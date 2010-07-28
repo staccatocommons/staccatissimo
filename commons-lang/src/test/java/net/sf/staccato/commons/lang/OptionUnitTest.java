@@ -1,0 +1,78 @@
+package net.sf.staccato.commons.lang;
+
+import static net.sf.staccato.commons.lang.Option.none;
+import static net.sf.staccato.commons.lang.Option.noneToNull;
+import static net.sf.staccato.commons.lang.Option.nullToNone;
+import static net.sf.staccato.commons.lang.Option.some;
+import static net.sf.staccato.commons.lang.Option.someNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import net.sf.staccato.commons.lang.Option.UndefinedOptionException;
+
+import org.junit.Test;
+
+public class OptionUnitTest {
+
+	@Test
+	public void testValue_defined() {
+		Integer i = 5;
+		assertSame(i, some(i).value());
+	}
+
+	@Test(expected = UndefinedOptionException.class)
+	public void testValue_undefined() {
+		none().value();
+	}
+
+	@Test
+	public void testIsDefined() {
+		assertTrue(some(5).isDefined());
+		assertTrue(some(null).isDefined());
+		assertFalse(none().isDefined());
+	}
+
+	@Test
+	public void testIsUndefined() {
+		assertFalse(some(5).isUndefined());
+		assertFalse(some(null).isUndefined());
+		assertTrue(none().isUndefined());
+	}
+
+	@Test
+	public void testIsEmpty() {
+		assertFalse(some(5).isEmpty());
+		assertFalse(some(null).isEmpty());
+		assertTrue(none().isEmpty());
+	}
+
+	@Test
+	public void testSize() {
+		assertEquals(1, some(5).size());
+		assertEquals(0, none().size());
+	}
+
+	@Test
+	public void testNullToNone() {
+		assertNull(noneToNull(none()));
+		assertNotNull(noneToNull(some("Hello")));
+	}
+
+	@Test
+	public void testNoneToNull() {
+		assertEquals(none(), nullToNone(null));
+		assertEquals(some("String"), nullToNone("String"));
+	}
+
+	@Test
+	public void Equalty() throws Exception {
+		assertEquals(some(5), some(5));
+		assertSame(none(), none());
+		assertSame(some(null), someNull());
+		assertEquals(new Some<Integer>(5), new Some<Integer>(5));
+		assertEquals(new Some<Integer>(null), new Some<Integer>(null));
+	}
+}

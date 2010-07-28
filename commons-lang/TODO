@@ -1,0 +1,6 @@
+Un equals builder y haschode builder que cacheen la estrategia
+
+
+Consistent toString implementation across all classes.
+
+ToStringStyle in the form Class(Attributte1,Atributte2,...AtributteN).
