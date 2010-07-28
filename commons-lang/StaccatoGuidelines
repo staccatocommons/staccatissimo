@@ -1,0 +1,17 @@
+Staccato Commons is a project aimed to create a bunch of small Java component libraries that provide elegant solutions to every day problems, and extend an integrate existing stantard java libraries and frameworks, like the JDK, apache commons. 
+
+taccato Commons is divided into two major subprojects:
+* Staccatissimo. The core libraries. They contain general purpouse classes, annotations and interfaces, on which all the staccato projects depend. Those components are mostly tied to the standard JDK and Apache Commons lang.  
+* Legato. Integration libraries between Staccato and other frameworks and technologies, like staccato-commons-aop, and staccato-commons-proxy. 
+
+It follows the following guidelines - called Staccato principles:
+
+* Java-centric. Staccato Commons does not define and avoids configuration files, and instead offers declarative ways to configure you components programatically. If you  still want to move that aspect out from your code - which is probably a good idea - just configure them using an IoC like Spring. 
+* Object Oriented. Staccato Commons offers OO solutions - or solutions that explode objected orientation as much as Java can offer - , and is implemented using the same techniques. 
+* Functional. Staccato Commons offers solutions that are functional, too. Encorages immutable objects, pure code - without side effect - messages, and functor objets.
+* Pragmatic. Staccato Commons is not a reasearch project. It presents solution that work. 
+* Documented. Staccato Commons is fully documented, and the best documentation is always Javadoc. 
+* Generic. Staccato Commons makes extensive use of Generics features of Java 5.
+* Rich, fluent, by contract interfaces. 
+* DRY and KISS. 
+
