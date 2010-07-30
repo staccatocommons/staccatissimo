@@ -3,7 +3,7 @@ package net.sf.staccato.commons.lang.lifecycle;
 import java.io.Closeable;
 import java.io.IOException;
 
-import net.sf.staccato.commons.testing.JUnit4MockObjectTestCase;
+import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
 import org.junit.Before;

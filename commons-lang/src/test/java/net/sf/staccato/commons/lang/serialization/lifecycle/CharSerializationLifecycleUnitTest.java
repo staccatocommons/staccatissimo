@@ -7,7 +7,7 @@ import java.io.Reader;
 import java.io.Writer;
 
 import net.sf.staccato.commons.lang.serialization.CharSerializationManager;
-import net.sf.staccato.commons.testing.JUnit4MockObjectTestCase;
+import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
 import org.junit.Before;
