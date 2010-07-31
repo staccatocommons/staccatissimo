@@ -11,8 +11,8 @@
 package net.sf.staccato.commons.lang.format;
 
 /**
- * A class with static utility methods to create debug string for pairs of
- * variables names and values
+ * A class methods to create debug string for pairs of variables names and
+ * values
  * 
  * @author flbulgarelli
  * 
@@ -27,26 +27,63 @@ public class Var {
 	private Var() {
 	}
 
+	/**
+	 * Creates a formatted string using the global {@link VariableFormatter}, for
+	 * the given variable name an value
+	 * 
+	 * @param name
+	 *          the variable name to format- Non null.
+	 * @param value
+	 *          the variable value to format. nullable
+	 * @return the formatted string
+	 */
+
 	public static String format(String name, Object value) {
 		return formatter.format(name, value);
 	}
 
-	public static String format(String preamble, String name, Object value,
-		String epilogue) {
-		return formatter.format(preamble, name, value, epilogue);
-	}
-
-	public static String format(String preamble, String name, Object value) {
-		return formatter.format(preamble, name, value);
+	/**
+	 * Creates a formatted string with a prefix and a suffix
+	 * 
+	 * @param prefix
+	 *          non null.
+	 * @param name
+	 *          non null
+	 * @param value
+	 *          nullable
+	 * @param suffix
+	 *          non null
+	 * @return the formatted string, non null.
+	 * 
+	 * @see VariableFormatter#format(String, String, Object, String)
+	 */
+	public static String format(String prefix, String name, Object value,
+		String suffix) {
+		return formatter.format(prefix, name, value, suffix);
 	}
 
 	/**
+	 * Creates a formatted string with a prefix
 	 * 
+	 * @param prefix
+	 *          non null.
+	 * @param name
+	 *          non null
+	 * @param value
+	 *          nullable
+	 * @return the formatted string, non null.
+	 * 
+	 * @see VariableFormatter#format(String, String, Object)
+	 */
+	public static String format(String prefix, String name, Object value) {
+		return formatter.format(prefix, name, value);
+	}
+
+	/**
 	 * This method should never be invoker except during application startup
 	 * 
-	 * @param formattingString
-	 *          the formattingString to set
-	 * 
+	 * @param formatter
+	 *          the global {@link VariableFormatter} to set
 	 */
 	public static synchronized void setVariableFormatter(
 		VariableFormatter formatter) {

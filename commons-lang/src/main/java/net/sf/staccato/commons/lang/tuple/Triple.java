@@ -45,16 +45,46 @@ public final class Triple<T1, T2, T3> extends Tuple implements
 		this.third = third;
 	}
 
+	/**
+	 * @return the first component
+	 */
 	public T1 getFirst() {
 		return first;
 	}
 
+	/**
+	 * @return the second component
+	 */
 	public T2 getSecond() {
 		return second;
 	}
 
+	/**
+	 * @return the third component
+	 */
 	public T3 getThird() {
 		return third;
+	}
+
+	/**
+	 * @return the first component
+	 */
+	public T1 _1() {
+		return getFirst();
+	}
+
+	/**
+	 * @return the second component
+	 */
+	public T2 _2() {
+		return getSecond();
+	}
+
+	/**
+	 * @return the third component
+	 */
+	public T3 _3() {
+		return getThird();
 	}
 
 	@Override

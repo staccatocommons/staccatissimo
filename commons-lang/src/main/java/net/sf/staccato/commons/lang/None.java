@@ -57,6 +57,11 @@ public final class None<T> extends Option<T> {
 		return ifUndefined.value();
 	}
 
+	@Override
+	public T valueOrNull() {
+		return null;
+	}
+
 	public Iterator<T> iterator() {
 		return Collections.<T> emptyList().iterator();
 	}

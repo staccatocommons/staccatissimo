@@ -11,25 +11,22 @@
 package net.sf.staccato.commons.lang.builder;
 
 /**
+ * Exception that signals that an object built process has not finished yet
  * 
  * @author flbulgarelli
- * 
  */
 public class ObjectUnderConstructionException extends IllegalStateException {
-	private static final String DEFAULT_MESSAGE = "Object is still under construction";
 
 	private static final long serialVersionUID = -7428589945799220264L;
 
-	public ObjectUnderConstructionException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public ObjectUnderConstructionException(String s) {
-		super(DEFAULT_MESSAGE + ": " + s);
-	}
-
-	public ObjectUnderConstructionException() {
-		super(DEFAULT_MESSAGE);
+	/**
+	 * Creates a new {@link ObjectUnderConstructionException} with the given
+	 * message
+	 * 
+	 * @param message
+	 */
+	public ObjectUnderConstructionException(String message) {
+		super(message);
 	}
 
 }

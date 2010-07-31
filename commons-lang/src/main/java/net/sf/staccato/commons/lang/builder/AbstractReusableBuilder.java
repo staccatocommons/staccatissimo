@@ -76,7 +76,7 @@ public abstract class AbstractReusableBuilder<T> implements ReusableBuilder<T> {
 		}
 
 		@Override
-		protected void checkFailed(String variableName, Object parameter,
+		protected void checkFailedImpl(String variableName, Object parameter,
 			String message) {
 			throw new ObjectUnderConstructionException(message);
 		}

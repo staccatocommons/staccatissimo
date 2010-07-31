@@ -58,6 +58,11 @@ public final class Some<T> extends Option<T> {
 		return value;
 	}
 
+	@Override
+	public T valueOrNull() {
+		return value;
+	}
+
 	public Iterator<T> iterator() {
 		return Collections.singleton(value).iterator();
 	}

@@ -27,8 +27,8 @@ public class VariableFormatter {
 	 */
 	public static final String DEFAULT_FORMATTING_STRING = "%s=[%s]";
 
-	private final String formattingString, formattingWithPreambleString,
-		formattingWithPreambleAndEpilogueString;
+	private final String formattingString, formattingWithPrefixString,
+		formattingWithPrefixAndSuffixString;
 
 	/**
 	 * Creates a {@link VariableFormatter} with a custom formatting string, in the
@@ -43,8 +43,8 @@ public class VariableFormatter {
 			Ensure.matches("formattingString", formattingString, ".*\\%s.*\\%s.*");
 
 		this.formattingString = formattingString;
-		this.formattingWithPreambleString = createFormattingWithPreambleString();
-		this.formattingWithPreambleAndEpilogueString = createFormattingWithPreambleAndEpilogueString();
+		this.formattingWithPrefixString = createFormattingWithPrefixString();
+		this.formattingWithPrefixAndSuffixString = createFormattingWithPrefixAndSuffixString();
 	}
 
 	/**
@@ -54,11 +54,11 @@ public class VariableFormatter {
 		this(DEFAULT_FORMATTING_STRING);
 	}
 
-	private String createFormattingWithPreambleString() {
+	private String createFormattingWithPrefixString() {
 		return "%s " + getFormattingString();
 	}
 
-	private String createFormattingWithPreambleAndEpilogueString() {
+	private String createFormattingWithPrefixAndSuffixString() {
 		return "%s " + getFormattingString() + " %s";
 	}
 
@@ -77,10 +77,9 @@ public class VariableFormatter {
 	}
 
 	/**
-	 * Creates a string that shows the content of a variable, preceded by a
-	 * preamble
+	 * Creates a string that shows the content of a variable, preceded by a prefix
 	 * 
-	 * @param preamble
+	 * @param prefix
 	 *          a string that will be inserted in front of the formatted string. A
 	 *          space is inserted between them. Non null
 	 * @param name
@@ -88,36 +87,48 @@ public class VariableFormatter {
 	 * @param value
 	 *          the variable value. Nullable
 	 * @return the formatted variable, using this {@link VariableFormatter}
-	 *         formatting string, preceded by a preamble
+	 *         formatting string, preceded by a prefix
 	 */
-	public String format(String preamble, String name, Object value) {
-		return String.format(
-			getFormattingWithPreambleString(),
-			preamble,
-			name,
-			value);
+	public String format(String prefix, String name, Object value) {
+		return String.format(getFormattingWithPrefixString(), prefix, name, value);
 	}
 
-	public String format(String preamble, String name, Object value,
-		String epilogue) {
+	/**
+	 * Creates a string that shows the content of a variable, preceded by a prefix
+	 * string and ended with a suffix string
+	 * 
+	 * @param prefix
+	 *          a string that will be inserted in front of the formatted string. A
+	 *          space is inserted between them. Non null
+	 * @param name
+	 *          the variable name. Non null.
+	 * @param value
+	 *          the variable value. Nullable
+	 * @param suffix
+	 *          a string that will be inserted at the end of the formatted string.
+	 *          A space is inserted between them. Non null
+	 * @return the formatted variable, using this {@link VariableFormatter}
+	 *         formatting string, preceded by a prefix, and ended with a suffix
+	 */
+	public String format(String prefix, String name, Object value, String suffix) {
 		return String.format(
-			getFormattingWithPreambleAndEpilogueString(),
-			preamble,
+			getFormattingWithPrefixAndSuffixString(),
+			prefix,
 			name,
 			value,
-			epilogue);
+			suffix);
 	}
 
 	private String getFormattingString() {
 		return formattingString;
 	}
 
-	private String getFormattingWithPreambleString() {
-		return formattingWithPreambleString;
+	private String getFormattingWithPrefixString() {
+		return formattingWithPrefixString;
 	}
 
-	private String getFormattingWithPreambleAndEpilogueString() {
-		return formattingWithPreambleAndEpilogueString;
+	private String getFormattingWithPrefixAndSuffixString() {
+		return formattingWithPrefixAndSuffixString;
 	}
 
 }

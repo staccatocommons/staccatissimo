@@ -9,7 +9,7 @@ public class ConstantUnitTest {
 	@Test
 	public void testValue() {
 		String value = "String";
-		Provider<String> constant = Constant.from(value);
+		Provider<String> constant = new Constant(value);
 		assertSame(value, constant.value());
 	}
 

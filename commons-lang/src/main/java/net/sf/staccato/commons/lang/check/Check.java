@@ -79,23 +79,36 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @param message
 	 *          non null check failure message.
 	 */
-	protected abstract void checkFailed(String variableName, Object variable,
+	protected abstract void checkFailedImpl(String variableName, Object variable,
 		String message) throws ExceptionType;
+
+	private void checkFailed(String variableName, Object variable,
+		String message, Object... args) throws ExceptionType {
+		checkFailedImpl(variableName, variable, String.format(message, args));
+	}
 
 	public void checkIsTrue(String variableName, boolean variableValue,
 		String message, Object... messageArgs) throws ExceptionType {
 		if (!variableValue) {
 			checkFailed(variableName, variableName, //
-				String.format(message, messageArgs));
+				message,
+				messageArgs);
 		}
 	}
 
+	/**
+	 * Checks the variable is true
+	 * 
+	 * @param variableName
+	 * @param variableValue
+	 * @throws ExceptionType
+	 */
 	public void checkIsTrue(String variableName, boolean variableValue)
 		throws ExceptionType {
 		if (!variableValue) {
 			checkFailed(variableName, variableName, //
-				String.format("%s should be true", //
-					Var.format(variableName, variableValue)));
+				"%s should be true", //
+				Var.format(variableName, variableValue));
 		}
 	}
 
@@ -111,9 +124,9 @@ public abstract class Check<ExceptionType extends Throwable> {
 		throws ExceptionType {
 		if (!value.matches(regex)) {
 			checkFailed(variableName, value,//
-				String.format("%s must match the %s", //
-					Var.format(variableName, value),
-					Var.format("regex", regex)));
+				"%s must match the %s", //
+				Var.format(variableName, value),
+				Var.format("regex", regex));
 		}
 	}
 
@@ -129,42 +142,86 @@ public abstract class Check<ExceptionType extends Throwable> {
 		throws ExceptionType {
 		if (!pattern.matcher(value).matches()) {
 			checkFailed(variableName, value, //
-				String.format("%s must match the %s", //
-					Var.format(variableName, value),
-					Var.format("regex", pattern.pattern())));
+				"%s must match the %s", //
+				Var.format(variableName, value),
+				Var.format("regex", pattern.pattern()));
 		}
 	}
 
+	/**
+	 * Checks the variable is &gt;= 0
+	 * 
+	 * @param variableName
+	 * @param number
+	 * @throws ExceptionType
+	 */
 	public void checkNonNegative(String variableName, long number)
 		throws ExceptionType {
 		if (number < 0)
 			checkNonNegativeFailed(variableName, number);
 	}
 
+	/**
+	 * Checks the variable is &gt;= 0
+	 * 
+	 * @param variableName
+	 * @param number
+	 * @throws ExceptionType
+	 */
 	public void checkNonNegative(String variableName, int number)
 		throws ExceptionType {
 		if (number < 0)
 			checkNonNegativeFailed(variableName, number);
 	}
 
+	/**
+	 * Checks the variable is &gt;= 0
+	 * 
+	 * @param variableName
+	 * @param number
+	 * @throws ExceptionType
+	 */
 	public void checkNonNegative(String variableName, double number)
 		throws ExceptionType {
 		if (number < 0)
 			checkNonNegativeFailed(variableName, number);
 	}
 
+	/**
+	 * Checks the variable is &gt;= 0
+	 * 
+	 * @param variableName
+	 * @param number
+	 * @throws ExceptionType
+	 */
 	public void checkNonNegative(String variableName, float number)
 		throws ExceptionType {
 		if (number < 0)
 			checkNonNegativeFailed(variableName, number);
 	}
 
+	/**
+	 * Checks the variable is &gt;= 0
+	 * 
+	 * @param variableName
+	 * @param number
+	 *          non null.
+	 * @throws ExceptionType
+	 */
 	public void checkNonNegative(String variableName, BigDecimal number)
 		throws ExceptionType {
 		if (number.compareTo(BigDecimal.ZERO) < 0)
 			checkNonNegativeFailed(variableName, number);
 	}
 
+	/**
+	 * Checks the variable is &gt;= 0
+	 * 
+	 * @param variableName
+	 * @param number
+	 *          non null.
+	 * @throws ExceptionType
+	 */
 	public void checkNonNegative(String variableName, BigInteger number)
 		throws ExceptionType {
 		if (number.compareTo(BigInteger.ZERO) < 0)
@@ -174,8 +231,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 	private final void checkNonNegativeFailed(String variableName, Object number)
 		throws ExceptionType {
 		checkFailed(variableName, number,//
-			String.format("%s must be non negative", //
-				Var.format(variableName, number)));
+			"%s must be non negative", //
+			Var.format(variableName, number));
 	}
 
 	public void checkNotEmpty(String variableName, EmptyAware variable)
@@ -247,8 +304,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 	private void checkNotEmptyFailed(String variableName, Object variable)
 		throws ExceptionType {
 		checkFailed(variableName, variable, //
-			String.format("%s must not be empty", //
-				Var.format(variableName, variable)));
+			"%s must not be empty", //
+			Var.format(variableName, variable));
 	}
 
 	public void checkEmpty(String variableName, Collection<?> variable)
@@ -279,8 +336,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 	private final void checkEmptyFailed(String variableName, Object variable)
 		throws ExceptionType {
 		checkFailed(variableName, variable, //
-			String.format("%s must be empty", //
-				Var.format(variableName, variable)));
+			"%s must be empty", //
+			Var.format(variableName, variable));
 	}
 
 	/**
@@ -295,40 +352,85 @@ public abstract class Check<ExceptionType extends Throwable> {
 		throws ExceptionType {
 		if (variable == null) {
 			checkFailed(variableName, null, //
-				String.format("%s must not be null", variableName));
+				"%s must not be null",
+				variableName);
 		}
 	}
 
+	/**
+	 * Checks the variable is &lt;= 0
+	 * 
+	 * @param variableName
+	 * @param variable
+	 * @throws ExceptionType
+	 */
 	public void checkPositive(String variableName, long variable)
 		throws ExceptionType {
 		if (variable <= 0)
 			checkSizeFailed(variableName, variable);
 	}
 
+	/**
+	 * Checks the variable is &lt;= 0
+	 * 
+	 * @param variableName
+	 * @param variable
+	 * @throws ExceptionType
+	 */
 	public void checkPositive(String variableName, int variable)
 		throws ExceptionType {
 		if (variable <= 0)
 			checkSizeFailed(variableName, variable);
 	}
 
+	/**
+	 * Checks the variable is &lt;= 0
+	 * 
+	 * @param variableName
+	 * @param variable
+	 * @throws ExceptionType
+	 */
 	public void checkPositive(String variableName, double variable)
 		throws ExceptionType {
 		if (variable <= 0)
 			checkSizeFailed(variableName, variable);
 	}
 
+	/**
+	 * Checks the variable is &lt;= 0
+	 * 
+	 * @param variableName
+	 * @param variable
+	 * @throws ExceptionType
+	 */
 	public void checkPositive(String variableName, float variable)
 		throws ExceptionType {
 		if (variable <= 0)
 			checkSizeFailed(variableName, variable);
 	}
 
+	/**
+	 * Checks the variable is &lt;= 0
+	 * 
+	 * @param variableName
+	 * @param variable
+	 *          non null
+	 * @throws ExceptionType
+	 */
 	public void checkPositive(String variableName, BigDecimal variable)
 		throws ExceptionType {
 		if (variable.compareTo(BigDecimal.ZERO) <= 0)
 			checkSizeFailed(variableName, variable);
 	}
 
+	/**
+	 * Checks the variable is &lt;= 0
+	 * 
+	 * @param variableName
+	 * @param variable
+	 *          non null.
+	 * @throws ExceptionType
+	 */
 	public void checkPositive(String variableName, BigInteger variable)
 		throws ExceptionType {
 		if (variable.compareTo(BigInteger.ZERO) <= 0)
@@ -338,18 +440,28 @@ public abstract class Check<ExceptionType extends Throwable> {
 	private void checkSizeFailed(String variableName, Object variable)
 		throws ExceptionType {
 		checkFailed(variableName, variable, //
-			String.format("%s must be positive", Var.format(variableName, variable)));
+			"%s must be positive",
+			Var.format(variableName, variable));
 	}
 
+	/**
+	 * Checks the variable is instance of the given class
+	 * 
+	 * @param variableName
+	 * @param variable
+	 *          non null
+	 * @param expectedClass
+	 *          non null.
+	 * @throws ExceptionType
+	 */
 	public void checkIsInstanceOf(String variableName, Object variable,
 		Class<?> expectedClass) throws ExceptionType {
 		if (!expectedClass.isInstance(variable)) {
 			checkFailed(variableName, variable, //
-				String.format(
-					"%s must be instance of class %s, but it was of class %d",
-					Var.format(variableName, variable),
-					expectedClass,
-					variable.getClass()));
+				"%s must be instance of class %s, but it was of class %d",
+				Var.format(variableName, variable),
+				expectedClass,
+				variable.getClass());
 		}
 	}
 
@@ -402,32 +514,47 @@ public abstract class Check<ExceptionType extends Throwable> {
 		int expectedSize, int actualSize) throws ExceptionType {
 		if (actualSize != expectedSize)
 			checkFailed(variableName, variable, //
-				String.format("%s must be of size %d, but it was %s", //
-					Var.format(variableName, variable),
-					expectedSize,
-					actualSize));
+				"%s must be of size %d, but it was %s", //
+				Var.format(variableName, variable),
+				expectedSize,
+				actualSize);
 	}
 
 	public <T> void checkBetween(String variableName, Comparable<T> variable,
 		T min, T max) throws ExceptionType {
 		if (!between(variable, min, max))
-			checkFailed(
-				variableName,
-				variable,
-				String.format(
-					"%s must be between %s and %s",
-					Var.format(variableName, variable),
-					min,
-					max));
+			checkFailed(variableName, variable,//
+				"%s must be between %s and %s",
+				Var.format(variableName, variable),
+				min,
+				max);
 	}
 
 	public <T> void checkContains(String variableName, ContainsAware<T> variable,
 		T element) throws ExceptionType {
 		if (!variable.contains(element))
-			checkFailed(variableName, variable, String.format(
+			checkFailed(variableName, variable,//
 				"%s must contain %s",
 				Var.format(variableName, variable),
-				element));
+				element);
+	}
+
+	public <T extends Comparable<T>> void checkGreatherThan(String variableName,
+		T variable, T other) throws ExceptionType {
+		if (!(variable.compareTo(other) > 0))
+			checkFailed(variableName, variable,//
+				"%s must be greather than %s",
+				Var.format(variableName, variable),
+				other);
+	}
+
+	public <T extends Comparable<T>> void checkLowerThan(String variableName,
+		T variable, T other) throws ExceptionType {
+		if (!(variable.compareTo(other) < 0))
+			checkFailed(variableName, variable,//
+				"%s must be lower than %s",
+				Var.format(variableName, variable),
+				other);
 	}
 
 	// TODO something in something

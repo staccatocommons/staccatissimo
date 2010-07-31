@@ -14,8 +14,8 @@ public class NullsUnitTest {
 
 	@Test
 	public void testNonNullOrElseTProviderOfT() {
-		assertEquals("Foo", IsNonNull.orElse(null, Constant.from("Foo")));
-		assertEquals("Bar", IsNonNull.orElse("Bar", Constant.from("Foo")));
+		assertEquals("Foo", IsNonNull.orElse(null, new Constant("Foo")));
+		assertEquals("Bar", IsNonNull.orElse("Bar", new Constant("Foo")));
 	}
 
 	@Test

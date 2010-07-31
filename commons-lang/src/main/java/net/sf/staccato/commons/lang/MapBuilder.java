@@ -13,9 +13,9 @@ package net.sf.staccato.commons.lang;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
 import net.sf.staccato.commons.lang.builder.Builder;
 import net.sf.staccato.commons.lang.builder.BuilderAlreadyUsedException;
@@ -32,6 +32,13 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 
 	private M map;
 
+	/**
+	 * 
+	 * Creates a new {@link MapBuilder}
+	 * 
+	 * @param map
+	 *          the map to build. Non null
+	 */
 	public MapBuilder(M map) {
 		this.map = map;
 	}
@@ -43,6 +50,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @param value
 	 * @return this {@link MapBuilder}
 	 */
+
 	public MapBuilder<K, V, M> with(K key, V value) {
 		map.put(key, value);
 		return this;
@@ -51,8 +59,9 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	/**
 	 * Adds an entry to the map
 	 * 
-	 * @param key
-	 * @param value
+	 * @param entry
+	 *          the entry to add. Non null
+	 * 
 	 * @return this {@link MapBuilder}
 	 */
 	public MapBuilder<K, V, M> with(Entry<K, V> entry) {
@@ -68,20 +77,74 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 		return map;
 	}
 
+	/**
+	 * Creates a new {@link MapBuilder} using the given map implementation and the
+	 * first key and value
+	 * 
+	 * @param <K>
+	 *          type of key
+	 * @param <V>
+	 *          type of value
+	 * @param <M>
+	 *          type of {@link Map}
+	 * @param map
+	 *          non null.
+	 * @param key
+	 * @param value
+	 * @return a new {@link MapBuilder}
+	 */
+	public static <K, V, M extends Map<K, V>> MapBuilder<K, V, M> mapWith(M map,
+		K key, V value) {
+		return new MapBuilder<K, V, M>(map).with(key, value);
+	}
+
+	/**
+	 * Creates a new {@link MapBuilder} using a {@link HashMap} as map
+	 * implementation and the first key and value
+	 * 
+	 * @param <K>
+	 *          type of key
+	 * @param <V>
+	 *          type of value
+	 * @param key
+	 * @param value
+	 * @return a new {@link MapBuilder}
+	 */
 	public static <K, V> MapBuilder<K, V, Map<K, V>> hashMapWith(K key, V value) {
-		return new MapBuilder<K, V, Map<K, V>>( //
-			new HashMap<K, V>()).with(key, value);
+		return mapWith((Map<K, V>) new HashMap<K, V>(), key, value);
 	}
 
+	/**
+	 * Creates a new {@link MapBuilder} using a {@link LinkedHashMap} as map
+	 * implementation and the first key and value
+	 * 
+	 * @param <K>
+	 *          type of key
+	 * @param <V>
+	 *          type of value
+	 * @param key
+	 * @param value
+	 * @return a new {@link MapBuilder}
+	 */
 	public static <K, V> MapBuilder<K, V, Map<K, V>> linkedMapWith(K key, V value) {
-		return new MapBuilder<K, V, Map<K, V>>( //
-			new LinkedHashMap<K, V>()).with(key, value);
+		return mapWith((Map<K, V>) new LinkedHashMap<K, V>(), key, value);
 	}
 
+	/**
+	 * Creates a new {@link MapBuilder} using a {@link TreeMap} as map
+	 * implementation and the first key and value
+	 * 
+	 * @param <K>
+	 *          type of key
+	 * @param <V>
+	 *          type of value
+	 * @param key
+	 * @param value
+	 * @return a new {@link MapBuilder}
+	 */
 	public static <K, V> MapBuilder<K, V, SortedMap<K, V>> treeMapWith(K key,
 		V value) {
-		return new MapBuilder<K, V, SortedMap<K, V>>( //
-			new TreeMap<K, V>()).with(key, value);
+		return mapWith((SortedMap<K, V>) new TreeMap<K, V>(), key, value);
 	}
 
 }

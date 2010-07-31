@@ -14,7 +14,6 @@ package net.sf.staccato.commons.lang;
  * 
  * @author flbulgarelli
  * 
- * @param <T>
  */
 public interface Cloneable extends java.lang.Cloneable {
 

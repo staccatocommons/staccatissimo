@@ -35,13 +35,13 @@ public final class Ensure extends Check<IllegalArgumentException> {
 	}
 
 	@Override
-	protected void checkFailed(String variableName, Object variable,
+	protected void checkFailedImpl(String variableName, Object variable,
 		String message) {
 		throw new IllegalArgumentException(message);
 	}
 
 	public static void fail(String variableName, Object variable, String message) {
-		instance.checkFailed(variableName, variable, message);
+		instance.checkFailedImpl(variableName, variable, message);
 	}
 
 	public static void empty(String variableName, Collection<?> variable) {
@@ -209,6 +209,16 @@ public final class Ensure extends Check<IllegalArgumentException> {
 	public static <T> void between(String variableName, Comparable<T> variable,
 		T min, T max) {
 		instance.checkBetween(variableName, variable, min, max);
+	}
+
+	public static <T extends Comparable<T>> void greatherThan(
+		String variableName, T variable, T other) {
+		instance.checkGreatherThan(variableName, variable, other);
+	}
+
+	public static <T extends Comparable<T>> void lowerThan(String variableName,
+		T variable, T other) {
+		instance.checkLowerThan(variableName, variable, other);
 	}
 
 	public static <T> void policy(Policy<T> policy, T value) {

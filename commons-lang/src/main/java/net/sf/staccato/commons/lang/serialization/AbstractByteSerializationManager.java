@@ -19,6 +19,12 @@ import java.io.OutputStream;
 
 import net.sf.staccato.commons.lang.serialization.lifecycle.SerializationLifecycle;
 
+/**
+ * Abstract implementation for a {@link ByteSerializationManager} that resolves
+ * the tasks of serializing from a file an back
+ * 
+ * @author flbulgarelli
+ */
 public abstract class AbstractByteSerializationManager implements
 	ByteSerializationManager {
 

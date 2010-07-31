@@ -22,16 +22,19 @@ public final class Constant<T> implements Provider<T> {
 
 	private final T value;
 
+	/**
+	 * 
+	 * Creates a new {@link Constant}
+	 * 
+	 * @param value
+	 *          the value to provide
+	 */
 	public Constant(T value) {
 		this.value = value;
 	}
 
 	public T value() {
 		return value;
-	}
-
-	public static <T> Provider<T> from(T value) {
-		return new Constant<T>(value);
 	}
 
 }

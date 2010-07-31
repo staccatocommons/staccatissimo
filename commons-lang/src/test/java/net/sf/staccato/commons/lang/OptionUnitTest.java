@@ -1,7 +1,6 @@
 package net.sf.staccato.commons.lang;
 
 import static net.sf.staccato.commons.lang.Option.none;
-import static net.sf.staccato.commons.lang.Option.noneToNull;
 import static net.sf.staccato.commons.lang.Option.nullToNone;
 import static net.sf.staccato.commons.lang.Option.some;
 import static net.sf.staccato.commons.lang.Option.someNull;
@@ -57,8 +56,8 @@ public class OptionUnitTest {
 
 	@Test
 	public void testNullToNone() {
-		assertNull(noneToNull(none()));
-		assertNotNull(noneToNull(some("Hello")));
+		assertNull(none().valueOrNull());
+		assertNotNull(some("Hello").valueOrNull());
 	}
 
 	@Test

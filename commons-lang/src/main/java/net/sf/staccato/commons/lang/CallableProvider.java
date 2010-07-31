@@ -14,13 +14,34 @@ import java.util.concurrent.Callable;
 
 import net.sf.staccato.commons.lang.structural.AbstractAdaptor;
 
+/**
+ * A {@link Provider} that provides the result of calling a {@link Callable}
+ * which wraps.
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T>
+ */
 public class CallableProvider<T> extends AbstractAdaptor<Callable<T>> implements
 	Provider<T> {
 
+	/**
+	 * 
+	 * Creates a new {@link CallableProvider}
+	 * 
+	 * @param adaptee
+	 *          the {@link Callable} which will provide the value.
+	 * 
+	 */
 	public CallableProvider(Callable<T> adaptee) {
 		super(adaptee);
 	}
 
+	/**
+	 * @throws RuntimeException
+	 *           if the wrapped {@link Callable} failed when executing
+	 *           {@link Callable#call()}
+	 */
 	@Override
 	public T value() {
 		return SoftException.callOrSoften(getAdaptee());

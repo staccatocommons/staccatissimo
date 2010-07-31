@@ -31,6 +31,14 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 	private final T3 third;
 	private final T4 fourth;
 
+	/**
+	 * Creates a new {@link Quadruple}
+	 * 
+	 * @param first
+	 * @param second
+	 * @param third
+	 * @param fourth
+	 */
 	public Quadruple(T1 first, T2 second, T3 third, T4 fourth) {
 		this.first = first;
 		this.second = second;
@@ -38,20 +46,60 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 		this.fourth = fourth;
 	}
 
+	/**
+	 * @return the first component
+	 */
 	public T1 getFirst() {
 		return first;
 	}
 
+	/**
+	 * @return the second component
+	 */
 	public T2 getSecond() {
 		return second;
 	}
 
+	/**
+	 * @return the third component
+	 */
 	public T3 getThird() {
 		return third;
 	}
 
+	/**
+	 * @return the fourth component
+	 */
 	public T4 getFourth() {
 		return fourth;
+	}
+
+	/**
+	 * @return the first component
+	 */
+	public T1 _1() {
+		return getFirst();
+	}
+
+	/**
+	 * @return the second component
+	 */
+	public T2 _2() {
+		return getSecond();
+	}
+
+	/**
+	 * @return the third component
+	 */
+	public T3 _3() {
+		return getThird();
+	}
+
+	/**
+	 * @return the fourth component
+	 */
+	public T4 _4() {
+		return getFourth();
 	}
 
 	@Override

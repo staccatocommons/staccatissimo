@@ -10,6 +10,12 @@
  */
 package net.sf.staccato.commons.lang.serialization;
 
+/**
+ * Marker interface for {@link SerializationManager}s whose serialization format
+ * is binary
+ * 
+ * @author flbulgarelli
+ */
 public interface ByteSerializationManager extends SerializationManager {
 
 }

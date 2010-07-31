@@ -133,6 +133,15 @@ public abstract class Option<T> /* extends AbstractCollection<T> */implements
 	 */
 	public abstract T valueOrElse(Provider<T> other);
 
+	/**
+	 * Returns the value of this {@link Option}, or <code>null</code>, if
+	 * undefined.
+	 * 
+	 * @return <code>this.value()</code> if defined, or <code>null</code>,
+	 *         otherwise
+	 */
+	public abstract T valueOrNull();
+
 	@Override
 	public Option<T> clone() {
 		return this;
@@ -165,9 +174,9 @@ public abstract class Option<T> /* extends AbstractCollection<T> */implements
 	}
 
 	/**
-	 * Factory method to create an option (defined or not), mapping null values to
-	 * undefined options, and non nulls to defined option. This method lets client
-	 * code to convert between null-as-undefined and
+	 * Creates an option (defined or not), mapping null values to undefined
+	 * options, and non nulls to defined option. This method lets client code to
+	 * convert between null-as-undefined and
 	 * 
 	 * @param <T>
 	 * @param value
@@ -179,12 +188,6 @@ public abstract class Option<T> /* extends AbstractCollection<T> */implements
 		return some(value);
 	}
 
-	public static <T> T noneToNull(Option<T> option) {
-		if (option.isUndefined())
-			return null;
-		return option.value();
-	}
-
 	/**
 	 * Exception thrown to signal that an option is not defined - instance of
 	 * class {@link None} , but that its was tried to be accessed
@@ -193,7 +196,10 @@ public abstract class Option<T> /* extends AbstractCollection<T> */implements
 		UnsupportedOperationException {
 		private static final long serialVersionUID = 1597749256471841503L;
 
-		public UndefinedOptionException() {
+		/**
+		 * Creates a new {@link UndefinedOptionException}
+		 */
+		UndefinedOptionException() {
 			super("Option is undefined");
 		}
 	}

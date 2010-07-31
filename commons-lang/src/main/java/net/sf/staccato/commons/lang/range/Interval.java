@@ -26,6 +26,7 @@ import net.sf.staccato.commons.lang.value.UnmodifiableObject;
 // TODO make interval size-aware. perhaps could change implementation to be
 // based on step numbers
 // TODO make contains aware
+// TODO make them possibly infinite
 public abstract class Interval<T extends Number & Comparable<T>> extends
 	UnmodifiableObject implements Iterable<T> {
 

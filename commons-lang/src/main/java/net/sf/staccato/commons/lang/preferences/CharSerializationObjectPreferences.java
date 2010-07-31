@@ -34,6 +34,14 @@ public class CharSerializationObjectPreferences implements ObjectPreferences {
 	private final Preferences preferences;
 	private final CharSerializationManager serializationManager;
 
+	/**
+	 * Creates a new {@link CharSerializationObjectPreferences}
+	 * 
+	 * @param preferences
+	 *          non null.
+	 * @param stream
+	 *          non null.
+	 */
 	public CharSerializationObjectPreferences(Preferences preferences,
 		CharSerializationManager stream) {
 		this.preferences = preferences;
