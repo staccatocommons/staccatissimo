@@ -14,6 +14,27 @@ package net.sf.staccato.commons.lang;
 
 public interface Evaluable<T> {
 
+	/**
+	 * Evaluates an argument.
+	 * 
+	 * {@link Evaluable} implementors are not required to handle null, so its
+	 * argument is non nullable, although concrete implementation may relax this
+	 * restriction.
+	 * 
+	 * However, instead of implementing nullable-argument {@link Evaluable}s, the
+	 * preferred way of getting a null safe {@link Evaluable} is composing it with
+	 * the non null predicate:
+	 * 
+	 * <pre>
+	 * Predicates.notNull().or(theActualEvaluable)
+	 * </pre>
+	 * 
+	 * 
+	 * @param argument
+	 *          the argument to evaluate. Non null
+	 * 
+	 * @return if the argument meets the given condition
+	 */
 	boolean eval(T argument);
 
 }

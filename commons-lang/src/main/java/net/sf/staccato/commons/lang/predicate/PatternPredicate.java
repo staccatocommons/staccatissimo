@@ -14,23 +14,38 @@ package net.sf.staccato.commons.lang.predicate;
 
 import java.util.regex.Pattern;
 
-
+/**
+ * A {@link Predicate} that evaluates if a String mathes a {@link Pattern}
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class PatternPredicate extends Predicate<String> {
 
 	private Pattern pattern;
 
+	/**
+	 * Creates a new {@link PatternPredicate} using a regular expression
+	 * 
+	 * @param regexp
+	 *          the regular expression. Non null.
+	 */
 	public PatternPredicate(String regexp) {
 		this.pattern = Pattern.compile(regexp);
 	}
 
+	/**
+	 * Creates a new {@link PatternPredicate} using a {@link Pattern}.
+	 * 
+	 * @param pattern
+	 *          the pattern. Non null
+	 */
 	public PatternPredicate(Pattern pattern) {
 		this.pattern = pattern;
 	}
 
 	@Override
 	public boolean eval(String input) {
-		if (input == null)
-			return false;
 		return pattern.matcher(input).matches();
 	}
 

@@ -25,20 +25,92 @@ import org.apache.commons.lang.ObjectUtils;
  */
 public class Compare {
 
-	public static <T> boolean between(Comparable<T> element, T min, T max) {
+	/**
+	 * Tests that given three {@link Comparable}s element, min and max, is true
+	 * that:
+	 * 
+	 * <pre>
+	 * min &lt;= element &lt;= max
+	 * </pre>
+	 * 
+	 * @param <T>
+	 *          the type of comparable element
+	 * @param element
+	 *          non null
+	 * @param min
+	 *          non null
+	 * @param max
+	 *          non null
+	 * @return if element is between min inclusive, and max, inclusive
+	 */
+	public static <T extends Comparable<T>> boolean between(T element, T min,
+		T max) {
 		return element.compareTo(max) <= 0 && element.compareTo(min) >= 0;
 	}
 
+	/**
+	 * Tests that given three {@link Comparable}s element, min and max, and a
+	 * {@link Comparator}, using that comparator is true that:
+	 * 
+	 * <pre>
+	 * min &lt;= element &lt;= max
+	 * </pre>
+	 * 
+	 * @param <T>
+	 *          the type of comparable element
+	 * @param element
+	 *          non null
+	 * @param min
+	 *          non null
+	 * @param max
+	 *          non null
+	 * @param comparator
+	 *          non null
+	 * @return if element is between min inclusive, and max, inclusive, using the
+	 *         given {@link Comparator} as ordering criteria
+	 */
 	public static <T> boolean between(T element, T min, T max,
 		Comparator<T> comparator) {
 		return comparator.compare(element, max) <= 0
 			&& comparator.compare(element, min) >= 0;
 	}
 
+	/**
+	 * Tests that given three <code>long</code>s element, min and max, is true
+	 * that:
+	 * 
+	 * <pre>
+	 * min &lt;= element &lt;= max
+	 * </pre>
+	 * 
+	 * @param element
+	 *          non null
+	 * @param min
+	 *          non null
+	 * @param max
+	 *          non null
+	 * @return if element is between min inclusive, and max, inclusive
+	 */
 	public static boolean between(long element, long min, long max) {
 		return element <= max && element >= min;
 	}
 
+	/**
+	 * Tests that given three <code>int</code>s element, min and max, is true
+	 * that:
+	 * 
+	 * <pre>
+	 * min &lt;= element &lt;= max
+	 * </pre>
+	 * 
+	 * @param element
+	 *          non null
+	 * @param min
+	 *          non null
+	 * @param max
+	 *          non null
+	 * @return if element is between min inclusive, and max, inclusive
+	 */
 	public static boolean between(int element, int min, int max) {
 		return element <= max && element >= min;
 	}

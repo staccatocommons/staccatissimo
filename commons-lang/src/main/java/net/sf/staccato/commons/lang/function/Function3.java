@@ -61,13 +61,7 @@ public abstract class Function3<T1, T2, T3, R> implements
 		};
 	}
 
-	public <Rp> Function3<T1, T2, T3, Rp> compose(final Function<R, Rp> other) {
-		return new Function3<T1, T2, T3, Rp>() {
-			public Rp apply(T1 argument1, T2 argument2, T3 argument3) {
-				return other.apply(Function3.this
-					.apply(argument1, argument2, argument3));
-			}
-		};
+	public <Rp> Function3<T1, T2, T3, Rp> then(final Function<? super R, Rp> other) {
+		return other.of(this);
 	}
-
 }

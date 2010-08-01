@@ -12,6 +12,15 @@
  */
 package net.sf.staccato.commons.lang;
 
+/**
+ * {@link Executable2}s are computations that take two arguments and whose
+ * result is a side effect, instead of a return value.
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T1>
+ * @param <T2>
+ */
 public interface Executable2<T1, T2> {
 
 	void exec(T1 argument1, T2 argument2);

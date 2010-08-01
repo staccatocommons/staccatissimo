@@ -17,41 +17,36 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.NotImplementedException;
 
 /**
- * 
- * This class extends {@link org.apache.commons.collections15.PredicateUtils}
- * functionality, adding some extra predicates, and shorter synonyms for them
- * 
  * @author flbulgarelli
- * 
  */
 public class Predicates {
 
+	/**
+	 * @param <T>
+	 * @return A {@link Predicate} that always returns <code>true</code>
+	 */
 	public static <T> Predicate<T> true_() {
-		return new Predicate<T>() {
-			public boolean eval(T argument) {
-				return true;
-			}
-		};
+		return TruePredicate.instance;
 	}
 
+	/**
+	 * @param <T>
+	 * @return A {@link Predicate} that always returns <code>false</code>
+	 */
 	public static <T> Predicate<T> false_() {
-		return new Predicate<T>() {
-			public boolean eval(T argument) {
-				return false;
-			}
-		};
+		return FalsePredicate.instance;
 	}
 
 	/*
 	 * Object predicates
 	 */
 
+	/**
+	 * @param <T>
+	 * @return A {@link Predicate} that tests if its argument is not null
+	 */
 	public static <T> Predicate<T> notNull() {
-		return new Predicate<T>() {
-			public boolean eval(T argument) {
-				return argument != null;
-			}
-		};
+		return NotNullPredicate.instance;
 	}
 
 	public static <T> Predicate<T> equal(final T value) {
@@ -105,6 +100,45 @@ public class Predicates {
 
 	public static <T extends Comparable<T>> Predicate<T> greaterThan(final T value) {
 		return new GreaterThanPredicate<T>(value);
+	}
+
+	/**
+	 * @author flbulgarelli
+	 * 
+	 * @param <T>
+	 */
+	private static final class NotNullPredicate<T> extends Predicate<T> {
+		public static Predicate instance = new NotNullPredicate();
+
+		public boolean eval(T argument) {
+			return argument != null;
+		}
+	}
+
+	/**
+	 * @author flbulgarelli
+	 * 
+	 * @param <T>
+	 */
+	private static final class FalsePredicate<T> extends Predicate<T> {
+		public static Predicate instance = new FalsePredicate();
+
+		public boolean eval(T argument) {
+			return false;
+		}
+	}
+
+	/**
+	 * @author flbulgarelli
+	 * 
+	 * @param <T>
+	 */
+	private static final class TruePredicate<T> extends Predicate<T> {
+		public static Predicate instance = new TruePredicate();
+
+		public boolean eval(T argument) {
+			return true;
+		}
 	}
 
 }

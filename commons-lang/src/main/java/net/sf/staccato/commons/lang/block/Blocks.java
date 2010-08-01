@@ -14,9 +14,6 @@ package net.sf.staccato.commons.lang.block;
 
 import org.apache.commons.lang.NotImplementedException;
 
-import net.sf.staccato.commons.lang.Provider;
-import net.sf.staccato.commons.lang.provider.ExceptionProvider;
-
 /**
  * 
  * @author flbulgarelli

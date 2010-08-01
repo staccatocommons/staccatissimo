@@ -522,8 +522,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 				actualSize);
 	}
 
-	public <T> void checkBetween(String variableName, Comparable<T> variable,
-		T min, T max) throws ExceptionType {
+	public <T extends Comparable<T>> void checkBetween(String variableName,
+		T variable, T min, T max) throws ExceptionType {
 		if (!between(variable, min, max))
 			checkFailed(variableName, variable,//
 				"%s must be between %s and %s",

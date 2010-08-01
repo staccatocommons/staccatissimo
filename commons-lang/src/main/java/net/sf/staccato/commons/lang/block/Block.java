@@ -14,6 +14,13 @@ package net.sf.staccato.commons.lang.block;
 
 import net.sf.staccato.commons.lang.Executable;
 
+/**
+ * An abstract, one argument code block, that implements {@link Executable}
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T>
+ */
 public abstract class Block<T> implements Executable<T> {
 
 	@Override

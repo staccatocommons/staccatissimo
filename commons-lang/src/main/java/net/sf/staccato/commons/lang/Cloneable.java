@@ -20,7 +20,27 @@ package net.sf.staccato.commons.lang;
  * @author flbulgarelli
  */
 public interface Cloneable extends java.lang.Cloneable {
-	// TODO make generic
 
+	/**
+	 * <p>
+	 * 
+	 * Clones this object.
+	 * </p>
+	 * <p>
+	 * Unlike the standard clone mechanism, it has no sense that {@link Cloneable}
+	 * s throw a {@link CloneNotSupportedException}, because {@link Cloneable}
+	 * interface exposes the {@link #clone()} method.
+	 * </p>
+	 * <p>
+	 * Implementors that rely on the {@link Object#clone()} implementation, should
+	 * thus throw an {@link AssertionError} when catching the
+	 * {@link CloneNotSupportedException} that <code>super</code> may throw.
+	 * </p>
+	 * 
+	 * 
+	 * @return a copy of this instance.
+	 * @see Object#clone()
+	 */
 	public Cloneable clone();
+
 }

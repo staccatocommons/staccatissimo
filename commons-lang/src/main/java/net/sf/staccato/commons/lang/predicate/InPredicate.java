@@ -15,7 +15,6 @@ package net.sf.staccato.commons.lang.predicate;
 import java.util.Collections;
 import java.util.HashSet;
 
-
 /**
  * A predicate that tests if evaluated element is in a set of values
  * 

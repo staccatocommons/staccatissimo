@@ -53,27 +53,111 @@ public abstract class Tuple implements Serializable {
 	Tuple() {
 	}
 
+	/**
+	 * Creates a new {@link Pair}
+	 * 
+	 * @param <T1>
+	 * @param <T2>
+	 * @param first
+	 *          nullable.
+	 * @param second
+	 *          nullable
+	 * @return a new {@link Pair}. Non null.
+	 */
 	public static <T1, T2> Pair<T1, T2> of(T1 first, T2 second) {
 		return new Pair<T1, T2>(first, second);
 	}
 
+	/**
+	 * Creates a new {@link Pair}
+	 * 
+	 * @param <T1>
+	 * @param <T2>
+	 * @param first
+	 *          nullable.
+	 * @param second
+	 *          nullable
+	 * @return a new {@link Pair}. Non null.
+	 */
 	public static <T1, T2> Pair<T1, T2> _(T1 first, T2 second) {
 		return of(first, second);
 	}
 
+	/**
+	 * Creates a new {@link Triple}
+	 * 
+	 * @param <T1>
+	 * @param <T2>
+	 * @param <T3>
+	 * @param first
+	 *          nullable.
+	 * @param second
+	 *          nullable
+	 * @param third
+	 *          nullable
+	 * @return a new {@link Triple}. Non null.
+	 */
 	public static <T1, T2, T3> Triple<T1, T2, T3> of(T1 first, T2 second, T3 third) {
 		return new Triple<T1, T2, T3>(first, second, third);
 	}
 
+	/**
+	 * Creates a new {@link Triple}
+	 * 
+	 * @param <T1>
+	 * @param <T2>
+	 * @param <T3>
+	 * @param first
+	 *          nullable.
+	 * @param second
+	 *          nullable
+	 * @param third
+	 *          nullable
+	 * @return a new {@link Triple}. Non null.
+	 */
 	public static <T1, T2, T3> Triple<T1, T2, T3> _(T1 first, T2 second, T3 third) {
 		return of(first, second, third);
 	}
 
+	/**
+	 * Creates a new {@link Quadruple}
+	 * 
+	 * @param <T1>
+	 * @param <T2>
+	 * @param <T3>
+	 * @param <T4>
+	 * @param first
+	 *          nullable.
+	 * @param second
+	 *          nullable
+	 * @param third
+	 *          nullable
+	 * @param fourth
+	 *          nullable
+	 * @return a new {@link Quadruple}. Non null.
+	 */
 	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> of(T1 first,
 		T2 second, T3 third, T4 fourth) {
 		return new Quadruple<T1, T2, T3, T4>(first, second, third, fourth);
 	}
 
+	/**
+	 * Creates a new {@link Quadruple}
+	 * 
+	 * @param <T1>
+	 * @param <T2>
+	 * @param <T3>
+	 * @param <T4>
+	 * @param first
+	 *          nullable.
+	 * @param second
+	 *          nullable
+	 * @param third
+	 *          nullable
+	 * @param fourth
+	 *          nullable
+	 * @return a new {@link Quadruple}. Non null.
+	 */
 	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> _(T1 first,
 		T2 second, T3 third, T4 fourth) {
 		return of(first, second, third, fourth);

@@ -94,10 +94,48 @@ public final class Triple<T1, T2, T3> extends Tuple implements
 		return 3;
 	}
 
+	/**
+	 * <p>
+	 * Rotates this {@link Triple} components to left, creating a new one where
+	 * the first component is placed at the third position, an the rests, shifted
+	 * right.
+	 * </p>
+	 * <p>
+	 * Given a triple whose components a, b, c implement appropriately equals
+	 * method, the following is always <code>true</code>
+	 * </p>
+	 * 
+	 * <pre>_(a,b,c).rotateLeft().equals(_(b,c,a))
+	 * 
+	 * <pre>
+	 * 
+	 * 
+	 * @return a new, non null
+	 * {@link Triple}, with its components rotated to left
+	 */
 	public Triple<T2, T3, T1> rotateLeft() {
+
 		return new Triple<T2, T3, T1>(this.second, this.third, this.first);
 	}
 
+	/**
+	 * <p>
+	 * Rotates this {@link Triple} components to right, creating a new one where
+	 * the third component is placed at the first position, an the rests, shifted
+	 * right.
+	 * </p>
+	 * <p>
+	 * Given a triple whose components a, b, c implement appropriately equals
+	 * method, the following is always <code>true</code>
+	 * </p>
+	 * 
+	 * <pre>_(a,b,c).rotateLeft().equals(_(c,b,a))
+	 * 
+	 * <pre>
+	 * 
+	 * @return a new, non null
+	 * {@link Triple}, with its components rotated to right
+	 */
 	public Triple<T3, T1, T2> rotateRight() {
 		return new Triple<T3, T1, T2>(this.third, this.first, this.second);
 	}

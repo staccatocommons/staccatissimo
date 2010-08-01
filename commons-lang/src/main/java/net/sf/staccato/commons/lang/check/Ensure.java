@@ -208,8 +208,8 @@ public final class Ensure extends Check<IllegalArgumentException> {
 		instance.checkSize(variableName, variable, size);
 	}
 
-	public static <T> void between(String variableName, Comparable<T> variable,
-		T min, T max) {
+	public static <T extends Comparable<T>> void between(String variableName,
+		T variable, T min, T max) {
 		instance.checkBetween(variableName, variable, min, max);
 	}
 
