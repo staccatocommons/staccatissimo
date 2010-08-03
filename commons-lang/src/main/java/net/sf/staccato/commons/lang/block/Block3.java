@@ -13,10 +13,21 @@
 package net.sf.staccato.commons.lang.block;
 
 import net.sf.staccato.commons.lang.Executable3;
+import net.sf.staccato.commons.lang.SoftException;
 
 public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3> {
 
-	public abstract void exec(T1 argument1, T2 argument2, T3 argument3);
+	public void exec(T1 argument1, T2 argument2, T3 argument3) {
+		try {
+			softExec(argument1, argument2, argument3);
+		} catch (Exception e) {
+			throw SoftException.soften(e);
+		}
+	}
+
+	protected void softExec(T1 argument1, T2 argument2, T3 argument3)
+		throws Exception {
+	}
 
 	// public Block<T3> exec(final T1 argument1, final T2 argument2) {
 	// return new Block<T3>() {

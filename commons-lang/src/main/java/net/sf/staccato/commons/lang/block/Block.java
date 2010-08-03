@@ -13,6 +13,7 @@
 package net.sf.staccato.commons.lang.block;
 
 import net.sf.staccato.commons.lang.Executable;
+import net.sf.staccato.commons.lang.SoftException;
 
 /**
  * An abstract, one argument code block, that implements {@link Executable}
@@ -24,7 +25,16 @@ import net.sf.staccato.commons.lang.Executable;
 public abstract class Block<T> implements Executable<T> {
 
 	@Override
-	public abstract void exec(T argument);
+	public void exec(T argument) {
+		try {
+			softExec(argument);
+		} catch (Exception e) {
+			throw SoftException.soften(e);
+		}
+	}
+
+	protected void softExec(T argument) throws Exception {
+	}
 
 	public Block<T> then(final Executable<? super T> other) {
 		return new Block<T>() {
