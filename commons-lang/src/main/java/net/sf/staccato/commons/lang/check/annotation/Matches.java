@@ -18,12 +18,31 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * {@link Matches} denote that the annotated element matches a regular
+ * expression.
+ * 
+ * Annotated elements should be of type {@link String} *
+ * 
+ * @author flbulgarelli
+ * @see CheckAnnotation
+ */
+@CheckAnnotation
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
 public @interface Matches {
+
+	/**
+	 * @return The variable name of the constrained element, or the empty string
+	 *         if unspecified. This value may help tools that analyze this
+	 *         annotation without access to source code.
+	 */
 	String var() default "";
 
+	/**
+	 * @return the regular expression
+	 */
 	String value();
 
 }

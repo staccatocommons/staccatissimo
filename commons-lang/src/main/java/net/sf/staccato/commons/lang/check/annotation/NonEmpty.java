@@ -18,10 +18,26 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * <p>
+ * An annotation that signals that an annotated can not be empty. This
+ * annotation should only be applied to elements that understand a length or
+ * size attribute, or length, size or isEmpty method.
+ * </p>
+ * 
+ * @author flbulgarelli
+ * @see CheckAnnotation
+ */
+@CheckAnnotation
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
 public @interface NonEmpty {
 
+	/**
+	 * @return The variable name of the constrained element, or the empty string
+	 *         if unspecified. This value may help tools that analyze this
+	 *         annotation without access to source code.
+	 */
 	String var() default "";
 }
