@@ -18,9 +18,26 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * <p>
+ * An annotation that signals that an annotated element must be positive.
+ * 
+ * This annotation should only be applied to {@link Number}s and primitive
+ * numeric types.
+ * </p>
+ * 
+ * @author flbulgarelli
+ * @see CheckAnnotation
+ */
+@CheckAnnotation
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
 public @interface Positive {
+	/**
+	 * @return The variable name of the constrained element, or the empty string
+	 *         if unspecified. This value may help tools that analyze this
+	 *         annotation without access to source code.
+	 */
 	String var() default "";
 }

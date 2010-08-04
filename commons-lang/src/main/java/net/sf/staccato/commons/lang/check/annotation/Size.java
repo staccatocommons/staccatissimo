@@ -17,12 +17,34 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Collections;
 
+/**
+ * <p>
+ * An annotation that signals that an annotated must have an specific size
+ * or length. This annotation should only be applied to elements that understand
+ * a length or size attribute, or length, or size method, like
+ * {@link Collections}, {@link String}s and arrays.
+ * </p>
+ * 
+ * @author flbulgarelli
+ * @see CheckAnnotation
+ */
+@CheckAnnotation
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
 public @interface Size {
 
-	public int value();
+	/**
+	 * @return The variable name of the constrained element, or the empty string
+	 *         if unspecified. This value may help tools that analyze this
+	 *         annotation without access to source code.
+	 */
+	String var() default "";
 
+	/**
+	 * @return the size the annotated element must have
+	 */
+	public int value();
 }
