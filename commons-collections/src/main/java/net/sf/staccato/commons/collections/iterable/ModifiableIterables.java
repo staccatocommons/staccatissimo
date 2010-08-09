@@ -1,13 +1,26 @@
+/*
+ Copyright (c) 2010, The Staccato-Commons Team   
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License as published by
+ the Free Software Foundation; version 3 of the License.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ */
 package net.sf.staccato.commons.collections.iterable;
 
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COLLECTION_PARAM;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.FUNCTION_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.OUTPUT_COLLECTION_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.PREDICATE_PARAM;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.TRANSFORMER_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.addAllInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.collectInternal;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.foreachInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.moveInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.rejectInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.selectInternal;
@@ -19,6 +32,7 @@ import java.util.List;
 
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.lang.Executable;
 import net.sf.staccato.commons.lang.check.Ensure;
 
 /**
@@ -89,7 +103,7 @@ public class ModifiableIterables {
 	public static <I, O, C extends Collection<O>> C collect(Iterable<I> iterable,
 		Applicable<? super I, ? extends O> applyer, C outputCollection) {
 		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(TRANSFORMER_PARAM, applyer);
+		Ensure.nonNull(FUNCTION_PARAM, applyer);
 		Ensure.nonNull(OUTPUT_COLLECTION_PARAM, outputCollection);
 		return collectInternal(iterable, applyer, outputCollection);
 	}
@@ -155,6 +169,13 @@ public class ModifiableIterables {
 		Ensure.nonNegative(AMOUNT_OF_ELEMENTS_PARAM, amountOfElements);
 		return moveInternal(iterable, amountOfElements, new ArrayList<T>(
 			amountOfElements));
+	}
+
+	public static <T> Iterable<T> foreach(Iterable<T> iterable,
+		Executable<? super T> block) {
+		Ensure.nonNull(ITERABLE_PARAM, iterable);
+		Ensure.nonNull("block", iterable);
+		return foreachInternal(iterable, block);
 	}
 
 	/*

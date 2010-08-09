@@ -10,26 +10,26 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.collections.iterable.internal;
+package net.sf.staccato.commons.collections.stream;
 
-import java.util.Iterator;
+/**
+ * {@link Stream} interface for accessing elements in an ordered manner
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T>
+ */
+public interface Accessible<T> {
 
-public class UnmodifiableIterator<T> extends AbstractUnmodifiableIterator<T> {
+	T first();
 
-	private final Iterator<T> iter;
+	T second();
 
-	public UnmodifiableIterator(Iterator<T> iter) {
-		this.iter = iter;
-	}
+	T third();
 
-	@Override
-	public boolean hasNext() {
-		return iter.hasNext();
-	}
+	T get(int n);
 
-	@Override
-	public T next() {
-		return iter.next();
-	}
+	@Reduction
+	T last();
 
 }

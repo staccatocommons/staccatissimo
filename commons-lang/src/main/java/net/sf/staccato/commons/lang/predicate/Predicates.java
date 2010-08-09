@@ -141,4 +141,13 @@ public class Predicates {
 		}
 	}
 
+	// public static <T> Predicate<T> not(final Evaluable<T> predicate) {
+	// return new Predicate<T>() {
+	// @Override
+	// public boolean eval(T argument) {
+	// return predicate.equals(argument);
+	// }
+	// }.not();
+	// }
+
 }

@@ -1,3 +1,15 @@
+/*
+ Copyright (c) 2010, The Staccato-Commons Team   
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License as published by
+ the Free Software Foundation; version 3 of the License.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ */
 package net.sf.staccato.commons.collections.iterable.internal;
 
 import java.util.Collection;
@@ -8,6 +20,7 @@ import net.sf.cglib.core.CollectionUtils;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.lang.Executable;
 import net.sf.staccato.commons.lang.check.Ensure;
 
 /**
@@ -25,7 +38,7 @@ public class IterablesInternal {
 	public static final String PREDICATE_PARAM = "predicate";
 	public static final String COLLECTION_PARAM = "collection";
 	public static final String ITERABLE_PARAM = "iterable";
-	public static final String TRANSFORMER_PARAM = "applyer";
+	public static final String FUNCTION_PARAM = "function";
 	public static final String OUTPUT_COLLECTION_PARAM = "outputCollection";
 
 	public static <T> boolean allSameInternal(Iterable<T> iterable) {
@@ -144,6 +157,13 @@ public class IterablesInternal {
 			if (each.equals(element))
 				return true;
 		return false;
+	}
+
+	public static <T> Iterable<T> foreachInternal(Iterable<T> iterable,
+		Executable<? super T> block) {
+		for (T element : iterable)
+			block.exec(element);
+		return iterable;
 	}
 
 }

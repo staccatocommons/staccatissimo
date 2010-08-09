@@ -12,7 +12,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import net.sf.staccato.commons.collections.iterable.Iterables;
 import net.sf.staccato.commons.lang.Option;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 

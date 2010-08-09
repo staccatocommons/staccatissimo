@@ -10,26 +10,23 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.collections.iterable.internal;
+package net.sf.staccato.commons.collections.stream;
 
-import java.util.Iterator;
+import java.util.List;
 
-public class UnmodifiableIterator<T> extends AbstractUnmodifiableIterator<T> {
+public class ListStream<T> extends CollectionStream<T> {
 
-	private final Iterator<T> iter;
-
-	public UnmodifiableIterator(Iterator<T> iter) {
-		this.iter = iter;
+	public ListStream(List<T> iterable) {
+		super(iterable);
 	}
 
 	@Override
-	public boolean hasNext() {
-		return iter.hasNext();
+	public T get(int n) {
+		return getList().get(n);
 	}
 
-	@Override
-	public T next() {
-		return iter.next();
+	protected List<T> getList() {
+		return (List<T>) getCollection();
 	}
 
 }

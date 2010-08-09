@@ -12,8 +12,6 @@
  */
 package net.sf.staccato.commons.lang.function;
 
-import java.util.Iterator;
-
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Applicable3;
@@ -98,33 +96,5 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 		};
 	}
 
-	// FIXME move out from here
-
-	public Iterable<R> map(final Iterable<T> iterable) {
-		return new Iterable() {
-			public Iterator iterator() {
-				return Function.this.map(iterable.iterator());
-			}
-		};
-	}
-
-	public Iterator<R> map(final Iterator<T> iter) {
-		return new Iterator<R>() {
-			@Override
-			public boolean hasNext() {
-				return iter.hasNext();
-			}
-
-			@Override
-			public R next() {
-				return Function.this.apply(iter.next());
-			}
-
-			@Override
-			public void remove() {
-				throw new UnsupportedOperationException();
-			}
-		};
-	}
 
 }

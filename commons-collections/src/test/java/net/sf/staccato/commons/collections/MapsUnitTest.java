@@ -1,6 +1,6 @@
 package net.sf.staccato.commons.collections;
 
-import static net.sf.staccato.commons.testing.junit.Assert.*;
+import static net.sf.staccato.commons.testing.junit.Assert.assertContainsEntry;
 
 import java.util.Map;
 

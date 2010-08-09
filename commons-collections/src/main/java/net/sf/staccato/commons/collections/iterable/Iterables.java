@@ -15,9 +15,9 @@ package net.sf.staccato.commons.collections.iterable;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COLLECTION_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COMPARATOR_PARAM;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.FUNCTION_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.PREDICATE_PARAM;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.TRANSFORMER_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.addAllInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.allSameInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.allSatisfiesInternal;
@@ -117,14 +117,14 @@ public class Iterables {
 	public static <T> T reduce(Iterable<T> iterable,
 		Applicable2<? super T, ? super T, ? extends T> applyer) {
 		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(TRANSFORMER_PARAM, applyer);
+		Ensure.nonNull(FUNCTION_PARAM, applyer);
 		return reduceInternal(iterable, applyer);
 	}
 
-	public static <I, O> O foldLeft(Iterable<I> iterable, O initial,
+	public static <I, O> O fold(Iterable<I> iterable, O initial,
 		Applicable2<? super O, ? super I, ? extends O> applyer) {
 		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(TRANSFORMER_PARAM, applyer);
+		Ensure.nonNull(FUNCTION_PARAM, applyer);
 		return foldInternal(iterable, initial, applyer);
 	}
 
@@ -399,7 +399,7 @@ public class Iterables {
 	public static <I, O> List<O> map(Collection<I> collection,
 		Applicable<? super I, ? extends O> applyer) {
 		Ensure.nonNull(COLLECTION_PARAM, collection);
-		Ensure.nonNull(TRANSFORMER_PARAM, applyer);
+		Ensure.nonNull(FUNCTION_PARAM, applyer);
 		return collectInternal( //
 			collection,
 			applyer,
@@ -409,14 +409,14 @@ public class Iterables {
 	public static <I, O> List<O> map(Iterable<I> iterable,
 		Applicable<? super I, ? extends O> applyer) {
 		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(TRANSFORMER_PARAM, applyer);
+		Ensure.nonNull(FUNCTION_PARAM, applyer);
 		return collectInternal(iterable, applyer, new LinkedList<O>());
 	}
 
 	public static <I, O> List<O> flatMap(Iterable<I> iterable,
 		Applicable<? super I, ? extends Iterable<O>> applyer) {
 		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(TRANSFORMER_PARAM, applyer);
+		Ensure.nonNull(FUNCTION_PARAM, applyer);
 
 		LinkedList<O> list = new LinkedList<O>();
 
@@ -496,7 +496,7 @@ public class Iterables {
 	public static <I, O> List<O> mapFilter(Iterable<I> iterable,
 		Applicable<? super I, ? extends O> applyer, Evaluable<? super O> predicate) {
 		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(TRANSFORMER_PARAM, applyer);
+		Ensure.nonNull(FUNCTION_PARAM, applyer);
 		Ensure.nonNull(PREDICATE_PARAM, predicate);
 		O applyed;
 		List<O> mapFiltered = new LinkedList<O>();
@@ -509,7 +509,7 @@ public class Iterables {
 	public static <I, O> List<O> filterMap(Iterable<I> iterable,
 		Evaluable<? super I> predicate, Applicable<? super I, ? extends O> applyer) {
 		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(TRANSFORMER_PARAM, applyer);
+		Ensure.nonNull(FUNCTION_PARAM, applyer);
 		Ensure.nonNull(PREDICATE_PARAM, predicate);
 		List<O> filterMapped = new LinkedList<O>();
 		for (I element : iterable)

@@ -10,26 +10,16 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.collections.iterable.internal;
+package net.sf.staccato.commons.collections.stream;
 
-import java.util.Iterator;
+import net.sf.staccato.commons.lang.Applicable2;
 
-public class UnmodifiableIterator<T> extends AbstractUnmodifiableIterator<T> {
+public interface Foldable<T> {
 
-	private final Iterator<T> iter;
+	@Reduction
+	T reduce(Applicable2<? super T, ? super T, ? extends T> applicable);
 
-	public UnmodifiableIterator(Iterator<T> iter) {
-		this.iter = iter;
-	}
-
-	@Override
-	public boolean hasNext() {
-		return iter.hasNext();
-	}
-
-	@Override
-	public T next() {
-		return iter.next();
-	}
-
+	@Reduction
+	<O> O fold(O initial,
+		Applicable2<? super O, ? super T, ? extends O> applicable);
 }
