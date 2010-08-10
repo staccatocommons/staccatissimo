@@ -12,8 +12,18 @@
  */
 package net.sf.staccato.commons.collections.stream;
 
+import java.util.NoSuchElementException;
+
 /**
- * {@link Stream} interface for accessing elements in an ordered manner
+ * {@link Stream} interface for accessing elements in an ordered manner.
+ * 
+ * Although {@link Stream} allow such kind of access, they do not warrant it is
+ * neither efficient - random access may be costly, for example - nor repeatable
+ * - element returned by {@link #first()} may not be the same between
+ * invocations, and it exclusively depends on the actual implementation.
+ * 
+ * All methods will throw an {@link NoSuchElementException} when trying to
+ * access an element out of the size of the {@link Stream}
  * 
  * @author flbulgarelli
  * 
@@ -21,14 +31,31 @@ package net.sf.staccato.commons.collections.stream;
  */
 public interface Accessible<T> {
 
+	/**
+	 * @return the first element
+	 */
 	T first();
 
+	/**
+	 * @return the second element
+	 */
 	T second();
 
+	/**
+	 * @return the third element
+	 */
 	T third();
 
+	/**
+	 * 
+	 * @param n
+	 * @return the n-th element, zero based
+	 */
 	T get(int n);
 
+	/**
+	 * @return the last element
+	 */
 	@Reduction
 	T last();
 

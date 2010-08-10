@@ -19,8 +19,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author flbulgarelli
+ * {@link Projection} annotates {@link Stream} methods that return without
+ * performing any processing on its element, but instead, returning a new
+ * {@link Stream} that will perform such operations when needed.
  * 
+ * Sending such messages has a small, constant, memory penalty, as they create
+ * an intermediate object that would be otherwise unnecessary if performed in a
+ * non-lazy manner, but are potentially much more efficient, as they do not
+ * perform any processing on elements that is not necessary.
+ * 
+ * TODO: add examples
+ * 
+ * @author flbulgarelli
  */
 @Documented
 @Target(ElementType.METHOD)

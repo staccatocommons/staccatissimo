@@ -26,38 +26,36 @@ import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Option;
 import net.sf.staccato.commons.lang.Provider;
-import net.sf.staccato.commons.lang.value.UnmodifiableObject;
 
 /**
+ * An abstract implementation of a {@link Stream}. Only it {@link Iterator}
+ * method is abstract
  * 
  * @author flbulgarelli
  * 
  * @param <T>
  */
-public abstract class AbstractStream<T> extends UnmodifiableObject implements
-	Stream<T> {
+public abstract class AbstractStream<T> implements Stream<T> {
 
-	private final Iterable<T> iterable() {
-		return this;
-	}
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public int size() {
 		int size = 0;
 		for (@SuppressWarnings("unused")
-		T element : iterable())
+		T element : this)
 			size++;
 		return size;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return IterablesInternal.isEmptyInternal(iterable());
+		return IterablesInternal.isEmptyInternal(this);
 	}
 
 	@Override
 	public boolean contains(T element) {
-		return IterablesInternal.containsInternal(iterable(), element);
+		return IterablesInternal.containsInternal(this, element);
 	}
 
 	@Override
@@ -70,16 +68,37 @@ public abstract class AbstractStream<T> extends UnmodifiableObject implements
 		return new AbstractStream<T>() {
 			@Override
 			public Iterator<T> iterator() {
-				return new AbstractUnmodifiableIterator<T>() {
-					private Iterator<T> iter = AbstractStream.this.iterator();
+				return new UnmodifiableIterator<T>(AbstractStream.this.iterator()) {
 					private T next;
 
 					@Override
 					public boolean hasNext() {
-						while (iter.hasNext())
-							if (predicate.eval((next = iter.next())))
+						while (super.hasNext())
+							if (predicate.eval((next = super.next())))
 								return true;
 						return false;
+					}
+
+					@Override
+					public T next() {
+						return next;
+					}
+				};
+			}
+		};
+	}
+
+	@Override
+	public Stream<T> takeWhile(final Evaluable<? super T> predicate) {
+		return new AbstractStream<T>() {
+			@Override
+			public Iterator<T> iterator() {
+				return new UnmodifiableIterator<T>(AbstractStream.this.iterator()) {
+					private T next;
+
+					@Override
+					public boolean hasNext() {
+						return super.hasNext() && predicate.eval((next = super.next()));
 					}
 
 					@Override
@@ -116,13 +135,13 @@ public abstract class AbstractStream<T> extends UnmodifiableObject implements
 
 	@Override
 	public T reduce(Applicable2<? super T, ? super T, ? extends T> applicable) {
-		return IterablesInternal.reduceInternal(iterable(), applicable);
+		return IterablesInternal.reduceInternal(this, applicable);
 	}
 
 	@Override
 	public <O> O fold(O initial,
 		Applicable2<? super O, ? super T, ? extends O> applicable) {
-		return IterablesInternal.foldInternal(iterable(), initial, applicable);
+		return IterablesInternal.foldInternal(this, initial, applicable);
 	}
 
 	@Override
@@ -132,58 +151,58 @@ public abstract class AbstractStream<T> extends UnmodifiableObject implements
 
 	@Override
 	public T any() {
-		return Iterables.any(iterable());
+		return Iterables.any(this);
 	}
 
 	@Override
 	public Option<T> anyOrNone() {
-		return Iterables.anyOrNone(iterable());
+		return Iterables.anyOrNone(this);
 	}
 
 	@Override
 	public T anyOrNull() {
-		return Iterables.anyOrNull(iterable());
+		return Iterables.anyOrNull(this);
 	}
 
 	@Override
 	public T anyOrElse(Provider<T> provider) {
-		return Iterables.anyOrElse(iterable(), provider);
+		return Iterables.anyOrElse(this, provider);
 	}
 
 	@Override
 	public T anyOrElse(T value) {
-		return Iterables.anyOrElse(iterable(), value);
+		return Iterables.anyOrElse(this, value);
 	}
 
 	@Override
 	public T find(Evaluable<? super T> predicate) {
-		return Iterables.find(iterable(), predicate);
+		return Iterables.find(this, predicate);
 	}
 
 	@Override
 	public Option<T> findOrNone(Evaluable<? super T> predicate) {
-		return Iterables.findOrNone(iterable(), predicate);
+		return Iterables.findOrNone(this, predicate);
 	}
 
 	@Override
 	public T findOrNull(Evaluable<? super T> predicate) {
-		return Iterables.findOrNull(iterable(), predicate);
+		return Iterables.findOrNull(this, predicate);
 	}
 
 	@Override
 	public T findOrElse(Evaluable<? super T> predicate,
 		Provider<? extends T> provider) {
-		return Iterables.findOrElse(iterable(), predicate, provider);
+		return Iterables.findOrElse(this, predicate, provider);
 	}
 
 	@Override
 	public boolean all(Evaluable<? super T> predicate) {
-		return Iterables.all(iterable(), predicate);
+		return Iterables.all(this, predicate);
 	}
 
 	@Override
 	public boolean any(Evaluable<? super T> predicate) {
-		return Iterables.any(iterable(), predicate);
+		return Iterables.any(this, predicate);
 	}
 
 	@Override
@@ -208,7 +227,6 @@ public abstract class AbstractStream<T> extends UnmodifiableObject implements
 		};
 	}
 
-
 	@Override
 	public T first() {
 		return get(0);
@@ -231,7 +249,7 @@ public abstract class AbstractStream<T> extends UnmodifiableObject implements
 
 	@Override
 	public T get(int n) {
-		return Iterables.get(iterable(), n);
+		return Iterables.get(this, n);
 	}
 
 	@Override

@@ -20,7 +20,6 @@ import java.lang.annotation.Target;
 
 /**
  * @author flbulgarelli
- * 
  */
 @Documented
 @Target(ElementType.METHOD)

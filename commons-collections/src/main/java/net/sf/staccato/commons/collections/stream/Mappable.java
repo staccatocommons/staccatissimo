@@ -12,26 +12,30 @@
  */
 package net.sf.staccato.commons.collections.stream;
 
-import java.util.List;
-
 import net.sf.staccato.commons.lang.Applicable;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
+/**
+ * {@link Stream} interface for mapping - aka transforming or collection -
+ * elements.
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T>
+ */
 public interface Mappable<T> {
 
 	/**
-	 * Maps the the given collection into a new list, using the gicen applyer
+	 * Transforms each element using the given function
 	 * 
 	 * @param <T>
 	 * @param <O>
-	 * @param collection
-	 *          the source of the mapping. Non null. May be empty.
-	 * @param applyer
-	 *          the mapper used to apply each element of the source collection.
-	 *          Non null.
-	 * @return a new, non null {@link List}, which contains an element for the
-	 *         result of the applyation of each element of the given collection.
-	 *         May be empty
+	 * @param function
+	 *          the mapper used to transform each element, applying it
+	 * @return a new {@link Stream} projection that will retrieve the result of
+	 *         applying the given function to each element
 	 */
+	@NonNull
 	@Projection
-	<O> Stream<O> map(Applicable<? super T, ? extends O> applyer);
+	<O> Stream<O> map(@NonNull Applicable<? super T, ? extends O> function);
 }

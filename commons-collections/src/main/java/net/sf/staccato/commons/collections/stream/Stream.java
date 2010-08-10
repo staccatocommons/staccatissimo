@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.collections.stream;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -19,7 +20,6 @@ import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Provider;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.SizeAware;
-import net.sf.staccato.commons.lang.value.Unmodifiable;
 
 /**
  * TODO rewrite this javadoc! Is out of date an incomplete
@@ -63,7 +63,6 @@ public interface Stream<T> extends //
 	SizeAware, //
 	ContainsAware<T>, //
 	Provider<T>, //
-	Unmodifiable, //
 	Filterable<T>, //
 	Foldable<T>,//
 	Applicable<Integer, T>,//
@@ -71,6 +70,7 @@ public interface Stream<T> extends //
 	Testeable<T>, //
 	Mappable<T>, //
 	Accessible<T>, //
-	Collectionable<T> {
+	Collectionable<T>, //
+	Serializable {
 
 }
