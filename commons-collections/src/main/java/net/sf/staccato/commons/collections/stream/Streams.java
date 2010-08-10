@@ -16,8 +16,22 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class Streams {
 
+	/**
+	 * Creates a new {@link Stream} that retrieves given array element. This
+	 * stream permits efficient random access and grants repeatable iteration
+	 * order.
+	 * 
+	 * @param <T>
+	 * @param elements
+	 * @return
+	 */
 	public static <T> Stream<T> from(T... elements) {
 		return from(Arrays.asList(elements));
 	}
@@ -38,5 +52,6 @@ public class Streams {
 	// public static <K, V> Stream<Entry<K, V>> from(Map<K, V> iterable) {
 	// return new MapEntryTranaversable<K, V>(iterable);
 	// }
+	// TODO other non-collection streams
 
 }

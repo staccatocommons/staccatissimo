@@ -25,13 +25,13 @@ import net.sf.staccato.commons.collections.iterable.internal.UnmodifiableIterato
  */
 public class CollectionStream<T> extends AbstractStream<T> {
 
-	private static final long serialVersionUID = 1L;
-	
 	private final Collection<T> collection;
 
 	/**
-	 * 
 	 * Creates a new {@link CollectionStream}
+	 * 
+	 * @param collection
+	 *          the collection to wrap
 	 */
 	public CollectionStream(Collection<T> collection) {
 		this.collection = collection;

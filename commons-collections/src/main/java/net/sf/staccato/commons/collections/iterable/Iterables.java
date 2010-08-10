@@ -22,6 +22,8 @@ import static net.sf.staccato.commons.collections.iterable.internal.IterablesInt
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.allSameInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.allSatisfiesInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyInternal;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyOrNoneInternal;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyOrNullInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anySatisfiesInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.collectInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.findOrNullInternal;
@@ -279,23 +281,18 @@ public class Iterables {
 
 	public static <T> T any(Iterable<T> iterable) {
 		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		if (isEmptyInternal(iterable))
-			throw new NoSuchElementException();
 		return anyInternal(iterable);
 	}
 
 	public static <T> Option<T> anyOrNone(Iterable<T> iterable) {
 		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		if (isEmptyInternal(iterable))
-			return Option.none();
-		return Option.some(anyInternal(iterable));
+		return anyOrNoneInternal(iterable);
+
 	}
 
 	public static <T> T anyOrNull(Iterable<T> iterable) {
 		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		if (isEmptyInternal(iterable))
-			return null;
-		return anyInternal(iterable);
+		return anyOrNullInternal(iterable);
 	}
 
 	public static <T> T anyOrElse(Iterable<T> iterable, Provider<T> provider) {

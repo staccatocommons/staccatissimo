@@ -12,7 +12,6 @@
  */
 package net.sf.staccato.commons.collections.stream;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -70,7 +69,6 @@ public interface Stream<T> extends //
 	Testeable<T>, //
 	Mappable<T>, //
 	Accessible<T>, //
-	Collectionable<T>, //
-	Serializable {
+	Collectible<T> {
 
 }

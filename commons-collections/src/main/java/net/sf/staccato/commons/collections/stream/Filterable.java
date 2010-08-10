@@ -47,7 +47,7 @@ public interface Filterable<T> {
 	Stream<T> takeWhile(@NonNull Evaluable<? super T> predicate);
 
 	/**
-	 * Preserves N elements
+	 * Preserves up to N elements
 	 * 
 	 * @param amountOfElements
 	 * @return a new {@link Stream} projection that will retrieve up to N elements

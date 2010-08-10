@@ -12,7 +12,6 @@
  */
 package net.sf.staccato.commons.collections.stream;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -36,8 +35,6 @@ import net.sf.staccato.commons.lang.Provider;
  * @param <T>
  */
 public abstract class AbstractStream<T> implements Stream<T> {
-
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	public int size() {
@@ -151,17 +148,17 @@ public abstract class AbstractStream<T> implements Stream<T> {
 
 	@Override
 	public T any() {
-		return Iterables.any(this);
+		return IterablesInternal.anyInternal(this);
 	}
 
 	@Override
 	public Option<T> anyOrNone() {
-		return Iterables.anyOrNone(this);
+		return IterablesInternal.anyOrNoneInternal(this);
 	}
 
 	@Override
 	public T anyOrNull() {
-		return Iterables.anyOrNull(this);
+		return IterablesInternal.anyOrNullInternal(this);
 	}
 
 	@Override
@@ -250,11 +247,6 @@ public abstract class AbstractStream<T> implements Stream<T> {
 	@Override
 	public T get(int n) {
 		return Iterables.get(this, n);
-	}
-
-	@Override
-	public Collection<T> toCollection() {
-		return toList();
 	}
 
 	@Override

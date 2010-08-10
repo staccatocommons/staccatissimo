@@ -21,6 +21,7 @@ import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Executable;
+import net.sf.staccato.commons.lang.Option;
 import net.sf.staccato.commons.lang.check.Ensure;
 
 /**
@@ -80,8 +81,19 @@ public class IterablesInternal {
 		return collection.iterator().next();
 	}
 
+	public static <T> Option<T> anyOrNoneInternal(Iterable<T> collection) {
+		Iterator<T> iterator = collection.iterator();
+		return iterator.hasNext() ? Option.some(iterator.next()) : Option
+			.<T> none();
+	}
+
+	public static <T> T anyOrNullInternal(Iterable<T> collection) {
+		Iterator<T> iterator = collection.iterator();
+		return iterator.hasNext() ? iterator.next() : null;
+	}
+
 	public static <T> boolean isEmptyInternal(Iterable<T> iterable) {
-		return iterable.iterator().hasNext();
+		return !iterable.iterator().hasNext();
 	}
 
 	public static <T> T reduceInternal(Iterable<T> iterable,

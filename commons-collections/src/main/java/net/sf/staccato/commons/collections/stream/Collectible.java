@@ -13,32 +13,22 @@
 package net.sf.staccato.commons.collections.stream;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
- * {@link Stream} interface for converting an {@link Stream} into a
- * {@link Collection}, {@link List} or {@link Set}.
+ * {@link Stream} interface for converting an {@link Stream} into a {@link List}
+ * or {@link Set}.
  * 
  * All implementations returned are non-lazy - all element references are copied
  * during invocation, and are {@link Serializable}.
  * 
  * @author flbulgarelli
  * @param <T>
- * 
  */
-public interface Collectionable<T> {
-
-	/**
-	 * @return a new {@link Collection} that contains each element. Concrete
-	 *         subinterface of {@link Collection} is unespecified
-	 */
-	@NonNull
-	@Reduction
-	Collection<T> toCollection();
+public interface Collectible<T> {
 
 	/**
 	 * @return a new {@link Set}
