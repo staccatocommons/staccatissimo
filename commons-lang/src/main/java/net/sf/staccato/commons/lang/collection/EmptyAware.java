@@ -12,8 +12,27 @@
  */
 package net.sf.staccato.commons.lang.collection;
 
+import net.sf.staccato.commons.lang.check.Check;
+
+/**
+ * Interface for objects that understand {@link #isEmpty()} message.
+ * 
+ * This interface is deliberately too generic, and does not make any assumption
+ * about the nature of the {@link EmptyAware} object - it may be array-like,
+ * collection-like, a domain model object, string-like, etc.
+ * 
+ * {@link EmptyAware} is originally designed to be used with {@link Check}s, but
+ * it may be used in any other context.
+ * 
+ * @author flbulgarelli
+ * 
+ */
+// TODO move pacakge
 public interface EmptyAware {
 
+	/**
+	 * @return if the object is empty, whatever it means
+	 */
 	boolean isEmpty();
 
 }

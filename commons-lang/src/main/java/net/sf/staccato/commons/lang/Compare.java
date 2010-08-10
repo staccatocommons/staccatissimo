@@ -115,6 +115,13 @@ public class Compare {
 		return element <= max && element >= min;
 	}
 
+	/**
+	 * Tests if a given array contains an element
+	 * 
+	 * @param element
+	 * @param values
+	 * @return if the array contains the given element
+	 */
 	public static boolean in(int element, int[] values) {
 		for (int value : values)
 			if (element == value)
@@ -122,6 +129,13 @@ public class Compare {
 		return false;
 	}
 
+	/**
+	 * Tests if a given array contains an element
+	 * 
+	 * @param element
+	 * @param values
+	 * @return if the array contains the given element
+	 */
 	public static boolean in(long element, long[] values) {
 		for (long value : values)
 			if (element == value)
@@ -129,6 +143,13 @@ public class Compare {
 		return false;
 	}
 
+	/**
+	 * Tests if a given array contains an element
+	 * 
+	 * @param element
+	 * @param values
+	 * @return if the array contains the given element, using equals comparison
+	 */
 	public static <T> boolean in(T element, T... values) {
 		for (T value : values)
 			if (element.equals(value))
