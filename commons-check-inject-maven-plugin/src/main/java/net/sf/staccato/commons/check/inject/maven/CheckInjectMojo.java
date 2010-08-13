@@ -10,13 +10,14 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.bytecode.check.maven;
+package net.sf.staccato.commons.check.inject.maven;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import net.sf.staccato.commons.bytecode.check.runner.CheckInjectorRunner;
+import net.sf.staccato.commons.check.inject.runner.CheckInjectorRunner;
+import net.sf.staccato.commons.collections.stream.Streams;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.lang.function.Function;
 
@@ -46,13 +47,29 @@ public class CheckInjectMojo extends AbstractMojo {
 	 */
 	protected List<Artifact> pluginArtifactsList;
 
+	/**
+	 * @required
+	 * @parameter
+	 */
+	protected List<String> argumentProcessorClassnames;
+
+	/**
+	 * @required
+	 * @parameter
+	 */
+	protected List<String> returnProcessorClassnames;
+
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Injecting checks to classes located in " + location);
 		String extraClasspath = createClassPathString();
 		getLog().debug("Using classpath " + extraClasspath);
 		try {
-			new CheckInjectorRunner(location, extraClasspath).run();
+			new CheckInjectorRunner(
+				location,
+				argumentProcessorClassnames,
+				returnProcessorClassnames,
+				extraClasspath).run();
 		} catch (Exception e) {
 			getLog().error(e.getMessage());
 			throw new MojoExecutionException("Unexpected error", e);
@@ -61,15 +78,17 @@ public class CheckInjectMojo extends AbstractMojo {
 	}
 
 	private String createClassPathString() {
-		return StringUtils.join(new Function<Artifact, String>() {
-			public String apply(Artifact arg) {
-				try {
-					return arg.getFile().getCanonicalPath();
-				} catch (IOException e) {
-					throw SoftException.soften(e);
+		return StringUtils.join(
+			Streams.from(pluginArtifactsList).map(new Function<Artifact, String>() {
+				public String apply(Artifact arg) {
+					try {
+						return arg.getFile().getCanonicalPath();
+					} catch (IOException e) {
+						throw SoftException.soften(e);
+					}
 				}
-			}
-		}.map(pluginArtifactsList.iterator()), File.pathSeparator);
+			}).iterator(),
+			File.pathSeparator);
 	}
 
 }
