@@ -12,7 +12,6 @@
  */
 package net.sf.staccato.commons.lang.range;
 
-import static net.sf.staccato.commons.lang.Compare.between;
 import net.sf.staccato.commons.lang.Compare;
 import net.sf.staccato.commons.lang.check.Ensure;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
@@ -66,10 +65,9 @@ public class Range<T extends Comparable<T>> extends UnmodifiableObject
 	 */
 	public boolean overlaps(@NonNull Range<T> that) {
 		Ensure.nonNull("that", that);
-		return between(this.getMin(), that.getMin(), that.getMax())
-			|| between(this.getMax(), that.getMin(), that.getMax()) //
-			|| this.includes(that) //
-			|| that.includes(this);
+		return this.contains(that.getMin()) //
+			|| this.contains(that.getMin()) //
+			|| that.contains(this.getMin());
 	}
 
 	/**
