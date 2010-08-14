@@ -208,7 +208,7 @@ public abstract class AbstractStream<T> implements Stream<T> {
 			@Override
 			public Iterator<O> iterator() {
 				return new AbstractUnmodifiableIterator<O>() {
-					private Iterator<T> iter;
+					private final Iterator<T> iter = AbstractStream.this.iterator();
 
 					@Override
 					public boolean hasNext() {
