@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import net.sf.staccato.commons.check.inject.runner.CheckInjectorRunner;
+import net.sf.staccato.commons.check.inject.runner.Runner;
 import net.sf.staccato.commons.collections.stream.Streams;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.lang.function.Function;
@@ -65,7 +65,7 @@ public class CheckInjectMojo extends AbstractMojo {
 		String extraClasspath = createClassPathString();
 		getLog().debug("Using classpath " + extraClasspath);
 		try {
-			new CheckInjectorRunner(
+			new Runner(
 				location,
 				argumentProcessorClassnames,
 				returnProcessorClassnames,
