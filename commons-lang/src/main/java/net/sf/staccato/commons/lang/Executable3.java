@@ -12,18 +12,38 @@
  */
 package net.sf.staccato.commons.lang;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
+ * <p>
  * {@link Executable3}s are computations that take three arguments and whose
  * result is a side effect, instead of a return value.
+ * </p>
+ * <p>
+ * For a more in dept discussion about {@link Executable3}, consult
+ * {@link Executable} javadoc.
+ * </p>
  * 
  * @author flbulgarelli
  * 
  * @param <T1>
+ *          first computation argument type
  * @param <T2>
+ *          second computation argument type
  * @param <T3>
+ *          third computation argument type
+ * @see Executable
  */
 public interface Executable3<T1, T2, T3> {
 
-	void exec(T1 arg1, T2 arg2, T3 arg3);
+	/**
+	 * Performing a side-effect computation.
+	 * 
+	 * @see Executable#exec(Object)
+	 * @param arg1
+	 * @param arg2
+	 * @param arg3
+	 */
+	void exec(@NonNull T1 arg1, @NonNull T2 arg2, @NonNull T3 arg3);
 
 }

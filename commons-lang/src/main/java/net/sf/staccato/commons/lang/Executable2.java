@@ -12,9 +12,17 @@
  */
 package net.sf.staccato.commons.lang;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
+ * <p>
  * {@link Executable2}s are computations that take two arguments and whose
  * result is a side effect, instead of a return value.
+ * </p>
+ * <p>
+ * For a more in dept discussion about {@link Executable2}, consult
+ * {@link Executable} javadoc.
+ * </p>
  * 
  * @author flbulgarelli
  * 
@@ -22,18 +30,17 @@ package net.sf.staccato.commons.lang;
  *          first computation argument type
  * @param <T2>
  *          second computation argument type
+ * @see Executable
  */
 public interface Executable2<T1, T2> {
 
 	/**
-	 * Executes this {@link Executable2}, performing a side-effect computation.
-	 * 
-	 * Same restrictions that for {@link Executable#exec(Object)} applies
+	 * Performs a side-effect computation.
 	 * 
 	 * @see Executable#exec(Object)
 	 * @param argument1
 	 * @param argument2
 	 */
-	void exec(T1 argument1, T2 argument2);
+	void exec(@NonNull T1 argument1, @NonNull T2 argument2);
 
 }

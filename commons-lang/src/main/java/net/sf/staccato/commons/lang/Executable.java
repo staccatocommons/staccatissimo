@@ -12,9 +12,32 @@
  */
 package net.sf.staccato.commons.lang;
 
+import java.util.Iterator;
+
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
+ * <p>
  * {@link Executable}s are computations that take one argument and whose result
  * is a side effect, instead of a return value.
+ * </p>
+ * <p>
+ * {@link Executable}s are slightly modeled against a minimal, parameterized,
+ * generic, command object interface in the context of the Command Design
+ * Pattern. In those cases, the exact meaning of the argument vary and should be
+ * specified by implementors and client code - it may be for example the
+ * execution context or the the actual command receiver.
+ * </p>
+ * <p>
+ * Possible - sometimes overlapped - usage scenarios are:
+ * <ul>
+ * <li>Implementing callbacks</li>
+ * <li>Enqueuing requests</li>
+ * <li>Asyncronous operations</li>
+ * <li>Traversing mechanism alternative to the {@link Iterable} and
+ * {@link Iterator} interfaces</li>
+ * </ul>
+ * </p>
  * 
  * @author flbulgarelli
  * 
@@ -24,16 +47,11 @@ package net.sf.staccato.commons.lang;
 public interface Executable<T> {
 
 	/**
-	 * Executes this {@link Executable}, performing a side-effect computation.
-	 * 
-	 * {@link Executable} argument is non nullable - implementors are not required
-	 * to handle <code>null</code> arguments. Thus, client code should never pass
-	 * null, although clearly stated that a nullable argument {@link Executable}
-	 * needs to be provided.
+	 * Performs a side-effect computation.
 	 * 
 	 * @param argument
-	 *          the argument of the computation. non null
+	 *          the argument of the computation.
 	 */
-	void exec(T argument);
+	void exec(@NonNull T argument);
 
 }

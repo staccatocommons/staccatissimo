@@ -48,6 +48,20 @@ import java.lang.annotation.Target;
  * and it depends exclusively on its static or dynamic processor. It may even
  * not be processed at all, and server exclusively as documentation.
  * </p>
+ * 
+ * <p>
+ * <strong>Notice about inheritance and polymorphism:</strong> Removing/adding
+ * {@link CheckAnnotation}s applied to methods have the same semantics related
+ * to inheritance and polymorphism that augmenting/reducing method visibility in
+ * Java. Overriders and implementors of annotated methods should follow these
+ * rules:
+ * <ol>
+ * <li>Must never introduce extra checks</li>
+ * <li>May relax parent checks</li>
+ * <li>Inherited checks must be explicit - if not present, client code must
+ * assume the parent checks have been relaxed</li>
+ * </ol>
+ * </p>
  */
 @Documented
 @Inherited
