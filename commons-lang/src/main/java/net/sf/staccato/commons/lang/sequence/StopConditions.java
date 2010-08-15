@@ -17,18 +17,31 @@ import net.sf.staccato.commons.lang.predicate.Predicates;
 
 /**
  * @author flbulgarelli
- * 
  */
 public class StopConditions {
 
+	/**
+	 * @param <T>
+	 * @return <code>Predicates.false_()</code>
+	 */
 	public static <T> Predicate<T> stopNever() {
 		return Predicates.false_();
 	}
 
+	/**
+	 * @param <T>
+	 * @param value
+	 * @return <code>Predicates.lowerThan(value)</code>
+	 */
 	public static <T extends Comparable<T>> Predicate<T> downTo(T value) {
 		return Predicates.lowerThan(value);
 	}
 
+	/**
+	 * @param <T>
+	 * @param value
+	 * @return <code>Predicates.greaterThan(value)</code>
+	 */
 	public static <T extends Comparable<T>> Predicate<T> upTo(T value) {
 		return Predicates.greaterThan(value);
 	}
