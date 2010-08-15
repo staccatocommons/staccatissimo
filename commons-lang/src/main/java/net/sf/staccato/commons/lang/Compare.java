@@ -146,6 +146,8 @@ public class Compare {
 	/**
 	 * Tests if a given array contains an element
 	 * 
+	 * @param <T>
+	 * 
 	 * @param element
 	 * @param values
 	 * @return if the array contains the given element, using equals comparison
@@ -157,10 +159,22 @@ public class Compare {
 		return false;
 	}
 
+	/**
+	 * @param <T>
+	 * @param c1
+	 * @param c2
+	 * @return c1 if it is lower than or equal to c2, c2 otherwise.
+	 */
 	public static <T extends Comparable<T>> T min(T c1, T c2) {
 		return (T) ObjectUtils.min(c1, c2);
 	}
 
+	/**
+	 * @param <T>
+	 * @param c1
+	 * @param c2
+	 * @return c1 if it is greater than or equal to c2, c2 otherwise.
+	 */
 	public static <T extends Comparable<T>> T max(T c1, T c2) {
 		return (T) ObjectUtils.max(c1, c2);
 	}

@@ -12,6 +12,12 @@
  */
 package net.sf.staccato.commons.lang;
 
+/**
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T>
+ */
 public interface Evaluable<T> {
 
 	/**

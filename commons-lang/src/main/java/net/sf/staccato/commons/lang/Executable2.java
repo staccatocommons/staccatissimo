@@ -19,10 +19,21 @@ package net.sf.staccato.commons.lang;
  * @author flbulgarelli
  * 
  * @param <T1>
+ *          first computation argument type
  * @param <T2>
+ *          second computation argument type
  */
 public interface Executable2<T1, T2> {
 
+	/**
+	 * Executes this {@link Executable2}, performing a side-effect computation.
+	 * 
+	 * Same restrictions that for {@link Executable#exec(Object)} applies
+	 * 
+	 * @see Executable#exec(Object)
+	 * @param argument1
+	 * @param argument2
+	 */
 	void exec(T1 argument1, T2 argument2);
 
 }
