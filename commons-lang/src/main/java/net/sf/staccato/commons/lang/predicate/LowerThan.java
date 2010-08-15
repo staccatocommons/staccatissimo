@@ -10,14 +10,22 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.sequence;
+package net.sf.staccato.commons.lang.predicate;
 
 /**
  * @author flbulgarelli
- * 
+ * @param <T>
  */
-public interface Step<T> {
+public class LowerThan<T extends Comparable<T>> extends Predicate<T> {
 
-	T next(T previous);
+	private final T value;
+
+	public LowerThan(T value) {
+		this.value = value;
+	}
+
+	public boolean eval(T argument) {
+		return argument.compareTo(value) < 0;
+	};
 
 }

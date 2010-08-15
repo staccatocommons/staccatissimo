@@ -61,6 +61,13 @@ public abstract class Function3<T1, T2, T3, R> implements
 		};
 	}
 
+	/**
+	 * Composes other function with this.
+	 * 
+	 * @param <Rp>
+	 * @param other
+	 * @return <code>other.of(this)</code>
+	 */
 	public <Rp> Function3<T1, T2, T3, Rp> then(final Function<? super R, Rp> other) {
 		return other.of(this);
 	}

@@ -61,7 +61,7 @@ public class EnsureUnitTest {
 		Ensure.notEmpty(VAR_NAME, new int[6]);
 		Ensure.notEmpty(VAR_NAME, new long[52]);
 		Ensure.notEmpty(VAR_NAME, new Object[2]);
-		Ensure.notEmpty(VAR_NAME, Range.range(5, 6));
+		Ensure.notEmpty(VAR_NAME, Range.from(5, 6));
 	}
 
 	@Test

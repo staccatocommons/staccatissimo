@@ -121,7 +121,7 @@ public class Range<T extends Comparable<T>> extends UnmodifiableObject
 	 * @return the new Range. Non null.
 	 */
 	@NonNull
-	public static <T extends Comparable<T>> Range<T> range(@NonNull T min,
+	public static <T extends Comparable<T>> Range<T> from(@NonNull T min,
 		@NonNull T max) {
 		return new Range<T>(min, max);
 	}

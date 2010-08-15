@@ -54,6 +54,13 @@ public abstract class Function2<T1, T2, R> implements Applicable2<T1, T2, R>,
 		};
 	}
 
+	/**
+	 * Composes other function with this.
+	 * 
+	 * @param <Rp>
+	 * @param other
+	 * @return <code>other.of(this)</code>
+	 */
 	public <Rp> Function2<T1, T2, Rp> then(final Function<? super R, Rp> other) {
 		return other.of(this);
 	}

@@ -12,27 +12,25 @@
  */
 package net.sf.staccato.commons.lang.sequence;
 
+import net.sf.staccato.commons.lang.predicate.Predicate;
+import net.sf.staccato.commons.lang.predicate.Predicates;
 
 /**
  * @author flbulgarelli
- * @param <T>
+ * 
  */
-public class Descend<T extends Comparable<T>> implements
-	StopCondition<T> {
+public class StopConditions {
 
-	private final T stopValue;
-
-	public Descend(T stopValue) {
-		this.stopValue = stopValue;
+	public static <T> Predicate<T> stopNever() {
+		return Predicates.false_();
 	}
 
-	@Override
-	public boolean shouldStop(T next) {
-		return next.compareTo(stopValue) < 0;
+	public static <T extends Comparable<T>> Predicate<T> downTo(T value) {
+		return Predicates.lowerThan(value);
 	}
 
-	public static <T extends Comparable<T>> Descend<T> upTo(T value) {
-		return new Descend<T>(value);
+	public static <T extends Comparable<T>> Predicate<T> upTo(T value) {
+		return Predicates.greaterThan(value);
 	}
 
 }

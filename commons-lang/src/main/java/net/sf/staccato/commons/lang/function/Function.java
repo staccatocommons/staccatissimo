@@ -31,6 +31,13 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 	@Override
 	public abstract R apply(T arg);
 
+	/**
+	 * Composes other function with this.
+	 * 
+	 * @param <Rp>
+	 * @param other
+	 * @return <code>other.of(this)</code>
+	 */
 	public <Rp> Function<T, Rp> then(final Function<? super R, Rp> other) {
 		return other.of(this);
 	}
@@ -95,6 +102,5 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 			}
 		};
 	}
-
 
 }

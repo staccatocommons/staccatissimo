@@ -29,7 +29,7 @@ import net.sf.staccato.commons.lang.function.Function;
  * </p>
  * <p>
  * Predicates in addition understand the basic boolean logic messages
- * {@link #not()}, {@link #and(Predicate)} and {@link #or(Predicate)} that
+ * {@link #not()}, {@link #and(Evaluable)} and {@link #or(Evaluable)} that
  * perform those operations on evaluation result.
  * </p>
  * 

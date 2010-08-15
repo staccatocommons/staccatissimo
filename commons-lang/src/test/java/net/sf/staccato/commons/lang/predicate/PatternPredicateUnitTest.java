@@ -25,14 +25,14 @@ public class PatternPredicateUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.lang.predicate.PatternPredicate#eval(java.lang.String)}
+	 * {@link net.sf.staccato.commons.lang.predicate.Matches#eval(java.lang.String)}
 	 * .
 	 */
 	@Test
 	public void testEvalString() {
-		assertTrue(new PatternPredicate(".*foo.*")
+		assertTrue(new Matches(".*foo.*")
 			.apply("The word foo is just a placeholder"));
-		assertFalse(new PatternPredicate(".*bar.*")
+		assertFalse(new Matches(".*bar.*")
 			.apply("The word foo is just a placeholder"));
 	}
 

@@ -14,8 +14,6 @@ package net.sf.staccato.commons.lang.predicate;
 
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.NotImplementedException;
-
 /**
  * @author flbulgarelli
  */
@@ -26,7 +24,7 @@ public class Predicates {
 	 * @return A {@link Predicate} that always returns <code>true</code>
 	 */
 	public static <T> Predicate<T> true_() {
-		return TruePredicate.instance;
+		return True.getInstance();
 	}
 
 	/**
@@ -34,7 +32,7 @@ public class Predicates {
 	 * @return A {@link Predicate} that always returns <code>false</code>
 	 */
 	public static <T> Predicate<T> false_() {
-		return FalsePredicate.instance;
+		return False.getInstance();
 	}
 
 	/*
@@ -46,30 +44,36 @@ public class Predicates {
 	 * @return A {@link Predicate} that tests if its argument is not null
 	 */
 	public static <T> Predicate<T> notNull() {
-		return NotNullPredicate.instance;
+		return NotNull.getInstance();
 	}
 
-	public static <T> Predicate<T> equal(final T value) {
-		return new Predicate<T>() {
-			public boolean eval(T argument) {
-				return value.equals(argument);
-			}
-		};
+	/**
+	 * 
+	 * @param <T>
+	 * @param value
+	 * @return a {@link Predicate} that tests if its argument is equal to the
+	 *         given value
+	 */
+	public static <T> Predicate<T> equal(T value) {
+		return new Equals<T>(value);
 	}
 
-	public static <T> Predicate<T> same(final T value) {
-		return new Predicate<T>() {
-			public boolean eval(T argument) {
-				return value == argument;
-			}
-		};
+	/**
+	 * 
+	 * @param <T>
+	 * @param value
+	 * @return a {@link Predicate} that tests if its argument is the same that the
+	 *         given value
+	 */
+	public static <T> Predicate<T> same(T value) {
+		return new Same<T>(value);
 	}
 
 	/*
 	 * String predicates
 	 */
 
-	public static Predicate<String> equalIgnoreCase(final String value) {
+	public static Predicate<String> equalsIgnoreCase(final String value) {
 		return new Predicate<String>() {
 			@Override
 			public boolean eval(String arg0) {
@@ -79,11 +83,11 @@ public class Predicates {
 	}
 
 	public static Predicate<String> matchesRegexp(String regexp) {
-		return new PatternPredicate(regexp);
+		return new Matches(regexp);
 	}
 
 	public static Predicate<String> matchesPattern(Pattern pattern) {
-		return new PatternPredicate(pattern);
+		return new Matches(pattern);
 	}
 
 	public static Predicate<String> contains(String substring) {
@@ -95,11 +99,11 @@ public class Predicates {
 	 */
 
 	public static <T extends Comparable<T>> Predicate<T> lowerThan(T value) {
-		throw new NotImplementedException();
+		return new LowerThan<T>(value);
 	}
 
 	public static <T extends Comparable<T>> Predicate<T> greaterThan(final T value) {
-		return new GreaterThanPredicate<T>(value);
+		return new GreaterThan<T>(value);
 	}
 
 	/**
@@ -107,12 +111,65 @@ public class Predicates {
 	 * 
 	 * @param <T>
 	 */
-	private static final class NotNullPredicate<T> extends Predicate<T> {
-		public static Predicate instance = new NotNullPredicate();
+	public static final class Same<T> extends Predicate<T> {
+		/**
+		 * 
+		 */
+		private final T value;
+
+		/**
+		 * Creates a new {@link Same}
+		 */
+		public Same(T value) {
+			this.value = value;
+		}
+
+		public boolean eval(T argument) {
+			return value == argument;
+		}
+	}
+
+	/**
+	 * @author flbulgarelli
+	 * 
+	 * @param <T>
+	 */
+	public static final class Equals<T> extends Predicate<T> {
+		private final T value;
+
+		/**
+		 * Creates a new {@link Equals}
+		 * 
+		 * @param value
+		 *          the value to test equality
+		 */
+		public Equals(T value) {
+			this.value = value;
+		}
+
+		public boolean eval(T argument) {
+			return value.equals(argument);
+		}
+	}
+
+	/**
+	 * @author flbulgarelli
+	 * 
+	 * @param <T>
+	 */
+	public static final class NotNull<T> extends Predicate<T> {
+		private static Predicate instance = new NotNull();
 
 		public boolean eval(T argument) {
 			return argument != null;
 		}
+
+		/**
+		 * @return the instance
+		 */
+		public static Predicate getInstance() {
+			return instance;
+		}
 	}
 
 	/**
@@ -120,12 +177,19 @@ public class Predicates {
 	 * 
 	 * @param <T>
 	 */
-	private static final class FalsePredicate<T> extends Predicate<T> {
-		public static Predicate instance = new FalsePredicate();
+	public static final class False<T> extends Predicate<T> {
+		private static Predicate instance = new False();
 
 		public boolean eval(T argument) {
 			return false;
 		}
+
+		/**
+		 * @return the instance
+		 */
+		public static Predicate getInstance() {
+			return instance;
+		}
 	}
 
 	/**
@@ -133,21 +197,18 @@ public class Predicates {
 	 * 
 	 * @param <T>
 	 */
-	private static final class TruePredicate<T> extends Predicate<T> {
-		public static Predicate instance = new TruePredicate();
+	public static final class True<T> extends Predicate<T> {
+		private static Predicate instance = new True();
 
 		public boolean eval(T argument) {
 			return true;
 		}
+
+		/**
+		 * @return the instance
+		 */
+		public static Predicate getInstance() {
+			return instance;
+		}
 	}
-
-	// public static <T> Predicate<T> not(final Evaluable<T> predicate) {
-	// return new Predicate<T>() {
-	// @Override
-	// public boolean eval(T argument) {
-	// return predicate.equals(argument);
-	// }
-	// }.not();
-	// }
-
 }

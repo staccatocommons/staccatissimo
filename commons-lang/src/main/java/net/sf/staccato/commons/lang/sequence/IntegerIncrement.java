@@ -12,12 +12,13 @@
  */
 package net.sf.staccato.commons.lang.sequence;
 
+import net.sf.staccato.commons.lang.function.Function;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class IntegerIncrement implements Step<Integer> {
+public class IntegerIncrement extends Function<Integer, Integer> {
 
 	private final int delta;
 
@@ -26,8 +27,8 @@ public class IntegerIncrement implements Step<Integer> {
 	}
 
 	@Override
-	public Integer next(Integer previous) {
-		return previous + delta;
+	public Integer apply(Integer arg) {
+		return arg + delta;
 	}
 
 }

@@ -20,27 +20,27 @@ import java.util.regex.Pattern;
  * @author flbulgarelli
  * 
  */
-public class PatternPredicate extends Predicate<String> {
+public class Matches extends Predicate<String> {
 
 	private Pattern pattern;
 
 	/**
-	 * Creates a new {@link PatternPredicate} using a regular expression
+	 * Creates a new {@link Matches} using a regular expression
 	 * 
 	 * @param regexp
 	 *          the regular expression. Non null.
 	 */
-	public PatternPredicate(String regexp) {
+	public Matches(String regexp) {
 		this.pattern = Pattern.compile(regexp);
 	}
 
 	/**
-	 * Creates a new {@link PatternPredicate} using a {@link Pattern}.
+	 * Creates a new {@link Matches} using a {@link Pattern}.
 	 * 
 	 * @param pattern
 	 *          the pattern. Non null
 	 */
-	public PatternPredicate(Pattern pattern) {
+	public Matches(Pattern pattern) {
 		this.pattern = pattern;
 	}
 

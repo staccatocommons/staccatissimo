@@ -14,11 +14,13 @@ package net.sf.staccato.commons.lang.sequence;
 
 import java.math.BigInteger;
 
+import net.sf.staccato.commons.lang.function.Function;
+
 /**
  * @author flbulgarelli
  * 
  */
-public class BigIntegerIncrement implements Step<BigInteger> {
+public class BigIntegerIncrement extends Function<BigInteger, BigInteger> {
 
 	private final BigInteger delta;
 
@@ -27,8 +29,8 @@ public class BigIntegerIncrement implements Step<BigInteger> {
 	}
 
 	@Override
-	public BigInteger next(BigInteger previous) {
-		return previous.add(delta);
+	public BigInteger apply(BigInteger arg) {
+		return arg.add(delta);
 	}
 
 }

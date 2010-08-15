@@ -12,11 +12,11 @@
  */
 package net.sf.staccato.commons.lang.predicate;
 
-public final class GreaterThanPredicate<T extends Comparable<T>> extends
+public final class GreaterThan<T extends Comparable<T>> extends
 	Predicate<T> {
 	private final T value;
 
-	public GreaterThanPredicate(T value) {
+	public GreaterThan(T value) {
 		this.value = value;
 	}
 
