@@ -20,6 +20,11 @@ import net.sf.staccato.commons.lang.check.Ensure;
 
 import org.apache.commons.lang.ObjectUtils;
 
+/**
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class Lists {
 	private static final String LIST_PARAM = "list";
 

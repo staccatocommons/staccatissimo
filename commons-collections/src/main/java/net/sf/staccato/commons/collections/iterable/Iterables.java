@@ -12,32 +12,25 @@
  */
 package net.sf.staccato.commons.collections.iterable;
 
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS_PARAM;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COLLECTION_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COMPARATOR_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.FUNCTION_PARAM;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE_PARAM;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.PREDICATE_PARAM;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.addAllInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.allSameInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.allSatisfiesInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyOrNoneInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyOrNullInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anySatisfiesInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.collectInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.findOrNullInternal;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.filterInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.foldInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.isEmptyInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.reduceInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.rejectInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.selectInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.takeInternal;
 import static net.sf.staccato.commons.lang.tuple.Tuple._;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -52,8 +45,9 @@ import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Option;
-import net.sf.staccato.commons.lang.Provider;
 import net.sf.staccato.commons.lang.check.Ensure;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.function.Function2;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 import net.sf.staccato.commons.lang.tuple.Pair;
 
@@ -80,34 +74,38 @@ import org.apache.commons.lang.ObjectUtils;
 public class Iterables {
 
 	/*
-	 * =====================================================================
-	 * =======================Functional algorithms=========================
-	 * =====================================================================
-	 */
-
-	/*
 	 * Filtering
 	 */
 
-	public static <T> List<T> filter(Iterable<T> iterable,
-		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(PREDICATE_PARAM, predicate);
-		return selectInternal(iterable, predicate, new LinkedList<T>());
+	/**
+	 * Selects all elements that evaluate to true
+	 * 
+	 * @param iterable
+	 * @param predicate
+	 * @param <T>
+	 * @return a list containing only elements from the original iterable that
+	 *         evaluate to true
+	 */
+	@NonNull
+	public static <T> List<T> filter(@NonNull Iterable<T> iterable,
+		@NonNull Evaluable<? super T> predicate) {
+		return filterInternal(iterable, predicate, new LinkedList<T>());
 	}
 
-	public static <T> List<T> reject(Iterable<T> iterable,
-		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(PREDICATE_PARAM, predicate);
-		LinkedList<T> list = new LinkedList<T>();
-
-		return rejectInternal(iterable, predicate, list);
-	}
-
-	public static <T> List<T> take(Iterable<T> iterable, int amountOfElements) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNegative(AMOUNT_OF_ELEMENTS_PARAM, amountOfElements);
+	/**
+	 * Selects at most the fist N elements from the iterable, according to its
+	 * iteration order.
+	 * 
+	 * @param <T>
+	 * @param iterable
+	 * @param amountOfElements
+	 * @return a new list containing at most the first N elements from original
+	 *         iterable
+	 */
+	@NonNull
+	public static <T> List<T> take(@NonNull Iterable<T> iterable,
+		int amountOfElements) {
+		Ensure.nonNegative(AMOUNT_OF_ELEMENTS, amountOfElements);
 		return takeInternal(iterable, amountOfElements, new ArrayList<T>(
 			amountOfElements));
 	}
@@ -116,17 +114,15 @@ public class Iterables {
 	 * Reduction
 	 */
 
-	public static <T> T reduce(Iterable<T> iterable,
-		Applicable2<? super T, ? super T, ? extends T> applyer) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(FUNCTION_PARAM, applyer);
-		return reduceInternal(iterable, applyer);
+	@NonNull
+	public static <T> T reduce(@NonNull Iterable<T> iterable,
+		@NonNull Applicable2<? super T, ? super T, ? extends T> function) {
+		return reduceInternal(iterable, function);
 	}
 
-	public static <I, O> O fold(Iterable<I> iterable, O initial,
-		Applicable2<? super O, ? super I, ? extends O> applyer) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(FUNCTION_PARAM, applyer);
+	@NonNull
+	public static <I, O> O fold(@NonNull Iterable<I> iterable, O initial,
+		@NonNull Applicable2<? super O, ? super I, ? extends O> applyer) {
 		return foldInternal(iterable, initial, applyer);
 	}
 
@@ -173,55 +169,12 @@ public class Iterables {
 	 */
 	public static <T> Option<T> findOrNone(Iterable<T> iterable,
 		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+		Ensure.nonNull(ITERABLE, iterable);
 		Ensure.nonNull(PREDICATE_PARAM, predicate);
 		for (T o : iterable)
 			if (predicate.eval(o))
 				return Option.some(o);
 		return Option.none();
-	}
-
-	/**
-	 * Alternative version of {@link #findOrNone(Iterable, Predicate)}, where the
-	 * element is returned if found, or null, otherwise.
-	 * 
-	 * @param <T>
-	 * @param iterable
-	 *          non null
-	 * @param predicate
-	 *          non null
-	 * @return null if element is not found or collection is empty, or the
-	 *         element, if found.
-	 */
-	public static <T> T findOrNull(Iterable<T> iterable,
-		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(PREDICATE_PARAM, predicate);
-		return findOrNullInternal(iterable, predicate);
-	}
-
-	/**
-	 * Alternative version of {@link #findOrNone(Iterable, Predicate)}, where the
-	 * element is returned if found, or a factory is invoked otherwise.
-	 * 
-	 * @param <T>
-	 * @param iterable
-	 *          non null.
-	 * @param predicate
-	 *          non null.
-	 * @param ifNone
-	 *          factory to be invoked if no such element exists. Non null
-	 * @return the element if found, or ifNone.create() otherwise
-	 */
-	public static <T> T findOrElse(Iterable<T> iterable,
-		Evaluable<? super T> predicate, Provider<? extends T> ifNone) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(PREDICATE_PARAM, predicate);
-		Ensure.nonNull("factory", predicate);
-		for (T o : iterable)
-			if (predicate.eval(o))
-				return o;
-		return ifNone.value();
 	}
 
 	/**
@@ -234,74 +187,42 @@ public class Iterables {
 	 *          a single element (size==1) collection
 	 * @return The unique element of the collection
 	 */
-	public static <T> T single(Collection<T> collection) {
+	/* TODO REVISE */public static <T> T single(Collection<T> collection) {
 		Ensure.nonNull(COLLECTION_PARAM, collection);
 		Ensure.size(COLLECTION_PARAM, collection, 1);
 		return anyInternal(collection);
 	}
 
-	public static <T> T any(Collection<T> collection) {
-		Ensure.nonNull(COLLECTION_PARAM, collection);
-		if (collection.isEmpty())
-			throw new NoSuchElementException();
-		return anyInternal(collection);
-	}
-
 	/**
-	 * Gets any element of the given collection. Returns some(element) if not
-	 * empty, or none, if empty.
+	 * Returns any element from this iterable, or throws a
+	 * {@link NoSuchElementException} it iterable is empty. Notice that
+	 * <strong>any does not mean random</strong>, it may return always the same
+	 * element - for example the first for a list -, but the exact element
+	 * returned from the iterable unspecified.
 	 * 
 	 * @param <T>
-	 * @param collection
-	 *          non null
-	 * @return some(element) if not empty, or none, otherwise.
+	 * @param iterable
+	 * @throws NoSuchElementException
+	 *           if the iterable is empty
+	 * @return an element contained in the given iterable. This is nullable, if
+	 *         the iterables's iterator may return null.
 	 */
-	public static <T> Option<T> anyOrNone(Collection<T> collection) {
-		Ensure.nonNull(COLLECTION_PARAM, collection);
-		if (collection.isEmpty())
-			return Option.none();
-		return Option.some(anyInternal(collection));
-	}
-
-	/**
-	 * Gets any element of the given collection. Returns the element if not empty,
-	 * or null, if empty.
-	 * 
-	 * @param <T>
-	 * @param collection
-	 *          non null
-	 * @return any element if not empty, or null, otherwise.
-	 */
-	public static <T> T anyOrNull(Collection<T> collection) {
-		Ensure.nonNull(COLLECTION_PARAM, collection);
-		if (collection.isEmpty())
-			return null;
-		return anyInternal(collection);
-	}
-
-	public static <T> T any(Iterable<T> iterable) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+	public static <T> T any(@NonNull Iterable<T> iterable) {
+		Ensure.nonNull(ITERABLE, iterable);
 		return anyInternal(iterable);
 	}
 
-	public static <T> Option<T> anyOrNone(Iterable<T> iterable) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+	/**
+	 * Gets any element of the given collection. Returns Option.some(element) if
+	 * not empty, or Option.none(), if empty.
+	 * 
+	 * @param <T>
+	 * @param iterable
+	 * @return some(element) if not empty, or none, otherwise.
+	 */
+	@NonNull
+	public static <T> Option<T> anyOrNone(@NonNull Iterable<T> iterable) {
 		return anyOrNoneInternal(iterable);
-
-	}
-
-	public static <T> T anyOrNull(Iterable<T> iterable) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		return anyOrNullInternal(iterable);
-	}
-
-	public static <T> T anyOrElse(Iterable<T> iterable, Provider<T> provider) {
-		Ensure.nonNull("provider", provider);
-		return anyOrNone(iterable).valueOrElse(provider);
-	}
-
-	public static <T> T anyOrElse(Iterable<T> iterable, T value) {
-		return anyOrNone(iterable).valueOrElse(value);
 	}
 
 	/*
@@ -310,9 +231,12 @@ public class Iterables {
 
 	public static <T> boolean all(Iterable<T> iterable,
 		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+		Ensure.nonNull(ITERABLE, iterable);
 		Ensure.nonNull(PREDICATE_PARAM, predicate);
-		return allSatisfiesInternal(iterable, predicate);
+		for (T o : iterable)
+			if (!predicate.eval(o))
+				return false;
+		return true;
 	}
 
 	/**
@@ -325,7 +249,7 @@ public class Iterables {
 	 *         False otherwise
 	 */
 	public static <T> boolean allEqual(Iterable<T> iterable) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+		Ensure.nonNull(ITERABLE, iterable);
 		Iterator<T> iter = iterable.iterator();
 		if (!iter.hasNext())
 			return true;
@@ -346,18 +270,28 @@ public class Iterables {
 	 *         object. False otherwise
 	 */
 	public static <T> boolean allSame(Iterable<T> iterable) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		return allSameInternal(iterable);
+		Ensure.nonNull(ITERABLE, iterable);
+		Iterator<T> iter = iterable.iterator();
+		if (!iter.hasNext())
+			return true;
+		T any = iter.next();
+		for (; iter.hasNext();)
+			if (any != iter.next())
+				return false;
+		return true;
 	}
 
 	public static <T> boolean any(Iterable<T> iterable,
 		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		return anySatisfiesInternal(iterable, predicate);
+		Ensure.nonNull(ITERABLE, iterable);
+		for (T o : iterable)
+			if (predicate.eval(o))
+				return true;
+		return false;
 	}
 
 	public static <T> boolean isEmpty(Iterable<T> iterable) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+		Ensure.nonNull(ITERABLE, iterable);
 		return isEmptyInternal(iterable);
 	}
 
@@ -393,7 +327,7 @@ public class Iterables {
 	 *         result of the applyation of each element of the given collection.
 	 *         May be empty
 	 */
-	public static <I, O> List<O> map(Collection<I> collection,
+	/* TODO REVISE */public static <I, O> List<O> map(Collection<I> collection,
 		Applicable<? super I, ? extends O> applyer) {
 		Ensure.nonNull(COLLECTION_PARAM, collection);
 		Ensure.nonNull(FUNCTION_PARAM, applyer);
@@ -405,14 +339,14 @@ public class Iterables {
 
 	public static <I, O> List<O> map(Iterable<I> iterable,
 		Applicable<? super I, ? extends O> applyer) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+		Ensure.nonNull(ITERABLE, iterable);
 		Ensure.nonNull(FUNCTION_PARAM, applyer);
 		return collectInternal(iterable, applyer, new LinkedList<O>());
 	}
 
 	public static <I, O> List<O> flatMap(Iterable<I> iterable,
 		Applicable<? super I, ? extends Iterable<O>> applyer) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+		Ensure.nonNull(ITERABLE, iterable);
 		Ensure.nonNull(FUNCTION_PARAM, applyer);
 
 		LinkedList<O> list = new LinkedList<O>();
@@ -443,7 +377,7 @@ public class Iterables {
 	 */
 	public static <S> List<S> asSortedList(Iterable<S> iterable,
 		Comparator<? super S> comparator) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+		Ensure.nonNull(ITERABLE, iterable);
 		Ensure.nonNull(COMPARATOR_PARAM, comparator);
 		List<S> list = new LinkedList<S>();
 		addAllInternal(list, iterable);
@@ -453,7 +387,7 @@ public class Iterables {
 
 	public static <S> SortedSet<S> asSortedSet(Iterable<S> iterable,
 		Comparator<? super S> comparator) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+		Ensure.nonNull(ITERABLE, iterable);
 		Ensure.nonNull(COMPARATOR_PARAM, comparator);
 		TreeSet<S> sortedSet = new TreeSet<S>(comparator);
 		addAllInternal(sortedSet, iterable);
@@ -461,7 +395,7 @@ public class Iterables {
 	}
 
 	public static <S> SortedSet<S> asSortedSet(Iterable<S> iterable) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+		Ensure.nonNull(ITERABLE, iterable);
 		TreeSet<S> sortedSet = new TreeSet<S>();
 		addAllInternal(sortedSet, iterable);
 		return sortedSet;
@@ -473,8 +407,8 @@ public class Iterables {
 
 	public static <T> Pair<List<T>, List<T>> partition(Iterable<T> iterable,
 		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+		Ensure.nonNull(ITERABLE, iterable);
+		Ensure.nonNull(ITERABLE, iterable);
 
 		List<T> left = new LinkedList<T>();
 		List<T> right = new LinkedList<T>();
@@ -484,35 +418,6 @@ public class Iterables {
 			else
 				right.add(element);
 		return _(left, right);
-	}
-
-	/*
-	 * Mapping & Filtering
-	 */
-
-	public static <I, O> List<O> mapFilter(Iterable<I> iterable,
-		Applicable<? super I, ? extends O> applyer, Evaluable<? super O> predicate) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(FUNCTION_PARAM, applyer);
-		Ensure.nonNull(PREDICATE_PARAM, predicate);
-		O applyed;
-		List<O> mapFiltered = new LinkedList<O>();
-		for (I element : iterable)
-			if (predicate.eval((applyed = applyer.apply(element))))
-				mapFiltered.add(applyed);
-		return Collections.unmodifiableList(mapFiltered);
-	}
-
-	public static <I, O> List<O> filterMap(Iterable<I> iterable,
-		Evaluable<? super I> predicate, Applicable<? super I, ? extends O> applyer) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(FUNCTION_PARAM, applyer);
-		Ensure.nonNull(PREDICATE_PARAM, predicate);
-		List<O> filterMapped = new LinkedList<O>();
-		for (I element : iterable)
-			if (predicate.eval(element))
-				filterMapped.add(applyer.apply(element));
-		return Collections.unmodifiableList(filterMapped);
 	}
 
 	/*
@@ -546,12 +451,6 @@ public class Iterables {
 		return new ArrayList<S>(collection);
 	}
 
-	/*
-	 * TODO implement public boolean containsAll(Iterable<? extends T> elements) {
-	 * for (T element : elements) if (!contains(element)) return false; return
-	 * true; }
-	 */
-
 	public static <T> T get(Iterable<T> iterable, int at)
 		throws NoSuchElementException {
 		T element = null;
@@ -560,4 +459,26 @@ public class Iterables {
 			element = iter.next();
 		return element;
 	}
+
+	public static <T1, T2, T3> List<T3> zip(Iterable<T1> iterable1,
+		Iterable<T2> iterable2, Applicable2<T1, T2, T3> function) {
+		Iterator<T1> iter1 = iterable1.iterator();
+		Iterator<T2> iter2 = iterable2.iterator();
+		List<T3> result = new LinkedList<T3>();
+		while (iter1.hasNext() && iter2.hasNext())
+			result.add(function.apply(iter1.next(), iter2.next()));
+		return result;
+	}
+
+	public static <T1, T2> List<Pair<T1, T2>> zip(Iterable<T1> iterable1,
+		Iterable<T2> iterable2) {
+		return zip(iterable1, iterable2, new Function2<T1, T2, Pair<T1, T2>>() {
+			@Override
+			public Pair<T1, T2> apply(T1 arg1, T2 arg2) {
+				return _(arg1, arg2);
+			}
+		});
+	}
+
+	// TODO take while
 }

@@ -12,28 +12,17 @@
  */
 package net.sf.staccato.commons.collections.iterable;
 
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS_PARAM;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COLLECTION_PARAM;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.FUNCTION_PARAM;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE_PARAM;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.OUTPUT_COLLECTION_PARAM;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.PREDICATE_PARAM;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.addAllInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.collectInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.foreachInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.moveInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.rejectInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.selectInternal;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
-import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Executable;
 import net.sf.staccato.commons.lang.check.Ensure;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * A bunch of static methods that extend the {@link java.util.Collections}
@@ -49,73 +38,80 @@ import net.sf.staccato.commons.lang.check.Ensure;
 public class ModifiableIterables {
 
 	/*
-	 * =====================================================================
-	 * =======================Imperative algorithms=========================
-	 * =====================================================================
+	 * Removing
 	 */
 
-	/*
-	 * selecting
+	/**
+	 * Removes from the given iterable all the elements that evaluate to true
+	 * 
+	 * @param iterable
+	 * @param predicate
+	 * @param <T>
+	 * @param <I>
+	 * @return the given iterable
 	 */
-
-	public static <T, C extends Collection<T>> C select(Iterable<T> iterable,
-		Evaluable<? super T> predicate, C outputCollection) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(PREDICATE_PARAM, predicate);
-		// Ensure.notNull(OUTPUT_COLLECTION_PARAM, outputCollection);
-		return selectInternal(iterable, predicate, outputCollection);
-	}
-
-	public static <T, C extends Collection<T>> C reject(Iterable<T> iterable,
-		Evaluable<? super T> predicate, C outputCollection) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(PREDICATE_PARAM, predicate);
-		return rejectInternal(iterable, predicate, outputCollection);
+	@NonNull
+	public static <T, I extends Iterable<T>> I removeAll(@NonNull I iterable,
+		@NonNull Evaluable<? super T> predicate) {
+		for (Iterator<T> iter = iterable.iterator(); iter.hasNext();)
+			if (predicate.eval(iter.next()))
+				iter.remove();
+		return iterable;
 	}
 
 	/**
-	 * Remove at most n elements from the given iterable, and adds it to the
-	 * output collection
+	 * Removes elements from the given iterable, while each element evaluates to
+	 * true
 	 * 
 	 * @param <T>
-	 * @param <C>
 	 * @param iterable
-	 *          non null.
-	 * @param amountOfElements
-	 *          the max amount of elements to select from the iterable. Must be >=
-	 *          0
-	 * @param outputCollection
-	 *          non null.
-	 * @return the output collection
+	 * @param predicate
 	 */
-	public static <T, C extends Collection<T>> C move(Iterable<T> iterable,
-		int amountOfElements, C outputCollection) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNegative(AMOUNT_OF_ELEMENTS_PARAM, amountOfElements);
-		Ensure.nonNull(OUTPUT_COLLECTION_PARAM, outputCollection);
-		return moveInternal(iterable, amountOfElements, outputCollection);
+	public static <T> void removeWhile(Iterable<? extends T> iterable,
+		Evaluable<? super T> predicate) {
+		Ensure.nonNull(ITERABLE, iterable);
+		for (Iterator<? extends T> iter = iterable.iterator(); iter.hasNext()
+			&& predicate.eval(iter.next());)
+			iter.remove();
 	}
 
-	/*
-	 * Collecting
+	/**
+	 * Removes up to N elements from the given iterable
+	 * 
+	 * @param <I>
+	 * 
+	 * @param iterable
+	 * @param amountOfElements
+	 *          Non negative
+	 * @return the given iterable
 	 */
-
-	public static <I, O, C extends Collection<O>> C collect(Iterable<I> iterable,
-		Applicable<? super I, ? extends O> applyer, C outputCollection) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull(FUNCTION_PARAM, applyer);
-		Ensure.nonNull(OUTPUT_COLLECTION_PARAM, outputCollection);
-		return collectInternal(iterable, applyer, outputCollection);
+	@NonNull
+	public static <I extends Iterable<?>> I remove(@NonNull I iterable,
+		int amountOfElements) {
+		Ensure.nonNegative(AMOUNT_OF_ELEMENTS, amountOfElements);
+		Iterator<?> iter = iterable.iterator();
+		for (int i = 0; i < amountOfElements && iter.hasNext(); i++)
+			iter.remove();
+		return iterable;
 	}
 
 	/*
 	 * Adding
 	 */
 
-	public static <T, C extends Collection<T>> C addAll(C collection,
-		Iterable<? extends T> iterable) {
-		Ensure.nonNull(COLLECTION_PARAM, collection);
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
+	/**
+	 * Adds all the elements from a given iterable to a given collection
+	 * 
+	 * @param collection
+	 * @param iterable
+	 * @param <T>
+	 * @param <C>
+	 * @return the given collection
+	 * 
+	 */
+	@NonNull
+	public static <T, C extends Collection<T>> C addAll(@NonNull C collection,
+		@NonNull Iterable<? extends T> iterable) {
 		addAllInternal(collection, iterable);
 		return collection;
 	}
@@ -127,59 +123,80 @@ public class ModifiableIterables {
 	 * @param <T>
 	 * @param collection
 	 * @param element
-	 * @return
+	 * @return if the element has been added or not
 	 */
-	public static <T> boolean addIfNotNull(Collection<? super T> collection,
-		T element) {
-		Ensure.nonNull(COLLECTION_PARAM, collection);
+	public static <T> boolean addIfNotNull(
+		@NonNull Collection<? super T> collection, T element) {
 		return element == null ? false : collection.add(element);
 	}
 
 	/*
-	 * Removing
+	 * Moving
 	 */
-
-	public static void drop(Iterable<?> iterable, int amountOfElements) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNegative(AMOUNT_OF_ELEMENTS_PARAM, amountOfElements);
-		Iterator<?> iter = iterable.iterator();
-		for (int i = 0; i < amountOfElements && iter.hasNext(); i++)
-			iter.remove();
-	}
-
-	public static <T> void dropWhile(Iterable<? extends T> iterable,
-		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		for (Iterator<? extends T> iter = iterable.iterator(); iter.hasNext()
-			&& predicate.eval(iter.next());)
-			iter.remove();
-	}
-
-	public static <T, C extends Collection<T>> C take(
-		Iterable<? extends T> iterable, int amountOfElements, C outputCollection) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNegative(AMOUNT_OF_ELEMENTS_PARAM, amountOfElements);
-		Ensure.nonNull(OUTPUT_COLLECTION_PARAM, outputCollection);
-		return moveInternal(iterable, amountOfElements, outputCollection);
-	}
-
-	public static <T> List<T> take(Iterable<? extends T> iterable,
-		int amountOfElements) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNegative(AMOUNT_OF_ELEMENTS_PARAM, amountOfElements);
-		return moveInternal(iterable, amountOfElements, new ArrayList<T>(
-			amountOfElements));
-	}
-
-	public static <T> Iterable<T> foreach(Iterable<T> iterable,
-		Executable<? super T> block) {
-		Ensure.nonNull(ITERABLE_PARAM, iterable);
-		Ensure.nonNull("block", iterable);
-		return foreachInternal(iterable, block);
-	}
-
-	/*
-	 * quitar si cumple dropWhere quitar si no cumple retainWhere quitar y
-	 * retornar mientras takeWhile quitar y retornar mientras takeWhere
+	/**
+	 * Removes all elements from the given iterable that evalute to true, and adds
+	 * them to the given collection
+	 * 
+	 * @param iterable
+	 * @param collection
+	 * @param predicate
+	 * @param <T>
+	 * @param <C>
+	 * @return the given collection
+	 * 
 	 */
+	@NonNull
+	public static <T, C extends Collection<T>> C move(
+		@NonNull Iterable<T> iterable, @NonNull C collection,
+		@NonNull Evaluable<T> predicate) {
+		for (Iterator<T> iter = iterable.iterator(); iter.hasNext();) {
+			T element = iter.next();
+			if (predicate.eval(element)) {
+				iter.remove();
+				collection.add(element);
+			}
+		}
+		return collection;
+	}
+
+	/**
+	 * Removes at most n elements from the given iterable, and adds it to the
+	 * output collection
+	 * 
+	 * @param <T>
+	 * @param <C>
+	 * @param iterable
+	 * @param amountOfElements
+	 *          the max amount of elements to select from the iterable. Must be >=
+	 *          0
+	 * @param collection
+	 * @return the output collection
+	 */
+	@NonNull
+	public static <T, C extends Collection<T>> C move(
+		@NonNull Iterable<T> iterable, int amountOfElements, @NonNull C collection) {
+		Ensure.nonNegative(AMOUNT_OF_ELEMENTS, amountOfElements);
+		Iterator<? extends T> iter = iterable.iterator();
+		for (int i = 0; i < amountOfElements && iter.hasNext(); i++) {
+			collection.add(iter.next());
+			iter.remove();
+		}
+		return collection;
+	}
+
+	/**
+	 * Executes a block for each of the elements of this iterable.
+	 * 
+	 * @param <T>
+	 * @param iterable
+	 * @param block
+	 * @return the given iterable
+	 */
+	@NonNull
+	public static <T> Iterable<T> foreach(@NonNull Iterable<T> iterable,
+		@NonNull Executable<? super T> block) {
+		for (T element : iterable)
+			block.exec(element);
+		return iterable;
+	}
 }

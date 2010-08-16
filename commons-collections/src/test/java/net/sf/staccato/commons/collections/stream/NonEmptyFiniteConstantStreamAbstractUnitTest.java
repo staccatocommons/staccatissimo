@@ -22,9 +22,11 @@ import java.util.NoSuchElementException;
 import net.sf.staccato.commons.collections.iterable.Iterables;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.lang.Provider;
 import net.sf.staccato.commons.lang.function.Function;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 import net.sf.staccato.commons.lang.predicate.Predicates;
+import net.sf.staccato.commons.lang.provider.NullProvider;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -35,10 +37,11 @@ import org.junit.Test;
  * 
  */
 public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
-
+	// TODO PARAMETERIZE functions and predicates
 	private Stream<T> stream;
 	private Evaluable<? super T> predicate;
 	private Applicable<? super T, Integer> function;
+	private Provider<T> provider;
 
 	/**
 	 * @throws java.lang.Exception
@@ -48,6 +51,14 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 		stream = createStream();
 		predicate = createPredicateMock();
 		function = createFunctionMock();
+		provider = createProviderMock();
+	}
+
+	/**
+	 * @return
+	 */
+	protected Provider<T> createProviderMock() {
+		return NullProvider.getInstance();
 	}
 
 	protected Applicable<? super T, Integer> createFunctionMock() {
@@ -219,10 +230,11 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#findOrNull(net.sf.staccato.commons.lang.Evaluable)}
 	 * .
 	 */
-	@Ignore
 	@Test
 	public void testFindOrNull() {
-		fail("Not yet implemented");
+		assertEquals(
+			stream.findOrNone(predicate).valueOrNull(),
+			stream.findOrNull(predicate));
 	}
 
 	/**
@@ -230,10 +242,11 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#findOrElse(net.sf.staccato.commons.lang.Evaluable, net.sf.staccato.commons.lang.Provider)}
 	 * .
 	 */
-	@Ignore
 	@Test
 	public void testFindOrElse() {
-		fail("Not yet implemented");
+		assertEquals(
+			stream.findOrNone(predicate).valueOrElse(provider),
+			stream.findOrElse(predicate, provider));
 	}
 
 	/**

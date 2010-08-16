@@ -53,15 +53,27 @@ public interface Searchable<T> {
 	Option<T> anyOrNone();
 
 	/**
-	 * Returns any element of the given {@link Searchable}. Returns the element if
-	 * not empty, or null, if empty.
+	 * Shorthand for <code>anyOrNone().valueOrNull()</code>
 	 * 
-	 * @return any element if not empty, or null, otherwise.
+	 * @return <code>anyOrNone().valueOrNull()</code>
 	 */
 	T anyOrNull();
 
+	/**
+	 * Shorthand for <code>anyOrNone().valueOrElse(provider)</code>
+	 * 
+	 * @param provider
+	 * 
+	 * @return <code>anyOrNone().valueOrElse(provider)</code>
+	 */
 	T anyOrElse(Provider<T> provider);
 
+	/**
+	 * Shorthand for <code>anyOrNone().valueOrElse(value)</code>
+	 * 
+	 * @param value
+	 * @return <code>anyOrNone().valueOrElse(value)</code>
+	 */
 	T anyOrElse(T value);
 
 	/**
@@ -118,5 +130,7 @@ public interface Searchable<T> {
 	 */
 	@Reduction
 	T findOrElse(Evaluable<? super T> predicate, Provider<? extends T> ifNone);
+
+	// TODO findOrElse(element)
 
 }

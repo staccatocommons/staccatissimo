@@ -14,6 +14,12 @@ package net.sf.staccato.commons.collections.stream;
 
 import java.util.List;
 
+/**
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T>
+ */
 public class ListStream<T> extends CollectionStream<T> {
 
 	public ListStream(List<T> iterable) {

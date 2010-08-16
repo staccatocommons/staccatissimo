@@ -158,17 +158,17 @@ public abstract class AbstractStream<T> implements Stream<T> {
 
 	@Override
 	public T anyOrNull() {
-		return IterablesInternal.anyOrNullInternal(this);
+		return anyOrNone().valueOrNull();
 	}
 
 	@Override
 	public T anyOrElse(Provider<T> provider) {
-		return Iterables.anyOrElse(this, provider);
+		return anyOrNone().valueOrElse(provider);
 	}
 
 	@Override
 	public T anyOrElse(T value) {
-		return Iterables.anyOrElse(this, value);
+		return anyOrNone().valueOrElse(value);
 	}
 
 	@Override
@@ -183,13 +183,13 @@ public abstract class AbstractStream<T> implements Stream<T> {
 
 	@Override
 	public T findOrNull(Evaluable<? super T> predicate) {
-		return Iterables.findOrNull(this, predicate);
+		return findOrNone(predicate).valueOrNull();
 	}
 
 	@Override
 	public T findOrElse(Evaluable<? super T> predicate,
 		Provider<? extends T> provider) {
-		return Iterables.findOrElse(this, predicate, provider);
+		return findOrNone(predicate).valueOrElse(provider);
 	}
 
 	@Override

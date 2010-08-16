@@ -21,6 +21,11 @@ import net.sf.staccato.commons.lang.MapBuilder;
 import net.sf.staccato.commons.lang.Option;
 import net.sf.staccato.commons.lang.check.Ensure;
 
+/**
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class Maps {
 
 	private static final String MAP_PARAM = "map";
