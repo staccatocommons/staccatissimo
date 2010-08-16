@@ -133,7 +133,7 @@ public abstract class Option<T> /* extends AbstractCollection<T> */implements
 	 * @return <code>this.value()</code> if defined, other.value()
 	 *         <code>otherwise</code>
 	 */
-	public abstract T valueOrElse(Provider<T> other);
+	public abstract T valueOrElse(Provider<? extends T> other);
 
 	/**
 	 * Returns the value of this {@link Option}, or <code>null</code>, if

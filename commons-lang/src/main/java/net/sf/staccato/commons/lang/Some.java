@@ -56,7 +56,7 @@ public final class Some<T> extends Option<T> {
 	}
 
 	@Override
-	public T valueOrElse(Provider<T> ifUndefined) {
+	public T valueOrElse(Provider<? extends T> ifUndefined) {
 		return value;
 	}
 
