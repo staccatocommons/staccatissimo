@@ -57,11 +57,7 @@ public abstract class Predicate<T> extends Function<T, Boolean> implements
 	 *         Non Null.
 	 */
 	public Predicate<T> not() {
-		return new Predicate<T>() {
-			public boolean eval(T argument) {
-				return !Predicate.this.eval(argument);
-			}
-		};
+		return Predicates.not(this);
 	}
 
 	/**

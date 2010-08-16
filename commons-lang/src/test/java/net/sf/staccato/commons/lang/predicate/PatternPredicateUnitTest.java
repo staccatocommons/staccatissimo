@@ -15,6 +15,8 @@ package net.sf.staccato.commons.lang.predicate;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import net.sf.staccato.commons.lang.predicate.internal.Matches;
+
 import org.junit.Test;
 
 /**
@@ -25,7 +27,7 @@ public class PatternPredicateUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.lang.predicate.Matches#eval(java.lang.String)}
+	 * {@link net.sf.staccato.commons.lang.predicate.internal.Matches#eval(java.lang.String)}
 	 * .
 	 */
 	@Test

@@ -10,10 +10,12 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.predicate;
+package net.sf.staccato.commons.lang.predicate.internal;
 
 import java.util.Collections;
 import java.util.HashSet;
+
+import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**
  * A predicate that tests if evaluated element is in a set of values

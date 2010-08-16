@@ -14,6 +14,8 @@ package net.sf.staccato.commons.lang.predicate;
 
 import static org.junit.Assert.*;
 
+import net.sf.staccato.commons.lang.predicate.internal.ContainsSubstringPredicate;
+
 import org.junit.Test;
 
 /**
@@ -24,7 +26,7 @@ public class ContainsSubstringPredicateUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.lang.predicate.ContainsSubstringPredicate#eval(java.lang.String)}
+	 * {@link net.sf.staccato.commons.lang.predicate.internal.ContainsSubstringPredicate#eval(java.lang.String)}
 	 * .
 	 */
 	@Test

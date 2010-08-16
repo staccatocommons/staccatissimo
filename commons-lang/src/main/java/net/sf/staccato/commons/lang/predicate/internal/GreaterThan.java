@@ -10,25 +10,19 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.predicate;
+package net.sf.staccato.commons.lang.predicate.internal;
 
-import org.apache.commons.lang.StringUtils;
+import net.sf.staccato.commons.lang.predicate.Predicate;
 
-public class ContainsSubstringPredicate extends Predicate<String> {
+public final class GreaterThan<T extends Comparable<T>> extends
+	Predicate<T> {
+	private final T value;
 
-	private final String substring;
-
-	public ContainsSubstringPredicate(String substring) {
-		this.substring = substring;
+	public GreaterThan(T value) {
+		this.value = value;
 	}
 
-	@Override
-	public boolean eval(String arg) {
-		return StringUtils.contains(arg, substring);
+	public boolean eval(T arg) {
+		return arg.compareTo(value) > 0;
 	}
-
-	public String getSubstring() {
-		return substring;
-	}
-
 }

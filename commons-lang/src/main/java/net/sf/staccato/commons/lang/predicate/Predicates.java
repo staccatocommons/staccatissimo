@@ -12,7 +12,23 @@ GNU Lesser General Public License for more details.
  */
 package net.sf.staccato.commons.lang.predicate;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
+
+import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.lang.predicate.internal.All;
+import net.sf.staccato.commons.lang.predicate.internal.Any;
+import net.sf.staccato.commons.lang.predicate.internal.ContainsSubstringPredicate;
+import net.sf.staccato.commons.lang.predicate.internal.Equals;
+import net.sf.staccato.commons.lang.predicate.internal.EqualsIgnoreCase;
+import net.sf.staccato.commons.lang.predicate.internal.False;
+import net.sf.staccato.commons.lang.predicate.internal.GreaterThan;
+import net.sf.staccato.commons.lang.predicate.internal.LowerThan;
+import net.sf.staccato.commons.lang.predicate.internal.Matches;
+import net.sf.staccato.commons.lang.predicate.internal.Not;
+import net.sf.staccato.commons.lang.predicate.internal.NotNull;
+import net.sf.staccato.commons.lang.predicate.internal.Same;
+import net.sf.staccato.commons.lang.predicate.internal.True;
 
 /**
  * @author flbulgarelli
@@ -73,13 +89,8 @@ public class Predicates {
 	 * String predicates
 	 */
 
-	public static Predicate<String> equalsIgnoreCase(final String value) {
-		return new Predicate<String>() {
-			@Override
-			public boolean eval(String arg0) {
-				return value.equalsIgnoreCase(arg0);
-			}
-		};
+	public static Predicate<String> equalsIgnoreCase(String value) {
+		return new EqualsIgnoreCase(value);
 	}
 
 	public static Predicate<String> matchesRegexp(String regexp) {
@@ -95,6 +106,30 @@ public class Predicates {
 	}
 
 	/*
+	 * Logical predicates
+	 */
+
+	public static <T> Predicate<T> all(Evaluable<T>... predicates) {
+		return all(Arrays.asList(predicates));
+	}
+
+	public static <T> Predicate<T> all(Iterable<Evaluable<T>> predicates) {
+		return new All<T>(predicates);
+	}
+
+	public static <T> Predicate<T> any(Evaluable<T>... predicates) {
+		return any(Arrays.asList(predicates));
+	}
+
+	public static <T> Predicate<T> any(Iterable<Evaluable<T>> predicates) {
+		return new Any<T>(predicates);
+	}
+
+	public static <T> Predicate<T> not(Evaluable<T> predicate) {
+		return new Not<T>(predicate);
+	}
+
+	/*
 	 * Comparable predicates
 	 */
 
@@ -106,109 +141,4 @@ public class Predicates {
 		return new GreaterThan<T>(value);
 	}
 
-	/**
-	 * @author flbulgarelli
-	 * 
-	 * @param <T>
-	 */
-	public static final class Same<T> extends Predicate<T> {
-		/**
-		 * 
-		 */
-		private final T value;
-
-		/**
-		 * Creates a new {@link Same}
-		 */
-		public Same(T value) {
-			this.value = value;
-		}
-
-		public boolean eval(T argument) {
-			return value == argument;
-		}
-	}
-
-	/**
-	 * @author flbulgarelli
-	 * 
-	 * @param <T>
-	 */
-	public static final class Equals<T> extends Predicate<T> {
-		private final T value;
-
-		/**
-		 * Creates a new {@link Equals}
-		 * 
-		 * @param value
-		 *          the value to test equality
-		 */
-		public Equals(T value) {
-			this.value = value;
-		}
-
-		public boolean eval(T argument) {
-			return value.equals(argument);
-		}
-	}
-
-	/**
-	 * @author flbulgarelli
-	 * 
-	 * @param <T>
-	 */
-	public static final class NotNull<T> extends Predicate<T> {
-		private static Predicate instance = new NotNull();
-
-		public boolean eval(T argument) {
-			return argument != null;
-		}
-
-		/**
-		 * @return the instance
-		 */
-		public static Predicate getInstance() {
-			return instance;
-		}
-	}
-
-	/**
-	 * @author flbulgarelli
-	 * 
-	 * @param <T>
-	 */
-	public static final class False<T> extends Predicate<T> {
-		private static Predicate instance = new False();
-
-		public boolean eval(T argument) {
-			return false;
-		}
-
-		/**
-		 * @return the instance
-		 */
-		public static Predicate getInstance() {
-			return instance;
-		}
-	}
-
-	/**
-	 * @author flbulgarelli
-	 * 
-	 * @param <T>
-	 */
-	public static final class True<T> extends Predicate<T> {
-		private static Predicate instance = new True();
-
-		public boolean eval(T argument) {
-			return true;
-		}
-
-		/**
-		 * @return the instance
-		 */
-		public static Predicate getInstance() {
-			return instance;
-		}
-	}
 }
