@@ -10,7 +10,9 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang;
+package net.sf.staccato.commons.lang.provider.internal;
+
+import net.sf.staccato.commons.lang.Provider;
 
 /**
  * {@link Constant} is a generic {@link Provider} that wraps another object.

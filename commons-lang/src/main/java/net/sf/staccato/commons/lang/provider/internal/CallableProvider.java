@@ -10,13 +10,12 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.provider;
+package net.sf.staccato.commons.lang.provider.internal;
 
 import java.util.concurrent.Callable;
 
 import net.sf.staccato.commons.lang.Provider;
 import net.sf.staccato.commons.lang.SoftException;
-import net.sf.staccato.commons.lang.structural.AbstractAdaptor;
 
 /**
  * A {@link Provider} that provides the result of calling a {@link Callable}
@@ -26,19 +25,20 @@ import net.sf.staccato.commons.lang.structural.AbstractAdaptor;
  * 
  * @param <T>
  */
-public class CallableProvider<T> extends AbstractAdaptor<Callable<T>> implements
-	Provider<T> {
+public class CallableProvider<T> implements Provider<T> {
+
+	private Callable<T> callable;
 
 	/**
 	 * 
 	 * Creates a new {@link CallableProvider}
 	 * 
-	 * @param adaptee
+	 * @param callable
 	 *          the {@link Callable} which will provide the value.
 	 * 
 	 */
-	public CallableProvider(Callable<T> adaptee) {
-		super(adaptee);
+	public CallableProvider(Callable<T> callable) {
+		this.callable = callable;
 	}
 
 	/**
@@ -48,6 +48,6 @@ public class CallableProvider<T> extends AbstractAdaptor<Callable<T>> implements
 	 */
 	@Override
 	public T value() {
-		return SoftException.callOrSoften(getAdaptee());
+		return SoftException.callOrSoften(callable);
 	}
 }

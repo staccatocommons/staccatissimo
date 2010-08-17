@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.concurrent.Callable;
 
 import net.sf.staccato.commons.lang.SoftException;
+import net.sf.staccato.commons.lang.provider.internal.CallableProvider;
 
 import org.junit.Test;
 
@@ -29,7 +30,7 @@ public class CallableProviderUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.lang.provider.CallableProvider#value()} when
+	 * {@link net.sf.staccato.commons.lang.provider.internal.CallableProvider#value()} when
 	 * callable throws an exception.
 	 */
 	@Test(expected = SoftException.class)
@@ -44,7 +45,7 @@ public class CallableProviderUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.lang.provider.CallableProvider#value()} when
+	 * {@link net.sf.staccato.commons.lang.provider.internal.CallableProvider#value()} when
 	 * call succeeds.
 	 */
 	@Test
