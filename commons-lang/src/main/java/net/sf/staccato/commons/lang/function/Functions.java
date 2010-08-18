@@ -12,8 +12,8 @@
  */
 package net.sf.staccato.commons.lang.function;
 
-import net.sf.staccato.commons.lang.function.interna.Constant;
-import net.sf.staccato.commons.lang.function.interna.Identity;
+import net.sf.staccato.commons.lang.function.internal.Constant;
+import net.sf.staccato.commons.lang.function.internal.Identity;
 
 /**
  * @author flbulgarelli

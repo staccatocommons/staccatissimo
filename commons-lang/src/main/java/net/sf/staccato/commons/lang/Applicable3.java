@@ -12,6 +12,17 @@
  */
 package net.sf.staccato.commons.lang;
 
+/**
+ * {@link Applicable3}s are computations that take three arguments and whose
+ * result is a return value.
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T1>
+ * @param <T2>
+ * @param <T3>
+ * @param <R>
+ */
 public interface Applicable3<T1, T2, T3, R> {
 
 	R apply(T1 arg1, T2 arg2, T3 arg3);

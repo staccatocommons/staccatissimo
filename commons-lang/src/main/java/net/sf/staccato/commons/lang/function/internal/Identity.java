@@ -1,4 +1,4 @@
-package net.sf.staccato.commons.lang.function.interna;
+package net.sf.staccato.commons.lang.function.internal;
 
 import net.sf.staccato.commons.lang.function.Function;
 
