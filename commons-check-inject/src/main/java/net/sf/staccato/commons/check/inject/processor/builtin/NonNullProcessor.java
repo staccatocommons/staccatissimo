@@ -17,33 +17,38 @@ import java.lang.annotation.Annotation;
 import net.sf.staccato.commons.check.inject.processor.AbstractCheckAnnotationProcessor;
 import net.sf.staccato.commons.instrument.ArgumentContext;
 import net.sf.staccato.commons.instrument.MethodContext;
-import net.sf.staccato.commons.lang.check.annotation.NonEmpty;
-
-import org.apache.commons.lang.NotImplementedException;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class NonEmptyProcessor extends AbstractCheckAnnotationProcessor {
+public class NonNullProcessor extends AbstractCheckAnnotationProcessor {
 
 	@Override
 	public Class<? extends Annotation> getSupportedAnnotationType() {
-		return NonEmpty.class;
+		return NonNull.class;
 	}
 
 	@Override
 	protected String createArgumentCheck(Object annotation,
 		ArgumentContext context) {
-		NonEmpty nonEmpty = (NonEmpty) annotation;
+		NonNull nonNull = (NonNull) annotation;
 		return String.format(
-			"notEmpty( \"%s\", %s)",
-			parameterName(context.getParameterNumber(), nonEmpty.var()),
+			"nonNull( \"%s\", %s)",
+			parameterName(context.getParameterNumber(), nonNull.var()),
 			context.getArgumentName());
 	}
 
-	@Override
+	// TODO improve before continue adding the rest of the annotations
 	protected String createMethodCheck(Object annotation, MethodContext context) {
-		throw new NotImplementedException();
+		return "net.sf.staccato.commons.lang.check.Assert.nonNull( \""
+			+ createVarName((NonNull) annotation) + "\", " + context.getReturnName()
+			+ ");";
 	}
+
+	private static String createVarName(NonNull nonNull) {
+		return nonNull.var().isEmpty() ? "returnValue" : nonNull.var();
+	}
+
 }

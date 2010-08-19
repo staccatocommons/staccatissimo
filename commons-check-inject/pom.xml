@@ -25,6 +25,11 @@
 			<artifactId>commons-collections</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.staccato</groupId>
+			<artifactId>commons-instrument</artifactId>
+			<version>0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

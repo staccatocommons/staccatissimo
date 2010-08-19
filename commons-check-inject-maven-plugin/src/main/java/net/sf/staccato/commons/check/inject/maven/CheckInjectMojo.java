@@ -51,13 +51,7 @@ public class CheckInjectMojo extends AbstractMojo {
 	 * @required
 	 * @parameter
 	 */
-	protected List<String> argumentProcessorClassnames;
-
-	/**
-	 * @required
-	 * @parameter
-	 */
-	protected List<String> returnProcessorClassnames;
+	protected List<String> processorClassnames;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
@@ -65,11 +59,7 @@ public class CheckInjectMojo extends AbstractMojo {
 		String extraClasspath = createClassPathString();
 		getLog().debug("Using classpath " + extraClasspath);
 		try {
-			new Runner(
-				location,
-				argumentProcessorClassnames,
-				returnProcessorClassnames,
-				extraClasspath).run();
+			new Runner(location, processorClassnames, extraClasspath).run();
 		} catch (Exception e) {
 			getLog().error(e.getMessage());
 			throw new MojoExecutionException("Unexpected error", e);
