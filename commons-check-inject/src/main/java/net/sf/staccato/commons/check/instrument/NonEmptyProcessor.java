@@ -10,14 +10,13 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.check.inject.processor.builtin;
+package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.check.inject.processor.AbstractCheckAnnotationProcessor;
-import net.sf.staccato.commons.instrument.ArgumentContext;
-import net.sf.staccato.commons.instrument.MethodContext;
-import net.sf.staccato.commons.lang.check.annotation.Matches;
+import net.sf.staccato.commons.instrument.AnnotatedArgumentContext;
+import net.sf.staccato.commons.instrument.AnnotatedMethodContext;
+import net.sf.staccato.commons.lang.check.annotation.NonEmpty;
 
 import org.apache.commons.lang.NotImplementedException;
 
@@ -25,28 +24,25 @@ import org.apache.commons.lang.NotImplementedException;
  * @author flbulgarelli
  * 
  */
-public class MatchesProcessor extends AbstractCheckAnnotationProcessor {
+public class NonEmptyProcessor extends AbstractCheckAnnotationProcessor {
 
 	@Override
 	public Class<? extends Annotation> getSupportedAnnotationType() {
-		return Matches.class;
+		return NonEmpty.class;
 	}
 
-	// FIXME improve caching the regexp statically in a class variable
 	@Override
 	protected String createArgumentCheck(Object annotation,
-		ArgumentContext context) {
-		Matches matches = (Matches) annotation;
+		AnnotatedArgumentContext context) {
+		NonEmpty nonEmpty = (NonEmpty) annotation;
 		return String.format(
-			"matches( \"%s\", %s, \"%s\")",
-			parameterName(context.getParameterNumber(), matches.var()),
-			context.getArgumentName(),
-			matches.value());
+			"notEmpty( \"%s\", %s);",
+			parameterName(context.getArgumentNumber(), nonEmpty.var()),
+			context.getArgumentName());
 	}
 
 	@Override
-	protected String createMethodCheck(Object annotation, MethodContext context) {
+	protected String createMethodCheck(Object annotation, AnnotatedMethodContext context) {
 		throw new NotImplementedException();
 	}
-
 }

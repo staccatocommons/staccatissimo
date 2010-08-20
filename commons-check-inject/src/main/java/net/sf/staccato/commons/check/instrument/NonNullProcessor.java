@@ -10,13 +10,12 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.check.inject.processor.builtin;
+package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.check.inject.processor.AbstractCheckAnnotationProcessor;
-import net.sf.staccato.commons.instrument.ArgumentContext;
-import net.sf.staccato.commons.instrument.MethodContext;
+import net.sf.staccato.commons.instrument.AnnotatedArgumentContext;
+import net.sf.staccato.commons.instrument.AnnotatedMethodContext;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
@@ -32,16 +31,16 @@ public class NonNullProcessor extends AbstractCheckAnnotationProcessor {
 
 	@Override
 	protected String createArgumentCheck(Object annotation,
-		ArgumentContext context) {
+		AnnotatedArgumentContext context) {
 		NonNull nonNull = (NonNull) annotation;
 		return String.format(
-			"nonNull( \"%s\", %s)",
-			parameterName(context.getParameterNumber(), nonNull.var()),
+			"nonNull( \"%s\", %s);",
+			parameterName(context.getArgumentNumber(), nonNull.var()),
 			context.getArgumentName());
 	}
 
 	// TODO improve before continue adding the rest of the annotations
-	protected String createMethodCheck(Object annotation, MethodContext context) {
+	protected String createMethodCheck(Object annotation, AnnotatedMethodContext context) {
 		return "net.sf.staccato.commons.lang.check.Assert.nonNull( \""
 			+ createVarName((NonNull) annotation) + "\", " + context.getReturnName()
 			+ ");";

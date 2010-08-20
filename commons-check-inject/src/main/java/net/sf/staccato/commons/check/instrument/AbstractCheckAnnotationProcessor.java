@@ -10,13 +10,13 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.check.inject.processor;
+package net.sf.staccato.commons.check.instrument;
 
 import javassist.CannotCompileException;
 import net.sf.staccato.commons.instrument.AbstractAnnotationProcessor;
-import net.sf.staccato.commons.instrument.ArgumentContext;
-import net.sf.staccato.commons.instrument.ConstructorContext;
-import net.sf.staccato.commons.instrument.MethodContext;
+import net.sf.staccato.commons.instrument.AnnotatedArgumentContext;
+import net.sf.staccato.commons.instrument.AnnotatedConstructorContext;
+import net.sf.staccato.commons.instrument.AnnotatedMethodContext;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.lang.check.Ensure;
 
@@ -32,9 +32,9 @@ public abstract class AbstractCheckAnnotationProcessor extends
 
 	@Override
 	public void processAnnotatedArgument(Object annotation,
-		ArgumentContext context) {
+		AnnotatedArgumentContext context) {
 		try {
-			context.getBehavior().insertBefore(
+			context.getArgumentBehavior().insertBefore(
 				ENSURE_FULLY_QUALIFIED_NAME + createArgumentCheck(annotation, context));
 		} catch (CannotCompileException e) {
 			context.logErrorMessage(
@@ -45,7 +45,8 @@ public abstract class AbstractCheckAnnotationProcessor extends
 	}
 
 	@Override
-	public void processAnnotatedMethod(Object annotation, MethodContext context) {
+	public void processAnnotatedMethod(Object annotation,
+		AnnotatedMethodContext context) {
 		Ensure.isTrue("context", !context.isVoid(), "must not be void");
 		try {
 			context.getMethod().insertAfter(createMethodCheck(annotation, context));
@@ -59,7 +60,7 @@ public abstract class AbstractCheckAnnotationProcessor extends
 
 	@Override
 	public void processAnnotatedConstructor(Object annotation,
-		ConstructorContext context) {
+		AnnotatedConstructorContext context) {
 		throw new AssertionError(
 			"constructors can not be annotated with check annotations");
 	}
@@ -70,13 +71,13 @@ public abstract class AbstractCheckAnnotationProcessor extends
 	 * @return
 	 */
 	protected abstract String createArgumentCheck(Object annotation,
-		ArgumentContext argumentContext);
+		AnnotatedArgumentContext argumentContext);
 
 	protected String parameterName(int argNumber, String annotatedVarName) {
 		return annotatedVarName.isEmpty() ? "var" + argNumber : annotatedVarName;
 	}
 
 	protected abstract String createMethodCheck(Object annotation,
-		MethodContext context);
+		AnnotatedMethodContext context);
 
 }
