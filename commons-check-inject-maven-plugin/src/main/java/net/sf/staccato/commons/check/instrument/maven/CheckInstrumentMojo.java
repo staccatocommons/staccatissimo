@@ -10,14 +10,22 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.check.inject.maven;
+package net.sf.staccato.commons.check.instrument.maven;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import net.sf.staccato.commons.check.inject.runner.Runner;
+import net.sf.staccato.commons.check.instrument.MatchesProcessor;
+import net.sf.staccato.commons.check.instrument.NonEmptyProcessor;
+import net.sf.staccato.commons.check.instrument.NonIgnoredCheckBehaviorFilteredAnotationProcessor;
+import net.sf.staccato.commons.check.instrument.NonNullProcessor;
 import net.sf.staccato.commons.collections.stream.Streams;
+import net.sf.staccato.commons.instrument.AnnotationProcessor;
+import net.sf.staccato.commons.instrument.AnnotationsParser;
+import net.sf.staccato.commons.instrument.ClassPathInstrumenter;
+import net.sf.staccato.commons.instrument.internal.PublicBehaviourFilteredAnnotationProcessor;
+import net.sf.staccato.commons.io.Directory;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.lang.function.Function;
 
@@ -29,13 +37,13 @@ import org.apache.maven.plugin.MojoFailureException;
 
 /**
  * @author flbulgarelli
- * @goal inject
+ * @goal instrument
  */
-public class CheckInjectMojo extends AbstractMojo {
+public class CheckInstrumentMojo extends AbstractMojo {
 
 	/**
 	 * @required
-	 * @parameter expression="${inject.location}"
+	 * @parameter expression="${instrument.location}"
 	 *            default-value="${project.build.directory}/classes"
 	 */
 	private String location;
@@ -48,23 +56,45 @@ public class CheckInjectMojo extends AbstractMojo {
 	protected List<Artifact> pluginArtifactsList;
 
 	/**
-	 * @required
-	 * @parameter
+	 * @parameter default-value="false"
 	 */
-	protected List<String> processorClassnames;
+	protected boolean processNonPublicMethods;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		getLog().info("Injecting checks to classes located in " + location);
+		getLog().info("Instrumenting checks to classes located in " + location);
 		String extraClasspath = createClassPathString();
 		getLog().debug("Using classpath " + extraClasspath);
+
 		try {
-			new Runner(location, processorClassnames, extraClasspath).run();
+			new ClassPathInstrumenter(
+				new AnnotationsParser(getProcessors()),
+				new Directory(location),
+				extraClasspath).instrument();
 		} catch (Exception e) {
 			getLog().error(e.getMessage());
 			throw new MojoExecutionException("Unexpected error", e);
 		}
-		getLog().info("Checks injected sucessfully");
+		getLog().info("Checks instrumented sucessfully");
+	}
+
+	/**
+	 * @return
+	 */
+	private Iterable<AnnotationProcessor> getProcessors() {
+		return Streams
+			.from(
+				new NonNullProcessor(),
+				new NonEmptyProcessor(),
+				new MatchesProcessor())
+			.map(new Function<AnnotationProcessor, AnnotationProcessor>() {
+				public AnnotationProcessor apply(AnnotationProcessor arg) {
+					arg = new NonIgnoredCheckBehaviorFilteredAnotationProcessor(arg);
+					return processNonPublicMethods ? arg
+						: new PublicBehaviourFilteredAnnotationProcessor(arg);
+				}
+			})
+			.toList();
 	}
 
 	private String createClassPathString() {
