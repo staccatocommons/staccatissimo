@@ -144,6 +144,8 @@ public abstract class Option<T> /* extends AbstractCollection<T> */implements
 	 */
 	public abstract T valueOrNull();
 
+	public abstract void ifDefined(Executable<T> block);
+
 	@Override
 	public Option<T> clone() {
 		return this;

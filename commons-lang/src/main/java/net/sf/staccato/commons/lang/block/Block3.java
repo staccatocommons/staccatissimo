@@ -15,6 +15,14 @@ package net.sf.staccato.commons.lang.block;
 import net.sf.staccato.commons.lang.Executable3;
 import net.sf.staccato.commons.lang.SoftException;
 
+/**
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T1>
+ * @param <T2>
+ * @param <T3>
+ */
 public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3> {
 
 	public void exec(T1 argument1, T2 argument2, T3 argument3) {
@@ -28,21 +36,6 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3> {
 	protected void softExec(T1 argument1, T2 argument2, T3 argument3)
 		throws Exception {
 	}
-
-	// public Block<T3> exec(final T1 argument1, final T2 argument2) {
-	// return new Block<T3>() {
-	// public void exec(T3 argument3) {
-	// Block3.this.exec(argument1, argument2);
-	// }
-	// };
-	// }
-	// public Block2<T2, T3> exec(final T1 argument1) {
-	// return new Block2<T2, T3>() {
-	// public void exec(T2 argument2, T3 argument3) {
-	// Block3.this.exec(argument1, argument2, argument3);
-	// }
-	// };
-	// }
 
 	public Block3<T1, T2, T3> then(final Block3<T1, T2, T3> other) {
 		return new Block3<T1, T2, T3>() {

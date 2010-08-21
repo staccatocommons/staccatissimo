@@ -65,6 +65,11 @@ public final class Some<T> extends Option<T> {
 		return value;
 	}
 
+	@Override
+	public void ifDefined(Executable<T> block) {
+		block.exec(value);
+	}
+
 	public Iterator<T> iterator() {
 		return Collections.singleton(value).iterator();
 	}

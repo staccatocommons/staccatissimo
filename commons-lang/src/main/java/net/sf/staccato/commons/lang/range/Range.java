@@ -13,7 +13,6 @@
 package net.sf.staccato.commons.lang.range;
 
 import net.sf.staccato.commons.lang.Compare;
-import net.sf.staccato.commons.lang.check.Ensure;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.EmptyAware;
@@ -46,8 +45,6 @@ public class Range<T extends Comparable<T>> extends UnmodifiableObject
 	 *          the upper bound, inclusive. Nun null.
 	 */
 	public Range(@NonNull T min, @NonNull T max) {
-		Ensure.nonNull("min", min);
-		Ensure.nonNull("max", max);
 		// FIXME Ensure.lowerThan("max", max, min);
 		this.min = min;
 		this.max = max;
@@ -64,7 +61,6 @@ public class Range<T extends Comparable<T>> extends UnmodifiableObject
 	 * @return if the given {@link Range} overlaps with this one
 	 */
 	public boolean overlaps(@NonNull Range<T> that) {
-		Ensure.nonNull("that", that);
 		return this.contains(that.getMin()) //
 			|| this.contains(that.getMin()) //
 			|| that.contains(this.getMin());
@@ -79,7 +75,6 @@ public class Range<T extends Comparable<T>> extends UnmodifiableObject
 	 * @return if the given range is included in the receptor
 	 */
 	public boolean includes(@NonNull Range<T> that) {
-		Ensure.nonNull("that", that);
 		return this.getMin().compareTo(that.getMin()) <= 0
 			&& this.getMax().compareTo(that.getMax()) >= 0;
 	}

@@ -14,6 +14,8 @@ package net.sf.staccato.commons.lang.block;
 
 import net.sf.staccato.commons.lang.Executable;
 import net.sf.staccato.commons.lang.SoftException;
+import net.sf.staccato.commons.lang.block.internal.Then;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * An abstract, one argument code block, that implements {@link Executable}
@@ -25,7 +27,7 @@ import net.sf.staccato.commons.lang.SoftException;
 public abstract class Block<T> implements Executable<T> {
 
 	@Override
-	public void exec(T argument) {
+	public void exec(@NonNull T argument) {
 		try {
 			softExec(argument);
 		} catch (Exception e) {
@@ -33,16 +35,12 @@ public abstract class Block<T> implements Executable<T> {
 		}
 	}
 
-	protected void softExec(T argument) throws Exception {
+	protected void softExec(@NonNull T argument) throws Exception {
 	}
 
-	public Block<T> then(final Executable<? super T> other) {
-		return new Block<T>() {
-			public void exec(T argument) {
-				Block.this.exec(argument);
-				other.exec(argument);
-			}
-		};
+	@NonNull
+	public Block<T> then(@NonNull final Executable<? super T> other) {
+		return new Then<T>(this, other);
 	}
 
 	public Block<T> andCatch(final Block2<? super RuntimeException, T> catchBlock) {

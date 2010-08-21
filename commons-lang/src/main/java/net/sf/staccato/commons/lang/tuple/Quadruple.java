@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang.tuple;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
  * Four-components tuple
  * 
@@ -114,6 +116,7 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 		return String.format("(%s,%s,%s,%s)", first, second, third, fourth);
 	}
 
+	@NonNull
 	@Override
 	public Object[] toArray() {
 		return new Object[] { first, second, third, fourth };

@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
  * Class methods to operate with nulls
  * 
@@ -27,7 +29,7 @@ public class IsNonNull {
 	 * @param value
 	 *          nullable.
 	 * @param other
-	 *          nullable. //TODO has little sense to be be null
+	 *          nullable, although it has little sense to be be null
 	 * @return <code> value != null ? value : other</code>
 	 */
 	public static <T> T orElse(T value, T other) {
@@ -45,7 +47,7 @@ public class IsNonNull {
 	 *          non null.
 	 * @return <code>value != null ? value : provider.value()</code>
 	 */
-	public static <T> T orElse(T value, Provider<T> provider) {
+	public static <T> T orElse(T value, @NonNull Provider<T> provider) {
 		return value != null ? value : provider.value();
 	}
 
@@ -58,6 +60,7 @@ public class IsNonNull {
 	 *          nullable.
 	 * @return <code>value != null ? Option.some(value) : Option.none()</code>
 	 */
+	@NonNull
 	public static <T> Option<T> orNone(T value) {
 		return Option.nullToNone(value);
 	}

@@ -14,6 +14,8 @@ package net.sf.staccato.commons.lang.tuple;
 
 import java.util.Map;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
  * Two-components tuple
  * 
@@ -81,6 +83,7 @@ public final class Pair<T1, T2> extends Tuple implements
 	 * 
 	 * @return a new pair, never null.
 	 */
+	@NonNull
 	public Pair<T2, T1> swap() {
 		return new Pair<T2, T1>(second, first);
 	}
@@ -95,6 +98,7 @@ public final class Pair<T1, T2> extends Tuple implements
 		return String.format("(%s,%s)", first, second);
 	}
 
+	@NonNull
 	@Override
 	public Object[] toArray() {
 		return new Object[] { first, second };

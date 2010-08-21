@@ -21,6 +21,7 @@ import java.util.TreeMap;
 
 import net.sf.staccato.commons.lang.builder.Builder;
 import net.sf.staccato.commons.lang.builder.BuilderAlreadyUsedException;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * 
@@ -41,7 +42,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @param map
 	 *          the map to build. Non null
 	 */
-	public MapBuilder(M map) {
+	public MapBuilder(@NonNull M map) {
 		this.map = map;
 	}
 
@@ -52,7 +53,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @param value
 	 * @return this {@link MapBuilder}
 	 */
-
+	@NonNull
 	public MapBuilder<K, V, M> with(K key, V value) {
 		map.put(key, value);
 		return this;
@@ -66,11 +67,13 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * 
 	 * @return this {@link MapBuilder}
 	 */
-	public MapBuilder<K, V, M> with(Entry<K, V> entry) {
+	@NonNull
+	public MapBuilder<K, V, M> with(@NonNull Entry<K, V> entry) {
 		map.put(entry.getKey(), entry.getValue());
 		return this;
 	}
 
+	@NonNull
 	public M build() {
 		M map = this.map;
 		this.map = null;
@@ -95,6 +98,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @param value
 	 * @return a new {@link MapBuilder}
 	 */
+	@NonNull
 	public static <K, V, M extends Map<K, V>> MapBuilder<K, V, M> mapWith(M map,
 		K key, V value) {
 		return new MapBuilder<K, V, M>(map).with(key, value);
@@ -112,6 +116,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @param value
 	 * @return a new {@link MapBuilder}
 	 */
+	@NonNull
 	public static <K, V> MapBuilder<K, V, Map<K, V>> hashMapWith(K key, V value) {
 		return mapWith((Map<K, V>) new HashMap<K, V>(), key, value);
 	}
@@ -128,6 +133,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @param value
 	 * @return a new {@link MapBuilder}
 	 */
+	@NonNull
 	public static <K, V> MapBuilder<K, V, Map<K, V>> linkedMapWith(K key, V value) {
 		return mapWith((Map<K, V>) new LinkedHashMap<K, V>(), key, value);
 	}
@@ -144,6 +150,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @param value
 	 * @return a new {@link MapBuilder}
 	 */
+	@NonNull
 	public static <K, V> MapBuilder<K, V, SortedMap<K, V>> treeMapWith(K key,
 		V value) {
 		return mapWith((SortedMap<K, V>) new TreeMap<K, V>(), key, value);

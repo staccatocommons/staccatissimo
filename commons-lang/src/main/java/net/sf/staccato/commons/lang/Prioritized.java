@@ -12,7 +12,7 @@
  */
 package net.sf.staccato.commons.lang;
 
-import net.sf.staccato.commons.lang.check.Ensure;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * A {@link Provider} that is {@link Comparable}, based on a priority attribute.
@@ -40,8 +40,7 @@ public class Prioritized<T, P extends Comparable<P>> implements Provider<T>,
 	 * @param priority
 	 *          the priority. Non Null.
 	 */
-	public Prioritized(T value, P priority) {
-		Ensure.nonNull("priority", priority);
+	public Prioritized(T value, @NonNull P priority) {
 		this.value = value;
 		this.priority = priority;
 	}
@@ -57,6 +56,7 @@ public class Prioritized<T, P extends Comparable<P>> implements Provider<T>,
 	/**
 	 * @return the priority used to determine order in comparison
 	 */
+	@NonNull
 	public P getPriority() {
 		return priority;
 	}
@@ -72,6 +72,7 @@ public class Prioritized<T, P extends Comparable<P>> implements Provider<T>,
 	 *          Non Null.
 	 * @return a new {@link Prioritized}
 	 */
+	@NonNull
 	public static <T, P extends Comparable<P>> Prioritized<T, P> from(T value,
 		P priority) {
 		return new Prioritized<T, P>(value, priority);

@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
  * Interface for objects that publicly understand a clone method. Not like the
  * standard {@link java.lang.Cloneable}, this interface exposes the
@@ -41,6 +43,7 @@ public interface Cloneable extends java.lang.Cloneable {
 	 * @return a copy of this instance.
 	 * @see Object#clone()
 	 */
+	@NonNull
 	public Cloneable clone();
 
 }

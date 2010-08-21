@@ -14,6 +14,8 @@ package net.sf.staccato.commons.lang;
 
 import java.util.Comparator;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 import org.apache.commons.lang.ObjectUtils;
 
 /**
@@ -43,8 +45,8 @@ public class Compare {
 	 *          non null
 	 * @return if element is between min inclusive, and max, inclusive
 	 */
-	public static <T extends Comparable<T>> boolean between(T element, T min,
-		T max) {
+	public static <T extends Comparable<T>> boolean between(@NonNull T element,
+		@NonNull T min, @NonNull T max) {
 		return element.compareTo(max) <= 0 && element.compareTo(min) >= 0;
 	}
 
@@ -69,8 +71,8 @@ public class Compare {
 	 * @return if element is between min inclusive, and max, inclusive, using the
 	 *         given {@link Comparator} as ordering criteria
 	 */
-	public static <T> boolean between(T element, T min, T max,
-		Comparator<T> comparator) {
+	public static <T> boolean between(@NonNull T element, @NonNull T min,
+		@NonNull T max, @NonNull Comparator<T> comparator) {
 		return comparator.compare(element, max) <= 0
 			&& comparator.compare(element, min) >= 0;
 	}
@@ -122,7 +124,7 @@ public class Compare {
 	 * @param values
 	 * @return if the array contains the given element
 	 */
-	public static boolean in(int element, int[] values) {
+	public static boolean in(int element, @NonNull int[] values) {
 		for (int value : values)
 			if (element == value)
 				return true;
@@ -136,7 +138,7 @@ public class Compare {
 	 * @param values
 	 * @return if the array contains the given element
 	 */
-	public static boolean in(long element, long[] values) {
+	public static boolean in(long element, @NonNull long[] values) {
 		for (long value : values)
 			if (element == value)
 				return true;
@@ -152,7 +154,7 @@ public class Compare {
 	 * @param values
 	 * @return if the array contains the given element, using equals comparison
 	 */
-	public static <T> boolean in(T element, T... values) {
+	public static <T> boolean in(@NonNull T element, @NonNull T... values) {
 		for (T value : values)
 			if (element.equals(value))
 				return true;
@@ -165,7 +167,8 @@ public class Compare {
 	 * @param c2
 	 * @return c1 if it is lower than or equal to c2, c2 otherwise.
 	 */
-	public static <T extends Comparable<T>> T min(T c1, T c2) {
+	@NonNull
+	public static <T extends Comparable<T>> T min(@NonNull T c1, @NonNull T c2) {
 		return (T) ObjectUtils.min(c1, c2);
 	}
 
@@ -175,7 +178,8 @@ public class Compare {
 	 * @param c2
 	 * @return c1 if it is greater than or equal to c2, c2 otherwise.
 	 */
-	public static <T extends Comparable<T>> T max(T c1, T c2) {
+	@NonNull
+	public static <T extends Comparable<T>> T max(@NonNull T c1, @NonNull T c2) {
 		return (T) ObjectUtils.max(c1, c2);
 	}
 

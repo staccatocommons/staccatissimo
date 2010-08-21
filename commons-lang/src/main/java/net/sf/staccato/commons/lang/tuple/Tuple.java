@@ -16,6 +16,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
  * <p>
  * A {@link Tuple} is a fixed size sequence of heterogeneous objects. They are
@@ -64,6 +66,7 @@ public abstract class Tuple implements Serializable {
 	 *          nullable
 	 * @return a new {@link Pair}. Non null.
 	 */
+	@NonNull
 	public static <T1, T2> Pair<T1, T2> of(T1 first, T2 second) {
 		return new Pair<T1, T2>(first, second);
 	}
@@ -79,6 +82,7 @@ public abstract class Tuple implements Serializable {
 	 *          nullable
 	 * @return a new {@link Pair}. Non null.
 	 */
+	@NonNull
 	public static <T1, T2> Pair<T1, T2> _(T1 first, T2 second) {
 		return of(first, second);
 	}
@@ -97,6 +101,7 @@ public abstract class Tuple implements Serializable {
 	 *          nullable
 	 * @return a new {@link Triple}. Non null.
 	 */
+	@NonNull
 	public static <T1, T2, T3> Triple<T1, T2, T3> of(T1 first, T2 second, T3 third) {
 		return new Triple<T1, T2, T3>(first, second, third);
 	}
@@ -115,6 +120,7 @@ public abstract class Tuple implements Serializable {
 	 *          nullable
 	 * @return a new {@link Triple}. Non null.
 	 */
+	@NonNull
 	public static <T1, T2, T3> Triple<T1, T2, T3> _(T1 first, T2 second, T3 third) {
 		return of(first, second, third);
 	}
@@ -136,6 +142,7 @@ public abstract class Tuple implements Serializable {
 	 *          nullable
 	 * @return a new {@link Quadruple}. Non null.
 	 */
+	@NonNull
 	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> of(T1 first,
 		T2 second, T3 third, T4 fourth) {
 		return new Quadruple<T1, T2, T3, T4>(first, second, third, fourth);
@@ -158,6 +165,7 @@ public abstract class Tuple implements Serializable {
 	 *          nullable
 	 * @return a new {@link Quadruple}. Non null.
 	 */
+	@NonNull
 	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> _(T1 first,
 		T2 second, T3 third, T4 fourth) {
 		return of(first, second, third, fourth);
@@ -173,6 +181,7 @@ public abstract class Tuple implements Serializable {
 	 * 
 	 * @return an new Object[] containing each of the elements of this tuple
 	 */
+	@NonNull
 	public abstract Object[] toArray();
 
 	/**
@@ -181,6 +190,7 @@ public abstract class Tuple implements Serializable {
 	 * 
 	 * @return a non null, unmodifiable list
 	 */
+	@NonNull
 	public List<Object> toList() {
 		return Arrays.asList(toArray());
 	}

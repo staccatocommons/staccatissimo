@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
  * 
  * @author flbulgarelli
@@ -41,6 +43,6 @@ public interface Evaluable<T> {
 	 * 
 	 * @return if the argument meets the given condition
 	 */
-	boolean eval(T argument);
+	boolean eval(@NonNull T argument);
 
 }

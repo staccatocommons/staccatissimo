@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang.tuple;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
  * Three-components {@link Tuple}.
  * 
@@ -113,8 +115,8 @@ public final class Triple<T1, T2, T3> extends Tuple implements
 	 * @return a new, non null
 	 * {@link Triple}, with its components rotated to left
 	 */
+	@NonNull
 	public Triple<T2, T3, T1> rotateLeft() {
-
 		return new Triple<T2, T3, T1>(this.second, this.third, this.first);
 	}
 
@@ -136,6 +138,7 @@ public final class Triple<T1, T2, T3> extends Tuple implements
 	 * @return a new, non null
 	 * {@link Triple}, with its components rotated to right
 	 */
+	@NonNull
 	public Triple<T3, T1, T2> rotateRight() {
 		return new Triple<T3, T1, T2>(this.third, this.first, this.second);
 	}
@@ -146,6 +149,7 @@ public final class Triple<T1, T2, T3> extends Tuple implements
 	}
 
 	@Override
+	@NonNull
 	public Object[] toArray() {
 		return new Object[] { first, second, third };
 	}

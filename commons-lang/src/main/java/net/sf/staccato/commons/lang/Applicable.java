@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
  * *
  * <p>
@@ -26,6 +28,7 @@ package net.sf.staccato.commons.lang;
  */
 public interface Applicable<T, R> {
 
-	R apply(T arg);
+	@NonNull
+	R apply(@NonNull T arg);
 
 }

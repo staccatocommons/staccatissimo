@@ -15,6 +15,8 @@ package net.sf.staccato.commons.lang;
 import java.util.Collections;
 import java.util.Iterator;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
  * 
  * @author flbulgarelli
@@ -60,6 +62,11 @@ public final class None<T> extends Option<T> {
 	}
 
 	@Override
+	public void ifDefined(Executable<T> block) {
+
+	}
+
+	@Override
 	public T valueOrNull() {
 		return null;
 	}
@@ -83,6 +90,7 @@ public final class None<T> extends Option<T> {
 		return false;
 	}
 
+	@NonNull
 	public static <T> None<T> none() {
 		return (None<T>) instance;
 	}

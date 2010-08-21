@@ -14,7 +14,7 @@ package net.sf.staccato.commons.lang;
 
 import java.util.concurrent.Callable;
 
-import net.sf.staccato.commons.lang.check.Ensure;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * A {@link SoftException} is a {@link RuntimeException} that wraps another with
@@ -32,9 +32,9 @@ public class SoftException extends RuntimeException {
 	 * @param cause
 	 *          the wrapped exception. Non null.
 	 */
-	public SoftException(Exception cause) {
+
+	public SoftException(@NonNull Exception cause) {
 		super(cause);
-		Ensure.nonNull("cause", cause);
 	}
 
 	/**
@@ -46,8 +46,8 @@ public class SoftException extends RuntimeException {
 	 * @return The given casted, casted to {@link RuntimeException}, if possible,
 	 *         or a new {@link SoftException} that wrapps it.
 	 */
-	public static RuntimeException soften(Exception exception) {
-		Ensure.nonNull("exception", exception);
+	@NonNull
+	public static RuntimeException soften(@NonNull Exception exception) {
 		if (exception instanceof RuntimeException)
 			return (RuntimeException) exception;
 		return new SoftException(exception);
@@ -66,8 +66,8 @@ public class SoftException extends RuntimeException {
 	 * @throws RuntimeException
 	 *           if the call failed
 	 */
-	public static <T> T callOrSoften(Callable<T> callable) {
-		Ensure.nonNull("callable", callable);
+	@NonNull
+	public static <T> T callOrSoften(@NonNull Callable<T> callable) {
 		try {
 			return callable.call();
 		} catch (Exception e) {
