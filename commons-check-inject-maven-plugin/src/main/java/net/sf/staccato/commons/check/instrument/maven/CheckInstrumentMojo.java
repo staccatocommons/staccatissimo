@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import net.sf.staccato.commons.check.instrument.ArgumentsOnlyFilteredAnotationProcessor;
 import net.sf.staccato.commons.check.instrument.MatchesProcessor;
 import net.sf.staccato.commons.check.instrument.NonEmptyProcessor;
 import net.sf.staccato.commons.check.instrument.NonIgnoredCheckBehaviorFilteredAnotationProcessor;
@@ -60,6 +61,11 @@ public class CheckInstrumentMojo extends AbstractMojo {
 	 */
 	protected boolean processNonPublicMethods;
 
+	/**
+	 * @parameter default-value="true"
+	 */
+	private boolean ignoreReturnChecks;
+
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Instrumenting checks to classes located in " + location);
@@ -88,10 +94,14 @@ public class CheckInstrumentMojo extends AbstractMojo {
 				new NonEmptyProcessor(),
 				new MatchesProcessor())
 			.map(new Function<AnnotationProcessor, AnnotationProcessor>() {
+
 				public AnnotationProcessor apply(AnnotationProcessor arg) {
 					arg = new NonIgnoredCheckBehaviorFilteredAnotationProcessor(arg);
-					return processNonPublicMethods ? arg
+					arg = processNonPublicMethods ? arg
 						: new PublicBehaviourFilteredAnnotationProcessor(arg);
+					arg = !ignoreReturnChecks ? arg
+						: new ArgumentsOnlyFilteredAnotationProcessor(arg);
+					return arg;
 				}
 			})
 			.toList();
