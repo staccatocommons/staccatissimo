@@ -5,6 +5,12 @@
 	<artifactId>commons-parent-pom</artifactId>
 	<packaging>pom</packaging>
 	<version>0.1</version>
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License v3 </name>
+			<url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
+		</license>
+	</licenses>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -69,11 +75,11 @@
 				<reportSets>
 					<reportSet>
 						<reports>
-<!--							<report>dependencies</report>-->
-<!--							<report>project-team</report>-->
-<!--							<report>mailing-list</report>-->
-<!--							<report>cim</report>-->
-<!--							<report>issue-tracking</report>-->
+							<!-- <report>dependencies</report> -->
+							<!-- <report>project-team</report> -->
+							<!-- <report>mailing-list</report> -->
+							<!-- <report>cim</report> -->
+							<!-- <report>issue-tracking</report> -->
 							<report>license</report>
 							<report>scm</report>
 						</reports>

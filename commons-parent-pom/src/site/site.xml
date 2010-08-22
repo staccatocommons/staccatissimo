@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<project name="Staccato-Common">
+  <bannerLeft>
+    <name>Staccato-Commons</name>
+    <href>http://staccatocommons.sourceforge.net/</href>
+  </bannerLeft>  
+  <body>
+    <links>
+      <item name="Staccato-Commons-Lang" href="http://staccatocommons.sourceforge.net/staccatissimo/commons-lang" />
+      <item name="Staccato-Commons-Collections" href="http://staccatocommons.sourceforge.net/staccatissimo/commons-collections"/>
+      <item name="Staccato-Commons-Testing" href="http://staccatocommons.sourceforge.net/staccatissimo/commons-testing"/>
+    </links>
+
+    <menu name="Staccato-Commons">
+      <item name="Introduction" href="index.html"/>
+      <item name="Download" href="http://sourceforge.net/projects/staccatocommons/files"/>
+      <item name="Browse Code" href="http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons"/>      
+      <item name="General Information" href="http://sourceforge.net/projects/staccatocommons/"/>  
+    </menu>    
+    <menu ref="reports"/>
+  </body>
+</project>
