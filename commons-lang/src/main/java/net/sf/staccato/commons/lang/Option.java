@@ -15,6 +15,7 @@ package net.sf.staccato.commons.lang;
 
 import java.util.Map;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.SizeAware;
 import net.sf.staccato.commons.lang.value.Unmodifiable;
@@ -24,8 +25,8 @@ import net.sf.staccato.commons.lang.value.Unmodifiable;
  * {@link Option} represent optional values, that can either be instances of
  * {@link Some} or {@link None}.
  * </p>
- * There are two possible scenarios where {@link Option} type should be used
- * <ol>
+ * There are three possible scenarios where {@link Option} type should be used
+ * <ul>
  * <li>When a method may fail without throwing an exception and returns an
  * unusable value. Traditionally, this problem is solved using null as centinel
  * value. For example, {@link Map#get(Object)}, returns null if there is no
@@ -42,7 +43,7 @@ import net.sf.staccato.commons.lang.value.Unmodifiable;
  * <li>When properties may be unset as a valid state, and null is not a valid
  * value for the property if set. Client code may forget to check this
  * condition, and causing {@link NullPointerException}.</li>
- * </ol>
+ * </ul>
  * 
  * <p>
  * These three classes are pure Java implementation of Scala homonimous classes,
@@ -144,7 +145,12 @@ public abstract class Option<T> /* extends AbstractCollection<T> */implements
 	 */
 	public abstract T valueOrNull();
 
-	public abstract void ifDefined(Executable<T> block);
+	/**
+	 * Executed the given block if this option is defined
+	 * 
+	 * @param block
+	 */
+	public abstract void ifDefined(@NonNull Executable<T> block);
 
 	@Override
 	public Option<T> clone() {

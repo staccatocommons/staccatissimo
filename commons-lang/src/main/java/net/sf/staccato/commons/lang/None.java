@@ -18,13 +18,14 @@ import java.util.Iterator;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
+ * An undefined {@link Option}, that it, and option that does not have a value
  * 
  * @author flbulgarelli
  * 
  * @param <T>
  *          the type of value - although {@link None} options have no associated
  *          value at all.
- * 
+ * @see Option
  */
 public final class None<T> extends Option<T> {
 
@@ -48,7 +49,7 @@ public final class None<T> extends Option<T> {
 
 	@Override
 	public String toString() {
-		return "Undefined";
+		return "None";
 	}
 
 	@Override

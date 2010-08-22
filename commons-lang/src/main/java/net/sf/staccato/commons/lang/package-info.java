@@ -1,8 +1,7 @@
 /**
- * This package contains the core functor-like interfaces of 
+ * This package contains the core function-like interfaces of 
  * staccato-commons-lang - {@link net.sf.staccato.commons.lang.Applicable}, {@link net.sf.staccato.commons.lang.Executable}, 
- * {@link net.sf.staccato.commons.lang.Provider} and variants.  
- * 
+ * {@link net.sf.staccato.commons.lang.Provider} and variants, options, soft exceptions and null handling utilities.  
  * 
  * There exists three different versions of the Executables, 
  * with <code>exec</code> method arities from 1 to 3 

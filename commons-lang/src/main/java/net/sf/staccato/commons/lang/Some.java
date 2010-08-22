@@ -15,13 +15,18 @@ package net.sf.staccato.commons.lang;
 import java.util.Collections;
 import java.util.Iterator;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.value.NamedTupleToStringStyle;
+
 import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
+ * A defined {@link Option}, that is, an option that holds a value.
+ * 
  * @author flbulgarelli
  * @param <T>
  * @see Option
- * 
  */
 public final class Some<T> extends Option<T> {
 
@@ -66,7 +71,7 @@ public final class Some<T> extends Option<T> {
 	}
 
 	@Override
-	public void ifDefined(Executable<T> block) {
+	public void ifDefined(@NonNull Executable<T> block) {
 		block.exec(value);
 	}
 
@@ -117,7 +122,9 @@ public final class Some<T> extends Option<T> {
 
 	@Override
 	public String toString() {
-		return String.valueOf(value);
+		return new ToStringBuilder(this, NamedTupleToStringStyle.getInstance())
+			.append(value)
+			.toString();
 	}
 
 	public static <T> Some<T> some(T value) {
