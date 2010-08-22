@@ -17,6 +17,8 @@ public final class Constant<I, O> extends Function<I, O> {
 
 	/**
 	 * Creates a new {@link Constant}
+	 * 
+	 * @param value
 	 */
 	public Constant(O value) {
 		this.value = value;
