@@ -11,6 +11,8 @@ public final class EqualsIgnoreCase extends Predicate<String> {
 
 	/**
 	 * Creates a new {@link EqualsIgnoreCase}
+	 * 
+	 * @param value
 	 */
 	public EqualsIgnoreCase(String value) {
 		this.value = value;

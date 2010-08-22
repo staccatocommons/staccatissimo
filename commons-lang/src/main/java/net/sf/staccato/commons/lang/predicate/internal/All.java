@@ -13,6 +13,8 @@ public final class All<T> extends Predicate<T> {
 
 	/**
 	 * Creates a new {@link All}
+	 * 
+	 * @param predicates
 	 */
 	public All(Iterable<Evaluable<T>> predicates) {
 		this.predicates = predicates;

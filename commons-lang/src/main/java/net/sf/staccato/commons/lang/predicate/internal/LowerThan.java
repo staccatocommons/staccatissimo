@@ -22,6 +22,11 @@ public class LowerThan<T extends Comparable<T>> extends Predicate<T> {
 
 	private final T value;
 
+	/**
+	 * Creates a new {@link LowerThan}
+	 * 
+	 * @param value
+	 */
 	public LowerThan(T value) {
 		this.value = value;
 	}

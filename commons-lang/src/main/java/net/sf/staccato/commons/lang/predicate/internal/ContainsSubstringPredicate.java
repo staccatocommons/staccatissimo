@@ -16,10 +16,18 @@ import net.sf.staccato.commons.lang.predicate.Predicate;
 
 import org.apache.commons.lang.StringUtils;
 
+/**
+ * @author flbulgarelli
+ */
 public class ContainsSubstringPredicate extends Predicate<String> {
 
 	private final String substring;
 
+	/**
+	 * Creates a new {@link ContainsSubstringPredicate}
+	 * 
+	 * @param substring
+	 */
 	public ContainsSubstringPredicate(String substring) {
 		this.substring = substring;
 	}
@@ -27,10 +35,6 @@ public class ContainsSubstringPredicate extends Predicate<String> {
 	@Override
 	public boolean eval(String arg) {
 		return StringUtils.contains(arg, substring);
-	}
-
-	public String getSubstring() {
-		return substring;
 	}
 
 }

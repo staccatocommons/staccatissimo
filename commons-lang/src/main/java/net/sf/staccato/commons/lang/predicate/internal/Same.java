@@ -13,6 +13,8 @@ public final class Same<T> extends Predicate<T> {
 
 	/**
 	 * Creates a new {@link Same}
+	 * 
+	 * @param value
 	 */
 	public Same(T value) {
 		this.value = value;

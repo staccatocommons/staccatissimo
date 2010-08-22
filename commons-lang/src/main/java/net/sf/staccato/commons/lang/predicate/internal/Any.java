@@ -13,6 +13,9 @@ public final class Any<T> extends Predicate<T> {
 
 	/**
 	 * Creates a new {@link All}
+	 * 
+	 * @param predicates
+	 * 
 	 */
 	public Any(Iterable<Evaluable<T>> predicates) {
 		this.predicates = predicates;

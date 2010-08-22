@@ -13,6 +13,8 @@ public final class Not<T> extends Predicate<T> {
 
 	/**
 	 * Creates a new {@link Not}
+	 * 
+	 * @param predicate
 	 */
 	public Not(Evaluable<T> predicate) {
 		this.predicate = predicate;
