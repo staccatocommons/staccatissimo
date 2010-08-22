@@ -25,14 +25,13 @@ import net.sf.staccato.commons.lang.check.annotation.NonNull;
  * are comparable, as long as they components are, too.
  * </p>
  * <p>
- * Tuples are aimed to be used in those places where an it is needed an object
- * whose attributes are only contextually related and does not encapsulate any
+ * Tuples are aimed to be used in those situations where an object that just
+ * relates others together is needed. Such object does not encapsulate any
  * business concept nor any specific behavior except of {@link #toString()},
  * {@link #equals(Object)}, {@link #hashCode()} and
  * {@link #compare(Object, Object)}. Tuples are thus not intended to be used
- * everywhere nor extended, a good design is not likely to expose Tuples on
- * public signatures. However, there are still some concrete scenarios where
- * tuple are useful:
+ * everywhere nor extended, but there are some concrete scenarios where they are
+ * useful:
  * </p>
  * <ul>
  * <li>
@@ -45,7 +44,6 @@ import net.sf.staccato.commons.lang.check.annotation.NonNull;
  * </ul>
  * 
  * @author flbulgarelli
- * 
  * 
  */
 public abstract class Tuple implements Serializable {
