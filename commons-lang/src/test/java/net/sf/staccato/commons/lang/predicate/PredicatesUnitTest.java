@@ -106,5 +106,32 @@ public class PredicatesUnitTest {
 		assertFalse(Predicates.matchesRegexp("[Hh]el+o").eval("world"));
 	}
 
+	@Test
+	public void testConstains() {
+		assertTrue(Predicates.contains("foo").apply(
+			"The word foo has no special meaning"));
+		assertFalse(Predicates.contains("foo").apply(
+			"The word bar has no special meaning, too"));
+	}
 
+	@Test
+	public void testNot() throws Exception {
+		assertFalse(Predicates.equal(6).not().eval(6));
+		assertTrue(Predicates.false_().not().eval(5));
+		assertFalse(Predicates.false_().not().not().eval(5));
+	}
+
+	@Test
+	public void testGreatherThan() throws Exception {
+		assertFalse(Predicates.greaterThan(5).eval(2));
+		assertFalse(Predicates.greaterThan(5).eval(5));
+		assertTrue(Predicates.greaterThan(5).eval(6));
+	}
+
+	@Test
+	public void testLowerThan() throws Exception {
+		assertTrue(Predicates.lowerThan(5).eval(2));
+		assertFalse(Predicates.lowerThan(5).eval(5));
+		assertFalse(Predicates.lowerThan(5).eval(6));
+	}
 }

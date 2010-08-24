@@ -33,6 +33,9 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 	Applicable2<Character, String, Integer> g2;
 	Applicable3<Character, String, Integer, Integer> g3;
 
+	/**
+	 * 
+	 */
 	@Before
 	public void setUp() {
 		g1 = mock(Applicable.class, "g1");
