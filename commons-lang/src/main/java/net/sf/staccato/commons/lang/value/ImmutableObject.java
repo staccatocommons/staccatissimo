@@ -20,7 +20,7 @@ package net.sf.staccato.commons.lang.value;
  * @author fbulgarelli
  * 
  */
-public class ImmutableObject extends UnmodifiableObject implements Immutable {
+public class ImmutableObject extends ValueObject implements Immutable {
 
 	private static final long serialVersionUID = -7152890149830790459L;
 

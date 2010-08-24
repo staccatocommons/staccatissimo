@@ -152,11 +152,6 @@ public abstract class Option<T> /* extends AbstractCollection<T> */implements
 	 */
 	public abstract void ifDefined(@NonNull Executable<T> block);
 
-	@Override
-	public Option<T> clone() {
-		return this;
-	}
-
 	/**
 	 * Factory method for creating defined values.This method does not guarantee
 	 * either to return the same or different instances for the same argument.

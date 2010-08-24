@@ -16,12 +16,21 @@ import net.sf.staccato.commons.lang.function.internal.Constant;
 import net.sf.staccato.commons.lang.function.internal.Identity;
 
 /**
+ * Class factory methods for some common {@link Function}s
+ * 
  * @author flbulgarelli
  */
 public class Functions {
 
+	/**
+	 * Returns the identity function, that is, a {@link Function} that takes a non
+	 * nullable argument and returns it.
+	 * 
+	 * @param <I>
+	 * @return the singleton identity function
+	 */
 	public static <I> Function<I, I> identity() {
-		return new Identity<I>();
+		return Identity.getInstance();
 	}
 
 	public static <I, O> Function<I, O> constant(final O value) {

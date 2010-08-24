@@ -18,7 +18,7 @@ import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.check.Ensure;
 import net.sf.staccato.commons.lang.value.Unmodifiable;
-import net.sf.staccato.commons.lang.value.UnmodifiableObject;
+import net.sf.staccato.commons.lang.value.ValueObject;
 
 /**
  * A {@link Sequence} is an {@link Iterable} object whose {@link Iterator},
@@ -31,7 +31,8 @@ import net.sf.staccato.commons.lang.value.UnmodifiableObject;
  * 
  * @param <T>
  */
-public class Sequence<T> extends UnmodifiableObject implements Iterable<T> {
+public class Sequence<T> extends ValueObject implements Unmodifiable,
+	Iterable<T> {
 
 	private static final long serialVersionUID = 8811454338704704525L;
 

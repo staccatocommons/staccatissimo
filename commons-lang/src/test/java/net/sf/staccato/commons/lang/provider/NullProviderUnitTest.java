@@ -1,6 +1,6 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team   
- 
+ Copyright (c) 2010, The Staccato-Commons Team
+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation; version 3 of the License.
@@ -10,18 +10,30 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.value;
+package net.sf.staccato.commons.lang.provider;
+
+
+import static org.junit.Assert.assertNull;
+
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author flbulgarelli
+ *
  */
-public class UnmodifiableObject extends ValueObject implements Unmodifiable {
+public class NullProviderUnitTest {
 
-	private static final long serialVersionUID = -6849278430971366307L;
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+	}
 
-	@Override
-	public UnmodifiableObject clone() {
-		return this;
+	@Test
+	public void testValue() throws Exception {
+		assertNull(NullProvider.getInstance().value());
 	}
 
 }

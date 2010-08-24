@@ -16,7 +16,8 @@ import net.sf.staccato.commons.lang.Compare;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.EmptyAware;
-import net.sf.staccato.commons.lang.value.UnmodifiableObject;
+import net.sf.staccato.commons.lang.value.Unmodifiable;
+import net.sf.staccato.commons.lang.value.ValueObject;
 
 /**
  * A {@link Range} represents a an inclusive lower and upper bound of
@@ -28,8 +29,8 @@ import net.sf.staccato.commons.lang.value.UnmodifiableObject;
  * 
  * @param <T>
  */
-public class Range<T extends Comparable<T>> extends UnmodifiableObject
-	implements ContainsAware<T>, EmptyAware {
+public class Range<T extends Comparable<T>> extends ValueObject implements
+	ContainsAware<T>, EmptyAware, Unmodifiable {
 
 	private static final long serialVersionUID = -1096861117755452369L;
 
@@ -50,6 +51,9 @@ public class Range<T extends Comparable<T>> extends UnmodifiableObject
 		this.max = max;
 	}
 
+	/**
+	 * Tests if a given element is between this range lower and upper bounds
+	 */
 	public boolean contains(T element) {
 		return Compare.between(element, min, max);
 	}

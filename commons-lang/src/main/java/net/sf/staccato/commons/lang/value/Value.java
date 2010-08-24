@@ -14,14 +14,12 @@ package net.sf.staccato.commons.lang.value;
 
 import java.io.Serializable;
 
-import net.sf.staccato.commons.lang.Cloneable;
-
 /**
  * 
  * {@link Value} interface describes statefull objects whose identity is not
  * important.
  * <p>
- * Values are {@link Cloneable} and {@link Serializable}, and must:
+ * Values are {@link Serializable}, and must:
  * <ul>
  * <li>Implement equality so that it is not based in identity, but in its
  * internal state instead. Values must override {@link #equals(Object)}</li>
@@ -34,7 +32,7 @@ import net.sf.staccato.commons.lang.Cloneable;
  * @author flbulgarelli
  * 
  */
-public interface Value extends Serializable, Cloneable {
+public interface Value extends Serializable {
 
 	public int hashCode();
 

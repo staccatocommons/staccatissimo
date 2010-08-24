@@ -33,7 +33,9 @@ public class ValueObject implements Value {
 
 	@Override
 	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
+		return ToStringBuilder.reflectionToString(
+			this,
+			NamedTupleToStringStyle.getInstance());
 	}
 
 	@Override
@@ -45,13 +47,4 @@ public class ValueObject implements Value {
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
 	}
-
-	public ValueObject clone() {
-		try {
-			return (ValueObject) super.clone();
-		} catch (CloneNotSupportedException e) {
-			throw new AssertionError(e);
-		}
-	}
-
 }

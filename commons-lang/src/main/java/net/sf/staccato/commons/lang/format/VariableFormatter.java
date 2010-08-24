@@ -41,7 +41,7 @@ public class VariableFormatter {
 	 * @param formattingString
 	 */
 	public VariableFormatter(String formattingString) {
-		if (formattingString != DEFAULT_FORMATTING_STRING)
+		if (!formattingString.equals(DEFAULT_FORMATTING_STRING))
 			Ensure.matches("formattingString", formattingString, ".*\\%s.*\\%s.*");
 
 		this.formattingString = formattingString;

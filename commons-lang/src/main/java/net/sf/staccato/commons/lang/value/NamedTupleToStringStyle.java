@@ -21,6 +21,8 @@ import org.apache.commons.lang.builder.ToStringStyle;
 public class NamedTupleToStringStyle extends ToStringStyle {
 	private static final long serialVersionUID = -7126928068442420366L;
 
+	private static final ToStringStyle INSTANCE = new NamedTupleToStringStyle();
+
 	/**
 	 * Creates a new {@link NamedTupleToStringStyle}
 	 */
@@ -30,6 +32,13 @@ public class NamedTupleToStringStyle extends ToStringStyle {
 		setUseShortClassName(true);
 		setContentStart("(");
 		setContentEnd(")");
+	}
+
+	/**
+	 * @return the instance
+	 */
+	public static ToStringStyle getInstance() {
+		return INSTANCE;
 	}
 
 }

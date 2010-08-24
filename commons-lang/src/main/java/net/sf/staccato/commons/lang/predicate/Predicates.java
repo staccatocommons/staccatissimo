@@ -89,10 +89,24 @@ public class Predicates {
 	 * String predicates
 	 */
 
+	/**
+	 * Returns a new {@link Predicate} that tests
+	 * <code>argument.equalsIgnoreCase(value)</code>
+	 * 
+	 * @param value
+	 * @return a new predicate
+	 */
 	public static Predicate<String> equalsIgnoreCase(String value) {
 		return new EqualsIgnoreCase(value);
 	}
 
+	/**
+	 * Returns a new {@link Predicate} that tests
+	 * <code>argument.matches(value)</code>
+	 * 
+	 * @param regexp
+	 * @return a new predicate
+	 */
 	public static Predicate<String> matchesRegexp(String regexp) {
 		return new Matches(regexp);
 	}

@@ -62,8 +62,4 @@ public class RangeUnitTest {
 		assertTrue(from(10, 10).isEmpty());
 	}
 
-	public void testEquality() throws Exception {
-		assertTrue(from(9, 50).clone().equals(from(9, 50)));
-	}
-
 }
