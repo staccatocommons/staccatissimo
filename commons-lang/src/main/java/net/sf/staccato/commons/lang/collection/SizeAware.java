@@ -12,7 +12,37 @@
  */
 package net.sf.staccato.commons.lang.collection;
 
+import net.sf.staccato.commons.lang.check.Check;
+
+/**
+ * Interface for objects that understand {@link #size()} message. It extends the
+ * {@link EmptyAware} interface.
+ * 
+ * This interface is deliberately too generic, and does not make any assumption
+ * about the nature of the {@link SizeAware} object - it may be array-like,
+ * collection-like, a domain model object, string-like, etc.
+ * 
+ * {@link SizeAware} is originally designed to be used with {@link Check}s, but
+ * it may be used in any other context.
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public interface SizeAware extends EmptyAware {
 
+	/**
+	 * Answers the size of this size aware, whatever it means. It should be a
+	 * positive int.
+	 * 
+	 * @return the size
+	 */
 	int size();
+
+	/**
+	 * Answers if this {@link SizeAware} is empty. It should always be true that
+	 * 
+	 * <code>aSizeAware.isEmpty() == (aSizeAware.size() == 0)</code>
+	 */
+	@Override
+	public boolean isEmpty();
 }

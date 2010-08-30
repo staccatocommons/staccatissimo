@@ -31,6 +31,8 @@ import net.sf.staccato.commons.lang.check.Check;
 public interface EmptyAware {
 
 	/**
+	 * Answers if this {@link EmptyAware} is empty
+	 * 
 	 * @return if the object is empty, whatever it means
 	 */
 	boolean isEmpty();
