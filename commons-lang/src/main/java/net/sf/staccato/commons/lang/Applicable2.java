@@ -16,16 +16,29 @@ import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * {@link Applicable2}s are computations that take two arguments and whose
- * result is a return value.
+ * result is a return value. {@link Applicable2}s should not have side effects
  * 
  * @author flbulgarelli
  * 
  * @param <T1>
+ *          first argument type
  * @param <T2>
+ *          second argument type
  * @param <R>
+ *          return type
  */
 public interface Applicable2<T1, T2, R> {
 
+	/**
+	 * Performs a transformation on the given element, and returns its result.
+	 * This method should have no side effect.
+	 * 
+	 * @param arg1
+	 *          the first computation argument
+	 * @param arg2
+	 *          the second computation argument
+	 * @return the transformation result
+	 */
 	@NonNull
 	R apply(@NonNull T1 arg1, @NonNull T2 arg2);
 

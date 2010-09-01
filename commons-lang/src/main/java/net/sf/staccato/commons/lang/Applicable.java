@@ -15,19 +15,25 @@ package net.sf.staccato.commons.lang;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
- * *
- * <p>
  * {@link Applicable}s are computations that take one argument and whose result
  * is a return value. {@link Applicable}s should not have side effects
- * </p>
  * 
  * @author flbulgarelli
  * 
  * @param <T>
+ *          argument type
  * @param <R>
+ *          return type
  */
 public interface Applicable<T, R> {
 
+	/**
+	 * Performs a transformation on the given element, and returns its result.
+	 * This method should have no side effect.
+	 * 
+	 * @param arg
+	 * @return the transformation result
+	 */
 	@NonNull
 	R apply(@NonNull T arg);
 
