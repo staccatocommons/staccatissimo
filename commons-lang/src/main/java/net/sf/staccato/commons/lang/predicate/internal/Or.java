@@ -2,31 +2,28 @@ package net.sf.staccato.commons.lang.predicate.internal;
 
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.predicate.Predicate;
-import net.sf.staccato.commons.lang.predicate.Predicates;
 
 /**
  * @author flbulgarelli
  * 
  * @param <T>
  */
-public final class Not<T> extends Predicate<T> {
+public final class Or<T> extends Predicate<T> {
 	private final Evaluable<T> predicate;
+	private final Evaluable<T> other;
 
 	/**
-	 * Creates a new {@link Not}
+	 * Creates a new {@link Or}
 	 * 
 	 * @param predicate
+	 * @param other
 	 */
-	public Not(Evaluable<T> predicate) {
+	public Or(Evaluable<T> predicate, Evaluable<T> other) {
+		this.other = other;
 		this.predicate = predicate;
 	}
 
 	public boolean eval(T argument) {
-		return !predicate.eval(argument);
-	}
-
-	@Override
-	public Predicate<T> not() {
-		return Predicates.from(predicate);
+		return predicate.eval(argument) || other.eval(argument);
 	}
 }

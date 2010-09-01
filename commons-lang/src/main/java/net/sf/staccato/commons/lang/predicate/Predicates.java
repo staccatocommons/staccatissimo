@@ -16,21 +16,27 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.predicate.internal.All;
+import net.sf.staccato.commons.lang.predicate.internal.And;
 import net.sf.staccato.commons.lang.predicate.internal.Any;
 import net.sf.staccato.commons.lang.predicate.internal.ContainsSubstringPredicate;
 import net.sf.staccato.commons.lang.predicate.internal.Equals;
 import net.sf.staccato.commons.lang.predicate.internal.EqualsIgnoreCase;
+import net.sf.staccato.commons.lang.predicate.internal.EvaluablePredicate;
 import net.sf.staccato.commons.lang.predicate.internal.False;
 import net.sf.staccato.commons.lang.predicate.internal.GreaterThan;
 import net.sf.staccato.commons.lang.predicate.internal.LowerThan;
 import net.sf.staccato.commons.lang.predicate.internal.Matches;
 import net.sf.staccato.commons.lang.predicate.internal.Not;
 import net.sf.staccato.commons.lang.predicate.internal.NotNull;
+import net.sf.staccato.commons.lang.predicate.internal.Or;
 import net.sf.staccato.commons.lang.predicate.internal.Same;
 import net.sf.staccato.commons.lang.predicate.internal.True;
 
 /**
+ * Factory methods for common predicates
+ * 
  * @author flbulgarelli
  */
 public class Predicates {
@@ -39,6 +45,7 @@ public class Predicates {
 	 * @param <T>
 	 * @return A {@link Predicate} that always returns <code>true</code>
 	 */
+	@NonNull
 	public static <T> Predicate<T> true_() {
 		return True.getInstance();
 	}
@@ -47,6 +54,7 @@ public class Predicates {
 	 * @param <T>
 	 * @return A {@link Predicate} that always returns <code>false</code>
 	 */
+	@NonNull
 	public static <T> Predicate<T> false_() {
 		return False.getInstance();
 	}
@@ -59,6 +67,7 @@ public class Predicates {
 	 * @param <T>
 	 * @return A {@link Predicate} that tests if its argument is not null
 	 */
+	@NonNull
 	public static <T> Predicate<T> notNull() {
 		return NotNull.getInstance();
 	}
@@ -70,6 +79,7 @@ public class Predicates {
 	 * @return a {@link Predicate} that tests if its argument is equal to the
 	 *         given value
 	 */
+	@NonNull
 	public static <T> Predicate<T> equal(T value) {
 		return new Equals<T>(value);
 	}
@@ -81,6 +91,7 @@ public class Predicates {
 	 * @return a {@link Predicate} that tests if its argument is the same that the
 	 *         given value
 	 */
+	@NonNull
 	public static <T> Predicate<T> same(T value) {
 		return new Same<T>(value);
 	}
@@ -96,7 +107,8 @@ public class Predicates {
 	 * @param value
 	 * @return a new predicate
 	 */
-	public static Predicate<String> equalsIgnoreCase(String value) {
+	@NonNull
+	public static Predicate<String> equalsIgnoreCase(@NonNull String value) {
 		return new EqualsIgnoreCase(value);
 	}
 
@@ -107,15 +119,33 @@ public class Predicates {
 	 * @param regexp
 	 * @return a new predicate
 	 */
-	public static Predicate<String> matchesRegexp(String regexp) {
+	@NonNull
+	public static Predicate<String> matchesRegexp(@NonNull String regexp) {
 		return new Matches(regexp);
 	}
 
-	public static Predicate<String> matchesPattern(Pattern pattern) {
+	/**
+	 * Returns a new {@link Predicate} that tests
+	 * <code>pattern.matcher(value).matches()</code>
+	 * 
+	 * @param pattern
+	 * @return a new predicate
+	 */
+	@NonNull
+	public static Predicate<String> matchesPattern(@NonNull Pattern pattern) {
 		return new Matches(pattern);
 	}
 
-	public static Predicate<String> contains(String substring) {
+	/**
+	 * Returns a new {@link Predicate} that tests
+	 * <code>argument.contains(substring)</code>
+	 * 
+	 * @param substring
+	 *          the substring to test if it is contained
+	 * @return a new predicate
+	 */
+	@NonNull
+	public static Predicate<String> contains(@NonNull String substring) {
 		return new ContainsSubstringPredicate(substring);
 	}
 
@@ -143,6 +173,14 @@ public class Predicates {
 		return new Not<T>(predicate);
 	}
 
+	public static <T> Predicate<T> or(Evaluable<T> predicate, Evaluable<T> other) {
+		return new Or<T>(predicate, other);
+	}
+
+	public static <T> Predicate<T> and(Evaluable<T> predicate, Evaluable<T> other) {
+		return new And<T>(predicate, other);
+	}
+
 	/*
 	 * Comparable predicates
 	 */
@@ -153,6 +191,16 @@ public class Predicates {
 
 	public static <T extends Comparable<T>> Predicate<T> greaterThan(final T value) {
 		return new GreaterThan<T>(value);
+	}
+
+	/*
+	 * Conversion
+	 */
+
+	public static <T> Predicate<T> from(Evaluable<T> evaluable) {
+		if (evaluable instanceof Predicate)
+			return (Predicate) evaluable;
+		return new EvaluablePredicate<T>(evaluable);
 	}
 
 }

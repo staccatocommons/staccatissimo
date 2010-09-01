@@ -14,10 +14,21 @@ package net.sf.staccato.commons.lang.predicate.internal;
 
 import net.sf.staccato.commons.lang.predicate.Predicate;
 
-public final class GreaterThan<T extends Comparable<T>> extends
-	Predicate<T> {
+/**
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T>
+ */
+public final class GreaterThan<T extends Comparable<T>> extends Predicate<T> {
 	private final T value;
 
+	/**
+	 * 
+	 * Creates a new {@link GreaterThan}
+	 * 
+	 * @param value
+	 */
 	public GreaterThan(T value) {
 		this.value = value;
 	}

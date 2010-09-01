@@ -20,7 +20,11 @@ import net.sf.staccato.commons.lang.Executable3;
 import net.sf.staccato.commons.lang.block.Block;
 import net.sf.staccato.commons.lang.block.Block2;
 import net.sf.staccato.commons.lang.block.Block3;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.function.Function;
+import net.sf.staccato.commons.lang.predicate.internal.And;
+import net.sf.staccato.commons.lang.predicate.internal.Not;
+import net.sf.staccato.commons.lang.predicate.internal.Or;
 
 /**
  * <p>
@@ -50,19 +54,19 @@ public abstract class Predicate<T> extends Function<T, Boolean> implements
 	}
 
 	@Override
-	public abstract boolean eval(T argument);
+	public abstract boolean eval(@NonNull T argument);
 
 	/**
 	 * @return a {@link Predicate} that negates this {@link Predicate}'s result.
 	 *         Non Null.
 	 */
 	public Predicate<T> not() {
-		return Predicates.not(this);
+		return new Not<T>(this);
 	}
 
 	/**
-	 * Returns a predicate that, when evaluated, performs a short-circuit or
-	 * between this {@link Predicate}'s {@link #eval(Object)} and other
+	 * Returns a predicate that, performs a short-circuit logical-or between this
+	 * {@link Predicate}'s {@link #eval(Object)} and other
 	 * 
 	 * @param other
 	 *          another {@link Evaluable}. Non null.
@@ -70,19 +74,20 @@ public abstract class Predicate<T> extends Function<T, Boolean> implements
 	 *         and other when evaluated. Non Null
 	 */
 	public Predicate<T> or(final Evaluable<T> other) {
-		return new Predicate<T>() {
-			public boolean eval(T argument) {
-				return Predicate.this.eval(argument) || other.eval(argument);
-			}
-		};
+		return new Or<T>(this, other);
 	}
 
+	/**
+	 * Returns a predicate that performs a short-circuit logical-and between this
+	 * {@link Predicate}'s {@link #eval(Object)} and other
+	 * 
+	 * @param other
+	 *          another {@link Evaluable}. Non null.
+	 * @return A new predicate that performs the short circuited logical-and
+	 *         between this and other when evaluated. Non Null
+	 */
 	public Predicate<T> and(final Evaluable<T> other) {
-		return new Predicate<T>() {
-			public boolean eval(T argument) {
-				return Predicate.this.eval(argument) && other.eval(argument);
-			}
-		};
+		return new And<T>(this, other);
 	}
 
 	public Executable<T> whileTrue(final Executable<T> aBlock) {

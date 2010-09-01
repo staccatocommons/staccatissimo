@@ -14,6 +14,7 @@ package net.sf.staccato.commons.lang.predicate.internal;
 
 import java.util.regex.Pattern;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**
@@ -47,7 +48,7 @@ public class Matches extends Predicate<String> {
 	}
 
 	@Override
-	public boolean eval(String input) {
+	public boolean eval(@NonNull String input) {
 		return pattern.matcher(input).matches();
 	}
 

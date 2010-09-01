@@ -1,6 +1,6 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team   
- 
+ Copyright (c) 2010, The Staccato-Commons Team
+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation; version 3 of the License.
@@ -12,28 +12,31 @@
  */
 package net.sf.staccato.commons.lang.predicate.internal;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**
  * @author flbulgarelli
+ * @param <T>
+ * 
  */
-public class ContainsSubstringPredicate extends Predicate<String> {
+public class EvaluablePredicate<T> extends Predicate<T> {
 
-	private final String substring;
+	private final Evaluable<T> evaluable;
 
 	/**
-	 * Creates a new {@link ContainsSubstringPredicate}
 	 * 
-	 * @param substring
+	 * Creates a new {@link EvaluablePredicate}
+	 * 
+	 * @param evaluable
 	 */
-	public ContainsSubstringPredicate(String substring) {
-		this.substring = substring;
+	public EvaluablePredicate(Evaluable<T> evaluable) {
+		this.evaluable = evaluable;
 	}
 
 	@Override
-	public boolean eval(@NonNull String arg) {
-		return arg.contains(substring);
+	public boolean eval(T argument) {
+		return evaluable.eval(argument);
 	}
 
 }

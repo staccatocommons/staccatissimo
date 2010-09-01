@@ -14,6 +14,7 @@ package net.sf.staccato.commons.lang.predicate.internal;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 import net.sf.staccato.commons.lang.predicate.Predicate;
 
@@ -22,18 +23,34 @@ import net.sf.staccato.commons.lang.predicate.Predicate;
  * 
  * @author flbugarelli
  * 
- * @param <E>
+ * @param <T>
  */
-public class InPredicate<E> extends Predicate<E> {
+public class InPredicate<T> extends Predicate<T> {
 
-	private HashSet<E> elements;
+	private Set<T> elements;
 
-	public InPredicate(E... elements) {
-		this.elements = new HashSet<E>();
+	/**
+	 * 
+	 * Creates a new {@link InPredicate}
+	 * 
+	 * @param elements
+	 */
+	public InPredicate(Set<T> elements) {
+		this.elements = elements;
+	}
+
+	/**
+	 * 
+	 * Creates a new {@link InPredicate}
+	 * 
+	 * @param elements
+	 */
+	public InPredicate(T... elements) {
+		this(new HashSet<T>());
 		Collections.addAll(this.elements, elements);
 	}
 
-	public boolean eval(E e) {
+	public boolean eval(T e) {
 		return this.elements.contains(e);
 	}
 
