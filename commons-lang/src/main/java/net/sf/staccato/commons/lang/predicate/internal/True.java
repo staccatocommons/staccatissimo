@@ -2,6 +2,7 @@ package net.sf.staccato.commons.lang.predicate.internal;
 
 import static net.sf.staccato.commons.lang.predicate.Predicates.false_;
 import static net.sf.staccato.commons.lang.predicate.Predicates.from;
+import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 
@@ -37,5 +38,18 @@ public final class True<T> extends Predicate<T> {
 	@Override
 	public Predicate<T> not() {
 		return false_();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.sf.staccato.commons.lang.predicate.Predicate#ifTrue(net.sf.staccato
+	 * .commons.lang.Applicable)
+	 */
+	@Override
+	public Applicable<T, T> ifTrue(Applicable<? super T, ? extends T> aFunction) {
+		// TODO Auto-generated method stub
+		return super.ifTrue(aFunction);
 	}
 }

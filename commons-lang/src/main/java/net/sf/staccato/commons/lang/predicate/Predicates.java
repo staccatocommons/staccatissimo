@@ -18,7 +18,6 @@ import java.util.regex.Pattern;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.predicate.internal.All;
-import net.sf.staccato.commons.lang.predicate.internal.And;
 import net.sf.staccato.commons.lang.predicate.internal.Any;
 import net.sf.staccato.commons.lang.predicate.internal.ContainsSubstringPredicate;
 import net.sf.staccato.commons.lang.predicate.internal.Equals;
@@ -28,9 +27,7 @@ import net.sf.staccato.commons.lang.predicate.internal.False;
 import net.sf.staccato.commons.lang.predicate.internal.GreaterThan;
 import net.sf.staccato.commons.lang.predicate.internal.LowerThan;
 import net.sf.staccato.commons.lang.predicate.internal.Matches;
-import net.sf.staccato.commons.lang.predicate.internal.Not;
 import net.sf.staccato.commons.lang.predicate.internal.NotNull;
-import net.sf.staccato.commons.lang.predicate.internal.Or;
 import net.sf.staccato.commons.lang.predicate.internal.Same;
 import net.sf.staccato.commons.lang.predicate.internal.True;
 
@@ -153,51 +150,98 @@ public class Predicates {
 	 * Logical predicates
 	 */
 
-	public static <T> Predicate<T> all(Evaluable<T>... predicates) {
+	/**
+	 * Returns a predicate that evaluates to true if and only if all the given
+	 * predicates evaluate true
+	 * 
+	 * @param <T>
+	 * @param predicates
+	 * @return the all predicate
+	 */
+	@NonNull
+	public static <T> Predicate<T> all(@NonNull Evaluable<T>... predicates) {
 		return all(Arrays.asList(predicates));
 	}
 
-	public static <T> Predicate<T> all(Iterable<Evaluable<T>> predicates) {
+	/**
+	 * Returns a predicate that evaluates to true if and only if all the given
+	 * predicates evaluate true
+	 * 
+	 * @param <T>
+	 * @param predicates
+	 * @return the all predicate
+	 */
+	@NonNull
+	public static <T> Predicate<T> all(@NonNull Iterable<Evaluable<T>> predicates) {
 		return new All<T>(predicates);
 	}
 
-	public static <T> Predicate<T> any(Evaluable<T>... predicates) {
+	/**
+	 * Returns a predicate that evaluates to false if and only if all the given
+	 * predicates evaluate false
+	 * 
+	 * @param <T>
+	 * @param predicates
+	 * @return the any predicate
+	 */
+	@NonNull
+	public static <T> Predicate<T> any(@NonNull Evaluable<T>... predicates) {
 		return any(Arrays.asList(predicates));
 	}
 
-	public static <T> Predicate<T> any(Iterable<Evaluable<T>> predicates) {
+	/**
+	 * Returns a predicate that evaluates to false if and only if all the given
+	 * predicates evaluate false
+	 * 
+	 * @param <T>
+	 * @param predicates
+	 * @return the any predicate
+	 */
+	@NonNull
+	public static <T> Predicate<T> any(@NonNull Iterable<Evaluable<T>> predicates) {
 		return new Any<T>(predicates);
-	}
-
-	public static <T> Predicate<T> not(Evaluable<T> predicate) {
-		return new Not<T>(predicate);
-	}
-
-	public static <T> Predicate<T> or(Evaluable<T> predicate, Evaluable<T> other) {
-		return new Or<T>(predicate, other);
-	}
-
-	public static <T> Predicate<T> and(Evaluable<T> predicate, Evaluable<T> other) {
-		return new And<T>(predicate, other);
 	}
 
 	/*
 	 * Comparable predicates
 	 */
-
-	public static <T extends Comparable<T>> Predicate<T> lowerThan(T value) {
+	/**
+	 * @param <T>
+	 * @param value
+	 * @return
+	 */
+	@NonNull
+	public static <T extends Comparable<T>> Predicate<T> lowerThan(
+		@NonNull T value) {
 		return new LowerThan<T>(value);
 	}
 
-	public static <T extends Comparable<T>> Predicate<T> greaterThan(final T value) {
+	/**
+	 * @param <T>
+	 * @param value
+	 * @return
+	 */
+	@NonNull
+	public static <T extends Comparable<T>> Predicate<T> greaterThan(
+		@NonNull T value) {
 		return new GreaterThan<T>(value);
 	}
 
 	/*
-	 * Conversion
+	 * Predicate - Evaluable bridge
 	 */
 
-	public static <T> Predicate<T> from(Evaluable<T> evaluable) {
+	/**
+	 * Converts the given {@link Evaluable} into a {@link Predicate}. If it is
+	 * already a Predicate, returns it.
+	 * 
+	 * @param evaluable
+	 * @param <T>
+	 * @return a {@link Predicate} view of the given evaluable, or the evaluable,
+	 *         it is a {@link Predicate} already
+	 */
+	@NonNull
+	public static <T> Predicate<T> from(@NonNull Evaluable<T> evaluable) {
 		if (evaluable instanceof Predicate)
 			return (Predicate) evaluable;
 		return new EvaluablePredicate<T>(evaluable);

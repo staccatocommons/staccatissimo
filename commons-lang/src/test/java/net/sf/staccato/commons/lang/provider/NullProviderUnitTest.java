@@ -15,6 +15,8 @@ package net.sf.staccato.commons.lang.provider;
 
 import static org.junit.Assert.assertNull;
 
+import net.sf.staccato.commons.lang.provider.internal.NullProvider;
+
 import org.junit.Before;
 import org.junit.Test;
 

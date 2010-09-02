@@ -51,3 +51,13 @@ Tasks
 
 Singleton objects? Document they are singleton?
  
+ 
+ 
+ soporte en check instrument para generar warnings respecto de los elementos anotados
+ 
+ 
+ Ensure.that.isTrue
+ Ensure.thatNot.isTrue
+ 
+ Desprenderse del uso de evaluables?
+ 

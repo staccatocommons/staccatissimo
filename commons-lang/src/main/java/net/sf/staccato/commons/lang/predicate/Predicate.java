@@ -28,8 +28,7 @@ import net.sf.staccato.commons.lang.predicate.internal.Or;
 
 /**
  * <p>
- * A {@link Predicate} is a {@link Function} that can return only
- * {@link Boolean}s and is also {@link Evaluable}.
+ * A {@link Predicate} is an abstract {@link Evaluable}.
  * </p>
  * <p>
  * Predicates in addition understand the basic boolean logic messages
@@ -42,16 +41,7 @@ import net.sf.staccato.commons.lang.predicate.internal.Or;
  * @param <T>
  *          the type of argument to evaluate
  */
-public abstract class Predicate<T> extends Function<T, Boolean> implements
-	Evaluable<T> {
-
-	/**
-	 * Evaluates the argument using {@link #eval(Object)}, and returns it as
-	 * {@link Boolean}
-	 */
-	public Boolean apply(T argument) {
-		return eval(argument);
-	}
+public abstract class Predicate<T> implements Evaluable<T> {
 
 	@Override
 	public abstract boolean eval(@NonNull T argument);
@@ -60,6 +50,7 @@ public abstract class Predicate<T> extends Function<T, Boolean> implements
 	 * @return a {@link Predicate} that negates this {@link Predicate}'s result.
 	 *         Non Null.
 	 */
+	@NonNull
 	public Predicate<T> not() {
 		return new Not<T>(this);
 	}
@@ -73,7 +64,8 @@ public abstract class Predicate<T> extends Function<T, Boolean> implements
 	 * @return A new predicate that performs the short circuited or between this
 	 *         and other when evaluated. Non Null
 	 */
-	public Predicate<T> or(final Evaluable<T> other) {
+	@NonNull
+	public Predicate<T> or(@NonNull final Evaluable<T> other) {
 		return new Or<T>(this, other);
 	}
 
@@ -86,7 +78,8 @@ public abstract class Predicate<T> extends Function<T, Boolean> implements
 	 * @return A new predicate that performs the short circuited logical-and
 	 *         between this and other when evaluated. Non Null
 	 */
-	public Predicate<T> and(final Evaluable<T> other) {
+	@NonNull
+	public Predicate<T> and(@NonNull final Evaluable<T> other) {
 		return new And<T>(this, other);
 	}
 

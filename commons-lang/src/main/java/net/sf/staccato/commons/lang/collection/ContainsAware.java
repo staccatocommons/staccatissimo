@@ -12,7 +12,14 @@
  */
 package net.sf.staccato.commons.lang.collection;
 
+/**
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T>
+ */
 public interface ContainsAware<T> {
+
 
 	public boolean contains(T element);
 

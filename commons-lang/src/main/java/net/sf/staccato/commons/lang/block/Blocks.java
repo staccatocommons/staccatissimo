@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang.block;
 
+import net.sf.staccato.commons.lang.block.internal.Empty;
+
 import org.apache.commons.lang.NotImplementedException;
 
 /**
@@ -21,11 +23,14 @@ import org.apache.commons.lang.NotImplementedException;
  */
 public class Blocks {
 
-	public static <T> Block<T> nop() {
-		return new Block<T>() {
-			public void exec(T argument) {
-			}
-		};
+	/**
+	 * Returns a block that does nothing
+	 * 
+	 * @param <T>
+	 * @return an empty block
+	 */
+	public static <T> Block<T> empty() {
+		return Empty.getInstance();
 	}
 
 	public static <T> Block<T> throwException(String message) {

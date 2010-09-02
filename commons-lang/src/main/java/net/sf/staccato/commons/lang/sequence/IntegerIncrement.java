@@ -22,6 +22,12 @@ public class IntegerIncrement extends Function<Integer, Integer> {
 
 	private final int delta;
 
+	/**
+	 * Creates a new {@link IntegerIncrement}
+	 * 
+	 * @param delta
+	 *          the increment. May be negative.
+	 */
 	public IntegerIncrement(int delta) {
 		this.delta = delta;
 	}

@@ -1,8 +1,6 @@
 package net.sf.staccato.commons.lang.predicate.internal;
 
-import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.predicate.Predicate;
-import net.sf.staccato.commons.lang.predicate.Predicates;
 
 /**
  * @author flbulgarelli
@@ -10,14 +8,14 @@ import net.sf.staccato.commons.lang.predicate.Predicates;
  * @param <T>
  */
 public final class Not<T> extends Predicate<T> {
-	private final Evaluable<T> predicate;
+	private final Predicate<T> predicate;
 
 	/**
 	 * Creates a new {@link Not}
 	 * 
 	 * @param predicate
 	 */
-	public Not(Evaluable<T> predicate) {
+	public Not(Predicate<T> predicate) {
 		this.predicate = predicate;
 	}
 
@@ -27,6 +25,7 @@ public final class Not<T> extends Predicate<T> {
 
 	@Override
 	public Predicate<T> not() {
-		return Predicates.from(predicate);
+		return predicate;
 	}
+
 }

@@ -108,9 +108,9 @@ public class PredicatesUnitTest {
 
 	@Test
 	public void testConstains() {
-		assertTrue(Predicates.contains("foo").apply(
+		assertTrue(Predicates.contains("foo").eval(
 			"The word foo has no special meaning"));
-		assertFalse(Predicates.contains("foo").apply(
+		assertFalse(Predicates.contains("foo").eval(
 			"The word bar has no special meaning, too"));
 	}
 

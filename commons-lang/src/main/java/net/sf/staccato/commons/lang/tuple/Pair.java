@@ -17,13 +17,14 @@ import java.util.Map;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
- * Two-components tuple
+ * Two-components {@link Tuple}
  * 
  * @author flbulgarelli
  * 
  * @param <T1>
+ *          first component type
  * @param <T2>
- * 
+ *          second component type
  */
 public final class Pair<T1, T2> extends Tuple implements
 	Comparable<Pair<T1, T2>>, Map.Entry<T1, T2> {
@@ -45,7 +46,9 @@ public final class Pair<T1, T2> extends Tuple implements
 	}
 
 	/**
-	 * @return the first element of the pair
+	 * Answers the first component
+	 * 
+	 * @return the first component
 	 */
 	public T1 getFirst() {
 		return first;
@@ -62,7 +65,9 @@ public final class Pair<T1, T2> extends Tuple implements
 	}
 
 	/**
-	 * @return the second element of the pair
+	 * Answers the second component
+	 * 
+	 * @return the second component
 	 */
 	public T2 getSecond() {
 		return second;
@@ -79,7 +84,7 @@ public final class Pair<T1, T2> extends Tuple implements
 	}
 
 	/**
-	 * Creates a new tuple, with swaped elements
+	 * Creates a new tuple, with swaped components
 	 * 
 	 * @return a new pair, never null.
 	 */

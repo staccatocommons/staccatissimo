@@ -41,9 +41,9 @@ public class Range<T extends Comparable<T>> extends ValueObject implements
 	 * Creates a new {@link Range}
 	 * 
 	 * @param min
-	 *          the lower bound, inclusive. Non null.
+	 *          the lower bound, inclusive.
 	 * @param max
-	 *          the upper bound, inclusive. Nun null.
+	 *          the upper bound, inclusive.
 	 */
 	public Range(@NonNull T min, @NonNull T max) {
 		// FIXME Ensure.lowerThan("max", max, min);
@@ -84,7 +84,9 @@ public class Range<T extends Comparable<T>> extends ValueObject implements
 	}
 
 	/**
-	 * @return the inclusive upper bound of this range. Non Null
+	 * Answers the upper bound
+	 * 
+	 * @return the inclusive upper bound of this range.
 	 */
 	@NonNull
 	public T getMax() {
@@ -92,7 +94,9 @@ public class Range<T extends Comparable<T>> extends ValueObject implements
 	}
 
 	/**
-	 * @return the inclusive lower bound of this range. Non Null.
+	 * Answers the lower bound
+	 * 
+	 * @return the inclusive lower bound of this range.
 	 */
 	@NonNull
 	public T getMin() {
@@ -114,10 +118,10 @@ public class Range<T extends Comparable<T>> extends ValueObject implements
 	 * @param <T>
 	 *          the type of range
 	 * @param min
-	 *          the lower bound, inclusive. Non null.
+	 *          the lower bound, inclusive.
 	 * @param max
-	 *          the upper bound, inclusive. Nun null.
-	 * @return the new Range. Non null.
+	 *          the upper bound, inclusive.
+	 * @return the new Range.
 	 */
 	@NonNull
 	public static <T extends Comparable<T>> Range<T> from(@NonNull T min,

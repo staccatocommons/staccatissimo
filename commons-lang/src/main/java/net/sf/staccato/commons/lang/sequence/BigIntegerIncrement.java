@@ -24,6 +24,12 @@ public class BigIntegerIncrement extends Function<BigInteger, BigInteger> {
 
 	private final BigInteger delta;
 
+	/**
+	 * Creates a new {@link BigIntegerIncrement}
+	 * 
+	 * @param delta
+	 *          the increment. May be negative.
+	 */
 	public BigIntegerIncrement(BigInteger delta) {
 		this.delta = delta;
 	}
