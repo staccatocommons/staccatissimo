@@ -1,0 +1,35 @@
+/*
+
+ Copyright (c) 2010, The Staccato-Commons Team
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License as published by
+ the Free Software Foundation; version 3 of the License.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ */
+package net.sf.staccato.commons.instrument.processor;
+
+import java.lang.annotation.Annotation;
+
+/**
+ * @author flbulgarelli
+ * 
+ */
+public interface AnnotationProcessor {
+
+	/**
+	 * @return the annotation this processor can process
+	 */
+	Class<? extends Annotation> getSupportedAnnotationType();
+
+	void processAnnotatedMethod(Object annotation, AnnotatedMethodContext context);
+
+	void processAnnotatedConstructor(Object annotation, AnnotatedConstructorContext context);
+
+	void processAnnotatedArgument(Object annotation, AnnotatedArgumentContext context);
+
+}

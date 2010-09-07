@@ -13,10 +13,10 @@
 package net.sf.staccato.commons.check.instrument;
 
 import javassist.CannotCompileException;
-import net.sf.staccato.commons.instrument.AbstractAnnotationProcessor;
-import net.sf.staccato.commons.instrument.AnnotatedArgumentContext;
-import net.sf.staccato.commons.instrument.AnnotatedConstructorContext;
-import net.sf.staccato.commons.instrument.AnnotatedMethodContext;
+import net.sf.staccato.commons.instrument.processor.AbstractAnnotationProcessor;
+import net.sf.staccato.commons.instrument.processor.AnnotatedArgumentContext;
+import net.sf.staccato.commons.instrument.processor.AnnotatedConstructorContext;
+import net.sf.staccato.commons.instrument.processor.AnnotatedMethodContext;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.lang.check.Ensure;
 

@@ -10,45 +10,33 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.check.instrument;
+package net.sf.staccato.commons.instrument.internal;
 
-import javassist.CtMember;
-import net.sf.staccato.commons.collections.stream.Streams;
+import javassist.CtBehavior;
+import javassist.Modifier;
 import net.sf.staccato.commons.instrument.processor.AnnotatedArgumentContext;
 import net.sf.staccato.commons.instrument.processor.AnnotatedConstructorContext;
 import net.sf.staccato.commons.instrument.processor.AnnotatedMethodContext;
 import net.sf.staccato.commons.instrument.processor.AnnotationProcessor;
 import net.sf.staccato.commons.instrument.processor.FilteredAnnotationProcessor;
-import net.sf.staccato.commons.lang.Evaluable;
-import net.sf.staccato.commons.lang.check.annotation.IgnoreChecks;
-import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class NonIgnoredCheckBehaviorFilteredAnotationProcessor extends
+public class PublicBehaviourFilteredAnnotationProcessor extends
 	FilteredAnnotationProcessor {
 
-	public NonIgnoredCheckBehaviorFilteredAnotationProcessor(
+	/**
+	 * Creates a new {@link PublicBehaviourFilteredAnnotationProcessor}
+	 */
+	public PublicBehaviourFilteredAnnotationProcessor(
 		AnnotationProcessor annotationProcessor) {
 		super(annotationProcessor);
 	}
 
-	private final static class Ignored extends Predicate<Object> {
-		public static Evaluable<? super Object> instance = new Ignored();
-
-		@Override
-		public boolean eval(Object argument) {
-			return (argument instanceof IgnoreChecks);
-		}
-	}
-
-	// TODO improve performance
-	protected boolean canProcess(CtMember member) {
-		return !Streams
-			.from(member.getAvailableAnnotations())
-			.any(Ignored.instance);
+	protected boolean canProcess(CtBehavior argument) {
+		return Modifier.isPublic(argument.getModifiers());
 	}
 
 	@Override
@@ -68,4 +56,5 @@ public class NonIgnoredCheckBehaviorFilteredAnotationProcessor extends
 		AnnotatedArgumentContext context) {
 		return canProcess(context.getArgumentBehavior());
 	}
+
 }

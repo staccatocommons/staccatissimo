@@ -22,10 +22,10 @@ import net.sf.staccato.commons.check.instrument.NonEmptyProcessor;
 import net.sf.staccato.commons.check.instrument.NonIgnoredCheckBehaviorFilteredAnotationProcessor;
 import net.sf.staccato.commons.check.instrument.NonNullProcessor;
 import net.sf.staccato.commons.collections.stream.Streams;
-import net.sf.staccato.commons.instrument.AnnotationProcessor;
-import net.sf.staccato.commons.instrument.AnnotationsParser;
-import net.sf.staccato.commons.instrument.ClassPathInstrumenter;
+import net.sf.staccato.commons.instrument.DefaultClassInstrumenter;
+import net.sf.staccato.commons.instrument.Instrumentation;
 import net.sf.staccato.commons.instrument.internal.PublicBehaviourFilteredAnnotationProcessor;
+import net.sf.staccato.commons.instrument.processor.AnnotationProcessor;
 import net.sf.staccato.commons.io.Directory;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.lang.function.Function;
@@ -73,10 +73,10 @@ public class CheckInstrumentMojo extends AbstractMojo {
 		getLog().debug("Using classpath " + extraClasspath);
 
 		try {
-			new ClassPathInstrumenter(
-				new AnnotationsParser(getProcessors()),
+			Instrumentation.instrumentClasspath(//
+				new DefaultClassInstrumenter(getProcessors()),
 				new Directory(location),
-				extraClasspath).instrument();
+				extraClasspath);
 		} catch (Exception e) {
 			getLog().error(e.getMessage());
 			throw new MojoExecutionException("Unexpected error", e);

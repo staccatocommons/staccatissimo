@@ -14,8 +14,8 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.instrument.AnnotatedArgumentContext;
-import net.sf.staccato.commons.instrument.AnnotatedMethodContext;
+import net.sf.staccato.commons.instrument.processor.AnnotatedArgumentContext;
+import net.sf.staccato.commons.instrument.processor.AnnotatedMethodContext;
 import net.sf.staccato.commons.lang.check.annotation.Matches;
 
 import org.apache.commons.lang.NotImplementedException;

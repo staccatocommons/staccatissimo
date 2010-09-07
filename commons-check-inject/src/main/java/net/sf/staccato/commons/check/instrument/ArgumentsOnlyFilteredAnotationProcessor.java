@@ -12,11 +12,11 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
-import net.sf.staccato.commons.instrument.AnnotatedArgumentContext;
-import net.sf.staccato.commons.instrument.AnnotatedConstructorContext;
-import net.sf.staccato.commons.instrument.AnnotatedMethodContext;
-import net.sf.staccato.commons.instrument.AnnotationProcessor;
-import net.sf.staccato.commons.instrument.FilteredAnnotationProcessor;
+import net.sf.staccato.commons.instrument.processor.AnnotatedArgumentContext;
+import net.sf.staccato.commons.instrument.processor.AnnotatedConstructorContext;
+import net.sf.staccato.commons.instrument.processor.AnnotatedMethodContext;
+import net.sf.staccato.commons.instrument.processor.AnnotationProcessor;
+import net.sf.staccato.commons.instrument.processor.FilteredAnnotationProcessor;
 
 /**
  * @author flbulgarelli
