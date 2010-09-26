@@ -12,39 +12,63 @@
  */
 package net.sf.staccato.commons.lang.lifecycle;
 
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
+
 /**
  * 
  * @author flbulgarelli
  * 
- * @param <TargetType>
+ * @param <ResourceType>
  * @param <ExceptionType>
  * @param <ReturnType>
  */
-public abstract class DefaultLifecycle<TargetType, ExceptionType extends Exception, ReturnType>
-	implements Lifecycle<TargetType, ExceptionType, ReturnType> {
+public abstract class DefaultLifecycle<ResourceType, ReturnType>
+	implements Lifecycle<ResourceType, ReturnType> {
 
-	public abstract TargetType initialize() throws ExceptionType;
+	public abstract ResourceType initialize() throws Exception;
 
-	public final ReturnType doWork(TargetType target) throws ExceptionType {
-		performTask(target);
-		return produceResult(target);
+	/**
+	 * Uses the resource, first invoking {@link #performTask(Object)} and the
+	 * {@link #produceResult(Object)}
+	 * */
+	public final ReturnType doWork(@NonNull ResourceType resource)
+		throws Exception {
+			performTask(resource);
+			return produceResult(resource);
 	}
 
-	public ReturnType produceResult(TargetType target) throws ExceptionType {
+	public void performTask(@NonNull ResourceType resource) throws Exception {
+	}
+
+	public ReturnType produceResult(@NonNull ResourceType resource)
+		throws Exception {
 		return null;
 	}
 
-	public void dispose(TargetType target) throws ExceptionType {
+	/**
+	 * Does nothing, subclasses may want to override this method to add disposal
+	 * logic
+	 */
+	public void dispose(@NonNull ResourceType resource) throws Exception {
 	}
 
-	public void performTask(TargetType target) throws ExceptionType {
-	}
-
-	public LifecycleManager<TargetType, ExceptionType, ReturnType> createManager() {
+	/**
+	 * Creates a {@link LifecycleManager} that is capable of executing this
+	 * {@link Lifecycle}
+	 * 
+	 * @return a new {@link LifecycleManager}
+	 */
+	@NonNull
+	public LifecycleManager<ResourceType, ReturnType> createManager() {
 		return LifecycleManager.createManager(this);
 	}
 
-	public ReturnType execute() throws ExceptionType {
+	/**
+	 * Executes this {@link Lifecycle}, creating a manager and executing it.
+	 * 
+	 * @return the return type of this lifecycle @
+	 */
+	public ReturnType execute() {
 		return createManager().execute();
 	}
 }

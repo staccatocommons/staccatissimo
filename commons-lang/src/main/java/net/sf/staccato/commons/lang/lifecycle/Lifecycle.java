@@ -24,16 +24,17 @@ import net.sf.staccato.commons.lang.check.annotation.NonNull;
  * @param <ExceptionType>
  * @param <ResultType>
  */
-public interface Lifecycle<ResourceType, ExceptionType extends Exception, ResultType> {
+public interface Lifecycle<ResourceType, ResultType> {
 
 	/**
 	 * Initializes and gets a resource of ResourceType
 	 * 
 	 * @return the initialized resources
-	 * @throws ExceptionType
+	 * @throws Exception
+	 *           if any error occurs
 	 */
 	@NonNull
-	ResourceType initialize() throws ExceptionType;
+	ResourceType initialize() throws Exception;
 
 	/**
 	 * Makes usage of a resource, and returns a result
@@ -42,16 +43,18 @@ public interface Lifecycle<ResourceType, ExceptionType extends Exception, Result
 	 *          the resource to use
 	 * @return the result of using the resource, of ResultType. It may be null, if
 	 *         and only if ResultType is {@link Void}
-	 * @throws ExceptionType
+	 * @throws Exception
+	 *           if any error occurs
 	 */
-	ResultType doWork(@NonNull ResourceType resource) throws ExceptionType;
+	ResultType doWork(@NonNull ResourceType resource) throws Exception;
 
 	/**
 	 * Disposes the resource.
 	 * 
 	 * @param resource
-	 * @throws ExceptionType
+	 * @throws Exception
+	 *           if any error occurs
 	 */
-	void dispose(@NonNull ResourceType resource) throws ExceptionType;
+	void dispose(@NonNull ResourceType resource) throws Exception;
 
 }

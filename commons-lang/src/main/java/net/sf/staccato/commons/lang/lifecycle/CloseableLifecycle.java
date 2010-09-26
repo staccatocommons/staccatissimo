@@ -13,7 +13,6 @@
 package net.sf.staccato.commons.lang.lifecycle;
 
 import java.io.Closeable;
-import java.io.IOException;
 
 /**
  * Abstract {@link IOLifecycle} that closes target on disposing it.
@@ -24,9 +23,9 @@ import java.io.IOException;
  * @param <ReturnType>
  */
 public abstract class CloseableLifecycle<TargetType extends Closeable, ReturnType>
-	extends IOLifecycle<TargetType, ReturnType> {
+	extends DefaultLifecycle<TargetType, ReturnType> {
 
-	public void dispose(TargetType target) throws IOException {
+	public void dispose(TargetType target) throws Exception {
 		target.close();
 	}
 

@@ -20,8 +20,6 @@ import java.io.OutputStream;
 import net.sf.staccato.commons.lang.lifecycle.CloseableLifecycle;
 import net.sf.staccato.commons.lang.serialization.SerializationManager;
 
-import org.apache.commons.lang.SerializationException;
-
 public abstract class SerializationLifecycle<TargetType extends Closeable, ReturnType>
 	extends CloseableLifecycle<TargetType, ReturnType> {
 
@@ -33,16 +31,6 @@ public abstract class SerializationLifecycle<TargetType extends Closeable, Retur
 
 	public SerializationManager getSerializationManager() {
 		return serializationManager;
-	}
-
-	// FIXME this may requiere also a more deep refactor about exception
-	// nesting in lifecycles
-	public ReturnType execute() {
-		try {
-			return super.execute();
-		} catch (IOException e) {
-			throw new SerializationException(e);
-		}
 	}
 
 	public static abstract class Serialize extends

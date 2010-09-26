@@ -20,17 +20,17 @@ public class DefaultLifecycleUnitTest {
 
 	@Test
 	public void testProduceResult() throws Exception {
-		assertNull(lifecycle.produceResult(null));
+		assertNull(lifecycle.produceResult(new Object()));
 	}
 
 	@Test
 	public void testDispose() throws Exception {
-		lifecycle.dispose(null);
+		lifecycle.dispose(new Object());
 	}
 
 	@Test
 	public void testPerformTask() throws Exception {
-		lifecycle.performTask(null);
+		lifecycle.performTask(new Object());
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class DefaultLifecycleUnitTest {
 	}
 
 	private final class DefaultLifecycleMock extends
-		DefaultLifecycle<Object, Exception, Void> {
+		DefaultLifecycle<Object, Void> {
 		private boolean produceResultInvoked;
 		private boolean performTaskInvoked;
 

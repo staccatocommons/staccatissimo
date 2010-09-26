@@ -10,9 +10,9 @@ import org.junit.Test;
 
 public class LifecycleManagertUnitTest extends JUnit4MockObjectTestCase {
 
-	LifecycleManager<Integer, Exception, Integer> manager;
+	LifecycleManager<Integer, Integer> manager;
 
-	Lifecycle<Integer, Exception, Integer> lifecycle;
+	Lifecycle<Integer, Integer> lifecycle;
 
 	@Before
 	public void setup() {

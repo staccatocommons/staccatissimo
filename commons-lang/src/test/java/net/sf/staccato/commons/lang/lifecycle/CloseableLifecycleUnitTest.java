@@ -19,7 +19,7 @@ public class CloseableLifecycleUnitTest extends JUnit4MockObjectTestCase {
 	}
 
 	@Test
-	public void testDispose() throws IOException {
+	public void testDispose() throws Exception {
 		checking(new Expectations() {
 			{
 				one(closeable).close();

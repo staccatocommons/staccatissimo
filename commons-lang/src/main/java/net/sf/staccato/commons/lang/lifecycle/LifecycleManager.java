@@ -19,62 +19,89 @@ import net.sf.staccato.commons.lang.SoftException;
 
 /**
  * 
+ * A {@link LifecycleManager} is an object capable of executing a
+ * {@link Lifecycle} in different fashions - using {@link #execute()},
+ * {@link #call()}, {@link #run()} or {@link #value()}
+ * 
  * @author fbulgarelli
  * 
  * @param <ManagedObjectType>
  * @param <ExceptionType>
  * @param <ReturnType>
  */
-public class LifecycleManager<ManagedObjectType, ExceptionType extends Exception, ReturnType>
-	implements Runnable, Callable<ReturnType>, Provider<ReturnType> {
+public final class LifecycleManager<ManagedObjectType, ReturnType> implements
+	Runnable, Callable<ReturnType>, Provider<ReturnType> {
 
-	private final Lifecycle<ManagedObjectType, ExceptionType, ReturnType> managedLifecycle;
+	private final Lifecycle<ManagedObjectType, ReturnType> managedLifecycle;
 
-	public LifecycleManager(
-		Lifecycle<ManagedObjectType, ExceptionType, ReturnType> lifecycle) {
+	public LifecycleManager(Lifecycle<ManagedObjectType, ReturnType> lifecycle) {
 		this.managedLifecycle = lifecycle;
 	}
 
-	public ReturnType execute() throws ExceptionType {
-		ManagedObjectType managed = null;
+	public ReturnType execute() {
+		return SoftException.callOrSoften(this);
+	}
+
+	public <ExceptionType extends Exception> ReturnType executeThrowing(
+		Class<ExceptionType> exceptionClass) throws ExceptionType {
 		try {
-			managed = managedLifecycle.initialize();
-			return managedLifecycle.doWork(managed);
-		} finally {
-			if (managed != null)
-				managedLifecycle.dispose(managed);
+			return executeInternal();
+		} catch (Exception e) {
+			if (exceptionClass.isAssignableFrom(e.getCause().getClass())) {
+				throw (ExceptionType) e;
+			}
+			throw SoftException.soften(e);
 		}
 	}
 
-	/*
-	 * public ReturnType execute(ExceptionHandler handler) { try { return
-	 * execute(); } catch (Exception e) { handler.handle(e); } }
-	 */
-	@Override
-	public void run() {
+	public <ExceptionType1 extends Exception, ExceptionType2 extends Exception> ReturnType executeThrowing(
+		Class<ExceptionType1> exceptionClass1, Class<ExceptionType1> exceptionClass2)
+		throws ExceptionType1, ExceptionType2 {
 		try {
-			execute();
+			return executeInternal();
 		} catch (Exception e) {
+			if (exceptionClass1.isAssignableFrom(e.getCause().getClass())) {
+				throw (ExceptionType1) e;
+			}
+			if (exceptionClass2.isAssignableFrom(e.getCause().getClass())) {
+				throw (ExceptionType2) e;
+			}
 			throw SoftException.soften(e);
 		}
 	}
 
 	@Override
 	public ReturnType call() throws Exception {
-		return execute();
+		return executeInternal();
+	}
+
+	@Override
+	public void run() {
+		execute();
 	}
 
 	@Override
 	public ReturnType value() {
-		return SoftException.callOrSoften(this);
+		return execute();
 	}
 
-	public Lifecycle<ManagedObjectType, ExceptionType, ReturnType> getManagedLifecycle() {
+	private ReturnType executeInternal() throws Exception {
+		ManagedObjectType resource = null;
+		try {
+			resource = managedLifecycle.initialize();
+			return managedLifecycle.doWork(resource);
+		} finally {
+			if (resource != null)
+				managedLifecycle.dispose(resource);
+		}
+	}
+
+	public Lifecycle<ManagedObjectType, ReturnType> getManagedLifecycle() {
 		return managedLifecycle;
 	}
 
-	public static <MO, E extends Exception, R> LifecycleManager<MO, E, R> createManager(
-		Lifecycle<MO, E, R> aLifecycle) {
-		return new LifecycleManager<MO, E, R>(aLifecycle);
+	public static <MO, R> LifecycleManager<MO, R> createManager(
+		Lifecycle<MO, R> aLifecycle) {
+		return new LifecycleManager<MO, R>(aLifecycle);
 	}
 }
