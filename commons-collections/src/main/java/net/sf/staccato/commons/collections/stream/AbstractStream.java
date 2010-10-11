@@ -19,7 +19,6 @@ import java.util.Set;
 import net.sf.staccato.commons.collections.iterable.Iterables;
 import net.sf.staccato.commons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccato.commons.collections.iterable.internal.IterablesInternal;
-import net.sf.staccato.commons.collections.iterable.internal.UnmodifiableIterator;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
@@ -35,6 +34,7 @@ import net.sf.staccato.commons.lang.Provider;
  * @param <T>
  */
 public abstract class AbstractStream<T> implements Stream<T> {
+
 
 	@Override
 	public int size() {
@@ -63,20 +63,16 @@ public abstract class AbstractStream<T> implements Stream<T> {
 	@Override
 	public Stream<T> filter(final Evaluable<? super T> predicate) {
 		return new AbstractStream<T>() {
-			@Override
 			public Iterator<T> iterator() {
-				return new UnmodifiableIterator<T>(AbstractStream.this.iterator()) {
+				final Iterator<T> iter = AbstractStream.this.iterator();
+				return new AbstractUnmodifiableIterator<T>() {
 					private T next;
-
-					@Override
 					public boolean hasNext() {
-						while (super.hasNext())
-							if (predicate.eval((next = super.next())))
+						while (iter.hasNext())
+							if (predicate.eval((next = iter.next())))
 								return true;
 						return false;
 					}
-
-					@Override
 					public T next() {
 						return next;
 					}
@@ -88,17 +84,13 @@ public abstract class AbstractStream<T> implements Stream<T> {
 	@Override
 	public Stream<T> takeWhile(final Evaluable<? super T> predicate) {
 		return new AbstractStream<T>() {
-			@Override
 			public Iterator<T> iterator() {
-				return new UnmodifiableIterator<T>(AbstractStream.this.iterator()) {
+				final Iterator<T> iter = AbstractStream.this.iterator();
+				return new AbstractUnmodifiableIterator<T>() {
 					private T next;
-
-					@Override
 					public boolean hasNext() {
-						return super.hasNext() && predicate.eval((next = super.next()));
+						return iter.hasNext() && predicate.eval((next = iter.next()));
 					}
-
-					@Override
 					public T next() {
 						return next;
 					}
@@ -110,20 +102,16 @@ public abstract class AbstractStream<T> implements Stream<T> {
 	@Override
 	public Stream<T> take(final int amountOfElements) {
 		return new AbstractStream<T>() {
-			@Override
 			public Iterator<T> iterator() {
-				return new UnmodifiableIterator<T>(AbstractStream.this.iterator()) {
+				final Iterator<T> iter = AbstractStream.this.iterator();
+				return new AbstractUnmodifiableIterator<T>() {
 					private int i = 0;
-
-					@Override
 					public boolean hasNext() {
-						return i < amountOfElements && super.hasNext();
+						return i < amountOfElements && iter.hasNext();
 					}
-
-					@Override
 					public T next() {
 						i++;
-						return super.next();
+						return iter.next();
 					}
 				};
 			}
@@ -205,19 +193,40 @@ public abstract class AbstractStream<T> implements Stream<T> {
 	@Override
 	public <O> Stream<O> map(final Applicable<? super T, ? extends O> applicable) {
 		return new AbstractStream<O>() {
-			@Override
 			public Iterator<O> iterator() {
+				final Iterator<T> iter = AbstractStream.this.iterator();
 				return new AbstractUnmodifiableIterator<O>() {
-					private final Iterator<T> iter = AbstractStream.this.iterator();
-
-					@Override
 					public boolean hasNext() {
 						return iter.hasNext();
 					}
-
-					@Override
 					public O next() {
 						return applicable.apply(iter.next());
+					}
+				};
+			}
+		};
+	}
+
+	@Override
+	public <O, I extends Iterable<? extends O>> Stream<O> flatMap(
+		final Applicable<? super T, I> applicable) {
+		return new AbstractStream<O>() {
+			public Iterator<O> iterator() {
+				final Iterator<T> iter = AbstractStream.this.iterator();
+				return new AbstractUnmodifiableIterator<O>() {
+					private Iterator<? extends O> subIter;
+					public boolean hasNext() {
+						if (subIter != null && subIter.hasNext())
+							return true;
+						if (iter.hasNext()) {
+							subIter = applicable.apply(iter.next()).iterator();
+							if(subIter.hasNext())
+								return true;
+						}
+						return false;
+					}
+					public O next() {
+						return subIter.next();
 					}
 				};
 			}

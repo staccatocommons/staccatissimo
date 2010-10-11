@@ -14,7 +14,8 @@ package net.sf.staccato.commons.collections.iterable.internal;
 
 import java.util.Iterator;
 
-public class UnmodifiableIterator<T> extends AbstractUnmodifiableIterator<T> {
+public final class UnmodifiableIterator<T> extends
+	AbstractUnmodifiableIterator<T> {
 
 	private final Iterator<T> iter;
 

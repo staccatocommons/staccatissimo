@@ -38,4 +38,7 @@ public interface Mappable<T> {
 	@NonNull
 	@Projection
 	<O> Stream<O> map(@NonNull Applicable<? super T, ? extends O> function);
+
+	<O, I extends Iterable<? extends O>> Stream<O> flatMap(
+		@NonNull Applicable<? super T, I> function);
 }

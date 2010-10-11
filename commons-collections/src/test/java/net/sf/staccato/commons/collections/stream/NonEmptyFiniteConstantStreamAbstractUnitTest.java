@@ -26,7 +26,8 @@ import net.sf.staccato.commons.lang.Provider;
 import net.sf.staccato.commons.lang.function.Function;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 import net.sf.staccato.commons.lang.predicate.Predicates;
-import net.sf.staccato.commons.lang.provider.NullProvider;
+import net.sf.staccato.commons.lang.provider.internal.NullProvider;
+import net.sf.staccato.commons.lang.sequence.Sequence;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -41,6 +42,7 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	private Stream<T> stream;
 	private Evaluable<? super T> predicate;
 	private Applicable<? super T, Integer> function;
+	private Applicable<? super T, Iterable<Integer>> combinedFunction;
 	private Provider<T> provider;
 
 	/**
@@ -51,6 +53,7 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 		stream = createStream();
 		predicate = createPredicateMock();
 		function = createFunctionMock();
+		combinedFunction = createCombinedFunctionMock();
 		provider = createProviderMock();
 	}
 
@@ -60,6 +63,19 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	protected Provider<T> createProviderMock() {
 		return NullProvider.getInstance();
 	}
+
+	/**
+	 * @return
+	 */
+	private Applicable<? super T, Iterable<Integer>> createCombinedFunctionMock() {
+		return new Function<T, Iterable<Integer>>() {
+			public Iterable<Integer> apply(T arg) {
+				int hc = System.identityHashCode(arg);
+				return Sequence.fromToBy(hc, hc + 100, 10);
+			}
+		};
+	}
+
 
 	protected Applicable<? super T, Integer> createFunctionMock() {
 		return new Function<T, Integer>() {
@@ -121,6 +137,13 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	@Test
 	public void testTake() {
 		assertEquals(2, stream.take(2).size());
+	}
+
+	@Test
+	public void testFlatMap() throws Exception {
+		assertEquals(
+			Iterables.flatMap(stream, combinedFunction),
+			stream.flatMap(combinedFunction).toList());
 	}
 
 	/**
