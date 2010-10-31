@@ -1,3 +1,4 @@
+package net.sf.staccato.commons.lang.exp;
 /*
  Copyright (c) 2010, The Staccato-Commons Team
 
@@ -10,7 +11,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.collections.stream.exp;
+
 
 import java.lang.annotation.Annotation;
 
