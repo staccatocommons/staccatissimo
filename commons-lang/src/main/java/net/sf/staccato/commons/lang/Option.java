@@ -185,7 +185,7 @@ public abstract class Option<T> /* extends AbstractCollection<T> */implements
 	 * 
 	 * @param <T>
 	 * @param value
-	 * @return None if value is null, some(value) otherwise
+	 * @return <code>value != null ? Option.some(value) : Option.none()</code>
 	 */
 	public static <T> Option<T> nullToNone(T value) {
 		if (value == null)

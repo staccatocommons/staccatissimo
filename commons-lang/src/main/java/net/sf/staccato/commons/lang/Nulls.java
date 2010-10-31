@@ -20,7 +20,7 @@ import net.sf.staccato.commons.lang.check.annotation.NonNull;
  * @author flbulgarelli
  * 
  */
-public class IsNonNull {
+public class Nulls {
 
 	/**
 	 * Returns the given value, if non null, or other, otherwise.
@@ -32,7 +32,7 @@ public class IsNonNull {
 	 *          nullable, although it has little sense to be be null
 	 * @return <code> value != null ? value : other</code>
 	 */
-	public static <T> T orElse(T value, T other) {
+	public static <T> T coalesce(T value, T other) {
 		return value != null ? value : other;
 	}
 
@@ -47,21 +47,7 @@ public class IsNonNull {
 	 *          non null.
 	 * @return <code>value != null ? value : provider.value()</code>
 	 */
-	public static <T> T orElse(T value, @NonNull Provider<T> provider) {
+	public static <T> T coalesce(T value, @NonNull Provider<T> provider) {
 		return value != null ? value : provider.value();
-	}
-
-	/**
-	 * Returns <code>Option.some(value)</code>, if non null, or
-	 * <code>Option.none()</code> otherwise
-	 * 
-	 * @param <T>
-	 * @param value
-	 *          nullable.
-	 * @return <code>value != null ? Option.some(value) : Option.none()</code>
-	 */
-	@NonNull
-	public static <T> Option<T> orNone(T value) {
-		return Option.nullToNone(value);
 	}
 }
