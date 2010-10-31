@@ -10,27 +10,12 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.collections.iterable.internal;
-
-import java.util.Iterator;
+package net.sf.staccato.commons.collections.stream;
 
 /**
  * @author flbulgarelli
  * 
- * @param <T>
  */
-public abstract class AbstractUnmodifiableIterator<T> implements Iterator<T> {
-
-	/**
-	 * Creates a new {@link AbstractUnmodifiableIterator}
-	 */
-	public AbstractUnmodifiableIterator() {
-		super();
-	}
-
-	@Override
-	public final void remove() {
-		throw new UnsupportedOperationException("This Iterator is unmodifiable");
-	}
-
+public interface Appendabable<T> {
+	Stream<T> concat(Stream<T> other);
 }

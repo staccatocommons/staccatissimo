@@ -35,6 +35,24 @@ import net.sf.staccato.commons.lang.Provider;
  */
 public abstract class AbstractStream<T> implements Stream<T> {
 
+	private final class MapIterator<O> extends AbstractUnmodifiableIterator<O> {
+		private final Applicable<? super T, ? extends O> applicable;
+		private final Iterator<T> iter;
+
+		private MapIterator(Applicable<? super T, ? extends O> applicable,
+			Iterator<T> iter) {
+			this.applicable = applicable;
+			this.iter = iter;
+		}
+
+		public boolean hasNext() {
+			return iter.hasNext();
+		}
+
+		public O next() {
+			return applicable.apply(iter.next());
+		}
+	}
 
 	@Override
 	public int size() {
@@ -56,23 +74,20 @@ public abstract class AbstractStream<T> implements Stream<T> {
 	}
 
 	@Override
-	public T value() {
-		return any();
-	}
-
-	@Override
 	public Stream<T> filter(final Evaluable<? super T> predicate) {
 		return new AbstractStream<T>() {
 			public Iterator<T> iterator() {
 				final Iterator<T> iter = AbstractStream.this.iterator();
 				return new AbstractUnmodifiableIterator<T>() {
 					private T next;
+
 					public boolean hasNext() {
 						while (iter.hasNext())
 							if (predicate.eval((next = iter.next())))
 								return true;
 						return false;
 					}
+
 					public T next() {
 						return next;
 					}
@@ -88,9 +103,11 @@ public abstract class AbstractStream<T> implements Stream<T> {
 				final Iterator<T> iter = AbstractStream.this.iterator();
 				return new AbstractUnmodifiableIterator<T>() {
 					private T next;
+
 					public boolean hasNext() {
 						return iter.hasNext() && predicate.eval((next = iter.next()));
 					}
+
 					public T next() {
 						return next;
 					}
@@ -106,9 +123,11 @@ public abstract class AbstractStream<T> implements Stream<T> {
 				final Iterator<T> iter = AbstractStream.this.iterator();
 				return new AbstractUnmodifiableIterator<T>() {
 					private int i = 0;
+
 					public boolean hasNext() {
 						return i < amountOfElements && iter.hasNext();
 					}
+
 					public T next() {
 						i++;
 						return iter.next();
@@ -129,10 +148,6 @@ public abstract class AbstractStream<T> implements Stream<T> {
 		return IterablesInternal.foldInternal(this, initial, applicable);
 	}
 
-	@Override
-	public T apply(Integer n) {
-		return get(n);
-	}
 
 	@Override
 	public T any() {
@@ -195,14 +210,7 @@ public abstract class AbstractStream<T> implements Stream<T> {
 		return new AbstractStream<O>() {
 			public Iterator<O> iterator() {
 				final Iterator<T> iter = AbstractStream.this.iterator();
-				return new AbstractUnmodifiableIterator<O>() {
-					public boolean hasNext() {
-						return iter.hasNext();
-					}
-					public O next() {
-						return applicable.apply(iter.next());
-					}
-				};
+				return new MapIterator(applicable, iter);
 			}
 		};
 	}
@@ -212,22 +220,54 @@ public abstract class AbstractStream<T> implements Stream<T> {
 		final Applicable<? super T, I> applicable) {
 		return new AbstractStream<O>() {
 			public Iterator<O> iterator() {
+
 				final Iterator<T> iter = AbstractStream.this.iterator();
 				return new AbstractUnmodifiableIterator<O>() {
 					private Iterator<? extends O> subIter;
+
 					public boolean hasNext() {
 						if (subIter != null && subIter.hasNext())
 							return true;
 						if (iter.hasNext()) {
 							subIter = applicable.apply(iter.next()).iterator();
-							if(subIter.hasNext())
+							if (subIter.hasNext())
 								return true;
 						}
 						return false;
 					}
+
 					public O next() {
 						return subIter.next();
 					}
+				};
+			}
+		};
+	}
+
+	@Override
+	public Stream<T> concat(final Stream<T> other) {
+		return new AbstractStream<T>() {
+			public Iterator<T> iterator() {
+				return new AbstractUnmodifiableIterator<T>() {
+					private Iterator<T> iter = AbstractStream.this.iterator();
+					private boolean second = false;
+
+					public boolean hasNext() {
+						if (iter.hasNext())
+							return true;
+
+						if (second)
+							return false;
+
+						iter = other.iterator();
+						second = true;
+						return iter.hasNext();
+					}
+
+					public T next() {
+						return iter.next();
+					}
+
 				};
 			}
 		};

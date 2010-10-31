@@ -37,4 +37,13 @@ public class Functions {
 		return new Constant<I, O>(value);
 	}
 
+	public static Function2<Integer, Integer, Integer> integerSum() {
+		return new Function2<Integer, Integer, Integer>() {
+			@Override
+			public Integer apply(Integer arg1, Integer arg2) {
+				return arg1 + arg2;
+			}
+		};
+	}
+
 }

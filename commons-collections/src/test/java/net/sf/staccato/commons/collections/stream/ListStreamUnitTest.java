@@ -13,17 +13,21 @@
 package net.sf.staccato.commons.collections.stream;
 
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.Collections;
+
+import org.junit.experimental.theories.DataPoints;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class NonEmptyCollectionStreamUnitTest extends
-	NonEmptyFiniteConstantStreamAbstractUnitTest<Integer> {
-	@Override
-	protected Stream<Integer> createStream() {
-		return Streams.from((Collection<Integer>) Arrays.asList(4, 5, 6, 9, 33, 0));
-	}
+public class ListStreamUnitTest extends StreamAbstractTest {
+
+	@DataPoints
+	public static Stream<Integer>[] streams = new Stream[] {
+			Streams.from(Arrays.asList(4, 5, 6, 9, 33, 0)),
+			Streams.from(Collections.emptyList()),
+			Streams.from(Collections.singletonList(5)),
+			Streams.from(Arrays.asList(900, 5)) };
 
 }

@@ -452,11 +452,15 @@ public class Iterables {
 	}
 
 	public static <T> T get(Iterable<T> iterable, int at)
-		throws NoSuchElementException {
+		throws IndexOutOfBoundsException {
 		T element = null;
 		Iterator<T> iter = iterable.iterator();
 		for (int i = 0; i <= at; i++)
-			element = iter.next();
+			try {
+				element = iter.next();
+			} catch (NoSuchElementException e) {
+				throw new IndexOutOfBoundsException("At " + at);
+			}
 		return element;
 	}
 

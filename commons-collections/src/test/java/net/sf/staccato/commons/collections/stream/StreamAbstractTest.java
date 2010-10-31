@@ -12,11 +12,19 @@
  */
 package net.sf.staccato.commons.collections.stream;
 
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.Assume.assumeThat;
+import static org.junit.Assume.assumeTrue;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import net.sf.staccato.commons.collections.iterable.Iterables;
@@ -24,98 +32,87 @@ import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Provider;
 import net.sf.staccato.commons.lang.function.Function;
+import net.sf.staccato.commons.lang.function.Functions;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 import net.sf.staccato.commons.lang.predicate.Predicates;
+import net.sf.staccato.commons.lang.provider.Providers;
 import net.sf.staccato.commons.lang.provider.internal.NullProvider;
 import net.sf.staccato.commons.lang.sequence.Sequence;
 
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.theories.DataPoints;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
 
 /**
  * @author flbulgarelli
  * 
  */
-public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
-	// TODO PARAMETERIZE functions and predicates
-	private Stream<T> stream;
-	private Evaluable<? super T> predicate;
-	private Applicable<? super T, Integer> function;
-	private Applicable<? super T, Iterable<Integer>> combinedFunction;
-	private Provider<T> provider;
+@RunWith(Theories.class)
+public abstract class StreamAbstractTest {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		stream = createStream();
-		predicate = createPredicateMock();
-		function = createFunctionMock();
-		combinedFunction = createCombinedFunctionMock();
-		provider = createProviderMock();
-	}
-
-	/**
-	 * @return
-	 */
-	protected Provider<T> createProviderMock() {
-		return NullProvider.getInstance();
-	}
-
-	/**
-	 * @return
-	 */
-	private Applicable<? super T, Iterable<Integer>> createCombinedFunctionMock() {
-		return new Function<T, Iterable<Integer>>() {
-			public Iterable<Integer> apply(T arg) {
-				int hc = System.identityHashCode(arg);
-				return Sequence.fromToBy(hc, hc + 100, 10);
+	@DataPoints
+	public static Predicate[] predicates = new Predicate[] {
+			Predicates.equal(5),
+			Predicates.greaterThan(90), //
+			Predicates.false_(), Predicates.true_(), Predicates.notNull(),
+			Predicates.equal(26), //
+			new Predicate<Integer>() {
+				public boolean eval(Integer argument) {
+					return argument % 2 == 0;
+				}
 			}
-		};
-	}
 
-
-	protected Applicable<? super T, Integer> createFunctionMock() {
-		return new Function<T, Integer>() {
-			public Integer apply(T arg) {
-				return System.identityHashCode(arg);
-			}
-		};
-	}
-
-	protected Evaluable<? super T> createPredicateMock() {
-		return new Predicate<T>() {
-			int i = 0;
-
-			public boolean eval(T argument) {
-				return i % 2 == 0;
-			}
-		};
-	}
-
-	protected abstract Stream<T> createStream();
-
-	/**
-	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#value()}.
-	 */
-	@Test
-	public void testValue() {
-		assertEquals(stream.any(), stream.value());
-	}
+	};
+	@DataPoints
+	public static Function[] functions = new Function[] { Functions.constant(59), //
+			Functions.identity(), //
+			new Function<Integer, Integer>() {
+				public Integer apply(Integer arg) {
+					return arg + 5;
+				}
+			}, //
+			new Function<Integer, Iterable<Integer>>() {
+				public Iterable<Integer> apply(Integer arg) {
+					return Sequence.fromToBy(arg, arg + 100, 10);
+				}
+			} };
+	@DataPoints
+	public static Provider<Integer>[] providers = new Provider[] {
+			NullProvider.getInstance(), //
+			Providers.constant(90) //
+	};
+	@DataPoints
+	public static int[] numbers = new int[] { 0, 1, 2, 4, 90 };
 
 	/**
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#filter(net.sf.staccato.commons.lang.Evaluable)}
 	 * .
+	 * 
+	 * @param stream
+	 * @param predicate
 	 */
-	@Test
-	public void testFilter() {
-		assertEquals(Iterables.filter(stream, predicate), stream
-			.filter(predicate)
-			.toList());
+	@Theory
+	public void filteredSizeLowerOrEqualToOriginal(Stream stream,
+		Evaluable predicate) {
+		assertThat(
+			stream.filter(predicate).size(),
+			lessThanOrEqualTo(stream.size()));
+	}
+
+	@Theory
+	public void allFilteredElementsEvaluate(Stream stream, Evaluable predicate) {
+		assertTrue(stream.filter(predicate).all(predicate));
+	}
+
+	@Theory
+	public void allFilteredElementsEvaluate(Stream stream, Predicate predicate) {
+		assertEquals(
+			stream.size(),
+			stream.filter(predicate).concat(stream.filter(predicate.not())).size());
 	}
 
 	/**
@@ -124,7 +121,7 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * .
 	 */
 	@Ignore
-	@Test
+	@Theory
 	public void testTakeWhile() {
 		fail("Not yet implemented");
 	}
@@ -134,16 +131,24 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#take(int)}
 	 * .
 	 */
-	@Test
-	public void testTake() {
-		assertEquals(2, stream.take(2).size());
+	@Theory
+	public void testTake(int size, Stream<Integer> stream) {
+		assumeThat(size, lessThanOrEqualTo(stream.size()));
+		assertEquals(size, stream.take(size).size());
 	}
 
-	@Test
-	public void testFlatMap() throws Exception {
+	@Theory
+	public void flatMapSize(Stream<Integer> stream) throws Exception {
+		Function<Integer, Iterable<Integer>> function2 = new Function<Integer, Iterable<Integer>>() {
+			@Override
+			public Iterable<Integer> apply(Integer arg) {
+				return Arrays.asList(arg, -arg);
+			}
+		};
+		assertEquals(2 * stream.size(), stream.flatMap(function2).size());
 		assertEquals(
-			Iterables.flatMap(stream, combinedFunction),
-			stream.flatMap(combinedFunction).toList());
+			0,
+			(int) stream.flatMap(function2).fold(0, Functions.integerSum()));
 	}
 
 	/**
@@ -152,7 +157,7 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * .
 	 */
 	@Ignore
-	@Test
+	@Theory
 	public void testReduce() {
 		fail("Not yet implemented");
 	}
@@ -163,27 +168,20 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * .
 	 */
 	@Ignore
-	@Test
+	@Theory
 	public void testFold() {
 		fail("Not yet implemented");
 	}
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#apply(java.lang.Integer)}
-	 * .
-	 */
-	@Test
-	public void testApply() {
-		assertEquals(stream.get(2), stream.apply(2));
-	}
-
-	/**
-	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#any()}.
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testAny() {
+	@Theory
+	public void testAny(Stream stream) {
+		assumeTrue(!stream.isEmpty());
 		assertTrue(stream.toList().contains(stream.any()));
 	}
 
@@ -191,9 +189,12 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#anyOrNone()}
 	 * .
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testAnyOrNone() {
+	@Theory
+	public void testAnyOrNone(Stream stream) {
+		assumeTrue(!stream.isEmpty());
 		assertTrue(stream.anyOrNone().isDefined());
 	}
 
@@ -201,10 +202,19 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#anyOrNull()}
 	 * .
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testAnyOrNull() {
+	@Theory
+	public void anyEqualsAnyOrNullOnNonEmpty(Stream stream) {
+		assumeTrue(!stream.isEmpty());
 		assertEquals(stream.any(), stream.anyOrNull());
+	}
+
+	@Theory
+	public void anyOrNullEqualsNullOnEmpty(Stream stream) {
+		assumeTrue(stream.isEmpty());
+		assertNull(stream.anyOrNull());
 	}
 
 	/**
@@ -213,48 +223,34 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * .
 	 */
 	@Ignore
-	@Test
+	@Theory
 	public void testAnyOrElseProviderOfT() {
 		fail("Not yet implemented");
 	}
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#anyOrElse(java.lang.Object)}
-	 * .
-	 */
-	@Test
-	public void testAnyOrElseT() {
-		assertEquals(stream.any(), stream.anyOrElse((T) null));
-	}
-
-	/**
-	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#find(net.sf.staccato.commons.lang.Evaluable)}
 	 * .
+	 * 
+	 * @param stream
 	 */
+	@Theory
 	@Test(expected = NoSuchElementException.class)
-	public void testFind_NoSuchElement() {
+	public void testFind_NoSuchElement(Searchable stream) {
 		stream.find(Predicates.false_());
-	}
-
-	/**
-	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#findOrNone(net.sf.staccato.commons.lang.Evaluable)}
-	 * .
-	 */
-	@Test
-	public void testFindOrNone_NoSuchElement() {
-		assertTrue(stream.findOrNone(Predicates.false_()).isUndefined());
 	}
 
 	/**
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#findOrNull(net.sf.staccato.commons.lang.Evaluable)}
 	 * .
+	 * 
+	 * @param stream
+	 * @param predicate
 	 */
-	@Test
-	public void testFindOrNull() {
+	@Theory
+	public void testFindOrNull(Stream stream, Evaluable predicate) {
 		assertEquals(
 			stream.findOrNone(predicate).valueOrNull(),
 			stream.findOrNull(predicate));
@@ -264,9 +260,14 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#findOrElse(net.sf.staccato.commons.lang.Evaluable, net.sf.staccato.commons.lang.Provider)}
 	 * .
+	 * 
+	 * @param stream
+	 * @param predicate
+	 * @param provider
 	 */
-	@Test
-	public void testFindOrElse() {
+	@Theory
+	public void testFindOrElse(Stream stream, Evaluable predicate,
+		Provider provider) {
 		assertEquals(
 			stream.findOrNone(predicate).valueOrElse(provider),
 			stream.findOrElse(predicate, provider));
@@ -276,40 +277,65 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#all(net.sf.staccato.commons.lang.Evaluable)}
 	 * .
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testAll() {
+	@Theory
+	public void testAll(Stream stream) {
+		assumeTrue(!stream.isEmpty());
 		assertTrue(stream.all(Predicates.true_()));
 		assertFalse(stream.all(Predicates.false_()));
+	}
+
+	@Theory
+	public void emptyStreamSatisfyAnyPredicate(Stream stream, Evaluable predicate) {
+		assumeTrue(stream.isEmpty());
+		assertTrue(stream.all(predicate));
 	}
 
 	/**
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#any(net.sf.staccato.commons.lang.Evaluable)}
 	 * .
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testAnyEvaluable() {
+	@Theory
+	public void testAnyEvaluable(Stream stream) {
+		assumeTrue(!stream.isEmpty());
 		assertTrue(stream.any(Predicates.true_()));
 		assertFalse(stream.any(Predicates.false_()));
+	}
+
+	@Theory
+	public void emptyStreamsSatisfyNoPredicate(Stream stream, Evaluable predicate) {
+		assumeTrue(stream.isEmpty());
+		assertFalse(stream.any(predicate));
 	}
 
 	/**
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#map(net.sf.staccato.commons.lang.Applicable)}
 	 * .
+	 * 
+	 * @param stream
+	 * @param function
 	 */
-	@Test
-	public void testMap() {
-		assertEquals(Iterables.map(stream, function), stream.map(function).toList());
+	@Theory
+	public void testMap(Stream stream, Applicable function) {
+		assertEquals(stream.size(), stream.map(function).size());
 	}
 
 	/**
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#first()}.
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testFirst() {
+	@Theory
+	public void testFirst(Stream stream) {
+		assumeThat(stream.size(), greaterThan(0));
+		assumeThat(stream.first(), is(stream.first()));
 		assertEquals(stream.get(0), stream.first());
 	}
 
@@ -317,46 +343,48 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#second()}.
 	 */
-	@Test
-	public void testSecond() {
+	@Theory
+	public void testSecond(Stream stream) {
+		assumeThat(stream.size(), greaterThan(1));
+		assumeThat(stream.second(), is(stream.second()));
 		assertEquals(stream.get(1), stream.second());
 	}
 
 	/**
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#third()}.
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testThird() {
+	@Theory
+	public void testThird(Stream stream) {
+		assumeThat(stream.size(), greaterThan(2));
+		assumeThat(stream.third(), is(stream.third()));
 		assertEquals(stream.get(2), stream.third());
 	}
 
 	/**
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#last()}.
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testLast() {
+	@Theory
+	public void testLast(Stream stream) {
+		assumeTrue(!stream.isEmpty());
+		assumeThat(stream.last(), is(stream.last()));
 		assertEquals(stream.get(stream.size() - 1), stream.last());
 	}
 
 	/**
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#get(int)}.
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testGet() {
-		assertEquals(Iterables.get(stream, 0), stream.get(0));
-		assertEquals(Iterables.get(stream, 1), stream.get(1));
-		assertEquals(Iterables.get(stream, 2), stream.get(2));
-	}
-
-	/**
-	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#get(int)}.
-	 */
-	@Test(expected = NoSuchElementException.class)
-	public void testGet_NoSuchElement() {
+	@Theory
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testGet_NoSuchElement(Stream stream) {
 		stream.get(stream.size());
 	}
 
@@ -364,40 +392,47 @@ public abstract class NonEmptyFiniteConstantStreamAbstractUnitTest<T> {
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#toCollection()}
 	 * .
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testToCollection() {
+	@Theory
+	public void testToCollection(Stream stream) {
 		assertEquals(Iterables.asList(stream), stream.toList());
 	}
 
 	/**
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#toSet()}.
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testToSet() {
+	@Theory
+	public void testToSet(Stream stream) {
 		assertEquals(Iterables.asSet(stream), stream.toSet());
 	}
 
 	/**
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#toList()}.
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testToList() {
+	@Theory
+	public void testToList(Stream stream) {
 		assertEquals(Iterables.asList(stream), stream.toList());
 	}
 
 	/**
 	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#toList()}.
+	 * 
+	 * @param stream
 	 */
-	@Test
-	public void testContains() {
-		// Invariant: the stream contains all element in it
-		assertTrue(stream.all(new Predicate<T>() {
+	@Theory
+	public void testContains(final Stream<Integer> stream) {
+		assertTrue(stream.all(new Predicate<Integer>() {
 			@Override
-			public boolean eval(T argument) {
+			public boolean eval(Integer argument) {
 				return stream.contains(argument);
 			}
 		}));
