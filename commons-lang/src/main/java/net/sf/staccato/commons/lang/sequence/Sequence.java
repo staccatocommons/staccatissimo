@@ -13,6 +13,7 @@
 package net.sf.staccato.commons.lang.sequence;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
@@ -76,7 +77,8 @@ public class Sequence<T> extends ValueObject implements Unmodifiable,
 	}
 
 	/**
-	 * @return the stopCondition. Sequencing will continue until it
+	 * @return the stopCondition. Sequencing will continue until it evaluates to
+	 *         <code>true</code>
 	 */
 	public Evaluable<T> getStopCondition() {
 		return stopCondition;
@@ -107,11 +109,18 @@ public class Sequence<T> extends ValueObject implements Unmodifiable,
 
 			@Override
 			public boolean hasNext() {
-				return !getStopCondition().eval(next);
+				return !stop();
+			}
+
+			private boolean stop() {
+				return getStopCondition().eval(next);
 			}
 
 			@Override
 			public T next() {
+				if (stop())
+					throw new NoSuchElementException();
+
 				T next = this.next;
 				this.next = getGenerator().apply(next);
 				return next;

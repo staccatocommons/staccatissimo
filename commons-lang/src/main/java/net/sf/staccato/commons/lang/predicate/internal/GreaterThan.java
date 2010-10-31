@@ -13,6 +13,9 @@
 package net.sf.staccato.commons.lang.predicate.internal;
 
 import net.sf.staccato.commons.lang.predicate.Predicate;
+import net.sf.staccato.commons.lang.value.NamedTupleToStringStyle;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 
@@ -36,4 +39,12 @@ public final class GreaterThan<T extends Comparable<T>> extends Predicate<T> {
 	public boolean eval(T arg) {
 		return arg.compareTo(value) > 0;
 	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(
+			this,
+			NamedTupleToStringStyle.getInstance());
+	}
+
 }

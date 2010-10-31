@@ -13,6 +13,9 @@
 package net.sf.staccato.commons.lang.sequence;
 
 import net.sf.staccato.commons.lang.function.Function;
+import net.sf.staccato.commons.lang.value.NamedTupleToStringStyle;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * @author flbulgarelli
@@ -35,6 +38,13 @@ public class IntegerIncrement extends Function<Integer, Integer> {
 	@Override
 	public Integer apply(Integer arg) {
 		return arg + delta;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(
+			this,
+			NamedTupleToStringStyle.getInstance());
 	}
 
 }
