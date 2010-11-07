@@ -30,10 +30,10 @@ public class IterablesInternal {
 
 	public static final String AMOUNT_OF_ELEMENTS = "amountOfElements";
 	public static final String COMPARATOR_PARAM = "comparator";
-	public static final String PREDICATE_PARAM = "predicate";
-	public static final String COLLECTION_PARAM = "collection";
+	public static final String PREDICATE = "predicate";
+	public static final String COLLECTION = "collection";
 	public static final String ITERABLE = "iterable";
-	public static final String FUNCTION_PARAM = "function";
+	public static final String FUNCTION = "function";
 	public static final String OUTPUT_COLLECTION_PARAM = "outputCollection";
 
 	public static <T> void addAllInternal(Collection<T> collection,

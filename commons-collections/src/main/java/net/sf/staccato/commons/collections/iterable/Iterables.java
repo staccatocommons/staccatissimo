@@ -13,11 +13,11 @@
 package net.sf.staccato.commons.collections.iterable;
 
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COLLECTION_PARAM;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COLLECTION;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COMPARATOR_PARAM;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.FUNCTION_PARAM;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.FUNCTION;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.PREDICATE_PARAM;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.PREDICATE;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.addAllInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyOrNoneInternal;
@@ -46,6 +46,7 @@ import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Option;
 import net.sf.staccato.commons.lang.check.Ensure;
+import net.sf.staccato.commons.lang.check.annotation.NonNegative;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.function.Function2;
 import net.sf.staccato.commons.lang.predicate.Predicate;
@@ -54,15 +55,14 @@ import net.sf.staccato.commons.lang.tuple.Pair;
 import org.apache.commons.lang.ObjectUtils;
 
 /**
- * A bunch of static methods that extend the {@link java.util.Collections}
+ * Class methods that complement the {@link java.util.Collections}
  * functionality, providing common algorithms for collections and iterables.
  * 
  * Otherwise stated, null collections, functors and iterables are prohibited as
  * parameter, but empty collections and iterables are allowed.
  * 
- * {@link Iterables} class contains only methods that do not modify any of its
- * arguments, and thus can be used with immutable collections, and treated as
- * functional code.
+ * {@link Iterables} class contains only side-effect-free methods that do not
+ * modify any of its arguments, and thus can be used with immutable collections.
  * 
  * For algorithms that modify the state of the input collections, see
  * {@link ModifiableIterables}. However, Stacatto-commons-collection-extra API
@@ -78,7 +78,7 @@ public class Iterables {
 	 */
 
 	/**
-	 * Selects all elements that evaluate to true
+	 * Selects all elements that evaluate to true.
 	 * 
 	 * @param iterable
 	 * @param predicate
@@ -87,8 +87,8 @@ public class Iterables {
 	 *         evaluate to true
 	 */
 	@NonNull
-	public static <T> List<T> filter(@NonNull Iterable<T> iterable,
-		@NonNull Evaluable<? super T> predicate) {
+	public static <T> List<T> filter(@NonNull(ITERABLE) Iterable<T> iterable,
+		@NonNull(PREDICATE) Evaluable<? super T> predicate) {
 		return filterInternal(iterable, predicate, new LinkedList<T>());
 	}
 
@@ -103,9 +103,8 @@ public class Iterables {
 	 *         iterable
 	 */
 	@NonNull
-	public static <T> List<T> take(@NonNull Iterable<T> iterable,
-		int amountOfElements) {
-		Ensure.nonNegative(AMOUNT_OF_ELEMENTS, amountOfElements);
+	public static <T> List<T> take(@NonNull(ITERABLE) Iterable<T> iterable,
+		@NonNegative(AMOUNT_OF_ELEMENTS) int amountOfElements) {
 		return takeInternal(iterable, amountOfElements, new ArrayList<T>(
 			amountOfElements));
 	}
@@ -115,15 +114,16 @@ public class Iterables {
 	 */
 
 	@NonNull
-	public static <T> T reduce(@NonNull Iterable<T> iterable,
-		@NonNull Applicable2<? super T, ? super T, ? extends T> function) {
+	public static <T> T reduce(@NonNull(ITERABLE) Iterable<T> iterable,
+		@NonNull(ITERABLE) Applicable2<? super T, ? super T, ? extends T> function) {
 		return reduceInternal(iterable, function);
 	}
 
 	@NonNull
-	public static <I, O> O fold(@NonNull Iterable<I> iterable, O initial,
-		@NonNull Applicable2<? super O, ? super I, ? extends O> applyer) {
-		return foldInternal(iterable, initial, applyer);
+	public static <I, O> O fold(@NonNull(ITERABLE) Iterable<I> iterable,
+		O initial,
+		@NonNull(ITERABLE) Applicable2<? super O, ? super I, ? extends O> function) {
+		return foldInternal(iterable, initial, function);
 	}
 
 	/*
@@ -136,19 +136,15 @@ public class Iterables {
 	 * otherwise
 	 * 
 	 * @param <T>
-	 * @param collection
-	 *          non null.
+	 * @param iterable
 	 * @param predicate
-	 *          non null.
 	 * @return the element if found
 	 * @throws NoSuchElementException
 	 *           if no element matches the predicate
 	 */
-	public static <T> T find(Iterable<T> collection,
-		Evaluable<? super T> predicate) {
-		Ensure.nonNull(COLLECTION_PARAM, collection);
-		Ensure.nonNull(PREDICATE_PARAM, predicate);
-		for (T o : collection)
+	public static <T> T find(@NonNull(ITERABLE) Iterable<T> iterable,
+		@NonNull(PREDICATE) Evaluable<? super T> predicate) {
+		for (T o : iterable)
 			if (predicate.eval(o))
 				return o;
 		throw new NoSuchElementException();
@@ -170,7 +166,7 @@ public class Iterables {
 	public static <T> Option<T> findOrNone(Iterable<T> iterable,
 		Evaluable<? super T> predicate) {
 		Ensure.nonNull(ITERABLE, iterable);
-		Ensure.nonNull(PREDICATE_PARAM, predicate);
+		Ensure.nonNull(PREDICATE, predicate);
 		for (T o : iterable)
 			if (predicate.eval(o))
 				return Option.some(o);
@@ -188,8 +184,8 @@ public class Iterables {
 	 * @return The unique element of the collection
 	 */
 	/* TODO REVISE */public static <T> T single(Collection<T> collection) {
-		Ensure.nonNull(COLLECTION_PARAM, collection);
-		Ensure.size(COLLECTION_PARAM, collection, 1);
+		Ensure.nonNull(COLLECTION, collection);
+		Ensure.size(COLLECTION, collection, 1);
 		return anyInternal(collection);
 	}
 
@@ -232,7 +228,7 @@ public class Iterables {
 	public static <T> boolean all(Iterable<T> iterable,
 		Evaluable<? super T> predicate) {
 		Ensure.nonNull(ITERABLE, iterable);
-		Ensure.nonNull(PREDICATE_PARAM, predicate);
+		Ensure.nonNull(PREDICATE, predicate);
 		for (T o : iterable)
 			if (!predicate.eval(o))
 				return false;
@@ -248,8 +244,7 @@ public class Iterables {
 	 * @return true if this collection is empty, or if all element are equal.
 	 *         False otherwise
 	 */
-	public static <T> boolean allEqual(Iterable<T> iterable) {
-		Ensure.nonNull(ITERABLE, iterable);
+	public static <T> boolean allEqual(@NonNull(ITERABLE) Iterable<T> iterable) {
 		Iterator<T> iter = iterable.iterator();
 		if (!iter.hasNext())
 			return true;
@@ -269,8 +264,7 @@ public class Iterables {
 	 * @return true if this collection is empty, or if all element are the same
 	 *         object. False otherwise
 	 */
-	public static <T> boolean allSame(Iterable<T> iterable) {
-		Ensure.nonNull(ITERABLE, iterable);
+	public static <T> boolean allSame(@NonNull(ITERABLE) Iterable<T> iterable) {
 		Iterator<T> iter = iterable.iterator();
 		if (!iter.hasNext())
 			return true;
@@ -281,21 +275,20 @@ public class Iterables {
 		return true;
 	}
 
-	public static <T> boolean any(Iterable<T> iterable,
+	public static <T> boolean any(@NonNull(ITERABLE) Iterable<T> iterable,
 		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE, iterable);
 		for (T o : iterable)
 			if (predicate.eval(o))
 				return true;
 		return false;
 	}
 
-	public static <T> boolean isEmpty(Iterable<T> iterable) {
-		Ensure.nonNull(ITERABLE, iterable);
+	public static <T> boolean isEmpty(@NonNull(ITERABLE) Iterable<T> iterable) {
 		return isEmptyInternal(iterable);
 	}
 
-	public static <T> boolean isNullOrEmpty(Iterable<T> iterable) {
+	public static <T> boolean isNullOrEmpty(
+		@NonNull(ITERABLE) Iterable<T> iterable) {
 		return iterable == null || isEmptyInternal(iterable);
 	}
 
@@ -305,7 +298,8 @@ public class Iterables {
 	 * @param collection
 	 * @return true if the collection is null or empty
 	 */
-	public static <T> boolean isNullOrEmpty(Collection<T> collection) {
+	public static <T> boolean isNullOrEmpty(
+		@NonNull(COLLECTION) Collection<T> collection) {
 		return collection == null || collection.isEmpty();
 	}
 
@@ -329,30 +323,25 @@ public class Iterables {
 	 */
 	/* TODO REVISE */public static <I, O> List<O> map(Collection<I> collection,
 		Applicable<? super I, ? extends O> applyer) {
-		Ensure.nonNull(COLLECTION_PARAM, collection);
-		Ensure.nonNull(FUNCTION_PARAM, applyer);
+		Ensure.nonNull(COLLECTION, collection);
+		Ensure.nonNull(FUNCTION, applyer);
 		return collectInternal( //
 			collection,
 			applyer,
 			new ArrayList<O>(collection.size()));
 	}
 
-	public static <I, O> List<O> map(Iterable<I> iterable,
-		Applicable<? super I, ? extends O> applyer) {
-		Ensure.nonNull(ITERABLE, iterable);
-		Ensure.nonNull(FUNCTION_PARAM, applyer);
+	public static <I, O> List<O> map(@NonNull(ITERABLE) Iterable<I> iterable,
+		@NonNull(FUNCTION) Applicable<? super I, ? extends O> applyer) {
 		return collectInternal(iterable, applyer, new LinkedList<O>());
 	}
 
-	public static <I, O> List<O> flatMap(Iterable<I> iterable,
-		Applicable<? super I, ? extends Iterable<O>> applyer) {
-		Ensure.nonNull(ITERABLE, iterable);
-		Ensure.nonNull(FUNCTION_PARAM, applyer);
-
+	public static <I, O> List<O> flatMap(@NonNull(ITERABLE) Iterable<I> iterable,
+		@NonNull(FUNCTION) Applicable<? super I, ? extends Iterable<O>> function) {
 		LinkedList<O> list = new LinkedList<O>();
 
 		for (I element : iterable)
-			for (O applyedElement : applyer.apply(element))
+			for (O applyedElement : function.apply(element))
 				list.add(applyedElement);
 
 		return list;
@@ -426,7 +415,7 @@ public class Iterables {
 
 	public static <T> int sum(Iterable<T> collection,
 		Applicable<? super T, Integer> integerFunction) {
-		Ensure.nonNull(COLLECTION_PARAM, collection);
+		Ensure.nonNull(COLLECTION, collection);
 		int sum = 0;
 		for (T element : collection)
 			sum += integerFunction.apply(element);

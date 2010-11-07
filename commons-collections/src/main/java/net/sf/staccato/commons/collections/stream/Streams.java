@@ -47,7 +47,11 @@ public class Streams {
 	public static <T> Stream<T> from(List<T> list) {
 		return new ListStream<T>(list);
 	}
-	// TODO empty Stream
+
+	public static <T> Stream<T> empty() {
+		return EmptyStream.getInstance();
+	}
+
 	// TODO File Stream
 	// public static <K, V> Stream<Entry<K, V>> from(Map<K, V> iterable) {
 	// return new MapEntryTranaversable<K, V>(iterable);

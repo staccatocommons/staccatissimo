@@ -17,30 +17,34 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccato.commons.lang.check.Ensure;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 import org.apache.commons.lang.ObjectUtils;
 
 /**
+ * Class methods for dealing with {@link List}
  * 
  * @author flbulgarelli
- * 
  */
 public class Lists {
 	private static final String LIST_PARAM = "list";
 
 	/**
+	 * Inserts the given element after the reference. Throws
+	 * {@link NoSuchElementException} if the list does not contain the reference
 	 * 
-	 * @param <S>
+	 * @param <T>
+	 *          the list type
 	 * @param list
-	 *          non null
+	 *          the list
 	 * @param element
-	 *          nullable, if the collection supports nulls, non nullable otherwise
+	 *          the element
 	 * @param reference
-	 *          nullable, if the collection supports nulls, non nullable otherwise
+	 *          the reference. The list must contain it
 	 */
-	public static <S> void addAfter(List<S> list, S element, S reference) {
-		Ensure.nonNull(LIST_PARAM, list);
-		for (ListIterator<S> iter = list.listIterator(); iter.hasNext();)
+	public static <T> void addAfter(@NonNull(LIST_PARAM) List<T> list, T element,
+		T reference) {
+		for (ListIterator<T> iter = list.listIterator(); iter.hasNext();)
 			if (ObjectUtils.equals(iter.next(), reference)) {
 				iter.add(element);
 				return;
@@ -48,8 +52,8 @@ public class Lists {
 		throw new NoSuchElementException(reference.toString());
 	}
 
-	public static <S> void addBefore(List<S> list, S element, S reference) {
-		Ensure.nonNull(LIST_PARAM, list);
+	public static <S> void addBefore(@NonNull(LIST_PARAM) List<S> list,
+		S element, S reference) {
 		for (ListIterator<S> iter = list.listIterator(); iter.hasNext();)
 			if (iter.next().equals(reference)) {
 				iter.previous();
