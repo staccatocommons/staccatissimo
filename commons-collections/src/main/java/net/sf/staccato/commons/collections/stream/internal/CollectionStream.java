@@ -10,22 +10,23 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.collections.stream;
+package net.sf.staccato.commons.collections.stream.internal;
 
 import java.util.Collection;
 import java.util.Iterator;
 
 import net.sf.staccato.commons.collections.iterable.internal.UnmodifiableIterator;
+import net.sf.staccato.commons.collections.stream.AbstractStream;
 
 /**
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  */
-public class CollectionStream<T> extends AbstractStream<T> {
+public class CollectionStream<A> extends AbstractStream<A> {
 
-	private final Collection<T> collection;
+	private final Collection<A> collection;
 
 	/**
 	 * Creates a new {@link CollectionStream}
@@ -33,7 +34,7 @@ public class CollectionStream<T> extends AbstractStream<T> {
 	 * @param collection
 	 *          the collection to wrap
 	 */
-	public CollectionStream(Collection<T> collection) {
+	public CollectionStream(Collection<A> collection) {
 		this.collection = collection;
 	}
 
@@ -43,7 +44,7 @@ public class CollectionStream<T> extends AbstractStream<T> {
 	}
 
 	@Override
-	public boolean contains(T element) {
+	public boolean contains(A element) {
 		return collection.contains(element);
 	}
 
@@ -53,11 +54,11 @@ public class CollectionStream<T> extends AbstractStream<T> {
 	}
 
 	@Override
-	public Iterator<T> iterator() {
-		return new UnmodifiableIterator<T>(collection.iterator());
+	public Iterator<A> iterator() {
+		return new UnmodifiableIterator<A>(collection.iterator());
 	}
 
-	protected Collection<T> getCollection() {
+	protected Collection<A> getCollection() {
 		return collection;
 	}
 

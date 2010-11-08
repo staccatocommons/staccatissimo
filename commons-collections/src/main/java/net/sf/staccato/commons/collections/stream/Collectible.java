@@ -26,22 +26,24 @@ import net.sf.staccato.commons.lang.check.annotation.NonNull;
  * during invocation, and are {@link Serializable}.
  * 
  * @author flbulgarelli
- * @param <T>
+ * @param <A>
  */
-public interface Collectible<T> {
+public interface Collectible<A> {
 
 	/**
 	 * @return a new {@link Set}
 	 */
 	@NonNull
 	@Reduction
-	Set<T> toSet();
+	Set<A> toSet();
 
 	/**
 	 * @return a new {@link List}
 	 */
 	@NonNull
 	@Reduction
-	List<T> toList();
+	List<A> toList();
+
+	A[] toArray(Class<? extends A> clazz);
 
 }

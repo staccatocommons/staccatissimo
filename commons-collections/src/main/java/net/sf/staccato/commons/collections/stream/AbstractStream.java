@@ -12,18 +12,29 @@
  */
 package net.sf.staccato.commons.collections.stream;
 
+import java.lang.reflect.Array;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import net.sf.staccato.commons.collections.iterable.Iterables;
-import net.sf.staccato.commons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccato.commons.collections.iterable.internal.IterablesInternal;
+import net.sf.staccato.commons.collections.stream.internal.ConcatStream;
+import net.sf.staccato.commons.collections.stream.internal.FilterStream;
+import net.sf.staccato.commons.collections.stream.internal.FlatMapStream;
+import net.sf.staccato.commons.collections.stream.internal.MapStream;
+import net.sf.staccato.commons.collections.stream.internal.TakeStream;
+import net.sf.staccato.commons.collections.stream.internal.TakeWhileStream;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Option;
 import net.sf.staccato.commons.lang.Provider;
+import net.sf.staccato.commons.lang.value.NamedTupleToStringStyle;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * An abstract implementation of a {@link Stream}. Only it {@link Iterator}
@@ -31,34 +42,15 @@ import net.sf.staccato.commons.lang.Provider;
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  */
-public abstract class AbstractStream<T> implements Stream<T> {
-
-	private final class MapIterator<O> extends AbstractUnmodifiableIterator<O> {
-		private final Applicable<? super T, ? extends O> applicable;
-		private final Iterator<T> iter;
-
-		private MapIterator(Applicable<? super T, ? extends O> applicable,
-			Iterator<T> iter) {
-			this.applicable = applicable;
-			this.iter = iter;
-		}
-
-		public boolean hasNext() {
-			return iter.hasNext();
-		}
-
-		public O next() {
-			return applicable.apply(iter.next());
-		}
-	}
+public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public int size() {
 		int size = 0;
 		for (@SuppressWarnings("unused")
-		T element : this)
+		A element : this)
 			size++;
 		return size;
 	}
@@ -69,243 +61,160 @@ public abstract class AbstractStream<T> implements Stream<T> {
 	}
 
 	@Override
-	public boolean contains(T element) {
+	public boolean contains(A element) {
 		return IterablesInternal.containsInternal(this, element);
 	}
 
 	@Override
-	public Stream<T> filter(final Evaluable<? super T> predicate) {
-		return new AbstractStream<T>() {
-			public Iterator<T> iterator() {
-				final Iterator<T> iter = AbstractStream.this.iterator();
-				return new AbstractUnmodifiableIterator<T>() {
-					private T next;
-
-					public boolean hasNext() {
-						while (iter.hasNext())
-							if (predicate.eval((next = iter.next())))
-								return true;
-						return false;
-					}
-
-					public T next() {
-						return next;
-					}
-				};
-			}
-		};
+	public Stream<A> filter(final Evaluable<? super A> predicate) {
+		return new FilterStream<A>(this, predicate);
 	}
 
 	@Override
-	public Stream<T> takeWhile(final Evaluable<? super T> predicate) {
-		return new AbstractStream<T>() {
-			public Iterator<T> iterator() {
-				final Iterator<T> iter = AbstractStream.this.iterator();
-				return new AbstractUnmodifiableIterator<T>() {
-					private T next;
-
-					public boolean hasNext() {
-						return iter.hasNext() && predicate.eval((next = iter.next()));
-					}
-
-					public T next() {
-						return next;
-					}
-				};
-			}
-		};
+	public Stream<A> takeWhile(final Evaluable<? super A> predicate) {
+		return new TakeWhileStream<A>(this, predicate);
 	}
 
 	@Override
-	public Stream<T> take(final int amountOfElements) {
-		return new AbstractStream<T>() {
-			public Iterator<T> iterator() {
-				final Iterator<T> iter = AbstractStream.this.iterator();
-				return new AbstractUnmodifiableIterator<T>() {
-					private int i = 0;
-
-					public boolean hasNext() {
-						return i < amountOfElements && iter.hasNext();
-					}
-
-					public T next() {
-						i++;
-						return iter.next();
-					}
-				};
-			}
-		};
+	public Stream<A> take(final int amountOfElements) {
+		return new TakeStream<A>(this, amountOfElements);
 	}
 
 	@Override
-	public T reduce(Applicable2<? super T, ? super T, ? extends T> applicable) {
-		return IterablesInternal.reduceInternal(this, applicable);
+	public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
+		return IterablesInternal.reduceInternal(this, function);
 	}
 
 	@Override
 	public <O> O fold(O initial,
-		Applicable2<? super O, ? super T, ? extends O> applicable) {
-		return IterablesInternal.foldInternal(this, initial, applicable);
+		Applicable2<? super O, ? super A, ? extends O> function) {
+		return IterablesInternal.foldInternal(this, initial, function);
 	}
 
 
 	@Override
-	public T any() {
+	public A any() {
 		return IterablesInternal.anyInternal(this);
 	}
 
 	@Override
-	public Option<T> anyOrNone() {
+	public Option<A> anyOrNone() {
 		return IterablesInternal.anyOrNoneInternal(this);
 	}
 
 	@Override
-	public T anyOrNull() {
+	public A anyOrNull() {
 		return anyOrNone().valueOrNull();
 	}
 
 	@Override
-	public T anyOrElse(Provider<T> provider) {
+	public A anyOrElse(Provider<A> provider) {
 		return anyOrNone().valueOrElse(provider);
 	}
 
 	@Override
-	public T anyOrElse(T value) {
+	public A anyOrElse(A value) {
 		return anyOrNone().valueOrElse(value);
 	}
 
 	@Override
-	public T find(Evaluable<? super T> predicate) {
+	public A find(Evaluable<? super A> predicate) {
 		return Iterables.find(this, predicate);
 	}
 
 	@Override
-	public Option<T> findOrNone(Evaluable<? super T> predicate) {
+	public Option<A> findOrNone(Evaluable<? super A> predicate) {
 		return Iterables.findOrNone(this, predicate);
 	}
 
 	@Override
-	public T findOrNull(Evaluable<? super T> predicate) {
+	public A findOrNull(Evaluable<? super A> predicate) {
 		return findOrNone(predicate).valueOrNull();
 	}
 
 	@Override
-	public T findOrElse(Evaluable<? super T> predicate,
-		Provider<? extends T> provider) {
+	public A findOrElse(Evaluable<? super A> predicate,
+		Provider<? extends A> provider) {
 		return findOrNone(predicate).valueOrElse(provider);
 	}
 
 	@Override
-	public boolean all(Evaluable<? super T> predicate) {
+	public boolean all(Evaluable<? super A> predicate) {
 		return Iterables.all(this, predicate);
 	}
 
 	@Override
-	public boolean any(Evaluable<? super T> predicate) {
+	public boolean any(Evaluable<? super A> predicate) {
 		return Iterables.any(this, predicate);
 	}
 
 	@Override
-	public <O> Stream<O> map(final Applicable<? super T, ? extends O> applicable) {
-		return new AbstractStream<O>() {
-			public Iterator<O> iterator() {
-				final Iterator<T> iter = AbstractStream.this.iterator();
-				return new MapIterator(applicable, iter);
-			}
-		};
+	public <B> Stream<B> map(final Applicable<? super A, ? extends B> function) {
+		return new MapStream<A, B>(this, function);
 	}
 
 	@Override
-	public <O, I extends Iterable<? extends O>> Stream<O> flatMap(
-		final Applicable<? super T, I> applicable) {
-		return new AbstractStream<O>() {
-			public Iterator<O> iterator() {
-
-				final Iterator<T> iter = AbstractStream.this.iterator();
-				return new AbstractUnmodifiableIterator<O>() {
-					private Iterator<? extends O> subIter;
-
-					public boolean hasNext() {
-						if (subIter != null && subIter.hasNext())
-							return true;
-						if (iter.hasNext()) {
-							subIter = applicable.apply(iter.next()).iterator();
-							if (subIter.hasNext())
-								return true;
-						}
-						return false;
-					}
-
-					public O next() {
-						return subIter.next();
-					}
-				};
-			}
-		};
+	public <B, I extends Iterable<? extends B>> Stream<B> flatMap(
+		final Applicable<? super A, I> function) {
+		return new FlatMapStream<A, B, I>(this, function);
 	}
 
 	@Override
-	public Stream<T> concat(final Stream<T> other) {
-		return new AbstractStream<T>() {
-			public Iterator<T> iterator() {
-				return new AbstractUnmodifiableIterator<T>() {
-					private Iterator<T> iter = AbstractStream.this.iterator();
-					private boolean second = false;
-
-					public boolean hasNext() {
-						if (iter.hasNext())
-							return true;
-
-						if (second)
-							return false;
-
-						iter = other.iterator();
-						second = true;
-						return iter.hasNext();
-					}
-
-					public T next() {
-						return iter.next();
-					}
-
-				};
-			}
-		};
+	public Stream<A> concat(final Stream<A> other) {
+		return new ConcatStream<A>(this, other);
 	}
 
 	@Override
-	public T first() {
+	public A first() {
 		return get(0);
 	}
 
 	@Override
-	public T second() {
+	public A second() {
 		return get(1);
 	}
 
 	@Override
-	public T third() {
+	public A third() {
 		return get(2);
 	}
 
 	@Override
-	public T last() {
+	public A last() {
 		return get(size() - 1);
 	}
 
 	@Override
-	public T get(int n) {
+	public A get(int n) {
 		return Iterables.get(this, n);
 	}
 
 	@Override
-	public Set<T> toSet() {
+	public Set<A> toSet() {
 		return Iterables.asSet(this);
 	}
 
 	@Override
-	public List<T> toList() {
+	public List<A> toList() {
 		return Iterables.asList(this);
+	}
+
+	@Override
+	public A[] toArray(Class<? extends A> clazz) {
+		Collection<A> list = toList();
+		return list.toArray((A[]) Array.newInstance(clazz, list.size()));
+	}
+
+	@Override
+	public String joinStrings(String separator) {
+		return StringUtils.join(iterator(), separator);
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(
+			this,
+			NamedTupleToStringStyle.getInstance());
 	}
 
 }

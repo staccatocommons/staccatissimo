@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.collections.stream;
+package net.sf.staccato.commons.collections.stream.internal;
 
 import java.util.List;
 
@@ -18,21 +18,21 @@ import java.util.List;
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  */
-public class ListStream<T> extends CollectionStream<T> {
+public class ListStream<A> extends CollectionStream<A> {
 
-	public ListStream(List<T> iterable) {
+	public ListStream(List<A> iterable) {
 		super(iterable);
 	}
 
 	@Override
-	public T get(int n) {
+	public A get(int n) {
 		return getList().get(n);
 	}
 
-	protected List<T> getList() {
-		return (List<T>) getCollection();
+	protected List<A> getList() {
+		return (List<A>) getCollection();
 	}
 
 }

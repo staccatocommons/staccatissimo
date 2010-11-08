@@ -14,12 +14,13 @@ package net.sf.staccato.commons.collections.stream;
 
 import net.sf.staccato.commons.lang.Applicable2;
 
-public interface Foldable<T> {
+public interface Foldable<A> {
 
 	@Reduction
-	T reduce(Applicable2<? super T, ? super T, ? extends T> applicable);
+	A reduce(Applicable2<? super A, ? super A, ? extends A> function);
 
 	@Reduction
-	<O> O fold(O initial,
-		Applicable2<? super O, ? super T, ? extends O> applicable);
+	<B> B fold(B initial, Applicable2<? super B, ? super A, ? extends B> function);
+
+	String joinStrings(String separator);
 }

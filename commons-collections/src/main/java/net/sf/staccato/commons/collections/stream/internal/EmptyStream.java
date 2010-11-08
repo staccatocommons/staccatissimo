@@ -10,20 +10,24 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.collections.stream;
+package net.sf.staccato.commons.collections.stream.internal;
 
 import java.util.Iterator;
+
+import net.sf.staccato.commons.collections.iterable.internal.EmptyIterator;
+import net.sf.staccato.commons.collections.stream.AbstractStream;
+import net.sf.staccato.commons.collections.stream.Stream;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class EmptyStream<T> extends AbstractStream<T> {
+public class EmptyStream<A> extends AbstractStream<A> {
 
 	private static final Stream INSTANCE = new EmptyStream();
 
 	@Override
-	public Iterator<T> iterator() {
+	public Iterator<A> iterator() {
 		return EmptyIterator.getInstance();
 	}
 

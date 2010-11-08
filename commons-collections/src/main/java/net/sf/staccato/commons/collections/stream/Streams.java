@@ -16,6 +16,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import net.sf.staccato.commons.collections.stream.internal.CollectionStream;
+import net.sf.staccato.commons.collections.stream.internal.EmptyStream;
+import net.sf.staccato.commons.collections.stream.internal.IterableStream;
+import net.sf.staccato.commons.collections.stream.internal.ListStream;
+
 /**
  * 
  * @author flbulgarelli

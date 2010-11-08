@@ -16,8 +16,7 @@ import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
- * {@link Stream} interface for mapping - aka transforming or collection -
- * elements.
+ * {@link Stream} interface for mapping - aka collecting - elements.
  * 
  * @author flbulgarelli
  * 

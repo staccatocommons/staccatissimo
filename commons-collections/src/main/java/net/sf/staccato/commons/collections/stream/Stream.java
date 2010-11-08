@@ -53,18 +53,18 @@ import net.sf.staccato.commons.lang.collection.SizeAware;
  * 
  * @author fbulgarelli
  * 
- * @param <T>
+ * @param <A>
  */
-public interface Stream<T> extends //
-	Iterable<T>, //
+public interface Stream<A> extends //
+	Iterable<A>, //
 	SizeAware, //
-	ContainsAware<T>, //
-	Filterable<T>, //
-	Foldable<T>,//
-	Searchable<T>,//
-	Testeable<T>, //
-	Mappable<T>, //
-	Accessible<T>, //
-	Collectible<T>, Appendabable<T> {
-
+	ContainsAware<A>, //
+	Filterable<A>, //
+	Foldable<A>,//
+	Searchable<A>,//
+	Testeable<A>, //
+	Mappable<A>, //
+	Accessible<A>, //
+	Collectible<A>, //
+	Appendabable<A> {
 }
