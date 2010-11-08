@@ -1,4 +1,4 @@
-package net.sf.staccato.commons.collections.stream.internal;
+package net.sf.staccato.commons.collections.stream.impl.internal;
 
 import java.util.Iterator;
 
@@ -8,34 +8,41 @@ import net.sf.staccato.commons.collections.stream.Stream;
 
 /**
  * @author flbulgarelli
- *
+ * 
  */
-public final class TakeStream<A> extends AbstractStream<A> {
-
+public final class ConcatStream<A> extends AbstractStream<A> {
 	private final Stream<A> stream;
-	private final int amountOfElements;
+	private final Stream<A> other;
 
 	/**
-	 * Creates a new {@link TakeStream}
+	 * Creates a new {@link ConcatStream}
 	 */
-	public TakeStream(Stream<A> stream, int amountOfElements) {
+	public ConcatStream(Stream<A> stream, Stream<A> other) {
 		this.stream = stream;
-		this.amountOfElements = amountOfElements;
+		this.other = other;
 	}
 
 	public Iterator<A> iterator() {
-		final Iterator<A> iter = stream.iterator();
 		return new AbstractUnmodifiableIterator<A>() {
-			private int i = 0;
+			private Iterator<A> iter = stream.iterator();
+			private boolean second = false;
 
 			public boolean hasNext() {
-				return i < amountOfElements && iter.hasNext();
+				if (iter.hasNext())
+					return true;
+
+				if (second)
+					return false;
+
+				iter = other.iterator();
+				second = true;
+				return iter.hasNext();
 			}
 
 			public A next() {
-				i++;
 				return iter.next();
 			}
+
 		};
 	}
 }

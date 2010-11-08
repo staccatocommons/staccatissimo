@@ -1,40 +1,40 @@
-package net.sf.staccato.commons.collections.stream.internal;
+package net.sf.staccato.commons.collections.stream.impl.internal;
 
 import java.util.Iterator;
 
 import net.sf.staccato.commons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccato.commons.collections.stream.AbstractStream;
 import net.sf.staccato.commons.collections.stream.Stream;
-import net.sf.staccato.commons.lang.Evaluable;
 
 /**
  * @author flbulgarelli
- * 
+ *
  */
-public final class TakeWhileStream<A> extends AbstractStream<A> {
+public final class TakeStream<A> extends AbstractStream<A> {
+
 	private final Stream<A> stream;
-	private final Evaluable<? super A> predicate;
+	private final int amountOfElements;
 
 	/**
-	 * Creates a new {@link TakeWhileStream}
+	 * Creates a new {@link TakeStream}
 	 */
-	public TakeWhileStream(Stream<A> stream,
-		Evaluable<? super A> predicate) {
+	public TakeStream(Stream<A> stream, int amountOfElements) {
 		this.stream = stream;
-		this.predicate = predicate;
+		this.amountOfElements = amountOfElements;
 	}
 
 	public Iterator<A> iterator() {
 		final Iterator<A> iter = stream.iterator();
 		return new AbstractUnmodifiableIterator<A>() {
-			private A next;
+			private int i = 0;
 
 			public boolean hasNext() {
-				return iter.hasNext() && predicate.eval((next = iter.next()));
+				return i < amountOfElements && iter.hasNext();
 			}
 
 			public A next() {
-				return next;
+				i++;
+				return iter.next();
 			}
 		};
 	}

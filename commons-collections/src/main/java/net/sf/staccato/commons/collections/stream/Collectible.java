@@ -31,19 +31,28 @@ import net.sf.staccato.commons.lang.check.annotation.NonNull;
 public interface Collectible<A> {
 
 	/**
-	 * @return a new {@link Set}
+	 * @return a new {@link Set} that contains all elements retrieved by this
+	 *         {@link Stream}
 	 */
 	@NonNull
 	@Reduction
 	Set<A> toSet();
 
 	/**
-	 * @return a new {@link List}
+	 * @return a new {@link List} that contains all elements retrieved by this
+	 *         {@link Stream}
 	 */
 	@NonNull
 	@Reduction
 	List<A> toList();
 
+	@NonNull
+	@Reduction
 	A[] toArray(Class<? extends A> clazz);
 
+	/*
+	 * @NonNull
+	 * 
+	 * @Reduction Stream<A> toStream();
+	 */
 }

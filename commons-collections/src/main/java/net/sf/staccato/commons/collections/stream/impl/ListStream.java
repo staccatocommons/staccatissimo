@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team
+ Copyright (c) 2010, The Staccato-Commons Team   
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -10,15 +10,29 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.collections.stream;
+package net.sf.staccato.commons.collections.stream.impl;
 
+import java.util.List;
 
 /**
+ * 
  * @author flbulgarelli
  * 
+ * @param <A>
  */
-public interface Constructable<T> {
+public class ListStream<A> extends CollectionStream<A> {
 
-	Stream<T> cons(Stream<T> other);
+	public ListStream(List<A> iterable) {
+		super(iterable);
+	}
+
+	@Override
+	public A get(int n) {
+		return getList().get(n);
+	}
+
+	protected List<A> getList() {
+		return (List<A>) getCollection();
+	}
 
 }

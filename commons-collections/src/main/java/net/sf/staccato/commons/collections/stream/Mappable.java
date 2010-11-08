@@ -20,15 +20,15 @@ import net.sf.staccato.commons.lang.check.annotation.NonNull;
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  */
-public interface Mappable<T> {
+public interface Mappable<A> {
 
 	/**
 	 * Transforms each element using the given function
 	 * 
-	 * @param <T>
-	 * @param <O>
+	 * @param <A>
+	 * @param <B>
 	 * @param function
 	 *          the mapper used to transform each element, applying it
 	 * @return a new {@link Stream} projection that will retrieve the result of
@@ -36,8 +36,19 @@ public interface Mappable<T> {
 	 */
 	@NonNull
 	@Projection
-	<O> Stream<O> map(@NonNull Applicable<? super T, ? extends O> function);
+	<B> Stream<B> map(@NonNull Applicable<? super A, ? extends B> function);
 
-	<O, I extends Iterable<? extends O>> Stream<O> flatMap(
-		@NonNull Applicable<? super T, I> function);
+	/**
+	 * Transformes each element using the given function, and concatenates
+	 * ("flatterns") the result
+	 * 
+	 * @param <B>
+	 * @param <I>
+	 * @param function
+	 * @return a new {@link Stream} that will retrieve the result of transforming
+	 *         each element and concatenating those transformations
+	 */
+	@Projection
+	<B> Stream<B> flatMap(
+		@NonNull Applicable<? super A, ? extends Iterable<? extends B>> function);
 }

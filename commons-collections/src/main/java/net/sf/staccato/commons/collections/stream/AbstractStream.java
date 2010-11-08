@@ -20,12 +20,12 @@ import java.util.Set;
 
 import net.sf.staccato.commons.collections.iterable.Iterables;
 import net.sf.staccato.commons.collections.iterable.internal.IterablesInternal;
-import net.sf.staccato.commons.collections.stream.internal.ConcatStream;
-import net.sf.staccato.commons.collections.stream.internal.FilterStream;
-import net.sf.staccato.commons.collections.stream.internal.FlatMapStream;
-import net.sf.staccato.commons.collections.stream.internal.MapStream;
-import net.sf.staccato.commons.collections.stream.internal.TakeStream;
-import net.sf.staccato.commons.collections.stream.internal.TakeWhileStream;
+import net.sf.staccato.commons.collections.stream.impl.internal.ConcatStream;
+import net.sf.staccato.commons.collections.stream.impl.internal.FilterStream;
+import net.sf.staccato.commons.collections.stream.impl.internal.FlatMapStream;
+import net.sf.staccato.commons.collections.stream.impl.internal.MapStream;
+import net.sf.staccato.commons.collections.stream.impl.internal.TakeStream;
+import net.sf.staccato.commons.collections.stream.impl.internal.TakeWhileStream;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
@@ -154,9 +154,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public <B, I extends Iterable<? extends B>> Stream<B> flatMap(
-		final Applicable<? super A, I> function) {
-		return new FlatMapStream<A, B, I>(this, function);
+	public <B> Stream<B> flatMap(
+		final Applicable<? super A, ? extends Iterable<? extends B>> function) {
+		return new FlatMapStream<A, B>(this, function);
 	}
 
 	@Override

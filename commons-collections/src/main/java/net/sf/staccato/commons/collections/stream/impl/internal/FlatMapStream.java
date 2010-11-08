@@ -1,4 +1,4 @@
-package net.sf.staccato.commons.collections.stream.internal;
+package net.sf.staccato.commons.collections.stream.impl.internal;
 
 import java.util.Iterator;
 
@@ -9,19 +9,19 @@ import net.sf.staccato.commons.lang.Applicable;
 
 /**
  * @author flbulgarelli
- *
+ * 
  * @param <B>
  * @param <I>
  */
-public final class FlatMapStream<A, B, I extends Iterable<? extends B>> extends
-	AbstractStream<B> {
+public final class FlatMapStream<A, B> extends AbstractStream<B> {
 	private final Stream<A> stream;
-	private final Applicable<? super A, I> function;
+	private final Applicable<? super A, ? extends Iterable<? extends B>> function;
 
 	/**
 	 * Creates a new {@link FlatMapStream}
 	 */
-	public FlatMapStream(Stream<A> stream, Applicable<? super A, I> function) {
+	public FlatMapStream(Stream<A> stream,
+		Applicable<? super A, ? extends Iterable<? extends B>> function) {
 		this.stream = stream;
 		this.function = function;
 	}

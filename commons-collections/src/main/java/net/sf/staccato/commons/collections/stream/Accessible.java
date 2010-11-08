@@ -34,16 +34,19 @@ public interface Accessible<T> {
 	/**
 	 * @return the first element
 	 */
+	@Reduction
 	T first();
 
 	/**
 	 * @return the second element
 	 */
+	@Reduction
 	T second();
 
 	/**
 	 * @return the third element
 	 */
+	@Reduction
 	T third();
 
 	/**
@@ -51,6 +54,7 @@ public interface Accessible<T> {
 	 * @param n
 	 * @return the n-th element, zero based
 	 */
+	@Reduction
 	T get(int n);
 
 	/**

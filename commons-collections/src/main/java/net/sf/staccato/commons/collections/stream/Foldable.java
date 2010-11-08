@@ -22,5 +22,6 @@ public interface Foldable<A> {
 	@Reduction
 	<B> B fold(B initial, Applicable2<? super B, ? super A, ? extends B> function);
 
+	@Reduction
 	String joinStrings(String separator);
 }

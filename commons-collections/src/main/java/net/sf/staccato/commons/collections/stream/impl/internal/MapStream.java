@@ -1,4 +1,4 @@
-package net.sf.staccato.commons.collections.stream.internal;
+package net.sf.staccato.commons.collections.stream.impl.internal;
 
 import java.util.Iterator;
 

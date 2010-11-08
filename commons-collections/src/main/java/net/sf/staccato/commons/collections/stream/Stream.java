@@ -19,25 +19,21 @@ import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.SizeAware;
 
 /**
- * TODO rewrite this javadoc! Is out of date an incomplete
- * 
- * A {@link Stream} is an object which is a source of other objects.
- * 
- * 
- * It is a generalization of a collection
- * 
+ * A {@link Stream} represent a lazy, rich-interfaced, {@link Iterable} source
+ * of objects, that generalizes the concept of a {@link Collection}.
+ * <p>
  * {@link Stream}s are lazy, that means, messages passed to it will normally
  * return fast, and no really processing will be done until it is really needed.
- * 
- * 
- * {@link Iterable} object with a highly rich interface. Not like the
- * {@link Collection} interface, it is not aimed to be subclasified in order to
- * add extra semantics, nor to have concrete, standalone, implementations.
- * Instead, implementation are supposed to decorate other collections, and,
- * {@link Stream}s do not, nor should have subinterfaces that, make any
- * guarantee about the iteration order, mutability, number or duplication of
- * elements, etc, as they will vary from instance to instance.
- * 
+ * </p>
+ * <p>
+ * {@link Stream}s offer a higly rich interface. Not like the {@link Collection}
+ * interface, it is not aimed to be subclasified in order to add additional
+ * semantics, nor to have concrete, standalone, implementations. Instead,
+ * implementation are supposed to decorate other {@link Iterable}s, and,
+ * {@link Stream}s do not, nor should have subinterfaces that make any guarantee
+ * about the iteration order, mutability, number or duplication of elements,
+ * etc, as they will vary from instance to instance.
+ * </p>
  * Thus, {@link Stream} exposes several methods that will be only supported if
  * the concrete decorated collection supports them. Those methods are marked to
  * throw {@link UnsupportedOperationException}, and, like any of the optional
@@ -45,15 +41,13 @@ import net.sf.staccato.commons.lang.collection.SizeAware;
  * creates the {@link Stream}, or when it was get from a method that explicitly
  * document the Container behaviour.
  * 
- * {@link Stream} are unmodifiable. {@link #iterator()} message will always
+ * {@link Stream}s are unmodifiable. {@link #iterator()} message will always
  * return an unmodifible {@link Iterator}
- * 
- * {@link Stream} interface is heavily inspired in Smalltalk Collection
- * Protocol, excluding including non-pure functional methods
  * 
  * @author fbulgarelli
  * 
  * @param <A>
+ *          the type of object the stream is source of
  */
 public interface Stream<A> extends //
 	Iterable<A>, //
@@ -66,5 +60,4 @@ public interface Stream<A> extends //
 	Mappable<A>, //
 	Accessible<A>, //
 	Collectible<A>, //
-	Appendabable<A> {
-}
+	Appendabable<A> {}

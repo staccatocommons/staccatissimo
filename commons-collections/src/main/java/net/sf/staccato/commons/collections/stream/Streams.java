@@ -16,26 +16,26 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import net.sf.staccato.commons.collections.stream.internal.CollectionStream;
-import net.sf.staccato.commons.collections.stream.internal.EmptyStream;
-import net.sf.staccato.commons.collections.stream.internal.IterableStream;
-import net.sf.staccato.commons.collections.stream.internal.ListStream;
+import net.sf.staccato.commons.collections.stream.impl.CollectionStream;
+import net.sf.staccato.commons.collections.stream.impl.IterableStream;
+import net.sf.staccato.commons.collections.stream.impl.internal.EmptyStream;
+import net.sf.staccato.commons.collections.stream.impl.internal.ListStream;
 
 /**
+ * Class methods for creating {@link Stream}s
  * 
  * @author flbulgarelli
- * 
  */
 public class Streams {
 
 	/**
-	 * Creates a new {@link Stream} that retrieves given array element. This
+	 * Creates a new {@link Stream} that retrieves given array elements. This
 	 * stream permits efficient random access and grants repeatable iteration
 	 * order.
 	 * 
 	 * @param <T>
 	 * @param elements
-	 * @return
+	 * @return a new stream that gets its elements from an array
 	 */
 	public static <T> Stream<T> from(T... elements) {
 		return from(Arrays.asList(elements));

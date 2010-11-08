@@ -16,6 +16,11 @@ package net.sf.staccato.commons.collections.stream;
  * @author flbulgarelli
  * 
  */
-public interface Appendabable<T> {
-	Stream<T> concat(Stream<T> other);
+public interface Appendabable<A> {
+	@Projection
+	Stream<A> concat(Stream<A> other);
+
+	/*
+	 * Stream<A> append(Stream<A> other);
+	 */
 }

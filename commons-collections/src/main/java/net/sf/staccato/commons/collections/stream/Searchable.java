@@ -39,6 +39,7 @@ public interface Searchable<T> {
 	 * @throws NoSuchElementException
 	 *           if this {@link Searchable} has no elements.
 	 */
+	@Reduction
 	T any();
 
 	/**
@@ -50,6 +51,7 @@ public interface Searchable<T> {
 	 * @return <code>Option.some(element)</code> if there is at least one element,
 	 *         or <code>Option.none()</code>, otherwise.
 	 */
+	@Reduction
 	Option<T> anyOrNone();
 
 	/**
@@ -57,6 +59,7 @@ public interface Searchable<T> {
 	 * 
 	 * @return <code>anyOrNone().valueOrNull()</code>
 	 */
+	@Reduction
 	T anyOrNull();
 
 	/**
@@ -66,6 +69,7 @@ public interface Searchable<T> {
 	 * 
 	 * @return <code>anyOrNone().valueOrElse(provider)</code>
 	 */
+	@Reduction
 	T anyOrElse(Provider<T> provider);
 
 	/**
@@ -74,6 +78,7 @@ public interface Searchable<T> {
 	 * @param value
 	 * @return <code>anyOrNone().valueOrElse(value)</code>
 	 */
+	@Reduction
 	T anyOrElse(T value);
 
 	/**
