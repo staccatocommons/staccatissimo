@@ -37,5 +37,5 @@ public @interface NonNull {
 	 *         if unspecified. This value may help tools that analyze this
 	 *         annotation without access to source code.
 	 */
-	String var() default "";
+	String value() default "";
 }
