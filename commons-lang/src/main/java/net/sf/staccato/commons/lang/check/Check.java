@@ -71,8 +71,7 @@ import org.apache.commons.lang.Validate;
 public abstract class Check<ExceptionType extends Throwable> {
 
 	/**
-	 * Takes an action when the check has failed. It is normally throwing an
-	 * exception of type ExceptionType
+	 * Throws an exception of type ExceptionType
 	 * 
 	 * @param variableName
 	 *          An identifier of the variable being check. non null
@@ -124,6 +123,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public void checkMatches(String variableName, String value, String regex)
 		throws ExceptionType {
+		checkNonNull(variableName, value);
+		checkNonNull("regex", regex);
 		if (!value.matches(regex)) {
 			checkFailed(variableName, value,//
 				"%s must match the %s", //
@@ -142,6 +143,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public void checkMatches(String variableName, String value, Pattern pattern)
 		throws ExceptionType {
+		checkNonNull(variableName, value);
+		checkNonNull("pattern", pattern);
 		if (!pattern.matcher(value).matches()) {
 			checkFailed(variableName, value, //
 				"%s must match the %s", //
@@ -212,6 +215,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public void checkNonNegative(String variableName, BigDecimal number)
 		throws ExceptionType {
+		checkNonNull(variableName, number);
 		if (number.compareTo(BigDecimal.ZERO) < 0)
 			checkNonNegativeFailed(variableName, number);
 	}
@@ -226,6 +230,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public void checkNonNegative(String variableName, BigInteger number)
 		throws ExceptionType {
+		checkNonNull(variableName, number);
 		if (number.compareTo(BigInteger.ZERO) < 0)
 			checkNonNegativeFailed(variableName, number);
 	}
@@ -239,66 +244,77 @@ public abstract class Check<ExceptionType extends Throwable> {
 
 	public void checkNotEmpty(String variableName, EmptyAware variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.isEmpty())
 			checkNotEmptyFailed(variableName, variable);
 	}
 
 	public void checkNotEmpty(String variableName, Collection<?> variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.isEmpty())
 			checkNotEmptyFailed(variableName, variable);
 	}
 
 	public void checkNotEmpty(String variableName, Iterable<?> variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.iterator().hasNext())
 			checkNotEmptyFailed(variableName, variable);
 	}
 
 	public void checkNotEmpty(String variableName, Map<?, ?> variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.isEmpty())
 			checkNotEmptyFailed(variableName, variable);
 	}
 
 	public void checkNotEmpty(String variableName, CharSequence variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.length() == 0)
 			checkNotEmptyFailed(variableName, variable);
 	}
 
 	public void checkNotEmpty(String variableName, Object[] variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.length == 0)
 			checkNotEmptyFailed(variableName, variable);
 	}
 
 	public void checkNotEmpty(String variableName, int[] variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.length == 0)
 			checkNotEmptyFailed(variableName, variable);
 	}
 
 	public void checkNotEmpty(String variableName, long[] variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.length == 0)
 			checkNotEmptyFailed(variableName, variable);
 	}
 
 	public void checkNotEmpty(String variableName, byte[] variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.length == 0)
 			checkNotEmptyFailed(variableName, variable);
 	}
 
 	public void checkNotEmpty(String variableName, double[] variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.length == 0)
 			checkNotEmptyFailed(variableName, variable);
 	}
 
 	public void checkNotEmpty(String variableName, float[] variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.length == 0)
 			checkNotEmptyFailed(variableName, variable);
 	}
@@ -312,6 +328,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 
 	public void checkEmpty(String variableName, Collection<?> variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (!variable.isEmpty()) {
 			checkEmptyFailed(variableName, variable);
 		}
@@ -319,18 +336,21 @@ public abstract class Check<ExceptionType extends Throwable> {
 
 	public void checkEmpty(String variableName, Iterable<?> variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (!variable.iterator().hasNext())
 			checkEmptyFailed(variableName, variable);
 	}
 
 	public void checkEmpty(String variableName, Map<?, ?> variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (!variable.isEmpty())
 			checkEmptyFailed(variableName, variable);
 	}
 
 	public void checkEmpty(String variableName, EmptyAware variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (!variable.isEmpty())
 			checkEmptyFailed(variableName, variable);
 	}
@@ -421,6 +441,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public void checkPositive(String variableName, BigDecimal variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.compareTo(BigDecimal.ZERO) <= 0)
 			checkSizeFailed(variableName, variable);
 	}
@@ -435,6 +456,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public void checkPositive(String variableName, BigInteger variable)
 		throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (variable.compareTo(BigInteger.ZERO) <= 0)
 			checkSizeFailed(variableName, variable);
 	}
@@ -458,6 +480,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public void checkIsInstanceOf(String variableName, Object variable,
 		Class<?> expectedClass) throws ExceptionType {
+		checkNonNull(variableName, variable);
 		if (!expectedClass.isInstance(variable)) {
 			checkFailed(variableName, variable, //
 				"%s must be instance of class %s, but it was of class %d",

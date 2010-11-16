@@ -223,14 +223,14 @@ public final class Ensure extends Check<IllegalArgumentException> {
 		instance.checkLowerThan(variableName, variable, other);
 	}
 
-	public static <T> void policy(Policy<T> policy, T value) {
-		policy.enforce(value, instance);
-	}
-
 	/**
-	 * @return the non null, singleton instance of Ensure
+	 * @return the non null, thread safe, singleton instance of Ensure
 	 */
 	public static Ensure getInstance() {
+		return instance;
+	}
+
+	public static Ensure that() {
 		return instance;
 	}
 

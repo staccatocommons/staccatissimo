@@ -222,11 +222,11 @@ public final class Assert extends Check<AssertionError> {
 		instance.checkLowerThan(variableName, variable, other);
 	}
 
-	public static <T> void policy(Policy<T> policy, T value) {
-		policy.enforce(value, instance);
+	public static Assert getInstance() {
+		return instance;
 	}
 
-	public static Assert getInstance() {
+	public static Assert that() {
 		return instance;
 	}
 }
