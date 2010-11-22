@@ -26,6 +26,12 @@ import net.sf.staccato.commons.lang.check.annotation.NonNull;
  */
 public abstract class Block<T> implements Executable<T> {
 
+	/**
+	 * Executes this block. This implementation just invokes
+	 * {@link #softExec(Object)}, and softens any exception it may throw.
+	 * Subclasses may override this behavior.
+	 * 
+	 */
 	@Override
 	public void exec(@NonNull T argument) {
 		try {
@@ -35,9 +41,24 @@ public abstract class Block<T> implements Executable<T> {
 		}
 	}
 
+	/**
+	 * Executes this block, potentially throwing a checked excpetion
+	 * 
+	 * @see #exec(Object)
+	 * 
+	 * @param argument
+	 * @throws Exception
+	 */
 	protected void softExec(@NonNull T argument) throws Exception {
 	}
 
+	/**
+	 * Creates a new {@link Block} that executes this one and then another one
+	 * provided.
+	 * 
+	 * @param other
+	 * @return a new block
+	 */
 	@NonNull
 	public Block<T> then(@NonNull final Executable<? super T> other) {
 		return new Then<T>(this, other);
@@ -50,18 +71,7 @@ public abstract class Block<T> implements Executable<T> {
 	// TODO reflection aware? soft exception ware?
 	public <E extends RuntimeException> Block<T> andCatch(
 		final Class<E> exceptionType, final Block2<? super E, T> catchBlock) {
-		return new Block<T>() {
-			public void exec(T arg) {
-				try {
-					Block.this.exec(arg);
-				} catch (RuntimeException e) {
-					if (exceptionType.isInstance(e))
-						catchBlock.exec((E) e, arg);
-					else
-						throw e;
-				}
-			}
-		};
+		return new Catch<E, T>(this, exceptionType, catchBlock);
 	}
 
 	public <E extends Throwable> Block<T> andFinally(

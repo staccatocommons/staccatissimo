@@ -14,6 +14,7 @@ package net.sf.staccato.commons.lang.predicate;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import net.sf.staccato.commons.lang.MapBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -134,4 +135,20 @@ public class PredicatesUnitTest {
 		assertFalse(Predicates.lowerThan(5).eval(5));
 		assertFalse(Predicates.lowerThan(5).eval(6));
 	}
+
+	@Test
+	public void testFoo() throws Exception {
+		new MapBuilder(null);
+	}
+	@Test
+	public void testname() throws Exception {
+
+		new Predicate<String>() {
+			@Override
+			public boolean eval(String argument) {
+				return false;
+			}
+		}.and(null);
+	}
+
 }

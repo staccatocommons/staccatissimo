@@ -64,7 +64,7 @@ import net.sf.staccato.commons.lang.value.Unmodifiable;
  *          the type of optional value
  * 
  */
-public abstract class Option<T> /* extends AbstractCollection<T> */implements
+public abstract class Option<T> implements
 	Provider<T>, ContainsAware<T>, Iterable<T>, SizeAware, Unmodifiable {
 
 	private static final long serialVersionUID = -4635925023376621559L;

@@ -19,7 +19,7 @@ import java.util.SortedMap;
 
 import net.sf.staccato.commons.lang.MapBuilder;
 import net.sf.staccato.commons.lang.Option;
-import net.sf.staccato.commons.lang.check.Ensure;
+import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * 
@@ -30,8 +30,7 @@ public class Maps {
 
 	private static final String MAP_PARAM = "map";
 
-	public static <T> Option<T> get(Map<?, T> map, Object key) {
-		Ensure.nonNull(MAP_PARAM, map);
+	public static <T> Option<T> get(@NonNull(MAP_PARAM) Map<?, T> map, Object key) {
 		T value = map.get(key);
 		if (value != null)
 			return Option.some(value);
@@ -42,29 +41,25 @@ public class Maps {
 		return Option.none();
 	}
 
-	public static <K> Option<K> anyKey(Map<K, ?> map) {
-		Ensure.nonNull(MAP_PARAM, map);
+	public static <K> Option<K> anyKey(@NonNull(MAP_PARAM) Map<K, ?> map) {
 		if (map.isEmpty())
 			return Option.none();
 		return Option.some(anyInternal(map.keySet()));
 	}
 
-	public static <K> K anyKeyOrNull(Map<K, ?> map) {
-		Ensure.nonNull(MAP_PARAM, map);
+	public static <K> K anyKeyOrNull(@NonNull(MAP_PARAM) Map<K, ?> map) {
 		if (map.isEmpty())
 			return null;
 		return anyInternal(map.keySet());
 	}
 
-	public static <V> Option<V> anyValue(Map<?, V> map) {
-		Ensure.nonNull(MAP_PARAM, map);
+	public static <V> Option<V> anyValue(@NonNull(MAP_PARAM) Map<?, V> map) {
 		if (map.isEmpty())
 			return Option.none();
 		return Option.some(anyInternal(map.values()));
 	}
 
-	public static <V> V anyValueOrNull(Map<?, V> map) {
-		Ensure.nonNull(MAP_PARAM, map);
+	public static <V> V anyValueOrNull(@NonNull(MAP_PARAM) Map<?, V> map) {
 		if (map.isEmpty())
 			return null;
 		return anyInternal(map.values());

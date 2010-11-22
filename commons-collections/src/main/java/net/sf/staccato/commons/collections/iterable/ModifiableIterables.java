@@ -67,9 +67,8 @@ public class ModifiableIterables {
 	 * @param iterable
 	 * @param predicate
 	 */
-	public static <T> void removeWhile(Iterable<? extends T> iterable,
+	public static <T> void removeWhile(@NonNull(ITERABLE) Iterable<? extends T> iterable,
 		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE, iterable);
 		for (Iterator<? extends T> iter = iterable.iterator(); iter.hasNext()
 			&& predicate.eval(iter.next());)
 			iter.remove();
@@ -86,9 +85,8 @@ public class ModifiableIterables {
 	 * @return the given iterable
 	 */
 	@NonNull
-	public static <I extends Iterable<?>> I remove(@NonNull I iterable,
-		int amountOfElements) {
-		Ensure.nonNegative(AMOUNT_OF_ELEMENTS, amountOfElements);
+	public static <I extends Iterable<?>> I remove(@NonNull I iterable, int amountOfElements) {
+		Ensure.that().isNotNegative(AMOUNT_OF_ELEMENTS, amountOfElements);
 		Iterator<?> iter = iterable.iterator();
 		for (int i = 0; i < amountOfElements && iter.hasNext(); i++)
 			iter.remove();
@@ -125,8 +123,7 @@ public class ModifiableIterables {
 	 * @param element
 	 * @return if the element has been added or not
 	 */
-	public static <T> boolean addIfNotNull(
-		@NonNull Collection<? super T> collection, T element) {
+	public static <T> boolean addIfNotNull(@NonNull Collection<? super T> collection, T element) {
 		return element == null ? false : collection.add(element);
 	}
 
@@ -146,9 +143,8 @@ public class ModifiableIterables {
 	 * 
 	 */
 	@NonNull
-	public static <T, C extends Collection<T>> C move(
-		@NonNull Iterable<T> iterable, @NonNull C collection,
-		@NonNull Evaluable<T> predicate) {
+	public static <T, C extends Collection<T>> C move(@NonNull Iterable<T> iterable,
+		@NonNull C collection, @NonNull Evaluable<T> predicate) {
 		for (Iterator<T> iter = iterable.iterator(); iter.hasNext();) {
 			T element = iter.next();
 			if (predicate.eval(element)) {
@@ -173,9 +169,9 @@ public class ModifiableIterables {
 	 * @return the output collection
 	 */
 	@NonNull
-	public static <T, C extends Collection<T>> C move(
-		@NonNull Iterable<T> iterable, int amountOfElements, @NonNull C collection) {
-		Ensure.nonNegative(AMOUNT_OF_ELEMENTS, amountOfElements);
+	public static <T, C extends Collection<T>> C move(@NonNull Iterable<T> iterable,
+		int amountOfElements, @NonNull C collection) {
+		Ensure.that().isNotNegative(AMOUNT_OF_ELEMENTS, amountOfElements);
 		Iterator<? extends T> iter = iterable.iterator();
 		for (int i = 0; i < amountOfElements && iter.hasNext(); i++) {
 			collection.add(iter.next());

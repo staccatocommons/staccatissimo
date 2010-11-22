@@ -32,8 +32,7 @@ import net.sf.staccato.commons.lang.value.ValueObject;
  * 
  * @param <T>
  */
-public class Sequence<T> extends ValueObject implements Unmodifiable,
-	Iterable<T> {
+public class Sequence<T> extends ValueObject implements Unmodifiable, Iterable<T> {
 
 	private static final long serialVersionUID = 8811454338704704525L;
 
@@ -142,8 +141,7 @@ public class Sequence<T> extends ValueObject implements Unmodifiable,
 	 * @param stopCondition
 	 * @return a new Sequence
 	 */
-	public static <T> Sequence<T> from(T start, Applicable<T, T> generator,
-		Evaluable<T> stopCondition) {
+	public static <T> Sequence<T> from(T start, Applicable<T, T> generator, Evaluable<T> stopCondition) {
 		return new Sequence<T>(start, generator, stopCondition);
 	}
 
@@ -160,10 +158,7 @@ public class Sequence<T> extends ValueObject implements Unmodifiable,
 	 * @return a new Sequence
 	 */
 	public static Sequence<Integer> fromBy(int from, int step) {
-		return new Sequence(
-			from,
-			new IntegerIncrement(step),
-			StopConditions.stopNever());
+		return new Sequence(from, new IntegerIncrement(step), StopConditions.stopNever());
 	}
 
 	/**
@@ -183,11 +178,9 @@ public class Sequence<T> extends ValueObject implements Unmodifiable,
 	 * @return a new Sequence
 	 */
 	public static Sequence<Integer> fromToBy(int from, int to, int step) {
-		Ensure.isTrue("step", step != 0, "must be non zero");
-		return new Sequence(
-			from,
-			new IntegerIncrement(step),
-			step < 0 ? StopConditions.downTo(to) : StopConditions.upTo(to));
+		Ensure.is("step", step, step != 0, "must be non zero");
+		return new Sequence(from, new IntegerIncrement(step), step < 0 ? StopConditions.downTo(to)
+			: StopConditions.upTo(to));
 	}
 
 	/**

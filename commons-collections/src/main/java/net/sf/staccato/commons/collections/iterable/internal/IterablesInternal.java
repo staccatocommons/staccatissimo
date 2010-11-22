@@ -29,7 +29,7 @@ import net.sf.staccato.commons.lang.check.Ensure;
 public class IterablesInternal {
 
 	public static final String AMOUNT_OF_ELEMENTS = "amountOfElements";
-	public static final String COMPARATOR_PARAM = "comparator";
+	public static final String COMPARATOR = "comparator";
 	public static final String PREDICATE = "predicate";
 	public static final String COLLECTION = "collection";
 	public static final String ITERABLE = "iterable";

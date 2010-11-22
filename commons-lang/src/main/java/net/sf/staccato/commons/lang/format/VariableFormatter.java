@@ -42,7 +42,7 @@ public class VariableFormatter {
 	 */
 	public VariableFormatter(String formattingString) {
 		if (!formattingString.equals(DEFAULT_FORMATTING_STRING))
-			Ensure.matches("formattingString", formattingString, ".*\\%s.*\\%s.*");
+			Ensure.that().matches("formattingString", formattingString, ".*\\%s.*\\%s.*");
 
 		this.formattingString = formattingString;
 		this.formattingWithPrefixString = createFormattingWithPrefixString();
@@ -113,12 +113,7 @@ public class VariableFormatter {
 	 *         formatting string, preceded by a prefix, and ended with a suffix
 	 */
 	public String format(String prefix, String name, Object value, String suffix) {
-		return String.format(
-			getFormattingWithPrefixAndSuffixString(),
-			prefix,
-			name,
-			value,
-			suffix);
+		return String.format(getFormattingWithPrefixAndSuffixString(), prefix, name, value, suffix);
 	}
 
 	private String getFormattingString() {

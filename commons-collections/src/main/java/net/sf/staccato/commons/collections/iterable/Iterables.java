@@ -14,7 +14,7 @@ package net.sf.staccato.commons.collections.iterable;
 
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COLLECTION;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COMPARATOR_PARAM;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COMPARATOR;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.FUNCTION;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.PREDICATE;
@@ -105,8 +105,7 @@ public class Iterables {
 	@NonNull
 	public static <T> List<T> take(@NonNull(ITERABLE) Iterable<T> iterable,
 		@NonNegative(AMOUNT_OF_ELEMENTS) int amountOfElements) {
-		return takeInternal(iterable, amountOfElements, new ArrayList<T>(
-			amountOfElements));
+		return takeInternal(iterable, amountOfElements, new ArrayList<T>(amountOfElements));
 	}
 
 	/*
@@ -120,8 +119,7 @@ public class Iterables {
 	}
 
 	@NonNull
-	public static <I, O> O fold(@NonNull(ITERABLE) Iterable<I> iterable,
-		O initial,
+	public static <I, O> O fold(@NonNull(ITERABLE) Iterable<I> iterable, O initial,
 		@NonNull(ITERABLE) Applicable2<? super O, ? super I, ? extends O> function) {
 		return foldInternal(iterable, initial, function);
 	}
@@ -163,10 +161,9 @@ public class Iterables {
 	 * @return None if no element matches the predicate or collection is empty, or
 	 *         some(element) if at least one exists
 	 */
-	public static <T> Option<T> findOrNone(Iterable<T> iterable,
-		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE, iterable);
-		Ensure.nonNull(PREDICATE, predicate);
+	public static <T> Option<T> findOrNone(Iterable<T> iterable, Evaluable<? super T> predicate) {
+		Ensure.isNotNull(ITERABLE, iterable);
+		Ensure.isNotNull(PREDICATE, predicate);
 		for (T o : iterable)
 			if (predicate.eval(o))
 				return Option.some(o);
@@ -184,8 +181,8 @@ public class Iterables {
 	 * @return The unique element of the collection
 	 */
 	/* TODO REVISE */public static <T> T single(Collection<T> collection) {
-		Ensure.nonNull(COLLECTION, collection);
-		Ensure.size(COLLECTION, collection, 1);
+		Ensure.isNotNull(COLLECTION, collection);
+		Ensure.that().isSize(COLLECTION, collection, 1);
 		return anyInternal(collection);
 	}
 
@@ -204,7 +201,7 @@ public class Iterables {
 	 *         the iterables's iterator may return null.
 	 */
 	public static <T> T any(@NonNull Iterable<T> iterable) {
-		Ensure.nonNull(ITERABLE, iterable);
+		Ensure.isNotNull(ITERABLE, iterable);
 		return anyInternal(iterable);
 	}
 
@@ -225,10 +222,9 @@ public class Iterables {
 	 * Validating
 	 */
 
-	public static <T> boolean all(Iterable<T> iterable,
-		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE, iterable);
-		Ensure.nonNull(PREDICATE, predicate);
+	public static <T> boolean all(Iterable<T> iterable, Evaluable<? super T> predicate) {
+		Ensure.isNotNull(ITERABLE, iterable);
+		Ensure.isNotNull(PREDICATE, predicate);
 		for (T o : iterable)
 			if (!predicate.eval(o))
 				return false;
@@ -287,8 +283,7 @@ public class Iterables {
 		return isEmptyInternal(iterable);
 	}
 
-	public static <T> boolean isNullOrEmpty(
-		@NonNull(ITERABLE) Iterable<T> iterable) {
+	public static <T> boolean isNullOrEmpty(@NonNull(ITERABLE) Iterable<T> iterable) {
 		return iterable == null || isEmptyInternal(iterable);
 	}
 
@@ -298,8 +293,7 @@ public class Iterables {
 	 * @param collection
 	 * @return true if the collection is null or empty
 	 */
-	public static <T> boolean isNullOrEmpty(
-		@NonNull(COLLECTION) Collection<T> collection) {
+	public static <T> boolean isNullOrEmpty(@NonNull(COLLECTION) Collection<T> collection) {
 		return collection == null || collection.isEmpty();
 	}
 
@@ -323,8 +317,8 @@ public class Iterables {
 	 */
 	/* TODO REVISE */public static <I, O> List<O> map(Collection<I> collection,
 		Applicable<? super I, ? extends O> applyer) {
-		Ensure.nonNull(COLLECTION, collection);
-		Ensure.nonNull(FUNCTION, applyer);
+		Ensure.isNotNull(COLLECTION, collection);
+		Ensure.isNotNull(FUNCTION, applyer);
 		return collectInternal( //
 			collection,
 			applyer,
@@ -364,27 +358,23 @@ public class Iterables {
 	 *         using the given criteria, or an empty mutable list, if the
 	 *         collection was null or empty.
 	 */
-	public static <S> List<S> asSortedList(Iterable<S> iterable,
-		Comparator<? super S> comparator) {
-		Ensure.nonNull(ITERABLE, iterable);
-		Ensure.nonNull(COMPARATOR_PARAM, comparator);
+	public static <S> List<S> asSortedList(Iterable<S> iterable, Comparator<? super S> comparator) {
+		Ensure.isNotNull(ITERABLE, iterable);
+		Ensure.isNotNull(COMPARATOR, comparator);
 		List<S> list = new LinkedList<S>();
 		addAllInternal(list, iterable);
 		java.util.Collections.sort(list, comparator);
 		return list;
 	}
 
-	public static <S> SortedSet<S> asSortedSet(Iterable<S> iterable,
-		Comparator<? super S> comparator) {
-		Ensure.nonNull(ITERABLE, iterable);
-		Ensure.nonNull(COMPARATOR_PARAM, comparator);
+	public static <S> SortedSet<S> asSortedSet(@NonNull(ITERABLE) Iterable<S> iterable,
+		@NonNull(COMPARATOR) Comparator<? super S> comparator) {
 		TreeSet<S> sortedSet = new TreeSet<S>(comparator);
 		addAllInternal(sortedSet, iterable);
 		return sortedSet;
 	}
 
-	public static <S> SortedSet<S> asSortedSet(Iterable<S> iterable) {
-		Ensure.nonNull(ITERABLE, iterable);
+	public static <S> SortedSet<S> asSortedSet(@NonNull(ITERABLE) Iterable<S> iterable) {
 		TreeSet<S> sortedSet = new TreeSet<S>();
 		addAllInternal(sortedSet, iterable);
 		return sortedSet;
@@ -394,10 +384,8 @@ public class Iterables {
 	 * Partioning
 	 */
 
-	public static <T> Pair<List<T>, List<T>> partition(Iterable<T> iterable,
+	public static <T> Pair<List<T>, List<T>> partition(@NonNull(ITERABLE) Iterable<T> iterable,
 		Evaluable<? super T> predicate) {
-		Ensure.nonNull(ITERABLE, iterable);
-		Ensure.nonNull(ITERABLE, iterable);
 
 		List<T> left = new LinkedList<T>();
 		List<T> right = new LinkedList<T>();
@@ -413,9 +401,8 @@ public class Iterables {
 	 * MISC
 	 */
 
-	public static <T> int sum(Iterable<T> collection,
+	public static <T> int sum(@NonNull(ITERABLE) Iterable<T> collection,
 		Applicable<? super T, Integer> integerFunction) {
-		Ensure.nonNull(COLLECTION, collection);
 		int sum = 0;
 		for (T element : collection)
 			sum += integerFunction.apply(element);
@@ -440,8 +427,7 @@ public class Iterables {
 		return new ArrayList<S>(collection);
 	}
 
-	public static <T> T get(Iterable<T> iterable, int at)
-		throws IndexOutOfBoundsException {
+	public static <T> T get(Iterable<T> iterable, int at) throws IndexOutOfBoundsException {
 		T element = null;
 		Iterator<T> iter = iterable.iterator();
 		for (int i = 0; i <= at; i++)
@@ -453,8 +439,8 @@ public class Iterables {
 		return element;
 	}
 
-	public static <T1, T2, T3> List<T3> zip(Iterable<T1> iterable1,
-		Iterable<T2> iterable2, Applicable2<T1, T2, T3> function) {
+	public static <T1, T2, T3> List<T3> zip(Iterable<T1> iterable1, Iterable<T2> iterable2,
+		Applicable2<T1, T2, T3> function) {
 		Iterator<T1> iter1 = iterable1.iterator();
 		Iterator<T2> iter2 = iterable2.iterator();
 		List<T3> result = new LinkedList<T3>();
@@ -463,8 +449,7 @@ public class Iterables {
 		return result;
 	}
 
-	public static <T1, T2> List<Pair<T1, T2>> zip(Iterable<T1> iterable1,
-		Iterable<T2> iterable2) {
+	public static <T1, T2> List<Pair<T1, T2>> zip(Iterable<T1> iterable1, Iterable<T2> iterable2) {
 		return zip(iterable1, iterable2, new Function2<T1, T2, Pair<T1, T2>>() {
 			@Override
 			public Pair<T1, T2> apply(T1 arg1, T2 arg2) {

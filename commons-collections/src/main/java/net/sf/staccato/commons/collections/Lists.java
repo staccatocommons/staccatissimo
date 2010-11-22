@@ -17,6 +17,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccato.commons.lang.check.Ensure;
+import net.sf.staccato.commons.lang.check.annotation.NonEmpty;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -42,8 +43,7 @@ public class Lists {
 	 * @param reference
 	 *          the reference. The list must contain it
 	 */
-	public static <T> void addAfter(@NonNull(LIST_PARAM) List<T> list, T element,
-		T reference) {
+	public static <T> void addAfter(@NonNull(LIST_PARAM) List<T> list, T element, T reference) {
 		for (ListIterator<T> iter = list.listIterator(); iter.hasNext();)
 			if (ObjectUtils.equals(iter.next(), reference)) {
 				iter.add(element);
@@ -52,8 +52,7 @@ public class Lists {
 		throw new NoSuchElementException(reference.toString());
 	}
 
-	public static <S> void addBefore(@NonNull(LIST_PARAM) List<S> list,
-		S element, S reference) {
+	public static <S> void addBefore(@NonNull(LIST_PARAM) List<S> list, S element, S reference) {
 		for (ListIterator<S> iter = list.listIterator(); iter.hasNext();)
 			if (iter.next().equals(reference)) {
 				iter.previous();
@@ -63,34 +62,27 @@ public class Lists {
 		throw new NoSuchElementException(reference.toString());
 	}
 
-	public static <S> S removeLast(List<S> list) {
-		Ensure.nonNull(LIST_PARAM, list);
+	public static <S> S removeLast(@NonNull List<S> list) {
 		return list.remove(list.size() - 1);
 	}
 
-	public static <S> S first(List<S> list) {
-		Ensure.nonNull(LIST_PARAM, list);
-		Ensure.notEmpty(LIST_PARAM, list);
+	public static <S> S first(@NonEmpty List<S> list) {
 		return list.get(0);
 	}
 
-	public static <S> S second(List<S> list) {
-		Ensure.nonNull(LIST_PARAM, list);
-		Ensure.isTrue(LIST_PARAM, list.size() > 1,//
+	public static <S> S second(@NonNull List<S> list) {
+		Ensure.is(LIST_PARAM, list, list.size() > 1,//
 			"Must hava at least two elements");
 		return list.get(1);
 	}
 
-	public static <S> S third(List<S> list) {
-		Ensure.nonNull(LIST_PARAM, list);
-		Ensure.isTrue(LIST_PARAM, list.size() > 2,//
+	public static <S> S third(@NonNull List<S> list) {
+		Ensure.is(LIST_PARAM, list, list.size() > 2,//
 			"Must hava at least three elements");
 		return list.get(2);
 	}
 
-	public static <S> S last(List<S> list) {
-		Ensure.nonNull(LIST_PARAM, list);
-		Ensure.notEmpty(LIST_PARAM, list);
+	public static <S> S last(@NonEmpty List<S> list) {
 		return list.get(list.size() - 1);
 	}
 }

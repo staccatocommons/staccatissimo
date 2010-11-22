@@ -56,8 +56,7 @@ public abstract class AbstractReusableBuilder<T> implements ReusableBuilder<T> {
 		return buildObject();
 	}
 
-	protected void checkDone(DoneCheck check)
-		throws ObjectUnderConstructionException {
+	protected void checkDone(DoneCheck check) throws ObjectUnderConstructionException {
 	}
 
 	protected abstract T buildObject();
@@ -71,17 +70,15 @@ public abstract class AbstractReusableBuilder<T> implements ReusableBuilder<T> {
 	 * A {@link Check} that throws an {@link ObjectUnderConstructionException}
 	 * when checks fail
 	 */
-	public static final class DoneCheck extends
-		Check<ObjectUnderConstructionException> {
+	public static final class DoneCheck extends Check<ObjectUnderConstructionException> {
 
 		private DoneCheck() {
 		}
 
-		@Override
-		protected void checkFailedImpl(String variableName, Object parameter,
-			String message) {
-			throw new ObjectUnderConstructionException(message);
+		protected ObjectUnderConstructionException createException(Failure failure) {
+			return new ObjectUnderConstructionException(failure.createMessage());
 		}
+
 	}
 
 }

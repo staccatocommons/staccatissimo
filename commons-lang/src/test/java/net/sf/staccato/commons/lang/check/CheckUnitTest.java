@@ -2,6 +2,8 @@ package net.sf.staccato.commons.lang.check;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.regex.Pattern;
 
 import org.junit.Test;
@@ -10,142 +12,142 @@ public class CheckUnitTest {
 
 	private static final String VAR_NAME = "var";
 
-	Check<IllegalArgumentException> c = Ensure.getInstance();
+	Check<IllegalArgumentException> c = Ensure.that();
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCheckIsTrueStringBooleanStringObjectArray() {
-		c.checkIsTrue(VAR_NAME, false, "should be true");
+		c.isTrue(VAR_NAME, false);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCheckIsTrueStringBoolean() {
-		c.checkIsTrue(VAR_NAME, false);
+		c.isTrue(VAR_NAME, false);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCheckMatchesStringStringString() {
-		c.checkMatches(VAR_NAME, "hello", ".ola.");
+		c.matches(VAR_NAME, "hello", ".ola.");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCheckMatchesStringStringPattern() {
-		c.checkMatches(VAR_NAME, "hello", Pattern.compile(".ola."));
+		c.matches(VAR_NAME, "hello", Pattern.compile(".ola."));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckNonNegativeStringLong() {
-		c.checkNonNegative(VAR_NAME, -5L);
+	public void testisNotNegativeStringLong() {
+		c.isNotNegative(VAR_NAME, -5L);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckNonNegativeStringInt() {
-		c.checkNonNegative(VAR_NAME, -5);
+	public void testisNotNegativeStringInt() {
+		c.isNotNegative(VAR_NAME, -5);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckNonNegativeStringDouble() {
-		c.checkNonNegative(VAR_NAME, -5.9);
+	public void testisNotNegativeStringDouble() {
+		c.isNotNegative(VAR_NAME, -5.9);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckNonNegativeStringFloat() {
-		c.checkNonNegative(VAR_NAME, -5f);
+	public void testisNotNegativeStringFloat() {
+		c.isNotNegative(VAR_NAME, -5f);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckNonNegativeStringBigDecimal() {
-		c.checkNonNegative(VAR_NAME, BigDecimal.valueOf(-9.69));
+	public void testisNotNegativeStringBigDecimal() {
+		c.isNotNegative(VAR_NAME, BigDecimal.valueOf(-9.69));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckNonNegativeStringBigInteger() {
-		c.checkNonNegative(VAR_NAME, BigInteger.valueOf(-9));
+	public void testisNotNegativeStringBigInteger() {
+		c.isNotNegative(VAR_NAME, BigInteger.valueOf(-9));
 	}
 
 	@Test
-	public void testCheckNonNegativeStringLong_Zero() {
-		c.checkNonNegative(VAR_NAME, 0L);
+	public void testisNotNegativeStringLong_Zero() {
+		c.isNotNegative(VAR_NAME, 0L);
 	}
 
 	@Test
-	public void testCheckNonNegativeStringInt_Zero() {
-		c.checkNonNegative(VAR_NAME, 0);
+	public void testisNotNegativeStringInt_Zero() {
+		c.isNotNegative(VAR_NAME, 0);
 	}
 
 	@Test
-	public void testCheckNonNegativeStringDouble_Zero() {
-		c.checkNonNegative(VAR_NAME, 0.0);
+	public void testisNotNegativeStringDouble_Zero() {
+		c.isNotNegative(VAR_NAME, 0.0);
 	}
 
 	@Test
-	public void testCheckNonNegativeStringFloat_Zero() {
-		c.checkNonNegative(VAR_NAME, 0.0f);
+	public void testisNotNegativeStringFloat_Zero() {
+		c.isNotNegative(VAR_NAME, 0.0f);
 	}
 
 	@Test
-	public void testCheckNonNegativeStringBigDecimal_Zero() {
-		c.checkNonNegative(VAR_NAME, BigDecimal.ZERO);
+	public void testisNotNegativeStringBigDecimal_Zero() {
+		c.isNotNegative(VAR_NAME, BigDecimal.ZERO);
 	}
 
 	@Test
-	public void testCheckNonNegativeStringBigInteger_Zero() {
-		c.checkNonNegative(VAR_NAME, BigInteger.ZERO);
+	public void testisNotNegativeStringBigInteger_Zero() {
+		c.isNotNegative(VAR_NAME, BigInteger.ZERO);
 	}
 
 	//
 	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckNotEmptyStringEmptyAware() {
+	// public void testisNotEmptyStringEmptyAware() {
 	// fail("Not yet implemented");
 	// }
 
 	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckNotEmptyStringCollectionOfQ() {
+	// public void testisNotEmptyStringCollectionOfQ() {
 	// fail("Not yet implemented");
 	// }
 	//
 	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckNotEmptyStringIterableOfQ() {
+	// public void testisNotEmptyStringIterableOfQ() {
 	// fail("Not yet implemented");
 	// }
 	//
 	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckNotEmptyStringMapOfQQ() {
+	// public void testisNotEmptyStringMapOfQQ() {
 	// fail("Not yet implemented");
 	// }
 	//
 	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckNotEmptyStringCharSequence() {
+	// public void testisNotEmptyStringCharSequence() {
 	// fail("Not yet implemented");
 	// }
 	//
 	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckNotEmptyStringObjectArray() {
+	// public void testisNotEmptyStringObjectArray() {
 	// fail("Not yet implemented");
 	// }
 	//
 	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckNotEmptyStringIntArray() {
+	// public void testisNotEmptyStringIntArray() {
 	// fail("Not yet implemented");
 	// }
 	//
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckNotEmptyStringLongArray() {
-		c.checkNotEmpty(VAR_NAME, new long[0]);
+	public void testisNotEmptyStringLongArray() {
+		c.isNotEmpty(VAR_NAME, new long[0]);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckNotEmptyStringByteArray() {
-		c.checkNotEmpty(VAR_NAME, new byte[0]);
+	public void testisNotEmptyStringByteArray() {
+		c.isNotEmpty(VAR_NAME, new byte[0]);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckNotEmptyStringDoubleArray() {
-		c.checkNotEmpty(VAR_NAME, new double[0]);
+	public void testisNotEmptyStringDoubleArray() {
+		c.isNotEmpty(VAR_NAME, new double[0]);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckNotEmptyStringFloatArray() {
-		c.checkNotEmpty(VAR_NAME, new float[0]);
+	public void testisNotEmptyStringFloatArray() {
+		c.isNotEmpty(VAR_NAME, new float[0]);
 	}
 
 	// @Test(expected = IllegalArgumentException.class)
@@ -169,7 +171,7 @@ public class CheckUnitTest {
 	// }
 	//
 	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckNonNull() {
+	// public void testisNotNull() {
 	// fail("Not yet implemented");
 	// }
 	//
@@ -253,4 +255,95 @@ public class CheckUnitTest {
 	// fail("Not yet implemented");
 	// }
 
+	@Test
+	public void testPositive() {
+		c
+			.isPositive(VAR_NAME, 9)
+			.isPositive(VAR_NAME, 9L)
+			.isPositive(VAR_NAME, 9f)
+			.isPositive(VAR_NAME, 9.0)
+			.isPositive(VAR_NAME, BigDecimal.valueOf(69.62))
+			.isPositive(VAR_NAME, BigInteger.valueOf(1200));
+	}
+
+	@Test
+	public void testSize() {
+		c
+			.isSize(VAR_NAME, Arrays.asList(9, 96), 2)
+			.isSize(VAR_NAME, "Hello", 5)
+			.isSize(VAR_NAME, new double[] { 5.5, 9 }, 2)
+			.isSize(VAR_NAME, new float[] { 63.0f }, 1)
+			.isSize(VAR_NAME, new int[] { 9, 93, 23, 6, 0 }, 5)
+			.isSize(VAR_NAME, new long[] { 9, 93, 23, 6, 0 }, 5)
+			.isSize(VAR_NAME, new Object[] { 9, 93, 23, 6, 0 }, 5);
+
+	}
+
+	@Test
+	public void testEmpty() {
+		c
+			.isEmpty(VAR_NAME, Collections.emptyList())
+			.isEmpty(VAR_NAME, Collections.emptyMap())
+			.isEmpty(VAR_NAME, Collections.<String> emptyList());
+	}
+
+	@Test
+	public void testIsInstanceOf() {
+		c.isInstanceOf(VAR_NAME, 5, Number.class);
+	}
+
+	@Test
+	public void testIsTrue() {
+		c.isTrue(VAR_NAME, true);
+	}
+
+	@Test
+	public void testMatchesStringStringPattern() {
+		c.matches(VAR_NAME, "Hello", ".*ell.");
+	}
+
+	@Test
+	public void testMatchesStringStringString() {
+		c.matches(VAR_NAME, "Hello", Pattern.compile(".*ell."));
+	}
+
+	@Test
+	public void testNonNegative() {
+		c
+			.isNotNegative(VAR_NAME, 9)
+			.isNotNegative(VAR_NAME, 9L)
+			.isNotNegative(VAR_NAME, 9f)
+			.isNotNegative(VAR_NAME, 9.0)
+			.isNotNegative(VAR_NAME, BigDecimal.valueOf(69.62))
+			.isNotNegative(VAR_NAME, BigInteger.valueOf(1200));
+	}
+
+	// @Test
+	// public void tes tNotEmptyCollection() {
+	// c
+	// .isNotEmpty(VAR_NAME, Collections.singleton(6))
+	// .isNotEmpty(VAR_NAME, new byte[1])
+	// .isNotEmpty(VAR_NAME, "A word")
+	// .isNotEmpty(VAR_NAME, new double[2])
+	// .isNotEmpty(VAR_NAME, new float[2])
+	// .isNotEmpty(VAR_NAME, new int[6])
+	// .isNotEmpty(VAR_NAME, new long[52])
+	// .isNotEmpty(VAR_NAME, new Object[2])
+	// .isNotEmpty(VAR_NAME, Range.from(5, 6));
+	// }
+
+	@Test
+	public void testNotEmptyStringMapOfQQ() {
+		c.isNotEmpty(VAR_NAME, Collections.singletonMap("Hello", "World"));
+	}
+
+	@Test
+	public void testNotNull() {
+		c.isNotNull(VAR_NAME, new Object());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFail() {
+		c.fail(VAR_NAME, "Foo", "Should be palindromic");
+	}
 }

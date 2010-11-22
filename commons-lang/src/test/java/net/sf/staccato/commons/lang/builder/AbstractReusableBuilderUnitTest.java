@@ -65,8 +65,8 @@ public class AbstractReusableBuilderUnitTest {
 
 		@Override
 		protected void checkDone(DoneCheck c) {
-			c.checkNonNull("X", x);
-			c.checkNonNull("Y", y);
+			c.isNotNull("X", x);
+			c.isNotNull("Y", y);
 		}
 	}
 

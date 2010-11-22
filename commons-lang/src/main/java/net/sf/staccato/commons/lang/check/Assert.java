@@ -12,221 +12,45 @@
  */
 package net.sf.staccato.commons.lang.check;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Collection;
-import java.util.Map;
-import java.util.regex.Pattern;
-
-import net.sf.staccato.commons.lang.collection.EmptyAware;
-
 /**
- * {@link Assert} is a {@link Check} that throws {@link AssertionError}s on
- * validation failures
+ * {@link Assert} is a utility class for performing postcondition checks
  * 
  * @author flbulgarelli
  * 
  */
-public final class Assert extends Check<AssertionError> {
+public final class Assert {
 
-	private static final Assert instance = new Assert();
+	private static final Check<AssertionError> check = new Check<AssertionError>() {
+		protected AssertionError createException(Failure failure) {
+			return new AssertionError(failure.createMessage());
+		}
+	};
 
 	private Assert() {
-
 	}
 
-	@Override
-	protected void checkFailedImpl(String variableName, Object variable,
-		String message) {
-		throw new AssertionError(message);
+	public static void fail(String varName, Object var, String message) {
+		that().fail(varName, var, message);
 	}
 
-	public static void fail(String variableName, Object variable, String message) {
-		instance.checkFailedImpl(variableName, variable, message);
+	public static void is(String varName, Object var, boolean condition, String message,
+		Object... messageArgs) {
+		that().is(varName, var, condition, message, messageArgs);
 	}
 
-	public static void empty(String variableName, Collection<?> variable) {
-		instance.checkEmpty(variableName, variable);
+	public static void isNotNull(String variableName, Object variable) {
+		that().isNotNull(variableName, variable);
 	}
 
-	public static void empty(String variableName, Iterable<?> variable) {
-		instance.checkEmpty(variableName, variable);
+	public static void isNull(String variableName, Object variable) {
+		that().isNull(variableName, variable);
 	}
 
-	public static void empty(String variableName, Map<?, ?> variable) {
-		instance.checkEmpty(variableName, variable);
-	}
-
-	public static void isInstanceOf(String variableName, Object variable,
-		Class<?> expectedClass) {
-		instance.checkIsInstanceOf(variableName, variable, expectedClass);
-	}
-
-	public static void isTrue(String variableName, boolean variableValue,
-		String message, Object... messageArgs) {
-		instance.checkIsTrue(variableName, variableValue, message, messageArgs);
-	}
-
-	public static void isTrue(String variableName, boolean variableValue) {
-		instance.checkIsTrue(variableName, variableValue);
-	}
-
-	public static void matches(String variableName, String value, Pattern pattern) {
-		instance.checkMatches(variableName, value, pattern);
-	}
-
-	public static void matches(String variableName, String value, String regex) {
-		instance.checkMatches(variableName, value, regex);
-	}
-
-	public static void nonNegative(String variableName, BigDecimal number) {
-		instance.checkNonNegative(variableName, number);
-	}
-
-	public static void nonNegative(String variableName, BigInteger number) {
-		instance.checkNonNegative(variableName, number);
-	}
-
-	public static void nonNegative(String variableName, double number) {
-		instance.checkNonNegative(variableName, number);
-	}
-
-	public static void nonNegative(String variableName, float number) {
-		instance.checkNonNegative(variableName, number);
-	}
-
-	public static void nonNegative(String variableName, int number) {
-		instance.checkNonNegative(variableName, number);
-	}
-
-	public static void nonNegative(String variableName, long number) {
-		instance.checkNonNegative(variableName, number);
-	}
-
-	public static void nonNull(String variableName, Object variable) {
-		instance.checkNonNull(variableName, variable);
-	}
-
-	public static void notEmpty(String variableName, EmptyAware variable) {
-		instance.checkNotEmpty(variableName, variable);
-	}
-
-	public static void notEmpty(String variableName, byte[] variable) {
-		instance.checkNotEmpty(variableName, variable);
-	}
-
-	public static void notEmpty(String variableName, CharSequence variable) {
-		instance.checkNotEmpty(variableName, variable);
-	}
-
-	public static void notEmpty(String variableName, Collection<?> variable) {
-		instance.checkNotEmpty(variableName, variable);
-	}
-
-	public static void notEmpty(String variableName, double[] variable) {
-		instance.checkNotEmpty(variableName, variable);
-	}
-
-	public static void notEmpty(String variableName, float[] variable) {
-		instance.checkNotEmpty(variableName, variable);
-	}
-
-	public static void notEmpty(String variableName, int[] variable) {
-		instance.checkNotEmpty(variableName, variable);
-	}
-
-	public static void notEmpty(String variableName, Iterable<?> variable) {
-		instance.checkNotEmpty(variableName, variable);
-	}
-
-	public static void notEmpty(String variableName, long[] variable) {
-		instance.checkNotEmpty(variableName, variable);
-	}
-
-	public static void notEmpty(String variableName, Map<?, ?> variable) {
-		instance.checkNotEmpty(variableName, variable);
-	}
-
-	public static void notEmpty(String variableName, Object[] variable) {
-		instance.checkNotEmpty(variableName, variable);
-	}
-
-	public static void positive(String variableName, BigDecimal variable) {
-		instance.checkPositive(variableName, variable);
-	}
-
-	public static void positive(String variableName, BigInteger variable) {
-		instance.checkPositive(variableName, variable);
-	}
-
-	public static void positive(String variableName, double variable) {
-		instance.checkPositive(variableName, variable);
-	}
-
-	public static void positive(String variableName, float variable) {
-		instance.checkPositive(variableName, variable);
-	}
-
-	public static void positive(String variableName, int variable) {
-		instance.checkPositive(variableName, variable);
-	}
-
-	public static void positive(String variableName, long variable) {
-		instance.checkPositive(variableName, variable);
-	}
-
-	public static void size(String variableName, byte[] variable, int size) {
-		instance.checkSize(variableName, variable, size);
-	}
-
-	public static void size(String variableName, CharSequence variable, int size) {
-		instance.checkSize(variableName, variable, size);
-	}
-
-	public static void size(String variableName, Collection<?> variable, int size) {
-		instance.checkSize(variableName, variable, size);
-	}
-
-	public static void size(String variableName, double[] variable, int size) {
-		instance.checkSize(variableName, variable, size);
-	}
-
-	public static void size(String variableName, float[] variable, int size) {
-		instance.checkSize(variableName, variable, size);
-	}
-
-	public static void size(String variableName, int[] variable, int size) {
-		instance.checkSize(variableName, variable, size);
-	}
-
-	public static void size(String variableName, long[] variable, int size) {
-		instance.checkSize(variableName, variable, size);
-	}
-
-	public static void size(String variableName, Object[] variable, int size) {
-		instance.checkSize(variableName, variable, size);
-	}
-
-	public static <T extends Comparable<T>> void between(String variableName,
-		T variable, T min, T max) {
-		instance.checkBetween(variableName, variable, min, max);
-	}
-
-	public static <T extends Comparable<T>> void greatherThan(
-		String variableName, T variable, T other) {
-		instance.checkGreatherThan(variableName, variable, other);
-	}
-
-	public static <T extends Comparable<T>> void lowerThan(String variableName,
-		T variable, T other) {
-		instance.checkLowerThan(variableName, variable, other);
-	}
-
-	public static Assert getInstance() {
-		return instance;
-	}
-
-	public static Assert that() {
-		return instance;
+	/**
+	 * @return a singleton {@link Check} that throws {@link AssertionError}s on
+	 *         check failure
+	 */
+	public static Check<AssertionError> that() {
+		return check;
 	}
 }

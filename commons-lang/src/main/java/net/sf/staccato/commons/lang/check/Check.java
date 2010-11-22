@@ -51,10 +51,10 @@ import org.apache.commons.lang.Validate;
  * </ul>
  * 
  * All check methods take a paremeterName as first argument. This is a String
- * identifier of the variable being check, that allows to find it in context.
- * For example, if what is being check is a method variable or local variable,
- * its variable name should be used, if is its an an attribute or property is
- * being used, its property name should be used.
+ * identifier of the var being check, that allows to find it in context. For
+ * example, if what is being check is a method var or local var, its var name
+ * should be used, if is its an an attribute or property is being used, its
+ * property name should be used.
  * 
  * 
  * @author flbulgarelli
@@ -70,519 +70,722 @@ import org.apache.commons.lang.Validate;
  */
 public abstract class Check<ExceptionType extends Throwable> {
 
+	/* Minimal Ops */
+
+	// private final Lazy<Check<ExceptionType>> not = new
+	// Lazy<Check<ExceptionType>>() {
+	// protected Check<ExceptionType> init() {
+	// return new Not<ExceptionType>(Check.this);
+	// }
+	// };
+
+	protected ExceptionType createVarException(VarFailure failure) {
+		return createException(failure);
+	}
+
+	protected abstract ExceptionType createException(Failure failure);
+
 	/**
-	 * Throws an exception of type ExceptionType
+	 * Fails, throwing an exception with a message. This method never returns
+	 * normally.
 	 * 
-	 * @param variableName
-	 *          An identifier of the variable being check. non null
-	 * @param variable
-	 *          non null the object being check
+	 * @param <Nothing>
 	 * @param message
-	 *          non null check failure message.
-	 */
-	protected abstract void checkFailedImpl(String variableName, Object variable,
-		String message) throws ExceptionType;
-
-	private void checkFailed(String variableName, Object variable,
-		String message, Object... args) throws ExceptionType {
-		checkFailedImpl(variableName, variable, String.format(message, args));
-	}
-
-	public void checkIsTrue(String variableName, boolean variableValue,
-		String message, Object... messageArgs) throws ExceptionType {
-		if (!variableValue) {
-			checkFailed(variableName, variableName, //
-				message,
-				messageArgs);
-		}
-	}
-
-	/**
-	 * Checks the variable is true
-	 * 
-	 * @param variableName
-	 * @param variableValue
+	 *          the error message
+	 * @param args
+	 *          the error message args
+	 * @return this method does never return normally
 	 * @throws ExceptionType
+	 *           always
 	 */
-	public void checkIsTrue(String variableName, boolean variableValue)
-		throws ExceptionType {
-		if (!variableValue) {
-			checkFailed(variableName, variableName, //
-				"%s should be true", //
-				Var.format(variableName, variableValue));
-		}
+	public <Nothing> Nothing fail(String message, Object... args) throws ExceptionType {
+		throw createException(new Failure(message, args));
 	}
 
 	/**
-	 * Checks that the string variable matches the given regular expression
+	 * Fails, throwing an exception with a message, the var and its name. This
+	 * method never returns normally.
 	 * 
-	 * @param variableName
-	 * @param value
+	 * @param <Nothing>
+	 * @param varName
+	 *          the name of the variable whose check failed
+	 * @param var
+	 *          the variable whose check failed
+	 * @param message
+	 *          the error message
+	 * @param args
+	 *          the error message arguments
+	 * @return this method does never return normally
+	 * @throws ExceptionType
+	 *           always
+	 */
+	public <Nothing> Nothing fail(String varName, Object var, String message, Object... args)
+		throws ExceptionType {
+		throw createVarException(new VarFailure(varName, var, message, args));
+	}
+
+	/**
+	 * Checks a condition, failing if not met.
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param condition
+	 *          the condition to be checked
+	 * @param message
+	 *          the error message
+	 * @param args
+	 *          the error message arguments
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public Check<ExceptionType> is(String varName, Object var, boolean condition, String message,
+		Object... args) throws ExceptionType {
+		if (!condition)
+			fail(varName, var, message, args);
+		return this;
+	}
+
+	/**
+	 * Checks a that a condition is true, failing if it is not.
+	 * 
+	 * @param condition
+	 *          the condition to be checked
+	 * @param message
+	 *          the error message
+	 * @param args
+	 *          the error message arguments
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public Check<ExceptionType> is(boolean condition, String message, Object... args)
+		throws ExceptionType {
+		if (!condition)
+			fail(message, args);
+		return this;
+	}
+
+	/**
+	 * Checks the variable is not null.
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isNotNull(String varName, Object var) throws ExceptionType {
+		if (var == null)
+			fail(varName, var, "must not be null");
+		return this;
+	}
+
+	/**
+	 * Checks the variable is null.
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isNull(String varName, Object var) throws ExceptionType {
+		if (var != null)
+			fail(varName, var, "must be null");
+		return this;
+	}
+
+	/* Extra ops */
+
+	/**
+	 * Checks a that the variable is true, failing with a generated message if it
+	 * is not.
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the var to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isTrue(String varName, boolean var) throws ExceptionType {
+		return is(varName, var, var, "must be true");
+	}
+
+	/**
+	 * Checks that the variable is not null and matches a given regular
+	 * expression.
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the var to be checked
 	 * @param regex
+	 *          the regular expression the var must match
+	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
+	 *           if the check failed
+	 * 
+	 * @see #is(boolean, String, Object...)
 	 */
-	public void checkMatches(String variableName, String value, String regex)
+	public final Check<ExceptionType> matches(String varName, String var, String regex)
 		throws ExceptionType {
-		checkNonNull(variableName, value);
-		checkNonNull("regex", regex);
-		if (!value.matches(regex)) {
-			checkFailed(variableName, value,//
-				"%s must match the %s", //
-				Var.format(variableName, value),
-				Var.format("regex", regex));
-		}
+		return isNotNull(varName, var).matches(varName, var, Pattern.compile(regex));
 	}
 
 	/**
-	 * Checks that the string variable matches the given regular expression
+	 * Checks that the variable is not null and matches a given pattern
 	 * 
-	 * @param variableName
-	 * @param value
-	 * @param regex
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param pattern
+	 *          the pattern the variable must match
+	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
+	 *           if the check failed
+	 * 
+	 * @see #is(boolean, String, Object...)
 	 */
-	public void checkMatches(String variableName, String value, Pattern pattern)
+	public final Check<ExceptionType> matches(String varName, String var, Pattern pattern)
 		throws ExceptionType {
-		checkNonNull(variableName, value);
-		checkNonNull("pattern", pattern);
-		if (!pattern.matcher(value).matches()) {
-			checkFailed(variableName, value, //
-				"%s must match the %s", //
-				Var.format(variableName, value),
-				Var.format("regex", pattern.pattern()));
-		}
+		return isNotNull(varName, var) //
+			.is(varName, var, pattern.matcher(var).matches(), "must match %s", pattern.pattern());
 	}
 
 	/**
-	 * Checks the variable is &gt;= 0
+	 * Checks that the variable is not null and empty
 	 * 
-	 * @param variableName
-	 * @param number
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param pattern
+	 *          the pattern the variable must match
+	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
+	 *           if the check failed
+	 * 
+	 * @see #is(boolean, String, Object...)
 	 */
-	public void checkNonNegative(String variableName, long number)
-		throws ExceptionType {
-		if (number < 0)
-			checkNonNegativeFailed(variableName, number);
+	public Check<ExceptionType> isEmpty(String varName, Collection<?> var) throws ExceptionType {
+		return isNotNull(varName, var).isEmpty(varName, var, var.isEmpty());
 	}
 
 	/**
-	 * Checks the variable is &gt;= 0
+	 * Checks that the variable is not null and empty
 	 * 
-	 * @param variableName
-	 * @param number
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param pattern
+	 *          the pattern the variable must match
+	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
+	 *           if the check failed
+	 * 
+	 * @see #is(boolean, String, Object...)
 	 */
-	public void checkNonNegative(String variableName, int number)
-		throws ExceptionType {
-		if (number < 0)
-			checkNonNegativeFailed(variableName, number);
+	public Check<ExceptionType> isEmpty(String varName, Map<?, ?> var) throws ExceptionType {
+		return isNotNull(varName, var).isEmpty(varName, var, var.isEmpty());
 	}
 
 	/**
-	 * Checks the variable is &gt;= 0
+	 * Checks that the variable is not null and empty
 	 * 
-	 * @param variableName
-	 * @param number
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param pattern
+	 *          the pattern the variable must match
+	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
+	 *           if the check failed
+	 * 
+	 * @see #is(boolean, String, Object...)
 	 */
-	public void checkNonNegative(String variableName, double number)
+	public Check<ExceptionType> isEmpty(String varName, EmptyAware var) throws ExceptionType {
+		return isNotNull(varName, var).isEmpty(varName, var, var.isEmpty());
+	}
+
+	private final Check<ExceptionType> isEmpty(String varName, Object var, boolean empty)
 		throws ExceptionType {
-		if (number < 0)
-			checkNonNegativeFailed(variableName, number);
+		return is(varName, var, empty, "must be empty");
 	}
 
 	/**
-	 * Checks the variable is &gt;= 0
+	 * Checks that the variable is not null and instance of the given class
 	 * 
-	 * @param variableName
-	 * @param number
-	 * @throws ExceptionType
-	 */
-	public void checkNonNegative(String variableName, float number)
-		throws ExceptionType {
-		if (number < 0)
-			checkNonNegativeFailed(variableName, number);
-	}
-
-	/**
-	 * Checks the variable is &gt;= 0
-	 * 
-	 * @param variableName
-	 * @param number
-	 *          non null.
-	 * @throws ExceptionType
-	 */
-	public void checkNonNegative(String variableName, BigDecimal number)
-		throws ExceptionType {
-		checkNonNull(variableName, number);
-		if (number.compareTo(BigDecimal.ZERO) < 0)
-			checkNonNegativeFailed(variableName, number);
-	}
-
-	/**
-	 * Checks the variable is &gt;= 0
-	 * 
-	 * @param variableName
-	 * @param number
-	 *          non null.
-	 * @throws ExceptionType
-	 */
-	public void checkNonNegative(String variableName, BigInteger number)
-		throws ExceptionType {
-		checkNonNull(variableName, number);
-		if (number.compareTo(BigInteger.ZERO) < 0)
-			checkNonNegativeFailed(variableName, number);
-	}
-
-	private final void checkNonNegativeFailed(String variableName, Object number)
-		throws ExceptionType {
-		checkFailed(variableName, number,//
-			"%s must be non negative", //
-			Var.format(variableName, number));
-	}
-
-	public void checkNotEmpty(String variableName, EmptyAware variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.isEmpty())
-			checkNotEmptyFailed(variableName, variable);
-	}
-
-	public void checkNotEmpty(String variableName, Collection<?> variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.isEmpty())
-			checkNotEmptyFailed(variableName, variable);
-	}
-
-	public void checkNotEmpty(String variableName, Iterable<?> variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.iterator().hasNext())
-			checkNotEmptyFailed(variableName, variable);
-	}
-
-	public void checkNotEmpty(String variableName, Map<?, ?> variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.isEmpty())
-			checkNotEmptyFailed(variableName, variable);
-	}
-
-	public void checkNotEmpty(String variableName, CharSequence variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.length() == 0)
-			checkNotEmptyFailed(variableName, variable);
-	}
-
-	public void checkNotEmpty(String variableName, Object[] variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.length == 0)
-			checkNotEmptyFailed(variableName, variable);
-	}
-
-	public void checkNotEmpty(String variableName, int[] variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.length == 0)
-			checkNotEmptyFailed(variableName, variable);
-	}
-
-	public void checkNotEmpty(String variableName, long[] variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.length == 0)
-			checkNotEmptyFailed(variableName, variable);
-	}
-
-	public void checkNotEmpty(String variableName, byte[] variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.length == 0)
-			checkNotEmptyFailed(variableName, variable);
-	}
-
-	public void checkNotEmpty(String variableName, double[] variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.length == 0)
-			checkNotEmptyFailed(variableName, variable);
-	}
-
-	public void checkNotEmpty(String variableName, float[] variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.length == 0)
-			checkNotEmptyFailed(variableName, variable);
-	}
-
-	private void checkNotEmptyFailed(String variableName, Object variable)
-		throws ExceptionType {
-		checkFailed(variableName, variable, //
-			"%s must not be empty", //
-			Var.format(variableName, variable));
-	}
-
-	public void checkEmpty(String variableName, Collection<?> variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (!variable.isEmpty()) {
-			checkEmptyFailed(variableName, variable);
-		}
-	}
-
-	public void checkEmpty(String variableName, Iterable<?> variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (!variable.iterator().hasNext())
-			checkEmptyFailed(variableName, variable);
-	}
-
-	public void checkEmpty(String variableName, Map<?, ?> variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (!variable.isEmpty())
-			checkEmptyFailed(variableName, variable);
-	}
-
-	public void checkEmpty(String variableName, EmptyAware variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (!variable.isEmpty())
-			checkEmptyFailed(variableName, variable);
-	}
-
-	private final void checkEmptyFailed(String variableName, Object variable)
-		throws ExceptionType {
-		checkFailed(variableName, variable, //
-			"%s must be empty", //
-			Var.format(variableName, variable));
-	}
-
-	/**
-	 * Checks the variable object is not null, and raises an
-	 * {@link IllegalArgumentException} if fails.
-	 * 
-	 * @param variableName
-	 * @param variable
-	 * @throws ExceptionType
-	 */
-	public void checkNonNull(String variableName, Object variable)
-		throws ExceptionType {
-		if (variable == null) {
-			checkFailed(variableName, null, //
-				"%s must not be null",
-				variableName);
-		}
-	}
-
-	/**
-	 * Checks the variable is &lt;= 0
-	 * 
-	 * @param variableName
-	 * @param variable
-	 * @throws ExceptionType
-	 */
-	public void checkPositive(String variableName, long variable)
-		throws ExceptionType {
-		if (variable <= 0)
-			checkSizeFailed(variableName, variable);
-	}
-
-	/**
-	 * Checks the variable is &lt;= 0
-	 * 
-	 * @param variableName
-	 * @param variable
-	 * @throws ExceptionType
-	 */
-	public void checkPositive(String variableName, int variable)
-		throws ExceptionType {
-		if (variable <= 0)
-			checkSizeFailed(variableName, variable);
-	}
-
-	/**
-	 * Checks the variable is &lt;= 0
-	 * 
-	 * @param variableName
-	 * @param variable
-	 * @throws ExceptionType
-	 */
-	public void checkPositive(String variableName, double variable)
-		throws ExceptionType {
-		if (variable <= 0)
-			checkSizeFailed(variableName, variable);
-	}
-
-	/**
-	 * Checks the variable is &lt;= 0
-	 * 
-	 * @param variableName
-	 * @param variable
-	 * @throws ExceptionType
-	 */
-	public void checkPositive(String variableName, float variable)
-		throws ExceptionType {
-		if (variable <= 0)
-			checkSizeFailed(variableName, variable);
-	}
-
-	/**
-	 * Checks the variable is &lt;= 0
-	 * 
-	 * @param variableName
-	 * @param variable
-	 *          non null
-	 * @throws ExceptionType
-	 */
-	public void checkPositive(String variableName, BigDecimal variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.compareTo(BigDecimal.ZERO) <= 0)
-			checkSizeFailed(variableName, variable);
-	}
-
-	/**
-	 * Checks the variable is &lt;= 0
-	 * 
-	 * @param variableName
-	 * @param variable
-	 *          non null.
-	 * @throws ExceptionType
-	 */
-	public void checkPositive(String variableName, BigInteger variable)
-		throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (variable.compareTo(BigInteger.ZERO) <= 0)
-			checkSizeFailed(variableName, variable);
-	}
-
-	private void checkSizeFailed(String variableName, Object variable)
-		throws ExceptionType {
-		checkFailed(variableName, variable, //
-			"%s must be positive",
-			Var.format(variableName, variable));
-	}
-
-	/**
-	 * Checks the variable is instance of the given class
-	 * 
-	 * @param variableName
-	 * @param variable
-	 *          non null
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
 	 * @param expectedClass
-	 *          non null.
+	 *          the class the variable must be instance of
+	 * @param pattern
+	 *          the pattern the variable must match
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 * 
+	 * @see #is(boolean, String, Object...)
+	 */
+	public Check<ExceptionType> isInstanceOf(String varName, Object var, Class<?> expectedClass)
+		throws ExceptionType {
+		return is(varName, var, expectedClass.isInstance(var),//
+			"must be instance of class %s",
+			expectedClass);
+	}
+
+	public Check<ExceptionType> isSize(String varName, Collection<?> var, int size)
+		throws ExceptionType {
+		return isSize(varName, var, size, var.size());
+	}
+
+	public Check<ExceptionType> isSize(String varName, CharSequence var, int size)
+		throws ExceptionType {
+		return isSize(varName, var, size, var.length());
+	}
+
+	public Check<ExceptionType> isSize(String varName, Object[] var, int size) throws ExceptionType {
+		return isSize(varName, var, size, var.length);
+	}
+
+	public Check<ExceptionType> isSize(String varName, int[] var, int size) throws ExceptionType {
+		return isSize(varName, var, size, var.length);
+	}
+
+	public Check<ExceptionType> isSize(String varName, long[] var, int size) throws ExceptionType {
+		return isSize(varName, var, size, var.length);
+	}
+
+	public Check<ExceptionType> isSize(String varName, byte[] var, int size) throws ExceptionType {
+		return isSize(varName, var, size, var.length);
+	}
+
+	public Check<ExceptionType> isSize(String varName, double[] var, int size) throws ExceptionType {
+		return isSize(varName, var, size, var.length);
+	}
+
+	public Check<ExceptionType> isSize(String varName, float[] var, int size) throws ExceptionType {
+		return isSize(varName, var, size, var.length);
+	}
+
+	public Check<ExceptionType> isSize(String varName, SizeAware value, int size)
+		throws ExceptionType {
+		return isSize(varName, value, size, value.size());
+	}
+
+	/**
+	 * Checks the var is &gt;= 0
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isNotNegative(String varName, long var) throws ExceptionType {
+		return isNotNegative(varName, var, var >= 0);
+	}
+
+	/**
+	 * Checks the var is &gt;= 0
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isNotNegative(String varName, int number) throws ExceptionType {
+		return isNotNegative(varName, number, number >= 0);
+	}
+
+	/**
+	 * Checks the var is &gt;= 0
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isNotNegative(String varName, double number)
+		throws ExceptionType {
+		return isNotNegative(varName, number, number >= 0);
+	}
+
+	/**
+	 * Checks the var is &gt;= 0
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isNotNegative(String varName, float number)
+		throws ExceptionType {
+		return isNotNegative(varName, number, number >= 0);
+	}
+
+	/**
+	 * Checks the var is &gt;= 0
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isNotNegative(String varName, BigDecimal number)
+		throws ExceptionType {
+		return isNotNull(varName, number) //
+			.isNotNegative(varName, number, number.compareTo(BigDecimal.ZERO) >= 0);
+	}
+
+	/**
+	 * Checks the var is &gt;= 0
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isNotNegative(String varName, BigInteger number)
+		throws ExceptionType {
+		return isNotNull(varName, number) //
+			.isNotNegative(varName, number, number.compareTo(BigInteger.ZERO) >= 0);
+	}
+
+	private Check<ExceptionType> isNotNegative(String varName, Object number, boolean negative)
+		throws ExceptionType {
+		return is(varName, number, negative, "Must be not negative");
+	}
+
+	public void isNotEmpty(String varName, EmptyAware var) throws ExceptionType {
+		isNotNull(varName, var);
+		if (var.isEmpty())
+			isNotEmptyFailed(varName, var);
+	}
+
+	public void isNotEmpty(String varName, Collection<?> var) throws ExceptionType {
+		isNotNull(varName, var);
+		if (var.isEmpty())
+			isNotEmptyFailed(varName, var);
+	}
+
+	public void isNotEmpty(String varName, Iterable<?> var) throws ExceptionType {
+		isNotNull(varName, var);
+		if (var.iterator().hasNext())
+			isNotEmptyFailed(varName, var);
+	}
+
+	public void isNotEmpty(String varName, Map<?, ?> var) throws ExceptionType {
+		isNotNull(varName, var);
+		if (var.isEmpty())
+			isNotEmptyFailed(varName, var);
+	}
+
+	public void isNotEmpty(String varName, CharSequence var) throws ExceptionType {
+		isNotNull(varName, var);
+		if (var.length() == 0)
+			isNotEmptyFailed(varName, var);
+	}
+
+	public void isNotEmpty(String varName, Object[] var) throws ExceptionType {
+		isNotNull(varName, var);
+		if (var.length == 0)
+			isNotEmptyFailed(varName, var);
+	}
+
+	public void isNotEmpty(String varName, int[] var) throws ExceptionType {
+		isNotNull(varName, var);
+		if (var.length == 0)
+			isNotEmptyFailed(varName, var);
+	}
+
+	public void isNotEmpty(String varName, long[] var) throws ExceptionType {
+		isNotNull(varName, var);
+		if (var.length == 0)
+			isNotEmptyFailed(varName, var);
+	}
+
+	public void isNotEmpty(String varName, byte[] var) throws ExceptionType {
+		isNotNull(varName, var);
+		if (var.length == 0)
+			isNotEmptyFailed(varName, var);
+	}
+
+	public void isNotEmpty(String varName, double[] var) throws ExceptionType {
+		isNotNull(varName, var);
+		if (var.length == 0)
+			isNotEmptyFailed(varName, var);
+	}
+
+	public void isNotEmpty(String varName, float[] var) throws ExceptionType {
+		isNotNull(varName, var);
+		if (var.length == 0)
+			isNotEmptyFailed(varName, var);
+	}
+
+	/*
+	 * Performance de array.getLength *
+	 */
+	/*
+	 * Performance del dispatch virtual
+	 */
+	/*
+	 * Performance del not
+	 */
+	/*
+	 * Performance del objeto TypeClass
+	 */
+
+	private void isNotEmptyFailed(String varName, Object var) throws ExceptionType {
+		fail(varName, var, //
+			"%s must not be empty", //
+			Var.format(varName, var));
+	}
+
+	/**
+	 * Checks the var is &lt;= 0
+	 * 
+	 * @param varName
+	 * @param var
+	 * @return
 	 * @throws ExceptionType
 	 */
-	public void checkIsInstanceOf(String variableName, Object variable,
-		Class<?> expectedClass) throws ExceptionType {
-		checkNonNull(variableName, variable);
-		if (!expectedClass.isInstance(variable)) {
-			checkFailed(variableName, variable, //
-				"%s must be instance of class %s, but it was of class %d",
-				Var.format(variableName, variable),
-				expectedClass,
-				variable.getClass());
-		}
+	public Check<ExceptionType> isPositive(String varName, long var) throws ExceptionType {
+		return isPositive(varName, var, var > 0);
 	}
 
-	public void checkSize(String variableName, Collection<?> variable, int size)
+	/**
+	 * Checks the var is &lt;= 0
+	 * 
+	 * @param varName
+	 * @param var
+	 * @return
+	 * @throws ExceptionType
+	 */
+	public Check<ExceptionType> isPositive(String varName, int var) throws ExceptionType {
+		return isPositive(varName, var, var > 0);
+	}
+
+	/**
+	 * Checks the var is &lt;= 0
+	 * 
+	 * @param varName
+	 * @param var
+	 * @return
+	 * @throws ExceptionType
+	 */
+	public Check<ExceptionType> isPositive(String varName, double var) throws ExceptionType {
+		return isPositive(varName, var, var > 0);
+	}
+
+	/**
+	 * Checks the var is &lt;= 0
+	 * 
+	 * @param varName
+	 * @param var
+	 * @return
+	 * @throws ExceptionType
+	 */
+	public Check<ExceptionType> isPositive(String varName, float var) throws ExceptionType {
+		return isPositive(varName, var, var > 0);
+	}
+
+	/**
+	 * Checks the var is &lt;= 0
+	 * 
+	 * @param varName
+	 * @param var
+	 *          not null
+	 * @return
+	 * @throws ExceptionType
+	 */
+	public Check<ExceptionType> isPositive(String varName, BigDecimal var) throws ExceptionType {
+		return isNotNull(varName, var).isPositive(varName, var, var.compareTo(BigDecimal.ZERO) > 0);
+	}
+
+	/**
+	 * Checks the var is &lt;= 0
+	 * 
+	 * @param varName
+	 * @param var
+	 *          not null.
+	 * @return
+	 * @throws ExceptionType
+	 */
+	public Check<ExceptionType> isPositive(String varName, BigInteger var) throws ExceptionType {
+		return isNotNull(varName, var).isPositive(varName, var, var.compareTo(BigInteger.ZERO) > 0);
+	}
+
+	private Check<ExceptionType> isPositive(String varName, Object var, boolean positive)
 		throws ExceptionType {
-		checkSizeIntenal(variableName, variable, size, variable.size());
+		return is(varName, var, positive, "must be positive");
 	}
 
-	public void checkSize(String variableName, CharSequence variable, int size)
+	private final Check<ExceptionType> isSize(String varName, Object var, int expectedSize,
+		int actualSize) throws ExceptionType {
+		return is(varName, var, actualSize == expectedSize, //
+			"must be of size %s, but was %s",
+			expectedSize,
+			actualSize);
+	}
+
+	public <T extends Comparable<T>> void isBetween(String varName, T var, T min, T max)
 		throws ExceptionType {
-		checkSizeIntenal(variableName, variable, size, variable.length());
-	}
-
-	public void checkSize(String variableName, Object[] variable, int size)
-		throws ExceptionType {
-		checkSizeIntenal(variableName, variable, size, variable.length);
-	}
-
-	public void checkSize(String variableName, int[] variable, int size)
-		throws ExceptionType {
-		checkSizeIntenal(variableName, variable, size, variable.length);
-	}
-
-	public void checkSize(String variableName, long[] variable, int size)
-		throws ExceptionType {
-		checkSizeIntenal(variableName, variable, size, variable.length);
-	}
-
-	public void checkSize(String variableName, byte[] variable, int size)
-		throws ExceptionType {
-		checkSizeIntenal(variableName, variable, size, variable.length);
-	}
-
-	public void checkSize(String variableName, double[] variable, int size)
-		throws ExceptionType {
-		checkSizeIntenal(variableName, variable, size, variable.length);
-	}
-
-	public void checkSize(String variableName, float[] variable, int size)
-		throws ExceptionType {
-		checkSizeIntenal(variableName, variable, size, variable.length);
-	}
-
-	public void checkSize(String variableName, SizeAware value, int size)
-		throws ExceptionType {
-		checkSizeIntenal(variableName, value, size, value.size());
-	}
-
-	private final void checkSizeIntenal(String variableName, Object variable,
-		int expectedSize, int actualSize) throws ExceptionType {
-		if (actualSize != expectedSize)
-			checkFailed(variableName, variable, //
-				"%s must be of size %d, but it was %s", //
-				Var.format(variableName, variable),
-				expectedSize,
-				actualSize);
-	}
-
-	public <T extends Comparable<T>> void checkBetween(String variableName,
-		T variable, T min, T max) throws ExceptionType {
-		if (!between(variable, min, max))
-			checkFailed(variableName, variable,//
+		if (!between(var, min, max))
+			fail(varName, var,//
 				"%s must be between %s and %s",
-				Var.format(variableName, variable),
+				Var.format(varName, var),
 				min,
 				max);
 	}
 
-	public <T> void checkContains(String variableName, ContainsAware<T> variable,
-		T element) throws ExceptionType {
-		if (!variable.contains(element))
-			checkFailed(variableName, variable,//
+	public <T> void contains(String varName, ContainsAware<T> var, T element) throws ExceptionType {
+		if (!var.contains(element))
+			fail(varName, var,//
 				"%s must contain %s",
-				Var.format(variableName, variable),
+				Var.format(varName, var),
 				element);
 	}
 
-	public <T extends Comparable<T>> void checkGreatherThan(String variableName,
-		T variable, T other) throws ExceptionType {
-		if (!(variable.compareTo(other) > 0))
-			checkFailed(variableName, variable,//
+	public <T extends Comparable<T>> void isGreatherThan(String varName, T var, T other)
+		throws ExceptionType {
+		if (!(var.compareTo(other) > 0))
+			fail(varName, var,//
 				"%s must be greather than %s",
-				Var.format(variableName, variable),
+				Var.format(varName, var),
 				other);
 	}
 
-	public <T extends Comparable<T>> void checkLowerThan(String variableName,
-		T variable, T other) throws ExceptionType {
-		if (!(variable.compareTo(other) < 0))
-			checkFailed(variableName, variable,//
+	public <T extends Comparable<T>> void isLowerThan(String varName, T var, T other)
+		throws ExceptionType {
+		if (!(var.compareTo(other) < 0))
+			fail(varName, var,//
 				"%s must be lower than %s",
-				Var.format(variableName, variable),
+				Var.format(varName, var),
 				other);
 	}
+
+	// public Check<ExceptionType> not() {
+	// return not.value();
+	// }
 
 	// TODO something in something
 	// TODO something contains something
+
+	public static class Failure {
+		private final String message;
+		private final Object[] messageArgs;
+
+		public Failure(String message, Object... messageArgs) {
+			this.message = message;
+			this.messageArgs = messageArgs;
+		}
+
+		public String createMessage() {
+			return String.format(message, messageArgs);
+		}
+	}
+
+	public static class VarFailure extends Failure {
+		private final String varName;
+		private final Object var;
+
+		public VarFailure(String varName, Object var, String message, Object... messageArgs) {
+			super(message, messageArgs);
+			this.varName = varName;
+			this.var = var;
+		}
+
+		/**
+		 * @return the var
+		 */
+		public Object getVar() {
+			return var;
+		}
+
+		/**
+		 * @return the varName
+		 */
+		public String getVarName() {
+			return varName;
+		}
+
+		public String createSimpleMessage() {
+			return super.createMessage();
+		}
+
+		public String createMessage() {
+			return Var.format("Check failure: ", varName, var, super.createMessage());
+		}
+	}
+
+	// private static final class Not<ExceptionType extends Throwable> extends
+	// Check<ExceptionType> {
+	//
+	// private final Check<ExceptionType> check;
+	//
+	// public Not(Check<ExceptionType> check) {
+	// this.check = check;
+	// }
+	//
+	// protected ExceptionType createException(String message) {
+	// return check.createException(message);
+	// }
+	//
+	// protected ExceptionType createException(String varName, Object var, String
+	// message) {
+	// return check.createException(varName, var, message);
+	// }
+	//
+	// public Check<ExceptionType> is(boolean condition, String message, Object...
+	// args)
+	// throws ExceptionType {
+	// super.is(!condition, message, args);
+	// return check;
+	// }
+	//
+	// public Check<ExceptionType> is(String varName, Object var, boolean
+	// condition, String message,
+	// Object... args) throws ExceptionType {
+	// super.is(varName, var, !condition, message, args);
+	// return check;
+	// }
+	//
+	// public Check<ExceptionType> not() {
+	// return check;
+	// }
+	//
+	// }
 
 }

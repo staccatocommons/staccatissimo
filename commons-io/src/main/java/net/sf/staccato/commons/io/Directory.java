@@ -33,7 +33,7 @@ public class Directory {
 	}
 
 	public Directory(File file) {
-		Ensure.isTrue("file", file.isDirectory(), "file denote a directory");
+		Ensure.is("file", file, file.isDirectory(), "must denote a directory");
 		this.file = file;
 	}
 
