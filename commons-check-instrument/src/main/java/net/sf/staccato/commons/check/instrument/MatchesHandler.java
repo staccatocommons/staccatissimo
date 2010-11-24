@@ -14,7 +14,7 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.lang.check.annotation.Matches;
+import net.sf.staccato.commons.check.annotation.Matches;
 
 /**
  * @author flbulgarelli

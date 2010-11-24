@@ -15,6 +15,7 @@ package net.sf.staccato.commons.check.instrument;
 import java.lang.annotation.Annotation;
 
 import javassist.CannotCompileException;
+import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
 import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
 import net.sf.staccato.commons.instrument.handler.ArgumentAnnotationHandler;
@@ -22,7 +23,6 @@ import net.sf.staccato.commons.instrument.handler.Deactivable;
 import net.sf.staccato.commons.instrument.handler.MethodAnnotationHandler;
 import net.sf.staccato.commons.instrument.handler.StackedDeactivableSupport;
 import net.sf.staccato.commons.lang.SoftException;
-import net.sf.staccato.commons.lang.check.Ensure;
 
 /**
  * @author flbulgarelli
@@ -31,8 +31,8 @@ import net.sf.staccato.commons.lang.check.Ensure;
 public abstract class AbstractCheckAnnotationHandler<T extends Annotation> implements
 	MethodAnnotationHandler, ArgumentAnnotationHandler, Deactivable {
 
-	protected static final String ENSURE_FULLY_QUALIFIED_NAME = "net.sf.staccato.commons.lang.check.Ensure.";
-	protected static final String ASSERT_FULLY_QUALIFIED_NAME = "net.sf.staccato.commons.lang.check.Assert.";
+	protected static final String ENSURE_FULLY_QUALIFIED_NAME = "net.sf.staccato.commons.check.Ensure.";
+	protected static final String ASSERT_FULLY_QUALIFIED_NAME = "net.sf.staccato.commons.check.Assert.";
 	private final StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport();
 	private final boolean ignoreReturns;
 

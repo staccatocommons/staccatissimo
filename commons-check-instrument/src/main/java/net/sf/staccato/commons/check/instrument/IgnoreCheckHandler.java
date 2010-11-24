@@ -14,13 +14,13 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
+import net.sf.staccato.commons.check.annotation.IgnoreChecks;
 import net.sf.staccato.commons.instrument.context.ConstructorAnnotationContext;
 import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
 import net.sf.staccato.commons.instrument.handler.AbstractDeactivatorAnnotationHandler;
 import net.sf.staccato.commons.instrument.handler.ClassAnnotationHandler;
 import net.sf.staccato.commons.instrument.handler.ConstructorAnnotationHandler;
 import net.sf.staccato.commons.instrument.handler.MethodAnnotationHandler;
-import net.sf.staccato.commons.lang.check.annotation.IgnoreChecks;
 
 /**
  * @author flbulgarelli
