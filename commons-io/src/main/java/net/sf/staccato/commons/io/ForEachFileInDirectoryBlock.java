@@ -16,9 +16,9 @@ package net.sf.staccato.commons.io;
 import java.io.File;
 import java.util.Iterator;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Executable2;
 import net.sf.staccato.commons.lang.block.Block;
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 import org.apache.commons.io.FileUtils;
 

@@ -14,8 +14,8 @@ package net.sf.staccato.commons.io;
 
 import java.io.File;
 
+import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.lang.Executable2;
-import net.sf.staccato.commons.lang.check.Ensure;
 
 /**
  * @author flbulgarelli
