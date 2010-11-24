@@ -14,15 +14,15 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.instrument.processor.AnnotatedArgumentContext;
-import net.sf.staccato.commons.instrument.processor.AnnotatedMethodContext;
+import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
+import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class NonNullProcessor extends AbstractCheckAnnotationProcessor {
+public class NotNullHandler extends AbstractCheckAnnotationHandler {
 
 	@Override
 	public Class<? extends Annotation> getSupportedAnnotationType() {
@@ -30,24 +30,21 @@ public class NonNullProcessor extends AbstractCheckAnnotationProcessor {
 	}
 
 	@Override
-	protected String createArgumentCheck(Object annotation,
-		AnnotatedArgumentContext context) {
+	protected String createArgumentCheck(Object annotation, ArgumentAnnotationContext context) {
 		NonNull nonNull = (NonNull) annotation;
 		return String.format(
-			"nonNull( \"%s\", %s);",
-			parameterName(context.getArgumentNumber(), nonNull.var()),
+			"isNotNull( \"%s\", %s);",
+			argumentName(context.getArgumentNumber(), nonNull.value()),
 			context.getArgumentName());
 	}
 
 	// TODO improve before continue adding the rest of the annotations
-	protected String createMethodCheck(Object annotation, AnnotatedMethodContext context) {
-		return "net.sf.staccato.commons.lang.check.Assert.nonNull( \""
-			+ createVarName((NonNull) annotation) + "\", " + context.getReturnName()
-			+ ");";
-	}
-
-	private static String createVarName(NonNull nonNull) {
-		return nonNull.var().isEmpty() ? "returnValue" : nonNull.var();
+	protected String createMethodCheck(Object annotation, MethodAnnotationContext context) {
+		NonNull nonNull = (NonNull) annotation;
+		return String.format(
+			"isNotNull( \"%s\", %s);",
+			createReturnName(nonNull.value()),
+			context.getReturnName());
 	}
 
 }

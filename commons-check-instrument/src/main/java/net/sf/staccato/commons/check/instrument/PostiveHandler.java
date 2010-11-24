@@ -14,9 +14,9 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.instrument.processor.AnnotatedArgumentContext;
-import net.sf.staccato.commons.instrument.processor.AnnotatedMethodContext;
-import net.sf.staccato.commons.lang.check.annotation.NonEmpty;
+import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
+import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
+import net.sf.staccato.commons.lang.check.annotation.Positive;
 
 import org.apache.commons.lang.NotImplementedException;
 
@@ -24,25 +24,22 @@ import org.apache.commons.lang.NotImplementedException;
  * @author flbulgarelli
  * 
  */
-public class NonEmptyProcessor extends AbstractCheckAnnotationProcessor {
+public class PostiveHandler extends AbstractCheckAnnotationHandler {
 
-	@Override
 	public Class<? extends Annotation> getSupportedAnnotationType() {
-		return NonEmpty.class;
+		return Positive.class;
 	}
 
-	@Override
-	protected String createArgumentCheck(Object annotation,
-		AnnotatedArgumentContext context) {
-		NonEmpty nonEmpty = (NonEmpty) annotation;
+	protected String createArgumentCheck(Object annotation, ArgumentAnnotationContext context) {
+		Positive positive = (Positive) annotation;
 		return String.format(
-			"notEmpty( \"%s\", %s);",
-			parameterName(context.getArgumentNumber(), nonEmpty.var()),
+			"that().isPositive( \"%s\", %s);",
+			argumentName(context.getArgumentNumber(), positive.value()),
 			context.getArgumentName());
 	}
 
-	@Override
-	protected String createMethodCheck(Object annotation, AnnotatedMethodContext context) {
+	protected String createMethodCheck(Object annotation, MethodAnnotationContext context) {
 		throw new NotImplementedException();
 	}
+
 }

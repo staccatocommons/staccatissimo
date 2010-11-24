@@ -14,8 +14,8 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.instrument.processor.AnnotatedArgumentContext;
-import net.sf.staccato.commons.instrument.processor.AnnotatedMethodContext;
+import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
+import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
 import net.sf.staccato.commons.lang.check.annotation.Matches;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -24,7 +24,7 @@ import org.apache.commons.lang.NotImplementedException;
  * @author flbulgarelli
  * 
  */
-public class MatchesProcessor extends AbstractCheckAnnotationProcessor {
+public class MatchesHandler extends AbstractCheckAnnotationHandler {
 
 	@Override
 	public Class<? extends Annotation> getSupportedAnnotationType() {
@@ -33,18 +33,17 @@ public class MatchesProcessor extends AbstractCheckAnnotationProcessor {
 
 	// FIXME improve caching the regexp statically in a class variable
 	@Override
-	protected String createArgumentCheck(Object annotation,
-		AnnotatedArgumentContext context) {
+	protected String createArgumentCheck(Object annotation, ArgumentAnnotationContext context) {
 		Matches matches = (Matches) annotation;
 		return String.format(
-			"matches( \"%s\", %s, \"%s\");",
-			parameterName(context.getArgumentNumber(), matches.var()),
+			"that().matches( \"%s\", %s, \"%s\");",
+			argumentName(context.getArgumentNumber(), matches.var()),
 			context.getArgumentName(),
 			matches.value());
 	}
 
 	@Override
-	protected String createMethodCheck(Object annotation, AnnotatedMethodContext context) {
+	protected String createMethodCheck(Object annotation, MethodAnnotationContext context) {
 		throw new NotImplementedException();
 	}
 
