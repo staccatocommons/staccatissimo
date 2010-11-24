@@ -22,8 +22,8 @@ import net.sf.staccato.commons.lang.check.annotation.NonNull;
  * @param <ExceptionType>
  * @param <ReturnType>
  */
-public abstract class DefaultLifecycle<ResourceType, ReturnType>
-	implements Lifecycle<ResourceType, ReturnType> {
+public abstract class DefaultLifecycle<ResourceType, ReturnType> implements
+	Lifecycle<ResourceType, ReturnType> {
 
 	public abstract ResourceType initialize() throws Exception;
 
@@ -31,17 +31,15 @@ public abstract class DefaultLifecycle<ResourceType, ReturnType>
 	 * Uses the resource, first invoking {@link #performTask(Object)} and the
 	 * {@link #produceResult(Object)}
 	 * */
-	public final ReturnType doWork(@NonNull ResourceType resource)
-		throws Exception {
-			performTask(resource);
-			return produceResult(resource);
+	public final ReturnType doWork(@NonNull ResourceType resource) throws Exception {
+		performTask(resource);
+		return produceResult(resource);
 	}
 
 	public void performTask(@NonNull ResourceType resource) throws Exception {
 	}
 
-	public ReturnType produceResult(@NonNull ResourceType resource)
-		throws Exception {
+	public ReturnType produceResult(@NonNull ResourceType resource) throws Exception {
 		return null;
 	}
 
@@ -66,9 +64,22 @@ public abstract class DefaultLifecycle<ResourceType, ReturnType>
 	/**
 	 * Executes this {@link Lifecycle}, creating a manager and executing it.
 	 * 
-	 * @return the return type of this lifecycle @
+	 * @return the return type of this lifecycle
 	 */
 	public ReturnType execute() {
 		return createManager().execute();
 	}
+
+	/**
+	 * Executes this {@link Lifecycle}, creating a manager and executing it,
+	 * checking a specific exception
+	 * 
+	 * @return the return type of this lifecycle
+	 * @throws Exception
+	 */
+	public <ExceptionType extends Exception> ReturnType executeThrowing(
+		Class<ExceptionType> exceptionClass) throws ExceptionType {
+		return createManager().executeThrowing(exceptionClass);
+	}
+
 }

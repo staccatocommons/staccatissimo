@@ -34,9 +34,13 @@ Staccato-Commons Organization
  
 Main Projects
 
- * staccato-commons-lang: the core staccatissimo library. It offers options, tuples, lazy values, functor object interfaces and abstract classes, builders, a generic validations ecosystem, jsrlifecycles, ranges, sequences, generic serialization managers and variables formatting.
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslang}staccato-commons-lang}}: the core staccatissimo library. It offers options, tuples, lazy values, functor object interfaces and abstract classes, builders, a generic validations ecosystem, jsrlifecycles, ranges, sequences, generic serialization managers and variables formatting.
  
- * staccato-commons-collections: Streams - a rich, lazy, iterable, general purpose collection generalization - and utility classes that offers near 50 frequent and simple, generic, algorithms on iterables, collections, maps and lists, like filtering (aka selecting), mapping (aka collecting), folding and reducing (aka injecting), zipping and testing a condition for all or any element, and much more.
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscollections}staccato-commons-collections}}: streams - rich, lazy, iterable, general purpose collection generalization - and utility classes that offers near 50 frequent and simple, generic, algorithms on iterables, collections, maps and lists, like filtering (aka selecting), mapping (aka collecting), folding and reducing (aka injecting), zipping and testing a condition for all or any element, and much more.
    
- * commons-testing 
+ * staccato-commons-testing
+ 
+ * staccato-commons-instrument
+ 
+ * staccato-commons-check-instrument and staccato-commons-check-instrument-maven-plugin 
  

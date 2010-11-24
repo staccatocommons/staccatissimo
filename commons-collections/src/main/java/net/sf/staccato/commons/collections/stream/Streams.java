@@ -18,8 +18,8 @@ import java.util.List;
 
 import net.sf.staccato.commons.collections.stream.impl.CollectionStream;
 import net.sf.staccato.commons.collections.stream.impl.IterableStream;
+import net.sf.staccato.commons.collections.stream.impl.ListStream;
 import net.sf.staccato.commons.collections.stream.impl.internal.EmptyStream;
-import net.sf.staccato.commons.collections.stream.impl.internal.ListStream;
 
 /**
  * Class methods for creating {@link Stream}s

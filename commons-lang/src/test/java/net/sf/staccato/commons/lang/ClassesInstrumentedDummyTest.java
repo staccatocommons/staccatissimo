@@ -10,22 +10,25 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.check.instrument;
+package net.sf.staccato.commons.lang;
 
-import net.sf.staccato.commons.instrument.AbstractInstrumentationMark;
+import org.junit.Test;
 
 /**
+ * 
+ * Test for verifyng the cheks processor is enabled and working fine
+ * 
  * @author flbulgarelli
  * 
  */
-public class CheckInstrumentationMark extends AbstractInstrumentationMark {
+public class ClassesInstrumentedDummyTest {
 
-	public String getMarkAttributeName() {
-		return "commons-check-instrument";
+	/**
+	 * Verifies that, at least, the notNull processor is working
+	 */
+	@SuppressWarnings("unused")
+	@Test(expected = IllegalArgumentException.class)
+	public void testArgumentsInstrumented() {
+		new MapBuilder(null);
 	}
-
-	public String getMark() {
-		return "instrumented";
-	}
-
 }

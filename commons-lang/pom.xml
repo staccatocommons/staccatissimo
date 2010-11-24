@@ -3,7 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.staccato</groupId>
 	<artifactId>commons-lang</artifactId>
-	<name>Staccato-Commons Lang</name>
+	<name>Staccato-Commons-Lang</name>
+	<description>Staccato-Commons core classes</description>
 	<version>1.0</version>
 	<parent>
 		<groupId>net.sf.staccato</groupId>
@@ -11,6 +12,31 @@
 		<version>0.1</version>
 	</parent>
 	<inceptionYear>2010</inceptionYear>
+	<distributionManagement>
+		<site>
+			<id> ${distribution.site.id}</id>
+			<url>${distribution.site.url}</url>
+		</site>
+	</distributionManagement>
+	<build>
+	<plugins>
+			<plugin>
+				<groupId>net.sf.staccato</groupId>
+				<artifactId>commons-check-instrument-maven-plugin</artifactId>
+				<version>0.1</version>
+				<configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>instrument</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins> 
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>commons-lang</groupId>
@@ -18,15 +44,26 @@
 			<version>2.4</version>
 		</dependency>
 		<dependency>
+			<groupId>net.sf.staccato</groupId>
+			<artifactId>commons-lang-minimal</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.staccato</groupId>
+			<artifactId>commons-check</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- TODO remove -->
+		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
 			<version>1.2.2</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency>	
 		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
-		</dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+		</dependency>	
 	</dependencies>
 </project>

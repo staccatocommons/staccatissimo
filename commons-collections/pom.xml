@@ -9,6 +9,12 @@
 		<artifactId>commons-parent-pom</artifactId>
 		<version>0.1</version>
 	</parent>
+		<distributionManagement>
+		<site>
+			<id> ${distribution.site.id}</id>
+			<url>${distribution.site.url}</url>
+		</site>
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.staccato</groupId>

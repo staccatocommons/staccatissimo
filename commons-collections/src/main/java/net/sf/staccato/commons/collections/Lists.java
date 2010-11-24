@@ -17,7 +17,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccato.commons.lang.check.Ensure;
-import net.sf.staccato.commons.lang.check.annotation.NonEmpty;
+import net.sf.staccato.commons.lang.check.annotation.NotEmpty;
 import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -66,7 +66,7 @@ public class Lists {
 		return list.remove(list.size() - 1);
 	}
 
-	public static <S> S first(@NonEmpty List<S> list) {
+	public static <S> S first(@NotEmpty List<S> list) {
 		return list.get(0);
 	}
 
@@ -82,7 +82,7 @@ public class Lists {
 		return list.get(2);
 	}
 
-	public static <S> S last(@NonEmpty List<S> list) {
+	public static <S> S last(@NotEmpty List<S> list) {
 		return list.get(list.size() - 1);
 	}
 }

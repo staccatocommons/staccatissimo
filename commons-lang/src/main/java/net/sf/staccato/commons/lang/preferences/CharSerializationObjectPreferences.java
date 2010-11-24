@@ -18,8 +18,8 @@ import java.util.prefs.Preferences;
 import net.sf.staccato.commons.lang.serialization.CharSerializationManager;
 
 import org.apache.commons.lang.SerializationException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * {@link ObjectPreferences} implementation that serializes objects using a
@@ -30,8 +30,8 @@ import org.apache.commons.logging.LogFactory;
 public class CharSerializationObjectPreferences implements ObjectPreferences {
 
 	// TODO move to sl4j
-	private static final Log log = LogFactory
-		.getLog(CharSerializationObjectPreferences.class);
+	private static final Logger log = LoggerFactory
+		.getLogger(CharSerializationObjectPreferences.class);
 
 	private final Preferences preferences;
 	private final CharSerializationManager serializationManager;
@@ -44,8 +44,7 @@ public class CharSerializationObjectPreferences implements ObjectPreferences {
 	 * @param stream
 	 *          non null.
 	 */
-	public CharSerializationObjectPreferences(Preferences preferences,
-		CharSerializationManager stream) {
+	public CharSerializationObjectPreferences(Preferences preferences, CharSerializationManager stream) {
 		this.preferences = preferences;
 		this.serializationManager = stream;
 	}
@@ -67,8 +66,8 @@ public class CharSerializationObjectPreferences implements ObjectPreferences {
 		try {
 			return (T) serializationManager.deserialize(valueAsString);
 		} catch (SerializationException e) {
-			log.warn("Could not read valid value for preference " + key
-				+ ", loading defaults " + defaultValue);
+			log.warn("Could not read valid value for preference " + key + ", loading defaults "
+				+ defaultValue);
 			log.debug("Loading preference " + key + "threw an exception", e);
 			return defaultValue;
 		}
