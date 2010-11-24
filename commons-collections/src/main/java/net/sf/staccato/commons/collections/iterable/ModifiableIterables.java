@@ -19,10 +19,10 @@ import static net.sf.staccato.commons.collections.iterable.internal.IterablesInt
 import java.util.Collection;
 import java.util.Iterator;
 
+import net.sf.staccato.commons.check.Ensure;
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Executable;
-import net.sf.staccato.commons.lang.check.Ensure;
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * A bunch of static methods that extend the {@link java.util.Collections}

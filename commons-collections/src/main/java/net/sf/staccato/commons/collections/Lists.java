@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-import net.sf.staccato.commons.lang.check.Ensure;
-import net.sf.staccato.commons.lang.check.annotation.NotEmpty;
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.Ensure;
+import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NotEmpty;
 
 import org.apache.commons.lang.ObjectUtils;
 

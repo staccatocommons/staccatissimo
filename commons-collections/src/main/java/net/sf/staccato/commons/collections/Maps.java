@@ -17,9 +17,9 @@ import static net.sf.staccato.commons.collections.iterable.internal.IterablesInt
 import java.util.Map;
 import java.util.SortedMap;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.MapBuilder;
 import net.sf.staccato.commons.lang.Option;
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * 

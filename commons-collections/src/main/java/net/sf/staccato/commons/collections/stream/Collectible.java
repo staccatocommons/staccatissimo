@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * {@link Stream} interface for converting an {@link Stream} into a {@link List}

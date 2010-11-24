@@ -41,13 +41,13 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import net.sf.staccato.commons.check.Ensure;
+import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NotNegative;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Option;
-import net.sf.staccato.commons.lang.check.Ensure;
-import net.sf.staccato.commons.lang.check.annotation.NotNegative;
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.function.Function2;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 import net.sf.staccato.commons.lang.tuple.Pair;

@@ -15,11 +15,11 @@ package net.sf.staccato.commons.collections.iterable.internal;
 import java.util.Collection;
 import java.util.Iterator;
 
+import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Option;
-import net.sf.staccato.commons.lang.check.Ensure;
 
 /**
  * This class is not part of of the public API of collections-extra.
