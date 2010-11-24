@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
+import java.lang.annotation.Annotation;
+
 import javassist.CannotCompileException;
 import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
 import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
@@ -26,12 +28,17 @@ import net.sf.staccato.commons.lang.check.Ensure;
  * @author flbulgarelli
  * 
  */
-public abstract class AbstractCheckAnnotationHandler implements MethodAnnotationHandler,
-	ArgumentAnnotationHandler, Deactivable {
+public abstract class AbstractCheckAnnotationHandler<T extends Annotation> implements
+	MethodAnnotationHandler, ArgumentAnnotationHandler, Deactivable {
 
 	protected static final String ENSURE_FULLY_QUALIFIED_NAME = "net.sf.staccato.commons.lang.check.Ensure.";
 	protected static final String ASSERT_FULLY_QUALIFIED_NAME = "net.sf.staccato.commons.lang.check.Assert.";
-	private StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport();
+	private final StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport();
+	private final boolean ignoreReturns;
+
+	public AbstractCheckAnnotationHandler(boolean ignoreReturns) {
+		this.ignoreReturns = ignoreReturns;
+	}
 
 	@Override
 	public final void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context) {
@@ -39,7 +46,7 @@ public abstract class AbstractCheckAnnotationHandler implements MethodAnnotation
 			return;
 		try {
 			context.getArgumentBehavior().insertBefore(
-				ENSURE_FULLY_QUALIFIED_NAME + createArgumentCheck(annotation, context));
+				ENSURE_FULLY_QUALIFIED_NAME + createArgumentCheck(annotation, context) + ";");
 		} catch (CannotCompileException e) {
 			context.logErrorMessage("Could not insert argument check: {0}", e.getMessage());
 			throw SoftException.soften(e);
@@ -48,7 +55,7 @@ public abstract class AbstractCheckAnnotationHandler implements MethodAnnotation
 
 	@Override
 	public final void preProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
-		if (!deactivableSupport.isActive())
+		if (ignoreReturns || !deactivableSupport.isActive())
 			return;
 		Ensure.is(!context.isVoid(), "Context must not be void");
 		try {
@@ -64,23 +71,29 @@ public abstract class AbstractCheckAnnotationHandler implements MethodAnnotation
 	public void postProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
 	}
 
-	/**
-	 * @param argumentNumber
-	 * @param annotation
-	 * @return
-	 */
-	protected abstract String createArgumentCheck(Object annotation,
-		ArgumentAnnotationContext argumentContext);
-
-	protected String argumentName(int argNumber, String annotatedVarName) {
-		return annotatedVarName.isEmpty() ? "var" + argNumber : annotatedVarName;
+	protected String createArgumentCheck(Object annotation, ArgumentAnnotationContext context) {
+		T typedAnnotation = (T) annotation;
+		return createCheckCode(
+			getArgumentMnemonic(context, getVarMnemonic(typedAnnotation)),
+			context.getArgumentIdentifier(),
+			typedAnnotation);
 	}
 
-	protected String createReturnName(String returnName) {
+	private String getArgumentMnemonic(ArgumentAnnotationContext context, String annotatedVarName) {
+		return annotatedVarName.isEmpty() ? "var" + context.getArgumentNumber() : annotatedVarName;
+	}
+
+	private String createMethodCheck(Object annotation, MethodAnnotationContext context) {
+		T typedAnnotation = (T) annotation;
+		return createCheckCode(
+			getReturnName(getVarMnemonic(typedAnnotation)),
+			context.getReturnIdentifier(),
+			typedAnnotation);
+	}
+
+	protected String getReturnName(String returnName) {
 		return returnName.isEmpty() ? "returnValue" : returnName;
 	}
-
-	protected abstract String createMethodCheck(Object annotation, MethodAnnotationContext context);
 
 	public final void deactivate() {
 		deactivableSupport.deactivate();
@@ -89,5 +102,10 @@ public abstract class AbstractCheckAnnotationHandler implements MethodAnnotation
 	public final void activate() {
 		deactivableSupport.activate();
 	}
+
+	protected abstract String createCheckCode(String argumentMnemonic, String argumentIdentifier,
+		T annotation);
+
+	protected abstract String getVarMnemonic(T annotation);
 
 }

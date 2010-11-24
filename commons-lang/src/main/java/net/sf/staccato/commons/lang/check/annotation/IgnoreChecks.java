@@ -18,12 +18,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * {@link IgnoreChecks} is a hint for automated annotation processors,
+ * suggesting that the {@link CheckAnnotation} in the annotated element and its
+ * descendants should be ignored
+ * 
+ * TODO add examples
  * 
  * @author flbulgarelli
  */
 @Retention(RetentionPolicy.CLASS)
-@Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.FIELD,
-		ElementType.TYPE })
+@Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.TYPE })
 public @interface IgnoreChecks {
 
 }

@@ -14,35 +14,36 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.check.annotation.Size;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class NotNullHandler extends AbstractCheckAnnotationHandler<NonNull> {
+public class SizeHandler extends AbstractCheckAnnotationHandler<Size> {
 
 	/**
-	 * Creates a new {@link NotNullHandler}
+	 * Creates a new {@link SizeHandler}
 	 */
-	public NotNullHandler(boolean ignoreReturns) {
+	public SizeHandler(boolean ignoreReturns) {
 		super(ignoreReturns);
 	}
 
-	@Override
 	public Class<? extends Annotation> getSupportedAnnotationType() {
-		return NonNull.class;
+		return Size.class;
 	}
 
-	@Override
-	protected String getVarMnemonic(NonNull nonNull) {
-		return nonNull.value();
-	}
-
-	@Override
 	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		NonNull annotation) {
-		return String.format("isNotNull( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
+		Size annotation) {
+		return String.format(
+			"that().isSize(\"%s\", %s, %s)",
+			argumentMnemonic,
+			argumentIdentifier,
+			annotation.value());
+	}
+
+	protected String getVarMnemonic(Size annotation) {
+		return annotation.var();
 	}
 
 }

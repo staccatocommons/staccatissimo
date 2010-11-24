@@ -35,6 +35,14 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2> {
 	protected void softExec(T1 argument1, T2 argument2) throws Exception {
 	}
 
+	public Block<T2> exec(final T1 argument1) {
+		return new Block<T2>() {
+			public void exec(T2 argument2) {
+				Block2.this.exec(argument1, argument2);
+			}
+		};
+	}
+
 	public final Block2<T1, T2> then(final Block2<T1, T2> other) {
 		return new Block2<T1, T2>() {
 			public void exec(T1 argument1, T2 argument2) {

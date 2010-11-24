@@ -14,37 +14,37 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
-import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
 import net.sf.staccato.commons.lang.check.annotation.Matches;
-
-import org.apache.commons.lang.NotImplementedException;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class MatchesHandler extends AbstractCheckAnnotationHandler {
+public class MatchesHandler extends AbstractCheckAnnotationHandler<Matches> {
+
+	/**
+	 * Creates a new {@link MatchesHandler}
+	 */
+	public MatchesHandler(boolean ignoreReturns) {
+		super(ignoreReturns);
+	}
 
 	@Override
 	public Class<? extends Annotation> getSupportedAnnotationType() {
 		return Matches.class;
 	}
 
-	// FIXME improve caching the regexp statically in a class variable
-	@Override
-	protected String createArgumentCheck(Object annotation, ArgumentAnnotationContext context) {
-		Matches matches = (Matches) annotation;
+	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
+		Matches annotation) {
 		return String.format(
-			"that().matches( \"%s\", %s, \"%s\");",
-			argumentName(context.getArgumentNumber(), matches.var()),
-			context.getArgumentName(),
-			matches.value());
+			"that().matches( \"%s\", %s, \"%s\")",
+			argumentMnemonic,
+			argumentIdentifier,
+			annotation.value());
 	}
 
-	@Override
-	protected String createMethodCheck(Object annotation, MethodAnnotationContext context) {
-		throw new NotImplementedException();
+	protected String getVarMnemonic(Matches annotation) {
+		return annotation.var();
 	}
 
 }

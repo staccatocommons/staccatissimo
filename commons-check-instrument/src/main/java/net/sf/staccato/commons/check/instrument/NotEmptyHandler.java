@@ -14,34 +14,33 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
-import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
 import net.sf.staccato.commons.lang.check.annotation.NotEmpty;
-
-import org.apache.commons.lang.NotImplementedException;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class NotEmptyHandler extends AbstractCheckAnnotationHandler {
+public class NotEmptyHandler extends AbstractCheckAnnotationHandler<NotEmpty> {
+
+	/**
+	 * Creates a new {@link NotEmptyHandler}
+	 */
+	public NotEmptyHandler(boolean ignoreReturns) {
+		super(ignoreReturns);
+	}
 
 	@Override
 	public Class<? extends Annotation> getSupportedAnnotationType() {
 		return NotEmpty.class;
 	}
 
-	@Override
-	protected String createArgumentCheck(Object annotation, ArgumentAnnotationContext context) {
-		NotEmpty nonEmpty = (NotEmpty) annotation;
-		return String.format(
-			"that().isNotEmpty( \"%s\", %s);",
-			argumentName(context.getArgumentNumber(), nonEmpty.value()),
-			context.getArgumentName());
+	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
+		NotEmpty annotation) {
+		return String.format("that().isNotEmpty( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
 	}
 
-	@Override
-	protected String createMethodCheck(Object annotation, MethodAnnotationContext context) {
-		throw new NotImplementedException();
+	protected String getVarMnemonic(NotEmpty annotation) {
+		return annotation.value();
 	}
+
 }

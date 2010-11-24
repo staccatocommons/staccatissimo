@@ -14,32 +14,32 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
-import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
 import net.sf.staccato.commons.lang.check.annotation.Positive;
-
-import org.apache.commons.lang.NotImplementedException;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class PostiveHandler extends AbstractCheckAnnotationHandler {
+public class PostiveHandler extends AbstractCheckAnnotationHandler<Positive> {
+
+	/**
+	 * Creates a new {@link PostiveHandler}
+	 */
+	public PostiveHandler(boolean ignoreReturns) {
+		super(ignoreReturns);
+	}
 
 	public Class<? extends Annotation> getSupportedAnnotationType() {
 		return Positive.class;
 	}
 
-	protected String createArgumentCheck(Object annotation, ArgumentAnnotationContext context) {
-		Positive positive = (Positive) annotation;
-		return String.format(
-			"that().isPositive( \"%s\", %s);",
-			argumentName(context.getArgumentNumber(), positive.value()),
-			context.getArgumentName());
+	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
+		Positive annotation) {
+		return String.format("that().isPositive( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
 	}
 
-	protected String createMethodCheck(Object annotation, MethodAnnotationContext context) {
-		throw new NotImplementedException();
+	protected String getVarMnemonic(Positive annotation) {
+		return annotation.value();
 	}
 
 }

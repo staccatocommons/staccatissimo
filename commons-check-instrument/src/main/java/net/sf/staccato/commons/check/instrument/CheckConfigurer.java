@@ -21,16 +21,24 @@ import net.sf.staccato.commons.instrument.InstrumenterConfigurer;
  */
 public class CheckConfigurer implements InstrumenterConfigurer {
 
+	private boolean ignoreReturns;
+
+	/**
+	 * Creates a new {@link CheckConfigurer}
+	 */
+	public CheckConfigurer(boolean ignoreReturns) {
+		this.ignoreReturns = ignoreReturns;
+	}
+
 	public void configureInstrumenter(InstrumenterConfiguration instrumenter) {
 
 		IgnoreCheckHandler ignoreCheckHandler = new IgnoreCheckHandler();
-
 		instrumenter
 			.addAnnotationHanlder(ignoreCheckHandler)
-			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new NotNullHandler()))
-			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new NotEmptyHandler()))
-			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new PostiveHandler()))
-			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new MatchesHandler()))
+			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new NotNullHandler(ignoreReturns)))
+			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new NotEmptyHandler(ignoreReturns)))
+			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new PostiveHandler(ignoreReturns)))
+			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new MatchesHandler(ignoreReturns)))
 			.setInstrumentationMark(new CheckInstrumentationMark())
 			.ensureConfigured();
 	}

@@ -25,27 +25,25 @@ import net.sf.staccato.commons.lang.collection.EmptyAware;
 import net.sf.staccato.commons.lang.collection.SizeAware;
 import net.sf.staccato.commons.lang.format.Var;
 
-import org.apache.commons.lang.Validate;
-
 /**
  * 
  * A {@link Check} is an object designed to validate conditions. It is heavily
- * inspired on {@link Validate}, but is designed to be more flexible and
- * easy-to-use, so, it should be seen as higher lever replacement.
+ * inspired on several validation utilities like
+ * {@link org.apache.commons.lang.Validate} from Apache commons, but is designed
+ * to be more flexible and easy-to-use, so, it should be seen as higher lever
+ * replacement.
  * 
  * The four main differences are the following
  * <ul>
  * <li>
  * This class is abstract and offers instance methods, and the exact behavior
- * when checks fail depends on subclasses. Two concrete implementation of
- * {@link Check}, with static methods like the original {@link Validate} class,
- * are {@link Ensure} and {@link Assert}</li>
- * <li> {@link Check} offers a rich interface, instead of the thin interface
- * offered by {@link Validate}. Not only method for checking nulls or boolean
- * values, but also, {@link Collection}s sizes, regular expresion and so on are
- * exposed</li>
- * <li>Messages are partially automatically generated, so most user code do not
- * need to provide string that tell what it is checking</li>
+ * when checks fail depends on subclasses. Three concrete implementation of
+ * {@link Check}, are {@link Ensure}, {@link Assert} and {@link Validate}</li>
+ * <li> {@link Check} offers a rich interface. Not only method for checking nulls
+ * or boolean values, but also, {@link Collection}s sizes, regular expresion and
+ * so on are exposed</li>
+ * <li>Simple messages are automatically generated, so most user code do not
+ * need to provide strings that tell what it is checking</li>
  * <li>Exception type thrown by implementors is generic, so they can throw
  * either checked or unchecked exceptions at no cost for client code</li>
  * </ul>
@@ -670,12 +668,16 @@ public abstract class Check<ExceptionType extends Throwable> {
 				max);
 	}
 
-	public <T> void contains(String varName, ContainsAware<T> var, T element) throws ExceptionType {
-		if (!var.contains(element))
-			fail(varName, var,//
-				"%s must contain %s",
-				Var.format(varName, var),
-				element);
+	public <T> Check<ExceptionType> contains(String varName, ContainsAware<T> var, T element)
+		throws ExceptionType {
+		return isNotNull(varName, var)//
+			.is(varName, var, var.contains(element), "must contain %s", element);
+	}
+
+	public <T> Check<ExceptionType> isIn(String varName, T var, ContainsAware<T> container)
+		throws ExceptionType {
+		return isNotNull(varName, var)//
+			.is(varName, var, container.contains(var), "must be in %s", container);
 	}
 
 	public <T extends Comparable<T>> void isGreatherThan(String varName, T var, T other)
@@ -700,27 +702,60 @@ public abstract class Check<ExceptionType extends Throwable> {
 	// return not.value();
 	// }
 
-	// TODO something in something
-	// TODO something contains something
-
+	/**
+	 * A basic check failure
+	 * 
+	 * @author flbulgarelli
+	 */
 	public static class Failure {
 		private final String message;
 		private final Object[] messageArgs;
 
+		/**
+		 * Creates a new {@link Failure}
+		 * 
+		 * @param message
+		 *          the failure message
+		 * @param messageArgs
+		 *          the failure message arguments
+		 */
 		public Failure(String message, Object... messageArgs) {
 			this.message = message;
 			this.messageArgs = messageArgs;
 		}
 
+		/**
+		 * @return the failure message
+		 */
 		public String createMessage() {
 			return String.format(message, messageArgs);
 		}
 	}
 
+	/**
+	 * A check failure that contains the name and value of the variable that was
+	 * checked
+	 * 
+	 * @author flbulgarelli
+	 * 
+	 */
 	public static class VarFailure extends Failure {
 		private final String varName;
 		private final Object var;
 
+		/**
+		 * Creates a new {@link VarFailure}
+		 * 
+		 * @param varName
+		 *          the name of the variable checked
+		 * @param var
+		 *          the variable checked
+		 * 
+		 * @param message
+		 *          the failure message
+		 * @param messageArgs
+		 *          the failure message arguments
+		 */
 		public VarFailure(String varName, Object var, String message, Object... messageArgs) {
 			super(message, messageArgs);
 			this.varName = varName;
@@ -741,10 +776,17 @@ public abstract class Check<ExceptionType extends Throwable> {
 			return varName;
 		}
 
+		/**
+		 * @return the failure message, which does not contain the variable name nor
+		 *         value
+		 */
 		public String createSimpleMessage() {
 			return super.createMessage();
 		}
 
+		/**
+		 * @return the failure message, which contains the variable name and value
+		 */
 		public String createMessage() {
 			return Var.format("Check failure: ", varName, var, super.createMessage());
 		}
