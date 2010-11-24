@@ -34,7 +34,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
-public @interface NonNegative {
+public @interface NotNegative {
 
 	/**
 	 * @return The variable name of the constrained element, or the empty string

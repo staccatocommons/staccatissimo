@@ -32,12 +32,12 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
-public @interface NonEmpty {
+public @interface NotEmpty {
 
 	/**
 	 * @return The variable name of the constrained element, or the empty string
 	 *         if unspecified. This value may help tools that analyze this
 	 *         annotation without access to source code.
 	 */
-	String var() default "";
+	String value() default "";
 }
