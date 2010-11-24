@@ -46,12 +46,12 @@
 		<dependency>
 			<groupId>net.sf.staccato</groupId>
 			<artifactId>commons-lang-minimal</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccato</groupId>
 			<artifactId>commons-check</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<!-- TODO remove -->
 		<dependency>
