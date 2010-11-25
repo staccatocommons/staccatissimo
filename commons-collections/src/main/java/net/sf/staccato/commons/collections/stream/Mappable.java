@@ -49,6 +49,5 @@ public interface Mappable<A> {
 	 *         each element and concatenating those transformations
 	 */
 	@Projection
-	<B> Stream<B> flatMap(
-		@NonNull Applicable<? super A, ? extends Iterable<? extends B>> function);
+	<B> Stream<B> flatMap(@NonNull Applicable<? super A, ? extends Iterable<? extends B>> function);
 }
