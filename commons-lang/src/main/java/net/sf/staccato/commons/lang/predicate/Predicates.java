@@ -15,8 +15,8 @@ package net.sf.staccato.commons.lang.predicate;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Evaluable;
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.predicate.internal.All;
 import net.sf.staccato.commons.lang.predicate.internal.Any;
 import net.sf.staccato.commons.lang.predicate.internal.ContainsSubstringPredicate;

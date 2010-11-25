@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * <p>

@@ -12,10 +12,10 @@
  */
 package net.sf.staccato.commons.lang.block;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Executable;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.lang.block.internal.Then;
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * An abstract, one argument code block, that implements {@link Executable}

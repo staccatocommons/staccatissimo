@@ -12,7 +12,7 @@
  */
 package net.sf.staccato.commons.lang.builder;
 
-import net.sf.staccato.commons.lang.check.Check;
+import net.sf.staccato.commons.check.Check;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 

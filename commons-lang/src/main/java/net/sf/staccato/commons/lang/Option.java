@@ -15,7 +15,7 @@ package net.sf.staccato.commons.lang;
 
 import java.util.Map;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.SizeAware;
 import net.sf.staccato.commons.lang.value.Unmodifiable;

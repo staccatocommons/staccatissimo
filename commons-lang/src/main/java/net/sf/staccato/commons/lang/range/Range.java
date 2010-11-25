@@ -12,8 +12,8 @@
  */
 package net.sf.staccato.commons.lang.range;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Compare;
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.EmptyAware;
 import net.sf.staccato.commons.lang.value.Unmodifiable;

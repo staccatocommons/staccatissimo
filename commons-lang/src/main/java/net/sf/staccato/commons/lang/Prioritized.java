@@ -12,7 +12,7 @@
  */
 package net.sf.staccato.commons.lang;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * A {@link Provider} that is {@link Comparable}, based on a priority attribute.

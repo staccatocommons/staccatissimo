@@ -14,7 +14,7 @@ package net.sf.staccato.commons.lang;
 
 import java.util.Comparator;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NonNull;
 
 import org.apache.commons.lang.ObjectUtils;
 

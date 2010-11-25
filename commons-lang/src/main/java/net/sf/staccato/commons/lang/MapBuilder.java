@@ -19,9 +19,9 @@ import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.builder.Builder;
 import net.sf.staccato.commons.lang.builder.BuilderAlreadyUsedException;
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
 
 /**
  * 

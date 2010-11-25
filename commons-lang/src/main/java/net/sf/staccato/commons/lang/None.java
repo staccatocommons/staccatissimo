@@ -15,7 +15,7 @@ package net.sf.staccato.commons.lang;
 import java.util.Collections;
 import java.util.Iterator;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * An undefined {@link Option}, that it, and option that does not have a value

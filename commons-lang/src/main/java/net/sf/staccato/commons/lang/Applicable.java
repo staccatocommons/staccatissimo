@@ -12,7 +12,7 @@
  */
 package net.sf.staccato.commons.lang;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * {@link Applicable}s are computations that take one argument and whose result

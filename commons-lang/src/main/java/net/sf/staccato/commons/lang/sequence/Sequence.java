@@ -15,9 +15,9 @@ package net.sf.staccato.commons.lang.sequence;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
-import net.sf.staccato.commons.lang.check.Ensure;
 import net.sf.staccato.commons.lang.value.Unmodifiable;
 import net.sf.staccato.commons.lang.value.ValueObject;
 

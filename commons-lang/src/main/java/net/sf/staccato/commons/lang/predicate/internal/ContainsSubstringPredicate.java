@@ -12,7 +12,7 @@
  */
 package net.sf.staccato.commons.lang.predicate.internal;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**

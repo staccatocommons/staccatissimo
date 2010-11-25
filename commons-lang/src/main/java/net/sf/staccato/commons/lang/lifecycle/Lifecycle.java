@@ -12,7 +12,7 @@ GNU Lesser General Public License for more details.
  */
 package net.sf.staccato.commons.lang.lifecycle;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * A {@link Lifecycle} represents a flow of initialization, usage and dispose of

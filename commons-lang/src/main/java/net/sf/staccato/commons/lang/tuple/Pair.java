@@ -14,7 +14,7 @@ package net.sf.staccato.commons.lang.tuple;
 
 import java.util.Map;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * Two-components {@link Tuple}

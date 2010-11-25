@@ -14,7 +14,7 @@ package net.sf.staccato.commons.lang;
 
 import java.util.concurrent.Callable;
 
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * A {@link SoftException} is a {@link RuntimeException} that wraps another with

@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.lang.predicate;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Executable;
@@ -20,7 +21,6 @@ import net.sf.staccato.commons.lang.Executable3;
 import net.sf.staccato.commons.lang.block.Block;
 import net.sf.staccato.commons.lang.block.Block2;
 import net.sf.staccato.commons.lang.block.Block3;
-import net.sf.staccato.commons.lang.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.function.Function;
 import net.sf.staccato.commons.lang.predicate.internal.And;
 import net.sf.staccato.commons.lang.predicate.internal.Not;
