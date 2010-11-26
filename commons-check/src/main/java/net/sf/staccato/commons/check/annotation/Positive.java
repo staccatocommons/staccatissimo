@@ -31,7 +31,7 @@ import java.lang.annotation.Target;
  */
 @CheckAnnotation
 @Documented
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
 public @interface Positive {
 	/**

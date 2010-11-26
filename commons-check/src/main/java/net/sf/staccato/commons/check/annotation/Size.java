@@ -21,10 +21,9 @@ import java.util.Collections;
 
 /**
  * <p>
- * An annotation that signals that an annotated must have an specific size
- * or length. This annotation should only be applied to elements that understand
- * a length or size attribute, or length, or size method, like
- * {@link Collections}, {@link String}s and arrays.
+ * An annotation that signals that an annotated must have an specific size or
+ * length. This annotation should only be applied to elements that understand a
+ * length or size attribute, or length, or size method, like {@link Collections}, {@link String}s and arrays.
  * </p>
  * 
  * @author flbulgarelli
@@ -32,7 +31,7 @@ import java.util.Collections;
  */
 @CheckAnnotation
 @Documented
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
 public @interface Size {
 
