@@ -35,7 +35,6 @@ public interface Collectible<A> {
 	 *         {@link Stream}
 	 */
 	@NonNull
-	@Reduction
 	Set<A> toSet();
 
 	/**
@@ -43,11 +42,9 @@ public interface Collectible<A> {
 	 *         {@link Stream}
 	 */
 	@NonNull
-	@Reduction
 	List<A> toList();
 
 	@NonNull
-	@Reduction
 	A[] toArray(Class<? extends A> clazz);
 
 	/*

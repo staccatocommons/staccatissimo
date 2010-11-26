@@ -14,6 +14,8 @@ package net.sf.staccato.commons.collections.stream.impl;
 
 import java.util.List;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
+
 /**
  * 
  * @author flbulgarelli
@@ -22,7 +24,7 @@ import java.util.List;
  */
 public class ListStream<A> extends CollectionStream<A> {
 
-	public ListStream(List<A> iterable) {
+	public ListStream(@NonNull List<A> iterable) {
 		super(iterable);
 	}
 

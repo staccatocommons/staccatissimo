@@ -15,6 +15,7 @@ package net.sf.staccato.commons.collections.stream.impl;
 import java.util.Collection;
 import java.util.Iterator;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.collections.iterable.internal.UnmodifiableIterator;
 import net.sf.staccato.commons.collections.stream.AbstractStream;
 
@@ -34,7 +35,7 @@ public class CollectionStream<A> extends AbstractStream<A> {
 	 * @param collection
 	 *          the collection to wrap
 	 */
-	public CollectionStream(Collection<A> collection) {
+	public CollectionStream(@NonNull Collection<A> collection) {
 		this.collection = collection;
 	}
 

@@ -39,7 +39,6 @@ public interface Searchable<T> {
 	 * @throws NoSuchElementException
 	 *           if this {@link Searchable} has no elements.
 	 */
-	@Reduction
 	T any();
 
 	/**
@@ -51,7 +50,6 @@ public interface Searchable<T> {
 	 * @return <code>Option.some(element)</code> if there is at least one element,
 	 *         or <code>Option.none()</code>, otherwise.
 	 */
-	@Reduction
 	Option<T> anyOrNone();
 
 	/**
@@ -59,7 +57,6 @@ public interface Searchable<T> {
 	 * 
 	 * @return <code>anyOrNone().valueOrNull()</code>
 	 */
-	@Reduction
 	T anyOrNull();
 
 	/**
@@ -69,7 +66,6 @@ public interface Searchable<T> {
 	 * 
 	 * @return <code>anyOrNone().valueOrElse(provider)</code>
 	 */
-	@Reduction
 	T anyOrElse(Provider<T> provider);
 
 	/**
@@ -78,7 +74,6 @@ public interface Searchable<T> {
 	 * @param value
 	 * @return <code>anyOrNone().valueOrElse(value)</code>
 	 */
-	@Reduction
 	T anyOrElse(T value);
 
 	/**
@@ -93,7 +88,6 @@ public interface Searchable<T> {
 	 *           if no element matches the predicate, or {@link Searchable} has
 	 *           not elements
 	 */
-	@Reduction
 	T find(Evaluable<? super T> predicate);
 
 	/* TODO UPDATE ** */
@@ -108,7 +102,6 @@ public interface Searchable<T> {
 	 * @return None if no element matches the predicate or collection is empty, or
 	 *         some(element) if at least one exists
 	 */
-	@Reduction
 	Option<T> findOrNone(Evaluable<? super T> predicate);
 
 	/**
@@ -120,7 +113,6 @@ public interface Searchable<T> {
 	 * @return null if element is not found or collection is empty, or the
 	 *         element, if found.
 	 */
-	@Reduction
 	T findOrNull(Evaluable<? super T> predicate);
 
 	/**
@@ -133,7 +125,6 @@ public interface Searchable<T> {
 	 *          factory to be invoked if no such element exists. Non null
 	 * @return the element if found, or ifNone.create() otherwise
 	 */
-	@Reduction
 	T findOrElse(Evaluable<? super T> predicate, Provider<? extends T> ifNone);
 
 	// TODO findOrElse(element)

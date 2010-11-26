@@ -16,12 +16,9 @@ import net.sf.staccato.commons.lang.Applicable2;
 
 public interface Foldable<A> {
 
-	@Reduction
 	A reduce(Applicable2<? super A, ? super A, ? extends A> function);
 
-	@Reduction
 	<B> B fold(B initial, Applicable2<? super B, ? super A, ? extends B> function);
 
-	@Reduction
 	String joinStrings(String separator);
 }

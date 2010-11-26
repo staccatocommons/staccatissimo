@@ -15,6 +15,25 @@
 			<url>${distribution.site.url}</url>
 		</site>
 	</distributionManagement>
+	<build>
+	<plugins>
+			<plugin>
+				<groupId>net.sf.staccato</groupId>
+				<artifactId>commons-check-instrument-maven-plugin</artifactId>
+				<version>0.1</version>
+				<configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>instrument</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins> 
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.staccato</groupId>

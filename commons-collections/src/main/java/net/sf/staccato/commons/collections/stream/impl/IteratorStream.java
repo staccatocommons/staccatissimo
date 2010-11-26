@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team   
+ Copyright (c) 2010, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -15,33 +15,35 @@ package net.sf.staccato.commons.collections.stream.impl;
 import java.util.Iterator;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.collections.iterable.internal.UnmodifiableIterator;
 import net.sf.staccato.commons.collections.stream.AbstractStream;
+import net.sf.staccato.commons.collections.stream.Stream;
 
 /**
- * A stream that retrieves elements from an {@link Iterable}
+ * 
+ * An {@link Stream} that gets elements from an iterator. This Stream can not be
+ * iterated more than once
  * 
  * @author flbulgarelli
- * 
  * @param <A>
- *          the element type
+ *          element type
  */
-public class IterableStream<A> extends AbstractStream<A> {
+public class IteratorStream<A> extends AbstractStream<A> {
 
-	private final Iterable<A> iterable;
+	private final Iterator iterator;
 
 	/**
-	 * Creates a new {@link IterableStream} that wraps the given {@link Iterable}
 	 * 
-	 * @param iterable
+	 * Creates a new {@link IteratorStream}
+	 * 
+	 * @param iterator
+	 *          the iterator to wrap
 	 */
-	public IterableStream(@NonNull Iterable<A> iterable) {
-		this.iterable = iterable;
+	public IteratorStream(@NonNull Iterator iterator) {
+		this.iterator = iterator;
 	}
 
-	@Override
 	public Iterator<A> iterator() {
-		return new UnmodifiableIterator<A>(iterable.iterator());
+		return iterator;
 	}
 
 }

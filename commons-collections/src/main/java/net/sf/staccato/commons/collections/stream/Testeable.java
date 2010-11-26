@@ -30,7 +30,6 @@ public interface Testeable<T> {
 	 *          an {@link Evaluable} to evaluate each element
 	 * @return if all the elements evaluate to true
 	 */
-	@Reduction
 	boolean all(Evaluable<? super T> predicate);
 
 	/**
@@ -40,7 +39,6 @@ public interface Testeable<T> {
 	 *          an {@link Evaluable} to evaluate each element
 	 * @return if any element evaluate to true
 	 */
-	@Reduction
 	boolean any(Evaluable<? super T> predicate);
 
 }
