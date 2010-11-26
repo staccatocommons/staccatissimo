@@ -279,19 +279,39 @@ public class Iterables {
 		return false;
 	}
 
+	/**
+	 * Answers if the given {@link Iterable} is empty or not, that is, if its
+	 * iterator returns at least one element.
+	 * 
+	 * @param <T>
+	 *          the iterable element type
+	 * @param iterable
+	 * @return if the iterable is empty or not
+	 */
 	public static <T> boolean isEmpty(@NonNull(ITERABLE) Iterable<T> iterable) {
 		return isEmptyInternal(iterable);
 	}
 
+	/**
+	 * Answers if the given {@link Iterable} is empty or null
+	 * 
+	 * @param <T>
+	 *          the iterable element type
+	 * @param iterable
+	 * @return if the iterable is null or empty
+	 * @see #isEmpty(Iterable)
+	 */
 	public static <T> boolean isNullOrEmpty(@NonNull(ITERABLE) Iterable<T> iterable) {
 		return iterable == null || isEmptyInternal(iterable);
 	}
 
 	/**
+	 * Answers if the given {@link Collection} is empty or null
 	 * 
 	 * @param <T>
+	 *          the collection element type
 	 * @param collection
-	 * @return true if the collection is null or empty
+	 * @return if the collection is null or empty
 	 */
 	public static <T> boolean isNullOrEmpty(@NonNull(COLLECTION) Collection<T> collection) {
 		return collection == null || collection.isEmpty();

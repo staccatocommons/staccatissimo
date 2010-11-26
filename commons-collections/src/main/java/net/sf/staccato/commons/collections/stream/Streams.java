@@ -78,12 +78,12 @@ public class Streams {
 		return new IteratorStream<A>(iterator);
 	}
 
-	// @NonNull
+	// TODO @NonNull
 	// public static <A> Stream<A> from(@NonNull Enumeration<A> enumeration) {
 	// return new EnumerationStream<A>(iterable);
 	// }
 	//
-	// @NonNull
+	// TODO @NonNull
 	// public static <A> Stream<A> from(@NonNull CharSequence charSequence) {
 	// return new CharSequenceStream<A>(iterable);
 	// }

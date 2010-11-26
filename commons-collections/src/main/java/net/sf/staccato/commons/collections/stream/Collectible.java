@@ -44,12 +44,15 @@ public interface Collectible<A> {
 	@NonNull
 	List<A> toList();
 
-	@NonNull
-	A[] toArray(Class<? extends A> clazz);
-
-	/*
-	 * @NonNull
+	/**
+	 * Create a new array that has the same elements that the retrived by this
+	 * {@link Stream}
 	 * 
-	 * @Reduction Stream<A> toStream();
+	 * @param clazz
+	 *          the array component class
+	 * @return a new array
 	 */
+	@NonNull
+	A[] toArray(@NonNull Class<? extends A> clazz);
+
 }

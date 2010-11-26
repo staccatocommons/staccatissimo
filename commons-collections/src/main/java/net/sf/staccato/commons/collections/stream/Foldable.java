@@ -14,6 +14,9 @@ package net.sf.staccato.commons.collections.stream;
 
 import net.sf.staccato.commons.lang.Applicable2;
 
+/**
+ * @author flbulgarelli
+ */
 public interface Foldable<A> {
 
 	A reduce(Applicable2<? super A, ? super A, ? extends A> function);

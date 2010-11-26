@@ -15,18 +15,24 @@ package net.sf.staccato.commons.collections.iterable.internal;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-
 /**
+ * A singleton iterator that retrieves no elements. Calling {@link #hasNext()}
+ * will always return false, and calling {@link #next()} will throw a
+ * {@link NoSuchElementException}
+ * 
  * @author flbulgarelli
  * @param <T>
+ *          the element type
  * 
  */
-public class EmptyIterator<T> extends AbstractUnmodifiableIterator<T> {
+public final class EmptyIterator<T> extends AbstractUnmodifiableIterator<T> {
 
 	private static final Iterator INSTANCE = new EmptyIterator();
 
 	/**
-	 * @return
+	 * @param <T>
+	 *          the type of the iterator element
+	 * @return the singleton instance
 	 */
 	public static <T> Iterator<T> getInstance() {
 		return INSTANCE;

@@ -573,9 +573,12 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * Checks the var is &lt;= 0
 	 * 
 	 * @param varName
+	 *          the name of the variable to be checked
 	 * @param var
-	 * @return
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
+	 *           if the check failed
 	 */
 	public Check<ExceptionType> isPositive(String varName, long var) throws ExceptionType {
 		return isPositive(varName, var, var > 0);
@@ -585,9 +588,12 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * Checks the var is &lt;= 0
 	 * 
 	 * @param varName
+	 *          the name of the variable to be checked
 	 * @param var
-	 * @return
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
+	 *           if the check failed
 	 */
 	public Check<ExceptionType> isPositive(String varName, int var) throws ExceptionType {
 		return isPositive(varName, var, var > 0);
@@ -597,9 +603,12 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * Checks the var is &lt;= 0
 	 * 
 	 * @param varName
+	 *          the name of the variable to be checked
 	 * @param var
-	 * @return
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
+	 *           if the check failed
 	 */
 	public Check<ExceptionType> isPositive(String varName, double var) throws ExceptionType {
 		return isPositive(varName, var, var > 0);
@@ -609,35 +618,42 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * Checks the var is &lt;= 0
 	 * 
 	 * @param varName
+	 *          the name of the variable to be checked
 	 * @param var
-	 * @return
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
+	 *           if the check failed
 	 */
 	public Check<ExceptionType> isPositive(String varName, float var) throws ExceptionType {
 		return isPositive(varName, var, var > 0);
 	}
 
 	/**
-	 * Checks the var is &lt;= 0
+	 * Checks the var is not null &lt;= 0
 	 * 
 	 * @param varName
+	 *          the name of the variable to be checked
 	 * @param var
-	 *          not null
-	 * @return
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
+	 *           if the check failed
 	 */
 	public Check<ExceptionType> isPositive(String varName, BigDecimal var) throws ExceptionType {
 		return isNotNull(varName, var).isPositive(varName, var, var.compareTo(BigDecimal.ZERO) > 0);
 	}
 
 	/**
-	 * Checks the var is &lt;= 0
+	 * Checks the var is not null and &lt;= 0
 	 * 
 	 * @param varName
+	 *          the name of the variable to be checked
 	 * @param var
-	 *          not null.
-	 * @return
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
+	 *           if the check failed
 	 */
 	public Check<ExceptionType> isPositive(String varName, BigInteger var) throws ExceptionType {
 		return isNotNull(varName, var).isPositive(varName, var, var.compareTo(BigInteger.ZERO) > 0);
@@ -664,6 +680,21 @@ public abstract class Check<ExceptionType extends Throwable> {
 			max);
 	}
 
+	/**
+	 * Checks that the variable contains the given element
+	 * 
+	 * @param <T>
+	 *          the contained element type
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param element
+	 *          the element that the variable must contain
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public <T> Check<ExceptionType> contains(String varName, ContainsAware<T> var, T element)
 		throws ExceptionType {
 		return isNotNull(varName, var)//

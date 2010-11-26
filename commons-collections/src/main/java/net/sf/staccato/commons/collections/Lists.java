@@ -34,7 +34,7 @@ public class Lists {
 	 * Inserts the given element after the reference. Throws
 	 * {@link NoSuchElementException} if the list does not contain the reference
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 *          the list type
 	 * @param list
 	 *          the list
@@ -43,8 +43,8 @@ public class Lists {
 	 * @param reference
 	 *          the reference. The list must contain it
 	 */
-	public static <T> void addAfter(@NonNull(LIST_PARAM) List<T> list, T element, T reference) {
-		for (ListIterator<T> iter = list.listIterator(); iter.hasNext();)
+	public static <A> void addAfter(@NonNull(LIST_PARAM) List<A> list, A element, A reference) {
+		for (ListIterator<A> iter = list.listIterator(); iter.hasNext();)
 			if (ObjectUtils.equals(iter.next(), reference)) {
 				iter.add(element);
 				return;
@@ -52,8 +52,8 @@ public class Lists {
 		throw new NoSuchElementException(reference.toString());
 	}
 
-	public static <S> void addBefore(@NonNull(LIST_PARAM) List<S> list, S element, S reference) {
-		for (ListIterator<S> iter = list.listIterator(); iter.hasNext();)
+	public static <A> void addBefore(@NonNull(LIST_PARAM) List<A> list, A element, A reference) {
+		for (ListIterator<A> iter = list.listIterator(); iter.hasNext();)
 			if (iter.next().equals(reference)) {
 				iter.previous();
 				iter.add(element);
@@ -62,14 +62,43 @@ public class Lists {
 		throw new NoSuchElementException(reference.toString());
 	}
 
-	public static <S> S removeLast(@NonNull List<S> list) {
+	/**
+	 * Removes the list last element
+	 * 
+	 * @param <A>
+	 * @param list
+	 * @return the element removed
+	 */
+	public static <A> A removeLast(@NonNull List<A> list) {
 		return list.remove(list.size() - 1);
 	}
 
-	public static <S> S first(@NotEmpty List<S> list) {
+	/**
+	 * Retrieves the list first element (at position 0)
+	 * 
+	 * @param <A>
+	 *          the list elements type
+	 * @param list
+	 * @return the list element
+	 * @throws IllegalArgumentException
+	 *           if list is empty if list is empty is out of range
+	 * @see List#get(int)
+	 */
+	public static <A> A first(@NotEmpty List<A> list) {
 		return list.get(0);
 	}
 
+	/**
+	 * Retrieves the list second element (at position 1)
+	 * 
+	 * @param <A>
+	 *          the list elements type
+	 * @param list
+	 * @return the list element
+	 * @throws IndexOutOfBoundsException
+	 *           if index is out of range
+	 * @see List#get(int)
+	 */
 	public static <S> S second(@NonNull List<S> list) {
 		Ensure.is(LIST_PARAM, list, list.size() > 1,//
 			"Must hava at least two elements");

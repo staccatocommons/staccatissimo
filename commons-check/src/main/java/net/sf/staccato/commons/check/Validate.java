@@ -13,8 +13,15 @@
 package net.sf.staccato.commons.check;
 
 /**
+ * {@link Validate} is a generic {@link Check} that on failure will throw a and
+ * exception of a parameterized class.
+ * 
+ * TODO add code samples
  * 
  * @author flbulgarelli
+ * @param <ExceptionType>
+ *          the type of the exception this {@link Validate} will throw on
+ *          failure
  * 
  */
 public final class Validate<ExceptionType extends Throwable> extends Check<ExceptionType> {
@@ -23,6 +30,9 @@ public final class Validate<ExceptionType extends Throwable> extends Check<Excep
 
 	/**
 	 * Creates a new {@link Validate}
+	 * 
+	 * @param exceptionType
+	 *          the class of the exception to throw on failure
 	 */
 	public Validate(Class<ExceptionType> exceptionType) {
 		this.exceptionType = exceptionType;

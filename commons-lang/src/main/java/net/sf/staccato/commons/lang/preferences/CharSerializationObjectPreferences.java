@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
  */
 public class CharSerializationObjectPreferences implements ObjectPreferences {
 
-	// TODO move to sl4j
 	private static final Logger log = LoggerFactory
 		.getLogger(CharSerializationObjectPreferences.class);
 
