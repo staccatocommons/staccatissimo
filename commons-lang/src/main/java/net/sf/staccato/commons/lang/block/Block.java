@@ -13,6 +13,7 @@
 package net.sf.staccato.commons.lang.block;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Executable;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.lang.block.internal.Then;
@@ -24,7 +25,7 @@ import net.sf.staccato.commons.lang.block.internal.Then;
  * 
  * @param <T>
  */
-public abstract class Block<T> implements Executable<T> {
+public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
 
 	/**
 	 * Executes this block. This implementation just invokes
@@ -39,6 +40,11 @@ public abstract class Block<T> implements Executable<T> {
 		} catch (Exception e) {
 			throw SoftException.soften(e);
 		}
+	}
+
+	public Void apply(T arg) {
+		exec(arg);
+		return null;
 	}
 
 	/**
@@ -69,13 +75,12 @@ public abstract class Block<T> implements Executable<T> {
 	}
 
 	// TODO reflection aware? soft exception ware?
-	public <E extends RuntimeException> Block<T> andCatch(
-		final Class<E> exceptionType, final Block2<? super E, T> catchBlock) {
+	public <E extends RuntimeException> Block<T> andCatch(final Class<E> exceptionType,
+		final Block2<? super E, T> catchBlock) {
 		return new Catch<E, T>(this, exceptionType, catchBlock);
 	}
 
-	public <E extends Throwable> Block<T> andFinally(
-		final Executable<T> finallyBlock) {
+	public <E extends Throwable> Block<T> andFinally(final Executable<T> finallyBlock) {
 		return new Block<T>() {
 			public void exec(T arg) {
 				try {

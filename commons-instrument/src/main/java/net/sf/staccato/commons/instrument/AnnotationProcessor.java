@@ -35,7 +35,7 @@ public class AnnotationProcessor<T extends AnnotationHandler> {
 
 	public void processUsing(final Object[] annotations, Block2<Object, T> block) {
 		for (Object annotation : annotations)
-			getHandler(annotation).ifDefined(block.exec(annotation));
+			getHandler(annotation).ifDefined(block.apply(annotation));
 	}
 
 	private Option<T> getHandler(final Object annotation) {

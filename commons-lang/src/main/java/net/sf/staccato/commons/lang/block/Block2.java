@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang.block;
 
+import net.sf.staccato.commons.lang.Applicable;
+import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Executable2;
 import net.sf.staccato.commons.lang.SoftException;
 
@@ -22,7 +24,8 @@ import net.sf.staccato.commons.lang.SoftException;
  * @param <T1>
  * @param <T2>
  */
-public abstract class Block2<T1, T2> implements Executable2<T1, T2> {
+public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2<T1, T2, Void>,
+	Applicable<T1, Block<T2>> {
 
 	public void exec(T1 argument1, T2 argument2) {
 		try {
@@ -35,7 +38,12 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2> {
 	protected void softExec(T1 argument1, T2 argument2) throws Exception {
 	}
 
-	public Block<T2> exec(final T1 argument1) {
+	public Void apply(T1 arg1, T2 arg2) {
+		exec(arg1, arg2);
+		return null;
+	};
+
+	public Block<T2> apply(final T1 argument1) {
 		return new Block<T2>() {
 			public void exec(T2 argument2) {
 				Block2.this.exec(argument1, argument2);
