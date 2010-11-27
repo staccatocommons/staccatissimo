@@ -26,8 +26,8 @@ import net.sf.staccato.commons.check.annotation.NonNull;
  * @param <T2>
  *          second component type
  */
-public final class Pair<T1, T2> extends Tuple implements
-	Comparable<Pair<T1, T2>>, Map.Entry<T1, T2> {
+public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>>,
+	Map.Entry<T1, T2> {
 
 	private static final long serialVersionUID = -6479045670420592337L;
 
@@ -79,8 +79,8 @@ public final class Pair<T1, T2> extends Tuple implements
 	 * @return {@link #getSecond()}
 	 * 
 	 */
-	public T1 _2() {
-		return first;
+	public T2 _2() {
+		return second;
 	}
 
 	/**

@@ -13,8 +13,15 @@
 package net.sf.staccato.commons.lang.predicate;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.util.regex.Pattern;
+
+import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
+
+import org.jmock.Expectations;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,7 +29,7 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class PredicatesUnitTest {
+public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * @throws java.lang.Exception
@@ -107,9 +114,15 @@ public class PredicatesUnitTest {
 	}
 
 	@Test
+	public void testMatchesPattern() throws Exception {
+		assertTrue(Predicates.matchesPattern(Pattern.compile("[Hh]el+o")).eval("hello"));
+		assertFalse(Predicates.matchesPattern(Pattern.compile("[Hh]el+o")).eval("world"));
+	}
+
+	@Test
 	public void testConstains() {
 		assertTrue(Predicates.contains("foo").eval("The word foo has no special meaning"));
-		assertFalse(Predicates.contains("foo").eval("The word bar has no special meaning, too"));
+		assertFalse(Predicates.contains("foo").eval("The word bar has no special meaning, neither"));
 	}
 
 	@Test
@@ -132,4 +145,57 @@ public class PredicatesUnitTest {
 		assertFalse(Predicates.lowerThan(5).eval(5));
 		assertFalse(Predicates.lowerThan(5).eval(6));
 	}
+
+	@Test
+	public void testAny() throws Exception {
+		assertTrue(Predicates.any(
+			Predicates.<Integer> true_(),
+			Predicates.lowerThan(2),
+			Predicates.equal(5)).eval(5));
+
+		assertTrue(Predicates.any(
+			Predicates.<Integer> false_(),
+			Predicates.greaterThan(2),
+			Predicates.equal(10)).eval(5));
+	}
+
+	/**
+	 * Test that Predicates.from return a new predicates that forwards to the
+	 * given evaluable
+	 */
+	@Test
+	public void testFrom() {
+		final Evaluable<Object> evaluable = mock(Evaluable.class);
+		Predicate<Object> from = Predicates.from(evaluable);
+		final Object arg = new Object();
+
+		checking(new Expectations() {
+			{
+				one(evaluable).eval(arg);
+				will(returnValue(true));
+			}
+		});
+
+		assertTrue(from.eval(arg));
+	}
+
+	@Test
+	public void testFromPredicate() throws Exception {
+		Predicate<Object> true_ = Predicates.true_();
+		assertSame(true_, Predicates.from(true_));
+	}
+
+	@Test
+	public void testAll() throws Exception {
+		assertFalse(Predicates.all(
+			Predicates.<Integer> true_(),
+			Predicates.<Integer> false_(),
+			Predicates.equal(5)).eval(5));
+
+		assertTrue(Predicates.all(
+			Predicates.<Integer> true_(),
+			Predicates.greaterThan(2),
+			Predicates.equal(5)).eval(5));
+	}
+
 }

@@ -2,6 +2,7 @@ package net.sf.staccato.commons.lang.tuple;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertSame;
 import static junit.framework.Assert.assertTrue;
 import static net.sf.staccato.commons.lang.tuple.Tuple._;
 
@@ -16,6 +17,9 @@ public class PairUnitTest extends TupleAbstractUnitTest {
 		Pair<Integer, String> pair = _(9, "Hello");
 		assertEquals((Integer) 9, pair.getFirst());
 		assertEquals("Hello", pair.getSecond());
+		assertSame(pair._1(), pair.getFirst());
+		assertSame(pair._2(), pair.getSecond());
+
 	}
 
 	@Override
