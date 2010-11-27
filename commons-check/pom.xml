@@ -8,6 +8,13 @@
   <groupId>net.sf.staccato</groupId>
   <artifactId>commons-check</artifactId>
   <version>0.1</version>
+  <inceptionYear>2010</inceptionYear>
+  <distributionManagement>
+		<site>
+			<id> ${distribution.site.id}</id>
+			<url>${distribution.site.url}/staccatissimo/commonscheck</url>
+		</site>
+	</distributionManagement>
   <dependencies>
   	<dependency>
   		<groupId>net.sf.staccato</groupId>

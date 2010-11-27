@@ -1,0 +1,9 @@
+About Staccato-Commons-IO
+ 
+ Staccato-Commons-IO is the IO library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. It integrates staccato-commons-lang and staccato-commons-collections with the existing java IO abstractions  
+ 
+Prealpha state 
+
+ Staccato-Commons-Lang is still in a prealpha state, and although it fully implements most of previous features, documentation is not yet fully documented nor tested, and types and packages are likely to change in the near future without notice. It is not recomended to use it in production systems yet. 
+ 
+ 

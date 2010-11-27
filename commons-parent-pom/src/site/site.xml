@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Staccato-Common">
+<project name="Staccato-Commons">
   <bannerLeft>
     <name>Staccato-Commons</name>
     <href>http://staccatocommons.sourceforge.net/</href>
@@ -7,8 +7,11 @@
   <body>
     <links>
       <item name="Staccato-Commons-Lang" href="http://staccatocommons.sourceforge.net/staccatissimo/commonslang" />
+      <item name="Staccato-Commons-Check" href="http://staccatocommons.sourceforge.net/staccatissimo/commonscheck"/>
       <item name="Staccato-Commons-Collections" href="http://staccatocommons.sourceforge.net/staccatissimo/commonscollections"/>
+      <item name="Staccato-Commons-IO" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsio"/>
       <item name="Staccato-Commons-Testing" href="http://staccatocommons.sourceforge.net/staccatissimo/commonstesting"/>
+      <item name="Staccato-Commons-Instrumentation" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrumentation"/>
     </links>
 
     <menu name="Staccato-Commons">
