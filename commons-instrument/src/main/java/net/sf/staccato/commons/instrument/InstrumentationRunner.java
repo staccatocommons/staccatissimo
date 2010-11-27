@@ -17,7 +17,10 @@ import java.io.File;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
+import net.sf.staccato.commons.instrument.config.InstrumenterConfigurer;
 import net.sf.staccato.commons.instrument.internal.ClassNames;
+import net.sf.staccato.commons.instrument.internal.Instrumenter;
+import net.sf.staccato.commons.instrument.internal.InstrumenterImpl;
 import net.sf.staccato.commons.io.Directory;
 import net.sf.staccato.commons.lang.block.Block2;
 

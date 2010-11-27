@@ -15,7 +15,7 @@ package net.sf.staccato.commons.instrument.internal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import javassist.ClassPool;
-import net.sf.staccato.commons.instrument.context.DefaultMethodAnnotationContext;
+import net.sf.staccato.commons.instrument.context.internal.DefaultMethodAnnotationContext;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.junit.Before;

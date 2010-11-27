@@ -15,6 +15,8 @@ package net.sf.staccato.commons.instrument.context;
 import javassist.CtBehavior;
 
 /**
+ * The context of an annotated argument
+ * 
  * @author flbulgarelli
  * 
  */

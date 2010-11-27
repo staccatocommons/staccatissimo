@@ -10,22 +10,16 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.instrument;
-
-import javassist.CannotCompileException;
-import javassist.CtClass;
+package net.sf.staccato.commons.instrument.handler.deactivator;
 
 /**
  * @author flbulgarelli
- *
+ * 
  */
-public interface Instrumenter {
+public interface Deactivable {
 
-	/**
-	 * @param clazz
-	 * @throws ClassNotFoundException
-	 * @throws CannotCompileException
-	 */
-	void instrumentClass(final CtClass clazz) throws CannotCompileException, ClassNotFoundException;
+	void activate();
+
+	void deactivate();
 
 }

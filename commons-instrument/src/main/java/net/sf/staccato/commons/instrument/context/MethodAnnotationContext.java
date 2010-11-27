@@ -15,6 +15,8 @@ package net.sf.staccato.commons.instrument.context;
 import javassist.CtMethod;
 
 /**
+ * The context of an annotated method
+ * 
  * @author flbulgarelli
  * 
  */
@@ -26,7 +28,7 @@ public interface MethodAnnotationContext extends AnnotationContext {
 	CtMethod getMethod();
 
 	/**
-	 * @return The name of the speudo-variable that represents the return value
+	 * @return The name of the pseudo-variable that represents the return value
 	 */
 	String getReturnIdentifier();
 

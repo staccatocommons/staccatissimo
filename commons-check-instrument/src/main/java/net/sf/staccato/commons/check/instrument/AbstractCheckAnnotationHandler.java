@@ -19,9 +19,9 @@ import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
 import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
 import net.sf.staccato.commons.instrument.handler.ArgumentAnnotationHandler;
-import net.sf.staccato.commons.instrument.handler.Deactivable;
 import net.sf.staccato.commons.instrument.handler.MethodAnnotationHandler;
-import net.sf.staccato.commons.instrument.handler.StackedDeactivableSupport;
+import net.sf.staccato.commons.instrument.handler.deactivator.Deactivable;
+import net.sf.staccato.commons.instrument.handler.deactivator.StackedDeactivableSupport;
 import net.sf.staccato.commons.lang.SoftException;
 
 /**

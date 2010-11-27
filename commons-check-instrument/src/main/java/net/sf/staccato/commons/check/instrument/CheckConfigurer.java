@@ -12,8 +12,8 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
-import net.sf.staccato.commons.instrument.InstrumenterConfiguration;
-import net.sf.staccato.commons.instrument.InstrumenterConfigurer;
+import net.sf.staccato.commons.instrument.config.InstrumenterConfiguration;
+import net.sf.staccato.commons.instrument.config.InstrumenterConfigurer;
 
 /**
  * @author flbulgarelli

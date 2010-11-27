@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.instrument;
+package net.sf.staccato.commons.instrument.internal;
 
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
@@ -19,9 +19,11 @@ import javassist.CtConstructor;
 import javassist.CtMethod;
 import javassist.Modifier;
 import net.sf.staccato.commons.check.Validate;
-import net.sf.staccato.commons.instrument.context.DefaultArgumentAnnotationContext;
-import net.sf.staccato.commons.instrument.context.DefaultConstructorAnnotationContext;
-import net.sf.staccato.commons.instrument.context.DefaultMethodAnnotationContext;
+import net.sf.staccato.commons.instrument.config.InstrumentationMark;
+import net.sf.staccato.commons.instrument.config.InstrumenterConfiguration;
+import net.sf.staccato.commons.instrument.context.internal.DefaultArgumentAnnotationContext;
+import net.sf.staccato.commons.instrument.context.internal.DefaultConstructorAnnotationContext;
+import net.sf.staccato.commons.instrument.context.internal.DefaultMethodAnnotationContext;
 import net.sf.staccato.commons.instrument.handler.AnnotationHandler;
 import net.sf.staccato.commons.instrument.handler.ArgumentAnnotationHandler;
 import net.sf.staccato.commons.instrument.handler.ClassAnnotationHandler;

@@ -10,19 +10,14 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.instrument;
+package net.sf.staccato.commons.instrument.config;
 
 /**
  * @author flbulgarelli
- *
+ * 
  */
-public interface InstrumentationMark {
+public interface InstrumenterConfigurer {
 
-	/**
-	 * @return The version number, as a class file version attribute value
-	 */
-	byte[] getMarkAttributeValue();
-
-	String getMarkAttributeName();
+	void configureInstrumenter(InstrumenterConfiguration instrumenter);
 
 }

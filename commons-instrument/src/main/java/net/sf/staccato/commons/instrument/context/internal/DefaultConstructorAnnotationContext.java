@@ -10,9 +10,11 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.instrument.context;
+package net.sf.staccato.commons.instrument.context.internal;
 
 import javassist.CtConstructor;
+
+import net.sf.staccato.commons.instrument.context.ConstructorAnnotationContext;
 
 import org.slf4j.Logger;
 

@@ -13,6 +13,8 @@
 package net.sf.staccato.commons.instrument.context;
 
 /**
+ * Base interface for an annotated element context
+ * 
  * @author flbulgarelli
  * 
  */

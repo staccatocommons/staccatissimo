@@ -1,4 +1,4 @@
-package net.sf.staccato.commons.instrument;
+package net.sf.staccato.commons.instrument.config;
 
 import java.nio.charset.Charset;
 

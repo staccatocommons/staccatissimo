@@ -15,6 +15,8 @@ package net.sf.staccato.commons.instrument.context;
 import javassist.CtConstructor;
 
 /**
+ * The context of an annotated constructor
+ * 
  * @author flbulgarelli
  * 
  */

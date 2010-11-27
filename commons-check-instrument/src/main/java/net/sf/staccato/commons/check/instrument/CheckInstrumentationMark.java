@@ -12,7 +12,7 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
-import net.sf.staccato.commons.instrument.AbstractInstrumentationMark;
+import net.sf.staccato.commons.instrument.config.AbstractInstrumentationMark;
 
 /**
  * @author flbulgarelli
