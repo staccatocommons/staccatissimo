@@ -570,7 +570,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is &lt;= 0
+	 * Checks the var is > 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
@@ -585,7 +585,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is &lt;= 0
+	 * Checks the var is > 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
@@ -600,7 +600,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is &lt;= 0
+	 * Checks the var is > 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
@@ -615,7 +615,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is &lt;= 0
+	 * Checks the var is > 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
@@ -630,7 +630,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is not null &lt;= 0
+	 * Checks the var is > 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
@@ -645,7 +645,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is not null and &lt;= 0
+	 * Checks the var is not null and > 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
