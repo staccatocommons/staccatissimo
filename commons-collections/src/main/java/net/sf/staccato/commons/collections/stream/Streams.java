@@ -14,6 +14,7 @@ package net.sf.staccato.commons.collections.stream;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,7 +24,9 @@ import net.sf.staccato.commons.collections.stream.impl.CollectionStream;
 import net.sf.staccato.commons.collections.stream.impl.IterableStream;
 import net.sf.staccato.commons.collections.stream.impl.IteratorStream;
 import net.sf.staccato.commons.collections.stream.impl.ListStream;
+import net.sf.staccato.commons.collections.stream.impl.internal.CharSequenceIterator;
 import net.sf.staccato.commons.collections.stream.impl.internal.EmptyStream;
+import net.sf.staccato.commons.collections.stream.impl.internal.EnumerationIterator;
 
 /**
  * Class methods for creating {@link Stream}s
@@ -78,15 +81,15 @@ public class Streams {
 		return new IteratorStream<A>(iterator);
 	}
 
-	// TODO @NonNull
-	// public static <A> Stream<A> from(@NonNull Enumeration<A> enumeration) {
-	// return new EnumerationStream<A>(iterable);
-	// }
-	//
-	// TODO @NonNull
-	// public static <A> Stream<A> from(@NonNull CharSequence charSequence) {
-	// return new CharSequenceStream<A>(iterable);
-	// }
+	@NonNull
+	public static <A> Stream<A> from(@NonNull Enumeration<A> enumeration) {
+		return from(new EnumerationIterator<A>(enumeration));
+	}
+
+	@NonNull
+	public static Stream<Character> from(@NonNull CharSequence charSequence) {
+		return from(new CharSequenceIterator(charSequence));
+	}
 
 	@NonNull
 	public static <A> Stream<A> from(@NonNull Collection<A> collection) {
