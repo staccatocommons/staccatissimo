@@ -59,8 +59,7 @@ public class Var {
 	 * 
 	 * @see VariableFormatter#format(String, String, Object, String)
 	 */
-	public static String format(String prefix, String name, Object value,
-		String suffix) {
+	public static String format(String prefix, String name, Object value, String suffix) {
 		return formatter.format(prefix, name, value, suffix);
 	}
 
@@ -81,14 +80,17 @@ public class Var {
 		return formatter.format(prefix, name, value);
 	}
 
+	public static String format(String name, Object value, String suffix) {
+		return formatter.format(name, value, suffix);
+	}
+
 	/**
 	 * This method should never be invoker except during application startup
 	 * 
 	 * @param formatter
 	 *          the global {@link VariableFormatter} to set
 	 */
-	public static synchronized void setVariableFormatter(
-		VariableFormatter formatter) {
+	public static synchronized void setVariableFormatter(VariableFormatter formatter) {
 		Var.formatter = formatter;
 	}
 

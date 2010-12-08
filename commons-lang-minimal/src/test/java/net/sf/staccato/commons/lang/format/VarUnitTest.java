@@ -13,7 +13,7 @@ public class VarUnitTest {
 
 	@Test
 	public void testFormatStringStringObjectString() {
-		assertNotNull(Var.format("Hello, ", "myVar", "hello"));
+		assertNotNull(Var.format("Hello, ", "myVar", (Object) "hello"));
 	}
 
 	@Test

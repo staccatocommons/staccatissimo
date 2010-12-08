@@ -30,7 +30,7 @@ public class VariableFormatter {
 	public static final String DEFAULT_FORMATTING_STRING = "%s=[%s]";
 
 	private final String formattingString, formattingWithPrefixString,
-		formattingWithPrefixAndSuffixString;
+		formattingWithPrefixAndSuffixString, formattingWithSuffixString;
 
 	/**
 	 * Creates a {@link VariableFormatter} with a custom formatting string, in the
@@ -49,6 +49,7 @@ public class VariableFormatter {
 		this.formattingString = formattingString;
 		this.formattingWithPrefixString = createFormattingWithPrefixString();
 		this.formattingWithPrefixAndSuffixString = createFormattingWithPrefixAndSuffixString();
+		this.formattingWithSuffixString = createFormattingWithSuffixString();
 	}
 
 	/**
@@ -64,6 +65,10 @@ public class VariableFormatter {
 
 	private String createFormattingWithPrefixAndSuffixString() {
 		return "%s " + getFormattingString() + " %s";
+	}
+
+	private String createFormattingWithSuffixString() {
+		return getFormattingString() + " %s";
 	}
 
 	/**
@@ -97,6 +102,10 @@ public class VariableFormatter {
 		return String.format(getFormattingWithPrefixString(), prefix, name, value);
 	}
 
+	public String format(String name, Object value, String suffix) {
+		return String.format(getFormattingWithSuffixString(), name, value, suffix);
+	}
+
 	/**
 	 * Creates a string that shows the content of a variable, preceded by a prefix
 	 * string and ended with a suffix string
@@ -124,6 +133,10 @@ public class VariableFormatter {
 
 	private String getFormattingWithPrefixString() {
 		return formattingWithPrefixString;
+	}
+
+	private String getFormattingWithSuffixString() {
+		return formattingWithSuffixString;
 	}
 
 	private String getFormattingWithPrefixAndSuffixString() {
