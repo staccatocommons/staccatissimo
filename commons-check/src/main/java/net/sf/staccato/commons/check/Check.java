@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.check;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
@@ -67,13 +68,6 @@ import net.sf.staccato.commons.lang.format.Var;
 public abstract class Check<ExceptionType extends Throwable> {
 
 	/* Minimal Ops */
-
-	// private final Lazy<Check<ExceptionType>> not = new
-	// Lazy<Check<ExceptionType>>() {
-	// protected Check<ExceptionType> init() {
-	// return new Not<ExceptionType>(Check.this);
-	// }
-	// };
 
 	protected ExceptionType createVarException(VarFailure failure) {
 		return createException(failure);
@@ -354,28 +348,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 		return isSize(varName, var, size, var.length());
 	}
 
-	public Check<ExceptionType> isSize(String varName, Object[] var, int size) throws ExceptionType {
-		return isSize(varName, var, size, var.length);
-	}
-
-	public Check<ExceptionType> isSize(String varName, int[] var, int size) throws ExceptionType {
-		return isSize(varName, var, size, var.length);
-	}
-
-	public Check<ExceptionType> isSize(String varName, long[] var, int size) throws ExceptionType {
-		return isSize(varName, var, size, var.length);
-	}
-
-	public Check<ExceptionType> isSize(String varName, byte[] var, int size) throws ExceptionType {
-		return isSize(varName, var, size, var.length);
-	}
-
-	public Check<ExceptionType> isSize(String varName, double[] var, int size) throws ExceptionType {
-		return isSize(varName, var, size, var.length);
-	}
-
-	public Check<ExceptionType> isSize(String varName, float[] var, int size) throws ExceptionType {
-		return isSize(varName, var, size, var.length);
+	public Check<ExceptionType> isSize(String varName, Object var, int size) throws ExceptionType {
+		return isSize(varName, var, size, Array.getLength(var));
 	}
 
 	public Check<ExceptionType> isSize(String varName, SizeAware value, int size)
@@ -481,92 +455,46 @@ public abstract class Check<ExceptionType extends Throwable> {
 
 	private Check<ExceptionType> isNotNegative(String varName, Object number, boolean negative)
 		throws ExceptionType {
-		return is(varName, number, negative, "Must be not negative");
+		return is(varName, number, negative, "must be not negative");
 	}
 
-	public void isNotEmpty(String varName, EmptyAware var) throws ExceptionType {
-		isNotNull(varName, var);
-		if (var.isEmpty())
-			isNotEmptyFailed(varName, var);
+	public Check<ExceptionType> isNotEmpty(String varName, EmptyAware var) throws ExceptionType {
+		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.isEmpty());
 	}
 
-	public void isNotEmpty(String varName, Collection<?> var) throws ExceptionType {
-		isNotNull(varName, var);
-		if (var.isEmpty())
-			isNotEmptyFailed(varName, var);
+	public Check<ExceptionType> isNotEmpty(String varName, Collection<?> var) throws ExceptionType {
+		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.isEmpty());
 	}
 
-	public void isNotEmpty(String varName, Iterable<?> var) throws ExceptionType {
-		isNotNull(varName, var);
-		if (var.iterator().hasNext())
-			isNotEmptyFailed(varName, var);
+	public Check<ExceptionType> isNotEmpty(String varName, Iterable<?> var) throws ExceptionType {
+		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.iterator().hasNext());
 	}
 
-	public void isNotEmpty(String varName, Map<?, ?> var) throws ExceptionType {
-		isNotNull(varName, var);
-		if (var.isEmpty())
-			isNotEmptyFailed(varName, var);
+	public Check<ExceptionType> isNotEmpty(String varName, Map<?, ?> var) throws ExceptionType {
+		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.isEmpty());
 	}
 
-	public void isNotEmpty(String varName, CharSequence var) throws ExceptionType {
-		isNotNull(varName, var);
-		if (var.length() == 0)
-			isNotEmptyFailed(varName, var);
+	public Check<ExceptionType> isNotEmpty(String varName, CharSequence var) throws ExceptionType {
+		return isNotNull(varName, var).isNotEmptyInternal(varName, var, var.length() != 0);
 	}
 
-	public void isNotEmpty(String varName, Object[] var) throws ExceptionType {
-		isNotNull(varName, var);
-		if (var.length == 0)
-			isNotEmptyFailed(varName, var);
-	}
-
-	public void isNotEmpty(String varName, int[] var) throws ExceptionType {
-		isNotNull(varName, var);
-		if (var.length == 0)
-			isNotEmptyFailed(varName, var);
-	}
-
-	public void isNotEmpty(String varName, long[] var) throws ExceptionType {
-		isNotNull(varName, var);
-		if (var.length == 0)
-			isNotEmptyFailed(varName, var);
-	}
-
-	public void isNotEmpty(String varName, byte[] var) throws ExceptionType {
-		isNotNull(varName, var);
-		if (var.length == 0)
-			isNotEmptyFailed(varName, var);
-	}
-
-	public void isNotEmpty(String varName, double[] var) throws ExceptionType {
-		isNotNull(varName, var);
-		if (var.length == 0)
-			isNotEmptyFailed(varName, var);
-	}
-
-	public void isNotEmpty(String varName, float[] var) throws ExceptionType {
-		isNotNull(varName, var);
-		if (var.length == 0)
-			isNotEmptyFailed(varName, var);
+	public Check<ExceptionType> isNotEmpty(String varName, Object var) throws ExceptionType {
+		return isNotNull(varName, var).isNotEmptyInternal(varName, var, Array.getLength(var) != 0);
 	}
 
 	/*
-	 * Performance de array.getLength *
+	 * TODO Performance del dispatch virtual
 	 */
 	/*
-	 * Performance del dispatch virtual
+	 * TODO Performance del not
 	 */
 	/*
-	 * Performance del not
-	 */
-	/*
-	 * Performance del objeto TypeClass
+	 * TODO Performance del objeto TypeClass
 	 */
 
-	private void isNotEmptyFailed(String varName, Object var) throws ExceptionType {
-		fail(varName, var, //
-			"%s must not be empty", //
-			Var.format(varName, var));
+	private Check<ExceptionType> isNotEmptyInternal(String varName, Object var, boolean notEmpty)
+		throws ExceptionType {
+		return is(varName, var, notEmpty, "must not be empty");
 	}
 
 	/**
@@ -656,7 +584,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *           if the check failed
 	 */
 	public Check<ExceptionType> isPositive(String varName, BigInteger var) throws ExceptionType {
-		return isNotNull(varName, var).isPositive(varName, var, var.compareTo(BigInteger.ZERO) > 0);
+		return isNotNull(varName, var)//
+			.isPositive(varName, var, var.compareTo(BigInteger.ZERO) > 0);
 	}
 
 	private Check<ExceptionType> isPositive(String varName, Object var, boolean positive)
@@ -707,27 +636,15 @@ public abstract class Check<ExceptionType extends Throwable> {
 			.is(varName, var, container.contains(var), "must be in %s", container);
 	}
 
-	public <T extends Comparable<T>> void isGreatherThan(String varName, T var, T other)
-		throws ExceptionType {
-		if (!(var.compareTo(other) > 0))
-			fail(varName, var,//
-				"%s must be greather than %s",
-				Var.format(varName, var),
-				other);
+	public <T extends Comparable<T>> Check<ExceptionType> isGreatherThan(String varName, T var,
+		T other) throws ExceptionType {
+		return is(varName, var, var.compareTo(other) > 0, "must be greater than %s", other);
 	}
 
-	public <T extends Comparable<T>> void isLowerThan(String varName, T var, T other)
+	public <T extends Comparable<T>> Check<ExceptionType> isLowerThan(String varName, T var, T other)
 		throws ExceptionType {
-		if (!(var.compareTo(other) < 0))
-			fail(varName, var,//
-				"%s must be lower than %s",
-				Var.format(varName, var),
-				other);
+		return is(varName, var, var.compareTo(other) < 0, "must be lower than %s", other);
 	}
-
-	// public Check<ExceptionType> not() {
-	// return not.value();
-	// }
 
 	/**
 	 * A basic check failure
@@ -818,43 +735,4 @@ public abstract class Check<ExceptionType extends Throwable> {
 			return Var.format("Check failure: ", varName, var, super.createMessage());
 		}
 	}
-
-	// private static final class Not<ExceptionType extends Throwable> extends
-	// Check<ExceptionType> {
-	//
-	// private final Check<ExceptionType> check;
-	//
-	// public Not(Check<ExceptionType> check) {
-	// this.check = check;
-	// }
-	//
-	// protected ExceptionType createException(String message) {
-	// return check.createException(message);
-	// }
-	//
-	// protected ExceptionType createException(String varName, Object var, String
-	// message) {
-	// return check.createException(varName, var, message);
-	// }
-	//
-	// public Check<ExceptionType> is(boolean condition, String message, Object...
-	// args)
-	// throws ExceptionType {
-	// super.is(!condition, message, args);
-	// return check;
-	// }
-	//
-	// public Check<ExceptionType> is(String varName, Object var, boolean
-	// condition, String message,
-	// Object... args) throws ExceptionType {
-	// super.is(varName, var, !condition, message, args);
-	// return check;
-	// }
-	//
-	// public Check<ExceptionType> not() {
-	// return check;
-	// }
-	//
-	// }
-
 }

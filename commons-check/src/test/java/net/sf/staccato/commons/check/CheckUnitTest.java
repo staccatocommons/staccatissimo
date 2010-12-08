@@ -6,9 +6,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-import net.sf.staccato.commons.check.Check;
-import net.sf.staccato.commons.check.Ensure;
-
 import org.junit.Test;
 
 public class CheckUnitTest {
@@ -38,62 +35,62 @@ public class CheckUnitTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testisNotNegativeStringLong() {
+	public void testisNotNegativeLong() {
 		c.isNotNegative(VAR_NAME, -5L);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testisNotNegativeStringInt() {
+	public void testisNotNegativeInt() {
 		c.isNotNegative(VAR_NAME, -5);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testisNotNegativeStringDouble() {
+	public void testisNotNegativeDouble() {
 		c.isNotNegative(VAR_NAME, -5.9);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testisNotNegativeStringFloat() {
+	public void testisNotNegativeFloat() {
 		c.isNotNegative(VAR_NAME, -5f);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testisNotNegativeStringBigDecimal() {
+	public void testisNotNegativeBigDecimal() {
 		c.isNotNegative(VAR_NAME, BigDecimal.valueOf(-9.69));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testisNotNegativeStringBigInteger() {
+	public void testisNotNegativeBigInteger() {
 		c.isNotNegative(VAR_NAME, BigInteger.valueOf(-9));
 	}
 
 	@Test
-	public void testisNotNegativeStringLong_Zero() {
+	public void testisNotNegativeLong_Zero() {
 		c.isNotNegative(VAR_NAME, 0L);
 	}
 
 	@Test
-	public void testisNotNegativeStringInt_Zero() {
+	public void testisNotNegativeInt_Zero() {
 		c.isNotNegative(VAR_NAME, 0);
 	}
 
 	@Test
-	public void testisNotNegativeStringDouble_Zero() {
+	public void testisNotNegativeDouble_Zero() {
 		c.isNotNegative(VAR_NAME, 0.0);
 	}
 
 	@Test
-	public void testisNotNegativeStringFloat_Zero() {
+	public void testisNotNegativeFloat_Zero() {
 		c.isNotNegative(VAR_NAME, 0.0f);
 	}
 
 	@Test
-	public void testisNotNegativeStringBigDecimal_Zero() {
+	public void testisNotNegativeBigDecimal_Zero() {
 		c.isNotNegative(VAR_NAME, BigDecimal.ZERO);
 	}
 
 	@Test
-	public void testisNotNegativeStringBigInteger_Zero() {
+	public void testisNotNegativeBigInteger_Zero() {
 		c.isNotNegative(VAR_NAME, BigInteger.ZERO);
 	}
 
@@ -113,44 +110,29 @@ public class CheckUnitTest {
 	// fail("Not yet implemented");
 	// }
 	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testisNotEmptyStringMapOfQQ() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testisNotEmptyStringCharSequence() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testisNotEmptyStringObjectArray() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testisNotEmptyStringIntArray() {
-	// fail("Not yet implemented");
-	// }
-	//
-	@Test(expected = IllegalArgumentException.class)
-	public void testisNotEmptyStringLongArray() {
-		c.isNotEmpty(VAR_NAME, new long[0]);
+	@Test
+	public void testNotEmptyMap() {
+		c.isNotEmpty(VAR_NAME, Collections.singletonMap("Hello", "World"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testisNotEmptyStringByteArray() {
+	public void testisNotEmptMap_Fail() {
+		c.isNotEmpty(VAR_NAME, Collections.emptyMap());
+	}
+
+	@Test
+	public void testisNotEmptyCharSequence() {
+		c.isNotEmpty(VAR_NAME, "hola");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testisNotEmptyCharSequence_Fail() {
+		c.isNotEmpty(VAR_NAME, "");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testisNotEmptyArray() {
 		c.isNotEmpty(VAR_NAME, new byte[0]);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testisNotEmptyStringDoubleArray() {
-		c.isNotEmpty(VAR_NAME, new double[0]);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testisNotEmptyStringFloatArray() {
-		c.isNotEmpty(VAR_NAME, new float[0]);
 	}
 
 	// @Test(expected = IllegalArgumentException.class)
@@ -223,35 +205,6 @@ public class CheckUnitTest {
 	// fail("Not yet implemented");
 	// }
 	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckSizeStringObjectArrayInt() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckSizeStringIntArrayInt() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckSizeStringLongArrayInt() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckSizeStringByteArrayInt() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckSizeStringDoubleArrayInt() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckSizeStringFloatArrayInt() {
-	// fail("Not yet implemented");
-	// }
 	//
 	// @Test(expected = IllegalArgumentException.class)
 	// public void testCheckSizeStringSizeAwareInt() {
@@ -275,9 +228,6 @@ public class CheckUnitTest {
 			.isSize(VAR_NAME, Arrays.asList(9, 96), 2)
 			.isSize(VAR_NAME, "Hello", 5)
 			.isSize(VAR_NAME, new double[] { 5.5, 9 }, 2)
-			.isSize(VAR_NAME, new float[] { 63.0f }, 1)
-			.isSize(VAR_NAME, new int[] { 9, 93, 23, 6, 0 }, 5)
-			.isSize(VAR_NAME, new long[] { 9, 93, 23, 6, 0 }, 5)
 			.isSize(VAR_NAME, new Object[] { 9, 93, 23, 6, 0 }, 5);
 
 	}
@@ -336,11 +286,6 @@ public class CheckUnitTest {
 	// }
 
 	@Test
-	public void testNotEmptyStringMapOfQQ() {
-		c.isNotEmpty(VAR_NAME, Collections.singletonMap("Hello", "World"));
-	}
-
-	@Test
 	public void testNotNull() {
 		c.isNotNull(VAR_NAME, new Object());
 	}
@@ -349,4 +294,5 @@ public class CheckUnitTest {
 	public void testFail() {
 		c.fail(VAR_NAME, "Foo", "Should be palindromic");
 	}
+
 }
