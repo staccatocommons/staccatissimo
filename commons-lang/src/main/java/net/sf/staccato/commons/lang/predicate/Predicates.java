@@ -27,7 +27,7 @@ import net.sf.staccato.commons.lang.predicate.internal.False;
 import net.sf.staccato.commons.lang.predicate.internal.GreaterThan;
 import net.sf.staccato.commons.lang.predicate.internal.LowerThan;
 import net.sf.staccato.commons.lang.predicate.internal.Matches;
-import net.sf.staccato.commons.lang.predicate.internal.NotNull;
+import net.sf.staccato.commons.lang.predicate.internal.NullPredicates;
 import net.sf.staccato.commons.lang.predicate.internal.Same;
 import net.sf.staccato.commons.lang.predicate.internal.True;
 
@@ -66,7 +66,16 @@ public class Predicates {
 	 */
 	@NonNull
 	public static <T> Predicate<T> notNull() {
-		return NotNull.getInstance();
+		return NullPredicates.notNull();
+	}
+
+	/**
+	 * @param <T>
+	 * @return A singleton {@link Predicate} that tests if its argument is null
+	 */
+	@NonNull
+	public static <T> Predicate<T> null_() {
+		return NullPredicates.null_();
 	}
 
 	/**
@@ -211,8 +220,7 @@ public class Predicates {
 	 * @return
 	 */
 	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> lowerThan(
-		@NonNull T value) {
+	public static <T extends Comparable<T>> Predicate<T> lowerThan(@NonNull T value) {
 		return new LowerThan<T>(value);
 	}
 
@@ -222,8 +230,7 @@ public class Predicates {
 	 * @return
 	 */
 	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> greaterThan(
-		@NonNull T value) {
+	public static <T extends Comparable<T>> Predicate<T> greaterThan(@NonNull T value) {
 		return new GreaterThan<T>(value);
 	}
 

@@ -31,12 +31,12 @@ public interface Evaluable<T> {
 	 * 
 	 * However, instead of implementing nullable-argument {@link Evaluable}s, the
 	 * preferred way of getting a null safe {@link Evaluable} is composing it with
-	 * the non null predicate:
+	 * the null or non-null predicates:
 	 * 
 	 * <pre>
-	 * Predicates.notNull().or(theActualEvaluable)
+	 * Predicates.null_().or(theActualEvaluable)
+	 * Predicates.notNull().and(theActualEvaluable)
 	 * </pre>
-	 * 
 	 * 
 	 * @param argument
 	 *          the argument to evaluate. Non null
