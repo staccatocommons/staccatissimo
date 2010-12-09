@@ -8,11 +8,17 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
+/**
+ * Test for {@link Check}
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class CheckUnitTest {
 
 	private static final String VAR_NAME = "var";
 
-	Check<IllegalArgumentException> c = Ensure.that();
+	private Check<IllegalArgumentException> c = Ensure.that();
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCheckIsTrueStringBooleanStringObjectArray() {
@@ -135,28 +141,24 @@ public class CheckUnitTest {
 		c.isNotEmpty(VAR_NAME, new byte[0]);
 	}
 
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckEmptyStringCollectionOfQ() {
-	// fail("Not yet implemented");
-	// }
-	//
+	@Test
+	public void testNotEmptyCollection() {
+		c.isNotEmpty(VAR_NAME, Collections.singleton(6));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNotEmptyCollection_Fail() {
+		c.isNotEmpty(VAR_NAME, Collections.emptyList());
+	}
+
 	// @Test(expected = IllegalArgumentException.class)
 	// public void testCheckEmptyStringIterableOfQ() {
 	// fail("Not yet implemented");
 	// }
 	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckEmptyStringMapOfQQ() {
-	// fail("Not yet implemented");
-	// }
 	//
 	// @Test(expected = IllegalArgumentException.class)
 	// public void testCheckEmptyStringEmptyAware() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testisNotNull() {
 	// fail("Not yet implemented");
 	// }
 	//
@@ -271,23 +273,14 @@ public class CheckUnitTest {
 			.isNotNegative(VAR_NAME, BigInteger.valueOf(1200));
 	}
 
-	// @Test
-	// public void tes tNotEmptyCollection() {
-	// c
-	// .isNotEmpty(VAR_NAME, Collections.singleton(6))
-	// .isNotEmpty(VAR_NAME, new byte[1])
-	// .isNotEmpty(VAR_NAME, "A word")
-	// .isNotEmpty(VAR_NAME, new double[2])
-	// .isNotEmpty(VAR_NAME, new float[2])
-	// .isNotEmpty(VAR_NAME, new int[6])
-	// .isNotEmpty(VAR_NAME, new long[52])
-	// .isNotEmpty(VAR_NAME, new Object[2])
-	// .isNotEmpty(VAR_NAME, Range.from(5, 6));
-	// }
-
 	@Test
 	public void testNotNull() {
 		c.isNotNull(VAR_NAME, new Object());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNotNull_Fail() {
+		c.isNotNull(VAR_NAME, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
