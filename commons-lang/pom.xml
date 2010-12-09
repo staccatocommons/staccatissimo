@@ -15,7 +15,7 @@
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}</url>
+			<url>${distribution.site.url}/staccatissimo/commonslang</url>
 		</site>
 	</distributionManagement>
 	<build>
