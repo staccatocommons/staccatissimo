@@ -15,7 +15,11 @@ package net.sf.staccato.commons.io;
 import java.io.File;
 
 import net.sf.staccato.commons.check.Ensure;
+import net.sf.staccato.commons.collections.stream.Stream;
+import net.sf.staccato.commons.collections.stream.Streams;
 import net.sf.staccato.commons.lang.Executable2;
+
+import org.apache.commons.lang.NotImplementedException;
 
 /**
  * @author flbulgarelli
@@ -39,6 +43,7 @@ public class Directory {
 
 	// TODO refactor, in order to use IOFilters
 	// TODO, an executable would be just enough
+	// TODO refactor, should expose an stream instead
 
 	public void forEachFile(Executable2<File, File> block) {
 		new ForEachFileInDirectoryBlock(block, false).exec(getFile());
@@ -60,6 +65,18 @@ public class Directory {
 	 */
 	public File getFile() {
 		return file;
+	}
+
+	public Stream<File> getFileStream() {
+		return Streams.from(file.listFiles());
+	}
+
+	public Stream<File> getBreadthFirstFileStream() {
+		throw new NotImplementedException();
+	}
+
+	public Stream<File> getDepthFirstFileStream() {
+		throw new NotImplementedException();
 	}
 
 }
