@@ -18,35 +18,48 @@ package net.sf.staccato.commons.lang.value;
  */
 public enum BasicEquals {
 
-	SAME {
+	EQUALS {
 		@Override
 		public boolean toEquals() {
 			return true;
 		}
+
+		public boolean isEqualsDone() {
+			return true;
+		}
 	},
-	DISTINCT_CLASS {
+	NOT_EQUALS {
 		@Override
 		public boolean toEquals() {
 			return false;
 		}
+
+		public boolean isEqualsDone() {
+			return true;
+		}
 	},
-	BASIC_EQUAL {
+	UNKNONWN {
 		@Override
 		public boolean toEquals() {
 			throw new IllegalStateException();
+		}
+
+		public boolean isEqualsDone() {
+			return false;
 		}
 	};
 
 	public static <T> BasicEquals from(T this_, Object that) {
 		if (that == null)
-			return DISTINCT_CLASS;
+			return NOT_EQUALS;
 		if (that == this_)
-			return SAME;
+			return EQUALS;
 		if (that.getClass() != this_.getClass())
-			return DISTINCT_CLASS;
-		return BASIC_EQUAL;
+			return NOT_EQUALS;
+		return UNKNONWN;
 	}
 
 	public abstract boolean toEquals();
 
+	public abstract boolean isEqualsDone();
 }

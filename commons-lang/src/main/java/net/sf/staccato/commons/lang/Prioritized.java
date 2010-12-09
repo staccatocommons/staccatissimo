@@ -13,6 +13,11 @@
 package net.sf.staccato.commons.lang;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.internal.ToString;
+import net.sf.staccato.commons.lang.value.BasicEquals;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * A {@link Provider} that is {@link Comparable}, based on a priority attribute.
@@ -49,16 +54,41 @@ public class Prioritized<T, P extends Comparable<P>> implements Provider<T>,
 		return value;
 	}
 
-	public int compareTo(Prioritized<T, P> other) {
-		return getPriority().compareTo(other.getPriority());
-	}
-
 	/**
 	 * @return the priority used to determine order in comparison
 	 */
 	@NonNull
 	public P getPriority() {
 		return priority;
+	}
+
+	public int compareTo(Prioritized<T, P> other) {
+		return getPriority().compareTo(other.getPriority());
+	}
+
+	/**
+	 * Test for equalty. In order to be consistent with
+	 * {@link #compareTo(Prioritized)}, this method will only consider the
+	 * priority attribute in the test
+	 */
+	public boolean equals(Object obj) {
+		BasicEquals be = BasicEquals.from(this, obj);
+		if (be.isEqualsDone())
+			return be.toEquals();
+		Prioritized<T, P> that = (Prioritized<T, P>) obj;
+		return new EqualsBuilder()//
+			.append(priority, that.priority)
+			.isEquals();
+	}
+
+	public int hashCode() {
+		return new HashCodeBuilder()//
+			.append(priority)
+			.toHashCode();
+	}
+
+	public String toString() {
+		return ToString.toString(this);
 	}
 
 	/**
@@ -73,8 +103,7 @@ public class Prioritized<T, P extends Comparable<P>> implements Provider<T>,
 	 * @return a new {@link Prioritized}
 	 */
 	@NonNull
-	public static <T, P extends Comparable<P>> Prioritized<T, P> from(T value,
-		P priority) {
+	public static <T, P extends Comparable<P>> Prioritized<T, P> from(T value, P priority) {
 		return new Prioritized<T, P>(value, priority);
 	}
 
