@@ -1,9 +1,9 @@
 About Staccato-Commons-Collections 
  
- Staccato-Commons-Collection is the collections library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. It is focused on providing new abstractions that mix object oriented and functional style for dealing with collections. It extend the existing Java Collections Framework adding, for example, filtering, mapping, folding, concatenating collections capabilities and much more. It also offers Streams, a lazy, collection-like hierarchy. On the ohter hand, Staccato-Commons-Collections is not aimed to provide new specific purpose collection implementations.    
+ Staccato-Commons-Collection is the collections library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. It is focused on providing new abstractions that mix object oriented and functional style for dealing with collections. It extend the existing Java Collections Framework adding filtering, mapping, folding, concatenating an so on capabilities to collections. It also offers Streams, a lazy, collection-like hierarchy. On the other hand, Staccato-Commons-Collections is not aimed to provide new specific purpose collection implementations.    
  
 Prealpha state 
 
- Staccato-Commons-Collection is still in a prealpha state, and although it fully implements most of previous features, documentation is not yet fully documented nor tested, and types and packages are likely to change in the near future without notice. It is not recomended to use it in production systems yet. 
+ Staccato-Commons-Collection is still in a prealpha state, and although it fully implements most of previous features, documentation is not yet fully documented nor tested, and types and packages are likely to change in the near future without notice. It is not recommended to use it in production systems yet. 
  
  
