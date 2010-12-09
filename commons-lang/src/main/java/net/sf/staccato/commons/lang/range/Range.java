@@ -16,7 +16,6 @@ import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Compare;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.EmptyAware;
-import net.sf.staccato.commons.lang.value.Unmodifiable;
 import net.sf.staccato.commons.lang.value.ValueObject;
 
 /**
@@ -29,8 +28,8 @@ import net.sf.staccato.commons.lang.value.ValueObject;
  * 
  * @param <T>
  */
-public class Range<T extends Comparable<T>> extends ValueObject implements
-	ContainsAware<T>, EmptyAware, Unmodifiable {
+public class Range<T extends Comparable<T>> extends ValueObject implements ContainsAware<T>,
+	EmptyAware {
 
 	private static final long serialVersionUID = -1096861117755452369L;
 
@@ -46,7 +45,7 @@ public class Range<T extends Comparable<T>> extends ValueObject implements
 	 *          the upper bound, inclusive.
 	 */
 	public Range(@NonNull T min, @NonNull T max) {
-		// FIXME Ensure.lowerThan("max", max, min);
+		// Ensure.that().isGreaterThanOrEqualTo("max", max, min);
 		this.min = min;
 		this.max = max;
 	}
@@ -124,8 +123,8 @@ public class Range<T extends Comparable<T>> extends ValueObject implements
 	 * @return the new Range.
 	 */
 	@NonNull
-	public static <T extends Comparable<T>> Range<T> from(@NonNull T min,
-		@NonNull T max) {
+	public static <T extends Comparable<T>> Range<T> from(@NonNull T min, @NonNull T max) {
 		return new Range<T>(min, max);
 	}
+
 }

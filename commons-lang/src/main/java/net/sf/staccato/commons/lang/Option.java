@@ -13,12 +13,12 @@
 
 package net.sf.staccato.commons.lang;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.SizeAware;
-import net.sf.staccato.commons.lang.value.Unmodifiable;
 
 /**
  * <p>
@@ -64,11 +64,14 @@ import net.sf.staccato.commons.lang.value.Unmodifiable;
  *          the type of optional value
  * 
  */
-public abstract class Option<T> implements
-	Provider<T>, ContainsAware<T>, Iterable<T>, SizeAware, Unmodifiable {
+public abstract class Option<T> implements Provider<T>, ContainsAware<T>, Iterable<T>, SizeAware,
+	Serializable {
 
 	private static final long serialVersionUID = -4635925023376621559L;
 
+	/**
+	 * Package level visibility to allow subclasses inside package
+	 */
 	Option() {
 	}
 
@@ -197,8 +200,7 @@ public abstract class Option<T> implements
 	 * Exception thrown to signal that an option is not defined - instance of
 	 * class {@link None} , but that its was tried to be accessed
 	 */
-	public static class UndefinedOptionException extends
-		UnsupportedOperationException {
+	public static class UndefinedOptionException extends UnsupportedOperationException {
 		private static final long serialVersionUID = 1597749256471841503L;
 
 		/**

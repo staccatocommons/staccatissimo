@@ -12,15 +12,27 @@
  */
 package net.sf.staccato.commons.lang.value;
 
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
- * {@link Unmodifiable}s are {@link Value}s that do not expose any method that
- * may modify receiver internal state. However, object's state can still be
- * mutated indirectly, if it holds and or exposes references to object that may
- * be mutated, so {@link Unmodifiable}s are also immutable, but only as long as
- * the references held by them are immutable too.
+ * {@link Unmodifiable}s are objects with a well-defined state that do not
+ * expose any method that may modify receiver internal state. However, object's
+ * state can still be mutated indirectly, if it holds and/or exposes references
+ * to object that may be mutated
+ * 
+ * TODO Value
  * 
  * @author flbulgarelli
  */
-public interface Unmodifiable extends Value {
+@Documented
+@Inherited
+@Retention(RetentionPolicy.SOURCE)
+@Target(ElementType.TYPE)
+public @interface Unmodifiable {
 
 }

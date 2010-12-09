@@ -1,6 +1,6 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team   
- 
+ Copyright (c) 2010, The Staccato-Commons Team
+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation; version 3 of the License.
@@ -11,8 +11,6 @@
  GNU Lesser General Public License for more details.
  */
 package net.sf.staccato.commons.lang.value;
-
-import java.io.Serializable;
 
 /**
  * 
@@ -32,12 +30,6 @@ import java.io.Serializable;
  * @author flbulgarelli
  * 
  */
-public interface Value extends Serializable {
-
-	public int hashCode();
-
-	public boolean equals(Object obj);
-
-	public String toString();
+public @interface Value {
 
 }

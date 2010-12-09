@@ -12,9 +12,12 @@
  */
 package net.sf.staccato.commons.lang.value;
 
+import java.io.Serializable;
+
+import net.sf.staccato.commons.lang.internal.ToString;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * {@link ValueObject} is aimed to be used as superclass for those object that
@@ -27,24 +30,22 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * @author flbulgarelli
  * 
  */
-public class ValueObject implements Value {
+public abstract class ValueObject implements Serializable {
 
 	private static final long serialVersionUID = -5493064104089778188L;
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(
-			this,
-			NamedTupleToStringStyle.getInstance());
+	public final String toString() {
+		return ToString.toString(this);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public final boolean equals(Object obj) {
 		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
 	}
 }

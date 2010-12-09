@@ -1,6 +1,6 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team   
- 
+ Copyright (c) 2010, The Staccato-Commons Team
+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation; version 3 of the License.
@@ -20,19 +20,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Classes annotated as {@link Immutable} indicate that their instances are
- * {@link Unmodifiable}, and also either all their attributes are primitives or
- * immutable objects - {@link String}s, {@link Integer}, or have no attributes
- * at all.
+ * {@link ConditionallyTransparent} annotated classes are
+ * {@link ConditionallyImmutable}s whose instances can be treated as
+ * {@link Transparent} as long as their attributes are {@link Transparent} too.
  * 
- * {@link Immutable}s are inherently thread-safe.
+ * @author flbulgarelli
  * 
- * @author fbulgarelli
  */
 @Documented
 @Inherited
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
-public @interface Immutable {
+public @interface ConditionallyTransparent {
 
 }
