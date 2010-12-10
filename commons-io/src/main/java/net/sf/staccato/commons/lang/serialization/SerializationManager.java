@@ -74,8 +74,7 @@ public interface SerializationManager {
 	 * @param outputStream
 	 * @throws SerializationException
 	 */
-	void serialize(Object target, OutputStream outputStream)
-		throws SerializationException;
+	void serialize(Object target, OutputStream outputStream) throws SerializationException;
 
 	/**
 	 * This method does not close the inputStream
