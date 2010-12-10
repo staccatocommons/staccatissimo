@@ -22,9 +22,6 @@ import net.sf.staccato.commons.lang.block.Block;
 import net.sf.staccato.commons.lang.block.Block2;
 import net.sf.staccato.commons.lang.block.Block3;
 import net.sf.staccato.commons.lang.function.Function;
-import net.sf.staccato.commons.lang.predicate.internal.And;
-import net.sf.staccato.commons.lang.predicate.internal.Not;
-import net.sf.staccato.commons.lang.predicate.internal.Or;
 
 /**
  * <p>
@@ -52,7 +49,17 @@ public abstract class Predicate<T> implements Evaluable<T> {
 	 */
 	@NonNull
 	public Predicate<T> not() {
-		return new Not<T>(this);
+		final class Not extends Predicate<T> {
+			public boolean eval(T argument) {
+				return !Predicate.this.eval(argument);
+			}
+
+			@Override
+			public Predicate<T> not() {
+				return Predicate.this;
+			}
+		}
+		return new Not();
 	}
 
 	/**
@@ -66,7 +73,12 @@ public abstract class Predicate<T> implements Evaluable<T> {
 	 */
 	@NonNull
 	public Predicate<T> or(@NonNull final Evaluable<T> other) {
-		return new Or<T>(this, other);
+		final class Or extends Predicate<T> {
+			public boolean eval(T argument) {
+				return Predicate.this.eval(argument) || other.eval(argument);
+			}
+		}
+		return new Or();
 	}
 
 	/**
@@ -80,7 +92,12 @@ public abstract class Predicate<T> implements Evaluable<T> {
 	 */
 	@NonNull
 	public Predicate<T> and(@NonNull final Evaluable<T> other) {
-		return new And<T>(this, other);
+		final class And extends Predicate<T> {
+			public boolean eval(T argument) {
+				return Predicate.this.eval(argument) && other.eval(argument);
+			}
+		}
+		return new And();
 	}
 
 	public Executable<T> whileTrue(final Executable<T> aBlock) {
@@ -101,8 +118,7 @@ public abstract class Predicate<T> implements Evaluable<T> {
 		};
 	}
 
-	public <T2, T3> Block3<T, T2, T3> whileTrue(
-		final Executable3<T, T2, T3> aBlock) {
+	public <T2, T3> Block3<T, T2, T3> whileTrue(final Executable3<T, T2, T3> aBlock) {
 		return new Block3<T, T2, T3>() {
 			public void exec(T argument1, T2 argument2, T3 argument3) {
 				while (eval(argument1))
@@ -138,8 +154,7 @@ public abstract class Predicate<T> implements Evaluable<T> {
 		};
 	}
 
-	public Applicable<T, T> ifTrue(
-		final Applicable<? super T, ? extends T> aFunction) {
+	public Applicable<T, T> ifTrue(final Applicable<? super T, ? extends T> aFunction) {
 		return new Function<T, T>() {
 			public T apply(T arg) {
 				return Predicate.this.eval(arg) ? aFunction.apply(arg) : arg;
