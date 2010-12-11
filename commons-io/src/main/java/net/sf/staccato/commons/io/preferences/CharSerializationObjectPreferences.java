@@ -10,12 +10,12 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.preferences;
+package net.sf.staccato.commons.io.preferences;
 
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import net.sf.staccato.commons.lang.serialization.CharSerializationManager;
+import net.sf.staccato.commons.io.serialization.CharSerializationManager;
 
 import org.apache.commons.lang.SerializationException;
 import org.slf4j.Logger;

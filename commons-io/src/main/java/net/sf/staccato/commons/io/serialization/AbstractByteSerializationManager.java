@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.serialization;
+package net.sf.staccato.commons.io.serialization;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import net.sf.staccato.commons.lang.serialization.lifecycle.SerializationLifecycle;
+import net.sf.staccato.commons.io.serialization.lifecycle.SerializationLifecycle;
 
 /**
  * Abstract implementation for a {@link ByteSerializationManager} that resolves

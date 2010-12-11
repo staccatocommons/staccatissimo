@@ -1,4 +1,4 @@
-package net.sf.staccato.commons.lang.preferences;
+package net.sf.staccato.commons.io.preferences;
 
 import static net.sf.staccato.commons.lang.tuple.Tuple._;
 import static org.junit.Assert.assertEquals;
@@ -9,8 +9,9 @@ import java.util.GregorianCalendar;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import net.sf.staccato.commons.lang.serialization.CharSerializationManager;
-import net.sf.staccato.commons.lang.serialization.XStreamXmlSerializationManager;
+import net.sf.staccato.commons.io.preferences.CharSerializationObjectPreferences;
+import net.sf.staccato.commons.io.serialization.CharSerializationManager;
+import net.sf.staccato.commons.io.serialization.XStreamXmlSerializationManager;
 import net.sf.staccato.commons.lang.tuple.Triple;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 

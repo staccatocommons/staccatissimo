@@ -1,4 +1,4 @@
-package net.sf.staccato.commons.lang.serialization;
+package net.sf.staccato.commons.io.serialization;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.GregorianCalendar;
+
+import net.sf.staccato.commons.io.serialization.SerializationManager;
 
 import org.apache.commons.lang.SerializationException;
 import org.junit.Before;

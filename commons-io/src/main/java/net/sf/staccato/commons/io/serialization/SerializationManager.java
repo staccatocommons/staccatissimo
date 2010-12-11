@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.serialization;
+package net.sf.staccato.commons.io.serialization;
 
 import java.io.File;
 import java.io.InputStream;

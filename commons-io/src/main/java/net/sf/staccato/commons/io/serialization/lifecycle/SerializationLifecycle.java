@@ -10,15 +10,15 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.serialization.lifecycle;
+package net.sf.staccato.commons.io.serialization.lifecycle;
 
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import net.sf.staccato.commons.io.serialization.SerializationManager;
 import net.sf.staccato.commons.lang.lifecycle.CloseableLifecycle;
-import net.sf.staccato.commons.lang.serialization.SerializationManager;
 
 public abstract class SerializationLifecycle<TargetType extends Closeable, ReturnType>
 	extends CloseableLifecycle<TargetType, ReturnType> {

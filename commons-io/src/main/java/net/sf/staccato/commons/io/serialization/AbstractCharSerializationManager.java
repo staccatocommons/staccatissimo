@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.serialization;
+package net.sf.staccato.commons.io.serialization;
 
 import java.io.File;
 import java.io.FileReader;
@@ -25,7 +25,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import net.sf.staccato.commons.lang.serialization.lifecycle.CharSerializationLifecycle;
+import net.sf.staccato.commons.io.serialization.lifecycle.CharSerializationLifecycle;
 
 public abstract class AbstractCharSerializationManager implements
 	CharSerializationManager {

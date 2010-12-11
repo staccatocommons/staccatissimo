@@ -1,4 +1,4 @@
-package net.sf.staccato.commons.lang.serialization.lifecycle;
+package net.sf.staccato.commons.io.serialization.lifecycle;
 
 import static junit.framework.Assert.assertSame;
 
@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
-import net.sf.staccato.commons.lang.serialization.CharSerializationManager;
+import net.sf.staccato.commons.io.serialization.CharSerializationManager;
+import net.sf.staccato.commons.io.serialization.lifecycle.CharSerializationLifecycle;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;

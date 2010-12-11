@@ -10,14 +10,14 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.serialization.lifecycle;
+package net.sf.staccato.commons.io.serialization.lifecycle;
 
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
-import net.sf.staccato.commons.lang.serialization.CharSerializationManager;
+import net.sf.staccato.commons.io.serialization.CharSerializationManager;
 
 public abstract class CharSerializationLifecycle<TargetType extends Closeable, ReturnType>
 	extends SerializationLifecycle<TargetType, ReturnType> {
