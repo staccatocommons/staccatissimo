@@ -59,6 +59,27 @@ public interface Filterable<A> {
 	@Projection
 	Stream<A> take(int amountOfElements);
 
-	Pair<List<A>, List<A>> partition(Evaluable<? super A> predicate);
+	/***
+	 * Splits stream elements into two lists using a predicate - elements that
+	 * evaluate to true will be returned in the first component, the rest will be
+	 * returned in the second component
+	 * 
+	 * @param predicate
+	 * @return a new {@link Pair} that contains this stream partitioned into two
+	 *         lists.
+	 */
+	@NonNull
+	Pair<List<A>, List<A>> partition(@NonNull Evaluable<? super A> predicate);
+
+	/**
+	 * Splits stream elements into two streams. This method just converts list
+	 * returned by {@link #partition(Evaluable)} into Streams
+	 * 
+	 * @param predicate
+	 * @return a new {@link Pair} that contains this stream partitioned into two
+	 *         other streams.
+	 */
+	@NonNull
+	Pair<Stream<A>, Stream<A>> streamPartition(@NonNull Evaluable<? super A> predicate);
 
 }

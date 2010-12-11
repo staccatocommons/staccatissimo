@@ -125,6 +125,8 @@ public class Streams {
 		return EmptyStream.getInstance();
 	}
 
+	// TODO single element stream
+
 	// TODO File Stream
 	// public static <K, V> Stream<Entry<K, V>> from(Map<K, V> iterable) {
 	// return new MapEntryTranaversable<K, V>(iterable);

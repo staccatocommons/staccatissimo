@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.collections.stream;
 
+import static net.sf.staccato.commons.lang.tuple.Tuple._;
+
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Iterator;
@@ -210,6 +212,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	@Override
 	public Pair<List<A>, List<A>> partition(Evaluable<? super A> predicate) {
 		return Iterables.partition(this, predicate);
+	}
+
+	public Pair<Stream<A>, Stream<A>> streamPartition(Evaluable<? super A> predicate) {
+		Pair<List<A>, List<A>> partition = partition(predicate);
+		return _(Streams.from(partition._1()), Streams.from(partition._2()));
 	}
 
 	@Override
