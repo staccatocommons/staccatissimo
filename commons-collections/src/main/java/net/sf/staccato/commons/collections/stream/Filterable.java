@@ -12,17 +12,20 @@
  */
 package net.sf.staccato.commons.collections.stream;
 
+import java.util.List;
+
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.lang.tuple.Pair;
 
 /**
  * {@link Stream} interface for filtering elements
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  */
-public interface Filterable<T> {
+public interface Filterable<A> {
 
 	/**
 	 * Preserves elements that evaluate to true
@@ -33,7 +36,7 @@ public interface Filterable<T> {
 	 */
 	@NonNull
 	@Projection
-	Stream<T> filter(@NonNull Evaluable<? super T> predicate);
+	Stream<A> filter(@NonNull Evaluable<? super A> predicate);
 
 	/**
 	 * Preserves all elements while they evalute to true
@@ -44,7 +47,7 @@ public interface Filterable<T> {
 	 */
 	@NonNull
 	@Projection
-	Stream<T> takeWhile(@NonNull Evaluable<? super T> predicate);
+	Stream<A> takeWhile(@NonNull Evaluable<? super A> predicate);
 
 	/**
 	 * Preserves up to N elements
@@ -54,6 +57,8 @@ public interface Filterable<T> {
 	 */
 	@NonNull
 	@Projection
-	Stream<T> take(int amountOfElements);
+	Stream<A> take(int amountOfElements);
+
+	Pair<List<A>, List<A>> partition(Evaluable<? super A> predicate);
 
 }

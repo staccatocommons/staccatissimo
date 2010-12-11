@@ -31,6 +31,7 @@ import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Option;
 import net.sf.staccato.commons.lang.Provider;
+import net.sf.staccato.commons.lang.tuple.Pair;
 import net.sf.staccato.commons.lang.value.NamedTupleToStringStyle;
 
 import org.apache.commons.lang.StringUtils;
@@ -86,11 +87,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public <O> O fold(O initial,
-		Applicable2<? super O, ? super A, ? extends O> function) {
+	public <O> O fold(O initial, Applicable2<? super O, ? super A, ? extends O> function) {
 		return IterablesInternal.foldInternal(this, initial, function);
 	}
-
 
 	@Override
 	public A any() {
@@ -133,8 +132,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public A findOrElse(Evaluable<? super A> predicate,
-		Provider<? extends A> provider) {
+	public A findOrElse(Evaluable<? super A> predicate, Provider<? extends A> provider) {
 		return findOrNone(predicate).valueOrElse(provider);
 	}
 
@@ -154,8 +152,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public <B> Stream<B> flatMap(
-		final Applicable<? super A, ? extends Iterable<? extends B>> function) {
+	public <B> Stream<B> flatMap(final Applicable<? super A, ? extends Iterable<? extends B>> function) {
 		return new FlatMapStream<A, B>(this, function);
 	}
 
@@ -211,10 +208,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
+	public Pair<List<A>, List<A>> partition(Evaluable<? super A> predicate) {
+		return Iterables.partition(this, predicate);
+	}
+
+	@Override
 	public String toString() {
-		return ToStringBuilder.reflectionToString(
-			this,
-			NamedTupleToStringStyle.getInstance());
+		return ToStringBuilder.reflectionToString(this, NamedTupleToStringStyle.getInstance());
 	}
 
 }
