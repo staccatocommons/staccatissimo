@@ -23,7 +23,7 @@ import net.sf.staccato.commons.collections.stream.Streams;
 public class IOStreams {
 
 	@NonNull
-	public static <A> Stream<A> from(@NonNull Readable redable, ReadStrategy<A> readStrategy) {
+	public static <A> Stream<A> from(@NonNull Readable redable, @NonNull ReadStrategy<A> readStrategy) {
 		return Streams.from(IOIterators.from(redable, readStrategy));
 	}
 

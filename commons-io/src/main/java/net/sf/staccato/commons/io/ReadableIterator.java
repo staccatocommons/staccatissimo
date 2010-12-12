@@ -28,6 +28,7 @@ public class ReadableIterator<A> extends AbstractUnmodifiableIterator<A> {
 	public ReadableIterator(ReadStrategy<A> readStrategy, Readable readable) {
 		this.readStrategy = readStrategy;
 		this.scanner = new Scanner(readable);
+		readStrategy.prepare(scanner);
 	}
 
 	public boolean hasNext() {

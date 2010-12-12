@@ -20,6 +20,8 @@ import java.util.Scanner;
  */
 public interface ReadStrategy<A> {
 
+	void prepare(Scanner s);
+
 	A next(Scanner s);
 
 	boolean hasNext(Scanner s);
