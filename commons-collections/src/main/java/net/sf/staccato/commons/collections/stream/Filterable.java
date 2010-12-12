@@ -72,8 +72,9 @@ public interface Filterable<A> {
 	Pair<List<A>, List<A>> partition(@NonNull Evaluable<? super A> predicate);
 
 	/**
-	 * Splits stream elements into two streams. This method just converts list
-	 * returned by {@link #partition(Evaluable)} into Streams
+	 * Splits stream elements into two ordered streams, that support random
+	 * access. This method just converts list returned by
+	 * {@link #partition(Evaluable)} into Streams.
 	 * 
 	 * @param predicate
 	 * @return a new {@link Pair} that contains this stream partitioned into two
