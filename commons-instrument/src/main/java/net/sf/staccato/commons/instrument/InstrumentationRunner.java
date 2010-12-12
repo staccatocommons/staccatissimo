@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.instrument;
 
+import static net.sf.staccato.commons.io.IOPredicates.suffix;
+
 import java.io.File;
 
 import javassist.ClassPool;
@@ -22,7 +24,6 @@ import net.sf.staccato.commons.instrument.internal.ClassNames;
 import net.sf.staccato.commons.instrument.internal.Instrumenter;
 import net.sf.staccato.commons.instrument.internal.InstrumenterImpl;
 import net.sf.staccato.commons.io.Directory;
-import net.sf.staccato.commons.lang.block.Block2;
 
 /**
  * @author flbulgarelli
@@ -61,13 +62,9 @@ public class InstrumentationRunner {
 				clazz.writeFile(processDirectory.getAbsolutePath());
 		}
 
-		private void doInstrument() {
-			processDirectory.forEachFileRecursively(new Block2<File, File>() {
-				public void softExec(File baseDir, File classfile) throws Exception {
-					processAndWriteClass(baseDir, classfile);
-				}
-			});
+		private void doInstrument() throws Exception {
+			for (File classfile : processDirectory.getRecurseFileStream().filter(suffix(".class")))
+				processAndWriteClass(processDirectory.getFile(), classfile);
 		}
 	}
-
 }
