@@ -22,7 +22,6 @@ package net.sf.staccato.commons.lang.collection;
  * @author flbulgarelli
  * 
  */
-// TODO move pacakge
 public interface EmptyAware {
 
 	/**

@@ -80,6 +80,19 @@ public class Var {
 		return formatter.format(prefix, name, value);
 	}
 
+	/**
+	 * Creates a formatted string with a suffix
+	 * 
+	 * @param suffix
+	 *          non null.
+	 * @param name
+	 *          non null
+	 * @param value
+	 *          nullable
+	 * @return the formatted string, non null.
+	 * 
+	 * @see VariableFormatter#format(String, Object, String)
+	 */
 	public static String format(String name, Object value, String suffix) {
 		return formatter.format(name, value, suffix);
 	}

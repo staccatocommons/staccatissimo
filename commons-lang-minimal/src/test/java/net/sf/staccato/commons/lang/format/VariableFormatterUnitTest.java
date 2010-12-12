@@ -4,6 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+/**
+ * Test for {@link VariableFormatter}
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class VariableFormatterUnitTest {
 
 	@Test
@@ -16,7 +22,7 @@ public class VariableFormatterUnitTest {
 	@Test
 	public void testFormatStringStringObject() {
 		VariableFormatter formatter = new VariableFormatter();
-		assertEquals("The content is myVar=[76]", // 
+		assertEquals("The content is myVar=[76]", //
 			formatter.format("The content is", "myVar", 76));
 
 	}
@@ -24,7 +30,7 @@ public class VariableFormatterUnitTest {
 	@Test
 	public void testFormatStringStringObjectString() {
 		VariableFormatter formatter = new VariableFormatter();
-		assertEquals("The property myVar=[76] looks bad", // 
+		assertEquals("The property myVar=[76] looks bad", //
 			formatter.format("The property", "myVar", 76, "looks bad"));
 	}
 

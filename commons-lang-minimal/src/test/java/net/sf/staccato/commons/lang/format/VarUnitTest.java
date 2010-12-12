@@ -4,6 +4,12 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
+/**
+ * Test for {@link Var}
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class VarUnitTest {
 
 	@Test

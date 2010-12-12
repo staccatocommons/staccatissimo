@@ -89,7 +89,7 @@ public class VariableFormatter {
 	 * Creates a string that shows the content of a variable, preceded by a prefix
 	 * 
 	 * @param prefix
-	 *          a string that will be inserted in front of the formatted string. A
+	 *          a string that will be inserted after the formatted variable A
 	 *          space is inserted between them. Non null
 	 * @param name
 	 *          the variable name. Non null.
@@ -102,6 +102,20 @@ public class VariableFormatter {
 		return String.format(getFormattingWithPrefixString(), prefix, name, value);
 	}
 
+	/**
+	 * Creates a string that shows the content of a variable, followed by a suffix
+	 * 
+	 * 
+	 * @param name
+	 *          the variable name. Non null.
+	 * @param value
+	 *          the variable value. Nullable
+	 * @param suffix
+	 *          a string that will be inserted after the formatted string. A space
+	 *          is inserted between them. Non null
+	 * @return the formatted variable, using this {@link VariableFormatter}
+	 *         formatting string, preceded by a prefix
+	 */
 	public String format(String name, Object value, String suffix) {
 		return String.format(getFormattingWithSuffixString(), name, value, suffix);
 	}
@@ -111,15 +125,15 @@ public class VariableFormatter {
 	 * string and ended with a suffix string
 	 * 
 	 * @param prefix
-	 *          a string that will be inserted in front of the formatted string. A
+	 *          a string that will be inserted before of the formatted variable. A
 	 *          space is inserted between them. Non null
 	 * @param name
 	 *          the variable name. Non null.
 	 * @param value
 	 *          the variable value. Nullable
 	 * @param suffix
-	 *          a string that will be inserted at the end of the formatted string.
-	 *          A space is inserted between them. Non null
+	 *          a string that will be inserted after the formatted variable. A
+	 *          space is inserted between them. Non null
 	 * @return the formatted variable, using this {@link VariableFormatter}
 	 *         formatting string, preceded by a prefix, and ended with a suffix
 	 */
