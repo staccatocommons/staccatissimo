@@ -21,7 +21,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * {@link ValueObject} is aimed to be used as superclass for those object that
- * require to implement {@link Value}
+ * require are annotated like {@link Value}
  * 
  * {@link ValueObject} implements {@link #toString()}, {@link #equals(Object)}
  * and {@link HashCodeBuilder} methods using reflective methods from Apache

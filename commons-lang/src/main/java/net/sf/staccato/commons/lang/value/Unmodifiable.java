@@ -20,12 +20,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * {@link Unmodifiable}s are objects with a well-defined state that do not
- * expose any method that may modify receiver internal state. However, object's
- * state can still be mutated indirectly, if it holds and/or exposes references
- * to object that may be mutated
- * 
- * TODO Value
+ * <p>
+ * {@link Unmodifiable}s are objects that do not expose publicly any method that
+ * may modify receiver internal state. However, object's state can still be
+ * mutated indirectly, if it holds and/or exposes references to objects that may
+ * be mutated
+ * </p>
+ * <p>
+ * {@link Unmodifiable}s can still implement lazy initialization and/or caching,
+ * as long as it remains encapsulated and is not exposed publicly
+ * </p>
  * 
  * @author flbulgarelli
  */

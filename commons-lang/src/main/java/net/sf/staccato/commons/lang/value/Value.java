@@ -12,13 +12,24 @@
  */
 package net.sf.staccato.commons.lang.value;
 
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.util.Date;
+
 /**
  * 
- * {@link Value} interface describes statefull objects whose identity is not
- * important.
+ * {@link Value} annotation describes objects whose identity is not important,
+ * but that are completely described by its state instead, like {@link String}s,
+ * {@link Number}s and {@link Date}s.
  * <p>
- * Values are {@link Serializable}, and must:
+ * Classes annotated this way grant that all their instances observe the
+ * following {@link Value} protocol
  * <ul>
+ * <li>Are {@link Serializable}</li>
  * <li>Implement equality so that it is not based in identity, but in its
  * internal state instead. Values must override {@link #equals(Object)}</li>
  * <li>Implement hashCode to be consistent with equals, in order to be compliant
@@ -26,10 +37,20 @@ package net.sf.staccato.commons.lang.value;
  * <li>{@link Value}s implement {@link Object#toString()} in order to provide a
  * descriptive representation of the object state</li>
  * </ul>
+ * <p>
+ * Although {@link Value} objects are usually immutable, this annotation does
+ * not make any assumption about it, as it only imposes restrictions regarding
+ * identity. Mutability aspect is covered by other annotations, like
+ * {@link Immutable}, {@link Unmodifiable} and the rest of the annotations
+ * defined in this package
+ * </p>
  * 
+ * @see Immutable
+ * @see Unmodifiable
  * @author flbulgarelli
- * 
  */
-public @interface Value {
-
-}
+@Documented
+@Inherited
+@Retention(RetentionPolicy.SOURCE)
+@Target(ElementType.TYPE)
+public @interface Value {}
