@@ -92,4 +92,8 @@ public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
 		};
 	}
 
+	public String toString() {
+		return "Block";
+	}
+
 }

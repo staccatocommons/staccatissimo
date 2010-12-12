@@ -33,8 +33,7 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3> {
 		}
 	}
 
-	protected void softExec(T1 argument1, T2 argument2, T3 argument3)
-		throws Exception {
+	protected void softExec(T1 argument1, T2 argument2, T3 argument3) throws Exception {
 	}
 
 	public Block3<T1, T2, T3> then(final Block3<T1, T2, T3> other) {
@@ -44,6 +43,10 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3> {
 				other.exec(argument1, argument2, argument3);
 			}
 		};
+	}
+
+	public String toString() {
+		return "Block3";
 	}
 
 }

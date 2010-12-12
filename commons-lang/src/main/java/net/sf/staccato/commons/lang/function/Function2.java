@@ -79,4 +79,8 @@ public abstract class Function2<T1, T2, R> implements Applicable2<T1, T2, R>,
 		};
 	}
 
+	public String toString() {
+		return "Function2";
+	}
+
 }

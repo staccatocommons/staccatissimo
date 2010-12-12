@@ -30,9 +30,8 @@ import net.sf.staccato.commons.lang.Applicable3;
  * @param <R>
  *          function return type
  */
-public abstract class Function3<T1, T2, T3, R> implements
-	Applicable3<T1, T2, T3, R>, Applicable2<T1, T2, Function<T3, R>>,
-	Applicable<T1, Function2<T2, T3, R>> {
+public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3, R>,
+	Applicable2<T1, T2, Function<T3, R>>, Applicable<T1, Function2<T2, T3, R>> {
 
 	/**
 	 * Applies the function
@@ -70,5 +69,9 @@ public abstract class Function3<T1, T2, T3, R> implements
 	 */
 	public <Rp> Function3<T1, T2, T3, Rp> then(final Function<? super R, Rp> other) {
 		return other.of(this);
+	}
+
+	public String toString() {
+		return "Function3";
 	}
 }

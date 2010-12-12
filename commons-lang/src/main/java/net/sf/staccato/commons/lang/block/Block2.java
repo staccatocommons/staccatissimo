@@ -60,4 +60,8 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2
 		};
 	}
 
+	public String toString() {
+		return "Block2";
+	}
+
 }
