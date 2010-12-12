@@ -35,7 +35,7 @@ public final class FlatMapStream<A, B> extends AbstractStream<B> {
 			public boolean hasNext() {
 				if (subIter != null && subIter.hasNext())
 					return true;
-				if (iter.hasNext()) {
+				while (iter.hasNext()) {
 					subIter = function.apply(iter.next()).iterator();
 					if (subIter.hasNext())
 						return true;
