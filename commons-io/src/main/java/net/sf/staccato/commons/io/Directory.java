@@ -32,12 +32,21 @@ public class Directory {
 	private final File file;
 
 	/**
-	 * Creates a new {@link Directory}
+	 * Creates a new {@link Directory} from a pathname
+	 * 
+	 * @param pathname
+	 *          the pathname of the directory. It must point to a directory
 	 */
 	public Directory(@NonNull String pathname) {
 		this(new File(pathname));
 	}
 
+	/**
+	 * Creates a new {@link Directory} from a {@link File}.
+	 * 
+	 * @param file
+	 *          must be a directory
+	 */
 	public Directory(@NonNull File file) {
 		Ensure.is("file", file, file.isDirectory(), "must denote a directory");
 		this.file = file;
@@ -49,13 +58,22 @@ public class Directory {
 	}
 
 	/**
-	 * @return the file
+	 * Obtains the underlying {@link File} of this directory
+	 * 
+	 * @return the underlying file. It grants be a directory
 	 */
 	@NonNull
 	public File getFile() {
 		return file;
 	}
 
+	/**
+	 * Obtains a {@link Stream} of the files directly contained by this directory
+	 * 
+	 * @return a new ordered Stream. However, precise order of files in the stream
+	 * 
+	 * @see File#listFiles()
+	 */
 	@NonNull
 	public Stream<File> getFileStream() {
 		return Streams.from(file.listFiles());
@@ -82,26 +100,25 @@ public class Directory {
 	public Stream<File> getRecurseFileStream() {
 		return getDepthFirstFileStream();
 	}
+}
 
-	private static final class BreathFirst extends Function<Stream<File>, Stream<File>> {
-		static final BreathFirst INSTANCE = new BreathFirst();
+final class BreathFirst extends Function<Stream<File>, Stream<File>> {
+	static final BreathFirst INSTANCE = new BreathFirst();
 
-		public Stream<File> apply(Stream<File> files) {
-			if (files.isEmpty())
-				return Streams.empty();
-			Pair<Stream<File>, Stream<File>> partion = files //
-				.streamPartition(new Predicate<File>() {
-					public boolean eval(File argument) {
-						return !argument.isDirectory();
-					}
-				});
-			return partion._1().concat(//
-				partion._2().flatMap(new Function<File, Iterable<File>>() {
-					public Iterable<File> apply(File arg) {
-						return Arrays.asList(arg.listFiles());
-					}
-				}).then(this));
-		}
+	public Stream<File> apply(Stream<File> files) {
+		if (files.isEmpty())
+			return Streams.empty();
+		Pair<Stream<File>, Stream<File>> partion = files //
+			.streamPartition(new Predicate<File>() {
+				public boolean eval(File argument) {
+					return !argument.isDirectory();
+				}
+			});
+		return partion._1().concat(//
+			partion._2().flatMap(new Function<File, Iterable<File>>() {
+				public Iterable<File> apply(File arg) {
+					return Arrays.asList(arg.listFiles());
+				}
+			}).then(this));
 	}
-
 }
