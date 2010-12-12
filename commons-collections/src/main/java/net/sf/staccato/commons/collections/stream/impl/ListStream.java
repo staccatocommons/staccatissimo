@@ -24,6 +24,12 @@ import net.sf.staccato.commons.check.annotation.NonNull;
  */
 public class ListStream<A> extends CollectionStream<A> {
 
+	/**
+	 * Creates a new {@link ListStream}
+	 * 
+	 * @param iterable
+	 *          the list to wrap
+	 */
 	public ListStream(@NonNull List<A> iterable) {
 		super(iterable);
 	}
@@ -35,6 +41,11 @@ public class ListStream<A> extends CollectionStream<A> {
 
 	protected List<A> getList() {
 		return (List<A>) getCollection();
+	}
+
+	@Override
+	public int indexOf(A element) {
+		return getList().indexOf(element);
 	}
 
 }

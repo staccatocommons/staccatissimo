@@ -58,4 +58,28 @@ public interface Accessible<T> {
 	 */
 	T last();
 
+	/**
+	 * Returns the zero-based index of the given element
+	 * 
+	 * @param element
+	 * @return the index of the element, or -1, if it is not contained by this
+	 *         stream
+	 */
+	int indexOf(T element);
+
+	/**
+	 * Returns the index of the given <strong>present</strong> element. This
+	 * method behaves exactly like {@link #indexOf(Object)}, with the only
+	 * difference that it will throw a {@link NoSuchElementException} if the given
+	 * element is not present on the stream
+	 * 
+	 * @param element
+	 * @return the index of the given element
+	 * @throws NoSuchElementException
+	 *           if the element is no contained by this {@link Stream}
+	 */
+	int positionOf(T element);
+
+	boolean isBefore(T previous, T next);
+
 }

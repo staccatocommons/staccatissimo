@@ -15,6 +15,7 @@ package net.sf.staccato.commons.collections.stream;
 import java.util.Collection;
 import java.util.Iterator;
 
+import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.SizeAware;
 
@@ -63,4 +64,8 @@ public interface Stream<A> extends //
 	Mappable<A>, //
 	Accessible<A>, //
 	Collectible<A>, //
-	Appendabable<A> {}
+	Appendabable<A> {
+
+	<B> Stream<B> then(Applicable<Stream<A>, ? extends Iterable<B>> function);
+
+}

@@ -18,6 +18,7 @@ import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import net.sf.staccato.commons.collections.iterable.Iterables;
@@ -189,6 +190,24 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
+	public int indexOf(A element) {
+		return Iterables.indexOf(this, element);
+	}
+
+	@Override
+	public int positionOf(A element) {
+		int index = indexOf(element);
+		if (index == -1)
+			throw new NoSuchElementException(element.toString());
+		return index;
+	}
+
+	@Override
+	public boolean isBefore(A previous, A next) {
+		return Iterables.isBefore(this, previous, next);
+	}
+
+	@Override
 	public Set<A> toSet() {
 		return Iterables.asSet(this);
 	}
@@ -217,6 +236,15 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	public Pair<Stream<A>, Stream<A>> streamPartition(Evaluable<? super A> predicate) {
 		Pair<List<A>, List<A>> partition = partition(predicate);
 		return _(Streams.from(partition._1()), Streams.from(partition._2()));
+	}
+
+	public <B> Stream<B> then(final Applicable<Stream<A>, ? extends Iterable<B>> function) {
+		class ThenStream extends AbstractStream<B> {
+			public Iterator<B> iterator() {
+				return function.apply(AbstractStream.this).iterator();
+			}
+		}
+		return new ThenStream();
 	}
 
 	@Override

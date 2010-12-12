@@ -37,9 +37,9 @@ import net.sf.staccato.commons.collections.stream.impl.internal.EnumerationItera
 public class Streams {
 
 	/**
-	 * Creates a new {@link Stream} that retrieves the elements from the given
-	 * array. This stream permits efficient random access and grants repeatable
-	 * iteration order.
+	 * Creates a new ordered {@link Stream} that retrieves the elements from the
+	 * given array. This stream permits efficient random access and grants
+	 * repeatable iteration order.
 	 * 
 	 * @param <A>
 	 *          the element type
@@ -97,8 +97,8 @@ public class Streams {
 	}
 
 	/**
-	 * Creates a new {@link Stream} that retrieves elements from a list. This
-	 * streams grants repeatable iterator order and supports (not necessary
+	 * Creates a new ordered {@link Stream} that retrieves elements from a list.
+	 * This streams grants repeatable iterator order and supports (not necessary
 	 * efficient) random access by index.
 	 * 
 	 * @param <A>
