@@ -52,39 +52,31 @@ public class IterablesUnitTest {
 	@SuppressWarnings("unchecked")
 	public void testAllSatisfy() {
 
-		assertTrue(Iterables.all(
-			Arrays.asList(1, 2, 3, 4, 5, 9),
-			greaterThan(0)));
-		assertFalse(Iterables.all(
-			Arrays.asList(1, -9, 3, 4, 5, 9),
-			greaterThan(0)));
+		assertTrue(Iterables.all(Arrays.asList(1, 2, 3, 4, 5, 9), greaterThan(0)));
+		assertFalse(Iterables.all(Arrays.asList(1, -9, 3, 4, 5, 9), greaterThan(0)));
 		assertTrue(Iterables.all((List) emptyList(), greaterThan(0)));
 
 	}
 
 	@Test
 	public void testFilter() throws Exception {
-		List<String> result = Iterables.filter(
-			stringsList,
-			new Predicate<String>() {
-				@Override
-				public boolean eval(String s) {
-					return s.startsWith("H");
-				}
-			});
+		List<String> result = Iterables.filter(stringsList, new Predicate<String>() {
+			@Override
+			public boolean eval(String s) {
+				return s.startsWith("H");
+			}
+		});
 		assertEquals(asList("Hello"), result);
 	}
 
 	@Test
 	public void testFind() throws Exception {
-		Option<String> result = Iterables.findOrNone(
-			stringsList,
-			new Predicate<String>() {
-				@Override
-				public boolean eval(String s) {
-					return s.startsWith("H");
-				}
-			});
+		Option<String> result = Iterables.findOrNone(stringsList, new Predicate<String>() {
+			@Override
+			public boolean eval(String s) {
+				return s.startsWith("H");
+			}
+		});
 		assertEquals("Hello", result.value());
 	}
 
@@ -109,6 +101,32 @@ public class IterablesUnitTest {
 		assertTrue(Iterables.allEqual(Arrays.asList(c1)));
 		assertTrue(Iterables.allEqual(Arrays.asList(c2, c3)));
 		assertFalse(Iterables.allEqual(Arrays.asList(c2, c1)));
+	}
+
+	/**
+	 * Test for {@link Iterables#indexOf(Iterable, Object)}
+	 */
+	@Test
+	public void testIndexOf() {
+		List<Object> list = Arrays.<Object> asList("hola", 80, 20, 'a');
+		assertEquals(3, Iterables.indexOf(list, 'a'));
+		assertEquals(0, Iterables.indexOf(list, "hola"));
+		assertEquals(-1, Iterables.indexOf(list, 13));
+	}
+
+	/**
+	 * Test for {@link Iterables#isBefore(Iterable, Object, Object)}
+	 */
+	@Test
+	public void testIsBefore() {
+		List<Object> list = Arrays.<Object> asList("hola", 80, 20, 'a');
+		assertTrue(Iterables.isBefore(list, 80, 20));
+		assertTrue(Iterables.isBefore(list, "hola", 'a'));
+		assertFalse(Iterables.isBefore(list, 20, 20));
+		assertFalse(Iterables.isBefore(list, 80, "hola"));
+		assertFalse(Iterables.isBefore(list, 20, 40));
+		assertFalse(Iterables.isBefore(list, 90, 10));
+		assertFalse(Iterables.isBefore(list, 90, 20));
 	}
 
 }

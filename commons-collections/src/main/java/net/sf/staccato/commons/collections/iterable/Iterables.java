@@ -371,7 +371,7 @@ public class Iterables {
 	 * 
 	 * @param <S>
 	 * @param iterable
-	 *          he the collection. Nullable.
+	 *          the the collection.
 	 * @param comparator
 	 *          . Not null.
 	 * @return a new list containing all the original colleciton elements, sorted
@@ -410,7 +410,7 @@ public class Iterables {
 		List<T> left = new LinkedList<T>();
 		List<T> right = new LinkedList<T>();
 		for (T element : iterable)
-			if (predicate.equals(element))
+			if (predicate.eval(element))
 				left.add(element);
 			else
 				right.add(element);
@@ -457,6 +457,52 @@ public class Iterables {
 				throw new IndexOutOfBoundsException("At " + at);
 			}
 		return element;
+	}
+
+	/**
+	 * The 0-based index of a given element in the iterable when iterating over it
+	 * 
+	 * @param <T>
+	 * @param iterable
+	 * @param element
+	 * @return the index of the element in the given iterable, or -1 if it is not
+	 *         contained on it
+	 */
+	public static <T> int indexOf(@NonNull Iterable<T> iterable, T element) {
+		int i = 0;
+		for (Object o : iterable) {
+			if (ObjectUtils.equals(element, o))
+				return i;
+			i++;
+		}
+		return -1;
+	}
+
+	/**
+	 * If an element is before another when iterating through the given iterable.
+	 * 
+	 * @param <T>
+	 * @param iterable
+	 * @param previous
+	 *          the element that must exist in the iterable and be before next
+	 * @param next
+	 *          the element that must exist in the iterable and be after previous
+	 * @return true if both elements are contained by the given iterable, and
+	 *         first element is before second one
+	 */
+	public static <T> boolean isBefore(@NonNull(ITERABLE) Iterable<T> iterable, T previous, T next) {
+		if (ObjectUtils.equals(previous, next))
+			return false;
+		boolean previousFound = false;
+		for (T o : iterable) {
+			if (!previousFound && ObjectUtils.equals(o, previous)) {
+				previousFound = true;
+				continue;
+			}
+			if (ObjectUtils.equals(o, next))
+				return previousFound;
+		}
+		return false;
 	}
 
 	public static <T1, T2, T3> List<T3> zip(Iterable<T1> iterable1, Iterable<T2> iterable2,
