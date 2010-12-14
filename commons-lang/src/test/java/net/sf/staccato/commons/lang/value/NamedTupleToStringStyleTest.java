@@ -13,7 +13,7 @@
 package net.sf.staccato.commons.lang.value;
 
 import static org.junit.Assert.assertEquals;
-import net.sf.staccato.commons.lang.range.Range;
+import net.sf.staccato.commons.lang.Range;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Before;

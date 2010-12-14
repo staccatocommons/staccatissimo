@@ -100,6 +100,14 @@ public abstract class Predicate<T> implements Evaluable<T> {
 		return new And();
 	}
 
+	public Applicable<T, T> ifTrue(final Applicable<? super T, ? extends T> aFunction) {
+		return new Function<T, T>() {
+			public T apply(T arg) {
+				return Predicate.this.eval(arg) ? aFunction.apply(arg) : arg;
+			}
+		};
+	}
+
 	public Executable<T> whileTrue(final Executable<T> aBlock) {
 		return new Block<T>() {
 			public void exec(T argument) {
@@ -150,14 +158,6 @@ public abstract class Predicate<T> implements Evaluable<T> {
 			public void exec(T argument1, T2 argument2, T3 argument3) {
 				if (eval(argument1))
 					aBlock.exec(argument1, argument2, argument3);
-			}
-		};
-	}
-
-	public Applicable<T, T> ifTrue(final Applicable<? super T, ? extends T> aFunction) {
-		return new Function<T, T>() {
-			public T apply(T arg) {
-				return Predicate.this.eval(arg) ? aFunction.apply(arg) : arg;
 			}
 		};
 	}

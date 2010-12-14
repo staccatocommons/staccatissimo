@@ -14,8 +14,6 @@ package net.sf.staccato.commons.lang.block;
 
 import net.sf.staccato.commons.lang.block.internal.Empty;
 
-import org.apache.commons.lang.NotImplementedException;
-
 /**
  * 
  * @author flbulgarelli
@@ -33,7 +31,4 @@ public class Blocks {
 		return Empty.getInstance();
 	}
 
-	public static <T> Block<T> throwException(String message) {
-		throw new NotImplementedException();
-	}
 }

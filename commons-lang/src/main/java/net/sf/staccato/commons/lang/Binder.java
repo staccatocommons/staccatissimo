@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
+
 /**
  * 
  * {@link Binder}s are objects that can transform one or argument into a result,
@@ -37,6 +39,7 @@ public interface Binder<I, B> {
 	 *          the binding argument
 	 * @return the binding result, if binding succeeded, or none, otherwise
 	 */
+	@NonNull
 	Option<B> bind(I arg);
 
 }

@@ -99,8 +99,8 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @return a new {@link MapBuilder}
 	 */
 	@NonNull
-	public static <K, V, M extends Map<K, V>> MapBuilder<K, V, M> mapWith(M map,
-		K key, V value) {
+	public static <K, V, M extends Map<K, V>> MapBuilder<K, V, M> mapWith(@NonNull M map, K key,
+		V value) {
 		return new MapBuilder<K, V, M>(map).with(key, value);
 	}
 
@@ -151,8 +151,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @return a new {@link MapBuilder}
 	 */
 	@NonNull
-	public static <K, V> MapBuilder<K, V, SortedMap<K, V>> treeMapWith(K key,
-		V value) {
+	public static <K, V> MapBuilder<K, V, SortedMap<K, V>> treeMapWith(K key, V value) {
 		return mapWith((SortedMap<K, V>) new TreeMap<K, V>(), key, value);
 	}
 

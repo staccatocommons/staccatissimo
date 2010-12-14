@@ -10,12 +10,14 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.range;
+package net.sf.staccato.commons.lang;
 
-import static net.sf.staccato.commons.lang.range.Range.from;
+import static net.sf.staccato.commons.lang.Range.from;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import net.sf.staccato.commons.lang.Range;
+import net.sf.staccato.commons.testing.junit.SerializationAssert;
 
 import org.junit.Test;
 
@@ -62,4 +64,8 @@ public class RangeUnitTest {
 		assertTrue(from(10, 10).isEmpty());
 	}
 
+	@Test
+	public void testSerialization() throws Exception {
+		SerializationAssert.assertCanSerialize(Range.from(50, 90));
+	}
 }

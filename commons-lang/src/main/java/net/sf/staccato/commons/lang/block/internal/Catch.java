@@ -1,4 +1,7 @@
-package net.sf.staccato.commons.lang.block;
+package net.sf.staccato.commons.lang.block.internal;
+
+import net.sf.staccato.commons.lang.block.Block;
+import net.sf.staccato.commons.lang.block.Block2;
 
 /**
  * @author flbulgarelli

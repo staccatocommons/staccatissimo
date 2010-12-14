@@ -10,41 +10,39 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.sequence;
+package net.sf.staccato.commons.lang.sequence.internal;
+
+import java.math.BigInteger;
 
 import net.sf.staccato.commons.lang.function.Function;
-import net.sf.staccato.commons.lang.value.NamedTupleToStringStyle;
-
-import org.apache.commons.lang.builder.ToStringBuilder;
+import net.sf.staccato.commons.lang.internal.ToString;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class IntegerIncrement extends Function<Integer, Integer> {
+public class BigIntegerIncrement extends Function<BigInteger, BigInteger> {
 
-	private final int delta;
+	private final BigInteger delta;
 
 	/**
-	 * Creates a new {@link IntegerIncrement}
+	 * Creates a new {@link BigIntegerIncrement}
 	 * 
 	 * @param delta
 	 *          the increment. May be negative.
 	 */
-	public IntegerIncrement(int delta) {
+	public BigIntegerIncrement(BigInteger delta) {
 		this.delta = delta;
 	}
 
 	@Override
-	public Integer apply(Integer arg) {
-		return arg + delta;
+	public BigInteger apply(BigInteger arg) {
+		return arg.add(delta);
 	}
 
 	@Override
 	public String toString() {
-		return ToStringBuilder.reflectionToString(
-			this,
-			NamedTupleToStringStyle.getInstance());
+		return ToString.toString(this);
 	}
 
 }

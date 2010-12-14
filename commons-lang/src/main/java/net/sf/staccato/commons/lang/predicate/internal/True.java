@@ -40,16 +40,8 @@ public final class True<T> extends Predicate<T> {
 		return false_();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * net.sf.staccato.commons.lang.predicate.Predicate#ifTrue(net.sf.staccato
-	 * .commons.lang.Applicable)
-	 */
 	@Override
 	public Applicable<T, T> ifTrue(Applicable<? super T, ? extends T> aFunction) {
-		// TODO Auto-generated method stub
-		return super.ifTrue(aFunction);
+		return (Applicable<T, T>) aFunction;
 	}
 }

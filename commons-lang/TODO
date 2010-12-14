@@ -7,57 +7,74 @@ Consistent factory method policy
 
 Consistent no null annotation/javadoc/ensuring/post processing policy
 
-Move collection-view related code to collections
-
-Add randomizing capabilities to Streams
 
 Consisten inner classes vs annonymus classes policy. 
 Think about serialization. Think about method hubs/class factories. -> thumb rule is always create top level classes, in order 
 to simplify debugging (better to string) and serialization throug reflection.
 
-Check injection disabling ?
 
-Check injection with class retention?, except of CheckAnnotation, which is just source
-
-produce warning when applying NonNull to primitives
-
-be compliant with http://www.ietf.org/rfc/rfc2119.txt meanings of must, should and may
-
-
-transparential reference in OO?
-
-
-return a + b is TR. 
-return a.size() is TR?
 
 TODO log checks added, see final classes, check is the validation of voids is working or not
 
-
 Anotar solo metodos publicos, de clases publicas, en paquetes no-internal
 
-ToString se sobrentiende que es non-null, idem clone
+ToString se sobrentiende que es non-null, idem clone. No null generico para toda la calse? no null por defecto?
+no null solo para argumentos de constructores? annotation nullable?
 
 
 serialization? Perhaps should remove that capaibility for non concrete classes, as it is error prone and does not offer a big help
 
 Annotations for unmodiables
 
-
 Tasks
+
 
 1. Increase test coverage
 2. Increase  javadoc coverage
-3. COmmit commons-instrument
 
 Singleton objects? Document they are singleton?
+
+
+
+links in javadoc
+
+remove xstream from commons-lang
+
  
  
+Reglas:
+
+Las restricciones imponen un contraro que debe ser observado tanto por el 
+implementador (su comportamiento debe estar definidio 
+para los casos contemplados) como por el cliente (deben utilizar
+al implementador de forma correcta)
+
+Dada una restriccion y un elemento:
+a. solo acepte elementos que la cumplen
+b. acepte elementos aun si no la cumplen (y por tanto, deba manejarlos apropiadamente)
+c. no esté especificado, si su comportamiento corresponde a a. o b. depende del contexto
+
+
+
+Las restricciones definidas en superclaes e interfaces deben ser respetadas
+por las subclases e implementadores, o relajadas
+
  
- soporte en check instrument para generar warnings respecto de los elementos anotados
- 
- 
- Ensure.that.isTrue
- Ensure.thatNot.isTrue
- 
- Desprenderse del uso de evaluables?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  

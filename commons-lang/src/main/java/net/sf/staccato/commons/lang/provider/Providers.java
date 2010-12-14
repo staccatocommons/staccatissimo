@@ -14,9 +14,11 @@ package net.sf.staccato.commons.lang.provider;
 
 import java.util.concurrent.Callable;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Provider;
 import net.sf.staccato.commons.lang.provider.internal.CallableProvider;
 import net.sf.staccato.commons.lang.provider.internal.Constant;
+import net.sf.staccato.commons.lang.provider.internal.NullProvider;
 
 /**
  * @author flbulgarelli
@@ -24,12 +26,19 @@ import net.sf.staccato.commons.lang.provider.internal.Constant;
  */
 public class Providers {
 
+	@NonNull
 	public static <T> Provider<T> constant(T value) {
 		return new Constant<T>(value);
 	}
 
-	public static <T> Provider<T> callable(Callable<T> callable) {
+	@NonNull
+	public static <T> Provider<T> callable(@NonNull Callable<T> callable) {
 		return new CallableProvider<T>(callable);
+	}
+
+	@NonNull
+	public static <T> Provider<T> null_() {
+		return NullProvider.getInstance();
 	}
 
 }

@@ -58,7 +58,7 @@ public final class None<T> extends Option<T> {
 	}
 
 	@Override
-	public T valueOrElse(Provider<? extends T> ifUndefined) {
+	public T valueOrElse(@NonNull Provider<? extends T> ifUndefined) {
 		return ifUndefined.value();
 	}
 

@@ -13,6 +13,10 @@
 package net.sf.staccato.commons.lang.value;
 
 /**
+ * Class that helps on building effective equals method
+ * 
+ * TODO how?
+ * 
  * @author flbulgarelli
  * 
  */

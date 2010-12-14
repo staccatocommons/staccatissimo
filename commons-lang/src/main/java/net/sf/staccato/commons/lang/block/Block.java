@@ -16,7 +16,6 @@ import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Executable;
 import net.sf.staccato.commons.lang.SoftException;
-import net.sf.staccato.commons.lang.block.internal.Then;
 
 /**
  * An abstract, one argument code block, that implements {@link Executable}
@@ -67,27 +66,10 @@ public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
 	 */
 	@NonNull
 	public Block<T> then(@NonNull final Executable<? super T> other) {
-		return new Then<T>(this, other);
-	}
-
-	public Block<T> andCatch(final Block2<? super RuntimeException, T> catchBlock) {
-		return andCatch(RuntimeException.class, catchBlock);
-	}
-
-	// TODO reflection aware? soft exception ware?
-	public <E extends RuntimeException> Block<T> andCatch(final Class<E> exceptionType,
-		final Block2<? super E, T> catchBlock) {
-		return new Catch<E, T>(this, exceptionType, catchBlock);
-	}
-
-	public <E extends Throwable> Block<T> andFinally(final Executable<T> finallyBlock) {
 		return new Block<T>() {
-			public void exec(T arg) {
-				try {
-					Block.this.exec(arg);
-				} finally {
-					finallyBlock.exec(arg);
-				}
+			public void exec(T argument) {
+				Block.this.exec(argument);
+				other.exec(argument);
 			}
 		};
 	}
