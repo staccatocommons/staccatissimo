@@ -189,8 +189,8 @@ public class Sequence<T> extends ValueObject implements Iterable<T> {
 
 	/**
 	 * Factory method that creates a new finite {@link Sequence} that generates
-	 * integers applying incrementing or decrementing by one - depending on if the
-	 * seed is lower to the stop value or not, until it reaches an stop value.
+	 * integers incrementing or decrementing by one - depending on if the seed is
+	 * lower to the stop value or not, until it reaches an stop value.
 	 * 
 	 * For example <code>Sequence.fromTo(0,4)</code> will iterate over 0,1,2 and
 	 * 3, and <code>Sequence.fromTo(4,2)</code> will iterate over 4 and 3.
@@ -201,8 +201,6 @@ public class Sequence<T> extends ValueObject implements Iterable<T> {
 	 *          the stop value
 	 * @return a new Sequence
 	 */
-	// FIXME BUG! in the latter example it should sequence up to 3, but it
-	// sequences up to 2!
 	public static Sequence<Integer> fromTo(int from, int to) {
 		return fromToBy(from, to, from < to ? 1 : -1);
 	}

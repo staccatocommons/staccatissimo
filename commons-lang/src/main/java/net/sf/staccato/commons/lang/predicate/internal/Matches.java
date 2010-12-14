@@ -23,7 +23,7 @@ import net.sf.staccato.commons.lang.predicate.Predicate;
  * @author flbulgarelli
  * 
  */
-public class Matches extends Predicate<String> {
+public class Matches extends NonAnnonymousPredicate<String> {
 
 	private Pattern pattern;
 

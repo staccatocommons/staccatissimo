@@ -6,16 +6,13 @@ import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Executable;
 import net.sf.staccato.commons.lang.block.Blocks;
 import net.sf.staccato.commons.lang.predicate.Predicate;
-import net.sf.staccato.commons.lang.value.NamedTupleToStringStyle;
-
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * @author flbulgarelli
  * 
  * @param <T>
  */
-public final class False<T> extends Predicate<T> {
+public final class False<T> extends NonAnnonymousPredicate<T> {
 	private static final Predicate INSTANCE = new False();
 
 	public boolean eval(T argument) {
@@ -47,12 +44,5 @@ public final class False<T> extends Predicate<T> {
 	@Override
 	public Executable<T> ifTrue(Executable<T> aBlock) {
 		return Blocks.empty();
-	}
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(
-			this,
-			NamedTupleToStringStyle.getInstance());
 	}
 }

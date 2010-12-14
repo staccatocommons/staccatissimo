@@ -16,8 +16,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.sf.staccato.commons.lang.predicate.Predicate;
-
 /**
  * A predicate that tests if evaluated element is in a set of values
  * 
@@ -25,7 +23,7 @@ import net.sf.staccato.commons.lang.predicate.Predicate;
  * 
  * @param <T>
  */
-public class InPredicate<T> extends Predicate<T> {
+public class InPredicate<T> extends NonAnnonymousPredicate<T> {
 
 	private Set<T> elements;
 

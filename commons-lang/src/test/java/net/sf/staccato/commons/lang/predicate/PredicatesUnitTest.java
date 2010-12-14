@@ -141,16 +141,16 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 
 	@Test
 	public void testLowerThan() throws Exception {
-		assertTrue(Predicates.lowerThan(5).eval(2));
-		assertFalse(Predicates.lowerThan(5).eval(5));
-		assertFalse(Predicates.lowerThan(5).eval(6));
+		assertTrue(Predicates.lessThan(5).eval(2));
+		assertFalse(Predicates.lessThan(5).eval(5));
+		assertFalse(Predicates.lessThan(5).eval(6));
 	}
 
 	@Test
 	public void testAny() throws Exception {
 		assertTrue(Predicates.any(
 			Predicates.<Integer> true_(),
-			Predicates.lowerThan(2),
+			Predicates.lessThan(2),
 			Predicates.equal(5)).eval(5));
 
 		assertTrue(Predicates.any(

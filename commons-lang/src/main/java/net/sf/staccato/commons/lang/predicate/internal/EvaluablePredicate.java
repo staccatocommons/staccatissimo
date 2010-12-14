@@ -13,14 +13,13 @@
 package net.sf.staccato.commons.lang.predicate.internal;
 
 import net.sf.staccato.commons.lang.Evaluable;
-import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**
  * @author flbulgarelli
  * @param <T>
  * 
  */
-public class EvaluablePredicate<T> extends Predicate<T> {
+public class EvaluablePredicate<T> extends NonAnnonymousPredicate<T> {
 
 	private final Evaluable<T> evaluable;
 

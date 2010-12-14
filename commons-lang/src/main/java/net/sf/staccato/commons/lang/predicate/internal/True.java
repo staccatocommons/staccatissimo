@@ -11,7 +11,7 @@ import net.sf.staccato.commons.lang.predicate.Predicate;
  * 
  * @param <T>
  */
-public final class True<T> extends Predicate<T> {
+public final class True<T> extends NonAnnonymousPredicate<T> {
 	private static final Predicate INSTANCE = new True();
 
 	public boolean eval(T argument) {

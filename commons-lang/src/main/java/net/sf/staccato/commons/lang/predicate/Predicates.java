@@ -25,7 +25,7 @@ import net.sf.staccato.commons.lang.predicate.internal.EqualsIgnoreCase;
 import net.sf.staccato.commons.lang.predicate.internal.EvaluablePredicate;
 import net.sf.staccato.commons.lang.predicate.internal.False;
 import net.sf.staccato.commons.lang.predicate.internal.GreaterThan;
-import net.sf.staccato.commons.lang.predicate.internal.LowerThan;
+import net.sf.staccato.commons.lang.predicate.internal.LessThan;
 import net.sf.staccato.commons.lang.predicate.internal.Matches;
 import net.sf.staccato.commons.lang.predicate.internal.NullPredicates;
 import net.sf.staccato.commons.lang.predicate.internal.Same;
@@ -214,24 +214,25 @@ public class Predicates {
 	/*
 	 * Comparable predicates
 	 */
-	/**
-	 * @param <T>
-	 * @param value
-	 * @return
-	 */
+
 	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> lowerThan(@NonNull T value) {
-		return new LowerThan<T>(value);
+	public static <T extends Comparable<T>> Predicate<T> lessThan(@NonNull T value) {
+		return new LessThan<T>(value);
 	}
 
-	/**
-	 * @param <T>
-	 * @param value
-	 * @return
-	 */
+	@NonNull
+	public static <T extends Comparable<T>> Predicate<T> lessThanOrEqualTo(@NonNull T value) {
+		return greaterThan(value).not();
+	}
+
 	@NonNull
 	public static <T extends Comparable<T>> Predicate<T> greaterThan(@NonNull T value) {
 		return new GreaterThan<T>(value);
+	}
+
+	@NonNull
+	public static <T extends Comparable<T>> Predicate<T> greaterThanOrEqualTo(@NonNull T value) {
+		return lessThan(value).not();
 	}
 
 	/*

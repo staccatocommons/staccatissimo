@@ -1,14 +1,12 @@
 package net.sf.staccato.commons.lang.predicate.internal;
 
-import net.sf.staccato.commons.lang.predicate.Predicate;
-
 
 /**
  * @author flbulgarelli
  * 
  * @param <T>
  */
-public final class Equals<T> extends Predicate<T> {
+public final class Equals<T> extends NonAnnonymousPredicate<T> {
 	private final T value;
 
 	/**

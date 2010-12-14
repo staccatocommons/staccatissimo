@@ -162,4 +162,8 @@ public abstract class Predicate<T> implements Evaluable<T> {
 		};
 	}
 
+	public String toString() {
+		return "Predicate";
+	}
+
 }

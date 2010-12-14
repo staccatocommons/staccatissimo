@@ -1,6 +1,6 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team   
- 
+ Copyright (c) 2010, The Staccato-Commons Team
+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation; version 3 of the License.
@@ -12,27 +12,27 @@
  */
 package net.sf.staccato.commons.lang.predicate.internal;
 
+import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**
- * 
  * @author flbulgarelli
- * 
  * @param <T>
  */
-public final class GreaterThan<T extends Comparable<T>> extends NonAnnonymousPredicate<T> {
+public class LessThan<T extends Comparable<T>> extends Predicate<T> {
+
 	private final T value;
 
 	/**
-	 * 
-	 * Creates a new {@link GreaterThan}
+	 * Creates a new {@link LessThan}
 	 * 
 	 * @param value
 	 */
-	public GreaterThan(T value) {
+	public LessThan(T value) {
 		this.value = value;
 	}
 
-	public boolean eval(T arg) {
-		return arg.compareTo(value) > 0;
+	public boolean eval(T argument) {
+		return argument.compareTo(value) < 0;
 	}
+
 }

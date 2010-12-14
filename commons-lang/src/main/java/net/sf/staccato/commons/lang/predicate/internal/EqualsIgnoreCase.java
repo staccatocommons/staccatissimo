@@ -1,12 +1,11 @@
 package net.sf.staccato.commons.lang.predicate.internal;
 
-import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**
  * @author flbulgarelli
  * 
  */
-public final class EqualsIgnoreCase extends Predicate<String> {
+public final class EqualsIgnoreCase extends NonAnnonymousPredicate<String> {
 	private final String value;
 
 	/**

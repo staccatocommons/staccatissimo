@@ -13,12 +13,11 @@
 package net.sf.staccato.commons.lang.predicate.internal;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**
  * @author flbulgarelli
  */
-public class ContainsSubstringPredicate extends Predicate<String> {
+public class ContainsSubstringPredicate extends NonAnnonymousPredicate<String> {
 
 	private final String substring;
 

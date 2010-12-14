@@ -22,7 +22,7 @@ public final class NullPredicates {
 		return null_;
 	}
 
-	private static class NotNull<T> extends Predicate<T> {
+	private static class NotNull<T> extends NonAnnonymousPredicate<T> {
 		public boolean eval(T argument) {
 			return argument != null;
 		}
@@ -32,7 +32,7 @@ public final class NullPredicates {
 		}
 	}
 
-	private static class Null<T> extends Predicate<T> {
+	private static class Null<T> extends NonAnnonymousPredicate<T> {
 		public boolean eval(T argument) {
 			return argument == null;
 		}

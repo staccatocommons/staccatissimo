@@ -12,27 +12,15 @@
  */
 package net.sf.staccato.commons.lang.predicate.internal;
 
+import net.sf.staccato.commons.lang.internal.ToString;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**
  * @author flbulgarelli
- * @param <T>
  */
-public class LowerThan<T extends Comparable<T>> extends Predicate<T> {
+abstract class NonAnnonymousPredicate<T> extends Predicate<T> {
 
-	private final T value;
-
-	/**
-	 * Creates a new {@link LowerThan}
-	 * 
-	 * @param value
-	 */
-	public LowerThan(T value) {
-		this.value = value;
+	public final String toString() {
+		return ToString.toString(this);
 	}
-
-	public boolean eval(T argument) {
-		return argument.compareTo(value) < 0;
-	};
-
 }

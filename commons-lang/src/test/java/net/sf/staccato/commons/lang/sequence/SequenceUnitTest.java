@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -38,15 +37,22 @@ public class SequenceUnitTest {
 	}
 
 	@Test
-	public void testFromTo_Asc_WithStep() {
+	public void testFromTo_Desc() {
+		Sequence<Integer> seq = Sequence.fromTo(9, 4);
+		assertNotNull(seq);
+		assertEquals(Arrays.asList(9, 8, 7, 6, 5), asList(seq));
+
+	}
+
+	@Test
+	public void testFromToBy_Asc() {
 		Sequence<Integer> seq = Sequence.fromToBy(1, 10, 2);
 		assertNotNull(seq);
 		assertEquals(Arrays.asList(1, 3, 5, 7, 9), asList(seq));
 	}
 
-	@Ignore
 	@Test
-	public void testFromTo_Desc() {
+	public void testFromToBy_Desc() {
 		Sequence<Integer> seq = Sequence.fromToBy(5, 1, -1);
 
 		assertNotNull(seq);
@@ -55,7 +61,7 @@ public class SequenceUnitTest {
 	}
 
 	@Test
-	public void testFromTo_Desc_WithStep() {
+	public void testFromToBy_Desc2() {
 		Sequence<Integer> seq = Sequence.fromToBy(10, 3, -2);
 
 		assertNotNull(seq);
