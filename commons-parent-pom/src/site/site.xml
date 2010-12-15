@@ -22,4 +22,10 @@
     </menu>    
     <menu ref="reports"/>
   </body>
+  <poweredBy>
+    <logo name="Maven" href="http://maven.apache.org/"
+          img="http://maven.apache.org/images/logos/maven-feather.png"/>
+    <logo name="Sourceforge" href="http://sourceforge.net"
+          img="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13"/>
+  </poweredBy>
 </project>
