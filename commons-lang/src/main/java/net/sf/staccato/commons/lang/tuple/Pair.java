@@ -15,6 +15,8 @@ package net.sf.staccato.commons.lang.tuple;
 import java.util.Map;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.value.ConditionallyTransparent;
+import net.sf.staccato.commons.lang.value.Value;
 
 /**
  * Two-components {@link Tuple}
@@ -26,6 +28,8 @@ import net.sf.staccato.commons.check.annotation.NonNull;
  * @param <T2>
  *          second component type
  */
+@Value
+@ConditionallyTransparent
 public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>>,
 	Map.Entry<T1, T2> {
 

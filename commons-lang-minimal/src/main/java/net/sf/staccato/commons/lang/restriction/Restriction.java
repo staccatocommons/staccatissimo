@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.check.annotation;
+package net.sf.staccato.commons.lang.restriction;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
 
 /**
  * <p>
- * {@link CheckAnnotation}s express constraints that annotated element must
+ * {@link Restriction}s express constraints that annotated element must
  * observe.
  * </p>
  * <p>
@@ -51,7 +51,7 @@ import java.lang.annotation.Target;
  * 
  * <p>
  * <strong>Notice about inheritance and polymorphism:</strong> Removing/adding
- * {@link CheckAnnotation}s applied to methods arguments have an analogous
+ * {@link Restriction}s applied to methods arguments have an analogous
  * semantics respect of inheritance and polymorphism that augmenting/reducing
  * method visibility in Java. Overriders and implementors of annotated methods
  * should follow these rules:
@@ -67,6 +67,6 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.ANNOTATION_TYPE)
-public @interface CheckAnnotation {
+public @interface Restriction {
 
 }

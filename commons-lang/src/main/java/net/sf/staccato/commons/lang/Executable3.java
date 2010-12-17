@@ -12,7 +12,6 @@
  */
 package net.sf.staccato.commons.lang;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * <p>
@@ -44,6 +43,6 @@ public interface Executable3<T1, T2, T3> {
 	 * @param arg2
 	 * @param arg3
 	 */
-	void exec(@NonNull T1 arg1, @NonNull T2 arg2, @NonNull T3 arg3);
+	void exec(T1 arg1, T2 arg2, T3 arg3);
 
 }

@@ -13,6 +13,8 @@
 package net.sf.staccato.commons.lang.tuple;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.value.ConditionallyTransparent;
+import net.sf.staccato.commons.lang.value.Value;
 
 /**
  * Three-components {@link Tuple}.
@@ -24,8 +26,9 @@ import net.sf.staccato.commons.check.annotation.NonNull;
  * @param <T3>
  * 
  */
-public final class Triple<T1, T2, T3> extends Tuple implements
-	Comparable<Triple<T1, T2, T3>> {
+@Value
+@ConditionallyTransparent
+public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple<T1, T2, T3>> {
 
 	private static final long serialVersionUID = 5811264763831754560L;
 
@@ -196,10 +199,9 @@ public final class Triple<T1, T2, T3> extends Tuple implements
 		if (other == this)
 			return 0;
 		int result;
-		return (result = compare(this.first, other.first)) != 0 ? result
-			: (result = compare(this.second, other.second)) != 0 ? result : compare(
-				this.third,
-				other.third);
+		return (result = compare(this.first, other.first)) != 0 ? result : (result = compare(
+			this.second,
+			other.second)) != 0 ? result : compare(this.third, other.third);
 	}
 
 }

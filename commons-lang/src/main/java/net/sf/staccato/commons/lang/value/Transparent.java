@@ -19,6 +19,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccato.commons.lang.restriction.Restriction;
+
 /**
  * Classes annotated as {@link Transparent} - aka Context Free - are
  * {@link Immutable}s that whose methods depend only on their internal state and
@@ -32,6 +34,7 @@ import java.lang.annotation.Target;
  */
 @Documented
 @Inherited
+@Restriction
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
 public @interface Transparent {

@@ -12,8 +12,6 @@
  */
 package net.sf.staccato.commons.lang;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-
 /**
  * {@link Applicable}s are computations that take one argument and whose result
  * is a return value. {@link Applicable}s should not have side effects
@@ -34,7 +32,6 @@ public interface Applicable<T, R> {
 	 * @param arg
 	 * @return the transformation result
 	 */
-	@NonNull
-	R apply(@NonNull T arg);
+	R apply(T arg);
 
 }

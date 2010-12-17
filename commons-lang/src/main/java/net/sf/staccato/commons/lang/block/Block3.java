@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.lang.block;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Executable3;
@@ -39,6 +40,7 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 	protected void softExec(T1 argument1, T2 argument2, T3 argument3) throws Exception {
 	}
 
+	@NonNull
 	public Block2<T2, T3> apply(final T1 arg) {
 		return new Block2<T2, T3>() {
 			public void exec(T2 argument1, T3 argument2) {
@@ -47,6 +49,7 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 		};
 	}
 
+	@NonNull
 	public Block<T3> apply(final T1 arg1, final T2 arg2) {
 		return new Block<T3>() {
 			public void exec(T3 argument) {
@@ -55,7 +58,8 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 		};
 	}
 
-	public Block3<T1, T2, T3> then(final Block3<T1, T2, T3> other) {
+	@NonNull
+	public Block3<T1, T2, T3> then(@NonNull final Block3<T1, T2, T3> other) {
 		return new Block3<T1, T2, T3>() {
 			public void exec(T1 argument1, T2 argument2, T3 argument3) {
 				Block3.this.exec(argument1, argument2, argument3);

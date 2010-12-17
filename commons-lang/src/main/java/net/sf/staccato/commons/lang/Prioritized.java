@@ -15,6 +15,7 @@ package net.sf.staccato.commons.lang;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.internal.ToString;
 import net.sf.staccato.commons.lang.value.BasicEquals;
+import net.sf.staccato.commons.lang.value.ConditionallyTransparent;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -31,6 +32,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * @param <P>
  *          the type of priority object
  */
+@ConditionallyTransparent
 public class Prioritized<T, P extends Comparable<P>> implements Provider<T>,
 	Comparable<Prioritized<T, P>> {
 

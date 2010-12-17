@@ -18,15 +18,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccato.commons.lang.restriction.Restriction;
+
 /**
  * <p>
  * An annotation that signals that an annotated is non nullable.
  * </p>
  * 
  * @author flbulgarelli
- * @see CheckAnnotation
+ * @see Restriction
  */
-@CheckAnnotation
+@Restriction
 @Documented
 @Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })

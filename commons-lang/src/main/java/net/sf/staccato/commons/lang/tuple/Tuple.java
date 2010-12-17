@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.value.ConditionallyTransparent;
+import net.sf.staccato.commons.lang.value.Value;
 
 /**
  * <p>
@@ -46,6 +48,8 @@ import net.sf.staccato.commons.check.annotation.NonNull;
  * @author flbulgarelli
  * 
  */
+@Value
+@ConditionallyTransparent
 public abstract class Tuple implements Serializable {
 
 	private static final long serialVersionUID = -3943649706502147516L;
@@ -141,8 +145,8 @@ public abstract class Tuple implements Serializable {
 	 * @return a new {@link Quadruple}. Non null.
 	 */
 	@NonNull
-	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> of(T1 first,
-		T2 second, T3 third, T4 fourth) {
+	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> of(T1 first, T2 second, T3 third,
+		T4 fourth) {
 		return new Quadruple<T1, T2, T3, T4>(first, second, third, fourth);
 	}
 
@@ -164,8 +168,8 @@ public abstract class Tuple implements Serializable {
 	 * @return a new {@link Quadruple}. Non null.
 	 */
 	@NonNull
-	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> _(T1 first,
-		T2 second, T3 third, T4 fourth) {
+	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> _(T1 first, T2 second, T3 third,
+		T4 fourth) {
 		return of(first, second, third, fourth);
 	}
 

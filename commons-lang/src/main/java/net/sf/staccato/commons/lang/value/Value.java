@@ -20,6 +20,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Date;
 
+import net.sf.staccato.commons.lang.restriction.Restriction;
+
 /**
  * 
  * {@link Value} annotation describes objects whose identity is not important,
@@ -45,12 +47,15 @@ import java.util.Date;
  * defined in this package
  * </p>
  * 
+ * TODO invariants
+ * 
  * @see Immutable
  * @see Unmodifiable
  * @author flbulgarelli
  */
 @Documented
 @Inherited
+@Restriction
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
 public @interface Value {}

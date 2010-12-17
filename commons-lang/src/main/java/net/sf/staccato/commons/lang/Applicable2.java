@@ -12,7 +12,6 @@
  */
 package net.sf.staccato.commons.lang;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * {@link Applicable2}s are computations that take two arguments and whose
@@ -39,7 +38,6 @@ public interface Applicable2<T1, T2, R> {
 	 *          the second computation argument
 	 * @return the transformation result
 	 */
-	@NonNull
-	R apply(@NonNull T1 arg1, @NonNull T2 arg2);
+	R apply(T1 arg1, T2 arg2);
 
 }

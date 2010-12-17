@@ -15,6 +15,8 @@ package net.sf.staccato.commons.lang;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.EmptyAware;
+import net.sf.staccato.commons.lang.value.ConditionallyTransparent;
+import net.sf.staccato.commons.lang.value.Value;
 import net.sf.staccato.commons.lang.value.ValueObject;
 
 /**
@@ -27,6 +29,8 @@ import net.sf.staccato.commons.lang.value.ValueObject;
  * 
  * @param <T>
  */
+@Value
+@ConditionallyTransparent
 public class Range<T extends Comparable<T>> extends ValueObject implements ContainsAware<T>,
 	EmptyAware {
 
@@ -52,7 +56,7 @@ public class Range<T extends Comparable<T>> extends ValueObject implements Conta
 	/**
 	 * Tests if a given element is between this range lower and upper bounds
 	 */
-	public boolean contains(T element) {
+	public boolean contains(@NonNull T element) {
 		return Compare.between(element, min, max);
 	}
 

@@ -54,7 +54,7 @@ public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
 	 * @param argument
 	 * @throws Exception
 	 */
-	protected void softExec(@NonNull T argument) throws Exception {
+	protected void softExec(T argument) throws Exception {
 	}
 
 	/**

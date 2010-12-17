@@ -1,4 +1,5 @@
 package net.sf.staccato.commons.lang.exp;
+
 /*
  Copyright (c) 2010, The Staccato-Commons Team
 
@@ -11,7 +12,6 @@ package net.sf.staccato.commons.lang.exp;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-
 
 import java.lang.annotation.Annotation;
 
@@ -31,8 +31,7 @@ public class Annotations {
 		return Option.nullToNone(getAnnotationInternal(object, annotationClass));
 	}
 
-	public static <A extends Annotation> boolean isAnnotated(Object object,
-		Class<A> annotationClass) {
+	public static <A extends Annotation> boolean isAnnotated(Object object, Class<A> annotationClass) {
 		return getAnnotationInternal(object, annotationClass) != null;
 	}
 

@@ -19,6 +19,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccato.commons.lang.restriction.Restriction;
+
 /**
  * <p>
  * {@link Unmodifiable}s are objects that do not expose publicly any method that
@@ -35,6 +37,7 @@ import java.lang.annotation.Target;
  */
 @Documented
 @Inherited
+@Restriction
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
 public @interface Unmodifiable {

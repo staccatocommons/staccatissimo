@@ -19,6 +19,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccato.commons.lang.restriction.Restriction;
+
 /**
  * {@link ConditionallyTransparent} annotated classes are
  * {@link ConditionallyImmutable}s whose instances can be treated as
@@ -29,6 +31,7 @@ import java.lang.annotation.Target;
  */
 @Documented
 @Inherited
+@Restriction
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
 public @interface ConditionallyTransparent {

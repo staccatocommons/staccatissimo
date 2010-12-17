@@ -14,6 +14,7 @@ package net.sf.staccato.commons.lang;
 
 import java.util.Comparator;
 
+import net.sf.staccato.commons.check.annotation.ForceChecks;
 import net.sf.staccato.commons.check.annotation.NonNull;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -45,8 +46,8 @@ public class Compare {
 	 *          non null
 	 * @return if element is between min inclusive, and max, inclusive
 	 */
-	public static <T extends Comparable<T>> boolean between(@NonNull T element,
-		@NonNull T min, @NonNull T max) {
+	public static <T extends Comparable<T>> boolean between(@NonNull T element, @NonNull T min,
+		@NonNull T max) {
 		return element.compareTo(max) <= 0 && element.compareTo(min) >= 0;
 	}
 
@@ -71,10 +72,9 @@ public class Compare {
 	 * @return if element is between min inclusive, and max, inclusive, using the
 	 *         given {@link Comparator} as ordering criteria
 	 */
-	public static <T> boolean between(@NonNull T element, @NonNull T min,
-		@NonNull T max, @NonNull Comparator<T> comparator) {
-		return comparator.compare(element, max) <= 0
-			&& comparator.compare(element, min) >= 0;
+	public static <T> boolean between(@NonNull T element, @NonNull T min, @NonNull T max,
+		@NonNull Comparator<T> comparator) {
+		return comparator.compare(element, max) <= 0 && comparator.compare(element, min) >= 0;
 	}
 
 	/**
@@ -179,6 +179,7 @@ public class Compare {
 	 * @return c1 if it is greater than or equal to c2, c2 otherwise.
 	 */
 	@NonNull
+	@ForceChecks
 	public static <T extends Comparable<T>> T max(@NonNull T c1, @NonNull T c2) {
 		return (T) ObjectUtils.max(c1, c2);
 	}

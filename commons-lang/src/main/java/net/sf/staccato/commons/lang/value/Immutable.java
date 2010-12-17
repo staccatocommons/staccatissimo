@@ -19,6 +19,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccato.commons.lang.restriction.Restriction;
+
 /**
  * Classes annotated as {@link Immutable} indicate that their instances are
  * {@link Unmodifiable}, and also either all their attributes are primitives or
@@ -31,6 +33,7 @@ import java.lang.annotation.Target;
  */
 @Documented
 @Inherited
+@Restriction
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
 public @interface Immutable {

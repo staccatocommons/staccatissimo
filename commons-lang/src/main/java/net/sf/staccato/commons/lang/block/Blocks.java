@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.lang.block;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.block.internal.Empty;
 
 /**
@@ -27,6 +28,7 @@ public class Blocks {
 	 * @param <T>
 	 * @return an empty block
 	 */
+	@NonNull
 	public static <T> Block<T> empty() {
 		return Empty.getInstance();
 	}

@@ -1,6 +1,6 @@
 package net.sf.staccato.commons.lang.tuple;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
 
 import java.util.Arrays;
 

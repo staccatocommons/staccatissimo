@@ -1,6 +1,7 @@
 package net.sf.staccato.commons.lang.builder;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 
 import java.util.HashMap;
 import java.util.Map;

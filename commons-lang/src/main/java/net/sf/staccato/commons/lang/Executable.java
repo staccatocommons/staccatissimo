@@ -14,8 +14,6 @@ package net.sf.staccato.commons.lang;
 
 import java.util.Iterator;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-
 /**
  * <p>
  * {@link Executable}s are computations that take one argument and whose result
@@ -52,6 +50,6 @@ public interface Executable<T> {
 	 * @param argument
 	 *          the argument of the computation.
 	 */
-	void exec(@NonNull T argument);
+	void exec(T argument);
 
 }

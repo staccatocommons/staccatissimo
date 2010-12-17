@@ -66,7 +66,6 @@ public class SoftException extends RuntimeException {
 	 * @throws RuntimeException
 	 *           if the call failed
 	 */
-	@NonNull
 	public static <T> T callOrSoften(@NonNull Callable<T> callable) {
 		try {
 			return callable.call();

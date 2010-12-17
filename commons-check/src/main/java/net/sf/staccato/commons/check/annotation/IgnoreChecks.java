@@ -17,9 +17,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccato.commons.lang.restriction.Restriction;
+
 /**
  * {@link IgnoreChecks} is a hint for automated annotation processors,
- * suggesting that the {@link CheckAnnotation} in the annotated element and its
+ * suggesting that the {@link Restriction} in the annotated element and its
  * descendants should be ignored
  * 
  * TODO add examples

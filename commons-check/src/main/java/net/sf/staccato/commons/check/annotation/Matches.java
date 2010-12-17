@@ -18,6 +18,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccato.commons.lang.restriction.Restriction;
+
 /**
  * {@link Matches} denote that the annotated element matches a regular
  * expression.
@@ -25,9 +27,9 @@ import java.lang.annotation.Target;
  * Annotated elements should be of type {@link String} *
  * 
  * @author flbulgarelli
- * @see CheckAnnotation
+ * @see Restriction
  */
-@CheckAnnotation
+@Restriction
 @Documented
 @Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })

@@ -16,10 +16,14 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.value.NamedTupleToStringStyle;
+import net.sf.staccato.commons.lang.internal.ToString;
+import net.sf.staccato.commons.lang.value.BasicEquals;
+import net.sf.staccato.commons.lang.value.ConditionallyTransparent;
+import net.sf.staccato.commons.lang.value.Value;
 
 import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * A defined {@link Option}, that is, an option that holds a value.
@@ -28,6 +32,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * @param <T>
  * @see Option
  */
+@Value
+@ConditionallyTransparent
 public final class Some<T> extends Option<T> {
 
 	private static final long serialVersionUID = 5981912873938772033L;
@@ -81,28 +87,20 @@ public final class Some<T> extends Option<T> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((value == null) ? 0 : value.hashCode());
-		return result;
+		return new HashCodeBuilder()//
+			.append(value)
+			.toHashCode();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Some other = (Some) obj;
-		if (value == null) {
-			if (other.value != null)
-				return false;
-		} else if (!value.equals(other.value))
-			return false;
-		return true;
+		BasicEquals be = BasicEquals.from(this, obj);
+		if (be.isEqualsDone())
+			return be.toEquals();
+		Some<?> that = (Some<?>) obj;
+		return new EqualsBuilder()//
+			.append(this.value, that.value)
+			.isEquals();
 	}
 
 	@Override
@@ -122,9 +120,7 @@ public final class Some<T> extends Option<T> {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this, NamedTupleToStringStyle.getInstance())
-			.append(value)
-			.toString();
+		return ToString.toString(this);
 	}
 
 	public static <T> Some<T> some(T value) {

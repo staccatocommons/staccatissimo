@@ -10,31 +10,8 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.provider;
+package net.sf.staccato.commons.check.annotation;
 
-
-import static org.junit.Assert.assertNull;
-import net.sf.staccato.commons.lang.provider.internal.NullProvider;
-
-import org.junit.Before;
-import org.junit.Test;
-
-/**
- * @author flbulgarelli
- *
- */
-public class NullProviderUnitTest {
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@Test
-	public void testValue() throws Exception {
-		assertNull(NullProvider.getInstance().value());
-	}
+public @interface ForceChecks {
 
 }

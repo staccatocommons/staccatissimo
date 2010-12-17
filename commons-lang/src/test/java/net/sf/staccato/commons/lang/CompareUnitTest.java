@@ -13,6 +13,12 @@ import java.util.Date;
 
 import org.junit.Test;
 
+/**
+ * Test for Compare
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class CompareUnitTest {
 
 	@Test

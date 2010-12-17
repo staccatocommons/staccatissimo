@@ -64,6 +64,18 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 	public void testNotNull() {
 		assertTrue(Predicates.notNull().eval(new Object()));
 		assertFalse(Predicates.notNull().eval(null));
+		assertSame(Predicates.notNull(), Predicates.null_().not());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.staccato.commons.lang.predicate.Predicates#null_()}.
+	 */
+	@Test
+	public void testNull() {
+		assertFalse(Predicates.null_().eval(new Object()));
+		assertTrue(Predicates.null_().eval(null));
+		assertSame(Predicates.null_(), Predicates.notNull().not());
 	}
 
 	/**

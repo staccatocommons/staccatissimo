@@ -13,6 +13,8 @@
 package net.sf.staccato.commons.lang.tuple;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.value.ConditionallyTransparent;
+import net.sf.staccato.commons.lang.value.Value;
 
 /**
  * Four-components {@link Tuple}
@@ -25,6 +27,8 @@ import net.sf.staccato.commons.check.annotation.NonNull;
  * @param <T4>
  * 
  */
+@Value
+@ConditionallyTransparent
 public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 	Comparable<Quadruple<T1, T2, T3, T4>> {
 
@@ -126,11 +130,10 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 		if (other == this)
 			return 0;
 		int result;
-		return (result = compare(this.first, other.first)) != 0 ? result
-			: (result = compare(this.second, other.second)) != 0 ? result
-				: (result = compare(this.third, other.third)) != 0 ? result : compare(
-					this.fourth,
-					other.fourth);
+		return (result = compare(this.first, other.first)) != 0 ? result : (result = compare(
+			this.second,
+			other.second)) != 0 ? result : (result = compare(this.third, other.third)) != 0 ? result
+			: compare(this.fourth, other.fourth);
 	}
 
 	@Override

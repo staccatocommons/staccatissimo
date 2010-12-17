@@ -16,6 +16,8 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.value.Transparent;
+import net.sf.staccato.commons.lang.value.Value;
 
 /**
  * An undefined {@link Option}, that it, and option that does not have a value
@@ -27,6 +29,8 @@ import net.sf.staccato.commons.check.annotation.NonNull;
  *          value at all.
  * @see Option
  */
+@Value
+@Transparent
 public final class None<T> extends Option<T> {
 
 	private static final long serialVersionUID = 6950027007611799776L;
@@ -45,11 +49,6 @@ public final class None<T> extends Option<T> {
 	@Override
 	public boolean isDefined() {
 		return false;
-	}
-
-	@Override
-	public String toString() {
-		return "None";
 	}
 
 	@Override
@@ -95,4 +94,10 @@ public final class None<T> extends Option<T> {
 	public static <T> None<T> none() {
 		return (None<T>) instance;
 	}
+
+	@Override
+	public String toString() {
+		return "None";
+	}
+
 }
