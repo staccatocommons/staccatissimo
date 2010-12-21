@@ -21,46 +21,65 @@ import java.lang.annotation.Target;
 
 /**
  * <p>
- * {@link Restriction}s express constraints that annotated element must
- * observe.
+ * {@link Restriction}s is a meta-annotation for annotation types that express
+ * constraints over annotated elements.
  * </p>
  * <p>
- * Meaning of them may vary depending on the particular element type being
- * annotated
+ * <p>
+ * Restrictions may express preconditions, postconditions or invariants,
+ * depending on the specific annotation type and on the annotated element:
  * <ul>
- * <li>When present on attributes, it means that that attribute must never be
- * assigned with objects that violate that constraint at time of assignment, and
- * that those attribute will always obey it.</li>
- * <li>When present on method parameters, it means that an object that violates
- * it must never be passed to an annotated parameter. Annotation express here a
- * method precondition. If client code violates it, the method with annotated
- * parameters may not behave right, and result is by default unspecified.
- * Violating this constrain is a client code bug.</li>
- * <li>When present on non void method, it means that the returned object can
- * not violate that constraint. Annotation express here a method postcondition.
- * Client code can safely treat returned values as if they obey the constraint
- * and should not check it. If annotated method violates this postcondition,
- * there is a bug in that annotated code.</li>
+ * <li>Preconditions means that client <strong>must not</strong> violate the
+ * restriction. Doing that is a client code bug and the annotated element and
+ * its context may not behave right, being its behavior by default unspecified.</li>
+ * <li>Postconditions and invariants means client code <strong>must</strong>
+ * assume the constraint the annotated element does not violate the constraint,
+ * and should not check it. If annotated element violates this postcondition,
+ * there is a bug in the implementor code</li>
  * </ul>
+ * </p>
+ * <p>
+ * Annotations marked as {@link Restriction} obey the following rules
+ * <ol>
+ * <li>Restrictions <strong>should</strong> be annotation-processor-agnostic and
+ * documentation oriented, that is, its primary design goal is documenting the
+ * constraint. As a consequence, these annotations should be {@link Documented}.
+ * However, it is valid to process them</li>
+ * <li>Restriction annotations <strong>must</strong> preserve their meaning in
+ * subtypes</li>
+ * <li>
+ * <ol>
+ * <li>Preconditions restrictions inherited by subtypes
+ * <strong>may</strong>relax restrictions but <strong> must
+ * not</strong>introduce new ones</li>
+ * <li>Postconditions and invariants restrictions inherited by subtypes
+ * <strong>must not</strong>relax restrictions but <strong>may</strong>introduce
+ * new ones</li>
+ * </ol>
+ * </li>
+ * <li>
+ * <ol>
+ * <li>Restriction annotations <strong>should</strong> be explicit in code
+ * directly exposed to client, but <strong>may</strong> be implicit in the rest
+ * of the code
+ * <li>Postconditions and invariants restrictions present on supertypes and
+ * absent on subtypes <strong>must</strong> be assummed to be still observed.</li>
+ * <li>Postconditions restrictions present on supertypes and absent on subtypes
+ * <strong>must</strong> be assumed to have being removed</li>
+ * </ol>
+ * <li>Elements not annotated with restrictions in supertypes but that however
+ * observe restrictions compatible with some restriction annotated
+ * <strong>may</strong>, be annotated with such annotation restrictions</li>
+ * <li>Absence of a Restriction in scenarios other than those previously
+ * mentioned <strong>must not</strong> being interpreted as the absence of the
+ * restriction. Instead, the restriction is subject to the element documentation
+ * </li>
+ * </ol>
  * </p>
  * <p>
  * The concrete way this annotation is handled is by no means described here,
  * and it depends exclusively on its static or dynamic processor. It may even
  * not be processed at all, and server exclusively as documentation.
- * </p>
- * 
- * <p>
- * <strong>Notice about inheritance and polymorphism:</strong> Removing/adding
- * {@link Restriction}s applied to methods arguments have an analogous
- * semantics respect of inheritance and polymorphism that augmenting/reducing
- * method visibility in Java. Overriders and implementors of annotated methods
- * should follow these rules:
- * <ol>
- * <li>Must never introduce extra checks</li>
- * <li>May relax parent checks</li>
- * <li>Inherited checks must be explicit - if not present, client code must
- * assume the parent checks have been relaxed</li>
- * </ol>
  * </p>
  */
 @Documented
