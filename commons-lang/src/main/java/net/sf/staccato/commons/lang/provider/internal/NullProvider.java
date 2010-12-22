@@ -15,6 +15,8 @@ package net.sf.staccato.commons.lang.provider.internal;
 import net.sf.staccato.commons.lang.Provider;
 
 /**
+ * Provider of null
+ * 
  * @author flbulgarelli
  */
 public class NullProvider<T> implements Provider<T> {

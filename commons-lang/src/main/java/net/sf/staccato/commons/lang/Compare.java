@@ -168,6 +168,7 @@ public class Compare {
 	 * @return c1 if it is lower than or equal to c2, c2 otherwise.
 	 */
 	@NonNull
+	@ForceChecks
 	public static <T extends Comparable<T>> T min(@NonNull T c1, @NonNull T c2) {
 		return (T) ObjectUtils.min(c1, c2);
 	}

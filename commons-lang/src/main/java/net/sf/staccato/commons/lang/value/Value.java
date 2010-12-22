@@ -28,16 +28,20 @@ import net.sf.staccato.commons.lang.restriction.Restriction;
  * but that are completely described by its state instead, like {@link String}s,
  * {@link Number}s and {@link Date}s.
  * <p>
+ * More formally, classes marked as {@link Value} must grant that it is possible
+ * to have two instances such that <code>a != b && a.equals(b)</code>
+ * </p>
+ * <p>
  * Classes annotated this way grant that all their instances observe the
  * following {@link Value} protocol
  * <ul>
- * <li>Are {@link Serializable}</li>
  * <li>Implement equality so that it is not based in identity, but in its
  * internal state instead. Values must override {@link #equals(Object)}</li>
  * <li>Implement hashCode to be consistent with equals, in order to be compliant
  * with general {@link Object#hashCode()} contract</li>
  * <li>{@link Value}s implement {@link Object#toString()} in order to provide a
  * descriptive representation of the object state</li>
+ * <li>Are {@link Serializable}</li>
  * </ul>
  * <p>
  * Although {@link Value} objects are usually immutable, this annotation does
@@ -46,8 +50,6 @@ import net.sf.staccato.commons.lang.restriction.Restriction;
  * {@link Immutable}, {@link Unmodifiable} and the rest of the annotations
  * defined in this package
  * </p>
- * 
- * TODO invariants
  * 
  * @see Immutable
  * @see Unmodifiable

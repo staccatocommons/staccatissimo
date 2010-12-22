@@ -19,7 +19,7 @@ import java.util.Map;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.SizeAware;
-import net.sf.staccato.commons.lang.value.ConditionallyTransparent;
+import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
 import net.sf.staccato.commons.lang.value.Value;
 
 /**
@@ -67,7 +67,7 @@ import net.sf.staccato.commons.lang.value.Value;
  * 
  */
 @Value
-@ConditionallyTransparent
+@ConditionallyImmutable
 public abstract class Option<T> implements Provider<T>, ContainsAware<T>, Iterable<T>, SizeAware,
 	Serializable {
 

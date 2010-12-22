@@ -19,9 +19,10 @@ import java.util.NoSuchElementException;
 import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.lang.internal.ToString;
 import net.sf.staccato.commons.lang.sequence.internal.IntegerIncrement;
+import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
 import net.sf.staccato.commons.lang.value.Unmodifiable;
-import net.sf.staccato.commons.lang.value.ValueObject;
 
 /**
  * A {@link Sequence} is an {@link Iterable} object whose {@link Iterator},
@@ -36,7 +37,8 @@ import net.sf.staccato.commons.lang.value.ValueObject;
  * 
  * @param <T>
  */
-public class Sequence<T> extends ValueObject implements Iterable<T> {
+@ConditionallyImmutable
+public class Sequence<T> implements Iterable<T>, Serializable {
 
 	private static final long serialVersionUID = 8811454338704704525L;
 
@@ -85,6 +87,10 @@ public class Sequence<T> extends ValueObject implements Iterable<T> {
 	 */
 	public Evaluable<T> getStopCondition() {
 		return stopCondition;
+	}
+
+	public String toString() {
+		return ToString.toString(this);
 	}
 
 	/**

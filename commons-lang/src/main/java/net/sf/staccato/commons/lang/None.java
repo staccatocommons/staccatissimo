@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.value.Transparent;
+import net.sf.staccato.commons.lang.value.Immutable;
 import net.sf.staccato.commons.lang.value.Value;
 
 /**
@@ -30,7 +30,7 @@ import net.sf.staccato.commons.lang.value.Value;
  * @see Option
  */
 @Value
-@Transparent
+@Immutable
 public final class None<T> extends Option<T> {
 
 	private static final long serialVersionUID = 6950027007611799776L;

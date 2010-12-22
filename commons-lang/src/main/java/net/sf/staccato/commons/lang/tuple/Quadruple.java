@@ -13,7 +13,7 @@
 package net.sf.staccato.commons.lang.tuple;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.value.ConditionallyTransparent;
+import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
 import net.sf.staccato.commons.lang.value.Value;
 
 /**
@@ -28,7 +28,7 @@ import net.sf.staccato.commons.lang.value.Value;
  * 
  */
 @Value
-@ConditionallyTransparent
+@ConditionallyImmutable
 public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 	Comparable<Quadruple<T1, T2, T3, T4>> {
 

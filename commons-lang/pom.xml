@@ -12,6 +12,10 @@
 		<version>0.1</version>
 	</parent>
 	<inceptionYear>2010</inceptionYear>
+	<scm>
+    <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/commons-lang</developerConnection>
+    <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/commons-lang</url>
+    </scm>
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
@@ -64,18 +68,6 @@
 			<groupId>net.sf.staccato</groupId>
 			<artifactId>commons-check</artifactId>
 			<version>0.1</version>
-		</dependency>
-		<!-- TODO remove -->
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.2.2</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.1</version>
 		</dependency>
 	</dependencies>
 </project>

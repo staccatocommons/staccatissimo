@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang.builder;
 
+import net.sf.staccato.commons.lang.value.Unmodifiable;
+
 /**
  * An constant-state builder.
  * <p>
@@ -33,6 +35,7 @@ package net.sf.staccato.commons.lang.builder;
  * 
  * @param <T>
  */
+@Unmodifiable
 public interface UnmodifiableBuilder<T> extends ReusableBuilder<T> {
 
 	/**

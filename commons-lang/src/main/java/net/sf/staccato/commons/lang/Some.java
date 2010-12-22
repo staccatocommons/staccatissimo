@@ -18,7 +18,7 @@ import java.util.Iterator;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.internal.ToString;
 import net.sf.staccato.commons.lang.value.BasicEquals;
-import net.sf.staccato.commons.lang.value.ConditionallyTransparent;
+import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
 import net.sf.staccato.commons.lang.value.Value;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -33,7 +33,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * @see Option
  */
 @Value
-@ConditionallyTransparent
+@ConditionallyImmutable
 public final class Some<T> extends Option<T> {
 
 	private static final long serialVersionUID = 5981912873938772033L;

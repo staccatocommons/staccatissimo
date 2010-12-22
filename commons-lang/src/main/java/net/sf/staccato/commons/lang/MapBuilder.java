@@ -24,6 +24,7 @@ import net.sf.staccato.commons.lang.builder.Builder;
 import net.sf.staccato.commons.lang.builder.BuilderAlreadyUsedException;
 
 /**
+ * A {@link Builder} for {@link Map}s
  * 
  * @author fbulgarelli
  * 
