@@ -13,8 +13,9 @@
 package net.sf.staccato.commons.lang;
 
 /**
- * {@link Applicable}s are computations that take one argument and whose result
- * is a return value. {@link Applicable}s should not have side effects
+ * {@link Applicable}s are transformations that take one argument and whose
+ * result is a return value. {@link Applicable}s <strong>should not</strong>
+ * have side effects
  * 
  * @author flbulgarelli
  * 
@@ -27,9 +28,10 @@ public interface Applicable<T, R> {
 
 	/**
 	 * Performs a transformation on the given element, and returns its result.
-	 * This method should have no side effect.
+	 * This method should <strong>should not</strong> have side effects.
 	 * 
 	 * @param arg
+	 *          the transformation
 	 * @return the transformation result
 	 */
 	R apply(T arg);

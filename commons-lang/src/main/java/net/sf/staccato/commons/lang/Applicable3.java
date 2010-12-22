@@ -12,10 +12,10 @@
  */
 package net.sf.staccato.commons.lang;
 
-
 /**
- * {@link Applicable3}s are computations that take three arguments and whose
- * result is a return value.{@link Applicable3}s should not have side effects
+ * {@link Applicable3}s are transformations that take three arguments and whose
+ * result is a return value.{@link Applicable3}s <strong>should not</strong>
+ * have side effects
  * 
  * @author flbulgarelli
  * 
@@ -32,7 +32,7 @@ public interface Applicable3<T1, T2, T3, R> {
 
 	/**
 	 * Performs a transformation on the given element, and returns its result.
-	 * This method should have no side effect.
+	 * This method <strong>should not</strong> have side effects.
 	 * 
 	 * @param arg1
 	 *          the first computation argument

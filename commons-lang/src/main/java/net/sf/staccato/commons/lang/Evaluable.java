@@ -13,10 +13,15 @@
 package net.sf.staccato.commons.lang;
 
 /**
+ * {@link Evaluable}s are boolean conditions over an argument that can be
+ * evaluated using its {@link #eval(Object)} message.
+ * 
+ * {@link Evaluable}s <strong>must not</strong> have side effects
  * 
  * @author flbulgarelli
  * 
  * @param <T>
+ *          the type of object that can be evaluated
  */
 public interface Evaluable<T> {
 
@@ -35,7 +40,7 @@ public interface Evaluable<T> {
 	 * @param argument
 	 *          the argument to evaluate.
 	 * 
-	 * @return if the argument meets the given condition
+	 * @return if the argument meets this evaluable condition
 	 */
 	boolean eval(T argument);
 

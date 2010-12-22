@@ -19,7 +19,7 @@ import net.sf.staccato.commons.check.annotation.NonNull;
  * {@link Binder}s are objects that can transform one or argument into a result,
  * if possible, or not perform any transformation, if binding can not succeed.
  * 
- * {@link Binder}s should have no side effect
+ * {@link Binder}s <strong>should not</strong> have side effects
  * 
  * @author flbulgarelli
  * 
@@ -32,8 +32,8 @@ public interface Binder<I, B> {
 
 	/**
 	 * Tries to bind argument to an object of type B. Returns {@link Some} if
-	 * succeeds, or {@link None} if argument can not be bound. This method should
-	 * have no side effect.
+	 * succeeds, or {@link None} if argument can not be bound. This method
+	 * <strong>should not</strong> have side effects.
 	 * 
 	 * @param arg
 	 *          the binding argument

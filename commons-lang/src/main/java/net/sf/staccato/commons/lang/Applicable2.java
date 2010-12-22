@@ -12,10 +12,10 @@
  */
 package net.sf.staccato.commons.lang;
 
-
 /**
- * {@link Applicable2}s are computations that take two arguments and whose
- * result is a return value. {@link Applicable2}s should not have side effects
+ * {@link Applicable2}s are transformations that take two arguments and whose
+ * result is a return value. {@link Applicable2}s <strong>should not</strong>
+ * have side effects
  * 
  * @author flbulgarelli
  * 
@@ -30,7 +30,7 @@ public interface Applicable2<T1, T2, R> {
 
 	/**
 	 * Performs a transformation on the given element, and returns its result.
-	 * This method should have no side effect.
+	 * This method <strong>should not</strong> have side effects
 	 * 
 	 * @param arg1
 	 *          the first computation argument
