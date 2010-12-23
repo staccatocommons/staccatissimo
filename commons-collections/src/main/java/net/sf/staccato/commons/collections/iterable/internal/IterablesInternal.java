@@ -29,21 +29,15 @@ import net.sf.staccato.commons.lang.Option;
 public class IterablesInternal {
 
 	public static final String AMOUNT_OF_ELEMENTS = "amountOfElements";
-	public static final String COMPARATOR = "comparator";
-	public static final String PREDICATE = "predicate";
-	public static final String COLLECTION = "collection";
 	public static final String ITERABLE = "iterable";
-	public static final String FUNCTION = "function";
-	public static final String OUTPUT_COLLECTION_PARAM = "outputCollection";
 
-	public static <T> void addAllInternal(Collection<T> collection,
-		Iterable<? extends T> iterable) {
+	public static <T> void addAllInternal(Collection<T> collection, Iterable<? extends T> iterable) {
 		for (T element : iterable)
 			collection.add(element);
 	}
 
-	public static <T, C extends Collection<T>> C takeInternal(
-		Iterable<T> iterable, int amountOfElements, C outputCollection) {
+	public static <T, C extends Collection<T>> C takeInternal(Iterable<T> iterable,
+		int amountOfElements, C outputCollection) {
 		Iterator<T> iter = iterable.iterator();
 		for (int i = 0; i < amountOfElements && iter.hasNext(); i++)
 			outputCollection.add(iter.next());
@@ -56,8 +50,7 @@ public class IterablesInternal {
 
 	public static <T> Option<T> anyOrNoneInternal(Iterable<T> collection) {
 		Iterator<T> iterator = collection.iterator();
-		return iterator.hasNext() ? Option.some(iterator.next()) : Option
-			.<T> none();
+		return iterator.hasNext() ? Option.some(iterator.next()) : Option.<T> none();
 	}
 
 	public static <T> boolean isEmptyInternal(Iterable<T> iterable) {
@@ -84,17 +77,16 @@ public class IterablesInternal {
 		return result;
 	}
 
-	public static <T, C extends Collection<T>> C filterInternal(
-		Iterable<T> iterable, Evaluable<? super T> predicate, C collection) {
+	public static <T, C extends Collection<T>> C filterInternal(Iterable<T> iterable,
+		Evaluable<? super T> predicate, C collection) {
 		for (T element : iterable)
 			if (predicate.eval(element))
 				collection.add(element);
 		return collection;
 	}
 
-	public static <I, O, C extends Collection<O>> C collectInternal(
-		Iterable<I> iterable, Applicable<? super I, ? extends O> function,
-		C outputCollection) {
+	public static <I, O, C extends Collection<O>> C collectInternal(Iterable<I> iterable,
+		Applicable<? super I, ? extends O> function, C outputCollection) {
 		for (I element : iterable)
 			outputCollection.add(function.apply(element));
 		return outputCollection;

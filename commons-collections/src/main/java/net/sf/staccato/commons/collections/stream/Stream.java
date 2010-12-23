@@ -15,9 +15,11 @@ package net.sf.staccato.commons.collections.stream;
 import java.util.Collection;
 import java.util.Iterator;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.SizeAware;
+import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
 
 /**
  * A {@link Stream} represent a lazy, rich-interfaced, {@link Iterable} source
@@ -53,6 +55,7 @@ import net.sf.staccato.commons.lang.collection.SizeAware;
  * @param <A>
  *          the type of object the stream is source of
  */
+@ConditionallyImmutable
 public interface Stream<A> extends //
 	Iterable<A>, //
 	SizeAware, //
@@ -66,6 +69,16 @@ public interface Stream<A> extends //
 	Collectible<A>, //
 	Appendabable<A> {
 
-	<B> Stream<B> then(Applicable<Stream<A>, ? extends Iterable<B>> function);
+	/**
+	 * Lazily applies the given function to this {@link Stream}
+	 * 
+	 * @param <B>
+	 * @param function
+	 *          the function to apply to this stream
+	 * @return a new stream that will retrieve elements from the result of
+	 *         applying the given function to this stream
+	 */
+	@NonNull
+	<B> Stream<B> then(@NonNull Applicable<Stream<A>, ? extends Iterable<B>> function);
 
 }

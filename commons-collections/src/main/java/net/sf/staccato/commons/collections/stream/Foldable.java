@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.collections.stream;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Applicable2;
 
 /**
@@ -19,9 +20,9 @@ import net.sf.staccato.commons.lang.Applicable2;
  */
 public interface Foldable<A> {
 
-	A reduce(Applicable2<? super A, ? super A, ? extends A> function);
+	A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function);
 
-	<B> B fold(B initial, Applicable2<? super B, ? super A, ? extends B> function);
+	<B> B fold(B initial, @NonNull Applicable2<? super B, ? super A, ? extends B> function);
 
-	String joinStrings(String separator);
+	String joinStrings(@NonNull String separator);
 }

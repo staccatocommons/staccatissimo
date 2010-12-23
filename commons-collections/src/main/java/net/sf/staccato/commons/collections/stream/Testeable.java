@@ -19,9 +19,9 @@ import net.sf.staccato.commons.lang.Evaluable;
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  */
-public interface Testeable<T> {
+public interface Testeable<A> {
 
 	/**
 	 * Tests if all elements satisfy the given {@link Evaluable}
@@ -30,7 +30,7 @@ public interface Testeable<T> {
 	 *          an {@link Evaluable} to evaluate each element
 	 * @return if all the elements evaluate to true
 	 */
-	boolean all(Evaluable<? super T> predicate);
+	boolean all(Evaluable<? super A> predicate);
 
 	/**
 	 * Tests if at least one element satisfies the given {@link Evaluable}
@@ -39,6 +39,6 @@ public interface Testeable<T> {
 	 *          an {@link Evaluable} to evaluate each element
 	 * @return if any element evaluate to true
 	 */
-	boolean any(Evaluable<? super T> predicate);
+	boolean any(Evaluable<? super A> predicate);
 
 }

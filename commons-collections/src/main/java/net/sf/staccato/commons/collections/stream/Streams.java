@@ -14,11 +14,11 @@ package net.sf.staccato.commons.collections.stream;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.staccato.commons.check.annotation.IgnoreChecks;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.collections.stream.impl.CollectionStream;
 import net.sf.staccato.commons.collections.stream.impl.IterableStream;
@@ -33,7 +33,6 @@ import net.sf.staccato.commons.collections.stream.impl.internal.EnumerationItera
  * 
  * @author flbulgarelli
  */
-@IgnoreChecks
 public class Streams {
 
 	/**
@@ -50,6 +49,19 @@ public class Streams {
 	@NonNull
 	public static <A> Stream<A> from(@NonNull A... elements) {
 		return from(Arrays.asList(elements));
+	}
+
+	/**
+	 * Creates a new Stream that will retrieve just the given element
+	 * 
+	 * @param <A>
+	 * @param element
+	 *          the sinle element the new {@link Stream} will retrieve
+	 * @return a new {@link Stream}
+	 */
+	@NonNull
+	public static <A> Stream<A> from(A element) {
+		return from(Collections.singleton(element));
 	}
 
 	/**
@@ -81,16 +93,43 @@ public class Streams {
 		return new IteratorStream<A>(iterator);
 	}
 
+	/**
+	 * Creates a new {@link Stream} that retrieves elements from the given
+	 * {@link Enumeration}. The resulting stream can not be iterated more than
+	 * once
+	 * 
+	 * @param <A>
+	 * @param enumeration
+	 *          source of the new {@link Stream}
+	 * @return a new {@link Stream}
+	 */
 	@NonNull
 	public static <A> Stream<A> from(@NonNull Enumeration<A> enumeration) {
 		return from(new EnumerationIterator<A>(enumeration));
 	}
 
+	/**
+	 * Creates a new {@link Stream} that retrieves character elements from the
+	 * given charSequence
+	 * 
+	 * @param charSequence
+	 *          source of the of characters of the new Stream
+	 * @return a new {@link Stream}
+	 */
 	@NonNull
 	public static Stream<Character> from(@NonNull CharSequence charSequence) {
 		return from(new CharSequenceIterator(charSequence));
 	}
 
+	/**
+	 * Creates a new {@link Stream} that will retrieve elements from the given
+	 * collection
+	 * 
+	 * @param <A>
+	 * @param collection
+	 *          source of the new {@link Stream}
+	 * @return a new {@link Stream}
+	 */
 	@NonNull
 	public static <A> Stream<A> from(@NonNull Collection<A> collection) {
 		return new CollectionStream<A>(collection);
@@ -124,8 +163,6 @@ public class Streams {
 	public static <A> Stream<A> empty() {
 		return EmptyStream.getInstance();
 	}
-
-	// TODO single element stream
 
 	// TODO File Stream
 	// public static <K, V> Stream<Entry<K, V>> from(Map<K, V> iterable) {

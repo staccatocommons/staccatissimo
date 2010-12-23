@@ -397,7 +397,7 @@ public abstract class StreamAbstractTest {
 	 */
 	@Theory
 	public void testToCollection(Stream stream) {
-		assertEquals(Iterables.asList(stream), stream.toList());
+		assertEquals(Iterables.toList(stream), stream.toList());
 	}
 
 	/**
@@ -408,7 +408,7 @@ public abstract class StreamAbstractTest {
 	 */
 	@Theory
 	public void testToSet(Stream stream) {
-		assertEquals(Iterables.asSet(stream), stream.toSet());
+		assertEquals(Iterables.toSet(stream), stream.toSet());
 	}
 
 	/**
@@ -419,7 +419,7 @@ public abstract class StreamAbstractTest {
 	 */
 	@Theory
 	public void testToList(Stream stream) {
-		assertEquals(Iterables.asList(stream), stream.toList());
+		assertEquals(Iterables.toList(stream), stream.toList());
 	}
 
 	/**

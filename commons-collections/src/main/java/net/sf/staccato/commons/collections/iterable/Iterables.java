@@ -13,11 +13,6 @@
 package net.sf.staccato.commons.collections.iterable;
 
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COLLECTION;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.COMPARATOR;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.FUNCTION;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.PREDICATE;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.addAllInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyOrNoneInternal;
@@ -41,9 +36,10 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import net.sf.staccato.commons.check.Ensure;
+import net.sf.staccato.commons.check.annotation.ForceChecks;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.check.annotation.NotNegative;
+import net.sf.staccato.commons.check.annotation.Size;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
@@ -82,45 +78,48 @@ public class Iterables {
 	 * 
 	 * @param iterable
 	 * @param predicate
-	 * @param <T>
+	 * @param <A>
 	 * @return a list containing only elements from the original iterable that
 	 *         evaluate to true
 	 */
 	@NonNull
-	public static <T> List<T> filter(@NonNull(ITERABLE) Iterable<T> iterable,
-		@NonNull(PREDICATE) Evaluable<? super T> predicate) {
-		return filterInternal(iterable, predicate, new LinkedList<T>());
+	public static <A> List<A> filter(@NonNull Iterable<A> iterable,
+		@NonNull Evaluable<? super A> predicate) {
+		return filterInternal(iterable, predicate, new LinkedList<A>());
 	}
 
 	/**
 	 * Selects at most the fist N elements from the iterable, according to its
 	 * iteration order.
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 * @param iterable
 	 * @param amountOfElements
 	 * @return a new list containing at most the first N elements from original
 	 *         iterable
 	 */
 	@NonNull
-	public static <T> List<T> take(@NonNull(ITERABLE) Iterable<T> iterable,
+	public static <A> List<A> take(@NonNull Iterable<A> iterable,
 		@NotNegative(AMOUNT_OF_ELEMENTS) int amountOfElements) {
-		return takeInternal(iterable, amountOfElements, new ArrayList<T>(amountOfElements));
+		return takeInternal(iterable, amountOfElements, new ArrayList<A>(amountOfElements));
 	}
+
+	// TODO take while
+	// TODO drop while
 
 	/*
 	 * Reduction
 	 */
 
 	@NonNull
-	public static <T> T reduce(@NonNull(ITERABLE) Iterable<T> iterable,
-		@NonNull(ITERABLE) Applicable2<? super T, ? super T, ? extends T> function) {
+	public static <A> A reduce(@NonNull Iterable<A> iterable,
+		@NonNull Applicable2<? super A, ? super A, ? extends A> function) {
 		return reduceInternal(iterable, function);
 	}
 
 	@NonNull
-	public static <I, O> O fold(@NonNull(ITERABLE) Iterable<I> iterable, O initial,
-		@NonNull(ITERABLE) Applicable2<? super O, ? super I, ? extends O> function) {
+	public static <A, B> B fold(@NonNull Iterable<A> iterable, B initial,
+		@NonNull Applicable2<? super B, ? super A, ? extends B> function) {
 		return foldInternal(iterable, initial, function);
 	}
 
@@ -133,16 +132,15 @@ public class Iterables {
 	 * element is returned if found, or a {@link NoSuchElementException} is thrown
 	 * otherwise
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 * @param iterable
 	 * @param predicate
 	 * @return the element if found
 	 * @throws NoSuchElementException
 	 *           if no element matches the predicate
 	 */
-	public static <T> T find(@NonNull(ITERABLE) Iterable<T> iterable,
-		@NonNull(PREDICATE) Evaluable<? super T> predicate) {
-		for (T o : iterable)
+	public static <A> A find(@NonNull Iterable<A> iterable, @NonNull Evaluable<? super A> predicate) {
+		for (A o : iterable)
 			if (predicate.eval(o))
 				return o;
 		throw new NoSuchElementException();
@@ -153,7 +151,7 @@ public class Iterables {
 	 * not exist, or collection is empty, returns {@link Option#none()}. Otherwise
 	 * returns {@link Option#some(Object)}, for the first object found
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 * @param iterable
 	 *          non null
 	 * @param predicate
@@ -161,10 +159,10 @@ public class Iterables {
 	 * @return None if no element matches the predicate or collection is empty, or
 	 *         some(element) if at least one exists
 	 */
-	public static <T> Option<T> findOrNone(Iterable<T> iterable, Evaluable<? super T> predicate) {
-		Ensure.isNotNull(ITERABLE, iterable);
-		Ensure.isNotNull(PREDICATE, predicate);
-		for (T o : iterable)
+	@NonNull
+	public static <A> Option<A> findOrNone(@NonNull Iterable<A> iterable,
+		@NonNull Evaluable<? super A> predicate) {
+		for (A o : iterable)
 			if (predicate.eval(o))
 				return Option.some(o);
 		return Option.none();
@@ -174,15 +172,14 @@ public class Iterables {
 	 * Returns the single element of the given collection. It must be of size 1,
 	 * otherwise, throws an IllegalArgumentException.
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 *          the collection type
 	 * @param collection
 	 *          a single element (size==1) collection
 	 * @return The unique element of the collection
 	 */
-	/* TODO REVISE */public static <T> T single(Collection<T> collection) {
-		Ensure.isNotNull(COLLECTION, collection);
-		Ensure.that().isSize(COLLECTION, collection, 1);
+	@ForceChecks
+	public static <A> A single(@Size(1) Collection<A> collection) {
 		return anyInternal(collection);
 	}
 
@@ -193,15 +190,14 @@ public class Iterables {
 	 * element - for example the first for a list -, but the exact element
 	 * returned from the iterable unspecified.
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 * @param iterable
 	 * @throws NoSuchElementException
 	 *           if the iterable is empty
 	 * @return an element contained in the given iterable. This is nullable, if
 	 *         the iterables's iterator may return null.
 	 */
-	public static <T> T any(@NonNull Iterable<T> iterable) {
-		Ensure.isNotNull(ITERABLE, iterable);
+	public static <A> A any(@NonNull Iterable<A> iterable) {
 		return anyInternal(iterable);
 	}
 
@@ -209,12 +205,12 @@ public class Iterables {
 	 * Gets any element of the given collection. Returns Option.some(element) if
 	 * not empty, or Option.none(), if empty.
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 * @param iterable
 	 * @return some(element) if not empty, or none, otherwise.
 	 */
 	@NonNull
-	public static <T> Option<T> anyOrNone(@NonNull Iterable<T> iterable) {
+	public static <A> Option<A> anyOrNone(@NonNull Iterable<A> iterable) {
 		return anyOrNoneInternal(iterable);
 	}
 
@@ -222,10 +218,22 @@ public class Iterables {
 	 * Validating
 	 */
 
-	public static <T> boolean all(Iterable<T> iterable, Evaluable<? super T> predicate) {
-		Ensure.isNotNull(ITERABLE, iterable);
-		Ensure.isNotNull(PREDICATE, predicate);
-		for (T o : iterable)
+	/**
+	 * Tests if all the elements of the given {@link Iterable} satisfy the given
+	 * predicate
+	 * 
+	 * @param <A>
+	 * @param iterable
+	 * @param predicate
+	 *          the predicate that will be used to evaluate each element
+	 * @return <code>true</code> if all the elements satisfy the given predicate,
+	 *         <code>false</code> otherwise. As a particular case of this rule,
+	 *         this method will return <code>true</code> for empty iterables,
+	 *         regardless of the predicate.
+	 */
+	public static <A> boolean all(@NonNull Iterable<A> iterable,
+		@NonNull Evaluable<? super A> predicate) {
+		for (A o : iterable)
 			if (!predicate.eval(o))
 				return false;
 		return true;
@@ -234,17 +242,18 @@ public class Iterables {
 	/**
 	 * Answers if all elements in the collection are equal.
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 * @param iterable
 	 *          non null. May be empty.
-	 * @return true if this collection is empty, or if all element are equal.
-	 *         False otherwise
+	 * @return <code>true</code>if all element are equal. <code>false</code>
+	 *         otherwise. As a particular case of this rule, if this collection is
+	 *         empty or has only one element, it will return <code>true</code>.
 	 */
-	public static <T> boolean allEqual(@NonNull(ITERABLE) Iterable<T> iterable) {
-		Iterator<T> iter = iterable.iterator();
+	public static <A> boolean allEqual(@NonNull Iterable<A> iterable) {
+		Iterator<A> iter = iterable.iterator();
 		if (!iter.hasNext())
 			return true;
-		T any = iter.next();
+		A any = iter.next();
 		for (; iter.hasNext();)
 			if (!ObjectUtils.equals(any, iter.next()))
 				return false;
@@ -254,26 +263,40 @@ public class Iterables {
 	/**
 	 * Answers if all elements in the collection are the same object.
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 * @param iterable
 	 *          non null. May be empty.
-	 * @return true if this collection is empty, or if all element are the same
-	 *         object. False otherwise
+	 * @return <code>true</code>if all element are the same object.
+	 *         <code>false</code> otherwise. As a particular case of this rule, if
+	 *         this collection is empty or has only one element, it will return
+	 *         <code>true</code>.
 	 */
-	public static <T> boolean allSame(@NonNull(ITERABLE) Iterable<T> iterable) {
-		Iterator<T> iter = iterable.iterator();
+	public static <A> boolean allSame(@NonNull Iterable<A> iterable) {
+		Iterator<A> iter = iterable.iterator();
 		if (!iter.hasNext())
 			return true;
-		T any = iter.next();
+		A any = iter.next();
 		for (; iter.hasNext();)
 			if (any != iter.next())
 				return false;
 		return true;
 	}
 
-	public static <T> boolean any(@NonNull(ITERABLE) Iterable<T> iterable,
-		Evaluable<? super T> predicate) {
-		for (T o : iterable)
+	/**
+	 * Tests if any of the elements of the given {@link Iterable} satisfy the
+	 * given predicate
+	 * 
+	 * @param <A>
+	 * @param iterable
+	 * @param predicate
+	 *          the predicate that will be used to evaluate each element
+	 * @return <code>true</code> if at least one element satisfies the given
+	 *         predicate, <code>false</code> otherwise. As a particular case of
+	 *         this rule, this method will return <code>false</code> for empty
+	 *         iterables, regardless of the predicate.
+	 */
+	public static <A> boolean any(@NonNull Iterable<A> iterable, Evaluable<? super A> predicate) {
+		for (A o : iterable)
 			if (predicate.eval(o))
 				return true;
 		return false;
@@ -283,37 +306,37 @@ public class Iterables {
 	 * Answers if the given {@link Iterable} is empty or not, that is, if its
 	 * iterator returns at least one element.
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 *          the iterable element type
 	 * @param iterable
 	 * @return if the iterable is empty or not
 	 */
-	public static <T> boolean isEmpty(@NonNull(ITERABLE) Iterable<T> iterable) {
+	public static <A> boolean isEmpty(@NonNull Iterable<A> iterable) {
 		return isEmptyInternal(iterable);
 	}
 
 	/**
 	 * Answers if the given {@link Iterable} is empty or null
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 *          the iterable element type
 	 * @param iterable
 	 * @return if the iterable is null or empty
 	 * @see #isEmpty(Iterable)
 	 */
-	public static <T> boolean isNullOrEmpty(@NonNull(ITERABLE) Iterable<T> iterable) {
+	public static <A> boolean isNullOrEmpty(@NonNull Iterable<A> iterable) {
 		return iterable == null || isEmptyInternal(iterable);
 	}
 
 	/**
 	 * Answers if the given {@link Collection} is empty or null
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 *          the collection element type
 	 * @param collection
 	 * @return if the collection is null or empty
 	 */
-	public static <T> boolean isNullOrEmpty(@NonNull(COLLECTION) Collection<T> collection) {
+	public static <A> boolean isNullOrEmpty(@NonNull Collection<A> collection) {
 		return collection == null || collection.isEmpty();
 	}
 
@@ -322,54 +345,72 @@ public class Iterables {
 	 */
 
 	/**
-	 * Maps the the given collection into a new list, using the gicen applyer
+	 * Maps the the given collection into a new list, using the given function
 	 * 
-	 * @param <I>
-	 * @param <O>
+	 * @param <A>
+	 *          the element type of the given collection
+	 * @param <B>
+	 *          the element type of the resulting list
 	 * @param collection
-	 *          the source of the mapping. Non null. May be empty.
-	 * @param applyer
-	 *          the mapper used to apply each element of the source collection.
-	 *          Non null.
+	 *          the source of the mapping.
+	 * @param function
+	 *          the function applied to each element of the source collection.
 	 * @return a new, non null {@link List}, which contains an element for the
-	 *         result of the applyation of each element of the given collection.
-	 *         May be empty
+	 *         result of the application of each element of the given collection.
+	 *         As a particular case, this method will return an empty list if the
+	 *         given collection is empty
 	 */
-	/* TODO REVISE */public static <I, O> List<O> map(Collection<I> collection,
-		Applicable<? super I, ? extends O> applyer) {
-		Ensure.isNotNull(COLLECTION, collection);
-		Ensure.isNotNull(FUNCTION, applyer);
+	@NonNull
+	public static <A, B> List<B> map(@NonNull Collection<A> collection,
+		@NonNull Applicable<? super A, ? extends B> function) {
 		return collectInternal( //
 			collection,
-			applyer,
-			new ArrayList<O>(collection.size()));
+			function,
+			new ArrayList<B>(collection.size()));
 	}
 
-	public static <I, O> List<O> map(@NonNull(ITERABLE) Iterable<I> iterable,
-		@NonNull(FUNCTION) Applicable<? super I, ? extends O> applyer) {
-		return collectInternal(iterable, applyer, new LinkedList<O>());
+	/**
+	 * Maps the the given iterable into a new list, using the given function
+	 * 
+	 * @param <A>
+	 *          the element type of the given iterable
+	 * @param <B>
+	 *          the element type of the resulting list
+	 * @param iterable
+	 *          the source of the mapping.
+	 * @param function
+	 *          the function applied to each element of the source iterable.
+	 * @return a new, non null {@link List}, which contains an element for the
+	 *         result of the application of each element of the given collection.
+	 *         As a particular case, this method will return an empty list if the
+	 *         given iterable is empty
+	 */
+	@NonNull
+	public static <A, B> List<B> map(@NonNull Iterable<A> iterable,
+		@NonNull Applicable<? super A, ? extends B> function) {
+		return collectInternal(iterable, function, new LinkedList<B>());
 	}
 
-	public static <I, O> List<O> flatMap(@NonNull(ITERABLE) Iterable<I> iterable,
-		@NonNull(FUNCTION) Applicable<? super I, ? extends Iterable<O>> function) {
-		LinkedList<O> list = new LinkedList<O>();
+	public static <A, B> List<B> flatMap(@NonNull Iterable<A> iterable,
+		@NonNull Applicable<? super A, ? extends Iterable<B>> function) {
+		LinkedList<B> list = new LinkedList<B>();
 
-		for (I element : iterable)
-			for (O applyedElement : function.apply(element))
+		for (A element : iterable)
+			for (B applyedElement : function.apply(element))
 				list.add(applyedElement);
 
 		return list;
 	}
 
 	/*
-	 * Sorting
+	 * Sorting and converting
 	 */
 
 	/**
 	 * Sorts a new list containing all the collection elements, using the given
 	 * comparator. Null collections are treated as empty collections.
 	 * 
-	 * @param <S>
+	 * @param <A>
 	 * @param iterable
 	 *          the the collection.
 	 * @param comparator
@@ -378,38 +419,73 @@ public class Iterables {
 	 *         using the given criteria, or an empty mutable list, if the
 	 *         collection was null or empty.
 	 */
-	public static <S> List<S> asSortedList(Iterable<S> iterable, Comparator<? super S> comparator) {
-		Ensure.isNotNull(ITERABLE, iterable);
-		Ensure.isNotNull(COMPARATOR, comparator);
-		List<S> list = new LinkedList<S>();
+	public static <A> List<A> toSortedList(@NonNull Iterable<A> iterable,
+		@NonNull Comparator<? super A> comparator) {
+		List<A> list = new LinkedList<A>();
 		addAllInternal(list, iterable);
 		java.util.Collections.sort(list, comparator);
 		return list;
 	}
 
-	public static <S> SortedSet<S> asSortedSet(@NonNull(ITERABLE) Iterable<S> iterable,
-		@NonNull(COMPARATOR) Comparator<? super S> comparator) {
-		TreeSet<S> sortedSet = new TreeSet<S>(comparator);
+	public static <A> SortedSet<A> toSortedSet(@NonNull Iterable<A> iterable,
+		@NonNull Comparator<? super A> comparator) {
+		TreeSet<A> sortedSet = new TreeSet<A>(comparator);
 		addAllInternal(sortedSet, iterable);
 		return sortedSet;
 	}
 
-	public static <S> SortedSet<S> asSortedSet(@NonNull(ITERABLE) Iterable<S> iterable) {
-		TreeSet<S> sortedSet = new TreeSet<S>();
+	public static <A> SortedSet<A> toSortedSet(@NonNull Iterable<A> iterable) {
+		TreeSet<A> sortedSet = new TreeSet<A>();
 		addAllInternal(sortedSet, iterable);
 		return sortedSet;
+	}
+
+	/**
+	 * Converts the given collection into a {@link Set}. If the collection is
+	 * already a set, it just returns it
+	 * 
+	 * @param <A>
+	 * @param collection
+	 * @return a new {@link Set} that contains all the elements from the given
+	 *         collection, or the given collection, if it is already a set
+	 */
+	public static <A> Set<A> toSet(Collection<A> collection) {
+		return collection instanceof Set ? (Set<A>) collection : new HashSet<A>(collection);
+	}
+
+	public static <A> Set<A> toSet(Iterable<A> iterable) {
+		return ModifiableIterables.addAll(new HashSet<A>(), iterable);
+	}
+
+	/**
+	 * Converts the given collection into a {@link List}. If the collection is
+	 * already a list, it just returns it
+	 * 
+	 * @param <A>
+	 * @param collection
+	 * @return a new {@link List} that contains all the elements from the given
+	 *         collection, or the given collection, if it is already a list
+	 */
+	public static <A> List<A> toList(@NonNull Collection<A> collection) {
+		return collection instanceof List ? (List<A>) collection : new ArrayList<A>(collection);
+	}
+
+	public static <A> List<A> toList(Iterable<A> iterable) {
+		LinkedList<A> list = new LinkedList<A>();
+		ModifiableIterables.addAll(list, iterable);
+		return list;
 	}
 
 	/*
 	 * Partioning
 	 */
 
-	public static <T> Pair<List<T>, List<T>> partition(@NonNull(ITERABLE) Iterable<T> iterable,
-		Evaluable<? super T> predicate) {
+	public static <A> Pair<List<A>, List<A>> partition(@NonNull Iterable<A> iterable,
+		Evaluable<? super A> predicate) {
 
-		List<T> left = new LinkedList<T>();
-		List<T> right = new LinkedList<T>();
-		for (T element : iterable)
+		List<A> left = new LinkedList<A>();
+		List<A> right = new LinkedList<A>();
+		for (A element : iterable)
 			if (predicate.eval(element))
 				left.add(element);
 			else
@@ -421,35 +497,17 @@ public class Iterables {
 	 * MISC
 	 */
 
-	public static <T> int sum(@NonNull(ITERABLE) Iterable<T> collection,
-		Applicable<? super T, Integer> integerFunction) {
+	public static <A> int sum(@NonNull Iterable<A> collection,
+		Applicable<? super A, Integer> integerFunction) {
 		int sum = 0;
-		for (T element : collection)
+		for (A element : collection)
 			sum += integerFunction.apply(element);
 		return sum;
 	}
 
-	public static <T> Set<T> asSet(Collection<T> collection) {
-		return new HashSet<T>(collection);
-	}
-
-	public static <T> Set<T> asSet(Iterable<T> iterable) {
-		return ModifiableIterables.addAll(new HashSet<T>(), iterable);
-	}
-
-	public static <S> List<S> asList(Iterable<S> iterable) {
-		LinkedList<S> list = new LinkedList<S>();
-		ModifiableIterables.addAll(list, iterable);
-		return list;
-	}
-
-	public static <S> List<S> asList(Collection<S> collection) {
-		return new ArrayList<S>(collection);
-	}
-
-	public static <T> T get(Iterable<T> iterable, int at) throws IndexOutOfBoundsException {
-		T element = null;
-		Iterator<T> iter = iterable.iterator();
+	public static <A> A get(@NonNull Iterable<A> iterable, int at) throws IndexOutOfBoundsException {
+		A element = null;
+		Iterator<A> iter = iterable.iterator();
 		for (int i = 0; i <= at; i++)
 			try {
 				element = iter.next();
@@ -462,13 +520,13 @@ public class Iterables {
 	/**
 	 * The 0-based index of a given element in the iterable when iterating over it
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 * @param iterable
 	 * @param element
 	 * @return the index of the element in the given iterable, or -1 if it is not
 	 *         contained on it
 	 */
-	public static <T> int indexOf(@NonNull Iterable<T> iterable, T element) {
+	public static <A> int indexOf(@NonNull Iterable<A> iterable, A element) {
 		int i = 0;
 		for (Object o : iterable) {
 			if (ObjectUtils.equals(element, o))
@@ -481,20 +539,21 @@ public class Iterables {
 	/**
 	 * If an element is before another when iterating through the given iterable.
 	 * 
-	 * @param <T>
+	 * @param <A>
 	 * @param iterable
 	 * @param previous
-	 *          the element that must exist in the iterable and be before next
+	 *          the element to test if exist in the iterable and is be before next
 	 * @param next
-	 *          the element that must exist in the iterable and be after previous
+	 *          the element to test if exists in the iterable and is after
+	 *          previous
 	 * @return true if both elements are contained by the given iterable, and
 	 *         first element is before second one
 	 */
-	public static <T> boolean isBefore(@NonNull(ITERABLE) Iterable<T> iterable, T previous, T next) {
+	public static <A> boolean isBefore(@NonNull Iterable<A> iterable, A previous, A next) {
 		if (ObjectUtils.equals(previous, next))
 			return false;
 		boolean previousFound = false;
-		for (T o : iterable) {
+		for (A o : iterable) {
 			if (!previousFound && ObjectUtils.equals(o, previous)) {
 				previousFound = true;
 				continue;
@@ -505,24 +564,27 @@ public class Iterables {
 		return false;
 	}
 
-	public static <T1, T2, T3> List<T3> zip(Iterable<T1> iterable1, Iterable<T2> iterable2,
-		Applicable2<T1, T2, T3> function) {
-		Iterator<T1> iter1 = iterable1.iterator();
-		Iterator<T2> iter2 = iterable2.iterator();
-		List<T3> result = new LinkedList<T3>();
+	@NonNull
+	public static <A, B, C> List<C> zip(@NonNull Iterable<A> iterable1,
+		@NonNull Iterable<B> iterable2, Applicable2<A, B, C> function) {
+		Iterator<A> iter1 = iterable1.iterator();
+		Iterator<B> iter2 = iterable2.iterator();
+		List<C> result = new LinkedList<C>();
 		while (iter1.hasNext() && iter2.hasNext())
 			result.add(function.apply(iter1.next(), iter2.next()));
 		return result;
 	}
 
-	public static <T1, T2> List<Pair<T1, T2>> zip(Iterable<T1> iterable1, Iterable<T2> iterable2) {
-		return zip(iterable1, iterable2, new Function2<T1, T2, Pair<T1, T2>>() {
+	@NonNull
+	public static <A, B> List<Pair<A, B>> zip(@NonNull Iterable<A> iterable1,
+		@NonNull Iterable<B> iterable2) {
+		return zip(iterable1, iterable2, new Function2<A, B, Pair<A, B>>() {
 			@Override
-			public Pair<T1, T2> apply(T1 arg1, T2 arg2) {
+			public Pair<A, B> apply(A arg1, B arg2) {
 				return _(arg1, arg2);
 			}
 		});
 	}
 
-	// TODO take while
+	// TODO product
 }

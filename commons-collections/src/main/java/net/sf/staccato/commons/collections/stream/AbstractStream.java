@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import net.sf.staccato.commons.check.annotation.ForceChecks;
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.collections.iterable.Iterables;
 import net.sf.staccato.commons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccato.commons.collections.stream.impl.internal.ConcatStream;
@@ -209,12 +211,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public Set<A> toSet() {
-		return Iterables.asSet(this);
+		return Iterables.toSet(this);
 	}
 
 	@Override
 	public List<A> toList() {
-		return Iterables.asList(this);
+		return Iterables.toList(this);
 	}
 
 	@Override
@@ -224,7 +226,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public String joinStrings(String separator) {
+	@ForceChecks
+	public String joinStrings(@NonNull String separator) {
 		return StringUtils.join(iterator(), separator);
 	}
 

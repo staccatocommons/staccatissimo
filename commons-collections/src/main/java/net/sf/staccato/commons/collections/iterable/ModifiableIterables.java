@@ -13,7 +13,6 @@
 package net.sf.staccato.commons.collections.iterable;
 
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.addAllInternal;
 
 import java.util.Collection;
@@ -67,8 +66,8 @@ public class ModifiableIterables {
 	 * @param iterable
 	 * @param predicate
 	 */
-	public static <T> void removeWhile(@NonNull(ITERABLE) Iterable<? extends T> iterable,
-		Evaluable<? super T> predicate) {
+	public static <T> void removeWhile(@NonNull Iterable<? extends T> iterable,
+		@NonNull Evaluable<? super T> predicate) {
 		for (Iterator<? extends T> iter = iterable.iterator(); iter.hasNext()
 			&& predicate.eval(iter.next());)
 			iter.remove();

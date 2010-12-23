@@ -24,9 +24,9 @@ import net.sf.staccato.commons.lang.predicate.Predicate;
  * {@link Stream} interface for searching for elements
  * 
  * @author flbulgarelli
- * @param <T>
+ * @param <A>
  */
-public interface Searchable<T> {
+public interface Searchable<A> {
 
 	/**
 	 * Returns any element in this {@link Searchable}.
@@ -39,7 +39,7 @@ public interface Searchable<T> {
 	 * @throws NoSuchElementException
 	 *           if this {@link Searchable} has no elements.
 	 */
-	T any();
+	A any();
 
 	/**
 	 * Returns any element of the given {@link Searchable}, just like
@@ -50,14 +50,14 @@ public interface Searchable<T> {
 	 * @return <code>Option.some(element)</code> if there is at least one element,
 	 *         or <code>Option.none()</code>, otherwise.
 	 */
-	Option<T> anyOrNone();
+	Option<A> anyOrNone();
 
 	/**
 	 * Shorthand for <code>anyOrNone().valueOrNull()</code>
 	 * 
 	 * @return <code>anyOrNone().valueOrNull()</code>
 	 */
-	T anyOrNull();
+	A anyOrNull();
 
 	/**
 	 * Shorthand for <code>anyOrNone().valueOrElse(provider)</code>
@@ -66,7 +66,7 @@ public interface Searchable<T> {
 	 * 
 	 * @return <code>anyOrNone().valueOrElse(provider)</code>
 	 */
-	T anyOrElse(Provider<T> provider);
+	A anyOrElse(Provider<A> provider);
 
 	/**
 	 * Shorthand for <code>anyOrNone().valueOrElse(value)</code>
@@ -74,7 +74,7 @@ public interface Searchable<T> {
 	 * @param value
 	 * @return <code>anyOrNone().valueOrElse(value)</code>
 	 */
-	T anyOrElse(T value);
+	A anyOrElse(A value);
 
 	/**
 	 * Looks for a element that evaluates to true the given {@link Evaluable}. If
@@ -88,7 +88,7 @@ public interface Searchable<T> {
 	 *           if no element matches the predicate, or {@link Searchable} has
 	 *           not elements
 	 */
-	T find(Evaluable<? super T> predicate);
+	A find(Evaluable<? super A> predicate);
 
 	/* TODO UPDATE ** */
 
@@ -102,7 +102,7 @@ public interface Searchable<T> {
 	 * @return None if no element matches the predicate or collection is empty, or
 	 *         some(element) if at least one exists
 	 */
-	Option<T> findOrNone(Evaluable<? super T> predicate);
+	Option<A> findOrNone(Evaluable<? super A> predicate);
 
 	/**
 	 * Alternative version of {@link #find(Iterable, Predicate)}, where the
@@ -113,7 +113,7 @@ public interface Searchable<T> {
 	 * @return null if element is not found or collection is empty, or the
 	 *         element, if found.
 	 */
-	T findOrNull(Evaluable<? super T> predicate);
+	A findOrNull(Evaluable<? super A> predicate);
 
 	/**
 	 * Alternative version of {@link #find(Iterable, Predicate)}, where the
@@ -125,7 +125,7 @@ public interface Searchable<T> {
 	 *          factory to be invoked if no such element exists. Non null
 	 * @return the element if found, or ifNone.create() otherwise
 	 */
-	T findOrElse(Evaluable<? super T> predicate, Provider<? extends T> ifNone);
+	A findOrElse(Evaluable<? super A> predicate, Provider<? extends A> ifNone);
 
 	// TODO findOrElse(element)
 
