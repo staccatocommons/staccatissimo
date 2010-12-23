@@ -33,7 +33,8 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 
 	protected static final String ENSURE_FULLY_QUALIFIED_NAME = "net.sf.staccato.commons.check.Ensure.";
 	protected static final String ASSERT_FULLY_QUALIFIED_NAME = "net.sf.staccato.commons.check.Assert.";
-	private final StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport();
+	private final StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport(
+		activeByDefault());
 	private final boolean ignoreReturns;
 
 	public AbstractCheckAnnotationHandler(boolean ignoreReturns) {
@@ -41,7 +42,7 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 	}
 
 	@Override
-	public final void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context) {
+	public void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context) {
 		if (!deactivableSupport.isActive())
 			return;
 		try {
@@ -54,13 +55,13 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 	}
 
 	@Override
-	public final void preProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
+	public void preProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
 		if (ignoreReturns || !deactivableSupport.isActive())
 			return;
 		Ensure.is(!context.isVoid(), "Context must not be void");
 		try {
 			context.getMethod().insertAfter(
-				ASSERT_FULLY_QUALIFIED_NAME + createMethodCheck(annotation, context));
+				ASSERT_FULLY_QUALIFIED_NAME + createMethodCheck(annotation, context) + ";");
 		} catch (CannotCompileException e) {
 			context.logErrorMessage("Could not insert method check: {0}", e.getMessage());
 			throw SoftException.soften(e);
@@ -107,5 +108,9 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 		T annotation);
 
 	protected abstract String getVarMnemonic(T annotation);
+
+	protected boolean activeByDefault() {
+		return true;
+	}
 
 }

@@ -28,6 +28,11 @@ public interface ArgumentAnnotationContext extends AnnotationContext {
 	CtBehavior getArgumentBehavior();
 
 	/**
+	 * @return if the annotated argument is a constructor or method parameter
+	 */
+	boolean isConstructorArgument();
+
+	/**
 	 * @return the annotated argument number, zero based
 	 */
 	int getArgumentNumber();

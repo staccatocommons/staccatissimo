@@ -12,19 +12,29 @@
  */
 package net.sf.staccato.commons.instrument.handler.deactivator;
 
-
 /**
  * @author flbulgarelli
  * 
  */
 public class StackedDeactivableSupport implements Deactivable {
 
-	private int activationCounter = 0;
+	private int activationCounter;
+
+	/**
+	 * Creates a new {@link StackedDeactivableSupport}
+	 */
+	public StackedDeactivableSupport(boolean active) {
+		activationCounter = active ? 0 : -1;
+	}
+
+	/**
+	 * Creates a new {@link StackedDeactivableSupport} initially active
+	 */
+	public StackedDeactivableSupport() {
+		this(true);
+	}
 
 	public void activate() {
-		if (activationCounter == 0) {
-			throw new IllegalStateException("Already active!");
-		}
 		activationCounter++;
 	}
 
@@ -33,7 +43,7 @@ public class StackedDeactivableSupport implements Deactivable {
 	}
 
 	public boolean isActive() {
-		return activationCounter == 0;
+		return activationCounter >= 0;
 	}
 
 	public int getRemainingActivations() {

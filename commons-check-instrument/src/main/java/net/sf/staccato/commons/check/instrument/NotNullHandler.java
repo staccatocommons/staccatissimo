@@ -15,6 +15,7 @@ package net.sf.staccato.commons.check.instrument;
 import java.lang.annotation.Annotation;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
 
 /**
  * @author flbulgarelli
@@ -37,6 +38,16 @@ public class NotNullHandler extends AbstractCheckAnnotationHandler<NonNull> {
 	@Override
 	protected String getVarMnemonic(NonNull nonNull) {
 		return nonNull.value();
+	}
+
+	public void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context) {
+		if (context.isConstructorArgument()) {
+			super.processAnnotatedArgument(annotation, context);
+		} else {
+			deactivate();
+			super.processAnnotatedArgument(annotation, context);
+			activate();
+		}
 	}
 
 	@Override

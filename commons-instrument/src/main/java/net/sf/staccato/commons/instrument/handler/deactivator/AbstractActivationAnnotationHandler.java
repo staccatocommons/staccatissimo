@@ -21,7 +21,7 @@ import net.sf.staccato.commons.instrument.handler.AnnotationHandler;
  * @author flbulgarelli
  * 
  */
-public abstract class AbstractDeactivatorAnnotationHandler implements AnnotationHandler {
+public abstract class AbstractActivationAnnotationHandler implements AnnotationHandler {
 
 	private final Collection<Deactivable> handlers = new LinkedList<Deactivable>();
 
@@ -30,12 +30,12 @@ public abstract class AbstractDeactivatorAnnotationHandler implements Annotation
 		return deactivable;
 	}
 
-	protected void onPreProcess() {
+	protected void deactivateAll() {
 		for (Deactivable deactivable : handlers)
 			deactivable.deactivate();
 	}
 
-	protected void onPostProcess() {
+	protected void activateAll() {
 		for (Deactivable deactivable : handlers)
 			deactivable.activate();
 	}

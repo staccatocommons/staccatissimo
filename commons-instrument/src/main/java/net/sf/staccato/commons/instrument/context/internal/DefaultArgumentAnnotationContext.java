@@ -13,7 +13,7 @@
 package net.sf.staccato.commons.instrument.context.internal;
 
 import javassist.CtBehavior;
-
+import javassist.CtConstructor;
 import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
 
 import org.slf4j.Logger;
@@ -55,6 +55,10 @@ public class DefaultArgumentAnnotationContext extends AbstractAnnotationContext 
 	 */
 	public int getArgumentNumber() {
 		return parameterNumber;
+	}
+
+	public boolean isConstructorArgument() {
+		return behavior instanceof CtConstructor;
 	}
 
 	/**

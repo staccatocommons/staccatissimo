@@ -19,6 +19,7 @@ import java.io.File;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.instrument.config.InstrumenterConfigurer;
 import net.sf.staccato.commons.instrument.internal.ClassNames;
 import net.sf.staccato.commons.instrument.internal.Instrumenter;
@@ -26,15 +27,36 @@ import net.sf.staccato.commons.instrument.internal.InstrumenterImpl;
 import net.sf.staccato.commons.io.Directory;
 
 /**
+ * Instrumentation API entry point.
+ * 
+ * @see #runInstrumentation(InstrumenterConfigurer, Directory, String)
  * @author flbulgarelli
  */
-public class InstrumentationRunner {
+public final class InstrumentationRunner {
 
 	private InstrumentationRunner() {
 	}
 
-	public static void runInstrumentation(InstrumenterConfigurer configurer,
-		Directory processDirectory, String extraPath) throws Exception {
+	/**
+	 * Instruments the given directory, reading each .class file, processing it,
+	 * and writing it back to the filesystem
+	 * 
+	 * @param configurer
+	 *          an {@link InstrumenterConfigurer} that will setup the actual
+	 *          {@link Instrumenter} that will be used to process the directory
+	 * @param processDirectory
+	 *          the directory with .class files to process
+	 * @param extraPath
+	 *          a string containing a list of additional paths to add to the
+	 *          classpath used on instrumentation. This string is
+	 *          system-dependent, using the platform separator and directory
+	 *          separator
+	 * @throws Exception
+	 * @see {@link File#pathSeparator}
+	 * @see {@link File#separator}
+	 */
+	public static void runInstrumentation(@NonNull InstrumenterConfigurer configurer,
+		@NonNull Directory processDirectory, @NonNull String extraPath) throws Exception {
 		InstrumenterImpl instrumenter = new InstrumenterImpl();
 		configurer.configureInstrumenter(instrumenter);
 		new InstrumentationContext(instrumenter, processDirectory, extraPath).doInstrument();

@@ -14,7 +14,7 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccato.commons.check.annotation.IgnoreChecks;
+import net.sf.staccato.commons.check.annotation.ForceChecks;
 import net.sf.staccato.commons.instrument.context.ConstructorAnnotationContext;
 import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
 import net.sf.staccato.commons.instrument.handler.ClassAnnotationHandler;
@@ -26,42 +26,42 @@ import net.sf.staccato.commons.instrument.handler.deactivator.AbstractActivation
  * @author flbulgarelli
  * 
  */
-public class IgnoreCheckHandler extends AbstractActivationAnnotationHandler implements
+public class ForceChecksHandler extends AbstractActivationAnnotationHandler implements
 	ClassAnnotationHandler, ConstructorAnnotationHandler, MethodAnnotationHandler {
 
 	/**
-	 * Creates a new {@link IgnoreCheckHandler}
+	 * Creates a new {@link ForceChecksHandler}
 	 */
-	public IgnoreCheckHandler() {
+	public ForceChecksHandler() {
 		super();
 	}
 
 	public Class<? extends Annotation> getSupportedAnnotationType() {
-		return IgnoreChecks.class;
+		return ForceChecks.class;
 	}
 
 	public void preProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
-		deactivateAll();
-	}
-
-	public void postProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
 		activateAll();
 	}
 
-	public void preProcessAnnotatedConstructor(Object annotation, ConstructorAnnotationContext context) {
+	public void postProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
 		deactivateAll();
+	}
+
+	public void preProcessAnnotatedConstructor(Object annotation, ConstructorAnnotationContext context) {
+		activateAll();
 	}
 
 	public void postProcessAnnotatedConstructor(Object annotation,
 		ConstructorAnnotationContext context) {
-		activateAll();
-	}
-
-	public void preProcessAnnotatedClass(Object annotation) {
 		deactivateAll();
 	}
 
-	public void postProcessAnnotatedClass(Object annotation) {
+	public void preProcessAnnotatedClass(Object annotation) {
 		activateAll();
+	}
+
+	public void postProcessAnnotatedClass(Object annotation) {
+		deactivateAll();
 	}
 }

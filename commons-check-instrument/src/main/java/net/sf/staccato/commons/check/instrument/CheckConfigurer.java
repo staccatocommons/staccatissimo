@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
+import java.util.Arrays;
+
 import net.sf.staccato.commons.instrument.config.InstrumenterConfiguration;
 import net.sf.staccato.commons.instrument.config.InstrumenterConfigurer;
 
@@ -33,13 +35,18 @@ public class CheckConfigurer implements InstrumenterConfigurer {
 	public void configureInstrumenter(InstrumenterConfiguration instrumenter) {
 
 		IgnoreCheckHandler ignoreCheckHandler = new IgnoreCheckHandler();
-		instrumenter
-			.addAnnotationHanlder(ignoreCheckHandler)
-			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new NotNullHandler(ignoreReturns)))
-			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new NotEmptyHandler(ignoreReturns)))
-			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new PostiveHandler(ignoreReturns)))
-			.addAnnotationHanlder(ignoreCheckHandler.addDeactivable(new MatchesHandler(ignoreReturns)))
-			.setInstrumentationMark(new CheckInstrumentationMark())
-			.ensureConfigured();
+		ForceChecksHandler forceCheckHandler = new ForceChecksHandler();
+		instrumenter.addAnnotationHanlder(ignoreCheckHandler).addAnnotationHanlder(forceCheckHandler);
+		for (AbstractCheckAnnotationHandler<?> handler : Arrays.asList(
+			new NotNullHandler(ignoreReturns),
+			new SizeHandler(ignoreReturns),
+			new NotEmptyHandler(ignoreReturns),
+			new PostiveHandler(ignoreReturns),
+			new MatchesHandler(ignoreReturns))) {
+			ignoreCheckHandler.addDeactivable(handler);
+			forceCheckHandler.addDeactivable(handler);
+			instrumenter.addAnnotationHanlder(handler);
+		}
+		instrumenter.setInstrumentationMark(new CheckInstrumentationMark()).ensureConfigured();
 	}
 }
