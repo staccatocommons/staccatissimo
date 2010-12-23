@@ -406,7 +406,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is &gt;= 0
+	 * Checks the variable is &gt;= 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
@@ -421,7 +421,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is &gt;= 0
+	 * Checks the variable is &gt;= 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
@@ -436,7 +436,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is &gt;= 0
+	 * Checks the variable is &gt;= 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
@@ -451,7 +451,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is &gt;= 0
+	 * Checks the variable is &gt;= 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
@@ -466,7 +466,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is &gt;= 0
+	 * Checks the variable is &gt;= 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
@@ -483,7 +483,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks the var is &gt;= 0
+	 * Checks the variable is &gt;= 0
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
@@ -504,29 +504,96 @@ public abstract class Check<ExceptionType extends Throwable> {
 		return is(varName, number, negative, "must be not negative");
 	}
 
+	/**
+	 * Checks that the {@link EmptyAware} var is not empty
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, EmptyAware var) throws ExceptionType {
 		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.isEmpty());
 	}
 
+	/**
+	 * Checks that the {@link Collection} variable is not empty
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, Collection<?> var)
 		throws ExceptionType {
 		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.isEmpty());
 	}
 
+	/**
+	 * Checks that the {@link Iterable} variable is not empty - that is -
+	 * <code>!var.itertaror().hasNext()</code>
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, Iterable<?> var)
 		throws ExceptionType {
 		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.iterator().hasNext());
 	}
 
+	/**
+	 * Checks that the {@link Map} variable is not empty
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, Map<?, ?> var) throws ExceptionType {
 		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.isEmpty());
 	}
 
+	/**
+	 * Checks that the {@link CharSequence} variable is not empty
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, CharSequence var)
 		throws ExceptionType {
 		return isNotNull(varName, var).isNotEmptyInternal(varName, var, var.length() != 0);
 	}
 
+	/**
+	 * Checks that the array variable is not empty
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, Object var) throws ExceptionType {
 		return isNotNull(varName, var).isNotEmptyInternal(varName, var, Array.getLength(var) != 0);
 	}

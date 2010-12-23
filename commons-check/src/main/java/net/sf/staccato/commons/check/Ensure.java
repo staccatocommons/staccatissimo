@@ -32,10 +32,21 @@ public final class Ensure {
 	private Ensure() {
 	}
 
-	public static void fail(String varName, Object var, String message) {
-		that().fail(varName, var, message);
+	/**
+	 * Shortcut to <code>Ensure.that().fail(varName,var,message,args)</code>
+	 * 
+	 * @see Check#fail(String, Object, String, Object...)
+	 */
+	public static void fail(String varName, Object var, String message, Object... args) {
+		that().fail(varName, var, message, args);
 	}
 
+	/**
+	 * Shortcut to
+	 * <code>Ensure.that().is(varName,var,condition,message,args)</code>
+	 * 
+	 * @see Check#is(String, Object, boolean, String, Object...)
+	 */
 	public static void is(String varName, Object var, boolean condition, String message,
 		Object... messageArgs) {
 		that().is(varName, var, condition, message, messageArgs);

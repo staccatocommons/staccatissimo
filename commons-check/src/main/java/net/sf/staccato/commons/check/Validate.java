@@ -38,6 +38,15 @@ public final class Validate<ExceptionType extends Throwable> extends Check<Excep
 		this.exceptionType = exceptionType;
 	}
 
+	/**
+	 * Created a new {@link Validate} that will throw an exception of the given
+	 * class on failure
+	 * 
+	 * @param <E>
+	 * @param exceptionType
+	 *          the class of exception to throw on check failure
+	 * @return a new {@link Validate}
+	 */
 	public static <E extends Throwable> Validate<E> throwing(Class<E> exceptionType) {
 		return new Validate<E>(exceptionType);
 	}

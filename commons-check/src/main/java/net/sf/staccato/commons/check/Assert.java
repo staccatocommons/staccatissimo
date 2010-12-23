@@ -29,13 +29,28 @@ public final class Assert {
 	private Assert() {
 	}
 
+	/**
+	 * Shortcut to <code>Assert.that().fail(varName,var,message,args)</code>
+	 * 
+	 * @see Check#fail(String, Object, String, Object...)
+	 */
 	public static void fail(String varName, Object var, String message) {
 		that().fail(varName, var, message);
 	}
 
+	/**
+	 * Shortcut to
+	 * <code>Assert.that().is(varName,var,condition,message,args)</code>
+	 * 
+	 * @see Check#is(String, Object, boolean, String, Object...)
+	 */
 	public static void is(String varName, Object var, boolean condition, String message,
 		Object... messageArgs) {
 		that().is(varName, var, condition, message, messageArgs);
+	}
+
+	public static void is(boolean condition, String message, Object... messageArgs) {
+		that().is(condition, message, messageArgs);
 	}
 
 	public static void isNotNull(String variableName, Object variable) {
