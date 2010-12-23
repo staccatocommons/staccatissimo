@@ -15,6 +15,7 @@ package net.sf.staccato.commons.lang.exp;
 
 import java.lang.annotation.Annotation;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Option;
 
 /**
@@ -26,12 +27,14 @@ public class Annotations {
 	private Annotations() {
 	}
 
-	public static <A extends Annotation> Option<A> getAnnotation(Object object,
-		Class<A> annotationClass) {
+	@NonNull
+	public static <A extends Annotation> Option<A> getAnnotation(@NonNull Object object,
+		@NonNull Class<A> annotationClass) {
 		return Option.nullToNone(getAnnotationInternal(object, annotationClass));
 	}
 
-	public static <A extends Annotation> boolean isAnnotated(Object object, Class<A> annotationClass) {
+	public static <A extends Annotation> boolean isAnnotated(@NonNull Object object,
+		@NonNull Class<A> annotationClass) {
 		return getAnnotationInternal(object, annotationClass) != null;
 	}
 

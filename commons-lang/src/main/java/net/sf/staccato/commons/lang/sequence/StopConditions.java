@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.lang.sequence;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 import net.sf.staccato.commons.lang.predicate.Predicates;
 
@@ -24,6 +25,7 @@ public class StopConditions {
 	 * @param <T>
 	 * @return <code>Predicates.false_()</code>
 	 */
+	@NonNull
 	public static <T> Predicate<T> stopNever() {
 		return Predicates.false_();
 	}
@@ -33,7 +35,8 @@ public class StopConditions {
 	 * @param value
 	 * @return <code>Predicates.lowerThan(value)</code>
 	 */
-	public static <T extends Comparable<T>> Predicate<T> downTo(T value) {
+	@NonNull
+	public static <T extends Comparable<T>> Predicate<T> downTo(@NonNull T value) {
 		return Predicates.lessThanOrEqualTo(value);
 	}
 
@@ -42,7 +45,8 @@ public class StopConditions {
 	 * @param value
 	 * @return <code>Predicates.greaterThan(value)</code>
 	 */
-	public static <T extends Comparable<T>> Predicate<T> upTo(T value) {
+	@NonNull
+	public static <T extends Comparable<T>> Predicate<T> upTo(@NonNull T value) {
 		return Predicates.greaterThan(value);
 	}
 

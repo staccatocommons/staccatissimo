@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.lang.function;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.function.internal.Constant;
 import net.sf.staccato.commons.lang.function.internal.Identity;
 
@@ -23,12 +24,13 @@ import net.sf.staccato.commons.lang.function.internal.Identity;
 public class Functions {
 
 	/**
-	 * Returns the identity function, that is, a {@link Function} that takes a non
-	 * nullable argument and returns it.
+	 * Returns the identity function, that is, a {@link Function} that takes an
+	 * argument and returns it.
 	 * 
 	 * @param <I>
 	 * @return the singleton identity function
 	 */
+	@NonNull
 	public static <I> Function<I, I> identity() {
 		return Identity.getInstance();
 	}

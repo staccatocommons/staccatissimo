@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccato.commons.check.Ensure;
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.internal.ToString;
@@ -60,7 +61,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 *          that is, when the given element and subsequent should not be
 	 *          retrieved.
 	 */
-	public Sequence(T seed, Applicable<T, T> generator, Evaluable<T> stopCondition) {
+	public Sequence(T seed, @NonNull Applicable<T, T> generator, @NonNull Evaluable<T> stopCondition) {
 		this.seed = seed;
 		this.generator = generator;
 		this.stopCondition = stopCondition;
@@ -77,6 +78,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 * @return the generator of the sequence elements. Elements are generated
 	 *         applying the previous element of the sequence to the generator
 	 */
+	@NonNull
 	public Applicable<T, T> getGenerator() {
 		return generator;
 	}
@@ -85,6 +87,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 * @return the stopCondition. Sequencing will continue until it evaluates to
 	 *         <code>true</code>
 	 */
+	@NonNull
 	public Evaluable<T> getStopCondition() {
 		return stopCondition;
 	}
@@ -151,7 +154,9 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 * @param stopCondition
 	 * @return a new Sequence
 	 */
-	public static <T> Sequence<T> from(T start, Applicable<T, T> generator, Evaluable<T> stopCondition) {
+	@NonNull
+	public static <T> Sequence<T> from(T start, @NonNull Applicable<T, T> generator,
+		@NonNull Evaluable<T> stopCondition) {
 		return new Sequence<T>(start, generator, stopCondition);
 	}
 
@@ -167,6 +172,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 *          the positive, zero o negative increment
 	 * @return a new Sequence
 	 */
+	@NonNull
 	public static Sequence<Integer> fromBy(int from, int step) {
 		return new Sequence(from, new IntegerIncrement(step), StopConditions.stopNever());
 	}
@@ -187,6 +193,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 *          the positive or negative increment. Non zero.
 	 * @return a new Sequence
 	 */
+	@NonNull
 	public static Sequence<Integer> fromToBy(int from, int to, int step) {
 		Ensure.is("step", step, step != 0, "must be non zero");
 		return new Sequence(from, new IntegerIncrement(step), step < 0 ? StopConditions.downTo(to)
@@ -207,6 +214,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 *          the stop value
 	 * @return a new Sequence
 	 */
+	@NonNull
 	public static Sequence<Integer> fromTo(int from, int to) {
 		return fromToBy(from, to, from < to ? 1 : -1);
 	}

@@ -24,23 +24,15 @@ no null solo para argumentos de constructores? annotation nullable?
 
 serialization? Perhaps should remove that capaibility for non concrete classes, as it is error prone and does not offer a big help
 
-Annotations for unmodiables
-
 Tasks
 
 
 1. Increase test coverage
 2. Increase  javadoc coverage
 
-Singleton objects? Document they are singleton?
-
-
-
 links in javadoc
 
-remove xstream from commons-lang
 
- 
  
 Reglas:
 
@@ -60,6 +52,8 @@ Las restricciones definidas en superclaes e interfaces deben ser respetadas
 por las subclases e implementadores, o relajadas
 
  
+si es conditional transparent, las subclases deben ser condtransparant
+o transparent
 
 
 
@@ -71,8 +65,8 @@ por las subclases e implementadores, o relajadas
 
 
 
-
-
+Está bien decir que el comportamiento no esta especificado ante violacion de restricciones? 
+no sería mejor decir que es fail fast y que lanzará una runtime?
 
 
 
