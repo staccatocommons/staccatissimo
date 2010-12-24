@@ -49,14 +49,29 @@ public final class Assert {
 		that().is(varName, var, condition, message, messageArgs);
 	}
 
+	/**
+	 * Shortcut to <code>Assert.that().is(condition,message,args)</code>
+	 * 
+	 * @see Check#is(boolean, String, Object...)
+	 */
 	public static void is(boolean condition, String message, Object... messageArgs) {
 		that().is(condition, message, messageArgs);
 	}
 
+	/**
+	 * Shortcut to <code>Assert.that().isNotNull(variableName, variable)</code>
+	 * 
+	 * @see Check#isNotNull(String, Object)
+	 */
 	public static void isNotNull(String variableName, Object variable) {
 		that().isNotNull(variableName, variable);
 	}
 
+	/**
+	 * Shortcut to <code>Assert.that().isNull(variableName, variable)</code>
+	 * 
+	 * @see Check#isNull(String, Object)
+	 */
 	public static void isNull(String variableName, Object variable) {
 		that().isNull(variableName, variable);
 	}

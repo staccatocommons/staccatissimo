@@ -21,13 +21,11 @@ import java.lang.annotation.Target;
 import net.sf.staccato.commons.lang.restriction.Restriction;
 
 /**
- * <p>
- * An annotation that signals that an annotated element must be positive or
- * zero.
+ * A check annotation that signals that the annotated element must be positive
+ * or zero.
  * 
  * This annotation should only be applied to {@link Number}s and primitive
  * numeric types.
- * </p>
  * 
  * @author flbulgarelli
  * @see Restriction

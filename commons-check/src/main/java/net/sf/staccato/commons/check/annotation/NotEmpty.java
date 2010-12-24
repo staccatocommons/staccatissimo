@@ -18,17 +18,19 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccato.commons.lang.collection.EmptyAware;
 import net.sf.staccato.commons.lang.restriction.Restriction;
 
 /**
- * <p>
- * An annotation that signals that an annotated can not be empty. This
- * annotation should only be applied to elements that understand a length or
- * size attribute, or length, size or isEmpty method.
- * </p>
+ * A check annotation that signals that the annotated element can not be empty.
+ * 
+ * This annotation should only be applied to elements that understand a length
+ * or size attribute, or length, size or isEmpty method, like {@link String}s or
+ * {@link EmptyAware}s.
  * 
  * @author flbulgarelli
  * @see Restriction
+ * @see EmptyAware
  */
 @Restriction
 @Documented

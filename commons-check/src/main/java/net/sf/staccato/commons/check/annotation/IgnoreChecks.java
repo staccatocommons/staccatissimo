@@ -17,16 +17,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.sf.staccato.commons.lang.restriction.Restriction;
-
 /**
- * {@link IgnoreChecks} is a hint for automated annotation processors,
- * suggesting that the {@link Restriction} in the annotated element and its
- * descendants should be ignored
+ * {@link IgnoreChecks} is a directive for automated annotation processors,
+ * indicating that check annotations in the annotated element and its
+ * descendants <strong>must not</strong> be processed
  * 
- * TODO add examples
+ * This annotation is incompatible with {@link ForceChecks} - an element
+ * <strong>must not</strong> be annotated with {@link IgnoreChecks} and
+ * {@link ForceChecks} at the same time
  * 
  * @author flbulgarelli
+ * @see ForceChecks
  */
 @Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.TYPE })

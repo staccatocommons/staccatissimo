@@ -17,6 +17,18 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * {@link ForceChecks} is a directive for automated annotation processors,
+ * indicating that check annotations in the annotated element and its
+ * descendants <strong>must</strong> be processed
+ * 
+ * This annotation is incompatible with {@link IgnoreChecks} - an element
+ * <strong>must not</strong> be annotated with {@link IgnoreChecks} and
+ * {@link ForceChecks} at the same time
+ * 
+ * @author flbulgarelli
+ * @see IgnoreChecks
+ */
 @Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.TYPE })
 public @interface ForceChecks {

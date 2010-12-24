@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
+import net.sf.staccato.commons.lang.collection.EmptyAware;
+import net.sf.staccato.commons.lang.collection.SizeAware;
+
 import org.junit.Test;
 
 /**
@@ -100,22 +103,6 @@ public class CheckUnitTest {
 		c.isNotNegative(VAR_NAME, BigInteger.ZERO);
 	}
 
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testisNotEmptyStringEmptyAware() {
-	// fail("Not yet implemented");
-	// }
-
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testisNotEmptyStringCollectionOfQ() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testisNotEmptyStringIterableOfQ() {
-	// fail("Not yet implemented");
-	// }
-	//
 	@Test
 	public void testNotEmptyMap() {
 		c.isNotEmpty(VAR_NAME, Collections.singletonMap("Hello", "World"));
@@ -151,68 +138,6 @@ public class CheckUnitTest {
 		c.isNotEmpty(VAR_NAME, Collections.emptyList());
 	}
 
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckEmptyStringIterableOfQ() {
-	// fail("Not yet implemented");
-	// }
-	//
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckEmptyStringEmptyAware() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckPositiveStringLong() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckPositiveStringInt() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckPositiveStringDouble() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckPositiveStringFloat() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckPositiveStringBigDecimal() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckPositiveStringBigInteger() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckIsInstanceOf() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckSizeStringCollectionOfQInt() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckSizeStringCharSequenceInt() {
-	// fail("Not yet implemented");
-	// }
-	//
-	//
-	// @Test(expected = IllegalArgumentException.class)
-	// public void testCheckSizeStringSizeAwareInt() {
-	// fail("Not yet implemented");
-	// }
-
 	@Test
 	public void testPositive() {
 		c
@@ -224,22 +149,58 @@ public class CheckUnitTest {
 			.isPositive(VAR_NAME, BigInteger.valueOf(1200));
 	}
 
+	/**
+	 * Test for {@link Check#isPositive(String, int)} on failure
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testPositive_IntegerFail() {
+		c.isPositive(VAR_NAME, -50);
+	}
+
+	/**
+	 * Test for {@link Check#isPositive(String, int)} on failure
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testPositive_BigIntegerFail() {
+		c.isPositive(VAR_NAME, BigInteger.valueOf(-10));
+	}
+
+	/**
+	 * Test for the isSize family of methods
+	 */
 	@Test
 	public void testSize() {
 		c
 			.isSize(VAR_NAME, Arrays.asList(9, 96), 2)
 			.isSize(VAR_NAME, "Hello", 5)
 			.isSize(VAR_NAME, new double[] { 5.5, 9 }, 2)
-			.isSize(VAR_NAME, new Object[] { 9, 93, 23, 6, 0 }, 5);
+			.isSize(VAR_NAME, new Object[] { 9, 93, 23, 6, 0 }, 5)
+			.isSize(VAR_NAME, new SizeAware() {
+				public int size() {
+					return 5;
+				}
+
+				public boolean isEmpty() {
+					return false;
+				}
+			}, 5);
 
 	}
 
+	/**
+	 * Test for the isEmpty family of methods
+	 */
 	@Test
 	public void testEmpty() {
 		c
 			.isEmpty(VAR_NAME, Collections.emptyList())
 			.isEmpty(VAR_NAME, Collections.emptyMap())
-			.isEmpty(VAR_NAME, Collections.<String> emptyList());
+			.isEmpty(VAR_NAME, Collections.<String> emptyList())
+			.isEmpty(VAR_NAME, new EmptyAware() {
+				public boolean isEmpty() {
+					return true;
+				}
+			});
 	}
 
 	@Test
@@ -283,9 +244,44 @@ public class CheckUnitTest {
 		c.isNotNull(VAR_NAME, null);
 	}
 
+	/**
+	 * Test for {@link Check#isNull(String, Object)} on failure
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testNull_Fail() {
+		c.isNull(VAR_NAME, new Object());
+	}
+
+	/**
+	 * Test for {@link Check#isNull(String, Object)}
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testNull() {
+		c.isNotNull(VAR_NAME, null);
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testFail() {
 		c.fail(VAR_NAME, "Foo", "Should be palindromic");
+	}
+
+	/**
+	 * Test for
+	 * {@link Check#isBetween(String, Comparable, Comparable, Comparable)} method
+	 * on failure
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testIsBetween_Fail() throws Exception {
+		c.isBetween(VAR_NAME, 8, 10, 90);
+	}
+
+	/**
+	 * Test for
+	 * {@link Check#isBetween(String, Comparable, Comparable, Comparable)}
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testIsBetween() throws Exception {
+		c.isBetween(VAR_NAME, "big", "bang", "!");
 	}
 
 }

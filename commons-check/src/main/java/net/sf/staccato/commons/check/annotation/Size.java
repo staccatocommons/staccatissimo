@@ -19,17 +19,20 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Collections;
 
+import net.sf.staccato.commons.lang.collection.SizeAware;
 import net.sf.staccato.commons.lang.restriction.Restriction;
 
 /**
- * <p>
- * An annotation that signals that an annotated must have an specific size or
- * length. This annotation should only be applied to elements that understand a
- * length or size attribute, or length, or size method, like {@link Collections}, {@link String}s and arrays.
- * </p>
+ * A check annotation that signals that the annotated element must have an given
+ * size or length.
+ * 
+ * This annotation should only be applied to elements that understand a length
+ * or size attribute, or length, or size method, like {@link Collections},
+ * {@link String}s, arrays and {@link SizeAware}s.
  * 
  * @author flbulgarelli
  * @see Restriction
+ * @see SizeAware
  */
 @Restriction
 @Documented

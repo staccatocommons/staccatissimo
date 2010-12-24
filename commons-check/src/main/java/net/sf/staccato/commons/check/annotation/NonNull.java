@@ -22,7 +22,7 @@ import net.sf.staccato.commons.lang.restriction.Restriction;
 
 /**
  * <p>
- * An annotation that signals that an annotated is non nullable.
+ * A check annotation that signals that the annotated element is non nullable.
  * </p>
  * 
  * @author flbulgarelli

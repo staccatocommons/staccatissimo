@@ -25,12 +25,10 @@ import net.sf.staccato.commons.lang.collection.SizeAware;
 import net.sf.staccato.commons.lang.format.Var;
 
 /**
- * 
- * A {@link Check} is an object designed to validate conditions. It is heavily
- * inspired on several validation utilities like
- * {@link org.apache.commons.lang.Validate} from Apache commons, but is designed
- * to be more flexible and easy-to-use, so, it should be seen as higher lever
- * replacement.
+ * {@link Check}s are objects that validate conditions. It is heavily inspired
+ * on several validation utilities like {@link org.apache.commons.lang.Validate}
+ * from Apache commons, but is designed to be more flexible and easy-to-use, so,
+ * it should be seen as higher lever replacement.
  * 
  * The four main differences are the following
  * <ul>
@@ -255,8 +253,6 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @param pattern
-	 *          the pattern the variable must match
 	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
@@ -274,8 +270,6 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @param pattern
-	 *          the pattern the variable must match
 	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
@@ -293,8 +287,6 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @param pattern
-	 *          the pattern the variable must match
 	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
@@ -319,8 +311,6 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the variable to be checked
 	 * @param expectedClass
 	 *          the class the variable must be instance of
-	 * @param pattern
-	 *          the pattern the variable must match
 	 * @return this, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
@@ -601,12 +591,6 @@ public abstract class Check<ExceptionType extends Throwable> {
 	/*
 	 * TODO Performance del dispatch virtual
 	 */
-	/*
-	 * TODO Performance del not
-	 */
-	/*
-	 * TODO Performance del objeto TypeClass
-	 */
 
 	private Check<ExceptionType> isNotEmptyInternal(String varName, Object var, boolean notEmpty)
 		throws ExceptionType {
@@ -775,8 +759,6 @@ public abstract class Check<ExceptionType extends Throwable> {
 		 * 
 		 * @param message
 		 *          the failure message
-		 * @param messageArgs
-		 *          the failure message arguments
 		 */
 		public Failure(String message) {
 			this.message = message;
@@ -811,8 +793,6 @@ public abstract class Check<ExceptionType extends Throwable> {
 		 * 
 		 * @param message
 		 *          the failure message
-		 * @param messageArgs
-		 *          the failure message arguments
 		 */
 		public VarFailure(String varName, Object var, String message) {
 			super(message);

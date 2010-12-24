@@ -21,10 +21,10 @@ import java.lang.annotation.Target;
 import net.sf.staccato.commons.lang.restriction.Restriction;
 
 /**
- * {@link Matches} denote that the annotated element matches a regular
- * expression.
+ * A check annotation that signals that the annotated element matches a regular
+ * expression
  * 
- * Annotated elements should be of type {@link String} *
+ * Annotated elements should be of type {@link String}
  * 
  * @author flbulgarelli
  * @see Restriction

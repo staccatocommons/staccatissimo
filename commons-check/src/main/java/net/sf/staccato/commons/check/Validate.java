@@ -34,7 +34,7 @@ public final class Validate<ExceptionType extends Throwable> extends Check<Excep
 	 * @param exceptionType
 	 *          the class of the exception to throw on failure
 	 */
-	public Validate(Class<ExceptionType> exceptionType) {
+	private Validate(Class<ExceptionType> exceptionType) {
 		this.exceptionType = exceptionType;
 	}
 

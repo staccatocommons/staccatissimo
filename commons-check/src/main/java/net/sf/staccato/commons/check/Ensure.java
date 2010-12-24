@@ -52,14 +52,29 @@ public final class Ensure {
 		that().is(varName, var, condition, message, messageArgs);
 	}
 
+	/**
+	 * Shortcut to <code>Ensure.that().is(condition,message,args)</code>
+	 * 
+	 * @see Check#is(boolean, String, Object...)
+	 */
 	public static void is(boolean condition, String message, Object... messageArgs) {
 		that().is(condition, message, messageArgs);
 	}
 
+	/**
+	 * Shortcut to <code>Ensure.that().isNotNull(variableName, variable)</code>
+	 * 
+	 * @see Check#isNotNull(String, Object)
+	 */
 	public static void isNotNull(String variableName, Object variable) {
 		that().isNotNull(variableName, variable);
 	}
 
+	/**
+	 * Shortcut to <code>Ensure.that().isNull(variableName, variable)</code>
+	 * 
+	 * @see Check#isNull(String, Object)
+	 */
 	public static void isNull(String variableName, Object variable) {
 		that().isNull(variableName, variable);
 	}
@@ -71,9 +86,5 @@ public final class Ensure {
 	public static Check<IllegalArgumentException> that() {
 		return check;
 	}
-
-	// public static Check<IllegalArgumentException> not() {
-	// return check.not();
-	// }
 
 }
