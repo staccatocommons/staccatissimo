@@ -17,7 +17,7 @@ public class LifecycleManagertUnitTest extends JUnit4MockObjectTestCase {
 	@Before
 	public void setup() {
 		lifecycle = mock(Lifecycle.class);
-		manager = LifecycleManager.createManager(lifecycle);
+		manager = LifecycleManager.from(lifecycle);
 	}
 
 	@Test

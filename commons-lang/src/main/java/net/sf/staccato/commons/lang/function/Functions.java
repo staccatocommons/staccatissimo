@@ -23,20 +23,34 @@ import net.sf.staccato.commons.lang.function.internal.Identity;
  */
 public class Functions {
 
+	private Functions() {
+	}
+
 	/**
 	 * Returns the identity function, that is, a {@link Function} that takes an
 	 * argument and returns it.
 	 * 
-	 * @param <I>
+	 * @param <A>
 	 * @return the singleton identity function
 	 */
 	@NonNull
-	public static <I> Function<I, I> identity() {
+	public static <A> Function<A, A> identity() {
 		return Identity.getInstance();
 	}
 
-	public static <I, O> Function<I, O> constant(final O value) {
-		return new Constant<I, O>(value);
+	/**
+	 * Returns a constant function, that is, a {@link Function} that takes one
+	 * argument, and regardless of it, returns a given value
+	 * 
+	 * @param <A>
+	 * @param <B>
+	 * @param value
+	 *          the value the constant function will return when applied
+	 * @return a new constant function
+	 */
+	@NonNull
+	public static <A, B> Function<A, B> constant(final B value) {
+		return new Constant<A, B>(value);
 	}
 
 	public static Function2<Integer, Integer, Integer> integerSum() {

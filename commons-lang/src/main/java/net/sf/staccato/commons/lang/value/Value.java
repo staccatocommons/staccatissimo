@@ -53,6 +53,7 @@ import net.sf.staccato.commons.lang.restriction.Restriction;
  * 
  * @see Immutable
  * @see Unmodifiable
+ * @see Restriction
  * @author flbulgarelli
  */
 @Documented

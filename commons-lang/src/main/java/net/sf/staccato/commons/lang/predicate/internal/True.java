@@ -2,7 +2,6 @@ package net.sf.staccato.commons.lang.predicate.internal;
 
 import static net.sf.staccato.commons.lang.predicate.Predicates.false_;
 import static net.sf.staccato.commons.lang.predicate.Predicates.from;
-import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 
@@ -40,8 +39,4 @@ public final class True<T> extends NonAnnonymousPredicate<T> {
 		return false_();
 	}
 
-	@Override
-	public Applicable<T, T> ifTrue(Applicable<? super T, ? extends T> aFunction) {
-		return (Applicable<T, T>) aFunction;
-	}
 }

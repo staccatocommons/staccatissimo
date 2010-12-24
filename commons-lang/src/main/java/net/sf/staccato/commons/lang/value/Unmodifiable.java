@@ -34,6 +34,7 @@ import net.sf.staccato.commons.lang.restriction.Restriction;
  * </p>
  * 
  * @author flbulgarelli
+ * @see Restriction
  */
 @Documented
 @Inherited

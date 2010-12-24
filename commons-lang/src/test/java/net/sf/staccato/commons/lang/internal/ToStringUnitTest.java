@@ -10,33 +10,30 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang;
+package net.sf.staccato.commons.lang.internal;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 /**
- * 
- * Test for verifyng the cheks processor is enabled and working fine
- * 
  * @author flbulgarelli
  * 
  */
-public class ClassesInstrumentedDummyTest {
+public class ToStringUnitTest {
 
-	/**
-	 * Verifies that, at least, the notNull processor is working on constructors
-	 */
-	@SuppressWarnings("unused")
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorsInstrumented() {
-		new MapBuilder(null);
+	static class Foo {
+		int x = 10;
+		int y = 90;
 	}
 
 	/**
-	 * Verifies that, at least, the notNull processor is working on methods
+	 * Test method for
+	 * {@link net.sf.staccato.commons.lang.internal.ToString#toString(java.lang.Object)}
 	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testMethodsInstrumented() {
-		Compare.min(null, 5);
+	@Test
+	public void testToStringObject() {
+		assertEquals("ToStringUnitTest.Foo(10,90)", ToString.toString(new Foo()));
 	}
+
 }

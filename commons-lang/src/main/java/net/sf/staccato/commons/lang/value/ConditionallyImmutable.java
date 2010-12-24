@@ -26,11 +26,8 @@ import net.sf.staccato.commons.lang.restriction.Restriction;
  * whose instance can be trated as {@link Immutable} as long as their attributes
  * are {@link Immutable} too.
  * 
- * 
- * TODO about inheritance
- * 
  * @author flbulgarelli
- * 
+ * @see Restriction
  */
 @Documented
 @Inherited

@@ -30,6 +30,7 @@ import net.sf.staccato.commons.lang.restriction.Restriction;
  * {@link Immutable}s are inherently thread-safe.
  * 
  * @author fbulgarelli
+ * @see Restriction
  */
 @Documented
 @Inherited

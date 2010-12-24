@@ -52,5 +52,4 @@ public class FunctionsUnitTest {
 		assertSame(i, Functions.constant(i).apply(0));
 		assertSame(i, Functions.constant(i).apply(2));
 	}
-
 }

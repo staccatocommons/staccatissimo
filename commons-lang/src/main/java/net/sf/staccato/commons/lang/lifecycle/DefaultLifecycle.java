@@ -58,7 +58,7 @@ public abstract class DefaultLifecycle<ResourceType, ReturnType> implements
 	 */
 	@NonNull
 	public LifecycleManager<ResourceType, ReturnType> createManager() {
-		return LifecycleManager.createManager(this);
+		return LifecycleManager.from(this);
 	}
 
 	/**

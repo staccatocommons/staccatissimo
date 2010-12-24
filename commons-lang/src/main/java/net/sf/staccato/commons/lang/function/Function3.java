@@ -29,6 +29,8 @@ import net.sf.staccato.commons.lang.Applicable3;
  *          function third argument type
  * @param <R>
  *          function return type
+ * 
+ * @see Function
  */
 public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3, R>,
 	Applicable2<T1, T2, Function<T3, R>>, Applicable<T1, Function2<T2, T3, R>> {

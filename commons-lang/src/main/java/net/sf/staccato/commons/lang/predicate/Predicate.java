@@ -13,15 +13,7 @@
 package net.sf.staccato.commons.lang.predicate;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
-import net.sf.staccato.commons.lang.Executable;
-import net.sf.staccato.commons.lang.Executable2;
-import net.sf.staccato.commons.lang.Executable3;
-import net.sf.staccato.commons.lang.block.Block;
-import net.sf.staccato.commons.lang.block.Block2;
-import net.sf.staccato.commons.lang.block.Block3;
-import net.sf.staccato.commons.lang.function.Function;
 
 /**
  * <p>
@@ -98,68 +90,6 @@ public abstract class Predicate<T> implements Evaluable<T> {
 			}
 		}
 		return new And();
-	}
-
-	public Applicable<T, T> ifTrue(final Applicable<? super T, ? extends T> aFunction) {
-		return new Function<T, T>() {
-			public T apply(T arg) {
-				return Predicate.this.eval(arg) ? aFunction.apply(arg) : arg;
-			}
-		};
-	}
-
-	public Executable<T> whileTrue(final Executable<T> aBlock) {
-		return new Block<T>() {
-			public void exec(T argument) {
-				while (eval(argument))
-					aBlock.exec(argument);
-			}
-		};
-	}
-
-	public <T2> Block2<T, T2> whileTrue(final Executable2<T, T2> aBlock) {
-		return new Block2<T, T2>() {
-			public void exec(T argument1, T2 argument2) {
-				while (eval(argument1))
-					aBlock.exec(argument1, argument2);
-			}
-		};
-	}
-
-	public <T2, T3> Block3<T, T2, T3> whileTrue(final Executable3<T, T2, T3> aBlock) {
-		return new Block3<T, T2, T3>() {
-			public void exec(T argument1, T2 argument2, T3 argument3) {
-				while (eval(argument1))
-					aBlock.exec(argument1, argument2, argument3);
-			}
-		};
-	}
-
-	public Executable<T> ifTrue(final Executable<T> aBlock) {
-		return new Block<T>() {
-			public void exec(T argument) {
-				if (eval(argument))
-					aBlock.exec(argument);
-			}
-		};
-	}
-
-	public <T2> Block2<T, T2> ifTrue(final Executable2<T, T2> aBlock) {
-		return new Block2<T, T2>() {
-			public void exec(T argument1, T2 argument2) {
-				if (eval(argument1))
-					aBlock.exec(argument1, argument2);
-			}
-		};
-	}
-
-	public <T2, T3> Block3<T, T2, T3> ifTrue(final Executable3<T, T2, T3> aBlock) {
-		return new Block3<T, T2, T3>() {
-			public void exec(T argument1, T2 argument2, T3 argument3) {
-				if (eval(argument1))
-					aBlock.exec(argument1, argument2, argument3);
-			}
-		};
 	}
 
 	public String toString() {

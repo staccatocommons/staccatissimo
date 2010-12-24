@@ -18,6 +18,8 @@ package net.sf.staccato.commons.lang;
  * 
  * {@link Evaluable}s <strong>must not</strong> have side effects
  * 
+ * 
+ * 
  * @author flbulgarelli
  * 
  * @param <T>
@@ -26,7 +28,8 @@ package net.sf.staccato.commons.lang;
 public interface Evaluable<T> {
 
 	/**
-	 * Evaluates an argument.
+	 * Evaluates an argument. If the arguments evaluates to true is said to
+	 * satisfy or meet this condition.
 	 * 
 	 * {@link Evaluable} implementors should not try to handle nulls. Instead, the
 	 * preferred way of getting a null safe {@link Evaluable} is composing it with

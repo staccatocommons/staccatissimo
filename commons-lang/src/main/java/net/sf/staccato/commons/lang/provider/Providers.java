@@ -21,10 +21,14 @@ import net.sf.staccato.commons.lang.provider.internal.Constant;
 import net.sf.staccato.commons.lang.provider.internal.NullProvider;
 
 /**
+ * 
  * @author flbulgarelli
  * 
  */
 public class Providers {
+
+	private Providers() {
+	}
 
 	@NonNull
 	public static <T> Provider<T> constant(T value) {

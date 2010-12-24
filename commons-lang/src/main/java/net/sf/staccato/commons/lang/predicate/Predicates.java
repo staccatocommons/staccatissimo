@@ -38,6 +38,9 @@ import net.sf.staccato.commons.lang.predicate.internal.True;
  */
 public class Predicates {
 
+	private Predicates() {
+	}
+
 	/**
 	 * @param <T>
 	 * @return A {@link Predicate} that always returns <code>true</code>
@@ -215,21 +218,69 @@ public class Predicates {
 	 * Comparable predicates
 	 */
 
+	/**
+	 * Returns a predicate that evaluates if its argument is less than the given
+	 * value.
+	 * 
+	 * More formally, this method returns a new predicate that evaluates
+	 * comparable argument with the statement
+	 * <code>argument.compareTo(value) < 0</code>
+	 * 
+	 * @param <T>
+	 * @param value
+	 * @return a new predicate
+	 */
 	@NonNull
 	public static <T extends Comparable<T>> Predicate<T> lessThan(@NonNull T value) {
 		return new LessThan<T>(value);
 	}
 
+	/**
+	 * Returns a predicate that evaluates if its argument is lower than or equal
+	 * to the given value.
+	 * 
+	 * More formally, this method returns a new predicate that evaluates
+	 * comparable argument with the statement
+	 * <code>argument.compareTo(value) <= 0</code>
+	 * 
+	 * @param <T>
+	 * @param value
+	 * @return a new predicate
+	 */
 	@NonNull
 	public static <T extends Comparable<T>> Predicate<T> lessThanOrEqualTo(@NonNull T value) {
 		return greaterThan(value).not();
 	}
 
+	/**
+	 * Returns a predicate that evaluates if its argument is greater than the
+	 * given value.
+	 * 
+	 * More formally, this method returns a new predicate that evaluates
+	 * comparable argument with the statement
+	 * <code>argument.compareTo(value) > 0</code>
+	 * 
+	 * @param <T>
+	 * @param value
+	 * @return a new predicate
+	 */
 	@NonNull
 	public static <T extends Comparable<T>> Predicate<T> greaterThan(@NonNull T value) {
 		return new GreaterThan<T>(value);
 	}
 
+	/**
+	 * Returns a predicate that evaluates if its argument is greater than or equal
+	 * to the given value.
+	 * 
+	 * More formally, this method returns a new predicate that evaluates
+	 * comparable argument with the statement
+	 * <code>argument.compareTo(value) >= 0</code>
+	 * 
+	 * @param <T>
+	 * @param value
+	 * @return a new predicate
+	 */
 	@NonNull
 	public static <T extends Comparable<T>> Predicate<T> greaterThanOrEqualTo(@NonNull T value) {
 		return lessThan(value).not();

@@ -100,7 +100,7 @@ public final class LifecycleManager<ManagedObjectType, ReturnType> implements
 		return managedLifecycle;
 	}
 
-	public static <MO, R> LifecycleManager<MO, R> createManager(
+	public static <MO, R> LifecycleManager<MO, R> from(
 		Lifecycle<MO, R> aLifecycle) {
 		return new LifecycleManager<MO, R>(aLifecycle);
 	}
