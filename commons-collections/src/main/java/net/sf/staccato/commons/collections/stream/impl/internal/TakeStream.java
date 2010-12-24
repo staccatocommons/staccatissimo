@@ -2,13 +2,14 @@ package net.sf.staccato.commons.collections.stream.impl.internal;
 
 import java.util.Iterator;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccato.commons.collections.stream.AbstractStream;
 import net.sf.staccato.commons.collections.stream.Stream;
 
 /**
  * @author flbulgarelli
- *
+ * 
  */
 public final class TakeStream<A> extends AbstractStream<A> {
 
@@ -18,7 +19,7 @@ public final class TakeStream<A> extends AbstractStream<A> {
 	/**
 	 * Creates a new {@link TakeStream}
 	 */
-	public TakeStream(Stream<A> stream, int amountOfElements) {
+	public TakeStream(@NonNull Stream<A> stream, @NonNull int amountOfElements) {
 		this.stream = stream;
 		this.amountOfElements = amountOfElements;
 	}

@@ -22,7 +22,7 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class CharSequenceIteratorUnitTest {
+public class CharSequenceIteratorUnitTest extends IteratorAbstractUnitTest {
 
 	@Test
 	public void testname() throws Exception {
@@ -36,5 +36,13 @@ public class CharSequenceIteratorUnitTest {
 						return arg1 += arg2;
 					}
 				}));
+	}
+
+	protected Iterable<?> createTwoElementsIterable() {
+		return Streams.from(new CharSequenceIterator("ab"));
+	}
+
+	protected Iterable<?> createOneElementIterable() {
+		return Streams.from(new CharSequenceIterator("a"));
 	}
 }

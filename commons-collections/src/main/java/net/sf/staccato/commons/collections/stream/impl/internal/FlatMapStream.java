@@ -1,7 +1,9 @@
 package net.sf.staccato.commons.collections.stream.impl.internal;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccato.commons.collections.stream.AbstractStream;
 import net.sf.staccato.commons.collections.stream.Stream;
@@ -20,8 +22,8 @@ public final class FlatMapStream<A, B> extends AbstractStream<B> {
 	/**
 	 * Creates a new {@link FlatMapStream}
 	 */
-	public FlatMapStream(Stream<A> stream,
-		Applicable<? super A, ? extends Iterable<? extends B>> function) {
+	public FlatMapStream(@NonNull Stream<A> stream,
+		@NonNull Applicable<? super A, ? extends Iterable<? extends B>> function) {
 		this.stream = stream;
 		this.function = function;
 	}
@@ -30,7 +32,7 @@ public final class FlatMapStream<A, B> extends AbstractStream<B> {
 
 		final Iterator<A> iter = stream.iterator();
 		return new AbstractUnmodifiableIterator<B>() {
-			private Iterator<? extends B> subIter;
+			private Iterator<? extends B> subIter = null;
 
 			public boolean hasNext() {
 				if (subIter != null && subIter.hasNext())
@@ -44,6 +46,8 @@ public final class FlatMapStream<A, B> extends AbstractStream<B> {
 			}
 
 			public B next() {
+				if (subIter == null)
+					throw new NoSuchElementException();
 				return subIter.next();
 			}
 		};

@@ -2,6 +2,7 @@ package net.sf.staccato.commons.collections.stream.impl.internal;
 
 import java.util.Iterator;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccato.commons.collections.stream.AbstractStream;
 import net.sf.staccato.commons.collections.stream.Stream;
@@ -19,7 +20,7 @@ public final class MapStream<A, B> extends AbstractStream<B> {
 	/**
 	 * Creates a new {@link MapStream}
 	 */
-	public MapStream(Stream<A> stream, Applicable<? super A, ? extends B> function) {
+	public MapStream(@NonNull Stream<A> stream, @NonNull Applicable<? super A, ? extends B> function) {
 		this.stream = stream;
 		this.function = function;
 	}

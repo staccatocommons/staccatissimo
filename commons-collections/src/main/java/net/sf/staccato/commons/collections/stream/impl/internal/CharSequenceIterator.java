@@ -14,6 +14,7 @@ package net.sf.staccato.commons.collections.stream.impl.internal;
 
 import java.util.NoSuchElementException;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.collections.iterable.internal.AbstractUnmodifiableIterator;
 
 /**
@@ -25,7 +26,13 @@ public class CharSequenceIterator extends AbstractUnmodifiableIterator<Character
 	private final CharSequence charSequence;
 	private int pos = 0;
 
-	public CharSequenceIterator(CharSequence charSequence) {
+	/**
+	 * Creates a new {@link CharSequenceIterator}
+	 * 
+	 * @param charSequence
+	 *          the sequence to wrap
+	 */
+	public CharSequenceIterator(@NonNull CharSequence charSequence) {
 		this.charSequence = charSequence;
 	}
 

@@ -470,7 +470,18 @@ public class Iterables {
 		return collection instanceof List ? (List<A>) collection : new ArrayList<A>(collection);
 	}
 
+	/**
+	 * Converts the given iterable into a {@link List}. If the iterable is already
+	 * a list, it just returns it
+	 * 
+	 * @param <A>
+	 * @param collection
+	 * @return a new {@link List} that contains all the elements from the given
+	 *         iterable, or the given collection, if it is already a list
+	 */
 	public static <A> List<A> toList(Iterable<A> iterable) {
+		if (iterable instanceof List)
+			return (List<A>) iterable;
 		LinkedList<A> list = new LinkedList<A>();
 		ModifiableIterables.addAll(list, iterable);
 		return list;

@@ -12,29 +12,21 @@
  */
 package net.sf.staccato.commons.collections.stream.impl.internal;
 
-import java.util.Enumeration;
-
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.collections.iterable.internal.AbstractUnmodifiableIterator;
+import static net.sf.staccato.commons.lang.predicate.Predicates.lessThan;
+import net.sf.staccato.commons.collections.stream.Streams;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class EnumerationIterator<A> extends AbstractUnmodifiableIterator<A> {
+public class TakeWhileIteratorUnitTest extends IteratorAbstractUnitTest {
 
-	private final Enumeration<A> enumeration;
-
-	public EnumerationIterator(@NonNull Enumeration<A> enumeration) {
-		this.enumeration = enumeration;
+	protected Iterable<?> createTwoElementsIterable() {
+		return Streams.from(4, 5, 6).takeWhile(lessThan(6));
 	}
 
-	public boolean hasNext() {
-		return enumeration.hasMoreElements();
-	}
-
-	public A next() {
-		return enumeration.nextElement();
+	protected Iterable<?> createOneElementIterable() {
+		return Streams.from(10, 15, 90).takeWhile(lessThan(12));
 	}
 
 }

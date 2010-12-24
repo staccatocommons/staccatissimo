@@ -37,10 +37,6 @@ public final class EmptyStream<A> extends AbstractStream<A> {
 		return EmptyIterator.getInstance();
 	}
 
-	/**
-	 * @param <T>
-	 * @return
-	 */
 	public static <T> Stream<T> getInstance() {
 		return INSTANCE;
 	}
