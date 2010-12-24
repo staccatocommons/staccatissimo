@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.collections.stream;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Evaluable;
 
 /**
@@ -30,7 +31,7 @@ public interface Testeable<A> {
 	 *          an {@link Evaluable} to evaluate each element
 	 * @return if all the elements evaluate to true
 	 */
-	boolean all(Evaluable<? super A> predicate);
+	boolean all(@NonNull Evaluable<? super A> predicate);
 
 	/**
 	 * Tests if at least one element satisfies the given {@link Evaluable}
@@ -39,6 +40,6 @@ public interface Testeable<A> {
 	 *          an {@link Evaluable} to evaluate each element
 	 * @return if any element evaluate to true
 	 */
-	boolean any(Evaluable<? super A> predicate);
+	boolean any(@NonNull Evaluable<? super A> predicate);
 
 }

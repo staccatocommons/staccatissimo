@@ -72,11 +72,12 @@ public class Streams {
 	 *          the element type
 	 * @param iterable
 	 *          the {@link Iterable} to decorate
-	 * @return a new stream
+	 * @return the given iterable, if it is {@link Stream}, a new stream that
+	 *         wraps it, otherwise
 	 */
 	@NonNull
 	public static <A> Stream<A> from(@NonNull Iterable<A> iterable) {
-		return new IterableStream<A>(iterable);
+		return iterable instanceof Stream ? (Stream<A>) iterable : new IterableStream<A>(iterable);
 	}
 
 	/**

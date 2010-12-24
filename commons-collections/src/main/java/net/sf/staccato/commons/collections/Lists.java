@@ -39,11 +39,11 @@ public class Lists {
 	 * @param list
 	 *          the list
 	 * @param element
-	 *          the element
+	 *          the element to be inserted just afeter the reference element
 	 * @param reference
 	 *          the reference. The list must contain it
 	 */
-	public static <A> void addAfter(@NonNull(LIST_PARAM) List<A> list, A element, A reference) {
+	public static <A> void addAfter(@NonNull List<A> list, A element, A reference) {
 		for (ListIterator<A> iter = list.listIterator(); iter.hasNext();)
 			if (ObjectUtils.equals(iter.next(), reference)) {
 				iter.add(element);
@@ -52,7 +52,20 @@ public class Lists {
 		throw new NoSuchElementException(reference.toString());
 	}
 
-	public static <A> void addBefore(@NonNull(LIST_PARAM) List<A> list, A element, A reference) {
+	/**
+	 * Inserts the given element before the reference. Throws
+	 * {@link NoSuchElementException} if the list does not contain the reference
+	 * 
+	 * @param <A>
+	 *          the list type
+	 * @param list
+	 *          the list
+	 * @param element
+	 *          the element to be inserted just before the reference element
+	 * @param reference
+	 *          the reference. The list must contain it
+	 */
+	public static <A> void addBefore(@NonNull List<A> list, A element, A reference) {
 		for (ListIterator<A> iter = list.listIterator(); iter.hasNext();)
 			if (iter.next().equals(reference)) {
 				iter.previous();
@@ -79,7 +92,7 @@ public class Lists {
 	 * @param <A>
 	 *          the list elements type
 	 * @param list
-	 * @return the list element
+	 * @return the element at position 1 in the list
 	 * @throws IllegalArgumentException
 	 *           if list is empty if list is empty is out of range
 	 * @see List#get(int)
@@ -94,7 +107,7 @@ public class Lists {
 	 * @param <A>
 	 *          the list elements type
 	 * @param list
-	 * @return the list element
+	 * @return the element at position 1 in the list
 	 * @throws IndexOutOfBoundsException
 	 *           if index is out of range
 	 * @see List#get(int)
@@ -105,13 +118,37 @@ public class Lists {
 		return list.get(1);
 	}
 
+	/**
+	 * Retrieves the list third element (at position 2)
+	 * 
+	 * @param <A>
+	 *          the list elements type
+	 * @param list
+	 * @return the element at position 2 in the list
+	 * @throws IndexOutOfBoundsException
+	 *           if index is out of range
+	 * @see List#get(int)
+	 */
 	public static <S> S third(@NonNull List<S> list) {
 		Ensure.is(LIST_PARAM, list, list.size() > 2,//
 			"Must hava at least three elements");
 		return list.get(2);
 	}
 
+	/**
+	 * Retrieves the last element (at position size - 1)
+	 * 
+	 * @param <A>
+	 *          the list elements type
+	 * @param list
+	 * @return the element at position size - 1 in the list
+	 * @throws IndexOutOfBoundsException
+	 *           if index is out of range
+	 * @see List#get(int)
+	 */
 	public static <S> S last(@NotEmpty List<S> list) {
 		return list.get(list.size() - 1);
 	}
+
+	// TODO revise exceptions thrown in getXXXX methods
 }

@@ -497,14 +497,6 @@ public class Iterables {
 	 * MISC
 	 */
 
-	public static <A> int sum(@NonNull Iterable<A> collection,
-		Applicable<? super A, Integer> integerFunction) {
-		int sum = 0;
-		for (A element : collection)
-			sum += integerFunction.apply(element);
-		return sum;
-	}
-
 	public static <A> A get(@NonNull Iterable<A> iterable, int at) throws IndexOutOfBoundsException {
 		A element = null;
 		Iterator<A> iter = iterable.iterator();

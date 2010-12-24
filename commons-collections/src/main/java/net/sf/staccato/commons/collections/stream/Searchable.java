@@ -14,6 +14,7 @@ package net.sf.staccato.commons.collections.stream;
 
 import java.util.NoSuchElementException;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.None;
 import net.sf.staccato.commons.lang.Option;
@@ -29,27 +30,27 @@ import net.sf.staccato.commons.lang.predicate.Predicate;
 public interface Searchable<A> {
 
 	/**
-	 * Returns any element in this {@link Searchable}.
+	 * Returns any element in this {@link Stream}.
 	 * 
 	 * Any does not mean a random element, but just any of all elements contained,
 	 * without having it any particular interest over the rest. Most ordered or
 	 * sorted implementations will just retrieve the first element.
 	 * 
-	 * @return any element contained by this {@link Searchable}
+	 * @return any element contained by this {@link Stream}
 	 * @throws NoSuchElementException
-	 *           if this {@link Searchable} has no elements.
+	 *           if this {@link Stream} has no elements.
 	 */
 	A any();
 
 	/**
-	 * Returns any element of the given {@link Searchable}, just like
-	 * {@link #any()}, but as an option. If {@link Searchable} has no elements,
-	 * instead of throwing a {@link NoSuchElementException}, it returns
-	 * {@link None}
+	 * Returns any element of the given {@link Stream}, just like {@link #any()},
+	 * but as an option. If {@link Stream} has no elements, instead of throwing a
+	 * {@link NoSuchElementException}, it returns {@link None}
 	 * 
 	 * @return <code>Option.some(element)</code> if there is at least one element,
 	 *         or <code>Option.none()</code>, otherwise.
 	 */
+	@NonNull
 	Option<A> anyOrNone();
 
 	/**
@@ -66,7 +67,7 @@ public interface Searchable<A> {
 	 * 
 	 * @return <code>anyOrNone().valueOrElse(provider)</code>
 	 */
-	A anyOrElse(Provider<A> provider);
+	A anyOrElse(@NonNull Provider<A> provider);
 
 	/**
 	 * Shorthand for <code>anyOrNone().valueOrElse(value)</code>
@@ -77,33 +78,33 @@ public interface Searchable<A> {
 	A anyOrElse(A value);
 
 	/**
-	 * Looks for a element that evaluates to true the given {@link Evaluable}. If
-	 * such element does not exist, or {@link Searchable} is empty, throws
-	 * {@link NoSuchElementException}
+	 * Looks for a element that satisfies the given {@link Evaluable}. If such
+	 * element does not exist, throws {@link NoSuchElementException}
 	 * 
 	 * @param predicate
-	 *          non null
-	 * @return the first elements that the predicate evaluates to true, if exists.
+	 * @return the first elements that the predicate satisfies, if exists.
 	 * @throws NoSuchElementException
-	 *           if no element matches the predicate, or {@link Searchable} has
-	 *           not elements
+	 *           if no element matches the predicate. As a particular case, this
+	 *           method will throw it if {@link Stream} has not elements,
+	 *           regardless of the predicate
 	 */
-	A find(Evaluable<? super A> predicate);
-
-	/* TODO UPDATE ** */
+	A find(@NonNull Evaluable<? super A> predicate);
 
 	/**
-	 * Alternative version of {@link #find(Iterable, Predicate)}, where the
-	 * element is returned if found, or a {@link NoSuchElementException} is thrown
-	 * otherwise
+	 * Looks for an element that satisfies the given {@link Evaluable}. If such
+	 * element exists, returns <code>some(element)</code>. Otherwise, returns
+	 * {@link None}.
 	 * 
 	 * @param predicate
-	 *          non null.
-	 * @return None if no element matches the predicate or collection is empty, or
-	 *         some(element) if at least one exists
+	 * @return None if no element matches the predicate, or some(element) if at
+	 *         least one exists. As a particular case, this method will return
+	 *         {@link None} if {@link Stream} is empty, regardless of the given
+	 *         predicate
 	 */
-	Option<A> findOrNone(Evaluable<? super A> predicate);
+	@NonNull
+	Option<A> findOrNone(@NonNull Evaluable<? super A> predicate);
 
+	/* TODO UPDATE ** */
 	/**
 	 * Alternative version of {@link #find(Iterable, Predicate)}, where the
 	 * element is returned if found, or null, otherwise.
@@ -113,7 +114,7 @@ public interface Searchable<A> {
 	 * @return null if element is not found or collection is empty, or the
 	 *         element, if found.
 	 */
-	A findOrNull(Evaluable<? super A> predicate);
+	A findOrNull(@NonNull Evaluable<? super A> predicate);
 
 	/**
 	 * Alternative version of {@link #find(Iterable, Predicate)}, where the
@@ -125,7 +126,7 @@ public interface Searchable<A> {
 	 *          factory to be invoked if no such element exists. Non null
 	 * @return the element if found, or ifNone.create() otherwise
 	 */
-	A findOrElse(Evaluable<? super A> predicate, Provider<? extends A> ifNone);
+	A findOrElse(@NonNull Evaluable<? super A> predicate, @NonNull Provider<? extends A> ifNone);
 
 	// TODO findOrElse(element)
 
