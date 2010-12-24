@@ -4,6 +4,6 @@ About Staccato-Commons-IO
  
 Prealpha state 
 
- Staccato-Commons-Lang is still in a prealpha state, and although it fully implements most of previous features, documentation is not yet fully documented nor tested, and types and packages are likely to change in the near future without notice. It is not recomended to use it in production systems yet. 
+ Staccato-Commons-Lang is still in a prealpha state, and although it fully implements most of previous features, documentation is not yet fully documented nor tested, and types and packages are likely to change in the near future without notice. It is not recommended to use it in production systems yet. 
  
  

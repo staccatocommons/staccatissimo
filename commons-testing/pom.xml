@@ -3,8 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.staccato</groupId>
 	<artifactId>commons-testing</artifactId>
-	<name>Staccato Commons Testing</name>
-	<version>1.0</version>
+	<name>Staccato-Commons- Testing</name>
+	<version>1.0-SNAPSHOT</version>
+	<inceptionYear>2010</inceptionYear>
 	<description>Testing components build on top of JUnit 4</description>
 	<build>
 		<plugins>

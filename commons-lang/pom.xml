@@ -5,16 +5,16 @@
 	<artifactId>commons-lang</artifactId>
 	<name>Staccato-Commons-Lang</name>
 	<description>Staccato-Commons core classes</description>
-	<version>1.0</version>
+	<version>1.0-SNAPSHOT</version>
 	<parent>
 		<groupId>net.sf.staccato</groupId>
 		<artifactId>commons-parent-pom</artifactId>
-		<version>0.1</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<inceptionYear>2010</inceptionYear>
-	<scm>
-    <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/commons-lang</developerConnection>
-    <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/commons-lang</url>
+    <scm>
+       <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-lang</developerConnection>
+       <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-lang/</url>
     </scm>
 	<distributionManagement>
 		<site>
@@ -27,7 +27,7 @@
 			<plugin>
 				<groupId>net.sf.staccato</groupId>
 				<artifactId>commons-check-instrument-maven-plugin</artifactId>
-				<version>0.1</version>
+				<version>1.0-SNAPSHOT</version>
 				<configuration>
 				</configuration>
 				<executions>
@@ -62,12 +62,12 @@
 		<dependency>
 			<groupId>net.sf.staccato</groupId>
 			<artifactId>commons-lang-minimal</artifactId>
-			<version>0.1</version>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccato</groupId>
 			<artifactId>commons-check</artifactId>
-			<version>0.1</version>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -4,13 +4,15 @@
 	<groupId>net.sf.staccato</groupId>
 	<artifactId>commons-parent-pom</artifactId>
 	<packaging>pom</packaging>
-	<version>0.1</version>
+	<version>1.0-SNAPSHOT</version>
+	<url>http://staccatocommons.sourceforge.net/</url>
 	<licenses>
 		<license>
 			<name>GNU Lesser General Public License v3 </name>
 			<url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
 		</license>
 	</licenses>
+	<inceptionYear>2010</inceptionYear>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -100,7 +102,7 @@
 		<dependency>
 			<groupId>net.sf.staccato</groupId>
 			<artifactId>commons-testing</artifactId>
-			<version>1.0</version>
+			<version>1.0-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
