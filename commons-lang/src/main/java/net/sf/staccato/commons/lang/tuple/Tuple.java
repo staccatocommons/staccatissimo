@@ -174,11 +174,6 @@ public abstract class Tuple implements Serializable {
 	}
 
 	/**
-	 * @return the length of the tuple. Not a really useful method
-	 */
-	public abstract int length();
-
-	/**
 	 * Converts this tuple into an array
 	 * 
 	 * @return an new Object[] containing each of the elements of this tuple

@@ -30,8 +30,9 @@ import java.lang.annotation.Target;
  * depending on the specific annotation type and on the annotated element:
  * <ul>
  * <li>Preconditions means that client <strong>must not</strong> violate the
- * restriction. Doing that is a client code bug and the annotated element and
- * its context may not behave right, being its behavior by default unspecified.</li>
+ * restriction. Doing that is a client code bug, and the annotated element and
+ * its context may not behave normally. Implementors <strong>should</strong>
+ * throw a {@link RuntimeException} or any subclass of it when this occurs</li>
  * <li>Postconditions and invariants means client code <strong>must</strong>
  * assume the constraint the annotated element does not violate the constraint,
  * and should not check it. If annotated element violates this postcondition,
@@ -63,7 +64,7 @@ import java.lang.annotation.Target;
  * directly exposed to client, but <strong>may</strong> be implicit in the rest
  * of the code
  * <li>Postconditions and invariants restrictions present on supertypes and
- * absent on subtypes <strong>must</strong> be assummed to be still observed.</li>
+ * absent on subtypes <strong>must</strong> be assumed to be still observed.</li>
  * <li>Postconditions restrictions present on supertypes and absent on subtypes
  * <strong>must</strong> be assumed to have being removed</li>
  * </ol>

@@ -12,17 +12,24 @@
  */
 package net.sf.staccato.commons.lang.value;
 
+import net.sf.staccato.commons.check.annotation.ForceChecks;
+import net.sf.staccato.commons.check.annotation.NonNull;
+
 /**
  * Class that helps on building effective equals method
  * 
- * TODO how?
+ * TODO how? Usage scenarios?
  * 
  * @author flbulgarelli
  * 
  */
 public enum BasicEquals {
 
-	EQUALS {
+	/**
+	 * {@link BasicEquals} test result where the two objects are always equal,
+	 * because their are the same object
+	 */
+	ALWAYS {
 		@Override
 		public boolean toEquals() {
 			return true;
@@ -32,7 +39,11 @@ public enum BasicEquals {
 			return true;
 		}
 	},
-	NOT_EQUALS {
+	/**
+	 * {@link BasicEquals} test result where the two objects can never be equal,
+	 * as either have different classes, or the second one is null
+	 */
+	NEVER {
 		@Override
 		public boolean toEquals() {
 			return false;
@@ -42,7 +53,11 @@ public enum BasicEquals {
 			return true;
 		}
 	},
-	UNKNONWN {
+	/**
+	 * {@link BasicEquals} test result where the two objects may be equal if and
+	 * only if the have a similar internal state
+	 */
+	MAYBE {
 		@Override
 		public boolean toEquals() {
 			throw new IllegalStateException();
@@ -53,14 +68,16 @@ public enum BasicEquals {
 		}
 	};
 
-	public static <T> BasicEquals from(T this_, Object that) {
+	@NonNull
+	@ForceChecks
+	public static <T> BasicEquals from(@NonNull T this_, Object that) {
 		if (that == null)
-			return NOT_EQUALS;
+			return NEVER;
 		if (that == this_)
-			return EQUALS;
+			return ALWAYS;
 		if (that.getClass() != this_.getClass())
-			return NOT_EQUALS;
-		return UNKNONWN;
+			return NEVER;
+		return MAYBE;
 	}
 
 	public abstract boolean toEquals();

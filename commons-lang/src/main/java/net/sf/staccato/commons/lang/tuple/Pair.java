@@ -15,8 +15,12 @@ package net.sf.staccato.commons.lang.tuple;
 import java.util.Map;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.value.BasicEquals;
 import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
 import net.sf.staccato.commons.lang.value.Value;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * Two-components {@link Tuple}
@@ -98,11 +102,6 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 	}
 
 	@Override
-	public int length() {
-		return 2;
-	}
-
-	@Override
 	public String toString() {
 		return String.format("(%s,%s)", first, second);
 	}
@@ -124,34 +123,23 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((first == null) ? 0 : first.hashCode());
-		result = prime * result + ((second == null) ? 0 : second.hashCode());
-		return result;
+		return new HashCodeBuilder() //
+			.append(first)
+			.append(second)
+			.toHashCode();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pair other = (Pair) obj;
-		if (first == null) {
-			if (other.first != null)
-				return false;
-		} else if (!first.equals(other.first))
-			return false;
-		if (second == null) {
-			if (other.second != null)
-				return false;
-		} else if (!second.equals(other.second))
-			return false;
-		return true;
+		BasicEquals be = BasicEquals.from(this, obj);
+		if (be.isEqualsDone())
+			return be.toEquals();
+		Pair<T1, T2> other = (Pair<T1, T2>) obj;
+		return new EqualsBuilder() //
+			.append(this.first, other.first)
+			.append(this.second, other.second)
+			.isEquals();
 	}
 
 	public T1 getKey() {

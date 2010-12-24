@@ -2,19 +2,30 @@ package net.sf.staccato.commons.lang.tuple;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertSame;
 import static junit.framework.Assert.assertTrue;
 import static net.sf.staccato.commons.lang.tuple.Tuple._;
 
 import org.junit.Test;
 
+/**
+ * Test for {@link Triple}
+ * 
+ * @author flbulgarelli
+ */
 public class TripleUnitTest extends TupleAbstractUnitTest {
 
 	@Override
 	public void testComponents() throws Exception {
 		Triple<Integer, String, String> triple = _(9, "Hello", "World");
 		assertEquals((Integer) 9, triple.getFirst());
+		assertSame(triple._1(), triple.getFirst());
+
 		assertEquals("Hello", triple.getSecond());
+		assertSame(triple._2(), triple.getSecond());
+
 		assertEquals("World", triple.getThird());
+		assertSame(triple._3(), triple.getThird());
 	}
 
 	@Override

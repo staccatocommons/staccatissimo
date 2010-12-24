@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang.function;
 
+import net.sf.staccato.commons.check.annotation.ForceChecks;
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Applicable3;
@@ -38,7 +40,8 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 	 * @param other
 	 * @return <code>other.of(this)</code>
 	 */
-	public <Rp> Function<T, Rp> then(final Function<? super R, Rp> other) {
+	@NonNull
+	public <Rp> Function<T, Rp> then(@NonNull final Function<? super R, Rp> other) {
 		return other.of(this);
 	}
 
@@ -52,7 +55,9 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 	 * @param other
 	 * @return a new function, this composed with other
 	 */
-	public <Tp> Function<Tp, R> of(final Applicable<Tp, ? extends T> other) {
+	@NonNull
+	@ForceChecks
+	public <Tp> Function<Tp, R> of(@NonNull final Applicable<Tp, ? extends T> other) {
 		return new Function<Tp, R>() {
 			public R apply(Tp arg) {
 				return Function.this.apply(other.apply(arg));
@@ -72,7 +77,10 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 	 *          non null
 	 * @return a new function, this composed with other. Non null.
 	 */
-	public <Tp1, Tp2> Function2<Tp1, Tp2, R> of(final Applicable2<Tp1, Tp2, ? extends T> other) {
+	@NonNull
+	@ForceChecks
+	public <Tp1, Tp2> Function2<Tp1, Tp2, R> of(
+		@NonNull final Applicable2<Tp1, Tp2, ? extends T> other) {
 		return new Function2<Tp1, Tp2, R>() {
 			public R apply(Tp1 arg1, Tp2 arg2) {
 				return Function.this.apply(other.apply(arg1, arg2));
@@ -93,8 +101,10 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 	 *          non null
 	 * @return a new function, this composed with other. Non null
 	 */
+	@NonNull
+	@ForceChecks
 	public <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, R> of(
-		final Applicable3<Tp1, Tp2, Tp3, ? extends T> other) {
+		@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends T> other) {
 		return new Function3<Tp1, Tp2, Tp3, R>() {
 			public R apply(Tp1 arg1, Tp2 arg2, Tp3 arg3) {
 				return Function.this.apply(other.apply(arg1, arg2, arg3));

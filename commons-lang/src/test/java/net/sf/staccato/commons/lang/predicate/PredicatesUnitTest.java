@@ -45,6 +45,7 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 	@Test
 	public void testTrue_() {
 		assertTrue(Predicates.true_().eval(new Object()));
+		assertSame(Predicates.true_(), Predicates.true_().or(mock(Evaluable.class)));
 	}
 
 	/**
@@ -54,6 +55,8 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 	@Test
 	public void testFalse_() {
 		assertFalse(Predicates.false_().eval(new Object()));
+		assertSame(Predicates.false_(), Predicates.false_().and(mock(Evaluable.class)));
+
 	}
 
 	/**

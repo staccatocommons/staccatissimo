@@ -11,10 +11,18 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import net.sf.staccato.commons.lang.Option.UndefinedOptionException;
+import net.sf.staccato.commons.lang.provider.Providers;
+import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
+import org.jmock.Expectations;
 import org.junit.Test;
 
-public class OptionUnitTest {
+/**
+ * Test for {@link Option}
+ * 
+ * @author flbulgarelli
+ */
+public class OptionUnitTest extends JUnit4MockObjectTestCase {
 
 	@Test
 	public void testValue_defined() {
@@ -60,6 +68,19 @@ public class OptionUnitTest {
 		assertNotNull(some("Hello").valueOrNull());
 	}
 
+	/**
+	 * Test for {@link Option#valueOrElse(Object)} and
+	 * {@link Option#valueOrElse(Provider)}
+	 * 
+	 * @throws Exception
+	 */
+	public void testValueOrElse() throws Exception {
+		assertEquals(4, (int) Option.some(4).valueOrElse(8));
+		assertEquals(4, (int) Option.some(4).valueOrElse(Providers.constant(9)));
+		assertEquals(9, (int) Option.<Integer> none().valueOrElse(Providers.constant(9)));
+		assertEquals(9, (int) Option.<Integer> none().valueOrElse(Providers.constant(9)));
+	}
+
 	@Test
 	public void testNoneToNull() {
 		assertEquals(none(), nullToNone(null));
@@ -67,11 +88,27 @@ public class OptionUnitTest {
 	}
 
 	@Test
-	public void Equalty() throws Exception {
+	public void testEqualty() throws Exception {
 		assertEquals(some(5), some(5));
 		assertSame(none(), none());
 		assertSame(some(null), someNull());
 		assertEquals(new Some<Integer>(5), new Some<Integer>(5));
 		assertEquals(new Some<Integer>(null), new Some<Integer>(null));
+	}
+
+	/**
+	 * Test for {@link Option#ifDefined(Executable)}
+	 * 
+	 * @throws Exception
+	 */
+	public void testIfDefined() throws Exception {
+		final Executable<String> block = mock(Executable.class);
+		checking(new Expectations() {
+			{
+				one(block).exec("foo");
+			}
+		});
+		Option.some("foo").ifDefined(block);
+		Option.<String> none().ifDefined(block);
 	}
 }

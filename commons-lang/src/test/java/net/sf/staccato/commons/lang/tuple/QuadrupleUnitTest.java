@@ -2,20 +2,32 @@ package net.sf.staccato.commons.lang.tuple;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertSame;
 import static junit.framework.Assert.assertTrue;
 import static net.sf.staccato.commons.lang.tuple.Tuple._;
 
+/**
+ * Test for {@link Quadruple}
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class QuadrupleUnitTest extends TupleAbstractUnitTest {
 
 	@Override
 	public void testComponents() throws Exception {
-		Quadruple<Integer, String, String, String> quad = // 
-		_(9, "Hello", "World", "!");
+		Quadruple<Integer, String, String, String> quad = _(9, "Hello", "World", "!");
 		assertEquals((Integer) 9, quad.getFirst());
-		assertEquals("Hello", quad.getSecond());
-		assertEquals("World", quad.getThird());
-		assertEquals("!", quad.getFourth());
+		assertSame(quad._1(), quad.getFirst());
 
+		assertEquals("Hello", quad.getSecond());
+		assertSame(quad._2(), quad.getSecond());
+
+		assertEquals("World", quad.getThird());
+		assertSame(quad._3(), quad.getThird());
+
+		assertEquals("!", quad.getFourth());
+		assertSame(quad._4(), quad.getFourth());
 	}
 
 	@Override
