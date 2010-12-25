@@ -28,6 +28,11 @@ import net.sf.staccato.commons.lang.SoftException;
 public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2<T1, T2, Void>,
 	Applicable<T1, Block<T2>> {
 
+	/**
+	 * Executes this block. This implementation just invokes
+	 * {@link #softExec(Object, Object)}, and softens any exception it may throw.
+	 * Subclasses may override this behavior.
+	 */
 	public void exec(T1 argument1, T2 argument2) {
 		try {
 			softExec(argument1, argument2);
@@ -36,13 +41,21 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2
 		}
 	}
 
+	/**
+	 * Executes this block, potentially throwing a checked {@link Exception}
+	 * 
+	 * @see #exec(Object, Object)
+	 * 
+	 * @param argument
+	 * @throws Exception
+	 */
 	protected void softExec(T1 argument1, T2 argument2) throws Exception {
 	}
 
 	public Void apply(T1 arg1, T2 arg2) {
 		exec(arg1, arg2);
 		return null;
-	};
+	}
 
 	@NonNull
 	public Block<T2> apply(final T1 argument1) {
@@ -53,6 +66,15 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2
 		};
 	}
 
+	/**
+	 * Chains this block with the given executable, creating a new {@link Block2}
+	 * that executes this one and then the another one.
+	 * 
+	 * @param other
+	 *          the block to execute after this
+	 * @return a new block that first invokes execute on this, and then on the
+	 *         {@link Executable2} provided
+	 */
 	@NonNull
 	public final Block2<T1, T2> then(@NonNull final Block2<T1, T2> other) {
 		return new Block2<T1, T2>() {

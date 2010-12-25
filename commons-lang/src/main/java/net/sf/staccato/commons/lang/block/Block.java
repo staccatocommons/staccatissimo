@@ -47,7 +47,7 @@ public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
 	}
 
 	/**
-	 * Executes this block, potentially throwing a checked excpetion
+	 * Executes this block, potentially throwing a checked {@link Exception}
 	 * 
 	 * @see #exec(Object)
 	 * 
@@ -58,11 +58,13 @@ public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
 	}
 
 	/**
-	 * Creates a new {@link Block} that executes this one and then another one
-	 * provided.
+	 * Chains this block with the given executable, creating a new {@link Block}
+	 * that executes this one and then the another one.
 	 * 
 	 * @param other
-	 * @return a new block
+	 *          the block to execute after this
+	 * @return a new block that first invokes execute on this, and then on the
+	 *         {@link Executable} provided
 	 */
 	@NonNull
 	public Block<T> then(@NonNull final Executable<? super T> other) {
