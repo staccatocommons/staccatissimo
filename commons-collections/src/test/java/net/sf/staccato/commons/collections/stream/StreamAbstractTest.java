@@ -32,6 +32,7 @@ import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Provider;
 import net.sf.staccato.commons.lang.function.Function;
+import net.sf.staccato.commons.lang.function.Function2;
 import net.sf.staccato.commons.lang.function.Functions;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 import net.sf.staccato.commons.lang.predicate.Predicates;
@@ -54,11 +55,9 @@ import org.junit.runner.RunWith;
 public abstract class StreamAbstractTest {
 
 	@DataPoints
-	public static Predicate[] predicates = new Predicate[] {
-			Predicates.equal(5),
+	public static Predicate[] predicates = new Predicate[] { Predicates.equal(5),
 			Predicates.greaterThan(90), //
-			Predicates.false_(), Predicates.true_(), Predicates.notNull(),
-			Predicates.equal(26), //
+			Predicates.false_(), Predicates.true_(), Predicates.notNull(), Predicates.equal(26), //
 			new Predicate<Integer>() {
 				public boolean eval(Integer argument) {
 					return argument % 2 == 0;
@@ -80,8 +79,7 @@ public abstract class StreamAbstractTest {
 				}
 			} };
 	@DataPoints
-	public static Provider<Integer>[] providers = new Provider[] {
-			NullProvider.getInstance(), //
+	public static Provider<Integer>[] providers = new Provider[] { NullProvider.getInstance(), //
 			Providers.constant(90) //
 	};
 	@DataPoints
@@ -96,11 +94,8 @@ public abstract class StreamAbstractTest {
 	 * @param predicate
 	 */
 	@Theory
-	public void filteredSizeLowerOrEqualToOriginal(Stream stream,
-		Evaluable predicate) {
-		assertThat(
-			stream.filter(predicate).size(),
-			lessThanOrEqualTo(stream.size()));
+	public void filteredSizeLowerOrEqualToOriginal(Stream stream, Evaluable predicate) {
+		assertThat(stream.filter(predicate).size(), lessThanOrEqualTo(stream.size()));
 	}
 
 	@Theory
@@ -110,8 +105,7 @@ public abstract class StreamAbstractTest {
 
 	@Theory
 	public void allFilteredElementsEvaluate(Stream stream, Predicate predicate) {
-		assertEquals(
-			stream.size(),
+		assertEquals(stream.size(),//
 			stream.filter(predicate).concat(stream.filter(predicate.not())).size());
 	}
 
@@ -146,9 +140,7 @@ public abstract class StreamAbstractTest {
 			}
 		};
 		assertEquals(2 * stream.size(), stream.flatMap(function2).size());
-		assertEquals(
-			0,
-			(int) stream.flatMap(function2).fold(0, Functions.integerSum()));
+		assertEquals(0, (int) stream.flatMap(function2).fold(0, integerSum()));
 	}
 
 	/**
@@ -251,9 +243,7 @@ public abstract class StreamAbstractTest {
 	 */
 	@Theory
 	public void testFindOrNull(Stream stream, Evaluable predicate) {
-		assertEquals(
-			stream.findOrNone(predicate).valueOrNull(),
-			stream.findOrNull(predicate));
+		assertEquals(stream.findOrNone(predicate).valueOrNull(), stream.findOrNull(predicate));
 	}
 
 	/**
@@ -266,8 +256,7 @@ public abstract class StreamAbstractTest {
 	 * @param provider
 	 */
 	@Theory
-	public void testFindOrElse(Stream stream, Evaluable predicate,
-		Provider provider) {
+	public void testFindOrElse(Stream stream, Evaluable predicate, Provider provider) {
 		assertEquals(
 			stream.findOrNone(predicate).valueOrElse(provider),
 			stream.findOrElse(predicate, provider));
@@ -436,5 +425,14 @@ public abstract class StreamAbstractTest {
 				return stream.contains(argument);
 			}
 		}));
+	}
+
+	public static Function2<Integer, Integer, Integer> integerSum() {
+		return new Function2<Integer, Integer, Integer>() {
+			@Override
+			public Integer apply(Integer arg1, Integer arg2) {
+				return arg1 + arg2;
+			}
+		};
 	}
 }
