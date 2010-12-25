@@ -38,15 +38,15 @@ public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3
 	/**
 	 * Applies the function
 	 */
-	public abstract R apply(T1 argument1, T2 argument2, T3 argument3);
+	public abstract R apply(T1 arg1, T2 arg2, T3 arg3);
 
 	/**
 	 * Partially applies the function, passing only its first and second arguments
 	 */
-	public Function<T3, R> apply(final T1 argument1, final T2 argument2) {
+	public Function<T3, R> apply(final T1 arg1, final T2 arg2) {
 		return new Function<T3, R>() {
-			public R apply(T3 argument3) {
-				return Function3.this.apply(argument1, argument2, argument3);
+			public R apply(T3 arg3) {
+				return Function3.this.apply(arg1, arg2, arg3);
 			}
 		};
 	}
@@ -54,10 +54,10 @@ public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3
 	/**
 	 * Partially applies the function, passing only its first argument
 	 */
-	public Function2<T2, T3, R> apply(final T1 argument1) {
+	public Function2<T2, T3, R> apply(final T1 arg1) {
 		return new Function2<T2, T3, R>() {
-			public R apply(T2 argument2, T3 argument3) {
-				return Function3.this.apply(argument1, argument2, argument3);
+			public R apply(T2 arg2, T3 arg3) {
+				return Function3.this.apply(arg1, arg2, arg3);
 			}
 		};
 	}

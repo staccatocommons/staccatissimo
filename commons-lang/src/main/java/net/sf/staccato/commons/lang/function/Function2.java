@@ -73,8 +73,8 @@ public abstract class Function2<T1, T2, R> implements Applicable2<T1, T2, R>,
 	 */
 	public Function2<T2, T1, R> flip() {
 		return new Function2<T2, T1, R>() {
-			public R apply(T2 argument2, T1 argument1) {
-				return Function2.this.apply(argument1, argument2);
+			public R apply(T2 arg2, T1 arg1) {
+				return Function2.this.apply(arg1, arg2);
 			}
 		};
 	}
