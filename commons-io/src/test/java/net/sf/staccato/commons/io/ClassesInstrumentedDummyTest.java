@@ -12,28 +12,24 @@
  */
 package net.sf.staccato.commons.io;
 
-import java.io.File;
-
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.predicate.Predicate;
-
-import org.apache.commons.io.filefilter.SuffixFileFilter;
+import org.junit.Test;
 
 /**
+ * 
+ * Test for verifyng the cheks processor is enabled and working fine
+ * 
  * @author flbulgarelli
  * 
  */
-public class IOPredicates {
+public class ClassesInstrumentedDummyTest {
 
 	/**
-	 * Answers a predicate that evaluates if a file ends with a given suffix
-	 * 
-	 * @param suffixes
-	 * @return a new {@link Predicate}
-	 * @see SuffixFileFilter
+	 * Verifies that, at least, the notNull processor is working on constructors
 	 */
-	@NonNull
-	public static Predicate<File> suffix(@NonNull String... suffixes) {
-		return new FilePredicate(new SuffixFileFilter(suffixes));
+	@SuppressWarnings("unused")
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructorsInstrumented() {
+		new Directory((String) null);
 	}
+
 }

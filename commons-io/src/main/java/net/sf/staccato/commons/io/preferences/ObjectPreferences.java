@@ -15,6 +15,8 @@ package net.sf.staccato.commons.io.preferences;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
+
 import org.apache.commons.lang.SerializationException;
 
 /**
@@ -45,7 +47,7 @@ public interface ObjectPreferences {
 	 * @see Preferences#put(String, String)
 	 * @see Preferences#MAX_VALUE_LENGTH
 	 */
-	void put(String key, Object value) throws SerializationException;
+	void put(@NonNull String key, Object value) throws SerializationException;
 
 	/**
 	 * 
@@ -57,7 +59,7 @@ public interface ObjectPreferences {
 	 *           if the key exists and contains a valid object, but it can not be
 	 *           casted to the desired &lt;T&gt;
 	 */
-	<T> T get(String key, T defaultValue);
+	<T> T get(@NonNull String key, T defaultValue);
 
 	// <T> T getStrict(String key, T defaultValue);
 
@@ -101,6 +103,7 @@ public interface ObjectPreferences {
 	 * @return the {@link Preferences} node this {@link ObjectPreferences} sits on
 	 *         top
 	 */
+	@NonNull
 	Preferences getNode();
 
 	// TODO add specific listener

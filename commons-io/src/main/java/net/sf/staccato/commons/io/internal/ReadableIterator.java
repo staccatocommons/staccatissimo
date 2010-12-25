@@ -14,6 +14,7 @@ package net.sf.staccato.commons.io.internal;
 
 import java.util.Scanner;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccato.commons.io.ReadStrategy;
 
@@ -26,7 +27,7 @@ public class ReadableIterator<A> extends AbstractUnmodifiableIterator<A> {
 	private final ReadStrategy<A> readStrategy;
 	private final Scanner scanner;
 
-	public ReadableIterator(ReadStrategy<A> readStrategy, Readable readable) {
+	public ReadableIterator(@NonNull ReadStrategy<A> readStrategy, @NonNull Readable readable) {
 		this.readStrategy = readStrategy;
 		this.scanner = new Scanner(readable);
 		readStrategy.prepare(scanner);

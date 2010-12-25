@@ -14,16 +14,18 @@ package net.sf.staccato.commons.io;
 
 import java.util.Scanner;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
+
 /**
  * @author flbulgarelli
  * 
  */
 public interface ReadStrategy<A> {
 
-	void prepare(Scanner s);
+	void prepare(@NonNull Scanner s);
 
-	A next(Scanner s);
+	A next(@NonNull Scanner s);
 
-	boolean hasNext(Scanner s);
+	boolean hasNext(@NonNull Scanner s);
 
 }

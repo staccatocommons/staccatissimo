@@ -15,6 +15,8 @@ package net.sf.staccato.commons.io;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
+
 /**
  * @author flbulgarelli
  * 
@@ -24,15 +26,18 @@ public class ReadStrategies {
 	private static final ReadStrategy<String> READ_LINES = new ReadLines();
 	private static final ReadStrategy<String> READ_WORDS = new ReadTokens("\\p{javaWhitespace}+");
 
+	@NonNull
 	public static ReadStrategy<String> readLines() {
 		return READ_LINES;
 	}
 
+	@NonNull
 	public static ReadStrategy<String> readWords() {
 		return READ_WORDS;
 	}
 
-	public static ReadStrategy<String> readTokens(String delimiter) {
+	@NonNull
+	public static ReadStrategy<String> readTokens(@NonNull String delimiter) {
 		return new ReadTokens(delimiter);
 	}
 

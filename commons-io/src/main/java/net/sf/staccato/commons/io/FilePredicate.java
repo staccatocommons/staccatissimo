@@ -40,11 +40,11 @@ public class FilePredicate extends Predicate<File> implements FileFilter {
 		this.fileFilter = fileFilter;
 	}
 
-	public boolean eval(File argument) {
+	public boolean eval(@NonNull File argument) {
 		return accept(argument);
 	}
 
-	public boolean accept(File pathname) {
+	public boolean accept(@NonNull File pathname) {
 		return fileFilter.accept(pathname);
 	}
 

@@ -52,6 +52,12 @@ public class Directory {
 		this.file = file;
 	}
 
+	/**
+	 * Answers the absolute path of this directory
+	 * 
+	 * @return <code>getFile().getAbsolutePath()</code>
+	 * @see File#getAbsolutePath()
+	 */
 	@NonNull
 	public String getAbsolutePath() {
 		return getFile().getAbsolutePath();

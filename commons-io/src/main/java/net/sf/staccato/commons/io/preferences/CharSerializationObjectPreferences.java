@@ -15,6 +15,7 @@ package net.sf.staccato.commons.io.preferences;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.io.serialization.CharSerializationManager;
 
 import org.apache.commons.lang.SerializationException;
@@ -43,20 +44,22 @@ public class CharSerializationObjectPreferences implements ObjectPreferences {
 	 * @param stream
 	 *          non null.
 	 */
-	public CharSerializationObjectPreferences(Preferences preferences, CharSerializationManager stream) {
+	public CharSerializationObjectPreferences(@NonNull Preferences preferences,
+		@NonNull CharSerializationManager stream) {
 		this.preferences = preferences;
 		this.serializationManager = stream;
 	}
 
+	@NonNull
 	public Preferences getNode() {
 		return preferences;
 	}
 
-	public void put(String key, Object value) {
+	public void put(@NonNull String key, Object value) {
 		preferences.put(key, serializationManager.serialize(value));
 	}
 
-	public <T> T get(String key, T defaultValue) {
+	public <T> T get(@NonNull String key, T defaultValue) {
 		String valueAsString = preferences.get(key, null);
 		if (valueAsString == null) {
 			log.debug("Preference " + key + "not found. Loading defaults");
