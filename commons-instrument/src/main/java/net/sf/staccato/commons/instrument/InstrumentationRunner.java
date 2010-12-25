@@ -34,6 +34,8 @@ import net.sf.staccato.commons.io.Directory;
  */
 public final class InstrumentationRunner {
 
+	// TODO improve exception handling, provide more descriptive exceptions
+
 	private InstrumentationRunner() {
 	}
 
@@ -79,9 +81,9 @@ public final class InstrumentationRunner {
 		private void processAndWriteClass(File baseDir, File classfile) throws Exception {
 			CtClass clazz = classPool.get(ClassNames.getClassName(baseDir, classfile));
 			classInstrumenter.instrumentClass(clazz);
-			clazz.detach();
 			if (clazz.isModified())
 				clazz.writeFile(processDirectory.getAbsolutePath());
+			clazz.detach();
 		}
 
 		private void doInstrument() throws Exception {
