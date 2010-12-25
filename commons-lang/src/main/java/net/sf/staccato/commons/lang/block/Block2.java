@@ -14,7 +14,6 @@ package net.sf.staccato.commons.lang.block;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Applicable;
-import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Executable2;
 import net.sf.staccato.commons.lang.SoftException;
 
@@ -25,8 +24,7 @@ import net.sf.staccato.commons.lang.SoftException;
  * @param <T1>
  * @param <T2>
  */
-public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2<T1, T2, Void>,
-	Applicable<T1, Block<T2>> {
+public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable<T1, Block<T2>> {
 
 	/**
 	 * Executes this block. This implementation just invokes
@@ -52,11 +50,6 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2
 	protected void softExec(T1 argument1, T2 argument2) throws Exception {
 	}
 
-	public Void apply(T1 arg1, T2 arg2) {
-		exec(arg1, arg2);
-		return null;
-	}
-
 	@NonNull
 	public Block<T2> apply(final T1 argument1) {
 		return new Block<T2>() {
@@ -76,7 +69,7 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2
 	 *         {@link Executable2} provided
 	 */
 	@NonNull
-	public final Block2<T1, T2> then(@NonNull final Block2<T1, T2> other) {
+	public final Block2<T1, T2> then(@NonNull final Executable2<T1, T2> other) {
 		return new Block2<T1, T2>() {
 			public void exec(T1 argument1, T2 argument2) {
 				Block2.this.exec(argument1, argument2);

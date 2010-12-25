@@ -1,5 +1,6 @@
 package net.sf.staccato.commons.lang.predicate.internal;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * @author flbulgarelli
@@ -19,7 +20,7 @@ public final class Equals<T> extends NonAnnonymousPredicate<T> {
 		this.value = value;
 	}
 
-	public boolean eval(T argument) {
-		return value.equals(argument);
+	public boolean eval(@NonNull T argument) {
+		return argument.equals(value);
 	}
 }

@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.lang.predicate.internal;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +26,15 @@ import java.util.Set;
  */
 public class InPredicate<T> extends NonAnnonymousPredicate<T> {
 
-	private Set<T> elements;
+	private final Set<T> elements;
+
+	/**
+	 * Creates a new {@link InPredicate}
+	 */
+	public InPredicate(Collection<T> elements) {
+		this(new HashSet<T>());
+		this.elements.addAll(elements);
+	}
 
 	/**
 	 * 

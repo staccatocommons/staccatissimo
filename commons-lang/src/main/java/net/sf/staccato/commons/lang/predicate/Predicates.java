@@ -13,6 +13,7 @@ GNU Lesser General Public License for more details.
 package net.sf.staccato.commons.lang.predicate;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.regex.Pattern;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
@@ -25,6 +26,7 @@ import net.sf.staccato.commons.lang.predicate.internal.EqualsIgnoreCase;
 import net.sf.staccato.commons.lang.predicate.internal.EvaluablePredicate;
 import net.sf.staccato.commons.lang.predicate.internal.False;
 import net.sf.staccato.commons.lang.predicate.internal.GreaterThan;
+import net.sf.staccato.commons.lang.predicate.internal.InPredicate;
 import net.sf.staccato.commons.lang.predicate.internal.LessThan;
 import net.sf.staccato.commons.lang.predicate.internal.Matches;
 import net.sf.staccato.commons.lang.predicate.internal.NullPredicates;
@@ -64,8 +66,10 @@ public class Predicates {
 	 */
 
 	/**
+	 * Returns a preficate that tests if its argument is not null
+	 * 
 	 * @param <T>
-	 * @return A {@link Predicate} that tests if its argument is not null
+	 * @return A singleton {@link Predicate}
 	 */
 	@NonNull
 	public static <T> Predicate<T> notNull() {
@@ -73,8 +77,10 @@ public class Predicates {
 	}
 
 	/**
+	 * Returns a predicate that tests if its argument is null
+	 * 
 	 * @param <T>
-	 * @return A singleton {@link Predicate} that tests if its argument is null
+	 * @return A singleton {@link Predicate}
 	 */
 	@NonNull
 	public static <T> Predicate<T> null_() {
@@ -82,11 +88,12 @@ public class Predicates {
 	}
 
 	/**
+	 * Returns a predicate that tests if its argument is equal to the given value:
+	 * <code>argument.equals(value)</code>
 	 * 
 	 * @param <T>
 	 * @param value
-	 * @return a {@link Predicate} that tests if its argument is equal to the
-	 *         given value
+	 * @return a new {@link Predicate}
 	 */
 	@NonNull
 	public static <T> Predicate<T> equal(T value) {
@@ -94,15 +101,42 @@ public class Predicates {
 	}
 
 	/**
+	 * Returns a predicate that tests if its argument is the same that the given
+	 * value
 	 * 
 	 * @param <T>
 	 * @param value
-	 * @return a {@link Predicate} that tests if its argument is the same that the
-	 *         given value
+	 * @return a new {@link Predicate}
 	 */
 	@NonNull
 	public static <T> Predicate<T> same(T value) {
 		return new Same<T>(value);
+	}
+
+	/**
+	 * Returns a predicate that tests if its argument is equal to any of the given
+	 * values
+	 * 
+	 * @param <T>
+	 * @param values
+	 * @return a new {@link Predicate}
+	 */
+	@NonNull
+	public static <T> Predicate<T> in(@NonNull T... values) {
+		return new InPredicate<T>(values);
+	}
+
+	/**
+	 * Returns a predicate that tests if its argument is equal to any of the
+	 * values in the given collection
+	 * 
+	 * @param <T>
+	 * @param values
+	 * @return a new {@link Predicate}
+	 */
+	@NonNull
+	public static <T> Predicate<T> in(@NonNull Collection<T> values) {
+		return new InPredicate<T>(values);
 	}
 
 	/*

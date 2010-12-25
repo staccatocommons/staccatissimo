@@ -1,6 +1,5 @@
 package net.sf.staccato.commons.lang.predicate.internal;
 
-
 /**
  * @author flbulgarelli
  * 
@@ -18,7 +17,7 @@ public final class EqualsIgnoreCase extends NonAnnonymousPredicate<String> {
 	}
 
 	@Override
-	public boolean eval(String arg0) {
-		return value.equalsIgnoreCase(arg0);
+	public boolean eval(String argument) {
+		return argument.equalsIgnoreCase(value);
 	}
 }

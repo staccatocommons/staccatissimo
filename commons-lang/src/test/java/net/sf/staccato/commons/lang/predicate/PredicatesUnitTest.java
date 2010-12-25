@@ -16,6 +16,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import net.sf.staccato.commons.lang.Evaluable;
@@ -26,8 +27,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author flbulgarelli
+ * Test for {@link Predicates}
  * 
+ * @author flbulgarelli
  */
 public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 
@@ -211,6 +213,23 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 			Predicates.<Integer> true_(),
 			Predicates.greaterThan(2),
 			Predicates.equal(5)).eval(5));
+	}
+
+	/**
+	 * Test method for {@link Predicates#in(java.util.Collection)} and
+	 * {@link Predicates#in(Object...)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testIn() throws Exception {
+		assertTrue(Predicates.in(4, 9, 50).eval(9));
+		assertFalse(Predicates.in(4, 9, 50).eval(60));
+
+		assertTrue(Predicates.in(Arrays.asList("hello", "world")).eval("hello"));
+		assertFalse(Predicates.in(Arrays.asList("hello", "world")).eval("bye"));
+
+		assertFalse(Predicates.in().eval(new Object()));
 	}
 
 }

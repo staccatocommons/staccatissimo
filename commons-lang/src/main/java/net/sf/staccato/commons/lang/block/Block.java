@@ -13,7 +13,6 @@
 package net.sf.staccato.commons.lang.block;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Executable;
 import net.sf.staccato.commons.lang.SoftException;
 
@@ -24,7 +23,7 @@ import net.sf.staccato.commons.lang.SoftException;
  * 
  * @param <T>
  */
-public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
+public abstract class Block<T> implements Executable<T> {
 
 	/**
 	 * Executes this block. This implementation just invokes
@@ -39,11 +38,6 @@ public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
 		} catch (Exception e) {
 			throw SoftException.soften(e);
 		}
-	}
-
-	public Void apply(T arg) {
-		exec(arg);
-		return null;
 	}
 
 	/**

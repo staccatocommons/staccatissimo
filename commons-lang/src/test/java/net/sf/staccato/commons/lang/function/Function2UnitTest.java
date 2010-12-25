@@ -13,7 +13,7 @@
 package net.sf.staccato.commons.lang.function;
 
 import static org.junit.Assert.assertEquals;
-import net.sf.staccato.commons.lang.Applicable3;
+import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -22,23 +22,22 @@ import org.junit.Test;
 
 /**
  * 
- * Test for {@link Function3}
+ * Test for {@link Function2}
  * 
  * @author flbulgarelli
- * 
  */
-public class Function3UnitTest extends JUnit4MockObjectTestCase {
+public class Function2UnitTest extends JUnit4MockObjectTestCase {
 
-	Function3<Integer, String, Boolean, Character> function;
-	Applicable3<Integer, String, Boolean, Character> applicable;
+	Function2<Integer, String, Character> function;
+	Applicable2<Integer, String, Character> applicable;
 
 	/** Instantiates both function and applicable */
 	@Before
 	public void setup() {
-		applicable = mock(Applicable3.class);
-		function = new Function3<Integer, String, Boolean, Character>() {
-			public Character apply(Integer arg1, String arg2, Boolean arg3) {
-				return applicable.apply(arg1, arg2, arg3);
+		applicable = mock(Applicable2.class);
+		function = new Function2<Integer, String, Character>() {
+			public Character apply(Integer arg1, String arg2) {
+				return applicable.apply(arg1, arg2);
 			}
 		};
 	}
@@ -52,13 +51,12 @@ public class Function3UnitTest extends JUnit4MockObjectTestCase {
 	public void testApply() {
 		checking(new Expectations() {
 			{
-				exactly(3).of(applicable).apply(5, "foo", true);
+				exactly(2).of(applicable).apply(5, "foo");
 				will(returnValue('a'));
 			}
 		});
-		assertEquals('a', (char) function.apply(5, "foo", true));
-		assertEquals('a', (char) function.apply(5, "foo").apply(true));
-		assertEquals('a', (char) function.apply(5).apply("foo", true));
+		assertEquals('a', (char) function.apply(5).apply("foo"));
+		assertEquals('a', (char) function.apply(5, "foo"));
 	}
 
 	/**
@@ -67,6 +65,18 @@ public class Function3UnitTest extends JUnit4MockObjectTestCase {
 	 */
 	@Test
 	public void testToString() {
-		assertEquals("Function3", function.toString());
+		assertEquals("Function2", function.toString());
+	}
+
+	/** Test method for {@link Function2#flip()} */
+	@Test
+	public void testFlip() throws Exception {
+		checking(new Expectations() {
+			{
+				exactly(2).of(applicable).apply(5, "hello");
+				will(returnValue('a'));
+			}
+		});
+		assertEquals(function.flip().apply("hello", 5), function.apply(5, "hello"));
 	}
 }

@@ -35,9 +35,9 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 	 * throw. Subclasses may override this behavior.
 	 * 
 	 */
-	public void exec(T1 argument1, T2 argument2, T3 argument3) {
+	public void exec(T1 arg1, T2 arg2, T3 arg3) {
 		try {
-			softExec(argument1, argument2, argument3);
+			softExec(arg1, arg2, arg3);
 		} catch (Exception e) {
 			throw SoftException.soften(e);
 		}
@@ -48,17 +48,17 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 	 * 
 	 * @see #exec(Object, Object)
 	 * 
-	 * @param argument
+	 * @param arg
 	 * @throws Exception
 	 */
-	protected void softExec(T1 argument1, T2 argument2, T3 argument3) throws Exception {
+	protected void softExec(T1 arg1, T2 arg2, T3 arg3) throws Exception {
 	}
 
 	@NonNull
 	public Block2<T2, T3> apply(final T1 arg) {
 		return new Block2<T2, T3>() {
-			public void exec(T2 argument1, T3 argument2) {
-				Block3.this.exec(arg, argument1, argument2);
+			public void exec(T2 arg1, T3 arg2) {
+				Block3.this.exec(arg, arg1, arg2);
 			}
 		};
 	}
@@ -66,8 +66,8 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 	@NonNull
 	public Block<T3> apply(final T1 arg1, final T2 arg2) {
 		return new Block<T3>() {
-			public void exec(T3 argument) {
-				Block3.this.exec(arg1, arg2, argument);
+			public void exec(T3 arg) {
+				Block3.this.exec(arg1, arg2, arg);
 			}
 		};
 	}
@@ -82,11 +82,11 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 	 *         {@link Executable3} provided
 	 */
 	@NonNull
-	public Block3<T1, T2, T3> then(@NonNull final Block3<T1, T2, T3> other) {
+	public Block3<T1, T2, T3> then(@NonNull final Executable3<T1, T2, T3> other) {
 		return new Block3<T1, T2, T3>() {
-			public void exec(T1 argument1, T2 argument2, T3 argument3) {
-				Block3.this.exec(argument1, argument2, argument3);
-				other.exec(argument1, argument2, argument3);
+			public void exec(T1 arg1, T2 arg2, T3 arg3) {
+				Block3.this.exec(arg1, arg2, arg3);
+				other.exec(arg1, arg2, arg3);
 			}
 		};
 	}

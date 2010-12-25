@@ -28,8 +28,6 @@
 				<groupId>net.sf.staccato</groupId>
 				<artifactId>commons-check-instrument-maven-plugin</artifactId>
 				<version>1.0-SNAPSHOT</version>
-				<configuration>
-				</configuration>
 				<executions>
 					<execution>
 						<phase>process-classes</phase>

@@ -22,8 +22,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author flbulgarelli
+ * Test for {@link Block3}
  * 
+ * @author flbulgarelli
  */
 public class BlockUnitTest extends JUnit4MockObjectTestCase {
 
@@ -51,13 +52,11 @@ public class BlockUnitTest extends JUnit4MockObjectTestCase {
 				argument.add(1);
 			}
 		};
-
 		checking(new Expectations() {
 			{
 				one(executable).exec(new MutableInt(1));
 			}
 		});
-
 		block.then(executable).exec(new MutableInt(0));
 	}
 
