@@ -22,8 +22,8 @@ import net.sf.staccato.commons.instrument.InstrumentationRunner;
 import net.sf.staccato.commons.io.Directory;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.lang.function.Function;
+import net.sf.staccato.commons.lang.predicate.Predicates;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -36,6 +36,9 @@ import org.apache.maven.plugin.MojoFailureException;
 public class CheckInstrumentMojo extends AbstractMojo {
 
 	/**
+	 * The location to instrument. It is <project directory>/target/classes by
+	 * default
+	 * 
 	 * @required
 	 * @parameter expression="${instrument.location}"
 	 *            default-value="${project.build.directory}/classes"
@@ -50,21 +53,30 @@ public class CheckInstrumentMojo extends AbstractMojo {
 	protected List<Artifact> pluginArtifactsList;
 
 	/**
-	 * @parameter default-value="false"
-	 */
-	protected boolean processNonPublicMethods;
-
-	/**
+	 * If check annotation on methods should be ignored, or should be processed
+	 * with assertion checks on their return types
+	 * 
 	 * @parameter default-value="true"
 	 */
 	private boolean ignoreReturnChecks;
+
+	/**
+	 * The current artifact being instrumented. The mojo will normally not need
+	 * this object, except on those projects from staccato-commons that are both
+	 * dependencies of this mojo and consumers of it - like staccato-commons-lang,
+	 * io, etc
+	 * 
+	 * @readonly
+	 * @required
+	 * @parameter default-value="${project.artifact}"
+	 */
+	private Artifact artifact;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Instrumenting checks to classes located in " + location);
 		String extraClasspath = createClassPathString();
 		getLog().debug("Using classpath " + extraClasspath);
-
 		try {
 			InstrumentationRunner.runInstrumentation(//
 				new CheckConfigurer(ignoreReturnChecks),
@@ -78,15 +90,18 @@ public class CheckInstrumentMojo extends AbstractMojo {
 	}
 
 	private String createClassPathString() {
-		return StringUtils.join(Streams.from(pluginArtifactsList).map(new Function<Artifact, String>() {
-			public String apply(Artifact arg) {
-				try {
-					return arg.getFile().getCanonicalPath();
-				} catch (IOException e) {
-					throw SoftException.soften(e);
+		return Streams //
+			.from(pluginArtifactsList)
+			.filter(Predicates.equal(artifact).not())
+			.map(new Function<Artifact, String>() {
+				public String apply(Artifact arg) {
+					try {
+						return arg.getFile().getCanonicalPath();
+					} catch (IOException e) {
+						throw SoftException.soften(e);
+					}
 				}
-			}
-		}).iterator(), File.pathSeparator);
+			})
+			.joinStrings(File.pathSeparator);
 	}
-
 }
