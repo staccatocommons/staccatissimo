@@ -111,4 +111,21 @@ public class OptionUnitTest extends JUnit4MockObjectTestCase {
 		Option.some("foo").ifDefined(block);
 		Option.<String> none().ifDefined(block);
 	}
+
+	/** Test method for {@link Option#contains(Object)} */
+	@Test
+	public void testContains() throws Exception {
+		assertTrue(Option.some(4).contains(4));
+		assertFalse(Option.some(null).contains(4));
+		assertFalse(Option.some(5).contains(4));
+		assertFalse(Option.none().contains(4));
+	}
+
+	/** Test method {@link Option#toString()} */
+	@Test
+	public void testToString() throws Exception {
+		assertEquals("None", Option.none().toString());
+		assertEquals("Some(foo)", Option.some("foo").toString());
+		assertEquals("Some(null)", Option.someNull().toString());
+	}
 }

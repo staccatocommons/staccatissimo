@@ -32,6 +32,7 @@ public class NamedTupleToStringStyle extends ToStringStyle {
 		setUseShortClassName(true);
 		setContentStart("(");
 		setContentEnd(")");
+		setNullText("null");
 	}
 
 	/**

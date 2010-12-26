@@ -9,18 +9,22 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 import org.junit.Test;
 
 /**
- * Test for Compare
+ * Test for {@link Compare}
  * 
  * @author flbulgarelli
  * 
  */
 public class CompareUnitTest {
 
+	/***
+	 * Test for {@link Compare#between(Comparable, Comparable, Comparable)}
+	 */
 	@Test
 	public void testBetweenComparable() {
 
@@ -39,13 +43,30 @@ public class CompareUnitTest {
 		assertFalse(between(date1, date2, date3));
 	}
 
+	/***
+	 * Test for
+	 * {@link Compare#between(Object, Object, Object, java.util.Comparator)}
+	 */
+	@Test
+	public void testBetweenComparator() {
+		assertTrue(between(50, 60, 10, Collections.reverseOrder()));
+		assertFalse(between(80, 60, 10, Collections.reverseOrder()));
+	}
+
+	/**
+	 * Test for {@link Compare#between(long, long, long)}
+	 */
 	@Test
 	public void testBetweenLong() {
 		assertTrue(between(90L, 60, 156));
+		assertFalse(between(90L, 100, 156));
 	}
 
+	/**
+	 * Test for {@link Compare#between(int, int, int)}
+	 */
 	@Test
-	public void testBetweenIntIntInt() {
+	public void testBetweenInt() {
 		assertTrue(between(90, 60, 156));
 		assertTrue(between(156, 60, 156));
 		assertTrue(between(60, 60, 156));

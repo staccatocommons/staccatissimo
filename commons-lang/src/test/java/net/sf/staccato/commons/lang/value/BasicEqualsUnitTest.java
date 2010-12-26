@@ -40,6 +40,8 @@ public class BasicEqualsUnitTest {
 		assertSame(BasicEquals.MAYBE, BasicEquals.from(10, new Integer(10)));
 		assertSame(BasicEquals.ALWAYS, BasicEquals.from(foo, bar));
 		assertSame(BasicEquals.NEVER, BasicEquals.from(new Date(), Option.some(5)));
+		assertSame(BasicEquals.NEVER, BasicEquals.from(10, null));
+		assertSame(BasicEquals.NEVER, BasicEquals.from(new Integer(10), new Long(10L)));
 	}
 
 	/**

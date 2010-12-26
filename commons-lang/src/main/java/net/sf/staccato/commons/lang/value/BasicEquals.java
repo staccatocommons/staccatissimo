@@ -15,12 +15,41 @@ package net.sf.staccato.commons.lang.value;
 import net.sf.staccato.commons.check.annotation.ForceChecks;
 import net.sf.staccato.commons.check.annotation.NonNull;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+
 /**
- * Class that helps on building effective equals method
+ * Enumeration of equalty-test scenarios that helps on building effective
+ * {@link Object#equals(Object)} method
  * 
- * TODO how? Usage scenarios?
+ * Normal usage scenario is the following
+ * 
+ * <pre>
+ * public boolean equals(Object obj) {
+ *    BasicEquals be = BasicEquals.from(this, obj);
+ *    if (be.isEqualsDone())
+ *       return be.toEquals();
+ *    MyClass that = (MyClass) obj;
+ *    ... test equalty based on internal state ...
+ *    return ....; 
+ * }
+ * </pre>
+ * 
+ * {@link BasicEquals} observes the following rules:
+ * <ol>
+ * <li>Reflexivity: an object is always equal to it</li>
+ * <li>Non-nullability: an object can never be equal to null</li>
+ * <li>An object can never to an object of a different type - required for
+ * symmetry</li>
+ * </ol>
+ * 
+ * {@link BasicEquals} implements rule nº 3 using a class-comparison strategy -
+ * as opposed to instanceof-comparison strategy. In many scenarios this is just
+ * enough, but rhis may not be the better strategy always, so client code should
+ * take care about it.
  * 
  * @author flbulgarelli
+ * @see EqualsBuilder
+ * @see Object#equals(Object)
  * 
  */
 public enum BasicEquals {
@@ -80,7 +109,27 @@ public enum BasicEquals {
 		return MAYBE;
 	}
 
+	// @NonNull
+	// @ForceChecks
+	// public static <T> BasicEquals from(@NonNull Class<T> thisClass, @NonNull T
+	// this_, Object that) {
+	// if (that == null)
+	// return NEVER;
+	// if (that == this_)
+	// return ALWAYS;
+	// if (!thisClass.isAssignableFrom(that.getClass()))
+	// return NEVER;
+	// return MAYBE;
+	// }
+
 	public abstract boolean toEquals();
 
+	/**
+	 * Answers if this basic equalty-test result is enough to determine if the two
+	 * objects given are equal or not
+	 * 
+	 * @return <code>true</code> for {@link #NEVER} and {@link #ALWAYS},
+	 *         <code>false</code> for {@link #MAYBE}
+	 */
 	public abstract boolean isEqualsDone();
 }

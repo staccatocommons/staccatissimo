@@ -14,10 +14,15 @@ package net.sf.staccato.commons.lang.sequence;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
+import net.sf.staccato.commons.lang.sequence.internal.BigIntegerIncrement;
 
 import org.junit.Test;
 
@@ -57,7 +62,6 @@ public class SequenceUnitTest {
 
 		assertNotNull(seq);
 		assertEquals(Arrays.asList(5, 4, 3, 2), asList(seq));
-
 	}
 
 	@Test
@@ -66,6 +70,40 @@ public class SequenceUnitTest {
 
 		assertNotNull(seq);
 		assertEquals(Arrays.asList(10, 8, 6, 4), asList(seq));
+	}
+
+	/**
+	 * Test for {@link Sequence#fromBy(int, int)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testFromBy() throws Exception {
+		Iterator<Integer> it = Sequence.fromBy(10, 5).iterator();
+		assertTrue(it.hasNext());
+		assertEquals(10, (int) it.next());
+		assertTrue(it.hasNext());
+		assertEquals(15, (int) it.next());
+		assertTrue(it.hasNext());
+		assertEquals(20, (int) it.next());
+		assertTrue(it.hasNext());
+		// and so on
+	}
+
+	/**
+	 * Test for
+	 * {@link Sequence#from(Object, net.sf.staccato.commons.lang.Applicable, net.sf.staccato.commons.lang.Evaluable)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testFrom() throws Exception {
+		Sequence<BigInteger> seq = Sequence //
+			.from(
+				BigInteger.ONE,
+				new BigIntegerIncrement(BigInteger.ONE),
+				StopConditions.upTo(BigInteger.TEN));
+		assertEquals(10, asList(seq).size());
 	}
 
 	private <T> List<T> asList(Sequence<T> seq) {

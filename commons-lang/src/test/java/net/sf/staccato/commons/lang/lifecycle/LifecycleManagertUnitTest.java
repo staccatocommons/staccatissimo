@@ -8,6 +8,11 @@ import org.jmock.Expectations;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test for {@link LifecycleManager}
+ * 
+ * @author flbulgarelli
+ */
 public class LifecycleManagertUnitTest extends JUnit4MockObjectTestCase {
 
 	LifecycleManager<Integer, Integer> manager;
