@@ -15,7 +15,9 @@ package net.sf.staccato.commons.check.instrument;
 import java.lang.annotation.Annotation;
 
 import javassist.CannotCompileException;
+import javassist.CtBehavior;
 import net.sf.staccato.commons.check.Ensure;
+import net.sf.staccato.commons.instrument.context.AnnotationContext;
 import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
 import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
 import net.sf.staccato.commons.instrument.handler.ArgumentAnnotationHandler;
@@ -37,6 +39,14 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 		activeByDefault());
 	private final boolean ignoreReturns;
 
+	/**
+	 * Creates a new {@link AbstractCheckAnnotationHandler} specifying if check
+	 * annotation in methods should be interpreted as checks over its return value
+	 * and processed
+	 * 
+	 * @param ignoreReturns
+	 *          if check annotation over returns should be processed
+	 */
 	public AbstractCheckAnnotationHandler(boolean ignoreReturns) {
 		this.ignoreReturns = ignoreReturns;
 	}
@@ -49,7 +59,7 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 			context.getArgumentBehavior().insertBefore(
 				ENSURE_FULLY_QUALIFIED_NAME + createArgumentCheck(annotation, context) + ";");
 		} catch (CannotCompileException e) {
-			context.logErrorMessage("Could not insert argument check: {0}", e.getMessage());
+			logError(context, context.getArgumentBehavior(), e);
 			throw SoftException.soften(e);
 		}
 	}
@@ -63,9 +73,15 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 			context.getMethod().insertAfter(
 				ASSERT_FULLY_QUALIFIED_NAME + createMethodCheck(annotation, context) + ";");
 		} catch (CannotCompileException e) {
-			context.logErrorMessage("Could not insert method check: {0}", e.getMessage());
+			logError(context, context.getMethod(), e);
 			throw SoftException.soften(e);
 		}
+	}
+
+	private void logError(AnnotationContext context, CtBehavior be, CannotCompileException e) {
+		context.logErrorMessage("Could not insert argument check on method {}: {}", //
+			be.getLongName(),
+			e.getMessage());
 	}
 
 	@Override
