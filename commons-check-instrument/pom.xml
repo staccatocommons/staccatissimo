@@ -9,6 +9,8 @@
 	<groupId>net.sf.staccato</groupId>
 	<artifactId>commons-check-instrument</artifactId>
 	<version>0.1</version>
+	<name>Staccato-Commons-Check-Instrument</name>
+	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrument</url>
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.staccato</groupId>

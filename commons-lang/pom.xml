@@ -6,16 +6,17 @@
 	<name>Staccato-Commons-Lang</name>
 	<description>Staccato-Commons core classes</description>
 	<version>1.0-SNAPSHOT</version>
+	<inceptionYear>2010</inceptionYear>
+    <url>http://staccatocommons.sourceforge.net/staccatissimo/commonslang</url>
+    <scm>
+       <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-lang</developerConnection>
+       <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-lang/</url>
+    </scm>
 	<parent>
 		<groupId>net.sf.staccato</groupId>
 		<artifactId>commons-parent-pom</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<inceptionYear>2010</inceptionYear>
-    <scm>
-       <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-lang</developerConnection>
-       <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-lang/</url>
-    </scm>
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>

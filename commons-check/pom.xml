@@ -10,6 +10,7 @@
   <name>Staccato-Commons-Check</name>
   <version>1.0-SNAPSHOT</version>
   <inceptionYear>2010</inceptionYear>
+  <url>http://staccatocommons.sourceforge.net/staccatissimo/commonscheck</url>
   <scm>
        <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-check</developerConnection>
        <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-check/</url>

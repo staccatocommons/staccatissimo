@@ -9,6 +9,9 @@
 	<groupId>net.sf.staccato</groupId>
 	<artifactId>commons-instrument</artifactId>
 	<version>1.0-SNAPSHOT</version>
+	<name>Staccato-Commons-Instrument</name>
+	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument</url>
+	<inceptionYear>2010</inceptionYear>
 	<dependencies>
 		<dependency>
 			<groupId>javassist</groupId>

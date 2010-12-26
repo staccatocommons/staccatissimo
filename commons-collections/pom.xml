@@ -6,6 +6,7 @@
 	<name>Staccato-Commons-Collections</name>
 	<version>1.0-SNAPSHOT</version>
 	<inceptionYear>2010</inceptionYear>
+	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonscollections</url>
 	<parent>
 		<groupId>net.sf.staccato</groupId>
 		<artifactId>commons-parent-pom</artifactId>
