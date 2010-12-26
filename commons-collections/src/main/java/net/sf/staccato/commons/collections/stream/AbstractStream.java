@@ -55,8 +55,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	@Override
 	public int size() {
 		int size = 0;
-		for (@SuppressWarnings("unused")
-		A element : this)
+		for (Iterator<A> iter = iterator(); iter.hasNext(); iter.next())
 			size++;
 		return size;
 	}

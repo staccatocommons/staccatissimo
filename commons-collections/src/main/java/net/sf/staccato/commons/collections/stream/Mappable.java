@@ -27,7 +27,6 @@ public interface Mappable<A> {
 	/**
 	 * Transforms each element using the given function
 	 * 
-	 * @param <A>
 	 * @param <B>
 	 * @param function
 	 *          the mapper used to transform each element, applying it
@@ -43,7 +42,6 @@ public interface Mappable<A> {
 	 * ("flatterns") the result
 	 * 
 	 * @param <B>
-	 * @param <I>
 	 * @param function
 	 * @return a new {@link Stream} that will retrieve the result of transforming
 	 *         each element and concatenating those transformations

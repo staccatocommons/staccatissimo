@@ -112,7 +112,7 @@ public class Lists {
 	 *           if index is out of range
 	 * @see List#get(int)
 	 */
-	public static <S> S second(@NonNull List<S> list) {
+	public static <A> A second(@NonNull List<A> list) {
 		Ensure.is(LIST_PARAM, list, list.size() > 1,//
 			"Must hava at least two elements");
 		return list.get(1);
@@ -129,7 +129,7 @@ public class Lists {
 	 *           if index is out of range
 	 * @see List#get(int)
 	 */
-	public static <S> S third(@NonNull List<S> list) {
+	public static <A> A third(@NonNull List<A> list) {
 		Ensure.is(LIST_PARAM, list, list.size() > 2,//
 			"Must hava at least three elements");
 		return list.get(2);
@@ -146,7 +146,7 @@ public class Lists {
 	 *           if index is out of range
 	 * @see List#get(int)
 	 */
-	public static <S> S last(@NotEmpty List<S> list) {
+	public static <A> A last(@NotEmpty List<A> list) {
 		return list.get(list.size() - 1);
 	}
 

@@ -37,6 +37,7 @@ public final class EmptyStream<A> extends AbstractStream<A> {
 		return EmptyIterator.getInstance();
 	}
 
+	/** Answers the singleton instance */
 	public static <T> Stream<T> getInstance() {
 		return INSTANCE;
 	}

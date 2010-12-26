@@ -28,10 +28,17 @@ import net.sf.staccato.commons.lang.Option;
  */
 public class Maps {
 
-	private static final String MAP_PARAM = "map";
-
-	public static <T> Option<T> get(@NonNull(MAP_PARAM) Map<?, T> map, Object key) {
-		T value = map.get(key);
+	/**
+	 * Answers the optional value for the given key
+	 * 
+	 * @param <V>
+	 * @param map
+	 * @param key
+	 *          the key to lookup
+	 * @return Some(value) if the key exists, None, otherwise
+	 */
+	public static <V> Option<V> get(@NonNull Map<?, V> map, Object key) {
+		V value = map.get(key);
 		if (value != null)
 			return Option.some(value);
 
@@ -41,35 +48,35 @@ public class Maps {
 		return Option.none();
 	}
 
-	public static <K> Option<K> anyKey(@NonNull(MAP_PARAM) Map<K, ?> map) {
+	public static <K> Option<K> anyKey(@NonNull Map<K, ?> map) {
 		if (map.isEmpty())
 			return Option.none();
 		return Option.some(anyInternal(map.keySet()));
 	}
 
-	public static <K> K anyKeyOrNull(@NonNull(MAP_PARAM) Map<K, ?> map) {
+	public static <K> K anyKeyOrNull(@NonNull Map<K, ?> map) {
 		if (map.isEmpty())
 			return null;
 		return anyInternal(map.keySet());
 	}
 
-	public static <V> Option<V> anyValue(@NonNull(MAP_PARAM) Map<?, V> map) {
+	public static <V> Option<V> anyValue(@NonNull Map<?, V> map) {
 		if (map.isEmpty())
 			return Option.none();
 		return Option.some(anyInternal(map.values()));
 	}
 
-	public static <V> V anyValueOrNull(@NonNull(MAP_PARAM) Map<?, V> map) {
+	public static <V> V anyValueOrNull(@NonNull Map<?, V> map) {
 		if (map.isEmpty())
 			return null;
 		return anyInternal(map.values());
 	}
 
 	/**
+	 * Answers if the given map is null or empty
 	 * 
-	 * @param <S>
-	 * @param collection
-	 * @return true if the collection is null or empty
+	 * @param map
+	 * @return <code>map == null || map.isEmpty()</code>
 	 */
 	public static boolean isNullOrEmpty(Map<?, ?> map) {
 		return map == null || map.isEmpty();

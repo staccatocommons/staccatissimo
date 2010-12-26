@@ -379,18 +379,6 @@ public abstract class StreamAbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#toCollection()}
-	 * .
-	 * 
-	 * @param stream
-	 */
-	@Theory
-	public void testToCollection(Stream stream) {
-		assertEquals(Iterables.toList(stream), stream.toList());
-	}
-
-	/**
-	 * Test method for
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#toSet()}.
 	 * 
 	 * @param stream

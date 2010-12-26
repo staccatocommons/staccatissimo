@@ -19,7 +19,7 @@ public final class TakeStream<A> extends AbstractStream<A> {
 	/**
 	 * Creates a new {@link TakeStream}
 	 */
-	public TakeStream(@NonNull Stream<A> stream, @NonNull int amountOfElements) {
+	public TakeStream(@NonNull Stream<A> stream, int amountOfElements) {
 		this.stream = stream;
 		this.amountOfElements = amountOfElements;
 	}

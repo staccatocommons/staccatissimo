@@ -13,8 +13,7 @@
 package net.sf.staccato.commons.lang.builder;
 
 import net.sf.staccato.commons.check.Check;
-
-import org.apache.commons.lang.builder.ToStringBuilder;
+import net.sf.staccato.commons.lang.internal.ToString;
 
 /**
  * An abstract implementation of a builder pattern.
@@ -63,7 +62,7 @@ public abstract class AbstractReusableBuilder<T> implements ReusableBuilder<T> {
 
 	@Override
 	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
+		return ToString.toString(this);
 	}
 
 	/**
