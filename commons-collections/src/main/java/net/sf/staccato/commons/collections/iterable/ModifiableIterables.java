@@ -66,11 +66,12 @@ public class ModifiableIterables {
 	 * @param iterable
 	 * @param predicate
 	 */
-	public static <T> void removeWhile(@NonNull Iterable<? extends T> iterable,
+	public static <T, I extends Iterable<T>> I removeWhile(@NonNull I iterable,
 		@NonNull Evaluable<? super T> predicate) {
 		for (Iterator<? extends T> iter = iterable.iterator(); iter.hasNext()
 			&& predicate.eval(iter.next());)
 			iter.remove();
+		return iterable;
 	}
 
 	/**
@@ -97,7 +98,7 @@ public class ModifiableIterables {
 	 */
 
 	/**
-	 * Adds all the elements from a given iterable to a given collection
+	 * Adds all the elements from a given {@link Iterable} to a given collection
 	 * 
 	 * @param collection
 	 * @param iterable

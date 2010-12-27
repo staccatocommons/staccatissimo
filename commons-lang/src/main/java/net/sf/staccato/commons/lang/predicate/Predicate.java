@@ -13,6 +13,7 @@
 package net.sf.staccato.commons.lang.predicate;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.lang.Applicable;
 import net.sf.staccato.commons.lang.Evaluable;
 
 /**
@@ -30,10 +31,14 @@ import net.sf.staccato.commons.lang.Evaluable;
  * @param <T>
  *          the type of argument to evaluate
  */
-public abstract class Predicate<T> implements Evaluable<T> {
+public abstract class Predicate<T> implements Evaluable<T>, Applicable<T, Boolean> {
 
 	@Override
 	public abstract boolean eval(@NonNull T argument);
+
+	public Boolean apply(T arg) {
+		return eval(arg);
+	}
 
 	/**
 	 * @return a {@link Predicate} that negates this {@link Predicate}'s result.

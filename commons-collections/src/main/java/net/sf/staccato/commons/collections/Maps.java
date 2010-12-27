@@ -15,10 +15,9 @@ package net.sf.staccato.commons.collections;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyInternal;
 
 import java.util.Map;
-import java.util.SortedMap;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.MapBuilder;
+import net.sf.staccato.commons.lang.None;
 import net.sf.staccato.commons.lang.Option;
 
 /**
@@ -48,18 +47,49 @@ public class Maps {
 		return Option.none();
 	}
 
+	/**
+	 * Answers Some(key) from the given {@link Map}, or {@link None}, if it is
+	 * empty. Notice that <strong>any does not mean random</strong>, it may return
+	 * always the same key, this method just guarantees that if Some(key) is
+	 * returned, map.containsKey(key) will return <code>true</code>
+	 * 
+	 * @param <K>
+	 * @param map
+	 * @return Some(key) if map is not empty, None otherwise
+	 */
 	public static <K> Option<K> anyKey(@NonNull Map<K, ?> map) {
 		if (map.isEmpty())
 			return Option.none();
 		return Option.some(anyInternal(map.keySet()));
 	}
 
+	/**
+	 * Answers a key from the given {@link Map}, or null, if it is empty. Notice
+	 * that <strong>any does not mean random</strong>, it may return always the
+	 * same key, this method just guarantees that if a non null key is returned,
+	 * <code>map.containsKey(key)</code> will return <code>true</code>
+	 * 
+	 * @param <K>
+	 * @param map
+	 * @return a key if map is not empty, null otherwise
+	 */
 	public static <K> K anyKeyOrNull(@NonNull Map<K, ?> map) {
 		if (map.isEmpty())
 			return null;
 		return anyInternal(map.keySet());
 	}
 
+	/**
+	 * Answers a <code>Some(value)</code> from the given {@link Map}, or
+	 * {@link None}, if it is empty. Notice that <strong>any does not mean
+	 * random</strong>, it may return always the same value, this method just
+	 * guarantees that if a <code>Some(value)</code> is returned,
+	 * <code>map.containsValue(key)</code> will return <code>true</code>
+	 * 
+	 * @param <K>
+	 * @param map
+	 * @return Some(value) if map is not empty, None otherwise
+	 */
 	public static <V> Option<V> anyValue(@NonNull Map<?, V> map) {
 		if (map.isEmpty())
 			return Option.none();
@@ -80,22 +110,6 @@ public class Maps {
 	 */
 	public static boolean isNullOrEmpty(Map<?, ?> map) {
 		return map == null || map.isEmpty();
-	}
-
-	public static <K, V> MapBuilder<K, V, Map<K, V>> with(K key, V value) {
-		return hashedWith(key, value);
-	}
-
-	public static <K, V> MapBuilder<K, V, Map<K, V>> hashedWith(K key, V value) {
-		return MapBuilder.hashMapWith(key, value);
-	}
-
-	public static <K, V> MapBuilder<K, V, Map<K, V>> linkedWith(K key, V value) {
-		return MapBuilder.linkedMapWith(key, value);
-	}
-
-	public static <K, V> MapBuilder<K, V, SortedMap<K, V>> treeWith(K key, V value) {
-		return MapBuilder.treeMapWith(key, value);
 	}
 
 }

@@ -15,7 +15,6 @@ package net.sf.staccato.commons.lang.predicate;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import net.sf.staccato.commons.lang.Evaluable;
-import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,13 +23,25 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class PredicateUnitTest extends JUnit4MockObjectTestCase {
+public class PredicateUnitTest {
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+	}
+
+	/** Test for {@link Predicate#apply(Object)} */
+	@Test
+	public void testApply() throws Exception {
+		Predicate<Object> predicate = new Predicate<Object>() {
+			public boolean eval(Object argument) {
+				return argument == null;
+			}
+		};
+		assertTrue(predicate.apply(null));
+		assertFalse(predicate.apply(new Object()));
 	}
 
 	/**

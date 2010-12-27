@@ -13,9 +13,19 @@
 package net.sf.staccato.commons.testing.junit;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
 
 public class Assert extends org.junit.Assert {
+
+	public static <T> void assertIn(T element, T... elements) {
+		HashSet<T> hashSet = new HashSet<T>();
+		Collections.addAll(hashSet, element);
+		assertTrue(//
+			String.format("Element %s should be one of %s", elements, hashSet),
+			hashSet.contains(element));
+	}
 
 	public static <T> void assertContains(Collection<T> collection, T element) {
 		assertTrue(//
