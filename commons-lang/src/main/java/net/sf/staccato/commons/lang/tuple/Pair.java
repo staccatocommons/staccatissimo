@@ -17,6 +17,7 @@ import java.util.Map;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.value.BasicEquals;
 import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
+import net.sf.staccato.commons.lang.value.ConditionallySerializable;
 import net.sf.staccato.commons.lang.value.Value;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -34,6 +35,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 @Value
 @ConditionallyImmutable
+@ConditionallySerializable
 public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>>,
 	Map.Entry<T1, T2> {
 

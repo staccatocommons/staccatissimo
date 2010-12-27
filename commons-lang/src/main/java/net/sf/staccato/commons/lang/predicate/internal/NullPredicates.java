@@ -23,6 +23,11 @@ public final class NullPredicates {
 	}
 
 	private static class NotNull<T> extends NonAnnonymousPredicate<T> {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 876641857208937901L;
+
 		public boolean eval(T argument) {
 			return argument != null;
 		}
@@ -33,6 +38,11 @@ public final class NullPredicates {
 	}
 
 	private static class Null<T> extends NonAnnonymousPredicate<T> {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -7208581270049483766L;
+
 		public boolean eval(T argument) {
 			return argument == null;
 		}

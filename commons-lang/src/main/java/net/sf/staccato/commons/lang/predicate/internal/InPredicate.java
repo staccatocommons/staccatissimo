@@ -26,6 +26,7 @@ import java.util.Set;
  */
 public class InPredicate<T> extends NonAnnonymousPredicate<T> {
 
+	private static final long serialVersionUID = -7713535502282119414L;
 	private final Set<T> elements;
 
 	/**

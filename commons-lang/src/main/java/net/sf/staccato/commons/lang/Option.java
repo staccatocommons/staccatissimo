@@ -20,6 +20,7 @@ import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.SizeAware;
 import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
+import net.sf.staccato.commons.lang.value.ConditionallySerializable;
 import net.sf.staccato.commons.lang.value.Value;
 
 /**
@@ -48,15 +49,9 @@ import net.sf.staccato.commons.lang.value.Value;
  * </ul>
  * 
  * <p>
- * These three classes are pure Java implementation of Scala homonimous classes,
- * which in turn are object oriented implementations of the Haskell algebraic
- * date type <code>Maybe t =  Just t | Nothing</code>.
- * </p>
- * <p>
- * Option instances are immutable as long as values are immutable too. Option
- * subclasses redefine {@link #equals(Object)} and {@link #hashCode()}, so that
- * two instances are equal as long they values are equal, or as long they are
- * undefined. Finally, options are thread safe, as long as values are.
+ * Option subclasses redefine {@link #equals(Object)} and {@link #hashCode()},
+ * so that two instances are equal as long they values are equal, or as long
+ * they are undefined.
  * </p>
  * 
  * 
@@ -68,6 +63,7 @@ import net.sf.staccato.commons.lang.value.Value;
  */
 @Value
 @ConditionallyImmutable
+@ConditionallySerializable
 public abstract class Option<T> implements Provider<T>, ContainsAware<T>, Iterable<T>, SizeAware,
 	Serializable {
 

@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.lang.value;
 
+import java.io.Serializable;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

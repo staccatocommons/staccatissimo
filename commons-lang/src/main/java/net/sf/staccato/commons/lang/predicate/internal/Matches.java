@@ -25,6 +25,7 @@ import net.sf.staccato.commons.lang.predicate.Predicate;
  */
 public class Matches extends NonAnnonymousPredicate<String> {
 
+	private static final long serialVersionUID = -4663999428767203678L;
 	private Pattern pattern;
 
 	/**

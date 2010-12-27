@@ -97,6 +97,20 @@ public enum BasicEquals {
 		}
 	};
 
+	/**
+	 * Performs a {@link BasicEquals} test
+	 * 
+	 * @param <T>
+	 * @param this_
+	 *          the "left hand" object to test equalty, that is, the object to
+	 *          wich the equals message has been sent
+	 * @param that
+	 *          the "right hand" objet of the equlty test, that is, the object
+	 *          that is parameter of the the equals message the
+	 * @return {@link #NEVER} if that is null or its class is not the same that
+	 *         this_ class, {@link #ALWAYS} if both objects are the same, or
+	 *         {@link #MAYBE} otherwise
+	 */
 	@NonNull
 	@ForceChecks
 	public static <T> BasicEquals from(@NonNull T this_, Object that) {
@@ -122,6 +136,15 @@ public enum BasicEquals {
 	// return MAYBE;
 	// }
 
+	/**
+	 * Returns the equals test based on this basic equals test result. This method
+	 * <strong>must</strong> only be called if there is enough information to
+	 * determine it, that is, if {@link #isEqualsDone()}.
+	 * 
+	 * @return true if this is {@link #ALWAYS} or false if this is {@link #NEVER}
+	 * @throws IllegalStateException
+	 *           of this is {@link #MAYBE}
+	 */
 	public abstract boolean toEquals();
 
 	/**

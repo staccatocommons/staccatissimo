@@ -12,13 +12,17 @@
  */
 package net.sf.staccato.commons.lang.predicate.internal;
 
+import java.io.Serializable;
+
 import net.sf.staccato.commons.lang.internal.ToString;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**
  * @author flbulgarelli
  */
-abstract class NonAnnonymousPredicate<T> extends Predicate<T> {
+abstract class NonAnnonymousPredicate<T> extends Predicate<T> implements Serializable {
+
+	private static final long serialVersionUID = 2953242687325764205L;
 
 	public final String toString() {
 		return ToString.toString(this);

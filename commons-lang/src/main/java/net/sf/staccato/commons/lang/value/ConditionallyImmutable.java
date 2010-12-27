@@ -22,9 +22,17 @@ import java.lang.annotation.Target;
 import net.sf.staccato.commons.lang.restriction.Restriction;
 
 /**
+ * <p>
  * {@link ConditionallyImmutable} annotated classes are {@link Unmodifiable}s
- * whose instance can be trated as {@link Immutable} as long as their attributes
- * are {@link Immutable} too.
+ * whose instance can be treated as {@link Immutable} as long as their
+ * attributes are {@link Immutable} too. There is no need to annotate those
+ * classes as unmodifiable, as it is implied.
+ * </p>
+ * <p>
+ * {@link ConditionallyImmutable} restriction is normally only useful on classes
+ * that have as attributes generic types or interfaces that do not make any
+ * assumption about immutability
+ * </p>
  * 
  * @author flbulgarelli
  * @see Restriction

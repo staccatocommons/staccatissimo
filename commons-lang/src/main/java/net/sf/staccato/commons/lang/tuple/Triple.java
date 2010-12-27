@@ -15,6 +15,7 @@ package net.sf.staccato.commons.lang.tuple;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.value.BasicEquals;
 import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
+import net.sf.staccato.commons.lang.value.ConditionallySerializable;
 import net.sf.staccato.commons.lang.value.Value;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -32,6 +33,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 @Value
 @ConditionallyImmutable
+@ConditionallySerializable
 public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple<T1, T2, T3>> {
 
 	private static final long serialVersionUID = 5811264763831754560L;

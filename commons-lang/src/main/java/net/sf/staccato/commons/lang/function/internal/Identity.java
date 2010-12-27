@@ -1,5 +1,7 @@
 package net.sf.staccato.commons.lang.function.internal;
 
+import java.io.Serializable;
+
 import net.sf.staccato.commons.lang.function.Function;
 
 /**
@@ -7,7 +9,9 @@ import net.sf.staccato.commons.lang.function.Function;
  * 
  * @param <I>
  */
-public final class Identity<I> extends Function<I, I> {
+public final class Identity<I> extends Function<I, I> implements Serializable {
+
+	private static final long serialVersionUID = -9042770205177366369L;
 
 	private static final Function INSTANCE = new Identity();
 

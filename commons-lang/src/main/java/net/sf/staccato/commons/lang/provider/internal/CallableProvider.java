@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.lang.provider.internal;
 
+import java.io.Serializable;
 import java.util.concurrent.Callable;
 
 import net.sf.staccato.commons.lang.Provider;
@@ -25,7 +26,9 @@ import net.sf.staccato.commons.lang.SoftException;
  * 
  * @param <T>
  */
-public class CallableProvider<T> implements Provider<T> {
+public class CallableProvider<T> implements Provider<T>, Serializable {
+
+	private static final long serialVersionUID = 6303570980842439165L;
 
 	private Callable<T> callable;
 

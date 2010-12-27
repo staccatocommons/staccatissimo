@@ -12,14 +12,13 @@
  */
 package net.sf.staccato.commons.lang.predicate.internal;
 
-import net.sf.staccato.commons.lang.predicate.Predicate;
-
 /**
  * @author flbulgarelli
  * @param <T>
  */
-public class LessThan<T extends Comparable<T>> extends Predicate<T> {
+public class LessThan<T extends Comparable<T>> extends NonAnnonymousPredicate<T> {
 
+	private static final long serialVersionUID = 459305478306868635L;
 	private final T value;
 
 	/**

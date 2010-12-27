@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FindBugsFilter>
-<!--	<Match>-->
-<!--		<Bug pattern="SE_BAD_FIELD" />-->
-<!--	</Match>-->
+	<Match>
+		<Bug pattern="SE_BAD_FIELD" />
+	</Match>
+	<Match>
+	   <Bug pattern="BC_EQUALS_METHOD_SHOULD_WORK_FOR_ALL_OBJECTS"/>
+	</Match>
 </FindBugsFilter>

@@ -1,5 +1,7 @@
 package net.sf.staccato.commons.lang.block.internal;
 
+import java.io.Serializable;
+
 import net.sf.staccato.commons.lang.block.Block;
 
 /**
@@ -7,7 +9,9 @@ import net.sf.staccato.commons.lang.block.Block;
  * 
  * @param <T>
  */
-public final class Empty<T> extends Block<T> {
+public final class Empty<T> extends Block<T> implements Serializable {
+
+	private static final long serialVersionUID = -8524759590808189374L;
 
 	private static final Block INSTANCE = new Empty();
 

@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang.provider.internal;
 
+import java.io.Serializable;
+
 import net.sf.staccato.commons.lang.Provider;
 
 /**
@@ -22,7 +24,9 @@ import net.sf.staccato.commons.lang.Provider;
  * @param <T>
  * 
  */
-public final class Constant<T> implements Provider<T> {
+public final class Constant<T> implements Provider<T>, Serializable {
+
+	private static final long serialVersionUID = -7769276251688297460L;
 
 	private final T value;
 

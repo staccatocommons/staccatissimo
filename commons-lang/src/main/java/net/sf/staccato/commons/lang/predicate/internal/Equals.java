@@ -8,6 +8,7 @@ import net.sf.staccato.commons.check.annotation.NonNull;
  * @param <T>
  */
 public final class Equals<T> extends NonAnnonymousPredicate<T> {
+	private static final long serialVersionUID = -7587113479123370400L;
 	private final T value;
 
 	/**

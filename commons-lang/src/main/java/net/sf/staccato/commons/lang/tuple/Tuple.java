@@ -18,6 +18,7 @@ import java.util.List;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
+import net.sf.staccato.commons.lang.value.ConditionallySerializable;
 import net.sf.staccato.commons.lang.value.Value;
 
 /**
@@ -50,6 +51,7 @@ import net.sf.staccato.commons.lang.value.Value;
  */
 @Value
 @ConditionallyImmutable
+@ConditionallySerializable
 public abstract class Tuple implements Serializable {
 
 	private static final long serialVersionUID = -3943649706502147516L;

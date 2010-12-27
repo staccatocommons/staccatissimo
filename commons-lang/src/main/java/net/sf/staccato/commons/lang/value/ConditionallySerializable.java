@@ -1,6 +1,6 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team   
- 
+ Copyright (c) 2010, The Staccato-Commons Team
+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation; version 3 of the License.
@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.lang.value;
 
+import java.io.Serializable;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -22,16 +23,16 @@ import java.lang.annotation.Target;
 import net.sf.staccato.commons.lang.restriction.Restriction;
 
 /**
- * {@link Unmodifiable}s are objects that do not expose publicly any method that
- * may modify receiver internal state. However, object's state can still be
- * mutated indirectly, if it holds and/or exposes references to objects that may
- * be mutated
- * <p>
- * {@link Unmodifiable}s can still implement lazy initialization and/or caching,
- * as long as it remains encadpsulated and is not exposed publicly
+ * {@link ConditionallySerializable} annotated classes that implement the
+ * {@link Serializable} interface, but that can be properly serilized or
+ * deserialized only as long as their attributes attributes are properly
+ * serializable too
+ * 
+ * {@link ConditionallyImmutable} restriction is normally only useful on classes
+ * that have as attributes generic types or interfaces that do not make any
+ * assumption about serialization
  * 
  * @author flbulgarelli
- *         </p>
  * @see Restriction
  */
 @Documented
@@ -39,6 +40,10 @@ import net.sf.staccato.commons.lang.restriction.Restriction;
 @Restriction
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
-public @interface Unmodifiable {
+public @interface ConditionallySerializable {
+	/*
+	 * XXX move from package? integrate in a more generic Conditionally
+	 * annotation? Another example is conditionally comparable
+	 */
 
 }

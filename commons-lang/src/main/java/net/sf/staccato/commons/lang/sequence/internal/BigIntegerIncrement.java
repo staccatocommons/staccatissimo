@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.lang.sequence.internal;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import net.sf.staccato.commons.lang.function.Function;
@@ -21,7 +22,9 @@ import net.sf.staccato.commons.lang.internal.ToString;
  * @author flbulgarelli
  * 
  */
-public class BigIntegerIncrement extends Function<BigInteger, BigInteger> {
+public class BigIntegerIncrement extends Function<BigInteger, BigInteger> implements Serializable {
+
+	private static final long serialVersionUID = 6665424536233331645L;
 
 	private final BigInteger delta;
 

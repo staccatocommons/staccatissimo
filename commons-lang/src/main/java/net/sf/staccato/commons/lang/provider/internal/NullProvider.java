@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang.provider.internal;
 
+import java.io.Serializable;
+
 import net.sf.staccato.commons.lang.Provider;
 
 /**
@@ -19,8 +21,9 @@ import net.sf.staccato.commons.lang.Provider;
  * 
  * @author flbulgarelli
  */
-public class NullProvider<T> implements Provider<T> {
+public class NullProvider<T> implements Provider<T>, Serializable {
 
+	private static final long serialVersionUID = 5879607480007179549L;
 	private static final NullProvider instance = new NullProvider();
 
 	private NullProvider() {

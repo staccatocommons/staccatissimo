@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang.sequence.internal;
 
+import java.io.Serializable;
+
 import net.sf.staccato.commons.lang.function.Function;
 import net.sf.staccato.commons.lang.internal.ToString;
 
@@ -19,8 +21,9 @@ import net.sf.staccato.commons.lang.internal.ToString;
  * @author flbulgarelli
  * 
  */
-public class IntegerIncrement extends Function<Integer, Integer> {
+public class IntegerIncrement extends Function<Integer, Integer> implements Serializable {
 
+	private static final long serialVersionUID = 7781352225318655326L;
 	private final int delta;
 
 	/**

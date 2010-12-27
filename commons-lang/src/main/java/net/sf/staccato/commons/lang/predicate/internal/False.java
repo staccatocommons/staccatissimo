@@ -11,6 +11,7 @@ import net.sf.staccato.commons.lang.predicate.Predicate;
  * @param <T>
  */
 public final class False<T> extends NonAnnonymousPredicate<T> {
+	private static final long serialVersionUID = 7804525181528599615L;
 	private static final Predicate INSTANCE = new False();
 
 	public boolean eval(T argument) {

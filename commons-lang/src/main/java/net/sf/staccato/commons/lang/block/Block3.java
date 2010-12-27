@@ -46,9 +46,14 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 	/**
 	 * Executes this block, potentially throwing a checked {@link Exception}
 	 * 
-	 * @see #exec(Object, Object)
+	 * @see #exec(Object, Object, Object)
 	 * 
-	 * @param arg
+	 * @param arg1
+	 *          operation first argument
+	 * @param arg2
+	 *          operation second argument
+	 * @param arg3
+	 *          operation third argument
 	 * @throws Exception
 	 */
 	protected void softExec(T1 arg1, T2 arg2, T3 arg3) throws Exception {

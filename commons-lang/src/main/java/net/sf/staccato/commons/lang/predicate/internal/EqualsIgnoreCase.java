@@ -5,6 +5,7 @@ package net.sf.staccato.commons.lang.predicate.internal;
  * 
  */
 public final class EqualsIgnoreCase extends NonAnnonymousPredicate<String> {
+	private static final long serialVersionUID = -1136105243595734514L;
 	private final String value;
 
 	/**

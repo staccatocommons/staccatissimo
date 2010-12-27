@@ -16,6 +16,7 @@ import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.collection.ContainsAware;
 import net.sf.staccato.commons.lang.collection.EmptyAware;
 import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
+import net.sf.staccato.commons.lang.value.ConditionallySerializable;
 import net.sf.staccato.commons.lang.value.Value;
 import net.sf.staccato.commons.lang.value.ValueObject;
 
@@ -31,6 +32,7 @@ import net.sf.staccato.commons.lang.value.ValueObject;
  */
 @Value
 @ConditionallyImmutable
+@ConditionallySerializable
 public class Range<T extends Comparable<T>> extends ValueObject implements ContainsAware<T>,
 	EmptyAware {
 

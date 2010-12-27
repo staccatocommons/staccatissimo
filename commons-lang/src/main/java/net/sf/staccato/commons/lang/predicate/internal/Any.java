@@ -8,6 +8,7 @@ import net.sf.staccato.commons.lang.Evaluable;
  * @param <T>
  */
 public final class Any<T> extends NonAnnonymousPredicate<T> {
+	private static final long serialVersionUID = -2122639961072159594L;
 	private final Iterable<Evaluable<T>> predicates;
 
 	/**

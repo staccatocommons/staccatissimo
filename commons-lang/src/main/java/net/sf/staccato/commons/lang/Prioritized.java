@@ -12,10 +12,13 @@
  */
 package net.sf.staccato.commons.lang;
 
+import java.io.Serializable;
+
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.internal.ToString;
 import net.sf.staccato.commons.lang.value.BasicEquals;
 import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
+import net.sf.staccato.commons.lang.value.ConditionallySerializable;
 import net.sf.staccato.commons.lang.value.Value;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -33,8 +36,11 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 @Value
 @ConditionallyImmutable
+@ConditionallySerializable
 public class Prioritized<T, P extends Comparable<P>> implements Provider<T>,
-	Comparable<Prioritized<T, P>> {
+	Comparable<Prioritized<T, P>>, Serializable {
+
+	private static final long serialVersionUID = 7131041003021112454L;
 
 	private final P priority;
 	private final T value;
