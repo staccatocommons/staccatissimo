@@ -1,6 +1,6 @@
 Purpose - What is Staccato-Commons?
  
- Staccato-Commons is a FLOSS project that is aimed to extend and integrate existing Java frameworks in order to fill their gaps and unificate abstractions, focusing on productivity and maintainability, in a full object oriented way and borrowing functional concepts and techniques.
+ Staccato-Commons is a FLOSS project that is aimed to extend and integrate existing Java frameworks in order to fill their gaps and unificate abstractions, focusing on productivity and maintainability, in a full object oriented way and taking functional concepts and techniques.
 
 Staccato-Commons Principles
 
@@ -28,7 +28,7 @@ Staccato-Commons Organization
  
  The project is divided into two main categories:
  
- * Staccatissimo.  Extensions to general purpose libraries like  {{{http://commons.apache.org/lang/}Apache Commons Lang}} and the JDK itself. They are the core of Staccato-Commons: stable classes, annotations and interfaces, on which all the staccato projects depend
+ * Staccatissimo.  Extensions to general purpose libraries like  {{{http://commons.apache.org/lang/}Apache Commons Lang}} and the JDK itself. They are the core of Staccato-Commons: stable classes, annotations and interfaces, on which all the Staccato projects depend
  
  * Legato - extensions to any other frameworks that does not fall in the previous category.
  
@@ -42,9 +42,8 @@ Main Projects
    
  * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsio}staccato-commons-io}}: integration between the Staccato libraries and java.io 
  
- * staccato-commons-testing
- 
- * staccato-commons-instrument
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument}staccato-commons-instrument}}
  
  * staccato-commons-check-instrument and staccato-commons-check-instrument-maven-plugin 
  
+ * staccato-commons-testing
