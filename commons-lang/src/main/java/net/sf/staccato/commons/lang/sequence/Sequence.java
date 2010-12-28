@@ -18,12 +18,12 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Applicable;
-import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.defs.Applicable;
+import net.sf.staccato.commons.defs.Evaluable;
+import net.sf.staccato.commons.defs.restriction.ConditionallyImmutable;
+import net.sf.staccato.commons.defs.restriction.Unmodifiable;
 import net.sf.staccato.commons.lang.internal.ToString;
 import net.sf.staccato.commons.lang.sequence.internal.IntegerIncrement;
-import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
-import net.sf.staccato.commons.lang.value.Unmodifiable;
 
 /**
  * A {@link Sequence} is an {@link Iterable} object whose {@link Iterator},

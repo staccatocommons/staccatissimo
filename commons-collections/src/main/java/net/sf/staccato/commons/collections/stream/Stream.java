@@ -16,10 +16,10 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Applicable;
-import net.sf.staccato.commons.lang.collection.ContainsAware;
-import net.sf.staccato.commons.lang.collection.SizeAware;
-import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
+import net.sf.staccato.commons.defs.Applicable;
+import net.sf.staccato.commons.defs.ContainsAware;
+import net.sf.staccato.commons.defs.SizeAware;
+import net.sf.staccato.commons.defs.restriction.ConditionallyImmutable;
 
 /**
  * A {@link Stream} represent a lazy, rich-interfaced, {@link Iterable} source

@@ -2,6 +2,8 @@ package net.sf.staccato.commons.lang.format;
 
 import static org.junit.Assert.assertNotNull;
 
+import net.sf.staccato.commons.check.format.Var;
+
 import org.junit.Test;
 
 /**

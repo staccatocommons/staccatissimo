@@ -13,9 +13,9 @@
 package net.sf.staccato.commons.lang.function;
 
 import static org.junit.Assert.assertEquals;
-import net.sf.staccato.commons.lang.Applicable;
-import net.sf.staccato.commons.lang.Applicable2;
-import net.sf.staccato.commons.lang.Applicable3;
+import net.sf.staccato.commons.defs.Applicable;
+import net.sf.staccato.commons.defs.Applicable2;
+import net.sf.staccato.commons.defs.Applicable3;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -67,7 +67,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.lang.function.Function#of(net.sf.staccato.commons.lang.Applicable2)
+	 * {@link net.sf.staccato.commons.lang.function.Function#of(net.sf.staccato.commons.defs.Applicable2)
 	 * )} .
 	 */
 	@Test
@@ -83,7 +83,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.lang.function.Function#of(net.sf.staccato.commons.lang.Applicable3)
+	 * {@link net.sf.staccato.commons.lang.function.Function#of(net.sf.staccato.commons.defs.Applicable3)
 	 * )} .
 	 */
 	@Test

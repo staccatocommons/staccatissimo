@@ -10,6 +10,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import net.sf.staccato.commons.defs.Executable;
 import net.sf.staccato.commons.lang.Option.UndefinedOptionException;
 import net.sf.staccato.commons.lang.provider.Providers;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;

@@ -2,6 +2,8 @@ package net.sf.staccato.commons.lang.format;
 
 import static org.junit.Assert.assertEquals;
 
+import net.sf.staccato.commons.check.format.VariableFormatter;
+
 import org.junit.Test;
 
 /**

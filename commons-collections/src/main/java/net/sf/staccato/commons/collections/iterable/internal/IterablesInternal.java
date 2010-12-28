@@ -15,8 +15,8 @@ package net.sf.staccato.commons.collections.iterable.internal;
 import java.util.Collection;
 import java.util.Iterator;
 
-import net.sf.staccato.commons.lang.Applicable;
-import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.defs.Applicable;
+import net.sf.staccato.commons.defs.Evaluable;
 import net.sf.staccato.commons.lang.Option;
 
 /**

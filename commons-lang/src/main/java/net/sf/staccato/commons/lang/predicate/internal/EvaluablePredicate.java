@@ -12,7 +12,7 @@
  */
 package net.sf.staccato.commons.lang.predicate.internal;
 
-import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.defs.Evaluable;
 
 /**
  * @author flbulgarelli

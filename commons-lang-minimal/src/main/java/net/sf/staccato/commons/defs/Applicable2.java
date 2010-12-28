@@ -10,11 +10,11 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang;
+package net.sf.staccato.commons.defs;
 
 /**
- * {@link Applicable3}s are transformations that take three arguments and whose
- * result is a return value.{@link Applicable3}s <strong>should not</strong>
+ * {@link Applicable2}s are transformations that take two arguments and whose
+ * result is a return value. {@link Applicable2}s <strong>should not</strong>
  * have side effects
  * 
  * @author flbulgarelli
@@ -23,25 +23,21 @@ package net.sf.staccato.commons.lang;
  *          first argument type
  * @param <T2>
  *          second argument type
- * @param <T3>
- *          third argument type
  * @param <R>
  *          return type
  */
-public interface Applicable3<T1, T2, T3, R> {
+public interface Applicable2<T1, T2, R> {
 
 	/**
 	 * Performs a transformation on the given element, and returns its result.
-	 * This method <strong>should not</strong> have side effects.
+	 * This method <strong>should not</strong> have side effects
 	 * 
 	 * @param arg1
 	 *          the first computation argument
 	 * @param arg2
 	 *          the second computation argument
-	 * @param arg3
-	 *          the third computation argument
 	 * @return the transformation result
 	 */
-	R apply(T1 arg1, T2 arg2, T3 arg3);
+	R apply(T1 arg1, T2 arg2);
 
 }

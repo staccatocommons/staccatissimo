@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.regex.Pattern;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.defs.Evaluable;
 import net.sf.staccato.commons.lang.predicate.internal.All;
 import net.sf.staccato.commons.lang.predicate.internal.Any;
 import net.sf.staccato.commons.lang.predicate.internal.ContainsSubstringPredicate;

@@ -16,8 +16,9 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.value.Immutable;
-import net.sf.staccato.commons.lang.value.Value;
+import net.sf.staccato.commons.defs.Executable;
+import net.sf.staccato.commons.defs.restriction.Immutable;
+import net.sf.staccato.commons.defs.restriction.Value;
 
 /**
  * An undefined {@link Option}, that it, and option that does not have a value

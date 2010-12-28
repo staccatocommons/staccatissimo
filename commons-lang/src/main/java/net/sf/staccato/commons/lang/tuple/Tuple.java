@@ -17,9 +17,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
-import net.sf.staccato.commons.lang.value.ConditionallySerializable;
-import net.sf.staccato.commons.lang.value.Value;
+import net.sf.staccato.commons.defs.restriction.ConditionallyImmutable;
+import net.sf.staccato.commons.defs.restriction.ConditionallySerializable;
+import net.sf.staccato.commons.defs.restriction.Value;
 
 /**
  * <p>

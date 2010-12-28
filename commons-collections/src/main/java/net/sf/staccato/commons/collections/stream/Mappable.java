@@ -13,7 +13,7 @@
 package net.sf.staccato.commons.collections.stream;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Applicable;
+import net.sf.staccato.commons.defs.Applicable;
 
 /**
  * {@link Stream} interface for mapping - aka collecting - elements.

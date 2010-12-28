@@ -16,11 +16,12 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.defs.Executable;
+import net.sf.staccato.commons.defs.restriction.ConditionallyImmutable;
+import net.sf.staccato.commons.defs.restriction.ConditionallySerializable;
+import net.sf.staccato.commons.defs.restriction.Value;
 import net.sf.staccato.commons.lang.internal.ToString;
 import net.sf.staccato.commons.lang.value.BasicEquals;
-import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
-import net.sf.staccato.commons.lang.value.ConditionallySerializable;
-import net.sf.staccato.commons.lang.value.Value;
 
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;

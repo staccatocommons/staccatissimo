@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.value;
+package net.sf.staccato.commons.defs.restriction;
 
 import java.io.Serializable;
 import java.lang.annotation.Documented;
@@ -21,7 +21,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Date;
 
-import net.sf.staccato.commons.lang.restriction.Restriction;
 
 /**
  * 

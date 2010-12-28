@@ -14,6 +14,7 @@ package net.sf.staccato.commons.lang.value;
 
 import java.io.Serializable;
 
+import net.sf.staccato.commons.defs.restriction.Value;
 import net.sf.staccato.commons.lang.internal.ToString;
 
 import org.apache.commons.lang.builder.EqualsBuilder;

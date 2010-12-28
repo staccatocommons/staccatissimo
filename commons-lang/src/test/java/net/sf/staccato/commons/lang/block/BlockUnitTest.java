@@ -13,7 +13,7 @@
 package net.sf.staccato.commons.lang.block;
 
 import static org.junit.Assert.assertEquals;
-import net.sf.staccato.commons.lang.Executable;
+import net.sf.staccato.commons.defs.Executable;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.apache.commons.lang.mutable.MutableInt;
@@ -41,7 +41,7 @@ public class BlockUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.lang.block.Block#then(net.sf.staccato.commons.lang.Executable)}
+	 * {@link net.sf.staccato.commons.lang.block.Block#then(net.sf.staccato.commons.defs.Executable)}
 	 * .
 	 */
 	@Test

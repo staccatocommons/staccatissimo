@@ -15,11 +15,11 @@ package net.sf.staccato.commons.lang;
 import java.io.Serializable;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.defs.restriction.ConditionallyImmutable;
+import net.sf.staccato.commons.defs.restriction.ConditionallySerializable;
+import net.sf.staccato.commons.defs.restriction.Value;
 import net.sf.staccato.commons.lang.internal.ToString;
 import net.sf.staccato.commons.lang.value.BasicEquals;
-import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
-import net.sf.staccato.commons.lang.value.ConditionallySerializable;
-import net.sf.staccato.commons.lang.value.Value;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

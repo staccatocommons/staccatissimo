@@ -13,7 +13,7 @@
 package net.sf.staccato.commons.lang.function;
 
 import static org.junit.Assert.assertEquals;
-import net.sf.staccato.commons.lang.Applicable3;
+import net.sf.staccato.commons.defs.Applicable3;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;

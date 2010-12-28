@@ -20,7 +20,7 @@ import java.util.Iterator;
 
 import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.defs.Evaluable;
 
 /**
  * A bunch of static methods that extend the {@link java.util.Collections}

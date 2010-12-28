@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.defs.Evaluable;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;

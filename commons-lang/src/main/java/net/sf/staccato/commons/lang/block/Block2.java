@@ -13,8 +13,8 @@
 package net.sf.staccato.commons.lang.block;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Applicable;
-import net.sf.staccato.commons.lang.Executable2;
+import net.sf.staccato.commons.defs.Applicable;
+import net.sf.staccato.commons.defs.Executable2;
 import net.sf.staccato.commons.lang.SoftException;
 
 /**

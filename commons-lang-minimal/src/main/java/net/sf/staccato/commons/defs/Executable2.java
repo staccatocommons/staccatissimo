@@ -10,16 +10,16 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang;
+package net.sf.staccato.commons.defs;
 
 
 /**
  * <p>
- * {@link Executable3}s are computations that take three arguments and whose
+ * {@link Executable2}s are computations that take two arguments and whose
  * result is a side effect, instead of a return value.
  * </p>
  * <p>
- * For a more in dept discussion about {@link Executable3}, consult
+ * For a more in dept discussion about {@link Executable2}, consult
  * {@link Executable} javadoc.
  * </p>
  * 
@@ -29,20 +29,17 @@ package net.sf.staccato.commons.lang;
  *          first computation argument type
  * @param <T2>
  *          second computation argument type
- * @param <T3>
- *          third computation argument type
  * @see Executable
  */
-public interface Executable3<T1, T2, T3> {
+public interface Executable2<T1, T2> {
 
 	/**
-	 * Performing a side-effect computation.
+	 * Performs a side-effect computation.
 	 * 
 	 * @see Executable#exec(Object)
-	 * @param arg1
-	 * @param arg2
-	 * @param arg3
+	 * @param argument1
+	 * @param argument2
 	 */
-	void exec(T1 arg1, T2 arg2, T3 arg3);
+	void exec(T1 argument1, T2 argument2);
 
 }

@@ -15,7 +15,7 @@ package net.sf.staccato.commons.collections.stream;
 import java.util.List;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.defs.Evaluable;
 import net.sf.staccato.commons.lang.tuple.Pair;
 
 /**

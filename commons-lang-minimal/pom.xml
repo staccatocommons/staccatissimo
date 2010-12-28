@@ -6,6 +6,13 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <groupId>net.sf.staccato</groupId>
-  <artifactId>commons-lang-minimal</artifactId>
+  <artifactId>commons-defs</artifactId>
+  <inceptionYear>2010</inceptionYear>
+  <name>Staccato-Commons-Definitions</name>
   <version>1.0-SNAPSHOT</version>
+  <url>http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs</url>
+    <scm>
+       <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-defs</developerConnection>
+       <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-defs/</url>
+    </scm>
 </project>

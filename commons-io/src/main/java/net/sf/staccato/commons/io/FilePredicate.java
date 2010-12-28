@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.FileFilter;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.defs.Evaluable;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**

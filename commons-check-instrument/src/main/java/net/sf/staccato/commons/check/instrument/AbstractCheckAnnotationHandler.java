@@ -68,7 +68,8 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 	public void preProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
 		if (ignoreReturns || !deactivableSupport.isActive())
 			return;
-		Ensure.is(!context.isVoid(), "Context must not be void");
+		// TODO handle properly
+		Ensure.is(!context.isVoid(), "Context must not be void: %s", context.getMethod().getLongName());
 		try {
 			context.getMethod().insertAfter(
 				ASSERT_FULLY_QUALIFIED_NAME + createMethodCheck(annotation, context) + ";");

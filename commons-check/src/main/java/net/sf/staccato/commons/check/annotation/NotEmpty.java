@@ -18,8 +18,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.sf.staccato.commons.lang.collection.EmptyAware;
-import net.sf.staccato.commons.lang.restriction.Restriction;
+import net.sf.staccato.commons.defs.EmptyAware;
+import net.sf.staccato.commons.defs.restriction.Restriction;
 
 /**
  * A check annotation that signals that the annotated element can not be empty.

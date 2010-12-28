@@ -14,9 +14,9 @@ package net.sf.staccato.commons.lang.function;
 
 import net.sf.staccato.commons.check.annotation.ForceChecks;
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Applicable;
-import net.sf.staccato.commons.lang.Applicable2;
-import net.sf.staccato.commons.lang.Applicable3;
+import net.sf.staccato.commons.defs.Applicable;
+import net.sf.staccato.commons.defs.Applicable2;
+import net.sf.staccato.commons.defs.Applicable3;
 
 /**
  * A one argument function.

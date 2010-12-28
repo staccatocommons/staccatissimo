@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-import net.sf.staccato.commons.lang.collection.EmptyAware;
-import net.sf.staccato.commons.lang.collection.SizeAware;
+import net.sf.staccato.commons.defs.EmptyAware;
+import net.sf.staccato.commons.defs.SizeAware;
 
 import org.junit.Test;
 
@@ -116,6 +116,22 @@ public class CheckUnitTest {
 	@Test
 	public void testisNotEmptyCharSequence() {
 		c.isNotEmpty(VAR_NAME, "hola");
+	}
+
+	/**
+	 * Test method for {@link Check#isNotEmpty(String, Iterable)}
+	 */
+	@Test
+	public void testisNotEmptyIterable() {
+		c.isNotEmpty(VAR_NAME, (Iterable<String>) Arrays.asList("foo", "bar"));
+	}
+
+	/**
+	 * Test method for {@link Check#isNotEmpty(String, Iterable)} on failure
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testisNotEmptyIterable_Fail() {
+		c.isNotEmpty(VAR_NAME, (Iterable<String>) Collections.<String> emptyList());
 	}
 
 	@Test(expected = IllegalArgumentException.class)

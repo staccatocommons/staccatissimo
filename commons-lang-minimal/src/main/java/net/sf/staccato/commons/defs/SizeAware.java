@@ -10,25 +10,34 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.collection;
+package net.sf.staccato.commons.defs;
 
 /**
- * Interface for objects that understand {@link #isEmpty()} message.
+ * Interface for objects that understand {@link #size()} message. It extends the
+ * {@link EmptyAware} interface.
  * 
  * This interface is deliberately too generic, and does not make any assumption
- * about the nature of the {@link EmptyAware} object - it may be array-like,
+ * about the nature of the {@link SizeAware} object - it may be array-like,
  * collection-like, a domain model object, string-like, etc.
  * 
  * @author flbulgarelli
  * 
  */
-public interface EmptyAware {
+public interface SizeAware extends EmptyAware {
 
 	/**
-	 * Answers if this {@link EmptyAware} is empty
+	 * Answers the size of this size aware, whatever it means. It should be a
+	 * positive int.
 	 * 
-	 * @return if the object is empty, whatever it means
+	 * @return the size
 	 */
-	boolean isEmpty();
+	int size();
 
+	/**
+	 * Answers if this {@link SizeAware} is empty. It should always be true that
+	 * 
+	 * <code>aSizeAware.isEmpty() == (aSizeAware.size() == 0)</code>
+	 */
+	@Override
+	public boolean isEmpty();
 }

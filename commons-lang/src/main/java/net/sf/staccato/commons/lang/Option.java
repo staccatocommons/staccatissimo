@@ -17,11 +17,12 @@ import java.io.Serializable;
 import java.util.Map;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.collection.ContainsAware;
-import net.sf.staccato.commons.lang.collection.SizeAware;
-import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
-import net.sf.staccato.commons.lang.value.ConditionallySerializable;
-import net.sf.staccato.commons.lang.value.Value;
+import net.sf.staccato.commons.defs.ContainsAware;
+import net.sf.staccato.commons.defs.Executable;
+import net.sf.staccato.commons.defs.SizeAware;
+import net.sf.staccato.commons.defs.restriction.ConditionallyImmutable;
+import net.sf.staccato.commons.defs.restriction.ConditionallySerializable;
+import net.sf.staccato.commons.defs.restriction.Value;
 
 /**
  * <p>

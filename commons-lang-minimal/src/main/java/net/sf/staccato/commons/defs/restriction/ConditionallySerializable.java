@@ -1,6 +1,6 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team   
- 
+ Copyright (c) 2010, The Staccato-Commons Team
+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation; version 3 of the License.
@@ -10,8 +10,9 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.value;
+package net.sf.staccato.commons.defs.restriction;
 
+import java.io.Serializable;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -19,17 +20,18 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.sf.staccato.commons.lang.restriction.Restriction;
 
 /**
- * Classes annotated as {@link Immutable} indicate that their instances are
- * {@link Unmodifiable}, and also either all their attributes are primitives or
- * immutable objects - {@link String}s, {@link Integer}, or have no attributes
- * at all.
+ * {@link ConditionallySerializable} annotated classes that implement the
+ * {@link Serializable} interface, but that can be properly serilized or
+ * deserialized only as long as their attributes attributes are properly
+ * serializable too
  * 
- * {@link Immutable}s are inherently thread-safe.
+ * {@link ConditionallyImmutable} restriction is normally only useful on classes
+ * that have as attributes generic types or interfaces that do not make any
+ * assumption about serialization
  * 
- * @author fbulgarelli
+ * @author flbulgarelli
  * @see Restriction
  */
 @Documented
@@ -37,6 +39,10 @@ import net.sf.staccato.commons.lang.restriction.Restriction;
 @Restriction
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
-public @interface Immutable {
+public @interface ConditionallySerializable {
+	/*
+	 * XXX move from package? integrate in a more generic Conditionally
+	 * annotation? Another example is conditionally comparable
+	 */
 
 }

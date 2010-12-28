@@ -10,7 +10,8 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.format;
+package net.sf.staccato.commons.check.format;
+
 
 /**
  * A class methods to create debug string for pairs of variables names and

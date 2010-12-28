@@ -7,7 +7,7 @@ import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccato.commons.collections.stream.AbstractStream;
 import net.sf.staccato.commons.collections.stream.Stream;
-import net.sf.staccato.commons.lang.Applicable;
+import net.sf.staccato.commons.defs.Applicable;
 
 /**
  * @author flbulgarelli

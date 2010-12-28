@@ -16,7 +16,7 @@ import static junit.framework.Assert.assertEquals;
 
 import java.io.IOException;
 
-import net.sf.staccato.commons.lang.Executable3;
+import net.sf.staccato.commons.defs.Executable3;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 

@@ -19,8 +19,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Collections;
 
-import net.sf.staccato.commons.lang.collection.SizeAware;
-import net.sf.staccato.commons.lang.restriction.Restriction;
+import net.sf.staccato.commons.defs.SizeAware;
+import net.sf.staccato.commons.defs.restriction.Restriction;
 
 /**
  * A check annotation that signals that the annotated element must have an given

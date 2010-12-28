@@ -14,7 +14,7 @@ package net.sf.staccato.commons.lang.predicate;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.defs.Evaluable;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -64,7 +64,7 @@ public class PredicateUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.lang.predicate.Predicate#or(net.sf.staccato.commons.lang.Evaluable)}
+	 * {@link net.sf.staccato.commons.lang.predicate.Predicate#or(net.sf.staccato.commons.defs.Evaluable)}
 	 * .
 	 */
 	@Test
@@ -93,7 +93,7 @@ public class PredicateUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.lang.predicate.Predicate#and(net.sf.staccato.commons.lang.Evaluable)}
+	 * {@link net.sf.staccato.commons.lang.predicate.Predicate#and(net.sf.staccato.commons.defs.Evaluable)}
 	 * .
 	 */
 	@Test

@@ -19,10 +19,10 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import net.sf.staccato.commons.lang.collection.ContainsAware;
-import net.sf.staccato.commons.lang.collection.EmptyAware;
-import net.sf.staccato.commons.lang.collection.SizeAware;
-import net.sf.staccato.commons.lang.format.Var;
+import net.sf.staccato.commons.check.format.Var;
+import net.sf.staccato.commons.defs.ContainsAware;
+import net.sf.staccato.commons.defs.EmptyAware;
+import net.sf.staccato.commons.defs.SizeAware;
 
 /**
  * {@link Check}s are objects that validate conditions. It is heavily inspired
@@ -539,7 +539,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, Iterable<?> var)
 		throws ExceptionType {
-		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.iterator().hasNext());
+		return isNotNull(varName, var).isNotEmptyInternal(varName, var, var.iterator().hasNext());
 	}
 
 	/**

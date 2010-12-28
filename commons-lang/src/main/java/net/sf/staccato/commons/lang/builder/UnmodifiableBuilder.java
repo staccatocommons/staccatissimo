@@ -12,7 +12,7 @@
  */
 package net.sf.staccato.commons.lang.builder;
 
-import net.sf.staccato.commons.lang.value.Unmodifiable;
+import net.sf.staccato.commons.defs.restriction.Unmodifiable;
 
 /**
  * An constant-state builder.

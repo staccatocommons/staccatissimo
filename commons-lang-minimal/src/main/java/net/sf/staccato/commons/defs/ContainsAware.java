@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.lang.collection;
+package net.sf.staccato.commons.defs;
 
 /**
  * Interface for objects that understand {@link #contains(Object)} message.

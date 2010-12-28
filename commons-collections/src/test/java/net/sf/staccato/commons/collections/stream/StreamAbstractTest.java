@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import net.sf.staccato.commons.collections.iterable.Iterables;
-import net.sf.staccato.commons.lang.Applicable;
-import net.sf.staccato.commons.lang.Evaluable;
+import net.sf.staccato.commons.defs.Applicable;
+import net.sf.staccato.commons.defs.Evaluable;
 import net.sf.staccato.commons.lang.Provider;
 import net.sf.staccato.commons.lang.function.Function;
 import net.sf.staccato.commons.lang.function.Function2;
@@ -89,7 +89,7 @@ public abstract class StreamAbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#filter(net.sf.staccato.commons.lang.Evaluable)}
+	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#filter(net.sf.staccato.commons.defs.Evaluable)}
 	 * .
 	 * 
 	 * @param stream
@@ -113,7 +113,7 @@ public abstract class StreamAbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#takeWhile(net.sf.staccato.commons.lang.Evaluable)}
+	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#takeWhile(net.sf.staccato.commons.defs.Evaluable)}
 	 * .
 	 */
 	@Ignore
@@ -245,7 +245,7 @@ public abstract class StreamAbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#find(net.sf.staccato.commons.lang.Evaluable)}
+	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#find(net.sf.staccato.commons.defs.Evaluable)}
 	 * .
 	 * 
 	 * @param stream
@@ -258,7 +258,7 @@ public abstract class StreamAbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#findOrNull(net.sf.staccato.commons.lang.Evaluable)}
+	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#findOrNull(net.sf.staccato.commons.defs.Evaluable)}
 	 * .
 	 * 
 	 * @param stream
@@ -271,7 +271,7 @@ public abstract class StreamAbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#findOrElse(net.sf.staccato.commons.lang.Evaluable, net.sf.staccato.commons.lang.Provider)}
+	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#findOrElse(net.sf.staccato.commons.defs.Evaluable, net.sf.staccato.commons.lang.Provider)}
 	 * .
 	 * 
 	 * @param stream
@@ -287,7 +287,7 @@ public abstract class StreamAbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#all(net.sf.staccato.commons.lang.Evaluable)}
+	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#all(net.sf.staccato.commons.defs.Evaluable)}
 	 * .
 	 * 
 	 * @param stream
@@ -307,7 +307,7 @@ public abstract class StreamAbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#any(net.sf.staccato.commons.lang.Evaluable)}
+	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#any(net.sf.staccato.commons.defs.Evaluable)}
 	 * .
 	 * 
 	 * @param stream
@@ -327,7 +327,7 @@ public abstract class StreamAbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#map(net.sf.staccato.commons.lang.Applicable)}
+	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#map(net.sf.staccato.commons.defs.Applicable)}
 	 * .
 	 * 
 	 * @param stream
