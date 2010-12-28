@@ -12,15 +12,17 @@
  */
 package net.sf.staccato.commons.collections.iterable;
 
+import static net.sf.staccato.commons.testing.junit.Assert.assertContains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 import net.sf.staccato.commons.lang.Evaluable;
-import net.sf.staccato.commons.lang.Executable;
 import net.sf.staccato.commons.lang.predicate.Predicates;
 
 import org.junit.Ignore;
@@ -81,24 +83,22 @@ public class ModifiableIterablesUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link ModifiableIterables#addIfNotNull(java.util.Collection, java.lang.Object)}
-	 * .
-	 */
-	@Ignore
-	@Test
-	public void testAddIfNotNull() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
 	 * {@link ModifiableIterables#move(java.lang.Iterable, java.util.Collection, Evaluable)}
 	 * .
 	 */
-	@Ignore
 	@Test
 	public void testMoveIterableOfTCEvaluableOfT() {
-		fail("Not yet implemented");
+		List<Integer> ints = ModifiableIterables.addAll(
+			new LinkedList<Integer>(),
+			Arrays.asList(4, 5, 9, 10));
+		ArrayList<Integer> moved = ModifiableIterables.move(
+			ints,
+			new ArrayList<Integer>(),
+			Predicates.in(5, 9));
+
+		assertContains(moved, 5);
+		assertContains(moved, 9);
+		assertEquals(Arrays.asList(4, 10), ints);
 	}
 
 	/**
@@ -109,16 +109,6 @@ public class ModifiableIterablesUnitTest {
 	@Ignore
 	@Test
 	public void testMoveIterableOfTIntC() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link ModifiableIterables#foreach(java.lang.Iterable, Executable)} .
-	 */
-	@Ignore
-	@Test
-	public void testForeach() {
 		fail("Not yet implemented");
 	}
 

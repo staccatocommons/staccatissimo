@@ -5,6 +5,7 @@ import static java.util.Collections.emptyList;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static net.sf.staccato.commons.lang.predicate.Predicates.greaterThan;
+import static net.sf.staccato.commons.lang.tuple.Tuple._;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
@@ -19,6 +20,8 @@ import java.util.List;
 import net.sf.staccato.commons.lang.Option;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 import net.sf.staccato.commons.lang.predicate.Predicates;
+import net.sf.staccato.commons.lang.sequence.Sequence;
+import net.sf.staccato.commons.lang.tuple.Pair;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -201,4 +204,39 @@ public class IterablesUnitTest {
 		Iterables.single(integersList);
 	}
 
+	/**
+	 * Test method for
+	 * {@link Iterables#partition(Iterable, net.sf.staccato.commons.lang.Evaluable)}
+	 */
+	@Test
+	public void testPartition() throws Exception {
+		Pair<List<Integer>, List<Integer>> partition = Iterables.partition(
+			Sequence.fromTo(10, 20),
+			new Predicate<Integer>() {
+				public boolean eval(Integer argument) {
+					return argument % 2 == 0;
+				}
+			});
+
+		assertEquals(Iterables.toList(Sequence.fromToBy(10, 20, 2)), partition._1());
+		assertEquals(Iterables.toList(Sequence.fromToBy(11, 20, 2)), partition._2());
+	}
+
+	/**
+	 * Test method for {@link Iterables#take(Iterable, int)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testTake() throws Exception {
+		assertEquals(Arrays.asList(11, 12, 13, 14), Iterables.take(Sequence.fromBy(11, 1), 4));
+	}
+
+	@Test
+	public void testZip() throws Exception {
+		assertEquals(
+			Arrays.asList(_(10, 8), _(12, 7), _(14, 6)),
+			Iterables.zip(Arrays.asList(10, 12, 14, 23), Arrays.asList(8, 7, 6)));
+
+	}
 }

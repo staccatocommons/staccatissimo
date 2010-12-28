@@ -12,15 +12,13 @@
  */
 package net.sf.staccato.commons.collections.iterable;
 
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS;
+import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.addAllInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyOrNoneInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.collectInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.filterInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.foldInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.isEmptyInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.reduceInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.takeInternal;
 import static net.sf.staccato.commons.lang.tuple.Tuple._;
 
@@ -36,8 +34,10 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.check.annotation.ForceChecks;
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.check.annotation.NotEmpty;
 import net.sf.staccato.commons.check.annotation.NotNegative;
 import net.sf.staccato.commons.check.annotation.Size;
 import net.sf.staccato.commons.lang.Applicable;
@@ -96,31 +96,38 @@ public class Iterables {
 	 * @param iterable
 	 * @param amountOfElements
 	 * @return a new list containing at most the first N elements from original
-	 *         iterable
+	 *         iterable.
 	 */
 	@NonNull
-	public static <A> List<A> take(@NonNull Iterable<A> iterable,
-		@NotNegative(AMOUNT_OF_ELEMENTS) int amountOfElements) {
+	@ForceChecks
+	public static <A> List<A> take(@NonNull Iterable<A> iterable, @NotNegative int amountOfElements) {
 		return takeInternal(iterable, amountOfElements, new ArrayList<A>(amountOfElements));
 	}
-
-	// TODO take while
-	// TODO drop while
 
 	/*
 	 * Reduction
 	 */
 
 	@NonNull
-	public static <A> A reduce(@NonNull Iterable<A> iterable,
+	public static <A> A reduce(@NotEmpty Iterable<A> iterable,
 		@NonNull Applicable2<? super A, ? super A, ? extends A> function) {
-		return reduceInternal(iterable, function);
+		Iterator<A> iter = iterable.iterator();
+		if (!iter.hasNext())
+			Ensure.fail(ITERABLE, iterable, "Must be not empty");
+
+		A result = iter.next();
+		for (; iter.hasNext();)
+			result = function.apply(result, iter.next());
+		return result;
 	}
 
 	@NonNull
 	public static <A, B> B fold(@NonNull Iterable<A> iterable, B initial,
 		@NonNull Applicable2<? super B, ? super A, ? extends B> function) {
-		return foldInternal(iterable, initial, function);
+		B result = initial;
+		for (A element : iterable)
+			result = function.apply(result, element);
+		return result;
 	}
 
 	/*
@@ -487,21 +494,31 @@ public class Iterables {
 		return list;
 	}
 
-	/*
-	 * Partioning
-	 */
+	/* Partition */
 
+	/**
+	 * Splits the given iterable by returning two {@link List}s, the first one
+	 * containing those elements that satisfy the given predicate, and the second
+	 * one containing those elements that do not satisfy it
+	 * 
+	 * @param <A>
+	 * @param iterable
+	 * @param predicate
+	 *          the {@link Evaluable} used to determine if elements hould go into
+	 *          the first or second list
+	 * @return a pair of lists
+	 */
 	public static <A> Pair<List<A>, List<A>> partition(@NonNull Iterable<A> iterable,
 		Evaluable<? super A> predicate) {
 
-		List<A> left = new LinkedList<A>();
-		List<A> right = new LinkedList<A>();
+		List<A> first = new LinkedList<A>();
+		List<A> second = new LinkedList<A>();
 		for (A element : iterable)
 			if (predicate.eval(element))
-				left.add(element);
+				first.add(element);
 			else
-				right.add(element);
-		return _(left, right);
+				second.add(element);
+		return _(first, second);
 	}
 
 	/*
@@ -578,6 +595,36 @@ public class Iterables {
 		return result;
 	}
 
+	/**
+	 * Returns a {@link List} formed by pair of elements from the two iterables.
+	 * If any if the {@link Iterable}s is shorter than the other one, the
+	 * remaining elements are discarded.
+	 * <p>
+	 * For example, the following code:
+	 * 
+	 * <pre>
+	 * Iterables.zip(Arrays.asList(10, 12, 14, 23), Arrays.asList(8, 7, 6))
+	 * </pre>
+	 * 
+	 * will return a list equal to:
+	 * 
+	 * <pre>
+	 * Arrays.asList(_(10, 8), _(12, 7), _(14, 6))
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * @param <A>
+	 *          first iterable element type
+	 * @param <B>
+	 *          second iterable element type
+	 * @param iterable1
+	 * @param iterable2
+	 * @return a new list formed by pair of element retrieved from the given
+	 *         iterables. The resulting list size is the minimum of both iterables
+	 *         sizes
+	 * @see #zip(Iterable, Iterable, Applicable2)
+	 */
 	@NonNull
 	public static <A, B> List<Pair<A, B>> zip(@NonNull Iterable<A> iterable1,
 		@NonNull Iterable<B> iterable2) {

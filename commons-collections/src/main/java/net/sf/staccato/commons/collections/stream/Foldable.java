@@ -19,6 +19,13 @@ import net.sf.staccato.commons.lang.Applicable2;
  * {@link Stream} interface for folding -aka injecting - elements - producing a
  * single aggregated result from all the Stream elements.
  * 
+ * {@link Streams} implements lefts folds, which consist of taking an initial
+ * value and a {@link Stream} element, applying a function to them, and then
+ * repeating the process with this result as the next initial value and the next
+ * element from the stream. The last returned value is the folding result.
+ * 
+ * 
+ * 
  * @see <a
  *      href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">Folds</a>
  * @author flbulgarelli
@@ -32,10 +39,19 @@ public interface Foldable<A> {
 	 * @param <B>
 	 * @param initial
 	 * @param function
-	 * @return
+	 * @return the folding result
 	 */
 	<B> B fold(B initial, @NonNull Applicable2<? super B, ? super A, ? extends B> function);
 
+	/**
+	 * (Left)folds the tail of this {@link Stream} using the first element of the
+	 * stream as initial value
+	 * 
+	 * @param function
+	 * @return the folding result
+	 * @throws IllegalStateException
+	 *           if the {@link Stream} is empty
+	 */
 	A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function);
 
 	/**

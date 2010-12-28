@@ -82,7 +82,8 @@ public class Streams {
 
 	/**
 	 * Creates a new {@link Stream} that retrieves elements from the given
-	 * iterator. The resulting stream can not be iterated more than once
+	 * iterator. The resulting stream can not be iterated more than once, thus it
+	 * is inherently mutable
 	 * 
 	 * @param <A>
 	 * @param iterator
@@ -97,7 +98,7 @@ public class Streams {
 	/**
 	 * Creates a new {@link Stream} that retrieves elements from the given
 	 * {@link Enumeration}. The resulting stream can not be iterated more than
-	 * once
+	 * once, thus it is inherently mutable
 	 * 
 	 * @param <A>
 	 * @param enumeration

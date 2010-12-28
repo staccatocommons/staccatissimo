@@ -15,9 +15,7 @@ package net.sf.staccato.commons.collections.iterable.internal;
 import java.util.Collection;
 import java.util.Iterator;
 
-import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.lang.Applicable;
-import net.sf.staccato.commons.lang.Applicable2;
 import net.sf.staccato.commons.lang.Evaluable;
 import net.sf.staccato.commons.lang.Option;
 
@@ -55,26 +53,6 @@ public class IterablesInternal {
 
 	public static <T> boolean isEmptyInternal(Iterable<T> iterable) {
 		return !iterable.iterator().hasNext();
-	}
-
-	public static <T> T reduceInternal(Iterable<T> iterable,
-		Applicable2<? super T, ? super T, ? extends T> applyer) {
-		Iterator<T> iter = iterable.iterator();
-		if (!iter.hasNext())
-			Ensure.fail(ITERABLE, iterable, "Must be not empty");
-
-		T result = iter.next();
-		for (; iter.hasNext();)
-			result = applyer.apply(result, iter.next());
-		return result;
-	}
-
-	public static <O, I> O foldInternal(Iterable<I> iterable, O initial,
-		Applicable2<? super O, ? super I, ? extends O> applyer) {
-		O result = initial;
-		for (I element : iterable)
-			result = applyer.apply(result, element);
-		return result;
 	}
 
 	public static <T, C extends Collection<T>> C filterInternal(Iterable<T> iterable,

@@ -24,7 +24,9 @@ import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeThat;
 import static org.junit.Assume.assumeTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import net.sf.staccato.commons.collections.iterable.Iterables;
@@ -126,7 +128,7 @@ public abstract class StreamAbstractTest {
 	 * .
 	 */
 	@Theory
-	public void testTake(int size, Stream<Integer> stream) {
+	public void testTake(int size, Stream<?> stream) {
 		assumeThat(size, lessThanOrEqualTo(stream.size()));
 		assertEquals(size, stream.take(size).size());
 	}
@@ -148,10 +150,18 @@ public abstract class StreamAbstractTest {
 	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#reduce(net.sf.staccato.commons.lang.Applicable2)}
 	 * .
 	 */
-	@Ignore
 	@Theory
-	public void testReduce() {
-		fail("Not yet implemented");
+	public void testFold(Stream<Integer> stream, final Function<Integer, Integer> function) {
+		assumeTrue(function != functions[3]);
+		assertEquals(
+			stream.map(function).toList(),
+			stream.fold(new ArrayList<Integer>(), new Function2<List<Integer>, Integer, List<Integer>>() {
+				public List<Integer> apply(List<Integer> arg1, Integer arg2) {
+					arg1.add(function.apply(arg2));
+					return arg1;
+				}
+			}));
+
 	}
 
 	/**
@@ -160,9 +170,22 @@ public abstract class StreamAbstractTest {
 	 * .
 	 */
 	@Ignore
+	@Test(expected = IllegalStateException.class)
 	@Theory
-	public void testFold() {
-		fail("Not yet implemented");
+	public void testReduce_Fail(Stream<Integer> stream) {
+		assumeTrue(stream.isEmpty());
+		stream.reduce(integerSum());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#fold(java.lang.Object, net.sf.staccato.commons.lang.Applicable2)}
+	 */
+	@Test
+	@Theory
+	public void testReduce(Stream<Integer> stream) {
+		assumeTrue(!stream.isEmpty());
+		assertEquals(stream.reduce(integerSum()), stream.fold(0, integerSum()));
 	}
 
 	/**

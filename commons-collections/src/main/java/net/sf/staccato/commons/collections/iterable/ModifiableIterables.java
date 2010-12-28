@@ -21,7 +21,6 @@ import java.util.Iterator;
 import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.lang.Evaluable;
-import net.sf.staccato.commons.lang.Executable;
 
 /**
  * A bunch of static methods that extend the {@link java.util.Collections}
@@ -114,19 +113,6 @@ public class ModifiableIterables {
 		return collection;
 	}
 
-	/**
-	 * Adds an element to the given collection, if this element is not null.
-	 * Otherwise, does nothing.
-	 * 
-	 * @param <T>
-	 * @param collection
-	 * @param element
-	 * @return if the element has been added or not
-	 */
-	public static <T> boolean addIfNotNull(@NonNull Collection<? super T> collection, T element) {
-		return element == null ? false : collection.add(element);
-	}
-
 	/*
 	 * Moving
 	 */
@@ -180,19 +166,4 @@ public class ModifiableIterables {
 		return collection;
 	}
 
-	/**
-	 * Executes a block for each of the elements of this iterable.
-	 * 
-	 * @param <T>
-	 * @param iterable
-	 * @param block
-	 * @return the given iterable
-	 */
-	@NonNull
-	public static <T> Iterable<T> foreach(@NonNull Iterable<T> iterable,
-		@NonNull Executable<? super T> block) {
-		for (T element : iterable)
-			block.exec(element);
-		return iterable;
-	}
 }

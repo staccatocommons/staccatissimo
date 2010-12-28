@@ -87,12 +87,14 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
-		return IterablesInternal.reduceInternal(this, function);
+		if (isEmpty())
+			throw new IllegalStateException("Can not reduce an empty stream");
+		return Iterables.reduce(this, function);
 	}
 
 	@Override
 	public <O> O fold(O initial, Applicable2<? super O, ? super A, ? extends O> function) {
-		return IterablesInternal.foldInternal(this, initial, function);
+		return Iterables.fold(this, initial, function);
 	}
 
 	@Override

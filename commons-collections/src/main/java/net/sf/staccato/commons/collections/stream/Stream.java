@@ -45,9 +45,9 @@ import net.sf.staccato.commons.lang.value.ConditionallyImmutable;
  * <p>
  * {@link Stream}s implementors are required to be unmodifiable, and
  * {@link #iterator()} message must always return an unmodifible
- * {@link Iterator}. However, nothing prevents sources from being immutable, nor
- * being side-effect-free, so {@link Streams} will have such characteristics as
- * long as its sources has them
+ * {@link Iterator}. However, nothing prevents sources or their elements from
+ * being mutable, so {@link Streams} will be immutable as long as its source and
+ * its elements are.
  * </p>
  * 
  * @author fbulgarelli
