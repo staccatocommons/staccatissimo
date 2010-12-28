@@ -25,7 +25,6 @@ import java.lang.annotation.Target;
  * constraints over annotated elements.
  * </p>
  * <p>
- * <p>
  * Restrictions may express preconditions, postconditions or invariants,
  * depending on the specific annotation type and on the annotated element:
  * <ul>
@@ -69,12 +68,8 @@ import java.lang.annotation.Target;
  * <strong>must</strong> be assumed to have being removed</li>
  * </ol>
  * <li>Elements not annotated with restrictions in supertypes but that however
- * observe restrictions compatible with some restriction annotated
- * <strong>may</strong>, be annotated with such annotation restrictions</li>
- * <li>Absence of a Restriction in scenarios other than those previously
- * mentioned <strong>must not</strong> being interpreted as the absence of the
- * restriction. Instead, the restriction is subject to the element documentation
- * </li>
+ * observe constraints compatible with some {@link Restriction},
+ * <strong>may</strong> be annotated with such Restriction</li>
  * </ol>
  * </p>
  * <p>
