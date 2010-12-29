@@ -19,6 +19,7 @@ import java.util.Map;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.defs.ContainsAware;
 import net.sf.staccato.commons.defs.Executable;
+import net.sf.staccato.commons.defs.Provider;
 import net.sf.staccato.commons.defs.SizeAware;
 import net.sf.staccato.commons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccato.commons.defs.restriction.ConditionallySerializable;

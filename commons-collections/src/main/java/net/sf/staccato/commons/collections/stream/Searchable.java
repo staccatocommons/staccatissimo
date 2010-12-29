@@ -16,9 +16,9 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.defs.Evaluable;
+import net.sf.staccato.commons.defs.Provider;
 import net.sf.staccato.commons.lang.None;
 import net.sf.staccato.commons.lang.Option;
-import net.sf.staccato.commons.lang.Provider;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 
 /**

@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.lang;
 
+import net.sf.staccato.commons.defs.Provider;
+
 /**
  * 
  * A {@link Lazy} is an abstract wrapper around a value initialization code that

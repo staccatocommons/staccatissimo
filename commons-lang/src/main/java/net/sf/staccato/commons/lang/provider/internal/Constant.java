@@ -14,7 +14,7 @@ package net.sf.staccato.commons.lang.provider.internal;
 
 import java.io.Serializable;
 
-import net.sf.staccato.commons.lang.Provider;
+import net.sf.staccato.commons.defs.Provider;
 
 /**
  * {@link Constant} is a generic {@link Provider} that wraps another object.

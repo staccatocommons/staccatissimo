@@ -19,7 +19,7 @@ import static org.junit.Assert.assertSame;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-import net.sf.staccato.commons.lang.Provider;
+import net.sf.staccato.commons.defs.Provider;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 

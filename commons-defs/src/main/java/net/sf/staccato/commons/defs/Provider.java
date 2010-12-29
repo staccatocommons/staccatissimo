@@ -11,7 +11,7 @@
  GNU Lesser General Public License for more details.
  */
 
-package net.sf.staccato.commons.lang;
+package net.sf.staccato.commons.defs;
 
 /**
  * A {@link Provider} is an object that is capable of returning another one.

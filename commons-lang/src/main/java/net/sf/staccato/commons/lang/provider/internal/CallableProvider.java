@@ -15,7 +15,7 @@ package net.sf.staccato.commons.lang.provider.internal;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import net.sf.staccato.commons.lang.Provider;
+import net.sf.staccato.commons.defs.Provider;
 import net.sf.staccato.commons.lang.SoftException;
 
 /**

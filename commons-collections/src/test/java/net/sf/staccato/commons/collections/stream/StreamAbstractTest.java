@@ -32,7 +32,7 @@ import java.util.NoSuchElementException;
 import net.sf.staccato.commons.collections.iterable.Iterables;
 import net.sf.staccato.commons.defs.Applicable;
 import net.sf.staccato.commons.defs.Evaluable;
-import net.sf.staccato.commons.lang.Provider;
+import net.sf.staccato.commons.defs.Provider;
 import net.sf.staccato.commons.lang.function.Function;
 import net.sf.staccato.commons.lang.function.Function2;
 import net.sf.staccato.commons.lang.function.Functions;
@@ -234,7 +234,7 @@ public abstract class StreamAbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#anyOrElse(net.sf.staccato.commons.lang.Provider)}
+	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#anyOrElse(net.sf.staccato.commons.defs.Provider)}
 	 * .
 	 */
 	@Ignore
@@ -271,7 +271,7 @@ public abstract class StreamAbstractTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#findOrElse(net.sf.staccato.commons.defs.Evaluable, net.sf.staccato.commons.lang.Provider)}
+	 * {@link net.sf.staccato.commons.collections.stream.AbstractStream#findOrElse(net.sf.staccato.commons.defs.Evaluable, net.sf.staccato.commons.defs.Provider)}
 	 * .
 	 * 
 	 * @param stream

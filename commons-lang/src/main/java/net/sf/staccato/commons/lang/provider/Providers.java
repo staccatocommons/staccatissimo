@@ -15,7 +15,7 @@ package net.sf.staccato.commons.lang.provider;
 import java.util.concurrent.Callable;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.Provider;
+import net.sf.staccato.commons.defs.Provider;
 import net.sf.staccato.commons.lang.provider.internal.CallableProvider;
 import net.sf.staccato.commons.lang.provider.internal.Constant;
 import net.sf.staccato.commons.lang.provider.internal.NullProvider;

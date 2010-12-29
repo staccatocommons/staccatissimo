@@ -34,8 +34,8 @@ import net.sf.staccato.commons.collections.stream.impl.internal.TakeWhileStream;
 import net.sf.staccato.commons.defs.Applicable;
 import net.sf.staccato.commons.defs.Applicable2;
 import net.sf.staccato.commons.defs.Evaluable;
+import net.sf.staccato.commons.defs.Provider;
 import net.sf.staccato.commons.lang.Option;
-import net.sf.staccato.commons.lang.Provider;
 import net.sf.staccato.commons.lang.tuple.Pair;
 import net.sf.staccato.commons.lang.value.NamedTupleToStringStyle;
 

@@ -17,6 +17,7 @@ import java.util.Iterator;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.defs.Executable;
+import net.sf.staccato.commons.defs.Provider;
 import net.sf.staccato.commons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccato.commons.defs.restriction.ConditionallySerializable;
 import net.sf.staccato.commons.defs.restriction.Value;
