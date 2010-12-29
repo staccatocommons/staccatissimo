@@ -82,7 +82,7 @@
                         <artifactId>doclet</artifactId>
                         <version>5.1</version>
                     </docletArtifact>
-                    <additionalparam>-operations -visibility -types -enumerations -enumconstants -collapsible</additionalparam>
+                    <additionalparam>-operations -visibility -types -enumerations -enumconstants -collapsible -link http://staccatocommons.sourceforge.net/staccatissimo/commonscheck/apidocs -link http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs -link http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs -link http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs</additionalparam>
                     <useStandardDocletOptions>true</useStandardDocletOptions>
                 </configuration>
             </plugin>
