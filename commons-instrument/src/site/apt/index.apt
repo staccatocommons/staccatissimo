@@ -1,9 +1,9 @@
 About Staccato-Commons-Instrument
  
- Staccato-Commons-Instrument is the annotation-oriented instrumentation library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}, built on top of {{{http://www.javassist.org}Javassist}}, which allows compile-time annotation processing in an event-handler fashion.       
+ Staccato-Commons-Instrument is the annotation-oriented instrumentation tool of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}, built on top of {{{http://www.javassist.org}Javassist}}. It allows compile-time annotation processing and class instrumentation in an event-handling fashion.       
  
 Prealpha state 
 
- Staccato-Commons-Collection is still in a prealpha state, and although it fully implements most of previous features, documentation is not yet fully documented nor tested, and types and packages are likely to change in the near future without notice. It is not recommended to use it in production systems yet. 
+ Staccato-Commons-Instrument is still in a prealpha state, and although it fully implements most of previous features, documentation is not yet fully documented nor tested, and types and packages are likely to change in the near future without notice. It is not recommended to use it in production systems yet. 
  
  
