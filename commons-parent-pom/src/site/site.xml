@@ -6,10 +6,11 @@
   </bannerLeft>  
   <body>
     <links>
+      <item name="Staccato-Commons-Defs" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs" />
+      <item name="Staccato-Commons-Check" href="http://staccatocommons.sourceforge.net/staccatissimo/commonscheck"/>      
       <item name="Staccato-Commons-Lang" href="http://staccatocommons.sourceforge.net/staccatissimo/commonslang" />
       <item name="Staccato-Commons-Collections" href="http://staccatocommons.sourceforge.net/staccatissimo/commonscollections"/>
       <item name="Staccato-Commons-IO" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsio"/>
-      <item name="Staccato-Commons-Check" href="http://staccatocommons.sourceforge.net/staccatissimo/commonscheck"/>
       <item name="Staccato-Commons-Instrument" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument"/>
       <item name="Staccato-Commons-Check-Instrument" href="http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrument"/>
     </links>
