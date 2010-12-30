@@ -17,6 +17,11 @@
 			<url>${distribution.site.url}/staccatissimo/commonsio</url>
 		</site>
 	</distributionManagement>
+	<scm>
+        <connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-io</connection>
+        <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-io</developerConnection>
+        <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-io/</url>
+    </scm>
 	<build>
 		<plugins>
             <plugin>

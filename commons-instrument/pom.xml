@@ -12,6 +12,17 @@
 	<name>Staccato-Commons-Instrument</name>
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument</url>
 	<inceptionYear>2010</inceptionYear>
+	<scm>
+        <connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-instrument</connection>
+        <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-instrument</developerConnection>
+        <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-instrument/</url>
+    </scm>
+	<distributionManagement>
+		<site>
+			<id> ${distribution.site.id}</id>
+			<url>${distribution.site.url}/staccatissimo/commonsinstrument</url>
+		</site>
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>javassist</groupId>

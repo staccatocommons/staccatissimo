@@ -1,31 +1,33 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>commons-parent-pom</artifactId>
-    <groupId>net.sf.staccato</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
-  <groupId>net.sf.staccato</groupId>
-  <artifactId>commons-check</artifactId>
-  <name>Staccato-Commons-Check</name>
-  <version>1.0-SNAPSHOT</version>
-  <inceptionYear>2010</inceptionYear>
-  <url>http://staccatocommons.sourceforge.net/staccatissimo/commonscheck</url>
-  <scm>
-       <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-check</developerConnection>
-       <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-check/</url>
-  </scm>
-  <distributionManagement>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>commons-parent-pom</artifactId>
+		<groupId>net.sf.staccato</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<groupId>net.sf.staccato</groupId>
+	<artifactId>commons-check</artifactId>
+	<name>Staccato-Commons-Check</name>
+	<version>1.0-SNAPSHOT</version>
+	<inceptionYear>2010</inceptionYear>
+	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonscheck</url>
+	<scm>
+        <connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-check</connection>
+		<developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-check</developerConnection>
+		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-check/</url>
+	</scm>
+	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
 			<url>${distribution.site.url}/staccatissimo/commonscheck</url>
 		</site>
 	</distributionManagement>
-  <dependencies>
-  	<dependency>
-  		<groupId>net.sf.staccato</groupId>
-  		<artifactId>commons-defs</artifactId>
-  		<version>1.0-SNAPSHOT</version>
-  	</dependency>
-  </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>net.sf.staccato</groupId>
+			<artifactId>commons-defs</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
