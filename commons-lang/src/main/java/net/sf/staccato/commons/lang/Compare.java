@@ -29,8 +29,8 @@ import org.apache.commons.lang.ObjectUtils;
 public class Compare {
 
 	/**
-	 * Tests that given three {@link Comparable}s element, min and max, is true
-	 * that:
+	 * Tests that given three {@link Comparable}s <code>element</code>,
+	 * <code>min</code> and <code>max</code>, is true that:
 	 * 
 	 * <pre>
 	 * min &lt;= element &lt;= max
@@ -52,8 +52,9 @@ public class Compare {
 	}
 
 	/**
-	 * Tests that given three {@link Comparable}s element, min and max, and a
-	 * {@link Comparator}, using that comparator is true that:
+	 * Tests that given three {@link Comparable}s <code>element</code>,
+	 * <code>min</code> and <code>max</code>, and a {@link Comparator}, using that
+	 * comparator is true that:
 	 * 
 	 * <pre>
 	 * min &lt;= element &lt;= max
@@ -78,8 +79,8 @@ public class Compare {
 	}
 
 	/**
-	 * Tests that given three <code>long</code>s element, min and max, is true
-	 * that:
+	 * Tests that given three <code>long</code>s <code>element</code>,
+	 * <code>min</code> and <code>max</code>, is true that:
 	 * 
 	 * <pre>
 	 * min &lt;= element &lt;= max
@@ -98,8 +99,8 @@ public class Compare {
 	}
 
 	/**
-	 * Tests that given three <code>int</code>s element, min and max, is true
-	 * that:
+	 * Tests that given three <code>int</code>s <code>element</code>,
+	 * <code>min</code> and <code>max</code>, is true that:
 	 * 
 	 * <pre>
 	 * min &lt;= element &lt;= max

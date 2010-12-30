@@ -15,6 +15,26 @@ package net.sf.staccato.commons.lang.value;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
+ * A {@link ToStringStyle} that formats an object like a named-tuple, were the
+ * name is the object's class, and its components are its attributes.
+ * 
+ * For example, using this style, an instance of following class:
+ * 
+ * <pre>
+ * class Foo {
+ *  private String  bar;
+ *  private int foobar;
+ *   ....
+ * }
+ * </pre>
+ * 
+ * with bar = "hello" and foobar = 10, will be formatted as
+ * 
+ * <pre>
+ * Foo(hello, 10)
+ * </pre>
+ * 
+ * 
  * @author flbulgarelli
  * 
  */

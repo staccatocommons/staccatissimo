@@ -19,9 +19,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 
 /**
  * Enumeration of equalty-test scenarios that helps on building effective
- * {@link Object#equals(Object)} method
+ * {@link Object#equals(Object)} method.
  * 
- * Normal usage scenario is the following
+ * Normal usage scenario is the following:
  * 
  * <pre>
  * public boolean equals(Object obj) {
@@ -44,7 +44,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
  * 
  * {@link BasicEquals} implements rule nº 3 using a class-comparison strategy -
  * as opposed to instanceof-comparison strategy. In many scenarios this is just
- * enough, but rhis may not be the better strategy always, so client code should
+ * enough, but this may not be the better strategy always, so client code should
  * take care about it.
  * 
  * @author flbulgarelli
@@ -107,9 +107,9 @@ public enum BasicEquals {
 	 * @param that
 	 *          the "right hand" objet of the equlty test, that is, the object
 	 *          that is parameter of the the equals message the
-	 * @return {@link #NEVER} if that is null or its class is not the same that
-	 *         this_ class, {@link #ALWAYS} if both objects are the same, or
-	 *         {@link #MAYBE} otherwise
+	 * @return {@link #NEVER} if <code>that</code> is null or its class is not the
+	 *         same that <code>this_.getClass()</code>, {@link #ALWAYS} if both
+	 *         objects are the same, or {@link #MAYBE} otherwise
 	 */
 	@NonNull
 	@ForceChecks

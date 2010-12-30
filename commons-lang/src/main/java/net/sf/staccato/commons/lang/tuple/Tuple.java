@@ -24,7 +24,7 @@ import net.sf.staccato.commons.defs.restriction.Value;
 /**
  * <p>
  * A {@link Tuple} is a fixed size sequence of heterogeneous objects. They are
- * unmodifiable, thus, tuples are immutable as long as their components are, and
+ * {@link ConditionallyImmutable} and {@link ConditionallySerializable}. They
  * are comparable, as long as they components are, too.
  * </p>
  * <p>
@@ -42,12 +42,35 @@ import net.sf.staccato.commons.defs.restriction.Value;
  * elements of hashed sets</li>
  * <li>When comparable components are used, they are valid keys for sorted maps
  * or elements of sorted sets and sorted lists</li>
- * <li>For debugging purposes, when printing to an string multiple objects is
- * needed.</li>
+ * <li>For debugging purposes, when it is needed to print to an string multiple
+ * objects.</li>
+ * <li>When a method needs to return a fixed amount of different results. For
+ * example, using 2-components tuple, it is easy to implement a divmod method
+ * that returns the quotient and modulus of an integral division, with the
+ * signature <code>Pair&lt;Integer, Integer&gt; divMod(int x, int y)</code></li>
  * </ul>
  * 
- * @author flbulgarelli
+ * Although it is possible to create tuples of different sizes from 2 to 4
+ * invoking the appropriate constructor, the recommended way of instantiating
+ * tuples is using the family of class methods named <code>_</code>. Although it
+ * looks odd at first glance, combining it with static imports produces quite
+ * clean code. For example, using again the divMod method:
  * 
+ * <pre>
+ *  import static net.sf.staccato.commons.lang.tuple.Tuple._;
+ *  
+ *  ...
+ *  Pair&lt;Integer, Integer&gt; divMod(int x, int y)
+ *   return _(x/y, x%y)
+ *  ...
+ * 
+ * </pre>
+ * 
+ * 
+ * @author flbulgarelli
+ * @see Pair
+ * @see Triple
+ * @see Quadruple
  */
 @Value
 @ConditionallyImmutable
@@ -71,43 +94,8 @@ public abstract class Tuple implements Serializable {
 	 * @return a new {@link Pair}. Non null.
 	 */
 	@NonNull
-	public static <T1, T2> Pair<T1, T2> of(T1 first, T2 second) {
-		return new Pair<T1, T2>(first, second);
-	}
-
-	/**
-	 * Creates a new {@link Pair}
-	 * 
-	 * @param <T1>
-	 * @param <T2>
-	 * @param first
-	 *          nullable.
-	 * @param second
-	 *          nullable
-	 * @return a new {@link Pair}. Non null.
-	 */
-	@NonNull
 	public static <T1, T2> Pair<T1, T2> _(T1 first, T2 second) {
-		return of(first, second);
-	}
-
-	/**
-	 * Creates a new {@link Triple}
-	 * 
-	 * @param <T1>
-	 * @param <T2>
-	 * @param <T3>
-	 * @param first
-	 *          nullable.
-	 * @param second
-	 *          nullable
-	 * @param third
-	 *          nullable
-	 * @return a new {@link Triple}. Non null.
-	 */
-	@NonNull
-	public static <T1, T2, T3> Triple<T1, T2, T3> of(T1 first, T2 second, T3 third) {
-		return new Triple<T1, T2, T3>(first, second, third);
+		return new Pair<T1, T2>(first, second);
 	}
 
 	/**
@@ -126,30 +114,7 @@ public abstract class Tuple implements Serializable {
 	 */
 	@NonNull
 	public static <T1, T2, T3> Triple<T1, T2, T3> _(T1 first, T2 second, T3 third) {
-		return of(first, second, third);
-	}
-
-	/**
-	 * Creates a new {@link Quadruple}
-	 * 
-	 * @param <T1>
-	 * @param <T2>
-	 * @param <T3>
-	 * @param <T4>
-	 * @param first
-	 *          nullable.
-	 * @param second
-	 *          nullable
-	 * @param third
-	 *          nullable
-	 * @param fourth
-	 *          nullable
-	 * @return a new {@link Quadruple}. Non null.
-	 */
-	@NonNull
-	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> of(T1 first, T2 second, T3 third,
-		T4 fourth) {
-		return new Quadruple<T1, T2, T3, T4>(first, second, third, fourth);
+		return new Triple<T1, T2, T3>(first, second, third);
 	}
 
 	/**
@@ -172,7 +137,7 @@ public abstract class Tuple implements Serializable {
 	@NonNull
 	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> _(T1 first, T2 second, T3 third,
 		T4 fourth) {
-		return of(first, second, third, fourth);
+		return new Quadruple<T1, T2, T3, T4>(first, second, third, fourth);
 	}
 
 	/**

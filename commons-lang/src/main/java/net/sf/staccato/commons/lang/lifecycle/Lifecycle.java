@@ -15,14 +15,15 @@ package net.sf.staccato.commons.lang.lifecycle;
 import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
- * A {@link Lifecycle} represents a flow of initialization, usage and dispose of
- * a resource.
+ * A {@link Lifecycle} is a flow of initialization, usage and dispose of a
+ * resource.
  * 
  * @author flbulgarelli
  * 
  * @param <ResourceType>
  * @param <ExceptionType>
  * @param <ResultType>
+ * @see LifecycleManager
  */
 public interface Lifecycle<ResourceType, ResultType> {
 
