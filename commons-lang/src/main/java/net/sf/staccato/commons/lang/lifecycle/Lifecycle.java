@@ -25,6 +25,17 @@ import net.sf.staccato.commons.lang.SoftException;
  * in different fashions - using {@link #execute()}, {@link #call()} ,
  * {@link #run()} or {@link #value()}
  * 
+ * Lifecycles are abstract, so in order to use them, client code must implement
+ * the following methods
+ * <ul>
+ * <li>{@link #initialize()}: this method will be invoked in order to create an
+ * initialize the handled resource, and it can throw any exception</li>
+ * <li>{@link #doWork(Object)}: this method executes the unit of work, it will
+ * be invoked to produce the result of the lifecycle, passing the handled
+ * resource returned by the {@link #initialize()} method.</li>
+ * <li>{@link #dispose(Object)}</li>
+ * </ul>
+ * 
  * @author fbulgarelli
  * 
  * @param <ResourceType>

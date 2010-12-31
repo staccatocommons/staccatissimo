@@ -25,7 +25,7 @@ import java.io.Closeable;
 public abstract class CloseableLifecycle<TargetType extends Closeable, ReturnType> extends
 	Lifecycle<TargetType, ReturnType> {
 
-	public void dispose(TargetType target) throws Exception {
+	public final void dispose(TargetType target) throws Exception {
 		target.close();
 	}
 
