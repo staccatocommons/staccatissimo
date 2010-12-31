@@ -13,6 +13,7 @@
 package net.sf.staccato.commons.io;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 import net.sf.staccato.commons.check.Ensure;
@@ -22,6 +23,8 @@ import net.sf.staccato.commons.collections.stream.Streams;
 import net.sf.staccato.commons.lang.function.Function;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 import net.sf.staccato.commons.lang.tuple.Pair;
+
+import org.apache.commons.io.FileUtils;
 
 /**
  * @author flbulgarelli
@@ -64,7 +67,7 @@ public class Directory {
 	}
 
 	/**
-	 * Obtains the underlying {@link File} of this directory
+	 * Returns the underlying {@link File} of this directory
 	 * 
 	 * @return the underlying file. It grants be a directory
 	 */
@@ -74,9 +77,10 @@ public class Directory {
 	}
 
 	/**
-	 * Obtains a {@link Stream} of the files directly contained by this directory
+	 * returns a {@link Stream} of the files directly contained by this directory
 	 * 
 	 * @return a new ordered Stream. However, precise order of files in the stream
+	 *         depend on the filesystem
 	 * 
 	 * @see File#listFiles()
 	 */
@@ -85,11 +89,29 @@ public class Directory {
 		return Streams.from(file.listFiles());
 	}
 
+	/**
+	 * Returns a {@link Stream} that retrieves all the non-directory files
+	 * contained by this directory or in subdirectories, recursing the directory
+	 * tree using a breadth-first algorithm
+	 * 
+	 * @return a new {@link Stream}.
+	 * @see <a href="http://en.wikipedia.org/wiki/Breadth-first_search">Breadth
+	 *      first search</a>
+	 */
 	@NonNull
-	public Stream<File> getBreathFirstFileStream() {
-		return Streams.from(file.listFiles()).then(BreathFirst.INSTANCE);
+	public Stream<File> getBreadthFirstFileStream() {
+		return Streams.from(file.listFiles()).then(BreadthFirst.INSTANCE);
 	}
 
+	/**
+	 * Returns a {@link Stream} that retrieves all the non-directory files
+	 * contained by this directory or in subdirectories, recursing the directory
+	 * tree using a depth-first algorithm
+	 * 
+	 * @return a new {@link Stream}.
+	 * @see <a href="http://en.wikipedia.org/wiki/Depth-first_search">Depth first
+	 *      search</a>
+	 */
 	@NonNull
 	public Stream<File> getDepthFirstFileStream() {
 		return Streams.from(file.listFiles())//
@@ -102,14 +124,57 @@ public class Directory {
 			});
 	}
 
+	/**
+	 * Synonym of {@link #getDepthFirstFileStream()}. Prefer this method if
+	 * iteration order is not important
+	 * 
+	 * @return {@link #getDepthFirstFileStream()}
+	 */
 	@NonNull
 	public Stream<File> getRecurseFileStream() {
 		return getDepthFirstFileStream();
 	}
+
+	/**
+	 * Answers {@link Directory} size.
+	 * 
+	 * @return <code>FileUtils.sizeOfDirectory(this.getFile())</code>
+	 * @see FileUtils#sizeOfDirectory(File)
+	 */
+	public long size() {
+		return FileUtils.sizeOfDirectory(getFile());
+	}
+
+	/**
+	 * Cleans this directory using
+	 * <code>FileUtils.cleanDirectory(this.getFile())</code>
+	 * 
+	 * @see {@link FileUtils#cleanDirectory(File)}
+	 * @return this
+	 */
+	public Directory clean() throws IOException {
+		FileUtils.cleanDirectory(getFile());
+		return this;
+	}
+
+	/**
+	 * Copies this directory and its contents to the given destinantion using
+	 * <code>FileUtils.copyDirectory(file, destination.getFile())</code>
+	 * 
+	 * @param destination
+	 *          the new directory
+	 * @return this
+	 * @throws IOException
+	 */
+	public Directory copy(@NonNull Directory destination) throws IOException {
+		FileUtils.copyDirectory(file, destination.getFile());
+		return this;
+	}
+
 }
 
-final class BreathFirst extends Function<Stream<File>, Stream<File>> {
-	static final BreathFirst INSTANCE = new BreathFirst();
+final class BreadthFirst extends Function<Stream<File>, Stream<File>> {
+	static final BreadthFirst INSTANCE = new BreadthFirst();
 
 	public Stream<File> apply(Stream<File> files) {
 		if (files.isEmpty())

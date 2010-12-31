@@ -95,7 +95,7 @@ public class DirectoryUnitTest {
 	public void testRecurseFileStreamElements() {
 		Directory directory = new Directory(root);
 		assertEquals(//
-			directory.getBreathFirstFileStream().toSet(),
+			directory.getBreadthFirstFileStream().toSet(),
 			directory.getDepthFirstFileStream().toSet());
 
 	}
@@ -118,7 +118,7 @@ public class DirectoryUnitTest {
 	 */
 	@Test
 	public void testGetRecurseFileStream() {
-		Stream<File> stream = new Directory(root).getBreathFirstFileStream();
+		Stream<File> stream = new Directory(root).getBreadthFirstFileStream();
 		assertEquals(Arrays.asList("f5", "f1", "f2", "f4", "f3"), stream
 			.map(IOFunctions.fileName())
 			.toList());
