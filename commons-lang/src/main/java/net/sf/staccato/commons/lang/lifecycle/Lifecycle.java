@@ -12,20 +12,96 @@ GNU Lesser General Public License for more details.
  */
 package net.sf.staccato.commons.lang.lifecycle;
 
+import java.util.concurrent.Callable;
+
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.defs.Provider;
+import net.sf.staccato.commons.lang.SoftException;
 
 /**
- * A {@link Lifecycle} is a flow of initialization, usage and dispose of a
- * resource.
  * 
- * @author flbulgarelli
+ * A {@link Lifecycle} is a logic of initialization, use and dispose of a
+ * resource , that can be executed as a single unit of work. It can be executed
+ * in different fashions - using {@link #execute()}, {@link #call()} ,
+ * {@link #run()} or {@link #value()}
+ * 
+ * @author fbulgarelli
  * 
  * @param <ResourceType>
  * @param <ExceptionType>
  * @param <ResultType>
- * @see LifecycleManager
  */
-public interface Lifecycle<ResourceType, ResultType> {
+public abstract class Lifecycle<ResourceType, ResultType> implements Runnable,
+	Callable<ResultType>, Provider<ResultType> {
+
+	/**
+	 * Executes this {@link Lifecycle}, initializing the resource it handles,
+	 * doing some work with it, disposing the resource and returning the work
+	 * result.
+	 * 
+	 * @return the result of the work over the resource
+	 */
+	public ResultType execute() {
+		return SoftException.callOrSoften(this);
+	}
+
+	public <ExceptionType extends Exception> ResultType executeThrowing(
+		Class<ExceptionType> exceptionClass) throws ExceptionType {
+		try {
+			return executeInternal();
+		} catch (Exception e) {
+			if (shouldCatch(exceptionClass, e)) {
+				throw (ExceptionType) e;
+			}
+			throw SoftException.soften(e);
+		}
+	}
+
+	public <ExceptionType1 extends Exception, ExceptionType2 extends Exception> ResultType executeThrowing(
+		Class<ExceptionType1> exceptionClass1, Class<ExceptionType1> exceptionClass2)
+		throws ExceptionType1, ExceptionType2 {
+		try {
+			return executeInternal();
+		} catch (Exception e) {
+			if (shouldCatch(exceptionClass1, e)) {
+				throw (ExceptionType1) e;
+			}
+			if (shouldCatch(exceptionClass2, e)) {
+				throw (ExceptionType2) e;
+			}
+			throw SoftException.soften(e);
+		}
+	}
+
+	private <ExceptionType1> boolean shouldCatch(Class<ExceptionType1> exceptionClass, Exception e) {
+		return exceptionClass.isAssignableFrom(e.getClass());
+	}
+
+	@Override
+	public ResultType call() throws Exception {
+		return executeInternal();
+	}
+
+	@Override
+	public void run() {
+		execute();
+	}
+
+	@Override
+	public ResultType value() {
+		return execute();
+	}
+
+	private ResultType executeInternal() throws Exception {
+		ResourceType resource = null;
+		try {
+			resource = initialize();
+			return doWork(resource);
+		} finally {
+			if (resource != null)
+				dispose(resource);
+		}
+	}
 
 	/**
 	 * Initializes and gets a resource of ResourceType
@@ -34,8 +110,7 @@ public interface Lifecycle<ResourceType, ResultType> {
 	 * @throws Exception
 	 *           if any error occurs
 	 */
-	@NonNull
-	ResourceType initialize() throws Exception;
+	protected abstract ResourceType initialize() throws Exception;
 
 	/**
 	 * Makes usage of a resource, and returns a result
@@ -47,15 +122,24 @@ public interface Lifecycle<ResourceType, ResultType> {
 	 * @throws Exception
 	 *           if any error occurs
 	 */
-	ResultType doWork(@NonNull ResourceType resource) throws Exception;
+	protected ResultType doWork(@NonNull ResourceType resource) throws Exception {
+		doVoidWork(resource);
+		return null;
+	}
+
+	protected void doVoidWork(@NonNull ResourceType resource) throws Exception {
+	}
 
 	/**
 	 * Disposes the resource.
+	 * 
+	 * Default implementation does nothing, subclasses may want to override this
+	 * method to add disposal logic
 	 * 
 	 * @param resource
 	 * @throws Exception
 	 *           if any error occurs
 	 */
-	void dispose(@NonNull ResourceType resource) throws Exception;
-
+	protected void dispose(@NonNull ResourceType resource) throws Exception {
+	}
 }

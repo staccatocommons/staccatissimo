@@ -2,6 +2,12 @@ package net.sf.staccato.commons.lang.lifecycle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+
+import java.io.IOException;
+
+import net.sf.staccato.commons.defs.Applicable;
+import net.sf.staccato.commons.defs.Executable;
+import net.sf.staccato.commons.defs.Provider;
 import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -9,122 +15,173 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test for {@link LifecycleManager}
+ * Test for {@link Lifecycle}
  * 
  * @author flbulgarelli
  */
-public class LifecycleManagertUnitTest extends JUnit4MockObjectTestCase {
+public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 
-	LifecycleManager<Integer, Integer> manager;
+	private Lifecycle<String, Integer> lifecycle;
+	private Provider<String> init;
+	private Applicable<String, Integer> use;
+	private Executable<String> dispose;
 
-	Lifecycle<Integer, Integer> lifecycle;
-
+	/** setups the test */
 	@Before
 	public void setup() {
-		lifecycle = mock(Lifecycle.class);
-		manager = LifecycleManager.from(lifecycle);
+		init = mock(Provider.class);
+		use = mock(Applicable.class);
+		dispose = mock(Executable.class);
+
+		lifecycle = new Lifecycle<String, Integer>() {
+			protected String initialize() throws Exception {
+				return init.value();
+			}
+
+			protected Integer doWork(String resource) throws Exception {
+				return use.apply(resource);
+			}
+
+			protected void dispose(String resource) throws Exception {
+				dispose.exec(resource);
+			}
+		};
 	}
 
 	@Test
 	public void testExecute_OK() throws Exception {
 		expectNormalLifecycle();
-		assertEquals((Integer) 6, manager.execute());
+		assertEquals((Integer) 6, lifecycle.execute());
+	}
+
+	@Test
+	public void testExecuteThrowing_OK() throws Exception {
+		expectNormalLifecycle();
+		assertEquals((Integer) 6, lifecycle.executeThrowing(IOException.class));
 	}
 
 	@Test
 	public void testRun_OK() throws Exception {
 		expectNormalLifecycle();
-		manager.run();
+		lifecycle.run();
 	}
 
 	@Test
 	public void testCall_OK() throws Exception {
 		expectNormalLifecycle();
-		assertEquals((Integer) 6, manager.call());
+		assertEquals((Integer) 6, lifecycle.call());
 	}
 
 	@Test
 	public void testValue_OK() throws Exception {
 		expectNormalLifecycle();
-		assertEquals((Integer) 6, manager.value());
+		assertEquals((Integer) 6, lifecycle.value());
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testExecute_Fail_OnInit() throws Exception {
 		expectFailLifecycleOnInitialization();
-		assertNull(manager.execute());
+		assertNull(lifecycle.execute());
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testRun_Fail_Init() throws Exception {
 		expectFailLifecycleOnInitialization();
-		manager.run();
+		lifecycle.run();
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testCall_Fail_OnInit() throws Exception {
 		expectFailLifecycleOnInitialization();
-		assertNull(manager.call());
+		assertNull(lifecycle.call());
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testValue_Fail_Init() throws Exception {
 		expectFailLifecycleOnInitialization();
-		assertNull(manager.value());
+		assertNull(lifecycle.value());
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testExecute_Fail_OnDispose() throws Exception {
 		expectFailLifecycleOnDispose();
-		assertNull(manager.execute());
+		lifecycle.execute();
+	}
+
+	/**
+	 * Test method for {@link Lifecycle#executeThrowing(Class)} when an exception
+	 * of class other than the given one occurs
+	 * 
+	 * @throws Exception
+	 */
+	@Test(expected = IOException.class)
+	public void testExecuteThrowing_FailChecked_OnInit() throws Exception {
+		lifecycle = new Lifecycle<String, Integer>() {
+			protected String initialize() throws Exception {
+				throw new IOException();
+			}
+		};
+		lifecycle.executeThrowing(IOException.class);
+	}
+
+	/**
+	 * Test method for {@link Lifecycle#executeThrowing(Class)} when an exception
+	 * of the given class occurs
+	 * 
+	 * @throws Exception
+	 */
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testExecuteThrowing_Fail_OnDispose() throws Exception {
+		expectFailLifecycleOnDispose();
+		lifecycle.executeThrowing(IOException.class);
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testRun_Fail_OnDispose() throws Exception {
 		expectFailLifecycleOnDispose();
-		manager.run();
+		lifecycle.run();
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testCall_Fail_OnDispose() throws Exception {
 		expectFailLifecycleOnDispose();
-		assertNull(manager.call());
+		assertNull(lifecycle.call());
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testValue_Fail_OnDispose() throws Exception {
 		expectFailLifecycleOnDispose();
-		assertNull(manager.value());
+		assertNull(lifecycle.value());
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testExecute_Fail_OnWork() throws Exception {
 		expectFailLifecycleOnWork();
-		assertNull(manager.execute());
+		assertNull(lifecycle.execute());
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testRun_Fail_OnWork() throws Exception {
 		expectFailLifecycleOnWork();
-		manager.run();
+		lifecycle.run();
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testCall_Fail_OnWork() throws Exception {
 		expectFailLifecycleOnWork();
-		assertNull(manager.call());
+		assertNull(lifecycle.call());
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testValue_Fail_OnWork() throws Exception {
 		expectFailLifecycleOnWork();
-		assertNull(manager.value());
+		assertNull(lifecycle.value());
 	}
 
 	private void expectFailLifecycleOnInitialization() throws Exception {
 		checking(new Expectations() {
 			{
-				one(lifecycle).initialize();
+				one(init).value();
 				will(throwException(new IndexOutOfBoundsException()));
 			}
 		});
@@ -133,13 +190,13 @@ public class LifecycleManagertUnitTest extends JUnit4MockObjectTestCase {
 	private void expectFailLifecycleOnWork() throws Exception {
 		checking(new Expectations() {
 			{
-				Integer managed = 0;
-				one(lifecycle).initialize();
+				String managed = "5";
+				one(init).value();
 				will(returnValue(managed));
-				one(lifecycle).doWork(managed);
+				one(use).apply(managed);
+				will(returnValue(6));
 				will(throwException(new IndexOutOfBoundsException()));
-
-				one(lifecycle).dispose(managed);
+				one(dispose).exec(managed);
 			}
 		});
 	}
@@ -147,12 +204,12 @@ public class LifecycleManagertUnitTest extends JUnit4MockObjectTestCase {
 	private void expectFailLifecycleOnDispose() throws Exception {
 		checking(new Expectations() {
 			{
-				Integer managed = 0;
-				one(lifecycle).initialize();
+				String managed = "5";
+				one(init).value();
 				will(returnValue(managed));
-				one(lifecycle).doWork(managed);
+				one(use).apply(managed);
 				will(returnValue(6));
-				one(lifecycle).dispose(managed);
+				one(dispose).exec(managed);
 				will(throwException(new IndexOutOfBoundsException()));
 			}
 		});
@@ -161,12 +218,12 @@ public class LifecycleManagertUnitTest extends JUnit4MockObjectTestCase {
 	private void expectNormalLifecycle() throws Exception {
 		checking(new Expectations() {
 			{
-				Integer managed = 0;
-				one(lifecycle).initialize();
+				String managed = "5";
+				one(init).value();
 				will(returnValue(managed));
-				one(lifecycle).doWork(managed);
+				one(use).apply(managed);
 				will(returnValue(6));
-				one(lifecycle).dispose(managed);
+				one(dispose).exec(managed);
 			}
 		});
 	}

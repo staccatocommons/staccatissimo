@@ -19,11 +19,10 @@ import java.io.Writer;
 
 import net.sf.staccato.commons.io.serialization.CharSerializationManager;
 
-public abstract class CharSerializationLifecycle<TargetType extends Closeable, ReturnType>
-	extends SerializationLifecycle<TargetType, ReturnType> {
+public abstract class CharSerializationLifecycle<TargetType extends Closeable, ReturnType> extends
+	SerializationLifecycle<TargetType, ReturnType> {
 
-	public CharSerializationLifecycle(
-		CharSerializationManager serializationManager) {
+	public CharSerializationLifecycle(CharSerializationManager serializationManager) {
 		super(serializationManager);
 	}
 
@@ -32,32 +31,29 @@ public abstract class CharSerializationLifecycle<TargetType extends Closeable, R
 		return (CharSerializationManager) super.getSerializationManager();
 	}
 
-	public static abstract class Serialize extends
-		CharSerializationLifecycle<Writer, Void> {
+	public static abstract class Serialize extends CharSerializationLifecycle<Writer, Void> {
 
 		private final Object target;
 
-		public Serialize(CharSerializationManager serializationManager,
-			Object target) {
+		public Serialize(CharSerializationManager serializationManager, Object target) {
 			super(serializationManager);
 			this.target = target;
 		}
 
 		@Override
-		public void performTask(Writer output) throws IOException {
+		public void doVoidWork(Writer output) throws IOException {
 			getSerializationManager().serialize(target, output);
 		}
 	}
 
-	public static abstract class Deserialize<T> extends
-		CharSerializationLifecycle<Reader, T> {
+	public static abstract class Deserialize<T> extends CharSerializationLifecycle<Reader, T> {
 
 		public Deserialize(CharSerializationManager serializationManager) {
 			super(serializationManager);
 		}
 
 		@Override
-		public T produceResult(Reader input) throws IOException {
+		public T doWork(Reader input) throws IOException {
 			return getSerializationManager().deserialize(input);
 		}
 	}

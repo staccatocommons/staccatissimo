@@ -20,8 +20,8 @@ import java.io.OutputStream;
 import net.sf.staccato.commons.io.serialization.SerializationManager;
 import net.sf.staccato.commons.lang.lifecycle.CloseableLifecycle;
 
-public abstract class SerializationLifecycle<TargetType extends Closeable, ReturnType>
-	extends CloseableLifecycle<TargetType, ReturnType> {
+public abstract class SerializationLifecycle<TargetType extends Closeable, ReturnType> extends
+	CloseableLifecycle<TargetType, ReturnType> {
 
 	private final SerializationManager serializationManager;
 
@@ -33,8 +33,7 @@ public abstract class SerializationLifecycle<TargetType extends Closeable, Retur
 		return serializationManager;
 	}
 
-	public static abstract class Serialize extends
-		SerializationLifecycle<OutputStream, Void> {
+	public static abstract class Serialize extends SerializationLifecycle<OutputStream, Void> {
 
 		private final Object target;
 
@@ -44,21 +43,19 @@ public abstract class SerializationLifecycle<TargetType extends Closeable, Retur
 		}
 
 		@Override
-		public void performTask(OutputStream output) throws IOException {
+		public void doVoidWork(OutputStream output) throws IOException {
 			getSerializationManager().serialize(target, output);
 		}
 	}
 
-	public static abstract class Deserialize<T> extends
-		SerializationLifecycle<InputStream, T> {
+	public static abstract class Deserialize<T> extends SerializationLifecycle<InputStream, T> {
 
 		public Deserialize(SerializationManager serializationManager) {
 			super(serializationManager);
 		}
 
-		@Override
-		public T produceResult(InputStream input) throws IOException {
-			return getSerializationManager().deserialize(input);
+		protected T doWork(InputStream resource) throws Exception {
+			return getSerializationManager().deserialize(resource);
 		}
 	}
 
