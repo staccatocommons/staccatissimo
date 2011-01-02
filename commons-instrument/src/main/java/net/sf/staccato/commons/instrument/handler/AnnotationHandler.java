@@ -18,11 +18,11 @@ import java.lang.annotation.Annotation;
  * @author flbulgarelli
  * 
  */
-public interface AnnotationHandler {
+public interface AnnotationHandler<A extends Annotation> {
 
 	/**
 	 * @return the annotation this processor can process
 	 */
-	Class<? extends Annotation> getSupportedAnnotationType();
+	Class<A> getSupportedAnnotationType();
 
 }

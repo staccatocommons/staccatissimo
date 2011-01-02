@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.instrument.internal;
 
+import java.lang.annotation.Annotation;
+
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtBehavior;
@@ -111,7 +113,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 			clazz.getAnnotations(),
 			new Block2<Object, ClassAnnotationHandler>() {
 				protected void softExec(Object annotation, ClassAnnotationHandler handler) throws Exception {
-					handler.preProcessAnnotatedClass(annotation);
+					handler.preProcessAnnotatedClass((Annotation) annotation);
 				}
 			});
 
@@ -126,7 +128,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 			clazz.getAnnotations(),
 			new Block2<Object, ClassAnnotationHandler>() {
 				protected void softExec(Object annotation, ClassAnnotationHandler handler) throws Exception {
-					handler.postProcessAnnotatedClass(annotation);
+					handler.postProcessAnnotatedClass((Annotation) annotation);
 				}
 			});
 
@@ -155,7 +157,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 			new Block2<Object, MethodAnnotationHandler>() {
 				protected void softExec(Object annotation, MethodAnnotationHandler handler)
 					throws Exception {
-					handler.preProcessAnnotatedMethod(annotation, methodContext);
+					handler.preProcessAnnotatedMethod((Annotation) annotation, methodContext);
 				}
 			});
 
@@ -166,7 +168,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 			new Block2<Object, MethodAnnotationHandler>() {
 				protected void softExec(Object annotation, MethodAnnotationHandler handler)
 					throws Exception {
-					handler.postProcessAnnotatedMethod(annotation, methodContext);
+					handler.postProcessAnnotatedMethod((Annotation) annotation, methodContext);
 				}
 			});
 	}
@@ -189,7 +191,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 			new Block2<Object, ConstructorAnnotationHandler>() {
 				protected void softExec(Object annotation, ConstructorAnnotationHandler handler)
 					throws Exception {
-					handler.preProcessAnnotatedConstructor(annotation, context);
+					handler.preProcessAnnotatedConstructor((Annotation) annotation, context);
 				}
 			});
 
@@ -200,7 +202,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 			new Block2<Object, ConstructorAnnotationHandler>() {
 				protected void softExec(Object annotation, ConstructorAnnotationHandler handler)
 					throws Exception {
-					handler.postProcessAnnotatedConstructor(annotation, context);
+					handler.postProcessAnnotatedConstructor((Annotation) annotation, context);
 				}
 			});
 	}
@@ -218,7 +220,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 				new Block2<Object, ArgumentAnnotationHandler>() {
 					protected void softExec(Object annotation, ArgumentAnnotationHandler handler)
 						throws Exception {
-						handler.processAnnotatedArgument(annotation, argumentContext);
+						handler.processAnnotatedArgument((Annotation) annotation, argumentContext);
 					}
 				});
 		}

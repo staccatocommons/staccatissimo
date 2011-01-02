@@ -12,8 +12,6 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
-import java.lang.annotation.Annotation;
-
 import net.sf.staccato.commons.check.annotation.Matches;
 
 /**
@@ -30,7 +28,7 @@ public class MatchesHandler extends AbstractCheckAnnotationHandler<Matches> {
 	}
 
 	@Override
-	public Class<? extends Annotation> getSupportedAnnotationType() {
+	public Class<Matches> getSupportedAnnotationType() {
 		return Matches.class;
 	}
 

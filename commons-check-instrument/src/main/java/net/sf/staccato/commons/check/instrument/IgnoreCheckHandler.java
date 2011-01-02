@@ -12,8 +12,6 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
-import java.lang.annotation.Annotation;
-
 import net.sf.staccato.commons.check.annotation.IgnoreChecks;
 import net.sf.staccato.commons.instrument.context.ConstructorAnnotationContext;
 import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
@@ -26,8 +24,9 @@ import net.sf.staccato.commons.instrument.handler.deactivator.AbstractActivation
  * @author flbulgarelli
  * 
  */
-public class IgnoreCheckHandler extends AbstractActivationAnnotationHandler implements
-	ClassAnnotationHandler, ConstructorAnnotationHandler, MethodAnnotationHandler {
+public class IgnoreCheckHandler extends AbstractActivationAnnotationHandler<IgnoreChecks> implements
+	ClassAnnotationHandler<IgnoreChecks>, ConstructorAnnotationHandler<IgnoreChecks>,
+	MethodAnnotationHandler<IgnoreChecks> {
 
 	/**
 	 * Creates a new {@link IgnoreCheckHandler}
@@ -36,32 +35,33 @@ public class IgnoreCheckHandler extends AbstractActivationAnnotationHandler impl
 		super();
 	}
 
-	public Class<? extends Annotation> getSupportedAnnotationType() {
+	public Class<IgnoreChecks> getSupportedAnnotationType() {
 		return IgnoreChecks.class;
 	}
 
-	public void preProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
+	public void preProcessAnnotatedMethod(IgnoreChecks annotation, MethodAnnotationContext context) {
 		deactivateAll();
 	}
 
-	public void postProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
+	public void postProcessAnnotatedMethod(IgnoreChecks annotation, MethodAnnotationContext context) {
 		activateAll();
 	}
 
-	public void preProcessAnnotatedConstructor(Object annotation, ConstructorAnnotationContext context) {
+	public void preProcessAnnotatedConstructor(IgnoreChecks annotation,
+		ConstructorAnnotationContext context) {
 		deactivateAll();
 	}
 
-	public void postProcessAnnotatedConstructor(Object annotation,
+	public void postProcessAnnotatedConstructor(IgnoreChecks annotation,
 		ConstructorAnnotationContext context) {
 		activateAll();
 	}
 
-	public void preProcessAnnotatedClass(Object annotation) {
+	public void preProcessAnnotatedClass(IgnoreChecks annotation) {
 		deactivateAll();
 	}
 
-	public void postProcessAnnotatedClass(Object annotation) {
+	public void postProcessAnnotatedClass(IgnoreChecks annotation) {
 		activateAll();
 	}
 }

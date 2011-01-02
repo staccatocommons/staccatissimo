@@ -122,13 +122,13 @@ public @interface NonNegativeDecimal { String value(); }
  The second step is to define the annotation processors. A very simple implementation would look like the following:
  
 +------------------------------------------------------------------+
-public class LogHandler implements MethodAnnotationHandler {
+public class LogHandler implements MethodAnnotationHandler<Loggeable> {
 
-    public Class<? extends Annotation> getSupportedAnnotationType() {
+    public Class<Loggeable> getSupportedAnnotationType() {
         return Loggeable.class;
     }
 
-    public void preProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context)
+    public void preProcessAnnotatedMethod(Loggeable annotation, MethodAnnotationContext context)
         throws CannotCompileException {
         if (!hasLogger(context)) {
             CtClass declaringClass = context.getMethod().getDeclaringClass();
@@ -140,7 +140,7 @@ public class LogHandler implements MethodAnnotationHandler {
         }
     }
 
-   public void postProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context)
+    public void postProcessAnnotatedMethod(Loggeable annotation, MethodAnnotationContext context)
         throws CannotCompileException {
         context.getMethod().insertAfter("logger.warning(\"" + context.getMethod().getName() + "\");");
         context.getMethod().addCatch("logger.severe($e.getMessage());throw $e;", getThrowable(context));

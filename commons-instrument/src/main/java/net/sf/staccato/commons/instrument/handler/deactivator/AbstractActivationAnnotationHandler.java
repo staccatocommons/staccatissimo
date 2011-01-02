@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.instrument.handler.deactivator;
 
+import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -21,7 +22,8 @@ import net.sf.staccato.commons.instrument.handler.AnnotationHandler;
  * @author flbulgarelli
  * 
  */
-public abstract class AbstractActivationAnnotationHandler implements AnnotationHandler {
+public abstract class AbstractActivationAnnotationHandler<A extends Annotation> implements
+	AnnotationHandler<A> {
 
 	private final Collection<Deactivable> handlers = new LinkedList<Deactivable>();
 

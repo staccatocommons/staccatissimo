@@ -12,6 +12,8 @@
  */
 package net.sf.staccato.commons.instrument.handler;
 
+import java.lang.annotation.Annotation;
+
 import javassist.CannotCompileException;
 import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
 
@@ -19,9 +21,9 @@ import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
  * @author flbulgarelli
  * 
  */
-public interface ArgumentAnnotationHandler extends AnnotationHandler {
+public interface ArgumentAnnotationHandler<A extends Annotation> extends AnnotationHandler<A> {
 
-	void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context)
+	void processAnnotatedArgument(A annotation, ArgumentAnnotationContext context)
 		throws CannotCompileException;
 
 }

@@ -31,7 +31,7 @@ import net.sf.staccato.commons.lang.SoftException;
  * 
  */
 public abstract class AbstractCheckAnnotationHandler<T extends Annotation> implements
-	MethodAnnotationHandler, ArgumentAnnotationHandler, Deactivable {
+	MethodAnnotationHandler<T>, ArgumentAnnotationHandler<T>, Deactivable {
 
 	protected static final String ENSURE_FULLY_QUALIFIED_NAME = "net.sf.staccato.commons.check.Ensure.";
 	protected static final String ASSERT_FULLY_QUALIFIED_NAME = "net.sf.staccato.commons.check.Assert.";
@@ -52,7 +52,7 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 	}
 
 	@Override
-	public void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context)
+	public void processAnnotatedArgument(T annotation, ArgumentAnnotationContext context)
 		throws CannotCompileException {
 		if (!deactivableSupport.isActive())
 			return;
@@ -66,7 +66,7 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 	}
 
 	@Override
-	public void preProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
+	public void preProcessAnnotatedMethod(T annotation, MethodAnnotationContext context) {
 		if (ignoreReturns || !deactivableSupport.isActive())
 			return;
 		// TODO handle properly
@@ -87,27 +87,25 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 	}
 
 	@Override
-	public void postProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
+	public void postProcessAnnotatedMethod(T annotation, MethodAnnotationContext context) {
 	}
 
-	protected String createArgumentCheck(Object annotation, ArgumentAnnotationContext context) {
-		T typedAnnotation = (T) annotation;
+	protected String createArgumentCheck(T annotation, ArgumentAnnotationContext context) {
 		return createCheckCode(
-			getArgumentMnemonic(context, getVarMnemonic(typedAnnotation)),
+			getArgumentMnemonic(context, getVarMnemonic(annotation)),
 			context.getArgumentIdentifier(),
-			typedAnnotation);
+			annotation);
 	}
 
 	private String getArgumentMnemonic(ArgumentAnnotationContext context, String annotatedVarName) {
 		return annotatedVarName.isEmpty() ? "var" + context.getArgumentNumber() : annotatedVarName;
 	}
 
-	private String createMethodCheck(Object annotation, MethodAnnotationContext context) {
-		T typedAnnotation = (T) annotation;
+	private String createMethodCheck(T annotation, MethodAnnotationContext context) {
 		return createCheckCode(
-			getReturnName(getVarMnemonic(typedAnnotation)),
+			getReturnName(getVarMnemonic(annotation)),
 			context.getReturnIdentifier(),
-			typedAnnotation);
+			annotation);
 	}
 
 	protected String getReturnName(String returnName) {

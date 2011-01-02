@@ -12,8 +12,6 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
-import java.lang.annotation.Annotation;
-
 import net.sf.staccato.commons.check.annotation.ForceChecks;
 import net.sf.staccato.commons.instrument.context.ConstructorAnnotationContext;
 import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
@@ -26,8 +24,9 @@ import net.sf.staccato.commons.instrument.handler.deactivator.AbstractActivation
  * @author flbulgarelli
  * 
  */
-public class ForceChecksHandler extends AbstractActivationAnnotationHandler implements
-	ClassAnnotationHandler, ConstructorAnnotationHandler, MethodAnnotationHandler {
+public class ForceChecksHandler extends AbstractActivationAnnotationHandler<ForceChecks> implements
+	ClassAnnotationHandler<ForceChecks>, ConstructorAnnotationHandler<ForceChecks>,
+	MethodAnnotationHandler<ForceChecks> {
 
 	/**
 	 * Creates a new {@link ForceChecksHandler}
@@ -36,32 +35,33 @@ public class ForceChecksHandler extends AbstractActivationAnnotationHandler impl
 		super();
 	}
 
-	public Class<? extends Annotation> getSupportedAnnotationType() {
+	public Class<ForceChecks> getSupportedAnnotationType() {
 		return ForceChecks.class;
 	}
 
-	public void preProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
+	public void preProcessAnnotatedMethod(ForceChecks annotation, MethodAnnotationContext context) {
 		activateAll();
 	}
 
-	public void postProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context) {
+	public void postProcessAnnotatedMethod(ForceChecks annotation, MethodAnnotationContext context) {
 		deactivateAll();
 	}
 
-	public void preProcessAnnotatedConstructor(Object annotation, ConstructorAnnotationContext context) {
+	public void preProcessAnnotatedConstructor(ForceChecks annotation,
+		ConstructorAnnotationContext context) {
 		activateAll();
 	}
 
-	public void postProcessAnnotatedConstructor(Object annotation,
+	public void postProcessAnnotatedConstructor(ForceChecks annotation,
 		ConstructorAnnotationContext context) {
 		deactivateAll();
 	}
 
-	public void preProcessAnnotatedClass(Object annotation) {
+	public void preProcessAnnotatedClass(ForceChecks annotation) {
 		activateAll();
 	}
 
-	public void postProcessAnnotatedClass(Object annotation) {
+	public void postProcessAnnotatedClass(ForceChecks annotation) {
 		deactivateAll();
 	}
 }

@@ -12,8 +12,6 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
-import java.lang.annotation.Annotation;
-
 import net.sf.staccato.commons.check.annotation.NotEmpty;
 
 /**
@@ -30,7 +28,7 @@ public class NotEmptyHandler extends AbstractCheckAnnotationHandler<NotEmpty> {
 	}
 
 	@Override
-	public Class<? extends Annotation> getSupportedAnnotationType() {
+	public Class<NotEmpty> getSupportedAnnotationType() {
 		return NotEmpty.class;
 	}
 

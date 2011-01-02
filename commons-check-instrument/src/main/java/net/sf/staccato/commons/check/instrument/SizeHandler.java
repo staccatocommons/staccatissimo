@@ -12,8 +12,6 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
-import java.lang.annotation.Annotation;
-
 import net.sf.staccato.commons.check.annotation.Size;
 
 /**
@@ -29,7 +27,7 @@ public class SizeHandler extends AbstractCheckAnnotationHandler<Size> {
 		super(ignoreReturns);
 	}
 
-	public Class<? extends Annotation> getSupportedAnnotationType() {
+	public Class<Size> getSupportedAnnotationType() {
 		return Size.class;
 	}
 

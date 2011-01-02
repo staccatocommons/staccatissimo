@@ -12,8 +12,6 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
-import java.lang.annotation.Annotation;
-
 import net.sf.staccato.commons.check.annotation.Positive;
 
 /**
@@ -29,7 +27,7 @@ public class PostiveHandler extends AbstractCheckAnnotationHandler<Positive> {
 		super(ignoreReturns);
 	}
 
-	public Class<? extends Annotation> getSupportedAnnotationType() {
+	public Class<Positive> getSupportedAnnotationType() {
 		return Positive.class;
 	}
 
