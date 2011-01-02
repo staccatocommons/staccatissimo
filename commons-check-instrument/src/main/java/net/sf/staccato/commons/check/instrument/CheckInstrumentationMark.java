@@ -12,20 +12,20 @@
  */
 package net.sf.staccato.commons.check.instrument;
 
-import net.sf.staccato.commons.instrument.config.AbstractInstrumentationMark;
+import net.sf.staccato.commons.instrument.config.InstrumentationMark;
+import net.sf.staccato.commons.instrument.config.SimpleInstrumentationMark;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class CheckInstrumentationMark extends AbstractInstrumentationMark {
+public class CheckInstrumentationMark {
 
-	public String getMarkAttributeName() {
-		return "commons-check-instrument";
-	}
-
-	public String getMark() {
-		return "instrumented";
-	}
+	/**
+	 * The instrumention mark for commons-check-instrument
+	 */
+	public static final InstrumentationMark INSTANCE = new SimpleInstrumentationMark(
+		"commons-check-instrument",
+		"instrumented");
 
 }

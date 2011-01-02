@@ -14,6 +14,7 @@ package net.sf.staccato.commons.instrument.context.internal;
 
 import java.util.Set;
 
+import javassist.ClassPool;
 import net.sf.staccato.commons.collections.stream.Streams;
 import net.sf.staccato.commons.instrument.context.AnnotationContext;
 import net.sf.staccato.commons.lang.function.Function;
@@ -27,11 +28,13 @@ import org.slf4j.Logger;
 public class AbstractAnnotationContext implements AnnotationContext {
 
 	private final Logger logger;
+	private final ClassPool classPool;
 
 	private Set<String> presentAnnotations;
 
-	public AbstractAnnotationContext(Logger logger) {
+	public AbstractAnnotationContext(ClassPool pool, Logger logger) {
 		this.logger = logger;
+		this.classPool = pool;
 	}
 
 	/**
@@ -61,19 +64,20 @@ public class AbstractAnnotationContext implements AnnotationContext {
 		getLogger().error(message, arguments);
 	}
 
+	public ClassPool getClassPool() {
+		return classPool;
+	}
+
 	/**
 	 * @return the presentAnnotations
 	 */
 	public Set<String> getPresentAnnotationsTypes(Object[] annotations) {
 		if (presentAnnotations == null) {
-			presentAnnotations = Streams
-				.from(annotations)
-				.map(new Function<Object, String>() {
-					public String apply(Object arg) {
-						return arg.getClass().getName();
-					}
-				})
-				.toSet();
+			presentAnnotations = Streams.from(annotations).map(new Function<Object, String>() {
+				public String apply(Object arg) {
+					return arg.getClass().getName();
+				}
+			}).toSet();
 		}
 		return presentAnnotations;
 	}

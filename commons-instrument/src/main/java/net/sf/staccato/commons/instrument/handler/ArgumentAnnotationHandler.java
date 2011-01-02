@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.instrument.handler;
 
+import javassist.CannotCompileException;
 import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
 
 /**
@@ -20,6 +21,7 @@ import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
  */
 public interface ArgumentAnnotationHandler extends AnnotationHandler {
 
-	void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context);
+	void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context)
+		throws CannotCompileException;
 
 }

@@ -12,6 +12,9 @@
  */
 package net.sf.staccato.commons.instrument.context;
 
+import javassist.ClassPool;
+import net.sf.staccato.commons.check.annotation.NonNull;
+
 /**
  * Base interface for an annotated element context
  * 
@@ -43,5 +46,13 @@ public interface AnnotationContext {
 	 * @param arguments
 	 */
 	void logErrorMessage(String message, Object... arguments);
+
+	/**
+	 * Returns the class pool in use by the instrumenter
+	 * 
+	 * @return a {@link ClassPool}
+	 */
+	@NonNull
+	ClassPool getClassPool();
 
 }

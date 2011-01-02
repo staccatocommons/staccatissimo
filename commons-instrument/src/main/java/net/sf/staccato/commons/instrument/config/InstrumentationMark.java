@@ -12,17 +12,29 @@
  */
 package net.sf.staccato.commons.instrument.config;
 
+import net.sf.staccato.commons.check.annotation.NonNull;
+
 /**
+ * 
+ * An instrumentation mark is pair of a string key and a byte array value that
+ * is inserted on each file processed by an instrumenter, in order to
+ * distinguish a processed from unprocessed class files.
+ * 
+ * Client code should not implement this interface directly, but implement
+ * {@link SimpleInstrumentationMark} instead.
+ * 
  * @author flbulgarelli
- *
+ * 
  */
 public interface InstrumentationMark {
 
 	/**
-	 * @return The version number, as a class file version attribute value
+	 * @return a mark that denotes that a file was processed
 	 */
+	@NonNull
 	byte[] getMarkAttributeValue();
 
+	@NonNull
 	String getMarkAttributeName();
 
 }

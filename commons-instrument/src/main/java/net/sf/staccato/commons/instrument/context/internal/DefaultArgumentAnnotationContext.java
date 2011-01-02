@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.instrument.context.internal;
 
+import javassist.ClassPool;
 import javassist.CtBehavior;
 import javassist.CtConstructor;
 import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
@@ -29,10 +30,11 @@ public class DefaultArgumentAnnotationContext extends AbstractAnnotationContext 
 	private int parameterNumber;
 
 	/**
+	 * 
 	 * Creates a new {@link DefaultArgumentAnnotationContext}
 	 */
-	public DefaultArgumentAnnotationContext(Logger logger) {
-		super(logger);
+	public DefaultArgumentAnnotationContext(ClassPool pool, Logger logger) {
+		super(pool, logger);
 	}
 
 	/**

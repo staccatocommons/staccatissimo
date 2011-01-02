@@ -26,8 +26,7 @@ import org.slf4j.Logger;
  * @author flbulgarelli
  * 
  */
-public class DefaultAnnotatedMethodContextUnitTest extends
-	JUnit4MockObjectTestCase {
+public class DefaultAnnotatedMethodContextUnitTest extends JUnit4MockObjectTestCase {
 
 	private Logger logger;
 	private DefaultMethodAnnotationContext context;
@@ -39,7 +38,7 @@ public class DefaultAnnotatedMethodContextUnitTest extends
 	@Before
 	public void setUp() throws Exception {
 		logger = mock(Logger.class);
-		context = new DefaultMethodAnnotationContext(logger);
+		context = new DefaultMethodAnnotationContext(pool, logger);
 	}
 
 	/**
@@ -51,9 +50,7 @@ public class DefaultAnnotatedMethodContextUnitTest extends
 	 */
 	@Test
 	public void testGetReturnName() throws Exception {
-		context.setMethod(pool.getMethod(
-			"net.sf.staccato.commons.lang.Option",
-			"value"));
+		context.setMethod(pool.getMethod("net.sf.staccato.commons.lang.Option", "value"));
 		assertEquals("$_", context.getReturnIdentifier());
 	}
 
@@ -66,9 +63,7 @@ public class DefaultAnnotatedMethodContextUnitTest extends
 	 */
 	@Test
 	public void testIsVoid() throws Exception {
-		context.setMethod(pool.getMethod(
-			"net.sf.staccato.commons.lang.Option",
-			"ifDefined"));
+		context.setMethod(pool.getMethod("net.sf.staccato.commons.lang.Option", "ifDefined"));
 		assertTrue(context.isVoid());
 	}
 

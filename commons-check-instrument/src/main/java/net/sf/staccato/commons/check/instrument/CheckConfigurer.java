@@ -47,6 +47,6 @@ public class CheckConfigurer implements InstrumenterConfigurer {
 			forceCheckHandler.addDeactivable(handler);
 			instrumenter.addAnnotationHanlder(handler);
 		}
-		instrumenter.setInstrumentationMark(new CheckInstrumentationMark()).ensureConfigured();
+		instrumenter.setInstrumentationMark(CheckInstrumentationMark.INSTANCE).ensureConfigured();
 	}
 }

@@ -59,9 +59,12 @@ public final class InstrumentationRunner {
 	 */
 	public static void runInstrumentation(@NonNull InstrumenterConfigurer configurer,
 		@NonNull Directory processDirectory, @NonNull String extraPath) throws Exception {
-		InstrumenterImpl instrumenter = new InstrumenterImpl();
+		ClassPool classPool = ClassPool.getDefault();
+		classPool.appendPathList(extraPath);
+		classPool.appendClassPath(processDirectory.getAbsolutePath());
+		InstrumenterImpl instrumenter = new InstrumenterImpl(classPool);
 		configurer.configureInstrumenter(instrumenter);
-		new InstrumentationContext(instrumenter, processDirectory, extraPath).doInstrument();
+		new InstrumentationContext(instrumenter, processDirectory, classPool).doInstrument();
 	}
 
 	private static class InstrumentationContext {
@@ -70,12 +73,10 @@ public final class InstrumentationRunner {
 		public Instrumenter classInstrumenter;
 
 		private InstrumentationContext(Instrumenter classInstrumenter, Directory processDirectory,
-			String extraPath) throws NotFoundException {
+			ClassPool pool) throws NotFoundException {
 			this.classInstrumenter = classInstrumenter;
 			this.processDirectory = processDirectory;
-			this.classPool = ClassPool.getDefault();
-			this.classPool.appendPathList(extraPath);
-			this.classPool.appendClassPath(processDirectory.getAbsolutePath());
+			this.classPool = pool;
 		}
 
 		private void processAndWriteClass(File baseDir, File classfile) throws Exception {

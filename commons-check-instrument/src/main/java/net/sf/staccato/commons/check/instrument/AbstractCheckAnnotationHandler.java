@@ -52,7 +52,8 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 	}
 
 	@Override
-	public void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context) {
+	public void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context)
+		throws CannotCompileException {
 		if (!deactivableSupport.isActive())
 			return;
 		try {
@@ -60,7 +61,7 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 				ENSURE_FULLY_QUALIFIED_NAME + createArgumentCheck(annotation, context) + ";");
 		} catch (CannotCompileException e) {
 			logError(context, context.getArgumentBehavior(), e);
-			throw SoftException.soften(e);
+			throw e;
 		}
 	}
 

@@ -14,6 +14,7 @@ package net.sf.staccato.commons.check.instrument;
 
 import java.lang.annotation.Annotation;
 
+import javassist.CannotCompileException;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.instrument.context.ArgumentAnnotationContext;
 
@@ -40,7 +41,8 @@ public class NotNullHandler extends AbstractCheckAnnotationHandler<NonNull> {
 		return nonNull.value();
 	}
 
-	public void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context) {
+	public void processAnnotatedArgument(Object annotation, ArgumentAnnotationContext context)
+		throws CannotCompileException {
 		if (context.isConstructorArgument()) {
 			super.processAnnotatedArgument(annotation, context);
 		} else {

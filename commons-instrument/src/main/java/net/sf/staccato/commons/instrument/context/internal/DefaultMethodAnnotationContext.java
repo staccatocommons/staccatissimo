@@ -12,10 +12,9 @@
  */
 package net.sf.staccato.commons.instrument.context.internal;
 
+import javassist.ClassPool;
 import javassist.CtMethod;
 import javassist.NotFoundException;
-
-
 import net.sf.staccato.commons.instrument.context.MethodAnnotationContext;
 
 import org.slf4j.Logger;
@@ -24,13 +23,13 @@ import org.slf4j.Logger;
  * @author flbulgarelli
  * 
  */
-public class DefaultMethodAnnotationContext extends AbstractAnnotationContext
-	implements MethodAnnotationContext {
+public class DefaultMethodAnnotationContext extends AbstractAnnotationContext implements
+	MethodAnnotationContext {
 
 	private CtMethod method;
 
-	public DefaultMethodAnnotationContext(Logger logger) {
-		super(logger);
+	public DefaultMethodAnnotationContext(ClassPool pool, Logger logger) {
+		super(pool, logger);
 	}
 
 	/**

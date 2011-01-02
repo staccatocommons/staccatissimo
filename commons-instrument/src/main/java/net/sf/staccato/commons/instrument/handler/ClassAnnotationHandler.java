@@ -12,13 +12,15 @@
  */
 package net.sf.staccato.commons.instrument.handler;
 
+import javassist.CannotCompileException;
+
 /**
  * @author flbulgarelli
  * 
  */
 public interface ClassAnnotationHandler extends AnnotationHandler {
 
-	void preProcessAnnotatedClass(Object annotation);
+	void preProcessAnnotatedClass(Object annotation) throws CannotCompileException;
 
 	void postProcessAnnotatedClass(Object annotation);
 

@@ -13,6 +13,7 @@
 package net.sf.staccato.commons.instrument.internal;
 
 import javassist.CannotCompileException;
+import javassist.ClassPool;
 import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.CtConstructor;
@@ -46,17 +47,21 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 	private final AnnotationProcessor<ArgumentAnnotationHandler> argumentProcessor;
 	private final AnnotationProcessor<ConstructorAnnotationHandler> constructorProcessor;
 	private InstrumentationMark instrumentationMark;
+	private final ClassPool classPool;
 
 	/**
 	 * Creates a new {@link InstrumenterImpl}
 	 * 
+	 * @param classPool
+	 * 
 	 * @param processors
 	 */
-	public InstrumenterImpl() {
+	public InstrumenterImpl(ClassPool classPool) {
 		this.classProcessor = new AnnotationProcessor();
 		this.methodProcessor = new AnnotationProcessor();
 		this.argumentProcessor = new AnnotationProcessor();
 		this.constructorProcessor = new AnnotationProcessor();
+		this.classPool = classPool;
 	}
 
 	/**
@@ -140,6 +145,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 	private void instrumentMethod(CtMethod method) throws CannotCompileException,
 		ClassNotFoundException {
 		final DefaultMethodAnnotationContext methodContext = new DefaultMethodAnnotationContext(
+			classPool,
 			handlersLogger);
 		methodContext.setMethod(method);
 		Object[] availableAnnotations = method.getAvailableAnnotations();
@@ -173,6 +179,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 	private void instrumentConstructor(CtConstructor constructor) throws CannotCompileException,
 		ClassNotFoundException {
 		final DefaultConstructorAnnotationContext context = new DefaultConstructorAnnotationContext(
+			classPool,
 			handlersLogger);
 		context.setConstructor(constructor);
 		Object[] availableAnnotations = constructor.getAvailableAnnotations();
@@ -201,6 +208,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 	private void instrumentArguments(CtBehavior behaviour) throws CannotCompileException {
 		Object[][] parameterAnnotations = behaviour.getAvailableParameterAnnotations();
 		final DefaultArgumentAnnotationContext argumentContext = new DefaultArgumentAnnotationContext(
+			classPool,
 			handlersLogger);
 		argumentContext.setBehavior(behaviour);
 		for (int i = 0; i < parameterAnnotations.length; i++) {

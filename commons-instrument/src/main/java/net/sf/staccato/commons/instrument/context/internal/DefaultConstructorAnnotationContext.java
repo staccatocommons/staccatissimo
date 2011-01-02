@@ -12,8 +12,8 @@
  */
 package net.sf.staccato.commons.instrument.context.internal;
 
+import javassist.ClassPool;
 import javassist.CtConstructor;
-
 import net.sf.staccato.commons.instrument.context.ConstructorAnnotationContext;
 
 import org.slf4j.Logger;
@@ -27,8 +27,8 @@ public class DefaultConstructorAnnotationContext extends AbstractAnnotationConte
 
 	private CtConstructor constructor;
 
-	public DefaultConstructorAnnotationContext(Logger logger) {
-		super(logger);
+	public DefaultConstructorAnnotationContext(ClassPool pool, Logger logger) {
+		super(pool, logger);
 	}
 
 	/**

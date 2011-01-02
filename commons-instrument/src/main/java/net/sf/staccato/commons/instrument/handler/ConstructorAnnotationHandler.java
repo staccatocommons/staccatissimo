@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.instrument.handler;
 
+import javassist.CannotCompileException;
 import net.sf.staccato.commons.instrument.context.ConstructorAnnotationContext;
 
 /**
@@ -20,8 +21,10 @@ import net.sf.staccato.commons.instrument.context.ConstructorAnnotationContext;
  */
 public interface ConstructorAnnotationHandler extends AnnotationHandler {
 
-	void preProcessAnnotatedConstructor(Object annotation, ConstructorAnnotationContext context);
+	void preProcessAnnotatedConstructor(Object annotation, ConstructorAnnotationContext context)
+		throws CannotCompileException;
 
-	void postProcessAnnotatedConstructor(Object annotation, ConstructorAnnotationContext context);
+	void postProcessAnnotatedConstructor(Object annotation, ConstructorAnnotationContext context)
+		throws CannotCompileException;
 
 }
