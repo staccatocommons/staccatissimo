@@ -59,7 +59,8 @@ public interface Foldable<A> {
 	 * separator
 	 * 
 	 * @param separator
-	 * @return
+	 * @return the string representation of each element concatenated using a
+	 *         separator
 	 */
 	@NonNull
 	String joinStrings(@NonNull String separator);

@@ -15,7 +15,6 @@ package net.sf.staccato.commons.collections.iterable;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.ITERABLE;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.addAllInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyInternal;
-import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.anyOrNoneInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.collectInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.filterInternal;
 import static net.sf.staccato.commons.collections.iterable.internal.IterablesInternal.isEmptyInternal;
@@ -218,7 +217,8 @@ public class Iterables {
 	 */
 	@NonNull
 	public static <A> Option<A> anyOrNone(@NonNull Iterable<A> iterable) {
-		return anyOrNoneInternal(iterable);
+		Iterator<A> iterator = iterable.iterator();
+		return iterator.hasNext() ? Option.some(iterator.next()) : Option.<A> none();
 	}
 
 	/*
@@ -460,7 +460,18 @@ public class Iterables {
 		return collection instanceof Set ? (Set<A>) collection : new HashSet<A>(collection);
 	}
 
-	public static <A> Set<A> toSet(Iterable<A> iterable) {
+	/**
+	 * Converts the given {@link Iterable} into a {@link Set}. If the
+	 * <code>iterable</code> is already a set, it just returns it
+	 * 
+	 * @param <A>
+	 * @param iterable
+	 * @return a new {@link Set} that contains all the elements from the given
+	 *         <code>iterable</code>, or the given <code>iterable</code>, if it is
+	 *         already a set
+	 */
+	@NonNull
+	public static <A> Set<A> toSet(@NonNull Iterable<A> iterable) {
 		return ModifiableIterables.addAll(new HashSet<A>(), iterable);
 	}
 
@@ -501,10 +512,22 @@ public class Iterables {
 	 * containing those elements that satisfy the given predicate, and the second
 	 * one containing those elements that do not satisfy it
 	 * 
+	 * For example, the following code:
+	 * 
+	 * <pre>
+	 * Iterables.partition(Arrays.asList(4, 8, 5, 20, 1), Predicate.greaterThan(5));
+	 * </pre>
+	 * 
+	 * will return a pair equal to:
+	 * 
+	 * <pre>
+	 * _(Arrays.asList(8, 20), Arrays.asList(4, 5, 1))
+	 * </pre>
+	 * 
 	 * @param <A>
 	 * @param iterable
 	 * @param predicate
-	 *          the {@link Evaluable} used to determine if elements hould go into
+	 *          the {@link Evaluable} used to determine if an elements goes into
 	 *          the first or second list
 	 * @return a pair of lists
 	 */
@@ -521,24 +544,33 @@ public class Iterables {
 		return _(first, second);
 	}
 
-	/*
-	 * MISC
+	/**
+	 * Gets the zero-based, <code>n</code>-th element of the given
+	 * {@link Iterable}, according to its iteration order.
+	 * 
+	 * @param <A>
+	 * @param iterable
+	 * @param n
+	 * @return the n-th element
+	 * @throws IndexOutOfBoundsException
+	 *           if n is greater or equal than the size of the
+	 *           <code>iterable</code>
 	 */
-
-	public static <A> A get(@NonNull Iterable<A> iterable, int at) throws IndexOutOfBoundsException {
+	public static <A> A get(@NonNull Iterable<A> iterable, int n) throws IndexOutOfBoundsException {
 		A element = null;
 		Iterator<A> iter = iterable.iterator();
-		for (int i = 0; i <= at; i++)
+		for (int i = 0; i <= n; i++)
 			try {
 				element = iter.next();
 			} catch (NoSuchElementException e) {
-				throw new IndexOutOfBoundsException("At " + at);
+				throw new IndexOutOfBoundsException("At " + n);
 			}
 		return element;
 	}
 
 	/**
-	 * The 0-based index of a given element in the iterable when iterating over it
+	 * The zero-based index of a given element in the iterable when iterating over
+	 * it
 	 * 
 	 * @param <A>
 	 * @param iterable
@@ -584,6 +616,28 @@ public class Iterables {
 		return false;
 	}
 
+	/**
+	 * Returns a {@link List} formed by the result of applying the given
+	 * <code>function</code> to each pair of elements from the two iterables
+	 * given. If any if the {@link Iterable}s is shorter than the other one, the
+	 * remaining elements are discarded.
+	 * <p>
+	 * 
+	 * @param <A>
+	 *          first iterable element type
+	 * @param <B>
+	 *          second iterable element type
+	 * @param <C>
+	 *          the resulting list element
+	 * @param iterable1
+	 * @param iterable2
+	 * @param function
+	 *          the function to apply to each pair
+	 * @return a new list formed applying the given {@link Applicable2} to each
+	 *         pair of element retrieved from the given iterables. The resulting
+	 *         list size is the minimum of both iterables sizes
+	 * @see #zip(Iterable, Iterable)
+	 */
 	@NonNull
 	public static <A, B, C> List<C> zip(@NonNull Iterable<A> iterable1,
 		@NonNull Iterable<B> iterable2, Applicable2<A, B, C> function) {
@@ -599,6 +653,7 @@ public class Iterables {
 	 * Returns a {@link List} formed by pair of elements from the two iterables.
 	 * If any if the {@link Iterable}s is shorter than the other one, the
 	 * remaining elements are discarded.
+	 * 
 	 * <p>
 	 * For example, the following code:
 	 * 

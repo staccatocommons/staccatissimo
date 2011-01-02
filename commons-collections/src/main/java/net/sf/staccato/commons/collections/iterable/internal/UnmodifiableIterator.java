@@ -24,6 +24,9 @@ public final class UnmodifiableIterator<T> extends AbstractUnmodifiableIterator<
 
 	private final Iterator<T> iter;
 
+	/**
+	 * Creates a new {@link UnmodifiableIterator}
+	 */
 	public UnmodifiableIterator(Iterator<T> iter) {
 		this.iter = iter;
 	}

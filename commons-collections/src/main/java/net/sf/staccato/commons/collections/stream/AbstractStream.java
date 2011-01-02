@@ -16,6 +16,7 @@ import static net.sf.staccato.commons.lang.tuple.Tuple._;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -25,6 +26,7 @@ import net.sf.staccato.commons.check.annotation.ForceChecks;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.collections.iterable.Iterables;
 import net.sf.staccato.commons.collections.iterable.internal.IterablesInternal;
+import net.sf.staccato.commons.collections.stream.impl.ListStream;
 import net.sf.staccato.commons.collections.stream.impl.internal.ConcatStream;
 import net.sf.staccato.commons.collections.stream.impl.internal.FilterStream;
 import net.sf.staccato.commons.collections.stream.impl.internal.FlatMapStream;
@@ -104,7 +106,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public Option<A> anyOrNone() {
-		return IterablesInternal.anyOrNoneInternal(this);
+		return Iterables.anyOrNone(this);
 	}
 
 	@Override
@@ -220,10 +222,25 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return Iterables.toList(this);
 	}
 
+	public Stream<A> toOrderedStream() {
+		return new ListStream<A>(toList()) {
+			public Stream<A> toOrderedStream() {
+				return this;
+			}
+
+			public List<A> toList() {
+				return Collections.unmodifiableList(getList());
+			}
+		};
+	}
+
 	@Override
 	public A[] toArray(Class<? extends A> clazz) {
-		Collection<A> list = toList();
-		return list.toArray((A[]) Array.newInstance(clazz, list.size()));
+		return toArray(clazz, toList());
+	}
+
+	protected A[] toArray(Class<? extends A> clazz, Collection<A> readOnlyColView) {
+		return readOnlyColView.toArray((A[]) Array.newInstance(clazz, readOnlyColView.size()));
 	}
 
 	@Override

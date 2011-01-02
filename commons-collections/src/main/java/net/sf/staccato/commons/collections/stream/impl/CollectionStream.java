@@ -14,8 +14,10 @@ package net.sf.staccato.commons.collections.stream.impl;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccato.commons.collections.iterable.Iterables;
 import net.sf.staccato.commons.collections.iterable.internal.UnmodifiableIterator;
 import net.sf.staccato.commons.collections.stream.AbstractStream;
 
@@ -57,6 +59,15 @@ public class CollectionStream<A> extends AbstractStream<A> {
 	@Override
 	public Iterator<A> iterator() {
 		return new UnmodifiableIterator<A>(collection.iterator());
+	}
+
+	@Override
+	public List<A> toList() {
+		return Iterables.toList(getCollection());
+	}
+
+	public A[] toArray(Class<? extends A> clazz) {
+		return toArray(clazz, getCollection());
 	}
 
 	protected Collection<A> getCollection() {

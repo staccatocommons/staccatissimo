@@ -25,6 +25,9 @@ public class EnumerationIterator<A> extends AbstractUnmodifiableIterator<A> {
 
 	private final Enumeration<A> enumeration;
 
+	/**
+	 * Creates a new {@link EnumerationIterator}
+	 */
 	public EnumerationIterator(@NonNull Enumeration<A> enumeration) {
 		this.enumeration = enumeration;
 	}

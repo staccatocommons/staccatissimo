@@ -19,8 +19,8 @@ import java.util.Set;
 import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
- * {@link Stream} interface for converting an {@link Stream} into a {@link List}
- * or {@link Set}.
+ * {@link Stream} interface for converting an {@link Stream} into other kind of
+ * {@link Iterable}s
  * 
  * All implementations returned are non-lazy - all element references are copied
  * during invocation, and are {@link Serializable}.
@@ -43,6 +43,16 @@ public interface Collectible<A> {
 	 */
 	@NonNull
 	List<A> toList();
+
+	/**
+	 * Converts this stream into a new ordered one that is not lazy and that can
+	 * be iterated more than once.
+	 * 
+	 * @return a new {@link Stream} that retrieves elements from the next
+	 *         iteration to this Stream.
+	 */
+	@NonNull
+	Stream<A> toOrderedStream();
 
 	/**
 	 * Create a new array that has the same elements that the retrived by this

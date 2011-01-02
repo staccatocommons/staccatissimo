@@ -46,11 +46,6 @@ public class IterablesInternal {
 		return collection.iterator().next();
 	}
 
-	public static <T> Option<T> anyOrNoneInternal(Iterable<T> collection) {
-		Iterator<T> iterator = collection.iterator();
-		return iterator.hasNext() ? Option.some(iterator.next()) : Option.<T> none();
-	}
-
 	public static <T> boolean isEmptyInternal(Iterable<T> iterable) {
 		return !iterable.iterator().hasNext();
 	}

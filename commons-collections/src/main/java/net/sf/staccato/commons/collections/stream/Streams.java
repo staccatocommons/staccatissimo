@@ -29,7 +29,7 @@ import net.sf.staccato.commons.collections.stream.impl.internal.EmptyStream;
 import net.sf.staccato.commons.collections.stream.impl.internal.EnumerationIterator;
 
 /**
- * Class methods for creating {@link Stream}s
+ * Class methods for creating very simple {@link Stream}s
  * 
  * @author flbulgarelli
  */

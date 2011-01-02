@@ -79,6 +79,7 @@ public interface Stream<A> extends //
 	 *         applying the given function to this stream
 	 */
 	@NonNull
+	@Projection
 	<B> Stream<B> then(@NonNull Applicable<Stream<A>, ? extends Iterable<B>> function);
 
 }

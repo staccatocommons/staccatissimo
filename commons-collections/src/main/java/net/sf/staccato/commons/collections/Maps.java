@@ -21,9 +21,9 @@ import net.sf.staccato.commons.lang.None;
 import net.sf.staccato.commons.lang.Option;
 
 /**
+ * Class methods for dealing with maps
  * 
  * @author flbulgarelli
- * 
  */
 public class Maps {
 
@@ -36,6 +36,7 @@ public class Maps {
 	 *          the key to lookup
 	 * @return Some(value) if the key exists, None, otherwise
 	 */
+	@NonNull
 	public static <V> Option<V> get(@NonNull Map<?, V> map, Object key) {
 		V value = map.get(key);
 		if (value != null)
@@ -50,13 +51,14 @@ public class Maps {
 	/**
 	 * Answers Some(key) from the given {@link Map}, or {@link None}, if it is
 	 * empty. Notice that <strong>any does not mean random</strong>, it may return
-	 * always the same key, this method just guarantees that if Some(key) is
+	 * always the same key, as this method just guarantees that if Some(key) is
 	 * returned, map.containsKey(key) will return <code>true</code>
 	 * 
 	 * @param <K>
 	 * @param map
 	 * @return Some(key) if map is not empty, None otherwise
 	 */
+	@NonNull
 	public static <K> Option<K> anyKey(@NonNull Map<K, ?> map) {
 		if (map.isEmpty())
 			return Option.none();
@@ -66,8 +68,8 @@ public class Maps {
 	/**
 	 * Answers a key from the given {@link Map}, or null, if it is empty. Notice
 	 * that <strong>any does not mean random</strong>, it may return always the
-	 * same key, this method just guarantees that if a non null key is returned,
-	 * <code>map.containsKey(key)</code> will return <code>true</code>
+	 * same key, as this method just guarantees that if a non null key is
+	 * returned, <code>map.containsKey(key)</code> will return <code>true</code>
 	 * 
 	 * @param <K>
 	 * @param map
@@ -84,18 +86,31 @@ public class Maps {
 	 * {@link None}, if it is empty. Notice that <strong>any does not mean
 	 * random</strong>, it may return always the same value, this method just
 	 * guarantees that if a <code>Some(value)</code> is returned,
-	 * <code>map.containsValue(key)</code> will return <code>true</code>
+	 * <code>map.containsValue(value)</code> will return <code>true</code>
 	 * 
 	 * @param <K>
 	 * @param map
 	 * @return Some(value) if map is not empty, None otherwise
 	 */
+	@NonNull
 	public static <V> Option<V> anyValue(@NonNull Map<?, V> map) {
 		if (map.isEmpty())
 			return Option.none();
 		return Option.some(anyInternal(map.values()));
 	}
 
+	/**
+	 * Answers a value from the given {@link Map}, or <code>null</code>, if it is
+	 * empty. Notice that <strong>any does not mean random</strong>, it may return
+	 * always the same value, as this method just guarantees that if a
+	 * <code>value</code> is returned, <code>map.containsValue(value)</code> will
+	 * return <code>true</code>
+	 * 
+	 * @param <K>
+	 * @param map
+	 * @return a <code>value</code> if map is not empty, <code>null</code>
+	 *         otherwise
+	 */
 	public static <V> V anyValueOrNull(@NonNull Map<?, V> map) {
 		if (map.isEmpty())
 			return null;

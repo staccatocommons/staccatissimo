@@ -26,10 +26,12 @@ import static org.junit.Assume.assumeTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import net.sf.staccato.commons.collections.iterable.Iterables;
+import net.sf.staccato.commons.collections.iterable.ModifiableIterables;
 import net.sf.staccato.commons.defs.Applicable;
 import net.sf.staccato.commons.defs.Evaluable;
 import net.sf.staccato.commons.defs.Provider;
@@ -383,7 +385,7 @@ public abstract class StreamAbstractTest {
 	 */
 	@Theory
 	public void testLast(Stream stream) {
-		assumeTrue(!stream.isEmpty());
+		assumeTrue(!stream.isEmpty());//
 		assumeThat(stream.last(), is(stream.last()));
 		assertEquals(stream.get(stream.size() - 1), stream.last());
 	}
@@ -420,6 +422,15 @@ public abstract class StreamAbstractTest {
 	@Theory
 	public void testToList(Stream stream) {
 		assertEquals(Iterables.toList(stream), stream.toList());
+	}
+
+	@Theory
+	public void testToStream(Stream stream) {
+		Stream stream2 = stream.toOrderedStream();
+		Stream stream3 = stream2.toOrderedStream();
+		assertEquals(
+			ModifiableIterables.addAll(new HashSet(), stream2),
+			ModifiableIterables.addAll(new HashSet(), stream3));
 	}
 
 	/**

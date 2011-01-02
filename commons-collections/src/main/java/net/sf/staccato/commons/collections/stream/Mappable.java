@@ -46,6 +46,7 @@ public interface Mappable<A> {
 	 * @return a new {@link Stream} that will retrieve the result of transforming
 	 *         each element and concatenating those transformations
 	 */
+	@NonNull
 	@Projection
 	<B> Stream<B> flatMap(@NonNull Applicable<? super A, ? extends Iterable<? extends B>> function);
 }
