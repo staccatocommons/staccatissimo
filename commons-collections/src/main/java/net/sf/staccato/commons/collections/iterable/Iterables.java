@@ -352,7 +352,12 @@ public class Iterables {
 	 */
 
 	/**
-	 * Maps the the given collection into a new list, using the given function
+	 * Maps the given {@link Collection} into a new {@link List}, using the given
+	 * <code>function</code>
+	 * 
+	 * The resulting list contains contains the result of applying the given
+	 * <code>function</code> to each element retrieved from the original
+	 * <code>iterable</code>
 	 * 
 	 * @param <A>
 	 *          the element type of the given collection
@@ -361,11 +366,11 @@ public class Iterables {
 	 * @param collection
 	 *          the source of the mapping.
 	 * @param function
-	 *          the function applied to each element of the source collection.
-	 * @return a new, non null {@link List}, which contains an element for the
-	 *         result of the application of each element of the given collection.
-	 *         As a particular case, this method will return an empty list if the
-	 *         given collection is empty
+	 *          an {@link Applicable} applied to each element of the source
+	 *          collection.
+	 * @return a new, non null {@link List}. As a particular case, this method
+	 *         will return an empty list if the given collection is empty,
+	 *         regardless of the given {@link Applicable}
 	 */
 	@NonNull
 	public static <A, B> List<B> map(@NonNull Collection<A> collection,
@@ -377,20 +382,24 @@ public class Iterables {
 	}
 
 	/**
-	 * Maps the the given iterable into a new list, using the given function
+	 * Maps the given {@link Iterable} into a new list, using the given
+	 * <code>function</code>.
+	 * 
+	 * The returned list contains contains the result of applying the given
+	 * <code>function</code> to each element retrieved from the original
+	 * <code>iterable</code>
+	 * 
 	 * 
 	 * @param <A>
-	 *          the element type of the given iterable
+	 *          the element type of the given <code>iterables</code>
 	 * @param <B>
 	 *          the element type of the resulting list
 	 * @param iterable
 	 *          the source of the mapping.
 	 * @param function
 	 *          the function applied to each element of the source iterable.
-	 * @return a new, non null {@link List}, which contains an element for the
-	 *         result of the application of each element of the given collection.
-	 *         As a particular case, this method will return an empty list if the
-	 *         given iterable is empty
+	 * @return a new, non null {@link List}. As a particular case, this method
+	 *         will return an empty list if the given iterable is empty
 	 */
 	@NonNull
 	public static <A, B> List<B> map(@NonNull Iterable<A> iterable,
@@ -398,6 +407,18 @@ public class Iterables {
 		return collectInternal(iterable, function, new LinkedList<B>());
 	}
 
+	/**
+	 * Maps the given <code>iterable</code> into a list of iterables using the
+	 * given <code>function</code>, and flattens the result, concatenating all the
+	 * resulting iterables into a {@link List}
+	 * 
+	 * @param <A>
+	 * @param <B>
+	 * @param iterable
+	 * @param function
+	 * @return a new {@link List}
+	 */
+	@NonNull
 	public static <A, B> List<B> flatMap(@NonNull Iterable<A> iterable,
 		@NonNull Applicable<? super A, ? extends Iterable<B>> function) {
 		LinkedList<B> list = new LinkedList<B>();

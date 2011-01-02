@@ -31,14 +31,14 @@ import net.sf.staccato.commons.check.annotation.NonNull;
 public interface Collectible<A> {
 
 	/**
-	 * @return a new {@link Set} that contains all elements retrieved by this
+	 * @return a new {@link Set} that contains all elements retrieved from this
 	 *         {@link Stream}
 	 */
 	@NonNull
 	Set<A> toSet();
 
 	/**
-	 * @return a new {@link List} that contains all elements retrieved by this
+	 * @return a new {@link List} that contains all elements retrieved from this
 	 *         {@link Stream}
 	 */
 	@NonNull

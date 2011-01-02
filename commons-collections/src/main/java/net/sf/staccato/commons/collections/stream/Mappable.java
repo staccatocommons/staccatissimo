@@ -39,7 +39,7 @@ public interface Mappable<A> {
 
 	/**
 	 * Transformes each element using the given function, and concatenates
-	 * ("flatterns") the result
+	 * (flattens) the result
 	 * 
 	 * @param <B>
 	 * @param function

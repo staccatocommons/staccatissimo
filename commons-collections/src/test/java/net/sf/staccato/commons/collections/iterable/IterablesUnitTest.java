@@ -17,7 +17,9 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 
+import net.sf.staccato.commons.defs.Applicable;
 import net.sf.staccato.commons.lang.Option;
+import net.sf.staccato.commons.lang.function.Function;
 import net.sf.staccato.commons.lang.predicate.Predicate;
 import net.sf.staccato.commons.lang.predicate.Predicates;
 import net.sf.staccato.commons.lang.sequence.Sequence;
@@ -86,6 +88,22 @@ public class IterablesUnitTest {
 		assertEquals(
 			Arrays.asList(false, true, false),
 			Iterables.map((Iterable<Integer>) integersList, Predicates.equal(5)));
+	}
+
+	/**
+	 * Test method for {@link Iterables#flatMap(Iterable, Applicable)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testFlatMap() throws Exception {
+		assertEquals(
+			Arrays.asList(1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6),
+			Iterables.flatMap(Sequence.fromTo(4, 6), new Function<Integer, Iterable<Integer>>() {
+				public Iterable<Integer> apply(Integer arg) {
+					return Sequence.fromTo(1, arg);
+				}
+			}));
 	}
 
 	@Test
