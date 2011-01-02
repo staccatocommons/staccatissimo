@@ -18,7 +18,7 @@ import net.sf.staccato.commons.check.annotation.NonNull;
 
 /**
  * A {@link SoftException} is a {@link RuntimeException} that wraps another with
- * only solely purpose of making it unchecked
+ * only solely purpose of making it unchecked.
  * 
  * @author flbulgarelli
  */
@@ -27,12 +27,15 @@ public class SoftException extends RuntimeException {
 	private static final long serialVersionUID = 4364656280386270636L;
 
 	/**
-	 * Creates a new {@link SoftException} that wraps the given one
+	 * Creates a new {@link SoftException} that wraps the given one.
+	 * 
+	 * Please note that the preferred way of wrapping the cause exception is using
+	 * the {@link #soften(Exception)} class method, which will not wrap
+	 * {@link RuntimeException} unnecessarily, when catching generic exceptions.
 	 * 
 	 * @param cause
-	 *          the wrapped exception. Non null.
+	 *          the wrapped exception.
 	 */
-
 	public SoftException(@NonNull Exception cause) {
 		super(cause);
 	}
@@ -42,9 +45,10 @@ public class SoftException extends RuntimeException {
 	 * it, if possible, or wrapping it into a {@link SoftException}
 	 * 
 	 * @param exception
-	 *          the target exception to soften. Non null.
-	 * @return The given casted, casted to {@link RuntimeException}, if possible,
-	 *         or a new {@link SoftException} that wrapps it.
+	 *          the target exception to soften.
+	 * @return The given <code>exception</code>, casted to
+	 *         {@link RuntimeException}, if possible, or a new
+	 *         {@link SoftException} that wrapps it, otherwise.
 	 */
 	@NonNull
 	public static RuntimeException soften(@NonNull Exception exception) {

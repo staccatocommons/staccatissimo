@@ -6,6 +6,8 @@ import static junit.framework.Assert.assertSame;
 import static junit.framework.Assert.assertTrue;
 import static net.sf.staccato.commons.lang.tuple.Tuple._;
 
+import java.util.Date;
+
 import org.junit.Test;
 
 /**
@@ -43,6 +45,8 @@ public class TripleUnitTest extends TupleAbstractUnitTest {
 	public void testEqualty() throws Exception {
 		assertEquals(_(5, 90L, "Bye"), _(5, 90L, "Bye"));
 		assertFalse(_("Hello", 0, 0).equals(_("World", 0, 1)));
+		Date date = new Date();
+		assertEquals(_(40, date, "hello").hashCode(), _(40, date.clone(), "hello").hashCode());
 	}
 
 	@Test

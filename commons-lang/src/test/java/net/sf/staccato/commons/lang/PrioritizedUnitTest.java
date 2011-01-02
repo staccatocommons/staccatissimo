@@ -1,5 +1,6 @@
 package net.sf.staccato.commons.lang;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
@@ -9,6 +10,11 @@ import java.util.List;
 
 import org.junit.Test;
 
+/**
+ * Test for {@link Prioritized}
+ * 
+ * @author flbulgarelli
+ */
 public class PrioritizedUnitTest {
 
 	@Test
@@ -37,5 +43,15 @@ public class PrioritizedUnitTest {
 
 		assertTrue(p2.compareTo(p1) <= 0);
 
+	}
+
+	/**
+	 * Test for {@link Prioritized#equals(Object)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testEquals() throws Exception {
+		assertEquals(Prioritized.from(50, 90), Prioritized.from(20, 90));
 	}
 }

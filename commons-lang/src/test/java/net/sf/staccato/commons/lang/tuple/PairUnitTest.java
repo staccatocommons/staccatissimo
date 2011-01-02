@@ -7,6 +7,7 @@ import static junit.framework.Assert.assertTrue;
 import static net.sf.staccato.commons.lang.tuple.Tuple._;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.Test;
 
@@ -35,6 +36,8 @@ public class PairUnitTest extends TupleAbstractUnitTest {
 	public void testEqualty() throws Exception {
 		assertEquals(_(5, 90L), _(5, 90L));
 		assertFalse(_("Hello", 5).equals(_("World", 5)));
+		Date date = new Date();
+		assertEquals(_(40, date).hashCode(), _(40, date.clone()).hashCode());
 	}
 
 	@Test

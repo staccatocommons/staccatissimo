@@ -50,11 +50,11 @@ import net.sf.staccato.commons.defs.restriction.Value;
  * signature <code>Pair&lt;Integer, Integer&gt; divMod(int x, int y)</code></li>
  * </ul>
  * 
- * Although it is possible to create tuples of different sizes from 2 to 4
- * invoking the appropriate constructor, the recommended way of instantiating
- * tuples is using the family of class methods named <code>_</code>. Although it
- * looks odd at first glance, combining it with static imports produces quite
- * clean code. For example, using again the divMod method:
+ * Although it is possible to create tuples of arities from 2 to 4 invoking the
+ * appropriate constructor, the recommended way of instantiating tuples is using
+ * the family of class methods named <code>_</code>. Although it looks odd at
+ * first glance, combining it with static imports produces quite clean code. For
+ * example, using again the divMod method:
  * 
  * <pre>
  *  import static net.sf.staccato.commons.lang.tuple.Tuple._;

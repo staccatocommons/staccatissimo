@@ -29,10 +29,20 @@ import net.sf.staccato.commons.lang.SoftException;
  * the following methods
  * <ul>
  * <li>{@link #initialize()}: this method will be invoked in order to create an
- * initialize the handled resource, and it can throw any exception</li>
- * <li>{@link #doWork(Object)}: this method executes the unit of work, it will
- * be invoked to produce the result of the lifecycle, passing the handled
- * resource returned by the {@link #initialize()} method.</li>
+ * initialize the handled resource. It <strong>may</strong> throw any exception</li>
+ * <li>
+ * <p>
+ * {@link #doWork(Object)}: this method executes the unit of work, it will be
+ * invoked to produce the result of the lifecycle, passing the handled resource
+ * returned by the {@link #initialize()} method.
+ * </p>
+ * <p>
+ * Lifecycles parameterized to have a result of type {@link Void}
+ * <strong>must</strong> return <code>null</code>; for those cases, client code,
+ * instead of overriding {@link #doWork(Object)}, <strong>should</strong>
+ * override {@link #doVoidWork(Object)}
+ * </p>
+ * </li>
  * <li>{@link #dispose(Object)}</li>
  * </ul>
  * 
@@ -50,12 +60,39 @@ public abstract class Lifecycle<ResourceType, ResultType> implements Runnable,
 	 * doing some work with it, disposing the resource and returning the work
 	 * result.
 	 * 
+	 * Any checked or unchecked exception produced during the flow execution will
+	 * be catch, soften and rethrown.
+	 * 
+	 * 
+	 * @throws RuntimeException
+	 *           if any exception is thrown during the flow execution
 	 * @return the result of the work over the resource
+	 * @see SoftException#soften(Exception)
 	 */
 	public ResultType execute() {
 		return SoftException.callOrSoften(this);
 	}
 
+	/**
+	 * Executes this {@link Lifecycle}, initializing the resource it handles,
+	 * doing some work with it, disposing the resource and returning the work
+	 * result.
+	 * 
+	 * Any checked or unchecked exception produced during the flow execution will
+	 * be catch. If it is of the given <code>exceptionclass</code>, it will be
+	 * thrown inmediatly. Otherwise, it will be soften and rethrown.
+	 * 
+	 * @param <ExceptionType>
+	 * @param exceptionClass
+	 *          the type of exception that will be thrown without being soften.
+	 *          This class <strong>should</strong> correspond to a checked
+	 *          exception type. Otherwise, this method would not provide any
+	 *          benefit over {@link #execute()}
+	 * @throws RuntimeException
+	 *           if any exception is thrown during the flow execution
+	 * @return the result of the work over the resource
+	 * @see #execute()
+	 */
 	public <ExceptionType extends Exception> ResultType executeThrowing(
 		Class<ExceptionType> exceptionClass) throws ExceptionType {
 		try {
@@ -69,7 +106,7 @@ public abstract class Lifecycle<ResourceType, ResultType> implements Runnable,
 	}
 
 	public <ExceptionType1 extends Exception, ExceptionType2 extends Exception> ResultType executeThrowing(
-		Class<ExceptionType1> exceptionClass1, Class<ExceptionType1> exceptionClass2)
+		Class<ExceptionType1> exceptionClass1, Class<ExceptionType2> exceptionClass2)
 		throws ExceptionType1, ExceptionType2 {
 		try {
 			return executeInternal();
@@ -125,6 +162,10 @@ public abstract class Lifecycle<ResourceType, ResultType> implements Runnable,
 
 	/**
 	 * Makes usage of a resource, and returns a result
+	 * 
+	 * {@link Lifecycle}s parameterized to have a {@link Void} result
+	 * <strong>should not</strong> override this method, but
+	 * {@link #doVoidWork(Object)} instead
 	 * 
 	 * @param resource
 	 *          the resource to use

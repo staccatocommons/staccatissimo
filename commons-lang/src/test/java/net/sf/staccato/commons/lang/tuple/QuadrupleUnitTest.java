@@ -6,6 +6,8 @@ import static junit.framework.Assert.assertSame;
 import static junit.framework.Assert.assertTrue;
 import static net.sf.staccato.commons.lang.tuple.Tuple._;
 
+import java.util.Date;
+
 /**
  * Test for {@link Quadruple}
  * 
@@ -43,6 +45,8 @@ public class QuadrupleUnitTest extends TupleAbstractUnitTest {
 	public void testEqualty() throws Exception {
 		assertEquals(_(5, 90L, "blah", "bleh"), _(5, 90L, "blah", "bleh"));
 		assertFalse(_("Hello", 5, 2, 3).equals(_("World", 5, 2, 4)));
+		Date date = new Date();
+		assertEquals(_(40, date, "hello", 'A').hashCode(), _(40, date.clone(), "hello", 'A').hashCode());
 	}
 
 	@Override
