@@ -1,0 +1,191 @@
+    ---------------
+    Getting started
+    ---------------
+
+Getting started
+
+* Introduction
+ 
+  Staccato-Commons-Instrument is a tool for processing annotations with instrumentation capabilities.
+ It consist of an instrumenter that runs on compiled classes directory with a extremly simple lifecycle:
+   
+    [[1]] Scans the directory for classfiles and loads each one it finds
+    
+    [[2]] Scans each loaded class for annotations, and depending on the annotated element and annotation type, 
+ invokes one or more custom handlers provided by the client
+    
+    [[3]] Handlers are custom classes that implement one or more interfaces 
+ from <<<package net.sf.staccato.commons.instrument.handler>>>, which have the chance of inspecting and/or 
+ modifying the annotated code or the processing context. Handlers 
+ have full access to {{{http://http://www.csg.is.titech.ac.jp/~chiba/javassist/tutorial/tutorial.html}Javassist}} API.
+     
+    [[4]] Finally, the instrumenter makes changes persistent by replacing old classfiles with modified ones.
+    
+* Running it
+  
+  The instrumenter must be run programatically, so you will need a main-like class to do experiment with it. Doing that is quite simple, just need to invoke  <<<net.sf.staccato.commons.instrument.InstrumentationRunner.runInstrumentation(InstrumenterConfigurer, Directory, String)>>>. For example:
+    
++-----------------------------------------------------------------------------------+
+   InstrumentationRunner.runInstrumentation(new InstrumenterConfigurer() {
+       public void configureInstrumenter(InstrumenterConfiguration instrumenter) {
+           instrumenter 
+               .addAnnotationHanlder(handler1)
+               .addAnnotationHanlder(handler2)
+               .setInstrumentationMark(mark);
+       }
+   }, new Directory("target/classes"), "");
++-----------------------------------------------------------------------------------+
+    
+ As you can see, the instrumenter itself is completely hidden, but you can register annotation handlers and an "instrumentation mark" using an <<<InstrumenterConfigurer>>>. In this example you can already see most of the elements of the staccato-commons-instrument API: handlers, instrumentation marks and configurers.
+ 
+* The API
+
+** InstrumenterConfigurer 
+
+ As seen before, the configurer is just a callback for registering custom components into the instrumenter, exposed as an <<<InstrumenterConfiguration>>> argument. 
+
+** <<AnnotationHandler>>s
+
+ Handlers contain the concrete logic of annotation processing. There are 
+four specific handler interfaces, one for each supported annotation 
+element: <<<ArgumentAnnotationHandler>>>, <<<ClassAnnotationHandler>>>, <<<ConstructorAnnotationHandler>>> and 
+<<<MethodAnnotationHandler>>>. In addition to specific methods defined by each interface - see each interface javadoc for 
+more details - all handlers need to override the method <<<Class<? extends Annotation>  AnnotationHandler.getSupportedAnnotationType()>>>, 
+which allows the instrumenter to select the proper handler o handlers for each annotation - there is no problem in registering more 
+than one handler for the same 
+annotation, as long as effects of handlers are independent of their execution order. 
+
+** <<<AnnotationContext>>>s
+** InstrumentionMark
+
+* A complete example
+
+ <The complete code can be found {{{https:/staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-instrument-examples}here}}>
+ 
+ Lets suppose that you have an Account, whose balance can be augmented by
+depositing money, or reseted to zero. Both operations must be logged. Also, 
+when depositing, some preconditions must be checked: the amount to deposit must be not null and >= 0. A näive implementation 
+will look like:
+    
++---------------------------------+
+public class Account {
+
+    private static final Logger logger = ...;
+
+    ...
+        
+    public void deposit(BigDecimal amount) {
+        if (amount == null) {
+            String message = "amount must not be null";
+            logger.severe(message);
+            throw new IllegalArgumentException(message);
+        }
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            String message = "amount must be positive";
+            logger.severe(message);
+            throw new IllegalArgumentException(message);
+        }
+        balance = balance.add(amount);
+        logger.warning("deposit");
+    }
+
+    public void resetBalance() {
+        balance = BigDecimal.ZERO;
+        logger.warning("resetBalance");
+    }
+    
+    ...
+}
++----------------------------------+
+    
+  The previous code has several flaws. That which is of particular interest here is that the logic of "whenever methods like  
+resetBalance and deposit are evaluated, log the invocation" and "when a non negative constraint is violated, throw an exception" 
+are harcoded and not encapsulted properly. 
+ 
+  Using staccato-commons-instrument we can create some annotations that encapsulate that behavior, and document it, by free. 
+So lets define two annotations: <<<Loggeable>>>, and <<<NonNegativeDecimal>>>:
+
++---------------------------------+
+
+@Documented
+@Retention(RetentionPolicy.CLASS)
+@Target(ElementType.METHOD)
+public @interface Loggeable {}
+
+@Documented
+@Retention(RetentionPolicy.CLASS)
+@Target(ElementType.PARAMETER)
+public @interface NonNegativeDecimal { String value(); }
+
++---------------------------------+    
+
+ The second step is to define the annotation processors. A very simple implementation would look like the following:
+ 
++------------------------------------------------------------------+
+public class LogHandler implements MethodAnnotationHandler {
+
+    public Class<? extends Annotation> getSupportedAnnotationType() {
+        return Loggeable.class;
+    }
+
+    public void preProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context)
+        throws CannotCompileException {
+        if (!hasLogger(context)) {
+            CtClass declaringClass = context.getMethod().getDeclaringClass();
+            CtField field = CtField.make(
+                "private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(\""
+                    + declaringClass.getName() + "\");",
+                declaringClass);
+            declaringClass.addField(field);
+        }
+    }
+
+   public void postProcessAnnotatedMethod(Object annotation, MethodAnnotationContext context)
+        throws CannotCompileException {
+        context.getMethod().insertAfter("logger.warning(\"" + context.getMethod().getName() + "\");");
+        context.getMethod().addCatch("logger.severe($e.getMessage());throw $e;", getThrowable(context));
+    }
+
+   ....
+}   
++--------------------------------------------------------------+
+ 
+ Finally, we need to annotate the methods and arguments with the new annotations: 
+ 
++-------------------------------------------------------------------------------+ 
+ public class Account2 {
+
+    ....
+
+    @Loggeable
+    public void deposit(@NonNull @NonNegativeDecimal("amount") BigDecimal amount) {
+        balance = balance.add(amount);
+    }
+
+    @Loggeable
+    public void resetBalance() {
+        balance = BigDecimal.ZERO;
+    }
+    
+    ...
+ }
++-------------------------------------------------------------------------------+
+
+ Now it is easy to see that the resulting code is much more clean and simple than the original. 
+ 
+ Perhaps the reader has already notice that the idea behind this example is the separation of crosscutting concerns, 
+and is probably saying: "That is not new! It is nothing I couldn't have achieved using AOP!". And 
+that is true, the final result is quite similar. However, staccato-commons-instrument is by no means a replacement
+of your favorite Aspects framework or language extension, because:
+ 
+    * It is not a language extension and adds no new abstractions or vocabulary. It is simply a non-invasive annotation processor.  
+ 
+    * It is a low-level API: you directly handle the instrumentation. It is really flexible, as 
+programmer has access this way to all the power of Javassist, but needs to handle its complexity. 
+ 
+    * It is not pointcut-based, but annotations based. The main consequence is that crosscuting behavior can be easily encapsulated, but 
+there is not inversion in the direction of injection.   
+ 
+    * It is a compile-time tool, as opposite of many AOP frameworks, that inject advice on runtime.  The main benefit is that it adds no 
+significant runtime overhead
+       
