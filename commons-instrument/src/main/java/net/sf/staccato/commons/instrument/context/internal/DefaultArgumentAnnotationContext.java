@@ -52,9 +52,6 @@ public class DefaultArgumentAnnotationContext extends AbstractAnnotationContext 
 		this.behavior = behavior;
 	}
 
-	/**
-	 * @return the parameterNumber
-	 */
 	public int getArgumentNumber() {
 		return parameterNumber;
 	}
@@ -64,6 +61,8 @@ public class DefaultArgumentAnnotationContext extends AbstractAnnotationContext 
 	}
 
 	/**
+	 * Sets the zero-base argument number
+	 * 
 	 * @param parameterNumber
 	 *          the parameterNumber to set
 	 */

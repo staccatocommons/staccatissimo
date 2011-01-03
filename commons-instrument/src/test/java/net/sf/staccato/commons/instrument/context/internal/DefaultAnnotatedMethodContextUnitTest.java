@@ -10,34 +10,27 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.instrument.internal;
+package net.sf.staccato.commons.instrument.context.internal;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import javassist.ClassPool;
-import net.sf.staccato.commons.instrument.context.internal.DefaultMethodAnnotationContext;
-import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class DefaultAnnotatedMethodContextUnitTest extends JUnit4MockObjectTestCase {
+public class DefaultAnnotatedMethodContextUnitTest extends AbstractAnnotationContextUnitTest {
 
-	private Logger logger;
 	private DefaultMethodAnnotationContext context;
-	ClassPool pool = ClassPool.getDefault();
 
 	/**
-	 * @throws java.lang.Exception
+	 * creates the context
 	 */
 	@Before
-	public void setUp() throws Exception {
-		logger = mock(Logger.class);
+	public void createContext() {
 		context = new DefaultMethodAnnotationContext(pool, logger);
 	}
 
