@@ -20,15 +20,13 @@ import net.sf.staccato.commons.instrument.config.InstrumenterConfigurer;
 import net.sf.staccato.commons.instrument.config.SimpleInstrumentationMark;
 import net.sf.staccato.commons.io.Directory;
 
-import org.junit.BeforeClass;
-
 /**
  * @author flbulgarelli
  * 
  */
 public class Test {
 
-	@BeforeClass
+	@org.junit.BeforeClass
 	public static void before() throws Exception {
 		InstrumentationRunner.runInstrumentation(new InstrumenterConfigurer() {
 			public void configureInstrumenter(InstrumenterConfiguration instrumenter) {
@@ -42,8 +40,8 @@ public class Test {
 			"");
 	}
 
-	@org.junit.Test
-	public void testname() throws Exception {
+	@org.junit.Test(expected = IllegalArgumentException.class)
+	public void testNegativeAmmount() throws Exception {
 		Account2 account2 = new Account2(BigDecimal.valueOf(10));
 		account2.resetBalance();
 		account2.deposit(BigDecimal.valueOf(-10));
