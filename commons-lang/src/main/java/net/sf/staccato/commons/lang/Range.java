@@ -12,6 +12,7 @@
  */
 package net.sf.staccato.commons.lang;
 
+import net.sf.staccato.commons.check.Ensure;
 import net.sf.staccato.commons.check.annotation.NonNull;
 import net.sf.staccato.commons.defs.ContainsAware;
 import net.sf.staccato.commons.defs.EmptyAware;
@@ -50,7 +51,7 @@ public class Range<T extends Comparable<T>> extends ValueObject implements Conta
 	 *          the upper bound, inclusive.
 	 */
 	public Range(@NonNull T min, @NonNull T max) {
-		// Ensure.that().isGreaterThanOrEqualTo("max", max, min);
+		Ensure.that().isGreaterThanOrEqualTo("max", max, min);
 		this.min = min;
 		this.max = max;
 	}
