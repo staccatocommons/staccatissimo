@@ -22,7 +22,7 @@ import org.slf4j.Logger;
  * @author flbulgarelli
  * 
  */
-public class AbstractAnnotationContextUnitTest extends JUnit4MockObjectTestCase {
+public abstract class AbstractAnnotationContextUnitTest extends JUnit4MockObjectTestCase {
 
 	protected Logger logger;
 	protected ClassPool pool = ClassPool.getDefault();
