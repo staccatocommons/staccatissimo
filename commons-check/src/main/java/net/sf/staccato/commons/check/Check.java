@@ -736,14 +736,96 @@ public abstract class Check<ExceptionType extends Throwable> {
 			.is(varName, var, container.contains(var), "must be in %s", container);
 	}
 
-	public final <T extends Comparable<T>> Check<ExceptionType> isGreatherThan(String varName, T var,
+	/**
+	 * Checks that the variable is not <code>null</code> and &gt; than
+	 * <code>other</code>
+	 * 
+	 * @param <T>
+	 *          the contained element type
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param other
+	 *          the {@link Comparable} object of the same type to be compared
+	 *          against <code>var</code>
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final <T extends Comparable<T>> Check<ExceptionType> isGreaterThan(String varName, T var,
 		T other) throws ExceptionType {
-		return is(varName, var, var.compareTo(other) > 0, "must be greater than %s", other);
+		return isNotNull(varName, var)//
+			.is(varName, var, var.compareTo(other) > 0, "must be greater than %s", other);
 	}
 
-	public final <T extends Comparable<T>> Check<ExceptionType> isLowerThan(String varName, T var,
+	/**
+	 * Checks that the variable is not <code>null</code> and &gt;= than
+	 * <code>other</code>
+	 * 
+	 * @param <T>
+	 *          the contained element type
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param other
+	 *          the {@link Comparable} object of the same type to be compared
+	 *          against <code>var</code>
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final <T extends Comparable<T>> Check<ExceptionType> isGreaterThanOrEqualTo(
+		String varName, T var, T other) throws ExceptionType {
+		return isNotNull(varName, var)//
+			.is(varName, var, var.compareTo(other) >= 0, "must be greater than or equal to %s", other);
+	}
+
+	/**
+	 * Checks that the variable is not <code>null</code> and &lt; than
+	 * <code>other</code>
+	 * 
+	 * @param <T>
+	 *          the contained element type
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param other
+	 *          the {@link Comparable} object of the same type to be compared
+	 *          against <code>var</code>
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final <T extends Comparable<T>> Check<ExceptionType> isLessThan(String varName, T var,
 		T other) throws ExceptionType {
-		return is(varName, var, var.compareTo(other) < 0, "must be lower than %s", other);
+		return isNotNull(varName, var)//
+			.is(varName, var, var.compareTo(other) < 0, "must be less than %s", other);
+	}
+
+	/**
+	 * Checks that the variable is not <code>null</code> and &lt;= than
+	 * <code>other</code>
+	 * 
+	 * @param <T>
+	 *          the contained element type
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param other
+	 *          the {@link Comparable} object of the same type to be compared
+	 *          against <code>var</code>
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final <T extends Comparable<T>> Check<ExceptionType> isLessThanOrEqualTo(String varName,
+		T var, T other) throws ExceptionType {
+		return isNotNull(varName, var) //
+			.is(varName, var, var.compareTo(other) <= 0, "must be less than or equal to %s", other);
 	}
 
 	/**

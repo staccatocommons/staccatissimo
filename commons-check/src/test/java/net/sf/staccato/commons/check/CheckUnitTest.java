@@ -300,4 +300,24 @@ public class CheckUnitTest {
 		c.isBetween(VAR_NAME, "big", "bang", "!");
 	}
 
+	/**
+	 * Test for {@link Check#isLessThan(String, Comparable, Comparable)},
+	 * {@link Check#isLessThanOrEqualTo(String, Comparable, Comparable)},
+	 * {@link Check#isGreaterThan(String, Comparable, Comparable)} and
+	 * {@link Check#isGreaterThanOrEqualTo(String, Comparable, Comparable)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testCompare() throws Exception {
+		c
+			.isGreaterThan(VAR_NAME, 90, 50)
+			.isGreaterThanOrEqualTo(VAR_NAME, 90, 90)
+			.isGreaterThanOrEqualTo(VAR_NAME, 90, 20)
+			.isLessThan(VAR_NAME, "foo", "zbar")
+			.isLessThanOrEqualTo(VAR_NAME, "baz", "baz")
+			.isLessThanOrEqualTo(VAR_NAME, "foobar", "zbaz");
+
+	}
+
 }
