@@ -13,8 +13,8 @@
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument</url>
 	<inceptionYear>2010</inceptionYear>
 	<scm>
-        <connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-instrument</connection>
-        <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-instrument</developerConnection>
+        <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-instrument</connection>
+        <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-instrument</developerConnection>
         <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-instrument/</url>
     </scm>
 	<distributionManagement>

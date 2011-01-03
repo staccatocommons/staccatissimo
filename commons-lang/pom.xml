@@ -9,8 +9,8 @@
 	<inceptionYear>2010</inceptionYear>
     <url>http://staccatocommons.sourceforge.net/staccatissimo/commonslang</url>
     <scm>
-       <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-lang</developerConnection>
-       <connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-lang</connection>
+       <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lang</developerConnection>
+       <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lang</connection>
        <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-lang/</url>
     </scm>
 	<parent>

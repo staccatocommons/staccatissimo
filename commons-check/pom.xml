@@ -13,8 +13,8 @@
 	<inceptionYear>2010</inceptionYear>
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonscheck</url>
 	<scm>
-        <connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-check</connection>
-		<developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-check</developerConnection>
+        <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-check</connection>
+		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-check</developerConnection>
 		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-check/</url>
 	</scm>
 	<distributionManagement>

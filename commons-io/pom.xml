@@ -18,8 +18,8 @@
 		</site>
 	</distributionManagement>
 	<scm>
-        <connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-io</connection>
-        <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-io</developerConnection>
+        <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-io</connection>
+        <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-io</developerConnection>
         <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-io/</url>
     </scm>
 	<build>

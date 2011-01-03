@@ -13,8 +13,8 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<scm>
-	   <connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-collections</connection>
-	   <developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-collections</developerConnection>
+	   <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-collections</connection>
+	   <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-collections</developerConnection>
 	   <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-collections/</url>
 	</scm>
 	<distributionManagement>
