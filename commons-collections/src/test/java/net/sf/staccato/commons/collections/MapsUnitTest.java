@@ -1,6 +1,6 @@
 package net.sf.staccato.commons.collections;
 
-import static net.sf.staccato.commons.testing.junit.Assert.assertIn;
+import static net.sf.staccatocommons.testing.junit.Assert.assertIn;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;

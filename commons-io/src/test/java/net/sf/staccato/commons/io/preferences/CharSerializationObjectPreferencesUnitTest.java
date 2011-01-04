@@ -13,7 +13,7 @@ import net.sf.staccato.commons.io.preferences.CharSerializationObjectPreferences
 import net.sf.staccato.commons.io.serialization.CharSerializationManager;
 import net.sf.staccato.commons.io.serialization.XStreamXmlSerializationManager;
 import net.sf.staccato.commons.lang.tuple.Triple;
-import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
+import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
 import org.jmock.lib.legacy.ClassImposteriser;

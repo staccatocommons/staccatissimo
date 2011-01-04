@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.testing.junit.jmock;
+package net.sf.staccatocommons.testing.junit.jmock;
 
 import java.util.Collection;
 

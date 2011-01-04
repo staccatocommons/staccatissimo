@@ -13,7 +13,7 @@
 package net.sf.staccato.commons.instrument.context.internal;
 
 import javassist.ClassPool;
-import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
+import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.junit.Before;
 import org.slf4j.Logger;

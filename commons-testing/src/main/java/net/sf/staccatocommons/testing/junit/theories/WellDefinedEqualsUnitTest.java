@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccato.commons.testing.junit.theories;
+package net.sf.staccatocommons.testing.junit.theories;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

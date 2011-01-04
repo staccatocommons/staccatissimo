@@ -13,7 +13,7 @@
 package net.sf.staccato.commons.lang;
 
 import static net.sf.staccato.commons.lang.tuple.Tuple._;
-import static net.sf.staccato.commons.testing.junit.Assert.assertContainsEntry;
+import static net.sf.staccatocommons.testing.junit.Assert.assertContainsEntry;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThat;
 

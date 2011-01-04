@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import net.sf.staccato.commons.defs.Evaluable;
-import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
+import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
 import org.junit.Before;

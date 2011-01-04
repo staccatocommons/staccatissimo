@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
 import net.sf.staccato.commons.defs.Executable;
 import net.sf.staccato.commons.lang.Option.UndefinedOptionException;
 import net.sf.staccato.commons.lang.provider.Providers;
-import net.sf.staccato.commons.testing.junit.jmock.JUnit4MockObjectTestCase;
+import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
 import org.junit.Test;

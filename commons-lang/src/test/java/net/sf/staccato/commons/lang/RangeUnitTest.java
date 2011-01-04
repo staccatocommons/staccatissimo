@@ -16,7 +16,7 @@ import static net.sf.staccato.commons.lang.Range.from;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import net.sf.staccato.commons.testing.junit.SerializationAssert;
+import net.sf.staccatocommons.testing.junit.SerializationAssert;
 
 import org.junit.Test;
 
