@@ -15,8 +15,8 @@ package net.sf.staccatocommons.instrument.context.internal;
 import java.util.Set;
 
 import javassist.ClassPool;
-import net.sf.staccato.commons.collections.stream.Streams;
 import net.sf.staccato.commons.lang.function.Function;
+import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
 
 import org.slf4j.Logger;

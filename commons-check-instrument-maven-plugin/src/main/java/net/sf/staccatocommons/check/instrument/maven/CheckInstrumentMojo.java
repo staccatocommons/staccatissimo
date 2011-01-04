@@ -16,13 +16,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import net.sf.staccato.commons.collections.stream.Streams;
-import net.sf.staccato.commons.io.Directory;
 import net.sf.staccato.commons.lang.SoftException;
 import net.sf.staccato.commons.lang.function.Function;
 import net.sf.staccato.commons.lang.predicate.Predicates;
 import net.sf.staccatocommons.check.instrument.CheckConfigurer;
+import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
+import net.sf.staccatocommons.io.Directory;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;

@@ -15,10 +15,10 @@ package net.sf.staccatocommons.instrument.internal;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import net.sf.staccato.commons.collections.stream.Streams;
 import net.sf.staccato.commons.lang.Option;
 import net.sf.staccato.commons.lang.block.Block2;
 import net.sf.staccato.commons.lang.predicate.Predicate;
+import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.instrument.handler.AnnotationHandler;
 
 /**
