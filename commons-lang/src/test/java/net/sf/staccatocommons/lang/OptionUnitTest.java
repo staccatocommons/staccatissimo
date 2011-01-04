@@ -23,8 +23,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.Some;
 import net.sf.staccatocommons.lang.Option.UndefinedOptionException;
 import net.sf.staccatocommons.lang.provider.Providers;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;

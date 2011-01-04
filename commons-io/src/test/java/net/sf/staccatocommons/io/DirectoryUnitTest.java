@@ -21,8 +21,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.io.Directory;
-import net.sf.staccatocommons.io.IOFunctions;
 
 import org.junit.Before;
 import org.junit.Test;

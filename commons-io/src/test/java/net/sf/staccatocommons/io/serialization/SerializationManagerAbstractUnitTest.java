@@ -9,8 +9,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.GregorianCalendar;
 
-import net.sf.staccatocommons.io.serialization.SerializationManager;
-
 import org.apache.commons.lang.SerializationException;
 import org.junit.Before;
 import org.junit.Test;

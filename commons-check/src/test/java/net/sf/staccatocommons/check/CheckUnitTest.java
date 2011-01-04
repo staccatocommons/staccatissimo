@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-import net.sf.staccatocommons.check.Check;
-import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.SizeAware;
 

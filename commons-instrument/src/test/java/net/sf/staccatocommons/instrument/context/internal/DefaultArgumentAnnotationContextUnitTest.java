@@ -18,7 +18,6 @@ import static org.junit.Assert.assertSame;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;
-import net.sf.staccatocommons.instrument.context.internal.DefaultArgumentAnnotationContext;
 
 import org.junit.Before;
 import org.junit.Test;

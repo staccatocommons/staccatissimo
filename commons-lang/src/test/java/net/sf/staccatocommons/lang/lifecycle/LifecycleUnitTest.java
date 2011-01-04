@@ -20,7 +20,6 @@ import java.io.IOException;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Provider;
-import net.sf.staccatocommons.lang.lifecycle.Lifecycle;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;

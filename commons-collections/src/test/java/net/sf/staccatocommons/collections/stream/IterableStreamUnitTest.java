@@ -14,8 +14,6 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.Collections;
 
-import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 
 import org.junit.experimental.theories.DataPoints;

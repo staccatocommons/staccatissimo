@@ -20,8 +20,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import net.sf.staccatocommons.lang.Prioritized;
-
 import org.junit.Test;
 
 /**

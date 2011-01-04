@@ -14,7 +14,6 @@ package net.sf.staccatocommons.check.instrument;
 
 import java.math.BigDecimal;
 
-import net.sf.staccatocommons.check.instrument.CheckConfigurer;
 import net.sf.staccatocommons.check.instrument.mock.Mock;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
 import net.sf.staccatocommons.io.Directory;

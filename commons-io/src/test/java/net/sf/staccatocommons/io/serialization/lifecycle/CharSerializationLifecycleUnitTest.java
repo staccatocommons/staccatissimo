@@ -7,7 +7,6 @@ import java.io.Reader;
 import java.io.Writer;
 
 import net.sf.staccatocommons.io.serialization.CharSerializationManager;
-import net.sf.staccatocommons.io.serialization.lifecycle.CharSerializationLifecycle;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;

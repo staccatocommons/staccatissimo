@@ -21,9 +21,6 @@ import static net.sf.staccatocommons.lang.tuple.Tuple._;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.sf.staccatocommons.lang.tuple.Pair;
-import net.sf.staccatocommons.lang.tuple.Tuple;
-
 import org.junit.Test;
 
 /**

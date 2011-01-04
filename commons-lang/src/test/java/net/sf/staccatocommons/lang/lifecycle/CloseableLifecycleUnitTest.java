@@ -15,7 +15,6 @@ package net.sf.staccatocommons.lang.lifecycle;
 import java.io.Closeable;
 import java.io.IOException;
 
-import net.sf.staccatocommons.lang.lifecycle.CloseableLifecycle;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;

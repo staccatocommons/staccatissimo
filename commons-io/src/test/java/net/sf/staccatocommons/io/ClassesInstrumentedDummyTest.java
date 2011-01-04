@@ -12,8 +12,6 @@
  */
 package net.sf.staccatocommons.io;
 
-import net.sf.staccatocommons.io.Directory;
-
 import org.junit.Test;
 
 /**

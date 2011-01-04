@@ -24,8 +24,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
-import net.sf.staccatocommons.lang.Compare;
-
 import org.junit.Test;
 
 /**

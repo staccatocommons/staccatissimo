@@ -32,8 +32,6 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.ModifiableIterables;
-import net.sf.staccatocommons.collections.stream.Searchable;
-import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Provider;

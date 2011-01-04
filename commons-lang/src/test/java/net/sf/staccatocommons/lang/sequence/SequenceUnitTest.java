@@ -22,8 +22,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.sf.staccatocommons.lang.sequence.Sequence;
-import net.sf.staccatocommons.lang.sequence.StopConditions;
 import net.sf.staccatocommons.lang.sequence.internal.BigIntegerIncrement;
 
 import org.junit.Test;

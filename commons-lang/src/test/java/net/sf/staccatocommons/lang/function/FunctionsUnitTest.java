@@ -14,8 +14,6 @@ package net.sf.staccatocommons.lang.function;
 
 import static org.junit.Assert.assertSame;
 
-import net.sf.staccatocommons.lang.function.Functions;
-
 import org.junit.Before;
 import org.junit.Test;
 

@@ -20,8 +20,6 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.lang.predicate.Predicate;
-import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;

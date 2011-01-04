@@ -14,8 +14,6 @@ package net.sf.staccatocommons.lang.block;
 
 import static org.junit.Assert.assertEquals;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.lang.block.Block;
-import net.sf.staccatocommons.lang.block.Block3;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.apache.commons.lang.mutable.MutableInt;

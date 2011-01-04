@@ -16,8 +16,6 @@ import static org.junit.Assert.assertSame;
 
 import java.io.IOException;
 
-import net.sf.staccatocommons.lang.SoftException;
-
 import org.junit.Test;
 
 public class SoftExceptionUnitTest {

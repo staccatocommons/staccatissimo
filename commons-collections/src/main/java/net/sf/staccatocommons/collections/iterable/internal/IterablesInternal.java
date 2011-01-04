@@ -17,7 +17,6 @@ import java.util.Iterator;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.lang.Option;
 
 /**
  * This class is not part of of the public API of collections-extra.

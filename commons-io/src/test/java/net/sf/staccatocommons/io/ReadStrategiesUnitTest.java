@@ -16,9 +16,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.StringReader;
 
-import net.sf.staccatocommons.io.IOStreams;
-import net.sf.staccatocommons.io.ReadStrategies;
-
 import org.junit.Before;
 import org.junit.Test;
 

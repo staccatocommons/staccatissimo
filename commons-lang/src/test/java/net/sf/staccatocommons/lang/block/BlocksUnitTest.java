@@ -14,8 +14,6 @@ package net.sf.staccatocommons.lang.block;
 
 import static org.junit.Assert.assertNotNull;
 
-import net.sf.staccatocommons.lang.block.Blocks;
-
 import org.junit.Test;
 
 /**

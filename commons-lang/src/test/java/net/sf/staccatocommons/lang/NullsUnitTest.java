@@ -13,7 +13,6 @@
 package net.sf.staccatocommons.lang;
 
 import static org.junit.Assert.assertEquals;
-import net.sf.staccatocommons.lang.Nulls;
 import net.sf.staccatocommons.lang.provider.internal.Constant;
 
 import org.junit.Test;

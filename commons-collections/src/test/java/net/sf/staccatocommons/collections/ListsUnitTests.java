@@ -5,8 +5,6 @@ import static junit.framework.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import net.sf.staccatocommons.collections.Lists;
-
 import org.junit.Test;
 
 public class ListsUnitTests {

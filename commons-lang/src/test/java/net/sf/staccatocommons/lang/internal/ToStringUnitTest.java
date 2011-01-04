@@ -14,8 +14,6 @@ package net.sf.staccatocommons.lang.internal;
 
 import static org.junit.Assert.assertEquals;
 
-import net.sf.staccatocommons.lang.internal.ToString;
-
 import org.junit.Test;
 
 /**

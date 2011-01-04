@@ -18,9 +18,6 @@ import static org.junit.Assert.assertNotSame;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.staccatocommons.lang.builder.AbstractReusableBuilder;
-import net.sf.staccatocommons.lang.builder.ObjectUnderConstructionException;
-
 import org.junit.Test;
 
 public class AbstractReusableBuilderUnitTest {

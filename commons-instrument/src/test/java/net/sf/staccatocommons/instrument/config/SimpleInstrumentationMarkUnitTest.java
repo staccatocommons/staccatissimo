@@ -14,8 +14,6 @@ package net.sf.staccatocommons.instrument.config;
 
 import static org.junit.Assert.assertEquals;
 
-import net.sf.staccatocommons.instrument.config.SimpleInstrumentationMark;
-
 import org.junit.Test;
 
 /**

@@ -14,8 +14,6 @@ package net.sf.staccatocommons.collections;
 
 import java.util.Arrays;
 
-import net.sf.staccatocommons.collections.Lists;
-
 import org.junit.Test;
 
 /**

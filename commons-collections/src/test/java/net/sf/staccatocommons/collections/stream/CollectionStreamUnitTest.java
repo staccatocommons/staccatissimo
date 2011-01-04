@@ -16,9 +16,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
-import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.Streams;
-
 import org.junit.experimental.theories.DataPoints;
 
 /**

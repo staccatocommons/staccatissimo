@@ -14,7 +14,6 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import static junit.framework.Assert.assertEquals;
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.collections.stream.impl.internal.CharSequenceIterator;
 import net.sf.staccatocommons.lang.function.Function2;
 
 import org.junit.Test;

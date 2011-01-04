@@ -16,8 +16,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
-import net.sf.staccatocommons.instrument.internal.ClassNames;
-
 import org.junit.Test;
 
 /**

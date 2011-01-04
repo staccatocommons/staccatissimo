@@ -9,7 +9,6 @@ import java.util.GregorianCalendar;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import net.sf.staccatocommons.io.preferences.CharSerializationObjectPreferences;
 import net.sf.staccatocommons.io.serialization.CharSerializationManager;
 import net.sf.staccatocommons.io.serialization.XStreamXmlSerializationManager;
 import net.sf.staccatocommons.lang.tuple.Triple;

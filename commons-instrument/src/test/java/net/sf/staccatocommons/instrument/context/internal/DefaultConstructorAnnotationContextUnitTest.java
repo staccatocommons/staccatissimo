@@ -15,8 +15,6 @@ package net.sf.staccatocommons.instrument.context.internal;
 import static org.junit.Assert.assertSame;
 import javassist.CtConstructor;
 
-import net.sf.staccatocommons.instrument.context.internal.DefaultConstructorAnnotationContext;
-
 import org.junit.Test;
 
 /**

@@ -18,7 +18,6 @@ import java.io.IOException;
 
 import net.sf.staccatocommons.defs.Executable3;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.block.Block3;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.apache.commons.lang.mutable.MutableInt;

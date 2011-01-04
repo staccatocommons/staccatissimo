@@ -12,8 +12,6 @@
  */
 package net.sf.staccatocommons.check;
 
-import net.sf.staccatocommons.check.Validate;
-
 import org.junit.Test;
 
 /**

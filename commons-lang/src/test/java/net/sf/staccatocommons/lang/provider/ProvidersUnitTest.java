@@ -21,7 +21,6 @@ import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.defs.Provider;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.provider.Providers;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;

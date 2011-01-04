@@ -16,8 +16,6 @@ import static junit.framework.Assert.assertEquals;
 
 import java.util.Arrays;
 
-import net.sf.staccatocommons.lang.tuple.Tuple;
-
 import org.junit.Test;
 
 /**

@@ -19,7 +19,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.value.BasicEquals;
 
 import org.junit.Test;
 

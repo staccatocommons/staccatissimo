@@ -14,7 +14,6 @@ package net.sf.staccatocommons.lang.value;
 
 import static org.junit.Assert.assertEquals;
 import net.sf.staccatocommons.lang.Range;
-import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Before;

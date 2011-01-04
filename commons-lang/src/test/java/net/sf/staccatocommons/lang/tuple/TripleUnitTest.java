@@ -20,9 +20,6 @@ import static net.sf.staccatocommons.lang.tuple.Tuple._;
 
 import java.util.Date;
 
-import net.sf.staccatocommons.lang.tuple.Triple;
-import net.sf.staccatocommons.lang.tuple.Tuple;
-
 import org.junit.Test;
 
 /**

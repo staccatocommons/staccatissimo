@@ -12,9 +12,6 @@
  */
 package net.sf.staccatocommons.lang;
 
-import net.sf.staccatocommons.lang.Compare;
-import net.sf.staccatocommons.lang.MapBuilder;
-
 import org.junit.Test;
 
 /**
