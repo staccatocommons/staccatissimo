@@ -16,13 +16,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-import net.sf.staccato.commons.check.Ensure;
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.function.Function;
-import net.sf.staccato.commons.lang.predicate.Predicate;
-import net.sf.staccato.commons.lang.tuple.Pair;
+import net.sf.staccatocommons.check.Ensure;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.lang.function.Function;
+import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.apache.commons.io.FileUtils;
 

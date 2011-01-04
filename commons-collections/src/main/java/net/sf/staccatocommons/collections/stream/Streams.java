@@ -19,7 +19,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.impl.CollectionStream;
 import net.sf.staccatocommons.collections.stream.impl.IterableStream;
 import net.sf.staccatocommons.collections.stream.impl.IteratorStream;

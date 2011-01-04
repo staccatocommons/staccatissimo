@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.check.instrument;
 
-import net.sf.staccato.commons.check.annotation.NotEmpty;
+import net.sf.staccatocommons.check.annotation.NotEmpty;
 
 /**
  * @author flbulgarelli

@@ -4,8 +4,8 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-import static net.sf.staccato.commons.lang.predicate.Predicates.greaterThan;
-import static net.sf.staccato.commons.lang.tuple.Tuple._;
+import static net.sf.staccatocommons.lang.predicate.Predicates.greaterThan;
+import static net.sf.staccatocommons.lang.tuple.Tuple._;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
@@ -17,14 +17,14 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 
-import net.sf.staccato.commons.defs.Applicable;
-import net.sf.staccato.commons.lang.Option;
-import net.sf.staccato.commons.lang.function.Function;
-import net.sf.staccato.commons.lang.predicate.Predicate;
-import net.sf.staccato.commons.lang.predicate.Predicates;
-import net.sf.staccato.commons.lang.sequence.Sequence;
-import net.sf.staccato.commons.lang.tuple.Pair;
 import net.sf.staccatocommons.collections.iterable.Iterables;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.function.Function;
+import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.lang.predicate.Predicates;
+import net.sf.staccatocommons.lang.sequence.Sequence;
+import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,7 +60,7 @@ public class IterablesUnitTest {
 
 	/**
 	 * Test for
-	 * {@link Iterables#filter(Iterable, net.sf.staccato.commons.lang.Evaluable)}
+	 * {@link Iterables#filter(Iterable, net.sf.staccatocommons.lang.Evaluable)}
 	 * 
 	 * @throws Exception
 	 */
@@ -77,7 +77,7 @@ public class IterablesUnitTest {
 
 	/**
 	 * Test for
-	 * {@link Iterables#map(Collection, net.sf.staccato.commons.lang.Applicable)}
+	 * {@link Iterables#map(Collection, net.sf.staccatocommons.lang.Applicable)}
 	 * 
 	 * @throws Exception
 	 */
@@ -225,7 +225,7 @@ public class IterablesUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link Iterables#partition(Iterable, net.sf.staccato.commons.lang.Evaluable)}
+	 * {@link Iterables#partition(Iterable, net.sf.staccatocommons.lang.Evaluable)}
 	 */
 	@Test
 	public void testPartition() throws Exception {

@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.check.instrument;
 
 import javassist.CannotCompileException;
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;
 
 /**

@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.io;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 

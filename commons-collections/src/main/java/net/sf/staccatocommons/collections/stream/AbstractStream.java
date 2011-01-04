@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccato.commons.lang.tuple.Tuple._;
+import static net.sf.staccatocommons.lang.tuple.Tuple._;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
@@ -22,15 +22,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import net.sf.staccato.commons.check.annotation.ForceChecks;
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.defs.Applicable;
-import net.sf.staccato.commons.defs.Applicable2;
-import net.sf.staccato.commons.defs.Evaluable;
-import net.sf.staccato.commons.defs.Provider;
-import net.sf.staccato.commons.lang.Option;
-import net.sf.staccato.commons.lang.tuple.Pair;
-import net.sf.staccato.commons.lang.value.NamedTupleToStringStyle;
+import net.sf.staccatocommons.check.annotation.ForceChecks;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
@@ -40,6 +33,13 @@ import net.sf.staccatocommons.collections.stream.impl.internal.FlatMapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.MapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeWhileStream;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;

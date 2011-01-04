@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.instrument.config;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 
 /**
  * 

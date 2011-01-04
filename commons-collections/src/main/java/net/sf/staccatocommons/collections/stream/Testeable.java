@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.defs.Evaluable;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Evaluable;
 
 /**
  * {@link Stream} interface for testing conditions on elements

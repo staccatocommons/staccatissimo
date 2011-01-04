@@ -14,7 +14,7 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.Enumeration;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.internal.AbstractUnmodifiableIterator;
 
 /**

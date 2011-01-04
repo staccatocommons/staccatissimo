@@ -16,9 +16,9 @@ import static net.sf.staccatocommons.collections.iterable.internal.IterablesInte
 
 import java.util.Map;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.None;
-import net.sf.staccato.commons.lang.Option;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.lang.None;
+import net.sf.staccatocommons.lang.Option;
 
 /**
  * Class methods for dealing with maps

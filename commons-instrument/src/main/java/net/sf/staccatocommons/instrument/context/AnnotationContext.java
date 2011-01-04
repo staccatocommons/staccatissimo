@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.instrument.context;
 
 import javassist.ClassPool;
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 
 /**
  * Base interface for an annotated element context

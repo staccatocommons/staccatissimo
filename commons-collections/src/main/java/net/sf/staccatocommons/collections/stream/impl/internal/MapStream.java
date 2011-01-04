@@ -2,11 +2,11 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.Iterator;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.defs.Applicable;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * @author flbulgarelli

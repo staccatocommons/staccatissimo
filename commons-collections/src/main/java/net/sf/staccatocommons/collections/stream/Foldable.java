@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.defs.Applicable2;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Applicable2;
 
 /**
  * {@link Stream} interface for folding -aka injecting - elements - producing a

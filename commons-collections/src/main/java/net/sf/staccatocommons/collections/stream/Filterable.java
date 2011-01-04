@@ -14,9 +14,9 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.List;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.defs.Evaluable;
-import net.sf.staccato.commons.lang.tuple.Pair;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
  * {@link Stream} interface for filtering elements

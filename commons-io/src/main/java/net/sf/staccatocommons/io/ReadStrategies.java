@@ -15,7 +15,7 @@ package net.sf.staccatocommons.io;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 
 /**
  * @author flbulgarelli

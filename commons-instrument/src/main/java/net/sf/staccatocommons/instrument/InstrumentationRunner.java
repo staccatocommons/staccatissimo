@@ -19,7 +19,7 @@ import java.io.File;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.config.InstrumenterConfigurer;
 import net.sf.staccatocommons.instrument.internal.ClassNames;
 import net.sf.staccatocommons.instrument.internal.Instrumenter;

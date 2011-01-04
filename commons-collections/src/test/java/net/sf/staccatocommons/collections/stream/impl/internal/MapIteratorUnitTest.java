@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import static net.sf.staccato.commons.lang.function.Functions.identity;
+import static net.sf.staccatocommons.lang.function.Functions.identity;
 import net.sf.staccatocommons.collections.stream.Streams;
 
 /**

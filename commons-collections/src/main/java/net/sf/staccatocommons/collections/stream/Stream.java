@@ -15,11 +15,11 @@ package net.sf.staccatocommons.collections.stream;
 import java.util.Collection;
 import java.util.Iterator;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.defs.Applicable;
-import net.sf.staccato.commons.defs.ContainsAware;
-import net.sf.staccato.commons.defs.SizeAware;
-import net.sf.staccato.commons.defs.restriction.ConditionallyImmutable;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.ContainsAware;
+import net.sf.staccatocommons.defs.SizeAware;
+import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 
 /**
  * A {@link Stream} represent a lazy, rich-interfaced, {@link Iterable} source

@@ -14,12 +14,12 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.NoSuchElementException;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.defs.Evaluable;
-import net.sf.staccato.commons.defs.Provider;
-import net.sf.staccato.commons.lang.None;
-import net.sf.staccato.commons.lang.Option;
-import net.sf.staccato.commons.lang.predicate.Predicate;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.lang.None;
+import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.predicate.Predicate;
 
 /**
  * {@link Stream} interface for searching for elements

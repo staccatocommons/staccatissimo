@@ -14,7 +14,7 @@ package net.sf.staccatocommons.io;
 
 import java.util.Iterator;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.io.internal.ReadableIterator;
 
 /**

@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.defs.Applicable;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * {@link Stream} interface for mapping - aka collecting - elements.

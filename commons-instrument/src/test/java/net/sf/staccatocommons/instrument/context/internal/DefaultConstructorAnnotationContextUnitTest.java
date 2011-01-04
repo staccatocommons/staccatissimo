@@ -36,7 +36,7 @@ public class DefaultConstructorAnnotationContextUnitTest extends AbstractAnnotat
 		DefaultConstructorAnnotationContext context = new DefaultConstructorAnnotationContext(
 			pool,
 			logger);
-		CtConstructor constructor = pool.get("net.sf.staccato.commons.lang.Range").getConstructors()[0];
+		CtConstructor constructor = pool.get("net.sf.staccatocommons.lang.Range").getConstructors()[0];
 		context.setConstructor(constructor);
 		assertSame(constructor, context.getConstructor());
 	}

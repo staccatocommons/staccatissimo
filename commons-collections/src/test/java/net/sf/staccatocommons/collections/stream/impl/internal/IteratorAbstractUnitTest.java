@@ -17,7 +17,7 @@ import static junit.framework.Assert.assertTrue;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import net.sf.staccato.commons.lang.sequence.Sequence;
+import net.sf.staccatocommons.lang.sequence.Sequence;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;

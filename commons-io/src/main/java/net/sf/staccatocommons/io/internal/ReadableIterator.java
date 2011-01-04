@@ -14,7 +14,7 @@ package net.sf.staccatocommons.io.internal;
 
 import java.util.Scanner;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.io.ReadStrategy;
 

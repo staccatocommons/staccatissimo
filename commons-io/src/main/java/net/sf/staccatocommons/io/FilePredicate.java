@@ -15,9 +15,9 @@ package net.sf.staccatocommons.io;
 import java.io.File;
 import java.io.FileFilter;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.defs.Evaluable;
-import net.sf.staccato.commons.lang.predicate.Predicate;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.lang.predicate.Predicate;
 
 /**
  * A {@link Predicate} that wraps a {@link FileFilter} and acts as a FileFilter

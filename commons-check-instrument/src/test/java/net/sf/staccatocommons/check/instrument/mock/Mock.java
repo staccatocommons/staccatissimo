@@ -2,12 +2,12 @@ package net.sf.staccatocommons.check.instrument.mock;
 
 import java.math.BigDecimal;
 
-import net.sf.staccato.commons.check.annotation.ForceChecks;
-import net.sf.staccato.commons.check.annotation.IgnoreChecks;
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.check.annotation.NotEmpty;
-import net.sf.staccato.commons.check.annotation.Positive;
-import net.sf.staccato.commons.check.annotation.Size;
+import net.sf.staccatocommons.check.annotation.ForceChecks;
+import net.sf.staccatocommons.check.annotation.IgnoreChecks;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NotEmpty;
+import net.sf.staccatocommons.check.annotation.Positive;
+import net.sf.staccatocommons.check.annotation.Size;
 
 public class Mock {
 

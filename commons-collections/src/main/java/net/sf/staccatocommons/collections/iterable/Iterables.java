@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.collections.iterable;
 
-import static net.sf.staccato.commons.lang.tuple.Tuple._;
 import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.ITERABLE;
 import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.addAllInternal;
 import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.anyInternal;
@@ -20,6 +19,7 @@ import static net.sf.staccatocommons.collections.iterable.internal.IterablesInte
 import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.filterInternal;
 import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.isEmptyInternal;
 import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.takeInternal;
+import static net.sf.staccatocommons.lang.tuple.Tuple._;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,19 +33,19 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import net.sf.staccato.commons.check.Ensure;
-import net.sf.staccato.commons.check.annotation.ForceChecks;
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.check.annotation.NotEmpty;
-import net.sf.staccato.commons.check.annotation.NotNegative;
-import net.sf.staccato.commons.check.annotation.Size;
-import net.sf.staccato.commons.defs.Applicable;
-import net.sf.staccato.commons.defs.Applicable2;
-import net.sf.staccato.commons.defs.Evaluable;
-import net.sf.staccato.commons.lang.Option;
-import net.sf.staccato.commons.lang.function.Function2;
-import net.sf.staccato.commons.lang.predicate.Predicate;
-import net.sf.staccato.commons.lang.tuple.Pair;
+import net.sf.staccatocommons.check.Ensure;
+import net.sf.staccatocommons.check.annotation.ForceChecks;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NotEmpty;
+import net.sf.staccatocommons.check.annotation.NotNegative;
+import net.sf.staccatocommons.check.annotation.Size;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.function.Function2;
+import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.apache.commons.lang.ObjectUtils;
 

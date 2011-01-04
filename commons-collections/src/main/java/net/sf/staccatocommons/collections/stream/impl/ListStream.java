@@ -14,7 +14,7 @@ package net.sf.staccatocommons.collections.stream.impl;
 
 import java.util.List;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 
 /**
  * 

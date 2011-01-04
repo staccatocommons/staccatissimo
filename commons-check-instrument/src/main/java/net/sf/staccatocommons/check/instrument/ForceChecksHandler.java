@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.check.instrument;
 
-import net.sf.staccato.commons.check.annotation.ForceChecks;
+import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.instrument.context.ConstructorAnnotationContext;
 import net.sf.staccatocommons.instrument.context.MethodAnnotationContext;
 import net.sf.staccatocommons.instrument.handler.ClassAnnotationHandler;

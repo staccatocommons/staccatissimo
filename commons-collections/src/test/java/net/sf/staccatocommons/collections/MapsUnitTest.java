@@ -8,9 +8,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.Collections;
 import java.util.Map;
 
-import net.sf.staccato.commons.lang.MapBuilder;
-import net.sf.staccato.commons.lang.Option;
 import net.sf.staccatocommons.collections.Maps;
+import net.sf.staccatocommons.lang.MapBuilder;
+import net.sf.staccatocommons.lang.Option;
 
 import org.junit.Test;
 

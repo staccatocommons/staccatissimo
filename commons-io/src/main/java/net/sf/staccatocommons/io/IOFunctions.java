@@ -14,8 +14,8 @@ package net.sf.staccatocommons.io;
 
 import java.io.File;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
-import net.sf.staccato.commons.lang.function.Function;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.lang.function.Function;
 
 /**
  * @author flbulgarelli

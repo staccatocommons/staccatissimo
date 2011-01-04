@@ -45,7 +45,7 @@ public class DefaultAnnotatedMethodContextUnitTest extends AbstractAnnotationCon
 	 */
 	@Test
 	public void testGetReturnName() throws Exception {
-		context.setMethod(pool.getMethod("net.sf.staccato.commons.lang.Option", "value"));
+		context.setMethod(pool.getMethod("net.sf.staccatocommons.lang.Option", "value"));
 		assertEquals("$_", context.getReturnIdentifier());
 	}
 
@@ -58,7 +58,7 @@ public class DefaultAnnotatedMethodContextUnitTest extends AbstractAnnotationCon
 	 */
 	@Test
 	public void testIsVoid() throws Exception {
-		context.setMethod(pool.getMethod("net.sf.staccato.commons.lang.Option", "ifDefined"));
+		context.setMethod(pool.getMethod("net.sf.staccatocommons.lang.Option", "ifDefined"));
 		assertTrue(context.isVoid());
 	}
 

@@ -14,7 +14,7 @@ package net.sf.staccatocommons.collections.stream.impl;
 
 import java.util.Iterator;
 
-import net.sf.staccato.commons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 

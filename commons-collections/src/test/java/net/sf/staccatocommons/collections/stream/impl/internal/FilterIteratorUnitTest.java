@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import static net.sf.staccato.commons.lang.predicate.Predicates.greaterThan;
+import static net.sf.staccatocommons.lang.predicate.Predicates.greaterThan;
 import net.sf.staccatocommons.collections.stream.Streams;
 
 /**

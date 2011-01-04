@@ -21,8 +21,7 @@ import javassist.CtClass;
 import javassist.CtConstructor;
 import javassist.CtMethod;
 import javassist.Modifier;
-import net.sf.staccato.commons.check.Validate;
-import net.sf.staccato.commons.lang.block.Block2;
+import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.instrument.config.InstrumentationMark;
 import net.sf.staccatocommons.instrument.config.InstrumenterConfiguration;
 import net.sf.staccatocommons.instrument.context.internal.DefaultArgumentAnnotationContext;
@@ -33,6 +32,7 @@ import net.sf.staccatocommons.instrument.handler.ArgumentAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.ClassAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.ConstructorAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.MethodAnnotationHandler;
+import net.sf.staccatocommons.lang.block.Block2;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
