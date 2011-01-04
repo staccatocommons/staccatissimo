@@ -11,6 +11,17 @@
 	<version>0.1</version>
 	<name>Staccato-Commons-Check-Instrument</name>
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrument</url>
+	<scm>
+		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-check-instrument</connection>
+		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-check-instrument</developerConnection>
+		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-check-instrument/</url>
+	</scm>
+	<distributionManagement>
+		<site>
+			<id> ${distribution.site.id}</id>
+			<url>${distribution.site.url}/staccatissimo/commonscheckinstrument</url>
+		</site>
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.staccato</groupId>
