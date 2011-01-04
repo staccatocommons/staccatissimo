@@ -15,7 +15,7 @@
 	<inceptionYear>2010</inceptionYear>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <staccatissimo.scm.base>https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo</staccatissimo.scm.base>
+		<staccatissimo.scm.base>https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo</staccatissimo.scm.base>
 	</properties>
 
 	<distributionManagement>
@@ -28,7 +28,7 @@
 			<url>${distribution.site.url}/maven2</url>
 		</repository>
 	</distributionManagement>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -86,6 +86,16 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<sourceEncoding>utf-8</sourceEncoding>
+					<minimumTokens>70</minimumTokens>
+					<targetJdk>1.6</targetJdk>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.7</version>
 				<configuration>
@@ -137,5 +147,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 </project>
