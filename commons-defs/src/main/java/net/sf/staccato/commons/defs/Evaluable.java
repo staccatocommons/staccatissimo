@@ -31,7 +31,7 @@ public interface Evaluable<T> {
 	 * 
 	 * {@link Evaluable} implementors should not try to handle nulls. Instead, the
 	 * preferred way of getting a null safe {@link Evaluable} is composing it with
-	 * the null or non-null predicates:
+	 * the null or non-null predicates from staccato-commons-lang:
 	 * 
 	 * <pre>
 	 * Predicates.null_().or(theActualEvaluable)
