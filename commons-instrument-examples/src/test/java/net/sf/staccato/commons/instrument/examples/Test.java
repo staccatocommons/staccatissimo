@@ -14,11 +14,14 @@ package net.sf.staccato.commons.instrument.examples;
 
 import java.math.BigDecimal;
 
-import net.sf.staccato.commons.instrument.InstrumentationRunner;
-import net.sf.staccato.commons.instrument.config.InstrumenterConfiguration;
-import net.sf.staccato.commons.instrument.config.InstrumenterConfigurer;
-import net.sf.staccato.commons.instrument.config.SimpleInstrumentationMark;
 import net.sf.staccato.commons.io.Directory;
+import net.sf.staccatocommons.instrument.InstrumentationRunner;
+import net.sf.staccatocommons.instrument.config.InstrumenterConfiguration;
+import net.sf.staccatocommons.instrument.config.InstrumenterConfigurer;
+import net.sf.staccatocommons.instrument.config.SimpleInstrumentationMark;
+import net.sf.staccatocommons.instrument.examples.Account2;
+import net.sf.staccatocommons.instrument.examples.LogHandler;
+import net.sf.staccatocommons.instrument.examples.NonNegativeDecimalHandler;
 
 /**
  * @author flbulgarelli

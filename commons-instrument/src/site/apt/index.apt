@@ -19,7 +19,7 @@ Getting started
  invokes one or more custom handlers provided by the client
     
     [[3]] Handlers are custom classes that implement one or more interfaces 
- from <<<package net.sf.staccato.commons.instrument.handler>>>, which have the chance of inspecting and/or 
+ from <<<package net.sf.staccatocommons.instrument.handler>>>, which have the chance of inspecting and/or 
  modifying the annotated code or the processing context. Handlers 
  have full access to {{{http://http://www.csg.is.titech.ac.jp/~chiba/javassist/tutorial/tutorial.html}Javassist}} API.
      
@@ -27,7 +27,7 @@ Getting started
     
 * Running it
   
-  The instrumenter must be run programatically, so you will need a main-like class to do experiment with it. Doing that is quite simple, just need to invoke  <<<net.sf.staccato.commons.instrument.InstrumentationRunner.runInstrumentation(InstrumenterConfigurer, Directory, String)>>>. For example:
+  The instrumenter must be run programatically, so you will need a main-like class to do experiment with it. Doing that is quite simple, just need to invoke  <<<net.sf.staccatocommons.instrument.InstrumentationRunner.runInstrumentation(InstrumenterConfigurer, Directory, String)>>>. For example:
     
 +-----------------------------------------------------------------------------------+
    InstrumentationRunner.runInstrumentation(new InstrumenterConfigurer() {
@@ -210,9 +210,9 @@ public class LogHandler implements MethodAnnotationHandler<Loggeable> {
  The test should pass, as in the third line a negative decimal is passed. Also, you should gete a log output similar to the following:
  
 +----------------------------------------------------------------------------------------+ 
-02/01/2011 23:09:10 net.sf.staccato.commons.instrument.examples.Account2 resetBalance
+02/01/2011 23:09:10 net.sf.staccatocommons.instrument.examples.Account2 resetBalance
 WARNING: resetBalance
-02/01/2011 23:09:10 net.sf.staccato.commons.instrument.examples.Account2 deposit
+02/01/2011 23:09:10 net.sf.staccatocommons.instrument.examples.Account2 deposit
 SEVERE: amount must be positive
 +----------------------------------------------------------------------------------------+    
  
