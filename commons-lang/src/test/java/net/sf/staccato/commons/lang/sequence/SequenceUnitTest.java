@@ -92,7 +92,7 @@ public class SequenceUnitTest {
 
 	/**
 	 * Test for
-	 * {@link Sequence#from(Object, net.sf.staccato.commons.lang.Applicable, net.sf.staccato.commons.lang.Evaluable)}
+	 * {@link Sequence#from(Object, net.sf.staccato.commons.defs.Applicable, net.sf.staccato.commons.defs.Evaluable)}
 	 * 
 	 * @throws Exception
 	 */

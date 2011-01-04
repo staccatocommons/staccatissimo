@@ -79,7 +79,7 @@ public class Block3UnitTest extends JUnit4MockObjectTestCase {
 	}
 
 	/**
-	 * Test method for {@link Block3#then(Block3)} .
+	 * Test method for {@link Block3#then(Executable3)} .
 	 */
 	@Test
 	public void testThen() {
