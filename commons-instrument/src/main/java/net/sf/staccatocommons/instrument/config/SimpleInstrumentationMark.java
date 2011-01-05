@@ -5,6 +5,9 @@ import java.nio.charset.Charset;
 import net.sf.staccatocommons.check.annotation.NonNull;
 
 /**
+ * Implementation of an {@link InstrumentationMark} where key and values are
+ * provided as attributes
+ * 
  * @author flbulgarelli
  */
 public final class SimpleInstrumentationMark implements InstrumentationMark {

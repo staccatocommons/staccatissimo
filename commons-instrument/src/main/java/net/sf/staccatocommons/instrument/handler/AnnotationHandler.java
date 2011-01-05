@@ -14,15 +14,37 @@ package net.sf.staccatocommons.instrument.handler;
 
 import java.lang.annotation.Annotation;
 
+import net.sf.staccatocommons.check.annotation.NonNull;
+
 /**
+ * Superinterface for all annotation handlers.
+ * <p>
+ * Although a concrete handler <strong>may</strong> implement more than one
+ * handler interfaces, in order to be capable of processing more than one
+ * element type, this interface reinforce that a handler <strong>must</strong>
+ * process a single annotation type
+ * </p>
+ * <p>
+ * As instrumentation is performed on a single thread, {@link AnnotationHandler}
+ * s have no restrictions regarding synchronization. In particular, they do not
+ * need to be statless nor immutable.
+ * </p>
+ * 
  * @author flbulgarelli
+ * @see ArgumentAnnotationHandler
+ * @see MethodAnnotationHandler
+ * @see ConstructorAnnotationHandler
+ * @see ClassAnnotationHandler
  * 
  */
 public interface AnnotationHandler<A extends Annotation> {
 
 	/**
-	 * @return the annotation this processor can process
+	 * Answers the annotation this processor can process
+	 * 
+	 * @return an annotation type
 	 */
+	@NonNull
 	Class<A> getSupportedAnnotationType();
 
 }

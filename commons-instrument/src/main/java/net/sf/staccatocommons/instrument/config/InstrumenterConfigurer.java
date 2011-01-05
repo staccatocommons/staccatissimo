@@ -12,12 +12,34 @@
  */
 package net.sf.staccatocommons.instrument.config;
 
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.instrument.InstrumentationRunner;
+
 /**
+ * Interface for configuring an instrumenter.
+ * <p>
+ * It declares a single message
+ * {@link #configureInstrumenter(InstrumenterConfiguration)} that will send by
+ * the {@link InstrumentationRunner} after it has created the instrumenter, and
+ * before running the instrumentation
+ * </p>
+ * 
+ * 
  * @author flbulgarelli
  * 
  */
 public interface InstrumenterConfigurer {
 
-	void configureInstrumenter(InstrumenterConfiguration instrumenter);
+	/**
+	 * Configures the given <code>instrumenter</code>.
+	 * <p>
+	 * Implementors <strong>must</strong> set an instrumentation mark to the
+	 * instrumenter and add at least one handler to it
+	 * </p>
+	 * 
+	 * @param instrumenter
+	 *          the instrumenter to configure
+	 */
+	void configureInstrumenter(@NonNull InstrumenterConfiguration instrumenter);
 
 }
