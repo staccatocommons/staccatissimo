@@ -149,7 +149,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
-	public Check<ExceptionType> is(boolean condition, String message, Object... args)
+	public final Check<ExceptionType> is(boolean condition, String message, Object... args)
 		throws ExceptionType {
 		if (!condition)
 			fail(message, args);
@@ -338,7 +338,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
-	public Check<ExceptionType> isSize(String varName, Collection<?> var, int size)
+	public final Check<ExceptionType> isSize(String varName, Collection<?> var, int size)
 		throws ExceptionType {
 		return isSize(varName, var, size, var.size());
 	}
@@ -356,7 +356,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
-	public Check<ExceptionType> isSize(String varName, CharSequence var, int size)
+	public final Check<ExceptionType> isSize(String varName, CharSequence var, int size)
 		throws ExceptionType {
 		return isSize(varName, var, size, var.length());
 	}
@@ -374,7 +374,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
-	public Check<ExceptionType> isSize(String varName, Object var, int size) throws ExceptionType {
+	public final Check<ExceptionType> isSize(String varName, Object var, int size)
+		throws ExceptionType {
 		return isSize(varName, var, size, Array.getLength(var));
 	}
 
@@ -391,7 +392,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
-	public Check<ExceptionType> isSize(String varName, SizeAware var, int size) throws ExceptionType {
+	public final Check<ExceptionType> isSize(String varName, SizeAware var, int size)
+		throws ExceptionType {
 		return isSize(varName, var, size, var.size());
 	}
 
@@ -697,12 +699,27 @@ public abstract class Check<ExceptionType extends Throwable> {
 			actualSize);
 	}
 
+	/**
+	 * Checks the <code>var</code> is not null, less than or equal to
+	 * <code>max</code> and greater than or equal to <code>min</code>
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param min
+	 * @param max
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public final <T extends Comparable<T>> Check<ExceptionType> isBetween(String varName, T var,
 		T min, T max) throws ExceptionType {
-		return is(varName, var, var.compareTo(max) <= 0 && var.compareTo(min) >= 0, //
-			"must be between %s and %s",
-			min,
-			max);
+		return isNotNull(varName, var) //
+			.is(varName, var, var.compareTo(max) <= 0 && var.compareTo(min) >= 0, //
+				"must be between %s and %s",
+				min,
+				max);
 	}
 
 	/**
@@ -726,6 +743,20 @@ public abstract class Check<ExceptionType extends Throwable> {
 			.is(varName, var, var.contains(element), "must contain %s", element);
 	}
 
+	/**
+	 * Checks the <code>var</code> is not null and contained by the given
+	 * <code>container</code>
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param container
+	 *          the {@link ContainsAware} that must contain <code>var</code>
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public final <T> Check<ExceptionType> isIn(String varName, T var, ContainsAware<T> container)
 		throws ExceptionType {
 		return isNotNull(varName, var)//

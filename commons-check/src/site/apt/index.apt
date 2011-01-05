@@ -2,8 +2,8 @@ About Staccato-Commons-Check
  
  Staccato-Commons-Check is the validation library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. It offers classes for performing flexible preconditions and postcondition (defensive programming) and domain-specific validations, plus many annotations for performing simple checks, inspired on JSR303. It is at the lowest level of the staccato-commons projects hierarchy, and all the projects depend make an intensive usage of it  
  
-Prealpha state 
+Alpha state 
 
- Staccato-Commons-Check is still in a prealpha state, and although it fully implements most of previous features, code is not yet fully documented nor tested, and types and packages are likely to change in the near future without notice. It is not recommended to use it in production systems yet. 
+ Staccato-Commons-Check is currently in alpha state. Although most of previous features are implemented, tested and documented, it is not recommended to use in production systems yet. Types and packages may change in the near future without notice.  
  
  

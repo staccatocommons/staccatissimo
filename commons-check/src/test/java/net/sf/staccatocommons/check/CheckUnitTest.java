@@ -1,5 +1,7 @@
 package net.sf.staccatocommons.check;
 
+import static junit.framework.Assert.assertEquals;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -368,8 +370,30 @@ public class CheckUnitTest {
 	public void testContains() throws Exception {
 		c.contains(VAR_NAME, new ContainsAware<Integer>() {
 			public boolean contains(Integer element) {
+				assertEquals((Integer) 5, element);
 				return true;
 			}
 		}, 5);
+	}
+
+	/** Test for {@link Check#isIn(String, Object, ContainsAware)} */
+	@Test
+	public void testIn() throws Exception {
+		c.isIn(VAR_NAME, 10, new ContainsAware<Integer>() {
+			public boolean contains(Integer element) {
+				assertEquals((Integer) 10, element);
+				return true;
+			}
+		});
+	}
+
+	/** Test for {@link Check#isIn(String, Object, ContainsAware)} */
+	@Test(expected = IllegalArgumentException.class)
+	public void testIn_Fail() throws Exception {
+		c.isIn(VAR_NAME, 10, new ContainsAware<Integer>() {
+			public boolean contains(Integer element) {
+				return false;
+			}
+		});
 	}
 }
