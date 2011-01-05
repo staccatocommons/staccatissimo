@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
+import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.SizeAware;
 
@@ -103,19 +104,9 @@ public class CheckUnitTest {
 		c.isNotNegative(VAR_NAME, BigInteger.ZERO);
 	}
 
-	@Test
-	public void testNotEmptyMap() {
-		c.isNotEmpty(VAR_NAME, Collections.singletonMap("Hello", "World"));
-	}
-
 	@Test(expected = IllegalArgumentException.class)
 	public void testisNotEmptMap_Fail() {
 		c.isNotEmpty(VAR_NAME, Collections.emptyMap());
-	}
-
-	@Test
-	public void testisNotEmptyCharSequence() {
-		c.isNotEmpty(VAR_NAME, "hola");
 	}
 
 	/**
@@ -124,6 +115,13 @@ public class CheckUnitTest {
 	@Test
 	public void testisNotEmptyIterable() {
 		c.isNotEmpty(VAR_NAME, (Iterable<String>) Arrays.asList("foo", "bar"));
+		c.isNotEmpty(VAR_NAME, "hola");
+		c.isNotEmpty(VAR_NAME, Collections.singletonMap("Hello", "World"));
+		c.isNotEmpty(VAR_NAME, new EmptyAware() {
+			public boolean isEmpty() {
+				return false;
+			}
+		});
 	}
 
 	/**
@@ -154,6 +152,9 @@ public class CheckUnitTest {
 		c.isNotEmpty(VAR_NAME, Collections.emptyList());
 	}
 
+	/**
+	 * Test for {@link Check#isPositive(String, BigDecimal)} and others
+	 */
 	@Test
 	public void testPositive() {
 		c
@@ -163,6 +164,24 @@ public class CheckUnitTest {
 			.isPositive(VAR_NAME, 9.0)
 			.isPositive(VAR_NAME, BigDecimal.valueOf(69.62))
 			.isPositive(VAR_NAME, BigInteger.valueOf(1200));
+	}
+
+	/**
+	 * Test for {@link Check#isPositive(String, int)}
+	 */
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testPositive_Negative() {
+		c.isPositive(VAR_NAME, -5);
+	}
+
+	/**
+	 * Test for {@link Check#isPositive(String, int)}
+	 */
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testPositive_Zero() {
+		c.isPositive(VAR_NAME, 0);
 	}
 
 	/**
@@ -271,9 +290,9 @@ public class CheckUnitTest {
 	/**
 	 * Test for {@link Check#isNull(String, Object)}
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testNull() {
-		c.isNotNull(VAR_NAME, null);
+		c.isNull(VAR_NAME, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -320,4 +339,37 @@ public class CheckUnitTest {
 
 	}
 
+	/**
+	 * Test for {@link Check#isGreaterThan(String, Comparable, Comparable)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testGtCompare_fail() throws Exception {
+		c.isGreaterThan(VAR_NAME, 50, 50);
+	}
+
+	/**
+	 * Test for {@link Check#isLessThan(String, Comparable, Comparable)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testLtCompare_fail() throws Exception {
+		c.isLessThan(VAR_NAME, 50, 50);
+	}
+
+	/**
+	 * test for {@link Check#contains(String, ContainsAware, Object)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testContains() throws Exception {
+		c.contains(VAR_NAME, new ContainsAware<Integer>() {
+			public boolean contains(Integer element) {
+				return true;
+			}
+		}, 5);
+	}
 }

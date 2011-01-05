@@ -588,10 +588,6 @@ public abstract class Check<ExceptionType extends Throwable> {
 		return isNotNull(varName, var).isNotEmptyInternal(varName, var, Array.getLength(var) != 0);
 	}
 
-	/*
-	 * TODO Performance del dispatch virtual
-	 */
-
 	private Check<ExceptionType> isNotEmptyInternal(String varName, Object var, boolean notEmpty)
 		throws ExceptionType {
 		return is(varName, var, notEmpty, "must not be empty");
