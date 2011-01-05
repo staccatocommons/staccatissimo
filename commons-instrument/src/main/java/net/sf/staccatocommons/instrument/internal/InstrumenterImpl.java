@@ -50,6 +50,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 	private final AnnotationProcessor<ConstructorAnnotationHandler> constructorProcessor;
 	private InstrumentationMark instrumentationMark;
 	private final ClassPool classPool;
+	private int handlersCount;
 
 	/**
 	 * Creates a new {@link InstrumenterImpl}
@@ -88,12 +89,15 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 
 		if (handler instanceof MethodAnnotationHandler)
 			methodProcessor.addHandler((MethodAnnotationHandler) handler);
+
+		handlersCount++;
 		return this;
 	}
 
 	public void ensureConfigured() {
 		Validate.throwing(IllegalStateException.class) //
-			.isNotNull("instrumentarionMark", instrumentationMark);
+			.isNotNull("instrumentarionMark", instrumentationMark)
+			.isGreaterThan("handlers.count", handlersCount, 0);
 	}
 
 	/**

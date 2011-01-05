@@ -55,7 +55,7 @@ public class DefaultMethodAnnotationContext extends AbstractAnnotationContext im
 	@Override
 	public boolean isVoid() {
 		try {
-			return ((CtMethod) getMethod()).getReturnType().getName().equals("void");
+			return getMethod().getReturnType().getName().equals("void");
 		} catch (NotFoundException e) {
 			return false;
 		}

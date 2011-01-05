@@ -12,23 +12,56 @@
  */
 package net.sf.staccatocommons.instrument.config;
 
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.handler.AnnotationHandler;
 
 /**
- * @author flbulgarelli
+ * Instrumenter's interface for configuring it.
+ * <p>
+ * It is not intended to be implemented by clients. Instead, client code will
+ * have access to an implementation of {@link InstrumenterConfiguration} only
+ * when executing
+ * {@link InstrumenterConfigurer#configureInstrumenter(InstrumenterConfiguration)}
+ * </p>
  * 
+ * @author flbulgarelli
+ * @see InstrumenterConfigurer
  */
 public interface InstrumenterConfiguration {
 
 	/**
+	 * Sets the instrumentation mark this instrumenter will print in the
+	 * instrumented classes.
+	 * 
+	 * This message <strong>must</strong> be sent at least once from inside
+	 * {@link InstrumenterConfigurer#configureInstrumenter(InstrumenterConfiguration)}
+	 * , and <strong>should</strong> be sent at most once from inside it.
+	 * 
 	 * @param instrumentationMark
 	 *          the instrumentationMark to set
-	 * @return this
+	 * @return this in order to allow method chaining
 	 */
-	InstrumenterConfiguration setInstrumentationMark(InstrumentationMark instrumentationMark);
+	@NonNull
+	InstrumenterConfiguration setInstrumentationMark(@NonNull InstrumentationMark instrumentationMark);
 
-	InstrumenterConfiguration addAnnotationHanlder(AnnotationHandler handler);
-
-	void ensureConfigured();
+	/**
+	 * Register an annotation handler to this instrumenter that will be notified
+	 * to process an annotation each time one of the type returned by
+	 * {@link AnnotationHandler#getSupportedAnnotationType()} is found.
+	 * 
+	 * If more than one {@link AnnotationHandler} that supports a certain
+	 * annotation type is registered, the instrumenter will notify all those
+	 * handlers when an annotation of such type is found, in the order they have
+	 * being registered.
+	 * 
+	 * This message <strong>must</strong> be sent at least once from inside
+	 * {@link InstrumenterConfigurer#configureInstrumenter(InstrumenterConfiguration)}
+	 * 
+	 * @param handler
+	 *          the handler to register
+	 * @return this in order to allow method chaining
+	 */
+	@NonNull
+	InstrumenterConfiguration addAnnotationHanlder(@NonNull AnnotationHandler handler);
 
 }

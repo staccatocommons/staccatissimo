@@ -20,8 +20,8 @@ import net.sf.staccatocommons.check.annotation.NonNull;
  * is inserted on each file processed by an instrumenter, in order to
  * distinguish a processed from unprocessed class files.
  * 
- * Client code should not implement this interface directly, but implement
- * {@link SimpleInstrumentationMark} instead.
+ * Client code <strong>should not</strong> implement this interface directly,
+ * but implement {@link SimpleInstrumentationMark} instead.
  * 
  * @author flbulgarelli
  * 

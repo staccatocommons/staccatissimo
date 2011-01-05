@@ -18,8 +18,10 @@ import javassist.CannotCompileException;
 import net.sf.staccatocommons.instrument.context.MethodAnnotationContext;
 
 /**
- * @author flbulgarelli
+ * Interface for annotation handlers that can process annotations in methods.
  * 
+ * @author flbulgarelli
+ * @see AnnotationHandler
  */
 public interface MethodAnnotationHandler<A extends Annotation> extends AnnotationHandler<A> {
 

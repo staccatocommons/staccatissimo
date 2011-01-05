@@ -29,6 +29,9 @@ import net.sf.staccatocommons.check.annotation.NonNull;
  * s have no restrictions regarding synchronization. In particular, they do not
  * need to be statless nor immutable.
  * </p>
+ * This interface <strong>must not</strong> be implemented directly by client
+ * code. It <strong>must</strong> implement one of the subinterfaces from this
+ * package
  * 
  * @author flbulgarelli
  * @see ArgumentAnnotationHandler

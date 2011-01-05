@@ -64,6 +64,7 @@ public final class InstrumentationRunner {
 		classPool.appendClassPath(processDirectory.getAbsolutePath());
 		InstrumenterImpl instrumenter = new InstrumenterImpl(classPool);
 		configurer.configureInstrumenter(instrumenter);
+		instrumenter.ensureConfigured();
 		new InstrumentationContext(instrumenter, processDirectory, classPool).doInstrument();
 	}
 
