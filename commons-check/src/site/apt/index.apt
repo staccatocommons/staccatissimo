@@ -21,11 +21,53 @@ Getting started
   
   * Check-Annotation. A annotations API for documenting simple constraints that extends the Staccato-Commons-Lang restrictions API.
   
-* Validation API
+* Validation API 
 
- <<TODO>>
+ Its core is the <<<net.sf.staccatocommons.check.Check\<E\>>>> class. It implements more than 40 common checks with automatic
+error messages building, in a method-chaining fashion. For example, the following, the following code will check that <<<bar != null && foo.compareTo(bar) <= 0 && baz.size() == 1 && baz.contains(foo)>>>, 
+throwing an exception and generating a proper message if any of the constraints is violated: 
 
-* Documentation API
++--
+   Check<... more about this parametrization later ...> check = ...obtain a reference to a check...
+   check.isNotNull("bar", bar)
+        .isGreaterThan("foo", foo, bar)
+        .isSize("baz", baz, 1)
+        .contains("baz", baz, foo);
+
++-- 
+
+ It is easy to see that all automatic check methods take at least two arguments: a mnemonic for the object - normally the variable 
+ or attribute name - and the object to check. It is not necessary to pass any extra message, as all the invocation have enough information
+ to generate them.
+
+ In addition to this checks, it offers general boolean condition tests and forced failures methods. For example:
+
++----
+ 
+  check.that(account.hasEnoughFonds(),  "Account %s must have enough fonds", account);
+  
+  check.failure("Code should not have reached here");
+
++--- 
+ 
+ Those methods take at least a <<<message>>> argument, as they have no enough information to construct one.  
+ 
+ Check class, however, is abstract, and does not define the specific exception to be thrown on failure.  
+It is parameterized instead by the exception type it throws, and is responsibility of subclasses to define that.
+
+ To address that, the API provides three concrete implementations of <<<Check>>>:
+ 
+ * <<<Ensure>>> Throws <<<java.lang.IllegalArgumentException>>>, and is used to check generic preconditions
+ 
+ * <<<Assert>>> Throws <<<java.lang.AssertionError>>>, and denotes is used to check generic postconditions and invariants.
+ 
+ * <<<Validate>>> Throws a exceptions of any given type - in particular, they do not need to be <<<java.lang.RuntimeException>>>s.
+It is used to perform domain specific validations.  
+
+<<<TODO>>>
+   
+
+* Documentation API - <<<net.sf.staccatocommons.check.annotation>>>
 
  <<TODO>>  
   
