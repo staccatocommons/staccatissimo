@@ -42,20 +42,20 @@ public final class Assert {
 	 * Shortcut to
 	 * <code>Assert.that().is(varName,var,condition,message,args)</code>
 	 * 
-	 * @see Check#is(String, Object, boolean, String, Object...)
+	 * @see Check#that(String, Object, boolean, String, Object...)
 	 */
-	public static void is(String varName, Object var, boolean condition, String message,
+	public static void that(String varName, Object var, boolean condition, String message,
 		Object... messageArgs) {
-		that().is(varName, var, condition, message, messageArgs);
+		that().that(varName, var, condition, message, messageArgs);
 	}
 
 	/**
 	 * Shortcut to <code>Assert.that().is(condition,message,args)</code>
 	 * 
-	 * @see Check#is(boolean, String, Object...)
+	 * @see Check#that(boolean, String, Object...)
 	 */
-	public static void is(boolean condition, String message, Object... messageArgs) {
-		that().is(condition, message, messageArgs);
+	public static void that(boolean condition, String message, Object... messageArgs) {
+		that().that(condition, message, messageArgs);
 	}
 
 	/**

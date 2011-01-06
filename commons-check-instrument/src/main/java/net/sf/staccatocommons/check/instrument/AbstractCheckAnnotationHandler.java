@@ -70,7 +70,7 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 		if (ignoreReturns || !deactivableSupport.isActive())
 			return;
 		// TODO handle properly
-		Ensure.is(!context.isVoid(), "Context must not be void: %s", context.getMethod().getLongName());
+		Ensure.that(!context.isVoid(), "Context must not be void: %s", context.getMethod().getLongName());
 		try {
 			context.getMethod().insertAfter(
 				ASSERT_FULLY_QUALIFIED_NAME + createMethodCheck(annotation, context) + ";");

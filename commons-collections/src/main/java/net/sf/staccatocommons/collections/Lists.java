@@ -113,7 +113,7 @@ public class Lists {
 	 * @see List#get(int)
 	 */
 	public static <A> A second(@NonNull List<A> list) {
-		Ensure.is(LIST_PARAM, list, list.size() > 1,//
+		Ensure.that(LIST_PARAM, list, list.size() > 1,//
 			"Must hava at least two elements");
 		return list.get(1);
 	}
@@ -130,7 +130,7 @@ public class Lists {
 	 * @see List#get(int)
 	 */
 	public static <A> A third(@NonNull List<A> list) {
-		Ensure.is(LIST_PARAM, list, list.size() > 2,//
+		Ensure.that(LIST_PARAM, list, list.size() > 2,//
 			"Must hava at least three elements");
 		return list.get(2);
 	}

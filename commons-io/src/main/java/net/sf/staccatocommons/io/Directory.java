@@ -51,7 +51,7 @@ public class Directory {
 	 *          must be a directory
 	 */
 	public Directory(@NonNull File file) {
-		Ensure.is("file", file, file.isDirectory(), "must denote a directory");
+		Ensure.that("file", file, file.isDirectory(), "must denote a directory");
 		this.file = file;
 	}
 

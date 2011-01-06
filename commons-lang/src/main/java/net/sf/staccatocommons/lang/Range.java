@@ -25,8 +25,6 @@ import net.sf.staccatocommons.lang.value.ValueObject;
  * A {@link Range} represents a an inclusive lower and upper bound of
  * {@link Comparable} objects.
  * 
- * {@link Range}s are unmodifiable.
- * 
  * @author flbulgarelli
  * 
  * @param <T>
@@ -109,8 +107,10 @@ public class Range<T extends Comparable<T>> extends ValueObject implements Conta
 	}
 
 	/**
-	 * @return if range min and max are equal, based on
-	 *         {@link Comparable#compareTo(Object)}
+	 * Answers if <code>min</code> and <code>max</code> are equal, based on
+	 * {@link Comparable#compareTo(Object)}
+	 * 
+	 * @return <code>getMin().compareTo(getMax()) == 0</code>
 	 */
 	@Override
 	public boolean isEmpty() {
