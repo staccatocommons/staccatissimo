@@ -16,25 +16,22 @@ package net.sf.staccatocommons.defs;
  * Interface for objects that understand {@link #size()} message. It extends the
  * {@link EmptyAware} interface.
  * 
- * This interface is deliberately too generic, and does not make any assumption
- * about the nature of the {@link SizeAware} object - it may be array-like,
- * collection-like, a domain model object, string-like, etc.
- * 
  * @author flbulgarelli
  * 
  */
 public interface SizeAware extends EmptyAware {
 
 	/**
-	 * Answers the size of this size aware, whatever it means. It should be a
-	 * positive int.
+	 * Answers the size of this size aware. It <strong>should</strong> be a non
+	 * negative int.
 	 * 
 	 * @return the size
 	 */
 	int size();
 
 	/**
-	 * Answers if this {@link SizeAware} is empty. It should always be true that
+	 * Answers if this {@link SizeAware} is empty. It <strong>should</strong> be
+	 * true that
 	 * 
 	 * <code>aSizeAware.isEmpty() == (aSizeAware.size() == 0)</code>
 	 */

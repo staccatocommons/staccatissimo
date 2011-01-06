@@ -15,10 +15,6 @@ package net.sf.staccatocommons.defs;
 /**
  * Interface for objects that understand {@link #contains(Object)} message.
  * 
- * This interface is deliberately too generic, and does not make any assumption
- * about the nature of the {@link ContainsAware} object - it may be array-like,
- * collection-like, a domain model object, string-like, etc.
- * 
  * @author flbulgarelli
  * 
  * @param <T>
@@ -27,7 +23,7 @@ package net.sf.staccatocommons.defs;
 public interface ContainsAware<T> {
 
 	/**
-	 * Answers if contains-aware contains the given element
+	 * Answers if this contains-aware contains the given <code>element</code>
 	 * 
 	 * @param element
 	 * 

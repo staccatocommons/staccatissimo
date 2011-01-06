@@ -15,10 +15,6 @@ package net.sf.staccatocommons.defs;
 /**
  * Interface for objects that understand {@link #isEmpty()} message.
  * 
- * This interface is deliberately too generic, and does not make any assumption
- * about the nature of the {@link EmptyAware} object - it may be array-like,
- * collection-like, a domain model object, string-like, etc.
- * 
  * @author flbulgarelli
  * 
  */
@@ -27,7 +23,7 @@ public interface EmptyAware {
 	/**
 	 * Answers if this {@link EmptyAware} is empty
 	 * 
-	 * @return if the object is empty, whatever it means
+	 * @return if the object is empty.
 	 */
 	boolean isEmpty();
 
