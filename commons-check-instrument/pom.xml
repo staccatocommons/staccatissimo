@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
-		<groupId>net.sf.staccato</groupId>
-		<version>1.0-SNAPSHOT</version>
+		<groupId>net.sf.staccatocommons</groupId>
+		<version>1.0-alpha-1-SNAPSHOT</version>
 	</parent>
-	<groupId>net.sf.staccato</groupId>
+	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-check-instrument</artifactId>
 	<version>0.1</version>
 	<name>Staccato-Commons-Check-Instrument</name>
@@ -24,9 +24,9 @@
 	</distributionManagement>
 	<dependencies>
 		<dependency>
-			<groupId>net.sf.staccato</groupId>
+			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-instrument</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0-alpha-1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<build>

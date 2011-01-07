@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.sf.staccato</groupId>
+	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-lang</artifactId>
 	<name>Staccato-Commons-Lang</name>
 	<description>Staccato-Commons core classes</description>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0-alpha-1-SNAPSHOT</version>
 	<inceptionYear>2010</inceptionYear>
     <url>http://staccatocommons.sourceforge.net/staccatissimo/commonslang</url>
     <scm>
@@ -14,9 +14,9 @@
        <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-lang/</url>
     </scm>
 	<parent>
-		<groupId>net.sf.staccato</groupId>
+		<groupId>net.sf.staccatocommons</groupId>
 		<artifactId>commons-parent-pom</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0-alpha-1-SNAPSHOT</version>
 	</parent>
 	<distributionManagement>
 		<site>
@@ -27,9 +27,9 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>net.sf.staccato</groupId>
+				<groupId>net.sf.staccatocommons</groupId>
 				<artifactId>commons-check-instrument-maven-plugin</artifactId>
-				<version>1.0-SNAPSHOT</version>
+				<version>1.0-alpha-1-SNAPSHOT</version>
 				<executions>
 					<execution>
 						<phase>process-classes</phase>
@@ -60,14 +60,14 @@
 			<version>2.4</version>
 		</dependency>
 		<dependency>
-			<groupId>net.sf.staccato</groupId>
+			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-defs</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0-alpha-1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>net.sf.staccato</groupId>
+			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-check</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0-alpha-1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
