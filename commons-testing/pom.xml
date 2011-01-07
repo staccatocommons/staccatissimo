@@ -1,13 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-testing</artifactId>
 	<name>Staccato-Commons-Testing</name>
-	<version>1.0-alpha-1</version>
+	<version>1.0-alpha-1-SNAPSHOT</version>
 	<inceptionYear>2010</inceptionYear>
 	<description>Testing components build on top of JUnit 4</description>
 	<scm>
-		<connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/tags/releases/1.0-alpha-1/commons-testing</connection>
+		<connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-testing</connection>
 	</scm>
 	<build>
 		<plugins>
