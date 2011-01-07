@@ -3,11 +3,11 @@
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-testing</artifactId>
 	<name>Staccato-Commons-Testing</name>
-	<version>1.0-alpha-1</version>
+	<version>1.0-alpha-2-SNAPSHOT</version>
 	<inceptionYear>2010</inceptionYear>
 	<description>Testing components build on top of JUnit 4</description>
 	<scm>
-		<connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/tags/releases/1.0-apha-1</connection>
+		<connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-testing</connection>
 	</scm>
 	<build>
 		<plugins>
@@ -26,6 +26,14 @@
 						<version>1.7</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<tagBase>https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases</tagBase>
+				</configuration>
+				<version>2.1</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
