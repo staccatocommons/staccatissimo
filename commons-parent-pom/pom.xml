@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.sf.staccato</groupId>
+	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-parent-pom</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0-alpha-1-SNAPSHOT</version>
 	<url>http://staccatocommons.sourceforge.net/</url>
 	<licenses>
 		<license>
@@ -17,7 +17,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<staccatissimo.scm.base>https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo</staccatissimo.scm.base>
 	</properties>
-
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
@@ -28,7 +27,6 @@
 			<url>${distribution.site.url}/maven2</url>
 		</repository>
 	</distributionManagement>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -160,9 +158,9 @@
 	</reporting>
 	<dependencies>
 		<dependency>
-			<groupId>net.sf.staccato</groupId>
+			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-testing</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0-alpha-1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
