@@ -1,9 +1,55 @@
 About Staccato-Commons-Collections 
  
- Staccato-Commons-Collection is the collections library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. It is focused on providing new abstractions that mix object oriented and functional style for dealing with collections. It extend the existing Java Collections Framework adding filtering, mapping, folding, concatenating an so on capabilities to it. It also offers Streams, rich lazy iterables that can wrap many different sources - much more than just collections. On the other hand, Staccato-Commons-Collections is not aimed to provide new specific purpose collection implementations.    
+ Staccato-Commons-Collection is the collections library of the 
+ {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}, focused on providing new abstractions that mix object oriented
+ and functional style for dealing with collections. 
+ It extend the existing Java Collections Framework by providing dozen of class methods for performing common operations like filtering, mapping, 
+ folding, finding and zipping. 
+ It also offers Streams, rich, fluent, lazy iterables that can wrap many different sources - much more than just collections, making
+ complex transformations on anything that is iterable extremely simple.  
+ 
+ 
+ On the other hand, Staccato-Commons-Collections is not aimed to provide new specific purpose collection implementations.    
  
 Alpha state 
 
  Staccato-Commons-Collections is currently in alpha state. Although most of previous features are implemented, tested and documented, it is not recommended to use in production systems yet. Types and packages may change in the near future without notice. 
  
  
+Getting started
+
+ Staccato-Commons-Collections exposes two APIs: 
+ 
+ * Iterables API - a bunch of utility classes that expose more than 50 common operation on iterables and maps.   
+ 
+ * Stream API - an ecosystem of interfaces and classes that model a Stream - a generic source of objects. 
+ 
+* Iterables
+ 
+* Streams
+
+ A Stream is just a source of objects that can retrieve a an arbitrary number of them. This definition is intentionally
+ very abstract, as lots of objects could fall in this category - for example, strings are sources of characters and substrings,
+ collections are source of their elements, text files are sources of tokens and lines,
+ directories are sources of files, queries to relational databases are sources of rows, and so on.  
+ 
+ Stream main characteristics are:
+ 
+ * Homogeneous and type-parameterized
+ 
+ * Iterable 
+ 
+ * Lazy
+ 
+ * Rich 
+ 
+ * Unmodifiable
+  
+ 
+What is next?
+
+ * Navigate the API
+ 
+ * Use it!
+ 
+ * Contribute! 
