@@ -10,6 +10,12 @@
 	<scm>
 		<connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-testing</connection>
 	</scm>
+	   <distributionManagement>
+        <repository>
+            <id>staccatocommons.sourceforge.net</id>
+            <url>${distribution.site.url}/maven2</url>
+        </repository>
+    </distributionManagement>
 	<build>
 		<plugins>
 			<plugin>

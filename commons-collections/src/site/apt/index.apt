@@ -8,7 +8,6 @@ About Staccato-Commons-Collections
  It also offers Streams, rich, fluent, lazy iterables that can wrap many different sources - much more than just collections, making
  complex transformations on anything that is iterable extremely simple.  
  
- 
  On the other hand, Staccato-Commons-Collections is not aimed to provide new specific purpose collection implementations.    
  
 Alpha state 
@@ -24,32 +23,3 @@ Getting started
  
  * Stream API - an ecosystem of interfaces and classes that model a Stream - a generic source of objects. 
  
-* Iterables
- 
-* Streams
-
- A Stream is just a source of objects that can retrieve a an arbitrary number of them. This definition is intentionally
- very abstract, as lots of objects could fall in this category - for example, strings are sources of characters and substrings,
- collections are source of their elements, text files are sources of tokens and lines,
- directories are sources of files, queries to relational databases are sources of rows, and so on.  
- 
- Stream main characteristics are:
- 
- * Homogeneous and type-parameterized
- 
- * Iterable 
- 
- * Lazy
- 
- * Rich 
- 
- * Unmodifiable
-  
- 
-What is next?
-
- * Navigate the API
- 
- * Use it!
- 
- * Contribute! 
