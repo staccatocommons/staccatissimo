@@ -213,16 +213,6 @@ public class IterablesUnitTest {
 	}
 
 	/**
-	 * Test for {@link Iterables#single(Collection)} on failure
-	 * 
-	 * @throws Exception
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testSingle_Failrue() throws Exception {
-		Iterables.single(integersList);
-	}
-
-	/**
 	 * Test method for
 	 * {@link Iterables#partition(Iterable, net.sf.staccatocommons.lang.Evaluable)}
 	 */
