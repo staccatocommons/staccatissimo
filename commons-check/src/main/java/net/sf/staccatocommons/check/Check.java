@@ -12,17 +12,19 @@
  */
 package net.sf.staccatocommons.check;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import net.sf.staccatocommons.check.format.Var;
+import net.sf.staccatocommons.check.internal.EmptyAwareTypes;
+import net.sf.staccatocommons.check.internal.SizeAwareTypes;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.SizeAware;
+import net.sf.staccatocommons.defs.type.EmptyAwareType;
+import net.sf.staccatocommons.defs.type.SizeAwareType;
 
 /**
  * {@link Check}s are objects that validate conditions. It is heavily inspired
@@ -260,7 +262,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @see #that(boolean, String, Object...)
 	 */
 	public final Check<ExceptionType> isEmpty(String varName, Collection<?> var) throws ExceptionType {
-		return isNotNull(varName, var).isEmptyInternal(varName, var, var.isEmpty());
+		return isEmpty(varName, var, SizeAwareTypes.COLLECTION);
 	}
 
 	/**
@@ -276,8 +278,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * 
 	 * @see #that(boolean, String, Object...)
 	 */
-	public final Check<ExceptionType> isEmpty(String varName, Map<?, ?> var) throws ExceptionType {
-		return isNotNull(varName, var).isEmptyInternal(varName, var, var.isEmpty());
+	public final Check<ExceptionType> isEmpty(String varName, CharSequence var) throws ExceptionType {
+		return isEmpty(varName, var, SizeAwareTypes.CHAR_SEQUENCE);
 	}
 
 	/**
@@ -294,12 +296,12 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @see #that(boolean, String, Object...)
 	 */
 	public final Check<ExceptionType> isEmpty(String varName, EmptyAware var) throws ExceptionType {
-		return isNotNull(varName, var).isEmptyInternal(varName, var, var.isEmpty());
+		return isEmpty(varName, var, EmptyAwareTypes.EMPTY_AWARE);
 	}
 
-	private Check<ExceptionType> isEmptyInternal(String varName, Object var, boolean empty)
+	public final <A> Check<ExceptionType> isEmpty(String varName, A var, EmptyAwareType<A> type)
 		throws ExceptionType {
-		return that(varName, var, empty, "must be empty");
+		return isNotNull(varName, var).that(varName, var, type.isEmpty(var), "must be empty");
 	}
 
 	/**
@@ -340,7 +342,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public final Check<ExceptionType> isSize(String varName, Collection<?> var, int size)
 		throws ExceptionType {
-		return isSize(varName, var, size, var.size());
+		return isSize(varName, var, size, SizeAwareTypes.COLLECTION);
 	}
 
 	/**
@@ -358,25 +360,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public final Check<ExceptionType> isSize(String varName, CharSequence var, int size)
 		throws ExceptionType {
-		return isSize(varName, var, size, var.length());
-	}
-
-	/**
-	 * Checks that the array variable's size is the given one
-	 * 
-	 * @param varName
-	 *          the name of the array variable to be checked
-	 * @param var
-	 *          the array variable to be checked
-	 * @param size
-	 *          the size the variable must have
-	 * @return this, in order to allow method chaining
-	 * @throws ExceptionType
-	 *           if the check failed
-	 */
-	public final Check<ExceptionType> isSize(String varName, Object var, int size)
-		throws ExceptionType {
-		return isSize(varName, var, size, Array.getLength(var));
+		return isSize(varName, var, size, SizeAwareTypes.CHAR_SEQUENCE);
 	}
 
 	/**
@@ -394,7 +378,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public final Check<ExceptionType> isSize(String varName, SizeAware var, int size)
 		throws ExceptionType {
-		return isSize(varName, var, size, var.size());
+		return isSize(varName, var, size, SizeAwareTypes.SIZE_AWARE);
 	}
 
 	/**
@@ -508,7 +492,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *           if the check failed
 	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, EmptyAware var) throws ExceptionType {
-		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.isEmpty());
+		return isNotEmpty(varName, var, EmptyAwareTypes.EMPTY_AWARE);
 	}
 
 	/**
@@ -524,39 +508,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, Collection<?> var)
 		throws ExceptionType {
-		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.isEmpty());
-	}
-
-	/**
-	 * Checks that the {@link Iterable} variable is not empty - that is -
-	 * <code>!var.itertaror().hasNext()</code>
-	 * 
-	 * @param varName
-	 *          the name of the variable to be checked
-	 * @param var
-	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
-	 * @throws ExceptionType
-	 *           if the check failed
-	 */
-	public final Check<ExceptionType> isNotEmpty(String varName, Iterable<?> var)
-		throws ExceptionType {
-		return isNotNull(varName, var).isNotEmptyInternal(varName, var, var.iterator().hasNext());
-	}
-
-	/**
-	 * Checks that the {@link Map} variable is not empty
-	 * 
-	 * @param varName
-	 *          the name of the variable to be checked
-	 * @param var
-	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
-	 * @throws ExceptionType
-	 *           if the check failed
-	 */
-	public final Check<ExceptionType> isNotEmpty(String varName, Map<?, ?> var) throws ExceptionType {
-		return isNotNull(varName, var).isNotEmptyInternal(varName, var, !var.isEmpty());
+		return isNotEmpty(varName, var, SizeAwareTypes.COLLECTION);
 	}
 
 	/**
@@ -572,27 +524,12 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, CharSequence var)
 		throws ExceptionType {
-		return isNotNull(varName, var).isNotEmptyInternal(varName, var, var.length() != 0);
+		return isNotEmpty(varName, var, SizeAwareTypes.CHAR_SEQUENCE);
 	}
 
-	/**
-	 * Checks that the array variable is not empty
-	 * 
-	 * @param varName
-	 *          the name of the variable to be checked
-	 * @param var
-	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
-	 * @throws ExceptionType
-	 *           if the check failed
-	 */
-	public final Check<ExceptionType> isNotEmpty(String varName, Object var) throws ExceptionType {
-		return isNotNull(varName, var).isNotEmptyInternal(varName, var, Array.getLength(var) != 0);
-	}
-
-	private Check<ExceptionType> isNotEmptyInternal(String varName, Object var, boolean notEmpty)
+	public final <A> Check<ExceptionType> isNotEmpty(String varName, A var, EmptyAwareType<A> type)
 		throws ExceptionType {
-		return that(varName, var, notEmpty, "must not be empty");
+		return isNotNull(varName, var).that(varName, var, !type.isEmpty(var), "must not be empty");
 	}
 
 	/**
@@ -691,12 +628,12 @@ public abstract class Check<ExceptionType extends Throwable> {
 		return that(varName, var, positive, "must be positive");
 	}
 
-	private Check<ExceptionType> isSize(String varName, Object var, int expectedSize, int actualSize)
-		throws ExceptionType {
-		return that(varName, var, actualSize == expectedSize, //
+	public final <A> Check<ExceptionType> isSize(String varName, A var, int expectedSize,
+		SizeAwareType<A> type) throws ExceptionType {
+		return that(varName, var, type.size(var) == expectedSize, //
 			"must be of size %s, but was %s",
 			expectedSize,
-			actualSize);
+			type.size(var));
 	}
 
 	/**

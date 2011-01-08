@@ -1,6 +1,6 @@
 package net.sf.staccatocommons.check;
 
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.*;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -106,47 +106,25 @@ public class CheckUnitTest {
 		c.isNotNegative(VAR_NAME, BigInteger.ZERO);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testisNotEmptMap_Fail() {
-		c.isNotEmpty(VAR_NAME, Collections.emptyMap());
-	}
-
 	/**
 	 * Test method for {@link Check#isNotEmpty(String, Iterable)}
 	 */
 	@Test
-	public void testisNotEmptyIterable() {
-		c.isNotEmpty(VAR_NAME, (Iterable<String>) Arrays.asList("foo", "bar"));
-		c.isNotEmpty(VAR_NAME, "hola");
-		c.isNotEmpty(VAR_NAME, Collections.singletonMap("Hello", "World"));
-		c.isNotEmpty(VAR_NAME, new EmptyAware() {
-			public boolean isEmpty() {
-				return false;
-			}
-		});
-	}
-
-	/**
-	 * Test method for {@link Check#isNotEmpty(String, Iterable)} on failure
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testisNotEmptyIterable_Fail() {
-		c.isNotEmpty(VAR_NAME, (Iterable<String>) Collections.<String> emptyList());
+	public void testisNotEmpty() {
+		c
+			.isNotEmpty(VAR_NAME, Arrays.asList("foo", "bar"))
+			.isNotEmpty(VAR_NAME, Collections.singleton(6))
+			.isNotEmpty(VAR_NAME, "hola")
+			.isNotEmpty(VAR_NAME, new EmptyAware() {
+				public boolean isEmpty() {
+					return false;
+				}
+			});
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testisNotEmptyCharSequence_Fail() {
 		c.isNotEmpty(VAR_NAME, "");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testisNotEmptyArray() {
-		c.isNotEmpty(VAR_NAME, new byte[0]);
-	}
-
-	@Test
-	public void testNotEmptyCollection() {
-		c.isNotEmpty(VAR_NAME, Collections.singleton(6));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -210,8 +188,6 @@ public class CheckUnitTest {
 		c
 			.isSize(VAR_NAME, Arrays.asList(9, 96), 2)
 			.isSize(VAR_NAME, "Hello", 5)
-			.isSize(VAR_NAME, new double[] { 5.5, 9 }, 2)
-			.isSize(VAR_NAME, new Object[] { 9, 93, 23, 6, 0 }, 5)
 			.isSize(VAR_NAME, new SizeAware() {
 				public int size() {
 					return 5;
@@ -231,8 +207,8 @@ public class CheckUnitTest {
 	public void testEmpty() {
 		c
 			.isEmpty(VAR_NAME, Collections.emptyList())
-			.isEmpty(VAR_NAME, Collections.emptyMap())
 			.isEmpty(VAR_NAME, Collections.<String> emptyList())
+			.isEmpty(VAR_NAME, "")
 			.isEmpty(VAR_NAME, new EmptyAware() {
 				public boolean isEmpty() {
 					return true;
