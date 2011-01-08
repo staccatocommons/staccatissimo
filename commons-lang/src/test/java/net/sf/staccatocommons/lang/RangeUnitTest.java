@@ -57,6 +57,9 @@ public class RangeUnitTest {
 		assertEquals((Integer) 9, from(9, 98).getMin());
 	}
 
+	/**
+	 * Test method for {@link Range#isEmpty()}
+	 */
 	@Test
 	public void testIsEmpty() {
 		assertFalse(from(8, 9).isEmpty());

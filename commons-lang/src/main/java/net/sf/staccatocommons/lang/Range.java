@@ -14,11 +14,14 @@ package net.sf.staccatocommons.lang;
 
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
+import net.sf.staccatocommons.lang.sequence.Sequence;
+import net.sf.staccatocommons.lang.sequence.StopConditions;
 import net.sf.staccatocommons.lang.value.ValueObject;
 
 /**
@@ -115,6 +118,20 @@ public class Range<T extends Comparable<T>> extends ValueObject implements Conta
 	@Override
 	public boolean isEmpty() {
 		return getMin().compareTo(getMax()) == 0;
+	}
+
+	/**
+	 * Returns a {@link Sequence} that iterates from <code>this.getMin()</code> up
+	 * to <code>this.getMax</code>, using as generator the given
+	 * {@link Applicable}
+	 * 
+	 * @param generator
+	 *          the generator of the new sequence
+	 * @return a new sequence
+	 */
+	@NonNull
+	public Sequence<T> by(@NonNull Applicable<T, T> generator) {
+		return Sequence.from(getMin(), generator, StopConditions.upTo(getMax()));
 	}
 
 	/**

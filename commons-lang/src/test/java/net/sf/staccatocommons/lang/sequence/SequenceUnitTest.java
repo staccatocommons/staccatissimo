@@ -22,7 +22,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.sf.staccatocommons.lang.Range;
 import net.sf.staccatocommons.lang.sequence.internal.BigIntegerIncrement;
+import net.sf.staccatocommons.lang.sequence.internal.IntegerIncrement;
 
 import org.junit.Test;
 
@@ -88,6 +90,14 @@ public class SequenceUnitTest {
 		assertEquals(20, (int) it.next());
 		assertTrue(it.hasNext());
 		// and so on
+	}
+
+	/** Test method for {@link Range#by(net.sf.staccatocommons.defs.Applicable)} */
+	@Test
+	public void testRangeBy() throws Exception {
+		assertEquals(
+			Arrays.asList(0, 1, 2, 3, 4, 5),
+			asList(Range.from(0, 5).by(new IntegerIncrement(1))));
 	}
 
 	/**

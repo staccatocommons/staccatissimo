@@ -27,6 +27,9 @@ import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.CharSequenceIterator;
 import net.sf.staccatocommons.collections.stream.impl.internal.EmptyStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.EnumerationIterator;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.lang.sequence.Sequence;
 
 /**
  * Class methods for creating very simple {@link Stream}s
@@ -49,6 +52,28 @@ public class Streams {
 	@NonNull
 	public static <A> Stream<A> from(@NonNull A... elements) {
 		return from(Arrays.asList(elements));
+	}
+
+	/**
+	 * Creates a new {@link Stream} that retrieves element from the sequence
+	 * <code>Sequence.from(start, generator, stopCondition)</code>
+	 * 
+	 * @param <A>
+	 * @param seed
+	 *          the initial element of the sequence
+	 * @param generator
+	 *          a function used to generated each element from the sequence after
+	 *          the initial element
+	 * @param stopCondition
+	 *          predicate is satisfied when sequencing should stop, that is, when
+	 *          the given element and subsequent should not be retrieved.
+	 * @return a new {@link Stream}
+	 * @see Sequence#from(Object, Applicable, Evaluable)
+	 */
+	@NonNull
+	public static <A> Stream<A> from(@NonNull A seed, @NonNull Applicable<A, A> generator,
+		@NonNull Evaluable<A> stopCondition) {
+		return from(Sequence.from(seed, generator, stopCondition));
 	}
 
 	/**

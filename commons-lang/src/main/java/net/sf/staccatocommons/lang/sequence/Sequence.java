@@ -56,10 +56,11 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 * @param seed
 	 *          the initial value to be retrieved
 	 * @param generator
-	 * @param stopCondition
-	 *          a predicate that evaluates to true when sequencing should stop,
-	 *          that is, when the given element and subsequent should not be
-	 *          retrieved.
+	 *          a function used to generated each element from the sequence after
+	 *          the initial element
+	 * @param a
+	 *          predicate is satisfied when sequencing should stop, that is, when
+	 *          the given element and subsequent should not be retrieved.
 	 */
 	public Sequence(T seed, @NonNull Applicable<T, T> generator, @NonNull Evaluable<T> stopCondition) {
 		this.seed = seed;
@@ -146,18 +147,37 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	}
 
 	/**
-	 * Factory method for creating new {@link Sequence}
+	 * Factory method for creating new {@link Sequence}.
 	 * 
+	 * For example, the following code:
+	 * 
+	 * <pre>
+	 * import static net.sf.staccatocommons.lang.sequence.StopConditions.*;
+	 * ...
+	 * Date march1 = ...;
+	 * Date march22 = ...; 
+	 * Function<Date,Date> nextWeek = ...;
+	 * Sequence.from( march1, nextWeek, upTo(march22) )
+	 * 
+	 * <pre>
+	 * 
+	 * will produce  a sequence that iterates through 1st of march, 8th of march, 15th of march and 22snd of march.
+	 *      
 	 * @param <T>
-	 * @param start
+	 * @param seed
+	 *          the initial element of the sequence
 	 * @param generator
-	 * @param stopCondition
+	 *          a function used to generated each element from the sequence after
+	 *          the initial element
+	 * @param a
+	 *          predicate is satisfied when sequencing should stop, that is, when
+	 *          the given element and subsequent should not be retrieved.
 	 * @return a new Sequence
 	 */
 	@NonNull
-	public static <T> Sequence<T> from(T start, @NonNull Applicable<T, T> generator,
+	public static <T> Sequence<T> from(T seed, @NonNull Applicable<T, T> generator,
 		@NonNull Evaluable<T> stopCondition) {
-		return new Sequence<T>(start, generator, stopCondition);
+		return new Sequence<T>(seed, generator, stopCondition);
 	}
 
 	/**
