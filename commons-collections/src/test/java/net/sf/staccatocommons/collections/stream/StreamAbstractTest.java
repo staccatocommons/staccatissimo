@@ -12,17 +12,9 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeThat;
-import static org.junit.Assume.assumeTrue;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+import static org.junit.Assume.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -456,5 +448,11 @@ public abstract class StreamAbstractTest {
 				return arg1 + arg2;
 			}
 		};
+	}
+
+	/** Test method for {@link AbstractStream#zip(Iterable)} */
+	@Theory
+	public void testZip(Stream stream, Iterable iterable) throws Exception {
+		assertEquals(Iterables.zip(stream, iterable), stream.zip(iterable).toList());
 	}
 }

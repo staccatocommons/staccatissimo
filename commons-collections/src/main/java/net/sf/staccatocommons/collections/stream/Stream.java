@@ -67,7 +67,8 @@ public interface Stream<A> extends //
 	Mappable<A>, //
 	Accessible<A>, //
 	Collectible<A>, //
-	Appendabable<A> {
+	Appendabable<A>,//
+	Zippeable<A> {
 
 	/**
 	 * Lazily applies the given function to this {@link Stream}

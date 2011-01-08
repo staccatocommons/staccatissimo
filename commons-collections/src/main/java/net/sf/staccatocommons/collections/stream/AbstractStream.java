@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccatocommons.lang.tuple.Tuple._;
+import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
@@ -24,7 +24,9 @@ import java.util.Set;
 
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.collections.iterable.Iterables;
+import net.sf.staccatocommons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ConcatStream;
@@ -266,6 +268,31 @@ public abstract class AbstractStream<A> implements Stream<A> {
 			}
 		}
 		return new ThenStream();
+	}
+
+	public <B> Stream<Pair<A, B>> zip(Iterable<B> iterable) {
+		return zip(iterable, ToPair.<A, B> getInstance());
+	}
+
+	@ForceChecks
+	public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable,
+		@NonNull final Applicable2<A, B, C> function) {
+		class ZipStream extends AbstractStream<C> {
+			public Iterator<C> iterator() {
+				final Iterator<A> iter1 = AbstractStream.this.iterator();
+				final Iterator<B> iter2 = iterable.iterator();
+				return new AbstractUnmodifiableIterator<C>() {
+					public boolean hasNext() {
+						return iter1.hasNext() && iter2.hasNext();
+					}
+
+					public C next() {
+						return function.apply(iter1.next(), iter2.next());
+					}
+				};
+			}
+		}
+		return new ZipStream();
 	}
 
 	@Override

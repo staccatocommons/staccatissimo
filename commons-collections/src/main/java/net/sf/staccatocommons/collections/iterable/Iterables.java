@@ -12,14 +12,8 @@
  */
 package net.sf.staccatocommons.collections.iterable;
 
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.ITERABLE;
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.addAllInternal;
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.anyInternal;
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.collectInternal;
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.filterInternal;
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.isEmptyInternal;
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.takeInternal;
-import static net.sf.staccatocommons.lang.tuple.Tuple._;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.*;
+import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,11 +33,11 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.check.annotation.NotEmpty;
 import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.check.annotation.Size;
+import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.function.Function2;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
@@ -656,7 +650,9 @@ public class Iterables {
 	 *          the function to apply to each pair
 	 * @return a new list formed applying the given {@link Applicable2} to each
 	 *         pair of element retrieved from the given iterables. The resulting
-	 *         list size is the minimum of both iterables sizes
+	 *         list size is the minimum of both iterables sizes. As a particular
+	 *         case, if any of both iterables is empty, returns an empty list,
+	 *         regardless of the given function
 	 * @see #zip(Iterable, Iterable)
 	 */
 	@NonNull
@@ -674,7 +670,6 @@ public class Iterables {
 	 * Returns a {@link List} formed by pair of elements from the two iterables.
 	 * If any if the {@link Iterable}s is shorter than the other one, the
 	 * remaining elements are discarded.
-	 * 
 	 * <p>
 	 * For example, the following code:
 	 * 
@@ -698,18 +693,14 @@ public class Iterables {
 	 * @param iterable2
 	 * @return a new list formed by pair of element retrieved from the given
 	 *         iterables. The resulting list size is the minimum of both iterables
-	 *         sizes
+	 *         sizes. As a particular case, if any of both iterables is empty,
+	 *         returns an empty list.
 	 * @see #zip(Iterable, Iterable, Applicable2)
 	 */
 	@NonNull
 	public static <A, B> List<Pair<A, B>> zip(@NonNull Iterable<A> iterable1,
 		@NonNull Iterable<B> iterable2) {
-		return zip(iterable1, iterable2, new Function2<A, B, Pair<A, B>>() {
-			@Override
-			public Pair<A, B> apply(A arg1, B arg2) {
-				return _(arg1, arg2);
-			}
-		});
+		return zip(iterable1, iterable2, ToPair.<A, B> getInstance());
 	}
 
 	// TODO product
