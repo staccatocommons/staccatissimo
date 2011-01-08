@@ -7,12 +7,12 @@
 	<description>Staccato-Commons core classes</description>
 	<version>1.0-alpha-1-SNAPSHOT</version>
 	<inceptionYear>2010</inceptionYear>
-    <url>http://staccatocommons.sourceforge.net/staccatissimo/commonslang</url>
-    <scm>
-       <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lang</developerConnection>
-       <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lang</connection>
-       <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-lang/</url>
-    </scm>
+	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonslang</url>
+	<scm>
+		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lang</developerConnection>
+		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lang</connection>
+		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-lang/</url>
+	</scm>
 	<parent>
 		<groupId>net.sf.staccatocommons</groupId>
 		<artifactId>commons-parent-pom</artifactId>
@@ -24,23 +24,6 @@
 			<url>${distribution.site.url}/staccatissimo/commonslang</url>
 		</site>
 	</distributionManagement>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>net.sf.staccatocommons</groupId>
-				<artifactId>commons-check-instrument-maven-plugin</artifactId>
-				<version>1.0-alpha-1-SNAPSHOT</version>
-				<executions>
-					<execution>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>instrument</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 	<reporting>
 		<plugins>
 			<plugin>
@@ -70,4 +53,46 @@
 			<version>1.0-alpha-1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>noinstrument</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.5</version>
+						<configuration>
+							<excludes>
+								<exclude>**/ClassesInstrumentedDummyTest.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>instrument</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>net.sf.staccatocommons</groupId>
+						<artifactId>commons-check-instrument-maven-plugin</artifactId>
+						<version>1.0-alpha-1-SNAPSHOT</version>
+						<executions>
+							<execution>
+								<phase>process-classes</phase>
+								<goals>
+									<goal>instrument</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
