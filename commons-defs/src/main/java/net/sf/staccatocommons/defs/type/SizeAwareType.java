@@ -27,6 +27,10 @@ import net.sf.staccatocommons.defs.restriction.SideEffectFree;
  * and {@link Collection}
  * </p>
  * 
+ * {@link SizeAwareType} are also {@link EmptyAwareType}s. In order to be
+ * {@link #size(Object)} consistent with {@link #isEmpty(Object)}, the latter
+ * <strong>must</strong> return <code>true</code> if and only if size is zero.
+ * 
  * @author flbulgarelli
  * @see SizeAware
  * @see <a href="http://en.wikipedia.org/wiki/Type_class">Type class</a>
