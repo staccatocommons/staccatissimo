@@ -24,8 +24,11 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
+import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Unmodifiable;
+import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.internal.ToString;
+import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 
 /**
  * A {@link Sequence} is an {@link Iterable} object whose {@link Iterator},
@@ -38,18 +41,19 @@ import net.sf.staccatocommons.lang.internal.ToString;
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  */
 @ConditionallyImmutable
-public class Sequence<T> implements Iterable<T>, Serializable {
+@ConditionallySerializable
+public class Sequence<A> implements Iterable<A>, ImplicitNumberType<A>, Serializable {
 
 	private static final long serialVersionUID = 8811454338704704525L;
 
-	private final T seed;
+	private final A seed;
 
-	private final Applicable<T, T> generator;
+	private final Applicable<A, A> generator;
 
-	private final Evaluable<T> stopCondition;
+	private final Evaluable<A> stopCondition;
 
 	/**
 	 * 
@@ -64,7 +68,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 *          predicate is satisfied when sequencing should stop, that is, when
 	 *          the given element and subsequent should not be retrieved.
 	 */
-	public Sequence(T seed, @NonNull Applicable<T, T> generator, @NonNull Evaluable<T> stopCondition) {
+	public Sequence(A seed, @NonNull Applicable<A, A> generator, @NonNull Evaluable<A> stopCondition) {
 		this.seed = seed;
 		this.generator = generator;
 		this.stopCondition = stopCondition;
@@ -73,7 +77,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	/**
 	 * @return the initial value of the sequence
 	 */
-	public T getSeed() {
+	public A getSeed() {
 		return seed;
 	}
 
@@ -82,7 +86,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 *         applying the previous element of the sequence to the generator
 	 */
 	@NonNull
-	public Applicable<T, T> getGenerator() {
+	public Applicable<A, A> getGenerator() {
 		return generator;
 	}
 
@@ -91,7 +95,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 *         <code>true</code>
 	 */
 	@NonNull
-	public Evaluable<T> getStopCondition() {
+	public Evaluable<A> getStopCondition() {
 		return stopCondition;
 	}
 
@@ -117,10 +121,10 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 * @return a new sequencing iterator over the generated values
 	 */
 	@Override
-	public Iterator<T> iterator() {
-		return new Iterator<T>() {
+	public Iterator<A> iterator() {
+		return new Iterator<A>() {
 
-			private T next = getSeed();
+			private A next = getSeed();
 
 			@Override
 			public boolean hasNext() {
@@ -132,11 +136,11 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 			}
 
 			@Override
-			public T next() {
+			public A next() {
 				if (stop())
 					throw new NoSuchElementException();
 
-				T next = this.next;
+				A next = this.next;
 				this.next = getGenerator().apply(next);
 				return next;
 			}
@@ -165,7 +169,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 * 
 	 * will produce  a sequence that iterates through 1st of march, 8th of march, 15th of march and 22snd of march.
 	 *      
-	 * @param <T>
+	 * @param <A>
 	 * @param seed
 	 *          the initial element of the sequence
 	 * @param generator
@@ -177,9 +181,9 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 * @return a new Sequence
 	 */
 	@NonNull
-	public static <T> Sequence<T> from(T seed, @NonNull Applicable<T, T> generator,
-		@NonNull Evaluable<T> stopCondition) {
-		return new Sequence<T>(seed, generator, stopCondition);
+	public static <A> Sequence<A> from(A seed, @NonNull Applicable<A, A> generator,
+		@NonNull Evaluable<A> stopCondition) {
+		return new Sequence<A>(seed, generator, stopCondition);
 	}
 
 	/**
@@ -238,6 +242,10 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	@NonNull
 	public static Sequence<Integer> fromTo(int from, int to) {
 		return fromToBy(from, to, from < to ? 1 : -1);
+	}
+
+	public NumberType<A> numberType() {
+		return ((ImplicitNumberType<A>) generator).numberType();
 	}
 
 }

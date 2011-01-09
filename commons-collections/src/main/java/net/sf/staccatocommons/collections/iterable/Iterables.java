@@ -39,6 +39,7 @@ import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
@@ -450,6 +451,7 @@ public class Iterables {
 		return list;
 	}
 
+	@NonNull
 	public static <A> SortedSet<A> toSortedSet(@NonNull Iterable<A> iterable,
 		@NonNull Comparator<? super A> comparator) {
 		TreeSet<A> sortedSet = new TreeSet<A>(comparator);
@@ -457,6 +459,7 @@ public class Iterables {
 		return sortedSet;
 	}
 
+	@NonNull
 	public static <A> SortedSet<A> toSortedSet(@NonNull Iterable<A> iterable) {
 		TreeSet<A> sortedSet = new TreeSet<A>();
 		addAllInternal(sortedSet, iterable);
@@ -704,13 +707,75 @@ public class Iterables {
 		return zip(iterable1, iterable2, ToPair.<A, B> getInstance());
 	}
 
-	public static <A> A product(@NonNull Iterable<A> iterable, @NonNull NumberType<A> numeric) {
-		return fold(iterable, numeric.one(), numeric.multiply());
+	@NonNull
+	public static <A, I extends Iterable<A> & ImplicitNumberType<A>> A sum(@NonNull I iterable) {
+		return sum(iterable, iterable.numberType());
 	}
 
-	public static <A> A sum(@NonNull Iterable<A> iterable, @NonNull NumberType<A> numeric) {
-		return fold(iterable, numeric.zero(), numeric.add());
+	/**
+	 * Answers the sum of the numeric elements of the given {@link Iterable},
+	 * using the given {@link NumberType} to implement the addition. If the given
+	 * <code>iterable</code> is empty, it returns 0.
+	 * 
+	 * For example, the following code:
+	 * 
+	 * <pre>
+	 *  import static net.sf.staccatocommons.lang.number.NumberTypes.*;
+	 *  ... 	
+	 *  Iterables.sum(Arrays.asList(10, 60, 21), integer());
+	 * </pre>
+	 * 
+	 * will produce the result <code>(Integer) 91</code>
+	 * 
+	 * @param <A>
+	 * @param iterable
+	 * @param type
+	 * @return <code>fold(iterable, type.zero(), type.add())</code>
+	 */
+	@NonNull
+	public static <A> A sum(@NonNull Iterable<A> iterable, @NonNull NumberType<A> type) {
+		return fold(iterable, type.zero(), type.add());
 	}
 
-	// TODO product
+	@NonNull
+	public static <A, I extends Iterable<A> & ImplicitNumberType<A>> A product(@NonNull I iterable) {
+		return product(iterable, iterable.numberType());
+	}
+
+	/**
+	 * Answers the product of the numeric elements of the given {@link Iterable},
+	 * using the given {@link NumberType} to implement the multiplication. If the
+	 * given <code>iterable</code> is empty, it returns 1.
+	 * 
+	 * For example, the following code:
+	 * 
+	 * <pre>
+	 *  import static net.sf.staccatocommons.lang.number.NumberTypes.*;
+	 *  ... 	
+	 *  Iterables.product(Arrays.asList(2L, 4L, 8L, 3L), long_());
+	 * </pre>
+	 * 
+	 * will produce the result <code>(Long) 192L</code>
+	 * 
+	 * @param <A>
+	 * @param iterable
+	 * @param type
+	 * @return <code>fold(iterable, type.one(), type.multiply())</code>
+	 */
+	@NonNull
+	public static <A> A product(@NonNull Iterable<A> iterable, @NonNull NumberType<A> type) {
+		return fold(iterable, type.one(), type.multiply());
+	}
+
+	// TODO cross
+
+	// private static final <A, B> List<Pair<A, B>> cross(Iterable<A> iterable1,
+	// Iterable<B> iterable2,
+	// List<Pair<A, B>> result) {
+	// for (A a : iterable1)
+	// for (B b : iterable2) {
+	// result.add(_(a, b));
+	// }
+	// return result;
+	// }
 }

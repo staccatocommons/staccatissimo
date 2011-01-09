@@ -22,12 +22,9 @@ import net.sf.staccatocommons.lang.function.Function2;
  */
 public abstract class AbstractNumberType<A extends Number & Comparable> implements NumberType<A> {
 
-	private transient Function2<A, A, A> add = new Function2<A, A, A>() {
-		@Override
-		public A apply(A arg1, A arg2) {
-			return add(arg1, arg2);
-		}
-	};
+	private transient Function2<A, A, A> add = new Add();
+
+	private transient Function2<A, A, A> multiply = new Multiply();
 
 	public boolean isZero(A n) {
 		return compare(n, zero()) == 0;
@@ -64,16 +61,53 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 
 	@Override
 	public Function2<A, A, A> multiply() {
-		return new Function2<A, A, A>() {
-			@Override
-			public A apply(A arg1, A arg2) {
-				return multiply(arg1, arg2);
-			}
-		};
+		return multiply;
 	}
 
 	public Function<A, A> add(A n) {
 		return add().apply(n);
 	}
 
+	private final class Add extends NumberTypeFunction2 {
+		@Override
+		public A apply(A arg1, A arg2) {
+			return add(arg1, arg2);
+		}
+	}
+
+	private final class Multiply extends NumberTypeFunction2 {
+		@Override
+		public A apply(A arg1, A arg2) {
+			return multiply(arg1, arg2);
+		}
+	}
+
+	/**
+	 * NumberTypeFunctions, override {@link Function2#apply(Object)} so that the
+	 * resulting function is flipped and it implements {@link ImplicitNumberType}
+	 * too
+	 * 
+	 * @author flbulgarelli
+	 * 
+	 */
+	private abstract class NumberTypeFunction2 extends Function2<A, A, A> implements
+		ImplicitNumberType<A> {
+		public final NumberType<A> numberType() {
+			return AbstractNumberType.this;
+		}
+
+		public Function<A, A> apply(final A arg1) {
+			abstract class NumberTypeFunction extends Function<A, A> implements ImplicitNumberType<A> {
+				public NumberType<A> numberType() {
+					return NumberTypeFunction2.this.numberType();
+				}
+			}
+			return new NumberTypeFunction() {
+				public A apply(A arg) {
+					return NumberTypeFunction2.this.apply(arg, arg1);
+				}
+			};
+		}
+
+	}
 }

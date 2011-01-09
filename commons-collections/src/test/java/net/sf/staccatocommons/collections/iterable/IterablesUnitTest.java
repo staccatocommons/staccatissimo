@@ -2,7 +2,6 @@ package net.sf.staccatocommons.collections.iterable;
 
 import static java.util.Arrays.*;
 import static java.util.Collections.*;
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static net.sf.staccatocommons.lang.predicate.Predicates.*;
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 import static org.junit.Assert.*;
@@ -255,7 +254,7 @@ public class IterablesUnitTest {
 	 */
 	@Test
 	public void testSum() throws Exception {
-		assertEquals(55, (int) Iterables.sum(Sequence.fromToBy(1, 10, 1), integer()));
+		assertEquals(55, (int) Iterables.sum(Sequence.fromToBy(1, 10, 1)));
 	}
 
 	/**
@@ -263,6 +262,6 @@ public class IterablesUnitTest {
 	 */
 	@Test
 	public void testProduct() throws Exception {
-		assertEquals(3628800, (int) Iterables.product(Sequence.fromToBy(1, 10, 1), integer()));
+		assertEquals(3628800, (int) Iterables.product(Sequence.fromToBy(1, 10, 1)));
 	}
 }
