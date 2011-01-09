@@ -24,9 +24,9 @@ import java.util.Set;
 
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.internal.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.collections.iterable.Iterables;
-import net.sf.staccatocommons.collections.iterable.internal.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ConcatStream;
@@ -168,7 +168,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public Stream<A> concat(final Stream<A> other) {
+	public Stream<A> concat(final Iterable<A> other) {
 		return new ConcatStream<A>(this, other);
 	}
 

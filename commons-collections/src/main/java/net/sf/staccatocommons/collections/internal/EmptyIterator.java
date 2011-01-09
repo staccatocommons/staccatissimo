@@ -10,10 +10,11 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.iterable.internal;
+package net.sf.staccatocommons.collections.internal;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 
 /**
  * A singleton iterator that retrieves no elements. Calling {@link #hasNext()}

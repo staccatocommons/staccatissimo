@@ -18,8 +18,7 @@ package net.sf.staccatocommons.collections.stream;
  */
 public interface Appendabable<A> {
 	@Projection
-	Stream<A> concat(Stream<A> other);
-
+	Stream<A> concat(Iterable<A> other);
 	/*
 	 * Stream<A> append(Stream<A> other);
 	 */

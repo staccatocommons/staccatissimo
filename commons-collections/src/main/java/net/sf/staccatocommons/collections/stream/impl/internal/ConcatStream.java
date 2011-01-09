@@ -3,7 +3,7 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.iterable.internal.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.collections.internal.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 
@@ -13,12 +13,12 @@ import net.sf.staccatocommons.collections.stream.Stream;
  */
 public final class ConcatStream<A> extends AbstractStream<A> {
 	private final Stream<A> stream;
-	private final Stream<A> other;
+	private final Iterable<A> other;
 
 	/**
 	 * Creates a new {@link ConcatStream}
 	 */
-	public ConcatStream(@NonNull Stream<A> stream, @NonNull Stream<A> other) {
+	public ConcatStream(@NonNull Stream<A> stream, @NonNull Iterable<A> other) {
 		this.stream = stream;
 		this.other = other;
 	}

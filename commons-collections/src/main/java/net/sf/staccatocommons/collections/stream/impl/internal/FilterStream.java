@@ -1,10 +1,9 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.iterable.internal.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.collections.internal.NextGetIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Evaluable;
@@ -27,27 +26,12 @@ public final class FilterStream<A> extends AbstractStream<A> {
 
 	public Iterator<A> iterator() {
 		final Iterator<A> iter = stream.iterator();
-		return new AbstractUnmodifiableIterator<A>() {
-			private A next;
-			private Boolean hasNext = null;
-
-			public boolean hasNext() {
-				if (hasNext != null)
-					return hasNext;
-				hasNext = false;
+		return new NextGetIterator<A>() {
+			protected Boolean updateNext() {
 				while (iter.hasNext())
-					if (predicate.eval((next = iter.next()))) {
-						hasNext = true;
-						break;
-					}
-				return hasNext;
-			}
-
-			public A next() {
-				if (!hasNext())
-					throw new NoSuchElementException();
-				hasNext = null;
-				return next;
+					if (predicate.eval(setNext(iter.next())))
+						return true;
+				return false;
 			}
 		};
 	}

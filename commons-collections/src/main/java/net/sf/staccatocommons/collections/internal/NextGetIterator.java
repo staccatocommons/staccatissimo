@@ -13,33 +13,41 @@
 
 package net.sf.staccatocommons.collections.internal;
 
-import static net.sf.staccatocommons.lang.tuple.Tuple.*;
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.lang.function.Function2;
-import net.sf.staccatocommons.lang.tuple.Pair;
+import java.util.NoSuchElementException;
 
 /**
+ * 
  * @author flbulgarelli
  * 
  * @param <A>
- * @param <B>
  */
-public final class ToPair<A, B> extends Function2<A, B, Pair<A, B>> {
+public abstract class NextGetIterator<A> extends AbstractUnmodifiableIterator<A> {
 
-	private static final Function2 INSTANCE = new ToPair();
+	private A next;
+	private Boolean hasNext;
 
-	@Override
-	public Pair<A, B> apply(A arg1, B arg2) {
-		return _(arg1, arg2);
+	public boolean hasNext() {
+		if (hasNext == null)
+			hasNext = updateNext();
+		return hasNext;
+	}
+
+	public A next() {
+		if (!hasNext())
+			throw new NoSuchElementException();
+		hasNext = null;
+		return next;
 	}
 
 	/**
-	 * Answers a singleton {@link ToPair}
-	 * 
-	 * @return the instance
+	 * @param next
+	 *          the next element to retrieve
+	 * @return
 	 */
-	@NonNull
-	public static <A, B> Function2<A, B, Pair<A, B>> getInstance() {
-		return INSTANCE;
+	public A setNext(A next) {
+		this.next = next;
+		return next;
 	}
+
+	protected abstract Boolean updateNext();
 }
