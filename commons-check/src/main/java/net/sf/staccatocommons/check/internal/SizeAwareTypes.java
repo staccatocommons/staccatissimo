@@ -12,31 +12,45 @@
  */
 package net.sf.staccatocommons.check.internal;
 
-import java.lang.reflect.Array;
 import java.util.Collection;
-import java.util.Map;
 
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.type.SizeAwareType;
 
 /**
+ * 
+ * {@link SizeAwareType}s for internal usage
+ * 
  * @author flbulgarelli
  * 
  */
 public class SizeAwareTypes {
 
+	private SizeAwareTypes() {
+	}
+
+	/**
+	 * {@link SizeAwareType} for {@link SizeAware}s
+	 */
 	public static final SizeAwareType<SizeAware> SIZE_AWARE = new AbstractSizeAwareType<SizeAware>() {
 		public int size(SizeAware sizeAware) {
 			return sizeAware.size();
 		}
 	};
+
+	/**
+	 * {@link SizeAwareType} for {@link CharSequence}s
+	 */
 	public static final SizeAwareType<CharSequence> CHAR_SEQUENCE = new AbstractSizeAwareType<CharSequence>() {
 		public int size(CharSequence sizeAware) {
 			return sizeAware.length();
 		}
 	};
 
-	public static final SizeAwareType<Collection<?>> COLLECTION = new AbstractSizeAwareType<Collection<?>>() {
+	/**
+	 * {@link SizeAwareType} for {@link Collection}s
+	 */
+	public static final SizeAwareType<Collection<?>> COLLECTION = new SizeAwareType<Collection<?>>() {
 		public int size(Collection<?> sizeAware) {
 			return sizeAware.size();
 		}
@@ -45,27 +59,5 @@ public class SizeAwareTypes {
 			return emptyAware.isEmpty();
 		}
 	};
-
-	public static final SizeAwareType<Object> ARRAY = new AbstractSizeAwareType<Object>() {
-		public int size(Object sizeAware) {
-			return Array.getLength(sizeAware);
-		}
-	};
-
-	public static final SizeAwareType<Map<?, ?>> MAP = new AbstractSizeAwareType<Map<?, ?>>() {
-		public int size(Map<?, ?> sizeAware) {
-			return sizeAware.size();
-		}
-
-		public boolean isEmpty(Map<?, ?> emptyAware) {
-			return emptyAware.isEmpty();
-		}
-	};
-
-	private static abstract class AbstractSizeAwareType<A> implements SizeAwareType<A> {
-		public boolean isEmpty(A emptyAware) {
-			return size(emptyAware) == 0;
-		}
-	}
 
 }

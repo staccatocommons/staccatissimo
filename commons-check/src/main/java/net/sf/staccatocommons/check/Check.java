@@ -299,6 +299,22 @@ public abstract class Check<ExceptionType extends Throwable> {
 		return isEmpty(varName, var, EmptyAwareTypes.EMPTY_AWARE);
 	}
 
+	/**
+	 * Checks that the variable is not null and empty
+	 * 
+	 * @param <A>
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param type
+	 *          the {@link EmptyAwareType} used to determine if <code>var</code>
+	 *          is not empty
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 * @see #that(boolean, String, Object...)
+	 */
 	public final <A> Check<ExceptionType> isEmpty(String varName, A var, EmptyAwareType<A> type)
 		throws ExceptionType {
 		return isNotNull(varName, var).that(varName, var, type.isEmpty(var), "must be empty");
@@ -328,12 +344,13 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks that the {@link Collection} variable's size is the given one
+	 * Checks that <code>var</code> is not null and its size is the given
+	 * <code>expectedSize</code>
 	 * 
 	 * @param varName
 	 *          the name of the collection variable to be checked
 	 * @param var
-	 *          the variable to be checked
+	 *          the {@link Collection} variable to be checked
 	 * @param size
 	 *          the size the variable must have
 	 * @return this, in order to allow method chaining
@@ -346,12 +363,13 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks that the {@link CharSequence} variable's size is the given one
+	 * Checks that <code>var</code> is not null and its size is the given
+	 * <code>expectedSize</code>
 	 * 
 	 * @param varName
 	 *          the name of the char sequence variable to be checked
 	 * @param var
-	 *          the variable to be checked
+	 *          the {@link CharSequence} variable to be checked
 	 * @param size
 	 *          the size the variable must have
 	 * @return this, in order to allow method chaining
@@ -364,12 +382,13 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks that the {@link SizeAware} variable's size is the given one
+	 * Checks that <code>var</code> is not null and its size is the given
+	 * <code>expectedSize</code>
 	 * 
 	 * @param varName
 	 *          the name of the size-aware variable to be checked
 	 * @param var
-	 *          the size-aware variable to be checked
+	 *          the {@link SizeAware} variable to be checked
 	 * @param size
 	 *          the size the variable must have
 	 * @return this, in order to allow method chaining
@@ -379,6 +398,32 @@ public abstract class Check<ExceptionType extends Throwable> {
 	public final Check<ExceptionType> isSize(String varName, SizeAware var, int size)
 		throws ExceptionType {
 		return isSize(varName, var, size, SizeAwareTypes.SIZE_AWARE);
+	}
+
+	/**
+	 * Checks that <code>var</code> is not null and its ize is the given
+	 * <code>expectedSize</code>
+	 * 
+	 * @param <A>
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param expectedSize
+	 * @param type
+	 *          the {@link SizeAwareType} used to determine if <code>var</code>
+	 *          has the given <code>expectedSize</code>
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 * @see #that(boolean, String, Object...)
+	 */
+	public final <A> Check<ExceptionType> isSize(String varName, A var, int expectedSize,
+		SizeAwareType<A> type) throws ExceptionType {
+		return that(varName, var, type.size(var) == expectedSize, //
+			"must be of size %s, but was %s",
+			expectedSize,
+			type.size(var));
 	}
 
 	/**
@@ -527,6 +572,22 @@ public abstract class Check<ExceptionType extends Throwable> {
 		return isNotEmpty(varName, var, SizeAwareTypes.CHAR_SEQUENCE);
 	}
 
+	/**
+	 * Checks that the variable is not null and not empty
+	 * 
+	 * @param <A>
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param type
+	 *          the {@link EmptyAwareType} used to determine if <code>var</code>
+	 *          is empty
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 * @see #that(boolean, String, Object...)
+	 */
 	public final <A> Check<ExceptionType> isNotEmpty(String varName, A var, EmptyAwareType<A> type)
 		throws ExceptionType {
 		return isNotNull(varName, var).that(varName, var, !type.isEmpty(var), "must not be empty");
@@ -626,14 +687,6 @@ public abstract class Check<ExceptionType extends Throwable> {
 	private Check<ExceptionType> isPositive(String varName, Object var, boolean positive)
 		throws ExceptionType {
 		return that(varName, var, positive, "must be positive");
-	}
-
-	public final <A> Check<ExceptionType> isSize(String varName, A var, int expectedSize,
-		SizeAwareType<A> type) throws ExceptionType {
-		return that(varName, var, type.size(var) == expectedSize, //
-			"must be of size %s, but was %s",
-			expectedSize,
-			type.size(var));
 	}
 
 	/**

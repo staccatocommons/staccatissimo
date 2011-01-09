@@ -39,6 +39,15 @@ public final class Assert {
 	}
 
 	/**
+	 * Shortcut to <code>Assert.that().fail(message,args)</code>
+	 * 
+	 * @see Check#fail(String, Object, String, Object...)
+	 */
+	public static void fail(String message, Object... args) {
+		that().fail(message, args);
+	}
+
+	/**
 	 * Shortcut to
 	 * <code>Assert.that().is(varName,var,condition,message,args)</code>
 	 * 

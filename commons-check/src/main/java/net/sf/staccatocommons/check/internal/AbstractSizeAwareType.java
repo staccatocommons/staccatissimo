@@ -12,24 +12,19 @@
  */
 package net.sf.staccatocommons.check.internal;
 
-import net.sf.staccatocommons.defs.EmptyAware;
-import net.sf.staccatocommons.defs.type.EmptyAwareType;
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.type.SizeAwareType;
 
 /**
- * {@link EmptyAwareType}s for internal usage
+ * An abstract implementation of {@link SizeAwareType} that implements
+ * {@link #isEmpty(Object)} so that it is consistent with {@link #size(Object)}
  * 
  * @author flbulgarelli
+ * 
+ * @param <A>
  */
-public class EmptyAwareTypes {
-
-	/**
-	 * An {@link EmptyAwareType} for {@link EmptyAware}s. It implements
-	 * {@link EmptyAwareType#isEmpty(Object)} sending {@link EmptyAware#isEmpty()}
-	 * to its argument.
-	 */
-	public static final EmptyAwareType<EmptyAware> EMPTY_AWARE = new EmptyAwareType<EmptyAware>() {
-		public boolean isEmpty(EmptyAware emptyAware) {
-			return emptyAware.isEmpty();
-		}
-	};
+public abstract class AbstractSizeAwareType<A> implements SizeAwareType<A> {
+	public final boolean isEmpty(@NonNull A emptyAware) {
+		return size(emptyAware) == 0;
+	}
 }
