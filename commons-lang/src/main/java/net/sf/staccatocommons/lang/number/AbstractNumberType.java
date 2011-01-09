@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.lang.number;
 
-import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.function.Function2;
 
 /**
@@ -21,6 +21,13 @@ import net.sf.staccatocommons.lang.function.Function2;
  * 
  */
 public abstract class AbstractNumberType<A extends Number & Comparable> implements NumberType<A> {
+
+	private transient Function2<A, A, A> add = new Function2<A, A, A>() {
+		@Override
+		public A apply(A arg1, A arg2) {
+			return add(arg1, arg2);
+		}
+	};
 
 	public boolean isZero(A n) {
 		return compare(n, zero()) == 0;
@@ -52,12 +59,7 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 
 	@Override
 	public Function2<A, A, A> add() {
-		return new Function2<A, A, A>() {
-			@Override
-			public A apply(A arg1, A arg2) {
-				return add(arg1, arg2);
-			}
-		};
+		return add;
 	}
 
 	@Override
@@ -70,8 +72,7 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 		};
 	}
 
-	// TODO performance is poor if add() is not singleton
-	public Applicable<A, A> add(A n) {
+	public Function<A, A> add(A n) {
 		return add().apply(n);
 	}
 

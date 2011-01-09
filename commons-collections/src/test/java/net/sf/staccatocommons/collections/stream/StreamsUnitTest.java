@@ -13,10 +13,10 @@
 package net.sf.staccatocommons.collections.stream;
 
 import static junit.framework.Assert.*;
+import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static net.sf.staccatocommons.lang.sequence.StopConditions.*;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.lang.number.NumberTypes;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class StreamsUnitTest {
 	@Test
 	public void testFromSeq() {
 		assertEquals(
-			Streams.from(10, NumberTypes.INTEGER.add(20), upTo(50)).toList(),
+			Streams.from(10, add(20), upTo(50)).toList(),
 			Streams.from(Sequence.fromToBy(10, 50, 20)).toList());
 	}
 

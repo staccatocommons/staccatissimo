@@ -12,6 +12,9 @@
  */
 package net.sf.staccatocommons.lang.sequence;
 
+import static net.sf.staccatocommons.lang.number.NumberTypes.*;
+import static net.sf.staccatocommons.lang.number.Numbers.*;
+import static net.sf.staccatocommons.lang.sequence.StopConditions.*;
 import static org.junit.Assert.*;
 
 import java.math.BigInteger;
@@ -21,7 +24,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.sf.staccatocommons.lang.Range;
-import net.sf.staccatocommons.lang.number.NumberTypes;
 
 import org.junit.Test;
 
@@ -92,9 +94,8 @@ public class SequenceUnitTest {
 	/** Test method for {@link Range#by(net.sf.staccatocommons.defs.Applicable)} */
 	@Test
 	public void testRangeBy() throws Exception {
-		assertEquals(
-			Arrays.asList(0, 1, 2, 3, 4, 5),
-			asList(Range.from(0, 5).by(NumberTypes.INTEGER.add(1))));
+		assertEquals(Arrays.asList(0, 1, 2, 3, 4, 5), asList(Range.from(0, 5).by(add(1))));
+
 	}
 
 	/**
@@ -105,11 +106,7 @@ public class SequenceUnitTest {
 	 */
 	@Test
 	public void testFrom() throws Exception {
-		Sequence<BigInteger> seq = Sequence //
-			.from(
-				BigInteger.ONE,
-				NumberTypes.BIG_INTEGER.add(BigInteger.ONE),
-				StopConditions.upTo(BigInteger.TEN));
+		Sequence<BigInteger> seq = Sequence.from(i(1), add(i(1)), upTo(i(10)));
 		assertEquals(10, asList(seq).size());
 	}
 

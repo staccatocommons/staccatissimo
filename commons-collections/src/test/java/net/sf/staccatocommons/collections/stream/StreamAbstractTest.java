@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.junit.Assume.*;
@@ -136,7 +137,7 @@ public abstract class StreamAbstractTest {
 			}
 		};
 		assertEquals(2 * stream.size(), stream.flatMap(function2).size());
-		assertEquals(0, (int) stream.flatMap(function2).fold(0, integerSum()));
+		assertEquals(0, (int) stream.flatMap(function2).fold(0, integer().add()));
 	}
 
 	/**
@@ -168,7 +169,7 @@ public abstract class StreamAbstractTest {
 	@Theory
 	public void testReduce_Fail(Stream<Integer> stream) {
 		assumeTrue(stream.isEmpty());
-		stream.reduce(integerSum());
+		stream.reduce(integer().add());
 	}
 
 	/**
@@ -179,7 +180,7 @@ public abstract class StreamAbstractTest {
 	@Theory
 	public void testReduce(Stream<Integer> stream) {
 		assumeTrue(!stream.isEmpty());
-		assertEquals(stream.reduce(integerSum()), stream.fold(0, integerSum()));
+		assertEquals(stream.reduce(integer().add()), stream.fold(0, integer().add()));
 	}
 
 	/**
@@ -439,15 +440,6 @@ public abstract class StreamAbstractTest {
 				return stream.contains(argument);
 			}
 		}));
-	}
-
-	public static Function2<Integer, Integer, Integer> integerSum() {
-		return new Function2<Integer, Integer, Integer>() {
-			@Override
-			public Integer apply(Integer arg1, Integer arg2) {
-				return arg1 + arg2;
-			}
-		};
 	}
 
 	/** Test method for {@link AbstractStream#zip(Iterable)} */

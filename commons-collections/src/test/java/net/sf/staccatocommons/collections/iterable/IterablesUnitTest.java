@@ -2,6 +2,7 @@ package net.sf.staccatocommons.collections.iterable;
 
 import static java.util.Arrays.*;
 import static java.util.Collections.*;
+import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static net.sf.staccatocommons.lang.predicate.Predicates.*;
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 import static org.junit.Assert.*;
@@ -237,11 +238,31 @@ public class IterablesUnitTest {
 		assertEquals(Arrays.asList(11, 12, 13, 14), Iterables.take(Sequence.fromBy(11, 1), 4));
 	}
 
+	/**
+	 * Test for {@link Iterables#zip(Iterable, Iterable)}
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testZip() throws Exception {
 		assertEquals(
 			Arrays.asList(_(10, 8), _(12, 7), _(14, 6)),
 			Iterables.zip(Arrays.asList(10, 12, 14, 23), Arrays.asList(8, 7, 6)));
+	}
 
+	/**
+	 * Test for sum
+	 */
+	@Test
+	public void testSum() throws Exception {
+		assertEquals(55, (int) Iterables.sum(Sequence.fromToBy(1, 10, 1), integer()));
+	}
+
+	/**
+	 * Test for product
+	 */
+	@Test
+	public void testProduct() throws Exception {
+		assertEquals(3628800, (int) Iterables.product(Sequence.fromToBy(1, 10, 1), integer()));
 	}
 }

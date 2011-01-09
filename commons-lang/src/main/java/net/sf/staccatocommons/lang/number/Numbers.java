@@ -21,15 +21,15 @@ import java.math.BigInteger;
  */
 public class Numbers {
 
-	public static BigDecimal bd(long val) {
+	public static BigDecimal d(long val) {
 		return BigDecimal.valueOf(val);
 	}
 
-	public static BigDecimal bd(long val, int scale) {
+	public static BigDecimal d(long val, int scale) {
 		return BigDecimal.valueOf(val, scale);
 	}
 
-	public static BigInteger bi(long val) {
+	public static BigInteger i(long val) {
 		return BigInteger.valueOf(val);
 	}
 
