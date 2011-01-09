@@ -24,6 +24,7 @@ import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.type.EmptyAwareType;
+import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.defs.type.SizeAwareType;
 
 /**
@@ -497,6 +498,11 @@ public abstract class Check<ExceptionType extends Throwable> {
 		return isNotNegative(varName, var, var >= 0);
 	}
 
+	public final <A> Check<ExceptionType> isNotNegative(String varName, A var, NumberType<A> type)
+		throws ExceptionType {
+		return isNotNegative(varName, var, !type.isNegative(var));
+	}
+
 	/**
 	 * Checks the variable is &gt;= 0
 	 * 
@@ -576,9 +582,9 @@ public abstract class Check<ExceptionType extends Throwable> {
 			.isNotNegative(varName, var, var.compareTo(BigInteger.ZERO) >= 0);
 	}
 
-	private Check<ExceptionType> isNotNegative(String varName, Object number, boolean negative)
+	private Check<ExceptionType> isNotNegative(String varName, Object number, boolean notNegative)
 		throws ExceptionType {
-		return that(varName, number, negative, "must be not negative");
+		return that(varName, number, notNegative, "must be not negative");
 	}
 
 	/**
@@ -738,6 +744,11 @@ public abstract class Check<ExceptionType extends Throwable> {
 	public final Check<ExceptionType> isPositive(String varName, BigInteger var) throws ExceptionType {
 		return isNotNull(varName, var)//
 			.isPositive(varName, var, var.compareTo(BigInteger.ZERO) > 0);
+	}
+
+	public final <A> Check<ExceptionType> isPositive(String varName, A var, NumberType<A> type)
+		throws ExceptionType {
+		return isNotNull(varName, var).isPositive(varName, var, type.isPositive(var));
 	}
 
 	private Check<ExceptionType> isPositive(String varName, Object var, boolean positive)

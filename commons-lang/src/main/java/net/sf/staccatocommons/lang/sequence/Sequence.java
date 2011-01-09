@@ -23,7 +23,7 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.Unmodifiable;
 import net.sf.staccatocommons.lang.internal.ToString;
-import net.sf.staccatocommons.lang.sequence.internal.IntegerIncrement;
+import net.sf.staccatocommons.lang.number.NumberTypes;
 
 /**
  * A {@link Sequence} is an {@link Iterable} object whose {@link Iterator},
@@ -194,7 +194,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	 */
 	@NonNull
 	public static Sequence<Integer> fromBy(int from, int step) {
-		return new Sequence(from, new IntegerIncrement(step), StopConditions.stopNever());
+		return new Sequence(from, NumberTypes.INTEGER.add(step), StopConditions.stopNever());
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class Sequence<T> implements Iterable<T>, Serializable {
 	@NonNull
 	public static Sequence<Integer> fromToBy(int from, int to, int step) {
 		Ensure.that("step", step, step != 0, "must be non zero");
-		return new Sequence(from, new IntegerIncrement(step), step < 0 ? StopConditions.downTo(to)
+		return new Sequence(from, NumberTypes.INTEGER.add(step), step < 0 ? StopConditions.downTo(to)
 			: StopConditions.upTo(to));
 	}
 

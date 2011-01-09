@@ -37,6 +37,7 @@ import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.tuple.Pair;
@@ -701,6 +702,14 @@ public class Iterables {
 	public static <A, B> List<Pair<A, B>> zip(@NonNull Iterable<A> iterable1,
 		@NonNull Iterable<B> iterable2) {
 		return zip(iterable1, iterable2, ToPair.<A, B> getInstance());
+	}
+
+	public static <A> A product(@NonNull Iterable<A> iterable, @NonNull NumberType<A> numeric) {
+		return fold(iterable, numeric.one(), numeric.multiply());
+	}
+
+	public static <A> A sum(@NonNull Iterable<A> iterable, @NonNull NumberType<A> numeric) {
+		return fold(iterable, numeric.zero(), numeric.add());
 	}
 
 	// TODO product

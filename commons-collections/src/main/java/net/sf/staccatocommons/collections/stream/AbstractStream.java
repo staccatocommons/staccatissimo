@@ -39,6 +39,7 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
@@ -256,11 +257,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return Iterables.partition(this, predicate);
 	}
 
+	@Override
 	public Pair<Stream<A>, Stream<A>> streamPartition(Evaluable<? super A> predicate) {
 		Pair<List<A>, List<A>> partition = partition(predicate);
 		return _(Streams.from(partition._1()), Streams.from(partition._2()));
 	}
 
+	@Override
 	public <B> Stream<B> then(final Applicable<Stream<A>, ? extends Iterable<B>> function) {
 		class ThenStream extends AbstractStream<B> {
 			public Iterator<B> iterator() {
@@ -270,6 +273,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new ThenStream();
 	}
 
+	@Override
 	public <B> Stream<Pair<A, B>> zip(Iterable<B> iterable) {
 		return zip(iterable, ToPair.<A, B> getInstance());
 	}
@@ -293,6 +297,16 @@ public abstract class AbstractStream<A> implements Stream<A> {
 			}
 		}
 		return new ZipStream();
+	}
+
+	@Override
+	public A sum(NumberType<A> numberType) {
+		return Iterables.sum(this, numberType);
+	}
+
+	@Override
+	public A product(NumberType<A> numberType) {
+		return Iterables.product(this, numberType);
 	}
 
 	@Override

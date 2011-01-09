@@ -1,13 +1,10 @@
 package net.sf.staccatocommons.collections.iterable;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-import static net.sf.staccatocommons.lang.predicate.Predicates.greaterThan;
-import static net.sf.staccatocommons.lang.tuple.Tuple._;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static net.sf.staccatocommons.lang.predicate.Predicates.*;
+import static net.sf.staccatocommons.lang.tuple.Tuple.*;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -18,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.predicate.Predicate;
@@ -47,10 +45,12 @@ public class IterablesUnitTest {
 		stringsList = Arrays.asList("Hello", "World", "everybody");
 	}
 
+	/**
+	 * Test for {@link Iterables#all(Iterable, Evaluable)}
+	 */
 	@Test
 	@SuppressWarnings("unchecked")
-	public void testAllSatisfy() {
-
+	public void testAll() {
 		assertTrue(Iterables.all(Arrays.asList(1, 2, 3, 4, 5, 9), greaterThan(0)));
 		assertFalse(Iterables.all(Arrays.asList(1, -9, 3, 4, 5, 9), greaterThan(0)));
 		assertTrue(Iterables.all((List) emptyList(), greaterThan(0)));
@@ -58,8 +58,7 @@ public class IterablesUnitTest {
 	}
 
 	/**
-	 * Test for
-	 * {@link Iterables#filter(Iterable, net.sf.staccatocommons.lang.Evaluable)}
+	 * Test for {@link Iterables#filter(Iterable, Evaluable)}
 	 * 
 	 * @throws Exception
 	 */
@@ -75,8 +74,7 @@ public class IterablesUnitTest {
 	}
 
 	/**
-	 * Test for
-	 * {@link Iterables#map(Collection, net.sf.staccatocommons.lang.Applicable)}
+	 * Test for {@link Iterables#map(Collection, Applicable)}
 	 * 
 	 * @throws Exception
 	 */
@@ -213,8 +211,7 @@ public class IterablesUnitTest {
 	}
 
 	/**
-	 * Test method for
-	 * {@link Iterables#partition(Iterable, net.sf.staccatocommons.lang.Evaluable)}
+	 * Test method for {@link Iterables#partition(Iterable, Evaluable)}
 	 */
 	@Test
 	public void testPartition() throws Exception {

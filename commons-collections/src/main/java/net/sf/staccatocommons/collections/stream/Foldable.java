@@ -14,6 +14,7 @@ package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.type.NumberType;
 
 /**
  * {@link Stream} interface for folding -aka injecting - elements - producing a
@@ -64,4 +65,8 @@ public interface Foldable<A> {
 	 */
 	@NonNull
 	String joinStrings(@NonNull String separator);
+
+	A sum(@NonNull NumberType<A> numberType);
+
+	A product(@NonNull NumberType<A> numberType);
 }

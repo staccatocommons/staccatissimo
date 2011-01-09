@@ -12,9 +12,7 @@
  */
 package net.sf.staccatocommons.lang.sequence;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -23,8 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.sf.staccatocommons.lang.Range;
-import net.sf.staccatocommons.lang.sequence.internal.BigIntegerIncrement;
-import net.sf.staccatocommons.lang.sequence.internal.IntegerIncrement;
+import net.sf.staccatocommons.lang.number.NumberTypes;
 
 import org.junit.Test;
 
@@ -97,7 +94,7 @@ public class SequenceUnitTest {
 	public void testRangeBy() throws Exception {
 		assertEquals(
 			Arrays.asList(0, 1, 2, 3, 4, 5),
-			asList(Range.from(0, 5).by(new IntegerIncrement(1))));
+			asList(Range.from(0, 5).by(NumberTypes.INTEGER.add(1))));
 	}
 
 	/**
@@ -111,7 +108,7 @@ public class SequenceUnitTest {
 		Sequence<BigInteger> seq = Sequence //
 			.from(
 				BigInteger.ONE,
-				new BigIntegerIncrement(BigInteger.ONE),
+				NumberTypes.BIG_INTEGER.add(BigInteger.ONE),
 				StopConditions.upTo(BigInteger.TEN));
 		assertEquals(10, asList(seq).size());
 	}
