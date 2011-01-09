@@ -297,6 +297,23 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * 
 	 * @see #that(boolean, String, Object...)
 	 */
+	public final Check<ExceptionType> isEmpty(String varName, Iterable<?> var) throws ExceptionType {
+		return isEmpty(varName, var, EmptyAwareTypes.ITERABLE);
+	}
+
+	/**
+	 * Checks that the variable is not null and empty
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 * 
+	 * @see #that(boolean, String, Object...)
+	 */
 	public final Check<ExceptionType> isEmpty(String varName, CharSequence var) throws ExceptionType {
 		return isEmpty(varName, var, SizeAwareTypes.CHAR_SEQUENCE);
 	}
@@ -739,6 +756,22 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, Map<?, ?> var) throws ExceptionType {
 		return isNotEmpty(varName, var, SizeAwareTypes.MAP);
+	}
+
+	/**
+	 * Checks that the {@link Iterable} variable is not null and not empty
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isNotEmpty(String varName, Iterable<?> var)
+		throws ExceptionType {
+		return isNotEmpty(varName, var, EmptyAwareTypes.ITERABLE);
 	}
 
 	/**

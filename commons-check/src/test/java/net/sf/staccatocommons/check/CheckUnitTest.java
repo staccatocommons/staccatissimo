@@ -5,6 +5,7 @@ import static junit.framework.Assert.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -86,45 +87,44 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
 		c.isNotNegative(VAR_NAME, BigInteger.valueOf(-9));
 	}
 
+	/**
+	 * Test for {@link Check#isNotNegative(String, BigDecimal)} and similar
+	 * methods
+	 */
 	@Test
-	public void testisNotNegativeLong_Zero() {
+	public void testisNotNegative_Zero() {
 		c.isNotNegative(VAR_NAME, 0L);
-	}
-
-	@Test
-	public void testisNotNegativeInt_Zero() {
 		c.isNotNegative(VAR_NAME, 0);
-	}
-
-	@Test
-	public void testisNotNegativeDouble_Zero() {
 		c.isNotNegative(VAR_NAME, 0.0);
-	}
-
-	@Test
-	public void testisNotNegativeFloat_Zero() {
 		c.isNotNegative(VAR_NAME, 0.0f);
-	}
-
-	@Test
-	public void testisNotNegativeBigDecimal_Zero() {
 		c.isNotNegative(VAR_NAME, BigDecimal.ZERO);
+		c.isNotNegative(VAR_NAME, BigInteger.ZERO);
 	}
 
+	/**
+	 * test for {@link Check#isNotNegative(String, BigDecimal)} and similar
+	 */
 	@Test
-	public void testisNotNegativeBigInteger_Zero() {
-		c.isNotNegative(VAR_NAME, BigInteger.ZERO);
+	public void testNonNegative_Positive() {
+		c
+			.isNotNegative(VAR_NAME, 9)
+			.isNotNegative(VAR_NAME, 9L)
+			.isNotNegative(VAR_NAME, 9f)
+			.isNotNegative(VAR_NAME, 9.0)
+			.isNotNegative(VAR_NAME, BigDecimal.valueOf(69.62))
+			.isNotNegative(VAR_NAME, BigInteger.valueOf(1200));
 	}
 
 	/**
 	 * Test method for {@link Check#isNotEmpty(String, Iterable)}
 	 */
 	@Test
-	public void testisNotEmpty() {
+	public void testNotEmpty() {
 		c
 			.isNotEmpty(VAR_NAME, Arrays.asList("foo", "bar"))
 			.isNotEmpty(VAR_NAME, Collections.singleton(6))
 			.isNotEmpty(VAR_NAME, "hola")
+			.isNotEmpty(VAR_NAME, (Iterable<?>) Collections.singletonList("sayounara"))
 			.isNotEmpty(VAR_NAME, Collections.singletonMap(10, 50))
 			.isNotEmpty(VAR_NAME, new EmptyAware() {
 				public boolean isEmpty() {
@@ -133,11 +133,17 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
 			});
 	}
 
+	/**
+	 * Test for {@link Check#isNotEmpty(String, CharSequence)}
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testisNotEmptyCharSequence_Fail() {
 		c.isNotEmpty(VAR_NAME, "");
 	}
 
+	/**
+	 * Test for {@link Check#isNotEmpty(String, Collection)}
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testNotEmptyCollection_Fail() {
 		c.isNotEmpty(VAR_NAME, Collections.emptyList());
@@ -284,6 +290,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
 			.isEmpty(VAR_NAME, Collections.emptyList())
 			.isEmpty(VAR_NAME, Collections.<String> emptyList())
 			.isEmpty(VAR_NAME, Collections.emptyMap())
+			.isEmpty(VAR_NAME, (Iterable<?>) Collections.emptyList())
 			.isEmpty(VAR_NAME, "")
 			.isEmpty(VAR_NAME, new EmptyAware() {
 				public boolean isEmpty() {
@@ -292,6 +299,9 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
 			});
 	}
 
+	/**
+	 * Test for {@link Check#isInstanceOf(String, Object, Class)}
+	 */
 	@Test
 	public void testIsInstanceOf() {
 		c.isInstanceOf(VAR_NAME, 5, Number.class);
@@ -302,32 +312,26 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
 		c.isTrue(VAR_NAME, true);
 	}
 
+	/**
+	 * Test for {@link Check#matches(String, String, Pattern)} and similar
+	 */
 	@Test
-	public void testMatchesStringStringPattern() {
+	public void testMatches() {
 		c.matches(VAR_NAME, "Hello", ".*ell.");
-	}
-
-	@Test
-	public void testMatchesStringStringString() {
 		c.matches(VAR_NAME, "Hello", Pattern.compile(".*ell."));
 	}
 
-	@Test
-	public void testNonNegative() {
-		c
-			.isNotNegative(VAR_NAME, 9)
-			.isNotNegative(VAR_NAME, 9L)
-			.isNotNegative(VAR_NAME, 9f)
-			.isNotNegative(VAR_NAME, 9.0)
-			.isNotNegative(VAR_NAME, BigDecimal.valueOf(69.62))
-			.isNotNegative(VAR_NAME, BigInteger.valueOf(1200));
-	}
-
+	/**
+	 * test for {@link Check#isNotNull(String, Object)}
+	 */
 	@Test
 	public void testNotNull() {
 		c.isNotNull(VAR_NAME, new Object());
 	}
 
+	/**
+	 * test for {@link Check#isNotNull(String, Object)}
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testNotNull_Fail() {
 		c.isNotNull(VAR_NAME, null);
@@ -349,6 +353,9 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
 		c.isNull(VAR_NAME, null);
 	}
 
+	/**
+	 * Test for {@link Check#fail(String, Object, String, Object...)}
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testFail() {
 		c.fail(VAR_NAME, "Foo", "Should be palindromic");
