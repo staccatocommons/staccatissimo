@@ -15,6 +15,8 @@ package net.sf.staccatocommons.check.instrument;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
+import net.sf.staccatocommons.check.annotation.ForceChecks;
+import net.sf.staccatocommons.check.annotation.IgnoreChecks;
 import net.sf.staccatocommons.check.instrument.mock.Mock;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
 import net.sf.staccatocommons.io.Directory;
@@ -29,61 +31,78 @@ import org.junit.Test;
 @SuppressWarnings("unused")
 public class InstrumentationManualTest {
 
+	/** setup */
 	@BeforeClass
 	public static void before() throws Exception {
 		InstrumentationRunner.runInstrumentation(new CheckConfigurer(false), new Directory(
 			"target/test-classes"), "");
 	}
 
+	/** Test for {@link NotNullHandler} in methods arguments */
 	@Test
 	public void testDefaultNonNullMethodArg() throws Exception {
 		new Mock().defaultNonNullMethodArgument(5);
 		new Mock().defaultNonNullMethodArgument(null);
 	}
 
+	/**
+	 * Test for {@link NotNullHandler} in methods arguments with
+	 * {@link ForceChecks}
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testForceNonNullMethodArg_Null() throws Exception {
 		new Mock().forceChecksNonNullMethodArgument(null);
 	}
 
+	/**
+	 * Test for {@link NotNullHandler} in methods arguments with
+	 * {@link IgnoreChecks}
+	 */
 	@Test
 	public void testIgnoreNonNullMethodArg() throws Exception {
 		new Mock().ignoreChecksNonNullMethodArgument(null);
 		new Mock().ignoreChecksNonNullMethodArgument(5);
 	}
 
+	/** Test for {@link NotEmptyHandler} */
 	@Test(expected = IllegalArgumentException.class)
 	public void testDefaultNotEmptyMethodArgument() throws Exception {
 		new Mock().defaultNotEmptyMethodArgument("");
 	}
 
+	/** Test for {@link PositiveHandler} */
 	@Test(expected = IllegalArgumentException.class)
 	public void testDefaultPositiveMethodArgument() throws Exception {
 		new Mock().defaultPositiveMethodArgument(BigDecimal.valueOf(-100));
 	}
 
+	/** Test for {@link NotNullHandler} in methods returns */
 	@Test(expected = AssertionError.class)
 	public void testDefaultReturnNonNull() throws Exception {
 		new Mock().defaultReturnNonNull();
 	}
 
+	/** Test for {@link SizeHandler} */
 	@Test(expected = IllegalArgumentException.class)
 	public void testDefaultSizeMethodArgument() throws Exception {
 		new Mock().defaultSizeMethodArgument(Arrays.asList(10, 20));
 	}
 
+	/** Test for {@link NotNullHandler} in constructors */
 	@Test(expected = IllegalArgumentException.class)
 	public void testDefaultInit() throws Exception {
 		new Mock(null, 5);
 	}
 
+	/** Test for {@link NotNullHandler} in constructors with {@link IgnoreChecks} */
 	@Test
 	public void testIgnoreInit() throws Exception {
 		new Mock(null, 5L);
 	}
 
+	/** Test for {@link NotNullHandler} in constructors with {@link ForceChecks} */
 	@Test(expected = IllegalArgumentException.class)
-	public void testIgnoreDefaultInit() throws Exception {
+	public void testNonNullForceInit() throws Exception {
 		new Mock(null, "5");
 	}
 
