@@ -6,11 +6,14 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.regex.Pattern;
 
+import net.sf.staccatocommons.check.internal.SizeAwareTypes;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.SizeAware;
+import net.sf.staccatocommons.defs.type.SizeAwareType;
 
 import org.junit.Test;
 
@@ -26,23 +29,27 @@ public class CheckUnitTest {
 
 	private Check<IllegalArgumentException> c = Ensure.that();
 
+	/**
+	 * Test method for {@link Check#isTrue(String, boolean)}
+	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckIsTrueStringBooleanStringObjectArray() {
+	public void testCheckIsTrue() {
 		c.isTrue(VAR_NAME, false);
 	}
 
+	/**
+	 * Test method for {@link Check#matches(String, String, String)}
+	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckIsTrueStringBoolean() {
-		c.isTrue(VAR_NAME, false);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testCheckMatchesStringStringString() {
+	public void testCheckMatches() {
 		c.matches(VAR_NAME, "hello", ".ola.");
 	}
 
+	/**
+	 * Test method for {@link Check#matches(String, String, Pattern)}
+	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testCheckMatchesStringStringPattern() {
+	public void testCheckMatchesPattern() {
 		c.matches(VAR_NAME, "hello", Pattern.compile(".ola."));
 	}
 
@@ -198,6 +205,42 @@ public class CheckUnitTest {
 				}
 			}, 5);
 
+	}
+
+	/**
+	 * Test for {@link Check#isMinSize(String, Object, int, SizeAwareType)} and
+	 * {@link Check#isMaxSize(String, Object, int, SizeAwareType)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMinMaxSize() throws Exception {
+		List<Integer> l = Arrays.asList(10, 20, 30);
+		c
+			.isMinSize(VAR_NAME, l, 2, SizeAwareTypes.COLLECTION)
+			.isMinSize(VAR_NAME, l, 3, SizeAwareTypes.COLLECTION)
+			.isMaxSize(VAR_NAME, l, 4, SizeAwareTypes.COLLECTION)
+			.isMaxSize(VAR_NAME, l, 3, SizeAwareTypes.COLLECTION);
+	}
+
+	/**
+	 * Test for {@link Check#isMinSize(String, Object, int, SizeAwareType)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testMinSize_Fail() throws Exception {
+		c.isMinSize(VAR_NAME, Arrays.asList(4), 2, SizeAwareTypes.COLLECTION);
+	}
+
+	/**
+	 * Test for {@link Check#isMinSize(String, Object, int, SizeAwareType)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testMaxSize_Fail() throws Exception {
+		c.isMaxSize(VAR_NAME, Arrays.asList(4, 1, 3), 2, SizeAwareTypes.COLLECTION);
 	}
 
 	/**

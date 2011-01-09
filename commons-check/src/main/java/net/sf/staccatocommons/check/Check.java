@@ -427,6 +427,62 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
+	 * Checks that <code>var</code> is not null and its size greater than or
+	 * equals to the the given <code>minSize</code>
+	 * 
+	 * @param <A>
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param minSize
+	 *          the minimum size
+	 * @param type
+	 *          the {@link SizeAwareType} used to determine the <code>var</code>
+	 *          size
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 * @see #that(boolean, String, Object...)
+	 */
+	public final <A> Check<ExceptionType> isMinSize(String varName, A var, int minSize,
+		SizeAwareType<A> type) throws ExceptionType {
+		return isNotNull(varName, var) //
+			.that(varName, var, type.size(var) >= minSize, //
+				"must be at least of size %s, but was %s",
+				minSize,
+				type.size(var));
+	}
+
+	/**
+	 * Checks that <code>var</code> is not null and its size less than or equals
+	 * to the the given <code>maxSize</code>
+	 * 
+	 * @param <A>
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param minSize
+	 *          the minimum size
+	 * @param type
+	 *          the {@link SizeAwareType} used to determine the <code>var</code>
+	 *          size
+	 * @return this, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 * @see #that(boolean, String, Object...)
+	 */
+	public final <A> Check<ExceptionType> isMaxSize(String varName, A var, int maxSize,
+		SizeAwareType<A> type) throws ExceptionType {
+		return isNotNull(varName, var) //
+			.that(varName, var, type.size(var) <= maxSize, //
+				"must be at most of size %s, but was %s",
+				maxSize,
+				type.size(var));
+	}
+
+	/**
 	 * Checks the variable is &gt;= 0
 	 * 
 	 * @param varName
