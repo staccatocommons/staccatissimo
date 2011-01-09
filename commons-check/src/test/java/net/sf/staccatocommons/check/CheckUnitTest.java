@@ -122,6 +122,7 @@ public class CheckUnitTest {
 			.isNotEmpty(VAR_NAME, Arrays.asList("foo", "bar"))
 			.isNotEmpty(VAR_NAME, Collections.singleton(6))
 			.isNotEmpty(VAR_NAME, "hola")
+			.isNotEmpty(VAR_NAME, Collections.singletonMap(10, 50))
 			.isNotEmpty(VAR_NAME, new EmptyAware() {
 				public boolean isEmpty() {
 					return false;
@@ -203,6 +204,7 @@ public class CheckUnitTest {
 		c
 			.isSize(VAR_NAME, Arrays.asList(9, 96), 2)
 			.isSize(VAR_NAME, "Hello", 5)
+			.isSize(VAR_NAME, Collections.singletonMap("", 0), 1)
 			.isSize(VAR_NAME, new SizeAware() {
 				public int size() {
 					return 5;
@@ -259,6 +261,7 @@ public class CheckUnitTest {
 		c
 			.isEmpty(VAR_NAME, Collections.emptyList())
 			.isEmpty(VAR_NAME, Collections.<String> emptyList())
+			.isEmpty(VAR_NAME, Collections.emptyMap())
 			.isEmpty(VAR_NAME, "")
 			.isEmpty(VAR_NAME, new EmptyAware() {
 				public boolean isEmpty() {

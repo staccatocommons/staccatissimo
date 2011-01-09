@@ -15,6 +15,7 @@ package net.sf.staccatocommons.check;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import net.sf.staccatocommons.check.format.Var;
@@ -128,7 +129,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the error message
 	 * @param args
 	 *          the error message arguments
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -148,7 +149,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the error message
 	 * @param args
 	 *          the error message arguments
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -166,7 +167,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -181,7 +182,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -199,7 +200,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the var to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -217,7 +218,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the var to be checked
 	 * @param regex
 	 *          the regular expression the var must match
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 * 
@@ -237,7 +238,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the variable to be checked
 	 * @param pattern
 	 *          the pattern the variable must match
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 * 
@@ -256,7 +257,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 * 
@@ -273,7 +274,24 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 * 
+	 * @see #that(boolean, String, Object...)
+	 */
+	public final Check<ExceptionType> isEmpty(String varName, Map<?, ?> var) throws ExceptionType {
+		return isEmpty(varName, var, SizeAwareTypes.MAP);
+	}
+
+	/**
+	 * Checks that the variable is not null and empty
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 * 
@@ -290,7 +308,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 * 
@@ -311,7 +329,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @param type
 	 *          the {@link EmptyAwareType} used to determine if <code>var</code>
 	 *          is not empty
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 * @see #that(boolean, String, Object...)
@@ -330,7 +348,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the variable to be checked
 	 * @param expectedClass
 	 *          the class the variable must be instance of
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 * 
@@ -354,7 +372,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the {@link Collection} variable to be checked
 	 * @param size
 	 *          the size the variable must have
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -373,7 +391,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the {@link CharSequence} variable to be checked
 	 * @param size
 	 *          the size the variable must have
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -392,13 +410,32 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the {@link SizeAware} variable to be checked
 	 * @param size
 	 *          the size the variable must have
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
 	public final Check<ExceptionType> isSize(String varName, SizeAware var, int size)
 		throws ExceptionType {
 		return isSize(varName, var, size, SizeAwareTypes.SIZE_AWARE);
+	}
+
+	/**
+	 * Checks that <code>var</code> is not null and its size is the given
+	 * <code>expectedSize</code>
+	 * 
+	 * @param varName
+	 *          the name of the {@link Map} variable to be checked
+	 * @param var
+	 *          the {@link Map} variable to be checked
+	 * @param size
+	 *          the size the variable must have
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isSize(String varName, Map<?, ?> var, int size)
+		throws ExceptionType {
+		return isSize(varName, var, size, SizeAwareTypes.MAP);
 	}
 
 	/**
@@ -414,7 +451,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @param type
 	 *          the {@link SizeAwareType} used to determine if <code>var</code>
 	 *          has the given <code>expectedSize</code>
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 * @see #that(boolean, String, Object...)
@@ -441,7 +478,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @param type
 	 *          the {@link SizeAwareType} used to determine the <code>var</code>
 	 *          size
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 * @see #that(boolean, String, Object...)
@@ -469,7 +506,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @param type
 	 *          the {@link SizeAwareType} used to determine the <code>var</code>
 	 *          size
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 * @see #that(boolean, String, Object...)
@@ -490,17 +527,12 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
 	public final Check<ExceptionType> isNotNegative(String varName, long var) throws ExceptionType {
 		return isNotNegative(varName, var, var >= 0);
-	}
-
-	public final <A> Check<ExceptionType> isNotNegative(String varName, A var, NumberType<A> type)
-		throws ExceptionType {
-		return isNotNegative(varName, var, !type.isNegative(var));
 	}
 
 	/**
@@ -510,7 +542,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -525,7 +557,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -540,7 +572,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -555,7 +587,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -572,7 +604,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -582,19 +614,49 @@ public abstract class Check<ExceptionType extends Throwable> {
 			.isNotNegative(varName, var, var.compareTo(BigInteger.ZERO) >= 0);
 	}
 
+	/**
+	 * Checks the <code>var</code> is &gt;= 0
+	 * 
+	 * @param <A>
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param type
+	 *          the {@link NumberType} used to determine if <code>var</code> is
+	 *          negative
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final <A> Check<ExceptionType> isNotNegative(String varName, A var, NumberType<A> type)
+		throws ExceptionType {
+		return isNotNegative(varName, var, !type.isNegative(var));
+	}
+
 	private Check<ExceptionType> isNotNegative(String varName, Object number, boolean notNegative)
 		throws ExceptionType {
 		return that(varName, number, notNegative, "must be not negative");
 	}
 
+	public final <A> Check<ExceptionType> isNotZero(String varName, A var, NumberType<A> type)
+		throws ExceptionType {
+		return isNotNull(varName, var).that(varName, var, !type.isZero(var), "must not be zero");
+	}
+
+	public final <A> Check<ExceptionType> isZero(String varName, A var, NumberType<A> type)
+		throws ExceptionType {
+		return isNotNull(varName, var).that(varName, var, type.isZero(var), "must be zero");
+	}
+
 	/**
-	 * Checks that the {@link EmptyAware} var is not empty
+	 * Checks that the {@link EmptyAware} var is not null and not empty
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -603,13 +665,13 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks that the {@link Collection} variable is not empty
+	 * Checks that the {@link Collection} variable is not null and not empty
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -619,19 +681,34 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
-	 * Checks that the {@link CharSequence} variable is not empty
+	 * Checks that the {@link CharSequence} variable is not null and not empty
 	 * 
 	 * @param varName
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
 	public final Check<ExceptionType> isNotEmpty(String varName, CharSequence var)
 		throws ExceptionType {
 		return isNotEmpty(varName, var, SizeAwareTypes.CHAR_SEQUENCE);
+	}
+
+	/**
+	 * Checks that the {@link Map} variable is not null and not empty
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isNotEmpty(String varName, Map<?, ?> var) throws ExceptionType {
+		return isNotEmpty(varName, var, SizeAwareTypes.MAP);
 	}
 
 	/**
@@ -645,7 +722,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @param type
 	 *          the {@link EmptyAwareType} used to determine if <code>var</code>
 	 *          is empty
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 * @see #that(boolean, String, Object...)
@@ -662,7 +739,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -677,7 +754,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -692,7 +769,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -707,7 +784,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -722,7 +799,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -737,7 +814,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -746,6 +823,21 @@ public abstract class Check<ExceptionType extends Throwable> {
 			.isPositive(varName, var, var.compareTo(BigInteger.ZERO) > 0);
 	}
 
+	/**
+	 * Checks the <code>var</code> is &gt; 0
+	 * 
+	 * @param <A>
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param type
+	 *          the {@link NumberType} used to determine if <code>var</code> is
+	 *          positive
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public final <A> Check<ExceptionType> isPositive(String varName, A var, NumberType<A> type)
 		throws ExceptionType {
 		return isNotNull(varName, var).isPositive(varName, var, type.isPositive(var));
@@ -766,7 +858,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the variable to be checked
 	 * @param min
 	 * @param max
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -790,7 +882,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the variable to be checked
 	 * @param element
 	 *          the element that the variable must contain
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -810,7 +902,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the variable to be checked
 	 * @param container
 	 *          the {@link ContainsAware} that must contain <code>var</code>
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -833,7 +925,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @param other
 	 *          the {@link Comparable} object of the same type to be compared
 	 *          against <code>var</code>
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -856,7 +948,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @param other
 	 *          the {@link Comparable} object of the same type to be compared
 	 *          against <code>var</code>
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -879,7 +971,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @param other
 	 *          the {@link Comparable} object of the same type to be compared
 	 *          against <code>var</code>
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */
@@ -902,7 +994,7 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 * @param other
 	 *          the {@link Comparable} object of the same type to be compared
 	 *          against <code>var</code>
-	 * @return this, in order to allow method chaining
+	 * @return <code>this</code>, in order to allow method chaining
 	 * @throws ExceptionType
 	 *           if the check failed
 	 */

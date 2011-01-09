@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.check.internal;
 
 import java.util.Collection;
+import java.util.Map;
 
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.type.SizeAwareType;
@@ -56,6 +57,19 @@ public class SizeAwareTypes {
 		}
 
 		public boolean isEmpty(Collection<?> emptyAware) {
+			return emptyAware.isEmpty();
+		}
+	};
+
+	/**
+	 * {@link SizeAwareType} for {@link Map}s
+	 */
+	public static final SizeAwareType<Map<?, ?>> MAP = new SizeAwareType<Map<?, ?>>() {
+		public int size(Map<?, ?> sizeAware) {
+			return sizeAware.size();
+		}
+
+		public boolean isEmpty(Map<?, ?> emptyAware) {
 			return emptyAware.isEmpty();
 		}
 	};
