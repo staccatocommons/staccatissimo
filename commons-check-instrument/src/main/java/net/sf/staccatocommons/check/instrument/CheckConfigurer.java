@@ -41,8 +41,9 @@ public class CheckConfigurer implements InstrumenterConfigurer {
 			new NotNullHandler(ignoreReturns),
 			new SizeHandler(ignoreReturns),
 			new NotEmptyHandler(ignoreReturns),
-			new PostiveHandler(ignoreReturns),
-			new MatchesHandler(ignoreReturns))) {
+			new PositiveHandler(ignoreReturns),
+			new MatchesHandler(ignoreReturns),
+			new NotNegativeHandler(ignoreReturns))) {
 			ignoreCheckHandler.addDeactivable(handler);
 			forceCheckHandler.addDeactivable(handler);
 			instrumenter.addAnnotationHanlder(handler);

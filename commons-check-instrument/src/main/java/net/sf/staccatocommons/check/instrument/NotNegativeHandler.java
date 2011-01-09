@@ -12,31 +12,31 @@
  */
 package net.sf.staccatocommons.check.instrument;
 
-import net.sf.staccatocommons.check.annotation.Positive;
+import net.sf.staccatocommons.check.annotation.NotNegative;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class PostiveHandler extends AbstractCheckAnnotationHandler<Positive> {
+public class NotNegativeHandler extends AbstractCheckAnnotationHandler<NotNegative> {
 
 	/**
-	 * Creates a new {@link PostiveHandler}
+	 * Creates a new {@link NotNegativeHandler}
 	 */
-	public PostiveHandler(boolean ignoreReturns) {
+	public NotNegativeHandler(boolean ignoreReturns) {
 		super(ignoreReturns);
 	}
 
-	public Class<Positive> getSupportedAnnotationType() {
-		return Positive.class;
+	public Class<NotNegative> getSupportedAnnotationType() {
+		return NotNegative.class;
 	}
 
 	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		Positive annotation) {
-		return String.format("that().isPositive( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
+		NotNegative annotation) {
+		return String.format("that().isNotNegative( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
 	}
 
-	protected String getVarMnemonic(Positive annotation) {
+	protected String getVarMnemonic(NotNegative annotation) {
 		return annotation.value();
 	}
 

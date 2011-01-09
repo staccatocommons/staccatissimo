@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.check.instrument;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 import net.sf.staccatocommons.check.instrument.mock.Mock;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
@@ -68,7 +69,7 @@ public class InstrumentationManualTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testDefaultSizeMethodArgument() throws Exception {
-		new Mock().defaultSizeMethodArgument(new Object[] { 4, 5 });
+		new Mock().defaultSizeMethodArgument(Arrays.asList(10, 20));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -84,6 +85,12 @@ public class InstrumentationManualTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testIgnoreDefaultInit() throws Exception {
 		new Mock(null, "5");
+	}
+
+	/** Test for {@link NotNegativeHandler} */
+	@Test(expected = IllegalArgumentException.class)
+	public void testNotNegative() throws Exception {
+		new Mock().defaultNotNegative(-5);
 	}
 
 }

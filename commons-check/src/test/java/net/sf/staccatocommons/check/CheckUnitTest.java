@@ -183,6 +183,14 @@ public class CheckUnitTest {
 	 * Test for {@link Check#isPositive(String, int)} on failure
 	 */
 	@Test(expected = IllegalArgumentException.class)
+	public void testPositive_Null_Fail() {
+		c.isPositive(VAR_NAME, (BigDecimal) null);
+	}
+
+	/**
+	 * Test for {@link Check#isPositive(String, int)} on failure
+	 */
+	@Test(expected = IllegalArgumentException.class)
 	public void testPositive_BigIntegerFail() {
 		c.isPositive(VAR_NAME, BigInteger.valueOf(-10));
 	}

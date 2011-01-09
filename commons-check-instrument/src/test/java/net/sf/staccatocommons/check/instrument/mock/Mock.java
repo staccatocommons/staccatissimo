@@ -1,11 +1,13 @@
 package net.sf.staccatocommons.check.instrument.mock;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.IgnoreChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.check.annotation.NotEmpty;
+import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.check.annotation.Positive;
 import net.sf.staccatocommons.check.annotation.Size;
 
@@ -41,13 +43,17 @@ public class Mock {
 	public void defaultNonNullMethodArgument(@NonNull Object argument) {
 	}
 
-	public void defaultSizeMethodArgument(@Size(1) Object[] argument) {
+	public void defaultSizeMethodArgument(@Size(1) List<?> argument) {
 	}
 
 	public void defaultNotEmptyMethodArgument(@NotEmpty String argument) {
 	}
 
 	public void defaultPositiveMethodArgument(@Positive BigDecimal argument) {
+	}
+
+	public void defaultNotNegative(@NotNegative int i) {
+
 	}
 
 }
