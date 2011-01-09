@@ -13,7 +13,10 @@ import net.sf.staccatocommons.check.internal.SizeAwareTypes;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.SizeAware;
+import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.defs.type.SizeAwareType;
+import net.sf.staccatocommons.testing.junit.jmock.Expectations;
+import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.junit.Test;
 
@@ -23,7 +26,7 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class CheckUnitTest {
+public class CheckUnitTest extends JUnit4MockObjectTestCase {
 
 	private static final String VAR_NAME = "var";
 
@@ -166,10 +169,29 @@ public class CheckUnitTest {
 	/**
 	 * Test for {@link Check#isPositive(String, int)}
 	 */
-
 	@Test(expected = IllegalArgumentException.class)
 	public void testPositive_Zero() {
 		c.isPositive(VAR_NAME, 0);
+	}
+
+	/**
+	 * Test for {@link Check#isNotZero(String, Object, NumberType)} and
+	 * {@link Check#isZero(String, Object, NumberType)}
+	 */
+	@Test
+	public void testNotZero() {
+		final NumberType mock = mock(NumberType.class);
+		checking(new Expectations() {
+			{
+				one(mock).isZero(5);
+				will(returnValue(false));
+
+				one(mock).isZero(0);
+				will(returnValue(true));
+			}
+		});
+		c.isNotZero(VAR_NAME, 5, mock);
+		c.isZero(VAR_NAME, 0, mock);
 	}
 
 	/**

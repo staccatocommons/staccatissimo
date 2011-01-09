@@ -639,11 +639,41 @@ public abstract class Check<ExceptionType extends Throwable> {
 		return that(varName, number, notNegative, "must be not negative");
 	}
 
+	/**
+	 * Checks the <code>var</code> is not null and not equal to 0
+	 * 
+	 * @param <A>
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param type
+	 *          the {@link NumberType} used to determine if <code>var</code> is
+	 *          not zero, based on {@link NumberType#isZero(Object)}
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public final <A> Check<ExceptionType> isNotZero(String varName, A var, NumberType<A> type)
 		throws ExceptionType {
 		return isNotNull(varName, var).that(varName, var, !type.isZero(var), "must not be zero");
 	}
 
+	/**
+	 * Checks the <code>var</code> is not null and equal to 0
+	 * 
+	 * @param <A>
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param type
+	 *          the {@link NumberType} used to determine if <code>var</code> is
+	 *          zero, based on {@link NumberType#isZero(Object)}
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
 	public final <A> Check<ExceptionType> isZero(String varName, A var, NumberType<A> type)
 		throws ExceptionType {
 		return isNotNull(varName, var).that(varName, var, type.isZero(var), "must be zero");
