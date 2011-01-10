@@ -16,10 +16,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
-import net.sf.staccatocommons.lang.value.BasicEquals;
-
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import net.sf.staccatocommons.lang.tuple.internal.TupleValue;
 
 /**
  * Three-components {@link Tuple}.
@@ -37,6 +34,11 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple<T1, T2, T3>> {
 
 	private static final long serialVersionUID = 5811264763831754560L;
+	private static final TupleValue<Triple> val = new TupleValue<Triple>(3) {
+		protected void significant(Triple o, Criteria b) {
+			b.with(o.first).with(o.second).with(o.third);
+		}
+	};
 
 	private final T1 first;
 	private final T2 second;
@@ -160,34 +162,16 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
 
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder() //
-			.append(first)
-			.append(second)
-			.append(third)
-			.toHashCode();
+		return val.hashCode(this);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
-		BasicEquals be = BasicEquals.from(this, obj);
-		if (be.isEqualsDone())
-			return be.toEquals();
-		Triple<T1, T2, T3> other = (Triple<T1, T2, T3>) obj;
-		return new EqualsBuilder() //
-			.append(this.first, other.first)
-			.append(this.second, other.second)
-			.append(this.third, other.third)
-			.isEquals();
+		return val.equals(this, obj);
 	}
 
 	public int compareTo(Triple<T1, T2, T3> other) {
-		if (other == this)
-			return 0;
-		int result;
-		return (result = compare(this.first, other.first)) != 0 ? result : (result = compare(
-			this.second,
-			other.second)) != 0 ? result : compare(this.third, other.third);
+		return val.compareTo(this, other);
 	}
 
 }

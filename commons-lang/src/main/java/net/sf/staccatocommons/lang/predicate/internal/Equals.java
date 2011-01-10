@@ -12,7 +12,7 @@ public final class Equals<T> extends NonAnnonymousPredicate<T> {
 	private final T value;
 
 	/**
-	 * Creates a new {@link Equals}
+	 * Creates a new {@link TupleValue}
 	 * 
 	 * @param value
 	 *          the value to test equality

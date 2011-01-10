@@ -16,10 +16,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
-import net.sf.staccatocommons.lang.value.BasicEquals;
-
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import net.sf.staccatocommons.lang.tuple.internal.TupleValue;
 
 /**
  * Four-components {@link Tuple}
@@ -39,6 +36,11 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 	Comparable<Quadruple<T1, T2, T3, T4>> {
 
 	private static final long serialVersionUID = -1072243152313731077L;
+	private static final TupleValue<Quadruple> val = new TupleValue<Quadruple>(4) {
+		protected void significant(Quadruple o, Criteria b) {
+			b.with(o.first).with(o.second).with(o.third).with(o.fourth);
+		}
+	};
 
 	private final T1 first;
 	private final T2 second;
@@ -128,38 +130,17 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 	}
 
 	public int compareTo(Quadruple<T1, T2, T3, T4> other) {
-		if (other == this)
-			return 0;
-		int result;
-		return (result = compare(this.first, other.first)) != 0 ? result : (result = compare(
-			this.second,
-			other.second)) != 0 ? result : (result = compare(this.third, other.third)) != 0 ? result
-			: compare(this.fourth, other.fourth);
+		return val.compareTo(this, other);
 	}
 
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder() //
-			.append(first)
-			.append(second)
-			.append(third)
-			.append(fourth)
-			.toHashCode();
+		return val.hashCode(this);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
-		BasicEquals be = BasicEquals.from(this, obj);
-		if (be.isEqualsDone())
-			return be.toEquals();
-		Quadruple<T1, T2, T3, T4> other = (Quadruple<T1, T2, T3, T4>) obj;
-		return new EqualsBuilder() //
-			.append(this.first, other.first)
-			.append(this.second, other.second)
-			.append(this.third, other.third)
-			.append(this.fourth, other.fourth)
-			.isEquals();
+		return val.equals(this, obj);
 	}
 
 }

@@ -79,8 +79,7 @@ public abstract class Tuple implements Serializable {
 
 	private static final long serialVersionUID = -3943649706502147516L;
 
-	Tuple() {
-	}
+	Tuple() {}
 
 	/**
 	 * Creates a new {@link Pair}
@@ -158,9 +157,4 @@ public abstract class Tuple implements Serializable {
 	public List<Object> toList() {
 		return Arrays.asList(toArray());
 	}
-
-	protected static <T1> int compare(T1 a, T1 b) {
-		return ((Comparable<T1>) a).compareTo(b);
-	}
-
 }

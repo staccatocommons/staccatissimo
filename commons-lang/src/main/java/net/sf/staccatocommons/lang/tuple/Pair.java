@@ -18,10 +18,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
-import net.sf.staccatocommons.lang.value.BasicEquals;
-
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import net.sf.staccatocommons.lang.tuple.internal.TupleValue;
 
 /**
  * Two-components {@link Tuple}
@@ -40,6 +37,11 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 	Map.Entry<T1, T2> {
 
 	private static final long serialVersionUID = -6479045670420592337L;
+	private static final TupleValue<Pair> val = new TupleValue<Pair>(2) {
+		protected void significant(Pair o, Criteria b) {
+			b.with(o.first).with(o.second);
+		}
+	};
 
 	private final T1 first;
 	private final T2 second;
@@ -115,33 +117,17 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 	}
 
 	public int compareTo(Pair<T1, T2> other) {
-		int result;
-		if (other == this)
-			return 0;
-
-		return (result = compare(this.first, other.first)) != 0 ? result : //
-			compare(this.second, other.second);
+		return val.compareTo(this, other);
 	}
 
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder() //
-			.append(first)
-			.append(second)
-			.toHashCode();
+		return val.hashCode(this);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
-		BasicEquals be = BasicEquals.from(this, obj);
-		if (be.isEqualsDone())
-			return be.toEquals();
-		Pair<T1, T2> other = (Pair<T1, T2>) obj;
-		return new EqualsBuilder() //
-			.append(this.first, other.first)
-			.append(this.second, other.second)
-			.isEquals();
+		return val.equals(this, obj);
 	}
 
 	public T1 getKey() {

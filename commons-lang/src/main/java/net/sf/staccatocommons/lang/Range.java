@@ -149,5 +149,4 @@ public class Range<T extends Comparable<T>> extends ValueObject implements Conta
 	public static <T extends Comparable<T>> Range<T> from(@NonNull T min, @NonNull T max) {
 		return new Range<T>(min, max);
 	}
-
 }
