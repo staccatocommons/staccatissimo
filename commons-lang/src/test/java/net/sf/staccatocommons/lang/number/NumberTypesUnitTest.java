@@ -15,14 +15,25 @@ package net.sf.staccatocommons.lang.number;
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static net.sf.staccatocommons.lang.number.Numbers.*;
 import static org.junit.Assert.*;
+import net.sf.staccatocommons.defs.type.NumberType;
 
 import org.junit.Test;
+import org.junit.experimental.theories.DataPoints;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
 
 /**
  * @author flbulgarelli
  * 
  */
+
+@RunWith(Theories.class)
 public class NumberTypesUnitTest {
+
+	@DataPoints
+	public static NumberType<?>[] types = new NumberType[] {//
+	integer(), bigInteger(), bigDecimal(), float_(), double_(), long_() };
 
 	/**
 	 * Test method for {@link NumberTypes#bigDecimal()}.
@@ -126,4 +137,40 @@ public class NumberTypesUnitTest {
 		assertEquals(integer().add(10, 50), add(10).apply(50));
 	}
 
+	/**
+	 * Theory for the relationship between {@link NumberType#increment(Object)} ,
+	 * zero and one
+	 */
+	@Theory
+	public <A> void testIncrement(NumberType<A> nt) throws Exception {
+		assertTrue(nt.compare(nt.one(), nt.increment(nt.zero())) == 0);
+	}
+
+	/**
+	 * Theory for relationship between {@link NumberType#decement(Object)} , zero
+	 * and one
+	 */
+	@Theory
+	public <A> void testDecrement(NumberType<A> nt) throws Exception {
+		assertTrue(nt.compare(nt.zero(), nt.decrement(nt.one())) == 0);
+	}
+
+	/**
+	 * Theory for particular cases of {@link NumberType#isZero(Object)},
+	 * isNegative and isPositive
+	 */
+	@Theory
+	public <A> void testSign(NumberType<A> nt) throws Exception {
+		assertTrue(nt.isZero(nt.zero()));
+		assertFalse(nt.isPositive(nt.zero()));
+		assertFalse(nt.isNegative(nt.zero()));
+
+		assertFalse(nt.isZero(nt.one()));
+		assertTrue(nt.isPositive(nt.one()));
+		assertFalse(nt.isNegative(nt.one()));
+
+		assertFalse(nt.isZero(nt.negate(nt.one())));
+		assertFalse(nt.isPositive(nt.negate(nt.one())));
+		assertTrue(nt.isNegative(nt.negate(nt.one())));
+	}
 }

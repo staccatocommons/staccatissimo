@@ -12,11 +12,8 @@
  */
 package net.sf.staccatocommons.lang.tuple;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertSame;
-import static junit.framework.Assert.assertTrue;
-import static net.sf.staccatocommons.lang.tuple.Tuple._;
+import static junit.framework.Assert.*;
+import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 
 import java.util.Date;
 
@@ -61,6 +58,7 @@ public class TripleUnitTest extends TupleAbstractUnitTest {
 		assertEquals(_(40, date, "hello").hashCode(), _(40, date.clone(), "hello").hashCode());
 	}
 
+	/** Test for {@link Triple#rotateLeft()} and {@link Triple#rotateRight()} */
 	@Test
 	public void testRotate() throws Exception {
 		assertEquals(_(2, 3, 1), _(1, 2, 3).rotateLeft());

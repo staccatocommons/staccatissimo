@@ -126,6 +126,10 @@ public interface NumberType<A> extends Comparator<A> {
 	 * <strong>must</strong> grant that
 	 * <code>nt.decrement(x) == nt.subtract(x, nt.one())</code>
 	 * 
+	 * As a particular case, it <strong>must</strong> grant that
+	 * <code>nt.compare(nt.zero(), nt.decrement(nt.one())) == 0</code>
+	 * 
+	 * 
 	 * @param n
 	 *          the number to decrement
 	 * @return <code>n - 1</code>
@@ -138,6 +142,10 @@ public interface NumberType<A> extends Comparator<A> {
 	 * For any {@link Number} x, a side-effect-free {@link NumberType}s nt
 	 * <strong>must</strong> grant that
 	 * <code>nt.increment(x) == nt.add(x, nt.one())</code>
+	 * 
+	 * As a particular case, it <strong>must</strong> grant that
+	 * <code>nt.compare(nt.one(), nt.increment(nt.zero())) == 0</code>
+	 * 
 	 * 
 	 * @param n
 	 *          the number increment
@@ -173,7 +181,7 @@ public interface NumberType<A> extends Comparator<A> {
 	 * Answers if the given number is zero.
 	 * 
 	 * For any {@link Number} x, a {@link NumberType}s nt <strong>must</strong>
-	 * grant that <code>nt.isZero(x) == (nt.compare(x, zero()) == 0)</code>
+	 * grant that <code>nt.isZero(x) == (nt.compare(x, nt.zero()) == 0)</code>
 	 * 
 	 * @param n
 	 * @return if the number is zero

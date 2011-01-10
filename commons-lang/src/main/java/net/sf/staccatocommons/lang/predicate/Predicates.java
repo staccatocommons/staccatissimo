@@ -163,7 +163,7 @@ public class Predicates {
 	 * @return a new predicate
 	 */
 	@NonNull
-	public static Predicate<String> matchesRegexp(@NonNull String regexp) {
+	public static Predicate<String> matches(@NonNull String regexp) {
 		return new Matches(regexp);
 	}
 
@@ -175,7 +175,7 @@ public class Predicates {
 	 * @return a new predicate
 	 */
 	@NonNull
-	public static Predicate<String> matchesPattern(@NonNull Pattern pattern) {
+	public static Predicate<String> matches(@NonNull Pattern pattern) {
 		return new Matches(pattern);
 	}
 

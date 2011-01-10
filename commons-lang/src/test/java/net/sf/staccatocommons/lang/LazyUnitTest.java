@@ -12,14 +12,21 @@
  */
 package net.sf.staccatocommons.lang;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * Test for {@link Lazy}
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class LazyUnitTest {
 
 	private int var;
 
+	/***/
 	@Test
 	public void testValue() {
 

@@ -12,9 +12,7 @@
  */
 package net.sf.staccatocommons.lang;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,7 +26,7 @@ import org.junit.Test;
  * @author flbulgarelli
  */
 public class PrioritizedUnitTest {
-
+	/***/
 	@Test
 	public void testFrom() {
 
@@ -41,6 +39,7 @@ public class PrioritizedUnitTest {
 		assertSame(priority, p1.getPriority());
 	}
 
+	/***/
 	@Test
 	public void testCompare() {
 

@@ -12,9 +12,7 @@
  */
 package net.sf.staccatocommons.lang.predicate;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -37,8 +35,7 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 	 * @throws java.lang.Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
-	}
+	public void setUp() throws Exception {}
 
 	/**
 	 * Test method for
@@ -92,6 +89,7 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 	public void testEqual() {
 		assertTrue(Predicates.equal(5).eval(Integer.parseInt("5")));
 		assertFalse(Predicates.equal(5).eval(6));
+		assertFalse(Predicates.equal(6).not().eval(6));
 	}
 
 	/**
@@ -121,34 +119,41 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.predicate.Predicates#matchesRegexp(java.lang.String)}
+	 * {@link net.sf.staccatocommons.lang.predicate.Predicates#matches(java.lang.String)}
 	 * .
 	 */
 	@Test
 	public void testMatchesRegexp() {
-		assertTrue(Predicates.matchesRegexp("[Hh]el+o").eval("hello"));
-		assertFalse(Predicates.matchesRegexp("[Hh]el+o").eval("world"));
+		assertTrue(Predicates.matches("[Hh]el+o").eval("hello"));
+		assertFalse(Predicates.matches("[Hh]el+o").eval("world"));
 	}
 
+	/***/
 	@Test
 	public void testMatchesPattern() throws Exception {
-		assertTrue(Predicates.matchesPattern(Pattern.compile("[Hh]el+o")).eval("hello"));
-		assertFalse(Predicates.matchesPattern(Pattern.compile("[Hh]el+o")).eval("world"));
+		assertTrue(Predicates.matches(Pattern.compile("[Hh]el+o")).eval("hello"));
+		assertFalse(Predicates.matches(Pattern.compile("[Hh]el+o")).eval("world"));
 	}
 
+	/***/
 	@Test
 	public void testConstains() {
 		assertTrue(Predicates.contains("foo").eval("The word foo has no special meaning"));
 		assertFalse(Predicates.contains("foo").eval("The word bar has no special meaning, neither"));
 	}
 
+	/**
+	 * Test for not in particular predicates that have optimizations on that
+	 * method
+	 */
 	@Test
 	public void testNot() throws Exception {
-		assertFalse(Predicates.equal(6).not().eval(6));
+
 		assertTrue(Predicates.false_().not().eval(5));
 		assertFalse(Predicates.false_().not().not().eval(5));
 	}
 
+	/***/
 	@Test
 	public void testGreatherThan() throws Exception {
 		assertFalse(Predicates.greaterThan(5).eval(2));
@@ -156,6 +161,7 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 		assertTrue(Predicates.greaterThan(5).eval(6));
 	}
 
+	/***/
 	@Test
 	public void testLowerThan() throws Exception {
 		assertTrue(Predicates.lessThan(5).eval(2));
@@ -163,6 +169,7 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 		assertFalse(Predicates.lessThan(5).eval(6));
 	}
 
+	/***/
 	@Test
 	public void testAny() throws Exception {
 		assertTrue(Predicates.any(
@@ -196,12 +203,14 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 		assertTrue(from.eval(arg));
 	}
 
+	/***/
 	@Test
 	public void testFromPredicate() throws Exception {
 		Predicate<Object> true_ = Predicates.true_();
 		assertSame(true_, Predicates.from(true_));
 	}
 
+	/***/
 	@Test
 	public void testAll() throws Exception {
 		assertFalse(Predicates.all(

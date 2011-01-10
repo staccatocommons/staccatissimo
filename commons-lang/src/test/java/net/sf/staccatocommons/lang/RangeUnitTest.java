@@ -12,25 +12,26 @@
  */
 package net.sf.staccatocommons.lang;
 
-import static net.sf.staccatocommons.lang.Range.from;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static net.sf.staccatocommons.lang.Range.*;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.testing.junit.SerializationAssert;
 
 import org.junit.Test;
 
 /**
+ * Test for {@link Range}
+ * 
  * @author flbulgarelli
  */
 public class RangeUnitTest {
-
+	/***/
 	@Test
 	public void testContains() {
 		assertTrue(from("Hello", "World").contains("Java"));
 		assertFalse(from(5, 9).contains(10));
 	}
 
+	/***/
 	@Test
 	public void testOverlaps() {
 		assertTrue(from(10, 400).overlaps(from(60, 80)));
@@ -40,18 +41,21 @@ public class RangeUnitTest {
 		assertFalse(from(500, 650).overlaps(from(50, 90)));
 	}
 
+	/***/
 	@Test
 	public void testIncludes() {
-		assertTrue((from(5, 900)).includes(from(9, 65)));
-		assertFalse((from(9, 65)).includes(from(5, 900)));
+		assertTrue(from(5, 900).includes(from(9, 65)));
+		assertFalse(from(9, 65).includes(from(5, 900)));
 		assertFalse(from(10, 400).includes(from(5, 900)));
 	}
 
+	/***/
 	@Test
 	public void testGetMax() {
 		assertEquals((Integer) 9, from(5, 9).getMax());
 	}
 
+	/***/
 	@Test
 	public void testGetMin() {
 		assertEquals((Integer) 9, from(9, 98).getMin());
@@ -66,6 +70,7 @@ public class RangeUnitTest {
 		assertTrue(from(10, 10).isEmpty());
 	}
 
+	/***/
 	@Test
 	public void testSerialization() throws Exception {
 		SerializationAssert.assertCanSerialize(Range.from(50, 90));

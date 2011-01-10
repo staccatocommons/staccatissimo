@@ -12,19 +12,27 @@
  */
 package net.sf.staccatocommons.lang;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.lang.provider.internal.Constant;
 
 import org.junit.Test;
 
+/**
+ * Test for {@link Nulls}
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class NullsUnitTest {
 
+	/***/
 	@Test
 	public void testNonNullOrElseTT() {
 		assertEquals("Foo", Nulls.coalesce(null, "Foo"));
 		assertEquals("Bar", Nulls.coalesce("Bar", "Foo"));
 	}
 
+	/***/
 	@Test
 	public void testNonNullOrElseTProviderOfT() {
 		assertEquals("Foo", Nulls.coalesce(null, new Constant("Foo")));

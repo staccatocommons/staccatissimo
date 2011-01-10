@@ -12,13 +12,8 @@
  */
 package net.sf.staccatocommons.lang;
 
-import static net.sf.staccatocommons.lang.Compare.between;
-import static net.sf.staccatocommons.lang.Compare.in;
-import static net.sf.staccatocommons.lang.Compare.max;
-import static net.sf.staccatocommons.lang.Compare.min;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static net.sf.staccatocommons.lang.Compare.*;
+import static org.junit.Assert.*;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -85,29 +80,34 @@ public class CompareUnitTest {
 		assertFalse(between(190, 60, 156));
 	}
 
+	/***/
 	@Test
 	public void testInIntValues() {
 		assertTrue(in(5, 1, 2, 3, 5, 9, 60));
 		assertFalse(in(6, 1, 2, 3, 5, 9, 60));
 	}
 
+	/***/
 	@Test
 	public void testInLongValues() {
 		assertTrue(in(5, new int[] { 1, 2, 3, 5, 9, 60 }));
 		assertFalse(in(6, new int[] { 1, 2, 3, 5, 9, 60 }));
 	}
 
+	/***/
 	@Test
 	public void testIn() {
 		assertTrue(in(5, new long[] { 1, 2, 3, 5, 9, 60 }));
 		assertFalse(in(6, new long[] { 1, 2, 3, 5, 9, 60 }));
 	}
 
+	/***/
 	@Test
 	public void testMax() {
 		assertEquals((Integer) 5, max(5, 2));
 	}
 
+	/***/
 	@Test
 	public void testMin() {
 		assertEquals("ABC", min("FGH", "ABC"));

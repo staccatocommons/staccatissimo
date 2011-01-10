@@ -12,14 +12,21 @@
  */
 package net.sf.staccatocommons.lang;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 
 import org.junit.Test;
 
+/**
+ * Test for {@link SoftException}
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public class SoftExceptionUnitTest {
 
+	/***/
 	@Test
 	public void testSoftException() {
 		IOException cause = new IOException("Ups, VFS crashed!");
@@ -27,6 +34,7 @@ public class SoftExceptionUnitTest {
 		assertSame(cause, softException.getCause());
 	}
 
+	/***/
 	@Test
 	public void testSoften_Runtime() {
 		IllegalArgumentException exception = new IllegalArgumentException("bad input");
@@ -34,6 +42,7 @@ public class SoftExceptionUnitTest {
 		assertSame(exception, soften);
 	}
 
+	/***/
 	@Test
 	public void testSoften_Checked() {
 		IOException exception = new IOException("bad file");

@@ -12,16 +12,8 @@
  */
 package net.sf.staccatocommons.lang;
 
-import static net.sf.staccatocommons.lang.Option.none;
-import static net.sf.staccatocommons.lang.Option.nullToNone;
-import static net.sf.staccatocommons.lang.Option.some;
-import static net.sf.staccatocommons.lang.Option.someNull;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static net.sf.staccatocommons.lang.Option.*;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.lang.Option.UndefinedOptionException;
 import net.sf.staccatocommons.lang.provider.Providers;
@@ -36,18 +28,20 @@ import org.junit.Test;
  * @author flbulgarelli
  */
 public class OptionUnitTest extends JUnit4MockObjectTestCase {
-
+	/***/
 	@Test
 	public void testValue_defined() {
 		Integer i = 5;
 		assertSame(i, some(i).value());
 	}
 
+	/***/
 	@Test(expected = UndefinedOptionException.class)
 	public void testValue_undefined() {
 		none().value();
 	}
 
+	/***/
 	@Test
 	public void testIsDefined() {
 		assertTrue(some(5).isDefined());
@@ -55,6 +49,7 @@ public class OptionUnitTest extends JUnit4MockObjectTestCase {
 		assertFalse(none().isDefined());
 	}
 
+	/***/
 	@Test
 	public void testIsUndefined() {
 		assertFalse(some(5).isUndefined());
@@ -62,6 +57,7 @@ public class OptionUnitTest extends JUnit4MockObjectTestCase {
 		assertTrue(none().isUndefined());
 	}
 
+	/***/
 	@Test
 	public void testIsEmpty() {
 		assertFalse(some(5).isEmpty());
@@ -69,14 +65,16 @@ public class OptionUnitTest extends JUnit4MockObjectTestCase {
 		assertTrue(none().isEmpty());
 	}
 
+	/***/
 	@Test
 	public void testSize() {
 		assertEquals(1, some(5).size());
 		assertEquals(0, none().size());
 	}
 
+	/** Test for {@link Option#valueOrNull()} */
 	@Test
-	public void testNullToNone() {
+	public void testValueOrNull() {
 		assertNull(none().valueOrNull());
 		assertNotNull(some("Hello").valueOrNull());
 	}
@@ -94,12 +92,14 @@ public class OptionUnitTest extends JUnit4MockObjectTestCase {
 		assertEquals(9, (int) Option.<Integer> none().valueOrElse(Providers.constant(9)));
 	}
 
+	/** Test for Option#nullTo */
 	@Test
-	public void testNoneToNull() {
+	public void testNullToNone() {
 		assertEquals(none(), nullToNone(null));
 		assertEquals(some("String"), nullToNone("String"));
 	}
 
+	/***/
 	@Test
 	public void testEqualty() throws Exception {
 		assertEquals(some(5), some(5));
