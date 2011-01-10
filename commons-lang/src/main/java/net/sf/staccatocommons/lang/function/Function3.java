@@ -15,6 +15,8 @@ package net.sf.staccatocommons.lang.function;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
+import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.lang.Lazy;
 
 /**
  * A three-arguments function
@@ -71,6 +73,14 @@ public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3
 	 */
 	public <Rp> Function3<T1, T2, T3, Rp> then(final Function<? super R, Rp> other) {
 		return other.of(this);
+	}
+
+	public Provider<R> lazy(final T1 arg1, final T2 arg2, final T3 arg3) {
+		return new Lazy<R>() {
+			protected R init() {
+				return apply(arg1, arg2, arg3);
+			}
+		};
 	}
 
 	public String toString() {

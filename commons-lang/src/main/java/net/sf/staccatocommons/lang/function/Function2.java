@@ -14,6 +14,8 @@ package net.sf.staccatocommons.lang.function;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.lang.Lazy;
 
 /**
  * A two-arguments function, that implements {@link Applicable2}.
@@ -75,6 +77,14 @@ public abstract class Function2<T1, T2, R> implements Applicable2<T1, T2, R>,
 		return new Function2<T2, T1, R>() {
 			public R apply(T2 arg2, T1 arg1) {
 				return Function2.this.apply(arg1, arg2);
+			}
+		};
+	}
+
+	public Provider<R> lazy(final T1 arg1, final T2 arg2) {
+		return new Lazy<R>() {
+			protected R init() {
+				return apply(arg1, arg2);
 			}
 		};
 	}

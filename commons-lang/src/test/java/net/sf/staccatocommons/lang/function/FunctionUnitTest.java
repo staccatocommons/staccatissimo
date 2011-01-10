@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.lang.function;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
@@ -97,5 +97,4 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 		});
 		assertEquals((Long) 10L, f.of(g3).apply('a', "Hello", 5));
 	}
-
 }
