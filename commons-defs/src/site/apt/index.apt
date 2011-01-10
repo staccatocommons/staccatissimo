@@ -1,9 +1,34 @@
 About Staccato-Commons-Defs 
  
- Staccato-Commons-Defs is the abstract definitions minimal library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. It provides very abstract interfaces and annotations with well defined but generic semantics, focused on code and documentation reuse.   
+ Staccato-Commons-Defs is the abstract definitions minimal library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}.
+ It provides very abstract interfaces and annotations with well defined but generic semantics, focused on code and documentation reuse.   
  
 Alpha state 
 
- Staccato-Commons-Defs is currently in alpha state. Although most of previous features are implemented, tested and documented, it is not recommended to use in production systems yet. Types and packages may change in the near future without notice 
+ Staccato-Commons-Defs is currently in alpha state. Although most of previous features are implemented, 
+ tested and documented, it is not recommended to use in production systems yet. Types and packages may change in the near 
+ future without notice 
  
+Getting Started 
+
+ Staccato-Commons-Defs contains no classes, but only interfaces and annotations and as such, it is not very useful by itself, but in combination
+ with the rest of the Staccato-Commons projects. Its key interfaces are:
  
+ * Applicables
+ 
+ * Executables
+ 
+ * Providers
+ 
+ * CollectionLikes and CollectionLikeTypes
+ 
+ * NumberTypes 
+ 
+  In addition to that, the project <encapsulates> some concepts and standards:
+ 
+ * Usage of must, must not, etc. consistent with {{{http://www.ietf.org/rfc/rfc2119.txt}RFC2119}} across Javadoc. This means that
+ whenever such words are used within Staccato-Commons-Defs and the rest of the projects, they
+ must be interpreted following such guidelines.  
+ 
+ * Reuse of documentation regarding properties and semantics of code. This is achieved by a <hierarchy> of source level annotations
+ with its root at <<<net.sf.staccatocommons.defs.restriction.Restriction>>>   
