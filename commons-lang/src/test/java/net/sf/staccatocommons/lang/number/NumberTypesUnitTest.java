@@ -16,7 +16,6 @@ import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static net.sf.staccatocommons.lang.number.Numbers.*;
 import static org.junit.Assert.*;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -34,6 +33,8 @@ public class NumberTypesUnitTest {
 		assertEquals(d(700), bigDecimal().subtract(d(800), d(100)));
 		assertEquals(d(1600), bigDecimal().multiply(d(800), d(2)));
 		assertEquals(d(400), bigDecimal().divide(d(800), d(2)));
+		assertEquals(d(1), bigDecimal().one());
+		assertEquals(d(0), bigDecimal().zero());
 	}
 
 	/**
@@ -45,42 +46,60 @@ public class NumberTypesUnitTest {
 		assertEquals(i(700), bigInteger().subtract(i(800), i(100)));
 		assertEquals(i(1600), bigInteger().multiply(i(800), i(2)));
 		assertEquals(i(400), bigInteger().divide(i(800), i(2)));
+		assertEquals(i(1), bigInteger().one());
+		assertEquals(i(0), bigInteger().zero());
 	}
 
 	/**
 	 * Test method for {@link NumberTypes#double_()}.
 	 */
-	@Ignore
 	@Test
 	public void testDouble_() {
-		fail("Not yet implemented");
+		assertEquals((Double) 192.0, double_().add(64.0, 128.0));
+		assertEquals((Double) 700.0, double_().subtract(800.0, 100.0));
+		assertEquals((Double) 1600.0, double_().multiply(800.0, 2.0));
+		assertEquals((Double) 400.0, double_().divide(800.0, 2.0));
+		assertEquals((Double) 1.0, double_().one());
+		assertEquals((Double) 0.0, double_().zero());
 	}
 
 	/**
 	 * Test method for {@link NumberTypes#float_()}.
 	 */
-	@Ignore
 	@Test
 	public void testFloat_() {
-		fail("Not yet implemented");
+		assertEquals((Float) 192.0f, float_().add(64.0f, 128.0f));
+		assertEquals((Float) 700.0f, float_().subtract(800.0f, 100.0f));
+		assertEquals((Float) 1600.0f, float_().multiply(800.0f, 2.0f));
+		assertEquals((Float) 400.0f, float_().divide(800.0f, 2.0f));
+		assertEquals((Float) 1.0f, float_().one());
+		assertEquals((Float) 0.0f, float_().zero());
 	}
 
 	/**
 	 * Test method for {@link NumberTypes#integer()}.
 	 */
-	@Ignore
 	@Test
 	public void testInteger() {
-		fail("Not yet implemented");
+		assertEquals(900, (int) integer().add(800, 100));
+		assertEquals(700, (int) integer().subtract(800, 100));
+		assertEquals(1600, (int) integer().multiply(800, 2));
+		assertEquals(400, (int) integer().divide(800, 2));
+		assertEquals(1, (int) integer().one());
+		assertEquals(0, (int) integer().zero());
 	}
 
 	/**
 	 * Test method for {@link NumberTypes#long_()}.
 	 */
-	@Ignore
 	@Test
 	public void testLong_() {
-		fail("Not yet implemented");
+		assertEquals(900, (long) long_().add(800L, 100L));
+		assertEquals(700, (long) long_().subtract(800L, 100L));
+		assertEquals(1600, (long) long_().multiply(800L, 2L));
+		assertEquals(400, (long) long_().divide(800L, 2L));
+		assertEquals(1, (long) long_().one());
+		assertEquals(0, (long) long_().zero());
 	}
 
 	/**

@@ -21,27 +21,31 @@ import net.sf.staccatocommons.defs.restriction.SideEffectFree;
 
 /**
  * A Strategy for dealing with {@link Number}s is a polymorphic way.
- * 
+ * <p>
  * All its methods <strong>should</strong> be side efect-free, which implies
  * that arguments their <strong>should</strong> not be mutated, and that return
  * values correspond to new numbers.
- * 
+ * </p>
+ * <p>
  * Although all public JDK {@link Number} classes are immutable, there is no
  * restriction for numbers for being mutable, like for example Apache Commons
- * Lang {@link org.apache.commons.lang.mutable.MutableInt} or
- * {@link org.apache.commons.lang.mutable.MutableDouble}.
- * 
+ * Lang MutableInts
+ * </p>
+ * <p>
  * In those cases, it is valid implement side-effect-full {@link NumberType}s
  * that may mutate its single or first argument, but such implementation
  * <strong>must not</strong> be passed as arguments of methods or constructor
  * that does not clearly state that accept non side-effect-free
  * {@link NumberType}.
- * 
+ * </p>
+ * <p>
  * In both cases, implementors {@link NumberType}s <strong>must not</strong>
  * mutate argument second arguments of methods that take two parameters
- * 
+ * </p>
+ * <p>
  * {@link NumberType} <strong>must</strong> be
  * {@link net.sf.staccatocommons.defs.restriction.Immutable}
+ * </p>
  * 
  * @author flbulgarelli
  * 
@@ -50,6 +54,7 @@ import net.sf.staccatocommons.defs.restriction.SideEffectFree;
  *          of type {@link Number}. However, this type bound is not included in
  *          the {@link NumberType} interface by design reasons an to allow
  *          maximum flexibility
+ * @see <a href="http://en.wikipedia.org/wiki/Type_class">Type class</a>
  */
 @Immutable
 public interface NumberType<A> extends Comparator<A> {
@@ -202,6 +207,13 @@ public interface NumberType<A> extends Comparator<A> {
 	@SideEffectFree
 	Applicable2<A, A, A> add();
 
+	/**
+	 * Answers function that adds the given number to its argument, as specified
+	 * by {@link #add(Object, Object)}
+	 * 
+	 * @return a function that adds its its argument with the given <code>n</code>
+	 *         using this {@link NumberType}
+	 */
 	@SideEffectFree
 	Applicable<A, A> add(A n);
 

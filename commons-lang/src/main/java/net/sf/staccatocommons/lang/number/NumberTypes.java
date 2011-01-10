@@ -15,6 +15,8 @@ package net.sf.staccatocommons.lang.number;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.restriction.SideEffectFree;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.number.internal.BigDecimalType;
@@ -25,6 +27,12 @@ import net.sf.staccatocommons.lang.number.internal.IntegerType;
 import net.sf.staccatocommons.lang.number.internal.LongType;
 
 /**
+ * 
+ * A hub for various {@link NumberType}s standard number classes
+ * <p>
+ * All the methods from number types exposed here are {@link SideEffectFree}
+ * </p>
+ * 
  * @author flbulgarelli
  * 
  */
@@ -33,60 +41,97 @@ public class NumberTypes {
 	/**
 	 * Creates a new {@link NumberTypes}
 	 */
-	private NumberTypes() {
-	}
+	private NumberTypes() {}
 
 	/**
-	 * @return the bigDecimal
+	 * Answers a {@link NumberType} that works with {@link BigDecimal}s
+	 * <p>
+	 * The returned type implements {@link NumberType#one()} and
+	 * {@link NumberType#zero()} so that it returns {@link BigDecimal#ONE} and
+	 * {@link BigDecimal#ZERO}, respectively
+	 * </p>
+	 * 
+	 * @return a {@link BigDecimal} numberType
 	 */
+	@NonNull
 	public static NumberType<BigDecimal> bigDecimal() {
 		return BigDecimalType.TYPE;
 	}
 
 	/**
-	 * @return the bigInteger
+	 * Answers a {@link NumberType} that works with {@link BigInteger}s.
+	 * 
+	 * <p>
+	 * The returned type implements {@link NumberType#one()} and
+	 * {@link NumberType#zero()} so that it returns {@link BigInteger#ONE} and
+	 * {@link BigInteger#ZERO}, respectively
+	 * </p>
+	 * 
+	 * @return a {@link BigInteger} numberType
 	 */
+	@NonNull
 	public static NumberType<BigInteger> bigInteger() {
 		return BigIntegerType.TYPE;
 	}
 
 	/**
-	 * @return the double
+	 * Answers a {@link NumberType} that works with {@link Double}s.
+	 * 
+	 * @return a {@link Double} numberType
 	 */
 	public static NumberType<Double> double_() {
 		return DoubleType.TYPE;
 	}
 
 	/**
-	 * @return the float
+	 * Answers a {@link NumberType} that works with {@link Float}s.
+	 * 
+	 * @return a {@link Float} numberType
 	 */
 	public static NumberType<Float> float_() {
 		return FloatType.TYPE;
 	}
 
 	/**
-	 * @return the integer
+	 * Answers a {@link NumberType} that works with {@link BigInteger}s.
+	 * 
+	 * @return a {@link BigInteger} numberType
 	 */
+	@NonNull
 	public static NumberType<Integer> integer() {
 		return IntegerType.TYPE;
 	}
 
 	/**
-	 * @return the long
+	 * Answers a {@link NumberType} that works with {@link Long}s.
+	 * 
+	 * @return a {@link Long} numberType
 	 */
 	public static NumberType<Long> long_() {
 		return LongType.TYPE;
 	}
 
-	public static Function<BigInteger, BigInteger> add(BigInteger n) {
+	/**
+	 * Shortcut for <code>(Function&lt;BigInteger&gt;) bigInteger().add(n)</code>
+	 */
+	@NonNull
+	public static Function<BigInteger, BigInteger> add(@NonNull BigInteger n) {
 		return BigIntegerType.TYPE.add(n);
 	}
 
-	public static Function<BigDecimal, BigDecimal> add(BigDecimal n) {
+	/**
+	 * Shortcut for <code>(Function&lt;BigDecimal&gt;) bigDecimal().add(n)</code>
+	 */
+	@NonNull
+	public static Function<BigDecimal, BigDecimal> add(@NonNull BigDecimal n) {
 		return BigDecimalType.TYPE.add(n);
 	}
 
-	public static Function<Integer, Integer> add(Integer n) {
+	/**
+	 * Shortcut for <code>(Function&lt;Integer&gt;) integer().add(n)</code>
+	 */
+	@NonNull
+	public static Function<Integer, Integer> add(@NonNull Integer n) {
 		return IntegerType.TYPE.add(n);
 	}
 
