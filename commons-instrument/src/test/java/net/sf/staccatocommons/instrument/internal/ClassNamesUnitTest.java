@@ -12,52 +12,63 @@
  */
 package net.sf.staccatocommons.instrument.internal;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
+
+import net.sf.staccatocommons.io.Directory;
 
 import org.junit.Test;
 
 /**
+ * Test for {@link ClassNames}
+ * 
  * @author flbulgarelli
  * 
  */
 public class ClassNamesUnitTest {
 
 	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.instrument.ClassNames#getClassName(java.io.File)}
-	 * .
+	 * Test method for {@link ClassNames#getClassName(Directory, File)}
 	 */
 	@Test
 	public void testGetClassName_AbsolutePath() {
 		assertEquals("com.foo.Foo",//
 			ClassNames.getClassName(//
-				new File("/home/user/classes"),
+				new Directory("/home/user/classes"),
 				new File("/home/user/classes/com/foo/Foo.class")));
 	}
 
+	/**
+	 * Test method for {@link ClassNames#getClassName(Directory, File)}
+	 */
 	@Test
 	public void testGetClassName_AbsolutePathWithEndSeparator() {
 		assertEquals("com.foo.Foo",//
 			ClassNames.getClassName(//
-				new File("/home/user/classes/"),
+				new Directory("/home/user/classes/"),
 				new File("/home/user/classes/com/foo/Foo.class")));
 	}
 
+	/**
+	 * Test method for {@link ClassNames#getClassName(Directory, File)}
+	 */
 	@Test
 	public void testGetClassName_RelativePaths() {
 		assertEquals("com.foo.Foo",//
 			ClassNames.getClassName(//
-				new File("classes"),
+				new Directory("classes"),
 				new File("classes/com/foo/Foo.class")));
 	}
 
+	/**
+	 * Test method for {@link ClassNames#getClassName(Directory, File)}
+	 */
 	@Test
 	public void testGetClassName_InnerClasses() {
 		assertEquals("com.foo.Foo$Internal",//
 			ClassNames.getClassName(//
-				new File("classes"),
+				new Directory("classes"),
 				new File("classes/com/foo/Foo$Internal.class")));
 	}
 

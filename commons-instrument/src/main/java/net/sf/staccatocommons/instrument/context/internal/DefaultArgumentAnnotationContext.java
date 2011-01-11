@@ -15,6 +15,7 @@ package net.sf.staccatocommons.instrument.context.internal;
 import javassist.ClassPool;
 import javassist.CtBehavior;
 import javassist.CtConstructor;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;
 
 import org.slf4j.Logger;
@@ -33,7 +34,7 @@ public class DefaultArgumentAnnotationContext extends AbstractAnnotationContext 
 	 * 
 	 * Creates a new {@link DefaultArgumentAnnotationContext}
 	 */
-	public DefaultArgumentAnnotationContext(ClassPool pool, Logger logger) {
+	public DefaultArgumentAnnotationContext(@NonNull ClassPool pool, @NonNull Logger logger) {
 		super(pool, logger);
 	}
 

@@ -15,6 +15,8 @@ package net.sf.staccatocommons.instrument.internal;
 import java.io.File;
 import java.util.regex.Pattern;
 
+import net.sf.staccatocommons.io.Directory;
+
 import org.apache.commons.io.FilenameUtils;
 
 /**
@@ -23,7 +25,8 @@ import org.apache.commons.io.FilenameUtils;
  */
 public class ClassNames {
 
-	public static String getClassName(File classDirectory, File classFile) {
+	/** Returns the class name of a given classFile */
+	public static String getClassName(Directory classDirectory, File classFile) {
 		String classFileAbsolutePath = classFile.getAbsolutePath();
 		String classDirectoryAbsolutePath = classDirectory.getAbsolutePath();
 		return FilenameUtils //

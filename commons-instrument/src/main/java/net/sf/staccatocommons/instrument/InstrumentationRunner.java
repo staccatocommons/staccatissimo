@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.instrument;
 
-import static net.sf.staccatocommons.io.IOPredicates.suffix;
+import static net.sf.staccatocommons.io.IOPredicates.*;
 
 import java.io.File;
 
@@ -36,8 +36,7 @@ public final class InstrumentationRunner {
 
 	// TODO improve exception handling, provide more descriptive exceptions
 
-	private InstrumentationRunner() {
-	}
+	private InstrumentationRunner() {}
 
 	/**
 	 * Instruments the given directory, reading each .class file, processing it,
@@ -80,7 +79,7 @@ public final class InstrumentationRunner {
 			this.classPool = pool;
 		}
 
-		private void processAndWriteClass(File baseDir, File classfile) throws Exception {
+		private void processAndWriteClass(Directory baseDir, File classfile) throws Exception {
 			CtClass clazz = classPool.get(ClassNames.getClassName(baseDir, classfile));
 			classInstrumenter.instrumentClass(clazz);
 			if (clazz.isModified())
@@ -90,7 +89,7 @@ public final class InstrumentationRunner {
 
 		private void doInstrument() throws Exception {
 			for (File classfile : processDirectory.getRecurseFileStream().filter(suffix(".class")))
-				processAndWriteClass(processDirectory.getFile(), classfile);
+				processAndWriteClass(processDirectory, classfile);
 		}
 	}
 }

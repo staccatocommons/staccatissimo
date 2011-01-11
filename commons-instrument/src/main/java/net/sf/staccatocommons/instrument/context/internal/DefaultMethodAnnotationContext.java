@@ -28,6 +28,9 @@ public class DefaultMethodAnnotationContext extends AbstractAnnotationContext im
 
 	private CtMethod method;
 
+	/**
+	 * Creates a new {@link DefaultMethodAnnotationContext}
+	 */
 	public DefaultMethodAnnotationContext(ClassPool pool, Logger logger) {
 		super(pool, logger);
 	}

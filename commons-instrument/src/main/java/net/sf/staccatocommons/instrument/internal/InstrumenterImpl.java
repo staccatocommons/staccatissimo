@@ -94,6 +94,10 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 		return this;
 	}
 
+	/**
+	 * Ensures that at least a handler has being registered, and the
+	 * instrumentation mark was set
+	 */
 	public void ensureConfigured() {
 		Validate.throwing(IllegalStateException.class) //
 			.isNotNull("instrumentarionMark", instrumentationMark)

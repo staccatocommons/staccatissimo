@@ -29,6 +29,9 @@ public class AnnotationProcessor<T extends AnnotationHandler> {
 
 	private final Collection<T> handlers;
 
+	/**
+	 * Creates a new {@link AnnotationProcessor}
+	 */
 	public AnnotationProcessor() {
 		this.handlers = new LinkedList<T>();
 	}
@@ -47,6 +50,7 @@ public class AnnotationProcessor<T extends AnnotationHandler> {
 			});
 	}
 
+	/** Adds a handler */
 	public void addHandler(T handler) {
 		this.handlers.add(handler);
 	}

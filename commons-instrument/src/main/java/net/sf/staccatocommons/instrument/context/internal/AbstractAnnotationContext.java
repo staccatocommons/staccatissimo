@@ -15,6 +15,8 @@ package net.sf.staccatocommons.instrument.context.internal;
 import java.util.Set;
 
 import javassist.ClassPool;
+import net.sf.staccatocommons.check.Ensure;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
 import net.sf.staccatocommons.lang.function.Function;
@@ -32,7 +34,12 @@ public class AbstractAnnotationContext implements AnnotationContext {
 
 	private Set<String> presentAnnotations;
 
-	public AbstractAnnotationContext(ClassPool pool, Logger logger) {
+	/**
+	 * Creates a new {@link AbstractAnnotationContext}
+	 */
+	public AbstractAnnotationContext(@NonNull ClassPool pool, @NonNull Logger logger) {
+		Ensure.isNotNull("pool", pool);
+		Ensure.isNotNull("logger", logger);
 		this.logger = logger;
 		this.classPool = pool;
 	}
