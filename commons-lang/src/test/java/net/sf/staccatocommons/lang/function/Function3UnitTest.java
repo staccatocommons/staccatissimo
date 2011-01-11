@@ -14,6 +14,7 @@ package net.sf.staccatocommons.lang.function;
 
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Applicable3;
+import net.sf.staccatocommons.defs.Provider;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -68,5 +69,20 @@ public class Function3UnitTest extends JUnit4MockObjectTestCase {
 	@Test
 	public void testToString() {
 		assertEquals("Function3", function.toString());
+	}
+
+	/** Test for {@link Function3#lazy(Object, Object)} */
+	@Test
+	public void testLazy() throws Exception {
+		Provider<Character> lazy = function.lazy(5, "foo", true);
+		checking(new Expectations() {
+			{
+				one(applicable).apply(5, "foo", true);
+				will(returnValue('a'));
+			}
+		});
+		assertEquals('a', (char) lazy.value());
+		assertEquals('a', (char) lazy.value());
+		assertEquals('a', (char) lazy.value());
 	}
 }

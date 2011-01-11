@@ -15,7 +15,6 @@ package net.sf.staccatocommons.lang.function;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
-import net.sf.staccatocommons.defs.Provider;
 import net.sf.staccatocommons.lang.Lazy;
 
 /**
@@ -75,7 +74,17 @@ public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3
 		return other.of(this);
 	}
 
-	public Provider<R> lazy(final T1 arg1, final T2 arg2, final T3 arg3) {
+	/**
+	 * Lazily applies this function, by returning a {@link Lazy} that will send
+	 * {@link #apply(Object, Object, Object)} when {@link Lazy#value()} is
+	 * evaluated by first time.
+	 * 
+	 * @param arg1
+	 * @param arg2
+	 * @param arg3
+	 * @return a new {@link Lazy}
+	 */
+	public Lazy<R> lazy(final T1 arg1, final T2 arg2, final T3 arg3) {
 		return new Lazy<R>() {
 			protected R init() {
 				return apply(arg1, arg2, arg3);

@@ -114,6 +114,14 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 		};
 	}
 
+	/**
+	 * Lazily applies this function, by returning a {@link Lazy} that will send
+	 * {@link #apply(Object)} when {@link Lazy#value()} is evaluated by first
+	 * time.
+	 * 
+	 * @param arg
+	 * @return a new {@link Lazy}
+	 */
 	public Provider<R> lazy(final T arg) {
 		return new Lazy<R>() {
 			protected R init() {
