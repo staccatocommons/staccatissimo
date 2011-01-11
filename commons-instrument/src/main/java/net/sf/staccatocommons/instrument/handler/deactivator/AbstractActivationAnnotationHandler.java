@@ -16,6 +16,8 @@ import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import net.sf.staccatocommons.check.Ensure;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.handler.AnnotationHandler;
 
 /**
@@ -27,9 +29,15 @@ public abstract class AbstractActivationAnnotationHandler<A extends Annotation> 
 
 	private final Collection<Deactivable> handlers = new LinkedList<Deactivable>();
 
-	public <T extends Deactivable> T addDeactivable(T deactivable) {
+	/**
+	 * Register a deactivable object that will be activated or deactivated after
+	 * the occurrence certain annotation processing events
+	 * 
+	 * @param deactivable
+	 */
+	public void addDeactivable(@NonNull Deactivable deactivable) {
+		Ensure.isNotNull("deactivable", deactivable);
 		handlers.add(deactivable);
-		return deactivable;
 	}
 
 	protected void deactivateAll() {

@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.instrument.context;
 
 import javassist.ClassPool;
+import javassist.CtClass;
 import net.sf.staccatocommons.check.annotation.NonNull;
 
 /**
@@ -46,6 +47,15 @@ public interface AnnotationContext {
 	 * @param arguments
 	 */
 	void logErrorMessage(String message, Object... arguments);
+
+	/**
+	 * Answers the class were the annotated element is declared. If the annotated
+	 * element is already a top level or anonymous class, returns it.
+	 * 
+	 * @return the declaring class of the annotated element
+	 */
+	@NonNull
+	CtClass getDeclaringClass();
 
 	/**
 	 * Returns the class pool in use by the instrumenter

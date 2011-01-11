@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.instrument.context.internal;
 
 import javassist.ClassPool;
+import javassist.CtClass;
 import javassist.CtConstructor;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.ConstructorAnnotationContext;
@@ -40,6 +41,10 @@ public class DefaultConstructorAnnotationContext extends AbstractAnnotationConte
 	 */
 	public CtConstructor getConstructor() {
 		return constructor;
+	}
+
+	public CtClass getDeclaringClass() {
+		return getConstructor().getDeclaringClass();
 	}
 
 	/**

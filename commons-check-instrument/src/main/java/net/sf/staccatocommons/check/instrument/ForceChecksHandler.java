@@ -12,7 +12,9 @@
  */
 package net.sf.staccatocommons.check.instrument;
 
+import javassist.CannotCompileException;
 import net.sf.staccatocommons.check.annotation.ForceChecks;
+import net.sf.staccatocommons.instrument.context.ClassAnnotationContext;
 import net.sf.staccatocommons.instrument.context.ConstructorAnnotationContext;
 import net.sf.staccatocommons.instrument.context.MethodAnnotationContext;
 import net.sf.staccatocommons.instrument.handler.ClassAnnotationHandler;
@@ -57,11 +59,17 @@ public class ForceChecksHandler extends AbstractActivationAnnotationHandler<Forc
 		deactivateAll();
 	}
 
-	public void preProcessAnnotatedClass(ForceChecks annotation) {
+	@Override
+	public void preProcessAnnotatedClass(ForceChecks annotation, ClassAnnotationContext context)
+		throws CannotCompileException {
 		activateAll();
+
 	}
 
-	public void postProcessAnnotatedClass(ForceChecks annotation) {
+	@Override
+	public void postProcessAnnotatedClass(ForceChecks annotation, ClassAnnotationContext context)
+		throws CannotCompileException {
 		deactivateAll();
 	}
+
 }

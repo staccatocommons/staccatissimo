@@ -16,6 +16,7 @@ import java.lang.annotation.Annotation;
 
 import javassist.CannotCompileException;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.instrument.context.ClassAnnotationContext;
 
 /**
  * @author flbulgarelli
@@ -23,8 +24,10 @@ import net.sf.staccatocommons.check.annotation.NonNull;
  */
 public interface ClassAnnotationHandler<A extends Annotation> extends AnnotationHandler<A> {
 
-	void preProcessAnnotatedClass(@NonNull A annotation) throws CannotCompileException;
+	void preProcessAnnotatedClass(@NonNull A annotation, @NonNull ClassAnnotationContext context)
+		throws CannotCompileException;
 
-	void postProcessAnnotatedClass(@NonNull A annotation);
+	void postProcessAnnotatedClass(@NonNull A annotation, @NonNull ClassAnnotationContext context)
+		throws CannotCompileException;
 
 }

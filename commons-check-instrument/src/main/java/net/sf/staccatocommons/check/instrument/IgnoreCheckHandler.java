@@ -12,7 +12,9 @@
  */
 package net.sf.staccatocommons.check.instrument;
 
+import javassist.CannotCompileException;
 import net.sf.staccatocommons.check.annotation.IgnoreChecks;
+import net.sf.staccatocommons.instrument.context.ClassAnnotationContext;
 import net.sf.staccatocommons.instrument.context.ConstructorAnnotationContext;
 import net.sf.staccatocommons.instrument.context.MethodAnnotationContext;
 import net.sf.staccatocommons.instrument.handler.ClassAnnotationHandler;
@@ -57,11 +59,17 @@ public class IgnoreCheckHandler extends AbstractActivationAnnotationHandler<Igno
 		activateAll();
 	}
 
-	public void preProcessAnnotatedClass(IgnoreChecks annotation) {
+	@Override
+	public void preProcessAnnotatedClass(IgnoreChecks annotation, ClassAnnotationContext context)
+		throws CannotCompileException {
 		deactivateAll();
+
 	}
 
-	public void postProcessAnnotatedClass(IgnoreChecks annotation) {
+	@Override
+	public void postProcessAnnotatedClass(IgnoreChecks annotation, ClassAnnotationContext context)
+		throws CannotCompileException {
 		activateAll();
 	}
+
 }

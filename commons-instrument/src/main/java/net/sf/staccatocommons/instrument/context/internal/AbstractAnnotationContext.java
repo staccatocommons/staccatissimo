@@ -27,7 +27,7 @@ import org.slf4j.Logger;
  * @author flbulgarelli
  * 
  */
-public class AbstractAnnotationContext implements AnnotationContext {
+public abstract class AbstractAnnotationContext implements AnnotationContext {
 
 	private final Logger logger;
 	private final ClassPool classPool;
@@ -71,7 +71,7 @@ public class AbstractAnnotationContext implements AnnotationContext {
 		getLogger().error(message, arguments);
 	}
 
-	public ClassPool getClassPool() {
+	public final ClassPool getClassPool() {
 		return classPool;
 	}
 

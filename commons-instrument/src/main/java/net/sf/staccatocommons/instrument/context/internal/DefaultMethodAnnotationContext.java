@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.instrument.context.internal;
 
 import javassist.ClassPool;
+import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 import net.sf.staccatocommons.instrument.context.MethodAnnotationContext;
@@ -55,6 +56,10 @@ public class DefaultMethodAnnotationContext extends AbstractAnnotationContext im
 		return "$_";
 	}
 
+	public CtClass getDeclaringClass() {
+		return getMethod().getDeclaringClass();
+	}
+
 	@Override
 	public boolean isVoid() {
 		try {
@@ -63,5 +68,4 @@ public class DefaultMethodAnnotationContext extends AbstractAnnotationContext im
 			return false;
 		}
 	}
-
 }

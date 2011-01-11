@@ -24,7 +24,9 @@ import javassist.Modifier;
 import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.instrument.config.InstrumentationMark;
 import net.sf.staccatocommons.instrument.config.InstrumenterConfiguration;
+import net.sf.staccatocommons.instrument.context.ClassAnnotationContext;
 import net.sf.staccatocommons.instrument.context.internal.DefaultArgumentAnnotationContext;
+import net.sf.staccatocommons.instrument.context.internal.DefaultClassAnnotationContext;
 import net.sf.staccatocommons.instrument.context.internal.DefaultConstructorAnnotationContext;
 import net.sf.staccatocommons.instrument.context.internal.DefaultMethodAnnotationContext;
 import net.sf.staccatocommons.instrument.handler.AnnotationHandler;
@@ -117,11 +119,13 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 		if (alreadyProcessed(clazz))
 			return;
 
+		final ClassAnnotationContext context = //
+		new DefaultClassAnnotationContext(classPool, handlersLogger, clazz);
 		classProcessor.processUsing(
 			clazz.getAnnotations(),
 			new Block2<Object, ClassAnnotationHandler>() {
 				protected void softExec(Object annotation, ClassAnnotationHandler handler) throws Exception {
-					handler.preProcessAnnotatedClass((Annotation) annotation);
+					handler.preProcessAnnotatedClass((Annotation) annotation, context);
 				}
 			});
 
@@ -136,7 +140,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 			clazz.getAnnotations(),
 			new Block2<Object, ClassAnnotationHandler>() {
 				protected void softExec(Object annotation, ClassAnnotationHandler handler) throws Exception {
-					handler.postProcessAnnotatedClass((Annotation) annotation);
+					handler.postProcessAnnotatedClass((Annotation) annotation, context);
 				}
 			});
 

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team
+ Copyright (c) 2011, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -12,21 +12,22 @@
  */
 package net.sf.staccatocommons.instrument.context;
 
-import javassist.CtConstructor;
+import javassist.CtClass;
 import net.sf.staccatocommons.check.annotation.NonNull;
 
 /**
- * The context of an annotated constructor
+ * The context of an annotated class
  * 
  * @author flbulgarelli
- * 
  */
-public interface ConstructorAnnotationContext extends AnnotationContext {
+public interface ClassAnnotationContext extends AnnotationContext {
 
 	/**
-	 * @return the annotated constructor
+	 * Answers the annotated class
+	 * 
+	 * @return the class
 	 */
 	@NonNull
-	CtConstructor getConstructor();
+	CtClass getAnnotatedClass();
 
 }

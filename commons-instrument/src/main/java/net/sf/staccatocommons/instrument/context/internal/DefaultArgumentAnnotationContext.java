@@ -14,6 +14,7 @@ package net.sf.staccatocommons.instrument.context.internal;
 
 import javassist.ClassPool;
 import javassist.CtBehavior;
+import javassist.CtClass;
 import javassist.CtConstructor;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;
@@ -69,6 +70,10 @@ public class DefaultArgumentAnnotationContext extends AbstractAnnotationContext 
 	 */
 	public void setParameterNumber(int parameterNumber) {
 		this.parameterNumber = parameterNumber;
+	}
+
+	public CtClass getDeclaringClass() {
+		return getArgumentBehavior().getDeclaringClass();
 	}
 
 	@Override
