@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.lang;
 
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.lang.cell.Cell;
 
 /**
  * 
@@ -28,7 +28,7 @@ import net.sf.staccatocommons.defs.Provider;
  * @param <T>
  * 
  */
-public abstract class Lazy<T> implements Provider<T> {
+public abstract class Lazy<T> extends Cell<T> {
 
 	private Option<T> lazyValue = Option.none();
 

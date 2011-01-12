@@ -10,13 +10,14 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.provider.internal;
+package net.sf.staccatocommons.lang.cell.internal;
 
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.defs.Provider;
 import net.sf.staccatocommons.lang.SoftException;
+import net.sf.staccatocommons.lang.cell.Cell;
 
 /**
  * A {@link Provider} that provides the result of calling a {@link Callable}
@@ -26,7 +27,7 @@ import net.sf.staccatocommons.lang.SoftException;
  * 
  * @param <T>
  */
-public class CallableProvider<T> implements Provider<T>, Serializable {
+public class CallableCell<T> extends Cell<T> implements Serializable {
 
 	private static final long serialVersionUID = 6303570980842439165L;
 
@@ -34,13 +35,13 @@ public class CallableProvider<T> implements Provider<T>, Serializable {
 
 	/**
 	 * 
-	 * Creates a new {@link CallableProvider}
+	 * Creates a new {@link CallableCell}
 	 * 
 	 * @param callable
 	 *          the {@link Callable} which will provide the value.
 	 * 
 	 */
-	public CallableProvider(Callable<T> callable) {
+	public CallableCell(Callable<T> callable) {
 		this.callable = callable;
 	}
 

@@ -12,11 +12,9 @@ GNU Lesser General Public License for more details.
  */
 package net.sf.staccatocommons.lang.lifecycle;
 
-import java.util.concurrent.Callable;
-
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.Provider;
 import net.sf.staccatocommons.lang.SoftException;
+import net.sf.staccatocommons.lang.cell.Cell;
 
 /**
  * 
@@ -68,8 +66,7 @@ import net.sf.staccatocommons.lang.SoftException;
  * @param <ResultType>
  *          the type of result returned by this lifecycle
  */
-public abstract class Lifecycle<ResourceType, ResultType> implements Runnable,
-	Callable<ResultType>, Provider<ResultType> {
+public abstract class Lifecycle<ResourceType, ResultType> extends Cell<ResultType> {
 
 	/**
 	 * Executes this {@link Lifecycle}, initializing the resource it handles,
@@ -181,14 +178,6 @@ public abstract class Lifecycle<ResourceType, ResultType> implements Runnable,
 		return executeInternal();
 	}
 
-	/**
-	 * Executes this lifecycle invoking {@link #execute()}
-	 */
-	@Override
-	public void run() {
-		execute();
-	}
-
 	@Override
 	public ResultType value() {
 		return execute();
@@ -245,8 +234,7 @@ public abstract class Lifecycle<ResourceType, ResultType> implements Runnable,
 	 * @throws Exception
 	 *           is any error occurs
 	 */
-	protected void doVoidWork(@NonNull ResourceType resource) throws Exception {
-	}
+	protected void doVoidWork(@NonNull ResourceType resource) throws Exception {}
 
 	/**
 	 * Disposes the resource.
@@ -258,6 +246,5 @@ public abstract class Lifecycle<ResourceType, ResultType> implements Runnable,
 	 * @throws Exception
 	 *           if any error occurs
 	 */
-	protected void dispose(@NonNull ResourceType resource) throws Exception {
-	}
+	protected void dispose(@NonNull ResourceType resource) throws Exception {}
 }

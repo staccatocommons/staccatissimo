@@ -17,8 +17,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
-import net.sf.staccatocommons.defs.Provider;
-import net.sf.staccatocommons.lang.Lazy;
+import net.sf.staccatocommons.lang.function.internal.AbstractApplicable;
 
 /**
  * A one argument function.
@@ -30,7 +29,7 @@ import net.sf.staccatocommons.lang.Lazy;
  * @param <R>
  *          function return type
  */
-public abstract class Function<T, R> implements Applicable<T, R> {
+public abstract class Function<T, R> extends AbstractApplicable<T, R> {
 
 	@Override
 	public abstract R apply(T arg);
@@ -110,22 +109,6 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 		return new Function3<Tp1, Tp2, Tp3, R>() {
 			public R apply(Tp1 arg1, Tp2 arg2, Tp3 arg3) {
 				return Function.this.apply(other.apply(arg1, arg2, arg3));
-			}
-		};
-	}
-
-	/**
-	 * Lazily applies this function, by returning a {@link Lazy} that will send
-	 * {@link #apply(Object)} when {@link Lazy#value()} is evaluated by first
-	 * time.
-	 * 
-	 * @param arg
-	 * @return a new {@link Lazy}
-	 */
-	public Provider<R> lazy(final T arg) {
-		return new Lazy<R>() {
-			protected R init() {
-				return Function.this.apply(arg);
 			}
 		};
 	}

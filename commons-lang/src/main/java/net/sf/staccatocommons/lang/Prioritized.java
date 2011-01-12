@@ -19,6 +19,7 @@ import net.sf.staccatocommons.defs.Provider;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
+import net.sf.staccatocommons.lang.cell.Cell;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.value.BasicEquals;
 
@@ -38,7 +39,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @Value
 @ConditionallyImmutable
 @ConditionallySerializable
-public class Prioritized<T, P extends Comparable<P>> implements Provider<T>,
+public class Prioritized<T, P extends Comparable<P>> extends Cell<T> implements
 	Comparable<Prioritized<T, P>>, Serializable {
 
 	private static final long serialVersionUID = 7131041003021112454L;

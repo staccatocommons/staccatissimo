@@ -10,39 +10,33 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.provider.internal;
+package net.sf.staccatocommons.lang.cell.internal;
 
 import java.io.Serializable;
 
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.lang.cell.Cell;
 
 /**
- * {@link Constant} is a generic {@link Provider} that wraps another object.
+ * Provider of null
  * 
  * @author flbulgarelli
- * 
- * @param <T>
- * 
  */
-public final class Constant<T> implements Provider<T>, Serializable {
+public class NullCell<T> extends Cell<T> implements Serializable {
 
-	private static final long serialVersionUID = -7769276251688297460L;
+	private static final long serialVersionUID = 5879607480007179549L;
+	private static final NullCell instance = new NullCell();
 
-	private final T value;
+	private NullCell() {}
+
+	@Override
+	public T value() {
+		return null;
+	}
 
 	/**
-	 * 
-	 * Creates a new {@link Constant}
-	 * 
-	 * @param value
-	 *          the value to provide
+	 * @return the instance
 	 */
-	public Constant(T value) {
-		this.value = value;
+	public static <T> Cell<T> getInstance() {
+		return instance;
 	}
-
-	public T value() {
-		return value;
-	}
-
 }

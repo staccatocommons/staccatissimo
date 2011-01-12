@@ -15,6 +15,7 @@ package net.sf.staccatocommons.lang.block;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.lang.SoftException;
+import net.sf.staccatocommons.lang.function.internal.AbstractApplicable;
 
 /**
  * An abstract, one argument code block, that implements {@link Executable}
@@ -23,7 +24,7 @@ import net.sf.staccatocommons.lang.SoftException;
  * 
  * @param <T>
  */
-public abstract class Block<T> implements Executable<T> {
+public abstract class Block<T> extends AbstractApplicable<T, Void> implements Executable<T> {
 
 	/**
 	 * Executes this block. This implementation just invokes
@@ -48,7 +49,11 @@ public abstract class Block<T> implements Executable<T> {
 	 * @param argument
 	 * @throws Exception
 	 */
-	protected void softExec(T argument) throws Exception {
+	protected void softExec(T argument) throws Exception {}
+
+	public Void apply(T arg) {
+		exec(arg);
+		return null;
 	}
 
 	/**

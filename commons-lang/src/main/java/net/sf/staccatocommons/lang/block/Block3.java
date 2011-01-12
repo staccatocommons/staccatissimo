@@ -17,6 +17,7 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Executable3;
 import net.sf.staccatocommons.lang.SoftException;
+import net.sf.staccatocommons.lang.function.internal.AbstractApplicable3;
 
 /**
  * 
@@ -26,8 +27,8 @@ import net.sf.staccatocommons.lang.SoftException;
  * @param <T2>
  * @param <T3>
  */
-public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
-	Applicable<T1, Block2<T2, T3>>, Applicable2<T1, T2, Block<T3>> {
+public abstract class Block3<T1, T2, T3> extends AbstractApplicable3<T1, T2, T3, Void> implements
+	Executable3<T1, T2, T3>, Applicable<T1, Block2<T2, T3>>, Applicable2<T1, T2, Block<T3>> {
 
 	/**
 	 * Executes this block. This implementation just invokes
@@ -56,8 +57,12 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 	 *          operation third argument
 	 * @throws Exception
 	 */
-	protected void softExec(T1 arg1, T2 arg2, T3 arg3) throws Exception {
-	}
+	protected void softExec(T1 arg1, T2 arg2, T3 arg3) throws Exception {}
+
+	public Void apply(T1 arg1, T2 arg2, T3 arg3) {
+		exec(arg1, arg2, arg3);
+		return null;
+	};
 
 	@NonNull
 	public Block2<T2, T3> apply(final T1 arg) {

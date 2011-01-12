@@ -14,8 +14,7 @@ package net.sf.staccatocommons.lang.function;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
-import net.sf.staccatocommons.defs.Applicable3;
-import net.sf.staccatocommons.lang.Lazy;
+import net.sf.staccatocommons.lang.function.internal.AbstractApplicable3;
 
 /**
  * A three-arguments function
@@ -33,7 +32,7 @@ import net.sf.staccatocommons.lang.Lazy;
  * 
  * @see Function
  */
-public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3, R>,
+public abstract class Function3<T1, T2, T3, R> extends AbstractApplicable3<T1, T2, T3, R> implements
 	Applicable2<T1, T2, Function<T3, R>>, Applicable<T1, Function2<T2, T3, R>> {
 
 	/**
@@ -72,24 +71,6 @@ public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3
 	 */
 	public <Rp> Function3<T1, T2, T3, Rp> then(final Function<? super R, Rp> other) {
 		return other.of(this);
-	}
-
-	/**
-	 * Lazily applies this function, by returning a {@link Lazy} that will send
-	 * {@link #apply(Object, Object, Object)} when {@link Lazy#value()} is
-	 * evaluated by first time.
-	 * 
-	 * @param arg1
-	 * @param arg2
-	 * @param arg3
-	 * @return a new {@link Lazy}
-	 */
-	public Lazy<R> lazy(final T1 arg1, final T2 arg2, final T3 arg3) {
-		return new Lazy<R>() {
-			protected R init() {
-				return apply(arg1, arg2, arg3);
-			}
-		};
 	}
 
 	public String toString() {

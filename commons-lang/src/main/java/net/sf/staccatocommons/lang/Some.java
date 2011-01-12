@@ -24,7 +24,6 @@ import net.sf.staccatocommons.defs.restriction.Value;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.value.BasicEquals;
 
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -115,11 +114,6 @@ public final class Some<T> extends Option<T> {
 	@Override
 	public boolean isEmpty() {
 		return false;
-	}
-
-	@Override
-	public boolean contains(Object element) {
-		return ObjectUtils.equals(value, element);
 	}
 
 	@Override

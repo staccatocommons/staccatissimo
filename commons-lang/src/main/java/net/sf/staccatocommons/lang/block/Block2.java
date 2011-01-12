@@ -16,6 +16,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Executable2;
 import net.sf.staccatocommons.lang.SoftException;
+import net.sf.staccatocommons.lang.function.internal.AbstractApplicable2;
 
 /**
  * 
@@ -24,7 +25,8 @@ import net.sf.staccatocommons.lang.SoftException;
  * @param <T1>
  * @param <T2>
  */
-public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable<T1, Block<T2>> {
+public abstract class Block2<T1, T2> extends AbstractApplicable2<T1, T2, Void> implements
+	Executable2<T1, T2>, Applicable<T1, Block<T2>> {
 
 	/**
 	 * Executes this block. This implementation just invokes
@@ -47,8 +49,7 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable<
 	 * @param argument
 	 * @throws Exception
 	 */
-	protected void softExec(T1 argument1, T2 argument2) throws Exception {
-	}
+	protected void softExec(T1 argument1, T2 argument2) throws Exception {}
 
 	@NonNull
 	public Block<T2> apply(final T1 argument1) {
@@ -57,6 +58,11 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable<
 				Block2.this.exec(argument1, argument2);
 			}
 		};
+	}
+
+	public Void apply(T1 arg1, T2 arg2) {
+		exec(arg1, arg2);
+		return null;
 	}
 
 	/**

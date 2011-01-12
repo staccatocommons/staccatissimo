@@ -17,13 +17,13 @@ import java.io.Serializable;
 import java.util.Map;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Provider;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
+import net.sf.staccatocommons.lang.cell.Cell;
 
 /**
  * <p>
@@ -66,16 +66,14 @@ import net.sf.staccatocommons.defs.restriction.Value;
 @Value
 @ConditionallyImmutable
 @ConditionallySerializable
-public abstract class Option<T> implements Provider<T>, ContainsAware<T>, Iterable<T>, SizeAware,
-	Serializable {
+public abstract class Option<T> extends Cell<T> implements Iterable<T>, SizeAware, Serializable {
 
 	private static final long serialVersionUID = -4635925023376621559L;
 
 	/**
 	 * Package level visibility to allow subclasses inside package
 	 */
-	Option() {
-	}
+	Option() {}
 
 	/**
 	 * Gets the optional value, if defined, or throws an UndefinedOptionException,

@@ -28,13 +28,13 @@ import net.sf.staccatocommons.collections.iterable.ModifiableIterables;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.lang.cell.Cells;
+import net.sf.staccatocommons.lang.cell.internal.NullCell;
 import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.function.Function2;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
-import net.sf.staccatocommons.lang.provider.Providers;
-import net.sf.staccatocommons.lang.provider.internal.NullProvider;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 
 import org.junit.Ignore;
@@ -76,8 +76,8 @@ public abstract class StreamAbstractTest {
 				}
 			} };
 	@DataPoints
-	public static Provider<Integer>[] providers = new Provider[] { NullProvider.getInstance(), //
-			Providers.constant(90) //
+	public static Provider<Integer>[] providers = new Provider[] { NullCell.getInstance(), //
+			Cells.constant(90) //
 	};
 	@DataPoints
 	public static int[] numbers = new int[] { 0, 1, 2, 4, 90 };
