@@ -53,8 +53,8 @@ public final class InstrumentationRunner {
 	 *          system-dependent, using the platform separator and directory
 	 *          separator
 	 * @throws Exception
-	 * @see {@link File#pathSeparator}
-	 * @see {@link File#separator}
+	 * @see File#pathSeparator
+	 * @see File#separator
 	 */
 	public static void runInstrumentation(@NonNull InstrumenterConfigurer configurer,
 		@NonNull Directory processDirectory, @NonNull String extraPath) throws Exception {

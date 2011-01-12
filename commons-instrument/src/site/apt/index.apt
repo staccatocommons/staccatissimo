@@ -46,7 +46,8 @@ Getting started
 
 ** InstrumenterConfigurer 
 
- As seen before, the configurer is just a callback for registering custom components into the instrumenter, exposed as an <<<InstrumenterConfiguration>>> argument. 
+ As seen before, the configurer is just a callback for registering custom components into the instrumenter,
+ exposed as an <<<InstrumenterConfiguration>>> argument. 
 
 ** AnnotationHandler
 
@@ -55,13 +56,15 @@ four specific handler interfaces, one for each supported annotation
 element: <<<ArgumentAnnotationHandler>>>, <<<ClassAnnotationHandler>>>, <<<ConstructorAnnotationHandler>>> and 
 <<<MethodAnnotationHandler>>>. In addition to specific methods defined by each interface - see each interface javadoc for 
 more details - all handlers need to override the method <<<Class<? extends Annotation>  AnnotationHandler.getSupportedAnnotationType()>>>, 
-which allows the instrumenter to select the proper handler o handlers for each annotation - there is no problem in registering more 
-than one handler for the same 
-annotation, as long as effects of handlers are independent of their execution order. 
+which allows the instrumenter to relate the proper handler o handlers with each annotation - there is no problem in registering more 
+than one handler for the same. 
 
 ** AnnotationContext
 
- TODO
+ AnnotationHandler's methods for performing concrete processing take two arguments: the annotation to process and a context, which represents
+the surrounding the annotation discovered by the instrumenter, which gives access to Javassits API. There are four specific AnnotationContexts
+which correspond to each AnnotationHandler: <<<MethodAnnotationContext>>>, <<<ConstructorAnnotationContext>>>, <<<ArgumentAnnotationContext>>> 
+and <<<ClassAnnotationContext>>>.    
  
 ** InstrumentionMark
 
