@@ -12,11 +12,7 @@
  */
 package net.sf.staccatocommons.testing.junit.jmock;
 
-import java.util.Collection;
-
 import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.Sequence;
 import org.jmock.States;
@@ -26,6 +22,7 @@ import org.jmock.api.Imposteriser;
 import org.jmock.api.MockObjectNamingScheme;
 import org.jmock.integration.junit4.JUnit4Mockery;
 import org.jmock.internal.ExpectationBuilder;
+import org.junit.After;
 
 /**
  * 
@@ -51,8 +48,7 @@ public abstract class JUnit4MockObjectTestCase {
 		context.setDefaultResultForType(type, result);
 	}
 
-	public void setExpectationErrorTranslator(
-		ExpectationErrorTranslator expectationErrorTranslator) {
+	public void setExpectationErrorTranslator(ExpectationErrorTranslator expectationErrorTranslator) {
 		context.setExpectationErrorTranslator(expectationErrorTranslator);
 	}
 
@@ -72,6 +68,7 @@ public abstract class JUnit4MockObjectTestCase {
 		context.addExpectation(expectation);
 	}
 
+	@After
 	public void assertIsSatisfied() {
 		context.assertIsSatisfied();
 	}
