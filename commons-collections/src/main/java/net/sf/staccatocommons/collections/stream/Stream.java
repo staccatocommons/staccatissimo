@@ -57,17 +57,17 @@ import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
  */
 @ConditionallyImmutable
 public interface Stream<A> extends //
-	Iterable<A>, //
-	SizeAware, //
+	Accessible<A>, //
+	Appendabable<A>,//
+	Collectible<A>, //
 	ContainsAware<A>, //
 	Filterable<A>, //
 	Foldable<A>,//
-	Searchable<A>,//
-	Testeable<A>, //
+	Iterable<A>, //
 	Mappable<A>, //
-	Accessible<A>, //
-	Collectible<A>, //
-	Appendabable<A>,//
+	Searchable<A>,//
+	SizeAware, //
+	Testeable<A>, //
 	Zippeable<A> {
 
 	/**

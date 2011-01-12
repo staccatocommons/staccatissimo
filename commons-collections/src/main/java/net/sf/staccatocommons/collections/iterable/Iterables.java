@@ -767,15 +767,25 @@ public class Iterables {
 		return fold(iterable, type.one(), type.multiply());
 	}
 
-	// TODO cross
+	@NonNull
+	public static final <A, B> List<Pair<A, B>> cross(@NonNull Iterable<A> iterable1,
+		@NonNull Iterable<B> iterable2) {
+		return cross(iterable1, iterable2, new LinkedList());
+	}
 
-	// private static final <A, B> List<Pair<A, B>> cross(Iterable<A> iterable1,
-	// Iterable<B> iterable2,
-	// List<Pair<A, B>> result) {
-	// for (A a : iterable1)
-	// for (B b : iterable2) {
-	// result.add(_(a, b));
-	// }
-	// return result;
-	// }
+	@NonNull
+	public static final <A, B> List<Pair<A, B>> cross(@NonNull Collection<A> collection1,
+		@NonNull Collection<B> collection2) {
+		return cross(collection1, collection2, new ArrayList(collection1.size() * collection2.size()));
+	}
+
+	@NonNull
+	private static <A, B> List<Pair<A, B>> cross(@NonNull Iterable<A> iterable1,
+		@NonNull Iterable<B> iterable2, @NonNull List<Pair<A, B>> result) {
+		for (A a : iterable1)
+			for (B b : iterable2) {
+				result.add(_(a, b));
+			}
+		return result;
+	}
 }
