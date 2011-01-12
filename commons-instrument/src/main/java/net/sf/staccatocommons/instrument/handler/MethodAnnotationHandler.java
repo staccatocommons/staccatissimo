@@ -51,8 +51,8 @@ public interface MethodAnnotationHandler<A extends Annotation> extends Annotatio
 	/**
 	 * Process an <code>annotation</code> discovered in a method by the
 	 * instrumenter, instrumenting the given <code>context</code> where the
-	 * annotation was found. This message is sent before discovering any argument
-	 * annotations.
+	 * annotation was found. This message is sent by the instrumenter before
+	 * discovering any argument annotation.
 	 * 
 	 * @param annotation
 	 *          the annotation to process
@@ -67,8 +67,8 @@ public interface MethodAnnotationHandler<A extends Annotation> extends Annotatio
 	/**
 	 * Process an <code>annotation</code> discovered in a method by the
 	 * instrumenter, instrumenting the given <code>context</code> where the
-	 * annotation was found. This message is sent after discovering and processing
-	 * all argument annotations.
+	 * annotation was found. This message is sent by the instrumenter after
+	 * discovering and processing all arguments annotations.
 	 * 
 	 * @param annotation
 	 *          the annotation to process
