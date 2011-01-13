@@ -10,6 +10,7 @@ import net.sf.staccatocommons.lang.number.AbstractNumberType;
  */
 public final class BigIntegerType extends AbstractNumberType<BigInteger> {
 
+	private static final long serialVersionUID = 8595141753229390523L;
 	/**
 	 * An instance
 	 */

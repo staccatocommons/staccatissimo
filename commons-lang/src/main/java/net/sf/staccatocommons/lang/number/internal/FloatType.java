@@ -9,6 +9,7 @@ import net.sf.staccatocommons.lang.number.AbstractNumberType;
  */
 public final class FloatType extends AbstractNumberType<Float> {
 
+	private static final long serialVersionUID = 5307960326139220406L;
 	/**
 	 * An instance
 	 */
@@ -39,10 +40,10 @@ public final class FloatType extends AbstractNumberType<Float> {
 	}
 
 	public Float increment(Float n) {
-		return ++n;
+		return n + 1;
 	}
 
 	public Float decrement(Float n) {
-		return --n;
+		return n - 1;
 	}
 }

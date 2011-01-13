@@ -10,6 +10,7 @@ import net.sf.staccatocommons.lang.number.AbstractNumberType;
  */
 public final class BigDecimalType extends AbstractNumberType<BigDecimal> {
 
+	private static final long serialVersionUID = 4097436616137740515L;
 	/**
 	 * An instance
 	 */

@@ -9,6 +9,7 @@ import net.sf.staccatocommons.lang.number.AbstractNumberType;
  */
 public final class LongType extends AbstractNumberType<Long> {
 
+	private static final long serialVersionUID = -8990585054249024230L;
 	/**
 	 * An instance
 	 */
@@ -39,10 +40,10 @@ public final class LongType extends AbstractNumberType<Long> {
 	}
 
 	public Long increment(Long n) {
-		return ++n;
+		return n + 1;
 	}
 
 	public Long decrement(Long n) {
-		return --n;
+		return n - 1;
 	}
 }

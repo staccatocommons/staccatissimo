@@ -8,6 +8,7 @@ import net.sf.staccatocommons.lang.number.AbstractNumberType;
  */
 public final class IntegerType extends AbstractNumberType<Integer> {
 
+	private static final long serialVersionUID = 6962808802837682697L;
 	/**
 	 * An instance
 	 */
@@ -38,10 +39,10 @@ public final class IntegerType extends AbstractNumberType<Integer> {
 	}
 
 	public Integer increment(Integer n) {
-		return ++n;
+		return n + 1;
 	}
 
 	public Integer decrement(Integer n) {
-		return --n;
+		return n - 1;
 	}
 }

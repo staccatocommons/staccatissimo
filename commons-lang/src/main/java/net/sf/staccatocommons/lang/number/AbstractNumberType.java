@@ -12,6 +12,8 @@
  */
 package net.sf.staccatocommons.lang.number;
 
+import java.io.Serializable;
+
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.function.Function2;
@@ -20,7 +22,10 @@ import net.sf.staccatocommons.lang.function.Function2;
  * @author flbulgarelli
  * 
  */
-public abstract class AbstractNumberType<A extends Number & Comparable> implements NumberType<A> {
+public abstract class AbstractNumberType<A extends Number & Comparable> implements NumberType<A>,
+	Serializable {
+
+	private static final long serialVersionUID = -2727245678088637829L;
 
 	private transient Function2<A, A, A> add = new Add();
 

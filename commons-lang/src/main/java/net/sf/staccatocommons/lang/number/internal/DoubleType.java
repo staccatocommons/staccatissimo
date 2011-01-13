@@ -9,6 +9,7 @@ import net.sf.staccatocommons.lang.number.AbstractNumberType;
  */
 public final class DoubleType extends AbstractNumberType<Double> {
 
+	private static final long serialVersionUID = 2443701983046831362L;
 	/**
 	 * An instance
 	 */
@@ -39,10 +40,10 @@ public final class DoubleType extends AbstractNumberType<Double> {
 	}
 
 	public Double increment(Double n) {
-		return ++n;
+		return n + 1;
 	}
 
 	public Double decrement(Double n) {
-		return --n;
+		return n - 1;
 	}
 }
