@@ -12,12 +12,13 @@
  */
 package net.sf.staccatocommons.lang.block;
 
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.*;
 
 import java.io.IOException;
 
 import net.sf.staccatocommons.defs.Executable2;
 import net.sf.staccatocommons.lang.SoftException;
+import net.sf.staccatocommons.lang.cell.Cell;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.apache.commons.lang.mutable.MutableInt;
@@ -92,6 +93,20 @@ public class Block2UnitTest extends JUnit4MockObjectTestCase {
 		});
 		block.then(otherExecutable).exec(mi, "");
 		assertEquals(6, mi.getValue());
+	}
+
+	/** Test for {@link Block2#delayed(Object, Object)} */
+	@Test
+	public void testDelayed() {
+		MutableInt mi = new MutableInt(10);
+		Cell<Void> delayed = block.delayed(mi, "hello");
+		checking(new Expectations() {
+			{
+				exactly(2).of(executable).exec(new MutableInt(10), "hello");
+			}
+		});
+		delayed.value();
+		delayed.value();
 	}
 
 }

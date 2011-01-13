@@ -14,6 +14,7 @@ package net.sf.staccatocommons.lang.cell;
 
 import java.util.concurrent.Callable;
 
+import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Provider;
 import net.sf.staccatocommons.lang.cell.internal.CallableCell;
@@ -71,7 +72,16 @@ public class Cells {
 		return new CallableCell<A>(callable);
 	}
 
-	public static Cell<Void> from(final Runnable runnable) {
+	/**
+	 * Returns a cell that provides not actual value, but a side effect instead,
+	 * by sending {@link Runnable#run()} to the given <code>runnable</code>
+	 * 
+	 * @param runnable
+	 * @return a new {@link Cell} that wraps the given {@link Runnable}
+	 */
+	@NonNull
+	@ForceChecks
+	public static Cell<Void> from(@NonNull final Runnable runnable) {
 		return new Cell<Void>() {
 			public Void value() {
 				runnable.run();
@@ -80,7 +90,11 @@ public class Cells {
 		};
 	}
 
-	public static <T> Cell<T> from(final Provider<T> provider) {
+	@NonNull
+	@ForceChecks
+	public static <T> Cell<T> from(@NonNull final Provider<T> provider) {
+		if (provider instanceof Cell)
+			return (Cell<T>) provider;
 		return new Cell<T>() {
 			public T value() {
 				return provider.value();

@@ -14,9 +14,10 @@ package net.sf.staccatocommons.lang.block;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Executable2;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.function.internal.AbstractApplicable2;
+import net.sf.staccatocommons.lang.cell.Cell;
 
 /**
  * 
@@ -25,8 +26,8 @@ import net.sf.staccatocommons.lang.function.internal.AbstractApplicable2;
  * @param <T1>
  * @param <T2>
  */
-public abstract class Block2<T1, T2> extends AbstractApplicable2<T1, T2, Void> implements
-	Executable2<T1, T2>, Applicable<T1, Block<T2>> {
+public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2<T1, T2, Void>,
+	Applicable<T1, Block<T2>> {
 
 	/**
 	 * Executes this block. This implementation just invokes
@@ -56,6 +57,23 @@ public abstract class Block2<T1, T2> extends AbstractApplicable2<T1, T2, Void> i
 		return new Block<T2>() {
 			public void exec(T2 argument2) {
 				Block2.this.exec(argument1, argument2);
+			}
+		};
+	}
+
+	/**
+	 * Delays the execution of the {@link Block2} by returing a new Cell that will
+	 * send {@link #exec(Object, Object)} on demand.
+	 * 
+	 * @param arg1
+	 * @param arg2
+	 * @return a new {@link Cell} of type Void that provides a side effect
+	 */
+	@NonNull
+	public Cell<Void> delayed(final T1 arg1, final T2 arg2) {
+		return new Cell<Void>() {
+			public Void value() {
+				return apply(arg1, arg2);
 			}
 		};
 	}

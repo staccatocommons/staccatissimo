@@ -15,9 +15,10 @@ package net.sf.staccatocommons.lang.block;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Executable3;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.function.internal.AbstractApplicable3;
+import net.sf.staccatocommons.lang.cell.Cell;
 
 /**
  * 
@@ -27,8 +28,8 @@ import net.sf.staccatocommons.lang.function.internal.AbstractApplicable3;
  * @param <T2>
  * @param <T3>
  */
-public abstract class Block3<T1, T2, T3> extends AbstractApplicable3<T1, T2, T3, Void> implements
-	Executable3<T1, T2, T3>, Applicable<T1, Block2<T2, T3>>, Applicable2<T1, T2, Block<T3>> {
+public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
+	Applicable3<T1, T2, T3, Void>, Applicable<T1, Block2<T2, T3>>, Applicable2<T1, T2, Block<T3>> {
 
 	/**
 	 * Executes this block. This implementation just invokes
@@ -58,6 +59,23 @@ public abstract class Block3<T1, T2, T3> extends AbstractApplicable3<T1, T2, T3,
 	 * @throws Exception
 	 */
 	protected void softExec(T1 arg1, T2 arg2, T3 arg3) throws Exception {}
+
+	/**
+	 * Delays the execution of the {@link Block3} by returning a new Cell that
+	 * will send {@link #exec(Object, Object, Object)} on demand.
+	 * 
+	 * @param arg1
+	 * @param arg2
+	 * @param arg3
+	 * @return a new {@link Cell} of type Void that provides a side effect
+	 */
+	public Cell<Void> delayed(final T1 arg1, final T2 arg2, final T3 arg3) {
+		return new Cell<Void>() {
+			public Void value() {
+				return apply(arg1, arg2, arg3);
+			}
+		};
+	}
 
 	public Void apply(T1 arg1, T2 arg2, T3 arg3) {
 		exec(arg1, arg2, arg3);

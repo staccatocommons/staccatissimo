@@ -12,16 +12,22 @@
  */
 package net.sf.staccatocommons.lang;
 
+import net.sf.staccatocommons.lang.Lazy.Atomic;
 import net.sf.staccatocommons.lang.cell.Cell;
 
 /**
  * 
  * A {@link Lazy} is an abstract wrapper around a value initialization code that
- * lets it postpone it creation, or even avoid it if not necessary. Client code
- * creating the lazy value just need to extend {@link Lazy} and implement
- * {@link #init()} method. Client code that needs to consume its value, must
- * call {@link #value()}
+ * lets it postpone it creation, or even avoid it if not necessary, and ensure
+ * that initialization is evaluated only once.
+ * <p>
+ * Client code creating the lazy value just need to extend {@link Lazy} and
+ * implement {@link #init()} method. Client code that needs to consume its
+ * value, must call {@link #value()}
+ * </p>
  * 
+ * {@link Lazy} is not thread safe. For a thread safe version, use
+ * {@link Atomic}
  * 
  * @author flbulgarelli
  * 
@@ -50,6 +56,14 @@ public abstract class Lazy<T> extends Cell<T> {
 	@Override
 	public String toString() {
 		return value().toString();
+	}
+
+	public static abstract class Atomic<T> extends Lazy<T> {
+
+		public synchronized T value() {
+			return super.value();
+		}
+
 	}
 
 }

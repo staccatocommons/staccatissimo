@@ -19,7 +19,6 @@ import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.defs.Provider;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.cell.Cells;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -40,8 +39,7 @@ public class CellsUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.cell.Cells#constant(java.lang.Object)}
-	 * .
+	 * {@link net.sf.staccatocommons.lang.cell.Cells#constant(java.lang.Object)} .
 	 */
 	@Test
 	public void testConstant() {
@@ -84,8 +82,8 @@ public class CellsUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.cell.internal.CallableCell#value()}
-	 * when callable throws an exception.
+	 * {@link net.sf.staccatocommons.lang.cell.internal.CallableCell#value()} when
+	 * callable throws an exception.
 	 */
 	@Test(expected = SoftException.class)
 	public void testCallableValue_Exception() {
@@ -99,8 +97,8 @@ public class CellsUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.cell.internal.CallableCell#value()}
-	 * when call succeeds.
+	 * {@link net.sf.staccatocommons.lang.cell.internal.CallableCell#value()} when
+	 * call succeeds.
 	 */
 	@Test
 	public void testCallableValue_OK() {
@@ -111,4 +109,19 @@ public class CellsUnitTest extends JUnit4MockObjectTestCase {
 			}
 		}).value());
 	}
+
+	/**
+	 * Test method for {@link Cells#from(Runnable)}
+	 */
+	@Test
+	public void testRunnable() {
+		final Runnable runnable = mock(Runnable.class);
+		checking(new Expectations() {
+			{
+				one(runnable).run();
+			}
+		});
+		assertNull(Cells.from(runnable).value());
+	}
+
 }
