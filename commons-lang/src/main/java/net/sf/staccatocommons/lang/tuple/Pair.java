@@ -107,7 +107,7 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 
 	@Override
 	public String toString() {
-		return String.format("(%s,%s)", first, second);
+		return val.toString(this);
 	}
 
 	@NonNull

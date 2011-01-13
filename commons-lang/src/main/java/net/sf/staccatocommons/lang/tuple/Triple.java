@@ -151,7 +151,7 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
 
 	@Override
 	public String toString() {
-		return String.format("(%s,%s,%s)", first, second, third);
+		return val.toString(this);
 	}
 
 	@Override

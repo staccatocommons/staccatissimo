@@ -18,8 +18,6 @@ import static org.junit.Assert.*;
 import java.util.Date;
 
 import net.sf.staccatocommons.lang.tuple.Triple;
-import net.sf.staccatocommons.lang.tuple.internal.TupleValue;
-import net.sf.staccatocommons.lang.tuple.internal.TupleValue.Criteria;
 
 import org.junit.Test;
 
@@ -64,6 +62,12 @@ public class TupleValueUnitTest {
 		assertTrue(val.hashCode(_("foo", 5L, '5')) != val.hashCode(_("fii", 5L, '5')));
 		assertTrue(val.hashCode(_("foo", 5L, '5')) != val.hashCode(_("foo", 619L, '5')));
 		assertTrue(val.hashCode(_("foo", 5L, '5')) != val.hashCode(_("foo", 5L, 'a')));
+	}
+
+	/** Test for {@link TupleValue#toString(Object)} **/
+	@Test
+	public void testToString() throws Exception {
+		assertEquals("(1,2,hello)", val.toString(_(1, 2, "hello")));
 	}
 
 }

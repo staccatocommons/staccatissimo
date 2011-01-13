@@ -120,7 +120,7 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 
 	@Override
 	public String toString() {
-		return String.format("(%s,%s,%s,%s)", first, second, third, fourth);
+		return val.toString(this);
 	}
 
 	@NonNull
@@ -129,6 +129,7 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 		return new Object[] { first, second, third, fourth };
 	}
 
+	@Override
 	public int compareTo(Quadruple<T1, T2, T3, T4> other) {
 		return val.compareTo(this, other);
 	}

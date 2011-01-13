@@ -17,6 +17,7 @@ import net.sf.staccatocommons.lang.value.BasicEquals;
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * @author flbulgarelli
@@ -37,6 +38,12 @@ public abstract class TupleValue<A> {
 		return b.toHashCode();
 	}
 
+	public String toString(A this_) {
+		ToStringCriteria b = new ToStringCriteria(this_);
+		significant(this_, b);
+		return b.toString();
+	}
+
 	public int compareTo(A this_, A that) {
 		if (this_ == that)
 			return 0;
@@ -55,9 +62,8 @@ public abstract class TupleValue<A> {
 	}
 
 	private void twoPhaseSignificant(A this_, Object that, TwoPhaseCriteria qb) {
-		qb.setState(TwoPhaseCriteriaState.FIRST_RUN);
 		significant(this_, qb);
-		qb.setState(TwoPhaseCriteriaState.SECOND_RUN);
+		qb.nextRun();
 		significant((A) that, qb);
 	}
 
@@ -68,10 +74,7 @@ public abstract class TupleValue<A> {
 		 */
 		void setCurrentProp(Object o);
 
-		/**
-		 * @param firstRun
-		 */
-		void setState(TwoPhaseCriteriaState firstRun);
+		void nextRun();
 
 		/**
 		 * @return
@@ -93,11 +96,13 @@ public abstract class TupleValue<A> {
 		 */
 		public CompareCriteria(int propsCount) {
 			props = new Object[propsCount];
+			state = TwoPhaseCriteriaState.FIRST_RUN;
+			i = 0;
 		}
 
-		public void setState(TwoPhaseCriteriaState state) {
-			this.state = state;
+		public void nextRun() {
 			i = 0;
+			state = TwoPhaseCriteriaState.SECOND_RUN;
 		}
 
 		public Criteria with(Object o) {
@@ -111,6 +116,22 @@ public abstract class TupleValue<A> {
 
 		public Object getCurrentProp() {
 			return props[i++];
+		}
+
+	}
+
+	private class ToStringCriteria extends ToStringBuilder implements Criteria {
+
+		/**
+		 * Creates a new {@link ToStringCriteria}
+		 */
+		public ToStringCriteria(Object object) {
+			super(object, TupleToStringStyle.getInstance());
+		}
+
+		public Criteria with(Object o) {
+			append(o);
+			return this;
 		}
 
 	}
@@ -134,11 +155,13 @@ public abstract class TupleValue<A> {
 		 */
 		public EqValueBuilder(int propsCount) {
 			props = new Object[propsCount];
+			state = TwoPhaseCriteriaState.FIRST_RUN;
+			i = 0;
 		}
 
-		public void setState(TwoPhaseCriteriaState state) {
-			this.state = state;
+		public void nextRun() {
 			i = 0;
+			state = TwoPhaseCriteriaState.SECOND_RUN;
 		}
 
 		public Criteria with(Object o) {
