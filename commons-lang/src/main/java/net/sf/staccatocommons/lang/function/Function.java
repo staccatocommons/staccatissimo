@@ -25,26 +25,26 @@ import net.sf.staccatocommons.lang.cell.Cell;
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  *          function argument type
- * @param <R>
+ * @param <B>
  *          function return type
  */
-public abstract class Function<T, R> implements Applicable<T, R> {
+public abstract class Function<A, B> implements Applicable<A, B> {
 
 	@Override
-	public abstract R apply(T arg);
+	public abstract B apply(A arg);
 
 	/**
 	 * Composes other function with this.
 	 * 
-	 * @param <Rp>
+	 * @param <C>
 	 * @param other
 	 * @return <code>other.of(this)</code>
 	 */
 	@NonNull
-	public <Rp> Function<T, Rp> then(@NonNull final Function<? super R, Rp> other) {
-		return other.of(this);
+	public <C> Function<A, C> then(@NonNull final Function<? super B, ? extends C> other) {
+		return (Function<A, C>) other.of(this);
 	}
 
 	/**
@@ -53,15 +53,15 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 	 * {@link Function} that when applied returns
 	 * <code>this.apply(other.apply(arg)</code>
 	 * 
-	 * @param <Tp>
+	 * @param <C>
 	 * @param other
-	 * @return a new function, this composed with other
+	 * @return a new function, <code>this</code> composed with <code>other</code>
 	 */
 	@NonNull
 	@ForceChecks
-	public <Tp> Function<Tp, R> of(@NonNull final Applicable<Tp, ? extends T> other) {
-		return new Function<Tp, R>() {
-			public R apply(Tp arg) {
+	public <C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other) {
+		return new Function<C, B>() {
+			public B apply(C arg) {
 				return Function.this.apply(other.apply(arg));
 			}
 		};
@@ -81,10 +81,10 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 	 */
 	@NonNull
 	@ForceChecks
-	public <Tp1, Tp2> Function2<Tp1, Tp2, R> of(
-		@NonNull final Applicable2<Tp1, Tp2, ? extends T> other) {
-		return new Function2<Tp1, Tp2, R>() {
-			public R apply(Tp1 arg1, Tp2 arg2) {
+	public <Tp1, Tp2> Function2<Tp1, Tp2, B> of(
+		@NonNull final Applicable2<Tp1, Tp2, ? extends A> other) {
+		return new Function2<Tp1, Tp2, B>() {
+			public B apply(Tp1 arg1, Tp2 arg2) {
 				return Function.this.apply(other.apply(arg1, arg2));
 			}
 		};
@@ -105,10 +105,10 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 	 */
 	@NonNull
 	@ForceChecks
-	public <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, R> of(
-		@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends T> other) {
-		return new Function3<Tp1, Tp2, Tp3, R>() {
-			public R apply(Tp1 arg1, Tp2 arg2, Tp3 arg3) {
+	public <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(
+		@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other) {
+		return new Function3<Tp1, Tp2, Tp3, B>() {
+			public B apply(Tp1 arg1, Tp2 arg2, Tp3 arg3) {
 				return Function.this.apply(other.apply(arg1, arg2, arg3));
 			}
 		};
@@ -122,9 +122,9 @@ public abstract class Function<T, R> implements Applicable<T, R> {
 	 * @param arg
 	 * @return a new {@link Lazy}
 	 */
-	public Cell<R> lazy(final T arg) {
-		return new Lazy<R>() {
-			protected R init() {
+	public Cell<B> lazy(final A arg) {
+		return new Lazy<B>() {
+			protected B init() {
 				return Function.this.apply(arg);
 			}
 		};

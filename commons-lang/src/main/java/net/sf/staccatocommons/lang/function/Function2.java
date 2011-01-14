@@ -28,28 +28,28 @@ import net.sf.staccatocommons.lang.Lazy;
  * 
  * @author flbulgarelli
  * 
- * @param <T1>
+ * @param <A>
  *          function first argument type
- * @param <T2>
+ * @param <B>
  *          function second argument type
- * @param <R>
+ * @param <C>
  *          function return type
  * 
  */
-public abstract class Function2<T1, T2, R> implements Applicable2<T1, T2, R>,
-	Applicable<T1, Function<T2, R>> {
+public abstract class Function2<A, B, C> implements Applicable2<A, B, C>,
+	Applicable<A, Function<B, C>> {
 
 	/**
 	 * Applies the function
 	 */
-	public abstract R apply(T1 arg1, T2 arg2);
+	public abstract C apply(A arg1, B arg2);
 
 	/**
 	 * Partially applies the function passing just its first parameter
 	 */
-	public Function<T2, R> apply(final T1 arg1) {
-		return new Function<T2, R>() {
-			public R apply(T2 arg2) {
+	public Function<B, C> apply(final A arg1) {
+		return new Function<B, C>() {
+			public C apply(B arg2) {
 				return Function2.this.apply(arg1, arg2);
 			}
 		};
@@ -58,12 +58,12 @@ public abstract class Function2<T1, T2, R> implements Applicable2<T1, T2, R>,
 	/**
 	 * Composes other function with this.
 	 * 
-	 * @param <Rp>
+	 * @param <D>
 	 * @param other
 	 * @return <code>other.of(this)</code>
 	 */
-	public <Rp> Function2<T1, T2, Rp> then(final Function<? super R, Rp> other) {
-		return other.of(this);
+	public <D> Function2<A, B, D> then(final Function<? super C, ? extends D> other) {
+		return (Function2<A, B, D>) other.of(this);
 	}
 
 	/**
@@ -72,9 +72,9 @@ public abstract class Function2<T1, T2, R> implements Applicable2<T1, T2, R>,
 	 * @return a new {@link Function2} that produces the same result of this one
 	 *         when applied, but with arguments flipped
 	 */
-	public Function2<T2, T1, R> flip() {
-		return new Function2<T2, T1, R>() {
-			public R apply(T2 arg2, T1 arg1) {
+	public Function2<B, A, C> flip() {
+		return new Function2<B, A, C>() {
+			public C apply(B arg2, A arg1) {
 				return Function2.this.apply(arg1, arg2);
 			}
 		};
@@ -89,9 +89,9 @@ public abstract class Function2<T1, T2, R> implements Applicable2<T1, T2, R>,
 	 * @param arg2
 	 * @return a new {@link Lazy}
 	 */
-	public Lazy<R> lazy(final T1 arg1, final T2 arg2) {
-		return new Lazy<R>() {
-			protected R init() {
+	public Lazy<C> lazy(final A arg1, final B arg2) {
+		return new Lazy<C>() {
+			protected C init() {
 				return apply(arg1, arg2);
 			}
 		};

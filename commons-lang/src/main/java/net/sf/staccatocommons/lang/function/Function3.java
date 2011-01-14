@@ -22,31 +22,31 @@ import net.sf.staccatocommons.lang.Lazy;
  * 
  * @author flbulgarelli
  * 
- * @param <T1>
+ * @param <A>
  *          function first argument type
- * @param <T2>
+ * @param <B>
  *          function second argument type
- * @param <T3>
+ * @param <C>
  *          function third argument type
- * @param <R>
+ * @param <D>
  *          function return type
  * 
  * @see Function
  */
-public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3, R>,
-	Applicable2<T1, T2, Function<T3, R>>, Applicable<T1, Function2<T2, T3, R>> {
+public abstract class Function3<A, B, C, D> implements Applicable3<A, B, C, D>,
+	Applicable2<A, B, Function<C, D>>, Applicable<A, Function2<B, C, D>> {
 
 	/**
 	 * Applies the function
 	 */
-	public abstract R apply(T1 arg1, T2 arg2, T3 arg3);
+	public abstract D apply(A arg1, B arg2, C arg3);
 
 	/**
 	 * Partially applies the function, passing only its first and second arguments
 	 */
-	public Function<T3, R> apply(final T1 arg1, final T2 arg2) {
-		return new Function<T3, R>() {
-			public R apply(T3 arg3) {
+	public Function<C, D> apply(final A arg1, final B arg2) {
+		return new Function<C, D>() {
+			public D apply(C arg3) {
 				return Function3.this.apply(arg1, arg2, arg3);
 			}
 		};
@@ -55,9 +55,9 @@ public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3
 	/**
 	 * Partially applies the function, passing only its first argument
 	 */
-	public Function2<T2, T3, R> apply(final T1 arg1) {
-		return new Function2<T2, T3, R>() {
-			public R apply(T2 arg2, T3 arg3) {
+	public Function2<B, C, D> apply(final A arg1) {
+		return new Function2<B, C, D>() {
+			public D apply(B arg2, C arg3) {
 				return Function3.this.apply(arg1, arg2, arg3);
 			}
 		};
@@ -66,12 +66,12 @@ public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3
 	/**
 	 * Composes other function with this.
 	 * 
-	 * @param <Rp>
+	 * @param <E>
 	 * @param other
 	 * @return <code>other.of(this)</code>
 	 */
-	public <Rp> Function3<T1, T2, T3, Rp> then(final Function<? super R, Rp> other) {
-		return other.of(this);
+	public <E> Function3<A, B, C, E> then(final Function<? super D, ? extends E> other) {
+		return (Function3<A, B, C, E>) other.of(this);
 	}
 
 	/**
@@ -84,9 +84,9 @@ public abstract class Function3<T1, T2, T3, R> implements Applicable3<T1, T2, T3
 	 * @param arg3
 	 * @return a new {@link Lazy}
 	 */
-	public Lazy<R> lazy(final T1 arg1, final T2 arg2, final T3 arg3) {
-		return new Lazy<R>() {
-			protected R init() {
+	public Lazy<D> lazy(final A arg1, final B arg2, final C arg3) {
+		return new Lazy<D>() {
+			protected D init() {
 				return apply(arg1, arg2, arg3);
 			}
 		};

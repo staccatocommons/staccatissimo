@@ -13,6 +13,8 @@
 package net.sf.staccatocommons.lang.function;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.lang.function.internal.ApplicableFunction;
 import net.sf.staccatocommons.lang.function.internal.Constant;
 import net.sf.staccatocommons.lang.function.internal.Identity;
 
@@ -23,8 +25,7 @@ import net.sf.staccatocommons.lang.function.internal.Identity;
  */
 public class Functions {
 
-	private Functions() {
-	}
+	private Functions() {}
 
 	/**
 	 * Returns the identity function, that is, a {@link Function} that takes an
@@ -49,8 +50,15 @@ public class Functions {
 	 * @return a new constant function
 	 */
 	@NonNull
-	public static <A, B> Function<A, B> constant(final B value) {
+	public static <A, B> Function<A, B> constant(B value) {
 		return new Constant<A, B>(value);
+	}
+
+	@NonNull
+	public static <A, B> Function<A, B> from(@NonNull Applicable<? super A, ? extends B> applicable) {
+		if (applicable instanceof Function)
+			return (Function<A, B>) applicable;
+		return new ApplicableFunction<A, B>(applicable);
 	}
 
 }
