@@ -69,7 +69,7 @@ public abstract class Predicate<T> implements Evaluable<T>, Applicable<T, Boolea
 	 *         and other when evaluated. Non Null
 	 */
 	@NonNull
-	public Predicate<T> or(@NonNull final Evaluable<T> other) {
+	public Predicate<T> or(@NonNull final Evaluable<? super T> other) {
 		final class Or extends Predicate<T> {
 			public boolean eval(T argument) {
 				return Predicate.this.eval(argument) || other.eval(argument);
@@ -88,7 +88,7 @@ public abstract class Predicate<T> implements Evaluable<T>, Applicable<T, Boolea
 	 *         between this and other when evaluated. Non Null
 	 */
 	@NonNull
-	public Predicate<T> and(@NonNull final Evaluable<T> other) {
+	public Predicate<T> and(@NonNull final Evaluable<? super T> other) {
 		final class And extends Predicate<T> {
 			public boolean eval(T argument) {
 				return Predicate.this.eval(argument) && other.eval(argument);

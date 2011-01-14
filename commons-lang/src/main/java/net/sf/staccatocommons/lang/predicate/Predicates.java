@@ -40,8 +40,7 @@ import net.sf.staccatocommons.lang.predicate.internal.True;
  */
 public class Predicates {
 
-	private Predicates() {
-	}
+	private Predicates() {}
 
 	/**
 	 * @param <T>
@@ -334,7 +333,7 @@ public class Predicates {
 	 *         it is a {@link Predicate} already
 	 */
 	@NonNull
-	public static <T> Predicate<T> from(@NonNull Evaluable<T> evaluable) {
+	public static <T> Predicate<T> from(@NonNull Evaluable<? super T> evaluable) {
 		if (evaluable instanceof Predicate)
 			return (Predicate) evaluable;
 		return new EvaluablePredicate<T>(evaluable);

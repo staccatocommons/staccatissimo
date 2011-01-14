@@ -1,7 +1,6 @@
 package net.sf.staccatocommons.lang.predicate.internal;
 
-import static net.sf.staccatocommons.lang.predicate.Predicates.from;
-import static net.sf.staccatocommons.lang.predicate.Predicates.true_;
+import static net.sf.staccatocommons.lang.predicate.Predicates.*;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 
@@ -26,12 +25,12 @@ public final class False<T> extends NonAnnonymousPredicate<T> {
 	}
 
 	@Override
-	public Predicate<T> and(Evaluable<T> other) {
+	public Predicate<T> and(Evaluable<? super T> other) {
 		return this;
 	}
 
 	@Override
-	public Predicate<T> or(Evaluable<T> other) {
+	public Predicate<T> or(Evaluable<? super T> other) {
 		return from(other);
 	}
 
