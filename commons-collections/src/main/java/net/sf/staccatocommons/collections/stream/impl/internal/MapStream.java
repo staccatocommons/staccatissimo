@@ -7,6 +7,7 @@ import net.sf.staccatocommons.collections.internal.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.lang.function.Functions;
 
 /**
  * @author flbulgarelli
@@ -37,6 +38,11 @@ public final class MapStream<A, B> extends AbstractStream<B> {
 				return function.apply(iter.next());
 			}
 		};
+	}
+
+	@Override
+	public <C> Stream<C> map(final Applicable<? super B, ? extends C> function) {
+		return new MapStream<A, C>(stream, Functions.from(function).of(this.function));
 	}
 
 }

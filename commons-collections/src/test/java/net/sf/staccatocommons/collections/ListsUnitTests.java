@@ -1,6 +1,6 @@
 package net.sf.staccatocommons.collections;
 
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.*;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -57,11 +57,6 @@ public class ListsUnitTests {
 	@Test
 	public void testFirst_OK() throws Exception {
 		assertEquals((Integer) 1, Lists.first(Arrays.asList(1, 2, 3)));
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testFirst_BadSize() throws Exception {
-		Lists.first(Arrays.asList());
 	}
 
 	@Test

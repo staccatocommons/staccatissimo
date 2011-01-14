@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.type.NumberType;
 
@@ -66,7 +67,17 @@ public interface Foldable<A> {
 	@NonNull
 	String joinStrings(@NonNull String separator);
 
+	/**
+	 * Sums this {@link Stream} using the given {@link NumberType}
+	 * 
+	 * @param numberType
+	 * @return the result of adding each element of this number type, or zero, if
+	 *         this stream is empty
+	 * @see Iterables#sum(Iterable, NumberType)
+	 */
+	@NonNull
 	A sum(@NonNull NumberType<A> numberType);
 
+	@NonNull
 	A product(@NonNull NumberType<A> numberType);
 }

@@ -7,6 +7,7 @@ import net.sf.staccatocommons.collections.internal.NextGetIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.lang.predicate.Predicates;
 
 /**
  * @author flbulgarelli
@@ -34,5 +35,9 @@ public final class FilterStream<A> extends AbstractStream<A> {
 				return false;
 			}
 		};
+	}
+
+	public Stream<A> filter(Evaluable<? super A> predicate) {
+		return new FilterStream<A>(stream, Predicates.from(this.predicate).and(predicate));
 	}
 }
