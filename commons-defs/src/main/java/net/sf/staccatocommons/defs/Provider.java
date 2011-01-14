@@ -15,25 +15,25 @@ package net.sf.staccatocommons.defs;
 
 /**
  * A {@link Provider} is an object that is capable of returning another one.
- * 
+ * <p>
+ * {@link Provider}s of return type {@link Void} have the semantics compatible
+ * with {@link Runnable}
+ * </p>
  * 
  * @author flbulgarelli
  * 
  * @param <T>
  *          the type of provided value
+ * 
+ * @see Applicative Recomendations for implementing
  */
+@Applicative
 public interface Provider<T> {
 
 	/**
-	 * Returns the value provided. This interfaces does not make any assumptions
-	 * respect of the source of this object nor its nature. It may return always
-	 * the same instance or different one, the same or different implementations,
-	 * etc. This interface does not make any assumptions about the kind of
-	 * {@link RuntimeException} this method could throw.
+	 * Returns the value provided.
 	 * 
-	 * @return the provided object. Nullable, but implementors may guarantee it is
-	 *         non null.
-	 * 
+	 * @return the provided object.
 	 */
 	T value();
 

@@ -13,9 +13,8 @@
 package net.sf.staccatocommons.defs;
 
 /**
- * {@link Applicable}s are transformations that take one argument and whose
- * result is a return value. {@link Applicable}s <strong>should not</strong>
- * have side effects
+ * {@link Applicable}s are transformations that take one argument and have a
+ * return value, by implementing an {@link #apply(Object)} method.
  * 
  * @author flbulgarelli
  * 
@@ -23,12 +22,13 @@ package net.sf.staccatocommons.defs;
  *          argument type
  * @param <R>
  *          return type
+ * @see Applicative Recomendations for implementing
  */
+@Applicative
 public interface Applicable<T, R> {
 
 	/**
 	 * Performs a transformation on the given element, and returns its result.
-	 * This method should <strong>should not</strong> have side effects.
 	 * 
 	 * @param arg
 	 *          the transformation

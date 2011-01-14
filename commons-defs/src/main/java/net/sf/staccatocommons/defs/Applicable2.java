@@ -13,9 +13,8 @@
 package net.sf.staccatocommons.defs;
 
 /**
- * {@link Applicable2}s are transformations that take two arguments and whose
- * result is a return value. {@link Applicable2}s <strong>should not</strong>
- * have side effects
+ * {@link Applicable2}s are transformations that take two arguments have a
+ * return value, by implementing an {@link #apply(Object, Object)} method
  * 
  * @author flbulgarelli
  * 
@@ -25,7 +24,9 @@ package net.sf.staccatocommons.defs;
  *          second argument type
  * @param <R>
  *          return type
+ * @see Applicative Recomendations for implementing
  */
+@Applicative
 public interface Applicable2<T1, T2, R> {
 
 	/**
@@ -33,9 +34,9 @@ public interface Applicable2<T1, T2, R> {
 	 * This method <strong>should not</strong> have side effects
 	 * 
 	 * @param arg1
-	 *          the first computation argument
+	 *          the first transformation argument
 	 * @param arg2
-	 *          the second computation argument
+	 *          the second transformation argument
 	 * @return the transformation result
 	 */
 	R apply(T1 arg1, T2 arg2);

@@ -27,19 +27,20 @@ package net.sf.staccatocommons.defs;
  *          third argument type
  * @param <R>
  *          return type
+ * @see Applicative Recomendations for implementing
  */
+@Applicative
 public interface Applicable3<T1, T2, T3, R> {
 
 	/**
 	 * Performs a transformation on the given element, and returns its result.
-	 * This method <strong>should not</strong> have side effects.
 	 * 
 	 * @param arg1
-	 *          the first computation argument
+	 *          the first transformation argument
 	 * @param arg2
-	 *          the second computation argument
+	 *          the second transformation argument
 	 * @param arg3
-	 *          the third computation argument
+	 *          the third transformation argument
 	 * @return the transformation result
 	 */
 	R apply(T1 arg1, T2 arg2, T3 arg3);

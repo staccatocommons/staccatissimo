@@ -12,15 +12,13 @@
  */
 package net.sf.staccatocommons.defs;
 
-
 /**
- * <p>
  * {@link Executable2}s are computations that take two arguments and whose
  * result is a side effect, instead of a return value.
- * </p>
  * <p>
- * For a more in dept discussion about {@link Executable2}, consult
- * {@link Executable} javadoc.
+ * {@link Executable2} has the same semantics that an {@link Applicable2} of
+ * {@link Void} return type, but is provided for ease of coding. Concrete
+ * implementors <strong>should</strong> implement {@link Applicable2} as well.
  * </p>
  * 
  * @author flbulgarelli
@@ -29,8 +27,9 @@ package net.sf.staccatocommons.defs;
  *          first computation argument type
  * @param <T2>
  *          second computation argument type
- * @see Executable
+ * @see Applicative Recomendations for implementing
  */
+@Applicative
 public interface Executable2<T1, T2> {
 
 	/**

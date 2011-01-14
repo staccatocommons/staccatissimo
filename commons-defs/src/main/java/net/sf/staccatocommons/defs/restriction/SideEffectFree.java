@@ -19,22 +19,34 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * A {@link Restriction} that applies to methods that <strong>must not</strong>
- * have side effects. Methods with such restriction are said to be <i>pure</i>
- * 
+ * Side effect free is a {@link Restriction} that applies to methods that have
+ * no side effects. As a consequence, such methods <strong>must not</strong>
+ * modify the state of its arguments, if any, nor the <code>this</code>
+ * reference, if non-static, nor any attribute in scope.
  * <p>
- * In particular such methods <strong>must not</strong> modify the state of any
- * of its arguments nor the <code>this</code> reference.
+ * When applied to types, it means that all its methods are
+ * {@link SideEffectFree}. As a consequence, statefull classes that are
+ * annotated this way <strong>must</strong> be ummodifiable, as mutators are
+ * inheritely non-side-effect free. Thus there is no reason no annotate
+ * {@link SideEffectFree} classes as {@link Unmodifiable}, as it is implicit.
+ * </p>
+ * <p>
+ * Being {@link SideEffectFree} is necessary but not sufficient for being
+ * referential transparent, thus methods annotated this way <strong>may</strong>
+ * return different results for the same arguments, if any. Such methods should
+ * be annotated with {@link Transparent} instead.
  * </p>
  * 
  * @author flbulgarelli
  * @see <a
- *      href="http://en.wikipedia.org/wiki/Side_effect_(computer_science)">Side effect</a>
+ *      href="http://en.wikipedia.org/wiki/Side_effect_(computer_science)">Side
+ *      effect</a>
+ * @see Transparent
  */
 @Restriction
 @Documented
 @Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.METHOD)
+@Target({ ElementType.METHOD, ElementType.TYPE })
 public @interface SideEffectFree {
 
 }

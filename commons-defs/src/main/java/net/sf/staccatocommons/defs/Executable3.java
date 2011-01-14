@@ -12,15 +12,13 @@
  */
 package net.sf.staccatocommons.defs;
 
-
 /**
- * <p>
  * {@link Executable3}s are computations that take three arguments and whose
  * result is a side effect, instead of a return value.
- * </p>
  * <p>
- * For a more in dept discussion about {@link Executable3}, consult
- * {@link Executable} javadoc.
+ * {@link Executable3} has the same semantics that an {@link Applicable3} of
+ * {@link Void} return type, but is provided for ease of coding. Concrete
+ * implementors <strong>should</strong> implement {@link Applicable3} as well.
  * </p>
  * 
  * @author flbulgarelli
@@ -31,8 +29,9 @@ package net.sf.staccatocommons.defs;
  *          second computation argument type
  * @param <T3>
  *          third computation argument type
- * @see Executable
+ * @see Applicative Recomendations for implementing
  */
+@Applicative
 public interface Executable3<T1, T2, T3> {
 
 	/**

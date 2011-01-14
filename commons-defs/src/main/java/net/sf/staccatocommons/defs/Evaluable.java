@@ -15,14 +15,20 @@ package net.sf.staccatocommons.defs;
 /**
  * {@link Evaluable}s are boolean conditions over an argument that can be tested
  * using its {@link #eval(Object)} message.
- * 
- * {@link Evaluable}s <strong>must not</strong> have side effects
+ * <p>
+ * {@link Evaluable} has the same semantics that an {@link Applicable} of
+ * {@link Boolean} return type, but is provided for ease of coding. Concrete
+ * implementors <strong>should</strong> implement {@link Applicable} as well.
+ * </p>
  * 
  * @author flbulgarelli
  * 
  * @param <T>
  *          the type of object that can be evaluated
+ * 
+ * @see Applicative Recomendations for implementing
  */
+@Applicative
 public interface Evaluable<T> {
 
 	/**
