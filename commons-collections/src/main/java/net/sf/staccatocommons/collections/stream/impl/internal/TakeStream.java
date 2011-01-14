@@ -1,5 +1,7 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
+import static java.lang.Math.*;
+
 import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
@@ -38,5 +40,10 @@ public final class TakeStream<A> extends AbstractStream<A> {
 				return iter.next();
 			}
 		};
+	}
+
+	@Override
+	public Stream<A> take(int amountOfElements) {
+		return new TakeStream<A>(stream, min(amountOfElements, this.amountOfElements));
 	}
 }

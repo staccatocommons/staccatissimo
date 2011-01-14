@@ -7,6 +7,7 @@ import net.sf.staccatocommons.collections.internal.NextGetIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.lang.predicate.Predicates;
 
 /**
  * @author flbulgarelli
@@ -31,5 +32,9 @@ public final class TakeWhileStream<A> extends AbstractStream<A> {
 				return iter.hasNext() && predicate.eval(setNext(iter.next()));
 			}
 		};
+	}
+
+	public Stream<A> takeWhile(Evaluable<? super A> predicate) {
+		return new TakeWhileStream<A>(stream, Predicates.from(this.predicate).and(predicate));
 	}
 }
