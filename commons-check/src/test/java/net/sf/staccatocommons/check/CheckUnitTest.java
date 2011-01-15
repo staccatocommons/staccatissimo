@@ -57,31 +57,37 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
 		c.matches(VAR_NAME, "hello", Pattern.compile(".ola."));
 	}
 
+	/** Test for {@link Check#isNotNegative(String, Long)} */
 	@Test(expected = IllegalArgumentException.class)
 	public void testisNotNegativeLong() {
 		c.isNotNegative(VAR_NAME, -5L);
 	}
 
+	/***/
 	@Test(expected = IllegalArgumentException.class)
 	public void testisNotNegativeInt() {
 		c.isNotNegative(VAR_NAME, -5);
 	}
 
+	/***/
 	@Test(expected = IllegalArgumentException.class)
 	public void testisNotNegativeDouble() {
 		c.isNotNegative(VAR_NAME, -5.9);
 	}
 
+	/***/
 	@Test(expected = IllegalArgumentException.class)
 	public void testisNotNegativeFloat() {
 		c.isNotNegative(VAR_NAME, -5f);
 	}
 
+	/***/
 	@Test(expected = IllegalArgumentException.class)
 	public void testisNotNegativeBigDecimal() {
 		c.isNotNegative(VAR_NAME, BigDecimal.valueOf(-9.69));
 	}
 
+	/***/
 	@Test(expected = IllegalArgumentException.class)
 	public void testisNotNegativeBigInteger() {
 		c.isNotNegative(VAR_NAME, BigInteger.valueOf(-9));
@@ -242,7 +248,12 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
 					return false;
 				}
 			}, 5);
+	}
 
+	/** Test for {@link Check#isSize(String, Object, int, SizeAwareType)} */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSize_Fail() throws Exception {
+		c.isSize(VAR_NAME, Arrays.asList(4, 5, 6), 2);
 	}
 
 	/**
@@ -307,6 +318,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
 		c.isInstanceOf(VAR_NAME, 5, Number.class);
 	}
 
+	/** Test for {@link Check#isTrue(String, boolean)} */
 	@Test
 	public void testIsTrue() {
 		c.isTrue(VAR_NAME, true);

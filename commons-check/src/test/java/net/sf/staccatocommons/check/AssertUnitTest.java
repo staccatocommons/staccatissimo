@@ -47,4 +47,12 @@ public class AssertUnitTest {
 			assertEquals("foo=[5] : it should haven been 4", e.getMessage());
 		}
 	}
+
+	/** Test for shortcuts */
+	@Test
+	public void testShortcuts() throws Exception {
+		Assert.isNotNull("var", 5);
+		Assert.isNull("var", null);
+	}
+
 }

@@ -1,6 +1,6 @@
 package net.sf.staccatocommons.lang.format;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.check.format.VariableFormatter;
 
 import org.junit.Test;
@@ -13,6 +13,7 @@ import org.junit.Test;
  */
 public class VariableFormatterUnitTest {
 
+	/***/
 	@Test
 	public void testFormatStringObject() {
 		VariableFormatter formatter = new VariableFormatter();
@@ -20,6 +21,7 @@ public class VariableFormatterUnitTest {
 		assertEquals("myVar=[null]", formatter.format("myVar", null));
 	}
 
+	/***/
 	@Test
 	public void testFormatStringStringObject() {
 		VariableFormatter formatter = new VariableFormatter();
@@ -28,6 +30,7 @@ public class VariableFormatterUnitTest {
 
 	}
 
+	/***/
 	@Test
 	public void testFormatStringStringObjectString() {
 		VariableFormatter formatter = new VariableFormatter();
