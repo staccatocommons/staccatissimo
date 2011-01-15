@@ -54,6 +54,19 @@ public class Functions {
 		return new Constant<A, B>(value);
 	}
 
+	/**
+	 * Converts the given {@link Applicable} into a {@link Function} by casting
+	 * it, is possible, or creating a new function that delegates its apply method
+	 * to it.
+	 * 
+	 * @param <A>
+	 * @param <B>
+	 * @param applicable
+	 *          the {@link Applicable} to convert
+	 * @return new a function that applies the given {@link Applicable}, if it is
+	 *         not already a {@link Function}, or the given
+	 *         <code>applicable</code> casted to {@link Function}, otherwise
+	 */
 	@NonNull
 	public static <A, B> Function<A, B> from(@NonNull Applicable<? super A, ? extends B> applicable) {
 		if (applicable instanceof Function)

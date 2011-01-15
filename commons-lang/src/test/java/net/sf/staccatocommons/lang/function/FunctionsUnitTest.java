@@ -12,8 +12,11 @@
  */
 package net.sf.staccatocommons.lang.function;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
+import org.jmock.Expectations;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,14 +24,13 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class FunctionsUnitTest {
+public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
-	}
+	public void setUp() throws Exception {}
 
 	/**
 	 * Test method for
@@ -51,5 +53,20 @@ public class FunctionsUnitTest {
 		assertSame(i, Functions.constant(i).apply(1));
 		assertSame(i, Functions.constant(i).apply(0));
 		assertSame(i, Functions.constant(i).apply(2));
+	}
+
+	/** Test for {@link Functions#from(Applicable)} */
+	@Test
+	public void testFromApplicable() throws Exception {
+		final Applicable<Integer, Character> applicable = mock(Applicable.class);
+
+		checking(new Expectations() {
+			{
+				one(applicable).apply(5);
+				will(returnValue('a'));
+			}
+		});
+		assertEquals((Character) 'a', Functions.from(applicable).apply(5));
+		assertSame(Functions.identity(), Functions.from(Functions.identity()));
 	}
 }

@@ -27,6 +27,13 @@ public abstract class TupleValue<A> {
 
 	private int significantAttributesCount;
 
+	/**
+	 * Creates a new {@link TupleValue}
+	 * 
+	 * @param the
+	 *          number of significant properties that determine the value of an
+	 *          object of type A
+	 */
 	public TupleValue(int significantAttributesCount) {
 		super();
 		this.significantAttributesCount = significantAttributesCount;
@@ -67,21 +74,19 @@ public abstract class TupleValue<A> {
 		significant((A) that, qb);
 	}
 
-	public static interface TwoPhaseCriteria extends Criteria {
+	public interface Criteria {
+		public Criteria with(Object o);
+	}
 
-		/**
-		 * @param o
-		 */
+	private static interface TwoPhaseCriteria extends Criteria {
+
 		void setCurrentProp(Object o);
 
 		void nextRun();
 
-		/**
-		 * @return
-		 */
 		Object getCurrentProp();
 
-		public Object append(Object o1, Object o2);
+		Object append(Object o1, Object o2);
 
 	}
 
@@ -179,10 +184,6 @@ public abstract class TupleValue<A> {
 	}
 
 	protected abstract void significant(A o, Criteria b);
-
-	public interface Criteria {
-		public Criteria with(Object o);
-	}
 
 	private enum TwoPhaseCriteriaState {
 
