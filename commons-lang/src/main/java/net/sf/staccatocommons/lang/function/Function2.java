@@ -74,8 +74,8 @@ public abstract class Function2<A, B, C> implements Applicable2<A, B, C>,
 	 * @param other
 	 * @return <code>other.of(this)</code>
 	 */
-	public <D> Function2<A, B, D> then(final Function<? super C, ? extends D> other) {
-		return (Function2<A, B, D>) other.of(this);
+	public <D> Function2<A, B, D> then(final Applicable<? super C, ? extends D> other) {
+		return Functions.from(other).of(this);
 	}
 
 	/**

@@ -44,8 +44,9 @@ public abstract class Function<A, B> implements Applicable<A, B> {
 	 * @return <code>other.of(this)</code>
 	 */
 	@NonNull
-	public <C> Function<A, C> then(@NonNull final Function<? super B, ? extends C> other) {
-		return (Function<A, C>) other.of(this);
+	public <C> Function<A, C> then(@NonNull final Applicable<? super B, ? extends C> other) {
+		/* the unnecessary cast is a hack for eclipse compiler */
+		return Functions.from(other).of((Applicable) this);
 	}
 
 	@NonNull
