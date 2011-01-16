@@ -15,6 +15,7 @@ package net.sf.staccatocommons.instrument.handler;
 import java.lang.annotation.Annotation;
 
 import javassist.CannotCompileException;
+import javassist.NotFoundException;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;
 
@@ -37,8 +38,10 @@ public interface ArgumentAnnotationHandler<A extends Annotation> extends Annotat
 	 *          the instrumentable context where the annotation was found
 	 * @throws CannotCompileException
 	 *           if any compilation errors occurs
+	 * @throws NotFoundException
+	 *           if any type needed by instrumentation was not found
 	 */
 	void processAnnotatedArgument(@NonNull A annotation, @NonNull ArgumentAnnotationContext context)
-		throws CannotCompileException;
+		throws CannotCompileException, NotFoundException;
 
 }

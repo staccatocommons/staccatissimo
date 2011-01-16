@@ -112,4 +112,22 @@ public class InstrumentationManualTest {
 		new Mock().defaultNotNegative(-5);
 	}
 
+	/** Test for {@link MinSizeHandler} */
+	@Test(expected = IllegalArgumentException.class)
+	public void testMinSize() throws Exception {
+		new Mock().defaulMinSize(Arrays.asList(5, 6, 9));
+	}
+
+	/** Test for {@link MaxSizeHandler} */
+	@Test(expected = IllegalArgumentException.class)
+	public void testMaxSize() throws Exception {
+		new Mock().defaulMaxSize(Arrays.asList(5, 6, 9));
+	}
+
+	// /** Test for {@link NotZeroHandler} */
+	// @Test(expected = IllegalArgumentException.class)
+	// public void testNotZero() throws Exception {
+	// new Mock().defaulNotZero(0L);
+	// }
+
 }

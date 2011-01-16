@@ -19,7 +19,6 @@ import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.ClassAnnotationContext;
 import net.sf.staccatocommons.lang.Nulls;
-import net.sf.staccatocommons.lang.SoftException;
 
 import org.slf4j.Logger;
 
@@ -46,12 +45,12 @@ public class DefaultClassAnnotationContext extends AbstractAnnotationContext imp
 		return clazz;
 	}
 
-	public CtClass getDeclaringClass() {
-		try {
-			return Nulls.coalesce(clazz.getDeclaringClass(), clazz);
-		} catch (NotFoundException e) {
-			throw SoftException.soften(e);
-		}
+	public CtClass getDeclaringClass() throws NotFoundException {
+		return Nulls.coalesce(clazz.getDeclaringClass(), clazz);
+	}
+
+	public CtClass getElementType() throws NotFoundException {
+		return clazz;
 	}
 
 }

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team
+ Copyright (c) 2011, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -12,33 +12,39 @@
  */
 package net.sf.staccatocommons.check.instrument;
 
-import net.sf.staccatocommons.check.annotation.Positive;
+import javassist.NotFoundException;
+import net.sf.staccatocommons.check.annotation.MinSize;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class PositiveHandler extends AbstractCheckAnnotationHandler<Positive> {
+public class MinSizeHandler extends AbstractCheckAnnotationHandler<MinSize> {
 
 	/**
-	 * Creates a new {@link PositiveHandler}
+	 * Creates a new {@link MinSizeHandler}
 	 */
-	public PositiveHandler(boolean ignoreReturns) {
+	public MinSizeHandler(boolean ignoreReturns) {
 		super(ignoreReturns);
 	}
 
-	public Class<Positive> getSupportedAnnotationType() {
-		return Positive.class;
+	public Class<MinSize> getSupportedAnnotationType() {
+		return MinSize.class;
 	}
 
 	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		Positive annotation, AnnotationContext context) {
-		return String.format("that().isPositive( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
+		MinSize annotation, AnnotationContext context) throws NotFoundException {
+		return String.format(
+			"that().isMinSize( \"%s\", %s, %s, %s)",
+			argumentMnemonic,
+			argumentIdentifier,
+			annotation.value(),
+			SizeAwareTypeCode.getSizeAwareCode(context));
 	}
 
-	protected String getVarMnemonic(Positive annotation) {
-		return annotation.value();
+	protected String getVarMnemonic(MinSize annotation) {
+		return annotation.var();
 	}
 
 }

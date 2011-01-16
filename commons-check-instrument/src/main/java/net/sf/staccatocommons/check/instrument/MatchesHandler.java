@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.check.instrument;
 
 import net.sf.staccatocommons.check.annotation.Matches;
+import net.sf.staccatocommons.instrument.context.AnnotationContext;
 
 /**
  * @author flbulgarelli
@@ -33,7 +34,7 @@ public class MatchesHandler extends AbstractCheckAnnotationHandler<Matches> {
 	}
 
 	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		Matches annotation) {
+		Matches annotation, AnnotationContext context) {
 		return String.format(
 			"that().matches( \"%s\", %s, \"%s\")",
 			argumentMnemonic,

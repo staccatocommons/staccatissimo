@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.check.instrument;
 
 import net.sf.staccatocommons.check.annotation.NotNegative;
+import net.sf.staccatocommons.instrument.context.AnnotationContext;
 
 /**
  * @author flbulgarelli
@@ -32,7 +33,7 @@ public class NotNegativeHandler extends AbstractCheckAnnotationHandler<NotNegati
 	}
 
 	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		NotNegative annotation) {
+		NotNegative annotation, AnnotationContext context) {
 		return String.format("that().isNotNegative( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
 	}
 

@@ -41,6 +41,9 @@ public class AnnotationProcessor<T extends AnnotationHandler> {
 			getHandler(annotation).ifDefined(block.apply(annotation));
 	}
 
+	// FIXME not consistent with documentation, if more than one is found that can
+	// process, the rest are ignored
+	// TODO linear time, should use a multimap
 	private Option<T> getHandler(final Object annotation) {
 		return Streams.from(handlers).findOrNone(//
 			new Predicate<T>() {

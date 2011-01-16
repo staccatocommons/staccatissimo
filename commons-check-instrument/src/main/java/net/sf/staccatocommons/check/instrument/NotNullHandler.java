@@ -13,7 +13,9 @@
 package net.sf.staccatocommons.check.instrument;
 
 import javassist.CannotCompileException;
+import javassist.NotFoundException;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.instrument.context.AnnotationContext;
 import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;
 
 /**
@@ -40,7 +42,7 @@ public class NotNullHandler extends AbstractCheckAnnotationHandler<NonNull> {
 	}
 
 	public void processAnnotatedArgument(NonNull annotation, ArgumentAnnotationContext context)
-		throws CannotCompileException {
+		throws CannotCompileException, NotFoundException {
 		if (context.isConstructorArgument()) {
 			super.processAnnotatedArgument(annotation, context);
 		} else {
@@ -52,7 +54,7 @@ public class NotNullHandler extends AbstractCheckAnnotationHandler<NonNull> {
 
 	@Override
 	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		NonNull annotation) {
+		NonNull annotation, AnnotationContext context) {
 		return String.format("isNotNull( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
 	}
 

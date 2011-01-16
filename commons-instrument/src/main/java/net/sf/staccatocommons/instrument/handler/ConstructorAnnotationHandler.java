@@ -15,6 +15,7 @@ package net.sf.staccatocommons.instrument.handler;
 import java.lang.annotation.Annotation;
 
 import javassist.CannotCompileException;
+import javassist.NotFoundException;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.ConstructorAnnotationContext;
 
@@ -36,9 +37,11 @@ public interface ConstructorAnnotationHandler<A extends Annotation> extends Anno
 	 *          the instrumentable context where the annotation was found
 	 * @throws CannotCompileException
 	 *           if compilation errors occur during instrumentation
+	 * @throws NotFoundException
+	 *           if any type needed by instrumentation was not found
 	 */
 	void preProcessAnnotatedConstructor(@NonNull A annotation,
-		@NonNull ConstructorAnnotationContext context) throws CannotCompileException;
+		@NonNull ConstructorAnnotationContext context) throws CannotCompileException, NotFoundException;
 
 	/**
 	 * Process an <code>annotation</code> discovered in a constructor by the
@@ -52,8 +55,10 @@ public interface ConstructorAnnotationHandler<A extends Annotation> extends Anno
 	 *          the instrumentable context where the annotation was found
 	 * @throws CannotCompileException
 	 *           if compilation errors occur during instrumentation
+	 * @throws NotFoundException
+	 *           if any type needed by instrumentation was not found
 	 */
 	void postProcessAnnotatedConstructor(@NonNull A annotation,
-		@NonNull ConstructorAnnotationContext context) throws CannotCompileException;
+		@NonNull ConstructorAnnotationContext context) throws CannotCompileException, NotFoundException;
 
 }

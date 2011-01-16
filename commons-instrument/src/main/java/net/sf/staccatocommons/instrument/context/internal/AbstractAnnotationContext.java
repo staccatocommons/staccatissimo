@@ -15,6 +15,8 @@ package net.sf.staccatocommons.instrument.context.internal;
 import java.util.Set;
 
 import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.NotFoundException;
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Streams;
@@ -73,6 +75,11 @@ public abstract class AbstractAnnotationContext implements AnnotationContext {
 
 	public final ClassPool getClassPool() {
 		return classPool;
+	}
+
+	public CtClass getClass(String className) throws NotFoundException {
+		Ensure.isNotNull("className", className);
+		return getClassPool().get(className);
 	}
 
 	/**

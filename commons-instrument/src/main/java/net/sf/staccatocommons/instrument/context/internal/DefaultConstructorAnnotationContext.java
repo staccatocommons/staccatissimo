@@ -15,6 +15,7 @@ package net.sf.staccatocommons.instrument.context.internal;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtConstructor;
+import javassist.NotFoundException;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.ConstructorAnnotationContext;
 
@@ -53,6 +54,10 @@ public class DefaultConstructorAnnotationContext extends AbstractAnnotationConte
 	 */
 	public void setConstructor(CtConstructor constructor) {
 		this.constructor = constructor;
+	}
+
+	public CtClass getElementType() throws NotFoundException {
+		return constructor.getDeclaringClass();
 	}
 
 }

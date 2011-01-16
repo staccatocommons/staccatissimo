@@ -16,6 +16,7 @@ import javassist.ClassPool;
 import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.CtConstructor;
+import javassist.NotFoundException;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;
 
@@ -81,4 +82,7 @@ public class DefaultArgumentAnnotationContext extends AbstractAnnotationContext 
 		return "$" + (getArgumentNumber() + 1);
 	}
 
+	public CtClass getElementType() throws NotFoundException {
+		return getArgumentBehavior().getParameterTypes()[getArgumentNumber()];
+	}
 }

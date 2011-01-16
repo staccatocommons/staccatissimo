@@ -16,6 +16,7 @@ import java.lang.annotation.Annotation;
 
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
+import javassist.NotFoundException;
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
 import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;
@@ -53,7 +54,7 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 
 	@Override
 	public void processAnnotatedArgument(T annotation, ArgumentAnnotationContext context)
-		throws CannotCompileException {
+		throws CannotCompileException, NotFoundException {
 		if (!deactivableSupport.isActive())
 			return;
 		try {
@@ -66,11 +67,14 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 	}
 
 	@Override
-	public void preProcessAnnotatedMethod(T annotation, MethodAnnotationContext context) {
+	public void preProcessAnnotatedMethod(T annotation, MethodAnnotationContext context)
+		throws NotFoundException {
 		if (ignoreReturns || !deactivableSupport.isActive())
 			return;
 		// TODO handle properly
-		Ensure.that(!context.isVoid(), "Context must not be void: %s", context.getMethod().getLongName());
+		Ensure.that(!context.isVoid(), "Context must not be void: %s", context
+			.getMethod()
+			.getLongName());
 		try {
 			context.getMethod().insertAfter(
 				ASSERT_FULLY_QUALIFIED_NAME + createMethodCheck(annotation, context) + ";");
@@ -87,25 +91,28 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 	}
 
 	@Override
-	public void postProcessAnnotatedMethod(T annotation, MethodAnnotationContext context) {
-	}
+	public void postProcessAnnotatedMethod(T annotation, MethodAnnotationContext context) {}
 
-	protected String createArgumentCheck(T annotation, ArgumentAnnotationContext context) {
+	protected String createArgumentCheck(T annotation, ArgumentAnnotationContext context)
+		throws NotFoundException {
 		return createCheckCode(
 			getArgumentMnemonic(context, getVarMnemonic(annotation)),
 			context.getArgumentIdentifier(),
-			annotation);
+			annotation,
+			context);
 	}
 
 	private String getArgumentMnemonic(ArgumentAnnotationContext context, String annotatedVarName) {
 		return annotatedVarName.isEmpty() ? "var" + context.getArgumentNumber() : annotatedVarName;
 	}
 
-	private String createMethodCheck(T annotation, MethodAnnotationContext context) {
+	private String createMethodCheck(T annotation, MethodAnnotationContext context)
+		throws NotFoundException {
 		return createCheckCode(
 			getReturnName(getVarMnemonic(annotation)),
 			context.getReturnIdentifier(),
-			annotation);
+			annotation,
+			context);
 	}
 
 	protected String getReturnName(String returnName) {
@@ -121,7 +128,7 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 	}
 
 	protected abstract String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		T annotation);
+		T annotation, AnnotationContext context) throws NotFoundException;
 
 	protected abstract String getVarMnemonic(T annotation);
 

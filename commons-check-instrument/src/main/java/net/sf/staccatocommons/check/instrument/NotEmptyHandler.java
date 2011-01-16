@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.check.instrument;
 
 import net.sf.staccatocommons.check.annotation.NotEmpty;
+import net.sf.staccatocommons.instrument.context.AnnotationContext;
 
 /**
  * @author flbulgarelli
@@ -33,7 +34,7 @@ public class NotEmptyHandler extends AbstractCheckAnnotationHandler<NotEmpty> {
 	}
 
 	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		NotEmpty annotation) {
+		NotEmpty annotation, AnnotationContext context) {
 		return String.format("that().isNotEmpty( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
 	}
 

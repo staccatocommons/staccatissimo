@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.check.internal;
 
+import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Map;
 
@@ -27,8 +28,7 @@ import net.sf.staccatocommons.defs.type.SizeAwareType;
  */
 public class SizeAwareTypes {
 
-	private SizeAwareTypes() {
-	}
+	private SizeAwareTypes() {}
 
 	/**
 	 * {@link SizeAwareType} for {@link SizeAware}s
@@ -71,6 +71,15 @@ public class SizeAwareTypes {
 
 		public boolean isEmpty(Map<?, ?> emptyAware) {
 			return emptyAware.isEmpty();
+		}
+	};
+
+	/**
+	 * A {@link SizeAwareType} for arrays
+	 */
+	public static final SizeAwareType<Object> ARRAY = new AbstractSizeAwareType<Object>() {
+		public int size(Object sizeAware) {
+			return Array.getLength(sizeAware);
 		}
 	};
 

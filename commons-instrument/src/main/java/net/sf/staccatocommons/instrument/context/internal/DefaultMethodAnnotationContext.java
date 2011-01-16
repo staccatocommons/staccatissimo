@@ -68,4 +68,8 @@ public class DefaultMethodAnnotationContext extends AbstractAnnotationContext im
 			return false;
 		}
 	}
+
+	public CtClass getElementType() throws NotFoundException {
+		return getMethod().getReturnType();
+	}
 }

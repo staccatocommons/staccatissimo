@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.check.instrument;
 
 import net.sf.staccatocommons.check.annotation.Size;
+import net.sf.staccatocommons.instrument.context.AnnotationContext;
 
 /**
  * @author flbulgarelli
@@ -32,7 +33,7 @@ public class SizeHandler extends AbstractCheckAnnotationHandler<Size> {
 	}
 
 	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		Size annotation) {
+		Size annotation, AnnotationContext context) {
 		return String.format(
 			"that().isSize(\"%s\", %s, %s)",
 			argumentMnemonic,

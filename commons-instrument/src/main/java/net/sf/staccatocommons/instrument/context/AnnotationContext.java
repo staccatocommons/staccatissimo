@@ -14,6 +14,7 @@ package net.sf.staccatocommons.instrument.context;
 
 import javassist.ClassPool;
 import javassist.CtClass;
+import javassist.NotFoundException;
 import net.sf.staccatocommons.check.annotation.NonNull;
 
 /**
@@ -53,9 +54,11 @@ public interface AnnotationContext {
 	 * element is already a top level or anonymous class, returns it.
 	 * 
 	 * @return the declaring class of the annotated element
+	 * @throws NotFoundException
+	 *           if such class is not available
 	 */
 	@NonNull
-	CtClass getDeclaringClass();
+	CtClass getDeclaringClass() throws NotFoundException;
 
 	/**
 	 * Returns the class pool in use by the instrumenter
@@ -64,5 +67,27 @@ public interface AnnotationContext {
 	 */
 	@NonNull
 	ClassPool getClassPool();
+
+	/** Shortcut for <code>getClassPoll().get(className)</code> **/
+	@NonNull
+	CtClass getClass(@NonNull String className) throws NotFoundException;
+
+	/**
+	 * Returns the type of the element annotated:
+	 * <ul>
+	 * <li>When the annotated element is a class, the type is that class</li>
+	 * <li>When the annotated element is a constructor, the type is the class that
+	 * declared such constructor</li>
+	 * <li>When the annotated element is a method, the type is the return type of
+	 * the method</li>
+	 * <li>Then the annotated element is an argument, the type is argument type</li>
+	 * <ul>
+	 * 
+	 * @return a {@link CtClass} that represents the type of the annotated element
+	 * @throws NotFoundException
+	 *           if such type is not available
+	 */
+	@NonNull
+	CtClass getElementType() throws NotFoundException;
 
 }
