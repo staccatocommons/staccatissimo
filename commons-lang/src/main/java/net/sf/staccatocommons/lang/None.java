@@ -17,7 +17,7 @@ import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.restriction.Immutable;
 import net.sf.staccatocommons.defs.restriction.Value;
 
@@ -40,8 +40,7 @@ public final class None<T> extends Option<T> {
 	@SuppressWarnings("unchecked")
 	private static final None<?> instance = new None();
 
-	private None() {
-	}
+	private None() {}
 
 	@Override
 	public T value() {
@@ -59,7 +58,7 @@ public final class None<T> extends Option<T> {
 	}
 
 	@Override
-	public T valueOrElse(@NonNull Provider<? extends T> ifUndefined) {
+	public T valueOrElse(@NonNull Thunk<? extends T> ifUndefined) {
 		return ifUndefined.value();
 	}
 

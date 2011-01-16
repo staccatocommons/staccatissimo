@@ -18,7 +18,7 @@ import java.io.IOException;
 
 import net.sf.staccatocommons.defs.Executable3;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.cell.Cell;
+import net.sf.staccatocommons.lang.provider.Provider;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.apache.commons.lang.mutable.MutableInt;
@@ -100,7 +100,7 @@ public class Block3UnitTest extends JUnit4MockObjectTestCase {
 	@Test
 	public void testDelayed() {
 		MutableInt mi = new MutableInt(10);
-		Cell<Void> delayed = block.delayed(mi, "hello", 'a');
+		Provider<Void> delayed = block.delayed(mi, "hello", 'a');
 		checking(new Expectations() {
 			{
 				exactly(2).of(executable).exec(new MutableInt(10), "hello", 'a');

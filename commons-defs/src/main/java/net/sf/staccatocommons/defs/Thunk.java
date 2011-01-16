@@ -14,10 +14,18 @@
 package net.sf.staccatocommons.defs;
 
 /**
- * A {@link Provider} is an object that is capable of returning another one.
+ * A {@link Thunk} is a computation that takes no arguments a returns a value.
+ * In other words, is an object that is capable of returning another one,
+ * through it {@link #value()} method.
  * <p>
- * {@link Provider}s of return type {@link Void} have the semantics compatible
- * with {@link Runnable}
+ * {@link Thunk}s of return type {@link Void} have the semantics compatible with
+ * {@link Runnable}
+ * </p>
+ * 
+ * <p>
+ * Notice: the meaning of the term "Thunk" is sometimes vague and varies
+ * depending the context and author. Within Staccato-Commons-Lang, thunk
+ * <strong>must</strong> be interpreted a "no arguments expression"
  * </p>
  * 
  * @author flbulgarelli
@@ -28,7 +36,7 @@ package net.sf.staccatocommons.defs;
  * @see Applicative Recomendations for implementing
  */
 @Applicative
-public interface Provider<T> {
+public interface Thunk<T> {
 
 	/**
 	 * Returns the value provided.

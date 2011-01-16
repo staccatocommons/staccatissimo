@@ -18,12 +18,12 @@ import java.util.Map;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
-import net.sf.staccatocommons.lang.cell.Cell;
+import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
  * <p>
@@ -66,7 +66,7 @@ import net.sf.staccatocommons.lang.cell.Cell;
 @Value
 @ConditionallyImmutable
 @ConditionallySerializable
-public abstract class Option<T> extends Cell<T> implements Iterable<T>, SizeAware, Serializable {
+public abstract class Option<T> extends Provider<T> implements Iterable<T>, SizeAware, Serializable {
 
 	private static final long serialVersionUID = -4635925023376621559L;
 
@@ -137,7 +137,7 @@ public abstract class Option<T> extends Cell<T> implements Iterable<T>, SizeAwar
 	 * @return <code>this.value()</code> if defined, other.value()
 	 *         <code>otherwise</code>
 	 */
-	public abstract T valueOrElse(Provider<? extends T> other);
+	public abstract T valueOrElse(Thunk<? extends T> other);
 
 	/**
 	 * Returns the value of this {@link Option}, or <code>null</code>, if

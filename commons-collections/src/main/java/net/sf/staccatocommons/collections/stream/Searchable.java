@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.None;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.predicate.Predicate;
@@ -67,7 +67,7 @@ public interface Searchable<A> {
 	 * 
 	 * @return <code>anyOrNone().valueOrElse(provider)</code>
 	 */
-	A anyOrElse(@NonNull Provider<A> provider);
+	A anyOrElse(@NonNull Thunk<A> provider);
 
 	/**
 	 * Shorthand for <code>anyOrNone().valueOrElse(value)</code>
@@ -126,7 +126,7 @@ public interface Searchable<A> {
 	 *          factory to be invoked if no such element exists. Non null
 	 * @return the element if found, or ifNone.create() otherwise
 	 */
-	A findOrElse(@NonNull Evaluable<? super A> predicate, @NonNull Provider<? extends A> ifNone);
+	A findOrElse(@NonNull Evaluable<? super A> predicate, @NonNull Thunk<? extends A> ifNone);
 
 	// TODO findOrElse(element)
 

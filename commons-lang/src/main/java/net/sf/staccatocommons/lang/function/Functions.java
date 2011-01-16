@@ -73,5 +73,4 @@ public class Functions {
 			return (Function<A, B>) applicable;
 		return new ApplicableFunction<A, B>(applicable);
 	}
-
 }

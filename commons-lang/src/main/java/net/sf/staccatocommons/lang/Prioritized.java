@@ -15,19 +15,19 @@ package net.sf.staccatocommons.lang;
 import java.io.Serializable;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
-import net.sf.staccatocommons.lang.cell.Cell;
 import net.sf.staccatocommons.lang.internal.ToString;
+import net.sf.staccatocommons.lang.provider.Provider;
 import net.sf.staccatocommons.lang.value.BasicEquals;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * A {@link Provider} that is {@link Comparable}, based on a priority attribute.
+ * A {@link Thunk} that is {@link Comparable}, based on a priority attribute.
  * 
  * @author flbulgarelli
  * 
@@ -39,7 +39,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @Value
 @ConditionallyImmutable
 @ConditionallySerializable
-public class Prioritized<T, P extends Comparable<P>> extends Cell<T> implements
+public class Prioritized<T, P extends Comparable<P>> extends Provider<T> implements
 	Comparable<Prioritized<T, P>>, Serializable {
 
 	private static final long serialVersionUID = 7131041003021112454L;

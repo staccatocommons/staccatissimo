@@ -58,7 +58,7 @@ public abstract class AbstractCharSerializationManager implements
 			public Reader initialize() throws IOException {
 				return new FileReader(input);
 			}
-		}.execute();
+		}.value();
 	}
 
 	@Override
@@ -67,6 +67,6 @@ public abstract class AbstractCharSerializationManager implements
 			public Writer initialize() throws IOException {
 				return new FileWriter(output);
 			}
-		}.execute();
+		}.value();
 	}
 }

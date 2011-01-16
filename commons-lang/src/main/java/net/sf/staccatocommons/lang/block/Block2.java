@@ -17,7 +17,7 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Executable2;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.cell.Cell;
+import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
  * 
@@ -62,16 +62,16 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2
 	}
 
 	/**
-	 * Delays the execution of the {@link Block2} by returing a new Cell that will
+	 * Delays the execution of the {@link Block2} by returing a new Provider that will
 	 * send {@link #exec(Object, Object)} on demand.
 	 * 
 	 * @param arg1
 	 * @param arg2
-	 * @return a new {@link Cell} of type Void that provides a side effect
+	 * @return a new {@link Provider} of type Void that provides a side effect
 	 */
 	@NonNull
-	public Cell<Void> delayed(final T1 arg1, final T2 arg2) {
-		return new Cell<Void>() {
+	public Provider<Void> delayed(final T1 arg1, final T2 arg2) {
+		return new Provider<Void>() {
 			public Void value() {
 				return apply(arg1, arg2);
 			}

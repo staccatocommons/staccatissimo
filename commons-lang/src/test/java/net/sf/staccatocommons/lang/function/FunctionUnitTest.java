@@ -12,11 +12,12 @@
  */
 package net.sf.staccatocommons.lang.function;
 
+import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -101,7 +102,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 	/** Test for {@link Function#apply(Object)} */
 	@Test
 	public void testLazy() throws Exception {
-		Provider<Long> p = f.of(g1).lazy('a');
+		Thunk<Long> p = f.of(g1).lazy('a');
 		checking(new Expectations() {
 			{
 				one(g1).apply('a');
@@ -111,5 +112,15 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 		assertEquals(10, (long) p.value());
 		assertEquals(10, (long) p.value());
 		assertEquals(10, (long) p.value());
+	}
+
+	@Test
+	public void testOf() throws Exception {
+		Function2<Integer, Integer, Integer> f2 = (Function2<Integer, Integer, Integer>) integer()
+			.multiply();
+		Function<Integer, Integer> f1 = add(1);
+
+		assertEquals(31, (int) f1.of(f2).apply(5, 6));
+		assertEquals(36, (int) f2.of(f1).apply(5, 6));
 	}
 }

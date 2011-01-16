@@ -10,22 +10,22 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.cell.internal;
+package net.sf.staccatocommons.lang.provider.internal;
 
 import java.io.Serializable;
 
-import net.sf.staccatocommons.defs.Provider;
-import net.sf.staccatocommons.lang.cell.Cell;
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
- * {@link Constant} is a generic {@link Provider} that wraps another object.
+ * {@link Constant} is a generic {@link Thunk} that wraps another object.
  * 
  * @author flbulgarelli
  * 
  * @param <T>
  * 
  */
-public final class Constant<T> extends Cell<T> implements Serializable {
+public final class Constant<T> extends Provider<T> implements Serializable {
 
 	private static final long serialVersionUID = -7769276251688297460L;
 

@@ -25,9 +25,9 @@ import net.sf.staccatocommons.defs.restriction.SideEffectFree;
 import net.sf.staccatocommons.defs.restriction.Transparent;
 
 /**
- * {@link Applicable} is an annotation for abstract types that have a code of
- * block/closure/lambda semantics, with an only abstract method that implements
- * such code, called applicative method.
+ * {@link Applicable} is an annotation for abstract types that have
+ * code-block/command/strategy/closure/lambda semantics, with an only abstract
+ * method that implements such code, called applicative method.
  * 
  * <p>
  * In order to remain as general purposes as possible, such types does not

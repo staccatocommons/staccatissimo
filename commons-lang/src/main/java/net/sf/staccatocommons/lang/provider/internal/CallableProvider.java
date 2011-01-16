@@ -10,24 +10,23 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.cell.internal;
+package net.sf.staccatocommons.lang.provider.internal;
 
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-import net.sf.staccatocommons.defs.Provider;
-import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.cell.Cell;
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
- * A {@link Provider} that provides the result of calling a {@link Callable}
- * which wraps.
+ * A {@link Thunk} that provides the result of calling a {@link Callable} which
+ * wraps.
  * 
  * @author flbulgarelli
  * 
  * @param <T>
  */
-public class CallableCell<T> extends Cell<T> implements Serializable {
+public class CallableProvider<T> extends Provider<T> implements Serializable {
 
 	private static final long serialVersionUID = 6303570980842439165L;
 
@@ -35,23 +34,18 @@ public class CallableCell<T> extends Cell<T> implements Serializable {
 
 	/**
 	 * 
-	 * Creates a new {@link CallableCell}
+	 * Creates a new {@link CallableProvider}
 	 * 
 	 * @param callable
 	 *          the {@link Callable} which will provide the value.
 	 * 
 	 */
-	public CallableCell(Callable<T> callable) {
+	public CallableProvider(Callable<T> callable) {
 		this.callable = callable;
 	}
 
-	/**
-	 * @throws RuntimeException
-	 *           if the wrapped {@link Callable} failed when executing
-	 *           {@link Callable#call()}
-	 */
-	@Override
-	public T value() {
-		return SoftException.callOrSoften(callable);
+	public T call() throws Exception {
+		return callable.call();
 	}
+
 }

@@ -38,7 +38,7 @@ import net.sf.staccatocommons.collections.stream.impl.internal.TakeWhileStream;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.tuple.Pair;
@@ -118,7 +118,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public A anyOrElse(Provider<A> provider) {
+	public A anyOrElse(Thunk<A> provider) {
 		return anyOrNone().valueOrElse(provider);
 	}
 
@@ -143,7 +143,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public A findOrElse(Evaluable<? super A> predicate, Provider<? extends A> provider) {
+	public A findOrElse(Evaluable<? super A> predicate, Thunk<? extends A> provider) {
 		return findOrNone(predicate).valueOrElse(provider);
 	}
 

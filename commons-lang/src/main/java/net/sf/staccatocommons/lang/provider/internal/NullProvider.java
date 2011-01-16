@@ -10,23 +10,23 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.cell.internal;
+package net.sf.staccatocommons.lang.provider.internal;
 
 import java.io.Serializable;
 
-import net.sf.staccatocommons.lang.cell.Cell;
+import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
- * Provider of null
+ * Thunk of null
  * 
  * @author flbulgarelli
  */
-public class NullCell<T> extends Cell<T> implements Serializable {
+public class NullProvider<T> extends Provider<T> implements Serializable {
 
 	private static final long serialVersionUID = 5879607480007179549L;
-	private static final NullCell instance = new NullCell();
+	private static final NullProvider instance = new NullProvider();
 
-	private NullCell() {}
+	private NullProvider() {}
 
 	@Override
 	public T value() {
@@ -36,7 +36,7 @@ public class NullCell<T> extends Cell<T> implements Serializable {
 	/**
 	 * @return the instance
 	 */
-	public static <T> Cell<T> getInstance() {
+	public static <T> Provider<T> getInstance() {
 		return instance;
 	}
 }

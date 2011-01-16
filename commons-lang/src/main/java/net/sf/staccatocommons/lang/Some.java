@@ -17,7 +17,7 @@ import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
@@ -70,7 +70,7 @@ public final class Some<T> extends Option<T> {
 	}
 
 	@Override
-	public T valueOrElse(Provider<? extends T> ifUndefined) {
+	public T valueOrElse(Thunk<? extends T> ifUndefined) {
 		return value;
 	}
 

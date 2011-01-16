@@ -12,6 +12,8 @@
  */
 package net.sf.staccatocommons.lang.function;
 
+import net.sf.staccatocommons.check.annotation.ForceChecks;
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.lang.Lazy;
@@ -51,6 +53,16 @@ public abstract class Function2<A, B, C> implements Applicable2<A, B, C>,
 		return new Function<B, C>() {
 			public C apply(B arg2) {
 				return Function2.this.apply(arg1, arg2);
+			}
+		};
+	}
+
+	@NonNull
+	@ForceChecks
+	public <D> Function2<D, B, C> of(@NonNull final Applicable<? super D, ? extends A> other) {
+		return new Function2<D, B, C>() {
+			public C apply(D arg1, B arg2) {
+				return Function2.this.apply(other.apply(arg1), arg2);
 			}
 		};
 	}

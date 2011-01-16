@@ -10,53 +10,59 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.cell;
+package net.sf.staccatocommons.lang.provider;
 
+import java.util.Date;
 import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.Provider;
-import net.sf.staccatocommons.lang.cell.internal.CallableCell;
-import net.sf.staccatocommons.lang.cell.internal.Constant;
-import net.sf.staccatocommons.lang.cell.internal.NullCell;
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.lang.provider.internal.CallableProvider;
+import net.sf.staccatocommons.lang.provider.internal.Constant;
+import net.sf.staccatocommons.lang.provider.internal.DateProvider;
+import net.sf.staccatocommons.lang.provider.internal.NullProvider;
 
 /**
- * Class factory methods for some common {@link Cell}s
+ * Class factory methods for some common {@link Provider}s
  * 
  * @author flbulgarelli
  * 
  */
-public class Cells {
+public class Providers {
 
-	private Cells() {}
+	private Providers() {}
 
 	/**
-	 * Returns a constant provider, that is, a {@link Provider} that provides the
+	 * Returns a constant provider, that is, a {@link Thunk} that provides the
 	 * given value
 	 * 
 	 * @param <A>
 	 * @param value
 	 *          the value the constant provider will return as when invoking
-	 *          {@link Provider#value()}
+	 *          {@link Thunk#value()}
 	 * @return a new constant provider
 	 */
 	@NonNull
-	public static <A> Cell<A> constant(A value) {
+	public static <A> Provider<A> constant(A value) {
 		return new Constant<A>(value);
 
 	}
 
 	/**
-	 * Returns a constant {@link Provider} that always provides *
-	 * <code>null</code>
+	 * Returns a constant {@link Thunk} that always provides * <code>null</code>
 	 * 
 	 * @param <A>
 	 * @return a singleton provider of nulls
 	 */
 	@NonNull
-	public static <A> Cell<A> null_() {
-		return NullCell.getInstance();
+	public static <A> Provider<A> null_() {
+		return NullProvider.getInstance();
+	}
+
+	@NonNull
+	public static Provider<Date> currentDate() {
+		return DateProvider.PROVIDER;
 	}
 
 	/**
@@ -65,11 +71,11 @@ public class Cells {
 	 * 
 	 * @param <A>
 	 * @param callable
-	 * @return a new {@link Provider} that wraps the given callable
+	 * @return a new {@link Thunk} that wraps the given callable
 	 */
 	@NonNull
-	public static <A> Cell<A> from(@NonNull Callable<A> callable) {
-		return new CallableCell<A>(callable);
+	public static <A> Provider<A> from(@NonNull Callable<A> callable) {
+		return new CallableProvider<A>(callable);
 	}
 
 	/**
@@ -77,12 +83,12 @@ public class Cells {
 	 * by sending {@link Runnable#run()} to the given <code>runnable</code>
 	 * 
 	 * @param runnable
-	 * @return a new {@link Cell} that wraps the given {@link Runnable}
+	 * @return a new {@link Provider} that wraps the given {@link Runnable}
 	 */
 	@NonNull
 	@ForceChecks
-	public static Cell<Void> from(@NonNull final Runnable runnable) {
-		return new Cell<Void>() {
+	public static Provider<Void> from(@NonNull final Runnable runnable) {
+		return new Provider<Void>() {
 			public Void value() {
 				runnable.run();
 				return null;
@@ -92,10 +98,10 @@ public class Cells {
 
 	@NonNull
 	@ForceChecks
-	public static <T> Cell<T> from(@NonNull final Provider<T> provider) {
-		if (provider instanceof Cell)
-			return (Cell<T>) provider;
-		return new Cell<T>() {
+	public static <T> Provider<T> from(@NonNull final Thunk<T> provider) {
+		if (provider instanceof Provider)
+			return (Provider<T>) provider;
+		return new Provider<T>() {
 			public T value() {
 				return provider.value();
 			}

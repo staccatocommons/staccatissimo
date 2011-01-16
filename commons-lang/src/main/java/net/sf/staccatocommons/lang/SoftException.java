@@ -15,6 +15,9 @@ package net.sf.staccatocommons.lang;
 import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Thunk;
+
+import org.apache.commons.lang.UnhandledException;
 
 /**
  * A {@link SoftException} is a {@link RuntimeException} that wraps another with
@@ -22,7 +25,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
  * 
  * @author flbulgarelli
  */
-public class SoftException extends RuntimeException {
+public class SoftException extends UnhandledException {
 
 	private static final long serialVersionUID = 4364656280386270636L;
 
@@ -57,6 +60,22 @@ public class SoftException extends RuntimeException {
 		return new SoftException(exception);
 	}
 
+	@NonNull
+	public static Exception harden(@NonNull SoftException e) {
+		return (Exception) e.getCause();
+	}
+
+	@NonNull
+	public static Exception harden(@NonNull RuntimeException e) {
+		if (e.getCause() == null)
+			return e;
+		if (e.getCause() instanceof Exception)
+			return (Exception) e.getCause();
+		if (e.getCause() instanceof RuntimeException)
+			return harden((RuntimeException) e.getCause());
+		return e;
+	}
+
 	/**
 	 * Tries to call the given {@link Callable} and return its result, and
 	 * rethrows a soften exception if {@link Callable#call()} threw an
@@ -77,4 +96,15 @@ public class SoftException extends RuntimeException {
 			throw soften(e);
 		}
 	}
+
+	public static <T> T valueOrHarden(@NonNull Thunk<T> thunk) throws Exception {
+		try {
+			return thunk.value();
+		} catch (SoftException e) {
+			throw harden(e);
+		} catch (RuntimeException e) {
+			throw harden(e);
+		}
+	}
+
 }

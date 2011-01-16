@@ -14,13 +14,13 @@ package net.sf.staccatocommons.lang.lifecycle;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.cell.Cell;
+import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
  * 
  * A {@link Lifecycle} is a logic of initialization, use and dispose of a
  * resource , that can be executed as a single unit of work. It can be executed
- * in different fashions - using {@link #execute()}, {@link #call()} ,
+ * in different fashions - using {@link #value()}, {@link #call()} ,
  * {@link #run()} or {@link #value()}
  * 
  * Lifecycles are abstract, so in order to use them, client code must implement
@@ -66,7 +66,7 @@ import net.sf.staccatocommons.lang.cell.Cell;
  * @param <ResultType>
  *          the type of result returned by this lifecycle
  */
-public abstract class Lifecycle<ResourceType, ResultType> extends Cell<ResultType> {
+public abstract class Lifecycle<ResourceType, ResultType> extends Provider<ResultType> {
 
 	/**
 	 * Executes this {@link Lifecycle}, initializing the resource it handles,
@@ -82,108 +82,7 @@ public abstract class Lifecycle<ResourceType, ResultType> extends Cell<ResultTyp
 	 * @return the result of the work over the resource
 	 * @see SoftException#soften(Exception)
 	 */
-	public ResultType execute() {
-		return SoftException.callOrSoften(this);
-	}
-
-	/**
-	 * Executes this {@link Lifecycle}, initializing the resource it handles,
-	 * doing some work with it, disposing the resource and returning the work
-	 * result.
-	 * 
-	 * Any checked or unchecked exception produced during the flow execution will
-	 * be catch. If it is of the given <code>exceptionclass</code>, it will be
-	 * thrown immediately. Otherwise, it will be soften and rethrown.
-	 * 
-	 * @param <ExceptionType>
-	 * @param exceptionClass
-	 *          the type of exception that will be thrown without being soften.
-	 *          This class <strong>should</strong> correspond to a checked
-	 *          exception type. Otherwise, this method would not provide any
-	 *          benefit over {@link #execute()}
-	 * @throws RuntimeException
-	 *           if any exception is thrown during the flow execution of class
-	 *           different of <code>exceptionClass</code>
-	 * @return the result of the work over the resource
-	 * @see #execute()
-	 */
-	public <ExceptionType extends Exception> ResultType executeThrowing(
-		Class<ExceptionType> exceptionClass) throws ExceptionType {
-		try {
-			return executeInternal();
-		} catch (Exception e) {
-			if (shouldCatch(exceptionClass, e)) {
-				throw (ExceptionType) e;
-			}
-			throw SoftException.soften(e);
-		}
-	}
-
-	/**
-	 * Executes this {@link Lifecycle}, initializing the resource it handles,
-	 * doing some work with it, disposing the resource and returning the work
-	 * result.
-	 * 
-	 * Any checked or unchecked exception produced during the flow execution will
-	 * be catch. If it is of the given <code>exceptionclass1</code> or
-	 * <code>exceptionclass2</code>, it will be thrown immediately. Otherwise, it
-	 * will be soften and rethrown.
-	 * 
-	 * @param <ExceptionType1>
-	 * @param <ExceptionType2>
-	 * @param exceptionClass1
-	 *          one of the two types of exceptions that will be thrown without
-	 *          being soften. This class <strong>should</strong> correspond to a
-	 *          checked exception type. Otherwise, this method would not provide
-	 *          any benefit over {@link #execute()}
-	 * @param exceptionClass2
-	 *          the second type of exception that will be thrown without being
-	 *          soften. Same restrictions of <code>exceptionClass1</code> apply
-	 * @throws RuntimeException
-	 *           if any exception is thrown during the flow execution of class
-	 *           different of <code>exceptionClass1</code> and
-	 *           <code>exceptionClass2</code>
-	 * @return the result of the work over the resource
-	 * @see #execute()
-	 */
-	public <ExceptionType1 extends Exception, ExceptionType2 extends Exception> ResultType executeThrowing(
-		Class<ExceptionType1> exceptionClass1, Class<ExceptionType2> exceptionClass2)
-		throws ExceptionType1, ExceptionType2 {
-		try {
-			return executeInternal();
-		} catch (Exception e) {
-			if (shouldCatch(exceptionClass1, e)) {
-				throw (ExceptionType1) e;
-			}
-			if (shouldCatch(exceptionClass2, e)) {
-				throw (ExceptionType2) e;
-			}
-			throw SoftException.soften(e);
-		}
-	}
-
-	private <ExceptionType1> boolean shouldCatch(Class<ExceptionType1> exceptionClass, Exception e) {
-		return exceptionClass.isAssignableFrom(e.getClass());
-	}
-
-	/**
-	 * Executes this lifecyle initializing the resource it handles, doing some
-	 * work with it, disposing the resource and returning the work result.
-	 * 
-	 * No checked or unchecked exception produced during the flow execution will
-	 * be handled.
-	 */
-	@Override
 	public ResultType call() throws Exception {
-		return executeInternal();
-	}
-
-	@Override
-	public ResultType value() {
-		return execute();
-	}
-
-	private ResultType executeInternal() throws Exception {
 		ResourceType resource = null;
 		try {
 			resource = initialize();

@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.lang;
 
 import static org.junit.Assert.*;
-import net.sf.staccatocommons.lang.cell.internal.Constant;
+import net.sf.staccatocommons.lang.provider.internal.Constant;
 
 import org.junit.Test;
 

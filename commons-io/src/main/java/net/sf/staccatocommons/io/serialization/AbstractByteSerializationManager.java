@@ -36,7 +36,7 @@ public abstract class AbstractByteSerializationManager implements
 			public InputStream initialize() throws IOException {
 				return new FileInputStream(input);
 			}
-		}.execute();
+		}.value();
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public abstract class AbstractByteSerializationManager implements
 			public OutputStream initialize() throws IOException {
 				return new FileOutputStream(output);
 			}
-		}.execute();
+		}.value();
 	}
 
 }

@@ -16,7 +16,7 @@ import static net.sf.staccatocommons.lang.Option.*;
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.lang.Option.UndefinedOptionException;
-import net.sf.staccatocommons.lang.cell.Cells;
+import net.sf.staccatocommons.lang.provider.Providers;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -81,15 +81,15 @@ public class OptionUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test for {@link Option#valueOrElse(Object)} and
-	 * {@link Option#valueOrElse(Provider)}
+	 * {@link Option#valueOrElse(Thunk)}
 	 * 
 	 * @throws Exception
 	 */
 	public void testValueOrElse() throws Exception {
 		assertEquals(4, (int) Option.some(4).valueOrElse(8));
-		assertEquals(4, (int) Option.some(4).valueOrElse(Cells.constant(9)));
-		assertEquals(9, (int) Option.<Integer> none().valueOrElse(Cells.constant(9)));
-		assertEquals(9, (int) Option.<Integer> none().valueOrElse(Cells.constant(9)));
+		assertEquals(4, (int) Option.some(4).valueOrElse(Providers.constant(9)));
+		assertEquals(9, (int) Option.<Integer> none().valueOrElse(Providers.constant(9)));
+		assertEquals(9, (int) Option.<Integer> none().valueOrElse(Providers.constant(9)));
 	}
 
 	/** Test for Option#nullTo */

@@ -19,7 +19,7 @@ import java.io.IOException;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -34,14 +34,14 @@ import org.junit.Test;
 public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 
 	private Lifecycle<String, Integer> lifecycle;
-	private Provider<String> init;
+	private Thunk<String> init;
 	private Applicable<String, Integer> use;
 	private Executable<String> dispose;
 
 	/** setups the test */
 	@Before
 	public void setup() {
-		init = mock(Provider.class);
+		init = mock(Thunk.class);
 		use = mock(Applicable.class);
 		dispose = mock(Executable.class);
 
@@ -63,22 +63,22 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	@Test
 	public void testExecute_OK() throws Exception {
 		expectNormalLifecycle();
-		assertEquals((Integer) 6, lifecycle.execute());
+		assertEquals((Integer) 6, lifecycle.value());
 	}
 
 	/**
-	 * Test for {@link Lifecycle#executeThrowing(Class)}
+	 * Test for {@link Lifecycle#throwing(Class)}
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	public void testExecuteThrowing_OK() throws Exception {
 		expectNormalLifecycle();
-		assertEquals((Integer) 6, lifecycle.executeThrowing(IOException.class));
+		assertEquals((Integer) 6, lifecycle.throwing(IOException.class));
 	}
 
 	/**
-	 * Test for {@link Lifecycle#executeThrowing(Class, Class)}
+	 * Test for {@link Lifecycle#throwing(Class, Class)}
 	 * 
 	 * @throws Exception
 	 */
@@ -87,7 +87,7 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 		expectNormalLifecycle();
 		assertEquals(
 			(Integer) 6,
-			lifecycle.executeThrowing(IOException.class, InterruptedException.class));
+			lifecycle.throwing(IOException.class, InterruptedException.class));
 	}
 
 	@Test
@@ -111,7 +111,7 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testExecute_Fail_OnInit() throws Exception {
 		expectFailLifecycleOnInitialization();
-		assertNull(lifecycle.execute());
+		assertNull(lifecycle.value());
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
@@ -135,11 +135,11 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testExecute_Fail_OnDispose() throws Exception {
 		expectFailLifecycleOnDispose();
-		lifecycle.execute();
+		lifecycle.value();
 	}
 
 	/**
-	 * Test method for {@link Lifecycle#executeThrowing(Class)} when an exception
+	 * Test method for {@link Lifecycle#throwing(Class)} when an exception
 	 * of class other than the given one occurs
 	 * 
 	 * @throws Exception
@@ -151,11 +151,11 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 				throw new IOException();
 			}
 		};
-		lifecycle.executeThrowing(IOException.class);
+		lifecycle.throwing(IOException.class);
 	}
 
 	/**
-	 * Test method for {@link Lifecycle#executeThrowing(Class, Class)} when an
+	 * Test method for {@link Lifecycle#throwing(Class, Class)} when an
 	 * exception of the first one given
 	 * 
 	 * @throws Exception
@@ -167,11 +167,11 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 				throw new IOException();
 			}
 		};
-		lifecycle.executeThrowing(IOException.class, InterruptedException.class);
+		lifecycle.throwing(IOException.class, InterruptedException.class);
 	}
 
 	/**
-	 * Test method for {@link Lifecycle#executeThrowing(Class, Class)} when an
+	 * Test method for {@link Lifecycle#throwing(Class, Class)} when an
 	 * exception of the second one given
 	 * 
 	 * @throws Exception
@@ -183,11 +183,11 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 				throw new InterruptedException();
 			}
 		};
-		lifecycle.executeThrowing(IOException.class, InterruptedException.class);
+		lifecycle.throwing(IOException.class, InterruptedException.class);
 	}
 
 	/**
-	 * Test method for {@link Lifecycle#executeThrowing(Class)} when an exception
+	 * Test method for {@link Lifecycle#throwing(Class)} when an exception
 	 * of the given class occurs
 	 * 
 	 * @throws Exception
@@ -195,11 +195,11 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testExecuteThrowing_Fail_OnDispose() throws Exception {
 		expectFailLifecycleOnDispose();
-		lifecycle.executeThrowing(IOException.class);
+		lifecycle.throwing(IOException.class);
 	}
 
 	/**
-	 * Test method for {@link Lifecycle#executeThrowing(Class, Class)} when an
+	 * Test method for {@link Lifecycle#throwing(Class, Class)} when an
 	 * exception of the given class occurs
 	 * 
 	 * @throws Exception
@@ -207,7 +207,7 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testExecuteThrowing2_Fail_OnDispose() throws Exception {
 		expectFailLifecycleOnDispose();
-		lifecycle.executeThrowing(IOException.class, InterruptedException.class);
+		lifecycle.throwing(IOException.class, InterruptedException.class);
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
@@ -231,7 +231,7 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testExecute_Fail_OnWork() throws Exception {
 		expectFailLifecycleOnWork();
-		assertNull(lifecycle.execute());
+		assertNull(lifecycle.value());
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)

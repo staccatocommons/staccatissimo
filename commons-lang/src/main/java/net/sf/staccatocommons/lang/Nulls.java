@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.lang;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.defs.Thunk;
 
 /**
  * Class methods to operate with nulls
@@ -39,7 +39,7 @@ public class Nulls {
 
 	/**
 	 * Returns the given value, if non null, or the value provided by the given
-	 * {@link Provider}, otherwise.
+	 * {@link Thunk}, otherwise.
 	 * 
 	 * @param <T>
 	 * @param value
@@ -48,7 +48,7 @@ public class Nulls {
 	 *          non null.
 	 * @return <code>value != null ? value : provider.value()</code>
 	 */
-	public static <T> T coalesce(T value, @NonNull Provider<T> provider) {
+	public static <T> T coalesce(T value, @NonNull Thunk<T> provider) {
 		return value != null ? value : provider.value();
 	}
 }

@@ -38,7 +38,7 @@ public class CharSerializationLifecycleUnitTest extends
 			public Writer initialize() throws IOException {
 				return writer;
 			}
-		}.execute();
+		}.value();
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class CharSerializationLifecycleUnitTest extends
 			public Reader initialize() throws IOException {
 				return reader;
 			}
-		}.execute();
+		}.value();
 
 		assertSame(target, result);
 	}

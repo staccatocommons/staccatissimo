@@ -17,8 +17,9 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.Lazy;
-import net.sf.staccatocommons.lang.cell.Cell;
+import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
  * A one argument function.
@@ -45,6 +46,16 @@ public abstract class Function<A, B> implements Applicable<A, B> {
 	@NonNull
 	public <C> Function<A, C> then(@NonNull final Function<? super B, ? extends C> other) {
 		return (Function<A, C>) other.of(this);
+	}
+
+	@NonNull
+	@ForceChecks
+	public Function<A, B> of(@NonNull final Thunk<? extends A> thunk) {
+		return new Function<A, B>() {
+			public B apply(A arg) {
+				return Function.this.apply(thunk.value());
+			}
+		};
 	}
 
 	/**
@@ -122,7 +133,7 @@ public abstract class Function<A, B> implements Applicable<A, B> {
 	 * @param arg
 	 * @return a new {@link Lazy}
 	 */
-	public Cell<B> lazy(final A arg) {
+	public Provider<B> lazy(final A arg) {
 		return new Lazy<B>() {
 			protected B init() {
 				return Function.this.apply(arg);

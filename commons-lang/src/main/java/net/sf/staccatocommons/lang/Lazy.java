@@ -12,8 +12,7 @@
  */
 package net.sf.staccatocommons.lang;
 
-import net.sf.staccatocommons.lang.Lazy.Atomic;
-import net.sf.staccatocommons.lang.cell.Cell;
+import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
  * 
@@ -27,14 +26,14 @@ import net.sf.staccatocommons.lang.cell.Cell;
  * </p>
  * 
  * {@link Lazy} is not thread safe. For a thread safe version, use
- * {@link Atomic}
+ * {@link Lazy.Atomic}
  * 
  * @author flbulgarelli
  * 
  * @param <T>
  * 
  */
-public abstract class Lazy<T> extends Cell<T> {
+public abstract class Lazy<T> extends Provider<T> {
 
 	private Option<T> lazyValue = Option.none();
 

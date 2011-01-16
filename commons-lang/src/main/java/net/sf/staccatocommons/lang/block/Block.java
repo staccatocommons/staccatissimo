@@ -16,7 +16,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.cell.Cell;
+import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
  * An abstract, one argument code block, that implements {@link Executable}
@@ -52,8 +52,8 @@ public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
 	 */
 	protected void softExec(T argument) throws Exception {}
 
-	public Cell<Void> delayed(final T arg1) {
-		return new Cell<Void>() {
+	public Provider<Void> delayed(final T arg1) {
+		return new Provider<Void>() {
 			public Void value() {
 				return apply(arg1);
 			}

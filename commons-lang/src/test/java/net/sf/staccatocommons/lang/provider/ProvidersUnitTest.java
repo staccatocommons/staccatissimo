@@ -10,15 +10,16 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.cell;
+package net.sf.staccatocommons.lang.provider;
 
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-import net.sf.staccatocommons.defs.Provider;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.SoftException;
+import net.sf.staccatocommons.lang.provider.Providers;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -29,7 +30,7 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class CellsUnitTest extends JUnit4MockObjectTestCase {
+public class ProvidersUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * @throws java.lang.Exception
@@ -39,21 +40,21 @@ public class CellsUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.cell.Cells#constant(java.lang.Object)} .
+	 * {@link net.sf.staccatocommons.lang.provider.Providers#constant(java.lang.Object)} .
 	 */
 	@Test
 	public void testConstant() {
 		Object value = new Object();
-		assertSame(value, Cells.constant(value).value());
+		assertSame(value, Providers.constant(value).value());
 	}
 
-	/** Test method fot {@link Cells#null_()} */
+	/** Test method fot {@link Providers#null_()} */
 	@Test
 	public void testNull_() throws Exception {
-		assertNull(Cells.null_().value());
+		assertNull(Providers.null_().value());
 	}
 
-	/** Test method for {@link Cells#from(Callable)} */
+	/** Test method for {@link Providers#from(Callable)} */
 	@Test
 	public void testCallable() throws Exception {
 		final Callable<Integer> callable = mock(Callable.class);
@@ -63,11 +64,11 @@ public class CellsUnitTest extends JUnit4MockObjectTestCase {
 				will(returnValue(50));
 			}
 		});
-		Provider<Integer> callableProvider = Cells.from(callable);
+		Thunk<Integer> callableProvider = Providers.from(callable);
 		assertEquals(50, (int) callableProvider.value());
 	}
 
-	/** Test method for {@link Cells#from(Callable)} */
+	/** Test method for {@link Providers#from(Callable)} */
 	@Test(expected = SoftException.class)
 	public void testCallable_Exception() throws Exception {
 		final Callable<Integer> callable = mock(Callable.class);
@@ -77,17 +78,17 @@ public class CellsUnitTest extends JUnit4MockObjectTestCase {
 				will(throwException(new IOException()));
 			}
 		});
-		Cells.from(callable).value();
+		Providers.from(callable).value();
 	}
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.cell.internal.CallableCell#value()} when
+	 * {@link net.sf.staccatocommons.lang.provider.internal.CallableProvider#value()} when
 	 * callable throws an exception.
 	 */
 	@Test(expected = SoftException.class)
 	public void testCallableValue_Exception() {
-		Cells.from(new Callable<String>() {
+		Providers.from(new Callable<String>() {
 			@Override
 			public String call() throws Exception {
 				throw new IOException();
@@ -97,12 +98,12 @@ public class CellsUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.cell.internal.CallableCell#value()} when
+	 * {@link net.sf.staccatocommons.lang.provider.internal.CallableProvider#value()} when
 	 * call succeeds.
 	 */
 	@Test
 	public void testCallableValue_OK() {
-		assertEquals("Hello", Cells.from(new Callable<String>() {
+		assertEquals("Hello", Providers.from(new Callable<String>() {
 			@Override
 			public String call() throws Exception {
 				return "Hello";
@@ -111,7 +112,7 @@ public class CellsUnitTest extends JUnit4MockObjectTestCase {
 	}
 
 	/**
-	 * Test method for {@link Cells#from(Runnable)}
+	 * Test method for {@link Providers#from(Runnable)}
 	 */
 	@Test
 	public void testRunnable() {
@@ -121,7 +122,7 @@ public class CellsUnitTest extends JUnit4MockObjectTestCase {
 				one(runnable).run();
 			}
 		});
-		assertNull(Cells.from(runnable).value());
+		assertNull(Providers.from(runnable).value());
 	}
 
 }
