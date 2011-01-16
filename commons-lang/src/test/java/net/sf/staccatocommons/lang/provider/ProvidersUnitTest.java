@@ -134,4 +134,20 @@ public class ProvidersUnitTest extends JUnit4MockObjectTestCase {
 		assertNotSame(currentTime, Providers.currentDate());
 	}
 
+	/** Test method for {@link Providers#from(Thunk)} */
+	@Test
+	public void testFromThunk() throws Exception {
+		final Thunk<Integer> thunk = mock(Thunk.class);
+		Provider<Integer> provider = Providers.from(thunk);
+
+		checking(new Expectations() {
+			{
+				exactly(2).of(thunk).value();
+				will(returnValue(90));
+			}
+		});
+		assertEquals((Integer) 90, provider.value());
+		assertEquals((Integer) 90, provider.value());
+	}
+
 }

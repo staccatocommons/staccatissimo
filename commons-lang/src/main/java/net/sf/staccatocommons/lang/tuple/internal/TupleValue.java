@@ -39,6 +39,13 @@ public abstract class TupleValue<A> {
 		this.significantAttributesCount = significantAttributesCount;
 	}
 
+	/**
+	 * Answers the hashcode for the given object, based on this {@link TupleValue}
+	 * 
+	 * @param this_
+	 * @return a hash code computed using the significants fields of the given
+	 *         object
+	 */
 	public int hashCode(A this_) {
 		HashCodeCriteria b = new HashCodeCriteria();
 		significant(this_, b);

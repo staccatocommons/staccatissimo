@@ -69,10 +69,10 @@ public class SoftException extends UnhandledException {
 	public static Exception harden(@NonNull RuntimeException e) {
 		if (e.getCause() == null)
 			return e;
-		if (e.getCause() instanceof Exception)
-			return (Exception) e.getCause();
 		if (e.getCause() instanceof RuntimeException)
 			return harden((RuntimeException) e.getCause());
+		if (e.getCause() instanceof Exception)
+			return (Exception) e.getCause();
 		return e;
 	}
 

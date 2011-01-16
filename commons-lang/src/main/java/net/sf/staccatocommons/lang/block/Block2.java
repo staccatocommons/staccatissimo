@@ -62,12 +62,12 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2
 	}
 
 	/**
-	 * Delays the execution of the {@link Block2} by returing a new Provider that will
-	 * send {@link #exec(Object, Object)} on demand.
+	 * Delays execution of this block by returning a void provider that will
+	 * evaluate <code>exec(arg1, arg2)</code> each time its value is required
 	 * 
 	 * @param arg1
 	 * @param arg2
-	 * @return a new {@link Provider} of type Void that provides a side effect
+	 * @return a new void {@link Provider}
 	 */
 	@NonNull
 	public Provider<Void> delayed(final T1 arg1, final T2 arg2) {

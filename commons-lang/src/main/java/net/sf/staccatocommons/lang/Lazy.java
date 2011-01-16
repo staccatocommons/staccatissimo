@@ -37,6 +37,11 @@ public abstract class Lazy<T> extends Provider<T> {
 
 	private Option<T> lazyValue = Option.none();
 
+	/**
+	 * Initializes the lazy value if necessary, and returns it.
+	 * 
+	 * @return the lazy value
+	 */
 	public T value() {
 		if (lazyValue.isUndefined())
 			lazyValue = Option.some(init());
@@ -44,23 +49,29 @@ public abstract class Lazy<T> extends Provider<T> {
 	}
 
 	/**
-	 * Initializes the lazy value. This code will never be executed, if
-	 * {@link #value()} is never called, or executed only once, if
-	 * {@link #value()} is called at least one time.
+	 * Initializes the lazy value. This code will never be evaluated, if
+	 * {@link #value()} is never sent, or evaluated once and only once, if
+	 * {@link #value()} is sent at least once.
 	 * 
 	 * @return the initialized value. May be null.
 	 */
 	protected abstract T init();
 
-	@Override
-	public String toString() {
-		return value().toString();
-	}
-
+	/**
+	 * A synchronized {@link Lazy} provider
+	 * 
+	 * @author flbulgarelli
+	 * 
+	 * @param <T>
+	 */
 	public static abstract class Atomic<T> extends Lazy<T> {
 
-		public synchronized T value() {
+		public final synchronized T value() {
 			return super.value();
+		}
+
+		public final T call() throws Exception {
+			return super.call();
 		}
 
 	}

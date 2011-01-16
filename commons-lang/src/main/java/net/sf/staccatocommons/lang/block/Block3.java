@@ -61,13 +61,14 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 	protected void softExec(T1 arg1, T2 arg2, T3 arg3) throws Exception {}
 
 	/**
-	 * Delays the execution of the {@link Block3} by returning a new Provider that
-	 * will send {@link #exec(Object, Object, Object)} on demand.
+	 * Delays execution of this block by returning a void provider that will
+	 * evaluate <code>exec(arg1, arg2, arg3)</code> each time its value is
+	 * required
 	 * 
 	 * @param arg1
 	 * @param arg2
 	 * @param arg3
-	 * @return a new {@link Provider} of type Void that provides a side effect
+	 * @return a new void {@link Provider}
 	 */
 	public Provider<Void> delayed(final T1 arg1, final T2 arg2, final T3 arg3) {
 		return new Provider<Void>() {

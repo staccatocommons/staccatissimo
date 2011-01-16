@@ -12,8 +12,9 @@
  */
 package net.sf.staccatocommons.lang.block;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Executable;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.apache.commons.lang.mutable.MutableInt;
@@ -58,6 +59,22 @@ public class BlockUnitTest extends JUnit4MockObjectTestCase {
 			}
 		});
 		block.then(executable).exec(new MutableInt(0));
+	}
+
+	/** Test for {@link Block#delayed(Object)} */
+	@Test
+	public void testDelayed() throws Exception {
+		block = new Block<MutableInt>() {
+			public void exec(MutableInt argument) {
+				argument.increment();
+			}
+		};
+		MutableInt mi = new MutableInt(5);
+		Thunk<Void> p = block.delayed(mi);
+		p.value();
+		p.value();
+		p.value();
+		assertEquals(mi.getValue(), 8);
 	}
 
 }

@@ -52,10 +52,17 @@ public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
 	 */
 	protected void softExec(T argument) throws Exception {}
 
-	public Provider<Void> delayed(final T arg1) {
+	/**
+	 * Delays execution of this block by returning a void provider that will
+	 * evaluate <code>exec(arg)</code> each time its value is required
+	 * 
+	 * @param arg
+	 * @return a new {@link Provider}
+	 */
+	public Provider<Void> delayed(final T arg) {
 		return new Provider<Void>() {
 			public Void value() {
-				return apply(arg1);
+				return apply(arg);
 			}
 		};
 	}
