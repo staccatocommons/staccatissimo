@@ -41,7 +41,7 @@
 					<dependency>
 						<groupId>org.codehaus.plexus</groupId>
 						<artifactId>plexus-compiler-eclipse</artifactId>
-						<version>1.7</version>
+						<version>1.8.1</version>
 					</dependency>
 				</dependencies>
 			</plugin>
