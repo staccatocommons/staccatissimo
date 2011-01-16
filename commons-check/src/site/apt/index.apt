@@ -6,12 +6,12 @@ annotations for documenting simple constraints.
 
  Please notice Staccato-Commons-Check is a validation API targeted for implementing defensive programming, like validation 
 classes you can find in {{{http://commons.apache.org/lang/}Apache Commons Lang}}
-or {{{http://code.google.com/p/guava-libraries/}Guava}}. It is by no means a conversion an validation 
+or {{{http://code.google.com/p/guava-libraries/}Guava}}. It is by no means a conversion and validation 
 API like {{{http://commons.apache.org/validator/}Apache Commons Validator}}    
  
 Alpha state 
 
- Staccato-Commons-Check is currently in alpha state. Although most of previous features are implemented, tested and documented, it is not recommended to use in production systems yet. Types and packages may change in the near future without notice.  
+ Staccato-Commons-Check is currently in alpha state. Although most of previous features are implemented, tested and documented, 
  
 Getting started
  
@@ -19,58 +19,88 @@ Getting started
   
   * Check. A validation API designed for being rich, easy to use, flexible, extensible, and general purpose. 
   
-  * Check-Annotation. A annotations API for documenting simple constraints that extends the Staccato-Commons-Lang restrictions API.
+  * Check-Annotation. A annotations API for documenting simple constraints that extends the 
+ {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/}Staccato-Commons-Defs}} restrictions API.
   
 * Validation API 
 
  Its core is the <<<net.sf.staccatocommons.check.Check\<E\>>>> class. It implements more than 40 common checks with automatic
-error messages building, in a method-chaining fashion. For example, the following, the following code will check that <<<bar != null && foo.compareTo(bar) <= 0 && baz.size() == 1 && baz.contains(foo)>>>, 
+error messages building, in a method-chaining fashion. For example, the following code will check that <<<bar != null && foo.compareTo(bar) <= 0 && baz.size() == 1 && baz.contains(foo)>>>, 
 throwing an exception and generating a proper message if any of the constraints is violated: 
 
 +--
-   Check<... more about this parametrization later ...> check = ...obtain a reference to a check...
-   check.isNotNull("bar", bar)
-        .isGreaterThan("foo", foo, bar)
-        .isSize("baz", baz, 1)
-        .contains("baz", baz, foo);
-
+Check<... more about this parametrization later ...> check = ...obtain a reference to a check...
+check.isNotNull("bar", bar)
+     .isGreaterThan("foo", foo, bar)
+     .isSize("baz", baz, 1)
+     .contains("baz", baz, foo);
 +-- 
 
- It is easy to see that all automatic check methods take at least two arguments: a mnemonic for the object - normally the variable 
+ All automatic check methods take at least two arguments: a mnemonic for the object - normally the variable 
  or attribute name - and the object to check. It is not necessary to pass any extra message, as all the invocation have enough information
  to generate them.
 
- In addition to this checks, it offers general boolean condition tests and forced failures methods. For example:
+ In addition to those checks, it offers general boolean condition tests and forced failures methods. For example:
 
-+----
- 
-  check.that(account.hasEnoughFonds(),  "Account %s must have enough fonds", account);
++---- 
+check.that(account.hasEnoughFonds(),  "Account %s must have enough fonds", account);
   
-  check.failure("Code should not have reached here");
-
+check.failure("Code should not have reached here");
 +--- 
  
- Those methods take at least a <<<message>>> argument, as they have no enough information to construct one.  
+ Those methods take at least a message argument, as they have no enough information to construct one.  
  
- Check class, however, is abstract, and does not define the specific exception to be thrown on failure.  
+ <<<Check>>> class, however, is abstract, and does not define the specific exception to be thrown on failure.  
 It is parameterized instead by the exception type it throws, and is responsibility of subclasses to define that.
 
  To address that, the API provides three concrete implementations of <<<Check>>>:
  
- * <<<Ensure>>> Throws <<<java.lang.IllegalArgumentException>>>, and is used to check generic preconditions
- 
- * <<<Assert>>> Throws <<<java.lang.AssertionError>>>, and denotes is used to check generic postconditions and invariants.
- 
- * <<<Validate>>> Throws a exceptions of any given type - in particular, they do not need to be <<<java.lang.RuntimeException>>>s.
-It is used to perform domain specific validations.  
-
-<<<TODO>>>
+ * Ensure's: throws <<<java.lang.IllegalArgumentException>>>, and is used to check generic preconditions. 
+ A reference to it can be obtained through the <<<Ensure>>> utility class:
    
++-----
+Ensure.that()
+    .isNotEmpty("bananas", bananas)
+    .isMinSize("pineapples", pineapples, 2);
++----- 
+ 
+ It offers also some class method shortcuts to the most frequent checks:
+ 
++----
+Ensure.isNotNull("jukebox", jukebox);
++---- 
+ 
+ * Assert's: Throws <<<java.lang.AssertionError>>>, and is used to check generic postconditions and invariants. There exists
+ an <<<Assert>>> utility class, similar to the <<<Ensure>>>. 
+ 
+ * Validate's: Throws exceptions of any given type - in particular, they do not need to be <<<java.lang.RuntimeException>>>s.
+It is used to perform domain specific validations. Instances of it can be created through <<<Validate.throwing(Class)>>> class method:
 
-* Documentation API - <<<net.sf.staccatocommons.check.annotation>>>
++----
+ Validate.throwing(PhoneCallException.class)
+    .that(!line.isBuys(), "The line %s must not be busy", line)
+    .that(destination.isReachable(), "The destination %s is unreachable", destination); 
++----   
 
- <<TODO>>  
-  
+* Documentation API 
+
+ The documentation API is under package <<<net.sf.staccatocommons.check.annotation>>>. It consists of
+ simple {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs/net/sf/staccatocommons/defs/restriction/Restriction.html}Restriction}} 
+ annotations, for signaling postconditions over method returns types, and preconditions over constructor and methods arguments. They include:
+ 
+ * MinSize, MaxSize and Size: constraints about sizes of collection-like elements 
+
+ * Matches: constraints about regular expressions matching over Strings
+ 
+ * NotNull: constraint about nullability of objects
+ 
+ * NotZero, NotNegative, Positive: constraints about sign of numeric types
+
+ []
+ 
+ Although those annotations have as primary objective to document such constraints, most of them may be processed in 
+ a non intrusive ways through Staccato-Commons-Check-Instrument.
+   
 What is next?
 
  * Navigate the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheck/apidocs/index.html}API javadoc}}
@@ -78,7 +108,8 @@ What is next?
  * Explore the rest of Staccato-Commons projects. They extensively use Staccato-Commons-Check
  
  * Have a look to the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrument/}Staccato-Commons-Check-Instrument}} API,
-which in many cases completely eliminates the need of writing checks code.      
+which instrument check annotations, by inserting at compile time calls
+to the Validation API previously described.      
 
 Road map
 
