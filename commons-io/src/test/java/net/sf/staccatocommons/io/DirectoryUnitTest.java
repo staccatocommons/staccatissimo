@@ -12,8 +12,7 @@
  */
 package net.sf.staccatocommons.io;
 
-import static net.sf.staccatocommons.io.FileMock.dir;
-import static net.sf.staccatocommons.io.FileMock.file;
+import static net.sf.staccatocommons.testing.junit.FileMock.*;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;

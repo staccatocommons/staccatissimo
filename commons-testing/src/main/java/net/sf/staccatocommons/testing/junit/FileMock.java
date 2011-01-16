@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.io;
+package net.sf.staccatocommons.testing.junit;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -77,14 +77,6 @@ public class FileMock extends File {
 
 	public boolean isFile() {
 		return !isDirectory();
-	}
-
-	public static FileMock dir(String pathname, File... contents) {
-		return new FileMock(pathname, contents);
-	}
-
-	public static FileMock file(String pathname) {
-		return new FileMock(pathname, (File[]) null);
 	}
 
 	public String getAbsolutePath() {
@@ -234,6 +226,14 @@ public class FileMock extends File {
 
 	public URL toURL() throws MalformedURLException {
 		throw new UnsupportedOperationException();
+	}
+
+	public static FileMock dir(String pathname, File... contents) {
+		return new FileMock(pathname, contents);
+	}
+
+	public static FileMock file(String pathname) {
+		return new FileMock(pathname, (File[]) null);
 	}
 
 }
