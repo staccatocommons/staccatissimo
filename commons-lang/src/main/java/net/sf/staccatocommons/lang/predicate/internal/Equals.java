@@ -1,6 +1,7 @@
 package net.sf.staccatocommons.lang.predicate.internal;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.lang.tuple.internal.TupleValue;
 
 /**
  * @author flbulgarelli

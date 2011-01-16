@@ -19,7 +19,6 @@ import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.Handle;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.function.Functions;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -72,6 +71,12 @@ public abstract class Provider<A> implements Thunk<A>, ContainsAware<A>, Callabl
 
 	/* Running time */
 
+	/**
+	 * Runs this {@link Provider} by sending {@link #run()}, and returns the time
+	 * it took.
+	 * 
+	 * @return the duration in milliseconds of running this {@link Provider}
+	 */
 	public final long runTime() {
 		long initialMillis = System.currentTimeMillis();
 		run();
@@ -92,7 +97,7 @@ public abstract class Provider<A> implements Thunk<A>, ContainsAware<A>, Callabl
 
 	/* Function composition */
 
-	public <B> Function<A, B> then(Applicable<? super A, ? extends B> function) {
+	public <B> Provider<B> then(Applicable<? super A, ? extends B> function) {
 		return Functions.from(function).of(this);
 	}
 

@@ -21,15 +21,20 @@ import org.jmock.Expectations;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * @author flbulgarelli
+ */
 public class CloseableLifecycleUnitTest extends JUnit4MockObjectTestCase {
 
 	private Closeable closeable;
 
+	/***/
 	@Before
 	public void setup() {
 		closeable = mock(Closeable.class);
 	}
 
+	/***/
 	@Test
 	public void testDispose() throws Exception {
 		checking(new Expectations() {

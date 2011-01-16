@@ -49,11 +49,21 @@ public abstract class Function<A, B> implements Applicable<A, B> {
 		return Functions.from(other).of((Applicable) this);
 	}
 
+	/**
+	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
+	 * this function with a {@link Thunk}, resulting in a new {@link Provider}
+	 * that when {@link Thunk#value()} is sent, returns
+	 * <code>this.apply(thunk.value())</code>
+	 * 
+	 * @param thunk
+	 * @return a new {@link Provider}, <code>this</code> composed with
+	 *         <code>thunk</code>
+	 */
 	@NonNull
 	@ForceChecks
-	public Function<A, B> of(@NonNull final Thunk<? extends A> thunk) {
-		return new Function<A, B>() {
-			public B apply(A arg) {
+	public Provider<B> of(@NonNull final Thunk<? extends A> thunk) {
+		return new Provider<B>() {
+			public B value() {
 				return Function.this.apply(thunk.value());
 			}
 		};

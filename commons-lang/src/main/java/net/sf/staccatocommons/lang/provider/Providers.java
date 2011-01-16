@@ -60,6 +60,11 @@ public class Providers {
 		return NullProvider.getInstance();
 	}
 
+	/**
+	 * Returns a {@link Provider} that provides the current date
+	 * 
+	 * @return a singleton provider that provides <code>new Date()</code>
+	 */
 	@NonNull
 	public static Provider<Date> currentDate() {
 		return DateProvider.PROVIDER;

@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.lang.function;
 
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
@@ -31,6 +30,7 @@ import org.junit.Test;
 public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
 	Function<Integer, Long> f;
+	Thunk<Integer> g0;
 	Applicable<Character, Integer> g1;
 	Applicable2<Character, String, Integer> g2;
 	Applicable3<Character, String, Integer, Integer> g3;
@@ -40,6 +40,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 	 */
 	@Before
 	public void setUp() {
+		g0 = mock(Thunk.class, "g0");
 		g1 = mock(Applicable.class, "g1");
 		g2 = mock(Applicable2.class, "g2");
 		g3 = mock(Applicable3.class, "g3");
@@ -50,6 +51,21 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 				return 10L;
 			}
 		};
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.staccatocommons.lang.function.Function#of(Thunk)}.
+	 */
+	@Test
+	public void testOf0() {
+		checking(new Expectations() {
+			{
+				one(g0).value();
+				will(returnValue(20));
+			}
+		});
+		assertEquals((Long) 10L, f.of(g0).value());
 	}
 
 	/**
@@ -114,13 +130,4 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 		assertEquals(10, (long) p.value());
 	}
 
-	@Test
-	public void testOf() throws Exception {
-		Function2<Integer, Integer, Integer> f2 = (Function2<Integer, Integer, Integer>) integer()
-			.multiply();
-		Function<Integer, Integer> f1 = add(1);
-
-		assertEquals(31, (int) f1.of(f2).apply(5, 6));
-		assertEquals(36, (int) f2.of(f1).apply(5, 6));
-	}
 }

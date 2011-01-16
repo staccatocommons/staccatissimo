@@ -12,8 +12,7 @@
  */
 package net.sf.staccatocommons.lang.lifecycle;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 
@@ -60,12 +59,6 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 		};
 	}
 
-	@Test
-	public void testExecute_OK() throws Exception {
-		expectNormalLifecycle();
-		assertEquals((Integer) 6, lifecycle.value());
-	}
-
 	/**
 	 * Test for {@link Lifecycle#throwing(Class)}
 	 * 
@@ -85,9 +78,7 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	@Test
 	public void testExecuteThrowing2_OK() throws Exception {
 		expectNormalLifecycle();
-		assertEquals(
-			(Integer) 6,
-			lifecycle.throwing(IOException.class, InterruptedException.class));
+		assertEquals((Integer) 6, lifecycle.throwing(IOException.class, InterruptedException.class));
 	}
 
 	@Test
@@ -132,15 +123,9 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 		assertNull(lifecycle.value());
 	}
 
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testExecute_Fail_OnDispose() throws Exception {
-		expectFailLifecycleOnDispose();
-		lifecycle.value();
-	}
-
 	/**
-	 * Test method for {@link Lifecycle#throwing(Class)} when an exception
-	 * of class other than the given one occurs
+	 * Test method for {@link Lifecycle#throwing(Class)} when an exception of
+	 * class other than the given one occurs
 	 * 
 	 * @throws Exception
 	 */
@@ -155,8 +140,8 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	}
 
 	/**
-	 * Test method for {@link Lifecycle#throwing(Class, Class)} when an
-	 * exception of the first one given
+	 * Test method for {@link Lifecycle#throwing(Class, Class)} when an exception
+	 * of the first one given
 	 * 
 	 * @throws Exception
 	 */
@@ -171,8 +156,8 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	}
 
 	/**
-	 * Test method for {@link Lifecycle#throwing(Class, Class)} when an
-	 * exception of the second one given
+	 * Test method for {@link Lifecycle#throwing(Class, Class)} when an exception
+	 * of the second one given
 	 * 
 	 * @throws Exception
 	 */
@@ -187,8 +172,8 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	}
 
 	/**
-	 * Test method for {@link Lifecycle#throwing(Class)} when an exception
-	 * of the given class occurs
+	 * Test method for {@link Lifecycle#throwing(Class)} when an exception of the
+	 * given class occurs
 	 * 
 	 * @throws Exception
 	 */
@@ -199,8 +184,8 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	}
 
 	/**
-	 * Test method for {@link Lifecycle#throwing(Class, Class)} when an
-	 * exception of the given class occurs
+	 * Test method for {@link Lifecycle#throwing(Class, Class)} when an exception
+	 * of the given class occurs
 	 * 
 	 * @throws Exception
 	 */
@@ -210,42 +195,49 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 		lifecycle.throwing(IOException.class, InterruptedException.class);
 	}
 
+	/***/
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testRun_Fail_OnDispose() throws Exception {
 		expectFailLifecycleOnDispose();
 		lifecycle.run();
 	}
 
+	/***/
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testCall_Fail_OnDispose() throws Exception {
 		expectFailLifecycleOnDispose();
 		assertNull(lifecycle.call());
 	}
 
+	/***/
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testValue_Fail_OnDispose() throws Exception {
 		expectFailLifecycleOnDispose();
 		assertNull(lifecycle.value());
 	}
 
+	/***/
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testExecute_Fail_OnWork() throws Exception {
 		expectFailLifecycleOnWork();
 		assertNull(lifecycle.value());
 	}
 
+	/***/
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testRun_Fail_OnWork() throws Exception {
 		expectFailLifecycleOnWork();
 		lifecycle.run();
 	}
 
+	/***/
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testCall_Fail_OnWork() throws Exception {
 		expectFailLifecycleOnWork();
 		assertNull(lifecycle.call());
 	}
 
+	/***/
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testValue_Fail_OnWork() throws Exception {
 		expectFailLifecycleOnWork();

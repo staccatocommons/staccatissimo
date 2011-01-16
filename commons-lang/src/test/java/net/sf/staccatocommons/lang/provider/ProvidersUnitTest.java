@@ -15,11 +15,11 @@ package net.sf.staccatocommons.lang.provider;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.provider.Providers;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -40,7 +40,8 @@ public class ProvidersUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.provider.Providers#constant(java.lang.Object)} .
+	 * {@link net.sf.staccatocommons.lang.provider.Providers#constant(java.lang.Object)}
+	 * .
 	 */
 	@Test
 	public void testConstant() {
@@ -83,8 +84,8 @@ public class ProvidersUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.provider.internal.CallableProvider#value()} when
-	 * callable throws an exception.
+	 * {@link net.sf.staccatocommons.lang.provider.internal.CallableProvider#value()}
+	 * when callable throws an exception.
 	 */
 	@Test(expected = SoftException.class)
 	public void testCallableValue_Exception() {
@@ -98,8 +99,8 @@ public class ProvidersUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.provider.internal.CallableProvider#value()} when
-	 * call succeeds.
+	 * {@link net.sf.staccatocommons.lang.provider.internal.CallableProvider#value()}
+	 * when call succeeds.
 	 */
 	@Test
 	public void testCallableValue_OK() {
@@ -123,6 +124,14 @@ public class ProvidersUnitTest extends JUnit4MockObjectTestCase {
 			}
 		});
 		assertNull(Providers.from(runnable).value());
+	}
+
+	/** Test method for {@link Providers#currentDate()} */
+	@Test
+	public void testCurrentDate() throws Exception {
+		Date currentTime = Providers.currentDate().value();
+		assertNotNull(currentTime);
+		assertNotSame(currentTime, Providers.currentDate());
 	}
 
 }

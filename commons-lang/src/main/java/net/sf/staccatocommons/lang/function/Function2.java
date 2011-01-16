@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.lang.function;
 
-import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
@@ -49,20 +48,11 @@ public abstract class Function2<A, B, C> implements Applicable2<A, B, C>,
 	/**
 	 * Partially applies the function passing just its first parameter
 	 */
+	@NonNull
 	public Function<B, C> apply(final A arg1) {
 		return new Function<B, C>() {
 			public C apply(B arg2) {
 				return Function2.this.apply(arg1, arg2);
-			}
-		};
-	}
-
-	@NonNull
-	@ForceChecks
-	public <D> Function2<D, B, C> of(@NonNull final Applicable<? super D, ? extends A> other) {
-		return new Function2<D, B, C>() {
-			public C apply(D arg1, B arg2) {
-				return Function2.this.apply(other.apply(arg1), arg2);
 			}
 		};
 	}
@@ -74,7 +64,8 @@ public abstract class Function2<A, B, C> implements Applicable2<A, B, C>,
 	 * @param other
 	 * @return <code>other.of(this)</code>
 	 */
-	public <D> Function2<A, B, D> then(final Applicable<? super C, ? extends D> other) {
+	@NonNull
+	public <D> Function2<A, B, D> then(@NonNull final Applicable<? super C, ? extends D> other) {
 		return Functions.from(other).of(this);
 	}
 
