@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.check.Ensure;
+import net.sf.staccatocommons.check.annotation.MinSize;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.check.annotation.NotEmpty;
 
@@ -28,7 +28,6 @@ import org.apache.commons.lang.ObjectUtils;
  * @author flbulgarelli
  */
 public class Lists {
-	private static final String LIST_PARAM = "list";
 
 	/**
 	 * Inserts the given element after the reference. Throws
@@ -112,9 +111,7 @@ public class Lists {
 	 *           if index is out of range
 	 * @see List#get(int)
 	 */
-	public static <A> A second(@NonNull List<A> list) {
-		Ensure.that(LIST_PARAM, list, list.size() > 1,//
-			"Must hava at least two elements");
+	public static <A> A second(@MinSize(2) List<A> list) {
 		return list.get(1);
 	}
 
@@ -129,9 +126,7 @@ public class Lists {
 	 *           if index is out of range
 	 * @see List#get(int)
 	 */
-	public static <A> A third(@NonNull List<A> list) {
-		Ensure.that(LIST_PARAM, list, list.size() > 2,//
-			"Must hava at least three elements");
+	public static <A> A third(@MinSize(3) List<A> list) {
 		return list.get(2);
 	}
 
@@ -150,5 +145,4 @@ public class Lists {
 		return list.get(list.size() - 1);
 	}
 
-	// TODO revise exceptions thrown in getXXXX methods
 }

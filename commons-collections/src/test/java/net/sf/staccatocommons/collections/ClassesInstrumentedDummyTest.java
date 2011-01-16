@@ -41,4 +41,10 @@ public class ClassesInstrumentedDummyTest {
 	public void testArgumentsInstrumented2() {
 		Lists.first(null);
 	}
+
+	/** Verifies that minsize processor is working */
+	@Test(expected = IllegalArgumentException.class)
+	public void testThird_BadSize() throws Exception {
+		Lists.third(Arrays.asList(1, 2));
+	}
 }

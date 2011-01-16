@@ -12,14 +12,13 @@
  */
 package net.sf.staccatocommons.collections.iterable;
 
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.AMOUNT_OF_ELEMENTS;
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.addAllInternal;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.*;
 
 import java.util.Collection;
 import java.util.Iterator;
 
-import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.defs.Evaluable;
 
 /**
@@ -84,8 +83,8 @@ public class ModifiableIterables {
 	 * @return the given iterable
 	 */
 	@NonNull
-	public static <I extends Iterable<?>> I remove(@NonNull I iterable, int amountOfElements) {
-		Ensure.that().isNotNegative(AMOUNT_OF_ELEMENTS, amountOfElements);
+	public static <I extends Iterable<?>> I remove(@NonNull I iterable,
+		@NotNegative int amountOfElements) {
 		Iterator<?> iter = iterable.iterator();
 		for (int i = 0; i < amountOfElements && iter.hasNext(); i++)
 			iter.remove();
@@ -156,8 +155,7 @@ public class ModifiableIterables {
 	 */
 	@NonNull
 	public static <T, C extends Collection<T>> C move(@NonNull Iterable<T> iterable,
-		int amountOfElements, @NonNull C collection) {
-		Ensure.that().isNotNegative(AMOUNT_OF_ELEMENTS, amountOfElements);
+		@NotNegative int amountOfElements, @NonNull C collection) {
 		Iterator<? extends T> iter = iterable.iterator();
 		for (int i = 0; i < amountOfElements && iter.hasNext(); i++) {
 			collection.add(iter.next());

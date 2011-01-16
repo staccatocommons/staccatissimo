@@ -9,11 +9,6 @@ import org.junit.Test;
 
 public class ListsUnitTests {
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testThird_BadSize() throws Exception {
-		Lists.third(Arrays.asList(1, 2));
-	}
-
 	@Test
 	public void testAddBefore_middle() throws Exception {
 
@@ -62,11 +57,6 @@ public class ListsUnitTests {
 	@Test
 	public void testSecond_OK() throws Exception {
 		assertEquals((Integer) 2, Lists.second(Arrays.asList(1, 2, 3)));
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testSecondBadSize() throws Exception {
-		Lists.second(Arrays.asList(1));
 	}
 
 	@Test
