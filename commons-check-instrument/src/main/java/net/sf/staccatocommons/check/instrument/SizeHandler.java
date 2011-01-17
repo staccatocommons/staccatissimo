@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.check.instrument;
 
+import javassist.NotFoundException;
 import net.sf.staccatocommons.check.annotation.Size;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
 
@@ -33,12 +34,13 @@ public class SizeHandler extends AbstractCheckAnnotationHandler<Size> {
 	}
 
 	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		Size annotation, AnnotationContext context) {
+		Size annotation, AnnotationContext context) throws NotFoundException {
 		return String.format(
-			"that().isSize(\"%s\", %s, %s)",
+			"that().isSize(\"%s\", %s, %s, %s)",
 			argumentMnemonic,
 			argumentIdentifier,
-			annotation.value());
+			annotation.value(),
+			SizeAwareTypeCode.getSizeAwareCode(context));
 	}
 
 	protected String getVarMnemonic(Size annotation) {
