@@ -29,14 +29,6 @@ public class SoftExceptionUnitTest {
 
 	/***/
 	@Test
-	public void testSoftException() {
-		IOException cause = new IOException("Ups, VFS crashed!");
-		SoftException softException = new SoftException(cause);
-		assertSame(cause, softException.getCause());
-	}
-
-	/***/
-	@Test
 	public void testSoften_Runtime() {
 		IllegalArgumentException exception = new IllegalArgumentException("bad input");
 		RuntimeException soften = SoftException.soften(exception);

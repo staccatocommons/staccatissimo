@@ -15,10 +15,16 @@ package net.sf.staccatocommons.lang;
 import java.util.concurrent.Callable;
 
 /**
- * @author flbulgarelli
+ * Utility class for handling exception in {@link Callable}s
  * 
+ * @author flbulgarelli
  */
 public class Handle {
+
+	/**
+	 * Creates a new {@link Handle}
+	 */
+	private Handle() {}
 
 	/**
 	 * Sends {@link Callable#call()} to the given <code>callable</code>, throwing

@@ -139,7 +139,6 @@ public class ProvidersUnitTest extends JUnit4MockObjectTestCase {
 	public void testFromThunk() throws Exception {
 		final Thunk<Integer> thunk = mock(Thunk.class);
 		Provider<Integer> provider = Providers.from(thunk);
-
 		checking(new Expectations() {
 			{
 				exactly(2).of(thunk).value();
@@ -148,6 +147,7 @@ public class ProvidersUnitTest extends JUnit4MockObjectTestCase {
 		});
 		assertEquals((Integer) 90, provider.value());
 		assertEquals((Integer) 90, provider.value());
+		assertSame(Providers.null_(), Providers.from((Thunk) Providers.null_()));
 	}
 
 }

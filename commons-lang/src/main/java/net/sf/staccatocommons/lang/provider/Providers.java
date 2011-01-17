@@ -101,14 +101,25 @@ public class Providers {
 		};
 	}
 
+	/**
+	 * Converts the given {@link Thunk} into a {@link Provider} by either casting
+	 * it, if possible, or wrapping it into a new one that forwards its
+	 * {@link Provider#value()} to it.
+	 * 
+	 * @param <T>
+	 * @param thunk
+	 *          the {@link Thunk} to convert
+	 * @return the given <code>thunk</code> casted to {@link Provider}, it is
+	 *         already one, or new Provider that wraps it.
+	 */
 	@NonNull
 	@ForceChecks
-	public static <T> Provider<T> from(@NonNull final Thunk<T> provider) {
-		if (provider instanceof Provider)
-			return (Provider<T>) provider;
+	public static <T> Provider<T> from(@NonNull final Thunk<T> thunk) {
+		if (thunk instanceof Provider)
+			return (Provider<T>) thunk;
 		return new Provider<T>() {
 			public T value() {
-				return provider.value();
+				return thunk.value();
 			}
 		};
 	}

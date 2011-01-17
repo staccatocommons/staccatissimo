@@ -12,11 +12,8 @@
  */
 package net.sf.staccatocommons.lang.tuple;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertSame;
-import static junit.framework.Assert.assertTrue;
-import static net.sf.staccatocommons.lang.tuple.Tuple._;
+import static junit.framework.Assert.*;
+import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -58,6 +55,7 @@ public class PairUnitTest extends TupleAbstractUnitTest {
 		assertEquals(_(40, date).hashCode(), _(40, date.clone()).hashCode());
 	}
 
+	/** Test for {@link Pair#swap()} */
 	@Test
 	public void testSwap() throws Exception {
 		Calendar calendar = Calendar.getInstance();
@@ -69,12 +67,14 @@ public class PairUnitTest extends TupleAbstractUnitTest {
 		assertEquals("(90,6)", _(90, 6).toString());
 	}
 
+	/***/
 	@Test
 	public void testAsEntry_Get() throws Exception {
 		assertEquals("Hello", _("Hello", 40).getKey());
 		assertEquals("Hello", _(40, "Hello").getValue());
 	}
 
+	/***/
 	@Test(expected = UnsupportedOperationException.class)
 	public void testAsEntry_Set() throws Exception {
 		_(40, 9).setValue(4);

@@ -86,6 +86,7 @@ public class OptionUnitTest extends JUnit4MockObjectTestCase {
 	 * 
 	 * @throws Exception
 	 */
+	@Test
 	public void testValueOrElse() throws Exception {
 		assertEquals(4, (int) Option.some(4).valueOrElse(8));
 		assertEquals(4, (int) Option.some(4).valueOrElse(Providers.constant(9)));
@@ -115,6 +116,7 @@ public class OptionUnitTest extends JUnit4MockObjectTestCase {
 	 * 
 	 * @throws Exception
 	 */
+	@Test
 	public void testIfDefined() throws Exception {
 		final Executable<String> block = mock(Executable.class);
 		checking(new Expectations() {

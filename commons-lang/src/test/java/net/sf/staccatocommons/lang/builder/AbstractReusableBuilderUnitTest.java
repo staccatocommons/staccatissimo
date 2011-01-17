@@ -12,22 +12,28 @@
  */
 package net.sf.staccatocommons.lang.builder;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
 
+/**
+ * Test for {@link AbstractReusableBuilder}
+ * 
+ * @author flbulgarelli
+ */
 public class AbstractReusableBuilderUnitTest {
 
+	/***/
 	@Test
 	public void testDone_OK() throws Exception {
 		Map<String, String> c = new TestBuilder().withY("hello").withX("world").build();
 		assertNotNull(c);
 	}
 
+	/***/
 	@Test(expected = ObjectUnderConstructionException.class)
 	public void testDone_NotFinished() throws Exception {
 		new TestBuilder() //
@@ -35,6 +41,7 @@ public class AbstractReusableBuilderUnitTest {
 			.build();
 	}
 
+	/***/
 	@Test
 	public void testDone_InvokedTwice() throws Exception {
 		TestBuilder builder = new TestBuilder() //

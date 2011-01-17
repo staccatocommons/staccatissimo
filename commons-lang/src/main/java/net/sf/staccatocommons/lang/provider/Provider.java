@@ -14,6 +14,7 @@ package net.sf.staccatocommons.lang.provider;
 
 import java.util.concurrent.Callable;
 
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.Thunk;
@@ -64,6 +65,7 @@ public abstract class Provider<A> implements Thunk<A>, ContainsAware<A>, Callabl
 		return ObjectUtils.equals(value(), element);
 	}
 
+	/** Send {@link #value()} and discards its return value */
 	@Override
 	public final void run() {
 		value();
@@ -81,23 +83,49 @@ public abstract class Provider<A> implements Thunk<A>, ContainsAware<A>, Callabl
 		long initialMillis = System.currentTimeMillis();
 		run();
 		long finalMillis = System.currentTimeMillis();
-		return initialMillis - finalMillis;
+		return finalMillis - initialMillis;
 	}
 
 	/* Exception handling */
 
+	/**
+	 * Handles exceptions of type <code>exceptionClass</code> that may occur when
+	 * sending {@link #call()}.
+	 * 
+	 * This method is just a shortcut for
+	 * <code>Handle.throwing(this, exceptionClass)</code>
+	 * 
+	 * @see {@link Handle#throwing(Callable, Class)}
+	 */
 	public final <E extends Exception> A throwing(Class<E> exceptionClass) throws E {
 		return Handle.throwing(this, exceptionClass);
 	}
 
-	public final <E1 extends Exception, E2 extends Exception> A throwing(Class<E1> e1, Class<E2> e2)
-		throws E1, E2 {
-		return Handle.throwing(this, e1, e2);
+	/**
+	 * Handles exceptions of type <code>exceptionClass1</code> and
+	 * <code>exceptionClass2</code> that may occur when sending {@link #call()}.
+	 * 
+	 * This method is just a shortcut for
+	 * <code>Handle.throwing(this, exceptionClass1, exceptionClass2)</code>
+	 * 
+	 * @see {@link Handle#throwing(Callable, Class,Class)}
+	 */
+	public final <E1 extends Exception, E2 extends Exception> A throwing(Class<E1> exceptionClass1,
+		Class<E2> exceptionClass2) throws E1, E2 {
+		return Handle.throwing(this, exceptionClass1, exceptionClass2);
 	}
 
 	/* Function composition */
 
-	public <B> Provider<B> then(Applicable<? super A, ? extends B> function) {
+	/**
+	 * Composes the given <code>function</code> with <code>this</code>
+	 * 
+	 * @param function
+	 *          the {@link Applicable} to compose with this provider
+	 * @return a Provider that returns <code>function.apply(this.value())</code>
+	 */
+	@NonNull
+	public <B> Provider<B> then(@NonNull Applicable<? super A, ? extends B> function) {
 		return Functions.from(function).of(this);
 	}
 

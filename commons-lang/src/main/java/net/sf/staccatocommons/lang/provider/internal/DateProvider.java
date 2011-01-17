@@ -10,6 +10,7 @@ import net.sf.staccatocommons.lang.provider.Provider;
  */
 public class DateProvider extends Provider<Date> {
 
+	/** An instance */
 	public static final DateProvider PROVIDER = new DateProvider();
 
 	public Date value() {

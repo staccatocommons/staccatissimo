@@ -39,7 +39,7 @@ public class SoftException extends UnhandledException {
 	 * @param cause
 	 *          the wrapped exception.
 	 */
-	public SoftException(@NonNull Exception cause) {
+	private SoftException(@NonNull Exception cause) {
 		super(cause);
 	}
 
@@ -60,6 +60,14 @@ public class SoftException extends UnhandledException {
 		return new SoftException(exception);
 	}
 
+	/**
+	 * Converts the given {@link SoftException} into a checked {@link Exception},
+	 * by returning its cause
+	 * 
+	 * @param e
+	 *          the soft exception to harden
+	 * @return the cause of the given soft exception
+	 */
 	@NonNull
 	public static Exception harden(@NonNull SoftException e) {
 		return (Exception) e.getCause();
