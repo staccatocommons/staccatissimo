@@ -40,7 +40,6 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
-import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -56,9 +55,9 @@ import org.apache.commons.lang.ObjectUtils;
  * modify any of its arguments, and thus can be used with immutable collections.
  * 
  * For algorithms that modify the state of the input collections, see
- * {@link ModifiableIterables}. However, Stacatto-commons-collection-extra API
+ * {@link ModifiableIterables}. However, Stacatto-commons-collection API
  * recommends to avoid those methods when possible, as will fail with
- * unmodifiable collections and are not functional.
+ * unmodifiable collections.
  * 
  * @author flbulgarelli
  */
@@ -109,9 +108,8 @@ public class Iterables {
 		Iterator<A> iter = iterable.iterator();
 		if (!iter.hasNext())
 			Ensure.fail(ITERABLE, iterable, "Must be not empty");
-
 		A result = iter.next();
-		for (; iter.hasNext();)
+		while (iter.hasNext())
 			result = function.apply(result, iter.next());
 		return result;
 	}
@@ -130,7 +128,7 @@ public class Iterables {
 	 */
 
 	/**
-	 * Alternative version of {@link #findOrNone(Iterable, Predicate)}, where the
+	 * Alternative version of {@link #findOrNone(Iterable, Evaluable)}, where the
 	 * element is returned if found, or a {@link NoSuchElementException} is thrown
 	 * otherwise
 	 * 
@@ -257,7 +255,7 @@ public class Iterables {
 		if (!iter.hasNext())
 			return true;
 		A any = iter.next();
-		for (; iter.hasNext();)
+		while (iter.hasNext())
 			if (!ObjectUtils.equals(any, iter.next()))
 				return false;
 		return true;
@@ -279,7 +277,7 @@ public class Iterables {
 		if (!iter.hasNext())
 			return true;
 		A any = iter.next();
-		for (; iter.hasNext();)
+		while (iter.hasNext())
 			if (any != iter.next())
 				return false;
 		return true;
@@ -431,18 +429,18 @@ public class Iterables {
 	 */
 
 	/**
-	 * Sorts a new list containing all the collection elements, using the given
-	 * comparator. Null collections are treated as empty collections.
+	 * Sorts a the given <code>iterable</code> into a new list, using the given
+	 * comparator.
 	 * 
 	 * @param <A>
 	 * @param iterable
 	 *          the the collection.
 	 * @param comparator
-	 *          . Not null.
 	 * @return a new list containing all the original colleciton elements, sorted
-	 *         using the given criteria, or an empty mutable list, if the
-	 *         collection was null or empty.
+	 *         using the given criteria, or an empty mutable list, if the original
+	 *         {@link Iterable} was empty.
 	 */
+	@NonNull
 	public static <A> List<A> toSortedList(@NonNull Iterable<A> iterable,
 		@NonNull Comparator<? super A> comparator) {
 		List<A> list = new LinkedList<A>();
@@ -451,6 +449,17 @@ public class Iterables {
 		return list;
 	}
 
+	/**
+	 * Sorts a given <code>iterable</code> using the given {@link Comparator} into
+	 * a new {@link SortedSet}
+	 * 
+	 * @param <A>
+	 * @param iterable
+	 *          the {@link Iterable} to sort
+	 * @param comparator
+	 * @return a sorted set containing the iterables elements sorted using the
+	 *         given <code>comparator</code>
+	 */
 	@NonNull
 	public static <A> SortedSet<A> toSortedSet(@NonNull Iterable<A> iterable,
 		@NonNull Comparator<? super A> comparator) {
@@ -459,8 +468,18 @@ public class Iterables {
 		return sortedSet;
 	}
 
+	/**
+	 * Sorts a given <code>iterable</code> using its natural ordering
+	 * 
+	 * @param <A>
+	 * @param iterable
+	 *          the {@link Iterable} to sort
+	 * @param comparator
+	 * @return a sorted set containing the iterables elements sorted using the
+	 *         given <code>comparator</code>
+	 */
 	@NonNull
-	public static <A> SortedSet<A> toSortedSet(@NonNull Iterable<A> iterable) {
+	public static <A extends Comparable<A>> SortedSet<A> toSortedSet(@NonNull Iterable<A> iterable) {
 		TreeSet<A> sortedSet = new TreeSet<A>();
 		addAllInternal(sortedSet, iterable);
 		return sortedSet;
@@ -529,7 +548,7 @@ public class Iterables {
 	/**
 	 * Splits the given iterable by returning two {@link List}s, the first one
 	 * containing those elements that satisfy the given predicate, and the second
-	 * one containing those elements that do not satisfy it
+	 * one containing those elements that do not satisfy it.
 	 * 
 	 * For example, the following code:
 	 * 

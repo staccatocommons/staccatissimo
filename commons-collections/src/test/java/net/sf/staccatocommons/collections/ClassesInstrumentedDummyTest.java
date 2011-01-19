@@ -27,7 +27,6 @@ public class ClassesInstrumentedDummyTest {
 	/**
 	 * Verifies that, at least, the notNull processor is working
 	 */
-	@SuppressWarnings("unused")
 	@Test(expected = IllegalArgumentException.class)
 	public void testArgumentsInstrumented() {
 		Lists.first(Arrays.asList());
@@ -36,7 +35,6 @@ public class ClassesInstrumentedDummyTest {
 	/**
 	 * Verifies that, at least, the notEmpty processor is working
 	 */
-	@SuppressWarnings("unused")
 	@Test(expected = IllegalArgumentException.class)
 	public void testArgumentsInstrumented2() {
 		Lists.first(null);

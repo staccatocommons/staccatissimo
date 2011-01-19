@@ -78,6 +78,15 @@ public interface Foldable<A> {
 	@NonNull
 	A sum(@NonNull NumberType<A> numberType);
 
+	/**
+	 * Returns the product of this {@link Stream} using the given
+	 * {@link NumberType}
+	 * 
+	 * @param numberType
+	 * @return the result of multiplying each element of this number type, or one,
+	 *         if this stream is empty
+	 * @see Iterables#product(Iterable, NumberType)
+	 */
 	@NonNull
 	A product(@NonNull NumberType<A> numberType);
 }

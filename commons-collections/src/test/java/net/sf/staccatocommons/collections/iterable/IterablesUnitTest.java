@@ -104,8 +104,9 @@ public class IterablesUnitTest {
 			}));
 	}
 
+	/** Test for {@link Iterables#findOrNone(Iterable, Evaluable)} */
 	@Test
-	public void testFind() throws Exception {
+	public void testFindOrNone() throws Exception {
 		Option<String> result = Iterables.findOrNone(stringsList, new Predicate<String>() {
 			@Override
 			public boolean eval(String s) {
@@ -115,6 +116,9 @@ public class IterablesUnitTest {
 		assertEquals("Hello", result.value());
 	}
 
+	/**
+	 * Test for {@link Iterables#allSame(Iterable)}
+	 */
 	@Test
 	public void testAllSame() {
 		Object o1 = new Object();
@@ -126,6 +130,9 @@ public class IterablesUnitTest {
 		assertFalse(Iterables.allSame(Arrays.asList(o1, o1, o2)));
 	}
 
+	/**
+	 * Test for {@link Iterables#allEqual(Iterable)}
+	 */
 	@Test
 	public void testAllEqual() {
 		Calendar c1 = new GregorianCalendar(1995, 10, 10);
