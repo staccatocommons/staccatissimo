@@ -31,6 +31,7 @@ import org.junit.runner.RunWith;
 @RunWith(Theories.class)
 public class NumberTypesUnitTest {
 
+	/***/
 	@DataPoints
 	public static NumberType<?>[] types = new NumberType[] {//
 	integer(), bigInteger(), bigDecimal(), float_(), double_(), long_() };

@@ -16,7 +16,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
-import net.sf.staccatocommons.lang.tuple.internal.TupleValue;
+import net.sf.staccatocommons.lang.value.RelevantState;
 
 /**
  * Four-components {@link Tuple}
@@ -36,9 +36,9 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 	Comparable<Quadruple<T1, T2, T3, T4>> {
 
 	private static final long serialVersionUID = -1072243152313731077L;
-	private static final TupleValue<Quadruple> val = new TupleValue<Quadruple>(4) {
-		protected void significant(Quadruple o, Criteria b) {
-			b.with(o.first).with(o.second).with(o.third).with(o.fourth);
+	private static final RelevantState<Quadruple> val = new TupleState<Quadruple>(4) {
+		protected void collectState(Quadruple o, StateCollector b) {
+			b.add(o.first).add(o.second).add(o.third).add(o.fourth);
 		}
 	};
 

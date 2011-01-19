@@ -20,6 +20,8 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
+import net.sf.staccatocommons.lang.tuple.internal.TupleToStringStyle;
+import net.sf.staccatocommons.lang.value.RelevantState;
 
 /**
  * <p>
@@ -156,5 +158,14 @@ public abstract class Tuple implements Serializable {
 	@NonNull
 	public List<Object> toList() {
 		return Arrays.asList(toArray());
+	}
+
+	protected static abstract class TupleState<A extends Tuple> extends RelevantState<A> {
+		/**
+		 * Creates a new {@link TupleState}
+		 */
+		public TupleState(int relevantAttributesCount) {
+			super(relevantAttributesCount, TupleToStringStyle.getInstance());
+		}
 	}
 }

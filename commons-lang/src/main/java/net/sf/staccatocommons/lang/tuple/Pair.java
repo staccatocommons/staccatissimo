@@ -18,7 +18,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
-import net.sf.staccatocommons.lang.tuple.internal.TupleValue;
+import net.sf.staccatocommons.lang.value.RelevantState;
 
 /**
  * Two-components {@link Tuple}
@@ -37,9 +37,9 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 	Map.Entry<T1, T2> {
 
 	private static final long serialVersionUID = -6479045670420592337L;
-	private static final TupleValue<Pair> val = new TupleValue<Pair>(2) {
-		protected void significant(Pair o, Criteria b) {
-			b.with(o.first).with(o.second);
+	private static final RelevantState<Pair> val = new TupleState<Pair>(2) {
+		protected void collectState(Pair o, StateCollector s) {
+			s.add(o.first).add(o.second);
 		}
 	};
 

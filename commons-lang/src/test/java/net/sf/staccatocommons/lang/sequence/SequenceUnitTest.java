@@ -34,6 +34,7 @@ import org.junit.Test;
  */
 public class SequenceUnitTest {
 
+	/***/
 	@Test
 	public void testFromTo_Asc() {
 		Sequence<Integer> seq = Sequence.fromTo(1, 5);
@@ -42,6 +43,7 @@ public class SequenceUnitTest {
 
 	}
 
+	/***/
 	@Test
 	public void testFromTo_Desc() {
 		Sequence<Integer> seq = Sequence.fromTo(9, 4);
@@ -50,6 +52,7 @@ public class SequenceUnitTest {
 
 	}
 
+	/***/
 	@Test
 	public void testFromToBy_Asc() {
 		Sequence<Integer> seq = Sequence.fromToBy(1, 10, 2);
@@ -57,6 +60,7 @@ public class SequenceUnitTest {
 		assertEquals(Arrays.asList(1, 3, 5, 7, 9), asList(seq));
 	}
 
+	/***/
 	@Test
 	public void testFromToBy_Desc() {
 		Sequence<Integer> seq = Sequence.fromToBy(5, 1, -1);
@@ -65,6 +69,7 @@ public class SequenceUnitTest {
 		assertEquals(Arrays.asList(5, 4, 3, 2), asList(seq));
 	}
 
+	/***/
 	@Test
 	public void testFromToBy_Desc2() {
 		Sequence<Integer> seq = Sequence.fromToBy(10, 3, -2);

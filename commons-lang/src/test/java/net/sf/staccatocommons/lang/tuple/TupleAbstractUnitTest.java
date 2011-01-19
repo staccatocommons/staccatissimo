@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.lang.tuple;
 
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.*;
 
 import java.util.Arrays;
 
@@ -26,21 +26,27 @@ import org.junit.Test;
  */
 public abstract class TupleAbstractUnitTest {
 
+	/** Test that equalty and hashcode is well defined */
 	@Test
 	public abstract void testEqualty() throws Exception;
 
+	/** Test that Tuples are comparable */
 	@Test
 	public abstract void testComparability() throws Exception;
 
+	/** Test components can be accessed */
 	@Test
 	public abstract void testComponents() throws Exception;
 
+	/** Test tuples to string is "nice" */
 	@Test
 	public abstract void testToString() throws Exception;
 
+	/** Test tuples can be concerted into an array */
 	@Test
 	public abstract void testToArray() throws Exception;
 
+	/** Test tuples can be converted into a list */
 	@Test
 	public void testToList() throws Exception {
 		Tuple sampleTuple = sampleTuple();

@@ -18,6 +18,8 @@ import static org.junit.Assert.*;
 import java.util.Date;
 
 import net.sf.staccatocommons.lang.tuple.Triple;
+import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
+import net.sf.staccatocommons.lang.value.RelevantState;
 
 import org.junit.Test;
 
@@ -25,17 +27,18 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class TupleValueUnitTest {
+public class RelevantStateUnitTest {
 
-	private TupleValue<Triple> val = new TupleValue<Triple>(3) {
-		protected void significant(Triple o, Criteria b) {
-			b.with(o._1()).with(o._2()).with(o._3());
+	private RelevantState<Triple> val = new RelevantState<Triple>(
+		3,
+		NamedTupleToStringStyle.getInstance()) {
+		protected void collectState(Triple o, StateCollector b) {
+			b.add(o._1()).add(o._2()).add(o._3());
 		}
 	};
 
 	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.value.Val#hashCode(java.lang.Object)}.
+	 * Test method for {@link RelevantState#hashCode(java.lang.Object)}.
 	 */
 	@Test
 	public void testEquals() {
@@ -51,8 +54,7 @@ public class TupleValueUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.value.Val#equals(java.lang.Object, java.lang.Object)}
-	 * .
+	 * {@link RelevantState#equals(java.lang.Object, java.lang.Object)} .
 	 */
 	@Test
 	public void testHashCode() {
@@ -64,10 +66,21 @@ public class TupleValueUnitTest {
 		assertTrue(val.hashCode(_("foo", 5L, '5')) != val.hashCode(_("foo", 5L, 'a')));
 	}
 
-	/** Test for {@link TupleValue#toString(Object)} **/
+	/** Test for {@link RelevantState#compareTo(Object, Object)} **/
+	@Test
+	public void testCompareTo() throws Exception {
+
+		Triple<Integer, Integer, Integer> t = _(4, 5, 6);
+		assertEquals(0, val.compareTo(t, t));
+		assertEquals(0, val.compareTo(_(4, 5, 6), _(4, 5, 6)));
+		assertTrue(val.compareTo(_(4, 10, 6), _(4, 5, 6)) > 0);
+
+	}
+
+	/** Test for {@link RelevantState#toString(Object)} **/
 	@Test
 	public void testToString() throws Exception {
-		assertEquals("(1,2,hello)", val.toString(_(1, 2, "hello")));
+		assertEquals("Triple(1,2,hello)", val.toString(_(1, 2, "hello")));
 	}
 
 }

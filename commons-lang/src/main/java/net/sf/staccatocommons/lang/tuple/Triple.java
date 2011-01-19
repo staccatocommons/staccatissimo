@@ -16,7 +16,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
-import net.sf.staccatocommons.lang.tuple.internal.TupleValue;
+import net.sf.staccatocommons.lang.value.RelevantState;
 
 /**
  * Three-components {@link Tuple}.
@@ -34,9 +34,9 @@ import net.sf.staccatocommons.lang.tuple.internal.TupleValue;
 public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple<T1, T2, T3>> {
 
 	private static final long serialVersionUID = 5811264763831754560L;
-	private static final TupleValue<Triple> val = new TupleValue<Triple>(3) {
-		protected void significant(Triple o, Criteria b) {
-			b.with(o.first).with(o.second).with(o.third);
+	private static final RelevantState<Triple> val = new TupleState<Triple>(3) {
+		protected void collectState(Triple o, StateCollector b) {
+			b.add(o.first).add(o.second).add(o.third);
 		}
 	};
 
