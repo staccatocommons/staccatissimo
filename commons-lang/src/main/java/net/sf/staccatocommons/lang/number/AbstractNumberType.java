@@ -73,46 +73,69 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 		return add().apply(n);
 	}
 
-	private final class Add extends NumberTypeFunction2 {
+	private final class Add extends NumberTypeFunction2<A> {
+		/**
+		 * Creates a new {@link Add}
+		 */
+		public Add() {
+			super(AbstractNumberType.this);
+		}
+
 		@Override
 		public A apply(A arg1, A arg2) {
 			return add(arg1, arg2);
 		}
 	}
 
-	private final class Multiply extends NumberTypeFunction2 {
+	private final class Multiply extends NumberTypeFunction2<A> {
+
+		/**
+		 * Creates a new {@link Multiply}
+		 */
+		public Multiply() {
+			super(AbstractNumberType.this);
+		}
+
 		@Override
 		public A apply(A arg1, A arg2) {
 			return multiply(arg1, arg2);
 		}
 	}
 
-	/**
-	 * NumberTypeFunctions, override {@link Function2#apply(Object)} so that the
-	 * resulting function is flipped and it implements {@link ImplicitNumberType}
-	 * too
-	 * 
-	 * @author flbulgarelli
-	 * 
-	 */
-	private abstract class NumberTypeFunction2 extends Function2<A, A, A> implements
-		ImplicitNumberType<A> {
-		public final NumberType<A> numberType() {
-			return AbstractNumberType.this;
-		}
+}
 
-		public Function<A, A> apply(final A arg1) {
-			abstract class NumberTypeFunction extends Function<A, A> implements ImplicitNumberType<A> {
-				public NumberType<A> numberType() {
-					return NumberTypeFunction2.this.numberType();
-				}
-			}
-			return new NumberTypeFunction() {
-				public A apply(A arg) {
-					return NumberTypeFunction2.this.apply(arg, arg1);
-				}
-			};
-		}
+/**
+ * NumberTypeFunctions, override {@link Function2#apply(Object)} so that the
+ * resulting function is flipped and it implements {@link ImplicitNumberType}
+ * too
+ * 
+ * @author flbulgarelli
+ * 
+ */
+abstract class NumberTypeFunction2<A> extends Function2<A, A, A> implements ImplicitNumberType<A> {
 
+	private final NumberType<A> type;
+
+	public NumberTypeFunction2(NumberType<A> type) {
+		super();
+		this.type = type;
 	}
+
+	public final NumberType<A> numberType() {
+		return type;
+	}
+
+	public Function<A, A> apply(final A arg1) {
+		abstract class NumberTypeFunction extends Function<A, A> implements ImplicitNumberType<A> {
+			public NumberType<A> numberType() {
+				return NumberTypeFunction2.this.numberType();
+			}
+		}
+		return new NumberTypeFunction() {
+			public A apply(A arg) {
+				return NumberTypeFunction2.this.apply(arg, arg1);
+			}
+		};
+	}
+
 }

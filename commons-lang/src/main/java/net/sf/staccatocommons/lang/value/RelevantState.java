@@ -14,6 +14,7 @@ package net.sf.staccatocommons.lang.value;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.Transparent;
+import net.sf.staccatocommons.lang.value.RelevantState.StateCollector;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -261,231 +262,231 @@ public abstract class RelevantState<A> {
 		StateCollector add(boolean attribute);
 	}
 
-	private static interface TwoPhaseStateBuilder extends StateCollector {
+}
 
-		void setState(TwoPhaseStateBuilderState state);
+interface TwoPhaseStateBuilder extends StateCollector {
 
-		void setPropertyIndex(int index);
+	void setState(TwoPhaseStateBuilderState state);
 
-		Object append(Object o1, Object o2);
+	void setPropertyIndex(int index);
 
-		Object append(long o1, long o2);
+	Object append(Object o1, Object o2);
 
-		Object append(int o1, int o2);
+	Object append(long o1, long o2);
 
-		Object append(boolean o1, boolean o2);
+	Object append(int o1, int o2);
 
-		Object[] getProperties();
+	Object append(boolean o1, boolean o2);
 
-		int getPropertyIndex();
+	Object[] getProperties();
 
+	int getPropertyIndex();
+
+}
+
+final class CompareStateBuilder extends CompareToBuilder implements
+	TwoPhaseStateBuilder {
+
+	private TwoPhaseStateBuilderState state;
+	private int propertyIndex;
+	private Object[] properties;
+
+	/**
+	 * Creates a new {@link RelevantState.EqualsStateBuilder}
+	 */
+	public CompareStateBuilder(int propsCount) {
+		properties = new Object[propsCount];
+		state = TwoPhaseStateBuilderState.FIRST_RUN;
+		propertyIndex = 0;
 	}
 
-	private static final class CompareStateBuilder extends CompareToBuilder implements
-		TwoPhaseStateBuilder {
-
-		private TwoPhaseStateBuilderState state;
-		private int propertyIndex;
-		private Object[] properties;
-
-		/**
-		 * Creates a new {@link RelevantState.EqualsStateBuilder}
-		 */
-		public CompareStateBuilder(int propsCount) {
-			properties = new Object[propsCount];
-			state = TwoPhaseStateBuilderState.FIRST_RUN;
-			propertyIndex = 0;
-		}
-
-		public Object[] getProperties() {
-			return properties;
-		}
-
-		public int getPropertyIndex() {
-			return propertyIndex;
-		}
-
-		public void setPropertyIndex(int propertyIndex) {
-			this.propertyIndex = propertyIndex;
-		}
-
-		public void setState(TwoPhaseStateBuilderState state) {
-			this.state = state;
-		}
-
-		public StateCollector add(Object o) {
-			state.with(o, this);
-			return this;
-		}
-
-		public StateCollector add(boolean attribute) {
-			state.with(attribute, this);
-			return this;
-		}
-
-		public StateCollector add(int attribute) {
-			state.with(attribute, this);
-			return this;
-		}
-
-		public StateCollector add(long attribute) {
-			state.with(attribute, this);
-			return this;
-		}
-
+	public Object[] getProperties() {
+		return properties;
 	}
 
-	private static final class ToStringCriteria extends ToStringBuilder implements StateCollector {
-
-		/**
-		 * Creates a new {@link ToStringCriteria}
-		 * 
-		 * @param toStrinStyle
-		 */
-		public ToStringCriteria(Object object, ToStringStyle toStrinStyle) {
-			super(object, toStrinStyle);
-		}
-
-		public StateCollector add(Object o) {
-			append(o);
-			return this;
-		}
-
-		public StateCollector add(boolean attribute) {
-			append(attribute);
-			return this;
-		}
-
-		public StateCollector add(int attribute) {
-			append(attribute);
-			return this;
-		}
-
-		public StateCollector add(long attribute) {
-			append(attribute);
-			return this;
-		}
-
+	public int getPropertyIndex() {
+		return propertyIndex;
 	}
 
-	private static final class HashCodeStateBuilder extends HashCodeBuilder implements StateCollector {
-		public StateCollector add(Object o) {
-			append(o);
-			return this;
-		}
-
-		public StateCollector add(int attribute) {
-			append(attribute);
-			return this;
-		}
-
-		public StateCollector add(boolean attribute) {
-			append(attribute);
-			return this;
-		}
-
-		public StateCollector add(long attribute) {
-			append(attribute);
-			return this;
-		}
+	public void setPropertyIndex(int propertyIndex) {
+		this.propertyIndex = propertyIndex;
 	}
 
-	private static class EqualsStateBuilder extends EqualsBuilder implements TwoPhaseStateBuilder {
-
-		private TwoPhaseStateBuilderState state;
-		private int propertyIndex;
-		private Object[] properties;
-
-		/**
-		 * Creates a new {@link RelevantState.EqualsStateBuilder}
-		 */
-		public EqualsStateBuilder(int propsCount) {
-			properties = new Object[propsCount];
-			state = TwoPhaseStateBuilderState.FIRST_RUN;
-			propertyIndex = 0;
-		}
-
-		public int getPropertyIndex() {
-			return propertyIndex;
-		}
-
-		public void setPropertyIndex(int propertyIndex) {
-			this.propertyIndex = propertyIndex;
-		}
-
-		public Object[] getProperties() {
-			return properties;
-		}
-
-		public void setState(TwoPhaseStateBuilderState state) {
-			this.state = state;
-		}
-
-		public StateCollector add(Object o) {
-			state.with(o, this);
-			return this;
-		}
-
-		public StateCollector add(int attribute) {
-			state.with(attribute, this);
-			return this;
-		}
-
-		public StateCollector add(boolean attribute) {
-			state.with(attribute, this);
-			return this;
-		}
-
-		public StateCollector add(long attribute) {
-			state.with(attribute, this);
-			return this;
-		}
-
+	public void setState(TwoPhaseStateBuilderState state) {
+		this.state = state;
 	}
 
-	private enum TwoPhaseStateBuilderState {
+	public StateCollector add(Object o) {
+		state.with(o, this);
+		return this;
+	}
 
-		FIRST_RUN {
-			void with(Object o, TwoPhaseStateBuilder eb) {
-				eb.getProperties()[nextIndex(eb)] = o;
-			}
-		},
-		SECOND_RUN {
-			void with(Object o, TwoPhaseStateBuilder eb) {
-				eb.append(eb.getProperties()[nextIndex(eb)], o);
-			}
+	public StateCollector add(boolean attribute) {
+		state.with(attribute, this);
+		return this;
+	}
 
-			void with(boolean o, TwoPhaseStateBuilder eb) {
-				eb.append(((Boolean) eb.getProperties()[nextIndex(eb)]).booleanValue(), o);
-			}
+	public StateCollector add(int attribute) {
+		state.with(attribute, this);
+		return this;
+	}
 
-			void with(int o, TwoPhaseStateBuilder eb) {
-				eb.append(((Integer) eb.getProperties()[nextIndex(eb)]).intValue(), o);
-			}
+	public StateCollector add(long attribute) {
+		state.with(attribute, this);
+		return this;
+	}
 
-			void with(long o, TwoPhaseStateBuilder eb) {
-				eb.append(((Long) eb.getProperties()[nextIndex(eb)]).longValue(), o);
-			}
-		};
-		abstract void with(Object o, TwoPhaseStateBuilder eb);
+}
+
+final class ToStringCriteria extends ToStringBuilder implements StateCollector {
+
+	/**
+	 * Creates a new {@link ToStringCriteria}
+	 * 
+	 * @param toStrinStyle
+	 */
+	public ToStringCriteria(Object object, ToStringStyle toStrinStyle) {
+		super(object, toStrinStyle);
+	}
+
+	public StateCollector add(Object o) {
+		append(o);
+		return this;
+	}
+
+	public StateCollector add(boolean attribute) {
+		append(attribute);
+		return this;
+	}
+
+	public StateCollector add(int attribute) {
+		append(attribute);
+		return this;
+	}
+
+	public StateCollector add(long attribute) {
+		append(attribute);
+		return this;
+	}
+
+}
+
+final class HashCodeStateBuilder extends HashCodeBuilder implements StateCollector {
+	public StateCollector add(Object o) {
+		append(o);
+		return this;
+	}
+
+	public StateCollector add(int attribute) {
+		append(attribute);
+		return this;
+	}
+
+	public StateCollector add(boolean attribute) {
+		append(attribute);
+		return this;
+	}
+
+	public StateCollector add(long attribute) {
+		append(attribute);
+		return this;
+	}
+}
+
+final class EqualsStateBuilder extends EqualsBuilder implements TwoPhaseStateBuilder {
+
+	private TwoPhaseStateBuilderState state;
+	private int propertyIndex;
+	private Object[] properties;
+
+	/**
+	 * Creates a new {@link RelevantState.EqualsStateBuilder}
+	 */
+	public EqualsStateBuilder(int propsCount) {
+		properties = new Object[propsCount];
+		state = TwoPhaseStateBuilderState.FIRST_RUN;
+		propertyIndex = 0;
+	}
+
+	public int getPropertyIndex() {
+		return propertyIndex;
+	}
+
+	public void setPropertyIndex(int propertyIndex) {
+		this.propertyIndex = propertyIndex;
+	}
+
+	public Object[] getProperties() {
+		return properties;
+	}
+
+	public void setState(TwoPhaseStateBuilderState state) {
+		this.state = state;
+	}
+
+	public StateCollector add(Object o) {
+		state.with(o, this);
+		return this;
+	}
+
+	public StateCollector add(int attribute) {
+		state.with(attribute, this);
+		return this;
+	}
+
+	public StateCollector add(boolean attribute) {
+		state.with(attribute, this);
+		return this;
+	}
+
+	public StateCollector add(long attribute) {
+		state.with(attribute, this);
+		return this;
+	}
+
+}
+
+enum TwoPhaseStateBuilderState {
+
+	FIRST_RUN {
+		void with(Object o, TwoPhaseStateBuilder eb) {
+			eb.getProperties()[nextIndex(eb)] = o;
+		}
+	},
+	SECOND_RUN {
+		void with(Object o, TwoPhaseStateBuilder eb) {
+			eb.append(eb.getProperties()[nextIndex(eb)], o);
+		}
 
 		void with(boolean o, TwoPhaseStateBuilder eb) {
-			with((Boolean) o, eb);
-		};
+			eb.append(((Boolean) eb.getProperties()[nextIndex(eb)]).booleanValue(), o);
+		}
 
 		void with(int o, TwoPhaseStateBuilder eb) {
-			with((Integer) o, eb);
+			eb.append(((Integer) eb.getProperties()[nextIndex(eb)]).intValue(), o);
 		}
 
 		void with(long o, TwoPhaseStateBuilder eb) {
-			with((Long) o, eb);
+			eb.append(((Long) eb.getProperties()[nextIndex(eb)]).longValue(), o);
 		}
+	};
+	abstract void with(Object o, TwoPhaseStateBuilder eb);
 
-		protected int nextIndex(TwoPhaseStateBuilder eb) {
-			int i = eb.getPropertyIndex();
-			eb.setPropertyIndex(i + 1);
-			return i;
-		}
+	void with(boolean o, TwoPhaseStateBuilder eb) {
+		with((Boolean) o, eb);
+	};
+
+	void with(int o, TwoPhaseStateBuilder eb) {
+		with((Integer) o, eb);
 	}
 
+	void with(long o, TwoPhaseStateBuilder eb) {
+		with((Long) o, eb);
+	}
+
+	protected int nextIndex(TwoPhaseStateBuilder eb) {
+		int i = eb.getPropertyIndex();
+		eb.setPropertyIndex(i + 1);
+		return i;
+	}
 }
