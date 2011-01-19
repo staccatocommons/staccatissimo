@@ -17,6 +17,7 @@
 
     <menu name="Staccato-Commons">
       <item name="Introduction" href="index.html"/>
+      <item name="Maven Integration" href="maven-integration.html"/>
       <item name="Download" href="http://sourceforge.net/projects/staccatocommons/files"/>
       <item name="Browse Code" href="http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons"/>      
       <item name="General Information" href="http://sourceforge.net/projects/staccatocommons/"/>
