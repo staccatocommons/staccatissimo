@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.lang.value;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.restriction.Transparent;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -22,13 +23,65 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * 
- * An abstract class that is able of identifying the relevant attributes of an
- * object, and uses them to implements value comparisons -
- * {@link Object#equals(Object)} and {@link Comparable#compareTo(Object)} -
- * {@link Object#toString()} and {@link Object#hashCode()} in a consistent way
+ * An abstract class that is capable of identifying the relevant attributes of
+ * an object and implementing with them value comparisons, hashing and string
+ * representation in a consisten way.
+ * <p>
+ * Normal usage of {@link RelevantState} is declaring an implementor per class
+ * of type &lt;A&gt;, having a singleton instance of it, and then delegating
+ * {@link Object#equals(Object)}, {@link Object#hashCode()} etc, to it. For
+ * example:
  * 
+ * <pre>
+ * class Customer {
+ *  
+ *   private String name;
+ *   private Date birthday;
+ *   private Date joinDate;
+ *   
+ *   .....
+ *   public int hashCode() {
+ *    return state.hashCode(this);
+ *   }
+ * 	
+ *   public boolean equals(Object obj) {
+ *    return state.equals(this, obj);
+ *   }
+ *   
+ *   public String toString() {
+ *    return val.toString(this);
+ *   }
+ *   .....
+ *   
+ *   private static RelevantState&lt;&lt;&gt; state = new TupleState&lt;Customer&gt;(3) {
+ *    protected void collectState(Customer o, StateCollector c) {
+ *     c.add(o.name).add(o.birthday).add(joinDate); 
+ * 		} 
+ *   };
+ * }
+ * 
+ * </pre>
+ * 
+ * In order to do that, {@link RelevantState} instances <strong>must</strong> be
+ * {@link Transparent}, allowing them to be shared by instances and threads.
+ * </p>
+ * <p>
+ * {@link RelevantState} is completely reflection-free, and is built on top of
+ * {@link EqualsBuilder}, {@link ToStringBuilder}, {@link HashCodeBuilder} and
+ * {@link CompareToBuilder}.
+ * </p>
+ * 
+ * 
+ * @see Object#equals(Object)
+ * @see Object#hashCode()
+ * @see Object#toString()
+ * @see Comparable#compareTo(Object)
+ * 
+ * @param <A>
+ *          the type of object this {@link RelevantState} applies to
  * @author flbulgarelli
  */
+@Transparent
 public abstract class RelevantState<A> {
 
 	private final int relevantAttributesCount;
@@ -178,7 +231,34 @@ public abstract class RelevantState<A> {
 		 *          an attribute to add to the relevant state
 		 * @return this builder
 		 */
-		public StateCollector add(Object attribute);
+		StateCollector add(Object attribute);
+
+		/**
+		 * Adds an int attribute to the object's state
+		 * 
+		 * @param attribute
+		 *          an attribute to add to the relevant state
+		 * @return this builder
+		 */
+		StateCollector add(int attribute);
+
+		/**
+		 * Adds a long attribute to the object's state
+		 * 
+		 * @param attribute
+		 *          an attribute to add to the relevant state
+		 * @return this builder
+		 */
+		StateCollector add(long attribute);
+
+		/**
+		 * Adds a boolean attribute to the object's state
+		 * 
+		 * @param attribute
+		 *          an attribute to add to the relevant state
+		 * @return this builder
+		 */
+		StateCollector add(boolean attribute);
 	}
 
 	private static interface TwoPhaseStateBuilder extends StateCollector {
@@ -188,6 +268,12 @@ public abstract class RelevantState<A> {
 		void setPropertyIndex(int index);
 
 		Object append(Object o1, Object o2);
+
+		Object append(long o1, long o2);
+
+		Object append(int o1, int o2);
+
+		Object append(boolean o1, boolean o2);
 
 		Object[] getProperties();
 
@@ -211,11 +297,6 @@ public abstract class RelevantState<A> {
 			propertyIndex = 0;
 		}
 
-		public StateCollector add(Object o) {
-			state.with(o, this);
-			return this;
-		}
-
 		public Object[] getProperties() {
 			return properties;
 		}
@@ -230,6 +311,26 @@ public abstract class RelevantState<A> {
 
 		public void setState(TwoPhaseStateBuilderState state) {
 			this.state = state;
+		}
+
+		public StateCollector add(Object o) {
+			state.with(o, this);
+			return this;
+		}
+
+		public StateCollector add(boolean attribute) {
+			state.with(attribute, this);
+			return this;
+		}
+
+		public StateCollector add(int attribute) {
+			state.with(attribute, this);
+			return this;
+		}
+
+		public StateCollector add(long attribute) {
+			state.with(attribute, this);
+			return this;
 		}
 
 	}
@@ -250,11 +351,41 @@ public abstract class RelevantState<A> {
 			return this;
 		}
 
+		public StateCollector add(boolean attribute) {
+			append(attribute);
+			return this;
+		}
+
+		public StateCollector add(int attribute) {
+			append(attribute);
+			return this;
+		}
+
+		public StateCollector add(long attribute) {
+			append(attribute);
+			return this;
+		}
+
 	}
 
 	private static final class HashCodeStateBuilder extends HashCodeBuilder implements StateCollector {
 		public StateCollector add(Object o) {
 			append(o);
+			return this;
+		}
+
+		public StateCollector add(int attribute) {
+			append(attribute);
+			return this;
+		}
+
+		public StateCollector add(boolean attribute) {
+			append(attribute);
+			return this;
+		}
+
+		public StateCollector add(long attribute) {
+			append(attribute);
 			return this;
 		}
 	}
@@ -274,11 +405,6 @@ public abstract class RelevantState<A> {
 			propertyIndex = 0;
 		}
 
-		public StateCollector add(Object o) {
-			state.with(o, this);
-			return this;
-		}
-
 		public int getPropertyIndex() {
 			return propertyIndex;
 		}
@@ -295,25 +421,71 @@ public abstract class RelevantState<A> {
 			this.state = state;
 		}
 
+		public StateCollector add(Object o) {
+			state.with(o, this);
+			return this;
+		}
+
+		public StateCollector add(int attribute) {
+			state.with(attribute, this);
+			return this;
+		}
+
+		public StateCollector add(boolean attribute) {
+			state.with(attribute, this);
+			return this;
+		}
+
+		public StateCollector add(long attribute) {
+			state.with(attribute, this);
+			return this;
+		}
+
 	}
 
 	private enum TwoPhaseStateBuilderState {
 
 		FIRST_RUN {
 			void with(Object o, TwoPhaseStateBuilder eb) {
-				int i = eb.getPropertyIndex();
-				eb.getProperties()[i] = o;
-				eb.setPropertyIndex(i + 1);
+				eb.getProperties()[nextIndex(eb)] = o;
 			}
 		},
 		SECOND_RUN {
 			void with(Object o, TwoPhaseStateBuilder eb) {
-				int i = eb.getPropertyIndex();
-				eb.append(eb.getProperties()[i], o);
-				eb.setPropertyIndex(i + 1);
+				eb.append(eb.getProperties()[nextIndex(eb)], o);
+			}
+
+			void with(boolean o, TwoPhaseStateBuilder eb) {
+				eb.append(((Boolean) eb.getProperties()[nextIndex(eb)]).booleanValue(), o);
+			}
+
+			void with(int o, TwoPhaseStateBuilder eb) {
+				eb.append(((Integer) eb.getProperties()[nextIndex(eb)]).intValue(), o);
+			}
+
+			void with(long o, TwoPhaseStateBuilder eb) {
+				eb.append(((Long) eb.getProperties()[nextIndex(eb)]).longValue(), o);
 			}
 		};
 		abstract void with(Object o, TwoPhaseStateBuilder eb);
+
+		void with(boolean o, TwoPhaseStateBuilder eb) {
+			with((Boolean) o, eb);
+		};
+
+		void with(int o, TwoPhaseStateBuilder eb) {
+			with((Integer) o, eb);
+		}
+
+		void with(long o, TwoPhaseStateBuilder eb) {
+			with((Long) o, eb);
+		}
+
+		protected int nextIndex(TwoPhaseStateBuilder eb) {
+			int i = eb.getPropertyIndex();
+			eb.setPropertyIndex(i + 1);
+			return i;
+		}
 	}
 
 }

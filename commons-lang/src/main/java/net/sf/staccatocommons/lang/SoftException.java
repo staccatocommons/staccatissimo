@@ -85,17 +85,17 @@ public class SoftException extends UnhandledException {
 	}
 
 	/**
-	 * Tries to call the given {@link Callable} and return its result, and
-	 * rethrows a soften exception if {@link Callable#call()} threw an
-	 * {@link Exception}
+	 * Tries return <code>callable.call()</code>. If an exception is thrown, it is
+	 * softened and rethrown.
 	 * 
 	 * @param <T>
 	 *          the callable return type
 	 * @param callable
 	 *          the callable to execute. Non null.
-	 * @return the result of the callable, if {@link Callable#call()} succeed
+	 * @return the result of the callable, if {@link Callable#call()} succeeds
 	 * @throws RuntimeException
 	 *           if the call failed
+	 * @see #soften(Exception)
 	 */
 	public static <T> T callOrSoften(@NonNull Callable<T> callable) {
 		try {
@@ -105,6 +105,19 @@ public class SoftException extends UnhandledException {
 		}
 	}
 
+	/**
+	 * Tries to return <code>thunk.value()</code>. If an exception is thrown, it
+	 * is hardened and rethrown
+	 * 
+	 * @param <T>
+	 *          the thunk return type
+	 * @param thunk
+	 * @return the value of the {@link Thunk}, if it succeeds
+	 * @throws Exception
+	 *           if {@link Thunk#value()} failed
+	 * @see {@link Thunk}
+	 * @see #harden(RuntimeException)
+	 */
 	public static <T> T valueOrHarden(@NonNull Thunk<T> thunk) throws Exception {
 		try {
 			return thunk.value();

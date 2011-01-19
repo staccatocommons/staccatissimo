@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.tuple.internal;
+package net.sf.staccatocommons.lang.value;
 
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 import static org.junit.Assert.*;
@@ -18,8 +18,6 @@ import static org.junit.Assert.*;
 import java.util.Date;
 
 import net.sf.staccatocommons.lang.tuple.Triple;
-import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
-import net.sf.staccatocommons.lang.value.RelevantState;
 
 import org.junit.Test;
 

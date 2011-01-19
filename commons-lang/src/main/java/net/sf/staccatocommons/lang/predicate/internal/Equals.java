@@ -1,7 +1,6 @@
 package net.sf.staccatocommons.lang.predicate.internal;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.lang.value.RelevantState;
 
 /**
  * @author flbulgarelli
@@ -13,7 +12,7 @@ public final class Equals<T> extends NonAnnonymousPredicate<T> {
 	private final T value;
 
 	/**
-	 * Creates a new {@link RelevantState}
+	 * Creates a new {@link Equals}
 	 * 
 	 * @param value
 	 *          the value to test equality
