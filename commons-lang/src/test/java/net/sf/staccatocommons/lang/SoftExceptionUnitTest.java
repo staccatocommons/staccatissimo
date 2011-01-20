@@ -49,11 +49,15 @@ public class SoftExceptionUnitTest {
 		Exception checked = new IOException();
 		RuntimeException unchecked = new RuntimeException();
 		RuntimeException uncheckdWithNestedError = new RuntimeException(new IOError(checked));
+		RuntimeException uncheckdWithNestedUnchecked = new RuntimeException(new RuntimeException("foo"));
 
 		assertSame(checked, SoftException.harden(SoftException.soften(checked)));
 		assertSame(unchecked, SoftException.harden(unchecked));
 		assertSame(checked, SoftException.harden(new RuntimeException(checked)));
-		assertSame(checked, SoftException.harden(new RuntimeException(new RuntimeException(checked))));
+		assertSame(checked, //
+			SoftException
+				.harden(new RuntimeException(new RuntimeException(new RuntimeException(checked)))));
 		assertSame(uncheckdWithNestedError, SoftException.harden(uncheckdWithNestedError));
+		assertSame(uncheckdWithNestedUnchecked, SoftException.harden(uncheckdWithNestedUnchecked));
 	}
 }

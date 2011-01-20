@@ -73,15 +73,32 @@ public class SoftException extends UnhandledException {
 		return (Exception) e.getCause();
 	}
 
+	/**
+	 * Converts a given {@link RuntimeException} into a checked {@link Exception},
+	 * if possible.
+	 * 
+	 * This method traverses the throwable causes chain, until a non
+	 * {@link RuntimeException} is found. If such throwable exists and is an
+	 * {@link Exception}, it returns it. Otherwise, returns the original
+	 * <code>runtimeException</code>
+	 * 
+	 * @param runtimeException
+	 * @return The first non {@link RuntimeException} in the causes chain, if
+	 *         exists and is an {@link Exception}. The given
+	 *         {@link RuntimeException} otherwise.
+	 */
 	@NonNull
-	public static Exception harden(@NonNull RuntimeException e) {
-		if (e.getCause() == null)
-			return e;
+	public static Exception harden(@NonNull RuntimeException runtimeException) {
+		Throwable nonRuntime = findNonRuntime(runtimeException);
+		if (nonRuntime instanceof Exception)
+			return (Exception) nonRuntime;
+		return runtimeException;
+	}
+
+	private static Throwable findNonRuntime(RuntimeException e) {
 		if (e.getCause() instanceof RuntimeException)
-			return harden((RuntimeException) e.getCause());
-		if (e.getCause() instanceof Exception)
-			return (Exception) e.getCause();
-		return e;
+			return findNonRuntime((RuntimeException) e.getCause());
+		return e.getCause();
 	}
 
 	/**
