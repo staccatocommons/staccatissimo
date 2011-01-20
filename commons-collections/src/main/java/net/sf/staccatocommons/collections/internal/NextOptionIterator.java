@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team
+ Copyright (c) 2011, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -10,23 +10,25 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.io;
+package net.sf.staccatocommons.collections.internal;
 
-import java.util.Iterator;
-
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.io.internal.ReadableIterator;
+import net.sf.staccatocommons.lang.Option;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class IOIterators {
+public abstract class NextOptionIterator<A> extends NextGetIterator<A> {
 
-	@NonNull
-	public static <A> Iterator<A> from(@NonNull Readable redable,
-		@NonNull ReadStrategy<A> readStrategy) {
-		return new ReadableIterator(readStrategy, redable);
+	protected final Boolean updateNext() {
+		Option<A> nextOption = nextOption();
+		if (nextOption.isDefined()) {
+			setNext(nextOption.value());
+			return true;
+		}
+		return false;
 	}
+
+	protected abstract Option<A> nextOption();
 
 }

@@ -12,9 +12,20 @@
  */
 package net.sf.staccatocommons.io;
 
+import java.io.EOFException;
+import java.io.ObjectInput;
+import java.io.Reader;
+import java.util.Iterator;
+import java.util.Scanner;
+
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.internal.NextOptionIterator;
+import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.SoftException;
+
+import org.apache.commons.io.LineIterator;
 
 /**
  * @author flbulgarelli
@@ -23,8 +34,50 @@ import net.sf.staccatocommons.collections.stream.Streams;
 public class IOStreams {
 
 	@NonNull
-	public static <A> Stream<A> from(@NonNull Readable redable, @NonNull ReadStrategy<A> readStrategy) {
-		return Streams.from(IOIterators.from(redable, readStrategy));
+	public static Stream<String> fromWords(@NonNull final Readable readable) {
+		return new AbstractStream<String>() {
+			public Iterator<String> iterator() {
+				return new Scanner(readable);
+			}
+		};
+	}
+
+	@NonNull
+	public static Stream<String> fromLines(@NonNull final Reader readable) {
+		return new AbstractStream<String>() {
+			public Iterator<String> iterator() {
+				return new LineIterator(readable);
+			}
+		};
+	}
+
+	@NonNull
+	public static Stream<String> fromTokens(@NonNull final Readable readable, final String token) {
+		return new AbstractStream<String>() {
+			public Iterator<String> iterator() {
+				return new Scanner(readable).useDelimiter(token);
+			}
+		};
+	}
+
+	@NonNull
+	public static <A> Stream<A> fromObjects(@NonNull final ObjectInput readable) {
+		return new AbstractStream<A>() {
+			public Iterator<A> iterator() {
+				return new NextOptionIterator<A>() {
+					protected Option<A> nextOption() {
+						try {
+							return Option.some((A) readable.readObject());
+						} catch (EOFException e) {
+							return Option.none();
+						} catch (Exception e) {
+							throw SoftException.soften(e);
+						}
+					}
+
+				};
+			}
+		};
 	}
 
 }

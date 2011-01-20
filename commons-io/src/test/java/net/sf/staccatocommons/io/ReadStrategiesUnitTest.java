@@ -12,8 +12,9 @@
  */
 package net.sf.staccatocommons.io;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import java.io.Reader;
 import java.io.StringReader;
 
 import org.junit.Before;
@@ -26,7 +27,7 @@ import org.junit.Test;
 public class ReadStrategiesUnitTest {
 
 	private static final String SAMPLE_TEXT = "this is line 1\n this is line 2 \n this is line three";
-	private Readable readable;
+	private Reader readable;
 
 	/**
 	 * @throws java.lang.Exception
@@ -44,7 +45,7 @@ public class ReadStrategiesUnitTest {
 	public void testReadLines() {
 		assertEquals(
 			"this is line 1| this is line 2 | this is line three",
-			IOStreams.from(readable, ReadStrategies.readLines()).joinStrings("|"));
+			IOStreams.fromLines(readable).joinStrings("|"));
 	}
 
 	/**
@@ -53,9 +54,9 @@ public class ReadStrategiesUnitTest {
 	 */
 	@Test
 	public void testReadWords() {
-		assertEquals(
-			"this|is|line|1|this|is|line|2|this|is|line|three",
-			IOStreams.from(readable, ReadStrategies.readWords()).joinStrings("|"));
+		assertEquals("this|is|line|1|this|is|line|2|this|is|line|three", IOStreams
+			.fromWords(readable)
+			.joinStrings("|"));
 	}
 
 }

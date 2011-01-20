@@ -26,13 +26,13 @@ public abstract class NextGetIterator<A> extends AbstractUnmodifiableIterator<A>
 	private A next;
 	private Boolean hasNext;
 
-	public boolean hasNext() {
+	public final boolean hasNext() {
 		if (hasNext == null)
 			hasNext = updateNext();
 		return hasNext;
 	}
 
-	public A next() {
+	public final A next() {
 		if (!hasNext())
 			throw new NoSuchElementException();
 		hasNext = null;
@@ -44,7 +44,7 @@ public abstract class NextGetIterator<A> extends AbstractUnmodifiableIterator<A>
 	 *          the next element to retrieve
 	 * @return
 	 */
-	public A setNext(A next) {
+	public final A setNext(A next) {
 		this.next = next;
 		return next;
 	}
