@@ -15,11 +15,11 @@ package net.sf.staccatocommons.defs;
 
 /**
  * A {@link Thunk} is a computation that takes no arguments a returns a value.
- * In other words, is an object that is capable of returning another one,
+ * In other words, is an object that is capable of providing another one,
  * through it {@link #value()} method.
  * <p>
- * {@link Thunk}s of return type {@link Void} have the semantics compatible with
- * {@link Runnable}
+ * {@link Thunk}s of return type {@link Void} have semantics compatible with
+ * {@link Runnable}, as they do not provide a value, but a side effect instead
  * </p>
  * 
  * <p>
