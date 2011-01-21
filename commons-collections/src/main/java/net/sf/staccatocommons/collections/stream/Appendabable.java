@@ -12,13 +12,29 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import net.sf.staccatocommons.check.annotation.NonNull;
+
 /**
  * @author flbulgarelli
  * 
  */
 public interface Appendabable<A> {
+
+	/**
+	 * Concatenates <code>this</code> with <code>other</code>
+	 * 
+	 * It answers an {@link Stream} that retrieves elements from this Stream, and
+	 * then, after its last element, from the given Stream.
+	 * 
+	 * As a particular case, if this Stream is infinite, the resulting Stream will
+	 * retrieve the same elements than this one.
+	 * 
+	 * @param other
+	 * @return a new {@link Stream}
+	 */
 	@Projection
-	Stream<A> concat(Iterable<A> other);
+	Stream<A> concat(@NonNull Iterable<A> other);
+
 	/*
 	 * Stream<A> append(Stream<A> other);
 	 */

@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -47,22 +47,27 @@ public abstract class IteratorAbstractUnitTest {
 	@Theory
 	public void testNext(int size) throws Exception {
 		Iterator<?> it = createIterable(size).iterator();
-		for (@SuppressWarnings("unused")
-		Integer i : times(size)) {
+		for (@SuppressWarnings("unused") Integer i : times(size)) {
 			it.next();
 		}
 	}
 
+	/**
+	 * Tests that iterator.next throws NoSuchElement exception on end
+	 */
 	@Theory
 	@Test(expected = NoSuchElementException.class)
 	public void testNextThrowsNoSuchElementException(int size) throws Exception {
 		Iterator<?> it = createIterable(size).iterator();
-		for (@SuppressWarnings("unused")
-		Integer i : times(size + 1)) {
+		for (@SuppressWarnings("unused") Integer i : times(size + 1)) {
 			it.next();
 		}
 	}
 
+	/**
+	 * Tests that the hasNext method of an iterator is repeable as long as
+	 * iterator.next is not invoked
+	 */
 	@Theory
 	public void testHasNextIsRepeatable(int size) throws Exception {
 		Iterator<?> it = createIterable(size).iterator();
@@ -77,9 +82,6 @@ public abstract class IteratorAbstractUnitTest {
 
 	/**
 	 * Creates an iterable for the given size
-	 * 
-	 * @param size
-	 * @return
 	 */
 	public Iterable<?> createIterable(int size) {
 		switch (size) {

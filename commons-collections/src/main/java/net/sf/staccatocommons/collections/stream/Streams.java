@@ -164,8 +164,12 @@ public class Streams {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
-	public static Stream<Character> from(@NonNull CharSequence charSequence) {
-		return from(new CharSequenceIterator(charSequence));
+	public static Stream<Character> fromChars(@NonNull final CharSequence charSequence) {
+		return new AbstractStream<Character>() {
+			public Iterator<Character> iterator() {
+				return new CharSequenceIterator(charSequence);
+			}
+		};
 	}
 
 	/**

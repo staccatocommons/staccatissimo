@@ -12,9 +12,8 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.*;
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.lang.function.Function2;
 
 import org.junit.Test;
 
@@ -24,18 +23,11 @@ import org.junit.Test;
  */
 public class CharSequenceIteratorUnitTest extends IteratorAbstractUnitTest {
 
+	/** Test that joining a character stream returns back the original string */
 	@Test
-	public void testname() throws Exception {
+	public void testJoin() throws Exception {
 		String string = "hello world!";
-		assertEquals(
-			string,
-			Streams.from(new CharSequenceIterator(string)).fold(
-				"",
-				new Function2<String, Character, String>() {
-					public String apply(String arg1, Character arg2) {
-						return arg1 += arg2;
-					}
-				}));
+		assertEquals(string, Streams.fromChars(string).joinStrings(""));
 	}
 
 	protected Iterable<?> createTwoElementsIterable() {
