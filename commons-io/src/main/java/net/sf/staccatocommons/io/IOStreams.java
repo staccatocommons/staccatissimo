@@ -15,69 +15,88 @@ package net.sf.staccatocommons.io;
 import java.io.EOFException;
 import java.io.ObjectInput;
 import java.io.Reader;
-import java.util.Iterator;
 import java.util.Scanner;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.internal.NextOptionIterator;
-import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.SoftException;
 
 import org.apache.commons.io.LineIterator;
 
 /**
- * @author flbulgarelli
+ * Class methods for creating {@link Stream}s that retrieve elements from
+ * different IO sources
  * 
+ * @author flbulgarelli
  */
 public class IOStreams {
 
+	private IOStreams() {}
+
+	/**
+	 * Answers a {@link Stream} that retrieves words from the given
+	 * {@link Readable}
+	 * 
+	 * @param readable
+	 * @return a new single-iteration {@link Stream}
+	 */
 	@NonNull
-	public static Stream<String> fromWords(@NonNull final Readable readable) {
-		return new AbstractStream<String>() {
-			public Iterator<String> iterator() {
-				return new Scanner(readable);
-			}
-		};
+	public static Stream<String> fromWords(@NonNull Readable readable) {
+		return Streams.from(new Scanner(readable));
 	}
 
+	/**
+	 * Answers a {@link Stream} that retrieves lines from the given
+	 * {@link Readable}
+	 * 
+	 * @param readable
+	 * @return a new single-iteration {@link Stream}
+	 */
 	@NonNull
-	public static Stream<String> fromLines(@NonNull final Reader readable) {
-		return new AbstractStream<String>() {
-			public Iterator<String> iterator() {
-				return new LineIterator(readable);
-			}
-		};
+	public static Stream<String> fromLines(@NonNull Reader readable) {
+		return Streams.from(new LineIterator(readable));
 	}
 
+	/**
+	 * Answers a {@link Stream} that retrieves tokens that match the given regular
+	 * expression from the given {@link Readable}
+	 * 
+	 * @param readable
+	 * @param regexp
+	 * @return a new single-iteration {@link Stream}
+	 */
 	@NonNull
-	public static Stream<String> fromTokens(@NonNull final Readable readable, final String token) {
-		return new AbstractStream<String>() {
-			public Iterator<String> iterator() {
-				return new Scanner(readable).useDelimiter(token);
-			}
-		};
+	public static Stream<String> fromTokens(@NonNull Readable readable, @NonNull String regexp) {
+		return Streams.from(new Scanner(readable).useDelimiter(regexp));
 	}
 
+	/**
+	 * Answers a {@link Stream} that retrieves objects from the given
+	 * {@link ObjectInput}
+	 * 
+	 * @param <A>
+	 *          the type of object to read from the given <code>redable</code>
+	 * @param readable
+	 *          an {@link ObjectInput} that is the source of the returned
+	 *          {@link Stream}
+	 * @return a new single-iteration {@link Stream}
+	 */
 	@NonNull
 	public static <A> Stream<A> fromObjects(@NonNull final ObjectInput readable) {
-		return new AbstractStream<A>() {
-			public Iterator<A> iterator() {
-				return new NextOptionIterator<A>() {
-					protected Option<A> nextOption() {
-						try {
-							return Option.some((A) readable.readObject());
-						} catch (EOFException e) {
-							return Option.none();
-						} catch (Exception e) {
-							throw SoftException.soften(e);
-						}
-					}
-
-				};
+		return Streams.from(new NextOptionIterator<A>() {
+			protected Option<A> nextOption() {
+				try {
+					return Option.some((A) readable.readObject());
+				} catch (EOFException e) {
+					return Option.none();
+				} catch (Exception e) {
+					throw SoftException.soften(e);
+				}
 			}
-		};
+		});
 	}
 
 }
