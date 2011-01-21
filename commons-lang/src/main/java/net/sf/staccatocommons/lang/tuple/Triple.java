@@ -171,7 +171,7 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
 	}
 
 	public int compareTo(Triple<T1, T2, T3> other) {
-		return val.compareTo(this, other);
+		return val.compare(this, other);
 	}
 
 }

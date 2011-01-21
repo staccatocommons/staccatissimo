@@ -117,7 +117,7 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 	}
 
 	public int compareTo(Pair<T1, T2> other) {
-		return val.compareTo(this, other);
+		return val.compare(this, other);
 	}
 
 	@Override

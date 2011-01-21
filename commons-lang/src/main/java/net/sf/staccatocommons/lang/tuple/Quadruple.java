@@ -131,7 +131,7 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 
 	@Override
 	public int compareTo(Quadruple<T1, T2, T3, T4> other) {
-		return val.compareTo(this, other);
+		return val.compare(this, other);
 	}
 
 	@Override

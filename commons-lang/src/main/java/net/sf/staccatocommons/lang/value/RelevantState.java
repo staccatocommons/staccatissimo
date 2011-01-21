@@ -12,6 +12,8 @@
  */
 package net.sf.staccatocommons.lang.value;
 
+import java.util.Comparator;
+
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.Transparent;
 import net.sf.staccatocommons.lang.value.RelevantState.StateCollector;
@@ -83,7 +85,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author flbulgarelli
  */
 @Transparent
-public abstract class RelevantState<A> {
+public abstract class RelevantState<A> implements Comparator<A> {
 
 	private final int relevantAttributesCount;
 	private final ToStringStyle toStringStyle;
@@ -160,7 +162,7 @@ public abstract class RelevantState<A> {
 	 * @return 0 if both arguments are the same, or the result of a field by field
 	 *         comparison
 	 */
-	public int compareTo(@NonNull A object, A other) {
+	public int compare(@NonNull A object, A other) {
 		if (object == other)
 			return 0;
 		CompareStateBuilder b = new CompareStateBuilder(relevantAttributesCount);
@@ -284,8 +286,7 @@ interface TwoPhaseStateBuilder extends StateCollector {
 
 }
 
-final class CompareStateBuilder extends CompareToBuilder implements
-	TwoPhaseStateBuilder {
+final class CompareStateBuilder extends CompareToBuilder implements TwoPhaseStateBuilder {
 
 	private TwoPhaseStateBuilderState state;
 	private int propertyIndex;
