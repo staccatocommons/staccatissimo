@@ -71,7 +71,7 @@ public class Function3UnitTest extends JUnit4MockObjectTestCase {
 		assertEquals("Function3", function.toString());
 	}
 
-	/** Test for {@link Function3#lazy(Object, Object)} */
+	/** Test for {@link Function3#lazy(Object, Object, Object)} */
 	@Test
 	public void testLazy() throws Exception {
 		Thunk<Character> lazy = function.lazy(5, "foo", true);

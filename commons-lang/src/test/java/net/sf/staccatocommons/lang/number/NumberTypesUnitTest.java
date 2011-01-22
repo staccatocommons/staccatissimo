@@ -148,7 +148,7 @@ public class NumberTypesUnitTest {
 	}
 
 	/**
-	 * Theory for relationship between {@link NumberType#decement(Object)} , zero
+	 * Theory for relationship between {@link NumberType#decrement(Object)} , zero
 	 * and one
 	 */
 	@Theory

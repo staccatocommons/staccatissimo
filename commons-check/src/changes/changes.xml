@@ -2,31 +2,21 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
 	<properties>
-		<title>Staccato-Commons-Lang Changes History</title>
+		<title>Staccato-Commons-Check Changes History</title>
 		<author>flbulgarelli</author>
 	</properties>
 	<body>
 		<release version="1.0-alpha-1" date="2011-01-08" description="Inception">
 			<action dev="flbulgarelli" type="add">
-				Initial Version, with Ranges,
-				Sequences, Options, Functions, Tuples, Blocks,
-				Predicates,
-				Lifecycles, BasicEquals, Nulls, SoftExceptions, MapBuilder and
-				Provders
+				Initial Version, with Check, Validate, Ensure, Assert, and check annotations
 			</action>
 		</release>
 		<release version="1.0-alpha-2" date="2011-01-21" description="Types">
 			<action dev="flbulgarelli" type="add">
-				Added NumericTypes
+				Support for numeric types, empty aware types and size aware types
             </action>
 			<action dev="flbulgarelli" type="add">
-				Added Provider as abstract base class for Thunks
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Added RelevantState
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Added thread-safe Lazy, and lazy and delayed results for Functions and Blocks
+				Added MinSize and MaxSize annotations
             </action>
 		</release>
 	</body>

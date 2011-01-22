@@ -14,7 +14,7 @@
 				restrictions
 			</action>
 		</release>
-		<release version="1.0-alpha-2" date="TBD" description="Types">
+		<release version="1.0-alpha-2" date="2011-01-21" description="Types">
 			<action dev="flbulgarelli" type="add">
 				Added NumericTypes,
 				EmptyAwareType and SizeAwareType 
