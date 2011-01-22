@@ -39,6 +39,8 @@ import net.sf.staccatocommons.lang.sequence.StopConditions;
  */
 public class Streams {
 
+	private Streams() {}
+
 	/**
 	 * Creates a new ordered {@link Stream} that retrieves the elements from the
 	 * given array. This stream permits efficient random access and grants

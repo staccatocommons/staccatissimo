@@ -98,10 +98,18 @@ public class Iterables {
 		return takeInternal(iterable, amountOfElements, new ArrayList<A>(amountOfElements));
 	}
 
-	/*
-	 * Reduction
+	/**
+	 * Answers the result of aggregating the given <code>iterable</code> elements
+	 * using the given <code>function</code>. The given {@link Iterable}
+	 * <strong>must not</strong> be empty.
+	 * 
+	 * @param <A>
+	 *          the {@link Iterable}'s elements type
+	 * @param iterable
+	 * @param function
+	 *          the aggregation {@link Applicable}
+	 * @return the result of aggregating the <code>iterable</code>'s element
 	 */
-
 	@NonNull
 	public static <A> A reduce(@NotEmpty Iterable<A> iterable,
 		@NonNull Applicable2<? super A, ? super A, ? extends A> function) {
@@ -114,6 +122,24 @@ public class Iterables {
 		return result;
 	}
 
+	/**
+	 * Answers the result of aggregating the given <code>initial</code> value and
+	 * the {@link Iterable} elements using the given <code>function</code>
+	 * 
+	 * As a particular case, if <code>iterable</code> is empty, this method
+	 * returns the initial value.
+	 * 
+	 * @param <A>
+	 *          the {@link Iterable}'s elements type
+	 * @param <B>
+	 *          the aggregated value type
+	 * @param iterable
+	 * @param initial
+	 * @param function
+	 *          the aggregation {@link Applicable}
+	 * @return the result of aggregating the initial value and the given
+	 *         <code>iterable</code>'s elements.
+	 */
 	@NonNull
 	public static <A, B> B fold(@NonNull Iterable<A> iterable, B initial,
 		@NonNull Applicable2<? super B, ? super A, ? extends B> function) {
