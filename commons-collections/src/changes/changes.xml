@@ -29,6 +29,12 @@
 			<action dev="flbulgarelli" type="add">
                  Drop and drop while implementation
             </action>
+            <action dev="flbulgarelli" type="update">
+                 Improved streams documentation
+            </action>
+            <action dev="flbulgarelli" type="add">
+                 Elements comparison
+            </action>
 		</release>
 	</body>
 </document>
