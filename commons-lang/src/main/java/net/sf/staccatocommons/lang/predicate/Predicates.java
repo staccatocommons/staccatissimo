@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
+import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.predicate.internal.All;
@@ -110,6 +111,24 @@ public class Predicates {
 	@NonNull
 	public static <T> Predicate<T> same(T value) {
 		return new Same<T>(value);
+	}
+
+	/**
+	 * Returns a predicate that tests if its argument is instance of the given
+	 * class
+	 * 
+	 * @param <T>
+	 * @param clazz
+	 * @return a new {@link Predicate}
+	 */
+	@ForceChecks
+	@NonNull
+	public static <T> Predicate<T> isInstanceOf(@NonNull final Class<? extends T> clazz) {
+		return new Predicate<T>() {
+			public boolean eval(T argument) {
+				return clazz.isAssignableFrom(argument.getClass());
+			}
+		};
 	}
 
 	/**

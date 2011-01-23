@@ -69,4 +69,10 @@ public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
 		assertEquals((Character) 'a', Functions.from(applicable).apply(5));
 		assertSame(Functions.identity(), Functions.from(Functions.identity()));
 	}
+
+	/** Test for {@link Functions#toString_()} */
+	@Test
+	public void testToString() throws Exception {
+		assertEquals("50", Functions.toString_().apply(50));
+	}
 }

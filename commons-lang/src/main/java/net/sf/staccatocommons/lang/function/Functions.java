@@ -55,6 +55,22 @@ public class Functions {
 	}
 
 	/**
+	 * Returns a function that returns the result of sending
+	 * {@link Object#toString()} to its argument
+	 * 
+	 * @param <A>
+	 * @return a function that returns <code>arg.toString()</code>
+	 */
+	@NonNull
+	public static <A> Function<A, String> toString_() {
+		return new Function<A, String>() {
+			public String apply(A arg) {
+				return arg.toString();
+			}
+		};
+	}
+
+	/**
 	 * Converts the given {@link Applicable} into a {@link Function} by casting
 	 * it, is possible, or creating a new function that delegates its apply method
 	 * to it.
