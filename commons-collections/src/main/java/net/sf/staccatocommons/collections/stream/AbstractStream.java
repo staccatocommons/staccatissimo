@@ -237,9 +237,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return Iterables.toList(this);
 	}
 
-	public Stream<A> toOrderedStream() {
+	public Stream<A> toRepetableStream() {
 		return new ListStream<A>(toList()) {
-			public Stream<A> toOrderedStream() {
+			public Stream<A> toRepetableStream() {
 				return this;
 			}
 

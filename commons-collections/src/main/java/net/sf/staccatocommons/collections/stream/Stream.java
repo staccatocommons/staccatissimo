@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.Applicable;
@@ -99,7 +100,9 @@ import net.sf.staccatocommons.defs.restriction.Unmodifiable;
  * Is always <code>true</code>, as long as the iterable or its elements are not
  * externally mutated. Streams have this property as long as its source has it -
  * for example {@link Iterator}s are a non repeatable iteration order source.
- * Streams that always ensure this property are marked as {@link Repeatable}</li>
+ * Streams that always ensure this property are marked as {@link Repeatable}.
+ * Streams that may have it depending on its source are marked as
+ * {@link ConditionallyRepeatable}</li>
  * <li>Immutability TODO</li>
  * <li>Referential transparency TODO</li>
  * </ul>
@@ -145,6 +148,7 @@ public interface Stream<A> extends //
 	 */
 	@NonNull
 	@Projection
+	@ConditionallyRepeatable
 	<B> Stream<B> then(@NonNull Applicable<Stream<A>, ? extends Iterable<B>> function);
 
 	boolean elementsEquals(Iterable<? extends A> other);

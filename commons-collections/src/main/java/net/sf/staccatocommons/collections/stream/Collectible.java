@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 
 /**
  * {@link Stream} interface for converting an {@link Stream} into other kind of
@@ -45,14 +46,15 @@ public interface Collectible<A> {
 	List<A> toList();
 
 	/**
-	 * Converts this stream into a new ordered one that is not lazy and that can
-	 * be iterated more than once.
+	 * Converts this stream into a new ordered one that is not lazy and that has
+	 * repeatable iteration order.
 	 * 
 	 * @return a new {@link Stream} that retrieves elements from the next
-	 *         iteration to this Stream.
+	 *         iteration of this Stream.
 	 */
 	@NonNull
-	Stream<A> toOrderedStream();
+	@Repeatable
+	Stream<A> toRepetableStream();
 
 	/**
 	 * Create a new array that has the same elements that the retrived by this

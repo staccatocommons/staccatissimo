@@ -13,6 +13,8 @@
 package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
+import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
@@ -26,17 +28,22 @@ import net.sf.staccatocommons.lang.tuple.Pair;
  */
 public interface Deconstructable<A> {
 
+	@NonNull
+	@Projection
+	@ConditionallyRepeatable
 	<B> Stream<B> then(@NonNull DeconsApplicable<A, B> function);
 
 	/**
 	 * Answers this stream splitted into head and tail.
 	 * 
-	 * When implementing code that must work for every {@link Stream}, this method
-	 * is preferred over {@link #head()} and {@link #tail()}, as it will work as
-	 * expected even on non repeatable iteratio streams.
+	 * This method is preferred over {@link #head()} and {@link #tail()}, as it
+	 * will work as expected even on non repeatable iteration streams.
 	 * 
-	 * @return a pair containg the head and the tail of this stream
+	 * @return a pair containing the head and the tail of this stream. The tail is
+	 *         {@link ConditionallyRepeatable}, {@link NonNull} and a
+	 *         {@link Projection}
 	 */
+	@NonNull
 	Pair<A, Stream<A>> decons();
 
 	/**
@@ -53,11 +60,27 @@ public interface Deconstructable<A> {
 	 * @return an {@link Stream} that retrieves all its elements, except of the
 	 *         first one
 	 */
+	@NonNull
+	@Projection
+	@ConditionallyRepeatable
 	Stream<A> tail();
 
 	public static interface DeconsApplicable<A, B> extends Applicable2<A, Stream<A>, Iterable<B>> {
 
+		/**
+		 * Applies this transformation when this Stream can not be deconstructed in
+		 * head and tail, because it is empty.
+		 * 
+		 * @return the result of applying this transformation over and empty
+		 *         {@link Stream}
+		 */
 		Iterable<B> emptyApply();
+
+		/**
+		 * Applies this transformation to a non empty Stream splitted into tail and
+		 * head
+		 */
+		Iterable<B> apply(A head, Stream<A> tail);
 
 	}
 

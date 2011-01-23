@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream;
 import java.util.List;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.tuple.Pair;
@@ -29,7 +30,7 @@ import net.sf.staccatocommons.lang.tuple.Pair;
 public interface Filterable<A> {
 
 	/**
-	 * Preserves elements that evaluate to true
+	 * Preserves elements that satisfy the given <code>predicate</code>
 	 * 
 	 * @param predicate
 	 * @return a new {@link Stream} projection that will retrieve only elements
@@ -37,17 +38,19 @@ public interface Filterable<A> {
 	 */
 	@NonNull
 	@Projection
+	@ConditionallyRepeatable
 	Stream<A> filter(@NonNull Evaluable<? super A> predicate);
 
 	/**
-	 * Preserves all elements while they evalute to true
+	 * Preserves all elements while they satisfy the given <code>predicate</code>
 	 * 
 	 * @param predicate
-	 * @return a new {@link Stream} projection that will retrieve all elements, as
-	 *         long as none of them evaluates to false.
+	 * @return a new {@link Stream} projection that will retrieve all elements
+	 *         from this stream, as long as none of them evaluates to false.
 	 */
 	@NonNull
 	@Projection
+	@ConditionallyRepeatable
 	Stream<A> takeWhile(@NonNull Evaluable<? super A> predicate);
 
 	/**
@@ -58,14 +61,17 @@ public interface Filterable<A> {
 	 */
 	@NonNull
 	@Projection
+	@ConditionallyRepeatable
 	Stream<A> take(int amountOfElements);
 
 	@NonNull
 	@Projection
+	@ConditionallyRepeatable
 	Stream<A> dropWhile(@NonNull Evaluable<? super A> predicate);
 
 	@NonNull
 	@Projection
+	@ConditionallyRepeatable
 	Stream<A> drop(int amountOfElements);
 
 	/***

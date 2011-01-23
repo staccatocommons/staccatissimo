@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Applicable;
 
@@ -36,6 +37,7 @@ public interface Mappable<A> {
 	 */
 	@NonNull
 	@Projection
+	@ConditionallyRepeatable
 	<B> Stream<B> map(@NonNull Applicable<? super A, ? extends B> function);
 
 	/**
@@ -49,5 +51,6 @@ public interface Mappable<A> {
 	 */
 	@NonNull
 	@Projection
+	@ConditionallyRepeatable
 	<B> Stream<B> flatMap(@NonNull Applicable<? super A, ? extends Iterable<? extends B>> function);
 }

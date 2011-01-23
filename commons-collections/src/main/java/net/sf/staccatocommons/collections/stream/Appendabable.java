@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 
 /**
@@ -33,7 +34,9 @@ public interface Appendabable<A> {
 	 * @param other
 	 * @return a new {@link Stream}
 	 */
+	@NonNull
 	@Projection
+	@ConditionallyRepeatable
 	Stream<A> concat(@NonNull Iterable<A> other);
 
 	/*

@@ -28,6 +28,8 @@ import net.sf.staccatocommons.collections.stream.impl.EmptyStream;
 import net.sf.staccatocommons.collections.stream.impl.IterableStream;
 import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
+import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
+import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
@@ -43,6 +45,8 @@ public class Streams {
 
 	private Streams() {}
 
+	@NonNull
+	@Projection
 	public static <A> Stream<A> from(final A head, @NonNull final Iterable<? extends A> tail) {
 		return ConsStream.from(head, tail);
 	}
@@ -60,6 +64,7 @@ public class Streams {
 	 */
 	@NonNull
 	@Repeatable
+	@Projection
 	public static <A> Stream<A> from(@NonNull A... elements) {
 		return from(Arrays.asList(elements));
 	}
@@ -81,6 +86,8 @@ public class Streams {
 	 * @see Sequence#from(Object, Applicable, Evaluable)
 	 */
 	@NonNull
+	@Projection
+	@ConditionallyRepeatable
 	public static <A> Stream<A> from(@NonNull A seed, @NonNull Applicable<A, A> generator,
 		@NonNull Evaluable<A> stopCondition) {
 		return from(Sequence.from(seed, generator, stopCondition));
@@ -101,6 +108,8 @@ public class Streams {
 	 * @see Sequence#from(Object, Applicable, Evaluable)
 	 */
 	@NonNull
+	@Projection
+	@ConditionallyRepeatable
 	public static <A> Stream<A> from(@NonNull A seed, @NonNull Applicable<A, A> generator) {
 		return from(Sequence.from(seed, generator, StopConditions.<A> stopNever()));
 	}
@@ -115,6 +124,7 @@ public class Streams {
 	 */
 	@NonNull
 	@Repeatable
+	@Projection
 	public static <A> Stream<A> from(A element) {
 		return from(Collections.singleton(element));
 	}
@@ -131,6 +141,8 @@ public class Streams {
 	 *         wraps it, otherwise
 	 */
 	@NonNull
+	@Projection
+	@ConditionallyRepeatable
 	public static <A> Stream<A> from(@NonNull Iterable<? extends A> iterable) {
 		return iterable instanceof Stream ? (Stream<A>) iterable : new IterableStream<A>(iterable);
 	}
@@ -146,6 +158,7 @@ public class Streams {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
+	@Projection
 	public static <A> Stream<A> from(@NonNull Iterator<? extends A> iterator) {
 		return new IteratorStream<A>(iterator);
 	}
@@ -161,6 +174,7 @@ public class Streams {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
+	@Projection
 	public static <A> Stream<A> from(@NonNull Enumeration<? extends A> enumeration) {
 		return from(new EnumerationIterator<A>(enumeration));
 	}
@@ -175,6 +189,7 @@ public class Streams {
 	 */
 	@NonNull
 	@Repeatable
+	@Projection
 	public static Stream<Character> fromChars(@NonNull final CharSequence charSequence) {
 		return new CharSequenceStream(charSequence);
 	}
@@ -190,6 +205,7 @@ public class Streams {
 	 */
 	@NonNull
 	@Repeatable
+	@Projection
 	public static <A> Stream<A> from(@NonNull Collection<? extends A> collection) {
 		return new CollectionStream<A>(collection);
 	}
@@ -207,6 +223,7 @@ public class Streams {
 	 */
 	@NonNull
 	@Repeatable
+	@Projection
 	public static <A> Stream<A> from(@NonNull List<? extends A> list) {
 		return new ListStream<A>(list);
 	}

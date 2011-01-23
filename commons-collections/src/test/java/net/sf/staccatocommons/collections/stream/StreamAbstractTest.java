@@ -419,8 +419,8 @@ public abstract class StreamAbstractTest {
 
 	@Theory
 	public void testToStream(Stream stream) {
-		Stream stream2 = stream.toOrderedStream();
-		Stream stream3 = stream2.toOrderedStream();
+		Stream stream2 = stream.toRepetableStream();
+		Stream stream3 = stream2.toRepetableStream();
 		assertEquals(
 			ModifiableIterables.addAll(new HashSet(), stream2),
 			ModifiableIterables.addAll(new HashSet(), stream3));
