@@ -17,9 +17,11 @@ import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
+import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
  * A {@link Stream} represent a lazy, rich-interfaced, {@link Iterable} source
@@ -82,5 +84,25 @@ public interface Stream<A> extends //
 	@NonNull
 	@Projection
 	<B> Stream<B> then(@NonNull Applicable<Stream<A>, ? extends Iterable<B>> function);
+
+	<B> Stream<B> then(@NonNull DeconsApplicable<A, B> function);
+
+	Pair<A, Stream<A>> decons();
+
+	A head();
+
+	Stream<A> tail();
+
+	// boolean elementsEquals(Iterable<? extends A> other);
+	//
+	// boolean elementsEquals(A... elements);
+
+	// with equalty test
+
+	public static interface DeconsApplicable<A, B> extends Applicable2<A, Stream<A>, Iterable<B>> {
+
+		Iterable<B> emptyApply();
+
+	}
 
 }

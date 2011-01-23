@@ -30,6 +30,8 @@ import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ConcatStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.DropWhileStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FilterStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FlatMapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.MapStream;
@@ -88,6 +90,14 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	@Override
 	public Stream<A> take(final int amountOfElements) {
 		return new TakeStream<A>(this, amountOfElements);
+	}
+
+	public Stream<A> dropWhile(Evaluable<? super A> predicate) {
+		return new DropWhileStream<A>(this, predicate);
+	}
+
+	public Stream<A> drop(int amountOfElements) {
+		return new DropStream<A>(this, amountOfElements);
 	}
 
 	@Override
@@ -263,6 +273,23 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return _(Streams.from(partition._1()), Streams.from(partition._2()));
 	}
 
+	// public boolean elementsEquals(A[] elements) {
+	// return elementsEquals(Arrays.asList(elements));
+	// }
+	//
+	// /*TODO with comparison strategy*/
+	//
+	// public boolean elementsEquals(Iterable<? extends A> other) {
+	// Iterator<A> iter = this.iterator();
+	// Iterator<? extends A> otherIter = other.iterator();
+	// while(iter.hasNext()){
+	// if(!otherIter.hasNext())
+	// return false;
+	// if(ObjectUtils.equals(otherIter, object2))
+	// }
+	// return !otherIter.hasNext();
+	// }
+
 	@Override
 	public <B> Stream<B> then(final Applicable<Stream<A>, ? extends Iterable<B>> function) {
 		class ThenStream extends AbstractStream<B> {
@@ -273,9 +300,33 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new ThenStream();
 	}
 
+	public <B> Stream<B> then(final DeconsApplicable<A, B> function) {
+		class DeconsThenStream extends AbstractStream<B> {
+			public Iterator<B> iterator() {
+				if (AbstractStream.this.isEmpty())
+					return function.emptyApply().iterator();
+				Pair<A, Stream<A>> decons = AbstractStream.this.decons();
+				return function.apply(decons._1(), decons._2()).iterator();
+			}
+		}
+		return new DeconsThenStream();
+	}
+
 	@Override
 	public <B> Stream<Pair<A, B>> zip(Iterable<B> iterable) {
 		return zip(iterable, ToPair.<A, B> getInstance());
+	}
+
+	public Pair<A, Stream<A>> decons() {
+		return _(head(), tail());
+	}
+
+	public Stream<A> tail() {
+		return drop(1);
+	}
+
+	public A head() {
+		return first();
 	}
 
 	@ForceChecks

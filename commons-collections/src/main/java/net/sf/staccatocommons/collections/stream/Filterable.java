@@ -59,6 +59,14 @@ public interface Filterable<A> {
 	@Projection
 	Stream<A> take(int amountOfElements);
 
+	@NonNull
+	@Projection
+	Stream<A> dropWhile(@NonNull Evaluable<? super A> predicate);
+
+	@NonNull
+	@Projection
+	Stream<A> drop(int amountOfElements);
+
 	/***
 	 * Splits stream elements into two lists using a predicate - elements that
 	 * evaluate to true will be returned in the first component, the rest will be

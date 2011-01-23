@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.internal.ConsIterator;
 import net.sf.staccatocommons.collections.stream.impl.CollectionStream;
 import net.sf.staccatocommons.collections.stream.impl.IterableStream;
 import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
@@ -40,6 +41,14 @@ import net.sf.staccatocommons.lang.sequence.StopConditions;
 public class Streams {
 
 	private Streams() {}
+	
+	public static <A> Stream<A> from(final A head, @NonNull final Stream<A> tail) {
+		return new AbstractStream<A>() {
+			public Iterator<A> iterator() {
+				return new ConsIterator<A>(head, tail.iterator());
+			}
+		};
+	}
 
 	/**
 	 * Creates a new ordered {@link Stream} that retrieves the elements from the
