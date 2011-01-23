@@ -3,7 +3,7 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.internal.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.collections.internal.iterator.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Applicable;

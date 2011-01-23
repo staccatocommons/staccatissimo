@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team
+ Copyright (c) 2010, The Staccato-Commons Team   
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -10,27 +10,36 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.internal;
+package net.sf.staccatocommons.collections.internal.iterator;
 
 import java.util.Iterator;
 
+
 /**
+ * 
  * @author flbulgarelli
  * 
  * @param <T>
  */
-public abstract class AbstractUnmodifiableIterator<T> implements Iterator<T> {
+public final class UnmodifiableIterator<T> extends AbstractUnmodifiableIterator<T> {
+
+	private final Iterator<T> iter;
 
 	/**
-	 * Creates a new {@link AbstractUnmodifiableIterator}
+	 * Creates a new {@link UnmodifiableIterator}
 	 */
-	public AbstractUnmodifiableIterator() {
-		super();
+	public UnmodifiableIterator(Iterator<T> iter) {
+		this.iter = iter;
 	}
 
 	@Override
-	public final void remove() {
-		throw new UnsupportedOperationException("This Iterator is unmodifiable");
+	public boolean hasNext() {
+		return iter.hasNext();
+	}
+
+	@Override
+	public T next() {
+		return iter.next();
 	}
 
 }

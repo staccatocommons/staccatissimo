@@ -18,7 +18,7 @@ import java.io.Reader;
 import java.util.Scanner;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.internal.NextOptionIterator;
+import net.sf.staccatocommons.collections.internal.iterator.NextOptionIterator;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.lang.Option;

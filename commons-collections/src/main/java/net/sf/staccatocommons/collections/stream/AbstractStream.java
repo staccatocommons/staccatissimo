@@ -25,8 +25,8 @@ import java.util.Set;
 
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.internal.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.collections.internal.ToPair;
+import net.sf.staccatocommons.collections.internal.iterator.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
@@ -275,11 +275,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public boolean elementsEquals(A[] elements) {
+	public boolean elementsEquals(A... elements) {
 		return elementsEquals(Arrays.asList(elements));
 	}
-
-	/* TODO with comparison strategy */
 
 	@Override
 	public boolean elementsEquals(Iterable<? extends A> other) {

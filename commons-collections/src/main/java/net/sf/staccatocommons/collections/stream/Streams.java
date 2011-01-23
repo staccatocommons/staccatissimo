@@ -20,14 +20,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.internal.iterator.EnumerationIterator;
+import net.sf.staccatocommons.collections.stream.impl.CharSequenceStream;
 import net.sf.staccatocommons.collections.stream.impl.CollectionStream;
 import net.sf.staccatocommons.collections.stream.impl.ConsStream;
+import net.sf.staccatocommons.collections.stream.impl.EmptyStream;
 import net.sf.staccatocommons.collections.stream.impl.IterableStream;
 import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.CharSequenceIterator;
-import net.sf.staccatocommons.collections.stream.impl.internal.EmptyStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.EnumerationIterator;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.sequence.Sequence;
@@ -172,11 +172,7 @@ public class Streams {
 	 */
 	@NonNull
 	public static Stream<Character> fromChars(@NonNull final CharSequence charSequence) {
-		return new AbstractStream<Character>() {
-			public Iterator<Character> iterator() {
-				return new CharSequenceIterator(charSequence);
-			}
-		};
+		return new CharSequenceStream(charSequence);
 	}
 
 	/**
@@ -219,7 +215,7 @@ public class Streams {
 	 */
 	@NonNull
 	public static <A> Stream<A> empty() {
-		return EmptyStream.getInstance();
+		return EmptyStream.empty();
 	}
 
 	// public static <K, V> Stream<Entry<K, V>> from(Map<K, V> iterable) {

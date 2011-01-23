@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2011, The Staccato-Commons Team
+ Copyright (c) 2010, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -10,25 +10,27 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.internal;
+package net.sf.staccatocommons.collections.internal.iterator;
 
-import net.sf.staccatocommons.lang.Option;
+import java.util.Iterator;
 
 /**
  * @author flbulgarelli
  * 
+ * @param <T>
  */
-public abstract class NextOptionIterator<A> extends NextGetIterator<A> {
+public abstract class AbstractUnmodifiableIterator<T> implements Iterator<T> {
 
-	protected final Boolean updateNext() {
-		Option<A> nextOption = nextOption();
-		if (nextOption.isDefined()) {
-			setNext(nextOption.value());
-			return true;
-		}
-		return false;
+	/**
+	 * Creates a new {@link AbstractUnmodifiableIterator}
+	 */
+	public AbstractUnmodifiableIterator() {
+		super();
 	}
 
-	protected abstract Option<A> nextOption();
+	@Override
+	public final void remove() {
+		throw new UnsupportedOperationException("This Iterator is unmodifiable");
+	}
 
 }

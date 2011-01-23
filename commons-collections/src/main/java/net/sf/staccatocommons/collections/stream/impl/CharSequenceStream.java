@@ -1,0 +1,26 @@
+package net.sf.staccatocommons.collections.stream.impl;
+
+import java.util.Iterator;
+
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.internal.iterator.CharSequenceIterator;
+import net.sf.staccatocommons.collections.stream.AbstractStream;
+
+/**
+ * @author flbulgarelli
+ * 
+ */
+public final class CharSequenceStream extends AbstractStream<Character> {
+	private final CharSequence charSequence;
+
+	/**
+	 * Creates a new {@link CharSequenceStream}
+	 */
+	public CharSequenceStream(@NonNull CharSequence charSequence) {
+		this.charSequence = charSequence;
+	}
+
+	public Iterator<Character> iterator() {
+		return new CharSequenceIterator(charSequence);
+	}
+}

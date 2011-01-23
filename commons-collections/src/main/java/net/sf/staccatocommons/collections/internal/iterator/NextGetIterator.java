@@ -11,9 +11,10 @@
  GNU Lesser General Public License for more details.
  */
 
-package net.sf.staccatocommons.collections.internal;
+package net.sf.staccatocommons.collections.internal.iterator;
 
 import java.util.NoSuchElementException;
+
 
 /**
  * 

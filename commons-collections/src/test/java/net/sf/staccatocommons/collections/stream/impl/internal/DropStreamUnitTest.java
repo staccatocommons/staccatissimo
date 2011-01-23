@@ -12,33 +12,30 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import java.util.Arrays;
-import java.util.Iterator;
+import static org.junit.Assert.*;
 
-import net.sf.staccatocommons.collections.internal.ConsIterator;
-import net.sf.staccatocommons.collections.internal.EmptyIterator;
+import java.util.Arrays;
+
 import net.sf.staccatocommons.collections.stream.AbstractStream;
+import net.sf.staccatocommons.collections.stream.Streams;
+
+import org.junit.Test;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class ConsIteratorUnitTest extends IteratorAbstractUnitTest {
+public class DropStreamUnitTest {
 
-	protected Iterable<?> createTwoElementsIterable() {
-		return new AbstractStream<Integer>() {
-			public Iterator<Integer> iterator() {
-				return new ConsIterator<Integer>(50, Arrays.asList(10).iterator());
-			}
-		};
-	}
-
-	protected Iterable<?> createOneElementIterable() {
-		return new AbstractStream<Integer>() {
-			public Iterator<Integer> iterator() {
-				return new ConsIterator<Integer>(60, EmptyIterator.<Integer> getInstance());
-			}
-		};
+	/**
+	 * Test method for {@link AbstractStream#drop(int)} .
+	 */
+	@Test
+	public void testDrop() {
+		assertEquals(Arrays.asList(90, 100), Streams.from(59, 10, 90, 100).drop(2).toList());
+		assertEquals(Arrays.asList(), Streams.from(59, 10, 90, 100).drop(4).toList());
+		assertEquals(Arrays.asList(), Streams.from(59, 10, 90, 100).drop(100).toList());
+		assertEquals(Arrays.asList(59, 10, 90, 100), Streams.from(59, 10, 90, 100).drop(0).toList());
 	}
 
 }

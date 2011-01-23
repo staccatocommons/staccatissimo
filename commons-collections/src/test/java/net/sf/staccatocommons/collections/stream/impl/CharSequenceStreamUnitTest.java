@@ -10,36 +10,24 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.internal;
+package net.sf.staccatocommons.collections.stream.impl;
 
-import java.util.Iterator;
+import static junit.framework.Assert.*;
+import net.sf.staccatocommons.collections.stream.Streams;
 
+import org.junit.Test;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class ConsIterator<A> extends AbstractUnmodifiableIterator<A> {
+public class CharSequenceStreamUnitTest {
 
-	private final A head;
-	private final Iterator<A> tail;
-	private boolean headConsumed;
-
-	public ConsIterator(A head, Iterator<A> tail) {
-		this.head = head;
-		this.tail = tail;
-	}
-
-	public boolean hasNext() {
-		return !headConsumed || tail.hasNext();
-	}
-
-	public A next() {
-		if (!headConsumed) {
-			headConsumed = true;
-			return head;
-		}
-		return tail.next();
+	/** Test that joining a character stream returns back the original string */
+	@Test
+	public void testJoin() throws Exception {
+		String string = "hello world!";
+		assertEquals(string, Streams.fromChars(string).joinStrings(""));
 	}
 
 }

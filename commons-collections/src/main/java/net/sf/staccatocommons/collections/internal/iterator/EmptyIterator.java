@@ -10,11 +10,10 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.internal;
+package net.sf.staccatocommons.collections.internal.iterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 
 /**
  * A singleton iterator that retrieves no elements. Calling {@link #hasNext()}
@@ -35,7 +34,7 @@ public final class EmptyIterator<T> extends AbstractUnmodifiableIterator<T> {
 	 *          the type of the iterator element
 	 * @return the singleton instance
 	 */
-	public static <T> Iterator<T> getInstance() {
+	public static <T> Iterator<T> empty() {
 		return INSTANCE;
 	}
 
