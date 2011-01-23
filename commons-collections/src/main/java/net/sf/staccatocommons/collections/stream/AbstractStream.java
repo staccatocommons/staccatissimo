@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream;
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -273,22 +274,17 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return _(Streams.from(partition._1()), Streams.from(partition._2()));
 	}
 
-	// public boolean elementsEquals(A[] elements) {
-	// return elementsEquals(Arrays.asList(elements));
-	// }
-	//
-	// /*TODO with comparison strategy*/
-	//
-	// public boolean elementsEquals(Iterable<? extends A> other) {
-	// Iterator<A> iter = this.iterator();
-	// Iterator<? extends A> otherIter = other.iterator();
-	// while(iter.hasNext()){
-	// if(!otherIter.hasNext())
-	// return false;
-	// if(ObjectUtils.equals(otherIter, object2))
-	// }
-	// return !otherIter.hasNext();
-	// }
+	@Override
+	public boolean elementsEquals(A[] elements) {
+		return elementsEquals(Arrays.asList(elements));
+	}
+
+	/* TODO with comparison strategy */
+
+	@Override
+	public boolean elementsEquals(Iterable<? extends A> other) {
+		return Iterables.elementsEquals(this, other);
+	}
 
 	@Override
 	public <B> Stream<B> then(final Applicable<Stream<A>, ? extends Iterable<B>> function) {

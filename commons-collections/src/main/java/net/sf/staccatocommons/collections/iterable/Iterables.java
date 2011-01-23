@@ -367,6 +367,19 @@ public class Iterables {
 		return collection == null || collection.isEmpty();
 	}
 
+	public static <A> boolean elementsEquals(@NonNull Iterable<? extends A> iterable1,
+		@NonNull Iterable<? extends A> iterable2) {
+		Iterator<? extends A> iter = iterable1.iterator();
+		Iterator<? extends A> otherIter = iterable2.iterator();
+		while (iter.hasNext()) {
+			if (!otherIter.hasNext())
+				return false;
+			if (!ObjectUtils.equals(iter.next(), otherIter.next()))
+				return false;
+		}
+		return !otherIter.hasNext();
+	}
+
 	/*
 	 * Mapping
 	 */

@@ -93,9 +93,9 @@ public interface Stream<A> extends //
 
 	Stream<A> tail();
 
-	// boolean elementsEquals(Iterable<? extends A> other);
-	//
-	// boolean elementsEquals(A... elements);
+	boolean elementsEquals(Iterable<? extends A> other);
+
+	boolean elementsEquals(A... elements);
 
 	// with equalty test
 

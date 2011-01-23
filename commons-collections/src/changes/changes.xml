@@ -8,16 +8,26 @@
 	<body>
 		<release version="1.0-alpha-1" date="2011-01-08" description="Inception">
 			<action dev="flbulgarelli" type="add">
-				Initial Version with Streams, Lists, Maps and Iterables
+				Initial Version with Streams,
+				Lists, Maps and Iterables
 			</action>
 		</release>
 		<release version="1.0-alpha-2" date="2011-01-21" description="Types">
 			<action dev="flbulgarelli" type="add">
-				Support for summing and product in Iterables and
-				 Streams using NumericType
+				Support for summing and
+				product in Iterables and
+				Streams using NumericType
             </action>
-            <action dev="flbulgarelli" type="add">
-                Zipping support for Streams
+			<action dev="flbulgarelli" type="add">
+				Zipping support for Streams
+            </action>
+		</release>
+		<release version="1.0-alpha-3" date="TBD" description="Streams">
+			<action dev="flbulgarelli" type="add">
+			     Tail-Head Stream construction and deconstruction
+			</action>
+			<action dev="flbulgarelli" type="add">
+                 Drop and drop while implementation
             </action>
 		</release>
 	</body>
