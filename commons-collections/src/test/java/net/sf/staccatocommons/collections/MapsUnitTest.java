@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections;
 
-import static net.sf.staccatocommons.testing.junit.Assert.*;
+import static net.sf.staccatocommons.testing.junit.CollectionAssert.*;
 import static org.junit.Assert.*;
 
 import java.util.Collections;
@@ -30,7 +30,6 @@ import org.junit.Test;
  * 
  */
 public class MapsUnitTest {
-
 	private Map<String, Integer> map = MapBuilder
 		.hashMapWith("Foo", 50)
 		.with("Bar", 90)

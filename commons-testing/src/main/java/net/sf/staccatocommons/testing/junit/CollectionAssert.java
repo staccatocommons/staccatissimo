@@ -12,12 +12,14 @@
  */
 package net.sf.staccatocommons.testing.junit;
 
+import static org.junit.Assert.*;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
-public class Assert extends org.junit.Assert {
+public class CollectionAssert {
 
 	public static <T> void assertIn(T element, T... elements) {
 		HashSet<T> hashSet = new HashSet<T>();

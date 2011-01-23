@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.iterable;
 
-import static net.sf.staccatocommons.testing.junit.Assert.assertContains;
+import static net.sf.staccatocommons.testing.junit.CollectionAssert.assertContains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
