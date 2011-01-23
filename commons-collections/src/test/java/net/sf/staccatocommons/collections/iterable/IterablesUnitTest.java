@@ -271,4 +271,12 @@ public class IterablesUnitTest {
 	public void testProduct() throws Exception {
 		assertEquals(3628800, (int) Iterables.product(Sequence.fromToBy(1, 10, 1)));
 	}
+
+	/** test for {@link Iterables#cross(Iterable, Iterable)} */
+	@Test
+	public void testCross() throws Exception {
+		assertEquals(
+			Arrays.asList(_(1, 'a'), _(1, 'b'), _(2, 'a'), _(2, 'b')),
+			Iterables.cross(Arrays.asList(1, 2), Arrays.asList('a', 'b')));
+	}
 }

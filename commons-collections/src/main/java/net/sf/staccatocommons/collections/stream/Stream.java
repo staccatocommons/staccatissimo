@@ -151,10 +151,4 @@ public interface Stream<A> extends //
 	@ConditionallyRepeatable
 	<B> Stream<B> then(@NonNull Applicable<Stream<A>, ? extends Iterable<B>> function);
 
-	boolean elementsEquals(Iterable<? extends A> other);
-
-	boolean elementsEquals(A... elements);
-
-	// with equalty test
-
 }

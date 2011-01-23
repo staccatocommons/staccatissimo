@@ -831,6 +831,27 @@ public class Iterables {
 		return cross(iterable1, iterable2, new LinkedList());
 	}
 
+	/**
+	 * Answers the Cartesian product of the two given {@link Collection}s.
+	 * 
+	 * For example, the following code:
+	 * 
+	 * <pre>
+	 * Iterables.cross(Arrays.asList(1, 2), Arrays.asList('a', 'b'));
+	 * </pre>
+	 * 
+	 * Will produce a list equal to
+	 * 
+	 * <pre>
+	 * Arrays.asList(_(1, 'a'), _(1, 'b'), _(2, 'a'), _(2, 'b'))
+	 * </pre>
+	 * 
+	 * @param <A>
+	 * @param <B>
+	 * @param collection1
+	 * @param collection2
+	 * @return a new List with the Cartesian product of both collections.
+	 */
 	@NonNull
 	public static final <A, B> List<Pair<A, B>> cross(@NonNull Collection<A> collection1,
 		@NonNull Collection<B> collection2) {

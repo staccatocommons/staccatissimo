@@ -42,4 +42,9 @@ public interface Testeable<A> {
 	 */
 	boolean any(@NonNull Evaluable<? super A> predicate);
 
+	boolean elementsEquals(Iterable<? extends A> other);
+
+	boolean elementsEquals(A... elements);
+	// with equalty test
+
 }

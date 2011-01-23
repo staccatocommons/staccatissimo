@@ -167,7 +167,6 @@ public abstract class StreamTheories {
 		} catch (IllegalStateException e) {
 			// ok
 		}
-
 	}
 
 	/** Test that empty streams have no head */

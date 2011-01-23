@@ -35,17 +35,19 @@ import org.junit.experimental.theories.DataPoint;
  */
 public class IteratorStreamUnitTest extends StreamTheories {
 
-	/** data set of itertor streams to test */
+	/** data point */
 	@DataPoint
 	public static Stream emptyIter() {
 		return Streams.from(EmptyIterator.empty());
 	}
 
+	/** data point */
 	@DataPoint
 	public static Stream oneElementsIter() {
 		return Streams.from(Arrays.asList(90, 50, 60, 230).iterator());
 	}
 
+	/** data point */
 	@DataPoint
 	public static Stream twoElementsIter() {
 		return Streams.from(Collections.singletonList(90).iterator());

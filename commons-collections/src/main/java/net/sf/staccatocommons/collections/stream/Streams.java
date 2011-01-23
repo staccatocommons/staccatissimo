@@ -45,6 +45,18 @@ public class Streams {
 
 	private Streams() {}
 
+	/**
+	 * Creates a new {@link Stream} that retrieves elements from a head, and
+	 * another {@link Iterable}, called tail.
+	 * 
+	 * This operation is known and <em>cons(tructing)</em>, and can be undone by
+	 * sending {@link Stream#decons()} to the resulting Stream.
+	 * 
+	 * @param <A>
+	 * @param head
+	 * @param tail
+	 * @return {@link ConsStream#from(Object, Iterable)}
+	 */
 	@NonNull
 	@Projection
 	public static <A> Stream<A> from(final A head, @NonNull final Iterable<? extends A> tail) {
@@ -52,9 +64,9 @@ public class Streams {
 	}
 
 	/**
-	 * Creates a new ordered {@link Stream} that retrieves the elements from the
-	 * given array. This stream permits efficient random access and grants
-	 * repeatable iteration order.
+	 * Creates a new {@link Stream} that retrieves the elements from the given
+	 * array. This stream permits efficient random access and grants repeatable
+	 * iteration order.
 	 * 
 	 * @param <A>
 	 *          the element type
@@ -211,8 +223,8 @@ public class Streams {
 	}
 
 	/**
-	 * Creates a new ordered {@link Stream} that retrieves elements from a list.
-	 * This streams grants repeatable iterator order and supports (not necessary
+	 * Creates a new {@link Stream} that retrieves elements from a list. This
+	 * streams grants repeatable iterator order and supports (not necessary
 	 * efficient) random access by index.
 	 * 
 	 * @param <A>
@@ -245,5 +257,7 @@ public class Streams {
 	// public static <K, V> Stream<Entry<K, V>> from(Map<K, V> iterable) {
 	// return new MapEntryTranaversable<K, V>(iterable);
 	// }
+
+	// fail
 
 }

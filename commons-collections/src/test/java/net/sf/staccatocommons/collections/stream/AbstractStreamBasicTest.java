@@ -108,6 +108,12 @@ public class AbstractStreamBasicTest {
 					throw new RuntimeException("baz");
 				}
 			})).take(1).toList());
+	}
 
+	/** Tets for indexof */
+	@Test
+	public void testIndexof() throws Exception {
+		assertEquals(0, Streams.from(10, 90).indexOf(10));
+		assertEquals(-1, Streams.from(10, 90).indexOf(87));
 	}
 }
