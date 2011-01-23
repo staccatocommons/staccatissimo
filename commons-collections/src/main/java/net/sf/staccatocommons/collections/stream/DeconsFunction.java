@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccatocommons.collections.stream.Stream.DeconsApplicable;
+import net.sf.staccatocommons.collections.stream.Deconstructable.DeconsApplicable;
 
 /**
  * @author flbulgarelli

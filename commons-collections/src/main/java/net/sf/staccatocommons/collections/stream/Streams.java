@@ -28,6 +28,7 @@ import net.sf.staccatocommons.collections.stream.impl.EmptyStream;
 import net.sf.staccatocommons.collections.stream.impl.IterableStream;
 import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
+import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.sequence.Sequence;
@@ -58,6 +59,7 @@ public class Streams {
 	 * @return a new stream that gets its elements from an array
 	 */
 	@NonNull
+	@Repeatable
 	public static <A> Stream<A> from(@NonNull A... elements) {
 		return from(Arrays.asList(elements));
 	}
@@ -112,6 +114,7 @@ public class Streams {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
+	@Repeatable
 	public static <A> Stream<A> from(A element) {
 		return from(Collections.singleton(element));
 	}
@@ -171,6 +174,7 @@ public class Streams {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
+	@Repeatable
 	public static Stream<Character> fromChars(@NonNull final CharSequence charSequence) {
 		return new CharSequenceStream(charSequence);
 	}
@@ -185,6 +189,7 @@ public class Streams {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
+	@Repeatable
 	public static <A> Stream<A> from(@NonNull Collection<? extends A> collection) {
 		return new CollectionStream<A>(collection);
 	}
@@ -201,6 +206,7 @@ public class Streams {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
+	@Repeatable
 	public static <A> Stream<A> from(@NonNull List<? extends A> list) {
 		return new ListStream<A>(list);
 	}
@@ -214,6 +220,7 @@ public class Streams {
 	 * @return a singleton empty {@link Stream}
 	 */
 	@NonNull
+	@Repeatable
 	public static <A> Stream<A> empty() {
 		return EmptyStream.empty();
 	}

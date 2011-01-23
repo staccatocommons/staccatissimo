@@ -29,6 +29,7 @@ import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.collections.internal.iterator.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
+import net.sf.staccatocommons.collections.stream.Deconstructable.DeconsApplicable;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ConcatStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;

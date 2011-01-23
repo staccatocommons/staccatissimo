@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.collections.internal.iterator;
 
-import net.sf.staccatocommons.collections.internal.iterator.CharSequenceIterator;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.collections.stream.impl.internal.IteratorAbstractUnitTest;
 

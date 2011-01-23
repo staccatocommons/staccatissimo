@@ -18,8 +18,8 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 
 import net.sf.staccatocommons.collections.stream.DeconsFunction;
+import net.sf.staccatocommons.collections.stream.Deconstructable.DeconsApplicable;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.Stream.DeconsApplicable;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.defs.Evaluable;
 

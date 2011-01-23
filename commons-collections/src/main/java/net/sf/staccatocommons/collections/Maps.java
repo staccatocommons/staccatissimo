@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections;
 
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.anyInternal;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.*;
 
 import java.util.Map;
 

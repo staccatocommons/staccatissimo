@@ -12,9 +12,8 @@
  */
 package net.sf.staccatocommons.collections.iterable;
 
-import static net.sf.staccatocommons.testing.junit.CollectionAssert.assertContains;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static net.sf.staccatocommons.testing.junit.CollectionAssert.*;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

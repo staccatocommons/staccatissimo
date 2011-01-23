@@ -19,7 +19,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-
 /**
  * {@link Unmodifiable}s are objects that do not expose publicly any method that
  * may modify receiver internal state. However, object's state can still be
@@ -27,7 +26,7 @@ import java.lang.annotation.Target;
  * be mutated
  * <p>
  * {@link Unmodifiable}s can still implement lazy initialization and/or caching,
- * as long as it remains encadpsulated and is not exposed publicly
+ * as long as it remains encapsulated and is not exposed publicly
  * 
  * @author flbulgarelli
  *         </p>
