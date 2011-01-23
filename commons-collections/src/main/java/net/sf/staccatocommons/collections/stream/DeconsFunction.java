@@ -15,11 +15,16 @@ package net.sf.staccatocommons.collections.stream;
 import net.sf.staccatocommons.collections.stream.Deconstructable.DeconsApplicable;
 
 /**
- * @author flbulgarelli
+ * Abstract {@link DeconsApplicable} that returns an empty stream for
+ * {@link #emptyApply()}
  * 
+ * @author flbulgarelli
  */
 public abstract class DeconsFunction<A, B> implements DeconsApplicable<A, B> {
 
+	/**
+	 * Returns and empty stream
+	 */
 	public Iterable<B> emptyApply() {
 		return Streams.empty();
 	}

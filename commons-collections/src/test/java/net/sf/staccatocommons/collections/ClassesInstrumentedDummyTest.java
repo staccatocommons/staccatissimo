@@ -14,6 +14,8 @@ package net.sf.staccatocommons.collections;
 
 import java.util.Arrays;
 
+import net.sf.staccatocommons.collections.stream.Streams;
+
 import org.junit.Test;
 
 /**
@@ -44,5 +46,13 @@ public class ClassesInstrumentedDummyTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testThird_BadSize() throws Exception {
 		Lists.third(Arrays.asList(1, 2));
+	}
+
+	/**
+	 * Verified that not negative is working
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testDrop_BadAmount() throws Exception {
+		Streams.from(90, 50, 30).drop(-2);
 	}
 }

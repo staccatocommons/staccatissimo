@@ -13,15 +13,26 @@
 package net.sf.staccatocommons.collections.stream.impl;
 
 import static junit.framework.Assert.*;
+import net.sf.staccatocommons.collections.stream.RepetableStreamTheories;
+import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 
 import org.junit.Test;
+import org.junit.experimental.theories.DataPoints;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class CharSequenceStreamUnitTest {
+public class CharSequenceStreamUnitTest extends RepetableStreamTheories {
+
+	/** Streams for testing */
+	@DataPoints
+	public static Stream[] streams = new Stream[] { //
+	Streams.fromChars(""),//
+			Streams.fromChars("hello"), //
+			Streams.fromChars("h") //
+	};
 
 	/** Test that joining a character stream returns back the original string */
 	@Test

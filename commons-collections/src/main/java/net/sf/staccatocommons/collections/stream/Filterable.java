@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream;
 import java.util.List;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Evaluable;
@@ -54,7 +55,9 @@ public interface Filterable<A> {
 	Stream<A> takeWhile(@NonNull Evaluable<? super A> predicate);
 
 	/**
-	 * Preserves up to N elements
+	 * Preserves up to N elements. It this Stream size is shorter than the given
+	 * <code>amountOfElements</code>, the resulting stream will retrieve the same
+	 * elements than this stream.
 	 * 
 	 * @param amountOfElements
 	 * @return a new {@link Stream} projection that will retrieve up to N elements
@@ -62,17 +65,27 @@ public interface Filterable<A> {
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable
-	Stream<A> take(int amountOfElements);
+	Stream<A> take(@NotNegative int amountOfElements);
 
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable
 	Stream<A> dropWhile(@NonNull Evaluable<? super A> predicate);
 
+	/**
+	 * Discards up to N elements from this {@link Stream}. Is the Stream size is
+	 * shorter than the given <code>amountOfElements</code>, the resulting stream
+	 * will be empty.
+	 * 
+	 * @param amountOfElements
+	 *          the amount of elements to discard
+	 * @return a new {@link Stream} that discards up to the given
+	 *         <code>amountOfElements</code>
+	 */
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable
-	Stream<A> drop(int amountOfElements);
+	Stream<A> drop(@NotNegative int amountOfElements);
 
 	/***
 	 * Splits stream elements into two lists using a predicate - elements that

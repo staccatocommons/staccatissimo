@@ -23,13 +23,14 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.collections.internal.iterator.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
-import net.sf.staccatocommons.collections.stream.Deconstructable.DeconsApplicable;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ConcatStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;
@@ -61,6 +62,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 public abstract class AbstractStream<A> implements Stream<A> {
 
+	protected static final Validate<IllegalStateException> state = Validate
+		.throwing(IllegalStateException.class);
+
 	@Override
 	public int size() {
 		int size = 0;
@@ -90,7 +94,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public Stream<A> take(final int amountOfElements) {
+	public Stream<A> take(@NotNegative final int amountOfElements) {
 		return new TakeStream<A>(this, amountOfElements);
 	}
 
@@ -98,14 +102,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new DropWhileStream<A>(this, predicate);
 	}
 
-	public Stream<A> drop(int amountOfElements) {
+	public Stream<A> drop(@NotNegative int amountOfElements) {
 		return new DropStream<A>(this, amountOfElements);
 	}
 
 	@Override
 	public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
-		if (isEmpty())
-			throw new IllegalStateException("Can not reduce an empty stream");
+		state.that(!isEmpty(), "Can not reduce an empty stream");
 		return Iterables.reduce(this, function);
 	}
 
@@ -317,10 +320,14 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	public Stream<A> tail() {
+		state.that(!isEmpty(), "Empty streams have not tail");
+		if (isEmpty())
+			throw new IllegalStateException("Empty Streams have no tail");
 		return drop(1);
 	}
 
 	public A head() {
+		state.that(!isEmpty(), "Empty streams have not head");
 		return first();
 	}
 

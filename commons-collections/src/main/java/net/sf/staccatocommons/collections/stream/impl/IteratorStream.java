@@ -31,7 +31,7 @@ import net.sf.staccatocommons.lang.tuple.Pair;
  * @param <A>
  *          element type
  */
-public class IteratorStream<A> extends AbstractStream<A> {
+public final class IteratorStream<A> extends AbstractStream<A> {
 
 	private final Iterator iterator;
 
@@ -52,6 +52,7 @@ public class IteratorStream<A> extends AbstractStream<A> {
 
 	public Pair<A, Stream<A>> decons() {
 		Iterator<A> iter = iterator();
+		state.that(iter.hasNext(), "Empty streams have no head");
 		return _(iter.next(), Streams.from(iter));
 	}
 }

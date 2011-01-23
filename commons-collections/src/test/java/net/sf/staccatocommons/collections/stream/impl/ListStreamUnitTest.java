@@ -15,8 +15,8 @@ package net.sf.staccatocommons.collections.stream.impl;
 import java.util.Arrays;
 import java.util.Collections;
 
+import net.sf.staccatocommons.collections.stream.RepetableStreamTheories;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.StreamAbstractTest;
 import net.sf.staccatocommons.collections.stream.Streams;
 
 import org.junit.experimental.theories.DataPoints;
@@ -25,13 +25,16 @@ import org.junit.experimental.theories.DataPoints;
  * @author flbulgarelli
  * 
  */
-public class ListStreamUnitTest extends StreamAbstractTest {
+public class ListStreamUnitTest extends RepetableStreamTheories {
 
+	/**
+	 * data set of lists
+	 */
 	@DataPoints
 	public static Stream<Integer>[] streams = new Stream[] {
-			Streams.from(Arrays.asList(4, 5, 6, 9, 33, 0)),
-			Streams.from(Collections.emptyList()),
-			Streams.from(Collections.singletonList(5)),
+			Streams.from(Arrays.asList(4, 5, 6, 9, 33, 0)), //
+			Streams.from(Collections.emptyList()),//
+			Streams.from(Collections.singletonList(5)),//
 			Streams.from(Arrays.asList(900, 5)) };
 
 }

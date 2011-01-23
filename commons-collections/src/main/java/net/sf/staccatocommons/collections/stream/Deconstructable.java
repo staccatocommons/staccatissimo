@@ -42,15 +42,19 @@ public interface Deconstructable<A> {
 	 * @return a pair containing the head and the tail of this stream. The tail is
 	 *         {@link ConditionallyRepeatable}, {@link NonNull} and a
 	 *         {@link Projection}
+	 * @throws IllegalStateException
+	 *           if stream is empty
 	 */
 	@NonNull
 	Pair<A, Stream<A>> decons();
 
 	/**
-	 * Answers the head of the {@link Stream}. This is just a synonym of
-	 * {@link Stream#first()}.
+	 * Answers the head of the {@link Stream}, which is the first element of the
+	 * stream.
 	 * 
 	 * @return {@link Stream#first()}
+	 * @throws IllegalStateException
+	 *           if stream is empty
 	 */
 	A head();
 
@@ -59,6 +63,8 @@ public interface Deconstructable<A> {
 	 * 
 	 * @return an {@link Stream} that retrieves all its elements, except of the
 	 *         first one
+	 * @throws IllegalStateException
+	 *           if stream is empty
 	 */
 	@NonNull
 	@Projection

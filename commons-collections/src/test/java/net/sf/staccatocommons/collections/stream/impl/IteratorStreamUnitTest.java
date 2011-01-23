@@ -16,20 +16,40 @@ import static net.sf.staccatocommons.testing.junit.ObjectAssert.*;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Set;
 
+import net.sf.staccatocommons.collections.internal.iterator.EmptyIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.collections.stream.StreamTheories;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.junit.Test;
+import org.junit.experimental.theories.DataPoint;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class IteratorStreamUnitTest {
+public class IteratorStreamUnitTest extends StreamTheories {
+
+	/** data set of itertor streams to test */
+	@DataPoint
+	public static Stream emptyIter() {
+		return Streams.from(EmptyIterator.empty());
+	}
+
+	@DataPoint
+	public static Stream oneElementsIter() {
+		return Streams.from(Arrays.asList(90, 50, 60, 230).iterator());
+	}
+
+	@DataPoint
+	public static Stream twoElementsIter() {
+		return Streams.from(Collections.singletonList(90).iterator());
+	}
 
 	/**
 	 * Test method for {@link IteratorStream#decons()}.
