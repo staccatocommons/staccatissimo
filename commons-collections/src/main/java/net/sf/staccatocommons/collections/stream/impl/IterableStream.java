@@ -28,14 +28,14 @@ import net.sf.staccatocommons.collections.stream.AbstractStream;
  */
 public class IterableStream<A> extends AbstractStream<A> {
 
-	private final Iterable<A> iterable;
+	private final Iterable<? extends A> iterable;
 
 	/**
 	 * Creates a new {@link IterableStream} that wraps the given {@link Iterable}
 	 * 
 	 * @param iterable
 	 */
-	public IterableStream(@NonNull Iterable<A> iterable) {
+	public IterableStream(@NonNull Iterable<? extends A> iterable) {
 		this.iterable = iterable;
 	}
 

@@ -14,7 +14,6 @@ package net.sf.staccatocommons.collections.internal.iterator;
 
 import java.util.Iterator;
 
-
 /**
  * 
  * @author flbulgarelli
@@ -23,12 +22,12 @@ import java.util.Iterator;
  */
 public final class UnmodifiableIterator<T> extends AbstractUnmodifiableIterator<T> {
 
-	private final Iterator<T> iter;
+	private final Iterator<? extends T> iter;
 
 	/**
 	 * Creates a new {@link UnmodifiableIterator}
 	 */
-	public UnmodifiableIterator(Iterator<T> iter) {
+	public UnmodifiableIterator(Iterator<? extends T> iter) {
 		this.iter = iter;
 	}
 

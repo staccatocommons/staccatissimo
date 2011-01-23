@@ -21,13 +21,13 @@ import java.util.Iterator;
 public class ConsIterator<A> extends AbstractUnmodifiableIterator<A> {
 
 	private final A head;
-	private final Iterator<A> tail;
+	private final Iterator<? extends A> tail;
 	private boolean headConsumed;
 
 	/**
 	 * Creates a new {@link ConsIterator}
 	 */
-	public ConsIterator(A head, Iterator<A> tail) {
+	public ConsIterator(A head, Iterator<? extends A> tail) {
 		this.head = head;
 		this.tail = tail;
 	}

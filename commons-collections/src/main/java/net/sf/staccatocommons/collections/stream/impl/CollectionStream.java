@@ -29,7 +29,7 @@ import net.sf.staccatocommons.collections.stream.AbstractStream;
  */
 public class CollectionStream<A> extends AbstractStream<A> {
 
-	private final Collection<A> collection;
+	private final Collection<? extends A> collection;
 
 	/**
 	 * Creates a new {@link CollectionStream}
@@ -37,7 +37,7 @@ public class CollectionStream<A> extends AbstractStream<A> {
 	 * @param collection
 	 *          the collection to wrap
 	 */
-	public CollectionStream(@NonNull Collection<A> collection) {
+	public CollectionStream(@NonNull Collection<? extends A> collection) {
 		this.collection = collection;
 	}
 
@@ -71,7 +71,7 @@ public class CollectionStream<A> extends AbstractStream<A> {
 	}
 
 	protected Collection<A> getCollection() {
-		return collection;
+		return (Collection<A>) collection;
 	}
 
 }

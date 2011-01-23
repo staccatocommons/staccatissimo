@@ -24,23 +24,38 @@ import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
+ * 
+ * A {@link ConsStream} is a {@link Stream} that retrieves first a single
+ * element - the head - and the elements from another {@link Iterable} - the
+ * tail.
+ * 
  * @author flbulgarelli
  * 
  * @param <A>
  */
 public final class ConsStream<A> extends AbstractStream<A> {
-	private final Iterable<A> tail;
+	private final Iterable<? extends A> tail;
 	private final A head;
 
 	/**
 	 * Creates a new {@link ConsStream}
 	 */
-	public ConsStream(A head, @NonNull Iterable<A> tail) {
+	public ConsStream(A head, @NonNull Iterable<? extends A> tail) {
 		this.tail = tail;
 		this.head = head;
 	}
 
-	public static <A> Stream<A> from(A head, @NonNull Iterable<A> tail) {
+	/**
+	 * Creates a new {@link ConsStream}
+	 * 
+	 * @param <A>
+	 * @param head
+	 *          the first element of the {@link Stream}
+	 * @param tail
+	 *          the rest of the element of the {@link Stream}
+	 * @return a new {@link ConsStream}
+	 */
+	public static <A> Stream<A> from(A head, @NonNull Iterable<? extends A> tail) {
 		return new ConsStream<A>(head, tail);
 	}
 

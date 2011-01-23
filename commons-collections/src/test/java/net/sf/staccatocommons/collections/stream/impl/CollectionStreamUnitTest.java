@@ -10,11 +10,15 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream;
+package net.sf.staccatocommons.collections.stream.impl;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 
-import net.sf.staccatocommons.lang.sequence.Sequence;
+import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.collections.stream.StreamAbstractTest;
+import net.sf.staccatocommons.collections.stream.Streams;
 
 import org.junit.experimental.theories.DataPoints;
 
@@ -22,13 +26,15 @@ import org.junit.experimental.theories.DataPoints;
  * @author flbulgarelli
  * 
  */
-public class IterableStreamUnitTest extends StreamAbstractTest {
+public class CollectionStreamUnitTest extends
+ StreamAbstractTest {
 
 	@DataPoints
 	public static Stream[] streams = new Stream[] {
-			Streams.from(Sequence.fromToBy(85, 3, 190)),
-			Streams.from((Iterable<Integer>) Streams.from(5, 9, 10, 156).toSet()),
-			Streams.from((Iterable<Integer>) Collections.singleton(5)),
-			Streams.from((Iterable<Integer>) Collections.<Integer> emptyList()) };
+			Streams.from((Collection<Integer>) Arrays.asList(4, 5, 6, 9, 33, 0)),
+			Streams.from((Collection<Integer>) Arrays.<Integer> asList()),
+			Streams.from(Collections.EMPTY_SET),
+			Streams.from(Collections.singleton(5)),
+			Streams.from((Collection<Integer>) Arrays.asList(900, 5)) };
 
 }

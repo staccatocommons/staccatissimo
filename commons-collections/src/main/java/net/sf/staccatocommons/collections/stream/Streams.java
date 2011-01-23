@@ -42,7 +42,7 @@ public class Streams {
 
 	private Streams() {}
 
-	public static <A> Stream<A> from(final A head, @NonNull final Iterable<A> tail) {
+	public static <A> Stream<A> from(final A head, @NonNull final Iterable<? extends A> tail) {
 		return ConsStream.from(head, tail);
 	}
 
@@ -128,7 +128,7 @@ public class Streams {
 	 *         wraps it, otherwise
 	 */
 	@NonNull
-	public static <A> Stream<A> from(@NonNull Iterable<A> iterable) {
+	public static <A> Stream<A> from(@NonNull Iterable<? extends A> iterable) {
 		return iterable instanceof Stream ? (Stream<A>) iterable : new IterableStream<A>(iterable);
 	}
 
@@ -143,7 +143,7 @@ public class Streams {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
-	public static <A> Stream<A> from(@NonNull Iterator<A> iterator) {
+	public static <A> Stream<A> from(@NonNull Iterator<? extends A> iterator) {
 		return new IteratorStream<A>(iterator);
 	}
 
@@ -158,7 +158,7 @@ public class Streams {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
-	public static <A> Stream<A> from(@NonNull Enumeration<A> enumeration) {
+	public static <A> Stream<A> from(@NonNull Enumeration<? extends A> enumeration) {
 		return from(new EnumerationIterator<A>(enumeration));
 	}
 
@@ -185,7 +185,7 @@ public class Streams {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
-	public static <A> Stream<A> from(@NonNull Collection<A> collection) {
+	public static <A> Stream<A> from(@NonNull Collection<? extends A> collection) {
 		return new CollectionStream<A>(collection);
 	}
 
@@ -201,7 +201,7 @@ public class Streams {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
-	public static <A> Stream<A> from(@NonNull List<A> list) {
+	public static <A> Stream<A> from(@NonNull List<? extends A> list) {
 		return new ListStream<A>(list);
 	}
 

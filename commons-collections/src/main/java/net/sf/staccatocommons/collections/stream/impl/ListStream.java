@@ -30,7 +30,7 @@ public class ListStream<A> extends CollectionStream<A> {
 	 * @param iterable
 	 *          the list to wrap
 	 */
-	public ListStream(@NonNull List<A> iterable) {
+	public ListStream(@NonNull List<? extends A> iterable) {
 		super(iterable);
 	}
 
