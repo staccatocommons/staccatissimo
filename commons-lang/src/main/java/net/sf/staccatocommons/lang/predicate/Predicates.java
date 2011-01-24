@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.lang.predicate.internal.All;
 import net.sf.staccatocommons.lang.predicate.internal.Any;
 import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
@@ -33,6 +34,8 @@ import net.sf.staccatocommons.lang.predicate.internal.Matches;
 import net.sf.staccatocommons.lang.predicate.internal.NullPredicates;
 import net.sf.staccatocommons.lang.predicate.internal.Same;
 import net.sf.staccatocommons.lang.predicate.internal.True;
+
+import org.apache.commons.lang.ObjectUtils;
 
 /**
  * Factory methods for common predicates
@@ -357,5 +360,23 @@ public class Predicates {
 			return (Predicate) evaluable;
 		return new EvaluablePredicate<T>(evaluable);
 	}
+
+	public static <A> Evaluable2<A, A> equalOrNull() {
+		return new Evaluable2<A, A>() {
+			public boolean eval(A arg0, A arg1) {
+				return ObjectUtils.equals(arg0, arg1);
+			}
+		};
+	}
+
+	public static <A extends Comparable<A>> Evaluable2<A, A> compare() {
+		return new Evaluable2<A, A>() {
+			public boolean eval(A arg0, A arg1) {
+				return arg0 == null && arg1 == null || arg0.compareTo(arg1) == 0;
+			}
+		};
+	}
+
+	// TODO have a similar or strategy for nulls with eval2
 
 }

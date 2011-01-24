@@ -18,28 +18,26 @@ import java.util.NoSuchElementException;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.internal.iterator.AbstractUnmodifiableIterator;
-import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class DropStream<A> extends AbstractStream<A> {
+public class DropStream<A> extends WrapperStream<A> {
 
-	private final Stream<A> stream;
 	private final int amountOfElements;
 
 	/**
 	 * Creates a new {@link DropStream}
 	 */
 	public DropStream(@NonNull Stream<A> stream, int amountOfElements) {
-		this.stream = stream;
+		super(stream);
 		this.amountOfElements = amountOfElements;
 	}
 
 	public Iterator<A> iterator() {
-		final Iterator<A> iter = stream.iterator();
+		final Iterator<A> iter = getSource().iterator();
 		return new AbstractUnmodifiableIterator<A>() {
 			private int i = amountOfElements;
 
@@ -63,6 +61,6 @@ public class DropStream<A> extends AbstractStream<A> {
 
 	@Override
 	public Stream<A> drop(@NotNegative int amountOfElements) {
-		return new DropStream<A>(stream, amountOfElements + this.amountOfElements);
+		return new DropStream<A>(getSource(), amountOfElements + this.amountOfElements);
 	}
 }

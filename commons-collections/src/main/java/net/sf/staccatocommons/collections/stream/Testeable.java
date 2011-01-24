@@ -14,6 +14,7 @@ package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Evaluable2;
 
 /**
  * {@link Stream} interface for testing conditions on elements
@@ -45,6 +46,7 @@ public interface Testeable<A> {
 	boolean elementsEquals(Iterable<? extends A> other);
 
 	boolean elementsEquals(A... elements);
-	// with equalty test
+
+	boolean elementsEquals(Iterable<? extends A> other, Evaluable2<A, A> equalty);
 
 }

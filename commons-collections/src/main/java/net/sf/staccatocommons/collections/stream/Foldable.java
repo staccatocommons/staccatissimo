@@ -12,6 +12,8 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import java.util.Comparator;
+
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.defs.Applicable2;
@@ -89,4 +91,23 @@ public interface Foldable<A> {
 	 */
 	@NonNull
 	A product(@NonNull NumberType<A> numberType);
+
+	@NonNull
+	A sum() throws ClassCastException;
+
+	@NonNull
+	A product() throws ClassCastException;
+
+	@NonNull
+	A minimum(@NonNull Comparator<A> comparator);
+
+	@NonNull
+	A minimum() throws ClassCastException;
+
+	@NonNull
+	A maximum(@NonNull Comparator<A> comparator);
+
+	@NonNull
+	A maximum() throws ClassCastException;
+
 }

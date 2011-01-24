@@ -12,12 +12,14 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import static net.sf.staccatocommons.collections.internal.comparator.NaturalComparator.*;
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -43,6 +45,7 @@ import net.sf.staccatocommons.collections.stream.impl.internal.ZipStream;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
@@ -51,6 +54,8 @@ import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * An abstract implementation of a {@link Stream}. Only it {@link Iterator}
@@ -64,6 +69,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	protected static final Validate<IllegalStateException> state = Validate
 		.throwing(IllegalStateException.class);
+
+	private static final Object $ = null;
 
 	@Override
 	public int size() {
@@ -288,6 +295,10 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return Iterables.elementsEquals(this, other);
 	}
 
+	public boolean elementsEquals(Iterable<? extends A> other, Evaluable2<A, A> equalty) {
+		return Iterables.elementsEquals(this, other, equalty);
+	}
+
 	@Override
 	public <B> Stream<B> then(final Applicable<Stream<A>, ? extends Iterable<B>> function) {
 		class ThenStream extends AbstractStream<B> {
@@ -338,8 +349,38 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
+	public A product() {
+		return Iterables.product(this);
+	}
+
+	@Override
+	public A sum() {
+		return Iterables.sum(this);
+	}
+
+	@Override
 	public A sum(NumberType<A> numberType) {
 		return Iterables.sum(this, numberType);
+	}
+
+	@Override
+	public A maximum() {
+		return maximum(natural((A) $));
+	}
+
+	@Override
+	public A minimum() {
+		return minimum(natural((A) $));
+	}
+
+	@Override
+	public A maximum(Comparator<A> comparator) {
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public A minimum(Comparator<A> comparator) {
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -352,4 +393,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return ToStringBuilder.reflectionToString(this, NamedTupleToStringStyle.getInstance());
 	}
 
+	public NumberType<A> numberType() {
+		throw new ClassCastException("Source can not be casted to ImplicitNumerType");
+	}
 }

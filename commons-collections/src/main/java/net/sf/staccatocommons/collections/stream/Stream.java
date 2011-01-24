@@ -24,6 +24,7 @@ import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.Unmodifiable;
+import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 
 /**
  * A {@link Stream} is a lazy, rich-interfaced, functional-style, unmodifiable,
@@ -130,6 +131,7 @@ public interface Stream<A> extends //
 	Deconstructable<A>, //
 	Filterable<A>, //
 	Foldable<A>,//
+	ImplicitNumberType<A>, //
 	Iterable<A>, //
 	Mappable<A>, //
 	Searchable<A>,//

@@ -32,8 +32,8 @@ package net.sf.staccatocommons.defs;
 public interface Evaluable<T> {
 
 	/**
-	 * Evaluates an argument. If the arguments evaluates to true is said to
-	 * satisfy or meet this condition.
+	 * Evaluates an argument. If the argument evaluates to true is said to satisfy
+	 * or meet this condition.
 	 * 
 	 * {@link Evaluable} implementors should not try to handle nulls. Instead, the
 	 * preferred way of getting a null safe {@link Evaluable} is composing it with

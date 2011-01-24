@@ -20,28 +20,26 @@ import java.util.NoSuchElementException;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.internal.iterator.AbstractUnmodifiableIterator;
-import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 
 /**
  * @author flbulgarelli
  * 
  */
-public final class TakeStream<A> extends AbstractStream<A> {
+public final class TakeStream<A> extends WrapperStream<A> {
 
-	private final Stream<A> stream;
 	private final int amountOfElements;
 
 	/**
 	 * Creates a new {@link TakeStream}
 	 */
 	public TakeStream(@NonNull Stream<A> stream, int amountOfElements) {
-		this.stream = stream;
+		super(stream);
 		this.amountOfElements = amountOfElements;
 	}
 
 	public Iterator<A> iterator() {
-		final Iterator<A> iter = stream.iterator();
+		final Iterator<A> iter = getSource().iterator();
 		return new AbstractUnmodifiableIterator<A>() {
 			private int i = 0;
 
@@ -61,6 +59,6 @@ public final class TakeStream<A> extends AbstractStream<A> {
 
 	@Override
 	public Stream<A> take(@NotNegative int amountOfElements) {
-		return new TakeStream<A>(stream, min(amountOfElements, this.amountOfElements));
+		return new TakeStream<A>(getSource(), min(amountOfElements, this.amountOfElements));
 	}
 }
