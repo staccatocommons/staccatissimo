@@ -12,17 +12,10 @@
  */
 package net.sf.staccatocommons.check.instrument.maven;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import net.sf.staccatocommons.check.instrument.CheckConfigurer;
-import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.instrument.InstrumentationRunner;
-import net.sf.staccatocommons.io.Directory;
-import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.function.Function;
-import net.sf.staccatocommons.lang.predicate.Predicates;
+import net.sf.staccatocommons.instrument.maven.InstrumentMojoSupport;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
@@ -72,36 +65,13 @@ public class CheckInstrumentMojo extends AbstractMojo {
 	 */
 	private Artifact artifact;
 
-	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		getLog().info("Instrumenting checks to classes located in " + location);
-		String extraClasspath = createClassPathString();
-		getLog().debug("Using classpath " + extraClasspath);
-		try {
-			InstrumentationRunner.runInstrumentation(//
-				new CheckConfigurer(ignoreReturnChecks),
-				new Directory(location),
-				extraClasspath);
-		} catch (Exception e) {
-			getLog().error(e.getMessage());
-			throw new MojoExecutionException("Unexpected error", e);
-		}
-		getLog().info("Checks instrumented sucessfully");
+		new InstrumentMojoSupport(this, location, artifact, pluginArtifactsList) {
+			@Override
+			protected CheckConfigurer createConfigurer() {
+				return new CheckConfigurer(ignoreReturnChecks);
+			}
+		}.execute();
 	}
 
-	private String createClassPathString() {
-		return Streams //
-			.from(pluginArtifactsList)
-			.filter(Predicates.equal(artifact).not())
-			.map(new Function<Artifact, String>() {
-				public String apply(Artifact arg) {
-					try {
-						return arg.getFile().getCanonicalPath();
-					} catch (IOException e) {
-						throw SoftException.soften(e);
-					}
-				}
-			})
-			.joinStrings(File.pathSeparator);
-	}
 }
