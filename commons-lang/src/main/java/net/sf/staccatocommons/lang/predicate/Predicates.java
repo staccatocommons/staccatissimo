@@ -22,7 +22,9 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.lang.predicate.internal.All;
 import net.sf.staccatocommons.lang.predicate.internal.Any;
+import net.sf.staccatocommons.lang.predicate.internal.CompareTest;
 import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
+import net.sf.staccatocommons.lang.predicate.internal.EqualityTest;
 import net.sf.staccatocommons.lang.predicate.internal.Equals;
 import net.sf.staccatocommons.lang.predicate.internal.EqualsIgnoreCase;
 import net.sf.staccatocommons.lang.predicate.internal.EvaluablePredicate;
@@ -34,8 +36,6 @@ import net.sf.staccatocommons.lang.predicate.internal.Matches;
 import net.sf.staccatocommons.lang.predicate.internal.NullPredicates;
 import net.sf.staccatocommons.lang.predicate.internal.Same;
 import net.sf.staccatocommons.lang.predicate.internal.True;
-
-import org.apache.commons.lang.ObjectUtils;
 
 /**
  * Factory methods for common predicates
@@ -361,20 +361,30 @@ public class Predicates {
 		return new EvaluablePredicate<T>(evaluable);
 	}
 
+	/**
+	 * Answers an {@link Evaluable2} that performs an equality test between its
+	 * nullable arguments, that it returns true if both are null or both are non
+	 * null and equal
+	 * 
+	 * @param <A>
+	 * @return a constant {@link Evaluable2} that performs an equality test
+	 */
+	@NonNull
 	public static <A> Evaluable2<A, A> equalOrNull() {
-		return new Evaluable2<A, A>() {
-			public boolean eval(A arg0, A arg1) {
-				return ObjectUtils.equals(arg0, arg1);
-			}
-		};
+		return EqualityTest.equalityTest();
 	}
 
-	public static <A extends Comparable<A>> Evaluable2<A, A> compare() {
-		return new Evaluable2<A, A>() {
-			public boolean eval(A arg0, A arg1) {
-				return arg0 == null && arg1 == null || arg0.compareTo(arg1) == 0;
-			}
-		};
+	/**
+	 * Answers an {@link Evaluable2} that performs an compare test between its
+	 * nullable {@link Comparable} arguments, that it returns true if both are
+	 * null or <code>arg0.compareTo(arg1) == 0</code>
+	 * 
+	 * @param <A>
+	 * @return a constant {@link Evaluable2} that performs a compare test
+	 */
+	@NonNull
+	public static <A extends Comparable<A>> Evaluable2<A, A> compareOrNull() {
+		return CompareTest.compareTest();
 	}
 
 	// TODO have a similar or strategy for nulls with eval2

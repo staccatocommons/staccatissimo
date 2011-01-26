@@ -241,4 +241,20 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 		assertFalse(Predicates.in().eval(new Object()));
 	}
 
+	/** Test method for {@link Predicates#equalOrNull()} */
+	@Test
+	public void testEquality() throws Exception {
+		assertFalse(Predicates.<Integer> equalOrNull().eval(4, 9));
+		assertTrue(Predicates.<String> equalOrNull().eval("Foo", "Foo"));
+		assertSame(Predicates.equalOrNull(), Predicates.equalOrNull());
+	}
+
+	/** Test method for {@link Predicates#compareOrNull()} */
+	@Test
+	public void testCompareOrNull() throws Exception {
+		assertFalse(Predicates.<Integer> compareOrNull().eval(4, 5));
+		assertTrue(Predicates.<String> compareOrNull().eval("Foo", "Foo"));
+		assertSame(Predicates.<Integer> compareOrNull(), Predicates.<Integer> compareOrNull());
+	}
+
 }
