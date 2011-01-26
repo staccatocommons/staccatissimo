@@ -68,8 +68,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public abstract class AbstractStream<A> implements Stream<A> {
 
-	protected static final Validate<IllegalStateException> state = Validate
-		.throwing(IllegalStateException.class);
+	protected static final Validate<NoSuchElementException> validate = Validate
+		.throwing(NoSuchElementException.class);
 
 	@Override
 	public int size() {
@@ -111,7 +111,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
-		state.that(!isEmpty(), "Can not reduce an empty stream");
+		validate.that(!isEmpty(), "Can not reduce an empty stream");
 		return Iterables.reduce(this, function);
 	}
 
@@ -350,19 +350,17 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	public Pair<A, Stream<A>> decons() {
 		Iterator<A> iter = iterator();
-		state.that(iter.hasNext(), "Empty streams have no head");
+		validate.that(iter.hasNext(), "Empty streams have no head");
 		return _(iter.next(), Streams.from(iter));
 	}
 
 	public Stream<A> tail() {
-		state.that(!isEmpty(), "Empty streams have not tail");
-		if (isEmpty())
-			throw new IllegalStateException("Empty Streams have no tail");
+		validate.that(!isEmpty(), "Empty streams have not tail");
 		return drop(1);
 	}
 
 	public A head() {
-		state.that(!isEmpty(), "Empty streams have not head");
+		validate.that(!isEmpty(), "Empty streams have not head");
 		return first();
 	}
 

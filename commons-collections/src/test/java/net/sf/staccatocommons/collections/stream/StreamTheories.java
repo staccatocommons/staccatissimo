@@ -68,7 +68,7 @@ public abstract class StreamTheories {
 		try {
 			stream.reduce(integer().add());
 			fail();
-		} catch (IllegalStateException e) {
+		} catch (NoSuchElementException e) {
 			// ok;
 		}
 	}
@@ -152,7 +152,7 @@ public abstract class StreamTheories {
 		try {
 			stream.decons();
 			fail();
-		} catch (IllegalStateException e) {
+		} catch (NoSuchElementException e) {
 			// ok
 		}
 	}
@@ -164,7 +164,7 @@ public abstract class StreamTheories {
 		try {
 			stream.tail();
 			fail();
-		} catch (IllegalStateException e) {
+		} catch (NoSuchElementException e) {
 			// ok
 		}
 	}
@@ -176,7 +176,7 @@ public abstract class StreamTheories {
 		try {
 			stream.head();
 			fail();
-		} catch (IllegalStateException e) {
+		} catch (NoSuchElementException e) {
 			// ok
 		}
 	}

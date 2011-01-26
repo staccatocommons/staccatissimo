@@ -14,6 +14,7 @@ package net.sf.staccatocommons.lang;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Executable;
@@ -44,7 +45,7 @@ public final class None<T> extends Option<T> {
 
 	@Override
 	public T value() {
-		throw new UndefinedOptionException();
+		throw new NoSuchElementException();
 	}
 
 	@Override

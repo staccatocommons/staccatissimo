@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.collections.stream;
 
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.Iterables;
@@ -55,7 +56,7 @@ public interface Foldable<A> {
 	 * 
 	 * @param function
 	 * @return the folding result
-	 * @throws IllegalStateException
+	 * @throws NoSuchElementException
 	 *           if the {@link Stream} is empty
 	 */
 	A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function);
@@ -127,7 +128,7 @@ public interface Foldable<A> {
 	 * 
 	 * @param comparator
 	 * @return the minimum element.
-	 * @throws IllegalStateException
+	 * @throws NoSuchElementException
 	 *           if the stream is empty.
 	 */
 	@NonNull
@@ -137,7 +138,7 @@ public interface Foldable<A> {
 	 * Answers the minimum element of the stream, using elements natural order.
 	 * 
 	 * @return the minimum element.
-	 * @throws IllegalStateException
+	 * @throws NoSuchElementException
 	 *           if the stream is empty.
 	 * @throws ClassCastException
 	 *           if elements are not comparable
@@ -151,7 +152,7 @@ public interface Foldable<A> {
 	 * 
 	 * @param comparator
 	 * @return the maximum element.
-	 * @throws IllegalStateException
+	 * @throws NoSuchElementException
 	 *           if the stream is empty.
 	 */
 	@NonNull
@@ -161,12 +162,12 @@ public interface Foldable<A> {
 	 * Answers the maximum element of the stream, using elements natural order.
 	 * 
 	 * @return the maximum element.
-	 * @throws IllegalStateException
+	 * @throws NoSuchElementException
 	 *           if the stream is empty.
 	 * @throws ClassCastException
 	 *           if elements are not comparable
 	 */
 	@NonNull
-	A maximum() throws ClassCastException, IllegalStateException;
+	A maximum() throws ClassCastException, NoSuchElementException;
 
 }

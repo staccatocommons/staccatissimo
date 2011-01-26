@@ -15,11 +15,12 @@ package net.sf.staccatocommons.lang;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.SizeAware;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
@@ -76,8 +77,8 @@ public abstract class Option<T> extends Provider<T> implements Iterable<T>, Size
 	Option() {}
 
 	/**
-	 * Gets the optional value, if defined, or throws an UndefinedOptionException,
-	 * otherwise.
+	 * Gets the optional value, if defined, or throws an
+	 * {@link NoSuchElementException}, otherwise.
 	 * 
 	 * @return The optional value. This value is nullable, if client code
 	 *         considers null as possible, valid values. Non null otherwise.
@@ -85,10 +86,10 @@ public abstract class Option<T> extends Provider<T> implements Iterable<T>, Size
 	 *         there in code to represent optional data, so nullable values in
 	 *         optional values is in most scenarios completely redundant,
 	 *         unnecessary an error prone.
-	 * @throws UndefinedOptionException
+	 * @throws NoSuchElementException
 	 *           if this option is undefined, and thus there is no value.
 	 */
-	public abstract T value() throws UndefinedOptionException;
+	public abstract T value() throws NoSuchElementException;
 
 	/**
 	 * Returns if the value has been defined or not.
@@ -194,21 +195,6 @@ public abstract class Option<T> extends Provider<T> implements Iterable<T>, Size
 		if (value == null)
 			return none();
 		return some(value);
-	}
-
-	/**
-	 * Exception thrown to signal that an option is not defined - instance of
-	 * class {@link None} , but that its was tried to be accessed
-	 */
-	public static class UndefinedOptionException extends UnsupportedOperationException {
-		private static final long serialVersionUID = 1597749256471841503L;
-
-		/**
-		 * Creates a new {@link UndefinedOptionException}
-		 */
-		UndefinedOptionException() {
-			super("Option is undefined");
-		}
 	}
 
 }
