@@ -18,6 +18,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 
 /**
  * {@link Stream} interface for folding -aka injecting - elements - producing a
@@ -28,7 +29,8 @@ import net.sf.staccatocommons.defs.type.NumberType;
  * repeating the process with this result as the next initial value and the next
  * element from the stream. The last returned value is the folding result.
  * 
- * 
+ * Due to previous definition, folds in this interface do not work on infinite
+ * {@link Stream}s
  * 
  * @see <a
  *      href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">Folds</a>
@@ -70,7 +72,8 @@ public interface Foldable<A> {
 	String joinStrings(@NonNull String separator);
 
 	/**
-	 * Sums this {@link Stream} using the given {@link NumberType}
+	 * Answers the sum of the elements of this {@link Stream} using the given
+	 * {@link NumberType}
 	 * 
 	 * @param numberType
 	 * @return the result of adding each element of this number type, or zero, if
@@ -81,7 +84,7 @@ public interface Foldable<A> {
 	A sum(@NonNull NumberType<A> numberType);
 
 	/**
-	 * Returns the product of this {@link Stream} using the given
+	 * Answers the product of the elements of this {@link Stream} using the given
 	 * {@link NumberType}
 	 * 
 	 * @param numberType
@@ -92,22 +95,78 @@ public interface Foldable<A> {
 	@NonNull
 	A product(@NonNull NumberType<A> numberType);
 
+	/**
+	 * Answers the sum of the elements of this {@link Stream} using the Stream's
+	 * source as {@link ImplicitNumberType}
+	 * 
+	 * @return the result of adding each element of this number type, or zero, if
+	 *         this stream is empty
+	 * @throws ClassCastException
+	 *           if the source is not an implicit number type
+	 * @see Iterables#sum(Iterable)
+	 */
 	@NonNull
 	A sum() throws ClassCastException;
 
+	/**
+	 * Answers the product of the elements of this {@link Stream} using the
+	 * Stream's source as {@link ImplicitNumberType}
+	 * 
+	 * @return the result of multiplying each element of this number type, or one,
+	 *         if this stream is empty
+	 * @throws ClassCastException
+	 *           if the source is not an implicit number type
+	 * @see Iterables#product(Iterable)
+	 */
 	@NonNull
 	A product() throws ClassCastException;
 
+	/**
+	 * Answers the min element of the stream, using the given
+	 * <code>comparator</code> to compare elements.
+	 * 
+	 * @param comparator
+	 * @return the minimum element.
+	 * @throws IllegalStateException
+	 *           if the stream is empty.
+	 */
 	@NonNull
 	A minimum(@NonNull Comparator<A> comparator);
 
+	/**
+	 * Answers the minimum element of the stream, using elements natural order.
+	 * 
+	 * @return the minimum element.
+	 * @throws IllegalStateException
+	 *           if the stream is empty.
+	 * @throws ClassCastException
+	 *           if elements are not comparable
+	 */
 	@NonNull
 	A minimum() throws ClassCastException;
 
+	/**
+	 * Answers the maximum element of the stream, using the given
+	 * <code>comparator</code> to compare elements. .
+	 * 
+	 * @param comparator
+	 * @return the maximum element.
+	 * @throws IllegalStateException
+	 *           if the stream is empty.
+	 */
 	@NonNull
 	A maximum(@NonNull Comparator<A> comparator);
 
+	/**
+	 * Answers the maximum element of the stream, using elements natural order.
+	 * 
+	 * @return the maximum element.
+	 * @throws IllegalStateException
+	 *           if the stream is empty.
+	 * @throws ClassCastException
+	 *           if elements are not comparable
+	 */
 	@NonNull
-	A maximum() throws ClassCastException;
+	A maximum() throws ClassCastException, IllegalStateException;
 
 }

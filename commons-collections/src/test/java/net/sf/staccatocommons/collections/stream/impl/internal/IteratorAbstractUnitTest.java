@@ -17,6 +17,7 @@ import static junit.framework.Assert.*;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 
 import org.junit.Test;
@@ -34,9 +35,25 @@ import org.junit.runner.RunWith;
 @RunWith(Theories.class)
 public abstract class IteratorAbstractUnitTest {
 
+	private final boolean repeatable;
+
 	/** Sizes of 1 and 2 **/
 	@DataPoints
 	public static int[] sizes = new int[] { 1, 2 };
+
+	/**
+	 * Creates a new {@link IteratorAbstractUnitTest}
+	 */
+	public IteratorAbstractUnitTest(boolean repeatable) {
+		this.repeatable = repeatable;
+	}
+
+	/**
+	 * Creates a new {@link IteratorAbstractUnitTest}
+	 */
+	public IteratorAbstractUnitTest() {
+		this(true);
+	}
 
 	/**
 	 * Test that for an iterator of a given size, next can be invoked size times
@@ -84,12 +101,18 @@ public abstract class IteratorAbstractUnitTest {
 	 * Creates an iterable for the given size
 	 */
 	public Iterable<?> createIterable(int size) {
+		Iterable<?> iterable;
 		switch (size) {
 		case 1:
-			return createOneElementIterable();
+			iterable = createOneElementIterable();
+			break;
 		default:
-			return createTwoElementsIterable();
+			iterable = createTwoElementsIterable();
+			break;
 		}
+		if (repeatable)
+			assertEquals(size, Iterables.size(iterable));
+		return iterable;
 	}
 
 	/**

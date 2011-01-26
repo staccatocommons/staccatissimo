@@ -12,38 +12,21 @@
  */
 package net.sf.staccatocommons.collections.internal.iterator;
 
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Hashtable;
-
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.collections.stream.impl.internal.IteratorAbstractUnitTest;
-import net.sf.staccatocommons.lang.MapBuilder;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class EnumerationIteratorUnitTest extends IteratorAbstractUnitTest {
-
-	/**
-	 * Creates a new {@link EnumerationIteratorUnitTest}
-	 */
-	public EnumerationIteratorUnitTest() {
-		super(false);
-	}
+public class AppendIteratorUnitTest extends IteratorAbstractUnitTest {
 
 	protected Iterable<?> createTwoElementsIterable() {
-		Enumeration<String> keys = new Hashtable<String, String>(MapBuilder
-			.hashMapWith("foo", "bar")
-			.with("baz", "foobar")
-			.build()).keys();
-		return Streams.from(keys);
+		return Streams.from(20).append(10);
 	}
 
 	protected Iterable<?> createOneElementIterable() {
-		return Streams.from(//
-			new Hashtable<String, String>(Collections.singletonMap("bar", "baz")).keys());
+		return Streams.empty().append(10);
 	}
 
 }

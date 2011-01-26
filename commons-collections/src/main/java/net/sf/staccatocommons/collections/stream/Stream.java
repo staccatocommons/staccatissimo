@@ -132,6 +132,7 @@ public interface Stream<A> extends //
 	Filterable<A>, //
 	Foldable<A>,//
 	ImplicitNumberType<A>, //
+	Interscalable<A>, //
 	Iterable<A>, //
 	Mappable<A>, //
 	Searchable<A>,//

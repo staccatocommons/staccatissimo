@@ -27,13 +27,17 @@
 			     Tail-Head Stream construction and deconstruction
 			</action>
 			<action dev="flbulgarelli" type="add">
-                 Drop and drop while implementation
+                 Drop, drop while, maximum, minimum implementation
+                 in streams
             </action>
             <action dev="flbulgarelli" type="update">
                  Improved streams documentation
             </action>
             <action dev="flbulgarelli" type="add">
-                 Elements comparison
+                 Elements comparison for streams
+            </action>
+            <action dev="flbulgarelli" type="add">
+                 implicit number type support for streams
             </action>
 		</release>
 	</body>

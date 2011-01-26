@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team
+ Copyright (c) 2011, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -17,30 +17,16 @@ import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeata
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 
 /**
+ * Interface for interscalating elements in a stream
+ * 
  * @author flbulgarelli
  * 
  */
-public interface Appendabable<A> {
+public interface Interscalable<A> {
 
-	/**
-	 * Concatenates <code>this</code> with <code>other</code>
-	 * 
-	 * It answers an {@link Stream} that retrieves elements from this Stream, and
-	 * then, after its last element, from the given Stream.
-	 * 
-	 * As a particular case, if this Stream is infinite, the resulting Stream will
-	 * retrieve the same elements than this one.
-	 * 
-	 * @param other
-	 * @return a new {@link Stream}
-	 */
 	@NonNull
-	@Projection
 	@ConditionallyRepeatable
-	Stream<A> concat(@NonNull Iterable<A> other);
-
-	Stream<A> append(A element);
-
-	Stream<A> prepend(A element);
+	@Projection
+	Stream<A> intersperse(A element);
 
 }

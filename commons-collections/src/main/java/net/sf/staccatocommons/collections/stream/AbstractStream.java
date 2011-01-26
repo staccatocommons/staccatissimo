@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccatocommons.collections.internal.comparator.NaturalComparator.*;
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 
 import java.lang.reflect.Array;
@@ -30,9 +29,11 @@ import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.internal.ToPair;
+import net.sf.staccatocommons.collections.internal.comparator.NaturalComparator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ConcatStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropWhileStream;
@@ -70,14 +71,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	protected static final Validate<IllegalStateException> state = Validate
 		.throwing(IllegalStateException.class);
 
-	private static final Object $ = null;
-
 	@Override
 	public int size() {
-		int size = 0;
-		for (Iterator<A> iter = iterator(); iter.hasNext(); iter.next())
-			size++;
-		return size;
+		return Iterables.size(this);
 	}
 
 	@Override
@@ -309,6 +305,32 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new ThenStream();
 	}
 
+	/**
+	 * <pre>
+	 * intersperse _   []      = []
+	 * intersperse _   [x]     = [x]
+	 * intersperse sep (x:xs)  = x : sep : intersperse sep xs
+	 * </pre>
+	 * 
+	 */
+	public Stream<A> intersperse(final A sep) {
+		return then(new DeconsFunction<A, A>() {
+			public Iterable<A> apply(A head, Stream<A> tail) {
+				if (tail.isEmpty())
+					return Streams.from(head);
+				return tail.intersperse(sep).prepend(sep).prepend(head);
+			}
+		});
+	}
+
+	public Stream<A> append(A element) {
+		return new AppendStream<A>(this, element);
+	}
+
+	public Stream<A> prepend(A element) {
+		return Streams.from(element, this);
+	}
+
 	public <B> Stream<B> then(final DeconsApplicable<A, B> function) {
 		class DeconsThenStream extends AbstractStream<B> {
 			public Iterator<B> iterator() {
@@ -365,12 +387,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public A maximum() {
-		return maximum(natural((A) $));
+		return maximum(NaturalComparator.<A> natural());
 	}
 
 	@Override
 	public A minimum() {
-		return minimum(natural((A) $));
+		return minimum(NaturalComparator.<A> natural());
 	}
 
 	@Override

@@ -10,24 +10,31 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.internal.comparator;
+package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import java.util.Comparator;
+import java.util.Iterator;
+
+import net.sf.staccatocommons.collections.internal.iterator.AppendIterator;
+import net.sf.staccatocommons.collections.stream.Stream;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class NaturalComparator<A> implements Comparator<A> {
+public class AppendStream<A> extends WrapperStream<A> {
 
-	private static NaturalComparator INSTANCE = new NaturalComparator();
+	private final A element;
 
-	public int compare(A o1, A o2) {
-		return ((Comparable<A>) o1).compareTo(o2);
+	/**
+	 * Creates a new {@link AppendStream}
+	 */
+	public AppendStream(Stream<A> source, A element) {
+		super(source);
+		this.element = element;
 	}
 
-	public static <A> NaturalComparator<A> natural() {
-		return INSTANCE;
+	public Iterator<A> iterator() {
+		return new AppendIterator(getSource().iterator(), element);
 	}
 
 }

@@ -22,10 +22,10 @@ import net.sf.staccatocommons.collections.stream.impl.internal.IteratorAbstractU
 public class CharSequenceIteratorUnitTest extends IteratorAbstractUnitTest {
 
 	protected Iterable<?> createTwoElementsIterable() {
-		return Streams.from(new CharSequenceIterator("ab"));
+		return Streams.fromChars("ab");
 	}
 
 	protected Iterable<?> createOneElementIterable() {
-		return Streams.from(new CharSequenceIterator("a"));
+		return Streams.fromChars("a");
 	}
 }
