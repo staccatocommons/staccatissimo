@@ -17,7 +17,9 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 
 /**
- * {@link Stream} interface for testing conditions on elements
+ * {@link Stream} interface for testing conditions on elements.
+ * 
+ * None of this tests will generally work for infinite {@link Stream}s
  * 
  * @author flbulgarelli
  * 
@@ -43,10 +45,41 @@ public interface Testeable<A> {
 	 */
 	boolean any(@NonNull Evaluable<? super A> predicate);
 
-	boolean elementsEquals(Iterable<? extends A> other);
-
+	/**
+	 * Test that the elements of this stream are equal to the elements of the
+	 * given array, and in the same order.
+	 * 
+	 * @param elements
+	 * @return <code>true</code> if this stream has the same number of elements
+	 *         that the given array, and each pair formed by elements of this
+	 *         stream and the given array at same position are equal.
+	 *         <code>false</code> otherwise
+	 */
 	boolean elementsEquals(A... elements);
 
-	boolean elementsEquals(Iterable<? extends A> other, Evaluable2<A, A> equalty);
+	/**
+	 * Test that the elements of this stream are equal to the elements of the
+	 * given {@link Iterable}, and in the same order.
+	 * 
+	 * @param elements
+	 * @return true if this stream has the same number of elements that the given
+	 *         <code>iterable</code>, and each pair formed by elements of this
+	 *         stream and given <code>iterable</code> at same position are equal.
+	 *         <code>false</code> otherwise
+	 */
+	boolean elementsEquals(Iterable<? extends A> iterable);
+
+	/**
+	 * Test that the elements of this stream are equal to the elements of the
+	 * given {@link Iterable}, and in the same order, using the given
+	 * <code>equalityTest</code> for determining equality of elements.
+	 * 
+	 * @param elements
+	 * @return <code>true</code> if this stream has the same number of elements
+	 *         that the given <code>iterable</code>, and each pair formed by
+	 *         elements of this stream and given <code>iterable</code> at same
+	 *         position satisfies the given {@link Evaluable2}
+	 */
+	boolean elementsEquals(Iterable<? extends A> iterable, Evaluable2<A, A> equality);
 
 }

@@ -48,6 +48,12 @@ public class AbstractStreamBasicTest {
 		assertEquals((Integer) 65, Streams.from(10, 20, 35).sum(integer()));
 	}
 
+	/** Test for product */
+	@Test
+	public void product() throws Exception {
+		assertEquals(1 * 2 * 3, (int) Streams.from(0, 1, 2).map(add(1)).product(integer()));
+	}
+
 	/** Test for implicit sum */
 	@Test
 	public void sumImplicit() throws Exception {

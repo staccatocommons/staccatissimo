@@ -67,6 +67,13 @@ public interface Filterable<A> {
 	@ConditionallyRepeatable
 	Stream<A> take(@NotNegative int amountOfElements);
 
+	/**
+	 * Discards all elements while they satisfy the given <code>predicate</code>
+	 * 
+	 * @param predicate
+	 * @return a new {@link Stream} projection that will skip all elements as long
+	 *         as they satisfy the given {@link Evaluable}
+	 */
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable

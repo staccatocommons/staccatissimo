@@ -279,4 +279,13 @@ public class IterablesUnitTest {
 			Arrays.asList(_(1, 'a'), _(1, 'b'), _(2, 'a'), _(2, 'b')),
 			Iterables.cross(Arrays.asList(1, 2), Arrays.asList('a', 'b')));
 	}
+
+	/** Test for {@link Iterables#elementsEquals(Iterable, Iterable)} */
+	@Test
+	public void testElementsEquals() throws Exception {
+		assertFalse(Iterables.elementsEquals(Arrays.asList(10, 20), Arrays.asList(10, 26)));
+		assertFalse(Iterables.elementsEquals(Arrays.asList(10, 20), Arrays.asList(10, 20, 6)));
+		assertFalse(Iterables.elementsEquals(Arrays.asList(10, 20, 4), Arrays.asList(10, 20)));
+		assertTrue(Iterables.elementsEquals(Arrays.asList(10, 20, 4), Arrays.asList(10, 20, 4)));
+	}
 }
