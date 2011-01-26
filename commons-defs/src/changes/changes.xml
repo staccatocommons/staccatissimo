@@ -20,13 +20,18 @@
 				EmptyAwareType and SizeAwareType 
             </action>
 			<action dev="flbulgarelli" type="add">
-			     Add Transparent and SideEffectFree restrictons
+				Add Transparent and SideEffectFree restrictons
 			</action>
 			<action dev="flbulgarelli" type="update">
 				Renamed Provider to Thunk, in
 				order to reuse that name for
 				an abstract implementation in lang.
 			</action>
+		</release>
+		<release version="1.0-alpha-3" date="TBD" description="Streams">
+			<action dev="flbulgarelli" type="add">
+				Added Evaluable2
+            </action>
 		</release>
 	</body>
 </document>

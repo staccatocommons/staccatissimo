@@ -20,6 +20,7 @@ import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
+import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.predicate.internal.All;
 import net.sf.staccatocommons.lang.predicate.internal.Any;
 import net.sf.staccatocommons.lang.predicate.internal.CompareTest;
@@ -51,6 +52,7 @@ public class Predicates {
 	 * @return A {@link Predicate} that always returns <code>true</code>
 	 */
 	@NonNull
+	@Constant
 	public static <T> Predicate<T> true_() {
 		return True.getInstance();
 	}
@@ -60,6 +62,7 @@ public class Predicates {
 	 * @return A {@link Predicate} that always returns <code>false</code>
 	 */
 	@NonNull
+	@Constant
 	public static <T> Predicate<T> false_() {
 		return False.getInstance();
 	}
@@ -72,9 +75,10 @@ public class Predicates {
 	 * Returns a preficate that tests if its argument is not null
 	 * 
 	 * @param <T>
-	 * @return A singleton {@link Predicate}
+	 * @return A constant {@link Predicate}
 	 */
 	@NonNull
+	@Constant
 	public static <T> Predicate<T> notNull() {
 		return NullPredicates.notNull();
 	}
@@ -86,6 +90,7 @@ public class Predicates {
 	 * @return A singleton {@link Predicate}
 	 */
 	@NonNull
+	@Constant
 	public static <T> Predicate<T> null_() {
 		return NullPredicates.null_();
 	}
@@ -370,6 +375,7 @@ public class Predicates {
 	 * @return a constant {@link Evaluable2} that performs an equality test
 	 */
 	@NonNull
+	@Constant
 	public static <A> Evaluable2<A, A> equalOrNull() {
 		return EqualityTest.equalityTest();
 	}
@@ -383,6 +389,7 @@ public class Predicates {
 	 * @return a constant {@link Evaluable2} that performs a compare test
 	 */
 	@NonNull
+	@Constant
 	public static <A extends Comparable<A>> Evaluable2<A, A> compareOrNull() {
 		return CompareTest.compareTest();
 	}

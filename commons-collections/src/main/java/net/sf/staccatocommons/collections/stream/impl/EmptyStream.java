@@ -17,6 +17,7 @@ import java.util.Iterator;
 import net.sf.staccatocommons.collections.internal.iterator.EmptyIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.defs.restriction.Constant;
 
 /**
  * @author flbulgarelli
@@ -36,7 +37,8 @@ public final class EmptyStream<A> extends AbstractStream<A> {
 		return EmptyIterator.empty();
 	}
 
-	/** Answers the singleton instance */
+	/** Answers a constant instance */
+	@Constant
 	public static <T> Stream<T> empty() {
 		return INSTANCE;
 	}

@@ -10,17 +10,17 @@ import net.sf.staccatocommons.lang.function.Function;
  * @param <I>
  * @param <O>
  */
-public final class Constant<I, O> extends Function<I, O> implements Serializable {
+public final class ConstantFunction<I, O> extends Function<I, O> implements Serializable {
 	private static final long serialVersionUID = 5134677209037542760L;
 
 	private final O value;
 
 	/**
-	 * Creates a new {@link Constant}
+	 * Creates a new {@link ConstantFunction}
 	 * 
 	 * @param value
 	 */
-	public Constant(O value) {
+	public ConstantFunction(O value) {
 		this.value = value;
 	}
 

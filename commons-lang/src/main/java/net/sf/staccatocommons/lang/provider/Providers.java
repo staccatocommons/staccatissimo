@@ -18,8 +18,9 @@ import java.util.concurrent.Callable;
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.provider.internal.CallableProvider;
-import net.sf.staccatocommons.lang.provider.internal.Constant;
+import net.sf.staccatocommons.lang.provider.internal.ConstantProvider;
 import net.sf.staccatocommons.lang.provider.internal.DateProvider;
 import net.sf.staccatocommons.lang.provider.internal.NullProvider;
 
@@ -34,18 +35,17 @@ public class Providers {
 	private Providers() {}
 
 	/**
-	 * Returns a constant provider, that is, a {@link Thunk} that provides the
-	 * given value
+	 * Returns a provider that returns always the given value
 	 * 
 	 * @param <A>
 	 * @param value
 	 *          the value the constant provider will return as when invoking
 	 *          {@link Thunk#value()}
-	 * @return a new constant provider
+	 * @return a new provider
 	 */
 	@NonNull
 	public static <A> Provider<A> constant(A value) {
-		return new Constant<A>(value);
+		return new ConstantProvider<A>(value);
 
 	}
 
@@ -53,9 +53,10 @@ public class Providers {
 	 * Returns a constant {@link Thunk} that always provides * <code>null</code>
 	 * 
 	 * @param <A>
-	 * @return a singleton provider of nulls
+	 * @return a constant provider of nulls
 	 */
 	@NonNull
+	@Constant
 	public static <A> Provider<A> null_() {
 		return NullProvider.getInstance();
 	}
@@ -63,9 +64,10 @@ public class Providers {
 	/**
 	 * Returns a {@link Provider} that provides the current date
 	 * 
-	 * @return a singleton provider that provides <code>new Date()</code>
+	 * @return a constant provider that provides <code>new Date()</code>
 	 */
 	@NonNull
+	@Constant
 	public static Provider<Date> currentDate() {
 		return DateProvider.PROVIDER;
 	}

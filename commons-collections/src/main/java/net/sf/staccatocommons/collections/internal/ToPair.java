@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.internal;
 
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.function.Function2;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
@@ -34,10 +35,11 @@ public final class ToPair<A, B> extends Function2<A, B, Pair<A, B>> {
 	}
 
 	/**
-	 * Answers a singleton {@link ToPair}
+	 * Answers a constant {@link ToPair}
 	 * 
 	 * @return the instance
 	 */
+	@Constant
 	@NonNull
 	public static <A, B> Function2<A, B, Pair<A, B>> getInstance() {
 		return INSTANCE;

@@ -2,6 +2,7 @@ package net.sf.staccatocommons.lang.function.internal;
 
 import java.io.Serializable;
 
+import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.function.Function;
 
 /**
@@ -22,8 +23,9 @@ public final class Identity<I> extends Function<I, I> implements Serializable {
 
 	/**
 	 * @param <I>
-	 * @return the singleton instance
+	 * @return a constant instance
 	 */
+	@Constant
 	public static <I> Function<I, I> getInstance() {
 		return INSTANCE;
 	}

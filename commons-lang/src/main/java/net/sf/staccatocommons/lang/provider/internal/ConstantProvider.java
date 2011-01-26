@@ -18,14 +18,14 @@ import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
- * {@link Constant} is a generic {@link Thunk} that wraps another object.
+ * {@link ConstantProvider} is a generic {@link Thunk} that wraps another object.
  * 
  * @author flbulgarelli
  * 
  * @param <T>
  * 
  */
-public final class Constant<T> extends Provider<T> implements Serializable {
+public final class ConstantProvider<T> extends Provider<T> implements Serializable {
 
 	private static final long serialVersionUID = -7769276251688297460L;
 
@@ -33,12 +33,12 @@ public final class Constant<T> extends Provider<T> implements Serializable {
 
 	/**
 	 * 
-	 * Creates a new {@link Constant}
+	 * Creates a new {@link ConstantProvider}
 	 * 
 	 * @param value
 	 *          the value to provide
 	 */
-	public Constant(T value) {
+	public ConstantProvider(T value) {
 		this.value = value;
 	}
 

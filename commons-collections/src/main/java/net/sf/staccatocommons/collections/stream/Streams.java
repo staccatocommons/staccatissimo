@@ -34,6 +34,7 @@ import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.sequence.StopConditions;
 
@@ -242,27 +243,29 @@ public class Streams {
 	}
 
 	/**
-	 * Answers a constant {@link Stream} that has no elements. This stream is
-	 * immutable and singleton
+	 * Answers a {@link Stream} that has no elements. This stream is immutable and
+	 * singleton
 	 * 
 	 * @param <A>
 	 *          the element type
 	 * @return a singleton empty {@link Stream}
 	 */
 	@NonNull
+	@Constant
 	@Repeatable
 	public static <A> Stream<A> empty() {
 		return EmptyStream.empty();
 	}
 
 	/**
-	 * Answers a constant infinte {@link Stream} that throws an exception when
-	 * trying to access any of its elements.
+	 * Answers a infinte {@link Stream} that throws an exception when trying to
+	 * access any of its elements.
 	 * 
 	 * @param <A>
-	 * @return
+	 * @return a Streams that throws an exception when accessing its elements
 	 */
 	@NonNull
+	@Constant
 	public static <A> Stream<A> undefined() {
 		return UndefinedStream.undefined();
 	}

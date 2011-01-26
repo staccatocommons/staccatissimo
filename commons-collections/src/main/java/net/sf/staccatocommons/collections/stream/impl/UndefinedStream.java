@@ -18,6 +18,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.internal.iterator.UndefinedIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.defs.restriction.Constant;
 
 /**
  * @author flbulgarelli
@@ -32,12 +33,13 @@ public class UndefinedStream<A> extends AbstractStream<A> {
 	}
 
 	/**
-	 * Answers a constant undefined stream
+	 * Answers an undefined stream
 	 * 
 	 * @param <A>
-	 * @return a constan undefined {@link Stream}
+	 * @return a undefined {@link Stream}
 	 */
 	@NonNull
+	@Constant
 	public static <A> Stream<A> undefined() {
 		return INSTANCE;
 	}

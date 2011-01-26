@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.internal.comparator;
 import java.util.Comparator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.restriction.Constant;
 
 /**
  * @author flbulgarelli
@@ -29,12 +30,13 @@ public class NaturalComparator<A> implements Comparator<A> {
 	}
 
 	/**
-	 * Answers a constant {@link NaturalComparator}
+	 * Answers a {@link NaturalComparator}
 	 * 
 	 * @param <A>
-	 * @return a constant natural comparator
+	 * @return a natural comparator
 	 */
 	@NonNull
+	@Constant
 	public static <A> NaturalComparator<A> natural() {
 		return INSTANCE;
 	}

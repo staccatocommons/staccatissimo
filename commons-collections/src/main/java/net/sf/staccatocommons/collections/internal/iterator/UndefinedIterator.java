@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.internal.iterator;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.restriction.Constant;
 
 /**
  * @author flbulgarelli
@@ -33,11 +34,12 @@ public class UndefinedIterator<A> extends AbstractUnmodifiableIterator<A> {
 	}
 
 	/**
-	 * Answers a constant {@link UndefinedIterator}
+	 * Answers a {@link UndefinedIterator}
 	 * 
 	 * @param <A>
-	 * @return a constant undefined iterator
+	 * @return a undefined iterator
 	 */
+	@Constant
 	@NonNull
 	public static <A> Iterator<A> undefined() {
 		return INSTANCE;

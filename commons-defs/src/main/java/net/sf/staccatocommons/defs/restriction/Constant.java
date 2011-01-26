@@ -1,6 +1,6 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team   
- 
+ Copyright (c) 2011, The Staccato-Commons Team
+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation; version 3 of the License.
@@ -14,27 +14,21 @@ package net.sf.staccatocommons.defs.restriction;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Classes annotated as {@link Immutable} indicate that their instances are
- * {@link Unmodifiable}, and also either all their attributes are primitives or
- * immutable objects - {@link String}s, {@link Integer}, or have no attributes
- * at all.
+ * {@link Restriction} that denotes that the return value of a method is always
+ * the same object. <strong>This does not necessary mean that the returned
+ * object is a singleton</strong>
  * 
- * {@link Immutable}s are inherently thread-safe.
- * 
- * @author fbulgarelli
- * @see Restriction
+ * @author flbulgarelli
  */
 @Documented
-@Inherited
 @Restriction
-@Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.TYPE)
-public @interface Immutable {
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.CLASS)
+public @interface Constant {
 
 }

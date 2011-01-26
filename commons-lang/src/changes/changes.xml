@@ -20,13 +20,21 @@
 				Added NumericTypes
             </action>
 			<action dev="flbulgarelli" type="add">
-				Added Provider as abstract base class for Thunks
+				Added Provider as abstract
+				base class for Thunks
             </action>
-            <action dev="flbulgarelli" type="add">
-                Added RelevantState
+			<action dev="flbulgarelli" type="add">
+				Added RelevantState
             </action>
-            <action dev="flbulgarelli" type="add">
-                Added thread-safe Lazy, and lazy and delayed results for Functions and Blocks
+			<action dev="flbulgarelli" type="add">
+				Added thread-safe Lazy, and
+				lazy and delayed results for Functions and
+				Blocks
+            </action>
+		</release>
+		<release version="1.0-alpha-3" date="TBD" description="Streams">
+			<action dev="flbulgarelli" type="remove">
+				Removed UndefinedOptionException, and replaced by NoSuchElementException
             </action>
 		</release>
 	</body>

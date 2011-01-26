@@ -23,6 +23,7 @@ import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
+import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.defs.restriction.Value;
 import net.sf.staccatocommons.lang.provider.Provider;
 
@@ -112,8 +113,9 @@ public abstract class Option<T> extends Provider<T> implements Iterable<T>, Size
 	 * 
 	 * @param <T>
 	 *          the type of optional value
-	 * @return The singleton {@link None} instance
+	 * @return A constant {@link None} instance
 	 */
+	@Constant
 	public static <T> None<T> none() {
 		return None.none();
 	}

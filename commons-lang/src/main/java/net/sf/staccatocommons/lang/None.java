@@ -92,14 +92,22 @@ public final class None<T> extends Option<T> {
 		return false;
 	}
 
-	@NonNull
-	public static <T> None<T> none() {
-		return (None<T>) instance;
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	public boolean equals(Object obj) {
+		return obj == this || obj instanceof None;
 	}
 
 	@Override
 	public String toString() {
 		return "None";
+	}
+
+	@NonNull
+	public static <T> None<T> none() {
+		return (None<T>) instance;
 	}
 
 }

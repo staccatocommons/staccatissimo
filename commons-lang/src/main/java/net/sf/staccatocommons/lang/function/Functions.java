@@ -14,8 +14,9 @@ package net.sf.staccatocommons.lang.function;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.function.internal.ApplicableFunction;
-import net.sf.staccatocommons.lang.function.internal.Constant;
+import net.sf.staccatocommons.lang.function.internal.ConstantFunction;
 import net.sf.staccatocommons.lang.function.internal.Identity;
 
 /**
@@ -32,26 +33,27 @@ public class Functions {
 	 * argument and returns it.
 	 * 
 	 * @param <A>
-	 * @return the singleton identity function
+	 * @return the constant identity function
 	 */
 	@NonNull
+	@Constant
 	public static <A> Function<A, A> identity() {
 		return Identity.getInstance();
 	}
 
 	/**
-	 * Returns a constant function, that is, a {@link Function} that takes one
-	 * argument, and regardless of it, returns a given value
+	 * Returns a function that takes one argument, and regardless of it, returns a
+	 * given value
 	 * 
 	 * @param <A>
 	 * @param <B>
 	 * @param value
-	 *          the value the constant function will return when applied
-	 * @return a new constant function
+	 *          the value the function will return when applied
+	 * @return a new function
 	 */
 	@NonNull
 	public static <A, B> Function<A, B> constant(B value) {
-		return new Constant<A, B>(value);
+		return new ConstantFunction<A, B>(value);
 	}
 
 	/**
@@ -62,6 +64,7 @@ public class Functions {
 	 * @return a function that returns <code>arg.toString()</code>
 	 */
 	@NonNull
+	/* FIXME */
 	public static <A> Function<A, String> toString_() {
 		return new Function<A, String>() {
 			public String apply(A arg) {
