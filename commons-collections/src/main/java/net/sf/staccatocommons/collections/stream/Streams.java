@@ -28,6 +28,7 @@ import net.sf.staccatocommons.collections.stream.impl.EmptyStream;
 import net.sf.staccatocommons.collections.stream.impl.IterableStream;
 import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
+import net.sf.staccatocommons.collections.stream.impl.UndefinedStream;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
@@ -241,8 +242,8 @@ public class Streams {
 	}
 
 	/**
-	 * Creates a new {@link Stream} that has no elements. This stream is immutable
-	 * and singleton
+	 * Answers a constant {@link Stream} that has no elements. This stream is
+	 * immutable and singleton
 	 * 
 	 * @param <A>
 	 *          the element type
@@ -252,6 +253,18 @@ public class Streams {
 	@Repeatable
 	public static <A> Stream<A> empty() {
 		return EmptyStream.empty();
+	}
+
+	/**
+	 * Answers a constant infinte {@link Stream} that throws an exception when
+	 * trying to access any of its elements.
+	 * 
+	 * @param <A>
+	 * @return
+	 */
+	@NonNull
+	public static <A> Stream<A> undefined() {
+		return UndefinedStream.undefined();
 	}
 
 	// public static <K, V> Stream<Entry<K, V>> from(Map<K, V> iterable) {
