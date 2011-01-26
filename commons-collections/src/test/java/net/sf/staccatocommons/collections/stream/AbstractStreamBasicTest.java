@@ -146,13 +146,19 @@ public class AbstractStreamBasicTest {
 	/** Test for {@link Stream#intersperse(Object)} */
 	@Test
 	public void testIntersperse() throws Exception {
-		assertTrue(Streams.from(4, 5, 6).intersperse(1).elementsEquals(4, 1, 5, 1, 6));
-		// assertTrue(Streams
-		// .from(4, 5)
-		// .concat(Streams.<Integer> undefined())
-		// .intersperse(1)
-		// .take(1)
-		// .elementsEquals(4, 1, 5, 1, 6, 1));
+		assertTrue( //
+		Streams //
+			.from(Arrays.asList(4, 5, 6))
+			.intersperse(1)
+			.elementsEquals(4, 1, 5, 1, 6));
 
+		assertTrue( //
+		Streams
+			.from(Arrays.asList(4, 5).iterator())
+			.append(10)
+			.intersperse(1)
+			.take(4)
+			.elementsEquals(4, 1, 5, 1));
 	}
+
 }

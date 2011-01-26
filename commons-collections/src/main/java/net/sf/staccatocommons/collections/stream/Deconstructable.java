@@ -84,7 +84,8 @@ public interface Deconstructable<A> {
 
 		/**
 		 * Applies this transformation to a non empty Stream splitted into tail and
-		 * head
+		 * head. Independently of the original stream source, the tail Stream is
+		 * always non-repeatable.
 		 */
 		Iterable<B> apply(A head, Stream<A> tail);
 

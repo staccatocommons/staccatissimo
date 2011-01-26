@@ -349,7 +349,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	public Pair<A, Stream<A>> decons() {
-		return _(head(), tail());
+		Iterator<A> iter = iterator();
+		state.that(iter.hasNext(), "Empty streams have no head");
+		return _(iter.next(), Streams.from(iter));
 	}
 
 	public Stream<A> tail() {
