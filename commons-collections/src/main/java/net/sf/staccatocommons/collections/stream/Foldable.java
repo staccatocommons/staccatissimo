@@ -122,6 +122,10 @@ public interface Foldable<A> {
 	@NonNull
 	A product() throws ClassCastException;
 
+	A average(@NonNull NumberType<A> numberType);
+
+	A average();
+
 	/**
 	 * Answers the min element of the stream, using the given
 	 * <code>comparator</code> to compare elements.

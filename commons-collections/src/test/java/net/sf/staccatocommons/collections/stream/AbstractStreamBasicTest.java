@@ -65,6 +65,12 @@ public class AbstractStreamBasicTest {
 				.sum());
 	}
 
+	/** Test for {@link Stream#average()} **/
+	@Test
+	public void testAvg() throws Exception {
+		assertEquals(9.6, Streams.from(10.0, 12.0, 15.0, 2.0, 9.0).average(double_()), 0.01);
+	}
+
 	/**
 	 * Test method for {@link AbstractStream#fold(java.lang.Object, Applicable2)}
 	 */

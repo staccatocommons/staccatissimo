@@ -12,11 +12,15 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
+import static net.sf.staccatocommons.lang.tuple.Tuple.*;
+
 import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.internal.iterator.UnmodifiableIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
  * 
@@ -39,11 +43,16 @@ public final class IteratorStream<A> extends AbstractStream<A> {
 	 *          the iterator to wrap
 	 */
 	public IteratorStream(@NonNull Iterator iterator) {
-		this.iterator = iterator;
+		this.iterator = new UnmodifiableIterator<A>(iterator);
 	}
 
 	public Iterator<A> iterator() {
 		return iterator;
+	}
+
+	public Pair<A, Stream<A>> decons() {
+		validate.that(!isEmpty(), "Empty streams can not be deconstructed");
+		return _(head(), (Stream<A>) this);
 	}
 
 }

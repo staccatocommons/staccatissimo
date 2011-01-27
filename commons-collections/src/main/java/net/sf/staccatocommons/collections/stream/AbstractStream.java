@@ -50,6 +50,7 @@ import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.function.Function2;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
 
@@ -371,11 +372,6 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public A product() {
-		return Iterables.product(this);
-	}
-
-	@Override
 	public A sum() {
 		return Iterables.sum(this);
 	}
@@ -383,6 +379,34 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	@Override
 	public A sum(NumberType<A> numberType) {
 		return Iterables.sum(this, numberType);
+	}
+
+	@Override
+	public A product() {
+		return Iterables.product(this);
+	}
+
+	@Override
+	public A product(NumberType<A> numberType) {
+		return Iterables.product(this, numberType);
+	}
+
+	public A average() {
+		return average(numberType());
+	}
+
+	public A average(final NumberType<A> numberType) {
+		validate.that(!isEmpty(), "Can not get average on an empty stream");
+		class Ref {
+			A val = numberType.zero();
+		}
+		final Ref size = new Ref();
+		return numberType.divide(fold(numberType.zero(), new Function2<A, A, A>() {
+			public A apply(A arg1, A arg2) {
+				size.val = numberType.increment(size.val);
+				return numberType.add(arg1, arg2);
+			}
+		}), size.val);
 	}
 
 	@Override
@@ -403,11 +427,6 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	@Override
 	public A minimum(Comparator<A> comparator) {
 		throw new NotImplementedException();
-	}
-
-	@Override
-	public A product(NumberType<A> numberType) {
-		return Iterables.product(this, numberType);
 	}
 
 	@Override
