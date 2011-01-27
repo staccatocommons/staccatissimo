@@ -20,7 +20,7 @@ import net.sf.staccatocommons.collections.stream.properties.Projection;
  * @author flbulgarelli
  * 
  */
-public interface Appendabable<A> {
+public interface Appendable<A> {
 
 	/**
 	 * Concatenates <code>this</code> with <code>other</code>

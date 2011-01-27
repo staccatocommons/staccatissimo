@@ -125,7 +125,7 @@ import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 @ConditionallyImmutable
 public interface Stream<A> extends //
 	Accessible<A>, //
-	Appendabable<A>,//
+	Appendable<A>,//
 	Collectible<A>, //
 	ContainsAware<A>, //
 	Deconstructable<A>, //
