@@ -92,6 +92,22 @@ public abstract class Function3<A, B, C, D> implements Applicable3<A, B, C, D>,
 		};
 	}
 
+	/**
+	 * Answers a new function that returns null if any of its arguments is null,
+	 * or the result of applying this function, otherwise.
+	 * 
+	 * @return a new null-safe {@link Function3}
+	 */
+	public final Function3<A, B, C, D> nullSafe() {
+		return new Function3<A, B, C, D>() {
+			public D apply(A arg1, B arg2, C arg3) {
+				if (arg1 == null || arg2 == null || arg3 == null)
+					return null;
+				return Function3.this.apply(arg1, arg2, arg3);
+			}
+		};
+	}
+
 	public String toString() {
 		return "Function3";
 	}

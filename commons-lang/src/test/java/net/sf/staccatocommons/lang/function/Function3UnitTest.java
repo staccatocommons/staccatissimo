@@ -85,4 +85,20 @@ public class Function3UnitTest extends JUnit4MockObjectTestCase {
 		assertEquals('a', (char) lazy.value());
 		assertEquals('a', (char) lazy.value());
 	}
+
+	/**
+	 * Test for {@link Function#nullSafe()}
+	 */
+	@Test
+	public void testNullSafe() throws Exception {
+		Function3<Integer, Integer, Integer, Integer> add = new Function3<Integer, Integer, Integer, Integer>() {
+			public Integer apply(Integer arg1, Integer arg2, Integer arg3) {
+				return arg1 + arg2 + arg3;
+			}
+		};
+		assertNull(add.nullSafe().apply(null, 1, 2));
+		assertNull(add.nullSafe().apply(1, null, 2));
+		assertNull(add.nullSafe().apply(1, 6, null));
+		assertEquals((Integer) 25, add.apply(10, 5, 10));
+	}
 }

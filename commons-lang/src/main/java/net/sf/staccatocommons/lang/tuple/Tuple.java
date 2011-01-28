@@ -34,7 +34,7 @@ import net.sf.staccatocommons.lang.value.RelevantState;
  * relates others together is needed. Such object does not encapsulate any
  * business concept nor any specific behavior except of {@link #toString()},
  * {@link #equals(Object)}, {@link #hashCode()} and
- * {@link #compare(Object, Object)}. Tuples are thus not intended to be used
+ * {@link #compareTo(Object, Object)}. Tuples are thus not intended to be used
  * everywhere nor extended, but there are some concrete scenarios where they are
  * useful:
  * </p>

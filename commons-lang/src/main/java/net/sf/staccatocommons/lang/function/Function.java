@@ -152,6 +152,23 @@ public abstract class Function<A, B> implements Applicable<A, B> {
 		};
 	}
 
+	/**
+	 * Answers a new function that returns null if its argument is null, or the
+	 * result of applying this function, otherwise.
+	 * 
+	 * @return a new null-safe {@link Function}
+	 */
+	@NonNull
+	public final Function<A, B> nullSafe() {
+		return new Function<A, B>() {
+			public B apply(A arg) {
+				if (arg == null)
+					return null;
+				return Function.this.apply(arg);
+			}
+		};
+	}
+
 	public String toString() {
 		return "Function";
 	}

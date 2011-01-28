@@ -12,9 +12,12 @@
  */
 package net.sf.staccatocommons.lang.function;
 
+import java.util.Comparator;
+
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.internal.ApplicableFunction;
 import net.sf.staccatocommons.lang.function.internal.ConstantFunction;
 import net.sf.staccatocommons.lang.function.internal.Identity;
@@ -92,4 +95,39 @@ public class Functions {
 			return (Function<A, B>) applicable;
 		return new ApplicableFunction<A, B>(applicable);
 	}
+
+	/**
+	 * Answers a new {@link Function2} that returns the min of its arguments using
+	 * the given comparator.
+	 * 
+	 * @param <A>
+	 * @param comparator
+	 * @return a new {@link Function2}
+	 */
+	@NonNull
+	public static <A> Function2<A, A, A> min(final Comparator<A> comparator) {
+		return new Function2<A, A, A>() {
+			public A apply(A arg0, A arg1) {
+				return Compare.min(arg0, arg1, comparator);
+			}
+		};
+	}
+
+	/**
+	 * Answers a new {@link Function2} that returns the max of its arguments using
+	 * the given comparator.
+	 * 
+	 * @param <A>
+	 * @param comparator
+	 * @return a new {@link Function2}
+	 */
+	@NonNull
+	public static <A> Function2<A, A, A> max(final Comparator<A> comparator) {
+		return new Function2<A, A, A>() {
+			public A apply(A arg0, A arg1) {
+				return Compare.max(arg0, arg1, comparator);
+			}
+		};
+	}
+
 }

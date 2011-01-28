@@ -17,8 +17,6 @@ import java.util.Comparator;
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 
-import org.apache.commons.lang.ObjectUtils;
-
 /**
  * Class methods that implement comparisons for {@link Comparable}s, like
  * between(max, min) and in(collection)
@@ -171,7 +169,7 @@ public class Compare {
 	@NonNull
 	@ForceChecks
 	public static <T extends Comparable<T>> T min(@NonNull T c1, @NonNull T c2) {
-		return (T) ObjectUtils.min(c1, c2);
+		return c1.compareTo(c2) < 1 ? c1 : c2;
 	}
 
 	/**
@@ -183,7 +181,39 @@ public class Compare {
 	@NonNull
 	@ForceChecks
 	public static <T extends Comparable<T>> T max(@NonNull T c1, @NonNull T c2) {
-		return (T) ObjectUtils.max(c1, c2);
+		return c1.compareTo(c2) >= 0 ? c1 : c2;
+	}
+
+	/**
+	 * Answers the min element between <code>c1</code> and <code>c2</code>, using
+	 * the given {@link Comparator}
+	 * 
+	 * @param <T>
+	 * @param c1
+	 * @param c2
+	 * @param comparator
+	 * @return <code>comparator.compare(c1, c2) >= 0 ? c1 : c2</code>
+	 */
+	@NonNull
+	@ForceChecks
+	public static <T> T max(@NonNull T c1, @NonNull T c2, @NonNull Comparator<T> comparator) {
+		return comparator.compare(c1, c2) >= 0 ? c1 : c2;
+	}
+
+	/**
+	 * Answers the max element between <code>c1</code> and <code>c2</code>, using
+	 * the given {@link Comparator}
+	 * 
+	 * @param <T>
+	 * @param c1
+	 * @param c2
+	 * @param comparator
+	 * @return <code> comparator.compare(c1, c2) <= 0 ? c1 : c2</code>
+	 */
+	@NonNull
+	@ForceChecks
+	public static <T> T min(@NonNull T c1, @NonNull T c2, Comparator<T> comparator) {
+		return comparator.compare(c1, c2) <= 0 ? c1 : c2;
 	}
 
 }

@@ -163,12 +163,16 @@ public abstract class RelevantState<A> implements Comparator<A>, Evaluable2<A, A
 	 * @return 0 if both arguments are the same, or the result of a field by field
 	 *         comparison
 	 */
-	public int compare(@NonNull A object, A other) {
+	public int compareTo(@NonNull A object, A other) {
 		if (object == other)
 			return 0;
 		CompareStateBuilder b = new CompareStateBuilder(relevantAttributesCount);
 		collectStateInTwoPhases(object, other, b);
 		return b.toComparison();
+	}
+
+	public int compare(A o1, A o2) {
+		return compareTo(o1, o2);
 	}
 
 	/**
@@ -195,6 +199,8 @@ public abstract class RelevantState<A> implements Comparator<A>, Evaluable2<A, A
 	}
 
 	public boolean eval(A arg0, A arg1) {
+		if (arg0 == null)
+			return arg1 == null;
 		return equals(arg0, arg1);
 	}
 
@@ -298,7 +304,7 @@ final class CompareStateBuilder extends CompareToBuilder implements TwoPhaseStat
 	private Object[] properties;
 
 	/**
-	 * Creates a new {@link RelevantState.EqualsStateBuilder}
+	 * Creates a new {@link RelevantState.CompareStateBuilder}
 	 */
 	public CompareStateBuilder(int propsCount) {
 		properties = new Object[propsCount];

@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.lang.function;
 
+import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Thunk;
@@ -94,5 +95,16 @@ public class Function2UnitTest extends JUnit4MockObjectTestCase {
 		assertEquals('a', (char) lazy.value());
 		assertEquals('a', (char) lazy.value());
 		assertEquals('a', (char) lazy.value());
+	}
+
+	/**
+	 * Test for {@link Function#nullSafe()}
+	 */
+	@Test
+	public void testNullSafe() throws Exception {
+		Function2<Integer, Integer, Integer> add = Functions.max(integer());
+		assertNull(add.nullSafe().apply(null, 1));
+		assertNull(add.nullSafe().apply(1, null));
+		assertEquals((Integer) 10, add.apply(10, 5));
 	}
 }

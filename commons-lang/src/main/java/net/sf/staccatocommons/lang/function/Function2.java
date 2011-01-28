@@ -100,6 +100,22 @@ public abstract class Function2<A, B, C> implements Applicable2<A, B, C>,
 		};
 	}
 
+	/**
+	 * Answers a new function that returns null if any of its arguments is null,
+	 * or the result of applying this function, otherwise.
+	 * 
+	 * @return a new null-safe {@link Function2}
+	 */
+	public final Function2<A, B, C> nullSafe() {
+		return new Function2<A, B, C>() {
+			public C apply(A arg1, B arg2) {
+				if (arg1 == null || arg2 == null)
+					return null;
+				return Function2.this.apply(arg1, arg2);
+			}
+		};
+	}
+
 	public String toString() {
 		return "Function2";
 	}

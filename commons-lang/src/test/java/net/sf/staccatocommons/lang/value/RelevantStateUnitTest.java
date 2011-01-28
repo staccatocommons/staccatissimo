@@ -40,7 +40,6 @@ public class RelevantStateUnitTest {
 	 */
 	@Test
 	public void testEquals() {
-
 		Date date = new Date();
 		assertTrue(val.equals(_(date, "hello", 'a'), _(date.clone(), "hello", 'a')));
 		assertTrue(val.equals(_(1, 2, 3), _(1, 2, 3)));
@@ -48,6 +47,16 @@ public class RelevantStateUnitTest {
 		assertFalse(val.equals(_(1, 2, 3), _("", 2, 3)));
 		assertFalse(val.equals(_(1, 2, 3), _(1, 4)));
 		assertFalse(val.equals(_(1, 2, 3), null));
+	}
+
+	/** Test method for {@link RelevantState#eval(Object, Object)} */
+	@Test
+	public void testEval() throws Exception {
+		assertFalse(val.eval(_(1, 2, 3), _(1, 4, 6)));
+		assertFalse(val.eval(_(1, 2, 3), null));
+		assertFalse(val.eval(null, _(1, 1, 1)));
+		assertTrue(val.eval(null, null));
+		assertTrue(val.eval(_(1, 2, 3), _(1, 2, 3)));
 	}
 
 	/**
@@ -64,14 +73,14 @@ public class RelevantStateUnitTest {
 		assertTrue(val.hashCode(_("foo", 5L, '5')) != val.hashCode(_("foo", 5L, 'a')));
 	}
 
-	/** Test for {@link RelevantState#compare(Object, Object)} **/
+	/** Test for {@link RelevantState#compareTo(Object, Object)} **/
 	@Test
 	public void testCompareTo() throws Exception {
 
 		Triple<Integer, Integer, Integer> t = _(4, 5, 6);
-		assertEquals(0, val.compare(t, t));
-		assertEquals(0, val.compare(_(4, 5, 6), _(4, 5, 6)));
-		assertTrue(val.compare(_(4, 10, 6), _(4, 5, 6)) > 0);
+		assertEquals(0, val.compareTo(t, t));
+		assertEquals(0, val.compareTo(_(4, 5, 6), _(4, 5, 6)));
+		assertTrue(val.compareTo(_(4, 10, 6), _(4, 5, 6)) > 0);
 
 	}
 
