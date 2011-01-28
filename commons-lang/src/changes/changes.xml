@@ -36,6 +36,12 @@
 			<action dev="flbulgarelli" type="remove">
 				Removed UndefinedOptionException, and replaced by NoSuchElementException
             </action>
+            <action dev="flbulgarelli" type="add">
+                Equality
+            </action>
+            <action dev="flbulgarelli" type="add">
+                Nul-Safe Functions
+            </action>
 		</release>
 	</body>
 </document>

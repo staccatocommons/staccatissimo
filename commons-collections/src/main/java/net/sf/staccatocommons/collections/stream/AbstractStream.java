@@ -13,7 +13,6 @@
 package net.sf.staccatocommons.collections.stream;
 
 import static net.sf.staccatocommons.lang.function.Functions.*;
-import static net.sf.staccatocommons.lang.predicate.Predicates.*;
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 
 import java.lang.reflect.Array;
@@ -54,6 +53,7 @@ import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.Function2;
+import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
 
@@ -226,8 +226,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	@Override
 	public int positionOf(A element) {
 		int index = indexOf(element);
-		if (index == -1)
-			throw new NoSuchElementException(element.toString());
+		if (index == -1) throw new NoSuchElementException(element.toString());
 		return index;
 	}
 
@@ -300,7 +299,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	public <B extends Comparable<B>> boolean elementsEquals(Iterable<? extends A> iterable,
 		Applicable<A, B> function) {
-		return elementsEquals(iterable, on(function));
+		return elementsEquals(iterable, Equiv.on(function));
 	}
 
 	@Override
@@ -324,8 +323,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	public Stream<A> intersperse(final A sep) {
 		return then(new DeconsFunction<A, A>() {
 			public Iterable<A> apply(A head, Stream<A> tail) {
-				if (tail.isEmpty())
-					return Streams.from(head);
+				if (tail.isEmpty()) return Streams.from(head);
 				return tail.intersperse(sep).prepend(sep).prepend(head);
 			}
 		});
@@ -342,8 +340,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	public <B> Stream<B> then(final DeconsApplicable<A, B> function) {
 		class DeconsThenStream extends AbstractStream<B> {
 			public Iterator<B> iterator() {
-				if (AbstractStream.this.isEmpty())
-					return function.emptyApply().iterator();
+				if (AbstractStream.this.isEmpty()) return function.emptyApply().iterator();
 				Pair<A, Stream<A>> decons = AbstractStream.this.decons();
 				return function.apply(decons._1(), decons._2()).iterator();
 			}

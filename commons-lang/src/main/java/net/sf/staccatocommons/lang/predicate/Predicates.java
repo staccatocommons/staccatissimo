@@ -18,15 +18,11 @@ import java.util.regex.Pattern;
 
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.predicate.internal.All;
 import net.sf.staccatocommons.lang.predicate.internal.Any;
-import net.sf.staccatocommons.lang.predicate.internal.CompareTest;
 import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
-import net.sf.staccatocommons.lang.predicate.internal.EqualityTest;
 import net.sf.staccatocommons.lang.predicate.internal.Equals;
 import net.sf.staccatocommons.lang.predicate.internal.EqualsIgnoreCase;
 import net.sf.staccatocommons.lang.predicate.internal.EvaluablePredicate;
@@ -366,43 +362,5 @@ public class Predicates {
 			return (Predicate) evaluable;
 		return new EvaluablePredicate<T>(evaluable);
 	}
-
-	/**
-	 * Answers an {@link Evaluable2} that performs an equality test between its
-	 * nullable arguments, that it returns true if both are null or both are non
-	 * null and equal
-	 * 
-	 * @param <A>
-	 * @return a constant {@link Evaluable2} that performs an equality test
-	 */
-	@NonNull
-	@Constant
-	public static <A> Evaluable2<A, A> equalOrNull() {
-		return EqualityTest.equalityTest();
-	}
-
-	/**
-	 * Answers an {@link Evaluable2} that performs an compare test between its
-	 * nullable {@link Comparable} arguments, that it returns true if both are
-	 * null or <code>arg0.compareTo(arg1) == 0</code>
-	 * 
-	 * @param <A>
-	 * @return a constant {@link Evaluable2} that performs a compare test
-	 */
-	@NonNull
-	@Constant
-	public static <A extends Comparable<A>> Evaluable2<A, A> compareOrNull() {
-		return CompareTest.compareTest();
-	}
-
-	public static <A, B extends Comparable<B>> Evaluable2<A, A> on(final Applicable<A, B> function) {
-		return new Evaluable2<A, A>() {
-			public boolean eval(A arg0, A arg1) {
-				return function.apply(arg0).equals(function.apply(arg1));
-			}
-		};
-	}
-
-	// TODO have a similar or strategy for nulls with eval2
 
 }

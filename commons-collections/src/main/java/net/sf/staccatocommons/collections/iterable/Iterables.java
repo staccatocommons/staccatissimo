@@ -41,7 +41,7 @@ import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
-import net.sf.staccatocommons.lang.predicate.Predicates;
+import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -393,7 +393,7 @@ public class Iterables {
 	 */
 	public static <A> boolean elementsEquals(@NonNull Iterable<? extends A> iterable1,
 		@NonNull Iterable<? extends A> iterable2) {
-		return elementsEquals(iterable1, iterable2, Predicates.equalOrNull());
+		return elementsEquals(iterable1, iterable2, Equiv.equalOrNull());
 	}
 
 	public static <A> boolean elementsEquals(@NonNull Iterable<? extends A> iterable1,

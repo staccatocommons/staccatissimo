@@ -2,6 +2,7 @@ package net.sf.staccatocommons.lang.predicate.internal;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Evaluable2;
+import net.sf.staccatocommons.defs.restriction.Constant;
 
 import org.apache.commons.lang.ObjectUtils;
 
@@ -10,9 +11,9 @@ import org.apache.commons.lang.ObjectUtils;
  * 
  * @param <A>
  */
-public final class EqualityTest<A> implements Evaluable2<A, A> {
+public final class EqualTest<A> implements Evaluable2<A, A> {
 
-	private static final EqualityTest INSTANCE = new EqualityTest();
+	private static final EqualTest INSTANCE = new EqualTest();
 
 	public boolean eval(A arg0, A arg1) {
 		return ObjectUtils.equals(arg0, arg1);
@@ -22,7 +23,8 @@ public final class EqualityTest<A> implements Evaluable2<A, A> {
 	 * @return a constant instance
 	 */
 	@NonNull
-	public static <A> Evaluable2<A, A> equalityTest() {
+	@Constant
+	public static <A> Evaluable2<A, A> equalTest() {
 		return INSTANCE;
 	}
 }
