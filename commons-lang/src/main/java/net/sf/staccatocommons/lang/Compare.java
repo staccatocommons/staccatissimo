@@ -16,6 +16,7 @@ import java.util.Comparator;
 
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * Class methods that implement comparisons for {@link Comparable}s, like
@@ -216,4 +217,11 @@ public class Compare {
 		return comparator.compare(c1, c2) <= 0 ? c1 : c2;
 	}
 
+	public static <A, B extends Comparable<B>> Comparator<A> on(final Applicable<A, B> function) {
+		return new Comparator<A>() {
+			public int compare(A arg0, A arg1) {
+				return function.apply(arg0).compareTo(function.apply(arg1));
+			}
+		};
+	}
 }

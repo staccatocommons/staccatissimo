@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.collections.stream;
 
 import static net.sf.staccatocommons.lang.function.Functions.*;
+import static net.sf.staccatocommons.lang.predicate.Predicates.*;
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 
 import java.lang.reflect.Array;
@@ -50,11 +51,13 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.Function2;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -295,6 +298,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return Iterables.elementsEquals(this, other, equalty);
 	}
 
+	public <B extends Comparable<B>> boolean elementsEquals(Iterable<? extends A> iterable,
+		Applicable<A, B> function) {
+		return elementsEquals(iterable, on(function));
+	}
+
 	@Override
 	public <B> Stream<B> then(final Applicable<Stream<A>, ? extends Iterable<B>> function) {
 		class ThenStream extends AbstractStream<B> {
@@ -429,12 +437,28 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
+	public <B extends Comparable<B>> A maximum(Applicable<A, B> function)
+		throws NoSuchElementException {
+		return maximum(Compare.on(function));
+	}
+
+	@Override
+	public <B extends Comparable<B>> A minimum(Applicable<A, B> function)
+		throws NoSuchElementException {
+		return minimum(Compare.on(function));
+	}
+
+	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, NamedTupleToStringStyle.getInstance());
 	}
 
 	public NumberType<A> numberType() {
 		throw new ClassCastException("Source can not be casted to ImplicitNumerType");
+	}
+
+	public Stream<A> reverse() {
+		throw new NotImplementedException("not yet");
 	}
 
 }

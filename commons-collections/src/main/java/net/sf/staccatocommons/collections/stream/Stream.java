@@ -135,8 +135,10 @@ public interface Stream<A> extends //
 	Interscalable<A>, //
 	Iterable<A>, //
 	Mappable<A>, //
+	Reversable<A>, //
 	Searchable<A>,//
 	SizeAware, //
+	Sortable<A>, //
 	Testeable<A>, //
 	Zippeable<A> {
 

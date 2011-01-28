@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.restriction.Constant;
@@ -392,6 +393,14 @@ public class Predicates {
 	@Constant
 	public static <A extends Comparable<A>> Evaluable2<A, A> compareOrNull() {
 		return CompareTest.compareTest();
+	}
+
+	public static <A, B extends Comparable<B>> Evaluable2<A, A> on(final Applicable<A, B> function) {
+		return new Evaluable2<A, A>() {
+			public boolean eval(A arg0, A arg1) {
+				return function.apply(arg0).equals(function.apply(arg1));
+			}
+		};
 	}
 
 	// TODO have a similar or strategy for nulls with eval2

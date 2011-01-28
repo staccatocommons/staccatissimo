@@ -17,6 +17,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.Iterables;
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
@@ -160,6 +161,9 @@ public interface Foldable<A> {
 	@NonNull
 	A minimum(@NonNull Comparator<A> comparator) throws NoSuchElementException;
 
+	<B extends Comparable<B>> A minimum(@NonNull Applicable<A, B> function)
+		throws NoSuchElementException;
+
 	/**
 	 * Answers the minimum element of the stream, using elements natural order.
 	 * 
@@ -183,6 +187,9 @@ public interface Foldable<A> {
 	 */
 	@NonNull
 	A maximum(@NonNull Comparator<A> comparator) throws NoSuchElementException;
+
+	<B extends Comparable<B>> A maximum(@NonNull Applicable<A, B> function)
+		throws NoSuchElementException;
 
 	/**
 	 * Answers the maximum element of the stream, using elements natural order.

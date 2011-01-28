@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 
@@ -81,5 +82,8 @@ public interface Testeable<A> {
 	 *         position satisfies the given {@link Evaluable2}
 	 */
 	boolean elementsEquals(Iterable<? extends A> iterable, Evaluable2<A, A> equality);
+
+	<B extends Comparable<B>> boolean elementsEquals(Iterable<? extends A> iterable,
+		Applicable<A, B> function);
 
 }
