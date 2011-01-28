@@ -12,9 +12,12 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import java.util.NoSuchElementException;
+
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
@@ -28,6 +31,20 @@ import net.sf.staccatocommons.lang.tuple.Pair;
  */
 public interface Deconstructable<A> {
 
+	/**
+	 * Lazily applies the given <code>function</code> to this stream,
+	 * deconstructing this stream into head and tail, or into an empty stream.
+	 * 
+	 * Unlike {@link Stream#then(Applicable)}, whose function will receive the
+	 * whole stream, the given {@link DeconsApplicable}, when applied, will take
+	 * the head and tail of this {@link Stream}, if non empty, or no arguments, if
+	 * the stream is empty.
+	 * 
+	 * @param <B>
+	 * @param function
+	 * @return a new stream that will retrieve elements from the result of
+	 *         applying the given function to this stream
+	 */
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable
@@ -71,6 +88,17 @@ public interface Deconstructable<A> {
 	@ConditionallyRepeatable
 	Stream<A> tail();
 
+	/**
+	 * An {@link Applicable2} that can transform a {@link Stream} by
+	 * deconstructing it into head and tail, or into an empty stream.
+	 * 
+	 * @author flbulgarelli
+	 * 
+	 * @param <A>
+	 *          input stream type
+	 * @param <B>
+	 *          output stream type
+	 */
 	public static interface DeconsApplicable<A, B> extends Applicable2<A, Stream<A>, Iterable<B>> {
 
 		/**

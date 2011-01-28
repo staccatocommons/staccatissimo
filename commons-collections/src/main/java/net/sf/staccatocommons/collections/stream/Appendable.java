@@ -39,8 +39,28 @@ public interface Appendable<A> {
 	@ConditionallyRepeatable
 	Stream<A> concat(@NonNull Iterable<A> other);
 
+	/**
+	 * Adds an element as the last one of the stream.
+	 * 
+	 * @param element
+	 * @return a new {@link Stream} that retrieves this {@link Stream} elements,
+	 *         and then, the given <code>element</code>
+	 */
+	@NonNull
+	@Projection
+	@ConditionallyRepeatable
 	Stream<A> append(A element);
 
+	/**
+	 * Adds an element as the first one of the stream.
+	 * 
+	 * @param element
+	 * @return a new {@link Stream} that retrieves the given <code>element</code>,
+	 *         and then, this {@link Stream} elements.
+	 */
+	@NonNull
+	@Projection
+	@ConditionallyRepeatable
 	Stream<A> prepend(A element);
 
 }

@@ -369,6 +369,13 @@ public class Iterables {
 		return collection == null || collection.isEmpty();
 	}
 
+	/**
+	 * Answers the size of the given <code>iterable</code>, that is, the number of
+	 * elements it retrieves
+	 * 
+	 * @param iterable
+	 * @return the number of elements in the given {@link Iterable}
+	 */
 	public static int size(@NonNull Iterable<?> iterable) {
 		int size = 0;
 		for (Iterator<?> iter = iterable.iterator(); iter.hasNext(); iter.next())
@@ -376,6 +383,14 @@ public class Iterables {
 		return size;
 	}
 
+	/**
+	 * Test that the elements of both iterables are equal, and in the same order.
+	 * 
+	 * @param elements
+	 * @return true if <code>iterable1</code> has the same number of elements that
+	 *         <code>iterable2</code>, and each pair formed by elements of both
+	 *         iterables at same position are equal. <code>false</code> otherwise
+	 */
 	public static <A> boolean elementsEquals(@NonNull Iterable<? extends A> iterable1,
 		@NonNull Iterable<? extends A> iterable2) {
 		return elementsEquals(iterable1, iterable2, Predicates.equalOrNull());

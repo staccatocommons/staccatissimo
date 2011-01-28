@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import static net.sf.staccatocommons.lang.function.Functions.*;
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 
 import java.lang.reflect.Array;
@@ -56,8 +57,6 @@ import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * An abstract implementation of a {@link Stream}. Only it {@link Iterator}
@@ -421,12 +420,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public A maximum(Comparator<A> comparator) {
-		throw new NotImplementedException();
+		return reduce(max(comparator));
 	}
 
 	@Override
 	public A minimum(Comparator<A> comparator) {
-		throw new NotImplementedException();
+		return reduce(min(comparator));
 	}
 
 	@Override
@@ -437,4 +436,5 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	public NumberType<A> numberType() {
 		throw new ClassCastException("Source can not be casted to ImplicitNumerType");
 	}
+
 }

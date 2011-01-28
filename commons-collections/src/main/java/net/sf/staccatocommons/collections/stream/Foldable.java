@@ -59,7 +59,8 @@ public interface Foldable<A> {
 	 * @throws NoSuchElementException
 	 *           if the {@link Stream} is empty
 	 */
-	A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function);
+	A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function)
+		throws NoSuchElementException;
 
 	/**
 	 * (Left)folds this {@link Stream} concatenating each elements toString with a
@@ -122,9 +123,30 @@ public interface Foldable<A> {
 	@NonNull
 	A product() throws ClassCastException;
 
-	A average(@NonNull NumberType<A> numberType);
+	/**
+	 * Answers the average of the stream elements, using the given
+	 * {@link NumberType} for performing addition and division.
+	 * 
+	 * @param numberType
+	 * @return the average of the stream elements
+	 * @throws NoSuchElementException
+	 *           if the stream is empty
+	 */
+	A average(@NonNull NumberType<A> numberType) throws NoSuchElementException;
 
-	A average();
+	/**
+	 * Answers the average of the stream elements, using the stream's source as an
+	 * {@link ImplicitNumberType}.
+	 * 
+	 * @param numberType
+	 * @return the average of the stream elements
+	 * @throws NoSuchElementException
+	 *           if the stream is empty
+	 * @throws ClassCastException
+	 *           if the source is not an implicit number type
+	 * @see #average(NumberType)
+	 */
+	A average() throws ClassCastException, NoSuchElementException;
 
 	/**
 	 * Answers the min element of the stream, using the given
@@ -136,7 +158,7 @@ public interface Foldable<A> {
 	 *           if the stream is empty.
 	 */
 	@NonNull
-	A minimum(@NonNull Comparator<A> comparator);
+	A minimum(@NonNull Comparator<A> comparator) throws NoSuchElementException;
 
 	/**
 	 * Answers the minimum element of the stream, using elements natural order.
@@ -148,7 +170,7 @@ public interface Foldable<A> {
 	 *           if elements are not comparable
 	 */
 	@NonNull
-	A minimum() throws ClassCastException;
+	A minimum() throws ClassCastException, NoSuchElementException;
 
 	/**
 	 * Answers the maximum element of the stream, using the given
@@ -160,7 +182,7 @@ public interface Foldable<A> {
 	 *           if the stream is empty.
 	 */
 	@NonNull
-	A maximum(@NonNull Comparator<A> comparator);
+	A maximum(@NonNull Comparator<A> comparator) throws NoSuchElementException;
 
 	/**
 	 * Answers the maximum element of the stream, using elements natural order.
