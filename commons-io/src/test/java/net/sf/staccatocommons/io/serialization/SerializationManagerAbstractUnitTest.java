@@ -1,6 +1,18 @@
+/*
+ Copyright (c) 2010, The Staccato-Commons Team
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License as published by
+ the Free Software Foundation; version 3 of the License.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ */
 package net.sf.staccatocommons.io.serialization;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,10 +25,17 @@ import org.apache.commons.lang.SerializationException;
 import org.junit.Before;
 import org.junit.Test;
 
+/***
+ * Test for {@link SerializationManager}
+ * 
+ * @author flbulgarelli
+ * 
+ */
 public abstract class SerializationManagerAbstractUnitTest {
 
 	private SerializationManager serializationManager;
 
+	/** Setups the test */
 	@Before
 	public void setUp() {
 		serializationManager = createSerializationManager();
@@ -24,6 +43,7 @@ public abstract class SerializationManagerAbstractUnitTest {
 
 	protected abstract SerializationManager createSerializationManager();
 
+	/***/
 	@Test
 	public void testSerializeDeserialize() {
 		GregorianCalendar valueObject = new GregorianCalendar(2011, 5, 6);
@@ -33,6 +53,7 @@ public abstract class SerializationManagerAbstractUnitTest {
 		assertEquals(valueObject, serializationManager.deserialize(in));
 	}
 
+	/***/
 	@Test(expected = SerializationException.class)
 	public void testDeserialize_IOFails() {
 		serializationManager.serialize(new Object(), new OutputStream() {
@@ -43,6 +64,7 @@ public abstract class SerializationManagerAbstractUnitTest {
 		});
 	}
 
+	/***/
 	@Test(expected = SerializationException.class)
 	public void testSerialize_IOFails() {
 		serializationManager.deserialize(new InputStream() {

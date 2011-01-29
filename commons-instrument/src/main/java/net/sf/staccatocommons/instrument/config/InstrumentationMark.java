@@ -29,11 +29,14 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 public interface InstrumentationMark {
 
 	/**
-	 * @return a mark that denotes that a file was processed
+	 * @return an attribute value added to processed class files
 	 */
 	@NonNull
 	byte[] getMarkAttributeValue();
 
+	/**
+	 * @return an attribute keyF added to processed class files
+	 */
 	@NonNull
 	String getMarkAttributeName();
 

@@ -1,6 +1,18 @@
+/*
+ Copyright (c) 2010, The Staccato-Commons Team
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License as published by
+ the Free Software Foundation; version 3 of the License.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+ */
 package net.sf.staccatocommons.io.serialization.lifecycle;
 
-import static junit.framework.Assert.assertSame;
+import static junit.framework.Assert.*;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -13,16 +25,23 @@ import org.jmock.Expectations;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CharSerializationLifecycleUnitTest extends
-	JUnit4MockObjectTestCase {
+/**
+ * Test for {@link CharSerializationManager}
+ * 
+ * @author flbulgarelli
+ * 
+ */
+public class CharSerializationLifecycleUnitTest extends JUnit4MockObjectTestCase {
 
 	private CharSerializationManager serializarionManager;
 
+	/** Setups the test */
 	@Before
 	public void setup() {
 		serializarionManager = mock(CharSerializationManager.class);
 	}
 
+	/***/
 	@Test
 	public void testSerialize() throws Exception {
 		final Object target = new Object();
@@ -41,6 +60,7 @@ public class CharSerializationLifecycleUnitTest extends
 		}.value();
 	}
 
+	/***/
 	@Test
 	public void testDeserialize() throws Exception {
 		final Object target = new Object();
@@ -53,8 +73,7 @@ public class CharSerializationLifecycleUnitTest extends
 			}
 		});
 
-		Object result = new CharSerializationLifecycle.Deserialize<Object>(
-			serializarionManager) {
+		Object result = new CharSerializationLifecycle.Deserialize<Object>(serializarionManager) {
 			@Override
 			public Reader initialize() throws IOException {
 				return reader;
@@ -66,16 +85,13 @@ public class CharSerializationLifecycleUnitTest extends
 
 	private final class TestWriter extends Writer {
 		@Override
-		public void close() throws IOException {
-		}
+		public void close() throws IOException {}
 
 		@Override
-		public void flush() throws IOException {
-		}
+		public void flush() throws IOException {}
 
 		@Override
-		public void write(char[] cbuf, int off, int len) throws IOException {
-		}
+		public void write(char[] cbuf, int off, int len) throws IOException {}
 	}
 
 	private final class TestReader extends Reader {

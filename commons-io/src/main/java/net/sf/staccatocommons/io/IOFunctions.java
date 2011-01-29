@@ -15,6 +15,7 @@ package net.sf.staccatocommons.io;
 import java.io.File;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.function.Function;
 
 /**
@@ -23,7 +24,13 @@ import net.sf.staccatocommons.lang.function.Function;
  */
 public class IOFunctions {
 
+	/**
+	 * Answers a function that returns the name of a file
+	 * 
+	 * @return a {@link Function} that returns <code>arg.getName()</code>
+	 */
 	@NonNull
+	@Constant
 	public static Function<File, String> fileName() {
 		return new Function<File, String>() {
 			public String apply(File arg) {
@@ -32,7 +39,13 @@ public class IOFunctions {
 		};
 	}
 
+	/**
+	 * Answers a function that returns the path of a file
+	 * 
+	 * @return a {@link Function} that returns <code>arg.getPath()</code>
+	 */
 	@NonNull
+	@Constant
 	public static Function<File, String> filePath() {
 		return new Function<File, String>() {
 			public String apply(File arg) {
