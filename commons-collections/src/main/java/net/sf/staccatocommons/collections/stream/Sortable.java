@@ -18,4 +18,9 @@ package net.sf.staccatocommons.collections.stream;
  */
 public interface Sortable<A> {
 
+	// TODO
+	// Stream<A> sort();
+	// Stream<A> sortBy(Comparator<A> comparator);
+	// Stream<A> sortOn(Applicable<A,A,A> function);
+
 }

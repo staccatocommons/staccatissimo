@@ -27,7 +27,8 @@
 			     Tail-Head Stream construction and deconstruction
 			</action>
 			<action dev="flbulgarelli" type="add">
-                 Drop, drop while, maximum, minimum implementation
+                 Drop, drop while, maximum, minimum, reversing,
+                 interscalating implementation
                  in streams
             </action>
             <action dev="flbulgarelli" type="update">
@@ -37,8 +38,11 @@
                  Elements comparison for streams
             </action>
             <action dev="flbulgarelli" type="add">
-                 implicit number type support for streams
-            </action>
+                 Implicit number type support for streams
+            </action> 
+             <action dev="flbulgarelli" type="update">
+                 Extracted iterators to staccato-commons-iterators
+            </action>          
 		</release>
 	</body>
 </document>

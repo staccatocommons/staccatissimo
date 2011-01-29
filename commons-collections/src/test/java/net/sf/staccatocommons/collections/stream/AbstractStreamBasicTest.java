@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream;
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static net.sf.staccatocommons.lang.number.Numbers.*;
 import static net.sf.staccatocommons.lang.predicate.Predicates.*;
+import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 import static org.junit.Assert.*;
 
 import java.math.BigInteger;
@@ -31,6 +32,7 @@ import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.function.Function2;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.lang.tuple.Triple;
 
 import org.junit.Test;
 
@@ -203,4 +205,28 @@ public class AbstractStreamBasicTest {
 			.equivalent(null, -5, 3, 0, 12, 9, 30, 50));
 	}
 
+	/** Test for {@link Stream#maximum()} */
+	@Test
+	public void testMaximum() throws Exception {
+		String max = Streams
+			.from(
+				_(new Object(), 10, "hello"),
+				_(new Object(), 12, "foo"),
+				_(new Object(), 9, "bye"),
+				_(new Object(), 6, ""))
+			.maximum(new Function<Triple<Object, Integer, String>, Integer>() {
+				public Integer apply(Triple<Object, Integer, String> arg) {
+					return arg._2();
+				}
+			})
+			._3();
+		assertEquals("foo", max);
+		assertEquals(150, (int) Streams.from(90, 10, 30, 6, 150, 65).maximum());
+	}
+
+	/** Test for {@link Stream#minimum()} */
+	@Test
+	public void testMinimum() throws Exception {
+		assertEquals(6, (int) Streams.from(90, 10, 30, 6, 150, 65).minimum());
+	}
 }

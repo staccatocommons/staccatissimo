@@ -159,6 +159,15 @@ public interface Foldable<A> {
 	@NonNull
 	A minimum(@NonNull Comparator<A> comparator) throws NoSuchElementException;
 
+	/**
+	 * Answers the minimum element of the stream, using the given
+	 * <code>Compare.on(function)</code> to compare elements.
+	 * 
+	 * @param function
+	 * @return the minimum element.
+	 * @throws NoSuchElementException
+	 *           if the stream is empty.
+	 */
 	<B extends Comparable<B>> A minimum(@NonNull Applicable<A, B> function)
 		throws NoSuchElementException;
 
@@ -176,7 +185,7 @@ public interface Foldable<A> {
 
 	/**
 	 * Answers the maximum element of the stream, using the given
-	 * <code>comparator</code> to compare elements. .
+	 * <code>comparator</code> to compare elements.
 	 * 
 	 * @param comparator
 	 * @return the maximum element.
@@ -186,6 +195,15 @@ public interface Foldable<A> {
 	@NonNull
 	A maximum(@NonNull Comparator<A> comparator) throws NoSuchElementException;
 
+	/**
+	 * Answers the maximum element of the stream, using the given
+	 * <code>Compare.on(function)</code> to compare elements.
+	 * 
+	 * @param function
+	 * @return the maximum element.
+	 * @throws NoSuchElementException
+	 *           if the stream is empty.
+	 */
 	<B extends Comparable<B>> A maximum(@NonNull Applicable<A, B> function)
 		throws NoSuchElementException;
 
