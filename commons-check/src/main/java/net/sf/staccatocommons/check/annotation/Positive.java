@@ -21,7 +21,8 @@ import java.lang.annotation.Target;
 import net.sf.staccatocommons.defs.restriction.Restriction;
 
 /**
- * A check annotation that signals that the annotated element must be positive.
+ * A check annotation that signals that the annotated element must be positive,
+ * that is, greater than 0.
  * 
  * This annotation should only be applied to {@link Number}s and primitive
  * numeric types.

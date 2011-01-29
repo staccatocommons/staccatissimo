@@ -518,8 +518,8 @@ public abstract class Check<ExceptionType extends Throwable> {
 	 *          the name of the variable to be checked
 	 * @param var
 	 *          the variable to be checked
-	 * @param minSize
-	 *          the minimum size
+	 * @param maxSize
+	 *          the maximum size
 	 * @param type
 	 *          the {@link SizeAwareType} used to determine the <code>var</code>
 	 *          size
