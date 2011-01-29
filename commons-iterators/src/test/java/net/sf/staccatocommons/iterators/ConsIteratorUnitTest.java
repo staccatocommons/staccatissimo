@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team
+ Copyright (c) 2011, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -10,22 +10,25 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.internal.iterator;
+package net.sf.staccatocommons.iterators;
 
-import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.collections.stream.impl.internal.IteratorAbstractUnitTest;
+import java.util.Arrays;
+import java.util.Iterator;
+
+import net.sf.staccatocommons.testing.junit.IteratorAbstractUnitTest;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class CharSequenceIteratorUnitTest extends IteratorAbstractUnitTest {
+public class ConsIteratorUnitTest extends IteratorAbstractUnitTest {
 
-	protected Iterable<?> createTwoElementsIterable() {
-		return Streams.fromChars("ab");
+	protected Iterator<?> createTwoElementsIterator() {
+		return new ConsIterator(50, Arrays.asList(10).iterator());
 	}
 
-	protected Iterable<?> createOneElementIterable() {
-		return Streams.fromChars("a");
+	protected Iterator<?> createOneElementIterator() {
+		return new ConsIterator(60, EmptyIterator.empty());
 	}
+
 }

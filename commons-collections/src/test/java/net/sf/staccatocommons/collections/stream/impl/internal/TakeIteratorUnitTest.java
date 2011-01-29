@@ -13,12 +13,13 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.testing.junit.IterableAbstractUnitTest;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class TakeIteratorUnitTest extends IteratorAbstractUnitTest {
+public class TakeIteratorUnitTest extends IterableAbstractUnitTest {
 
 	protected Iterable<?> createTwoElementsIterable() {
 		return Streams.from(4, 5, 6).take(2);

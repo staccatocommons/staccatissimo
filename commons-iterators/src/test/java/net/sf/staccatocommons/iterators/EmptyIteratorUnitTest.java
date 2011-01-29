@@ -10,23 +10,26 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.internal.iterator;
+package net.sf.staccatocommons.iterators;
 
-import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.collections.stream.impl.internal.IteratorAbstractUnitTest;
+import static org.junit.Assert.*;
+import net.sf.staccatocommons.iterators.EmptyIterator;
+
+import org.junit.Test;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class AppendIteratorUnitTest extends IteratorAbstractUnitTest {
+public class EmptyIteratorUnitTest {
 
-	protected Iterable<?> createTwoElementsIterable() {
-		return Streams.from(20).append(10);
-	}
-
-	protected Iterable<?> createOneElementIterable() {
-		return Streams.empty().append(10);
+	/**
+	 * Test method for {@link EmptyIterator#empty()}.
+	 */
+	@Test
+	public void testEmpty() {
+		assertFalse(EmptyIterator.empty().hasNext());
+		assertFalse(EmptyIterator.empty().hasNext());
 	}
 
 }

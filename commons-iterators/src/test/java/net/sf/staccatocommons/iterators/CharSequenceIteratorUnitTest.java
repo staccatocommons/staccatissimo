@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2011, The Staccato-Commons Team
+ Copyright (c) 2010, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -10,26 +10,23 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.internal.iterator;
+package net.sf.staccatocommons.iterators;
 
-import static org.junit.Assert.*;
-import net.sf.staccatocommons.iterators.EmptyIterator;
+import java.util.Iterator;
 
-import org.junit.Test;
+import net.sf.staccatocommons.testing.junit.IteratorAbstractUnitTest;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class EmptyIteratorUnitTest {
+public class CharSequenceIteratorUnitTest extends IteratorAbstractUnitTest {
 
-	/**
-	 * Test method for {@link EmptyIterator#empty()}.
-	 */
-	@Test
-	public void testEmpty() {
-		assertFalse(EmptyIterator.empty().hasNext());
-		assertFalse(EmptyIterator.empty().hasNext());
+	protected Iterator<?> createTwoElementsIterator() {
+		return new CharSequenceIterator("ab");
 	}
 
+	protected Iterator<?> createOneElementIterator() {
+		return new CharSequenceIterator("a");
+	}
 }

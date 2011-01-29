@@ -36,7 +36,7 @@ public class SingleIterator<A> extends AbstractUnmodifiableIterator<A> {
 	}
 
 	public boolean hasNext() {
-		return consumed;
+		return !consumed;
 	}
 
 	public A next() {

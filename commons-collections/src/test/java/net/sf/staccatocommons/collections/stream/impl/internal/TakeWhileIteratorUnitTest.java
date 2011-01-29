@@ -14,12 +14,13 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import static net.sf.staccatocommons.lang.predicate.Predicates.*;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.testing.junit.IterableAbstractUnitTest;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class TakeWhileIteratorUnitTest extends IteratorAbstractUnitTest {
+public class TakeWhileIteratorUnitTest extends IterableAbstractUnitTest {
 
 	protected Iterable<?> createTwoElementsIterable() {
 		return Streams.from(4, 5, 6).takeWhile(lessThan(6));

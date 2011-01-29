@@ -10,15 +10,12 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl.internal;
+package net.sf.staccatocommons.testing.junit;
 
 import static junit.framework.Assert.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
-import net.sf.staccatocommons.collections.iterable.Iterables;
-import net.sf.staccatocommons.lang.sequence.Sequence;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
@@ -35,25 +32,9 @@ import org.junit.runner.RunWith;
 @RunWith(Theories.class)
 public abstract class IteratorAbstractUnitTest {
 
-	private final boolean repeatable;
-
 	/** Sizes of 1 and 2 **/
 	@DataPoints
 	public static int[] sizes = new int[] { 1, 2 };
-
-	/**
-	 * Creates a new {@link IteratorAbstractUnitTest}
-	 */
-	public IteratorAbstractUnitTest(boolean repeatable) {
-		this.repeatable = repeatable;
-	}
-
-	/**
-	 * Creates a new {@link IteratorAbstractUnitTest}
-	 */
-	public IteratorAbstractUnitTest() {
-		this(true);
-	}
 
 	/**
 	 * Test that for an iterator of a given size, next can be invoked size times
@@ -63,8 +44,8 @@ public abstract class IteratorAbstractUnitTest {
 	 */
 	@Theory
 	public void testNext(int size) throws Exception {
-		Iterator<?> it = createIterable(size).iterator();
-		for (@SuppressWarnings("unused") Integer i : times(size)) {
+		Iterator<?> it = createIterator(size);
+		for (int i = 0; i < size; i++) {
 			it.next();
 		}
 	}
@@ -75,8 +56,8 @@ public abstract class IteratorAbstractUnitTest {
 	@Theory
 	@Test(expected = NoSuchElementException.class)
 	public void testNextThrowsNoSuchElementException(int size) throws Exception {
-		Iterator<?> it = createIterable(size).iterator();
-		for (@SuppressWarnings("unused") Integer i : times(size + 1)) {
+		Iterator<?> it = createIterator(size);
+		for (int i = 0; i < size + 1; i++) {
 			it.next();
 		}
 	}
@@ -87,42 +68,34 @@ public abstract class IteratorAbstractUnitTest {
 	 */
 	@Theory
 	public void testHasNextIsRepeatable(int size) throws Exception {
-		Iterator<?> it = createIterable(size).iterator();
-		for (Integer i : times(size + 2)) {
+		Iterator<?> it = createIterator(size);
+		for (int i = 0; i < size + 2; i++) {
 			assertTrue("On iteration " + i, it.hasNext());
 		}
-	}
-
-	private static Iterable<Integer> times(int times) {
-		return Sequence.fromTo(1, times);
 	}
 
 	/**
 	 * Creates an iterable for the given size
 	 */
-	public Iterable<?> createIterable(int size) {
-		Iterable<?> iterable;
+	public Iterator<?> createIterator(int size) {
 		switch (size) {
 		case 1:
-			iterable = createOneElementIterable();
-			break;
+			return createOneElementIterator();
+		case 2:
+			return createTwoElementsIterator();
 		default:
-			iterable = createTwoElementsIterable();
-			break;
+			throw new AssertionError();
 		}
-		if (repeatable)
-			assertEquals(size, Iterables.size(iterable));
-		return iterable;
 	}
 
 	/**
 	 * @return
 	 */
-	protected abstract Iterable<?> createTwoElementsIterable();
+	protected abstract Iterator<?> createTwoElementsIterator();
 
 	/**
 	 * @return
 	 */
-	protected abstract Iterable<?> createOneElementIterable();
+	protected abstract Iterator<?> createOneElementIterator();
 
 }

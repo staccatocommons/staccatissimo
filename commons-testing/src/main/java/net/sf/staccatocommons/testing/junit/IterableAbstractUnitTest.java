@@ -10,25 +10,26 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.internal.iterator;
+package net.sf.staccatocommons.testing.junit;
 
-import java.util.Arrays;
-
-import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.collections.stream.impl.internal.IteratorAbstractUnitTest;
+import java.util.Iterator;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class ConsIteratorUnitTest extends IteratorAbstractUnitTest {
+public abstract class IterableAbstractUnitTest extends IteratorAbstractUnitTest {
 
-	protected Iterable<?> createTwoElementsIterable() {
-		return Streams.from(50, Arrays.asList(10));
+	protected final Iterator<?> createOneElementIterator() {
+		return createOneElementIterable().iterator();
 	}
 
-	protected Iterable<?> createOneElementIterable() {
-		return Streams.from(60, Streams.empty());
+	protected final Iterator<?> createTwoElementsIterator() {
+		return createTwoElementsIterable().iterator();
 	}
+
+	protected abstract Iterable<?> createOneElementIterable();
+
+	protected abstract Iterable<?> createTwoElementsIterable();
 
 }
