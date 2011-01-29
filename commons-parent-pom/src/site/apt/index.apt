@@ -31,6 +31,8 @@ Staccato-Commons Organization
  * Legato - extensions to any other frameworks that does not fall in the previous category. It is in planning state. 
  
 Main Projects 
+
+ These are the projects currently in active development:
  
  * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs}staccato-commons-defs}}: the core Staccatisimo definitions, a minimal library of interfaces and annotations that are deliberately very abstract, with well defined but generic semantics, in order to augment code and documentation reuse. They are the glue of Staccato-Commons    
 
@@ -44,6 +46,22 @@ Main Projects
  
  * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument}staccato-commons-instrument}}: an extensible, compile-time, annotation processing tool with class-instrumentation capabilities. 
  
- * staccato-commons-check-instrument and staccato-commons-check-instrument-maven-plugin 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrument}staccato-commons-check-instrument}} and 
+ staccato-commons-check-instrument-maven-plugin 
  
  * staccato-commons-testing
+ 
+Planned projects
+
+ These are projects that are in planning stages and are likely to be publicly available in the near future:
+ 
+  * staccato-commons-restrictions: a library of restriction annotations.  
+  
+  * staccato-commons-iterators: a library of generic iterators
+  
+  * staccato-commons-types: a library that provides implementations of many type-classes defined in commons-defs. 
+  
+  * staccato-commons-restrictions-instrument: a tool for instrumenting the restrictions not covered by staccato-commons-check-instrument. 
+  
+  
+  

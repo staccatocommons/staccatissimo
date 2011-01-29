@@ -217,7 +217,19 @@ public class Compare {
 		return comparator.compare(c1, c2) <= 0 ? c1 : c2;
 	}
 
-	public static <A, B extends Comparable<B>> Comparator<A> on(final Applicable<A, B> function) {
+	/**
+	 * Answers a new {@link Comparator} that performs the comparison between the
+	 * results of applying the given <code>function</code> to its arguments.
+	 * 
+	 * @param <A>
+	 * @param <B>
+	 * @param function
+	 * @return a new {@link Comparator}
+	 */
+	@NonNull
+	@ForceChecks
+	public static <A, B extends Comparable<B>> Comparator<A> on(
+		@NonNull final Applicable<A, B> function) {
 		return new Comparator<A>() {
 			public int compare(A arg0, A arg1) {
 				return function.apply(arg0).compareTo(function.apply(arg1));

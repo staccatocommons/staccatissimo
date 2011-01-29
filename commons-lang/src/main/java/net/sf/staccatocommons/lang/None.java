@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.lang;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -21,6 +20,7 @@ import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.restriction.Immutable;
 import net.sf.staccatocommons.defs.restriction.Value;
+import net.sf.staccatocommons.iterators.EmptyIterator;
 
 /**
  * An undefined {@link Option}, that it, and option that does not have a value
@@ -74,7 +74,7 @@ public final class None<T> extends Option<T> {
 	}
 
 	public Iterator<T> iterator() {
-		return Collections.<T> emptyList().iterator();
+		return EmptyIterator.empty();
 	}
 
 	@Override

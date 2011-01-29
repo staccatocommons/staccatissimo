@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.lang;
 
-import java.util.Collections;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
@@ -21,6 +20,7 @@ import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
+import net.sf.staccatocommons.iterators.SingleIterator;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.value.BasicEquals;
 
@@ -85,7 +85,7 @@ public final class Some<T> extends Option<T> {
 	}
 
 	public Iterator<T> iterator() {
-		return Collections.singleton(value).iterator();
+		return SingleIterator.from(value);
 	}
 
 	@Override

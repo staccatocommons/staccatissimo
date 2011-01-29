@@ -27,6 +27,7 @@ import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Unmodifiable;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 
@@ -126,8 +127,7 @@ public class Sequence<A> implements Iterable<A>, ImplicitNumberType<A>, Serializ
 	 */
 	@Override
 	public Iterator<A> iterator() {
-		return new Iterator<A>() {
-
+		return new AbstractUnmodifiableIterator<A>() {
 			private A next = getSeed();
 
 			@Override
@@ -147,11 +147,6 @@ public class Sequence<A> implements Iterable<A>, ImplicitNumberType<A>, Serializ
 				A next = this.next;
 				this.next = getGenerator().apply(next);
 				return next;
-			}
-
-			@Override
-			public void remove() {
-				throw new UnsupportedOperationException("Unmodifiable interator");
 			}
 		};
 	}
