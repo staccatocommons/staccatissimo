@@ -25,10 +25,12 @@ import java.util.Collections;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.function.Function2;
 import net.sf.staccatocommons.lang.sequence.Sequence;
+import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.junit.Test;
 
@@ -69,6 +71,12 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void testAvg() throws Exception {
 		assertEquals(9.6, Streams.from(10.0, 12.0, 15.0, 2.0, 9.0).average(double_()), 0.01);
+	}
+
+	/** Test for {@link Stream#average()} **/
+	@Test(expected = NoSuchElementException.class)
+	public void testAvgEmptyStream() throws Exception {
+		Streams.<Double> from().average(double_());
 	}
 
 	/**
@@ -171,6 +179,28 @@ public class AbstractStreamBasicTest {
 			.intersperse(1)
 			.take(4)
 			.elementsEquals(4, 1, 5, 1));
+	}
+
+	/** Test for {@link Stream#streamPartition(Evaluable)} */
+	@Test
+	public void testname() throws Exception {
+		Pair<Stream<Integer>, Stream<Integer>> partition = Streams
+			.from(50, 60, 1, 6, 9, 10, 100)
+			.streamPartition(greaterThan(9));
+
+		assertTrue(partition._1().elementsEquals(50, 60, 10, 100));
+		assertTrue(partition._2().elementsEquals(1, 6, 9));
+
+	}
+
+	/** Test for {@link Stream#reverse()} */
+	@Test
+	public void testReverse() throws Exception {
+		assertTrue(//
+		Streams
+			.from(50, 30, 9, 12, 0, 3, -5, null)
+			.reverse()
+			.elementsEquals(null, -5, 3, 0, 12, 9, 30, 50));
 	}
 
 }

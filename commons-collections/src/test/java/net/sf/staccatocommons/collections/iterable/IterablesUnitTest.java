@@ -288,4 +288,15 @@ public class IterablesUnitTest {
 		assertFalse(Iterables.elementsEquals(Arrays.asList(10, 20, 4), Arrays.asList(10, 20)));
 		assertTrue(Iterables.elementsEquals(Arrays.asList(10, 20, 4), Arrays.asList(10, 20, 4)));
 	}
+
+	/**
+	 * Test method for
+	 * {@link Iterables#toSortedList(Iterable, java.util.Comparator)}
+	 */
+	@Test
+	public void testToSortedSet() throws Exception {
+		assertEquals(
+			Arrays.asList(3, 6, 9, 12, 50, 60),
+			Iterables.toList(Iterables.toSortedSet(Arrays.asList(50, 60, 12, 6, 9, 3))));
+	}
 }

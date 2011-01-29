@@ -54,12 +54,11 @@ import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.Function2;
+import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
-import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * An abstract implementation of a {@link Stream}. Only it {@link Iterator}
@@ -81,7 +80,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public boolean isEmpty() {
-		return IterablesInternal.isEmptyInternal(this);
+		return Iterables.isEmpty(this);
 	}
 
 	@Override
@@ -125,7 +124,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public A any() {
-		return IterablesInternal.anyInternal(this);
+		return Iterables.any(this);
 	}
 
 	@Override
@@ -224,7 +223,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public int positionOf(A element) {
+	public final int positionOf(A element) {
 		int index = indexOf(element);
 		if (index == -1)
 			throw new NoSuchElementException(element.toString());
@@ -279,13 +278,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public Pair<Stream<A>, Stream<A>> streamPartition(Evaluable<? super A> predicate) {
+	public final Pair<Stream<A>, Stream<A>> streamPartition(Evaluable<? super A> predicate) {
 		Pair<List<A>, List<A>> partition = partition(predicate);
 		return _(Streams.from(partition._1()), Streams.from(partition._2()));
 	}
 
 	@Override
-	public boolean elementsEquals(A... elements) {
+	public final boolean elementsEquals(A... elements) {
 		return elementsEquals(Arrays.asList(elements));
 	}
 
@@ -449,8 +448,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, NamedTupleToStringStyle.getInstance());
+	public final String toString() {
+		return ToString.toString(this);
 	}
 
 	public NumberType<A> numberType() {

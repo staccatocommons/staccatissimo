@@ -79,8 +79,7 @@ public interface Foldable<A> {
 	 * {@link NumberType}
 	 * 
 	 * @param numberType
-	 * @return the result of adding each element of this number type, or zero, if
-	 *         this stream is empty
+	 * @return the result of adding each element, or zero, if this stream is empty
 	 * @see Iterables#sum(Iterable, NumberType)
 	 */
 	@NonNull
@@ -91,8 +90,8 @@ public interface Foldable<A> {
 	 * {@link NumberType}
 	 * 
 	 * @param numberType
-	 * @return the result of multiplying each element of this number type, or one,
-	 *         if this stream is empty
+	 * @return the result of multiplying each element, or one, if this stream is
+	 *         empty
 	 * @see Iterables#product(Iterable, NumberType)
 	 */
 	@NonNull
@@ -102,8 +101,7 @@ public interface Foldable<A> {
 	 * Answers the sum of the elements of this {@link Stream} using the Stream's
 	 * source as {@link ImplicitNumberType}
 	 * 
-	 * @return the result of adding each element of this number type, or zero, if
-	 *         this stream is empty
+	 * @return the result of adding each element, or zero, if this stream is empty
 	 * @throws ClassCastException
 	 *           if the source is not an implicit number type
 	 * @see Iterables#sum(Iterable)
@@ -115,8 +113,8 @@ public interface Foldable<A> {
 	 * Answers the product of the elements of this {@link Stream} using the
 	 * Stream's source as {@link ImplicitNumberType}
 	 * 
-	 * @return the result of multiplying each element of this number type, or one,
-	 *         if this stream is empty
+	 * @return the result of multiplying each element, or one, if this stream is
+	 *         empty
 	 * @throws ClassCastException
 	 *           if the source is not an implicit number type
 	 * @see Iterables#product(Iterable)

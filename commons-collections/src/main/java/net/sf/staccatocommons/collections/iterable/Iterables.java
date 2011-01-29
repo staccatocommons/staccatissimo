@@ -208,7 +208,7 @@ public class Iterables {
 	 */
 	@ForceChecks
 	public static <A> A single(@Size(1) Collection<A> collection) {
-		return anyInternal(collection);
+		return any(collection);
 	}
 
 	/**
@@ -226,7 +226,7 @@ public class Iterables {
 	 *         the iterables's iterator may return null.
 	 */
 	public static <A> A any(@NonNull Iterable<A> iterable) {
-		return anyInternal(iterable);
+		return iterable.iterator().next();
 	}
 
 	/**
@@ -341,7 +341,7 @@ public class Iterables {
 	 * @return if the iterable is empty or not
 	 */
 	public static <A> boolean isEmpty(@NonNull Iterable<A> iterable) {
-		return isEmptyInternal(iterable);
+		return !iterable.iterator().hasNext();
 	}
 
 	/**
@@ -354,7 +354,7 @@ public class Iterables {
 	 * @see #isEmpty(Iterable)
 	 */
 	public static <A> boolean isNullOrEmpty(@NonNull Iterable<A> iterable) {
-		return iterable == null || isEmptyInternal(iterable);
+		return iterable == null || isEmpty(iterable);
 	}
 
 	/**
@@ -387,23 +387,36 @@ public class Iterables {
 	 * Test that the elements of both iterables are equal, and in the same order.
 	 * 
 	 * @param elements
-	 * @return true if <code>iterable1</code> has the same number of elements that
-	 *         <code>iterable2</code>, and each pair formed by elements of both
-	 *         iterables at same position are equal. <code>false</code> otherwise
+	 * @return <code>true</code> if <code>iterable1</code> has the same number of
+	 *         elements that <code>iterable2</code>, and each pair formed by
+	 *         elements of both iterables at same position are equal.
+	 *         <code>false</code> otherwise
 	 */
 	public static <A> boolean elementsEquals(@NonNull Iterable<? extends A> iterable1,
 		@NonNull Iterable<? extends A> iterable2) {
 		return elementsEquals(iterable1, iterable2, Equiv.equalOrNull());
 	}
 
+	/**
+	 * Test that the elements of of both iterables are equal, and in the same
+	 * order, using the given <code>equalityTest</code> for determining equality
+	 * of elements.
+	 * 
+	 * @param iterable
+	 * @param equalityTest
+	 * @return <code>true</code> if <code>iterable1</code> has the same number of
+	 *         elements that <code>iterable2</code>, and each pair formed by
+	 *         elements of both iterables at same position are equivalent using
+	 *         the given <code>eqivTest</code>. <code>false</code> otherwise
+	 */
 	public static <A> boolean elementsEquals(@NonNull Iterable<? extends A> iterable1,
-		@NonNull Iterable<? extends A> iterable2, Evaluable2<A, A> equalty) {
+		@NonNull Iterable<? extends A> iterable2, Evaluable2<A, A> eqivTest) {
 		Iterator<? extends A> iter = iterable1.iterator();
 		Iterator<? extends A> otherIter = iterable2.iterator();
 		while (iter.hasNext()) {
 			if (!otherIter.hasNext())
 				return false;
-			if (!equalty.eval(iter.next(), otherIter.next()))
+			if (!eqivTest.eval(iter.next(), otherIter.next()))
 				return false;
 		}
 		return !otherIter.hasNext();
@@ -794,6 +807,16 @@ public class Iterables {
 		return zip(iterable1, iterable2, ToPair.<A, B> getInstance());
 	}
 
+	/**
+	 * Answers the sum of the elements of the given {@link Iterable} that
+	 * implements {@link ImplicitNumberType}, using the {@link NumberType}
+	 * provided by it.
+	 * 
+	 * @return the result of adding each element of the {@link Iterable}, using
+	 *         the implicit number type, or zero, if <code>iterable</code> is
+	 *         empty
+	 * @see Iterables#sum(Iterable, NumberType)
+	 */
 	@NonNull
 	public static <A, I extends Iterable<A> & ImplicitNumberType<A>> A sum(@NonNull I iterable) {
 		return sum(iterable, iterable.numberType());
@@ -824,6 +847,16 @@ public class Iterables {
 		return fold(iterable, type.zero(), type.add());
 	}
 
+	/**
+	 * Answers the product of the elements of the given {@link Iterable} that
+	 * implements {@link ImplicitNumberType}, using the {@link NumberType}
+	 * provided by it.
+	 * 
+	 * @return the result of multiplying each element of the {@link Iterable},
+	 *         using the implicit number type, or one, if <code>iterable</code> is
+	 *         empty
+	 * @see Iterables#product(Iterable, NumberType)
+	 */
 	@NonNull
 	public static <A, I extends Iterable<A> & ImplicitNumberType<A>> A product(@NonNull I iterable) {
 		return product(iterable, iterable.numberType());

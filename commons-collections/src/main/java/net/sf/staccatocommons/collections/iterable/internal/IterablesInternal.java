@@ -44,16 +44,6 @@ public class IterablesInternal {
 	}
 
 	/***/
-	public static <T> T anyInternal(Iterable<T> collection) {
-		return collection.iterator().next();
-	}
-
-	/***/
-	public static <T> boolean isEmptyInternal(Iterable<T> iterable) {
-		return !iterable.iterator().hasNext();
-	}
-
-	/***/
 	public static <T, C extends Collection<T>> C filterInternal(Iterable<T> iterable,
 		Evaluable<? super T> predicate, C collection) {
 		for (T element : iterable)

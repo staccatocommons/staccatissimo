@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections;
 
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.*;
+import static net.sf.staccatocommons.collections.iterable.Iterables.*;
 
 import java.util.Map;
 
@@ -62,7 +62,7 @@ public class Maps {
 	public static <K> Option<K> anyKey(@NonNull Map<K, ?> map) {
 		if (map.isEmpty())
 			return Option.none();
-		return Option.some(anyInternal(map.keySet()));
+		return Option.some(any(map.keySet()));
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class Maps {
 	public static <K> K anyKeyOrNull(@NonNull Map<K, ?> map) {
 		if (map.isEmpty())
 			return null;
-		return anyInternal(map.keySet());
+		return any(map.keySet());
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class Maps {
 	public static <V> Option<V> anyValue(@NonNull Map<?, V> map) {
 		if (map.isEmpty())
 			return Option.none();
-		return Option.some(anyInternal(map.values()));
+		return Option.some(any(map.values()));
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class Maps {
 	public static <V> V anyValueOrNull(@NonNull Map<?, V> map) {
 		if (map.isEmpty())
 			return null;
-		return anyInternal(map.values());
+		return any(map.values());
 	}
 
 	/**
