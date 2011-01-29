@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +25,7 @@ import net.sf.staccatocommons.collections.internal.iterator.EnumerationIterator;
 import net.sf.staccatocommons.collections.stream.impl.CharSequenceStream;
 import net.sf.staccatocommons.collections.stream.impl.CollectionStream;
 import net.sf.staccatocommons.collections.stream.impl.ConsStream;
+import net.sf.staccatocommons.collections.stream.impl.DequeStream;
 import net.sf.staccatocommons.collections.stream.impl.EmptyStream;
 import net.sf.staccatocommons.collections.stream.impl.IterableStream;
 import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
@@ -240,6 +242,24 @@ public class Streams {
 	@Projection
 	public static <A> Stream<A> from(@NonNull List<? extends A> list) {
 		return new ListStream<A>(list);
+	}
+
+	/**
+	 * Creates a new {@link Stream} that retrieves elements from a {@link Deque}.
+	 * This streams grants repeatable iterator order and supports (not necessary
+	 * efficient) random access by index. This stream can be lazily reversed.
+	 * 
+	 * @param <A>
+	 *          the element type
+	 * @param list
+	 *          the source of the new {@link Stream}
+	 * @return a new {@link Stream}
+	 */
+	@NonNull
+	@Repeatable
+	@Projection
+	public static <A> Stream<A> from(@NonNull Deque<? extends A> list) {
+		return new DequeStream<A>(list);
 	}
 
 	/**

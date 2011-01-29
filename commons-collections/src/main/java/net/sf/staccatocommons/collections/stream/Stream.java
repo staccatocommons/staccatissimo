@@ -106,6 +106,7 @@ import net.sf.staccatocommons.lang.number.ImplicitNumberType;
  * {@link ConditionallyRepeatable}</li>
  * <li>Immutability TODO</li>
  * <li>Referential transparency TODO</li>
+ * <li>Random access TODO</li>
  * </ul>
  * 
  * <h2>Reference semantics</h2>

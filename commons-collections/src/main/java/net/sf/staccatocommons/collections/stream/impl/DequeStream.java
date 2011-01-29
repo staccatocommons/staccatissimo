@@ -24,7 +24,7 @@ import net.sf.staccatocommons.collections.stream.Stream;
  * @author flbulgarelli
  * 
  */
-public class DequeStream<A> extends CollectionStream {
+public class DequeStream<A> extends CollectionStream<A> {
 
 	/**
 	 * Creates a new {@link DequeStream}
@@ -51,6 +51,14 @@ public class DequeStream<A> extends CollectionStream {
 				return DequeStream.this;
 			}
 		};
+	}
+
+	public A first() {
+		return getCollection().getFirst();
+	}
+
+	public A last() {
+		return getCollection().getFirst();
 	}
 
 	protected Deque<A> getCollection() {

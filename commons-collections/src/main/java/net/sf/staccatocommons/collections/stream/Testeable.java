@@ -75,15 +75,30 @@ public interface Testeable<A> {
 	 * given {@link Iterable}, and in the same order, using the given
 	 * <code>equalityTest</code> for determining equality of elements.
 	 * 
-	 * @param elements
+	 * @param iterable
+	 * @param equalityTest
 	 * @return <code>true</code> if this stream has the same number of elements
 	 *         that the given <code>iterable</code>, and each pair formed by
 	 *         elements of this stream and given <code>iterable</code> at same
 	 *         position satisfies the given {@link Evaluable2}
 	 */
-	boolean elementsEquals(Iterable<? extends A> iterable, Evaluable2<A, A> equality);
+	boolean elementsEquals(@NonNull Iterable<? extends A> iterable,
+		@NonNull Evaluable2<A, A> equalityTest);
 
-	<B extends Comparable<B>> boolean elementsEquals(Iterable<? extends A> iterable,
-		Applicable<A, B> function);
+	/**
+	 * Test that the elements of this stream are equal to the elements of the
+	 * given {@link Iterable}, and in the same order, using the
+	 * <code>Equiv.on(function)</code> for determining equality of elements.
+	 * 
+	 * @param iterable
+	 * @param function
+	 * @return <code>true</code> if this stream has the same number of elements
+	 *         that the given <code>iterable</code>, and each pair formed by
+	 *         elements of this stream and given <code>iterable</code> at same
+	 *         position satisfies the {@link Evaluable2}
+	 *         <code>Equiv.on(function)</code>
+	 */
+	<B extends Comparable<B>> boolean elementsEquals(@NonNull Iterable<? extends A> iterable,
+		@NonNull Applicable<A, B> function);
 
 }

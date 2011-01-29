@@ -854,6 +854,27 @@ public class Iterables {
 		return fold(iterable, type.one(), type.multiply());
 	}
 
+	/**
+	 * Answers the Cartesian product of the two given {@link Iterable}s.
+	 * 
+	 * For example, the following code:
+	 * 
+	 * <pre>
+	 * Iterables.cross((Iterable&lt;Integer&gt;) Arrays.asList(1, 2), Arrays.asList('a', 'b'));
+	 * </pre>
+	 * 
+	 * Will produce a list equal to
+	 * 
+	 * <pre>
+	 * Arrays.asList(_(1, 'a'), _(1, 'b'), _(2, 'a'), _(2, 'b'))
+	 * </pre>
+	 * 
+	 * @param <A>
+	 * @param <B>
+	 * @param iterable1
+	 * @param iterable2
+	 * @return a new List with the Cartesian product of both collections.
+	 */
 	@NonNull
 	public static final <A, B> List<Pair<A, B>> cross(@NonNull Iterable<A> iterable1,
 		@NonNull Iterable<B> iterable2) {
