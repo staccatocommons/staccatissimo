@@ -56,7 +56,7 @@ public interface Testeable<A> {
 	 *         stream and the given array at same position are equal.
 	 *         <code>false</code> otherwise
 	 */
-	boolean elementsEquals(A... elements);
+	boolean equivalent(A... elements);
 
 	/**
 	 * Test that the elements of this stream are equal to the elements of the
@@ -68,12 +68,12 @@ public interface Testeable<A> {
 	 *         stream and given <code>iterable</code> at same position are equal.
 	 *         <code>false</code> otherwise
 	 */
-	boolean elementsEquals(Iterable<? extends A> iterable);
+	boolean equivalent(Iterable<? extends A> iterable);
 
 	/**
-	 * Test that the elements of this stream are equal to the elements of the
+	 * Test that the elements of this stream are equivalent to the elements of the
 	 * given {@link Iterable}, and in the same order, using the given
-	 * <code>equalityTest</code> for determining equality of elements.
+	 * <code>equalityTest</code> for determining equivalence between elements.
 	 * 
 	 * @param iterable
 	 * @param equalityTest
@@ -82,13 +82,13 @@ public interface Testeable<A> {
 	 *         elements of this stream and given <code>iterable</code> at same
 	 *         position satisfies the given {@link Evaluable2}
 	 */
-	boolean elementsEquals(@NonNull Iterable<? extends A> iterable,
-		@NonNull Evaluable2<A, A> equalityTest);
+	boolean equivalent(@NonNull Iterable<? extends A> iterable, @NonNull Evaluable2<A, A> equalityTest);
 
 	/**
-	 * Test that the elements of this stream are equal to the elements of the
+	 * Test that the elements of this stream are equivalent to the elements of the
 	 * given {@link Iterable}, and in the same order, using the
-	 * <code>Equiv.on(function)</code> for determining equality of elements.
+	 * <code>Equiv.on(function)</code> for determining equivalence between
+	 * elements.
 	 * 
 	 * @param iterable
 	 * @param function
@@ -98,7 +98,7 @@ public interface Testeable<A> {
 	 *         position satisfies the {@link Evaluable2}
 	 *         <code>Equiv.on(function)</code>
 	 */
-	<B extends Comparable<B>> boolean elementsEquals(@NonNull Iterable<? extends A> iterable,
+	<B extends Comparable<B>> boolean equivalent(@NonNull Iterable<? extends A> iterable,
 		@NonNull Applicable<A, B> function);
 
 }

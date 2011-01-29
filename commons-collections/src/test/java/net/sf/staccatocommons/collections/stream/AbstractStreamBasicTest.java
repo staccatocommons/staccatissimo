@@ -120,7 +120,7 @@ public class AbstractStreamBasicTest {
 					return Sequence.fromTo(1, arg);
 				}
 			})
-			.elementsEquals(1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6));
+			.equivalent(1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6));
 	}
 
 	/** Test for {@link AbstractStream#concat(Iterable)} ***/
@@ -170,7 +170,7 @@ public class AbstractStreamBasicTest {
 		Streams //
 			.from(Arrays.asList(4, 5, 6))
 			.intersperse(1)
-			.elementsEquals(4, 1, 5, 1, 6));
+			.equivalent(4, 1, 5, 1, 6));
 
 		assertTrue( //
 		Streams
@@ -178,7 +178,7 @@ public class AbstractStreamBasicTest {
 			.append(10)
 			.intersperse(1)
 			.take(4)
-			.elementsEquals(4, 1, 5, 1));
+			.equivalent(4, 1, 5, 1));
 	}
 
 	/** Test for {@link Stream#streamPartition(Evaluable)} */
@@ -188,8 +188,8 @@ public class AbstractStreamBasicTest {
 			.from(50, 60, 1, 6, 9, 10, 100)
 			.streamPartition(greaterThan(9));
 
-		assertTrue(partition._1().elementsEquals(50, 60, 10, 100));
-		assertTrue(partition._2().elementsEquals(1, 6, 9));
+		assertTrue(partition._1().equivalent(50, 60, 10, 100));
+		assertTrue(partition._2().equivalent(1, 6, 9));
 
 	}
 
@@ -197,10 +197,10 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void testReverse() throws Exception {
 		assertTrue(//
-		Streams
+		Streams //
 			.from(50, 30, 9, 12, 0, 3, -5, null)
 			.reverse()
-			.elementsEquals(null, -5, 3, 0, 12, 9, 30, 50));
+			.equivalent(null, -5, 3, 0, 12, 9, 30, 50));
 	}
 
 }

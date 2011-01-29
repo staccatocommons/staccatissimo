@@ -280,13 +280,13 @@ public class IterablesUnitTest {
 			Iterables.cross(Arrays.asList(1, 2), Arrays.asList('a', 'b')));
 	}
 
-	/** Test for {@link Iterables#elementsEquals(Iterable, Iterable)} */
+	/** Test for {@link Iterables#equivalent(Iterable, Iterable)} */
 	@Test
 	public void testElementsEquals() throws Exception {
-		assertFalse(Iterables.elementsEquals(Arrays.asList(10, 20), Arrays.asList(10, 26)));
-		assertFalse(Iterables.elementsEquals(Arrays.asList(10, 20), Arrays.asList(10, 20, 6)));
-		assertFalse(Iterables.elementsEquals(Arrays.asList(10, 20, 4), Arrays.asList(10, 20)));
-		assertTrue(Iterables.elementsEquals(Arrays.asList(10, 20, 4), Arrays.asList(10, 20, 4)));
+		assertFalse(Iterables.equivalent(Arrays.asList(10, 20), Arrays.asList(10, 26)));
+		assertFalse(Iterables.equivalent(Arrays.asList(10, 20), Arrays.asList(10, 20, 6)));
+		assertFalse(Iterables.equivalent(Arrays.asList(10, 20, 4), Arrays.asList(10, 20)));
+		assertTrue(Iterables.equivalent(Arrays.asList(10, 20, 4), Arrays.asList(10, 20, 4)));
 	}
 
 	/**

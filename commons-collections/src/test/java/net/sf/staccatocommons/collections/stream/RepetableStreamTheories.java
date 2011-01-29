@@ -251,13 +251,13 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 		}));
 	}
 
-	/** Test for {@link Stream#elementsEquals(Iterable)} */
+	/** Test for {@link Stream#equivalent(Iterable)} */
 	@Theory
 	public <A> void testElementEqual(Stream<A> stream) throws Exception {
-		assertTrue(stream.elementsEquals(stream));
-		assertTrue(stream.elementsEquals(stream.toRepetableStream()));
-		assertTrue(stream.elementsEquals(stream.toList()));
-		assertTrue(stream.elementsEquals(stream.toArray((Class<A>) Object.class)));
+		assertTrue(stream.equivalent(stream));
+		assertTrue(stream.equivalent(stream.toRepetableStream()));
+		assertTrue(stream.equivalent(stream.toList()));
+		assertTrue(stream.equivalent(stream.toArray((Class<A>) Object.class)));
 	}
 
 	/** Test method for {@link AbstractStream#zip(Iterable)} */

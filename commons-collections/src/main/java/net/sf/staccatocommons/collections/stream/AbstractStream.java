@@ -284,22 +284,22 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public final boolean elementsEquals(A... elements) {
-		return elementsEquals(Arrays.asList(elements));
+	public final boolean equivalent(A... elements) {
+		return equivalent(Arrays.asList(elements));
 	}
 
 	@Override
-	public boolean elementsEquals(Iterable<? extends A> other) {
-		return Iterables.elementsEquals(this, other);
+	public boolean equivalent(Iterable<? extends A> other) {
+		return Iterables.equivalent(this, other);
 	}
 
-	public boolean elementsEquals(Iterable<? extends A> other, Evaluable2<A, A> equalty) {
-		return Iterables.elementsEquals(this, other, equalty);
+	public boolean equivalent(Iterable<? extends A> other, Evaluable2<A, A> equalty) {
+		return Iterables.equivalent(this, other, equalty);
 	}
 
-	public <B extends Comparable<B>> boolean elementsEquals(Iterable<? extends A> iterable,
+	public <B extends Comparable<B>> boolean equivalent(Iterable<? extends A> iterable,
 		Applicable<A, B> function) {
-		return elementsEquals(iterable, Equiv.on(function));
+		return Iterables.equivalent(this, iterable, Equiv.on(function));
 	}
 
 	@Override
