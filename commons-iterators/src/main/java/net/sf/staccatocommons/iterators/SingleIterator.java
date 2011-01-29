@@ -16,9 +16,10 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.restriction.Constant;
 
 /**
+ * An iterator that retrieves a single given element
+ * 
  * @author flbulgarelli
  * 
  */
@@ -27,6 +28,9 @@ public class SingleIterator<A> extends AbstractUnmodifiableIterator<A> {
 	private final A element;
 	private boolean consumed;
 
+	/**
+	 * Creates a new {@link SingleIterator}
+	 */
 	public SingleIterator(A element) {
 		this.element = element;
 	}
@@ -42,8 +46,15 @@ public class SingleIterator<A> extends AbstractUnmodifiableIterator<A> {
 		return element;
 	}
 
+	/**
+	 * Answers a {@link SingleIterator} that retrieves the given element
+	 * 
+	 * @param <A>
+	 * @param element
+	 *          the element to retrieve
+	 * @return a new {@link SingleIterator}
+	 */
 	@NonNull
-	@Constant
 	public static <A> Iterator<A> from(A element) {
 		return new SingleIterator<A>(element);
 	}

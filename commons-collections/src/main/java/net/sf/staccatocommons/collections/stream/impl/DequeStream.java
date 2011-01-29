@@ -16,9 +16,9 @@ import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
 
-import net.sf.staccatocommons.collections.internal.iterator.UnmodifiableIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.iterators.UnmodifiableIterator;
 
 /**
  * @author flbulgarelli
@@ -36,7 +36,7 @@ public class DequeStream<A> extends CollectionStream<A> {
 	public Stream reverse() {
 		return new AbstractStream<A>() {
 			public Iterator<A> iterator() {
-				return new UnmodifiableIterator<A>(getCollection().descendingIterator());
+				return UnmodifiableIterator.from(getCollection().descendingIterator());
 			}
 
 			public boolean contains(A element) {

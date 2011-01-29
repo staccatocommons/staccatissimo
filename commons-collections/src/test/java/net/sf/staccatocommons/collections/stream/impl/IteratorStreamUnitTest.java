@@ -19,11 +19,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 
-import net.sf.staccatocommons.collections.internal.iterator.EmptyIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.StreamTheories;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.iterators.EmptyIterator;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.junit.Test;

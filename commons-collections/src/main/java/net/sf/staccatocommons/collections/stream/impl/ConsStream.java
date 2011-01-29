@@ -17,11 +17,11 @@ import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.internal.iterator.ConsIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.iterators.ConsIterator;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.lang.tuple.Pair;
 

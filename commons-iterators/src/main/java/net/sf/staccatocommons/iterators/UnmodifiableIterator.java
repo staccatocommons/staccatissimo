@@ -14,6 +14,8 @@ package net.sf.staccatocommons.iterators;
 
 import java.util.Iterator;
 
+import net.sf.staccatocommons.check.annotation.NonNull;
+
 /**
  * 
  * @author flbulgarelli
@@ -39,6 +41,19 @@ public final class UnmodifiableIterator<T> extends AbstractUnmodifiableIterator<
 	@Override
 	public T next() {
 		return iter.next();
+	}
+
+	/**
+	 * Answers an {@link Iterator} view of the given <code>iter</code> that does
+	 * not support {@link #remove()}
+	 * 
+	 * @param <A>
+	 * @param element
+	 * @return a new {@link UnmodifiableIterator}
+	 */
+	@NonNull
+	public static <A> Iterator<A> from(Iterator<? extends A> iter) {
+		return new UnmodifiableIterator<A>(iter);
 	}
 
 }

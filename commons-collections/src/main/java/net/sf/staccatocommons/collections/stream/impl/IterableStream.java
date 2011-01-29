@@ -15,9 +15,9 @@ package net.sf.staccatocommons.collections.stream.impl;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.internal.iterator.UnmodifiableIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.iterators.UnmodifiableIterator;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 
 /**
@@ -43,7 +43,7 @@ public class IterableStream<A> extends AbstractStream<A> {
 
 	@Override
 	public Iterator<A> iterator() {
-		return new UnmodifiableIterator<A>(iterable.iterator());
+		return UnmodifiableIterator.from(iterable.iterator());
 	}
 
 	public NumberType<A> numberType() {

@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.collections.internal.iterator;
 
 import static org.junit.Assert.*;
+import net.sf.staccatocommons.iterators.EmptyIterator;
 
 import org.junit.Test;
 

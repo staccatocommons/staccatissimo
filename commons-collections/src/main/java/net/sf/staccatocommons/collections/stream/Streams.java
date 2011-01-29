@@ -21,7 +21,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.internal.iterator.EnumerationIterator;
 import net.sf.staccatocommons.collections.stream.impl.CharSequenceStream;
 import net.sf.staccatocommons.collections.stream.impl.CollectionStream;
 import net.sf.staccatocommons.collections.stream.impl.ConsStream;
@@ -37,6 +36,7 @@ import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.iterators.EnumerationIterator;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.sequence.StopConditions;
 

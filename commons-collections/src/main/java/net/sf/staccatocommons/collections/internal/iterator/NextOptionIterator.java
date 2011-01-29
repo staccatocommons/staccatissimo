@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.collections.internal.iterator;
 
+import net.sf.staccatocommons.iterators.NextGetIterator;
 import net.sf.staccatocommons.lang.Option;
 
 /**

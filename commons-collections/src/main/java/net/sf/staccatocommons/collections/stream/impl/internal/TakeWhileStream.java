@@ -15,9 +15,9 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.internal.iterator.NextGetIterator;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.iterators.NextGetIterator;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 
 /**

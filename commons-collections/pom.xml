@@ -29,6 +29,11 @@
 			<artifactId>commons-lang</artifactId>
 			<version>1.0-alpha-3-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.staccatocommons</groupId>
+			<artifactId>commons-iterators</artifactId>
+			<version>1.0-alpha-3-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<reporting>
 		<plugins>

@@ -15,10 +15,10 @@ package net.sf.staccatocommons.collections.stream.impl;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.internal.iterator.UndefinedIterator;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.iterators.UndefinedIterator;
 
 /**
  * @author flbulgarelli
