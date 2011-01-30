@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream;
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static net.sf.staccatocommons.lang.number.Numbers.*;
 import static net.sf.staccatocommons.lang.predicate.Predicates.*;
+import static net.sf.staccatocommons.lang.sequence.StopConditions.*;
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 import static org.junit.Assert.*;
 
@@ -73,6 +74,7 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void testAvg() throws Exception {
 		assertEquals(9.6, Streams.from(10.0, 12.0, 15.0, 2.0, 9.0).average(double_()), 0.01);
+		assertEquals(6, (int) Streams.from(1, add(1), upTo(11)).average());
 	}
 
 	/** Test for {@link Stream#average()} **/
