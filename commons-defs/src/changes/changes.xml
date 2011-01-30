@@ -32,6 +32,12 @@
 			<action dev="flbulgarelli" type="add">
 				Added Evaluable2
             </action>
+            <action dev="flbulgarelli" type="add">
+                Added ContainsAwareType
+            </action>
+            <action dev="flbulgarelli" type="add">
+                Added Constant restriction
+            </action>
 		</release>
 	</body>
 </document>
