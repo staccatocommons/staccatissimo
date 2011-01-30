@@ -66,6 +66,7 @@ public class CheckInstrumentMojo extends AbstractMojo {
 	private Artifact artifact;
 
 	public void execute() throws MojoExecutionException, MojoFailureException {
+		getLog().info("*** Staccato-Commons-Check-Instrument *** ");
 		new InstrumentMojoSupport(this, location, artifact, pluginArtifactsList) {
 			@Override
 			protected CheckConfigurer createConfigurer() {

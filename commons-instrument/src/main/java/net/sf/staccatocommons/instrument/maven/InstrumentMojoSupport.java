@@ -67,7 +67,7 @@ public abstract class InstrumentMojoSupport {
 	 * @throws MojoFailureException
 	 */
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		mojo.getLog().info("Instrumenting checks to classes located in " + location);
+		mojo.getLog().info("Instrumenting classes located in " + location);
 		String extraClasspath = createClassPathString();
 		mojo.getLog().debug("Using classpath " + extraClasspath);
 		try {
@@ -79,7 +79,7 @@ public abstract class InstrumentMojoSupport {
 			mojo.getLog().error(e.getMessage());
 			throw new MojoExecutionException("Unexpected error", e);
 		}
-		mojo.getLog().info("Checks instrumented sucessfully");
+		mojo.getLog().info("Classes instrumented sucessfully");
 	}
 
 	private String createClassPathString() {
