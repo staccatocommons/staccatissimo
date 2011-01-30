@@ -12,6 +12,12 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import java.util.Comparator;
+import java.util.NoSuchElementException;
+
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Applicable;
+
 /**
  * @author flbulgarelli
  * 
@@ -22,5 +28,77 @@ public interface Sortable<A> {
 	// Stream<A> sort();
 	// Stream<A> sortBy(Comparator<A> comparator);
 	// Stream<A> sortOn(Applicable<A,A,A> function);
+
+	/**
+	 * Answers the min element of the stream, using the given
+	 * <code>comparator</code> to compare elements.
+	 * 
+	 * @param comparator
+	 * @return the minimum element.
+	 * @throws NoSuchElementException
+	 *           if the stream is empty.
+	 */
+	@NonNull
+	A minimumBy(@NonNull Comparator<A> comparator) throws NoSuchElementException;
+
+	/**
+	 * Answers the minimum element of the stream, using the given
+	 * <code>Compare.on(function)</code> to compare elements.
+	 * 
+	 * @param function
+	 * @return the minimum element.
+	 * @throws NoSuchElementException
+	 *           if the stream is empty.
+	 */
+	<B extends Comparable<B>> A minimumOn(@NonNull Applicable<A, B> function)
+		throws NoSuchElementException;
+
+	/**
+	 * Answers the minimum element of the stream, using elements natural order.
+	 * 
+	 * @return the minimum element.
+	 * @throws NoSuchElementException
+	 *           if the stream is empty.
+	 * @throws ClassCastException
+	 *           if elements are not comparable
+	 */
+	@NonNull
+	A minimum() throws ClassCastException, NoSuchElementException;
+
+	/**
+	 * Answers the maximum element of the stream, using the given
+	 * <code>comparator</code> to compare elements.
+	 * 
+	 * @param comparator
+	 * @return the maximum element.
+	 * @throws NoSuchElementException
+	 *           if the stream is empty.
+	 */
+	@NonNull
+	A maximumBy(@NonNull Comparator<A> comparator) throws NoSuchElementException;
+
+	/**
+	 * Answers the maximum element of the stream, using the given
+	 * <code>Compare.on(function)</code> to compare elements.
+	 * 
+	 * @param function
+	 * @return the maximum element.
+	 * @throws NoSuchElementException
+	 *           if the stream is empty.
+	 */
+	<B extends Comparable<B>> A maximumOn(@NonNull Applicable<A, B> function)
+		throws NoSuchElementException;
+
+	/**
+	 * Answers the maximum element of the stream, using elements natural order.
+	 * 
+	 * @return the maximum element.
+	 * @throws NoSuchElementException
+	 *           if the stream is empty.
+	 * @throws ClassCastException
+	 *           if elements are not comparable
+	 */
+	@NonNull
+	A maximum() throws ClassCastException, NoSuchElementException;
 
 }

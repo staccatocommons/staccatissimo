@@ -394,7 +394,7 @@ public class Iterables {
 	 */
 	public static <A> boolean equivalent(@NonNull Iterable<? extends A> iterable1,
 		@NonNull Iterable<? extends A> iterable2) {
-		return equivalent(iterable1, iterable2, Equiv.equalOrNull());
+		return equivalentBy(iterable1, iterable2, Equiv.equalOrNull());
 	}
 
 	/**
@@ -409,7 +409,7 @@ public class Iterables {
 	 *         elements of both iterables at same position are equivalent using
 	 *         the given <code>eqivTest</code>. <code>false</code> otherwise
 	 */
-	public static <A> boolean equivalent(@NonNull Iterable<? extends A> iterable1,
+	public static <A> boolean equivalentBy(@NonNull Iterable<? extends A> iterable1,
 		@NonNull Iterable<? extends A> iterable2, Evaluable2<A, A> eqivTest) {
 		Iterator<? extends A> iter = iterable1.iterator();
 		Iterator<? extends A> otherIter = iterable2.iterator();

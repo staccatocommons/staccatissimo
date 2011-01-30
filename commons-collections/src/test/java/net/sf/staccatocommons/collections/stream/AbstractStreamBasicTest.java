@@ -214,7 +214,7 @@ public class AbstractStreamBasicTest {
 				_(new Object(), 12, "foo"),
 				_(new Object(), 9, "bye"),
 				_(new Object(), 6, ""))
-			.maximum(new Function<Triple<Object, Integer, String>, Integer>() {
+			.maximumOn(new Function<Triple<Object, Integer, String>, Integer>() {
 				public Integer apply(Triple<Object, Integer, String> arg) {
 					return arg._2();
 				}

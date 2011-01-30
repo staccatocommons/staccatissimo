@@ -293,13 +293,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return Iterables.equivalent(this, other);
 	}
 
-	public boolean equivalent(Iterable<? extends A> other, Evaluable2<A, A> equalty) {
-		return Iterables.equivalent(this, other, equalty);
+	public boolean equivalentBy(Iterable<? extends A> other, Evaluable2<A, A> equalty) {
+		return Iterables.equivalentBy(this, other, equalty);
 	}
 
-	public <B extends Comparable<B>> boolean equivalent(Iterable<? extends A> iterable,
+	public <B extends Comparable<B>> boolean equivalentOn(Iterable<? extends A> iterable,
 		Applicable<A, B> function) {
-		return Iterables.equivalent(this, iterable, Equiv.on(function));
+		return Iterables.equivalentBy(this, iterable, Equiv.on(function));
 	}
 
 	@Override
@@ -417,34 +417,34 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public A maximum() {
-		return maximum(NaturalComparator.<A> natural());
+		return maximumBy(NaturalComparator.<A> natural());
 	}
 
 	@Override
 	public A minimum() {
-		return minimum(NaturalComparator.<A> natural());
+		return minimumBy(NaturalComparator.<A> natural());
 	}
 
 	@Override
-	public A maximum(Comparator<A> comparator) {
+	public A maximumBy(Comparator<A> comparator) {
 		return reduce(max(comparator));
 	}
 
 	@Override
-	public A minimum(Comparator<A> comparator) {
+	public A minimumBy(Comparator<A> comparator) {
 		return reduce(min(comparator));
 	}
 
 	@Override
-	public <B extends Comparable<B>> A maximum(Applicable<A, B> function)
+	public <B extends Comparable<B>> A maximumOn(Applicable<A, B> function)
 		throws NoSuchElementException {
-		return maximum(Compare.on(function));
+		return maximumBy(Compare.on(function));
 	}
 
 	@Override
-	public <B extends Comparable<B>> A minimum(Applicable<A, B> function)
+	public <B extends Comparable<B>> A minimumOn(Applicable<A, B> function)
 		throws NoSuchElementException {
-		return minimum(Compare.on(function));
+		return minimumBy(Compare.on(function));
 	}
 
 	@Override
