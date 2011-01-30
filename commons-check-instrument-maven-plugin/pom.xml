@@ -4,13 +4,13 @@
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.0-alpha-3-SNAPSHOT</version>
+		<version>1.0-alpha-3</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-check-instrument-maven-plugin</artifactId>
 	<name>Staccato-Commons-Check-Instrument-Maven-Plugin</name>
 	<description>A Maven Mojo for instrummenting checks with staccato-commons-check-instrument as part of the build process</description>
-	<version>1.0-alpha-3-SNAPSHOT</version>
+	<version>1.0-alpha-3</version>
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrumentmavenplugin</url>
 	<packaging>maven-plugin</packaging>
 	<scm>
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-check-instrument</artifactId>
-			<version>1.0-alpha-3-SNAPSHOT</version>
+			<version>1.0-alpha-3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>

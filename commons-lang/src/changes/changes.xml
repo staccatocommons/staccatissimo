@@ -32,7 +32,7 @@
 				Blocks
             </action>
 		</release>
-		<release version="1.0-alpha-3" date="TBD" description="Streams">
+		<release version="1.0-alpha-3" date="2011-01-30" description="Streams">
 			<action dev="flbulgarelli" type="remove">
 				Removed UndefinedOptionException, and replaced by NoSuchElementException
             </action>

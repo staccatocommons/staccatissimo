@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.0-alpha-3-SNAPSHOT</version>
+		<version>1.0-alpha-3</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-check-instrument</artifactId>
-	<version>1.0-alpha-3-SNAPSHOT</version>
+	<version>1.0-alpha-3</version>
 	<name>Staccato-Commons-Check-Instrument</name>
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrument</url>
 	<scm>
@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-instrument</artifactId>
-			<version>1.0-alpha-3-SNAPSHOT</version>
+			<version>1.0-alpha-3</version>
 		</dependency>
 	</dependencies>
 	<build>

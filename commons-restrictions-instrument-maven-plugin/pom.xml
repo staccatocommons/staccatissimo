@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.0-alpha-3-SNAPSHOT</version>
+		<version>1.0-alpha-3</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
-	<version>1.0-alpha-3-SNAPSHOT</version>
+	<version>1.0-alpha-3</version>
 	<name>Staccato-Commons-Restrictions-Instrument-Maven-Plugin</name>
 	<packaging>maven-plugin</packaging>
 	<build>
@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-restrictions-instrument</artifactId>
-			<version>1.0-alpha-3-SNAPSHOT</version>
+			<version>1.0-alpha-3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
