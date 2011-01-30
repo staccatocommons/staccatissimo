@@ -174,4 +174,14 @@ public class NumberTypesUnitTest {
 		assertFalse(nt.isPositive(nt.negate(nt.one())));
 		assertTrue(nt.isNegative(nt.negate(nt.one())));
 	}
+
+	/**
+	 * Theory for testing that number types have functions that are implicit
+	 * providers of themselves
+	 */
+	@Theory
+	public <A> void testIsImplicitProvider(NumberType<A> nt) {
+		assertSame(nt, ((ImplicitNumberType<A>) nt.add()).numberType());
+		assertSame(nt, ((ImplicitNumberType<A>) nt.multiply()).numberType());
+	}
 }

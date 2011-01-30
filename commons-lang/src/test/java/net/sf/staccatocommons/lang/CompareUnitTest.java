@@ -105,12 +105,17 @@ public class CompareUnitTest {
 	@Test
 	public void testMax() {
 		assertEquals((Integer) 5, max(5, 2));
+		assertEquals((Integer) 9, max(5, 9));
+		assertEquals((Integer) 9, max(9, 9));
 	}
 
 	/***/
 	@Test
 	public void testMin() {
 		assertEquals("ABC", min("FGH", "ABC"));
+		assertEquals("AAA", min("AAA", "ABC"));
+		assertEquals("EEE", min("EEE", "EEE"));
+
 	}
 
 }

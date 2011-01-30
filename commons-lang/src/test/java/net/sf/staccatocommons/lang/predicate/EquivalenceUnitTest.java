@@ -34,6 +34,8 @@ public class EquivalenceUnitTest {
 	public void testEquality() throws Exception {
 		assertFalse(Equiv.<Integer> equalOrNull().eval(4, 9));
 		assertTrue(Equiv.<String> equalOrNull().eval("Foo", "Foo"));
+		assertTrue(Equiv.<String> equalOrNull().eval(null, null));
+		assertFalse(Equiv.<String> equalOrNull().eval(null, "foo"));
 		assertSame(Equiv.equalOrNull(), Equiv.equalOrNull());
 	}
 
@@ -42,6 +44,9 @@ public class EquivalenceUnitTest {
 	public void testCompareOrNull() throws Exception {
 		assertFalse(Equiv.<Integer> compareOrNull().eval(4, 5));
 		assertTrue(Equiv.<String> compareOrNull().eval("Foo", "Foo"));
+		assertTrue(Equiv.<String> compareOrNull().eval(null, null));
+		assertFalse(Equiv.<String> compareOrNull().eval(null, ""));
+		assertFalse(Equiv.<String> compareOrNull().eval("", null));
 		assertSame(Equiv.<Integer> compareOrNull(), Equiv.<Integer> compareOrNull());
 	}
 

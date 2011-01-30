@@ -18,6 +18,7 @@ import static org.junit.Assert.*;
 import java.util.Date;
 
 import net.sf.staccatocommons.lang.tuple.Triple;
+import net.sf.staccatocommons.lang.value.RelevantState.StateCollector;
 
 import org.junit.Test;
 
@@ -90,4 +91,17 @@ public class RelevantStateUnitTest {
 		assertEquals("Triple(1,2,hello)", val.toString(_(1, 2, "hello")));
 	}
 
+	/** Test for primitive variants of {@link StateCollector#add(Object)} **/
+	@Test
+	public void testPrimitiveTypes() throws Exception {
+		RelevantState<Triple<Integer, Boolean, Long>> rs = //
+		new RelevantState<Triple<Integer, Boolean, Long>>(3) {
+			protected void collectState(Triple<Integer, Boolean, Long> object, StateCollector s) {
+				s.add((int) object._1()).add((boolean) object._2()).add((long) object._3());
+			}
+		};
+		assertTrue(rs.eval(_(10, true, 5L), _(10, true, 5L)));
+		assertTrue(rs.compareTo(_(10, true, 5L), _(10, true, 5L)) == 0);
+		assertEquals(rs.hashCode(_(10, true, 5L)), rs.hashCode(_(10, true, 5L)));
+	}
 }

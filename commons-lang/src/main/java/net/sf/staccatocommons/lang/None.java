@@ -93,7 +93,7 @@ public final class None<T> extends Option<T> {
 	}
 
 	public int hashCode() {
-		return super.hashCode();
+		return 37;
 	}
 
 	public boolean equals(Object obj) {

@@ -13,7 +13,11 @@ public final class CompareTest<A extends Comparable<A>> implements Evaluable2<A,
 	private static final Evaluable2 INSTANCE = new CompareTest();
 
 	public boolean eval(A arg0, A arg1) {
-		return arg0 == null && arg1 == null || arg0.compareTo(arg1) == 0;
+		if (arg0 == null)
+			return arg1 == null;
+		if (arg1 == null)
+			return false;
+		return arg0.compareTo(arg1) == 0;
 	}
 
 	/**
