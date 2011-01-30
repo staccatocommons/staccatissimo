@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.instrument.internal;
 
-import static net.sf.staccatocommons.testing.junit.FileMock.*;
+import static net.sf.staccatocommons.testing.mock.FileMock.*;
 import static org.junit.Assert.*;
 
 import java.io.File;

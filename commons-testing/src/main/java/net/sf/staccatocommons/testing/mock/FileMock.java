@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.testing.junit;
+package net.sf.staccatocommons.testing.mock;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -46,7 +46,7 @@ public class FileMock extends File {
 	private static final long serialVersionUID = -4997788227815563688L;
 	private final File[] contents;
 
-	public FileMock(String pathname, File... contents) {
+	protected FileMock(String pathname, File... contents) {
 		super(pathname);
 		this.contents = contents;
 	}
@@ -228,10 +228,26 @@ public class FileMock extends File {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * Creates a {@link FileMock} that represents a directory
+	 * 
+	 * @param pathname
+	 *          the name of the fake directory.
+	 * @param contents
+	 *          the files listed on it. May be empty.
+	 * @return a new {@link FileMock}
+	 */
 	public static FileMock dir(String pathname, File... contents) {
 		return new FileMock(pathname, contents);
 	}
 
+	/**
+	 * Creates a {@link FileMock} that represents a regular file
+	 * 
+	 * @param pathname
+	 *          the name of the fake file
+	 * @return a new {@link FileMock}
+	 */
 	public static FileMock file(String pathname) {
 		return new FileMock(pathname, (File[]) null);
 	}

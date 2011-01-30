@@ -14,13 +14,13 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import static net.sf.staccatocommons.lang.function.Functions.*;
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.testing.junit.IterableAbstractUnitTest;
+import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class MapIteratorUnitTest extends IterableAbstractUnitTest {
+public class MapIteratorUnitTest extends IterableTheories {
 
 	protected Iterable<?> createTwoElementsIterable() {
 		return Streams.from(10, 80).map(identity());

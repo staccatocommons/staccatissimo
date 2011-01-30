@@ -16,13 +16,13 @@ import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import net.sf.staccatocommons.testing.junit.IteratorAbstractUnitTest;
+import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class EnumerationIteratorUnitTest extends IteratorAbstractUnitTest {
+public class EnumerationIteratorUnitTest extends IteratorTheories {
 
 	protected Iterator<?> createTwoElementsIterator() {
 

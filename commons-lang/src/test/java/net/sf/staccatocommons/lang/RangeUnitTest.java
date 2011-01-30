@@ -14,7 +14,7 @@ package net.sf.staccatocommons.lang;
 
 import static net.sf.staccatocommons.lang.Range.*;
 import static org.junit.Assert.*;
-import net.sf.staccatocommons.testing.junit.SerializationAssert;
+import net.sf.staccatocommons.testing.junit.asserts.SerializationAssert;
 
 import org.junit.Test;
 

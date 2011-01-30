@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import static net.sf.staccatocommons.testing.junit.ObjectAssert.*;
+import static net.sf.staccatocommons.testing.junit.asserts.ObjectAssert.*;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;

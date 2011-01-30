@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.testing.junit;
+package net.sf.staccatocommons.testing.junit.asserts;
 
 import static org.junit.Assert.*;
 
@@ -19,6 +19,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
+/**
+ * Assertions for collections
+ * 
+ * @author flbulgarelli
+ */
 public class CollectionAssert {
 
 	public static <T> void assertIn(T element, T... elements) {

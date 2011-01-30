@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
  * 
  */
 @RunWith(Theories.class)
-public abstract class WellDefinedEqualsUnitTest {
+public abstract class WellDefinedEqualsTheories {
 
 	@Theory
 	public void testEqualsReflexive(Object o1) throws Exception {

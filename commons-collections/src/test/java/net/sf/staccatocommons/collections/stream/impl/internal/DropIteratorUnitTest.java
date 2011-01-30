@@ -13,13 +13,13 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.testing.junit.IterableAbstractUnitTest;
+import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class DropIteratorUnitTest extends IterableAbstractUnitTest {
+public class DropIteratorUnitTest extends IterableTheories {
 
 	protected Iterable<?> createTwoElementsIterable() {
 		return Streams.from(4, 5, 9, 10, 6).drop(3);

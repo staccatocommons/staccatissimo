@@ -12,9 +12,8 @@
  */
 package net.sf.staccatocommons.testing.junit.theories;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.Assert.*;
+import static org.junit.Assume.*;
 
 import org.junit.experimental.theories.Theory;
 
@@ -22,11 +21,18 @@ import org.junit.experimental.theories.Theory;
  * @author flbulgarelli
  * 
  */
-public class WellDefinedCompareUnitTest extends WellDefinedEqualsUnitTest {
+public class WellDefinedCompareTheories extends WellDefinedEqualsTheories {
 
 	private boolean consistentWithEquals;
 
-	public WellDefinedCompareUnitTest(boolean consistentWithEquals) {
+	/**
+	 * Creates a new {@link WellDefinedCompareTheories}
+	 * 
+	 * @param consistentWithEquals
+	 *          if this theories must assume that the comparables under test are
+	 *          consistent with equals
+	 */
+	public WellDefinedCompareTheories(boolean consistentWithEquals) {
 		this.consistentWithEquals = consistentWithEquals;
 	}
 
@@ -58,6 +64,13 @@ public class WellDefinedCompareUnitTest extends WellDefinedEqualsUnitTest {
 		assertEquals(signum(o1.compareTo(o3)), signum(o2.compareTo(o3)));
 	}
 
+	/**
+	 * Theory that tests consistency of compareTo with equals.
+	 * 
+	 * @param o1
+	 * @param o2
+	 * @throws Exception
+	 */
 	@Theory
 	public void testConsistentWithEquals(Comparable o1, Comparable o2) throws Exception {
 		assumeTrue(consistentWithEquals);

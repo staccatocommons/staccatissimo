@@ -17,5 +17,10 @@
 				Removed ReadStrategies
 			</action>
 		</release>
+		<release version="1.0-alpha-3" date="TBD" description="Streams">
+            <action dev="flbulgarelli" type="update">
+                Enabled Constant annotations instrumentation
+            </action>
+        </release>
 	</body>
 </document>

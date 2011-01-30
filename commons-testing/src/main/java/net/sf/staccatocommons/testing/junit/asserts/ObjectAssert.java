@@ -10,13 +10,14 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.testing.junit;
+package net.sf.staccatocommons.testing.junit.asserts;
 
 import static org.junit.Assert.*;
 
 /**
- * @author flbulgarelli
+ * Assertion for {@link Object}s
  * 
+ * @author flbulgarelli
  */
 public class ObjectAssert {
 

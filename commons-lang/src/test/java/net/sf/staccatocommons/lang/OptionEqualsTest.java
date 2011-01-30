@@ -14,7 +14,7 @@ package net.sf.staccatocommons.lang;
 
 import java.lang.reflect.Constructor;
 
-import net.sf.staccatocommons.testing.junit.theories.WellDefinedEqualsUnitTest;
+import net.sf.staccatocommons.testing.junit.theories.WellDefinedEqualsTheories;
 
 import org.junit.experimental.theories.DataPoints;
 
@@ -22,7 +22,7 @@ import org.junit.experimental.theories.DataPoints;
  * @author flbulgarelli
  * 
  */
-public class OptionEqualsTest extends WellDefinedEqualsUnitTest {
+public class OptionEqualsTest extends WellDefinedEqualsTheories {
 
 	/** Options data points */
 	@DataPoints

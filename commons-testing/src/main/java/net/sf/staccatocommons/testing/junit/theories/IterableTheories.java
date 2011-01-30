@@ -10,15 +10,14 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.testing.junit;
+package net.sf.staccatocommons.testing.junit.theories;
 
 import java.util.Iterator;
 
 /**
  * @author flbulgarelli
- * 
  */
-public abstract class IterableAbstractUnitTest extends IteratorAbstractUnitTest {
+public abstract class IterableTheories extends IteratorTheories {
 
 	protected final Iterator<?> createOneElementIterator() {
 		return createOneElementIterable().iterator();
