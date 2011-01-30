@@ -1,0 +1,10 @@
+About Staccato-Commons-Iterators 
+ 
+ Staccato-Commons-Iterators is a small and lightweight library with few dependencies that implements many common  
+concrete iterators and iterator decorators, that are not tied to any collections API. 
+
+Alpha state 
+
+ Staccato-Commons-Iterators is currently in alpha state. Although most of previous features are implemented, tested and documented, it is not recommended to use in production systems yet. Types and packages may change in the near future without notice. 
+ 
+ 
