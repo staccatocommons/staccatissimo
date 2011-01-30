@@ -10,9 +10,10 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.io;
+package net.sf.staccatocommons.iterators;
 
 import static org.junit.Assert.*;
+import net.sf.staccatocommons.iterators.EmptyIterator;
 
 import org.junit.Test;
 
@@ -25,19 +26,10 @@ import org.junit.Test;
  */
 public class ClassesInstrumentedDummyTest {
 
-	/**
-	 * Verifies that, at least, the notNull processor is working on constructors
-	 */
-	@SuppressWarnings("unused")
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorsInstrumented() {
-		new Directory((String) null);
-	}
-
 	/** Test that the constant instrumenter is working */
 	@Test
 	public void testConst() throws Exception {
-		assertSame(IOFunctions.fileName(), IOFunctions.fileName());
+		assertSame(EmptyIterator.empty(), EmptyIterator.empty());
 	}
 
 }

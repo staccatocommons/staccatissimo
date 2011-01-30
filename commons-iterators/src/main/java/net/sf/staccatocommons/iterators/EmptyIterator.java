@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team
+y Copyright (c) 2010, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -15,6 +15,9 @@ package net.sf.staccatocommons.iterators;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.restriction.Constant;
+
 /**
  * A singleton iterator that retrieves no elements. Calling {@link #hasNext()}
  * will always return false, and calling {@link #next()} will throw a
@@ -27,15 +30,15 @@ import java.util.NoSuchElementException;
  */
 public final class EmptyIterator<T> extends AbstractUnmodifiableIterator<T> {
 
-	private static final Iterator INSTANCE = new EmptyIterator();
-
 	/**
 	 * @param <T>
 	 *          the type of the iterator element
 	 * @return the singleton instance
 	 */
+	@NonNull
+	@Constant
 	public static <T> Iterator<T> empty() {
-		return INSTANCE;
+		return new EmptyIterator();
 	}
 
 	@Override

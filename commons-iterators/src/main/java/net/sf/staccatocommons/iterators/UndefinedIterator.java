@@ -23,8 +23,6 @@ import net.sf.staccatocommons.defs.restriction.Constant;
  */
 public class UndefinedIterator<A> extends AbstractUnmodifiableIterator<A> {
 
-	private static final Iterator INSTANCE = new UndefinedIterator();
-
 	public boolean hasNext() {
 		return true;
 	}
@@ -42,6 +40,6 @@ public class UndefinedIterator<A> extends AbstractUnmodifiableIterator<A> {
 	@Constant
 	@NonNull
 	public static <A> Iterator<A> undefined() {
-		return INSTANCE;
+		return new UndefinedIterator();
 	}
 }

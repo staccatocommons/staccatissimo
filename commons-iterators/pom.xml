@@ -72,6 +72,19 @@
 				<plugins>
 					<plugin>
 						<groupId>net.sf.staccatocommons</groupId>
+						<artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
+						<version>1.0-alpha-3-SNAPSHOT</version>
+						<executions>
+							<execution>
+								<phase>process-classes</phase>
+								<goals>
+									<goal>instrument</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>net.sf.staccatocommons</groupId>
 						<artifactId>commons-check-instrument-maven-plugin</artifactId>
 						<version>1.0-alpha-3-SNAPSHOT</version>
 						<executions>
