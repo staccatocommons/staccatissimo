@@ -40,11 +40,17 @@ public abstract class AbstractActivationAnnotationHandler<A extends Annotation> 
 		handlers.add(deactivable);
 	}
 
+	/**
+	 * Deactivates all the registered {@link Deactivable} handlers
+	 */
 	protected void deactivateAll() {
 		for (Deactivable deactivable : handlers)
 			deactivable.deactivate();
 	}
 
+	/**
+	 * Activates all the registered {@link Deactivable} handlers
+	 */
 	protected void activateAll() {
 		for (Deactivable deactivable : handlers)
 			deactivable.activate();

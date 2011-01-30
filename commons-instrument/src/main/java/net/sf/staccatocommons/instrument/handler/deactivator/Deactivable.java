@@ -13,13 +13,22 @@
 package net.sf.staccatocommons.instrument.handler.deactivator;
 
 /**
+ * Interface for handlers that can be activated or deactivated when certain
+ * annotations are discovered
+ * 
  * @author flbulgarelli
  * 
  */
 public interface Deactivable {
 
+	/**
+	 * Requests the handler to be deactivated. This request can be ignored.
+	 */
 	void activate();
 
+	/**
+	 * Requests the handler to be activated. This request can be ignored.
+	 */
 	void deactivate();
 
 }

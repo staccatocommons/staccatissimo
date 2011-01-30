@@ -25,7 +25,7 @@ import net.sf.staccatocommons.lang.predicate.Predicate;
  * @author flbulgarelli
  * 
  */
-public class AnnotationProcessor<T extends AnnotationHandler> {
+class AnnotationProcessor<T extends AnnotationHandler> {
 
 	private final Collection<T> handlers;
 

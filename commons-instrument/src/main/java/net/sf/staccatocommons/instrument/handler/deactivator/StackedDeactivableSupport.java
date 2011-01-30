@@ -42,12 +42,20 @@ public class StackedDeactivableSupport implements Deactivable {
 		activationCounter--;
 	}
 
+	/**
+	 * Answers if this {@link Deactivable} is active, that is, if the number of
+	 * activations - times {@link #activate()} has been sent to it - is greater
+	 * than the number of deactivations - times {@link #deactivate()} has been
+	 * sent to it.
+	 * 
+	 * @return is this deactivable is active
+	 */
 	public boolean isActive() {
 		return activationCounter >= 0;
 	}
 
-	public int getRemainingActivations() {
-		return -activationCounter;
-	}
+	// public int getRemainingActivations() {
+	// return -activationCounter;
+	// }
 
 }
