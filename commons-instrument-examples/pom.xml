@@ -3,21 +3,21 @@
   <parent>
     <artifactId>commons-parent-pom</artifactId>
     <groupId>net.sf.staccatocommons</groupId>
-    <version>1.0-alpha-3</version>
+    <version>1.0-alpha-4-SNAPSHOT</version>
   </parent>
   <groupId>net.sf.staccatocommons</groupId>
   <artifactId>commons-instrument-examples</artifactId>
-  <version>1.0-alpha-3</version>
+  <version>1.0-alpha-4-SNAPSHOT</version>
   <dependencies>
   	<dependency>
   		<groupId>net.sf.staccatocommons</groupId>
   		<artifactId>commons-lang</artifactId>
-  		<version>1.0-alpha-3</version>
+  		<version>1.0-alpha-4-SNAPSHOT</version>
   	</dependency>
   	<dependency>
   		<groupId>net.sf.staccatocommons</groupId>
   		<artifactId>commons-instrument</artifactId>
-  		<version>1.0-alpha-3</version>
+  		<version>1.0-alpha-4-SNAPSHOT</version>
   	</dependency>
   </dependencies>
 </project>

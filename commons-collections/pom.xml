@@ -4,13 +4,13 @@
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-collections</artifactId>
 	<name>Staccato-Commons-Collections</name>
-	<version>1.0-alpha-3</version>
+	<version>1.0-alpha-4-SNAPSHOT</version>
 	<inceptionYear>2010</inceptionYear>
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonscollections</url>
 	<parent>
 		<groupId>net.sf.staccatocommons</groupId>
 		<artifactId>commons-parent-pom</artifactId>
-		<version>1.0-alpha-3</version>
+		<version>1.0-alpha-4-SNAPSHOT</version>
 	</parent>
 	<scm>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-collections</connection>
@@ -27,12 +27,12 @@
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>1.0-alpha-3</version>
+			<version>1.0-alpha-4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-iterators</artifactId>
-			<version>1.0-alpha-3</version>
+			<version>1.0-alpha-4-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<reporting>
@@ -72,7 +72,7 @@
 					<plugin>
 						<groupId>net.sf.staccatocommons</groupId>
 						<artifactId>commons-check-instrument-maven-plugin</artifactId>
-						<version>1.0-alpha-3</version>
+						<version>1.0-alpha-4-SNAPSHOT</version>
 						<executions>
 							<execution>
 								<phase>process-classes</phase>

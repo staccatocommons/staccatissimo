@@ -4,7 +4,7 @@
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-parent-pom</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0-alpha-3</version>
+	<version>1.0-alpha-4-SNAPSHOT</version>
 	<url>http://staccatocommons.sourceforge.net/</url>
 	<licenses>
 		<license>
@@ -160,7 +160,7 @@
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-testing</artifactId>
-			<version>1.0-alpha-3</version>
+			<version>1.0-alpha-4-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
