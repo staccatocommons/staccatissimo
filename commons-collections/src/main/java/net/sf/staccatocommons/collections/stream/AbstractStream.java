@@ -192,6 +192,10 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new ConcatStream<A>(this, other);
 	}
 
+	public Stream<A> concatUndefined() {
+		return concat(Streams.<A> undefined());
+	}
+
 	@Override
 	public A first() {
 		return get(0);

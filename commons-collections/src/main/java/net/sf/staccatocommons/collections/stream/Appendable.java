@@ -40,6 +40,15 @@ public interface Appendable<A> {
 	Stream<A> concat(@NonNull Iterable<A> other);
 
 	/**
+	 * Concatenates this Stream with the undefined Stream. Equivalent to
+	 * <code>concat(Streams.undefined())</code>
+	 * 
+	 * @return a new {@link Stream}
+	 * @see Streams#undefined()
+	 */
+	Stream<A> concatUndefined();
+
+	/**
 	 * Adds an element as the last one of the stream.
 	 * 
 	 * @param element

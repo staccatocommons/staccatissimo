@@ -277,6 +277,7 @@ public class Streams {
 		return EmptyStream.empty();
 	}
 
+	/* TODO undefined is not infinite, it should be [undefined]* */
 	/**
 	 * Answers a infinte {@link Stream} that throws an exception when trying to
 	 * access any of its elements.
