@@ -49,6 +49,8 @@ import org.apache.commons.lang.ObjectUtils;
 /**
  * Class methods that complement the {@link java.util.Collections}
  * functionality, providing common algorithms for collections and iterables.
+ * With no exception, all these methods are eager, that is, processing is
+ * completely performed on method evaluation.
  * 
  * Otherwise stated, null collections, functors and iterables are prohibited as
  * parameter, but empty collections and iterables are allowed.

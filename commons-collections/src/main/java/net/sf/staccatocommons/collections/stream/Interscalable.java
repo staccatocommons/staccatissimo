@@ -24,6 +24,13 @@ import net.sf.staccatocommons.collections.stream.properties.Projection;
  */
 public interface Interscalable<A> {
 
+	/**
+	 * Inserts the given <code>element</code> between each retrieved element of
+	 * this {@link Stream}
+	 * 
+	 * @param element
+	 * @return a new {@link Stream}
+	 */
 	@NonNull
 	@ConditionallyRepeatable
 	@Projection

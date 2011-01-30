@@ -183,9 +183,21 @@ public class AbstractStreamBasicTest {
 			.equivalent(4, 1, 5, 1));
 	}
 
+	/**
+	 * Test for {@link Stream#intersperse(Object)}
+	 */
+	@Test
+	public void testIntersperseRepeatable() throws Exception {
+		Stream<Integer> interspersed = Streams.from(10, 20, 30).intersperse(1);
+		assertEquals(10, (int) interspersed.first());
+		assertEquals(10, (int) interspersed.first());
+		assertEquals(1, (int) interspersed.second());
+		assertEquals(20, (int) interspersed.third());
+	}
+
 	/** Test for {@link Stream#streamPartition(Evaluable)} */
 	@Test
-	public void testname() throws Exception {
+	public void testPartition() throws Exception {
 		Pair<Stream<Integer>, Stream<Integer>> partition = Streams
 			.from(50, 60, 1, 6, 9, 10, 100)
 			.streamPartition(greaterThan(9));
