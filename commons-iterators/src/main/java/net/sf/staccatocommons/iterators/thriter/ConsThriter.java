@@ -24,14 +24,14 @@ import net.sf.staccatocommons.iterators.ConsIterator;
 public class ConsThriter<A> extends AdvanceThriter<A> {
 
 	private final A head;
-	private final Thriterator<? extends A> tail;
+	private final Thriter<? extends A> tail;
 	private boolean headConsumed;
 	private boolean tailAdvanced;
 
 	/**
 	 * Creates a new {@link ConsThriter}
 	 */
-	public ConsThriter(A head, Thriterator<? extends A> tail) {
+	public ConsThriter(A head, Thriter<? extends A> tail) {
 		this.head = head;
 		this.tail = tail;
 	}
@@ -57,8 +57,8 @@ public class ConsThriter<A> extends AdvanceThriter<A> {
 
 	public static <A> Thriterator<A> from(A head, Iterator<? extends A> tail) {
 		if (tail instanceof Thriter)
-			return new ConsIterator<A>(head, tail);
-		return new ConsThriter<A>(head, (Thriterator<? extends A>) tail);
+			return new ConsThriter<A>(head, (Thriter<? extends A>) tail);
+		return new ConsIterator<A>(head, tail);
 	}
 
 }

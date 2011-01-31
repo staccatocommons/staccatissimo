@@ -12,13 +12,15 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.iterators.thriter.NextThriter;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriter;
+import net.sf.staccatocommons.iterators.thriter.IteratorThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
@@ -38,8 +40,8 @@ public final class ConcatStream<A> extends AbstractStream<A> {
 	}
 
 	public Thriterator<A> iterator() {
-		return new NextThriter<A>() {
-			private Iterator<A> iter = stream.iterator();
+		return new AdvanceThriter<A>() {
+			private Thriter<A> iter = stream.iterator();
 			private boolean second = false;
 
 			public boolean hasNext() {
@@ -49,13 +51,17 @@ public final class ConcatStream<A> extends AbstractStream<A> {
 				if (second)
 					return false;
 
-				iter = other.iterator();
+				iter = IteratorThriter.from(other.iterator());
 				second = true;
 				return iter.hasNext();
 			}
 
-			public A next() {
-				return iter.next();
+			public void advance() throws NoSuchElementException {
+				iter.advance();
+			}
+
+			public A current() throws NoSuchElementException {
+				return iter.current();
 			}
 		};
 	}

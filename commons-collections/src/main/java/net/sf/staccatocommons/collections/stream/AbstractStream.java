@@ -51,6 +51,8 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
@@ -76,7 +78,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public int size() {
-		return Iterables.size(this);
+		int size = 0;
+		Thriter<A> iter = this.iterator();
+		while (iter.hasNext()) {
+			iter.advance();
+			size++;
+		}
+		return size;
 	}
 
 	@Override
@@ -353,13 +361,54 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	public <B> Stream<B> then(final DeconsApplicable<A, B> function) {
 		class DeconsThenStream extends AbstractStream<B> {
 			public Thriterator<B> iterator() {
-				if (AbstractStream.this.isEmpty())
-					return function.emptyApply().iterator();
-				Pair<A, Stream<A>> decons = AbstractStream.this.decons();
-				return function.apply(decons._1(), decons._2()).iterator();
+				return new DynamicIterator<B>() {
+					protected Thriterator<B> createIter() {
+						if (AbstractStream.this.isEmpty())
+							return function.emptyApply().iterator();
+						Pair<A, Stream<A>> decons = AbstractStream.this.decons();
+						return function.apply(decons._1(), decons._2()).iterator();
+					}
+				};
 			}
 		}
 		return new DeconsThenStream();
+	}
+
+	private static abstract class DynamicIterator<A> extends AbstractUnmodifiableIterator<A>
+		implements Thriterator<A> {
+
+		private Thriterator<A> iter;
+		private boolean evaluated;
+
+		public boolean hasNext() {
+			checkDynamic();
+			return iter.hasNext();
+		}
+
+		public A next() {
+			checkDynamic();
+			return iter.next();
+		}
+
+		public void advance() throws NoSuchElementException {
+			checkDynamic();
+			iter.advance();
+		}
+
+		public A current() throws NoSuchElementException {
+			checkDynamic();
+			return iter.current();
+		}
+
+		private void checkDynamic() {
+			if (!evaluated) {
+				iter = createIter();
+				evaluated = true;
+			}
+		}
+
+		protected abstract Thriterator<A> createIter();
+
 	}
 
 	@Override
