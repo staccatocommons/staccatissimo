@@ -24,6 +24,7 @@ import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.Unmodifiable;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 
 /**
@@ -155,6 +156,8 @@ public interface Stream<A> extends //
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable
-	<B> Stream<B> then(@NonNull Applicable<Stream<A>, ? extends Iterable<B>> function);
+	<B> Stream<B> then(@NonNull Applicable<Stream<A>, ? extends Stream<B>> function);
+
+	Thriterator<A> iterator();
 
 }

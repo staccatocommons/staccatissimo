@@ -13,13 +13,13 @@
 package net.sf.staccatocommons.collections.stream.impl;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
-import net.sf.staccatocommons.iterators.UnmodifiableIterator;
+import net.sf.staccatocommons.iterators.thriter.IteratorThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * 
@@ -57,8 +57,8 @@ public class CollectionStream<A> extends AbstractStream<A> {
 	}
 
 	@Override
-	public Iterator<A> iterator() {
-		return UnmodifiableIterator.from(collection.iterator());
+	public Thriterator<A> iterator() {
+		return IteratorThriter.from(collection.iterator());
 	}
 
 	@Override

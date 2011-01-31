@@ -13,15 +13,13 @@
 package net.sf.staccatocommons.collections.stream.impl;
 
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
-
-import java.util.Iterator;
-
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.iterators.ConsIterator;
+import net.sf.staccatocommons.iterators.thriter.ConsThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
@@ -61,8 +59,8 @@ public final class ConsStream<A> extends AbstractStream<A> {
 		return new ConsStream<A>(head, tail);
 	}
 
-	public Iterator<A> iterator() {
-		return new ConsIterator<A>(head, tail.iterator());
+	public Thriterator<A> iterator() {
+		return ConsThriter.from(head, tail.iterator());
 	}
 
 	public boolean isEmpty() {

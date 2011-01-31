@@ -10,36 +10,34 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators;
+package net.sf.staccatocommons.iterators.thriter;
 
-import java.util.Iterator;
-
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class UndefinedIterator<A> extends AbstractUnmodifiableIterator<A> {
+public class MapThriter<A, B> extends AdvanceThriter<B> {
+
+	final Applicable<? super A, ? extends B> function;
+	final Thriter<? extends A> thriter;
+
+	public MapThriter(Applicable<? super A, ? extends B> function, Thriter<? extends A> thriter) {
+		this.function = function;
+		this.thriter = thriter;
+	}
 
 	public boolean hasNext() {
-		return true;
+		return thriter.hasNext();
 	}
 
-	public A next() {
-		throw new RuntimeException("undefined");
+	public void advance() {
+		thriter.advance();
 	}
 
-	/**
-	 * Answers a {@link UndefinedIterator}
-	 * 
-	 * @param <A>
-	 * @return a undefined iterator
-	 */
-	@Constant
-	@NonNull
-	public static <A> Iterator<A> undefined() {
-		return new UndefinedIterator();
+	public B current() {
+		return function.apply(thriter.current());
 	}
+
 }

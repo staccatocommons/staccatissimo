@@ -51,6 +51,7 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.Function2;
@@ -218,7 +219,14 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public A get(int n) {
-		return Iterables.get(this, n);
+		Thriterator<A> iter = this.iterator();
+		for (int i = 0; i <= n; i++)
+			try {
+				iter.advance();
+			} catch (NoSuchElementException e) {
+				throw new IndexOutOfBoundsException("At " + n);
+			}
+		return iter.current();
 	}
 
 	@Override
@@ -307,9 +315,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public <B> Stream<B> then(final Applicable<Stream<A>, ? extends Iterable<B>> function) {
+	public <B> Stream<B> then(final Applicable<Stream<A>, ? extends Stream<B>> function) {
 		class ThenStream extends AbstractStream<B> {
-			public Iterator<B> iterator() {
+			public Thriterator<B> iterator() {
 				return function.apply(AbstractStream.this).iterator();
 			}
 		}
@@ -326,7 +334,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	 */
 	public Stream<A> intersperse(final A sep) {
 		return then(new DeconsFunction<A, A>() {
-			public Iterable<A> apply(A head, Stream<A> tail) {
+			public Stream<A> apply(A head, Stream<A> tail) {
 				if (tail.isEmpty())
 					return Streams.from(head);
 				return tail.intersperse(sep).prepend(sep).prepend(head);
@@ -344,7 +352,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	public <B> Stream<B> then(final DeconsApplicable<A, B> function) {
 		class DeconsThenStream extends AbstractStream<B> {
-			public Iterator<B> iterator() {
+			public Thriterator<B> iterator() {
 				if (AbstractStream.this.isEmpty())
 					return function.emptyApply().iterator();
 				Pair<A, Stream<A>> decons = AbstractStream.this.decons();

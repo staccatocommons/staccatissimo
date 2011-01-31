@@ -12,15 +12,15 @@ y Copyright (c) 2010, The Staccato-Commons Team
  */
 package net.sf.staccatocommons.iterators;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
- * A singleton iterator that retrieves no elements. Calling {@link #hasNext()}
- * will always return false, and calling {@link #next()} will throw a
+ * An iterator that retrieves no elements. Calling {@link #hasNext()} will
+ * always return false, and calling {@link #next()} will throw a
  * {@link NoSuchElementException}
  * 
  * @author flbulgarelli
@@ -28,7 +28,8 @@ import net.sf.staccatocommons.defs.restriction.Constant;
  *          the element type
  * 
  */
-public final class EmptyIterator<T> extends AbstractUnmodifiableIterator<T> {
+public final class EmptyIterator<T> extends AbstractUnmodifiableIterator<T> implements
+	Thriterator<T> {
 
 	/**
 	 * @param <T>
@@ -37,7 +38,7 @@ public final class EmptyIterator<T> extends AbstractUnmodifiableIterator<T> {
 	 */
 	@NonNull
 	@Constant
-	public static <T> Iterator<T> empty() {
+	public static <T> Thriterator<T> empty() {
 		return new EmptyIterator();
 	}
 
@@ -49,6 +50,14 @@ public final class EmptyIterator<T> extends AbstractUnmodifiableIterator<T> {
 	@Override
 	public T next() {
 		throw new NoSuchElementException("Empty Iterator");
+	}
+
+	public void advance() throws NoSuchElementException {
+		next();
+	}
+
+	public T current() throws NoSuchElementException {
+		return next();
 	}
 
 }

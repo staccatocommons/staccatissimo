@@ -10,37 +10,42 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl;
+package net.sf.staccatocommons.iterators.thriter;
+
+import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.stream.AbstractStream;
-import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.restriction.Constant;
-import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.iterators.thriter.UndefinedThriter;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class UndefinedStream<A> extends AbstractStream<A> {
+public class UndefinedThriter<A> extends AdvanceThriter<A> {
 
-	private static final UndefinedStream INSTANCE = new UndefinedStream();
+	private boolean advanced;
 
-	public Thriterator<A> iterator() {
-		return UndefinedThriter.undefined();
+	public boolean hasNext() {
+		return !advanced;
+	}
+
+	public void advance() throws NoSuchElementException {
+		advanced = true;
+	}
+
+	public A current() throws NoSuchElementException {
+		throw new RuntimeException("Undefined");
 	}
 
 	/**
-	 * Answers an undefined stream
+	 * Answers a {@link UndefinedThriter}
 	 * 
 	 * @param <A>
-	 * @return a undefined {@link Stream}
+	 * @return a undefined iterator
 	 */
-	@NonNull
 	@Constant
-	public static <A> Stream<A> undefined() {
-		return INSTANCE;
+	@NonNull
+	public static <A> Thriterator<A> undefined() {
+		return new UndefinedThriter();
 	}
-
 }

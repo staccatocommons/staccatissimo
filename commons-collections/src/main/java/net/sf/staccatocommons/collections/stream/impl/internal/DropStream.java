@@ -12,13 +12,11 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.iterators.thriter.DropThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
@@ -36,27 +34,8 @@ public class DropStream<A> extends WrapperStream<A> {
 		this.amountOfElements = amountOfElements;
 	}
 
-	public Iterator<A> iterator() {
-		final Iterator<A> iter = getSource().iterator();
-		return new AbstractUnmodifiableIterator<A>() {
-			private int i = amountOfElements;
-
-			public boolean hasNext() {
-				while (i > 0) {
-					if (!iter.hasNext())
-						return false;
-					iter.next();
-					i--;
-				}
-				return iter.hasNext();
-			}
-
-			public A next() {
-				if (!hasNext())
-					throw new NoSuchElementException();
-				return iter.next();
-			}
-		};
+	public Thriterator<A> iterator() {
+		return new DropThriter<A>(amountOfElements, getSource().iterator());
 	}
 
 	@Override

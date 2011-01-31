@@ -43,7 +43,7 @@ public class DeconsThenStreamTest {
 	 * */
 	public static <A> Stream<A> dropWhile(final Evaluable<A> pred, Stream<A> stream) {
 		return stream.then(new DeconsFunction<A, A>() {
-			public Iterable<A> apply(A head, Stream<A> tail) {
+			public Stream<A> apply(A head, Stream<A> tail) {
 				if (pred.eval(head))
 					return dropWhile(pred, tail);
 				return Streams.from(head, tail);

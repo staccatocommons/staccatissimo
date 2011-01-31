@@ -10,22 +10,25 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream;
+package net.sf.staccatocommons.iterators.thriter;
 
-import net.sf.staccatocommons.collections.stream.Deconstructable.DeconsApplicable;
+import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
 
 /**
- * Abstract {@link DeconsApplicable} that returns an empty stream for
- * {@link #emptyApply()}
- * 
  * @author flbulgarelli
+ * 
  */
-public abstract class DeconsFunction<A, B> implements DeconsApplicable<A, B> {
+public abstract class NextThriter<A> extends AbstractUnmodifiableIterator<A> implements
+	Thriterator<A> {
 
-	/**
-	 * Returns and empty stream
-	 */
-	public Stream<B> emptyApply() {
-		return Streams.empty();
+	private A next;
+
+	public final void advance() {
+		next = next();
 	}
+
+	public final A current() {
+		return next;
+	}
+
 }

@@ -12,12 +12,12 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import java.util.Iterator;
-
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.defs.Applicable2;
-import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.iterators.thriter.IteratorThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.ZipThriter;
 
 /**
  * @author flbulgarelli
@@ -41,17 +41,10 @@ public final class ZipStream<C, A, B> extends AbstractStream<C> {
 		this.abstractStream = abstractStream;
 	}
 
-	public Iterator<C> iterator() {
-		final Iterator<A> iter1 = abstractStream.iterator();
-		final Iterator<B> iter2 = iterable.iterator();
-		return new AbstractUnmodifiableIterator<C>() {
-			public boolean hasNext() {
-				return iter1.hasNext() && iter2.hasNext();
-			}
-
-			public C next() {
-				return function.apply(iter1.next(), iter2.next());
-			}
-		};
+	public Thriterator<C> iterator() {
+		return new ZipThriter(
+			abstractStream.iterator(),
+			IteratorThriter.from(iterable.iterator()),
+			function);
 	}
 }

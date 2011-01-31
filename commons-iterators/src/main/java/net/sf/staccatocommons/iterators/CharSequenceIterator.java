@@ -15,12 +15,13 @@ package net.sf.staccatocommons.iterators;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriter;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class CharSequenceIterator extends AbstractUnmodifiableIterator<Character> {
+public class CharSequenceIterator extends AdvanceThriter<Character> {
 
 	private final CharSequence charSequence;
 	private int pos = 0;
@@ -39,10 +40,13 @@ public class CharSequenceIterator extends AbstractUnmodifiableIterator<Character
 		return pos < charSequence.length();
 	}
 
-	public Character next() {
+	public void advance() throws NoSuchElementException {
 		if (pos == charSequence.length())
 			throw new NoSuchElementException();
-		return charSequence.charAt(pos++);
+		pos++;
 	}
 
+	public Character current() throws NoSuchElementException {
+		return charSequence.charAt(pos - 1);
+	}
 }

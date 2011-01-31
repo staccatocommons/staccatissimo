@@ -12,10 +12,10 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import java.util.Iterator;
-
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.iterators.AppendIterator;
+import net.sf.staccatocommons.iterators.thriter.IteratorThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
@@ -33,8 +33,8 @@ public class AppendStream<A> extends WrapperStream<A> {
 		this.element = element;
 	}
 
-	public Iterator<A> iterator() {
-		return new AppendIterator(getSource().iterator(), element);
+	public Thriterator<A> iterator() {
+		return IteratorThriter.from(new AppendIterator(getSource().iterator(), element));
 	}
 
 }

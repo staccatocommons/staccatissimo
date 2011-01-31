@@ -12,12 +12,11 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import java.util.Iterator;
-
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.iterators.EmptyIterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
@@ -33,7 +32,7 @@ public final class EmptyStream<A> extends AbstractStream<A> {
 	private EmptyStream() {}
 
 	@Override
-	public Iterator<A> iterator() {
+	public Thriterator<A> iterator() {
 		return EmptyIterator.empty();
 	}
 

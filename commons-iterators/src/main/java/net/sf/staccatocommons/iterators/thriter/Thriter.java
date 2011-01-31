@@ -10,22 +10,28 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream;
+package net.sf.staccatocommons.iterators.thriter;
 
-import net.sf.staccatocommons.collections.stream.Deconstructable.DeconsApplicable;
+import java.util.NoSuchElementException;
 
 /**
- * Abstract {@link DeconsApplicable} that returns an empty stream for
- * {@link #emptyApply()}
+ * Three-phase-iterator
  * 
  * @author flbulgarelli
+ * 
  */
-public abstract class DeconsFunction<A, B> implements DeconsApplicable<A, B> {
+public interface Thriter<A> {
+
+	boolean hasNext();
+
+	void advance() throws NoSuchElementException;
 
 	/**
-	 * Returns and empty stream
+	 * Answers current element of this {@link Thriter}. Result of this method if
+	 * {@link #advance()} was never called before is undefined.
+	 * 
+	 * @return the current element
 	 */
-	public Stream<B> emptyApply() {
-		return Streams.empty();
-	}
+	A current() throws NoSuchElementException;
+
 }

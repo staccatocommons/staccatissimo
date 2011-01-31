@@ -18,7 +18,8 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.iterators.thriter.NextThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
@@ -36,8 +37,8 @@ public final class ConcatStream<A> extends AbstractStream<A> {
 		this.other = other;
 	}
 
-	public Iterator<A> iterator() {
-		return new AbstractUnmodifiableIterator<A>() {
+	public Thriterator<A> iterator() {
+		return new NextThriter<A>() {
 			private Iterator<A> iter = stream.iterator();
 			private boolean second = false;
 
@@ -56,7 +57,6 @@ public final class ConcatStream<A> extends AbstractStream<A> {
 			public A next() {
 				return iter.next();
 			}
-
 		};
 	}
 

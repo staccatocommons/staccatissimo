@@ -10,29 +10,29 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators;
+package net.sf.staccatocommons.iterators.thriter;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.iterators.thriter.AdvanceThriter;
-import net.sf.staccatocommons.iterators.thriter.ConsThriter;
+import net.sf.staccatocommons.iterators.ConsIterator;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class ConsIterator<A> extends AdvanceThriter<A> {
+public class ConsThriter<A> extends AdvanceThriter<A> {
 
-	private A next;
-	private final Iterator<? extends A> tail;
+	private final A head;
+	private final Thriterator<? extends A> tail;
 	private boolean headConsumed;
+	private boolean tailAdvanced;
 
 	/**
 	 * Creates a new {@link ConsThriter}
 	 */
-	public ConsIterator(A head, Iterator<? extends A> tail) {
-		this.next = head;
+	public ConsThriter(A head, Thriterator<? extends A> tail) {
+		this.head = head;
 		this.tail = tail;
 	}
 
@@ -44,12 +44,21 @@ public class ConsIterator<A> extends AdvanceThriter<A> {
 		if (!headConsumed) {
 			headConsumed = true;
 		} else {
-			next = tail.next();
+			tail.advance();
+			tailAdvanced = true;
 		}
 	}
 
 	public A current() throws NoSuchElementException {
-		return next;
+		if (tailAdvanced)
+			return tail.current();
+		return head;
+	}
+
+	public static <A> Thriterator<A> from(A head, Iterator<? extends A> tail) {
+		if (tail instanceof Thriter)
+			return new ConsIterator<A>(head, tail);
+		return new ConsThriter<A>(head, (Thriterator<? extends A>) tail);
 	}
 
 }

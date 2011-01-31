@@ -19,7 +19,8 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.iterators.thriter.NextThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
@@ -40,10 +41,10 @@ public final class FlatMapStream<A, B> extends AbstractStream<B> {
 		this.function = function;
 	}
 
-	public Iterator<B> iterator() {
+	public Thriterator<B> iterator() {
 
 		final Iterator<A> iter = stream.iterator();
-		return new AbstractUnmodifiableIterator<B>() {
+		return new NextThriter<B>() {
 			private Iterator<? extends B> subIter = null;
 
 			public boolean hasNext() {

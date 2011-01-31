@@ -14,11 +14,11 @@ package net.sf.staccatocommons.collections.stream.impl;
 
 import java.util.Collection;
 import java.util.Deque;
-import java.util.Iterator;
 
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.iterators.UnmodifiableIterator;
+import net.sf.staccatocommons.iterators.thriter.IteratorThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
@@ -35,8 +35,8 @@ public class DequeStream<A> extends CollectionStream<A> {
 
 	public Stream reverse() {
 		return new AbstractStream<A>() {
-			public Iterator<A> iterator() {
-				return UnmodifiableIterator.from(getCollection().descendingIterator());
+			public Thriterator<A> iterator() {
+				return IteratorThriter.from(getCollection().descendingIterator());
 			}
 
 			public boolean contains(A element) {

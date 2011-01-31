@@ -99,7 +99,7 @@ public interface Deconstructable<A> {
 	 * @param <B>
 	 *          output stream type
 	 */
-	public static interface DeconsApplicable<A, B> extends Applicable2<A, Stream<A>, Iterable<B>> {
+	public static interface DeconsApplicable<A, B> extends Applicable2<A, Stream<A>, Stream<B>> {
 
 		/**
 		 * Applies this transformation when this Stream can not be deconstructed in
@@ -108,14 +108,14 @@ public interface Deconstructable<A> {
 		 * @return the result of applying this transformation over and empty
 		 *         {@link Stream}
 		 */
-		Iterable<B> emptyApply();
+		Stream<B> emptyApply();
 
 		/**
 		 * Applies this transformation to a non empty Stream splitted into tail and
 		 * head. Independently of the original stream source, the tail Stream is
 		 * always non-repeatable.
 		 */
-		Iterable<B> apply(A head, Stream<A> tail);
+		Stream<B> apply(A head, Stream<A> tail);
 
 	}
 

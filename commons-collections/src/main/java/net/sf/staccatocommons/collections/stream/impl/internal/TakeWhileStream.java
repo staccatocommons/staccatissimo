@@ -18,6 +18,8 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.iterators.NextGetIterator;
+import net.sf.staccatocommons.iterators.thriter.IteratorThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 
 /**
@@ -35,13 +37,13 @@ public final class TakeWhileStream<A> extends WrapperStream<A> {
 		this.predicate = predicate;
 	}
 
-	public Iterator<A> iterator() {
+	public Thriterator<A> iterator() {
 		final Iterator<A> iter = getSource().iterator();
-		return new NextGetIterator<A>() {
+		return IteratorThriter.from(new NextGetIterator<A>() {
 			protected Boolean updateNext() {
 				return iter.hasNext() && predicate.eval(setNext(iter.next()));
 			}
-		};
+		});
 	}
 
 	public Stream<A> takeWhile(Evaluable<? super A> predicate) {

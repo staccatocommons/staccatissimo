@@ -1,10 +1,9 @@
 package net.sf.staccatocommons.collections.stream.impl;
 
-import java.util.Iterator;
-
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.iterators.CharSequenceIterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
@@ -20,7 +19,7 @@ public final class CharSequenceStream extends AbstractStream<Character> {
 		this.charSequence = charSequence;
 	}
 
-	public Iterator<Character> iterator() {
+	public Thriterator<Character> iterator() {
 		return new CharSequenceIterator(charSequence);
 	}
 }

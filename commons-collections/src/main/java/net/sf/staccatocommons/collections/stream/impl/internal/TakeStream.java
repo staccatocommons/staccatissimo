@@ -13,14 +13,11 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import static java.lang.Math.*;
-
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.iterators.thriter.TakeThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
@@ -38,23 +35,8 @@ public final class TakeStream<A> extends WrapperStream<A> {
 		this.amountOfElements = amountOfElements;
 	}
 
-	public Iterator<A> iterator() {
-		final Iterator<A> iter = getSource().iterator();
-		return new AbstractUnmodifiableIterator<A>() {
-			private int i = 0;
-
-			public boolean hasNext() {
-				return i < amountOfElements && iter.hasNext();
-			}
-
-			public A next() {
-				if (!hasNext())
-					throw new NoSuchElementException();
-
-				i++;
-				return iter.next();
-			}
-		};
+	public Thriterator<A> iterator() {
+		return new TakeThriter<A>(amountOfElements, getSource().iterator());
 	}
 
 	@Override

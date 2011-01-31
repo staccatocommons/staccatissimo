@@ -10,46 +10,37 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators;
+package net.sf.staccatocommons.iterators.thriter;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
-
-import net.sf.staccatocommons.iterators.thriter.AdvanceThriter;
-import net.sf.staccatocommons.iterators.thriter.ConsThriter;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class ConsIterator<A> extends AdvanceThriter<A> {
+public class TakeThriter<A> extends AdvanceThriter<A> {
 
-	private A next;
-	private final Iterator<? extends A> tail;
-	private boolean headConsumed;
+	private int remaining;
+	private final Thriter<A> thriter;
 
-	/**
-	 * Creates a new {@link ConsThriter}
-	 */
-	public ConsIterator(A head, Iterator<? extends A> tail) {
-		this.next = head;
-		this.tail = tail;
+	public TakeThriter(int n, Thriter<A> thriter) {
+		this.thriter = thriter;
+		this.remaining = n;
 	}
 
 	public boolean hasNext() {
-		return !headConsumed || tail.hasNext();
+		return remaining > 0 && thriter.hasNext();
 	}
 
 	public void advance() throws NoSuchElementException {
-		if (!headConsumed) {
-			headConsumed = true;
-		} else {
-			next = tail.next();
-		}
+		if (!hasNext())
+			throw new NoSuchElementException();
+		thriter.advance();
+		remaining--;
 	}
 
 	public A current() throws NoSuchElementException {
-		return next;
+		return thriter.current();
 	}
 
 }
