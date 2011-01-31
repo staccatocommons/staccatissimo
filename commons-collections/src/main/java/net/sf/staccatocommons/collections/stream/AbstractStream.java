@@ -52,6 +52,7 @@ import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.iterators.thriter.NextThriter;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.Compare;
@@ -524,6 +525,48 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		for (A element : this)
 			reversedList.addFirst(element);
 		return Streams.from((List<A>) reversedList);
+	}
+
+	/***
+	 * @param pred
+	 * @return a new {@link Stream}. Although the resulting stream itself is lazy,
+	 *         its stream elements are not.
+	 */
+	public Stream<Stream<A>> groupBy(final Evaluable2<A, A> pred) {
+		return new AbstractStream<Stream<A>>() {
+			public Thriterator<Stream<A>> iterator() {
+				final Iterator<A> iter = AbstractStream.this.iterator();
+				return new NextThriter<Stream<A>>() {
+
+					private List<A> list = new LinkedList<A>();
+					private A next;
+					private boolean remaining;
+
+					public boolean hasNext() {
+						return remaining || iter.hasNext();
+					}
+
+					public Stream<A> next() {
+						if (!hasNext())
+							throw new NoSuchElementException();
+						if (!remaining)
+							next = iter.next();
+						list.add(next);
+						boolean eval = true;
+						while (iter.hasNext() && (eval = pred.eval(next, (next = iter.next()))))
+							list.add(next);
+						remaining = !eval;
+						Stream<A> ret = new ListStream<A>(list) {
+							public List<A> toList() {
+								return Collections.unmodifiableList(getList());
+							}
+						};
+						list = new LinkedList<A>();
+						return ret;
+					}
+				};
+			}
+		};
 	}
 
 }

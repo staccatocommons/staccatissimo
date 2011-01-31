@@ -56,13 +56,23 @@ public class LazinessIntegrationTest {
 	/***/
 	@Ignore
 	@Test
-	public void testIntersparseAndTake() throws Exception {
+	public void testIntersparseAndSize() throws Exception {
 		Streams //
 			.from(10, 20)
 			.concatUndefined()
 			.intersperse(1)
 			.size();
-		// assertTrue(stream.equivalent(10, 1));
+	}
+
+	/***/
+	@Test
+	public void testIntersparseAndTake() throws Exception {
+		assertTrue(Streams //
+			.from(10, 20)
+			.concatUndefined()
+			.intersperse(1)
+			.take(4)
+			.equivalent(10, 1, 20, 1));
 	}
 
 	/***/

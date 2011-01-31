@@ -24,17 +24,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.function.Function2;
+import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.lang.tuple.Triple;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -242,5 +247,25 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void testMinimum() throws Exception {
 		assertEquals(6, (int) Streams.from(90, 10, 30, 6, 150, 65).minimum());
+	}
+
+	/** Test for {@link AbstractStream#groupBy(Evaluable2)} */
+	@Test
+	public void foo() {
+		Assert
+			.assertEquals(
+				Arrays.asList(
+					Arrays.asList(1, 1),
+					Arrays.asList(2),
+					Arrays.asList(4, 4, 4),
+					Arrays.asList(5)),
+				new ListStream<Integer>(Arrays.asList(1, 1, 2, 4, 4, 4, 5))
+					.groupBy(Equiv.<Integer> equalOrNull())
+					.map(new Function<Stream<Integer>, List<Integer>>() {
+						public List<Integer> apply(Stream<Integer> arg) {
+							return arg.toList();
+						}
+					})
+					.toList());
 	}
 }

@@ -26,6 +26,7 @@ public class ZipThriter<A, B, C> extends AdvanceThriter<C> {
 	final Thriter<B> thriter2;
 	final Applicable2<A, B, C> function;
 
+	// FIXME BUG! LIMIT TO LAZINESS
 	public ZipThriter(@NonNull Thriter<A> thriter1, @NonNull Thriter<B> thriter2,
 		@NonNull Applicable2<A, B, C> function) {
 		this.thriter1 = thriter1;
