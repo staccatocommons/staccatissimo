@@ -18,8 +18,8 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.iterators.ConsIterator;
-import net.sf.staccatocommons.iterators.thriter.IteratorThriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 
 /**
  * @author flbulgarelli
@@ -43,7 +43,7 @@ public class DropWhileStream<A> extends WrapperStream<A> {
 			next = null;
 		}
 		if (next == null)
-			return IteratorThriter.from(iter);
+			return Thriterators.from(iter);
 		return new ConsIterator<A>(next, iter);
 	}
 }

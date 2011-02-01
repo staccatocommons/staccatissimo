@@ -10,55 +10,52 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl;
+package net.sf.staccatocommons.collections.stream.impl.internal.delayed;
 
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.iterators.ConsIterator;
+import net.sf.staccatocommons.iterators.delayed.DelayedConsIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
- * 
- * A {@link ConsStream} is a {@link Stream} that retrieves first a single
- * element - the head - and the elements from another {@link Iterable} - the
- * tail.
- * 
  * @author flbulgarelli
  * 
- * @param <A>
  */
-public final class ConsStream<A> extends AbstractStream<A> {
+public class DelayedConsStream<A> extends AbstractStream<A> {
+
 	private final Iterable<? extends A> tail;
-	private final A head;
+	private final Thunk<A> head;
 
 	/**
-	 * Creates a new {@link ConsStream}
+	 * Creates a new {@link DelayedConsStream}
 	 */
-	public ConsStream(A head, @NonNull Iterable<? extends A> tail) {
-		this.tail = tail;
+	public DelayedConsStream(@NonNull Thunk<A> head, @NonNull Iterable<? extends A> tail) {
 		this.head = head;
+		this.tail = tail;
 	}
 
 	public Thriterator<A> iterator() {
-		return new ConsIterator<A>(head, tail.iterator());
+		return new DelayedConsIterator<A>(head, Thriterators.from(tail.iterator()));
 	}
 
 	public boolean isEmpty() {
 		return false;
 	}
 
-	public Pair<A, Stream<A>> decons() {
+	public Pair<Thunk<A>, Stream<A>> delayedDecons() {
 		return _(head, Streams.from(tail));
 	}
 
 	public A head() {
-		return head;
+		return head.value();
 	}
 
 	public NumberType<A> numberType() {

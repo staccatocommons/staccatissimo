@@ -12,7 +12,9 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import static net.sf.staccatocommons.lang.provider.Providers.*;
 import net.sf.staccatocommons.collections.stream.Deconstructable.DeconsApplicable;
+import net.sf.staccatocommons.defs.Thunk;
 
 /**
  * Abstract {@link DeconsApplicable} that returns an empty stream for
@@ -28,4 +30,13 @@ public abstract class DeconsFunction<A, B> implements DeconsApplicable<A, B> {
 	public Stream<B> emptyApply() {
 		return Streams.empty();
 	}
+
+	public Stream<B> delayedApply(Thunk<A> head, Stream<A> tail) {
+		return apply(head.value(), tail);
+	}
+
+	public Stream<B> apply(A head, Stream<A> tail) {
+		return delayedApply(constant(head), tail);
+	}
+
 }

@@ -18,8 +18,8 @@ import java.util.List;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
-import net.sf.staccatocommons.iterators.thriter.IteratorThriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 
 /**
  * 
@@ -58,7 +58,7 @@ public class CollectionStream<A> extends AbstractStream<A> {
 
 	@Override
 	public Thriterator<A> iterator() {
-		return IteratorThriter.from(collection.iterator());
+		return Thriterators.from(collection.iterator());
 	}
 
 	@Override

@@ -55,20 +55,20 @@ public class AbstractStreamBasicTest {
 	/** Test for sum */
 	@Test
 	public void sum() throws Exception {
-		assertEquals((Integer) 65, Streams.from(10, 20, 35).sum(integer()));
+		assertEquals((Integer) 65, Cons.from(10, 20, 35).sum(integer()));
 	}
 
 	/** Test for product */
 	@Test
 	public void product() throws Exception {
-		assertEquals(1 * 2 * 3, (int) Streams.from(0, 1, 2).map(add(1)).product(integer()));
+		assertEquals(1 * 2 * 3, (int) Cons.from(0, 1, 2).map(add(1)).product(integer()));
 	}
 
 	/** Test for implicit sum */
 	@Test
 	public void sumImplicit() throws Exception {
 		assertEquals((Integer) 70, //
-			Streams.from(10, add(3)) //
+			Iterate.from(10, add(3)) //
 				.take(7)
 				.filter(lessThan(25))
 				.tail()
@@ -78,14 +78,14 @@ public class AbstractStreamBasicTest {
 	/** Test for {@link Stream#average()} **/
 	@Test
 	public void testAvg() throws Exception {
-		assertEquals(9.6, Streams.from(10.0, 12.0, 15.0, 2.0, 9.0).average(double_()), 0.01);
-		assertEquals(6, (int) Streams.from(1, add(1), upTo(11)).average());
+		assertEquals(9.6, Cons.from(10.0, 12.0, 15.0, 2.0, 9.0).average(double_()), 0.01);
+		assertEquals(6, (int) Iterate.from(1, add(1), upTo(11)).average());
 	}
 
 	/** Test for {@link Stream#average()} **/
 	@Test(expected = NoSuchElementException.class)
 	public void testAvgEmptyStream() throws Exception {
-		Streams.<Double> from().average(double_());
+		Cons.<Double> from().average(double_());
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void fold() {
 		Stream<Collection<String>> stream = //
-		Streams.<Collection<String>> from(Arrays.asList("foo", "baz"), Collections.singleton("bar"));
+		Cons.<Collection<String>> from(Arrays.asList("foo", "baz"), Collections.singleton("bar"));
 
 		Collection<String> result = stream.fold(
 			new ArrayList<String>(),
@@ -112,7 +112,7 @@ public class AbstractStreamBasicTest {
 	 */
 	@Test
 	public void testReduce() {
-		Stream<BigInteger> bigints = Streams.from(i(100), i(800), i(260));
+		Stream<BigInteger> bigints = Cons.from(i(100), i(800), i(260));
 		assertEquals(i(1160), bigints.reduce(bigInteger().add()));
 	}
 
@@ -121,7 +121,7 @@ public class AbstractStreamBasicTest {
 	 */
 	@Test
 	public void flatMap() throws Exception {
-		assertTrue(Streams//
+		assertTrue(Iterate//
 			.from(4, add(1))
 			.take(3)
 			.flatMap(new Function<Integer, Iterable<Integer>>() {
@@ -137,11 +137,11 @@ public class AbstractStreamBasicTest {
 	public void concat() {
 		assertEquals(
 			Arrays.asList(10, 90, 60, 1, 2, 20),
-			Streams.from(10, 90, 60).concat(Arrays.asList(1, 2)).concat(Streams.from(20)).toList());
+			Cons.from(10, 90, 60).concat(Arrays.asList(1, 2)).concat(Cons.from(20)).toList());
 
 		assertEquals(
 			Arrays.asList("foo"),
-			Streams.from("foo").concat(Streams.from(new AbstractUnmodifiableIterator<String>() {
+			Cons.from("foo").concat(Streams.from(new AbstractUnmodifiableIterator<String>() {
 				public boolean hasNext() {
 					return true;
 				}
@@ -156,28 +156,29 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void testIndexof() throws Exception {
 		assertEquals(3, Streams.from(Arrays.asList(12, 69, null, 1).iterator()).indexOf(1));
-		assertEquals(0, Streams.from(10, 90).indexOf(10));
-		assertEquals(-1, Streams.from(10, 90).indexOf(87));
+		assertEquals(0, Cons.from(10, 90).indexOf(10));
+		assertEquals(-1, Cons.from(10, 90).indexOf(87));
 	}
 
 	/** Tets for positionOf */
 	@Test
 	public void testPositionOf() throws Exception {
-		assertEquals(1, Streams.from(2, 10, 90).positionOf(10));
+		assertEquals(1, Cons.from(2, 10, 90).positionOf(10));
 	}
 
 	/** Tets for positionOf */
 	@Test(expected = NoSuchElementException.class)
 	public void testPositionOfBad() throws Exception {
-		Streams.from(10, 90).positionOf(87);
+		Cons.from(10, 90).positionOf(87);
 	}
 
 	/** Test for {@link Stream#intersperse(Object)} */
 	@Test
 	public void testIntersperse() throws Exception {
+		System.out.println(Cons.from(4, 5).intersperse(10).joinStrings(""));
 		assertTrue( //
-		Streams //
-			.from(Arrays.asList(4, 5, 6))
+		Cons //
+			.from(4, 5, 6)
 			.intersperse(1)
 			.equivalent(4, 1, 5, 1, 6));
 
@@ -195,7 +196,7 @@ public class AbstractStreamBasicTest {
 	 */
 	@Test
 	public void testIntersperseRepeatable() throws Exception {
-		Stream<Integer> interspersed = Streams.from(10, 20, 30).intersperse(1);
+		Stream<Integer> interspersed = Cons.from(10, 20, 30).intersperse(1);
 		assertEquals(10, (int) interspersed.first());
 		assertEquals(10, (int) interspersed.first());
 		assertEquals(1, (int) interspersed.second());
@@ -205,7 +206,7 @@ public class AbstractStreamBasicTest {
 	/** Test for {@link Stream#streamPartition(Evaluable)} */
 	@Test
 	public void testPartition() throws Exception {
-		Pair<Stream<Integer>, Stream<Integer>> partition = Streams
+		Pair<Stream<Integer>, Stream<Integer>> partition = Cons
 			.from(50, 60, 1, 6, 9, 10, 100)
 			.streamPartition(greaterThan(9));
 
@@ -218,7 +219,7 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void testReverse() throws Exception {
 		assertTrue(//
-		Streams //
+		Cons //
 			.from(50, 30, 9, 12, 0, 3, -5, null)
 			.reverse()
 			.equivalent(null, -5, 3, 0, 12, 9, 30, 50));
@@ -227,7 +228,7 @@ public class AbstractStreamBasicTest {
 	/** Test for {@link Stream#maximum()} */
 	@Test
 	public void testMaximum() throws Exception {
-		String max = Streams
+		String max = Cons
 			.from(
 				_(new Object(), 10, "hello"),
 				_(new Object(), 12, "foo"),
@@ -240,13 +241,13 @@ public class AbstractStreamBasicTest {
 			})
 			._3();
 		assertEquals("foo", max);
-		assertEquals(150, (int) Streams.from(90, 10, 30, 6, 150, 65).maximum());
+		assertEquals(150, (int) Cons.from(90, 10, 30, 6, 150, 65).maximum());
 	}
 
 	/** Test for {@link Stream#minimum()} */
 	@Test
 	public void testMinimum() throws Exception {
-		assertEquals(6, (int) Streams.from(90, 10, 30, 6, 150, 65).minimum());
+		assertEquals(6, (int) Cons.from(90, 10, 30, 6, 150, 65).minimum());
 	}
 
 	/** Test for {@link AbstractStream#groupBy(Evaluable2)} */

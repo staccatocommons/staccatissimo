@@ -15,13 +15,13 @@ package net.sf.staccatocommons.iterators;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.iterators.thriter.AdvanceThriter;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class CharSequenceIterator extends AdvanceThriter<Character> {
+public class CharSequenceIterator extends AdvanceThriterator<Character> {
 
 	private final CharSequence charSequence;
 	private int pos = 0;

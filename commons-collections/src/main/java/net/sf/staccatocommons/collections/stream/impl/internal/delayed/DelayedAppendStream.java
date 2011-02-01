@@ -10,36 +10,33 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl.internal;
+package net.sf.staccatocommons.collections.stream.impl.internal.delayed;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.iterators.DropIterator;
+import net.sf.staccatocommons.collections.stream.impl.internal.WrapperStream;
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.iterators.delayed.DelayedAppendIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class DropStream<A> extends WrapperStream<A> {
+public class DelayedAppendStream<A> extends WrapperStream<A> {
 
-	private final int amountOfElements;
+	private Thunk<A> element;
 
 	/**
-	 * Creates a new {@link DropStream}
+	 * Creates a new {@link DelayedAppendStream}
 	 */
-	public DropStream(@NonNull Stream<A> stream, int amountOfElements) {
-		super(stream);
-		this.amountOfElements = amountOfElements;
+	public DelayedAppendStream(@NonNull Stream<A> source, @NonNull Thunk<A> element) {
+		super(source);
+		this.element = element;
 	}
 
 	public Thriterator<A> iterator() {
-		return new DropIterator<A>(amountOfElements, getSource().iterator());
+		return new DelayedAppendIterator(getSource().iterator(), element);
 	}
 
-	@Override
-	public Stream<A> drop(@NotNegative int amountOfElements) {
-		return new DropStream<A>(getSource(), amountOfElements + this.amountOfElements);
-	}
 }

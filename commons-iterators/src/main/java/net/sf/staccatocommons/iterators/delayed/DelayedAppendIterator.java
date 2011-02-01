@@ -10,25 +10,27 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators.thriter;
+package net.sf.staccatocommons.iterators.delayed;
 
-import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.iterators.AppendIterator;
+import net.sf.staccatocommons.iterators.thriter.Thriter;
 
 /**
  * @author flbulgarelli
  * 
  */
-public abstract class NextThriter<A> extends AbstractUnmodifiableIterator<A> implements
-	Thriterator<A> {
+public class DelayedAppendIterator<A> extends AppendIterator<A> {
 
-	private A next;
-
-	public final void advance() {
-		next = next();
+	/**
+	 * Creates a new {@link DelayedAppendIterator}
+	 */
+	public DelayedAppendIterator(Thriter<? extends A> iterator, Thunk<A> element) {
+		super(iterator, (A) element);
 	}
 
-	public final A current() {
-		return next;
+	protected A elementValue() {
+		return ((Thunk<A>) super.elementValue()).value();
 	}
 
 }

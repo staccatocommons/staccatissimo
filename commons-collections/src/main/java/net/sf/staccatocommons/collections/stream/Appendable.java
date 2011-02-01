@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
+import net.sf.staccatocommons.defs.Thunk;
 
 /**
  * @author flbulgarelli
@@ -60,6 +61,8 @@ public interface Appendable<A> {
 	@ConditionallyRepeatable
 	Stream<A> append(A element);
 
+	Stream<A> delayedAppend(Thunk<A> element);
+
 	/**
 	 * Adds an element as the first one of the stream.
 	 * 
@@ -71,5 +74,7 @@ public interface Appendable<A> {
 	@Projection
 	@ConditionallyRepeatable
 	Stream<A> prepend(A element);
+
+	Stream<A> delayedPrepend(Thunk<A> element);
 
 }

@@ -12,32 +12,29 @@
  */
 package net.sf.staccatocommons.iterators.thriter;
 
-import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class MapThriter<A, B> extends AdvanceThriter<B> {
+public abstract class AbstractThriterator<A> extends AbstractUnmodifiableIterator<A> implements
+	Thriterator<A> {
 
-	final Applicable<? super A, ? extends B> function;
-	final Thriter<? extends A> thriter;
-
-	public MapThriter(Applicable<? super A, ? extends B> function, Thriter<? extends A> thriter) {
-		this.function = function;
-		this.thriter = thriter;
+	public Thunk<A> delayed() {
+		// TODO const provider
+		final A current = current();
+		return new Thunk<A>() {
+			public A value() {
+				return current;
+			}
+		};
 	}
 
-	public boolean hasNext() {
-		return thriter.hasNext();
-	}
-
-	public void advance() {
-		thriter.advance();
-	}
-
-	public B current() {
-		return function.apply(thriter.current());
+	public final Thunk<A> delayedNext() {
+		advance();
+		return delayed();
 	}
 
 }

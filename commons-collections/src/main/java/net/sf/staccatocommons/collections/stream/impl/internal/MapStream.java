@@ -16,7 +16,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.iterators.thriter.MapThriter;
+import net.sf.staccatocommons.iterators.MapIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.function.Functions;
 
@@ -38,7 +38,7 @@ public final class MapStream<A, B> extends AbstractStream<B> {
 	}
 
 	public Thriterator<B> iterator() {
-		return new MapThriter<A, B>(function, stream.iterator());
+		return new MapIterator<A, B>(function, stream.iterator());
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import static java.lang.Math.*;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.iterators.thriter.TakeThriter;
+import net.sf.staccatocommons.iterators.TakeIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
@@ -36,7 +36,7 @@ public final class TakeStream<A> extends WrapperStream<A> {
 	}
 
 	public Thriterator<A> iterator() {
-		return new TakeThriter<A>(amountOfElements, getSource().iterator());
+		return new TakeIterator<A>(amountOfElements, getSource().iterator());
 	}
 
 	@Override

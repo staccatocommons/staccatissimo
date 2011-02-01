@@ -19,7 +19,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.iterators.thriter.NextThriter;
+import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
@@ -44,7 +44,7 @@ public final class FlatMapStream<A, B> extends AbstractStream<B> {
 	public Thriterator<B> iterator() {
 
 		final Iterator<A> iter = stream.iterator();
-		return new NextThriter<B>() {
+		return new NextThriterator<B>() {
 			private Iterator<? extends B> subIter = null;
 
 			public boolean hasNext() {

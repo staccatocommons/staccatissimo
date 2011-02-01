@@ -10,37 +10,31 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl;
+package net.sf.staccatocommons.collections.stream.impl.internal.delayed;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
-import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.defs.restriction.Constant;
-import net.sf.staccatocommons.iterators.UndefinedIterator;
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.iterators.delayed.DelayedSingleIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class UndefinedStream<A> extends AbstractStream<A> {
+public class DelayedSingleStream<A> extends AbstractStream<A> {
 
-	private static final UndefinedStream INSTANCE = new UndefinedStream();
-
-	public Thriterator<A> iterator() {
-		return new UndefinedIterator<A>();
-	}
+	private final Thunk<A> thunk;
 
 	/**
-	 * Answers an undefined stream
-	 * 
-	 * @param <A>
-	 * @return a undefined {@link Stream}
+	 * Creates a new {@link DelayedSingleStream}
 	 */
-	@NonNull
-	@Constant
-	public static <A> Stream<A> undefined() {
-		return INSTANCE;
+	public DelayedSingleStream(@NonNull Thunk<A> thunk) {
+		this.thunk = thunk;
+	}
+
+	public Thriterator<A> iterator() {
+		return new DelayedSingleIterator<A>(thunk);
 	}
 
 }

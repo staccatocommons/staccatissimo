@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.iterators.thriter.AppendThriter;
+import net.sf.staccatocommons.iterators.AppendIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
@@ -33,7 +33,7 @@ public class AppendStream<A> extends WrapperStream<A> {
 	}
 
 	public Thriterator<A> iterator() {
-		return new AppendThriter(getSource().iterator(), element);
+		return new AppendIterator(getSource().iterator(), element);
 	}
 
 }

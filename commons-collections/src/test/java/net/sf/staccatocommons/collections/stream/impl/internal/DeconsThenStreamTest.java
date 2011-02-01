@@ -17,10 +17,10 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
+import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.collections.stream.DeconsFunction;
 import net.sf.staccatocommons.collections.stream.Deconstructable.DeconsApplicable;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.defs.Evaluable;
 
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class DeconsThenStreamTest {
 			public Stream<A> apply(A head, Stream<A> tail) {
 				if (pred.eval(head))
 					return dropWhile(pred, tail);
-				return Streams.from(head, tail);
+				return Cons.from(head, tail);
 			}
 		});
 	}
@@ -60,14 +60,14 @@ public class DeconsThenStreamTest {
 	 */
 	@Test
 	public void testThen() throws Exception {
-		assertEquals(Arrays.asList(1, 9, 2, 0), dropWhile(greaterThan(5), Streams.from(1, 9, 2, 0))
+		assertEquals(Arrays.asList(1, 9, 2, 0), dropWhile(greaterThan(5), Cons.from(1, 9, 2, 0))
 			.toList());
-		assertEquals(Arrays.asList(), dropWhile(greaterThanOrEqualTo(0), Streams.from(1, 9, 2, 0))
+		assertEquals(Arrays.asList(), dropWhile(greaterThanOrEqualTo(0), Cons.from(1, 9, 2, 0))
 			.toList());
 		assertEquals(
 			Arrays.asList(1, 9, 2, 0),
-			dropWhile(greaterThanOrEqualTo(2), Streams.from(1, 9, 2, 0)).toList());
-		assertEquals(Arrays.asList(0), dropWhile(greaterThanOrEqualTo(1), Streams.from(1, 9, 2, 0))
+			dropWhile(greaterThanOrEqualTo(2), Cons.from(1, 9, 2, 0)).toList());
+		assertEquals(Arrays.asList(0), dropWhile(greaterThanOrEqualTo(1), Cons.from(1, 9, 2, 0))
 			.toList());
 	}
 

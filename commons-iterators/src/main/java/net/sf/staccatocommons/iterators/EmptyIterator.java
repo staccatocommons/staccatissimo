@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
@@ -28,8 +29,7 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
  *          the element type
  * 
  */
-public final class EmptyIterator<T> extends AbstractUnmodifiableIterator<T> implements
-	Thriterator<T> {
+public final class EmptyIterator<T> extends AbstractThriterator<T> {
 
 	/**
 	 * @param <T>

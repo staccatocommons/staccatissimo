@@ -12,40 +12,20 @@
  */
 package net.sf.staccatocommons.iterators.thriter;
 
-import java.util.NoSuchElementException;
+import java.util.Iterator;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.restriction.Constant;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class UndefinedThriter<A> extends AdvanceThriter<A> {
-
-	private boolean advanced;
-
-	public boolean hasNext() {
-		return !advanced;
-	}
-
-	public void advance() throws NoSuchElementException {
-		advanced = true;
-	}
-
-	public A current() throws NoSuchElementException {
-		throw new RuntimeException("Undefined");
-	}
-
-	/**
-	 * Answers a {@link UndefinedThriter}
-	 * 
-	 * @param <A>
-	 * @return a undefined iterator
-	 */
-	@Constant
+public class Thriterators {
 	@NonNull
-	public static <A> Thriterator<A> undefined() {
-		return new UndefinedThriter();
+	public static <A> Thriterator<A> from(@NonNull Iterator<? extends A> iter) {
+		if (iter instanceof Thriterator)
+			return (Thriterator<A>) iter;
+		return new IteratorThriter<A>(iter);
 	}
+
 }

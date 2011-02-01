@@ -12,10 +12,11 @@
  */
 package net.sf.staccatocommons.iterators;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * An iterator that retrieves a single given element
@@ -23,7 +24,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
  * @author flbulgarelli
  * 
  */
-public class SingleIterator<A> extends AbstractUnmodifiableIterator<A> {
+public class SingleIterator<A> extends AdvanceThriterator<A> {
 
 	private final A element;
 	private boolean consumed;
@@ -39,10 +40,13 @@ public class SingleIterator<A> extends AbstractUnmodifiableIterator<A> {
 		return !consumed;
 	}
 
-	public A next() {
+	public void advance() throws NoSuchElementException {
 		if (!hasNext())
 			throw new NoSuchElementException();
 		consumed = true;
+	}
+
+	public A current() throws NoSuchElementException {
 		return element;
 	}
 
@@ -55,7 +59,7 @@ public class SingleIterator<A> extends AbstractUnmodifiableIterator<A> {
 	 * @return a new {@link SingleIterator}
 	 */
 	@NonNull
-	public static <A> Iterator<A> from(A element) {
+	public static <A> Thriterator<A> from(A element) {
 		return new SingleIterator<A>(element);
 	}
 }

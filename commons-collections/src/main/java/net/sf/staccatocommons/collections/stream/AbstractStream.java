@@ -45,14 +45,15 @@ import net.sf.staccatocommons.collections.stream.impl.internal.MapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeWhileStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ZipStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedAppendStream;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
-import net.sf.staccatocommons.iterators.thriter.NextThriter;
+import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
+import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.Compare;
@@ -342,11 +343,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	 * 
 	 */
 	public Stream<A> intersperse(final A sep) {
-		return then(new DeconsFunction<A, A>() {
-			public Stream<A> apply(A head, Stream<A> tail) {
+		return delayedThen(new DeconsFunction<A, A>() {
+			public Stream<A> delayedApply(Thunk<A> head, Stream<A> tail) {
 				if (tail.isEmpty())
-					return Streams.from(head);
-				return tail.intersperse(sep).prepend(sep).prepend(head);
+					return Cons.from(head);
+				return tail.intersperse(sep).prepend(sep).delayedPrepend(head);
 			}
 		});
 	}
@@ -355,8 +356,16 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new AppendStream<A>(this, element);
 	}
 
+	public Stream<A> delayedAppend(Thunk<A> element) {
+		return new DelayedAppendStream<A>(this, element);
+	}
+
 	public Stream<A> prepend(A element) {
-		return Streams.from(element, this);
+		return Cons.from(element, this);
+	}
+
+	public Stream<A> delayedPrepend(Thunk<A> element) {
+		return Cons.from(element, this);
 	}
 
 	public <B> Stream<B> then(final DeconsApplicable<A, B> function) {
@@ -375,8 +384,23 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new DeconsThenStream();
 	}
 
-	private static abstract class DynamicIterator<A> extends AbstractUnmodifiableIterator<A>
-		implements Thriterator<A> {
+	public <B> Stream<B> delayedThen(final DeconsApplicable<A, B> function) {
+		class DeconsDelayedThenStream extends AbstractStream<B> {
+			public Thriterator<B> iterator() {
+				return new DynamicIterator<B>() {
+					protected Thriterator<B> createIter() {
+						if (AbstractStream.this.isEmpty())
+							return function.emptyApply().iterator();
+						Pair<Thunk<A>, Stream<A>> decons = AbstractStream.this.delayedDecons();
+						return function.delayedApply(decons._1(), decons._2()).iterator();
+					}
+				};
+			}
+		}
+		return new DeconsDelayedThenStream();
+	}
+
+	private static abstract class DynamicIterator<A> extends AbstractThriterator<A> {
 
 		private Thriterator<A> iter;
 		private boolean evaluated;
@@ -421,6 +445,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		Iterator<A> iter = iterator();
 		validate.that(iter.hasNext(), "Empty streams have no head");
 		return _(iter.next(), Streams.from(iter));
+	}
+
+	public Pair<Thunk<A>, Stream<A>> delayedDecons() {
+		Thriterator<A> iter = iterator();
+		validate.that(iter.hasNext(), "Empty streams have no head");
+		return _(iter.delayedNext(), Streams.from(iter));
 	}
 
 	public Stream<A> tail() {
@@ -536,7 +566,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new AbstractStream<Stream<A>>() {
 			public Thriterator<Stream<A>> iterator() {
 				final Iterator<A> iter = AbstractStream.this.iterator();
-				return new NextThriter<Stream<A>>() {
+				return new NextThriterator<Stream<A>>() {
 
 					private List<A> list = new LinkedList<A>();
 					private A next;

@@ -10,34 +10,41 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators.thriter;
+package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 
 /**
- * Three-phase-iterator
- * 
  * @author flbulgarelli
  * 
  */
-public interface Thriter<A> {
+public class UndefinedIterator<A> extends AdvanceThriterator<A> {
 
-	boolean hasNext();
+	private boolean advanced;
 
-	void advance() throws NoSuchElementException;
+	public boolean hasNext() {
+		return !advanced;
+	}
 
-	/**
-	 * Answers current element of this {@link Thriter}. Result of this method if
-	 * {@link #advance()} was never called before is undefined.
-	 * 
-	 * @return the current element
-	 */
-	A current() throws NoSuchElementException;
+	public void advance() throws NoSuchElementException {
+		advanced = true;
+	}
 
-	Thunk<A> delayed();
+	public A current() throws NoSuchElementException {
+		if (advanced) {
+			throw new NoSuchElementException();
+		}
+		throw new RuntimeException("Undefined");
+	}
 
-	Thunk<A> delayedNext();
-
+	public Thunk<A> delayed() {
+		return new Thunk<A>() {
+			public A value() {
+				return current();
+			}
+		};
+	}
 }

@@ -10,22 +10,25 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl.internal;
+package net.sf.staccatocommons.iterators.delayed;
 
-import net.sf.staccatocommons.collections.stream.Cons;
-import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
+import java.util.NoSuchElementException;
+
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.iterators.SingleIterator;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class TakeIteratorUnitTest extends IterableTheories {
+public class DelayedSingleIterator<A> extends SingleIterator<A> {
 
-	protected Iterable<?> createTwoElementsIterable() {
-		return Cons.from(4, 5, 6).take(2);
+	public DelayedSingleIterator(Thunk<A> element) {
+		super((A) element);
 	}
 
-	protected Iterable<?> createOneElementIterable() {
-		return Cons.from(10, 15, 90).take(1);
+	public A current() throws NoSuchElementException {
+		return ((Thunk<A>) super.current()).value();
 	}
+
 }

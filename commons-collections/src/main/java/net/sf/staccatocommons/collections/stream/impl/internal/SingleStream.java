@@ -10,20 +10,29 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators.thriter;
+package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.collections.stream.AbstractStream;
+import net.sf.staccatocommons.iterators.SingleIterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
  * 
  */
-public abstract class AdvanceThriter<A> extends AbstractUnmodifiableIterator<A> implements
-	Thriterator<A> {
+public class SingleStream<A> extends AbstractStream<A> {
 
-	public final A next() {
-		advance();
-		return current();
+	private A element;
+
+	/**
+	 * Creates a new {@link SingleStream}
+	 */
+	public SingleStream(A element) {
+		this.element = element;
+	}
+
+	public Thriterator<A> iterator() {
+		return SingleIterator.from(element);
 	}
 
 }

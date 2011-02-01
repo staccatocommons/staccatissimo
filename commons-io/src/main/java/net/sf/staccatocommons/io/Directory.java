@@ -18,6 +18,7 @@ import java.util.Arrays;
 
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.lang.function.Function;
@@ -86,7 +87,7 @@ public class Directory {
 	 */
 	@NonNull
 	public Stream<File> getFileStream() {
-		return Streams.from(file.listFiles());
+		return Cons.from(file.listFiles());
 	}
 
 	/**
@@ -100,7 +101,7 @@ public class Directory {
 	 */
 	@NonNull
 	public Stream<File> getBreadthFirstFileStream() {
-		return Streams.from(file.listFiles()).then(BreadthFirst.INSTANCE);
+		return Cons.from(file.listFiles()).then(BreadthFirst.INSTANCE);
 	}
 
 	/**
@@ -114,12 +115,12 @@ public class Directory {
 	 */
 	@NonNull
 	public Stream<File> getDepthFirstFileStream() {
-		return Streams.from(file.listFiles())//
+		return Cons.from(file.listFiles())//
 			.flatMap(new Function<File, Stream<File>>() {
 				public Stream<File> apply(File arg) {
 					if (arg.isDirectory())
 						return new Directory(arg).getDepthFirstFileStream();
-					return Streams.from(arg);
+					return Cons.from(arg);
 				}
 			});
 	}

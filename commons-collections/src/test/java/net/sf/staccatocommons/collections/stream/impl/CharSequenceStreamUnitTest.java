@@ -29,16 +29,16 @@ public class CharSequenceStreamUnitTest extends RepetableStreamTheories {
 	/** Streams for testing */
 	@DataPoints
 	public static Stream[] streams = new Stream[] { //
-	Streams.fromChars(""),//
-			Streams.fromChars("hello"), //
-			Streams.fromChars("h") //
+	Streams.from(""),//
+			Streams.from("hello"), //
+			Streams.from("h") //
 	};
 
 	/** Test that joining a character stream returns back the original string */
 	@Test
 	public void testJoin() throws Exception {
 		String string = "hello world!";
-		assertEquals(string, Streams.fromChars(string).joinStrings(""));
+		assertEquals(string, Streams.from(string).joinStrings(""));
 	}
 
 }

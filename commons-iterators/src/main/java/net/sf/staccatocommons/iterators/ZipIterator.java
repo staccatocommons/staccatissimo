@@ -10,24 +10,25 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators.thriter;
+package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriter;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class ZipThriter<A, B, C> extends AdvanceThriter<C> {
+public class ZipIterator<A, B, C> extends AdvanceThriterator<C> {
 	final Thriter<A> thriter1;
 	final Thriter<B> thriter2;
 	final Applicable2<A, B, C> function;
 
-	// FIXME BUG! LIMIT TO LAZINESS
-	public ZipThriter(@NonNull Thriter<A> thriter1, @NonNull Thriter<B> thriter2,
+	public ZipIterator(@NonNull Thriter<A> thriter1, @NonNull Thriter<B> thriter2,
 		@NonNull Applicable2<A, B, C> function) {
 		this.thriter1 = thriter1;
 		this.thriter2 = thriter2;
@@ -46,4 +47,6 @@ public class ZipThriter<A, B, C> extends AdvanceThriter<C> {
 	public C current() throws NoSuchElementException {
 		return function.apply(thriter1.current(), thriter2.current());
 	}
+
+	// TODO override thunk
 }

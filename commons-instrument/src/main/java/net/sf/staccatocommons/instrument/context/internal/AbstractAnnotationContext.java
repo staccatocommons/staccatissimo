@@ -19,7 +19,7 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
 import net.sf.staccatocommons.lang.function.Function;
 
@@ -87,7 +87,7 @@ public abstract class AbstractAnnotationContext implements AnnotationContext {
 	 */
 	public Set<String> getPresentAnnotationsTypes(Object[] annotations) {
 		if (presentAnnotations == null) {
-			presentAnnotations = Streams.from(annotations).map(new Function<Object, String>() {
+			presentAnnotations = Cons.from(annotations).map(new Function<Object, String>() {
 				public String apply(Object arg) {
 					return arg.getClass().getName();
 				}

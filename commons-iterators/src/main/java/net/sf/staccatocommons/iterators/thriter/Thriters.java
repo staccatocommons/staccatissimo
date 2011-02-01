@@ -12,35 +12,18 @@
  */
 package net.sf.staccatocommons.iterators.thriter;
 
-import java.util.NoSuchElementException;
+import java.util.Iterator;
+
+import net.sf.staccatocommons.check.annotation.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class TakeThriter<A> extends AdvanceThriter<A> {
-
-	private int remaining;
-	private final Thriter<A> thriter;
-
-	public TakeThriter(int n, Thriter<A> thriter) {
-		this.thriter = thriter;
-		this.remaining = n;
-	}
-
-	public boolean hasNext() {
-		return remaining > 0 && thriter.hasNext();
-	}
-
-	public void advance() throws NoSuchElementException {
-		if (!hasNext())
-			throw new NoSuchElementException();
-		thriter.advance();
-		remaining--;
-	}
-
-	public A current() throws NoSuchElementException {
-		return thriter.current();
+public class Thriters {
+	@NonNull
+	public static <A> Thriter<A> from(@NonNull Iterator<? extends A> iter) {
+		return Thriterators.from(iter);
 	}
 
 }

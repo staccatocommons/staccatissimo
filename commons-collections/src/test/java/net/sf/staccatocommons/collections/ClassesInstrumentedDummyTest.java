@@ -14,7 +14,7 @@ package net.sf.staccatocommons.collections;
 
 import java.util.Arrays;
 
-import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.collections.stream.Cons;
 
 import org.junit.Test;
 
@@ -53,6 +53,6 @@ public class ClassesInstrumentedDummyTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testDrop_BadAmount() throws Exception {
-		Streams.from(90, 50, 30).drop(-2);
+		Cons.from(90, 50, 30).drop(-2);
 	}
 }

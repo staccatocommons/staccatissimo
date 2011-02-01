@@ -19,8 +19,8 @@ import java.util.Iterator;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.iterators.thriter.IteratorThriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
@@ -44,7 +44,7 @@ public final class IteratorStream<A> extends AbstractStream<A> {
 	 *          the iterator to wrap
 	 */
 	public IteratorStream(@NonNull Iterator<? extends A> iterator) {
-		this.iterator = IteratorThriter.from(iterator);
+		this.iterator = Thriterators.from(iterator);
 	}
 
 	public Thriterator<A> iterator() {

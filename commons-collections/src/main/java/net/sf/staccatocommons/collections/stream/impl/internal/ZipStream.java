@@ -15,9 +15,9 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.defs.Applicable2;
-import net.sf.staccatocommons.iterators.thriter.IteratorThriter;
+import net.sf.staccatocommons.iterators.ZipIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.iterators.thriter.ZipThriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 
 /**
  * @author flbulgarelli
@@ -42,9 +42,9 @@ public final class ZipStream<C, A, B> extends AbstractStream<C> {
 	}
 
 	public Thriterator<C> iterator() {
-		return new ZipThriter(
+		return new ZipIterator(
 			abstractStream.iterator(),
-			IteratorThriter.from(iterable.iterator()),
+			Thriterators.from(iterable.iterator()),
 			function);
 	}
 }

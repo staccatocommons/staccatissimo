@@ -10,51 +10,45 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators.thriter;
+package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.iterators.AppendIterator;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriter;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class AppendThriter<A> extends AdvanceThriter<A> {
+public class TakeIterator<A> extends AdvanceThriterator<A> {
 
-	private final Thriter<? extends A> iterator;
-	private final A element;
-	private boolean unconsumed = true;
+	private int remaining;
+	private final Thriter<A> thriter;
 
 	/**
-	 * 
-	 * Creates a new {@link AppendIterator}
+	 * Creates a new {@link TakeIterator} that takes up to {@code n} elements from
+	 * the given {@code thritter}
 	 */
-	public AppendThriter(@NonNull Thriter<? extends A> iterator, A element) {
-		this.iterator = iterator;
-		this.element = element;
+	public TakeIterator(int n, @NonNull Thriter<A> thriter) {
+		this.thriter = thriter;
+		this.remaining = n;
 	}
 
 	public boolean hasNext() {
-		if (iterator.hasNext())
-			return true;
-		return unconsumed;
+		return remaining > 0 && thriter.hasNext();
 	}
 
 	public void advance() throws NoSuchElementException {
-		if (iterator.hasNext())
-			iterator.advance();
-		else if (unconsumed)
-			unconsumed = false;
-		else
+		if (!hasNext())
 			throw new NoSuchElementException();
+		thriter.advance();
+		remaining--;
 	}
 
 	public A current() throws NoSuchElementException {
-		if (unconsumed)
-			return iterator.current();
-		return element;
+		return thriter.current();
 	}
 
 }

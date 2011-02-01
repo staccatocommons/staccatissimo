@@ -15,7 +15,6 @@ package net.sf.staccatocommons.collections.stream;
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.lang.function.Function;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -54,10 +53,9 @@ public class LazinessIntegrationTest {
 	}
 
 	/***/
-	@Ignore
 	@Test
 	public void testIntersparseAndSize() throws Exception {
-		Streams //
+		Cons //
 			.from(10, 20)
 			.concatUndefined()
 			.intersperse(1)
@@ -67,7 +65,7 @@ public class LazinessIntegrationTest {
 	/***/
 	@Test
 	public void testIntersparseAndTake() throws Exception {
-		assertTrue(Streams //
+		assertTrue(Cons //
 			.from(10, 20)
 			.concatUndefined()
 			.intersperse(1)
@@ -78,7 +76,7 @@ public class LazinessIntegrationTest {
 	/***/
 	@Test
 	public void testConcatAndSize() throws Exception {
-		int size = Streams //
+		int size = Cons //
 			.from(10)
 			.concatUndefined()
 			.size();
@@ -88,7 +86,8 @@ public class LazinessIntegrationTest {
 	/***/
 	@Test
 	public void testAppendAndSize() throws Exception {
-		int size = Streams //
+		int size = //
+		Cons //
 			.from(10)
 			.concatUndefined()
 			.append(20)
@@ -99,16 +98,17 @@ public class LazinessIntegrationTest {
 	/***/
 	@Test
 	public void testConsAndSize() throws Exception {
-		assertEquals(6, Streams //
-			.from(10, 20, 30)
-			.concatUndefined()
-			.prepend(20)
-			.prepend(30)
-			.size());
+		assertEquals(6,//
+			Cons //
+				.from(10, 20, 30)
+				.concatUndefined()
+				.prepend(20)
+				.prepend(30)
+				.size());
 	}
 
 	protected Stream<Integer> integersStream() {
-		return Streams.from(10, 20, 30, null, 50).map(new Function<Integer, Integer>() {
+		return Cons.from(10, 20, 30, null, 50).map(new Function<Integer, Integer>() {
 			public Integer apply(Integer arg) {
 				return arg - 0;
 			}

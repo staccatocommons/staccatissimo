@@ -20,7 +20,7 @@ import net.sf.staccatocommons.check.annotation.NonNull;
  * @author flbulgarelli
  * 
  */
-public class IteratorThriter<A> extends NextThriter<A> implements Thriterator<A> {
+public class IteratorThriter<A> extends NextThriterator<A> {
 
 	private final Iterator<? extends A> iter;
 
@@ -39,10 +39,4 @@ public class IteratorThriter<A> extends NextThriter<A> implements Thriterator<A>
 		return iter.next();
 	}
 
-	@NonNull
-	public static <A> Thriterator<A> from(@NonNull Iterator<? extends A> iter) {
-		if (iter instanceof Thriterator)
-			return (Thriterator<A>) iter;
-		return new IteratorThriter<A>(iter);
-	}
 }

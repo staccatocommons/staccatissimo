@@ -10,22 +10,22 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl.internal;
+package net.sf.staccatocommons.iterators.thriter;
 
-import net.sf.staccatocommons.collections.stream.Cons;
-import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class TakeIteratorUnitTest extends IterableTheories {
+public abstract class NextThriterator<A> extends AbstractThriterator<A> {
 
-	protected Iterable<?> createTwoElementsIterable() {
-		return Cons.from(4, 5, 6).take(2);
+	private A next;
+
+	public final void advance() {
+		next = next();
 	}
 
-	protected Iterable<?> createOneElementIterable() {
-		return Cons.from(10, 15, 90).take(1);
+	public final A current() {
+		return next;
 	}
 }

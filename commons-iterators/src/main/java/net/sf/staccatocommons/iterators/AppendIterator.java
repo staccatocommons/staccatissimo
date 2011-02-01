@@ -16,16 +16,18 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriter;
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriters;
 
 /**
- * An Iterator that iterates first over another iterator and then over an
- * element.
- * 
  * @author flbulgarelli
+ * 
  */
-public class AppendIterator<A> extends AbstractUnmodifiableIterator<A> {
+public class AppendIterator<A> extends AdvanceThriterator<A> {
 
-	private final Iterator<A> iterator;
+	private final Thriter<? extends A> iterator;
 	private final A element;
 	private boolean unconsumed = true;
 
@@ -33,27 +35,42 @@ public class AppendIterator<A> extends AbstractUnmodifiableIterator<A> {
 	 * 
 	 * Creates a new {@link AppendIterator}
 	 */
-	public AppendIterator(@NonNull Iterator<A> iterator, A element) {
+	public AppendIterator(@NonNull Thriter<? extends A> iterator, A element) {
 		this.iterator = iterator;
 		this.element = element;
 	}
 
-	public boolean hasNext() {
+	public AppendIterator(@NonNull Iterator<? extends A> iterator, A element) {
+		this(Thriters.from(iterator), element);
+	}
+
+	public AppendIterator(@NonNull Thriterator<? extends A> iterator, A element) {
+		this((Thriter<? extends A>) iterator, element);
+	}
+
+	public final boolean hasNext() {
 		if (iterator.hasNext())
 			return true;
 		return unconsumed;
 	}
 
-	public A next() {
+	public final void advance() throws NoSuchElementException {
 		if (iterator.hasNext())
-			return iterator.next();
-
-		if (unconsumed) {
+			iterator.advance();
+		else if (unconsumed)
 			unconsumed = false;
-			return element;
-		}
+		else
+			throw new NoSuchElementException();
+	}
 
-		throw new NoSuchElementException();
+	public final A current() throws NoSuchElementException {
+		if (unconsumed)
+			return iterator.current();
+		return elementValue();
+	}
+
+	protected A elementValue() {
+		return element;
 	}
 
 }

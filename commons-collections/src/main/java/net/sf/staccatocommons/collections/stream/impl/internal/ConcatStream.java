@@ -17,11 +17,12 @@ import java.util.NoSuchElementException;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.iterators.thriter.AdvanceThriter;
-import net.sf.staccatocommons.iterators.thriter.IteratorThriter;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 
 /**
  * @author flbulgarelli
@@ -40,7 +41,7 @@ public final class ConcatStream<A> extends AbstractStream<A> {
 	}
 
 	public Thriterator<A> iterator() {
-		return new AdvanceThriter<A>() {
+		return new AdvanceThriterator<A>() {
 			private Thriter<A> iter = stream.iterator();
 			private boolean second = false;
 
@@ -51,7 +52,7 @@ public final class ConcatStream<A> extends AbstractStream<A> {
 				if (second)
 					return false;
 
-				iter = IteratorThriter.from(other.iterator());
+				iter = Thriterators.from(other.iterator());
 				second = true;
 				return iter.hasNext();
 			}
@@ -62,6 +63,10 @@ public final class ConcatStream<A> extends AbstractStream<A> {
 
 			public A current() throws NoSuchElementException {
 				return iter.current();
+			}
+
+			public Thunk<A> delayed() {
+				return iter.delayed();
 			}
 		};
 	}

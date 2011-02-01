@@ -40,11 +40,11 @@ public class StreamsUnitTest {
 	@Test
 	public void testFromSeq() {
 		assertEquals(
-			Streams.from(10, add(20), upTo(50)).toList(),
+			Iterate.from(10, add(20), upTo(50)).toList(),
 			Streams.from(Sequence.fromToBy(10, 50, 20)).toList());
 
 		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),//
-			Streams.from(1, add(1)).take(10).toList());
+			Iterate.from(1, add(1)).take(10).toList());
 
 	}
 

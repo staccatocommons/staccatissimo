@@ -10,20 +10,27 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators.thriter;
+package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
+
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriter;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class DropThriter<A> extends AdvanceThriter<A> {
+public class DropIterator<A> extends AdvanceThriterator<A> {
 
 	private int n;
 	private final Thriter<A> thriter;
 
-	public DropThriter(int n, Thriter<A> thriter) {
+	/**
+	 * Creates a new {@link DropIterator}
+	 */
+	public DropIterator(int n, @NonNull Thriter<A> thriter) {
 		this.n = n;
 		this.thriter = thriter;
 	}
