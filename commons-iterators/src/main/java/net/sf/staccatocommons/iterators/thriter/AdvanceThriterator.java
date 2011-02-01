@@ -19,7 +19,7 @@ package net.sf.staccatocommons.iterators.thriter;
 public abstract class AdvanceThriterator<A> extends AbstractThriterator<A> {
 
 	public final A next() {
-		advance();
+		advanceNext();
 		return current();
 	}
 

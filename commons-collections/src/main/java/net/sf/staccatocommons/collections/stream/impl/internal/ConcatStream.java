@@ -57,8 +57,8 @@ public final class ConcatStream<A> extends AbstractStream<A> {
 				return iter.hasNext();
 			}
 
-			public void advance() throws NoSuchElementException {
-				iter.advance();
+			public void advanceNext() throws NoSuchElementException {
+				iter.advanceNext();
 			}
 
 			public A current() throws NoSuchElementException {

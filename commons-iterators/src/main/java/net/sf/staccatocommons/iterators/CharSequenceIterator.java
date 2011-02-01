@@ -40,7 +40,7 @@ public class CharSequenceIterator extends AdvanceThriterator<Character> {
 		return pos < charSequence.length();
 	}
 
-	public void advance() throws NoSuchElementException {
+	public void advanceNext() throws NoSuchElementException {
 		if (pos == charSequence.length())
 			throw new NoSuchElementException();
 		pos++;

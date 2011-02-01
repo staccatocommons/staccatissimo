@@ -33,7 +33,7 @@ public abstract class AbstractThriterator<A> extends AbstractUnmodifiableIterato
 	}
 
 	public final Thunk<A> delayedNext() {
-		advance();
+		advanceNext();
 		return delayedCurrent();
 	}
 

@@ -40,16 +40,16 @@ public class DropIterator<A> extends AdvanceThriterator<A> {
 		while (n > 0) {
 			if (!thriter.hasNext())
 				return false;
-			thriter.advance();
+			thriter.advanceNext();
 			n--;
 		}
 		return thriter.hasNext();
 	}
 
-	public void advance() {
+	public void advanceNext() {
 		if (!hasNext())
 			throw new NoSuchElementException();
-		thriter.advance();
+		thriter.advanceNext();
 	}
 
 	public A current() {

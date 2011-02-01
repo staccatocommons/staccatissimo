@@ -40,8 +40,8 @@ public class MapIterator<A, B> extends AdvanceThriterator<B> {
 		return thriter.hasNext();
 	}
 
-	public void advance() {
-		thriter.advance();
+	public void advanceNext() {
+		thriter.advanceNext();
 	}
 
 	public B current() {

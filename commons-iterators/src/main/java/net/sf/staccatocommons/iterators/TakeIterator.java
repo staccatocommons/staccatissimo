@@ -41,10 +41,10 @@ public class TakeIterator<A> extends AdvanceThriterator<A> {
 		return remaining > 0 && thriter.hasNext();
 	}
 
-	public void advance() throws NoSuchElementException {
+	public void advanceNext() throws NoSuchElementException {
 		if (!hasNext())
 			throw new NoSuchElementException();
-		thriter.advance();
+		thriter.advanceNext();
 		remaining--;
 	}
 

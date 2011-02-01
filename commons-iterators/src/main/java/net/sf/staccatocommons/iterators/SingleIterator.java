@@ -40,7 +40,7 @@ public class SingleIterator<A> extends AdvanceThriterator<A> {
 		return !consumed;
 	}
 
-	public void advance() throws NoSuchElementException {
+	public void advanceNext() throws NoSuchElementException {
 		if (!hasNext())
 			throw new NoSuchElementException();
 		consumed = true;

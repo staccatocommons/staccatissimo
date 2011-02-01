@@ -54,9 +54,9 @@ public class AppendIterator<A> extends AdvanceThriterator<A> {
 		return unconsumed;
 	}
 
-	public final void advance() throws NoSuchElementException {
+	public final void advanceNext() throws NoSuchElementException {
 		if (iterator.hasNext())
-			iterator.advance();
+			iterator.advanceNext();
 		else if (unconsumed)
 			unconsumed = false;
 		else

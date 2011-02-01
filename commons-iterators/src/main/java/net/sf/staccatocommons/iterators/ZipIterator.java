@@ -39,9 +39,9 @@ public class ZipIterator<A, B, C> extends AdvanceThriterator<C> {
 		return thriter1.hasNext() && thriter2.hasNext();
 	}
 
-	public void advance() throws NoSuchElementException {
-		thriter1.advance();
-		thriter2.advance();
+	public void advanceNext() throws NoSuchElementException {
+		thriter1.advanceNext();
+		thriter2.advanceNext();
 	}
 
 	public C current() throws NoSuchElementException {

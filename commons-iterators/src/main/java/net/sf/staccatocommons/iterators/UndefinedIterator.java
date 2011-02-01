@@ -29,7 +29,7 @@ public class UndefinedIterator<A> extends AdvanceThriterator<A> {
 		return !advanced;
 	}
 
-	public void advance() throws NoSuchElementException {
+	public void advanceNext() throws NoSuchElementException {
 		advanced = true;
 	}
 

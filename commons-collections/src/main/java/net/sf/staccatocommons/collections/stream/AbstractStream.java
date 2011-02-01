@@ -83,7 +83,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		int size = 0;
 		Thriter<A> iter = this.iterator();
 		while (iter.hasNext()) {
-			iter.advance();
+			iter.advanceNext();
 			size++;
 		}
 		return size;
@@ -232,7 +232,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		Thriterator<A> iter = this.iterator();
 		for (int i = 0; i <= n; i++)
 			try {
-				iter.advance();
+				iter.advanceNext();
 			} catch (NoSuchElementException e) {
 				throw new IndexOutOfBoundsException("At " + n);
 			}
@@ -415,9 +415,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
 			return iter.next();
 		}
 
-		public void advance() throws NoSuchElementException {
+		public void advanceNext() throws NoSuchElementException {
 			checkDynamic();
-			iter.advance();
+			iter.advanceNext();
 		}
 
 		public A current() throws NoSuchElementException {

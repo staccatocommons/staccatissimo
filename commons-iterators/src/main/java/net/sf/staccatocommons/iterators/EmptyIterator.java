@@ -52,7 +52,7 @@ public final class EmptyIterator<T> extends AbstractThriterator<T> {
 		throw new NoSuchElementException("Empty Iterator");
 	}
 
-	public void advance() throws NoSuchElementException {
+	public void advanceNext() throws NoSuchElementException {
 		next();
 	}
 

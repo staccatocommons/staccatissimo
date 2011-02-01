@@ -21,7 +21,7 @@ public abstract class NextThriterator<A> extends AbstractThriterator<A> {
 
 	private A next;
 
-	public final void advance() {
+	public final void advanceNext() {
 		next = next();
 	}
 

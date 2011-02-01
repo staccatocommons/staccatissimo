@@ -51,11 +51,11 @@ public class ConsIterator<A> extends AdvanceThriterator<A> {
 		return !headConsumed || tail.hasNext();
 	}
 
-	public final void advance() throws NoSuchElementException {
+	public final void advanceNext() throws NoSuchElementException {
 		if (!headConsumed) {
 			headConsumed = true;
 		} else {
-			tail.advance();
+			tail.advanceNext();
 			tailAdvanced = true;
 		}
 	}

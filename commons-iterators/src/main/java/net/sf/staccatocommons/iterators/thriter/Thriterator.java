@@ -15,8 +15,12 @@ package net.sf.staccatocommons.iterators.thriter;
 import java.util.Iterator;
 
 /**
- * @author flbulgarelli
+ * An object that both implements {@link Iterator} and {@link Thriter}
  * 
+ * @author flbulgarelli
+ * @see AbstractThriterator
+ * @param <A>
+ *          the type of elements retrieved by this {@link Thriterator}
  */
 public interface Thriterator<A> extends Thriter<A>, Iterator<A> {
 
