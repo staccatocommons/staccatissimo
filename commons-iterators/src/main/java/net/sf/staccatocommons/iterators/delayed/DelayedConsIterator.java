@@ -33,6 +33,8 @@ public class DelayedConsIterator<A> extends ConsIterator<A> {
 		return ((Thunk<A>) super.headValue()).value();
 	}
 
-	// TODO override delayedCurrent
+	protected Thunk<A> headThunk() {
+		return (Thunk<A>) super.headValue();
+	}
 
 }

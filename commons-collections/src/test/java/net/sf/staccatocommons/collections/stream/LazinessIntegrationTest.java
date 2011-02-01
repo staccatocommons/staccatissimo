@@ -14,6 +14,8 @@ package net.sf.staccatocommons.collections.stream;
 
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.lang.function.Function;
+import net.sf.staccatocommons.lang.provider.Provider;
+import net.sf.staccatocommons.lang.provider.Providers;
 
 import org.junit.Test;
 
@@ -71,6 +73,23 @@ public class LazinessIntegrationTest {
 			.intersperse(1)
 			.take(4)
 			.equivalent(10, 1, 20, 1));
+	}
+
+	/***/
+	@Test
+	public void testIntersparseAndAppend() throws Exception {
+		assertEquals(25, (int) Cons //
+			.from(10, 20)
+			.append(21)
+			.append(Providers.constant(22))
+			.append(new Provider<Integer>() {
+				public Integer call() throws Exception {
+					throw new Exception();
+				}
+			})
+			.append(Providers.constant(25))
+			.intersperse(1)
+			.last());
 	}
 
 	/***/

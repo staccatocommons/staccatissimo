@@ -1,6 +1,6 @@
 /*
- Copyright (c) 2011, The Staccato-Commons Team
-
+ Copyright (c) 2011, The Staccato-Commons Team   
+ 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation; version 3 of the License.
@@ -10,26 +10,30 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators.thriter;
+package net.sf.staccatocommons.iterators.thriter.internal;
 
+import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
-import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
 
 /**
  * @author flbulgarelli
  * 
+ * @param <T>
+ * 
  */
-public abstract class AbstractThriterator<A> extends AbstractUnmodifiableIterator<A> implements
-	Thriterator<A> {
+public final class ConstantThunk<T> implements Thunk<T> {
 
-	public Thunk<A> delayedCurrent() {
-		return new ConstantThunk<A>(current());
+	private final T value;
+
+	/**
+	 * Creates a new {@link ConstantThunk}
+	 */
+	public ConstantThunk(@NonNull T value) {
+		this.value = value;
 	}
 
-	public final Thunk<A> delayedNext() {
-		advanceNext();
-		return delayedCurrent();
+	public T value() {
+		return value;
 	}
 
 }

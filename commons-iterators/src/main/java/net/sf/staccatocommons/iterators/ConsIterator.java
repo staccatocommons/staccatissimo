@@ -15,10 +15,12 @@ package net.sf.staccatocommons.iterators;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriters;
+import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
 
 /**
  * @author flbulgarelli
@@ -70,6 +72,14 @@ public class ConsIterator<A> extends AdvanceThriterator<A> {
 		return head;
 	}
 
-	// TODO override delayedCurrent
+	protected Thunk<A> headThunk() {
+		return new ConstantThunk<A>(head);
+	}
+
+	public Thunk<A> delayedCurrent() {
+		if (tailAdvanced)
+			return (Thunk<A>) tail.delayedCurrent();
+		return headThunk();
+	}
 
 }

@@ -61,7 +61,17 @@ public interface Appendable<A> {
 	@ConditionallyRepeatable
 	Stream<A> append(A element);
 
-	Stream<A> append(Thunk<A> element);
+	/**
+	 * Adds an element's thunk as the last one of the stream.
+	 * 
+	 * @param thunk
+	 * @return a new {@link Stream} that retrieves this {@link Stream} elements,
+	 *         and then, the value of the given <code>thunk</code>
+	 */
+	@NonNull
+	@Projection
+	@ConditionallyRepeatable
+	Stream<A> append(@NonNull Thunk<A> thunk);
 
 	/**
 	 * Adds an element as the first one of the stream.
@@ -75,6 +85,16 @@ public interface Appendable<A> {
 	@ConditionallyRepeatable
 	Stream<A> prepend(A element);
 
-	Stream<A> prepend(Thunk<A> element);
+	/**
+	 * Adds an element's thunk as the first one of the stream.
+	 * 
+	 * @param thunk
+	 * @return a new {@link Stream} that retrieves the value of the given
+	 *         <code>thunk</code>, and then, this {@link Stream} elements.
+	 */
+	@NonNull
+	@Projection
+	@ConditionallyRepeatable
+	Stream<A> prepend(@NonNull Thunk<A> thunk);
 
 }
