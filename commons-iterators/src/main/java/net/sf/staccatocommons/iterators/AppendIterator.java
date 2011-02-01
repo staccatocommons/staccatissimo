@@ -73,4 +73,6 @@ public class AppendIterator<A> extends AdvanceThriterator<A> {
 		return element;
 	}
 
+	// TODO override delayedCurrent
+
 }

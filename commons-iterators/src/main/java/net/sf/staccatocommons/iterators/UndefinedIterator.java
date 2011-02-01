@@ -40,7 +40,7 @@ public class UndefinedIterator<A> extends AdvanceThriterator<A> {
 		throw new RuntimeException("Undefined");
 	}
 
-	public Thunk<A> delayed() {
+	public Thunk<A> delayedCurrent() {
 		return new Thunk<A>() {
 			public A value() {
 				return current();

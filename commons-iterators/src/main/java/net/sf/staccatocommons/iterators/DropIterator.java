@@ -15,6 +15,7 @@ package net.sf.staccatocommons.iterators;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 
@@ -53,6 +54,10 @@ public class DropIterator<A> extends AdvanceThriterator<A> {
 
 	public A current() {
 		return thriter.current();
+	}
+
+	public Thunk<A> delayedCurrent() {
+		return thriter.delayedCurrent();
 	}
 
 }

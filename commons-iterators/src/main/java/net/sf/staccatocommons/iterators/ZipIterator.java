@@ -48,5 +48,5 @@ public class ZipIterator<A, B, C> extends AdvanceThriterator<C> {
 		return function.apply(thriter1.current(), thriter2.current());
 	}
 
-	// TODO override thunk
+	// TODO override delayedCurrent
 }

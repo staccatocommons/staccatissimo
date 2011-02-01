@@ -347,7 +347,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 			public Stream<A> delayedApply(Thunk<A> head, Stream<A> tail) {
 				if (tail.isEmpty())
 					return Cons.from(head);
-				return tail.intersperse(sep).prepend(sep).delayedPrepend(head);
+				return tail.intersperse(sep).prepend(sep).prepend(head);
 			}
 		});
 	}
@@ -356,7 +356,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new AppendStream<A>(this, element);
 	}
 
-	public Stream<A> delayedAppend(Thunk<A> element) {
+	public Stream<A> append(Thunk<A> element) {
 		return new DelayedAppendStream<A>(this, element);
 	}
 
@@ -364,7 +364,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return Cons.from(element, this);
 	}
 
-	public Stream<A> delayedPrepend(Thunk<A> element) {
+	public Stream<A> prepend(Thunk<A> element) {
 		return Cons.from(element, this);
 	}
 

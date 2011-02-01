@@ -65,8 +65,8 @@ public final class ConcatStream<A> extends AbstractStream<A> {
 				return iter.current();
 			}
 
-			public Thunk<A> delayed() {
-				return iter.delayed();
+			public Thunk<A> delayedCurrent() {
+				return iter.delayedCurrent();
 			}
 		};
 	}

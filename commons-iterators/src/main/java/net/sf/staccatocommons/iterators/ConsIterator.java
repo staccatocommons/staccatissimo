@@ -15,7 +15,6 @@ package net.sf.staccatocommons.iterators;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
@@ -64,13 +63,13 @@ public class ConsIterator<A> extends AdvanceThriterator<A> {
 	public final A current() throws NoSuchElementException {
 		if (tailAdvanced)
 			return tail.current();
-		if (headValue() instanceof Thunk) // XXX HACK!
-			return ((Thunk<A>) headValue()).value();
 		return headValue();
 	}
 
 	protected A headValue() {
 		return head;
 	}
+
+	// TODO override delayedCurrent
 
 }

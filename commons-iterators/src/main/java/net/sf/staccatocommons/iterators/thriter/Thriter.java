@@ -36,7 +36,7 @@ public interface Thriter<A> {
 	 */
 	A current() throws NoSuchElementException;
 
-	Thunk<A> delayed();
+	Thunk<A> delayedCurrent();
 
 	Thunk<A> delayedNext();
 

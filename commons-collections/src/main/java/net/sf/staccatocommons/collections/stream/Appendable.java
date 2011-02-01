@@ -61,7 +61,7 @@ public interface Appendable<A> {
 	@ConditionallyRepeatable
 	Stream<A> append(A element);
 
-	Stream<A> delayedAppend(Thunk<A> element);
+	Stream<A> append(Thunk<A> element);
 
 	/**
 	 * Adds an element as the first one of the stream.
@@ -75,6 +75,6 @@ public interface Appendable<A> {
 	@ConditionallyRepeatable
 	Stream<A> prepend(A element);
 
-	Stream<A> delayedPrepend(Thunk<A> element);
+	Stream<A> prepend(Thunk<A> element);
 
 }

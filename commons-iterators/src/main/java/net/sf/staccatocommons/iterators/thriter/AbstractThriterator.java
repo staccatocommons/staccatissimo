@@ -22,7 +22,7 @@ import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
 public abstract class AbstractThriterator<A> extends AbstractUnmodifiableIterator<A> implements
 	Thriterator<A> {
 
-	public Thunk<A> delayed() {
+	public Thunk<A> delayedCurrent() {
 		// TODO const provider
 		final A current = current();
 		return new Thunk<A>() {
@@ -34,7 +34,7 @@ public abstract class AbstractThriterator<A> extends AbstractUnmodifiableIterato
 
 	public final Thunk<A> delayedNext() {
 		advance();
-		return delayed();
+		return delayedCurrent();
 	}
 
 }

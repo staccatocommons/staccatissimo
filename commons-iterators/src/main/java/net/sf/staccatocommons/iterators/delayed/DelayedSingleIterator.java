@@ -31,4 +31,8 @@ public class DelayedSingleIterator<A> extends SingleIterator<A> {
 		return ((Thunk<A>) super.current()).value();
 	}
 
+	public Thunk<A> delayedCurrent() {
+		return (Thunk<A>) super.current();
+	}
+
 }

@@ -33,4 +33,6 @@ public class DelayedAppendIterator<A> extends AppendIterator<A> {
 		return ((Thunk<A>) super.elementValue()).value();
 	}
 
+	// TODO override delayedCurrent
+
 }
