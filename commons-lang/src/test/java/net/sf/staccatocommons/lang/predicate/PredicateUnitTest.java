@@ -12,8 +12,7 @@
  */
 package net.sf.staccatocommons.lang.predicate;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Evaluable;
 
 import org.junit.Before;

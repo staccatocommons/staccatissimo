@@ -12,12 +12,12 @@
  */
 package net.sf.staccatocommons.lang.block;
 
+import net.sf.staccatocommons.applicables.NullSafe;
+import net.sf.staccatocommons.applicables.impl.AbstractDelayable2;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Executable2;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
  * 
@@ -26,17 +26,17 @@ import net.sf.staccatocommons.lang.provider.Provider;
  * @param <T1>
  * @param <T2>
  */
-public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2<T1, T2, Void>,
-	Applicable<T1, Block<T2>> {
+public abstract class Block2<T1, T2> extends AbstractDelayable2<T1, T2, Void> implements
+	Executable2<T1, T2>, Applicable<T1, Block<T2>>, NullSafe<Block2<T1, T2>> {
 
 	/**
 	 * Executes this block. This implementation just invokes
 	 * {@link #softExec(Object, Object)}, and softens any exception it may throw.
 	 * Subclasses may override this behavior.
 	 */
-	public void exec(T1 argument1, T2 argument2) {
+	public void exec(T1 arg0, T2 arg1) {
 		try {
-			softExec(argument1, argument2);
+			softExec(arg0, arg1);
 		} catch (Exception e) {
 			throw SoftException.soften(e);
 		}
@@ -61,26 +61,19 @@ public abstract class Block2<T1, T2> implements Executable2<T1, T2>, Applicable2
 		};
 	}
 
-	/**
-	 * Delays execution of this block by returning a void provider that will
-	 * evaluate <code>exec(arg1, arg2)</code> each time its value is required
-	 * 
-	 * @param arg1
-	 * @param arg2
-	 * @return a new void {@link Provider}
-	 */
-	@NonNull
-	public Provider<Void> delayed(final T1 arg1, final T2 arg2) {
-		return new Provider<Void>() {
-			public Void value() {
-				return apply(arg1, arg2);
-			}
-		};
-	}
-
 	public Void apply(T1 arg1, T2 arg2) {
 		exec(arg1, arg2);
 		return null;
+	}
+
+	public Block2<T1, T2> nullSafe() {
+		return new Block2<T1, T2>() {
+			public void exec(T1 arg0, T2 arg1) {
+				if (arg0 == null || arg1 == null)
+					return;
+				Block2.this.exec(arg0, arg1);
+			};
+		};
 	}
 
 	/**

@@ -38,10 +38,10 @@ public interface Executable3<T1, T2, T3> {
 	 * Performing a side-effect computation.
 	 * 
 	 * @see Executable#exec(Object)
+	 * @param arg0
 	 * @param arg1
 	 * @param arg2
-	 * @param arg3
 	 */
-	void exec(T1 arg1, T2 arg2, T3 arg3);
+	void exec(T1 arg0, T2 arg1, T3 arg2);
 
 }

@@ -57,6 +57,11 @@
 			<artifactId>commons-iterators</artifactId>
 			<version>1.0-alpha-4-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.staccatocommons</groupId>
+			<artifactId>commons-applicables</artifactId>
+			<version>1.0-alpha-4-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>

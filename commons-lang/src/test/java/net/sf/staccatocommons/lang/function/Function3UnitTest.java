@@ -13,6 +13,8 @@
 package net.sf.staccatocommons.lang.function;
 
 import static org.junit.Assert.*;
+import net.sf.staccatocommons.applicables.impl.AbstractFunction;
+import net.sf.staccatocommons.applicables.impl.AbstractFunction3;
 import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
@@ -23,21 +25,21 @@ import org.junit.Test;
 
 /**
  * 
- * Test for {@link Function3}
+ * Test for {@link AbstractFunction3}
  * 
  * @author flbulgarelli
  * 
  */
 public class Function3UnitTest extends JUnit4MockObjectTestCase {
 
-	Function3<Integer, String, Boolean, Character> function;
+	AbstractFunction3<Integer, String, Boolean, Character> function;
 	Applicable3<Integer, String, Boolean, Character> applicable;
 
 	/** Instantiates both function and applicable */
 	@Before
 	public void setup() {
 		applicable = mock(Applicable3.class);
-		function = new Function3<Integer, String, Boolean, Character>() {
+		function = new AbstractFunction3<Integer, String, Boolean, Character>() {
 			public Character apply(Integer arg1, String arg2, Boolean arg3) {
 				return applicable.apply(arg1, arg2, arg3);
 			}
@@ -46,8 +48,8 @@ public class Function3UnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.Function3#apply(java.lang.Object, java.lang.Object)}
-	 * and {@link Function3#apply(Object, Object, Object)} .
+	 * {@link net.sf.staccatocommons.lang.function.AbstractFunction3#apply(java.lang.Object, java.lang.Object)}
+	 * and {@link AbstractFunction3#apply(Object, Object, Object)} .
 	 */
 	@Test
 	public void testApply() {
@@ -64,17 +66,17 @@ public class Function3UnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.Function3#toString()}.
+	 * {@link net.sf.staccatocommons.lang.function.AbstractFunction3#toString()}.
 	 */
 	@Test
 	public void testToString() {
 		assertEquals("Function3", function.toString());
 	}
 
-	/** Test for {@link Function3#lazy(Object, Object, Object)} */
+	/** Test for {@link AbstractFunction3#delayed(Object, Object, Object)} */
 	@Test
 	public void testLazy() throws Exception {
-		Thunk<Character> lazy = function.lazy(5, "foo", true);
+		Thunk<Character> lazy = function.delayed(5, "foo", true);
 		checking(new Expectations() {
 			{
 				one(applicable).apply(5, "foo", true);
@@ -87,11 +89,11 @@ public class Function3UnitTest extends JUnit4MockObjectTestCase {
 	}
 
 	/**
-	 * Test for {@link Function#nullSafe()}
+	 * Test for {@link AbstractFunction#nullSafe()}
 	 */
 	@Test
 	public void testNullSafe() throws Exception {
-		Function3<Integer, Integer, Integer, Integer> add = new Function3<Integer, Integer, Integer, Integer>() {
+		AbstractFunction3<Integer, Integer, Integer, Integer> add = new AbstractFunction3<Integer, Integer, Integer, Integer>() {
 			public Integer apply(Integer arg1, Integer arg2, Integer arg3) {
 				return arg1 + arg2 + arg3;
 			}

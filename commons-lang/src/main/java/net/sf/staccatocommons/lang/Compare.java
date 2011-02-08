@@ -14,6 +14,8 @@ package net.sf.staccatocommons.lang;
 
 import java.util.Comparator;
 
+import net.sf.staccatocommons.applicables.function.Function2;
+import net.sf.staccatocommons.applicables.impl.AbstractFunction2;
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
@@ -183,6 +185,40 @@ public class Compare {
 	@ForceChecks
 	public static <T extends Comparable<T>> T max(@NonNull T c1, @NonNull T c2) {
 		return c1.compareTo(c2) >= 0 ? c1 : c2;
+	}
+
+	/**
+	 * Answers a new {@link AbstractFunction2} that returns the min of its arguments using
+	 * the given comparator.
+	 * 
+	 * @param <A>
+	 * @param comparator
+	 * @return a new {@link AbstractFunction2}
+	 */
+	@NonNull
+	public static <A> Function2<A, A, A> min(final Comparator<A> comparator) {
+		return new AbstractFunction2<A, A, A>() {
+			public A apply(A arg0, A arg1) {
+				return Compare.min(arg0, arg1, comparator);
+			}
+		};
+	}
+
+	/**
+	 * Answers a new {@link AbstractFunction2} that returns the max of its arguments using
+	 * the given comparator.
+	 * 
+	 * @param <A>
+	 * @param comparator
+	 * @return a new {@link AbstractFunction2}
+	 */
+	@NonNull
+	public static <A> Function2<A, A, A> max(final Comparator<A> comparator) {
+		return new AbstractFunction2<A, A, A>() {
+			public A apply(A arg0, A arg1) {
+				return Compare.max(arg0, arg1, comparator);
+			}
+		};
 	}
 
 	/**

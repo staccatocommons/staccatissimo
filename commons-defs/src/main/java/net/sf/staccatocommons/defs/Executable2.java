@@ -36,9 +36,9 @@ public interface Executable2<T1, T2> {
 	 * Performs a side-effect computation.
 	 * 
 	 * @see Executable#exec(Object)
-	 * @param argument1
-	 * @param argument2
+	 * @param arg0
+	 * @param arg1
 	 */
-	void exec(T1 argument1, T2 argument2);
+	void exec(T1 arg0, T2 arg1);
 
 }

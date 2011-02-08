@@ -15,11 +15,11 @@ package net.sf.staccatocommons.lang.number;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import net.sf.staccatocommons.applicables.function.Function;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.defs.restriction.SideEffectFree;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.number.internal.BigDecimalType;
 import net.sf.staccatocommons.lang.number.internal.BigIntegerType;
 import net.sf.staccatocommons.lang.number.internal.DoubleType;

@@ -13,7 +13,9 @@
 package net.sf.staccatocommons.lang.function;
 
 import static org.junit.Assert.*;
+import net.sf.staccatocommons.applicables.function.Functions;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -34,7 +36,7 @@ public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.Functions#identity()}.
+	 * {@link net.sf.staccatocommons.applicables.function.Functions#identity()}.
 	 */
 	@Test
 	public void testIdentity() {
@@ -44,7 +46,7 @@ public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.Functions#constant(java.lang.Object)}
+	 * {@link net.sf.staccatocommons.applicables.function.Functions#constant(java.lang.Object)}
 	 * .
 	 */
 	@Test
@@ -73,6 +75,6 @@ public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
 	/** Test for {@link Functions#toString_()} */
 	@Test
 	public void testToString() throws Exception {
-		assertEquals("50", Functions.toString_().apply(50));
+		assertEquals("50", Strings.toString_().apply(50));
 	}
 }

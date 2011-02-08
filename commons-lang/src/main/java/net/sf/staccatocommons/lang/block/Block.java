@@ -12,11 +12,11 @@
  */
 package net.sf.staccatocommons.lang.block;
 
+import net.sf.staccatocommons.applicables.NullSafe;
+import net.sf.staccatocommons.applicables.impl.AbstractDelayable;
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
  * An abstract, one argument code block, that implements {@link Executable}
@@ -25,7 +25,8 @@ import net.sf.staccatocommons.lang.provider.Provider;
  * 
  * @param <T>
  */
-public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
+public abstract class Block<T> extends AbstractDelayable<T, Void> implements Executable<T>,
+	NullSafe<Block<T>> {
 
 	/**
 	 * Executes this block. This implementation just invokes
@@ -52,24 +53,19 @@ public abstract class Block<T> implements Executable<T>, Applicable<T, Void> {
 	 */
 	protected void softExec(T argument) throws Exception {}
 
-	/**
-	 * Delays execution of this block by returning a void provider that will
-	 * evaluate <code>exec(arg)</code> each time its value is required
-	 * 
-	 * @param arg
-	 * @return a new {@link Provider}
-	 */
-	public Provider<Void> delayed(final T arg) {
-		return new Provider<Void>() {
-			public Void value() {
-				return apply(arg);
-			}
-		};
-	}
-
 	public Void apply(T arg) {
 		exec(arg);
 		return null;
+	}
+
+	public Block<T> nullSafe() {
+		return new Block<T>() {
+			public void exec(T argument) {
+				if (argument == null)
+					return;
+				Block.this.exec(argument);
+			};
+		};
 	}
 
 	/**

@@ -14,13 +14,10 @@ package net.sf.staccatocommons.lang.provider;
 
 import java.util.concurrent.Callable;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.Handle;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.function.Functions;
 
 import org.apache.commons.lang.ObjectUtils;
 
@@ -113,20 +110,6 @@ public abstract class Provider<A> implements Thunk<A>, ContainsAware<A>, Callabl
 	public final <E1 extends Exception, E2 extends Exception> A throwing(Class<E1> exceptionClass1,
 		Class<E2> exceptionClass2) throws E1, E2 {
 		return Handle.throwing(this, exceptionClass1, exceptionClass2);
-	}
-
-	/* Function composition */
-
-	/**
-	 * Composes the given <code>function</code> with <code>this</code>
-	 * 
-	 * @param function
-	 *          the {@link Applicable} to compose with this provider
-	 * @return a Provider that returns <code>function.apply(this.value())</code>
-	 */
-	@NonNull
-	public <B> Provider<B> then(@NonNull Applicable<? super A, ? extends B> function) {
-		return Functions.from(function).of(this);
 	}
 
 }

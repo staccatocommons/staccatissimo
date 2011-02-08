@@ -14,9 +14,10 @@ package net.sf.staccatocommons.lang.number;
 
 import java.io.Serializable;
 
+import net.sf.staccatocommons.applicables.function.Function;
+import net.sf.staccatocommons.applicables.impl.AbstractFunction;
+import net.sf.staccatocommons.applicables.impl.AbstractFunction2;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.lang.function.Function;
-import net.sf.staccatocommons.lang.function.Function2;
 
 /**
  * @author flbulgarelli
@@ -27,9 +28,9 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 
 	private static final long serialVersionUID = -2727245678088637829L;
 
-	private transient Function2<A, A, A> add = new Add();
+	private transient AbstractFunction2<A, A, A> add = new Add();
 
-	private transient Function2<A, A, A> multiply = new Multiply();
+	private transient AbstractFunction2<A, A, A> multiply = new Multiply();
 
 	public boolean isZero(A n) {
 		return compare(n, zero()) == 0;
@@ -60,12 +61,12 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 	}
 
 	@Override
-	public Function2<A, A, A> add() {
+	public AbstractFunction2<A, A, A> add() {
 		return add;
 	}
 
 	@Override
-	public Function2<A, A, A> multiply() {
+	public AbstractFunction2<A, A, A> multiply() {
 		return multiply;
 	}
 
@@ -105,14 +106,14 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 }
 
 /**
- * NumberTypeFunctions, override {@link Function2#apply(Object)} so that the
+ * NumberTypeFunctions, override {@link AbstractFunction2#apply(Object)} so that the
  * resulting function is flipped and it implements {@link ImplicitNumberType}
  * too
  * 
  * @author flbulgarelli
  * 
  */
-abstract class NumberTypeFunction2<A> extends Function2<A, A, A> implements ImplicitNumberType<A> {
+abstract class NumberTypeFunction2<A> extends AbstractFunction2<A, A, A> implements ImplicitNumberType<A> {
 
 	private final NumberType<A> type;
 
@@ -126,7 +127,7 @@ abstract class NumberTypeFunction2<A> extends Function2<A, A, A> implements Impl
 	}
 
 	public Function<A, A> apply(final A arg1) {
-		abstract class NumberTypeFunction extends Function<A, A> implements ImplicitNumberType<A> {
+		abstract class NumberTypeFunction extends AbstractFunction<A, A> implements ImplicitNumberType<A> {
 			public NumberType<A> numberType() {
 				return NumberTypeFunction2.this.numberType();
 			}

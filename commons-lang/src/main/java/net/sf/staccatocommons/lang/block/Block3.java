@@ -12,13 +12,14 @@
  */
 package net.sf.staccatocommons.lang.block;
 
+import net.sf.staccatocommons.applicables.NullSafe;
+import net.sf.staccatocommons.applicables.impl.AbstractDelayable3;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Executable3;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
  * 
@@ -28,8 +29,9 @@ import net.sf.staccatocommons.lang.provider.Provider;
  * @param <T2>
  * @param <T3>
  */
-public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
-	Applicable3<T1, T2, T3, Void>, Applicable<T1, Block2<T2, T3>>, Applicable2<T1, T2, Block<T3>> {
+public abstract class Block3<T1, T2, T3> extends AbstractDelayable3<T1, T2, T3, Void> implements
+	Executable3<T1, T2, T3>, Applicable3<T1, T2, T3, Void>, Applicable<T1, Block2<T2, T3>>,
+	Applicable2<T1, T2, Block<T3>>, NullSafe<Block3<T1, T2, T3>> {
 
 	/**
 	 * Executes this block. This implementation just invokes
@@ -60,25 +62,7 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 	 */
 	protected void softExec(T1 arg1, T2 arg2, T3 arg3) throws Exception {}
 
-	/**
-	 * Delays execution of this block by returning a void provider that will
-	 * evaluate <code>exec(arg1, arg2, arg3)</code> each time its value is
-	 * required
-	 * 
-	 * @param arg1
-	 * @param arg2
-	 * @param arg3
-	 * @return a new void {@link Provider}
-	 */
-	public Provider<Void> delayed(final T1 arg1, final T2 arg2, final T3 arg3) {
-		return new Provider<Void>() {
-			public Void value() {
-				return apply(arg1, arg2, arg3);
-			}
-		};
-	}
-
-	public Void apply(T1 arg1, T2 arg2, T3 arg3) {
+	public final Void apply(T1 arg1, T2 arg2, T3 arg3) {
 		exec(arg1, arg2, arg3);
 		return null;
 	};
@@ -98,6 +82,17 @@ public abstract class Block3<T1, T2, T3> implements Executable3<T1, T2, T3>,
 			public void exec(T3 arg) {
 				Block3.this.exec(arg1, arg2, arg);
 			}
+		};
+	}
+
+	public Block3<T1, T2, T3> nullSafe() {
+		return new Block3<T1, T2, T3>() {
+			public void exec(T1 arg1, T2 arg2, T3 arg3) {
+				if (arg1 == null || arg2 == null || arg3 == null) {
+					return;
+				}
+				Block3.this.exec(arg1, arg2, arg3);
+			};
 		};
 	}
 

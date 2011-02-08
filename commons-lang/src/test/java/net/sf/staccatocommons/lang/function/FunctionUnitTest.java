@@ -14,6 +14,7 @@ package net.sf.staccatocommons.lang.function;
 
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static org.junit.Assert.*;
+import net.sf.staccatocommons.applicables.impl.AbstractFunction;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
@@ -30,7 +31,7 @@ import org.junit.Test;
  */
 public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
-	Function<Integer, Long> f;
+	AbstractFunction<Integer, Long> f;
 	Thunk<Integer> g0;
 	Applicable<Character, Integer> g1;
 	Applicable2<Character, String, Integer> g2;
@@ -45,7 +46,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 		g1 = mock(Applicable.class, "g1");
 		g2 = mock(Applicable2.class, "g2");
 		g3 = mock(Applicable3.class, "g3");
-		f = new Function<Integer, Long>() {
+		f = new AbstractFunction<Integer, Long>() {
 			@Override
 			public Long apply(Integer argument) {
 				assertEquals((Integer) 20, argument);
@@ -56,7 +57,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.Function#of(Thunk)}.
+	 * {@link net.sf.staccatocommons.lang.function.AbstractFunction#of(Thunk)}.
 	 */
 	@Test
 	public void testOf0() {
@@ -71,7 +72,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.Function#of(Applicable)}.
+	 * {@link net.sf.staccatocommons.lang.function.AbstractFunction#of(Applicable)}.
 	 */
 	@Test
 	public void testOf1() {
@@ -86,7 +87,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.Function#of(net.sf.staccatocommons.defs.Applicable2)
+	 * {@link net.sf.staccatocommons.lang.function.AbstractFunction#of(net.sf.staccatocommons.defs.Applicable2)
 	 * )} .
 	 */
 	@Test
@@ -102,7 +103,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.Function#of(net.sf.staccatocommons.defs.Applicable3)
+	 * {@link net.sf.staccatocommons.lang.function.AbstractFunction#of(net.sf.staccatocommons.defs.Applicable3)
 	 * )} .
 	 */
 	@Test
@@ -116,10 +117,10 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 		assertEquals((Long) 10L, f.of(g3).apply('a', "Hello", 5));
 	}
 
-	/** Test for {@link Function#apply(Object)} */
+	/** Test for {@link AbstractFunction#apply(Object)} */
 	@Test
 	public void testLazy() throws Exception {
-		Thunk<Long> p = f.of(g1).lazy('a');
+		Thunk<Long> p = f.of(g1).delayed('a');
 		checking(new Expectations() {
 			{
 				one(g1).apply('a');
@@ -132,7 +133,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 	}
 
 	/**
-	 * Test for {@link Function#nullSafe()}
+	 * Test for {@link AbstractFunction#nullSafe()}
 	 */
 	@Test
 	public void testNullSafe() throws Exception {
