@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccatocommons.lang.function.Functions.*;
+import static net.sf.staccatocommons.lang.Compare.*;
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 
 import java.lang.reflect.Array;
@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import net.sf.staccatocommons.applicables.impl.AbstractFunction2;
 import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
@@ -58,7 +59,6 @@ import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.function.Function2;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
@@ -499,7 +499,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 			A val = numberType.zero();
 		}
 		final Ref size = new Ref();
-		return numberType.divide(fold(numberType.zero(), new Function2<A, A, A>() {
+		return numberType.divide(fold(numberType.zero(), new AbstractFunction2<A, A, A>() {
 			public A apply(A arg1, A arg2) {
 				size.val = numberType.increment(size.val);
 				return numberType.add(arg1, arg2);

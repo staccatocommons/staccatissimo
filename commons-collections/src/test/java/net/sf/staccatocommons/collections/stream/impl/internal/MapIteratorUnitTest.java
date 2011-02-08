@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import static net.sf.staccatocommons.lang.function.Functions.*;
+import static net.sf.staccatocommons.applicables.function.Functions.*;
 import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 

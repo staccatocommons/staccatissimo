@@ -17,11 +17,11 @@ import java.util.Set;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
+import net.sf.staccatocommons.applicables.impl.AbstractFunction;
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
-import net.sf.staccatocommons.lang.function.Function;
 
 import org.slf4j.Logger;
 
@@ -87,7 +87,7 @@ public abstract class AbstractAnnotationContext implements AnnotationContext {
 	 */
 	public Set<String> getPresentAnnotationsTypes(Object[] annotations) {
 		if (presentAnnotations == null) {
-			presentAnnotations = Cons.from(annotations).map(new Function<Object, String>() {
+			presentAnnotations = Cons.from(annotations).map(new AbstractFunction<Object, String>() {
 				public String apply(Object arg) {
 					return arg.getClass().getName();
 				}

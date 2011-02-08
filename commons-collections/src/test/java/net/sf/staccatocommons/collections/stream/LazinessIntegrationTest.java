@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.collections.stream;
 
 import static org.junit.Assert.*;
-import net.sf.staccatocommons.lang.function.Function;
+import net.sf.staccatocommons.applicables.impl.AbstractFunction;
 import net.sf.staccatocommons.lang.provider.Provider;
 import net.sf.staccatocommons.lang.provider.Providers;
 
@@ -127,7 +127,7 @@ public class LazinessIntegrationTest {
 	}
 
 	protected Stream<Integer> integersStream() {
-		return Cons.from(10, 20, 30, null, 50).map(new Function<Integer, Integer>() {
+		return Cons.from(10, 20, 30, null, 50).map(new AbstractFunction<Integer, Integer>() {
 			public Integer apply(Integer arg) {
 				return arg - 0;
 			}

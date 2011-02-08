@@ -10,28 +10,28 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.instrument.config;
+package net.sf.staccatocommons.applicables.internal;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import net.sf.staccatocommons.applicables.impl.AbstractFunction;
+import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class SimpleInstrumentationMarkUnitTest {
+public class ApplicableFunction<A, B> extends AbstractFunction<A, B> {
+
+	private Applicable<? super A, ? extends B> applicable;
 
 	/**
-	 * Test method for
-	 * {@link SimpleInstrumentationMark#SimpleInstrumentationMark(java.lang.String, java.lang.String)}
-	 * .
+	 * Creates a new {@link ApplicableFunction}
 	 */
-	@Test
-	public void testSimpleInstrumentationMark() {
-		SimpleInstrumentationMark mark = new SimpleInstrumentationMark("mark-key", "mark-value");
-		assertEquals("mark-key", mark.getMarkAttributeName());
-		assertEquals("mark-value", new String(mark.getMarkAttributeValue()));
+	public ApplicableFunction(Applicable<? super A, ? extends B> applicable) {
+		this.applicable = applicable;
+	}
+
+	public B apply(A arg) {
+		return applicable.apply(arg);
 	}
 
 }

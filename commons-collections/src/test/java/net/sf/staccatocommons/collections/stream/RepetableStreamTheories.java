@@ -18,12 +18,13 @@ import static org.junit.Assume.*;
 
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.applicables.function.Function;
+import net.sf.staccatocommons.applicables.function.Functions;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.function.Function;
-import net.sf.staccatocommons.lang.function.Functions;
+import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.provider.Providers;
@@ -45,7 +46,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 	/** Functions data points */
 	@DataPoints
 	public static Function[] functions = new Function[] { Functions.constant(59),
-			Functions.identity(), Functions.toString_() };
+			Functions.identity(), Strings.toString_() };
 
 	/** providers data points */
 	@DataPoints

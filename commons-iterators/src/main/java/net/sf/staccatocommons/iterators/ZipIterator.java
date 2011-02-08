@@ -14,6 +14,7 @@ package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.applicables.function.Functions;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Thunk;
@@ -50,12 +51,6 @@ public class ZipIterator<A, B, C> extends AdvanceThriterator<C> {
 	}
 
 	public Thunk<C> delayedCurrent() {
-		final A current1 = thriter1.current();
-		final B current2 = thriter2.current();
-		return new Thunk<C>() {
-			public C value() {
-				return function.apply(current1, current2);
-			}
-		};
+		return Functions.from(function).delayed(thriter1.current(), thriter2.current());
 	}
 }

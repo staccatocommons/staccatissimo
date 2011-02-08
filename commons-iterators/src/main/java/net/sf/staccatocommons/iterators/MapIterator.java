@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.iterators;
 
+import net.sf.staccatocommons.applicables.function.Functions;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Thunk;
@@ -49,12 +50,7 @@ public class MapIterator<A, B> extends AdvanceThriterator<B> {
 	}
 
 	public Thunk<B> delayedCurrent() {
-		final A current = thriter.current();
-		return new Thunk<B>() {
-			public B value() {
-				return function.apply(current);
-			}
-		};
+		return Functions.from(function).delayed(thriter.current());
 	}
 
 }

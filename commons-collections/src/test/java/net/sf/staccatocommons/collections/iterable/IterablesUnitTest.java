@@ -14,10 +14,10 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 
+import net.sf.staccatocommons.applicables.impl.AbstractFunction;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.sequence.Sequence;
@@ -97,7 +97,7 @@ public class IterablesUnitTest {
 	public void testFlatMap() throws Exception {
 		assertEquals(
 			Arrays.asList(1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6),
-			Iterables.flatMap(Sequence.fromTo(4, 6), new Function<Integer, Iterable<Integer>>() {
+			Iterables.flatMap(Sequence.fromTo(4, 6), new AbstractFunction<Integer, Iterable<Integer>>() {
 				public Iterable<Integer> apply(Integer arg) {
 					return Sequence.fromTo(1, arg);
 				}

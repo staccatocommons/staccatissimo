@@ -16,12 +16,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+import net.sf.staccatocommons.applicables.impl.AbstractFunction;
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.lang.function.Function;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
@@ -116,7 +116,7 @@ public class Directory {
 	@NonNull
 	public Stream<File> getDepthFirstFileStream() {
 		return Cons.from(file.listFiles())//
-			.flatMap(new Function<File, Stream<File>>() {
+			.flatMap(new AbstractFunction<File, Stream<File>>() {
 				public Stream<File> apply(File arg) {
 					if (arg.isDirectory())
 						return new Directory(arg).getDepthFirstFileStream();
@@ -174,7 +174,7 @@ public class Directory {
 
 }
 
-final class BreadthFirst extends Function<Stream<File>, Stream<File>> {
+final class BreadthFirst extends AbstractFunction<Stream<File>, Stream<File>> {
 	static final BreadthFirst INSTANCE = new BreadthFirst();
 
 	public Stream<File> apply(Stream<File> files) {
@@ -187,7 +187,7 @@ final class BreadthFirst extends Function<Stream<File>, Stream<File>> {
 				}
 			});
 		return partion._1().concat(//
-			partion._2().flatMap(new Function<File, Iterable<File>>() {
+			partion._2().flatMap(new AbstractFunction<File, Iterable<File>>() {
 				public Iterable<File> apply(File arg) {
 					return Arrays.asList(arg.listFiles());
 				}

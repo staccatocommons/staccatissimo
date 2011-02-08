@@ -27,13 +27,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.applicables.impl.AbstractFunction;
+import net.sf.staccatocommons.applicables.impl.AbstractFunction2;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
-import net.sf.staccatocommons.lang.function.Function;
-import net.sf.staccatocommons.lang.function.Function2;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.tuple.Pair;
@@ -98,7 +98,7 @@ public class AbstractStreamBasicTest {
 
 		Collection<String> result = stream.fold(
 			new ArrayList<String>(),
-			new Function2<Collection<String>, Collection<String>, Collection<String>>() {
+			new AbstractFunction2<Collection<String>, Collection<String>, Collection<String>>() {
 				public Collection<String> apply(Collection<String> arg1, Collection<String> arg2) {
 					arg1.addAll(arg2);
 					return arg1;
@@ -124,7 +124,7 @@ public class AbstractStreamBasicTest {
 		assertTrue(Iterate//
 			.from(4, add(1))
 			.take(3)
-			.flatMap(new Function<Integer, Iterable<Integer>>() {
+			.flatMap(new AbstractFunction<Integer, Iterable<Integer>>() {
 				public Iterable<Integer> apply(Integer arg) {
 					return Sequence.fromTo(1, arg);
 				}
@@ -234,7 +234,7 @@ public class AbstractStreamBasicTest {
 				_(new Object(), 12, "foo"),
 				_(new Object(), 9, "bye"),
 				_(new Object(), 6, ""))
-			.maximumOn(new Function<Triple<Object, Integer, String>, Integer>() {
+			.maximumOn(new AbstractFunction<Triple<Object, Integer, String>, Integer>() {
 				public Integer apply(Triple<Object, Integer, String> arg) {
 					return arg._2();
 				}
@@ -262,7 +262,7 @@ public class AbstractStreamBasicTest {
 					Arrays.asList(5)),
 				new ListStream<Integer>(Arrays.asList(1, 1, 2, 4, 4, 4, 5))
 					.groupBy(Equiv.<Integer> equalOrNull())
-					.map(new Function<Stream<Integer>, List<Integer>>() {
+					.map(new AbstractFunction<Stream<Integer>, List<Integer>>() {
 						public List<Integer> apply(Stream<Integer> arg) {
 							return arg.toList();
 						}
