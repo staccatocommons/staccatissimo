@@ -42,10 +42,18 @@ public class AppendIterator<A> extends AdvanceThriterator<A> {
 		this.element = element;
 	}
 
+	/**
+	 * 
+	 * Creates a new {@link AppendIterator}
+	 */
 	public AppendIterator(@NonNull Iterator<? extends A> iterator, A element) {
 		this(Thriters.from(iterator), element);
 	}
 
+	/**
+	 * 
+	 * Creates a new {@link AppendIterator}
+	 */
 	public AppendIterator(@NonNull Thriterator<? extends A> iterator, A element) {
 		this((Thriter<? extends A>) iterator, element);
 	}

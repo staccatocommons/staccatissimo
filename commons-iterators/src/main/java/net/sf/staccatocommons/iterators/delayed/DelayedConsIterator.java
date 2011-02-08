@@ -30,7 +30,7 @@ public class DelayedConsIterator<A> extends ConsIterator<A> {
 	}
 
 	protected A headValue() {
-		return ((Thunk<A>) super.headValue()).value();
+		return headThunk().value();
 	}
 
 	protected Thunk<A> headThunk() {

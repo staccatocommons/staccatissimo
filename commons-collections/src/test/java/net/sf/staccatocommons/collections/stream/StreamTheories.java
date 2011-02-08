@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.lang.block.Block;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 
@@ -50,6 +51,8 @@ public abstract class StreamTheories {
 	@DataPoints
 	public static int[] sizes = new int[] { 0, 1, 4, 90 };
 
+	private boolean emptyImpossible;
+
 	/**
 	 * Test method for {@link bstractStream#take(int)} .
 	 */
@@ -64,13 +67,16 @@ public abstract class StreamTheories {
 	 */
 	@Theory
 	public final void reduce_OnEmpty(Stream<Integer> stream) {
-		assumeTrue(stream.isEmpty());
-		try {
-			stream.reduce(integer().add());
-			fail();
-		} catch (NoSuchElementException e) {
-			// ok;
-		}
+		assumeEmpty(stream, new Block<Stream>() {
+			public void exec(Stream argument) {
+				try {
+					argument.reduce(integer().add());
+					fail();
+				} catch (NoSuchElementException e) {
+					// ok;
+				}
+			}
+		});
 	}
 
 	/**
@@ -110,9 +116,13 @@ public abstract class StreamTheories {
 
 	/** Test for any */
 	@Theory
-	public final <A> void emptyStreamSatisfyAnyPredicate(Stream<A> stream, Evaluable<A> predicate) {
-		assumeTrue(stream.isEmpty());
-		assertTrue(stream.all(predicate));
+	public final <A> void emptyStreamSatisfyAnyPredicate(Stream<A> stream,
+		final Evaluable<A> predicate) {
+		assumeEmpty(stream, new Block<Stream>() {
+			public void exec(Stream stream) {
+				assertTrue(stream.all(predicate));
+			}
+		});
 	}
 
 	/**
@@ -126,16 +136,24 @@ public abstract class StreamTheories {
 
 	/** Test that any in an empty stream returns false always */
 	@Theory
-	public final <A> void emptyStreamsSatisfyNoPredicate(Stream<A> stream, Evaluable<A> predicate) {
-		assumeTrue(stream.isEmpty());
-		assertFalse(stream.any(predicate));
+	public final <A> void emptyStreamsSatisfyNoPredicate(Stream<A> stream,
+		final Evaluable<A> predicate) {
+		assumeEmpty(stream, new Block<Stream>() {
+			public void exec(Stream stream) {
+				assertFalse(stream.any(predicate));
+			}
+		});
 	}
 
 	/** Test that empty streams have no any element */
 	@Theory
 	public final void anyOrNullEqualsNullInEmptyStream(Stream<?> stream) {
-		assumeTrue(stream.isEmpty());
-		assertNull(stream.anyOrNull());
+		assumeEmpty(stream, new Block<Stream>() {
+			public void exec(Stream stream) {
+				assertNull(stream.anyOrNull());
+			}
+		});
+
 	}
 
 	/** Test that decons succeeds alwas on non empty streams */
@@ -148,37 +166,57 @@ public abstract class StreamTheories {
 	/** test that decons fails on empty streams */
 	@Theory
 	public final <A> void deconsFailsOnEmptyStream(Stream<A> stream) throws Exception {
-		assumeTrue(stream.isEmpty());
-		try {
-			stream.decons();
-			fail();
-		} catch (NoSuchElementException e) {
-			// ok
-		}
+		assumeEmpty(stream, new Block<Stream>() {
+			public void exec(Stream stream) {
+				try {
+					stream.decons();
+					fail();
+				} catch (NoSuchElementException e) {
+					// ok
+				}
+			}
+		});
 	}
 
 	/** Test that empty streams have no tail */
 	@Theory
 	public void tailFailsInEmptyStream(Stream<?> stream) {
-		assumeTrue(stream.isEmpty());
-		try {
-			stream.tail();
-			fail();
-		} catch (NoSuchElementException e) {
-			// ok
-		}
+		assumeEmpty(stream, new Block<Stream>() {
+			public void exec(Stream stream) {
+				try {
+					stream.tail();
+					fail();
+				} catch (NoSuchElementException e) {
+					// ok
+				}
+			}
+		});
 	}
 
 	/** Test that empty streams have no head */
 	@Theory
 	public void headFailsInEmptyStream(Stream<?> stream) {
-		assumeTrue(stream.isEmpty());
-		try {
-			stream.head();
-			fail();
-		} catch (NoSuchElementException e) {
-			// ok
-		}
+		assumeEmpty(stream, new Block<Stream>() {
+			public void exec(Stream stream) {
+				try {
+					stream.head();
+					fail();
+				} catch (NoSuchElementException e) {
+					// ok
+				}
+			}
+		});
 	}
 
+	/** Ignores test that require empty streams */
+	public void emptyIsImpossible() {
+		emptyImpossible = true;
+	}
+
+	protected void assumeEmpty(Stream<?> stream, Block<Stream> block) {
+		if (emptyImpossible)
+			return;
+		assumeTrue(stream.isEmpty());
+		block.exec(stream);
+	}
 }

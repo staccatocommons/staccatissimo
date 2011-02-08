@@ -55,6 +55,9 @@ public interface Deconstructable<A> {
 	@ConditionallyRepeatable
 	<B> Stream<B> then(@NonNull DeconsApplicable<A, B> function);
 
+	// XXX this method name is confusing. It should be "then" and take a different
+	// DeconsApplicable
+
 	/**
 	 * Lazily applies the given <code>function</code> to this stream,
 	 * deconstructing this stream into a head thunk and tail, or into an empty

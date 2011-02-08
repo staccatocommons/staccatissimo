@@ -41,10 +41,16 @@ public class ConsIterator<A> extends AdvanceThriterator<A> {
 		this.tail = tail;
 	}
 
+	/**
+	 * Creates a new {@link ConsIterator}
+	 */
 	public ConsIterator(A head, Iterator<? extends A> tail) {
 		this(head, Thriters.from(tail));
 	}
 
+	/**
+	 * Creates a new {@link ConsIterator}
+	 */
 	public ConsIterator(A head, Thriterator<? extends A> tail) {
 		this(head, (Thriter<A>) tail);
 	}

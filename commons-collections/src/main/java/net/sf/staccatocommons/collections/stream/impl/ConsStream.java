@@ -14,13 +14,17 @@ package net.sf.staccatocommons.collections.stream.impl;
 
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.ConsIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.provider.Providers;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
@@ -33,7 +37,7 @@ import net.sf.staccatocommons.lang.tuple.Pair;
  * 
  * @param <A>
  */
-public final class ConsStream<A> extends AbstractStream<A> {
+public class ConsStream<A> extends AbstractStream<A> {
 	private final Iterable<? extends A> tail;
 	private final A head;
 
@@ -46,23 +50,41 @@ public final class ConsStream<A> extends AbstractStream<A> {
 	}
 
 	public Thriterator<A> iterator() {
-		return new ConsIterator<A>(head, tail.iterator());
+		return new ConsIterator<A>(head(), tailIterator());
 	}
 
-	public boolean isEmpty() {
+	public final boolean isEmpty() {
 		return false;
 	}
 
-	public Pair<A, Stream<A>> decons() {
-		return _(head, Streams.from(tail));
+	public final Pair<A, Stream<A>> decons() {
+		return _(head(), tail());
+	}
+
+	public Pair<Thunk<A>, Stream<A>> delayedDecons() {
+		return _((Thunk<A>) Providers.constant(head), tail());
 	}
 
 	public A head() {
 		return head;
 	}
 
-	public NumberType<A> numberType() {
+	public final Stream<A> tail() {
+		return Streams.from(tail);
+	}
+
+	public final A get(int n) {
+		if (n == 0)
+			return head();
+		return Iterables.get(tail, n - 1);
+	}
+
+	public final NumberType<A> numberType() {
 		return ((ImplicitNumberType<A>) tail).numberType();
+	}
+
+	protected final Thriterator<? extends A> tailIterator() {
+		return Thriterators.from(tail.iterator());
 	}
 
 }
