@@ -10,27 +10,35 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.applicables;
-
-import net.sf.staccatocommons.defs.Thunk;
+package net.sf.staccatocommons.defs;
 
 /**
+ * {@link Delayable2}s are delayed transformations that two arguments and return
+ * a thunk that will perform the actual processing when evaluated, by
+ * implementing a {@link #delayed(Object, Object)} method.
+ * 
  * @author flbulgarelli
  * 
  * @param <A>
+ *          first argument type
  * @param <B>
+ *          second argument type
  * @param <C>
+ *          type of returned thunk
+ * @see Applicative Recomendations for implementing
+ * @see Thunk
  */
+@Applicative
 public interface Delayable2<A, B, C> {
 
 	/**
-	 * Lazily applies this function, by returning a {@link Lazy} that will send
-	 * {@link #apply(Object, Object)} when {@link Lazy#value()} is evaluated by
-	 * first time. FIXME
+	 * Asynchronously applies this {@link Delayable2}, by returning a
+	 * {@link Thunk} that will perform the actual transformation each time it is
+	 * evaluated.
 	 * 
 	 * @param arg1
 	 * @param arg2
-	 * @return a new {@link Lazy}
+	 * @return a new {@link Thunk}. Non null.
 	 */
 	Thunk<C> delayed(final A arg1, final B arg2);
 

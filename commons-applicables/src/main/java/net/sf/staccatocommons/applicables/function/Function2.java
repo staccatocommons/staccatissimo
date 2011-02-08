@@ -12,10 +12,10 @@
  */
 package net.sf.staccatocommons.applicables.function;
 
-import net.sf.staccatocommons.applicables.Delayable2;
-import net.sf.staccatocommons.applicables.NullSafe;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Delayable2;
+import net.sf.staccatocommons.defs.NullSafe;
 
 /**
  * A two-arguments function, that implements {@link Applicable2}.

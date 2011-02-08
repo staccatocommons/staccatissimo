@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.applicables.impl;
 
-import net.sf.staccatocommons.applicables.Delayable2;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Delayable2;
 import net.sf.staccatocommons.defs.Thunk;
 
 /**

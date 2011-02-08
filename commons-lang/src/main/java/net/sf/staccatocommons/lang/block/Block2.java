@@ -12,11 +12,11 @@
  */
 package net.sf.staccatocommons.lang.block;
 
-import net.sf.staccatocommons.applicables.NullSafe;
 import net.sf.staccatocommons.applicables.impl.AbstractDelayable2;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Executable2;
+import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.lang.SoftException;
 
 /**

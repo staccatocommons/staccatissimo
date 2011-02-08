@@ -12,12 +12,12 @@
  */
 package net.sf.staccatocommons.applicables.function;
 
-import net.sf.staccatocommons.applicables.Delayable3;
-import net.sf.staccatocommons.applicables.NullSafe;
 import net.sf.staccatocommons.applicables.impl.AbstractFunction3;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
+import net.sf.staccatocommons.defs.Delayable3;
+import net.sf.staccatocommons.defs.NullSafe;
 
 /**
  * @author flbulgarelli

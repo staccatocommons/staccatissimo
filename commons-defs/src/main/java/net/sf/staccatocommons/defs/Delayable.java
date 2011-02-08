@@ -10,9 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.applicables;
-
-import net.sf.staccatocommons.defs.Thunk;
+package net.sf.staccatocommons.defs;
 
 /**
  * @author flbulgarelli
@@ -20,15 +18,30 @@ import net.sf.staccatocommons.defs.Thunk;
  * @param <A>
  * @param <B>
  */
+
+/**
+ * {@link Delayable}s are delayed transformations that take one argument and
+ * return a thunk that will perform the processing when evaluated, by
+ * implementing a {@link #delayed(Object)} method.
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <T>
+ *          argument type
+ * @param <R>
+ *          type of returned thunk
+ * @see Applicative Recomendations for implementing
+ * @see Thunk
+ */
+@Applicative
 public interface Delayable<A, B> {
 
 	/**
-	 * Lazily applies this lambda, by returning a {@link Lazy} that will send
-	 * {@link #apply(Object)} when {@link Lazy#value()} is evaluated by first
-	 * time.
+	 * Asynchronously applies this {@link Delayable}, by returning a {@link Thunk}
+	 * that will perform the actual transformation each time it is evaluated.
 	 * 
 	 * @param arg
-	 * @return a new {@link Lazy}
+	 * @return a new {@link Thunk}
 	 */
 	Thunk<B> delayed(final A arg);
 
