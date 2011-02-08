@@ -20,7 +20,8 @@ import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.defs.Thunk;
 
 /**
- * A one argument function.
+ * {@link Function}s are rich interfaced {@link Applicable}s - one argument
+ * composable, {@link Delayable} and {@link NullSafe} tranformations.
  * 
  * @author flbulgarelli
  * 

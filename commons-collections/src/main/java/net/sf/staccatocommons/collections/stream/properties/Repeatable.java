@@ -22,7 +22,9 @@ import net.sf.staccatocommons.collections.stream.Stream;
 
 /**
  * {@link Repeatable} annotates methods that return {@link Stream}s that grant
- * to have a repeatable iteration order as long as they are not mutated.
+ * to have a repeatable iteration order - that is, subsequent acess the the same
+ * position returns equal objects - as long as such {@link Stream}s are not
+ * mutated.
  * 
  * @see Stream Repetable iteration order
  * 

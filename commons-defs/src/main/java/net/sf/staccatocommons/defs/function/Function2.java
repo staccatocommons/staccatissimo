@@ -18,11 +18,13 @@ import net.sf.staccatocommons.defs.Delayable2;
 import net.sf.staccatocommons.defs.NullSafe;
 
 /**
- * A two-arguments function, that implements {@link Applicable2}.
+ * {@link Function2}s are rich interfaced {@link Applicable2}s - two arguments
+ * {@link Delayable2} and {@link NullSafe} transformations.
+ * 
  * 
  * {@link Function2} can also be <a
  * href="http://en.wikipedia.org/wiki/Partial_application">partially
- * applied</a>, which means, apply it with less arguments than required,
+ * applied</a>, which means, applying it with less arguments than required,
  * returning, instead of the result of the transformation, a new function that
  * expects the rest of the arguments. Thus, {@link Function2} do also implement
  * {@link Applicable}

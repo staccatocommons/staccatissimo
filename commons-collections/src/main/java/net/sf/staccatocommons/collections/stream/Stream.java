@@ -96,7 +96,7 @@ import net.sf.staccatocommons.lang.number.ImplicitNumberType;
  * words, an iterable is repeatable if and only if:
  * 
  * <pre>
- * Streams.from(iterable).elementsEquals(iterable);
+ * Streams.from(iterable).equivalent(iterable);
  * </pre>
  * 
  * Is always <code>true</code>, as long as the iterable or its elements are not

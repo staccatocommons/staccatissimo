@@ -19,7 +19,25 @@ import net.sf.staccatocommons.defs.Delayable3;
 import net.sf.staccatocommons.defs.NullSafe;
 
 /**
+ * {@link Function3}s are rich interfaced {@link Applicable3}s - two arguments
+ * {@link Delayable3} and {@link NullSafe} transformations.
+ * 
+ * 
+ * {@link Function3} can also be <a
+ * href="http://en.wikipedia.org/wiki/Partial_application">partially
+ * applied</a>, which means, applying it with less arguments than required,
+ * returning, instead of the result of the transformation, a new function that
+ * expects the rest of the arguments. Thus, {@link Function3} do also implement
+ * {@link Applicable} and {@link Applicable2}
+ * 
  * @author flbulgarelli
+ * 
+ * @param <A>
+ *          function first argument type
+ * @param <B>
+ *          function second argument type
+ * @param <C>
+ *          function return type
  * 
  */
 public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>,

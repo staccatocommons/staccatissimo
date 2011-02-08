@@ -19,6 +19,7 @@ import net.sf.staccatocommons.collections.stream.impl.ConsStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.SingleStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedConsStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedSingleStream;
+import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.Thunk;
@@ -39,7 +40,7 @@ public class Cons {
 	 * 
 	 * @param <A>
 	 * @param element
-	 *          the sinle element the new {@link Stream} will retrieve
+	 *          the single element the new {@link Stream} will retrieve
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
@@ -49,6 +50,21 @@ public class Cons {
 		return new SingleStream<A>(element);
 	}
 
+	/**
+	 * Creates a one-element new Stream that will retrieve the thunk's value.
+	 * 
+	 * This stream is {@link Repeatable} as long as the thunk's value is always
+	 * equal.
+	 * 
+	 * @param <A>
+	 * @param element
+	 * @return a new
+	 * 
+	 * @see Thunk#value()
+	 */
+	@Projection
+	@ConditionallyRepeatable
+	@NonNull
 	public static <A> Stream<A> from(Thunk<A> element) {
 		return new DelayedSingleStream(element);
 	}
@@ -78,17 +94,39 @@ public class Cons {
 	 * This operation is known and <em>cons(tructing)</em>, and can be undone by
 	 * sending {@link Stream#decons()} to the resulting Stream.
 	 * 
+	 * * The returned stream is {@link Repeatable} as long as the tail is
+	 * repeatable.
+	 * 
 	 * @param <A>
 	 * @param head
 	 * @param tail
-	 * @return {@link ConsStream#from(Object, Iterable)}
+	 * @return a new {@link Stream}
 	 */
 	@NonNull
 	@Projection
+	@ConditionallyRepeatable
 	public static <A> Stream<A> from(final A head, @NonNull final Iterable<? extends A> tail) {
 		return new ConsStream<A>(head, tail);
 	}
 
+	/**
+	 * Creates a new {@link Stream} that retrieves elements from a head's thunk,
+	 * and another {@link Iterable}, called tail.
+	 * 
+	 * This operation is known and <em>cons(tructing)</em>, and can be undone by
+	 * sending {@link Stream#delayedDecons()} to the resulting Stream.
+	 * 
+	 * The returned stream is {@link Repeatable} as long as the thunk's head value
+	 * is always equal, and the tail is repeatable.
+	 * 
+	 * @param <A>
+	 * @param head
+	 * @param tail
+	 * @return a new {@link Stream}
+	 */
+	@NonNull
+	@Projection
+	@ConditionallyRepeatable
 	public static <A> Stream<A> from(final Thunk<A> head, @NonNull final Iterable<? extends A> tail) {
 		return new DelayedConsStream<A>(head, tail);
 	}

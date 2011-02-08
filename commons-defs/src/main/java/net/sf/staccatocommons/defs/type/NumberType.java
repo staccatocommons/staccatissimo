@@ -14,8 +14,8 @@ package net.sf.staccatocommons.defs.type;
 
 import java.util.Comparator;
 
-import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.function.Function;
+import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.restriction.Immutable;
 import net.sf.staccatocommons.defs.restriction.SideEffectFree;
 
@@ -213,7 +213,7 @@ public interface NumberType<A> extends Comparator<A> {
 	 *         {@link NumberType}
 	 */
 	@SideEffectFree
-	Applicable2<A, A, A> add();
+	Function2<A, A, A> add();
 
 	/**
 	 * Answers function that adds the given number to its argument, as specified
@@ -223,7 +223,7 @@ public interface NumberType<A> extends Comparator<A> {
 	 *         using this {@link NumberType}
 	 */
 	@SideEffectFree
-	Applicable<A, A> add(A n);
+	Function<A, A> add(A n);
 
 	/**
 	 * Answers a 2-arguments function that perform multiplication as specified by
@@ -233,6 +233,6 @@ public interface NumberType<A> extends Comparator<A> {
 	 *         {@link NumberType}
 	 */
 	@SideEffectFree
-	Applicable2<A, A, A> multiply();
+	Function2<A, A, A> multiply();
 
 }
