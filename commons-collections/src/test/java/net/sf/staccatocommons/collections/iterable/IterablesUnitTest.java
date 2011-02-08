@@ -14,10 +14,10 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 
-import net.sf.staccatocommons.applicables.impl.AbstractFunction;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.sequence.Sequence;

@@ -12,10 +12,9 @@
  */
 package net.sf.staccatocommons.iterators;
 
-import net.sf.staccatocommons.applicables.function.Functions;
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 
@@ -25,13 +24,13 @@ import net.sf.staccatocommons.iterators.thriter.Thriter;
  */
 public class MapIterator<A, B> extends AdvanceThriterator<B> {
 
-	final Applicable<? super A, ? extends B> function;
+	final Function<? super A, ? extends B> function;
 	final Thriter<? extends A> thriter;
 
 	/**
 	 * Creates a new {@link MapIterator}
 	 */
-	public MapIterator(@NonNull Applicable<? super A, ? extends B> function,
+	public MapIterator(@NonNull Function<? super A, ? extends B> function,
 		@NonNull Thriter<? extends A> thriter) {
 		this.function = function;
 		this.thriter = thriter;
@@ -50,7 +49,6 @@ public class MapIterator<A, B> extends AdvanceThriterator<B> {
 	}
 
 	public Thunk<B> delayedCurrent() {
-		return Functions.from(function).delayed(thriter.current());
+		return (Thunk<B>) function.delayed(thriter.current());
 	}
-
 }

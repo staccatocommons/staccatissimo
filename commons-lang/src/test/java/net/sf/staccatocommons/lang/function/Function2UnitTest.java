@@ -14,12 +14,9 @@ package net.sf.staccatocommons.lang.function;
 
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static org.junit.Assert.*;
-import net.sf.staccatocommons.applicables.function.Function2;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction2;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction3;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 

@@ -27,13 +27,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.applicables.impl.AbstractFunction;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction2;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.tuple.Pair;

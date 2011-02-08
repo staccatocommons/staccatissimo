@@ -14,9 +14,9 @@
 package net.sf.staccatocommons.collections.internal;
 
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction2;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**

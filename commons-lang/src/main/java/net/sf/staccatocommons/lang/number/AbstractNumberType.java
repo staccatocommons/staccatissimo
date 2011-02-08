@@ -14,10 +14,10 @@ package net.sf.staccatocommons.lang.number;
 
 import java.io.Serializable;
 
-import net.sf.staccatocommons.applicables.function.Function;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction2;
+import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.function.AbstractFunction2;
 
 /**
  * @author flbulgarelli

@@ -17,11 +17,11 @@ import java.util.Set;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction;
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
 
 import org.slf4j.Logger;
 

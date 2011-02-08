@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import net.sf.staccatocommons.applicables.impl.AbstractFunction2;
 import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
@@ -52,6 +51,8 @@ import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.function.Function;
+import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
 import net.sf.staccatocommons.iterators.thriter.NextThriterator;
@@ -59,6 +60,7 @@ import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
@@ -189,12 +191,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public <B> Stream<B> map(final Applicable<? super A, ? extends B> function) {
+	public <B> Stream<B> map(final Function<? super A, ? extends B> function) {
 		return new MapStream<A, B>(this, function);
 	}
 
 	@Override
-	public <B> Stream<B> flatMap(final Applicable<? super A, ? extends Iterable<? extends B>> function) {
+	public <B> Stream<B> flatMap(final Function<? super A, ? extends Iterable<? extends B>> function) {
 		return new FlatMapStream<A, B>(this, function);
 	}
 
@@ -465,7 +467,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@ForceChecks
 	public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable,
-		@NonNull final Applicable2<A, B, C> function) {
+		@NonNull final Function2<A, B, C> function) {
 		return new ZipStream<C, A, B>(this, iterable, function);
 	}
 

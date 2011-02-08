@@ -12,11 +12,10 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import net.sf.staccatocommons.applicables.function.Functions;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.iterators.MapIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
@@ -27,12 +26,12 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
  */
 public final class MapStream<A, B> extends AbstractStream<B> {
 	private final Stream<A> stream;
-	private final Applicable<? super A, ? extends B> function;
+	private final Function<? super A, ? extends B> function;
 
 	/**
 	 * Creates a new {@link MapStream}
 	 */
-	public MapStream(@NonNull Stream<A> stream, @NonNull Applicable<? super A, ? extends B> function) {
+	public MapStream(@NonNull Stream<A> stream, @NonNull Function<? super A, ? extends B> function) {
 		this.stream = stream;
 		this.function = function;
 	}
@@ -42,8 +41,8 @@ public final class MapStream<A, B> extends AbstractStream<B> {
 	}
 
 	@Override
-	public <C> Stream<C> map(final Applicable<? super B, ? extends C> function) {
-		return new MapStream<A, C>(stream, Functions.from(function).of(this.function));
+	public <C> Stream<C> map(final Function<? super B, ? extends C> function) {
+		return new MapStream<A, C>(stream, function.of(this.function));
 	}
 
 }

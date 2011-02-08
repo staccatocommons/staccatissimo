@@ -14,8 +14,8 @@ package net.sf.staccatocommons.lang.predicate;
 
 import static net.sf.staccatocommons.lang.tuple.Tuple.*;
 import static org.junit.Assert.*;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.junit.Test;

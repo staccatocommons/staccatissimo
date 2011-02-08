@@ -10,31 +10,28 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang;
+package net.sf.staccatocommons.lang.function.internal;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.function.Function;
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class Strings {
+public class ApplicableFunction<A, B> extends AbstractFunction<A, B> {
+
+	private Applicable<? super A, ? extends B> applicable;
+
 	/**
-	 * Returns a function that returns the result of sending
-	 * {@link Object#toString()} to its argument
-	 * 
-	 * @param <A>
-	 * @return a function that returns <code>arg.toString()</code>
+	 * Creates a new {@link ApplicableFunction}
 	 */
-	@NonNull
-	/* FIXME */
-	public static <A> Function<A, String> toString_() {
-		return new AbstractFunction<A, String>() {
-			public String apply(A arg) {
-				return arg.toString();
-			}
-		};
+	public ApplicableFunction(Applicable<? super A, ? extends B> applicable) {
+		this.applicable = applicable;
 	}
+
+	public B apply(A arg) {
+		return applicable.apply(arg);
+	}
+
 }

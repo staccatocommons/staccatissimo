@@ -13,8 +13,6 @@
 package net.sf.staccatocommons.lang.function;
 
 import static org.junit.Assert.*;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction3;
 import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;

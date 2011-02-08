@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.collections.stream;
 
 import static org.junit.Assert.*;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.provider.Provider;
 import net.sf.staccatocommons.lang.provider.Providers;
 

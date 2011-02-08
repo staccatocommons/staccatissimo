@@ -15,7 +15,7 @@ package net.sf.staccatocommons.collections.stream;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
-import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.function.Function;
 
 /**
  * {@link Stream} interface for mapping - aka collecting - elements.
@@ -38,7 +38,7 @@ public interface Mappable<A> {
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable
-	<B> Stream<B> map(@NonNull Applicable<? super A, ? extends B> function);
+	<B> Stream<B> map(@NonNull Function<? super A, ? extends B> function);
 
 	/**
 	 * Transformes each element using the given function, and concatenates
@@ -52,5 +52,5 @@ public interface Mappable<A> {
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable
-	<B> Stream<B> flatMap(@NonNull Applicable<? super A, ? extends Iterable<? extends B>> function);
+	<B> Stream<B> flatMap(@NonNull Function<? super A, ? extends Iterable<? extends B>> function);
 }

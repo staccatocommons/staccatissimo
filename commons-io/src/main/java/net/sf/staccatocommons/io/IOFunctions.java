@@ -14,10 +14,10 @@ package net.sf.staccatocommons.io;
 
 import java.io.File;
 
-import net.sf.staccatocommons.applicables.function.Function;
-import net.sf.staccatocommons.applicables.impl.AbstractFunction;
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
 
 /**
  * @author flbulgarelli

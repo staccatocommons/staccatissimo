@@ -17,6 +17,7 @@ import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
@@ -53,7 +54,7 @@ public interface Zippeable<A> {
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable
-	public <B, C> Stream<C> zip(@NonNull Iterable<B> iterable, Applicable2<A, B, C> function);
+	public <B, C> Stream<C> zip(@NonNull Iterable<B> iterable, Function2<A, B, C> function);
 
 	/**
 	 * Returns a {@link Stream} formed by by pair of element from
