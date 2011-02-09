@@ -37,7 +37,7 @@ public class StopConditions {
 	 */
 	@NonNull
 	public static <T extends Comparable<T>> Predicate<T> downTo(@NonNull T value) {
-		return Predicates.lessThanOrEqualTo(value);
+		return Predicates.lessThan(value);
 	}
 
 	/**

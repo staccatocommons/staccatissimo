@@ -189,7 +189,7 @@ public class Sequence<A> implements Iterable<A>, ImplicitNumberType<A>, Serializ
 	 * Factory method that creates a new infinte {@link Sequence} that generates
 	 * integers applying an a positive, zero, or negative increment.
 	 * 
-	 * Zero increment will produce a sequence that just replicates the seed.
+	 * Zero step will produce a sequence that just replicates the seed.
 	 * 
 	 * @param from
 	 *          the seed of the sequence
@@ -207,8 +207,8 @@ public class Sequence<A> implements Iterable<A>, ImplicitNumberType<A>, Serializ
 	 * integers applying an a positive, or negative increment, until it reaches an
 	 * stop value.
 	 * 
-	 * For example <code>Sequence.fromToBy(0,4,1)</code> will iterate over 0,1,2
-	 * and 3.
+	 * For example <code>Sequence.fromToBy(0,4,1)</code> will iterate over 0,1,2,3
+	 * and 4.
 	 * 
 	 * @param from
 	 *          the seed of the sequence
@@ -229,8 +229,8 @@ public class Sequence<A> implements Iterable<A>, ImplicitNumberType<A>, Serializ
 	 * integers incrementing or decrementing by one - depending on if the seed is
 	 * lower to the stop value or not, until it reaches an stop value.
 	 * 
-	 * For example <code>Sequence.fromTo(0,4)</code> will iterate over 0,1,2 and
-	 * 3, and <code>Sequence.fromTo(4,2)</code> will iterate over 4 and 3.
+	 * For example <code>Sequence.fromTo(0,4)</code> will iterate over 0,1,2, 3
+	 * and 4, and <code>Sequence.fromTo(4,2)</code> will iterate over 4, 3 and 2.
 	 * 
 	 * @param from
 	 *          the seed of the sequence
