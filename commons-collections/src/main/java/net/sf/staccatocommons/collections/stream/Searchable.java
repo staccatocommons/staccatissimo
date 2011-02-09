@@ -19,7 +19,6 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.None;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.predicate.Predicate;
 
 /**
  * {@link Stream} interface for searching for elements
@@ -63,11 +62,11 @@ public interface Searchable<A> {
 	/**
 	 * Shorthand for <code>anyOrNone().valueOrElse(provider)</code>
 	 * 
-	 * @param provider
+	 * @param thunk
 	 * 
 	 * @return <code>anyOrNone().valueOrElse(provider)</code>
 	 */
-	A anyOrElse(@NonNull Thunk<A> provider);
+	A anyOrElse(@NonNull Thunk<A> thunk);
 
 	/**
 	 * Shorthand for <code>anyOrNone().valueOrElse(value)</code>
@@ -104,29 +103,29 @@ public interface Searchable<A> {
 	@NonNull
 	Option<A> findOrNone(@NonNull Evaluable<? super A> predicate);
 
-	/* TODO UPDATE ** */
 	/**
-	 * Alternative version of {@link #find(Iterable, Predicate)}, where the
-	 * element is returned if found, or null, otherwise.
+	 * Looks for an element that satisfies the given {@link Evaluable}. If such
+	 * element exists, returns it. Otherwise, returns null.
 	 * 
 	 * @param predicate
-	 *          non null
-	 * @return null if element is not found or collection is empty, or the
-	 *         element, if found.
+	 * @return null if no element matches the predicate, or an element that
+	 *         satisfies it, if at least one exists. As a particular case, this
+	 *         method will return null if {@link Stream} is empty, regardless of
+	 *         the given predicate
 	 */
 	A findOrNull(@NonNull Evaluable<? super A> predicate);
 
 	/**
-	 * Alternative version of {@link #find(Iterable, Predicate)}, where the
-	 * element is returned if found, or a factory is invoked otherwise.
+	 * Looks for an element that satisfies the given {@link Evaluable}. If such
+	 * element exists, returns it. Otherwise, returns the given thunk's value.
 	 * 
 	 * @param predicate
-	 *          non null.
-	 * @param ifNone
-	 *          factory to be invoked if no such element exists. Non null
-	 * @return the element if found, or ifNone.create() otherwise
+	 * @return <code>thunk.value()</code> if no element matches the predicate, or
+	 *         an element that satisfies it, if at least one exists. As a
+	 *         particular case, this method will return the thunk's value if
+	 *         {@link Stream} is empty, regardless of the given predicate
 	 */
-	A findOrElse(@NonNull Evaluable<? super A> predicate, @NonNull Thunk<? extends A> ifNone);
+	A findOrElse(@NonNull Evaluable<? super A> predicate, @NonNull Thunk<? extends A> thunk);
 
 	// TODO findOrElse(element)
 

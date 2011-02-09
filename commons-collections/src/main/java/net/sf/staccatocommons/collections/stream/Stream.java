@@ -26,6 +26,7 @@ import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.Unmodifiable;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.sequence.Sequence;
 
 /**
  * A {@link Stream} is a lazy, rich-interfaced, functional-style, unmodifiable,
@@ -115,8 +116,21 @@ import net.sf.staccatocommons.lang.number.ImplicitNumberType;
  * 
  * <h2>Concrete Streams</h2>
  * 
- * TODO
+ * Staccato-Commnons-Collections offers several concrete implementations of
+ * streams. They fall in three categories:
+ * <ul>
+ * <li>Streams that decorate collections, or that are standalone.
+ * {@link Streams} is a class methods hub for instantiating such streams</li>
+ * <li>Streams that are built on top of {@link Sequence}s. {@link Iterate} is a
+ * class methods hub for instantiating such streams</li>
+ * <li>Streams that are built specifying its elements, or in a head-tail manner.
+ * {@link Cons} is a class methods hub for instantiating such streams</li>
+ * </ul>
  * 
+ * Aside from these concrete streams, client code may also implement new ones.
+ * In order to do that, it <strong>must not</strong> implement this interface
+ * directly, but inherit from {@link AbstractStream}, which implements all
+ * methods except of {@link #iterator()}
  * 
  * @author fbulgarelli
  * 
