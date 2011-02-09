@@ -17,9 +17,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
+import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.defs.restriction.Value;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.tuple.internal.TupleToStringStyle;
 import net.sf.staccatocommons.lang.value.RelevantState;
 
@@ -160,6 +163,107 @@ public abstract class Tuple implements Serializable {
 		return Arrays.asList(toArray());
 	}
 
+	/**
+	 * Answers a function that returns the first component of a tuple
+	 * 
+	 * @param <A>
+	 *          type of the first element
+	 * @return a constant function
+	 */
+	@Constant
+	public static <A> Function<FirstAware<A>, A> first() {
+		return new AbstractFunction<Tuple.FirstAware<A>, A>() {
+			public A apply(FirstAware<A> arg) {
+				return arg._1();
+			}
+		};
+	}
+
+	/**
+	 * Answers a function that returns the second component of a tuple
+	 * 
+	 * @param <A>
+	 *          type of the second element
+	 * @return a constant function
+	 */
+	@Constant
+	public static <A> Function<SecondAware<A>, A> second() {
+		return new AbstractFunction<Tuple.SecondAware<A>, A>() {
+			public A apply(SecondAware<A> arg) {
+				return arg._2();
+			}
+		};
+	}
+
+	static interface FirstAware<A> {
+
+		/**
+		 * Answers the first component
+		 * 
+		 * @return the first component
+		 */
+		public A getFirst();
+
+		/**
+		 * Synonym for {@link #getFirst()}
+		 * 
+		 * @return {@link #getFirst()}
+		 * 
+		 */
+		public A _1();
+
+	}
+
+	static interface SecondAware<A> {
+
+		/**
+		 * Answers the second component
+		 * 
+		 * @return the second component
+		 */
+		public A getSecond();
+
+		/**
+		 * Synonym for {@link #getSecond()}
+		 * 
+		 * @return {@link #getSecond()}
+		 * 
+		 */
+		public A _2();
+	}
+
+	static interface ThirdAware<A> {
+		/**
+		 * Answers the third component
+		 * 
+		 * @return the third component
+		 */
+		A getThird();
+
+		/**
+		 * 
+		 * Synonym for {@link #getThird()}
+		 * 
+		 * @return the third component
+		 */
+		A _3();
+	}
+
+	static interface FourthAware<A> {
+
+		/**
+		 * @return the fourth component
+		 */
+		A getFourth();
+
+		/**
+		 * Synonym for {@link #getFourth()}
+		 * 
+		 * @return the fourth component
+		 */
+		A _4();
+	}
+
 	protected static abstract class TupleState<A extends Tuple> extends RelevantState<A> {
 		/**
 		 * Creates a new {@link TupleState}
@@ -168,4 +272,5 @@ public abstract class Tuple implements Serializable {
 			super(relevantAttributesCount, TupleToStringStyle.getInstance());
 		}
 	}
+
 }

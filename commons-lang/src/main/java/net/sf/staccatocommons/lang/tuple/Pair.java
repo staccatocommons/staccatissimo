@@ -18,6 +18,8 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
+import net.sf.staccatocommons.lang.tuple.Tuple.FirstAware;
+import net.sf.staccatocommons.lang.tuple.Tuple.SecondAware;
 import net.sf.staccatocommons.lang.value.RelevantState;
 
 /**
@@ -34,7 +36,7 @@ import net.sf.staccatocommons.lang.value.RelevantState;
 @ConditionallyImmutable
 @ConditionallySerializable
 public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>>,
-	Map.Entry<T1, T2> {
+	Map.Entry<T1, T2>, FirstAware<T1>, SecondAware<T2> {
 
 	private static final long serialVersionUID = -6479045670420592337L;
 	private static final RelevantState<Pair> val = new TupleState<Pair>(2) {
@@ -57,40 +59,22 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 		this.second = second;
 	}
 
-	/**
-	 * Answers the first component
-	 * 
-	 * @return the first component
-	 */
+	@Override
 	public T1 getFirst() {
 		return first;
 	}
 
-	/**
-	 * Synonym for {@link #getFirst()}
-	 * 
-	 * @return {@link #getFirst()}
-	 * 
-	 */
+	@Override
 	public T1 _1() {
 		return first;
 	}
 
-	/**
-	 * Answers the second component
-	 * 
-	 * @return the second component
-	 */
+	@Override
 	public T2 getSecond() {
 		return second;
 	}
 
-	/**
-	 * Synonym for {@link #getSecond()}
-	 * 
-	 * @return {@link #getSecond()}
-	 * 
-	 */
+	@Override
 	public T2 _2() {
 		return second;
 	}

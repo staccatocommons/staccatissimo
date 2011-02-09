@@ -16,6 +16,9 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
+import net.sf.staccatocommons.lang.tuple.Tuple.FirstAware;
+import net.sf.staccatocommons.lang.tuple.Tuple.SecondAware;
+import net.sf.staccatocommons.lang.tuple.Tuple.ThirdAware;
 import net.sf.staccatocommons.lang.value.RelevantState;
 
 /**
@@ -31,7 +34,8 @@ import net.sf.staccatocommons.lang.value.RelevantState;
 @Value
 @ConditionallyImmutable
 @ConditionallySerializable
-public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple<T1, T2, T3>> {
+public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple<T1, T2, T3>>,
+	FirstAware<T1>, SecondAware<T2>, ThirdAware<T3> {
 
 	private static final long serialVersionUID = 5811264763831754560L;
 	private static final RelevantState<Triple> val = new TupleState<Triple>(3) {
@@ -60,44 +64,31 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
 		this.third = third;
 	}
 
-	/**
-	 * @return the first component
-	 */
+	@Override
 	public T1 getFirst() {
 		return first;
 	}
 
-	/**
-	 * @return the second component
-	 */
+	@Override
 	public T2 getSecond() {
 		return second;
 	}
 
-	/**
-	 * @return the third component
-	 */
+	@Override
 	public T3 getThird() {
 		return third;
 	}
 
-	/**
-	 * @return the first component
-	 */
+	@Override
 	public T1 _1() {
 		return getFirst();
 	}
 
-	/**
-	 * @return the second component
-	 */
+	@Override
 	public T2 _2() {
 		return getSecond();
 	}
 
-	/**
-	 * @return the third component
-	 */
 	public T3 _3() {
 		return getThird();
 	}

@@ -16,12 +16,12 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Delayable;
-import net.sf.staccatocommons.defs.NullSafe;
+import net.sf.staccatocommons.defs.NullSafeAware;
 import net.sf.staccatocommons.defs.Thunk;
 
 /**
  * {@link Function}s are rich interfaced {@link Applicable}s - one argument
- * composable, {@link Delayable} and {@link NullSafe} tranformations.
+ * composable, {@link Delayable} and {@link NullSafeAware} tranformations.
  * 
  * @author flbulgarelli
  * 
@@ -31,7 +31,7 @@ import net.sf.staccatocommons.defs.Thunk;
  *          function return type
  */
 public interface Function<A, B> extends Applicable<A, B>, //
-	NullSafe<Function<A, B>>, //
+	NullSafeAware<Function<A, B>>, //
 	Delayable<A, B> {
 
 	/**

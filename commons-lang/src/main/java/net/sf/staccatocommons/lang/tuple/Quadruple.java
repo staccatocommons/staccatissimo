@@ -16,6 +16,10 @@ import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
+import net.sf.staccatocommons.lang.tuple.Tuple.FirstAware;
+import net.sf.staccatocommons.lang.tuple.Tuple.FourthAware;
+import net.sf.staccatocommons.lang.tuple.Tuple.SecondAware;
+import net.sf.staccatocommons.lang.tuple.Tuple.ThirdAware;
 import net.sf.staccatocommons.lang.value.RelevantState;
 
 /**
@@ -33,7 +37,8 @@ import net.sf.staccatocommons.lang.value.RelevantState;
 @ConditionallyImmutable
 @ConditionallySerializable
 public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
-	Comparable<Quadruple<T1, T2, T3, T4>> {
+	Comparable<Quadruple<T1, T2, T3, T4>>, FirstAware<T1>, SecondAware<T2>, ThirdAware<T3>,
+	FourthAware<T4> {
 
 	private static final long serialVersionUID = -1072243152313731077L;
 	private static final RelevantState<Quadruple> val = new TupleState<Quadruple>(4) {
@@ -62,58 +67,36 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 		this.fourth = fourth;
 	}
 
-	/**
-	 * @return the first component
-	 */
 	public T1 getFirst() {
 		return first;
 	}
 
-	/**
-	 * @return the second component
-	 */
 	public T2 getSecond() {
 		return second;
 	}
 
-	/**
-	 * @return the third component
-	 */
 	public T3 getThird() {
 		return third;
 	}
 
-	/**
-	 * @return the fourth component
-	 */
+	@Override
 	public T4 getFourth() {
 		return fourth;
 	}
 
-	/**
-	 * @return the first component
-	 */
 	public T1 _1() {
 		return getFirst();
 	}
 
-	/**
-	 * @return the second component
-	 */
 	public T2 _2() {
 		return getSecond();
 	}
 
-	/**
-	 * @return the third component
-	 */
 	public T3 _3() {
 		return getThird();
 	}
 
-	/**
-	 * @return the fourth component
-	 */
+	@Override
 	public T4 _4() {
 		return getFourth();
 	}

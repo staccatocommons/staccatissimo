@@ -15,11 +15,11 @@ package net.sf.staccatocommons.defs.function;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Delayable2;
-import net.sf.staccatocommons.defs.NullSafe;
+import net.sf.staccatocommons.defs.NullSafeAware;
 
 /**
  * {@link Function2}s are rich interfaced {@link Applicable2}s - two arguments
- * {@link Delayable2} and {@link NullSafe} transformations.
+ * {@link Delayable2} and {@link NullSafeAware} transformations.
  * 
  * 
  * {@link Function2} can also be <a
@@ -40,7 +40,7 @@ import net.sf.staccatocommons.defs.NullSafe;
  * 
  */
 public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, Function<B, C>>,
-	Delayable2<A, B, C>, NullSafe<Function2<A, B, C>> {
+	Delayable2<A, B, C>, NullSafeAware<Function2<A, B, C>> {
 
 	/**
 	 * Partially applies the function passing just its first parameter

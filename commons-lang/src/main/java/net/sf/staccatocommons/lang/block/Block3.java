@@ -17,7 +17,7 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Executable3;
-import net.sf.staccatocommons.defs.NullSafe;
+import net.sf.staccatocommons.defs.NullSafeAware;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractDelayable3;
 
@@ -31,7 +31,7 @@ import net.sf.staccatocommons.lang.function.AbstractDelayable3;
  */
 public abstract class Block3<T1, T2, T3> extends AbstractDelayable3<T1, T2, T3, Void> implements
 	Executable3<T1, T2, T3>, Applicable3<T1, T2, T3, Void>, Applicable<T1, Block2<T2, T3>>,
-	Applicable2<T1, T2, Block<T3>>, NullSafe<Block3<T1, T2, T3>> {
+	Applicable2<T1, T2, Block<T3>>, NullSafeAware<Block3<T1, T2, T3>> {
 
 	/**
 	 * Executes this block. This implementation just invokes
