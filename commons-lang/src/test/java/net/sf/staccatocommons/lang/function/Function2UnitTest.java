@@ -90,7 +90,7 @@ public class Function2UnitTest extends JUnit4MockObjectTestCase {
 		Thunk<Character> lazy = function.delayed(5, "foo");
 		checking(new Expectations() {
 			{
-				one(applicable).apply(5, "foo");
+				exactly(3).of(applicable).apply(5, "foo");
 				will(returnValue('a'));
 			}
 		});

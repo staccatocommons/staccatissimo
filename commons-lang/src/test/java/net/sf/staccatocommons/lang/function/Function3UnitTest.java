@@ -77,7 +77,7 @@ public class Function3UnitTest extends JUnit4MockObjectTestCase {
 		Thunk<Character> lazy = function.delayed(5, "foo", true);
 		checking(new Expectations() {
 			{
-				one(applicable).apply(5, "foo", true);
+				exactly(3).of(applicable).apply(5, "foo", true);
 				will(returnValue('a'));
 			}
 		});

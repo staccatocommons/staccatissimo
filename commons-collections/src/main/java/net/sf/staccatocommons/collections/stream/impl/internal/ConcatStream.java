@@ -40,7 +40,7 @@ public final class ConcatStream<A> extends AbstractStream<A> {
 		this.other = other;
 	}
 
-	public Thriterator<A> iterator() {
+	public Thriterator<A> iterator() {// FIXME bad impl
 		return new AdvanceThriterator<A>() {
 			private Thriter<A> iter = stream.iterator();
 			private boolean second = false;

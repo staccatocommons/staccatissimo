@@ -71,7 +71,8 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.AbstractFunction#of(Applicable)}.
+	 * {@link net.sf.staccatocommons.lang.function.AbstractFunction#of(Applicable)}
+	 * .
 	 */
 	@Test
 	public void testOf1() {
@@ -122,7 +123,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 		Thunk<Long> p = f.of(g1).delayed('a');
 		checking(new Expectations() {
 			{
-				one(g1).apply('a');
+				exactly(3).of(g1).apply('a');
 				will(returnValue(20));
 			}
 		});
