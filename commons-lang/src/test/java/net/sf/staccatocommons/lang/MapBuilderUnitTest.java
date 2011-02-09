@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.lang;
 
-import static net.sf.staccatocommons.lang.tuple.Tuple.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static net.sf.staccatocommons.testing.junit.asserts.CollectionAssert.*;
 import static org.hamcrest.core.IsInstanceOf.*;
 import static org.junit.Assert.*;
@@ -55,9 +55,7 @@ public class MapBuilderUnitTest {
 	 */
 	@Test
 	public void testHashMapWith() {
-		assertThat(
-			MapBuilder.hashMapWith("FOO", 5).build(),
-			instanceOf(HashMap.class));
+		assertThat(MapBuilder.hashMapWith("FOO", 5).build(), instanceOf(HashMap.class));
 	}
 
 	/**
@@ -67,9 +65,7 @@ public class MapBuilderUnitTest {
 	 */
 	@Test
 	public void testLinkedMapWith() {
-		assertThat(
-			MapBuilder.linkedMapWith("FOO", 5).build(),
-			instanceOf(LinkedHashMap.class));
+		assertThat(MapBuilder.linkedMapWith("FOO", 5).build(), instanceOf(LinkedHashMap.class));
 	}
 
 	/**
@@ -79,9 +75,7 @@ public class MapBuilderUnitTest {
 	 */
 	@Test
 	public void testTreeMapWith() {
-		assertThat(
-			MapBuilder.treeMapWith("FOO", 5).build(),
-			instanceOf(TreeMap.class));
+		assertThat(MapBuilder.treeMapWith("FOO", 5).build(), instanceOf(TreeMap.class));
 	}
 
 }

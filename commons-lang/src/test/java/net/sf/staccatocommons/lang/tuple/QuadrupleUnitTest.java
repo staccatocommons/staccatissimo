@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.lang.tuple;
 
 import static junit.framework.Assert.*;
-import static net.sf.staccatocommons.lang.tuple.Tuple.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
 import java.util.Date;
 
@@ -28,17 +28,17 @@ public class QuadrupleUnitTest extends TupleAbstractUnitTest {
 	@Override
 	public void testComponents() throws Exception {
 		Quadruple<Integer, String, String, String> quad = _(9, "Hello", "World", "!");
-		assertEquals((Integer) 9, quad.getFirst());
-		assertSame(quad._1(), quad.getFirst());
+		assertEquals((Integer) 9, quad.first());
+		assertSame(quad._1(), quad.first());
 
-		assertEquals("Hello", quad.getSecond());
-		assertSame(quad._2(), quad.getSecond());
+		assertEquals("Hello", quad.second());
+		assertSame(quad._2(), quad.second());
 
-		assertEquals("World", quad.getThird());
-		assertSame(quad._3(), quad.getThird());
+		assertEquals("World", quad.third());
+		assertSame(quad._3(), quad.third());
 
-		assertEquals("!", quad.getFourth());
-		assertSame(quad._4(), quad.getFourth());
+		assertEquals("!", quad.fourth());
+		assertSame(quad._4(), quad.fourth());
 	}
 
 	@Override

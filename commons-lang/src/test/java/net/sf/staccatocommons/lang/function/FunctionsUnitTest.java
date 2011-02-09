@@ -15,7 +15,6 @@ package net.sf.staccatocommons.lang.function;
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.lang.Strings;
-import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;

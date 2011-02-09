@@ -60,7 +60,7 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 	}
 
 	@Override
-	public T1 getFirst() {
+	public T1 first() {
 		return first;
 	}
 
@@ -70,7 +70,7 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 	}
 
 	@Override
-	public T2 getSecond() {
+	public T2 second() {
 		return second;
 	}
 
@@ -115,11 +115,11 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 	}
 
 	public T1 getKey() {
-		return getFirst();
+		return first();
 	}
 
 	public T2 getValue() {
-		return getSecond();
+		return second();
 	}
 
 	public T2 setValue(T2 arg0) {

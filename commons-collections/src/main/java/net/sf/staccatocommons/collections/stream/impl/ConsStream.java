@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import static net.sf.staccatocommons.lang.tuple.Tuple.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.AbstractStream;

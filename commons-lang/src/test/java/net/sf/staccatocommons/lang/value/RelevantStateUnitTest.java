@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.lang.value;
 
-import static net.sf.staccatocommons.lang.tuple.Tuple.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.junit.Assert.*;
 
 import java.util.Date;

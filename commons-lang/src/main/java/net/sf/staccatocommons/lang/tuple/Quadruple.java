@@ -67,38 +67,38 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 		this.fourth = fourth;
 	}
 
-	public T1 getFirst() {
+	public T1 first() {
 		return first;
 	}
 
-	public T2 getSecond() {
+	public T2 second() {
 		return second;
 	}
 
-	public T3 getThird() {
+	public T3 third() {
 		return third;
 	}
 
 	@Override
-	public T4 getFourth() {
+	public T4 fourth() {
 		return fourth;
 	}
 
 	public T1 _1() {
-		return getFirst();
+		return first();
 	}
 
 	public T2 _2() {
-		return getSecond();
+		return second();
 	}
 
 	public T3 _3() {
-		return getThird();
+		return third();
 	}
 
 	@Override
 	public T4 _4() {
-		return getFourth();
+		return fourth();
 	}
 
 	@Override

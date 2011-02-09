@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.lang.tuple;
 
 import static junit.framework.Assert.*;
-import static net.sf.staccatocommons.lang.tuple.Tuple.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -31,10 +31,10 @@ public class PairUnitTest extends TupleAbstractUnitTest {
 	@Override
 	public void testComponents() throws Exception {
 		Pair<Integer, String> pair = _(9, "Hello");
-		assertEquals((Integer) 9, pair.getFirst());
-		assertEquals("Hello", pair.getSecond());
-		assertSame(pair._1(), pair.getFirst());
-		assertSame(pair._2(), pair.getSecond());
+		assertEquals((Integer) 9, pair.first());
+		assertEquals("Hello", pair.second());
+		assertSame(pair._1(), pair.first());
+		assertSame(pair._2(), pair.second());
 
 	}
 

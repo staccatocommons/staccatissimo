@@ -17,12 +17,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.defs.restriction.Value;
-import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.tuple.internal.TupleToStringStyle;
 import net.sf.staccatocommons.lang.value.RelevantState;
 
@@ -57,12 +54,12 @@ import net.sf.staccatocommons.lang.value.RelevantState;
  * 
  * Although it is possible to create tuples of arities from 2 to 4 invoking the
  * appropriate constructor, the recommended way of instantiating tuples is using
- * the family of class methods named <code>_</code>. Although it looks odd at
- * first glance, combining it with static imports produces quite clean code. For
- * example, using again the divMod method:
+ * the family of class methods in {@link Tuples} named <code>_</code>. Although
+ * it looks odd at first glance, combining it with static imports produces quite
+ * clean code. For example, using again the divMod method:
  * 
  * <pre>
- *  import static net.sf.staccatocommons.lang.tuple.Tuple._;
+ *  import static net.sf.staccatocommons.lang.tuple._;
  *  
  *  ...
  *  Pair&lt;Integer, Integer&gt; divMod(int x, int y)
@@ -87,64 +84,6 @@ public abstract class Tuple implements Serializable {
 	Tuple() {}
 
 	/**
-	 * Creates a new {@link Pair}
-	 * 
-	 * @param <T1>
-	 * @param <T2>
-	 * @param first
-	 *          nullable.
-	 * @param second
-	 *          nullable
-	 * @return a new {@link Pair}. Non null.
-	 */
-	@NonNull
-	public static <T1, T2> Pair<T1, T2> _(T1 first, T2 second) {
-		return new Pair<T1, T2>(first, second);
-	}
-
-	/**
-	 * Creates a new {@link Triple}
-	 * 
-	 * @param <T1>
-	 * @param <T2>
-	 * @param <T3>
-	 * @param first
-	 *          nullable.
-	 * @param second
-	 *          nullable
-	 * @param third
-	 *          nullable
-	 * @return a new {@link Triple}. Non null.
-	 */
-	@NonNull
-	public static <T1, T2, T3> Triple<T1, T2, T3> _(T1 first, T2 second, T3 third) {
-		return new Triple<T1, T2, T3>(first, second, third);
-	}
-
-	/**
-	 * Creates a new {@link Quadruple}
-	 * 
-	 * @param <T1>
-	 * @param <T2>
-	 * @param <T3>
-	 * @param <T4>
-	 * @param first
-	 *          nullable.
-	 * @param second
-	 *          nullable
-	 * @param third
-	 *          nullable
-	 * @param fourth
-	 *          nullable
-	 * @return a new {@link Quadruple}. Non null.
-	 */
-	@NonNull
-	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> _(T1 first, T2 second, T3 third,
-		T4 fourth) {
-		return new Quadruple<T1, T2, T3, T4>(first, second, third, fourth);
-	}
-
-	/**
 	 * Converts this tuple into an array
 	 * 
 	 * @return an new Object[] containing each of the elements of this tuple
@@ -164,100 +103,98 @@ public abstract class Tuple implements Serializable {
 	}
 
 	/**
-	 * Answers a function that returns the first component of a tuple
+	 * Interface for accessing the first element of a tuple
+	 * 
+	 * @author flbulgarelli
 	 * 
 	 * @param <A>
-	 *          type of the first element
-	 * @return a constant function
 	 */
-	@Constant
-	public static <A> Function<FirstAware<A>, A> first() {
-		return new AbstractFunction<Tuple.FirstAware<A>, A>() {
-			public A apply(FirstAware<A> arg) {
-				return arg._1();
-			}
-		};
-	}
-
-	/**
-	 * Answers a function that returns the second component of a tuple
-	 * 
-	 * @param <A>
-	 *          type of the second element
-	 * @return a constant function
-	 */
-	@Constant
-	public static <A> Function<SecondAware<A>, A> second() {
-		return new AbstractFunction<Tuple.SecondAware<A>, A>() {
-			public A apply(SecondAware<A> arg) {
-				return arg._2();
-			}
-		};
-	}
-
-	static interface FirstAware<A> {
+	public static interface FirstAware<A> {
 
 		/**
 		 * Answers the first component
 		 * 
 		 * @return the first component
 		 */
-		public A getFirst();
+		A first();
 
 		/**
-		 * Synonym for {@link #getFirst()}
+		 * Synonym for {@link #first()}
 		 * 
-		 * @return {@link #getFirst()}
+		 * @return {@link #first()}
 		 * 
 		 */
-		public A _1();
+		A _1();
 
 	}
 
-	static interface SecondAware<A> {
+	/**
+	 * Interface for accessing the second element of a tuple
+	 * 
+	 * @author flbulgarelli
+	 * 
+	 * @param <A>
+	 */
+
+	public static interface SecondAware<A> {
 
 		/**
 		 * Answers the second component
 		 * 
 		 * @return the second component
 		 */
-		public A getSecond();
+		A second();
 
 		/**
-		 * Synonym for {@link #getSecond()}
+		 * Synonym for {@link #second()}
 		 * 
-		 * @return {@link #getSecond()}
+		 * @return {@link #second()}
 		 * 
 		 */
-		public A _2();
+		A _2();
 	}
 
-	static interface ThirdAware<A> {
+	/**
+	 * Interface for accessing the third element of a tuple
+	 * 
+	 * @author flbulgarelli
+	 * 
+	 * @param <A>
+	 */
+
+	public static interface ThirdAware<A> {
 		/**
 		 * Answers the third component
 		 * 
 		 * @return the third component
 		 */
-		A getThird();
+		A third();
 
 		/**
 		 * 
-		 * Synonym for {@link #getThird()}
+		 * Synonym for {@link #third()}
 		 * 
 		 * @return the third component
 		 */
 		A _3();
 	}
 
-	static interface FourthAware<A> {
+	/**
+	 * Interface for accessing the fourth element of a tuple
+	 * 
+	 * @author flbulgarelli
+	 * 
+	 * @param <A>
+	 */
+	public static interface FourthAware<A> {
 
 		/**
 		 * @return the fourth component
 		 */
-		A getFourth();
+		A fourth();
 
 		/**
-		 * Synonym for {@link #getFourth()}
+		 * Synonym for {@link #fourth()}
 		 * 
 		 * @return the fourth component
 		 */

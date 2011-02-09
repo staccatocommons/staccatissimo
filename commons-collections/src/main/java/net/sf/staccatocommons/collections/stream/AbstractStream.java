@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.collections.stream;
 
 import static net.sf.staccatocommons.lang.Compare.*;
-import static net.sf.staccatocommons.lang.tuple.Tuple.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;

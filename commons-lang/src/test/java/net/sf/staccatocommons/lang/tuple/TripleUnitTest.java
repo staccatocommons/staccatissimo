@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.lang.tuple;
 
 import static junit.framework.Assert.*;
-import static net.sf.staccatocommons.lang.tuple.Tuple.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
 import java.util.Date;
 
@@ -29,14 +29,14 @@ public class TripleUnitTest extends TupleAbstractUnitTest {
 	@Override
 	public void testComponents() throws Exception {
 		Triple<Integer, String, String> triple = _(9, "Hello", "World");
-		assertEquals((Integer) 9, triple.getFirst());
-		assertSame(triple._1(), triple.getFirst());
+		assertEquals((Integer) 9, triple.first());
+		assertSame(triple._1(), triple.first());
 
-		assertEquals("Hello", triple.getSecond());
-		assertSame(triple._2(), triple.getSecond());
+		assertEquals("Hello", triple.second());
+		assertSame(triple._2(), triple.second());
 
-		assertEquals("World", triple.getThird());
-		assertSame(triple._3(), triple.getThird());
+		assertEquals("World", triple.third());
+		assertSame(triple._3(), triple.third());
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class TripleUnitTest extends TupleAbstractUnitTest {
 		assertEquals(_(5, 90L, "Bye"), _(5, 90L, "Bye"));
 		assertFalse(_("Hello", 0, 0).equals(_("World", 0, 1)));
 		Date date = new Date();
-		assertEquals(_(40, date, "hello").hashCode(), _(40, date.clone(), "hello").hashCode());
+		assertEquals(_(40, date, "hello").hashCode(), Tuples._(40, date.clone(), "hello").hashCode());
 	}
 
 	/** Test for {@link Triple#rotateLeft()} and {@link Triple#rotateRight()} */

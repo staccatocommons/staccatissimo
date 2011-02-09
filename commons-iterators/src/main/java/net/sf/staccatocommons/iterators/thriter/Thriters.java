@@ -21,6 +21,9 @@ import net.sf.staccatocommons.check.annotation.NonNull;
  * 
  */
 public class Thriters {
+
+	private Thriters() {}
+
 	@NonNull
 	public static <A> Thriter<A> from(@NonNull Iterator<? extends A> iter) {
 		return Thriterators.from(iter);

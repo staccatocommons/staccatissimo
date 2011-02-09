@@ -3,7 +3,7 @@ package net.sf.staccatocommons.collections.iterable;
 import static java.util.Arrays.*;
 import static java.util.Collections.*;
 import static net.sf.staccatocommons.lang.predicate.Predicates.*;
-import static net.sf.staccatocommons.lang.tuple.Tuple.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;

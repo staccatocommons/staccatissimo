@@ -65,32 +65,32 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
 	}
 
 	@Override
-	public T1 getFirst() {
+	public T1 first() {
 		return first;
 	}
 
 	@Override
-	public T2 getSecond() {
+	public T2 second() {
 		return second;
 	}
 
 	@Override
-	public T3 getThird() {
+	public T3 third() {
 		return third;
 	}
 
 	@Override
 	public T1 _1() {
-		return getFirst();
+		return first();
 	}
 
 	@Override
 	public T2 _2() {
-		return getSecond();
+		return second();
 	}
 
 	public T3 _3() {
-		return getThird();
+		return third();
 	}
 
 	/**

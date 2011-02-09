@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.io.preferences;
 
-import static net.sf.staccatocommons.lang.tuple.Tuple.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
