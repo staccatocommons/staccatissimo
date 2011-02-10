@@ -18,7 +18,9 @@ import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.function.Function2;
+import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
+import net.sf.staccatocommons.lang.internal.NaturalComparator;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.internal.GreaterThan;
 import net.sf.staccatocommons.lang.predicate.internal.LessThan;
@@ -31,74 +33,6 @@ import net.sf.staccatocommons.lang.predicate.internal.LessThan;
  * 
  */
 public class Compare {
-
-	/**
-	 * Returns a predicate that evaluates if its argument is less than the given
-	 * value.
-	 * 
-	 * More formally, this method returns a new predicate that evaluates
-	 * comparable argument with the statement
-	 * <code>argument.compareTo(value) < 0</code>
-	 * 
-	 * @param <T>
-	 * @param value
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> lessThan(@NonNull T value) {
-		return new LessThan<T>(value);
-	}
-
-	/**
-	 * Returns a predicate that evaluates if its argument is lower than or equal
-	 * to the given value.
-	 * 
-	 * More formally, this method returns a new predicate that evaluates
-	 * comparable argument with the statement
-	 * <code>argument.compareTo(value) <= 0</code>
-	 * 
-	 * @param <T>
-	 * @param value
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> lessThanOrEqualTo(@NonNull T value) {
-		return greaterThan(value).not();
-	}
-
-	/**
-	 * Returns a predicate that evaluates if its argument is greater than the
-	 * given value.
-	 * 
-	 * More formally, this method returns a new predicate that evaluates
-	 * comparable argument with the statement
-	 * <code>argument.compareTo(value) > 0</code>
-	 * 
-	 * @param <T>
-	 * @param value
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> greaterThan(@NonNull T value) {
-		return new GreaterThan<T>(value);
-	}
-
-	/**
-	 * Returns a predicate that evaluates if its argument is greater than or equal
-	 * to the given value.
-	 * 
-	 * More formally, this method returns a new predicate that evaluates
-	 * comparable argument with the statement
-	 * <code>argument.compareTo(value) >= 0</code>
-	 * 
-	 * @param <T>
-	 * @param value
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> greaterThanOrEqualTo(@NonNull T value) {
-		return lessThan(value).not();
-	}
 
 	/**
 	 * Tests that given three {@link Comparable}s <code>element</code>,
@@ -243,7 +177,7 @@ public class Compare {
 	@NonNull
 	@ForceChecks
 	public static <T extends Comparable<T>> T min(@NonNull T c1, @NonNull T c2) {
-		return c1.compareTo(c2) < 1 ? c1 : c2;
+		return min(c1, c2, Compare.<T> natural());
 	}
 
 	/**
@@ -255,7 +189,7 @@ public class Compare {
 	@NonNull
 	@ForceChecks
 	public static <T extends Comparable<T>> T max(@NonNull T c1, @NonNull T c2) {
-		return c1.compareTo(c2) >= 0 ? c1 : c2;
+		return max(c1, c2, Compare.<T> natural());
 	}
 
 	/**
@@ -342,5 +276,86 @@ public class Compare {
 				return function.apply(arg0).compareTo(function.apply(arg1));
 			}
 		};
+	}
+
+	/**
+	 * Returns a predicate that evaluates if its argument is less than the given
+	 * value.
+	 * 
+	 * More formally, this method returns a new predicate that evaluates
+	 * comparable argument with the statement
+	 * <code>argument.compareTo(value) < 0</code>
+	 * 
+	 * @param <T>
+	 * @param value
+	 * @return a new predicate
+	 */
+	@NonNull
+	public static <T extends Comparable<T>> Predicate<T> lessThan(@NonNull T value) {
+		return new LessThan<T>(value);
+	}
+
+	/**
+	 * Returns a predicate that evaluates if its argument is lower than or equal
+	 * to the given value.
+	 * 
+	 * More formally, this method returns a new predicate that evaluates
+	 * comparable argument with the statement
+	 * <code>argument.compareTo(value) <= 0</code>
+	 * 
+	 * @param <T>
+	 * @param value
+	 * @return a new predicate
+	 */
+	@NonNull
+	public static <T extends Comparable<T>> Predicate<T> lessThanOrEqualTo(@NonNull T value) {
+		return greaterThan(value).not();
+	}
+
+	/**
+	 * Returns a predicate that evaluates if its argument is greater than the
+	 * given value.
+	 * 
+	 * More formally, this method returns a new predicate that evaluates
+	 * comparable argument with the statement
+	 * <code>argument.compareTo(value) > 0</code>
+	 * 
+	 * @param <T>
+	 * @param value
+	 * @return a new predicate
+	 */
+	@NonNull
+	public static <T extends Comparable<T>> Predicate<T> greaterThan(@NonNull T value) {
+		return new GreaterThan<T>(value);
+	}
+
+	/**
+	 * Returns a predicate that evaluates if its argument is greater than or equal
+	 * to the given value.
+	 * 
+	 * More formally, this method returns a new predicate that evaluates
+	 * comparable argument with the statement
+	 * <code>argument.compareTo(value) >= 0</code>
+	 * 
+	 * @param <T>
+	 * @param value
+	 * @return a new predicate
+	 */
+	@NonNull
+	public static <T extends Comparable<T>> Predicate<T> greaterThanOrEqualTo(@NonNull T value) {
+		return lessThan(value).not();
+	}
+
+	/**
+	 * Answers a natural comparator, that is, a comparator that compares elements
+	 * using its natural order, as defined by {@link Comparable}.
+	 * 
+	 * @param <A>
+	 * @return a natural {@link Comparator}
+	 */
+	@Constant
+	@NonNull
+	public static <A extends Comparable<A>> Comparator<A> natural() {
+		return NaturalComparator.natural();
 	}
 }

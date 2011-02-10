@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.internal.comparator;
+package net.sf.staccatocommons.lang.internal;
 
 import java.util.Comparator;
 
@@ -21,12 +21,12 @@ import net.sf.staccatocommons.defs.restriction.Constant;
  * @author flbulgarelli
  * 
  */
-public class NaturalComparator<A> implements Comparator<A> {
+public class NaturalComparator<A extends Comparable<A>> implements Comparator<A> {
 
 	private static NaturalComparator INSTANCE = new NaturalComparator();
 
 	public int compare(A o1, A o2) {
-		return ((Comparable<A>) o1).compareTo(o2);
+		return o1.compareTo(o2);
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class NaturalComparator<A> implements Comparator<A> {
 	 */
 	@NonNull
 	@Constant
-	public static <A> NaturalComparator<A> natural() {
+	public static <A extends Comparable<A>> Comparator<A> natural() {
 		return INSTANCE;
 	}
 

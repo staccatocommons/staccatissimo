@@ -36,12 +36,28 @@ public class Tuples {
 	 * @return a constant function
 	 */
 	@Constant
+	@NonNull
 	public static <A> Function<Tuple.FirstAware<A>, A> first() {
 		return new AbstractFunction<Tuple.FirstAware<A>, A>() {
 			public A apply(Tuple.FirstAware<A> arg) {
 				return arg._1();
 			}
 		};
+	}
+
+	/**
+	 * Answers a function that returns the first component of a tuple, specifying
+	 * the concrete type of the function
+	 * 
+	 * @param <A>
+	 *          type of the first element
+	 * @param clazz
+	 * @return a constant function
+	 */
+	@Constant
+	@NonNull
+	public static <A> Function<Tuple.FirstAware<A>, A> first(Class<A> clazz) {
+		return first();
 	}
 
 	/**
@@ -52,12 +68,26 @@ public class Tuples {
 	 * @return a constant function
 	 */
 	@Constant
+	@NonNull
 	public static <A> Function<Tuple.SecondAware<A>, A> second() {
 		return new AbstractFunction<Tuple.SecondAware<A>, A>() {
 			public A apply(Tuple.SecondAware<A> arg) {
 				return arg._2();
 			}
 		};
+	}
+
+	/**
+	 * Answers a function that returns the first component of a tuple, specifying
+	 * the concrete type of the function
+	 * 
+	 * @param <A>
+	 *          type of the first element
+	 * @param clazz
+	 * @return a constant function
+	 */
+	public static <A> Function<Tuple.SecondAware<A>, A> second(Class<A> clazz) {
+		return second();
 	}
 
 	/**
@@ -68,6 +98,7 @@ public class Tuples {
 	 * @return a constant function
 	 */
 	@Constant
+	@NonNull
 	public static <A> Function<ThirdAware<A>, A> third() {
 		return new AbstractFunction<Tuple.ThirdAware<A>, A>() {
 			public A apply(Tuple.ThirdAware<A> arg) {
@@ -84,6 +115,7 @@ public class Tuples {
 	 * @return a constant function
 	 */
 	@Constant
+	@NonNull
 	public static <A> Function<FourthAware<A>, A> fourth() {
 		return new AbstractFunction<FourthAware<A>, A>() {
 			public A apply(FourthAware<A> arg) {

@@ -31,7 +31,6 @@ import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.internal.ToPair;
-import net.sf.staccatocommons.collections.internal.comparator.NaturalComparator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
@@ -511,12 +510,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public A maximum() {
-		return maximumBy(NaturalComparator.<A> natural());
+		return maximumBy((Comparator<A>) Compare.<Comparable> natural());
 	}
 
 	@Override
 	public A minimum() {
-		return minimumBy(NaturalComparator.<A> natural());
+		return minimumBy((Comparator<A>) Compare.<Comparable> natural());
 	}
 
 	@Override

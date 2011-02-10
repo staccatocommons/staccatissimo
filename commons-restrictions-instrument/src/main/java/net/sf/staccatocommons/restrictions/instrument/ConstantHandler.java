@@ -47,6 +47,13 @@ public class ConstantHandler implements MethodAnnotationHandler<Constant> {
 			return;
 		}
 
+		if (originalMethod.getParameterTypes().length > 0) {
+			context.logInfoMessage("{}: has one or more parameters. Not processing", context
+				.getMethod()
+				.getLongName());
+			return;
+		}
+
 		CodeAttribute codeAttribute = originalMethod.getMethodInfo().getCodeAttribute();
 		if (codeAttribute == null || codeAttribute.getMaxStack() < 2) {
 			context.logInfoMessage("{}: may be already constant. Not processing", context

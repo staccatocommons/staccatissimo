@@ -13,11 +13,14 @@
 package net.sf.staccatocommons.lang;
 
 import static net.sf.staccatocommons.lang.Compare.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+
+import net.sf.staccatocommons.defs.Applicable;
 
 import org.junit.Test;
 
@@ -115,7 +118,13 @@ public class CompareUnitTest {
 		assertEquals("ABC", min("FGH", "ABC"));
 		assertEquals("AAA", min("AAA", "ABC"));
 		assertEquals("EEE", min("EEE", "EEE"));
+	}
 
+	/*** Test for {@link Compare#on(Applicable)} */
+	@Test
+	public void testOn() throws Exception {
+		assertEquals(0, Compare.on(first(Integer.class)).compare(_(20, 30), _(20, 40)));
+		assertTrue(Compare.on(second(Integer.class)).compare(_(20, 30), _(20, 40)) < 0);
 	}
 
 }

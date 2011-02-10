@@ -19,11 +19,7 @@ import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
-import net.sf.staccatocommons.lang.internal.ToString;
-import net.sf.staccatocommons.lang.value.BasicEquals;
-
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import net.sf.staccatocommons.lang.value.RelevantState;
 
 /**
  * A {@link Thunk} that is {@link Comparable}, based on a priority attribute.
@@ -42,7 +38,11 @@ public class Prioritized<T, P extends Comparable<P>> implements Comparable<Prior
 	Thunk<T>, Serializable {
 
 	private static final long serialVersionUID = 7131041003021112454L;
-
+	private static final RelevantState<Prioritized> state = new RelevantState<Prioritized>(1) {
+		protected void collectState(Prioritized object, StateCollector s) {
+			s.add(object.priority);
+		}
+	};
 	private final P priority;
 	private final T value;
 
@@ -81,23 +81,15 @@ public class Prioritized<T, P extends Comparable<P>> implements Comparable<Prior
 	 * priority attribute in the test
 	 */
 	public boolean equals(Object obj) {
-		BasicEquals be = BasicEquals.from(this, obj);
-		if (be.isEqualsDone())
-			return be.toEquals();
-		Prioritized<T, P> that = (Prioritized<T, P>) obj;
-		return new EqualsBuilder()//
-			.append(priority, that.priority)
-			.isEquals();
+		return state.equals(this, obj);
 	}
 
 	public int hashCode() {
-		return new HashCodeBuilder()//
-			.append(priority)
-			.toHashCode();
+		return state.hashCode(this);
 	}
 
 	public String toString() {
-		return ToString.toString(this);
+		return state.toString(this);
 	}
 
 	/**

@@ -27,36 +27,36 @@ import java.util.NoSuchElementException;
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  */
-public interface Accessible<T> {
+public interface Accessible<A> {
 
 	/**
 	 * @return the first element
 	 */
-	T first();
+	A first();
 
 	/**
 	 * @return the second element
 	 */
-	T second();
+	A second();
 
 	/**
 	 * @return the third element
 	 */
-	T third();
+	A third();
 
 	/**
 	 * 
 	 * @param n
 	 * @return the n-th element, zero based
 	 */
-	T get(int n);
+	A get(int n);
 
 	/**
 	 * @return the last element
 	 */
-	T last();
+	A last();
 
 	/**
 	 * Answers the zero-based index of the given element
@@ -65,7 +65,7 @@ public interface Accessible<T> {
 	 * @return the index of the element, or -1, if it is not contained by this
 	 *         stream
 	 */
-	int indexOf(T element);
+	int indexOf(A element);
 
 	/**
 	 * Answers the index of the given <strong>present</strong> element. This
@@ -78,7 +78,7 @@ public interface Accessible<T> {
 	 * @throws NoSuchElementException
 	 *           if the element is no contained by this {@link Stream}
 	 */
-	int positionOf(T element);
+	int positionOf(A element);
 
 	/**
 	 * Answers if both arguments are contained by this stream, and the first one
@@ -90,6 +90,6 @@ public interface Accessible<T> {
 	 * @return if both elements are contained by this {@link Stream}, and the
 	 *         first is before the second one
 	 */
-	boolean isBefore(T previous, T next);
+	boolean isBefore(A previous, A next);
 
 }
