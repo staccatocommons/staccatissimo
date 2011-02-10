@@ -6,6 +6,7 @@
 	<packaging>pom</packaging>
 	<version>1.0-alpha-4-SNAPSHOT</version>
 	<url>http://staccatocommons.sourceforge.net/</url>
+        <name>Staccato-Commons-Parent-Pom</name>
 	<licenses>
 		<license>
 			<name>GNU Lesser General Public License v3 </name>

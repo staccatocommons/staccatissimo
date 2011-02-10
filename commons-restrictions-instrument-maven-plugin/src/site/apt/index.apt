@@ -1,0 +1,6 @@
+About Staccato-Commons-Check-Instrument-Maven-Plugin 
+ 
+ Staccato-Commons-Check-Instrument-Maven-Plugin is Mojo for instrumenting check
+ using  {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrument/}Staccato-Commons-Check-Instrument}} as part
+ of a build lifecycle
+ 

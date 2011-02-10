@@ -56,7 +56,10 @@ public class RestrictionsInstrumentMojo extends AbstractMojo {
 
 	/**
 	 * If check annotations should be ignored or not. If set to <code>true</code>,
-	 * then <code>ignoreReturnChecks</code> has no effect
+	 * then <code>ignoreReturnChecks</code> has no effect.
+	 * 
+	 * Notice: in order to properly instrument checks, target project must depend
+	 * on the staccato-commons-check dependency
 	 * 
 	 * @parameter default-value="false"
 	 */

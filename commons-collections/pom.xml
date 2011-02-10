@@ -70,18 +70,23 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>net.sf.staccatocommons</groupId>
-						<artifactId>commons-check-instrument-maven-plugin</artifactId>
-						<version>1.0-alpha-4-SNAPSHOT</version>
-						<executions>
-							<execution>
-								<phase>process-classes</phase>
-								<goals>
-									<goal>instrument</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
+                        <groupId>net.sf.staccatocommons</groupId>
+                        <artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
+                        <version>1.0-alpha-4-SNAPSHOT</version>
+                        <configuration>
+                            <ignoreReturnChecks>true</ignoreReturnChecks>
+                            <ignoreConstants>false</ignoreConstants>
+                            <ignoreChecks>false</ignoreChecks>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>instrument</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
 				</plugins>
 			</build>
 		</profile>

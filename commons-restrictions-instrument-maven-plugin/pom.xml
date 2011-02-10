@@ -11,6 +11,16 @@
 	<version>1.0-alpha-4-SNAPSHOT</version>
 	<name>Staccato-Commons-Restrictions-Instrument-Maven-Plugin</name>
 	<packaging>maven-plugin</packaging>
+    <description>A Maven Mojo for instrummenting restrictions with as part of the build process</description>
+    <url>http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrumentmavenplugin</url>
+    <scm>
+        <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument-maven-plugin</connection>
+        <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument-maven-plugin</developerConnection>
+        <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-restrictions-instrument-maven-plugin/</url>
+    </scm>
+	<issueManagement>
+		<url>http://sourceforge.net/tracker/?group_id=317949</url>
+	</issueManagement>
 	<build>
 		<plugins>
 			<!-- <plugin> -->
