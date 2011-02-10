@@ -12,9 +12,9 @@
  */
 package net.sf.staccatocommons.lang.function;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * 

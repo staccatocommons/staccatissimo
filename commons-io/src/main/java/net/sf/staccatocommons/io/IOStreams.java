@@ -17,12 +17,12 @@ import java.io.ObjectInput;
 import java.io.Reader;
 import java.util.Scanner;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.internal.iterator.NextOptionIterator;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.SoftException;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.apache.commons.io.LineIterator;
 

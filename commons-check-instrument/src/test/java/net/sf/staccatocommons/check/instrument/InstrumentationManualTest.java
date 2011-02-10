@@ -15,11 +15,11 @@ package net.sf.staccatocommons.check.instrument;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-import net.sf.staccatocommons.check.annotation.ForceChecks;
-import net.sf.staccatocommons.check.annotation.IgnoreChecks;
 import net.sf.staccatocommons.check.instrument.mock.Mock;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
 import net.sf.staccatocommons.io.Directory;
+import net.sf.staccatocommons.restrictions.processing.ForceChecks;
+import net.sf.staccatocommons.restrictions.processing.IgnoreChecks;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

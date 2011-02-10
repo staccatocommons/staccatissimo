@@ -34,7 +34,6 @@ public class EquivalenceUnitTest {
 		assertTrue(Equiv.<String> equalOrNull().eval("Foo", "Foo"));
 		assertTrue(Equiv.<String> equalOrNull().eval(null, null));
 		assertFalse(Equiv.<String> equalOrNull().eval(null, "foo"));
-		assertSame(Equiv.equalOrNull(), Equiv.equalOrNull());
 	}
 
 	/** Test method for {@link Predicates#compareOrNull()} */
@@ -45,7 +44,7 @@ public class EquivalenceUnitTest {
 		assertTrue(Equiv.<String> compareOrNull().eval(null, null));
 		assertFalse(Equiv.<String> compareOrNull().eval(null, ""));
 		assertFalse(Equiv.<String> compareOrNull().eval("", null));
-		assertSame(Equiv.<Integer> compareOrNull(), Equiv.<Integer> compareOrNull());
+
 	}
 
 	/** Test for {@link Equiv#on(Applicable)} */

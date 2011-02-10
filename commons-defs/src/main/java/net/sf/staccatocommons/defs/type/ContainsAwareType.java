@@ -16,6 +16,7 @@ import java.util.Collection;
 
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.EmptyAware;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * A Strategy for asking if an object contains another one.
@@ -43,6 +44,6 @@ public interface ContainsAwareType<A, B> {
 	 * @param element
 	 * @return if the given <code>container</code> contains the given element.
 	 */
-	boolean contains(A container, B element);
+	boolean contains(@NonNull A container, B element);
 
 }

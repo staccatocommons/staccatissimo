@@ -15,8 +15,9 @@ package net.sf.staccatocommons.defs.type;
 import java.util.Collection;
 
 import net.sf.staccatocommons.defs.SizeAware;
-import net.sf.staccatocommons.defs.restriction.Immutable;
-import net.sf.staccatocommons.defs.restriction.SideEffectFree;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
+import net.sf.staccatocommons.restrictions.value.Immutable;
 
 /**
  * A Strategy for asking the size of an object.
@@ -43,10 +44,9 @@ public interface SizeAwareType<A> extends EmptyAwareType<A> {
 	 * "having size".
 	 * 
 	 * @param sizeAware
-	 *          Non null.
 	 * @return the <code>sizeAware</code> size
 	 */
 	@SideEffectFree
-	int size(A sizeAware);
+	int size(@NonNull A sizeAware);
 
 }

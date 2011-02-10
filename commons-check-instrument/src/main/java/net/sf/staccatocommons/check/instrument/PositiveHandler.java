@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.check.instrument;
 
-import net.sf.staccatocommons.check.annotation.Positive;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
+import net.sf.staccatocommons.restrictions.check.Positive;
 
 /**
  * @author flbulgarelli

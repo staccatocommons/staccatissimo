@@ -14,10 +14,10 @@ package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * An iterator that retrieves no elements. Calling {@link #hasNext()} will

@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.instrument.context;
 
 import javassist.CtConstructor;
-import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * The context of an annotated constructor

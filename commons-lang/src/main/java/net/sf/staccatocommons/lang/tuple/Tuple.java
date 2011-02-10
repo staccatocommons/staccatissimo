@@ -16,12 +16,12 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
-import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
-import net.sf.staccatocommons.defs.restriction.Value;
 import net.sf.staccatocommons.lang.tuple.internal.TupleToStringStyle;
 import net.sf.staccatocommons.lang.value.RelevantState;
+import net.sf.staccatocommons.restrictions.ConditionallySerializable;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
  * <p>

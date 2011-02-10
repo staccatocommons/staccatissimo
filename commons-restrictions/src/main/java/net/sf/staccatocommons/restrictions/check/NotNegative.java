@@ -10,7 +10,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.check.annotation;
+package net.sf.staccatocommons.restrictions.check;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -18,7 +18,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.sf.staccatocommons.defs.restriction.Restriction;
+import net.sf.staccatocommons.restrictions.Restriction;
 
 /**
  * A check annotation that signals that the annotated element <strong>must

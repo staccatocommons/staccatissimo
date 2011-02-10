@@ -14,9 +14,9 @@ package net.sf.staccatocommons.lang.callable.internal;
 
 import java.util.concurrent.Callable;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.SoftException;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * A {@link Callable} that wraps a {@link Thunk}

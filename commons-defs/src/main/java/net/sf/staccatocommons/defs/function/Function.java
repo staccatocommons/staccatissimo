@@ -18,6 +18,7 @@ import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Delayable;
 import net.sf.staccatocommons.defs.NullSafeAware;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * {@link Function}s are rich interfaced {@link Applicable}s - one argument
@@ -44,7 +45,8 @@ public interface Function<A, B> extends Applicable<A, B>, //
 	 * @return a new {@link Provider}, <code>this</code> composed with
 	 *         <code>thunk</code>
 	 */
-	Thunk<B> of(final Thunk<? extends A> thunk);
+	@NonNull
+	Thunk<B> of(@NonNull final Thunk<? extends A> thunk);
 
 	/**
 	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
@@ -56,7 +58,8 @@ public interface Function<A, B> extends Applicable<A, B>, //
 	 * @param other
 	 * @return a new function, <code>this</code> composed with <code>other</code>
 	 */
-	<C> Function<C, B> of(final Applicable<? super C, ? extends A> other);
+	@NonNull
+	<C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other);
 
 	/**
 	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
@@ -70,7 +73,8 @@ public interface Function<A, B> extends Applicable<A, B>, //
 	 *          non null
 	 * @return a new function, this composed with other. Non null.
 	 */
-	<Tp1, Tp2> Function2<Tp1, Tp2, B> of(final Applicable2<Tp1, Tp2, ? extends A> other);
+	@NonNull
+	<Tp1, Tp2> Function2<Tp1, Tp2, B> of(@NonNull final Applicable2<Tp1, Tp2, ? extends A> other);
 
 	/**
 	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
@@ -85,7 +89,9 @@ public interface Function<A, B> extends Applicable<A, B>, //
 	 *          non null
 	 * @return a new function, this composed with other. Non null
 	 */
-	<Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(final Applicable3<Tp1, Tp2, Tp3, ? extends A> other);
+	@NonNull
+	<Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(
+		@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other);
 
 	/**
 	 * Answers a new function that returns null if is argument is null, or the
@@ -93,6 +99,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
 	 * 
 	 * @return a new null-safe {@link Function}
 	 */
+	@NonNull
 	Function<A, B> nullSafe();
 
 }

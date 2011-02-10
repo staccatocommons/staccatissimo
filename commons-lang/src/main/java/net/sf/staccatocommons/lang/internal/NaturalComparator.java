@@ -14,8 +14,8 @@ package net.sf.staccatocommons.lang.internal;
 
 import java.util.Comparator;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli

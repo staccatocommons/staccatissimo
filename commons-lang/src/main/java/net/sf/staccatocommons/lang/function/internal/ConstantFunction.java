@@ -2,11 +2,11 @@ package net.sf.staccatocommons.lang.function.internal;
 
 import java.io.Serializable;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.thunk.Thunks;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli

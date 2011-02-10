@@ -12,12 +12,12 @@
  */
 package net.sf.staccatocommons.lang.tuple;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.function.Function;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.tuple.Tuple.FourthAware;
 import net.sf.staccatocommons.lang.tuple.Tuple.ThirdAware;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Class methods hub for creating {@link Tuple}s, and obtaining Tuple-related

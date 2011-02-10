@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.check.annotation;
+package net.sf.staccatocommons.restrictions.check;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -19,32 +19,30 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Collections;
 
-import net.sf.staccatocommons.defs.SizeAware;
-import net.sf.staccatocommons.defs.restriction.Restriction;
+import net.sf.staccatocommons.restrictions.Restriction;
 
 /**
- * A check annotation that signals the annotated element's size must be less
- * than or equal to the given value.
+ * A check annotation that signals the annotated element's size must be, at
+ * minimum, the given value.
  * <p>
  * This annotation should only be applied to elements that understand a length
  * or size attribute, or length, or size method, like {@link Collections},
- * {@link String}s, arrays and {@link SizeAware}s.
+ * {@link String}s, arrays and SizeAware's from Staccato-Commons-Defs
  * </p>
  * 
  * @author flbulgarelli
  * @see Restriction
- * @see SizeAware
  */
 @Restriction
 @Documented
 @Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
-public @interface MaxSize {
+public @interface MinSize {
 
 	/**
-	 * The maximum value of the annotated element's size
+	 * The minimum value of the annotated element's size
 	 * 
-	 * @return the max size.
+	 * @return the minimum size.
 	 */
 	@Positive
 	int value();

@@ -14,6 +14,7 @@ package net.sf.staccatocommons.lang.function;
 
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
@@ -67,8 +68,9 @@ public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
 				will(returnValue('a'));
 			}
 		});
+		Function<Object, Object> identity = Functions.identity();
 		assertEquals((Character) 'a', Functions.from(applicable).apply(5));
-		assertSame(Functions.identity(), Functions.from(Functions.identity()));
+		assertSame(identity, Functions.from(identity));
 	}
 
 	/** Test for {@link Functions#toString_()} */

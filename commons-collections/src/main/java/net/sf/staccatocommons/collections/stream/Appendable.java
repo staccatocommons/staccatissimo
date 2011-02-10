@@ -12,10 +12,10 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli

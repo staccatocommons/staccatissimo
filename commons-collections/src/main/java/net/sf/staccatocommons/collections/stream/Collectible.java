@@ -16,8 +16,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * {@link Stream} interface for converting an {@link Stream} into other kind of

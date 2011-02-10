@@ -10,31 +10,35 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.defs.restriction;
+package net.sf.staccatocommons.restrictions.check;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccatocommons.restrictions.Restriction;
+
 /**
- * Classes annotated as {@link Immutable} indicate that their instances are
- * {@link Unmodifiable}, and also either all their attributes are primitives or
- * immutable objects - {@link String}s, {@link Integer}, or have no attributes
- * at all.
+ * A check annotation that signals that the annotated element must be positive,
+ * that is, greater than 0.
  * 
- * {@link Immutable}s are inherently thread-safe.
+ * This annotation should only be applied to {@link Number}s and primitive
+ * numeric types.
  * 
- * @author fbulgarelli
+ * @author flbulgarelli
  * @see Restriction
  */
-@Documented
-@Inherited
 @Restriction
-@Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.TYPE)
-public @interface Immutable {
-
+@Documented
+@Retention(RetentionPolicy.CLASS)
+@Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
+public @interface Positive {
+	/**
+	 * @return The variable name of the constrained element, or the empty string
+	 *         if unspecified. This value may help tools that analyze this
+	 *         annotation without access to source code.
+	 */
+	String value() default "";
 }

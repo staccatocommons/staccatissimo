@@ -16,8 +16,8 @@ import java.util.Comparator;
 
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
-import net.sf.staccatocommons.defs.restriction.Immutable;
-import net.sf.staccatocommons.defs.restriction.SideEffectFree;
+import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
+import net.sf.staccatocommons.restrictions.value.Immutable;
 
 /**
  * A Strategy for dealing with {@link Number}s is a polymorphic way.
@@ -44,7 +44,7 @@ import net.sf.staccatocommons.defs.restriction.SideEffectFree;
  * </p>
  * <p>
  * {@link NumberType} <strong>must</strong> be
- * {@link net.sf.staccatocommons.defs.restriction.Immutable}
+ * {@link net.sf.staccatocommons.restrictions.value.Immutable}
  * </p>
  * 
  * @author flbulgarelli

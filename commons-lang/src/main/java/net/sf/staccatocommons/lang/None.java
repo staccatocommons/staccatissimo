@@ -15,12 +15,12 @@ package net.sf.staccatocommons.lang;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.defs.restriction.Immutable;
-import net.sf.staccatocommons.defs.restriction.Value;
 import net.sf.staccatocommons.iterators.EmptyIterator;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.value.Immutable;
+import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
  * An undefined {@link Option}, that it, and option that does not have a value

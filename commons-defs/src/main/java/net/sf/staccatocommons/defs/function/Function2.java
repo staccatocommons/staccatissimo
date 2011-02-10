@@ -16,6 +16,7 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Delayable2;
 import net.sf.staccatocommons.defs.NullSafeAware;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * {@link Function2}s are rich interfaced {@link Applicable2}s - two arguments
@@ -45,11 +46,13 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
 	/**
 	 * Partially applies the function passing just its first parameter
 	 */
+	@NonNull
 	Function<B, C> apply(final A arg1);
 
 	/**
 	 * Applies the function
 	 */
+	@NonNull
 	C apply(A arg1, B arg2);
 
 	/**
@@ -58,6 +61,7 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
 	 * @return a new {@link Function2} that produces the same result of this one
 	 *         when applied, but with arguments flipped
 	 */
+	@NonNull
 	Function2<B, A, C> flip();
 
 }

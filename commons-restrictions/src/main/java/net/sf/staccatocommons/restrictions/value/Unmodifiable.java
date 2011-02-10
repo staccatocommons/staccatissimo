@@ -10,35 +10,35 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.check.annotation;
+package net.sf.staccatocommons.restrictions.value;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.sf.staccatocommons.defs.restriction.Restriction;
+import net.sf.staccatocommons.restrictions.Restriction;
 
 /**
- * A check annotation that signals that the annotated element must be positive,
- * that is, greater than 0.
- * 
- * This annotation should only be applied to {@link Number}s and primitive
- * numeric types.
+ * {@link Unmodifiable}s are objects that do not expose publicly any method that
+ * may modify receiver internal state. However, object's state can still be
+ * mutated indirectly, if it holds and/or exposes references to objects that may
+ * be mutated
+ * <p>
+ * {@link Unmodifiable}s can still implement lazy initialization and/or caching,
+ * as long as it remains encapsulated and is not exposed publicly
  * 
  * @author flbulgarelli
+ *         </p>
  * @see Restriction
  */
-@Restriction
 @Documented
-@Retention(RetentionPolicy.CLASS)
-@Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
-public @interface Positive {
-	/**
-	 * @return The variable name of the constrained element, or the empty string
-	 *         if unspecified. This value may help tools that analyze this
-	 *         annotation without access to source code.
-	 */
-	String value() default "";
+@Inherited
+@Restriction
+@Retention(RetentionPolicy.SOURCE)
+@Target(ElementType.TYPE)
+public @interface Unmodifiable {
+
 }

@@ -13,8 +13,9 @@
 package net.sf.staccatocommons.lang;
 
 import static org.junit.Assert.*;
-import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.predicate.Predicates;
+import net.sf.staccatocommons.restrictions.Constant;
 
 import org.junit.Test;
 
@@ -48,5 +49,7 @@ public class ClassesInstrumentedDummyTest {
 	@Test
 	public void testConstInstrumented() throws Exception {
 		assertSame(Predicates.true_(), Predicates.true_());
+		assertSame(Equiv.equalOrNull(), Equiv.equalOrNull());
+		assertSame(Equiv.<Integer> compareOrNull(), Equiv.<Integer> compareOrNull());
 	}
 }

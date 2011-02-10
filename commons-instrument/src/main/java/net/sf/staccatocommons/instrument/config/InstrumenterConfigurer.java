@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.instrument.config;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Interface for configuring an instrumenter.

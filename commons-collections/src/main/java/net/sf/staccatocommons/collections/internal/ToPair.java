@@ -14,10 +14,10 @@
 package net.sf.staccatocommons.collections.internal;
 
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli

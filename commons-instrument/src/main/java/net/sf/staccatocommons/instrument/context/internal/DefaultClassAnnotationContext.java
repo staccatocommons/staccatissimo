@@ -16,9 +16,9 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
 import net.sf.staccatocommons.check.Ensure;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.ClassAnnotationContext;
 import net.sf.staccatocommons.lang.Nulls;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.slf4j.Logger;
 

@@ -14,15 +14,15 @@ package net.sf.staccatocommons.lang;
 
 import java.util.Iterator;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
-import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
-import net.sf.staccatocommons.defs.restriction.Value;
 import net.sf.staccatocommons.iterators.SingleIterator;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.value.BasicEquals;
+import net.sf.staccatocommons.restrictions.ConditionallySerializable;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.value.Value;
 
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;

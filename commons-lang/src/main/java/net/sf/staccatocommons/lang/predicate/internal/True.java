@@ -2,8 +2,8 @@ package net.sf.staccatocommons.lang.predicate.internal;
 
 import static net.sf.staccatocommons.lang.predicate.Predicates.*;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.restrictions.Constant;
 
 /**
  * @author flbulgarelli

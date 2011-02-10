@@ -15,7 +15,7 @@ package net.sf.staccatocommons.instrument.context;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
-import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Base interface for an annotated element context

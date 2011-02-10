@@ -14,12 +14,12 @@ package net.sf.staccatocommons.lang;
 
 import java.io.Serializable;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
-import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
-import net.sf.staccatocommons.defs.restriction.Value;
 import net.sf.staccatocommons.lang.value.RelevantState;
+import net.sf.staccatocommons.restrictions.ConditionallySerializable;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
  * A {@link Thunk} that is {@link Comparable}, based on a priority attribute.

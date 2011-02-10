@@ -14,8 +14,8 @@ package net.sf.staccatocommons.lang.predicate.internal;
 
 import java.util.regex.Pattern;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * A {@link Predicate} that evaluates if a String mathes a {@link Pattern}

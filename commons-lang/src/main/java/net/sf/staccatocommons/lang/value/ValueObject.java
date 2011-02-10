@@ -14,8 +14,8 @@ package net.sf.staccatocommons.lang.value;
 
 import java.io.Serializable;
 
-import net.sf.staccatocommons.defs.restriction.Value;
 import net.sf.staccatocommons.lang.internal.ToString;
+import net.sf.staccatocommons.restrictions.value.Value;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

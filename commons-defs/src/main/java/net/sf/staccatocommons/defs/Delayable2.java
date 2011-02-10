@@ -12,6 +12,8 @@
  */
 package net.sf.staccatocommons.defs;
 
+import net.sf.staccatocommons.restrictions.check.NonNull;
+
 /**
  * {@link Delayable2}s are delayed transformations that two arguments and return
  * a thunk that will perform the actual processing when evaluated, by
@@ -40,6 +42,7 @@ public interface Delayable2<A, B, C> {
 	 * @param arg2
 	 * @return a new {@link Thunk}. Non null.
 	 */
+	@NonNull
 	Thunk<C> delayed(final A arg1, final B arg2);
 
 }

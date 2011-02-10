@@ -13,7 +13,6 @@
 package net.sf.staccatocommons.collections.stream.impl.internal.delayed;
 
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.collections.stream.impl.ConsStream;
@@ -21,6 +20,7 @@ import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.delayed.DelayedConsIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli

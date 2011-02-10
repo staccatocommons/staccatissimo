@@ -15,11 +15,11 @@ package net.sf.staccatocommons.collections.stream.impl;
 import java.util.Collection;
 import java.util.List;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * 

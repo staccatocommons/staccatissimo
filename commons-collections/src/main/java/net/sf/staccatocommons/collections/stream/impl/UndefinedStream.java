@@ -12,12 +12,12 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.iterators.UndefinedIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli

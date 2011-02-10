@@ -14,7 +14,7 @@ package net.sf.staccatocommons.restrictions.instrument;
 
 import java.util.Date;
 
-import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.restrictions.Constant;
 
 /**
  * @author flbulgarelli

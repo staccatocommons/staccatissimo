@@ -12,9 +12,9 @@
  */
 package net.sf.staccatocommons.lang.predicate;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * <p>

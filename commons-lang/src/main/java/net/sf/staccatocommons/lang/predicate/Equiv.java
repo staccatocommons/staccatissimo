@@ -12,13 +12,13 @@
  */
 package net.sf.staccatocommons.lang.predicate;
 
-import net.sf.staccatocommons.check.annotation.ForceChecks;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable2;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.predicate.internal.CompareTest;
 import net.sf.staccatocommons.lang.predicate.internal.EqualTest;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceChecks;
 
 /**
  * Factory class methods for creating common, simple {@link Evaluable2} that

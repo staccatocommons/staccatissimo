@@ -10,21 +10,24 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.check.annotation;
+package net.sf.staccatocommons.restrictions.check;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Collections;
 
-import net.sf.staccatocommons.defs.restriction.Restriction;
+import net.sf.staccatocommons.restrictions.Restriction;
 
 /**
- * A check annotation that signals that the annotated element matches a regular
- * expression
+ * A check annotation that signals that the annotated element must have an given
+ * size or length.
  * 
- * Annotated elements should be of type {@link String}
+ * This annotation should only be applied to elements that understand a length
+ * or size attribute, or length, or size method, like {@link Collections},
+ * {@link String}s, arrays and SizeAware's from Staccato-Commons-Defs
  * 
  * @author flbulgarelli
  * @see Restriction
@@ -33,7 +36,7 @@ import net.sf.staccatocommons.defs.restriction.Restriction;
 @Documented
 @Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
-public @interface Matches {
+public @interface Size {
 
 	/**
 	 * @return The variable name of the constrained element, or the empty string
@@ -43,8 +46,7 @@ public @interface Matches {
 	String var() default "";
 
 	/**
-	 * @return the regular expression
+	 * @return the size the annotated element must have
 	 */
-	String value();
-
+	public int value();
 }

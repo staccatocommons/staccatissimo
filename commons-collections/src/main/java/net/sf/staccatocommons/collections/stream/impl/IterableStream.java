@@ -12,12 +12,12 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * A stream that retrieves elements from an {@link Iterable}

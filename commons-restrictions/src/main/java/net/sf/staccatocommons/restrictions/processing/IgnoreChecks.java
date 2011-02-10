@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2011, The Staccato-Commons Team
+ Copyright (c) 2010, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -10,30 +10,27 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.check.annotation;
+package net.sf.staccatocommons.restrictions.processing;
 
-import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.sf.staccatocommons.defs.restriction.Restriction;
-
 /**
- * A check annotation that signals that the annotated element <strong>must
- * not</strong> be zero
+ * {@link IgnoreChecks} is a directive for automated annotation processors,
+ * indicating that check annotations in the annotated element and its
+ * descendants <strong>must not</strong> be processed
  * 
- * This annotation should only be applied to {@link Number}s and primitive
- * numeric types.
+ * This annotation is incompatible with {@link ForceChecks} - an element
+ * <strong>must not</strong> be annotated with {@link IgnoreChecks} and
+ * {@link ForceChecks} at the same time
  * 
  * @author flbulgarelli
- * @see Restriction
+ * @see ForceChecks
  */
-@Restriction
-@Documented
 @Retention(RetentionPolicy.CLASS)
-@Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
-public @interface NotZero {
+@Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.TYPE })
+public @interface IgnoreChecks {
 
 }

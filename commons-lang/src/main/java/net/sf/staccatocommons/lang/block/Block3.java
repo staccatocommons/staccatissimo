@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.lang.block;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
@@ -20,6 +19,7 @@ import net.sf.staccatocommons.defs.Executable3;
 import net.sf.staccatocommons.defs.NullSafeAware;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractDelayable3;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * 

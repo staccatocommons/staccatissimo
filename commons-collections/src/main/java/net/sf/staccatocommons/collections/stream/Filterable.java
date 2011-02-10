@@ -14,12 +14,12 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.List;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.check.NotNegative;
 
 /**
  * {@link Stream} interface for filtering elements

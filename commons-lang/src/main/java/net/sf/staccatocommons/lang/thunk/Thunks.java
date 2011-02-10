@@ -16,14 +16,14 @@ package net.sf.staccatocommons.lang.thunk;
 import java.util.Date;
 import java.util.concurrent.Callable;
 
-import net.sf.staccatocommons.check.annotation.ForceChecks;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
 import net.sf.staccatocommons.lang.thunk.internal.CallableThunk;
 import net.sf.staccatocommons.lang.thunk.internal.DateThunk;
 import net.sf.staccatocommons.lang.thunk.internal.NullThunk;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceChecks;
 
 /**
  * Class factory methods for some common {@link Thunk}s

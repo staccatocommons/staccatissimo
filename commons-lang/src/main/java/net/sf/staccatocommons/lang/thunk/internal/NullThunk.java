@@ -15,7 +15,7 @@ package net.sf.staccatocommons.lang.thunk.internal;
 import java.io.Serializable;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.restrictions.Constant;
 
 /**
  * Thunk of null

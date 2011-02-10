@@ -2,7 +2,7 @@ package net.sf.staccatocommons.instrument.config;
 
 import java.nio.charset.Charset;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Implementation of an {@link InstrumentationMark} where key and values are

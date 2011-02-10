@@ -12,13 +12,15 @@
  */
 package net.sf.staccatocommons.defs;
 
+import net.sf.staccatocommons.restrictions.check.NonNull;
+
 /**
  * A {@link NullSafeAware}s are object that may be converted to an
  * {@link Applicative} object of type {@code A} that accepts nulls in its
  * applicative method.
  * 
- * {@link NullSafeAware}s parameterized by type {@code A} <strong>should</strong> be
- * of type {@code A} too.
+ * {@link NullSafeAware}s parameterized by type {@code A}
+ * <strong>should</strong> be of type {@code A} too.
  * 
  * @author flbulgarelli
  * 
@@ -36,6 +38,7 @@ public interface NullSafeAware<A> {
 	 * 
 	 * @return a new null-safe {@link Applicable} of type {@code A}. Non null.
 	 */
+	@NonNull
 	A nullSafe();
 
 }

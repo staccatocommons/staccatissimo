@@ -14,10 +14,10 @@ package net.sf.staccatocommons.lang.value;
 
 import java.util.Comparator;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Evaluable2;
-import net.sf.staccatocommons.defs.restriction.Transparent;
 import net.sf.staccatocommons.lang.value.RelevantState.StateCollector;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.effect.Transparent;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;

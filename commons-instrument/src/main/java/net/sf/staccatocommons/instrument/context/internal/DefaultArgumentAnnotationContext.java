@@ -17,8 +17,8 @@ import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.CtConstructor;
 import javassist.NotFoundException;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.slf4j.Logger;
 

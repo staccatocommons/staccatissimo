@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.lang.value;
 
-import net.sf.staccatocommons.check.annotation.ForceChecks;
-import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceChecks;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 

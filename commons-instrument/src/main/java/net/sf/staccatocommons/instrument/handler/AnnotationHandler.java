@@ -14,7 +14,7 @@ package net.sf.staccatocommons.instrument.handler;
 
 import java.lang.annotation.Annotation;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Superinterface for all annotation handlers.

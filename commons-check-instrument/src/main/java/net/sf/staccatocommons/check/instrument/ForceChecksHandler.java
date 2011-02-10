@@ -13,7 +13,6 @@
 package net.sf.staccatocommons.check.instrument;
 
 import javassist.CannotCompileException;
-import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.instrument.context.ClassAnnotationContext;
 import net.sf.staccatocommons.instrument.context.ConstructorAnnotationContext;
 import net.sf.staccatocommons.instrument.context.MethodAnnotationContext;
@@ -21,6 +20,7 @@ import net.sf.staccatocommons.instrument.handler.ClassAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.ConstructorAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.MethodAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.deactivator.AbstractActivationAnnotationHandler;
+import net.sf.staccatocommons.restrictions.processing.ForceChecks;
 
 /**
  * @author flbulgarelli

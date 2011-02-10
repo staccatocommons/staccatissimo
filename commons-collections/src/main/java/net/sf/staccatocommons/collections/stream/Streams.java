@@ -18,7 +18,6 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.impl.CharSequenceStream;
 import net.sf.staccatocommons.collections.stream.impl.CollectionStream;
 import net.sf.staccatocommons.collections.stream.impl.DequeStream;
@@ -30,8 +29,9 @@ import net.sf.staccatocommons.collections.stream.impl.UndefinedStream;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.iterators.EnumerationIterator;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Class methods for creating very simple {@link Stream}s wrapping existing

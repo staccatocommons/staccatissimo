@@ -15,9 +15,9 @@ package net.sf.staccatocommons.iterators.thriter;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.defs.restriction.SideEffectFree;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
 
 /**
  * A {@link Thriter} - acronym for <strong>Thr</strong>ee-messages

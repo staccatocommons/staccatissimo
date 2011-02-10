@@ -17,9 +17,9 @@ import static net.sf.staccatocommons.collections.iterable.internal.IterablesInte
 import java.util.Collection;
 import java.util.Iterator;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.check.NotNegative;
 
 /**
  * A bunch of static methods that extend the {@link java.util.Collections}

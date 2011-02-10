@@ -12,16 +12,16 @@
  */
 package net.sf.staccatocommons.lang.function;
 
-import net.sf.staccatocommons.check.annotation.ForceChecks;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.function.internal.ApplicableFunction;
 import net.sf.staccatocommons.lang.function.internal.ConstantFunction;
 import net.sf.staccatocommons.lang.function.internal.IdentityFunction;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceChecks;
 
 /**
  * Class factory methods for some common {@link Function}s

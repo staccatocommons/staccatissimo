@@ -21,9 +21,9 @@ import javassist.CtNewMethod;
 import javassist.Modifier;
 import javassist.NotFoundException;
 import javassist.bytecode.CodeAttribute;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.instrument.context.MethodAnnotationContext;
 import net.sf.staccatocommons.instrument.handler.MethodAnnotationHandler;
+import net.sf.staccatocommons.restrictions.Constant;
 
 /**
  * @author flbulgarelli

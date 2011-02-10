@@ -17,6 +17,13 @@
 		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-defs</developerConnection>
 		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-defs/</url>
 	</scm>
+	<dependencies>
+		<dependency>
+			<groupId>net.sf.staccatocommons</groupId>
+			<artifactId>commons-restrictions</artifactId>
+			<version>1.0-alpha-4-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>

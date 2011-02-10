@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.check.internal;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.type.SizeAwareType;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * An abstract implementation of {@link SizeAwareType} that implements

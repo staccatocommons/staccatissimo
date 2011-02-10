@@ -12,6 +12,8 @@
  */
 package net.sf.staccatocommons.defs;
 
+import net.sf.staccatocommons.restrictions.check.NonNull;
+
 /**
  * @author flbulgarelli
  * 
@@ -43,6 +45,7 @@ public interface Delayable<A, B> {
 	 * @param arg
 	 * @return a new {@link Thunk}
 	 */
+	@NonNull
 	Thunk<B> delayed(final A arg);
 
 }

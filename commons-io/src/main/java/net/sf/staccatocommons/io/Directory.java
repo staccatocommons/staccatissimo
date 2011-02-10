@@ -17,13 +17,13 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import net.sf.staccatocommons.check.Ensure;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.apache.commons.io.FileUtils;
 

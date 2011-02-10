@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.check.instrument;
 
-import net.sf.staccatocommons.check.annotation.Matches;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
+import net.sf.staccatocommons.restrictions.check.Matches;
 
 /**
  * @author flbulgarelli

@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.lang;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Class methods to operate with nulls

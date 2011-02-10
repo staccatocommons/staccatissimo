@@ -16,8 +16,8 @@ import java.lang.annotation.Annotation;
 
 import javassist.CannotCompileException;
 import javassist.NotFoundException;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.context.MethodAnnotationContext;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Interface for annotation handlers that can process annotations in methods.

@@ -14,7 +14,6 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.Arrays;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.impl.ConsStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.SingleStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedConsStream;
@@ -23,6 +22,7 @@ import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeata
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Class methods for creating {@link Stream}s from its elements specifiying its

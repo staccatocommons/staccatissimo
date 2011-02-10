@@ -15,10 +15,7 @@ package net.sf.staccatocommons.lang.predicate;
 import java.util.Arrays;
 import java.util.Collection;
 
-import net.sf.staccatocommons.check.annotation.ForceChecks;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.predicate.internal.All;
 import net.sf.staccatocommons.lang.predicate.internal.Any;
 import net.sf.staccatocommons.lang.predicate.internal.Equals;
@@ -28,6 +25,9 @@ import net.sf.staccatocommons.lang.predicate.internal.InPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.NullPredicates;
 import net.sf.staccatocommons.lang.predicate.internal.Same;
 import net.sf.staccatocommons.lang.predicate.internal.True;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceChecks;
 
 /**
  * Factory methods for common predicates

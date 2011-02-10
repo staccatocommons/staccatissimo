@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.instrument.context;
 
 import javassist.CtClass;
-import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * The context of an annotated class

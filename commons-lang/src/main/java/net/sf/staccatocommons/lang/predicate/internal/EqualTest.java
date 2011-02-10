@@ -1,8 +1,8 @@
 package net.sf.staccatocommons.lang.predicate.internal;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Evaluable2;
-import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.apache.commons.lang.ObjectUtils;
 

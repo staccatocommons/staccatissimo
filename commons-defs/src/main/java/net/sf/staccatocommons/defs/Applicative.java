@@ -19,10 +19,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.sf.staccatocommons.defs.restriction.Immutable;
-import net.sf.staccatocommons.defs.restriction.Restriction;
-import net.sf.staccatocommons.defs.restriction.SideEffectFree;
-import net.sf.staccatocommons.defs.restriction.Transparent;
+import net.sf.staccatocommons.restrictions.Restriction;
+import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
+import net.sf.staccatocommons.restrictions.effect.Transparent;
+import net.sf.staccatocommons.restrictions.value.Immutable;
 
 /**
  * {@link Applicable} is an annotation for abstract types that have

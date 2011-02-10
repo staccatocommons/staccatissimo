@@ -14,10 +14,10 @@ package net.sf.staccatocommons.check.instrument;
 
 import javassist.CtClass;
 import javassist.NotFoundException;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.check.internal.SizeAwareTypes;
 import net.sf.staccatocommons.defs.type.SizeAwareType;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli

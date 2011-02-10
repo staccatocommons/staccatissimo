@@ -17,6 +17,7 @@ import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Delayable3;
 import net.sf.staccatocommons.defs.NullSafeAware;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * {@link Function3}s are rich interfaced {@link Applicable3}s - two arguments
@@ -47,13 +48,16 @@ public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>,
 	/**
 	 * Partially applies the function, passing only its first argument
 	 */
+	@NonNull
 	Function2<B, C, D> apply(final A arg1);
 
 	/**
 	 * Partially applies the function, passing only its first and second arguments
 	 */
+	@NonNull
 	Function<C, D> apply(final A arg1, final B arg2);
 
+	@NonNull
 	D apply(A arg1, B arg2, C arg3);
 
 	/**
@@ -62,6 +66,7 @@ public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>,
 	 * 
 	 * @return a new null-safe {@link AbstractFunction3}
 	 */
+	@NonNull
 	Function3<A, B, C, D> nullSafe();
 
 }

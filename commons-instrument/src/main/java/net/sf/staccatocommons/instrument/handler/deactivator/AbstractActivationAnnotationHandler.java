@@ -17,8 +17,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import net.sf.staccatocommons.check.Ensure;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.instrument.handler.AnnotationHandler;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli

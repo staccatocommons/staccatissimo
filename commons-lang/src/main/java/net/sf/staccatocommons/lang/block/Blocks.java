@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.lang.block;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.lang.block.internal.Empty;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * 

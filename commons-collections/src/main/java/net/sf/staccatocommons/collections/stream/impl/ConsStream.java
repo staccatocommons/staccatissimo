@@ -13,7 +13,6 @@
 package net.sf.staccatocommons.collections.stream.impl;
 
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
@@ -26,6 +25,7 @@ import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * 

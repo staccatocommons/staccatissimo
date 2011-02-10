@@ -14,14 +14,14 @@ package net.sf.staccatocommons.lang;
 
 import java.util.regex.Pattern;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.function.Function;
-import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.EqualsIgnoreCase;
 import net.sf.staccatocommons.lang.predicate.internal.Matches;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli

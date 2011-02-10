@@ -13,8 +13,8 @@
 package net.sf.staccatocommons.check.instrument;
 
 import javassist.NotFoundException;
-import net.sf.staccatocommons.check.annotation.Size;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
+import net.sf.staccatocommons.restrictions.check.Size;
 
 /**
  * @author flbulgarelli

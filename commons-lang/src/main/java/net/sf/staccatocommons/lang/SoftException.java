@@ -14,8 +14,8 @@ package net.sf.staccatocommons.lang;
 
 import java.util.concurrent.Callable;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.apache.commons.lang.UnhandledException;
 

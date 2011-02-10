@@ -12,13 +12,13 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * {@link Stream} interface for zipping

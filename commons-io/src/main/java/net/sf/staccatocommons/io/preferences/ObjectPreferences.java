@@ -15,7 +15,7 @@ package net.sf.staccatocommons.io.preferences;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.apache.commons.lang.SerializationException;
 

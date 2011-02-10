@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.check.annotation;
+package net.sf.staccatocommons.restrictions.check;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -18,30 +18,40 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.sf.staccatocommons.defs.EmptyAware;
-import net.sf.staccatocommons.defs.restriction.Restriction;
+import net.sf.staccatocommons.restrictions.Restriction;
 
 /**
- * A check annotation that signals that the annotated element can not be empty.
+ * <p>
+ * An annotation that signals that an annotated must be between a min and a max
+ * value, both inclusive.
  * 
- * This annotation should only be applied to elements that understand a length
- * or size attribute, or length, size or isEmpty method, like {@link String}s or
- * {@link EmptyAware}s.
+ * This annotation should only be applied to {@link Number}s and primitive
+ * numeric types.
+ * </p>
  * 
  * @author flbulgarelli
  * @see Restriction
- * @see EmptyAware
  */
 @Restriction
 @Documented
 @Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
-public @interface NotEmpty {
+public @interface Between {
+
+	/**
+	 * @return the inclusive lower bound
+	 */
+	long min();
+
+	/**
+	 * @return the inclusive upper bound
+	 */
+	long max();
 
 	/**
 	 * @return The variable name of the constrained element, or the empty string
 	 *         if unspecified. This value may help tools that analyze this
 	 *         annotation without access to source code.
 	 */
-	String value() default "";
+	String var() default "";
 }

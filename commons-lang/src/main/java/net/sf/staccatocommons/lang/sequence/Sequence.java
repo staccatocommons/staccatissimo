@@ -20,16 +20,16 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.Ensure;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
-import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
-import net.sf.staccatocommons.defs.restriction.Unmodifiable;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.restrictions.ConditionallySerializable;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 /**
  * A {@link Sequence} is an {@link Iterable} object whose {@link Iterator},

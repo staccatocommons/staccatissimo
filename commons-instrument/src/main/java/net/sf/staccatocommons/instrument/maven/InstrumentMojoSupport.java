@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.List;
 
 import net.sf.staccatocommons.check.Ensure;
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
 import net.sf.staccatocommons.instrument.config.InstrumenterConfigurer;
@@ -25,6 +24,7 @@ import net.sf.staccatocommons.io.Directory;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.Predicates;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.Mojo;

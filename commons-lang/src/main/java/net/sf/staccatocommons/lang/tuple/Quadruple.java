@@ -12,15 +12,15 @@
  */
 package net.sf.staccatocommons.lang.tuple;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
-import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
-import net.sf.staccatocommons.defs.restriction.Value;
 import net.sf.staccatocommons.lang.tuple.Tuple.FirstAware;
 import net.sf.staccatocommons.lang.tuple.Tuple.FourthAware;
 import net.sf.staccatocommons.lang.tuple.Tuple.SecondAware;
 import net.sf.staccatocommons.lang.tuple.Tuple.ThirdAware;
 import net.sf.staccatocommons.lang.value.RelevantState;
+import net.sf.staccatocommons.restrictions.ConditionallySerializable;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
  * Four-components {@link Tuple}

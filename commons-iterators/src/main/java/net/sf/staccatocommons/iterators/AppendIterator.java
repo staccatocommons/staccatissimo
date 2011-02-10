@@ -15,13 +15,13 @@ package net.sf.staccatocommons.iterators;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriters;
 import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli

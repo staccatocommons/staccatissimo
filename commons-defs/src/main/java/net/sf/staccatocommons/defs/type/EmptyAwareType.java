@@ -15,8 +15,9 @@ package net.sf.staccatocommons.defs.type;
 import java.util.Collection;
 
 import net.sf.staccatocommons.defs.EmptyAware;
-import net.sf.staccatocommons.defs.restriction.Immutable;
-import net.sf.staccatocommons.defs.restriction.SideEffectFree;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
+import net.sf.staccatocommons.restrictions.value.Immutable;
 
 /**
  * A Strategy for asking if an object is empty.
@@ -45,6 +46,6 @@ public interface EmptyAwareType<A> {
 	 * @return is the given <code>emptyAware</code> is empty
 	 */
 	@SideEffectFree
-	boolean isEmpty(A emptyAware);
+	boolean isEmpty(@NonNull A emptyAware);
 
 }

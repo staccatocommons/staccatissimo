@@ -27,9 +27,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import net.sf.staccatocommons.check.Validate;
-import net.sf.staccatocommons.check.annotation.ForceChecks;
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.check.annotation.NotNegative;
 import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
@@ -63,6 +60,9 @@ import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.check.NotNegative;
+import net.sf.staccatocommons.restrictions.processing.ForceChecks;
 
 import org.apache.commons.lang.StringUtils;
 

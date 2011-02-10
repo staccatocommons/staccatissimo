@@ -15,8 +15,8 @@ package net.sf.staccatocommons.collections.stream;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli

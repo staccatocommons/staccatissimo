@@ -28,11 +28,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import net.sf.staccatocommons.check.Ensure;
-import net.sf.staccatocommons.check.annotation.ForceChecks;
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.check.annotation.NotEmpty;
-import net.sf.staccatocommons.check.annotation.NotNegative;
-import net.sf.staccatocommons.check.annotation.Size;
 import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
@@ -43,6 +38,11 @@ import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.check.NotEmpty;
+import net.sf.staccatocommons.restrictions.check.NotNegative;
+import net.sf.staccatocommons.restrictions.check.Size;
+import net.sf.staccatocommons.restrictions.processing.ForceChecks;
 
 import org.apache.commons.lang.ObjectUtils;
 

@@ -4,16 +4,16 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
-import net.sf.staccatocommons.check.annotation.ForceChecks;
-import net.sf.staccatocommons.check.annotation.IgnoreChecks;
-import net.sf.staccatocommons.check.annotation.MaxSize;
-import net.sf.staccatocommons.check.annotation.MinSize;
-import net.sf.staccatocommons.check.annotation.NonNull;
-import net.sf.staccatocommons.check.annotation.NotEmpty;
-import net.sf.staccatocommons.check.annotation.NotNegative;
-import net.sf.staccatocommons.check.annotation.NotZero;
-import net.sf.staccatocommons.check.annotation.Positive;
-import net.sf.staccatocommons.check.annotation.Size;
+import net.sf.staccatocommons.restrictions.check.MaxSize;
+import net.sf.staccatocommons.restrictions.check.MinSize;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.check.NotEmpty;
+import net.sf.staccatocommons.restrictions.check.NotNegative;
+import net.sf.staccatocommons.restrictions.check.NotZero;
+import net.sf.staccatocommons.restrictions.check.Positive;
+import net.sf.staccatocommons.restrictions.check.Size;
+import net.sf.staccatocommons.restrictions.processing.ForceChecks;
+import net.sf.staccatocommons.restrictions.processing.IgnoreChecks;
 
 /**
  * 

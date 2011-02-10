@@ -15,7 +15,7 @@ package net.sf.staccatocommons.lang.number;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Static factory methods for creating {@link BigDecimal}s and
