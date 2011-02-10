@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.sf.staccatocommons</groupId>
+  <artifactId>staccatocommons-module</artifactId>
+  <version>1.0-alpha-4-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Staccato-Commons-Modules</name>
+  <modules>
+    <module>commons-testing</module>
+    <module>commons-parent-pom</module>
+    <module>commons-lang</module>
+    <module>commons-restrictions</module>
+    <module>commons-defs</module>
+    <module>commons-check</module>
+    <module>commons-instrument</module>
+    <module>commons-io</module>
+    <module>commons-collections</module>
+    <module>commons-iterators</module>
+    <module>commons-restrictions-instrument</module>
+  </modules>
+</project>
