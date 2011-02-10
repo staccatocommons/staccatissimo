@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccatocommons.lang.provider.Providers.*;
+import static net.sf.staccatocommons.lang.thunk.Thunks.*;
 import net.sf.staccatocommons.collections.stream.Deconstructable.DeconsApplicable;
 import net.sf.staccatocommons.defs.Thunk;
 

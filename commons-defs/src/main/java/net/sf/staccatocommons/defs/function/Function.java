@@ -36,6 +36,18 @@ public interface Function<A, B> extends Applicable<A, B>, //
 
 	/**
 	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
+	 * this lambda with a {@link Thunk}, resulting in a new {@link Thunk} that
+	 * when {@link Thunk#value()} is sent, returns
+	 * <code>this.apply(thunk.value())</code>
+	 * 
+	 * @param thunk
+	 * @return a new {@link Provider}, <code>this</code> composed with
+	 *         <code>thunk</code>
+	 */
+	Thunk<B> of(final Thunk<? extends A> thunk);
+
+	/**
+	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
 	 * this lambda with another {@link Applicable}, resulting in a new
 	 * {@link Function} that when applied returns
 	 * <code>this.apply(other.apply(arg)</code>
@@ -74,18 +86,6 @@ public interface Function<A, B> extends Applicable<A, B>, //
 	 * @return a new function, this composed with other. Non null
 	 */
 	<Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(final Applicable3<Tp1, Tp2, Tp3, ? extends A> other);
-
-	/**
-	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
-	 * this lambda with a {@link Thunk}, resulting in a new {@link Thunk} that
-	 * when {@link Thunk#value()} is sent, returns
-	 * <code>this.apply(thunk.value())</code>
-	 * 
-	 * @param thunk
-	 * @return a new {@link Provider}, <code>this</code> composed with
-	 *         <code>thunk</code>
-	 */
-	Thunk<B> of(final Thunk<? extends A> thunk);
 
 	/**
 	 * Answers a new function that returns null if is argument is null, or the

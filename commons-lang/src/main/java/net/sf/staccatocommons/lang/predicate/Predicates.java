@@ -14,7 +14,6 @@ package net.sf.staccatocommons.lang.predicate;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.regex.Pattern;
 
 import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
@@ -22,15 +21,10 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.predicate.internal.All;
 import net.sf.staccatocommons.lang.predicate.internal.Any;
-import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.Equals;
-import net.sf.staccatocommons.lang.predicate.internal.EqualsIgnoreCase;
 import net.sf.staccatocommons.lang.predicate.internal.EvaluablePredicate;
 import net.sf.staccatocommons.lang.predicate.internal.False;
-import net.sf.staccatocommons.lang.predicate.internal.GreaterThan;
 import net.sf.staccatocommons.lang.predicate.internal.InPredicate;
-import net.sf.staccatocommons.lang.predicate.internal.LessThan;
-import net.sf.staccatocommons.lang.predicate.internal.Matches;
 import net.sf.staccatocommons.lang.predicate.internal.NullPredicates;
 import net.sf.staccatocommons.lang.predicate.internal.Same;
 import net.sf.staccatocommons.lang.predicate.internal.True;
@@ -167,59 +161,6 @@ public class Predicates {
 	 */
 
 	/**
-	 * Returns a new {@link Predicate} that tests
-	 * <code>argument.equalsIgnoreCase(value)</code>
-	 * 
-	 * @param value
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static Predicate<String> equalsIgnoreCase(@NonNull String value) {
-		return new EqualsIgnoreCase(value);
-	}
-
-	/**
-	 * Returns a new {@link Predicate} that tests
-	 * <code>argument.matches(value)</code>
-	 * 
-	 * @param regexp
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static Predicate<String> matches(@NonNull String regexp) {
-		return new Matches(regexp);
-	}
-
-	/**
-	 * Returns a new {@link Predicate} that tests
-	 * <code>pattern.matcher(value).matches()</code>
-	 * 
-	 * @param pattern
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static Predicate<String> matches(@NonNull Pattern pattern) {
-		return new Matches(pattern);
-	}
-
-	/**
-	 * Returns a new {@link Predicate} that tests
-	 * <code>argument.contains(substring)</code>
-	 * 
-	 * @param substring
-	 *          the substring to test if it is contained
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static Predicate<String> contains(@NonNull String substring) {
-		return new ContainsSubstringPredicate(substring);
-	}
-
-	/*
-	 * Logical predicates
-	 */
-
-	/**
 	 * Returns a predicate that evaluates to true if and only if all the given
 	 * predicates evaluate true
 	 * 
@@ -273,78 +214,6 @@ public class Predicates {
 
 	/*
 	 * Comparable predicates
-	 */
-
-	/**
-	 * Returns a predicate that evaluates if its argument is less than the given
-	 * value.
-	 * 
-	 * More formally, this method returns a new predicate that evaluates
-	 * comparable argument with the statement
-	 * <code>argument.compareTo(value) < 0</code>
-	 * 
-	 * @param <T>
-	 * @param value
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> lessThan(@NonNull T value) {
-		return new LessThan<T>(value);
-	}
-
-	/**
-	 * Returns a predicate that evaluates if its argument is lower than or equal
-	 * to the given value.
-	 * 
-	 * More formally, this method returns a new predicate that evaluates
-	 * comparable argument with the statement
-	 * <code>argument.compareTo(value) <= 0</code>
-	 * 
-	 * @param <T>
-	 * @param value
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> lessThanOrEqualTo(@NonNull T value) {
-		return greaterThan(value).not();
-	}
-
-	/**
-	 * Returns a predicate that evaluates if its argument is greater than the
-	 * given value.
-	 * 
-	 * More formally, this method returns a new predicate that evaluates
-	 * comparable argument with the statement
-	 * <code>argument.compareTo(value) > 0</code>
-	 * 
-	 * @param <T>
-	 * @param value
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> greaterThan(@NonNull T value) {
-		return new GreaterThan<T>(value);
-	}
-
-	/**
-	 * Returns a predicate that evaluates if its argument is greater than or equal
-	 * to the given value.
-	 * 
-	 * More formally, this method returns a new predicate that evaluates
-	 * comparable argument with the statement
-	 * <code>argument.compareTo(value) >= 0</code>
-	 * 
-	 * @param <T>
-	 * @param value
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> greaterThanOrEqualTo(@NonNull T value) {
-		return lessThan(value).not();
-	}
-
-	/*
-	 * Predicate - Evaluable bridge
 	 */
 
 	/**

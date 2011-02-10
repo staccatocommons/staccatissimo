@@ -44,10 +44,10 @@ public class Handle {
 	 *           {@link Callable#call()}.
 	 * @return the result of evaluating {@link Callable#call()}
 	 */
-	public static <ExceptionType extends Exception, R> R throwing(Callable<R> provider,
+	public static <ExceptionType extends Exception, R> R throwing(Callable<R> thunk,
 		Class<ExceptionType> exceptionClass) throws ExceptionType {
 		try {
-			return provider.call();
+			return thunk.call();
 		} catch (Exception e) {
 			if (shouldCatch(exceptionClass, e)) {
 				throw (ExceptionType) e;
@@ -79,10 +79,10 @@ public class Handle {
 	 * @return the result of evaluating {@link Callable#call()}
 	 */
 	public static <ExceptionType1 extends Exception, ExceptionType2 extends Exception, R> R throwing(
-		Callable<R> provider, Class<ExceptionType1> exceptionClass1,
-		Class<ExceptionType2> exceptionClass2) throws ExceptionType1, ExceptionType2 {
+		Callable<R> thunk, Class<ExceptionType1> exceptionClass1, Class<ExceptionType2> exceptionClass2)
+		throws ExceptionType1, ExceptionType2 {
 		try {
-			return provider.call();
+			return thunk.call();
 		} catch (Exception e) {
 			if (shouldCatch(exceptionClass1, e)) {
 				throw (ExceptionType1) e;

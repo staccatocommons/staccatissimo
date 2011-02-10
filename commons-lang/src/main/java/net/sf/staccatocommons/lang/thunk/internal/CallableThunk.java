@@ -10,13 +10,13 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.provider.internal;
+package net.sf.staccatocommons.lang.thunk.internal;
 
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.provider.Provider;
+import net.sf.staccatocommons.lang.SoftException;
 
 /**
  * A {@link Thunk} that provides the result of calling a {@link Callable} which
@@ -26,26 +26,25 @@ import net.sf.staccatocommons.lang.provider.Provider;
  * 
  * @param <T>
  */
-public class CallableProvider<T> extends Provider<T> implements Serializable {
+public class CallableThunk<T> implements Serializable, Thunk<T> {
 
 	private static final long serialVersionUID = 6303570980842439165L;
 
 	private Callable<T> callable;
 
 	/**
-	 * 
-	 * Creates a new {@link CallableProvider}
+	 * Creates a new {@link CallableThunk}
 	 * 
 	 * @param callable
 	 *          the {@link Callable} which will provide the value.
 	 * 
 	 */
-	public CallableProvider(Callable<T> callable) {
+	public CallableThunk(Callable<T> callable) {
 		this.callable = callable;
 	}
 
-	public T call() throws Exception {
-		return callable.call();
+	public T value() {
+		return SoftException.callOrSoften(callable);
 	}
 
 }

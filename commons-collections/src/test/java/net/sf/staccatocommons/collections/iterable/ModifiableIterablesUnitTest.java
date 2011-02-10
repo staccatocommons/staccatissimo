@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 
 import org.junit.Ignore;
@@ -41,7 +42,7 @@ public class ModifiableIterablesUnitTest {
 	public void testRemoveAll() {
 		LinkedList<Integer> list = new LinkedList<Integer>();
 		Collections.addAll(list, 2, 9, 6, 8, 10, 2);
-		assertEquals(list, ModifiableIterables.removeAll(list, Predicates.greaterThan(8)));
+		assertEquals(list, ModifiableIterables.removeAll(list, Compare.greaterThan(8)));
 		assertEquals(Arrays.asList(2, 6, 8, 2), list);
 	}
 
@@ -53,7 +54,7 @@ public class ModifiableIterablesUnitTest {
 	public void testRemoveWhile() {
 		LinkedList<Integer> list = new LinkedList<Integer>();
 		Collections.addAll(list, 2, 5, 8, 6, 8, 10, 2);
-		assertEquals(list, ModifiableIterables.removeWhile(list, Predicates.lessThan(8)));;
+		assertEquals(list, ModifiableIterables.removeWhile(list, Compare.lessThan(8)));;
 		assertEquals(Arrays.asList(8, 6, 8, 10, 2), list);
 	}
 

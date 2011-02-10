@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.block.Block;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
@@ -40,7 +41,7 @@ public abstract class StreamTheories {
 	/** predicates for testing */
 	@DataPoints
 	public static Predicate[] predicates = new Predicate[] { Predicates.equal(5),
-			isInstanceOf(Integer.class).and(greaterThan(90)), //
+			isInstanceOf(Integer.class).and(Compare.greaterThan(90)), //
 			false_(), //
 			true_(), //
 			notNull(), //

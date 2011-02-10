@@ -10,66 +10,43 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.provider;
+package net.sf.staccatocommons.lang.callable;
 
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.SoftException;
 
 import org.junit.Test;
 
 /**
- * Test for {@link Provider}
- * 
  * @author flbulgarelli
  * 
  */
-public class ProviderUnitTest {
+public class CallablesUnitTest {
 
 	/**
-	 * Test method for {@link Provider#runTime()}.
+	 * Test method for {@link Callables#from(Thunk)} on exception
 	 */
-	@Test
-	public void testRunTime() {
-		long runTime = new Provider<Void>() {
-			public Void call() throws Exception {
-				Thread.sleep(10);
-				return null;
-			}
-		}.runTime();
-		assertTrue(runTime >= 10);
-	}
-
-	/** Test method for {@link Provider#call()} on exception */
 	@Test(expected = IOException.class)
 	public void testCall_failure() throws Exception {
-		new Provider<Void>() {
+		Callables.from(new Thunk<Void>() {
 			public Void value() {
 				throw SoftException.soften(new IOException());
 			};
-		}.call();
+		}).call();
 	}
 
-	/** Test method for {@link Provider#call()} */
+	/** Test method for {@link Callables#from(Thunk)} */
 	@Test
 	public void testCall() throws Exception {
-		assertEquals(5, (int) new Provider<Integer>() {
+		assertEquals(5, (int) Callables.from(new Thunk<Integer>() {
 			public Integer value() {
 				return 5;
 			}
-		}.call());
-	}
-
-	/** Test method for {@link Provider#value()} */
-	@Test(expected = SoftException.class)
-	public void testValue() throws Exception {
-		new Provider<Void>() {
-			public Void call() throws Exception {
-				throw new IOException();
-			}
-		}.value();
+		}).call());
 	}
 
 }

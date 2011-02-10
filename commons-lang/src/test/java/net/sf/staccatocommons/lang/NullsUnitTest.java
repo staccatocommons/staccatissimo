@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.lang;
 
 import static org.junit.Assert.*;
-import net.sf.staccatocommons.lang.provider.internal.ConstantProvider;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 
 import org.junit.Test;
 
@@ -35,8 +35,8 @@ public class NullsUnitTest {
 	/***/
 	@Test
 	public void testNonNullOrElseTProviderOfT() {
-		assertEquals("Foo", Nulls.coalesce(null, new ConstantProvider("Foo")));
-		assertEquals("Bar", Nulls.coalesce("Bar", new ConstantProvider("Foo")));
+		assertEquals("Foo", Nulls.coalesce(null, Thunks.constant("Foo")));
+		assertEquals("Bar", Nulls.coalesce("Bar", Thunks.constant("Foo")));
 	}
 
 }

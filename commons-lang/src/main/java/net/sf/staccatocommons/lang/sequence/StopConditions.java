@@ -13,6 +13,7 @@
 package net.sf.staccatocommons.lang.sequence;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 
@@ -37,7 +38,7 @@ public class StopConditions {
 	 */
 	@NonNull
 	public static <T extends Comparable<T>> Predicate<T> downTo(@NonNull T value) {
-		return Predicates.lessThan(value);
+		return Compare.lessThan(value);
 	}
 
 	/**
@@ -47,7 +48,7 @@ public class StopConditions {
 	 */
 	@NonNull
 	public static <T extends Comparable<T>> Predicate<T> upTo(@NonNull T value) {
-		return Predicates.greaterThan(value);
+		return Compare.greaterThan(value);
 	}
 
 }

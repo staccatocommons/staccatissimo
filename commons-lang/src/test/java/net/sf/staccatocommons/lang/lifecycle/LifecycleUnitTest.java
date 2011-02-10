@@ -81,13 +81,6 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 		assertEquals((Integer) 6, lifecycle.throwing(IOException.class, InterruptedException.class));
 	}
 
-	/** Test for {@link Lifecycle#run()} */
-	@Test
-	public void testRun_OK() throws Exception {
-		expectNormalLifecycle();
-		lifecycle.run();
-	}
-
 	/** Test for {@link Lifecycle#call()} */
 	@Test
 	public void testCall_OK() throws Exception {
@@ -107,13 +100,6 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	public void testValue_Fail_OnInit() throws Exception {
 		expectFailLifecycleOnInitialization();
 		assertNull(lifecycle.value());
-	}
-
-	/** Test for {@link Lifecycle#run()} */
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testRun_Fail_Init() throws Exception {
-		expectFailLifecycleOnInitialization();
-		lifecycle.run();
 	}
 
 	/** Test for {@link Lifecycle#call()} */
@@ -197,13 +183,6 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 
 	/***/
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void testRun_Fail_OnDispose() throws Exception {
-		expectFailLifecycleOnDispose();
-		lifecycle.run();
-	}
-
-	/***/
-	@Test(expected = IndexOutOfBoundsException.class)
 	public void testCall_Fail_OnDispose() throws Exception {
 		expectFailLifecycleOnDispose();
 		assertNull(lifecycle.call());
@@ -221,13 +200,6 @@ public class LifecycleUnitTest extends JUnit4MockObjectTestCase {
 	public void testExecute_Fail_OnWork() throws Exception {
 		expectFailLifecycleOnWork();
 		assertNull(lifecycle.value());
-	}
-
-	/***/
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testRun_Fail_OnWork() throws Exception {
-		expectFailLifecycleOnWork();
-		lifecycle.run();
 	}
 
 	/***/

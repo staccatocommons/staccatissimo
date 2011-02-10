@@ -10,40 +10,35 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.provider.internal;
+package net.sf.staccatocommons.lang.thunk.internal;
 
 import java.io.Serializable;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.provider.Provider;
+import net.sf.staccatocommons.defs.restriction.Constant;
 
 /**
- * {@link ConstantProvider} is a generic {@link Thunk} that wraps another object.
+ * Thunk of null
  * 
  * @author flbulgarelli
- * 
- * @param <T>
- * 
  */
-public final class ConstantProvider<T> extends Provider<T> implements Serializable {
+public class NullThunk<T> implements Thunk<T>, Serializable {
 
-	private static final long serialVersionUID = -7769276251688297460L;
+	private static final long serialVersionUID = 5879607480007179549L;
+	private static final NullThunk instance = new NullThunk();
 
-	private final T value;
+	private NullThunk() {}
+
+	@Override
+	public T value() {
+		return null;
+	}
 
 	/**
-	 * 
-	 * Creates a new {@link ConstantProvider}
-	 * 
-	 * @param value
-	 *          the value to provide
+	 * @return the instance
 	 */
-	public ConstantProvider(T value) {
-		this.value = value;
+	@Constant
+	public static <T> Thunk<T> getInstance() {
+		return instance;
 	}
-
-	public T value() {
-		return value;
-	}
-
 }

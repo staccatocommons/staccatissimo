@@ -19,7 +19,7 @@ import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.collections.stream.RepetableStreamTheories;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedConsStream;
-import net.sf.staccatocommons.lang.provider.Providers;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 
 import org.junit.Before;
 import org.junit.experimental.theories.DataPoints;
@@ -44,7 +44,7 @@ public class DelayedConsStreamUnitTest extends RepetableStreamTheories {
 	/** Data points */
 	@DataPoints
 	public static Stream[] stream = new Stream[] {
-			Cons.from(Providers.constant(10), Arrays.asList(15, 20, 30)),
-			Cons.from(Providers.constant(1), Collections.<Integer> emptyList()), };
+			Cons.from(Thunks.constant(10), Arrays.asList(15, 20, 30)),
+			Cons.from(Thunks.constant(1), Collections.<Integer> emptyList()), };
 
 }

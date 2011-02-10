@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.Thunk;
@@ -25,7 +26,6 @@ import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.defs.restriction.Value;
-import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
  * <p>
@@ -68,7 +68,8 @@ import net.sf.staccatocommons.lang.provider.Provider;
 @Value
 @ConditionallyImmutable
 @ConditionallySerializable
-public abstract class Option<T> extends Provider<T> implements Iterable<T>, SizeAware, Serializable {
+public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, ContainsAware<T>,
+	Serializable {
 
 	private static final long serialVersionUID = -4635925023376621559L;
 
@@ -135,7 +136,7 @@ public abstract class Option<T> extends Provider<T> implements Iterable<T>, Size
 	 * undefined
 	 * 
 	 * @param other
-	 *          the provider of the return value in case this {@link Option} is
+	 *          the thunk of the return value in case this {@link Option} is
 	 *          undefined
 	 * @return <code>this.value()</code> if defined, other.value()
 	 *         <code>otherwise</code>

@@ -24,7 +24,7 @@ import net.sf.staccatocommons.iterators.ConsIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
-import net.sf.staccatocommons.lang.provider.Providers;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
@@ -62,7 +62,7 @@ public class ConsStream<A> extends AbstractStream<A> {
 	}
 
 	public Pair<Thunk<A>, Stream<A>> delayedDecons() {
-		return _((Thunk<A>) Providers.constant(head), tail());
+		return _(Thunks.constant(head), tail());
 	}
 
 	public A head() {

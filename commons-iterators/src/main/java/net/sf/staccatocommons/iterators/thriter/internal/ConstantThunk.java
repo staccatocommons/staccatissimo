@@ -12,7 +12,8 @@
  */
 package net.sf.staccatocommons.iterators.thriter.internal;
 
-import net.sf.staccatocommons.check.annotation.NonNull;
+import java.io.Serializable;
+
 import net.sf.staccatocommons.defs.Thunk;
 
 /**
@@ -21,14 +22,20 @@ import net.sf.staccatocommons.defs.Thunk;
  * @param <T>
  * 
  */
-public final class ConstantThunk<T> implements Thunk<T> {
+public final class ConstantThunk<T> implements Serializable, Thunk<T> {
+
+	private static final long serialVersionUID = -7769276251688297460L;
 
 	private final T value;
 
 	/**
+	 * 
 	 * Creates a new {@link ConstantThunk}
+	 * 
+	 * @param value
+	 *          the value to provide
 	 */
-	public ConstantThunk(@NonNull T value) {
+	public ConstantThunk(T value) {
 		this.value = value;
 	}
 

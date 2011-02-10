@@ -20,7 +20,6 @@ import net.sf.staccatocommons.defs.restriction.ConditionallyImmutable;
 import net.sf.staccatocommons.defs.restriction.ConditionallySerializable;
 import net.sf.staccatocommons.defs.restriction.Value;
 import net.sf.staccatocommons.lang.internal.ToString;
-import net.sf.staccatocommons.lang.provider.Provider;
 import net.sf.staccatocommons.lang.value.BasicEquals;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -39,8 +38,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @Value
 @ConditionallyImmutable
 @ConditionallySerializable
-public class Prioritized<T, P extends Comparable<P>> extends Provider<T> implements
-	Comparable<Prioritized<T, P>>, Serializable {
+public class Prioritized<T, P extends Comparable<P>> implements Comparable<Prioritized<T, P>>,
+	Thunk<T>, Serializable {
 
 	private static final long serialVersionUID = 7131041003021112454L;
 

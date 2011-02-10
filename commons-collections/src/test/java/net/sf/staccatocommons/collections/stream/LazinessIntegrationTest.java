@@ -13,9 +13,11 @@
 package net.sf.staccatocommons.collections.stream;
 
 import static org.junit.Assert.*;
+
+import java.util.concurrent.Callable;
+
 import net.sf.staccatocommons.lang.function.AbstractFunction;
-import net.sf.staccatocommons.lang.provider.Provider;
-import net.sf.staccatocommons.lang.provider.Providers;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 
 import org.junit.Test;
 
@@ -81,13 +83,13 @@ public class LazinessIntegrationTest {
 		assertEquals(25, (int) Cons //
 			.from(10, 20)
 			.append(21)
-			.append(Providers.constant(22))
-			.append(new Provider<Integer>() {
+			.append(Thunks.constant(22))
+			.append(Thunks.from(new Callable<Integer>() {
 				public Integer call() throws Exception {
 					throw new Exception();
 				}
-			})
-			.append(Providers.constant(25))
+			}))
+			.append(Thunks.constant(25))
 			.intersperse(1)
 			.last());
 	}

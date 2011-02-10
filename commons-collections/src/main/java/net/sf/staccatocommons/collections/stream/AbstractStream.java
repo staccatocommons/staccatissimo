@@ -151,8 +151,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public A anyOrElse(Thunk<A> provider) {
-		return anyOrNone().valueOrElse(provider);
+	public A anyOrElse(Thunk<A> thunk) {
+		return anyOrNone().valueOrElse(thunk);
 	}
 
 	@Override
@@ -176,8 +176,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public A findOrElse(Evaluable<? super A> predicate, Thunk<? extends A> provider) {
-		return findOrNone(predicate).valueOrElse(provider);
+	public A findOrElse(Evaluable<? super A> predicate, Thunk<? extends A> thunk) {
+		return findOrNone(predicate).valueOrElse(thunk);
 	}
 
 	@Override

@@ -24,6 +24,7 @@ import net.sf.staccatocommons.iterators.SingleIterator;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.value.BasicEquals;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -86,6 +87,10 @@ public final class Some<T> extends Option<T> {
 
 	public Iterator<T> iterator() {
 		return SingleIterator.from(value);
+	}
+
+	public boolean contains(T element) {
+		return ObjectUtils.equals(value, element);
 	}
 
 	@Override

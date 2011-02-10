@@ -18,6 +18,8 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.lang.Compare;
+import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -108,38 +110,38 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.predicate.Predicates#equalsIgnoreCase(java.lang.String)}
+	 * {@link net.sf.staccatocommons.lang.Strings#equalsIgnoreCase(java.lang.String)}
 	 * .
 	 */
 	@Test
 	public void testEqualsIgnoreCase() {
-		assertTrue(Predicates.equalsIgnoreCase("Hello").eval("hello"));
-		assertFalse(Predicates.equalsIgnoreCase("Hello").eval("world"));
+		assertTrue(Strings.equalsIgnoreCase("Hello").eval("hello"));
+		assertFalse(Strings.equalsIgnoreCase("Hello").eval("world"));
 	}
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.predicate.Predicates#matches(java.lang.String)}
+	 * {@link net.sf.staccatocommons.lang.Strings#matches(java.lang.String)}
 	 * .
 	 */
 	@Test
 	public void testMatchesRegexp() {
-		assertTrue(Predicates.matches("[Hh]el+o").eval("hello"));
-		assertFalse(Predicates.matches("[Hh]el+o").eval("world"));
+		assertTrue(Strings.matches("[Hh]el+o").eval("hello"));
+		assertFalse(Strings.matches("[Hh]el+o").eval("world"));
 	}
 
 	/***/
 	@Test
 	public void testMatchesPattern() throws Exception {
-		assertTrue(Predicates.matches(Pattern.compile("[Hh]el+o")).eval("hello"));
-		assertFalse(Predicates.matches(Pattern.compile("[Hh]el+o")).eval("world"));
+		assertTrue(Strings.matches(Pattern.compile("[Hh]el+o")).eval("hello"));
+		assertFalse(Strings.matches(Pattern.compile("[Hh]el+o")).eval("world"));
 	}
 
 	/***/
 	@Test
 	public void testConstains() {
-		assertTrue(Predicates.contains("foo").eval("The word foo has no special meaning"));
-		assertFalse(Predicates.contains("foo").eval("The word bar has no special meaning, neither"));
+		assertTrue(Strings.contains("foo").eval("The word foo has no special meaning"));
+		assertFalse(Strings.contains("foo").eval("The word bar has no special meaning, neither"));
 	}
 
 	/**
@@ -156,17 +158,17 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 	/***/
 	@Test
 	public void testGreatherThan() throws Exception {
-		assertFalse(Predicates.greaterThan(5).eval(2));
-		assertFalse(Predicates.greaterThan(5).eval(5));
-		assertTrue(Predicates.greaterThan(5).eval(6));
+		assertFalse(Compare.greaterThan(5).eval(2));
+		assertFalse(Compare.greaterThan(5).eval(5));
+		assertTrue(Compare.greaterThan(5).eval(6));
 	}
 
 	/***/
 	@Test
 	public void testLowerThan() throws Exception {
-		assertTrue(Predicates.lessThan(5).eval(2));
-		assertFalse(Predicates.lessThan(5).eval(5));
-		assertFalse(Predicates.lessThan(5).eval(6));
+		assertTrue(Compare.lessThan(5).eval(2));
+		assertFalse(Compare.lessThan(5).eval(5));
+		assertFalse(Compare.lessThan(5).eval(6));
 	}
 
 	/***/
@@ -174,12 +176,12 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 	public void testAny() throws Exception {
 		assertTrue(Predicates.any(
 			Predicates.<Integer> true_(),
-			Predicates.lessThan(2),
+			Compare.lessThan(2),
 			Predicates.equal(5)).eval(5));
 
 		assertTrue(Predicates.any(
 			Predicates.<Integer> false_(),
-			Predicates.greaterThan(2),
+			Compare.greaterThan(2),
 			Predicates.equal(10)).eval(5));
 	}
 
@@ -220,7 +222,7 @@ public class PredicatesUnitTest extends JUnit4MockObjectTestCase {
 
 		assertTrue(Predicates.all(
 			Predicates.<Integer> true_(),
-			Predicates.greaterThan(2),
+			Compare.greaterThan(2),
 			Predicates.equal(5)).eval(5));
 	}
 

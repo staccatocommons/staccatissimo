@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.lang;
 
-import net.sf.staccatocommons.lang.provider.Provider;
+import net.sf.staccatocommons.defs.Thunk;
 
 /**
  * 
@@ -33,7 +33,7 @@ import net.sf.staccatocommons.lang.provider.Provider;
  * @param <T>
  * 
  */
-public abstract class Lazy<T> extends Provider<T> {
+public abstract class Lazy<T> implements Thunk<T> {
 
 	private Option<T> lazyValue = Option.none();
 
@@ -58,7 +58,7 @@ public abstract class Lazy<T> extends Provider<T> {
 	protected abstract T init();
 
 	/**
-	 * A synchronized {@link Lazy} provider
+	 * A synchronized {@link Lazy} thunk
 	 * 
 	 * @author flbulgarelli
 	 * 
@@ -69,11 +69,6 @@ public abstract class Lazy<T> extends Provider<T> {
 		public final synchronized T value() {
 			return super.value();
 		}
-
-		public final T call() throws Exception {
-			return super.call();
-		}
-
 	}
 
 }

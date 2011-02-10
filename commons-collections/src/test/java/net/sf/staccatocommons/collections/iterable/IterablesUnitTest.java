@@ -2,7 +2,6 @@ package net.sf.staccatocommons.collections.iterable;
 
 import static java.util.Arrays.*;
 import static java.util.Collections.*;
-import static net.sf.staccatocommons.lang.predicate.Predicates.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.junit.Assert.*;
 
@@ -16,6 +15,7 @@ import java.util.List;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.Predicate;
@@ -51,9 +51,9 @@ public class IterablesUnitTest {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void testAll() {
-		assertTrue(Iterables.all(Arrays.asList(1, 2, 3, 4, 5, 9), greaterThan(0)));
-		assertFalse(Iterables.all(Arrays.asList(1, -9, 3, 4, 5, 9), greaterThan(0)));
-		assertTrue(Iterables.all((List) emptyList(), greaterThan(0)));
+		assertTrue(Iterables.all(Arrays.asList(1, 2, 3, 4, 5, 9), Compare.greaterThan(0)));
+		assertFalse(Iterables.all(Arrays.asList(1, -9, 3, 4, 5, 9), Compare.greaterThan(0)));
+		assertTrue(Iterables.all((List) emptyList(), Compare.greaterThan(0)));
 
 	}
 

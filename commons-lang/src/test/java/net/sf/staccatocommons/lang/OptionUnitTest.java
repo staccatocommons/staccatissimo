@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.provider.Providers;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -91,9 +91,9 @@ public class OptionUnitTest extends JUnit4MockObjectTestCase {
 	@Test
 	public void testValueOrElse() throws Exception {
 		assertEquals(4, (int) Option.some(4).valueOrElse(8));
-		assertEquals(4, (int) Option.some(4).valueOrElse(Providers.constant(9)));
-		assertEquals(9, (int) Option.<Integer> none().valueOrElse(Providers.constant(9)));
-		assertEquals(9, (int) Option.<Integer> none().valueOrElse(Providers.constant(9)));
+		assertEquals(4, (int) Option.some(4).valueOrElse(Thunks.constant(9)));
+		assertEquals(9, (int) Option.<Integer> none().valueOrElse(Thunks.constant(9)));
+		assertEquals(9, (int) Option.<Integer> none().valueOrElse(Thunks.constant(9)));
 	}
 
 	/** Test for Option#nullTo */

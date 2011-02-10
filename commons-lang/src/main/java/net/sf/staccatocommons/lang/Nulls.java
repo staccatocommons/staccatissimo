@@ -44,11 +44,11 @@ public class Nulls {
 	 * @param <T>
 	 * @param value
 	 *          nullable.
-	 * @param provider
+	 * @param thunk
 	 *          non null.
-	 * @return <code>value != null ? value : provider.value()</code>
+	 * @return <code>value != null ? value : thunk.value()</code>
 	 */
-	public static <T> T coalesce(T value, @NonNull Thunk<T> provider) {
-		return value != null ? value : provider.value();
+	public static <T> T coalesce(T value, @NonNull Thunk<T> thunk) {
+		return value != null ? value : thunk.value();
 	}
 }

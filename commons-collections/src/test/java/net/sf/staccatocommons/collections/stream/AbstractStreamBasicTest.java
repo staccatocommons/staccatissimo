@@ -14,7 +14,6 @@ package net.sf.staccatocommons.collections.stream;
 
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static net.sf.staccatocommons.lang.number.Numbers.*;
-import static net.sf.staccatocommons.lang.predicate.Predicates.*;
 import static net.sf.staccatocommons.lang.sequence.StopConditions.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.junit.Assert.*;
@@ -32,6 +31,7 @@ import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
+import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.predicate.Equiv;
@@ -70,7 +70,7 @@ public class AbstractStreamBasicTest {
 		assertEquals((Integer) 70, //
 			Iterate.from(10, add(3)) //
 				.take(7)
-				.filter(lessThan(25))
+				.filter(Compare.lessThan(25))
 				.tail()
 				.sum());
 	}
@@ -208,7 +208,7 @@ public class AbstractStreamBasicTest {
 	public void testPartition() throws Exception {
 		Pair<Stream<Integer>, Stream<Integer>> partition = Cons
 			.from(50, 60, 1, 6, 9, 10, 100)
-			.streamPartition(greaterThan(9));
+			.streamPartition(Compare.greaterThan(9));
 
 		assertTrue(partition._1().equivalent(50, 60, 10, 100));
 		assertTrue(partition._2().equivalent(1, 6, 9));

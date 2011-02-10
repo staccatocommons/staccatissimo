@@ -26,8 +26,8 @@ import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
-import net.sf.staccatocommons.lang.provider.Providers;
-import net.sf.staccatocommons.lang.provider.internal.NullProvider;
+import net.sf.staccatocommons.lang.thunk.Thunks;
+import net.sf.staccatocommons.lang.thunk.internal.NullThunk;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
@@ -47,10 +47,10 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 	public static Function[] functions = new Function[] { Functions.constant(59),
 			Functions.identity(), Strings.toString_() };
 
-	/** providers data points */
+	/** thunks data points */
 	@DataPoints
-	public static Thunk<Integer>[] providers = new Thunk[] { NullProvider.getInstance(), //
-			Providers.constant(90) //
+	public static Thunk<Integer>[] thunks = new Thunk[] { NullThunk.getInstance(), //
+			Thunks.constant(90) //
 	};
 
 	/**
@@ -130,13 +130,13 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 	 * 
 	 * @param stream
 	 * @param predicate
-	 * @param provider
+	 * @param thunk
 	 */
 	@Theory
-	public void testFindOrElse(Stream stream, Evaluable predicate, Thunk provider) {
+	public void testFindOrElse(Stream stream, Evaluable predicate, Thunk thunk) {
 		assertEquals(
-			stream.findOrNone(predicate).valueOrElse(provider),
-			stream.findOrElse(predicate, provider));
+			stream.findOrNone(predicate).valueOrElse(thunk),
+			stream.findOrElse(predicate, thunk));
 	}
 
 	/**

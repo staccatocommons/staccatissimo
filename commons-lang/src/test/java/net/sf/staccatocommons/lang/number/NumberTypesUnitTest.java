@@ -177,7 +177,7 @@ public class NumberTypesUnitTest {
 
 	/**
 	 * Theory for testing that number types have functions that are implicit
-	 * providers of themselves
+	 * thunks of themselves
 	 */
 	@Theory
 	public <A> void testIsImplicitProvider(NumberType<A> nt) {

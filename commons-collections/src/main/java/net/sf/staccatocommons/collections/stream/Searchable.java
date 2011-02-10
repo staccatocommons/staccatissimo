@@ -60,11 +60,11 @@ public interface Searchable<A> {
 	A anyOrNull();
 
 	/**
-	 * Shorthand for <code>anyOrNone().valueOrElse(provider)</code>
+	 * Shorthand for <code>anyOrNone().valueOrElse(thunk)</code>
 	 * 
 	 * @param thunk
 	 * 
-	 * @return <code>anyOrNone().valueOrElse(provider)</code>
+	 * @return <code>anyOrNone().valueOrElse(thunk)</code>
 	 */
 	A anyOrElse(@NonNull Thunk<A> thunk);
 

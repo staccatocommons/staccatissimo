@@ -12,9 +12,12 @@ GNU Lesser General Public License for more details.
  */
 package net.sf.staccatocommons.lang.lifecycle;
 
+import java.util.concurrent.Callable;
+
 import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.lang.Handle;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.lang.provider.Provider;
 
 /**
  * 
@@ -66,7 +69,8 @@ import net.sf.staccatocommons.lang.provider.Provider;
  * @param <ResultType>
  *          the type of result returned by this lifecycle
  */
-public abstract class Lifecycle<ResourceType, ResultType> extends Provider<ResultType> {
+public abstract class Lifecycle<ResourceType, ResultType> implements Thunk<ResultType>,
+	Callable<ResultType> {
 
 	/**
 	 * Executes this {@link Lifecycle}, initializing the resource it handles,
@@ -91,6 +95,43 @@ public abstract class Lifecycle<ResourceType, ResultType> extends Provider<Resul
 			if (resource != null)
 				dispose(resource);
 		}
+	}
+
+	/**
+	 * Sends the {@link #call()} message, softening any exception that may occur.
+	 * 
+	 * @see SoftException#callOrSoften(Callable)
+	 */
+	@Override
+	public ResultType value() {
+		return SoftException.callOrSoften(this);
+	}
+
+	/**
+	 * Handles exceptions of type <code>exceptionClass</code> that may occur when
+	 * sending {@link #call()}.
+	 * 
+	 * This method is just a shortcut for
+	 * <code>Handle.throwing(this, exceptionClass)</code>
+	 * 
+	 * @see {@link Handle#throwing(Callable, Class)}
+	 */
+	public final <E extends Exception> ResultType throwing(Class<E> exceptionClass) throws E {
+		return Handle.throwing(this, exceptionClass);
+	}
+
+	/**
+	 * Handles exceptions of type <code>exceptionClass1</code> and
+	 * <code>exceptionClass2</code> that may occur when sending {@link #call()}.
+	 * 
+	 * This method is just a shortcut for
+	 * <code>Handle.throwing(this, exceptionClass1, exceptionClass2)</code>
+	 * 
+	 * @see {@link Handle#throwing(Callable, Class,Class)}
+	 */
+	public final <E1 extends Exception, E2 extends Exception> ResultType throwing(
+		Class<E1> exceptionClass1, Class<E2> exceptionClass2) throws E1, E2 {
+		return Handle.throwing(this, exceptionClass1, exceptionClass2);
 	}
 
 	/**

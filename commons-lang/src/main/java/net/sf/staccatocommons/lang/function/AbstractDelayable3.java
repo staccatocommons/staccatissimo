@@ -35,7 +35,7 @@ public abstract class AbstractDelayable3<A, B, C, D> implements Applicable3<A, B
 	}
 
 	/**
-	 * Delays execution of this block by returning a void provider that will
+	 * Delays execution of this block by returning a void thunk that will
 	 * evaluate <code>exec(arg1, arg2, arg3)</code> each time its value is
 	 * required
 	 * 
