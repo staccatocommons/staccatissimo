@@ -28,8 +28,10 @@ public class InstrumentationIntegrationTest {
 	/** setup */
 	@BeforeClass
 	public static void before() throws Exception {
-		InstrumentationRunner.runInstrumentation(new RestrictionConfigurer(), new Directory(
-			"target/test-classes"), "");
+		InstrumentationRunner.runInstrumentation(
+			new RestrictionConfigurer(true, true, false),
+			new Directory("target/test-classes"),
+			"");
 	}
 
 	/** Test the {@link ConstantHandler} */

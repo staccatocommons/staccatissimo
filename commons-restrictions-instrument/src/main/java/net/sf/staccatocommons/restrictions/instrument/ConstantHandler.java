@@ -23,13 +23,20 @@ import javassist.NotFoundException;
 import javassist.bytecode.CodeAttribute;
 import net.sf.staccatocommons.instrument.context.MethodAnnotationContext;
 import net.sf.staccatocommons.instrument.handler.MethodAnnotationHandler;
+import net.sf.staccatocommons.instrument.handler.deactivator.Deactivable;
+import net.sf.staccatocommons.instrument.handler.deactivator.StackedDeactivableSupport;
 import net.sf.staccatocommons.restrictions.Constant;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class ConstantHandler implements MethodAnnotationHandler<Constant> {
+public class ConstantHandler implements MethodAnnotationHandler<Constant>, Deactivable {
+
+	private static final String METHOD_TEMPLATE = "return %s;";
+	private static final String FIELD_TEMPLATE = "public static final %s %s;";
+	private static final String INITIALIZER_NAME_TEMPLATE = "%sInitializer";
+	private StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport();
 
 	public Class<Constant> getSupportedAnnotationType() {
 		return Constant.class;
@@ -40,6 +47,10 @@ public class ConstantHandler implements MethodAnnotationHandler<Constant> {
 
 	public void postProcessAnnotatedMethod(Constant annotation, MethodAnnotationContext context)
 		throws CannotCompileException, NotFoundException {
+
+		if (!deactivableSupport.isActive())
+			return;
+
 		CtMethod originalMethod = context.getMethod();
 		if (!Modifier.isStatic(originalMethod.getModifiers())) {
 			context.logInfoMessage("{}: this processor does not support @Constant processing "
@@ -80,9 +91,13 @@ public class ConstantHandler implements MethodAnnotationHandler<Constant> {
 		originalMethod.setBody(String.format(METHOD_TEMPLATE, fieldName));
 	}
 
-	private static final String METHOD_TEMPLATE = "return %s;";
-	private static final String FIELD_TEMPLATE = "public static final %s %s;";
-	private static final String INITIALIZER_NAME_TEMPLATE = "%sInitializer";
+	public final void deactivate() {
+		deactivableSupport.deactivate();
+	}
+
+	public final void activate() {
+		deactivableSupport.activate();
+	}
 
 	/** Converts a method name into a constant name */
 	public static String toJavaConstantString(String original) {

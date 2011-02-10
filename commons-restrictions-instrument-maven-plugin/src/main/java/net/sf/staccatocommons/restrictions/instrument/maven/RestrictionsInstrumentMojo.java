@@ -47,6 +47,29 @@ public class RestrictionsInstrumentMojo extends AbstractMojo {
 	protected List<Artifact> pluginArtifactsList;
 
 	/**
+	 * If check annotation on methods should be ignored, or should be processed
+	 * with assertion checks on their return types
+	 * 
+	 * @parameter default-value="true"
+	 */
+	private boolean ignoreReturnChecks;
+
+	/**
+	 * If check annotations should be ignored or not. If set to <code>true</code>,
+	 * then <code>ignoreReturnChecks</code> has no effect
+	 * 
+	 * @parameter default-value="false"
+	 */
+	private boolean ignoreChecks;
+
+	/**
+	 * If constant annotation on methods should be ignored or not
+	 * 
+	 * @parameter default-value="false"
+	 */
+	private boolean ignoreConstants;
+
+	/**
 	 * The current artifact being instrumented. The mojo will normally not need
 	 * this object, except on those projects from staccato-commons that are both
 	 * dependencies of this mojo and consumers of it - like staccato-commons-lang,
@@ -61,8 +84,9 @@ public class RestrictionsInstrumentMojo extends AbstractMojo {
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("*** Staccato-Commons-Restrictions-Instrument *** ");
 		new InstrumentMojoSupport(this, location, artifact, pluginArtifactsList) {
+
 			protected InstrumenterConfigurer createConfigurer() {
-				return new RestrictionConfigurer();
+				return new RestrictionConfigurer(ignoreReturnChecks, ignoreChecks, ignoreConstants);
 			}
 		}.execute();
 	}

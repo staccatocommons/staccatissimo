@@ -62,6 +62,6 @@ public interface InstrumenterConfiguration {
 	 * @return this in order to allow method chaining
 	 */
 	@NonNull
-	InstrumenterConfiguration addAnnotationHanlder(@NonNull AnnotationHandler handler);
+	InstrumenterConfiguration addAnnotationHanlder(@NonNull AnnotationHandler<?> handler);
 
 }
