@@ -106,8 +106,8 @@ public abstract class RelevantState<A> implements Comparator<A>, Evaluable2<A, A
 	}
 
 	/**
-	 * Creates a new {@link RelevantState}, using
-	 * {@link ToStringBuilder#getDefaultStyle()} as <code>toStringStyle</code>
+	 * Creates a new {@link RelevantState}, using {@link NamedTupleToStringStyle}
+	 * as <code>toStringStyle</code>
 	 * 
 	 * 
 	 * @param relevantAttributesCount
@@ -115,7 +115,7 @@ public abstract class RelevantState<A> implements Comparator<A>, Evaluable2<A, A
 	 *          object of type A
 	 */
 	public RelevantState(int relevantAttributesCount) {
-		this(relevantAttributesCount, ToStringBuilder.getDefaultStyle());
+		this(relevantAttributesCount, NamedTupleToStringStyle.getInstance());
 	}
 
 	/**

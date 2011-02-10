@@ -31,7 +31,7 @@ import org.junit.Test;
  */
 public class MapsUnitTest {
 	private Map<String, Integer> map = MapBuilder
-		.hashMapWith("Foo", 50)
+		.mapWith("Foo", 50)
 		.with("Bar", 90)
 		.with("Foobar", 120)
 		.build();
@@ -70,7 +70,7 @@ public class MapsUnitTest {
 	public void testGet() throws Exception {
 		assertEquals(50, (int) Maps.get(map, "Foo").value());
 		assertTrue(Maps.get(map, "FOO").isUndefined());
-		assertEquals(Option.someNull(), Maps.get(MapBuilder.hashMapWith(10, null).build(), 10));
+		assertEquals(Option.someNull(), Maps.get(MapBuilder.mapWith(10, null).build(), 10));
 
 	}
 }

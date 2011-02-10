@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.lang;
 
+import static net.sf.staccatocommons.lang.MapBuilder.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static net.sf.staccatocommons.testing.junit.asserts.CollectionAssert.*;
 import static org.hamcrest.core.IsInstanceOf.*;
@@ -21,6 +22,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
+
+import net.sf.staccatocommons.lang.builder.BuilderAlreadyUsedException;
 
 import org.junit.Test;
 
@@ -35,9 +38,8 @@ public class MapBuilderUnitTest {
 	 */
 	@Test
 	public void testMapBuilder() {
-		Map<String, Integer> map = new MapBuilder<String, Integer, Map<String, Integer>>(
-			new HashMap<String, Integer>())
-			.with("one", 1)
+		Map<String, Integer> map = //
+		mapWith("one", 1) //
 			.with("two", 2)
 			.with("three", 3)
 			.with(_("four", 4))
@@ -48,14 +50,23 @@ public class MapBuilderUnitTest {
 		assertContainsEntry(map, "four", 4);
 	}
 
+	/** Test for {@link MapBuilder#build()} when it has been already be built */
+	@Test(expected = BuilderAlreadyUsedException.class)
+	public void testReuse() throws Exception {
+		MapBuilder<String, Integer, Map<String, Integer>> mb = //
+		mapWith("hello", 10).with("world", 1);
+		mb.build();
+		mb.build();
+	}
+
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.MapBuilder#hashMapWith(java.lang.Object, java.lang.Object)}
+	 * {@link net.sf.staccatocommons.lang.MapBuilder#mapWith(java.lang.Object, java.lang.Object)}
 	 * .
 	 */
 	@Test
 	public void testHashMapWith() {
-		assertThat(MapBuilder.hashMapWith("FOO", 5).build(), instanceOf(HashMap.class));
+		assertThat(mapWith("FOO", 5).build(), instanceOf(HashMap.class));
 	}
 
 	/**
@@ -65,7 +76,7 @@ public class MapBuilderUnitTest {
 	 */
 	@Test
 	public void testLinkedMapWith() {
-		assertThat(MapBuilder.linkedMapWith("FOO", 5).build(), instanceOf(LinkedHashMap.class));
+		assertThat(linkedMapWith("FOO", 5).build(), instanceOf(LinkedHashMap.class));
 	}
 
 	/**
@@ -75,7 +86,7 @@ public class MapBuilderUnitTest {
 	 */
 	@Test
 	public void testTreeMapWith() {
-		assertThat(MapBuilder.treeMapWith("FOO", 5).build(), instanceOf(TreeMap.class));
+		assertThat(treeMapWith("FOO", 5).build(), instanceOf(TreeMap.class));
 	}
 
 }

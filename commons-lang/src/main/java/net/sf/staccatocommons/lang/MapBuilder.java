@@ -118,7 +118,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @return a new {@link MapBuilder}
 	 */
 	@NonNull
-	public static <K, V> MapBuilder<K, V, Map<K, V>> hashMapWith(K key, V value) {
+	public static <K, V> MapBuilder<K, V, Map<K, V>> mapWith(K key, V value) {
 		return mapWith((Map<K, V>) new HashMap<K, V>(), key, value);
 	}
 

@@ -28,9 +28,8 @@ import org.junit.Test;
  */
 public class RelevantStateUnitTest {
 
-	private RelevantState<Triple> val = new RelevantState<Triple>(
-		3,
-		NamedTupleToStringStyle.getInstance()) {
+	private RelevantState<Triple> val = //
+	new RelevantState<Triple>(3) {
 		protected void collectState(Triple o, StateCollector b) {
 			b.add(o._1()).add(o._2()).add(o._3());
 		}
@@ -103,5 +102,6 @@ public class RelevantStateUnitTest {
 		assertTrue(rs.eval(_(10, true, 5L), _(10, true, 5L)));
 		assertTrue(rs.compareTo(_(10, true, 5L), _(10, true, 5L)) == 0);
 		assertEquals(rs.hashCode(_(10, true, 5L)), rs.hashCode(_(10, true, 5L)));
+		assertEquals("Triple(10,true,5)", rs.toString(_(10, true, 5L)));
 	}
 }
