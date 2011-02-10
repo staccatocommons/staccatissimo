@@ -34,34 +34,46 @@ Main Projects
 
  These are the projects currently in active development:
  
- * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs}staccato-commons-defs}}: the core Staccatisimo definitions, a minimal library of interfaces and annotations that are deliberately very abstract, with well defined but generic semantics, in order to augment code and documentation reuse. They are the glue of Staccato-Commons    
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions}staccato-commons-restrictions}}: 
+ a library of annotations that express restrictions and properties of code, in order to augment documentation reuse, maintainability
+ and consistency. Many of those annotations may be processed by to staccato-commons-restriction-instrument tool. 
+ 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs}staccato-commons-defs}}: 
+ the core Staccatisimo definitions, a minimal library of interfaces that are deliberately very abstract, with well 
+ defined but generic semantics, in order to augment code reuse. They are the glue of Staccato-Commons    
 
- * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslang}staccato-commons-lang}}: simple but essential abstractions for the rest of the projects, like Options, Predicates, Lifecycles and Tuples.  
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslang}staccato-commons-lang}}: simple 
+ but essential abstractions for the rest of the projects, like Options, Lifecycles and Tuples. It contains also abstract and/or 
+ concrete implementations of most of the interfaces in staccato-commons-defs, like NumberTypes, and facilities for implementing 
+ equals, hashcode, toString and compareTo in a consistent way, without performance impacts or boilerplate code.    
  
- * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheck}staccato-commons-check}}: a general purpose, abstract validation ecosystem, with concrete classes and annotations for checking preconditions and postconditions 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheck}staccato-commons-check}}:
+  a general purpose, abstract validation ecosystem, with concrete classes for checking preconditions and postconditions 
  
- * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscollections}staccato-commons-collections}}: dozens of class methods for iterables handling, in both a functional and a more imperative style, and Streams, the "super"-terable - rich, lazy, and generic enough to handle much more than just collections.
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators}staccato-commons-iterators}}: a library of generic, reusable
+  common iterators, and <<thriter>>s, advanced powerful iterator-like objects that permit lazy iterations impossible before them.      
+ 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscollections}staccato-commons-collections}}:
+  dozens of class methods for iterables handling, in both a functional and a more imperative style,
+  and Streams, the "super"-terable - rich, lazy, and generic enough to handle much more than just collections.
    
- * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsio}staccato-commons-io}}: integration between the Staccato libraries and java.io 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsio}staccato-commons-io}}:
+  integration between the Staccato libraries and java.io.  
  
- * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument}staccato-commons-instrument}}: an extensible, compile-time, annotation processing tool with class-instrumentation capabilities. 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument}staccato-commons-instrument}}: 
+ an extensible, compile-time, annotation processing tool with class-instrumentation capabilities. 
  
- * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrument}staccato-commons-check-instrument}} and 
- staccato-commons-check-instrument-maven-plugin 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument}staccato-commons-restrictions-instrument}} and 
+{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrumentmavenplugin}staccato-commons-restrictions-instrument-maven-plugin}} 
  
  * staccato-commons-testing
- 
+     
 Planned projects
 
  These are projects that are in planning stages and are likely to be publicly available in the near future:
- 
-  * staccato-commons-restrictions: a library of restriction annotations.  
-  
-  * staccato-commons-iterators: a library of generic iterators
-  
+   
   * staccato-commons-types: a library that provides implementations of many type-classes defined in commons-defs. 
   
-  * staccato-commons-restrictions-instrument: a tool for instrumenting the restrictions not covered by staccato-commons-check-instrument. 
   
   
   

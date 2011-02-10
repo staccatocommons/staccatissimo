@@ -1,40 +1,145 @@
 About Staccato-Commons-Check
  
- Staccato-Commons-Check is the validation and restrictions documentation library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. 
-It offers classes for performing flexible, generic preconditions and postconditions and domain-specific validations, and 
-annotations for documenting simple constraints.   
+ Staccato-Commons-Check is the validation library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. 
+It offers classes for performing flexible, generic preconditions and postconditions and domain-specific validations. 
 
- Please notice Staccato-Commons-Check is a validation API targeted for implementing defensive programming, like validation 
+ Please notice Staccato-Commons-Check is a validation API targeted for implementing fail-fast programming, like validation 
 classes you can find in {{{http://commons.apache.org/lang/}Apache Commons Lang}}
 or {{{http://code.google.com/p/guava-libraries/}Guava}}. It is by no means a conversion and validation 
 API like {{{http://commons.apache.org/validator/}Apache Commons Validator}}    
  
 Alpha state 
 
- Staccato-Commons-Check is currently in alpha state. Although most of previous features are implemented, tested and documented, 
+ Staccato-Commons-Check is currently in alpha state.
+  Although most of previous features are implemented, tested and documented, it should not be used in productive systems yet. 
  
 Getting started
  
- Staccato-Commons-Check exposes two APIs
-  
-  * Check. A validation API designed for being rich, easy to use, flexible, extensible, and general purpose. 
-  
-  * Check-Annotation. A annotations API for documenting simple constraints that extends the 
- {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/}Staccato-Commons-Defs}} restrictions API.
-  
-* Validation API 
+ Staccato-Commons-Check is a validation API designed for being rich, easy to use, flexible, extensible, and general purpose. Its core is
+ the <<<net.sf.staccatocommons.check.Check\<E\>>>> class. It implements more than 40 common checks with automatic
+error messages building, in a method-chaining fashion. 
 
- Its core is the <<<net.sf.staccatocommons.check.Check\<E\>>>> class. It implements more than 40 common checks with automatic
-error messages building, in a method-chaining fashion. For example, the following code will check that <<<bar != null && foo.compareTo(bar) <= 0 && baz.size() == 1 && baz.contains(foo)>>>, 
-throwing an exception and generating a proper message if any of the constraints is violated: 
+ Lets see how it works with an example:
+ suppose we are implementing a juice recipes system, that can produce juice given its ingredients. In particular, we are now implementing 
+a TropicalJuiceRecipe, based on bananas and pineapples. We are going to inject dependencies through constructor, so our recipe will look
+like the following:
 
-+--
-Check<... more about this parametrization later ...> check = ...obtain a reference to a check...
-check.isNotNull("bar", bar)
-     .isGreaterThan("foo", foo, bar)
-     .isSize("baz", baz, 1)
-     .contains("baz", baz, foo);
-+-- 
++---
+ class TropicalJuiceRecipe implements JuiceRecipe {
+
+    private final int suger;
+    private final OrangeJuice juice;
+    private final Collection<Banana> bananas;
+    private final Collection<Pineapple> pineapples;
+
+    /**
+     * 
+     * Creates a new {@link TropicalJuiceRecipe}
+     * 
+     * It takes orange juice, some sugar, some bananas and at least 2 pinaples.
+     * 
+     * Juice must not have expired and that it must not be too acid.
+     */
+    public TropicalJuiceRecipe(int sugar, OrangeJuice juice, Collection<Banana> bananas,
+        Collection<Pineapple> pineapples) {
+        this.suger = sugar;
+        this.juice = juice;
+        this.bananas = bananas;
+        this.pineapples = pineapples;
+
+    }
+
+    public Juice prepare() {
+        // Don't care....
+        return null;
+    }
+}
+
++----
+
+ As you see in the constructor Javadoc, our recipe has some constraints regarding its input ingredients, 
+ such restrictions are called preconditions. 
+ Our recipe will not work unless they are meet, so it is good practice to check them as soon as possible, and fail fast, if necessary. 
+ So just add the preconditions check, our constructor will look like the following:
+ 
++-----
+
+
+  /**
+     * 
+     * Creates a new {@link TropicalJuiceRecipe}
+     * 
+     * It takes orange juice, some sugar, some bananas and at least 2 pinaples.
+     * 
+     * Juice must not have expired and that it must not be too acid.
+     */
+    public TropicalJuiceRecipe(int sugar, OrangeJuice juice, Collection<Banana> bananas,
+        Collection<Pineapple> pineapples) {
+        if (juice == null)
+            throw new IllegalArgumentException("juice must not be null");
+
+        if (!juice.isNotTooAcid())
+            throw new IllegalArgumentException("juice.isNotTooAcide must not be true");
+
+        if (juice.getExpirationDate().compareTo(new Date()) >= 0)
+            throw new IllegalArgumentException("juice.expirationDate must be greater than today");
+
+        if (sugar <= 0)
+            throw new IllegalArgumentException("sugar must be be greather than zero");
+
+        if (bananas == null)
+            throw new IllegalArgumentException("bananas must not be null");
+
+        if (bananas.isEmpty())
+            throw new IllegalArgumentException("bananas must not be empty");
+
+        if (pineapples == null)
+            throw new IllegalArgumentException("pineapples must be null");
+
+        if (pineapples.size() < 2)
+            throw new IllegalArgumentException("pineapples must be of at least size 2");
+            
+        this.suger = sugar;
+        this.juice = juice;
+        this.bananas = bananas;
+        this.pineapples = pineapples;
+
+    }
++----- 
+ 
+  All such checks are necessary, but boilerplate, code. We are forced to manually write each condition, negating them,
+  generating a message, and throwing an exception. It works, but is not the Panacea.
+  
+  Here is where Staccato-Commons-Check comes to rescue:
+  
+  
++---
+    /**
+     * 
+     * Creates a new {@link TropicalJuiceRecipe}
+     * 
+     * It takes orange juice, some sugar, some bananas and at least 2 pinaples.
+     * 
+     * Juice must not have expired and that it must not be too acid.
+     */
+    public TropicalJuiceRecipe2(int sugar, OrangeJuice juice, Collection<Banana> bananas,
+        Collection<Pineapple> pineapples) {
+        Ensure
+            .that()
+            .isTrue("juice.notTooAcid", juice.isNotTooAcid())
+            .isGreaterThan("juice.expirationDate", juice.getExpirationDate(), new Date())
+            .isPositive("sugar", sugar)
+            .isNotEmpty("bananas", bananas)
+            .isMinSize("pineapples", pineapples, 2);
+        this.suger = sugar;
+        this.juice = juice;
+        this.bananas = bananas;
+        this.pineapples = pineapples;
+    }
++---         
+
+TODO.......
+
 
  All automatic check methods take at least two arguments: a mnemonic for the object - normally the variable 
  or attribute name - and the object to check. It is not necessary to pass any extra message, as all the invocation have enough information
@@ -81,25 +186,6 @@ It is used to perform domain specific validations. Instances of it can be create
     .that(!line.isBuys(), "The line %s must not be busy", line)
     .that(destination.isReachable(), "The destination %s is unreachable", destination); 
 +----   
-
-* Documentation API 
-
- The documentation API is under package <<<net.sf.staccatocommons.check.annotation>>>. It consists of
- simple {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs/net/sf/staccatocommons/defs/restriction/Restriction.html}Restriction}} 
- annotations, for signaling postconditions over method returns types, and preconditions over constructor and methods arguments. They include:
- 
- * MinSize, MaxSize and Size: constraints about sizes of collection-like elements 
-
- * Matches: constraints about regular expressions matching over Strings
- 
- * NotNull: constraint about nullability of objects
- 
- * NotZero, NotNegative, Positive: constraints about sign of numeric types
-
- []
- 
- Although those annotations have as primary objective to document such constraints, most of them may be processed in 
- a non intrusive ways through Staccato-Commons-Check-Instrument.
    
 What is next?
 
@@ -107,7 +193,7 @@ What is next?
  
  * Explore the rest of Staccato-Commons projects. They extensively use Staccato-Commons-Check
  
- * Have a look to the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrument/}Staccato-Commons-Check-Instrument}} API,
+ * Have a look to the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument/}Staccato-Commons-Restricions-Instrument}} API,
 which instrument check annotations, by inserting at compile time calls
 to the Validation API previously described.      
 

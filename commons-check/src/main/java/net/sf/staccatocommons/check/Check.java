@@ -481,6 +481,11 @@ public abstract class Check<ExceptionType extends Throwable> {
 			type.size(var));
 	}
 
+	public final Check<ExceptionType> isMinSize(String varName, Collection<?> var, int minSize)
+		throws ExceptionType {
+		return isMinSize(varName, var, minSize, SizeAwareTypes.COLLECTION);
+	}
+
 	/**
 	 * Checks that <code>var</code> is not null and its size greater than or
 	 * equals to the the given <code>minSize</code>
@@ -507,6 +512,11 @@ public abstract class Check<ExceptionType extends Throwable> {
 				"must be at least of size %s, but was %s",
 				minSize,
 				type.size(var));
+	}
+
+	public final Check<ExceptionType> isMaxSize(String varName, Collection<?> var, int minSize)
+		throws ExceptionType {
+		return isMaxSize(varName, var, minSize, SizeAwareTypes.COLLECTION);
 	}
 
 	/**
