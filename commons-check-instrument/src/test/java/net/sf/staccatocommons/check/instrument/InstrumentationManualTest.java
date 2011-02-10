@@ -18,8 +18,8 @@ import java.util.Arrays;
 import net.sf.staccatocommons.check.instrument.mock.Mock;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
 import net.sf.staccatocommons.io.Directory;
-import net.sf.staccatocommons.restrictions.processing.ForceChecks;
-import net.sf.staccatocommons.restrictions.processing.IgnoreChecks;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -47,7 +47,7 @@ public class InstrumentationManualTest {
 
 	/**
 	 * Test for {@link NotNullHandler} in methods arguments with
-	 * {@link ForceChecks}
+	 * {@link ForceRestrictions}
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testForceNonNullMethodArg_Null() throws Exception {
@@ -56,7 +56,7 @@ public class InstrumentationManualTest {
 
 	/**
 	 * Test for {@link NotNullHandler} in methods arguments with
-	 * {@link IgnoreChecks}
+	 * {@link IgnoreRestrictions}
 	 */
 	@Test
 	public void testIgnoreNonNullMethodArg() throws Exception {
@@ -94,13 +94,13 @@ public class InstrumentationManualTest {
 		new Mock(null, 5);
 	}
 
-	/** Test for {@link NotNullHandler} in constructors with {@link IgnoreChecks} */
+	/** Test for {@link NotNullHandler} in constructors with {@link IgnoreRestrictions} */
 	@Test
 	public void testIgnoreInit() throws Exception {
 		new Mock(null, 5L);
 	}
 
-	/** Test for {@link NotNullHandler} in constructors with {@link ForceChecks} */
+	/** Test for {@link NotNullHandler} in constructors with {@link ForceRestrictions} */
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonNullForceInit() throws Exception {
 		new Mock(null, "5");

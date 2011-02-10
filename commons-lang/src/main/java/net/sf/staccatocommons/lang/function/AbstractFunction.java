@@ -20,7 +20,7 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceChecks;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * 
@@ -33,7 +33,7 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
 	Function<A, B> {
 
 	@NonNull
-	@ForceChecks
+	@ForceRestrictions
 	public Thunk<B> of(@NonNull final Thunk<? extends A> thunk) {
 		return new Thunk<B>() {
 			public B value() {
@@ -43,7 +43,7 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
 	}
 
 	@NonNull
-	@ForceChecks
+	@ForceRestrictions
 	public <C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other) {
 		return new AbstractFunction<C, B>() {
 			public B apply(C arg) {
@@ -53,7 +53,7 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
 	}
 
 	@NonNull
-	@ForceChecks
+	@ForceRestrictions
 	public <Tp1, Tp2> Function2<Tp1, Tp2, B> of(
 		@NonNull final Applicable2<Tp1, Tp2, ? extends A> other) {
 		return new AbstractFunction2<Tp1, Tp2, B>() {
@@ -64,7 +64,7 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
 	}
 
 	@NonNull
-	@ForceChecks
+	@ForceRestrictions
 	public <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(
 		@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other) {
 		return new AbstractFunction3<Tp1, Tp2, Tp3, B>() {

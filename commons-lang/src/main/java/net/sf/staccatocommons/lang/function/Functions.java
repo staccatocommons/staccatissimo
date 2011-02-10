@@ -21,7 +21,7 @@ import net.sf.staccatocommons.lang.function.internal.ConstantFunction;
 import net.sf.staccatocommons.lang.function.internal.IdentityFunction;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceChecks;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * Class factory methods for some common {@link Function}s
@@ -67,7 +67,7 @@ public class Functions {
 	 *         <code>applicable</code> casted to {@link Function2}, otherwise
 	 */
 	@NonNull
-	@ForceChecks
+	@ForceRestrictions
 	public static <A, B, C> Function2<A, B, C> from(
 		@NonNull final Applicable2<? super A, ? super B, ? extends C> applicable) {
 		if (applicable instanceof Function2)

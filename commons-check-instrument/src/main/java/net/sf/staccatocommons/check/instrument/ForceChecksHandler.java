@@ -20,15 +20,15 @@ import net.sf.staccatocommons.instrument.handler.ClassAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.ConstructorAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.MethodAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.deactivator.AbstractActivationAnnotationHandler;
-import net.sf.staccatocommons.restrictions.processing.ForceChecks;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class ForceChecksHandler extends AbstractActivationAnnotationHandler<ForceChecks> implements
-	ClassAnnotationHandler<ForceChecks>, ConstructorAnnotationHandler<ForceChecks>,
-	MethodAnnotationHandler<ForceChecks> {
+public class ForceChecksHandler extends AbstractActivationAnnotationHandler<ForceRestrictions> implements
+	ClassAnnotationHandler<ForceRestrictions>, ConstructorAnnotationHandler<ForceRestrictions>,
+	MethodAnnotationHandler<ForceRestrictions> {
 
 	/**
 	 * Creates a new {@link ForceChecksHandler}
@@ -37,37 +37,37 @@ public class ForceChecksHandler extends AbstractActivationAnnotationHandler<Forc
 		super();
 	}
 
-	public Class<ForceChecks> getSupportedAnnotationType() {
-		return ForceChecks.class;
+	public Class<ForceRestrictions> getSupportedAnnotationType() {
+		return ForceRestrictions.class;
 	}
 
-	public void preProcessAnnotatedMethod(ForceChecks annotation, MethodAnnotationContext context) {
+	public void preProcessAnnotatedMethod(ForceRestrictions annotation, MethodAnnotationContext context) {
 		activateAll();
 	}
 
-	public void postProcessAnnotatedMethod(ForceChecks annotation, MethodAnnotationContext context) {
+	public void postProcessAnnotatedMethod(ForceRestrictions annotation, MethodAnnotationContext context) {
 		deactivateAll();
 	}
 
-	public void preProcessAnnotatedConstructor(ForceChecks annotation,
+	public void preProcessAnnotatedConstructor(ForceRestrictions annotation,
 		ConstructorAnnotationContext context) {
 		activateAll();
 	}
 
-	public void postProcessAnnotatedConstructor(ForceChecks annotation,
+	public void postProcessAnnotatedConstructor(ForceRestrictions annotation,
 		ConstructorAnnotationContext context) {
 		deactivateAll();
 	}
 
 	@Override
-	public void preProcessAnnotatedClass(ForceChecks annotation, ClassAnnotationContext context)
+	public void preProcessAnnotatedClass(ForceRestrictions annotation, ClassAnnotationContext context)
 		throws CannotCompileException {
 		activateAll();
 
 	}
 
 	@Override
-	public void postProcessAnnotatedClass(ForceChecks annotation, ClassAnnotationContext context)
+	public void postProcessAnnotatedClass(ForceRestrictions annotation, ClassAnnotationContext context)
 		throws CannotCompileException {
 		deactivateAll();
 	}

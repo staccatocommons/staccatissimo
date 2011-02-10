@@ -62,7 +62,7 @@ import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
-import net.sf.staccatocommons.restrictions.processing.ForceChecks;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -290,7 +290,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	@ForceChecks
+	@ForceRestrictions
 	public String joinStrings(@NonNull String separator) {
 		return StringUtils.join(iterator(), separator);
 	}
@@ -464,7 +464,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return first();
 	}
 
-	@ForceChecks
+	@ForceRestrictions
 	public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable,
 		@NonNull final Function2<A, B, C> function) {
 		return new ZipStream<C, A, B>(this, iterable, function);

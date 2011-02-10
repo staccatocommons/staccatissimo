@@ -18,7 +18,7 @@ import net.sf.staccatocommons.lang.predicate.internal.CompareTest;
 import net.sf.staccatocommons.lang.predicate.internal.EqualTest;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceChecks;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * Factory class methods for creating common, simple {@link Evaluable2} that
@@ -84,7 +84,7 @@ public class Equiv {
 	 * @return a new {@link Evaluable2}
 	 */
 	@NonNull
-	@ForceChecks
+	@ForceRestrictions
 	public static <A, B extends Comparable<B>> Evaluable2<A, A> on(
 		@NonNull final Applicable<A, B> function) {
 		return new Evaluable2<A, A>() {

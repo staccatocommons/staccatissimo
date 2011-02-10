@@ -23,7 +23,7 @@ import net.sf.staccatocommons.lang.predicate.internal.GreaterThan;
 import net.sf.staccatocommons.lang.predicate.internal.LessThan;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceChecks;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * Class methods that implement comparisons for {@link Comparable}s, like
@@ -175,7 +175,7 @@ public class Compare {
 	 * @return c1 if it is lower than or equal to c2, c2 otherwise.
 	 */
 	@NonNull
-	@ForceChecks
+	@ForceRestrictions
 	public static <T extends Comparable<T>> T min(@NonNull T c1, @NonNull T c2) {
 		return min(c1, c2, Compare.<T> natural());
 	}
@@ -187,7 +187,7 @@ public class Compare {
 	 * @return c1 if it is greater than or equal to c2, c2 otherwise.
 	 */
 	@NonNull
-	@ForceChecks
+	@ForceRestrictions
 	public static <T extends Comparable<T>> T max(@NonNull T c1, @NonNull T c2) {
 		return max(c1, c2, Compare.<T> natural());
 	}
@@ -237,7 +237,7 @@ public class Compare {
 	 * @return <code>comparator.compare(c1, c2) >= 0 ? c1 : c2</code>
 	 */
 	@NonNull
-	@ForceChecks
+	@ForceRestrictions
 	public static <T> T max(@NonNull T c1, @NonNull T c2, @NonNull Comparator<T> comparator) {
 		return comparator.compare(c1, c2) >= 0 ? c1 : c2;
 	}
@@ -253,7 +253,7 @@ public class Compare {
 	 * @return <code> comparator.compare(c1, c2) <= 0 ? c1 : c2</code>
 	 */
 	@NonNull
-	@ForceChecks
+	@ForceRestrictions
 	public static <T> T min(@NonNull T c1, @NonNull T c2, Comparator<T> comparator) {
 		return comparator.compare(c1, c2) <= 0 ? c1 : c2;
 	}
@@ -268,7 +268,7 @@ public class Compare {
 	 * @return a new {@link Comparator}
 	 */
 	@NonNull
-	@ForceChecks
+	@ForceRestrictions
 	public static <A, B extends Comparable<B>> Comparator<A> on(
 		@NonNull final Applicable<A, B> function) {
 		return new Comparator<A>() {

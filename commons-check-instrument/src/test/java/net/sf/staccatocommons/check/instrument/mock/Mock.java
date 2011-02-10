@@ -12,8 +12,8 @@ import net.sf.staccatocommons.restrictions.check.NotNegative;
 import net.sf.staccatocommons.restrictions.check.NotZero;
 import net.sf.staccatocommons.restrictions.check.Positive;
 import net.sf.staccatocommons.restrictions.check.Size;
-import net.sf.staccatocommons.restrictions.processing.ForceChecks;
-import net.sf.staccatocommons.restrictions.processing.IgnoreChecks;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 /**
  * 
@@ -28,11 +28,11 @@ public class Mock {
 	public Mock(@NonNull Object argument, @NonNull Integer argument2) {}
 
 	/***/
-	@IgnoreChecks
+	@IgnoreRestrictions
 	public Mock(@NonNull Object argument, @NonNull Long argument2) {}
 
 	/***/
-	@ForceChecks
+	@ForceRestrictions
 	public Mock(@NonNull Object argument, @NonNull String argument2) {}
 
 	/***/
@@ -42,11 +42,11 @@ public class Mock {
 	}
 
 	/***/
-	@ForceChecks
+	@ForceRestrictions
 	public void forceChecksNonNullMethodArgument(@NonNull Object argument) {}
 
 	/***/
-	@IgnoreChecks
+	@IgnoreRestrictions
 	public void ignoreChecksNonNullMethodArgument(@NonNull Object argument) {}
 
 	/***/
