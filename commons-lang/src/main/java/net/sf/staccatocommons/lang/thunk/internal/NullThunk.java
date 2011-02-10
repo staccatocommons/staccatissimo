@@ -25,9 +25,6 @@ import net.sf.staccatocommons.defs.restriction.Constant;
 public class NullThunk<T> implements Thunk<T>, Serializable {
 
 	private static final long serialVersionUID = 5879607480007179549L;
-	private static final NullThunk instance = new NullThunk();
-
-	private NullThunk() {}
 
 	@Override
 	public T value() {
@@ -35,10 +32,10 @@ public class NullThunk<T> implements Thunk<T>, Serializable {
 	}
 
 	/**
-	 * @return the instance
+	 * @return an instance
 	 */
 	@Constant
-	public static <T> Thunk<T> getInstance() {
-		return instance;
+	public static <T> Thunk<T> null_() {
+		return new NullThunk();
 	}
 }

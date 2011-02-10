@@ -2,9 +2,16 @@ package net.sf.staccatocommons.lang.function.internal;
 
 import java.io.Serializable;
 
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
+import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.function.Functions;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 
 /**
  * @author flbulgarelli
@@ -15,11 +22,39 @@ public final class IdentityFunction<A> extends AbstractFunction<A, A> implements
 
 	private static final long serialVersionUID = -9042770205177366369L;
 
-	private static final Function INSTANCE = new IdentityFunction();
-
 	@Override
 	public A apply(A argument) {
 		return argument;
+	}
+
+	@Override
+	@NonNull
+	public Function<A, A> nullSafe() {
+		return this;
+	}
+
+	@NonNull
+	@Override
+	public Thunk<A> delayed(A arg) {
+		return Thunks.constant(arg);
+	}
+
+	@NonNull
+	@Override
+	public Thunk<A> of(Thunk<? extends A> thunk) {
+		return (Thunk<A>) thunk;
+	}
+
+	@NonNull
+	@Override
+	public <Tp1, Tp2> Function2<Tp1, Tp2, A> of(Applicable2<Tp1, Tp2, ? extends A> other) {
+		return Functions.from(other);
+	}
+
+	@NonNull
+	@Override
+	public <C> Function<C, A> of(Applicable<? super C, ? extends A> other) {
+		return Functions.from(other);
 	}
 
 	/**
@@ -27,11 +62,8 @@ public final class IdentityFunction<A> extends AbstractFunction<A, A> implements
 	 * @return a constant instance
 	 */
 	@Constant
-	public static <I> Function<I, I> getInstance() {
-		return INSTANCE;
+	public static <I> Function<I, I> identity() {
+		return new IdentityFunction();
 	}
 
-	public Function<A, A> nullSafe() {
-		return this;
-	}
 }

@@ -86,7 +86,6 @@ public class Strings {
 	 */
 	@NonNull
 	@Constant
-	/* FIXME */
 	public static <A> Function<A, String> toString_() {
 		return new AbstractFunction<A, String>() {
 			public String apply(A arg) {

@@ -59,7 +59,7 @@ public class Thunks {
 	@NonNull
 	@Constant
 	public static <A> Thunk<A> null_() {
-		return NullThunk.getInstance();
+		return NullThunk.null_();
 	}
 
 	/**

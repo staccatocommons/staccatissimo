@@ -6,20 +6,20 @@ import net.sf.staccatocommons.lang.predicate.Predicate;
  * @author flbulgarelli
  */
 public final class NullPredicates {
-	private static Predicate null_ = new Null(), notNull = new NotNull();
+	private static final Predicate NULL = new Null(), NOT_NULL = new NotNull();
 
 	/**
 	 * @return the notNull
 	 */
 	public static Predicate notNull() {
-		return notNull;
+		return NOT_NULL;
 	}
 
 	/**
 	 * @return the null_
 	 */
 	public static Predicate null_() {
-		return null_;
+		return NULL;
 	}
 
 	private static class NotNull<T> extends NonAnnonymousPredicate<T> {
@@ -33,7 +33,7 @@ public final class NullPredicates {
 		}
 
 		public Predicate<T> not() {
-			return null_;
+			return NULL;
 		}
 	}
 
@@ -48,7 +48,7 @@ public final class NullPredicates {
 		}
 
 		public Predicate<T> not() {
-			return notNull;
+			return NOT_NULL;
 		}
 
 	}

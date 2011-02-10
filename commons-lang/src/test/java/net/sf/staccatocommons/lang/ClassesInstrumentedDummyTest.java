@@ -12,6 +12,10 @@
  */
 package net.sf.staccatocommons.lang;
 
+import static org.junit.Assert.*;
+import net.sf.staccatocommons.defs.restriction.Constant;
+import net.sf.staccatocommons.lang.predicate.Predicates;
+
 import org.junit.Test;
 
 /**
@@ -38,5 +42,11 @@ public class ClassesInstrumentedDummyTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testMethodsInstrumented() {
 		Compare.min(null, 5);
+	}
+
+	/** Verifies that {@link Constant} was instrumented */
+	@Test
+	public void testConstInstrumented() throws Exception {
+		assertSame(Predicates.true_(), Predicates.true_());
 	}
 }

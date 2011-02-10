@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.lang.function;
 
+import net.sf.staccatocommons.check.annotation.ForceChecks;
 import net.sf.staccatocommons.check.annotation.NonNull;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
@@ -66,6 +67,7 @@ public class Functions {
 	 *         <code>applicable</code> casted to {@link Function2}, otherwise
 	 */
 	@NonNull
+	@ForceChecks
 	public static <A, B, C> Function2<A, B, C> from(
 		@NonNull final Applicable2<? super A, ? super B, ? extends C> applicable) {
 		if (applicable instanceof Function2)
@@ -87,7 +89,7 @@ public class Functions {
 	@NonNull
 	@Constant
 	public static <A> Function<A, A> identity() {
-		return IdentityFunction.getInstance();
+		return IdentityFunction.identity();
 	}
 
 	/**

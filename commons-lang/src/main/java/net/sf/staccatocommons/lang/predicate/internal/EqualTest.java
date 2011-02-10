@@ -13,8 +13,6 @@ import org.apache.commons.lang.ObjectUtils;
  */
 public final class EqualTest<A> implements Evaluable2<A, A> {
 
-	private static final EqualTest INSTANCE = new EqualTest();
-
 	public boolean eval(A arg0, A arg1) {
 		return ObjectUtils.equals(arg0, arg1);
 	}
@@ -25,6 +23,6 @@ public final class EqualTest<A> implements Evaluable2<A, A> {
 	@NonNull
 	@Constant
 	public static <A> Evaluable2<A, A> equalTest() {
-		return INSTANCE;
+		return new EqualTest();
 	}
 }

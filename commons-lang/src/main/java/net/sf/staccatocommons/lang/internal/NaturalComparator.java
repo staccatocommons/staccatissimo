@@ -23,8 +23,6 @@ import net.sf.staccatocommons.defs.restriction.Constant;
  */
 public class NaturalComparator<A extends Comparable<A>> implements Comparator<A> {
 
-	private static NaturalComparator INSTANCE = new NaturalComparator();
-
 	public int compare(A o1, A o2) {
 		return o1.compareTo(o2);
 	}
@@ -38,7 +36,7 @@ public class NaturalComparator<A extends Comparable<A>> implements Comparator<A>
 	@NonNull
 	@Constant
 	public static <A extends Comparable<A>> Comparator<A> natural() {
-		return INSTANCE;
+		return new NaturalComparator();
 	}
 
 }

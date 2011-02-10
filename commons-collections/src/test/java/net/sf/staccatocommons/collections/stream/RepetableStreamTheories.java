@@ -49,7 +49,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 
 	/** thunks data points */
 	@DataPoints
-	public static Thunk<Integer>[] thunks = new Thunk[] { NullThunk.getInstance(), //
+	public static Thunk<Integer>[] thunks = new Thunk[] { NullThunk.null_(), //
 			Thunks.constant(90) //
 	};
 

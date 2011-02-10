@@ -2,8 +2,11 @@ package net.sf.staccatocommons.lang.function.internal;
 
 import java.io.Serializable;
 
+import net.sf.staccatocommons.check.annotation.NonNull;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 
 /**
  * @author flbulgarelli
@@ -29,8 +32,16 @@ public final class ConstantFunction<I, O> extends AbstractFunction<I, O> impleme
 		return value;
 	}
 
+	@Override
+	@NonNull
 	public Function<I, O> nullSafe() {
 		return this;
+	}
+
+	@NonNull
+	@Override
+	public Thunk<O> delayed(I arg) {
+		return Thunks.constant(value);
 	}
 
 }

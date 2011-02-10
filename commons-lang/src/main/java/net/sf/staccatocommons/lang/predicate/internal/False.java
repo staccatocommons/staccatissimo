@@ -2,6 +2,7 @@ package net.sf.staccatocommons.lang.predicate.internal;
 
 import static net.sf.staccatocommons.lang.predicate.Predicates.*;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.restriction.Constant;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 
 /**
@@ -11,7 +12,6 @@ import net.sf.staccatocommons.lang.predicate.Predicate;
  */
 public final class False<T> extends NonAnnonymousPredicate<T> {
 	private static final long serialVersionUID = 7804525181528599615L;
-	private static final Predicate INSTANCE = new False();
 
 	public boolean eval(T argument) {
 		return false;
@@ -20,8 +20,9 @@ public final class False<T> extends NonAnnonymousPredicate<T> {
 	/**
 	 * @return the instance
 	 */
+	@Constant
 	public static Predicate getInstance() {
-		return INSTANCE;
+		return new False();
 	}
 
 	@Override
