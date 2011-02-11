@@ -35,8 +35,10 @@ import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ConcatStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropWhileStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.DynamicIterator;
 import net.sf.staccatocommons.collections.stream.impl.internal.FilterStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FlatMapStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.GroupByStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.MapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeWhileStream;
@@ -50,8 +52,6 @@ import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
-import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.Compare;
@@ -370,7 +370,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	public <B> Stream<B> then(final DeconsApplicable<A, B> function) {
-		class DeconsThenStream extends AbstractStream<B> {
+		return new AbstractStream<B>() {
 			public Thriterator<B> iterator() {
 				return new DynamicIterator<B>() {
 					protected Thriterator<B> createIter() {
@@ -381,12 +381,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
 					}
 				};
 			}
-		}
-		return new DeconsThenStream();
+		};
 	}
 
 	public <B> Stream<B> delayedThen(final DeconsApplicable<A, B> function) {
-		class DeconsDelayedThenStream extends AbstractStream<B> {
+		return new AbstractStream<B>() {
 			public Thriterator<B> iterator() {
 				return new DynamicIterator<B>() {
 					protected Thriterator<B> createIter() {
@@ -397,44 +396,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 					}
 				};
 			}
-		}
-		return new DeconsDelayedThenStream();
-	}
-
-	private static abstract class DynamicIterator<A> extends AbstractThriterator<A> {
-
-		private Thriterator<A> iter;
-		private boolean evaluated;
-
-		public boolean hasNext() {
-			checkDynamic();
-			return iter.hasNext();
-		}
-
-		public A next() {
-			checkDynamic();
-			return iter.next();
-		}
-
-		public void advanceNext() throws NoSuchElementException {
-			checkDynamic();
-			iter.advanceNext();
-		}
-
-		public A current() throws NoSuchElementException {
-			checkDynamic();
-			return iter.current();
-		}
-
-		private void checkDynamic() {
-			if (!evaluated) {
-				iter = createIter();
-				evaluated = true;
-			}
-		}
-
-		protected abstract Thriterator<A> createIter();
-
+		};
 	}
 
 	@Override
@@ -564,40 +526,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	 *         its stream elements are not.
 	 */
 	public Stream<Stream<A>> groupBy(final Evaluable2<A, A> pred) {
-		return new AbstractStream<Stream<A>>() {
-			public Thriterator<Stream<A>> iterator() {
-				final Iterator<A> iter = AbstractStream.this.iterator();
-				return new NextThriterator<Stream<A>>() {
-
-					private List<A> list = new LinkedList<A>();
-					private A next;
-					private boolean remaining;
-
-					public boolean hasNext() {
-						return remaining || iter.hasNext();
-					}
-
-					public Stream<A> next() {
-						if (!hasNext())
-							throw new NoSuchElementException();
-						if (!remaining)
-							next = iter.next();
-						list.add(next);
-						boolean eval = true;
-						while (iter.hasNext() && (eval = pred.eval(next, (next = iter.next()))))
-							list.add(next);
-						remaining = !eval;
-						Stream<A> ret = new ListStream<A>(list) {
-							public List<A> toList() {
-								return Collections.unmodifiableList(getList());
-							}
-						};
-						list = new LinkedList<A>();
-						return ret;
-					}
-				};
-			}
-		};
+		return new GroupByStream<A>(this, pred);
 	}
 
 }
