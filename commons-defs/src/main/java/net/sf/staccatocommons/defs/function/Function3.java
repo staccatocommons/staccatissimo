@@ -64,7 +64,7 @@ public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>,
 	 * Answers a new function that returns null if any of its arguments is null,
 	 * or the result of applying this function, otherwise.
 	 * 
-	 * @return a new null-safe {@link AbstractFunction3}
+	 * @return a new null-safe {@link Function3}
 	 */
 	@NonNull
 	Function3<A, B, C, D> nullSafe();

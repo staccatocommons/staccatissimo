@@ -17,8 +17,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.sf.staccatocommons.restrictions.Restriction;
-
 /**
  * {@link IgnoreRestrictions} is a directive for automated annotation processors,
  * indicating that {@link Restriction}s in the annotated element and its

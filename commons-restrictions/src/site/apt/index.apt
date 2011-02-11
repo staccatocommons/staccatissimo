@@ -1,0 +1,53 @@
+About Staccato-Commons-Restrictions
+ 
+ Staccato-Commons-Restrictions is the core annotations library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. 
+It contains annotations that express restrictions in the form of preconditions, postconditions an invariants over objects and messages, 
+focused on documentation reuse. 
+
+Alpha state 
+
+ Staccato-Commons-Restrictions is currently in alpha state.
+  Although most of previous features are implemented, tested and documented, it should not be used in productive systems yet. 
+ 
+Getting started
+
+  The Restrictions API is composed by a bunch of source and class level annotations that express constraints over code elements, 
+ and the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs/net/sf/staccatocommons/defs/restriction/Restriction.html}Restriction}} 
+ meta-annotation, that express the semantics of such annotations. 
+ 
+  The API is primary targeted for documenting such constraints, in order to reuse documentation of properties of code.
+ However, many of them may be processed in a non intrusive ways through Staccato-Commons-Restrictions-Instrument, a tool capable 
+ of enforcing them.   
+
+  Restrictions delivered with this library fall in the following categories: 
+  
+  * Restriction meta-annotation: express the general contract of a restriction
+  
+  * Check Restrictions: for signaling simple postconditions over method returns types, 
+  and preconditions over constructor and methods arguments, including:
+ 
+     * MinSize, MaxSize and Size: constraints about sizes of collection-like elements 
+    
+     * Matches: constraints about regular expressions matching over Strings
+     
+     * NotNull: constraint about nullability of objects
+     
+     * NotZero, NotNegative, Positive: constraints about sign of numeric types
+     
+     []
+     
+  * Effect Restrictions
+   
+  * Value Restrictions
+   
+  * Processing directives for tools that interpret restrictions.    
+
+ []
+
+ In addition to that, the project <encapsulates> imposes consistent use of words of must, must not, etc. with {{{http://www.ietf.org/rfc/rfc2119.txt}RFC2119}} across Javadoc. 
+ This means that whenever such words are used within Staccato-Commons-Restrictions and the rest of the projects, they
+ must be interpreted following such guidelines.  
+   
+Examples
+
+  Coming soon...

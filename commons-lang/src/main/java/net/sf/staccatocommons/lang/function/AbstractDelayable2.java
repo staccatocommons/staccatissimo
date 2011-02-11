@@ -34,12 +34,12 @@ public abstract class AbstractDelayable2<A, B, C> implements Applicable2<A, B, C
 	}
 
 	/**
-	 * Delays execution of this block by returning a void thunk that will
-	 * evaluate <code>exec(arg1, arg2)</code> each time its value is required
+	 * Delays execution of this block by returning a void thunk that will evaluate
+	 * <code>exec(arg1, arg2)</code> each time its value is required
 	 * 
 	 * @param arg1
 	 * @param arg2
-	 * @return a new void {@link Provider}
+	 * @return a new void {@link Thunk}
 	 */
 	public Thunk<C> delayed(final A arg1, final B arg2) {
 		return new Thunk<C>() {

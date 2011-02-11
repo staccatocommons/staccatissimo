@@ -12,17 +12,11 @@
  */
 package net.sf.staccatocommons.defs;
 
-import java.io.Serializable;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import net.sf.staccatocommons.restrictions.Restriction;
-import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
-import net.sf.staccatocommons.restrictions.effect.Transparent;
-import net.sf.staccatocommons.restrictions.value.Immutable;
 
 /**
  * {@link Applicable} is an annotation for abstract types that have

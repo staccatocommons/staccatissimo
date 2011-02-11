@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.instrument.config;
 
-import net.sf.staccatocommons.instrument.InstrumentationRunner;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**

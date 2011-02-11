@@ -43,7 +43,7 @@ public interface Delayable3<A, B, C, D> {
 	 * @param arg1
 	 * @param arg2
 	 * @param arg3
-	 * @return a new {@link Thunk}. Non null.
+	 * @return a new {@link Thunk}.
 	 */
 	@NonNull
 	Thunk<D> delayed(final A arg1, final B arg2, final C arg3);

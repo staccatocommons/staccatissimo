@@ -70,7 +70,7 @@ public class Thunks {
 	@NonNull
 	@Constant
 	public static Thunk<Date> currentDate() {
-		return DateThunk.PROVIDER;
+		return DateThunk.INSTANCE;
 	}
 
 	/**

@@ -51,11 +51,11 @@ Main Projects
   a general purpose, abstract validation ecosystem, with concrete classes for checking preconditions and postconditions 
  
  * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators}staccato-commons-iterators}}: a library of generic, reusable
-  common iterators, and <<thriter>>s, advanced powerful iterator-like objects that permit lazy iterations impossible before them.      
+  common iterators, and thriters, advanced powerful iterator-like objects that permit lazy iterations impossible before them.      
  
  * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscollections}staccato-commons-collections}}:
   dozens of class methods for iterables handling, in both a functional and a more imperative style,
-  and Streams, the "super"-terable - rich, lazy, and generic enough to handle much more than just collections.
+  and Streams, the "super"-iterable - rich, lazy, and generic enough to handle much more than just collections.
    
  * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsio}staccato-commons-io}}:
   integration between the Staccato libraries and java.io.  

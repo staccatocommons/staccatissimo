@@ -28,9 +28,9 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  *          argument type
- * @param <R>
+ * @param <B>
  *          type of returned thunk
  * @see Applicative Recomendations for implementing
  * @see Thunk

@@ -11,7 +11,7 @@ import net.sf.staccatocommons.defs.Thunk;
 public class DateThunk implements Thunk<Date> {
 
 	/** An instance */
-	public static final DateThunk PROVIDER = new DateThunk();
+	public static final DateThunk INSTANCE = new DateThunk();
 
 	public Date value() {
 		return new Date();

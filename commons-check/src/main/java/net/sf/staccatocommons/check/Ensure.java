@@ -29,15 +29,16 @@ public final class Ensure {
 		}
 	};
 
-	private Ensure() {}
+	private Ensure() {
+	}
 
 	/**
 	 * Shortcut to <code>Ensure.that().fail(varName,var,message,args)</code>
 	 * 
 	 * @see Check#fail(String, Object, String, Object...)
 	 */
-	public static <A> A fail(String varName, Object var, String message, Object... args) {
-		return that().fail(varName, var, message, args);
+	public static void fail(String varName, Object var, String message, Object... args) {
+		that().fail(varName, var, message, args);
 	}
 
 	/**
@@ -46,9 +47,9 @@ public final class Ensure {
 	 * 
 	 * @see Check#that(String, Object, boolean, String, Object...)
 	 */
-	public static Check<IllegalArgumentException> that(String varName, Object var, boolean condition,
-		String message, Object... messageArgs) {
-		return that().that(varName, var, condition, message, messageArgs);
+	public static void that(String varName, Object var, boolean condition, String message,
+		Object... messageArgs) {
+		that().that(varName, var, condition, message, messageArgs);
 	}
 
 	/**
@@ -56,9 +57,8 @@ public final class Ensure {
 	 * 
 	 * @see Check#that(boolean, String, Object...)
 	 */
-	public static Check<IllegalArgumentException> that(boolean condition, String message,
-		Object... messageArgs) {
-		return that().that(condition, message, messageArgs);
+	public static void that(boolean condition, String message, Object... messageArgs) {
+		that().that(condition, message, messageArgs);
 	}
 
 	/**
@@ -66,8 +66,8 @@ public final class Ensure {
 	 * 
 	 * @see Check#isNotNull(String, Object)
 	 */
-	public static Check<IllegalArgumentException> isNotNull(String variableName, Object variable) {
-		return that().isNotNull(variableName, variable);
+	public static void isNotNull(String variableName, Object variable) {
+		that().isNotNull(variableName, variable);
 	}
 
 	/**
@@ -75,8 +75,8 @@ public final class Ensure {
 	 * 
 	 * @see Check#isNull(String, Object)
 	 */
-	public static Check<IllegalArgumentException> isNull(String variableName, Object variable) {
-		return that().isNull(variableName, variable);
+	public static void isNull(String variableName, Object variable) {
+		that().isNull(variableName, variable);
 	}
 
 	/**

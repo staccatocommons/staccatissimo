@@ -1,12 +1,25 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>commons-parent-pom</artifactId>
-    <groupId>net.sf.staccatocommons</groupId>
-    <version>1.0-alpha-4-SNAPSHOT</version>
-  </parent>
-  <groupId>net.sf.staccatocommons</groupId>
-  <artifactId>commons-restrictions</artifactId>
-  <version>1.0-alpha-4-SNAPSHOT</version>
-  <name>Staccato-Commons-Restrictions</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>commons-parent-pom</artifactId>
+		<groupId>net.sf.staccatocommons</groupId>
+		<version>1.0-alpha-4-SNAPSHOT</version>
+	</parent>
+	<groupId>net.sf.staccatocommons</groupId>
+	<artifactId>commons-restrictions</artifactId>
+	<version>1.0-alpha-4-SNAPSHOT</version>
+	<name>Staccato-Commons-Restrictions</name>
+	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions</url>
+	<distributionManagement>
+		<site>
+			<id> ${distribution.site.id}</id>
+			<url>${distribution.site.url}/staccatissimo/commonsrestrictions</url>
+		</site>
+	</distributionManagement>
+	<scm>
+		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions</developerConnection>
+		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions</connection>
+		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-restrictions/</url>
+	</scm>
 </project>

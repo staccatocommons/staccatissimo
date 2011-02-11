@@ -42,7 +42,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
 	 * <code>this.apply(thunk.value())</code>
 	 * 
 	 * @param thunk
-	 * @return a new {@link Provider}, <code>this</code> composed with
+	 * @return a new {@link Thunk}, <code>this</code> composed with
 	 *         <code>thunk</code>
 	 */
 	@NonNull

@@ -19,7 +19,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import net.sf.staccatocommons.restrictions.Restriction;
-import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 /**
  * Side effect free is a {@link Restriction} that applies to methods that have
