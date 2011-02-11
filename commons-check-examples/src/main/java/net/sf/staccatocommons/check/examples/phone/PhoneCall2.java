@@ -28,7 +28,7 @@ public class PhoneCall2 {
 	 * PhoneLine
 	 */
 	public PhoneCall2(PhoneLine line, CallDestination destination) {
-		Ensure
+		Ensure.that()//
 			.isNotNull("line", line)
 			.isNotNull("destination", destination)
 			.contains("line.allowedDestinations", line.getAllowedDestinations(), destination);

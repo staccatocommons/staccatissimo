@@ -32,7 +32,7 @@ public class PhoneCall3 {
 	 * PhoneLine
 	 */
 	public PhoneCall3(PhoneLine line, CallDestination destination) {
-		Ensure
+		Ensure.that()//
 			.isNotNull("line", line)
 			.isNotNull("destination", destination)
 			.contains("line.allowedDestinations", line.getAllowedDestinations(), destination);
