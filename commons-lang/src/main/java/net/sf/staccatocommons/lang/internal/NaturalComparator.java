@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.lang.internal;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import net.sf.staccatocommons.restrictions.Constant;
@@ -21,7 +22,9 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public class NaturalComparator<A extends Comparable<A>> implements Comparator<A> {
+public class NaturalComparator<A extends Comparable<A>> implements Comparator<A>, Serializable {
+
+	private static final long serialVersionUID = 2687644878633769309L;
 
 	public int compare(A o1, A o2) {
 		return o1.compareTo(o2);
