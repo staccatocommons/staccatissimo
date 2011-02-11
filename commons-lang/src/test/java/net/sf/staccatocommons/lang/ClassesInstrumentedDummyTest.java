@@ -15,7 +15,6 @@ package net.sf.staccatocommons.lang;
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.predicate.Predicates;
-import net.sf.staccatocommons.restrictions.Constant;
 
 import org.junit.Test;
 

@@ -18,7 +18,6 @@ import java.io.Reader;
 import java.io.Writer;
 
 import net.sf.staccatocommons.io.serialization.CharSerializationManager;
-import net.sf.staccatocommons.lang.lifecycle.Lifecycle;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 public abstract class CharSerializationLifecycle<TargetType extends Closeable, ReturnType> extends

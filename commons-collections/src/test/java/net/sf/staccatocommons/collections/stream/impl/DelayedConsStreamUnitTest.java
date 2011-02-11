@@ -18,7 +18,6 @@ import java.util.Collections;
 import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.collections.stream.RepetableStreamTheories;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedConsStream;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 
 import org.junit.Before;

@@ -27,9 +27,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
-import net.sf.staccatocommons.defs.Applicable2;
-import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.AbstractFunction;

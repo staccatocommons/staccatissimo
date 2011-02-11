@@ -18,7 +18,6 @@ import static org.junit.Assert.*;
 import java.util.Date;
 
 import net.sf.staccatocommons.lang.tuple.Triple;
-import net.sf.staccatocommons.lang.value.RelevantState.StateCollector;
 
 import org.junit.Test;
 

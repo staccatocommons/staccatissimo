@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 

@@ -19,7 +19,6 @@ import java.io.OutputStream;
 
 import net.sf.staccatocommons.io.serialization.SerializationManager;
 import net.sf.staccatocommons.lang.lifecycle.CloseableLifecycle;
-import net.sf.staccatocommons.lang.lifecycle.Lifecycle;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 public abstract class SerializationLifecycle<TargetType extends Closeable, ReturnType> extends

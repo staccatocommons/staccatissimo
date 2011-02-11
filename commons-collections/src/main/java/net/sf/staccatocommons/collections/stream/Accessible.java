@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import java.util.NoSuchElementException;
 
 /**
  * {@link Stream} interface for accessing elements in an ordered manner.

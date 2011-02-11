@@ -16,7 +16,6 @@ import static net.sf.staccatocommons.collections.iterable.Iterables.*;
 
 import java.util.Map;
 
-import net.sf.staccatocommons.lang.None;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 

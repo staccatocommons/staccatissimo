@@ -29,7 +29,6 @@ import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.restrictions.ConditionallySerializable;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
-import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 /**
  * A {@link Sequence} is an {@link Iterable} object whose {@link Iterator},

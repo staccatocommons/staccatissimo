@@ -20,8 +20,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
-import net.sf.staccatocommons.defs.Applicable;
-
 import org.junit.Test;
 
 /**

@@ -18,8 +18,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.sf.staccatocommons.collections.stream.Stream;
-
 /**
  * {@link Repeatable} annotates methods that return {@link Stream}s that grant
  * to have a repeatable iteration order - that is, subsequent acess the the same

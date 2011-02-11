@@ -16,8 +16,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import net.sf.staccatocommons.restrictions.value.Value;
-
 import org.apache.commons.lang.SerializationException;
 
 /**

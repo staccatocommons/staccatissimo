@@ -18,7 +18,6 @@ import static org.junit.Assert.*;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 

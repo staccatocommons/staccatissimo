@@ -15,7 +15,6 @@ package net.sf.staccatocommons.lang.callable;
 import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.callable.internal.ThunkCallable;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 

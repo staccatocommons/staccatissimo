@@ -14,7 +14,6 @@
 package net.sf.staccatocommons.lang;
 
 import java.io.Serializable;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.ContainsAware;

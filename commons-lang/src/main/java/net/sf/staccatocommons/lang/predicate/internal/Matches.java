@@ -14,7 +14,6 @@ package net.sf.staccatocommons.lang.predicate.internal;
 
 import java.util.regex.Pattern;
 
-import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**

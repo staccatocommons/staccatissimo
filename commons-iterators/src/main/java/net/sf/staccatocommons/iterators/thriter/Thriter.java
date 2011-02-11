@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.iterators.thriter;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Thunk;

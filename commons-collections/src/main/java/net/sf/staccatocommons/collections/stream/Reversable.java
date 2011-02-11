@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**

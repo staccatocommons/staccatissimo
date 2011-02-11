@@ -16,7 +16,6 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
-import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Cons;
 
 import org.junit.Test;
