@@ -12,6 +12,8 @@
  */
 package net.sf.staccatocommons.defs.type;
 
+import net.sf.staccatocommons.defs.ContainsAware;
+import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**

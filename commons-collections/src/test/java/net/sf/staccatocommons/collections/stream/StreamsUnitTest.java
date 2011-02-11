@@ -18,6 +18,8 @@ import static net.sf.staccatocommons.lang.sequence.StopConditions.*;
 
 import java.util.Arrays;
 
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 
 import org.junit.Test;

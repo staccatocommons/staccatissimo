@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.defs.type;
 
+import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
 import net.sf.staccatocommons.restrictions.value.Immutable;

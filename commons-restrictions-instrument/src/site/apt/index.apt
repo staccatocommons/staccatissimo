@@ -1,39 +1,43 @@
-About Staccato-Commons-Check-Instrument 
+About Staccato-Commons-Restrictions-Instrument 
  
- Staccato-Commons-Check-Instrument is a checks instrumentation tool build on top of {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheck}Staccato-Commons-Check}} and
+ Staccato-Commons-Restrictions-Instrument is an instrumentation tool build on top of
+ Staccato-Commons-Restrictions, {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheck}Staccato-Commons-Check}} and
 {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument}Staccato-Commons-Instrument}}. It is capable of inserting   
-preconditions and postconditions checks for most of Staccato-Commons-Check restriction annotations.   
+preconditions and postconditions checks for most of check restrictions annotations, and of ensuring that
+{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/index.html}Constant}} methods effectively are.   
  
 Alpha state 
 
- Staccato-Commons-Check-Instrument is currently in alpha state. Although most of previous features are implemented, tested and documented, it is not recommended to use in production systems yet. Types and packages may change in the near future without notice 
+ Staccato-Commons-Restrictions-Instrument is currently in alpha state. Although most of previous features are implemented, tested and documented, it is not recommended to use in production systems yet. Types and packages may change in the near future without notice 
  
 Check-Annotations Supported
 
  Currently, the following check-annotations are supported by the tool:
 
- *  <<<net.sf.staccatocommons.check.annotation.NonNull>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/NonNull.html}NonNull}}>>>
  
- *  <<<net.sf.staccatocommons.check.annotation.Size>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/Size.html}Size}}>>>
  
- *  <<<net.sf.staccatocommons.check.annotation.MinSize>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/MinSize.html}MinSize}}>>>
  
- *  <<<net.sf.staccatocommons.check.annotation.MaxSize>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/MaxSize.html}MaxSize}}>>>
  
- *  <<<net.sf.staccatocommons.check.annotation.NotEmpty>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/NotEmpty.html}NotEmpty}}>>>
  
- *  <<<net.sf.staccatocommons.check.annotation.Positive>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/Positive.html}Positive}}>>>
  
- *  <<<net.sf.staccatocommons.check.annotation.NotNegative>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/NotNegative.html}NotNegative}}>>>
  
- *  <<<net.sf.staccatocommons.check.annotation.Matches>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/Matches.html}Matches}}>>>
+   
+Processing directives Supported
+  
+ * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/processing/IgnoreRestrictions.html}IgnoreRestrictions}}>>>
  
- []
- 
- Also the following directives are supported:
- 
- *  <<<net.sf.staccatocommons.check.annotation.IgnoreChecks>>>
- 
- *  <<<net.sf.staccatocommons.check.annotation.ForceChecks>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/processing/ForceRestrictions.html}ForceRestrictions}}>>>
+  
+Other Restrictions Supported
+
+ * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/Constant.html}Constant}}>>>
  
  

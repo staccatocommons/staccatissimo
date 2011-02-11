@@ -19,6 +19,7 @@ import static org.junit.Assume.*;
 
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.block.Block;

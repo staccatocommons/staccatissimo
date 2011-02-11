@@ -18,6 +18,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 
 import net.sf.staccatocommons.collections.stream.Cons;
+import net.sf.staccatocommons.defs.Evaluable;
 
 import org.junit.Test;
 

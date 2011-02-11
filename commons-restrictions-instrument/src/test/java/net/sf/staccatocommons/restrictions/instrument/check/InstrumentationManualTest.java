@@ -18,6 +18,8 @@ import java.util.Arrays;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
 import net.sf.staccatocommons.io.Directory;
 import net.sf.staccatocommons.restrictions.instrument.RestrictionConfigurer;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

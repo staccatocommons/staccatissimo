@@ -15,6 +15,8 @@ package net.sf.staccatocommons.lang.value;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+
 /**
  * Enumeration of equalty-test scenarios that helps on building effective
  * {@link Object#equals(Object)} method.

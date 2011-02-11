@@ -12,6 +12,8 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import java.util.NoSuchElementException;
+
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.Option;

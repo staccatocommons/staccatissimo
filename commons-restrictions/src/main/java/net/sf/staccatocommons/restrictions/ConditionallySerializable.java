@@ -19,6 +19,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+
 
 /**
  * {@link ConditionallySerializable} annotated classes that implement the
