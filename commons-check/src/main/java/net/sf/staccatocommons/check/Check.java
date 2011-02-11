@@ -497,6 +497,21 @@ public abstract class Check<ExceptionType extends Throwable> {
 			type.size(var));
 	}
 
+	/**
+	 * Checks that <code>var</code> is not null and its size greater than or
+	 * equals to the the given <code>minSize</code>
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param minSize
+	 *          the minimum size
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 * @see #that(boolean, String, Object...)
+	 */
 	public final Check<ExceptionType> isMinSize(String varName, Collection<?> var, int minSize)
 		throws ExceptionType {
 		return isMinSize(varName, var, minSize, SizeAwareTypes.COLLECTION);
@@ -530,6 +545,21 @@ public abstract class Check<ExceptionType extends Throwable> {
 				type.size(var));
 	}
 
+	/**
+	 * Checks that <code>var</code> is not null and its size less than or equals
+	 * to the the given <code>maxSize</code>
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the variable to be checked
+	 * @param maxSize
+	 *          the maximum size
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 * @see #that(boolean, String, Object...)
+	 */
 	public final Check<ExceptionType> isMaxSize(String varName, Collection<?> var, int minSize)
 		throws ExceptionType {
 		return isMaxSize(varName, var, minSize, SizeAwareTypes.COLLECTION);

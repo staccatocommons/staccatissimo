@@ -14,6 +14,7 @@ import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.defs.type.SizeAwareType;
 import net.sf.staccatocommons.testing.junit.jmock.Expectations;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
