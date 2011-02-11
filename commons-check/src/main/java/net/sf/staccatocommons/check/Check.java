@@ -209,6 +209,22 @@ public abstract class Check<ExceptionType extends Throwable> {
 	}
 
 	/**
+	 * Checks a that the variable is true, failing with a generated message if it
+	 * is not.
+	 * 
+	 * @param varName
+	 *          the name of the variable to be checked
+	 * @param var
+	 *          the var to be checked
+	 * @return <code>this</code>, in order to allow method chaining
+	 * @throws ExceptionType
+	 *           if the check failed
+	 */
+	public final Check<ExceptionType> isFalse(String varName, boolean var) throws ExceptionType {
+		return that(varName, var, !var, "must be false");
+	}
+
+	/**
 	 * Checks that the variable is not null and matches a given regular
 	 * expression.
 	 * 
