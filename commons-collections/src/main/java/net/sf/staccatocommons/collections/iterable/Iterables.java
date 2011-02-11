@@ -388,7 +388,11 @@ public class Iterables {
 	/**
 	 * Test that the elements of both iterables are equal, and in the same order.
 	 * 
-	 * @param elements
+	 * @param <A>
+	 * @param iterable1
+	 *          first iterable
+	 * @param iterable2
+	 *          second iterable
 	 * @return <code>true</code> if <code>iterable1</code> has the same number of
 	 *         elements that <code>iterable2</code>, and each pair formed by
 	 *         elements of both iterables at same position are equal.
@@ -404,7 +408,7 @@ public class Iterables {
 	 * order, using the given <code>equalityTest</code> for determining equality
 	 * of elements.
 	 * 
-	 * @param iterable
+	 * @param equivTest
 	 * @param equalityTest
 	 * @return <code>true</code> if <code>iterable1</code> has the same number of
 	 *         elements that <code>iterable2</code>, and each pair formed by
@@ -412,13 +416,13 @@ public class Iterables {
 	 *         the given <code>eqivTest</code>. <code>false</code> otherwise
 	 */
 	public static <A> boolean equivalentBy(@NonNull Iterable<? extends A> iterable1,
-		@NonNull Iterable<? extends A> iterable2, Evaluable2<A, A> eqivTest) {
+		@NonNull Iterable<? extends A> iterable2, Evaluable2<A, A> equivTest) {
 		Iterator<? extends A> iter = iterable1.iterator();
 		Iterator<? extends A> otherIter = iterable2.iterator();
 		while (iter.hasNext()) {
 			if (!otherIter.hasNext())
 				return false;
-			if (!eqivTest.eval(iter.next(), otherIter.next()))
+			if (!equivTest.eval(iter.next(), otherIter.next()))
 				return false;
 		}
 		return !otherIter.hasNext();
@@ -557,7 +561,6 @@ public class Iterables {
 	 * @param <A>
 	 * @param iterable
 	 *          the {@link Iterable} to sort
-	 * @param comparator
 	 * @return a sorted set containing the iterables elements sorted using the
 	 *         given <code>comparator</code>
 	 */
@@ -614,7 +617,7 @@ public class Iterables {
 	 * a list, it just returns it
 	 * 
 	 * @param <A>
-	 * @param collection
+	 * @param iterable
 	 * @return a new {@link List} that contains all the elements from the given
 	 *         iterable, or the given collection, if it is already a list
 	 */

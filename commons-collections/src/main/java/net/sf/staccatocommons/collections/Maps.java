@@ -16,6 +16,7 @@ import static net.sf.staccatocommons.collections.iterable.Iterables.*;
 
 import java.util.Map;
 
+import net.sf.staccatocommons.lang.None;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -87,7 +88,7 @@ public class Maps {
 	 * guarantees that if a <code>Some(value)</code> is returned,
 	 * <code>map.containsValue(value)</code> will return <code>true</code>
 	 * 
-	 * @param <K>
+	 * @param <V>
 	 * @param map
 	 * @return Some(value) if map is not empty, None otherwise
 	 */
@@ -105,7 +106,7 @@ public class Maps {
 	 * <code>value</code> is returned, <code>map.containsValue(value)</code> will
 	 * return <code>true</code>
 	 * 
-	 * @param <K>
+	 * @param <V>
 	 * @param map
 	 * @return a <code>value</code> if map is not empty, <code>null</code>
 	 *         otherwise

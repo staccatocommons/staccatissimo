@@ -72,7 +72,7 @@ public interface Zippeable<A> {
 	 *         is the minimum of both iterables sizes, or infinite, if both this
 	 *         and <code>iterable</code> are
 	 * @see Iterables#zip(Iterable, Iterable)
-	 * @see #zip(Iterable, Applicable2)
+	 * @see #zip(Iterable, Function2)
 	 */
 	@NonNull
 	@Projection

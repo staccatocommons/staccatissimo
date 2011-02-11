@@ -135,7 +135,6 @@ public interface Foldable<A> {
 	 * Answers the average of the stream elements, using the stream's source as an
 	 * {@link ImplicitNumberType}.
 	 * 
-	 * @param numberType
 	 * @return the average of the stream elements
 	 * @throws NoSuchElementException
 	 *           if the stream is empty

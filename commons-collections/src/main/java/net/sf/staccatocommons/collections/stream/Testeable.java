@@ -62,7 +62,7 @@ public interface Testeable<A> {
 	 * Test that the elements of this stream are equal to the elements of the
 	 * given {@link Iterable}, and in the same order.
 	 * 
-	 * @param elements
+	 * @param iterable
 	 * @return true if this stream has the same number of elements that the given
 	 *         <code>iterable</code>, and each pair formed by elements of this
 	 *         stream and given <code>iterable</code> at same position are equal.

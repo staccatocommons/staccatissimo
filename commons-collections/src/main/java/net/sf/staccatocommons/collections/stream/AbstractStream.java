@@ -33,9 +33,10 @@ import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ConcatStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.DeconsThenStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.DelayedThenStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropWhileStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.DynamicIterator;
 import net.sf.staccatocommons.collections.stream.impl.internal.FilterStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FlatMapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.GroupByStream;
@@ -327,12 +328,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public <B> Stream<B> then(final Applicable<Stream<A>, ? extends Stream<B>> function) {
-		class ThenStream extends AbstractStream<B> {
-			public Thriterator<B> iterator() {
-				return function.apply(AbstractStream.this).iterator();
-			}
-		}
-		return new ThenStream();
+		return new ThenStream<A, B>(this, function);
 	}
 
 	/**
@@ -370,33 +366,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	public <B> Stream<B> then(final DeconsApplicable<A, B> function) {
-		return new AbstractStream<B>() {
-			public Thriterator<B> iterator() {
-				return new DynamicIterator<B>() {
-					protected Thriterator<B> createIter() {
-						if (AbstractStream.this.isEmpty())
-							return function.emptyApply().iterator();
-						Pair<A, Stream<A>> decons = AbstractStream.this.decons();
-						return function.apply(decons._1(), decons._2()).iterator();
-					}
-				};
-			}
-		};
+		return new DeconsThenStream<B, A>(this, function);
 	}
 
 	public <B> Stream<B> delayedThen(final DeconsApplicable<A, B> function) {
-		return new AbstractStream<B>() {
-			public Thriterator<B> iterator() {
-				return new DynamicIterator<B>() {
-					protected Thriterator<B> createIter() {
-						if (AbstractStream.this.isEmpty())
-							return function.emptyApply().iterator();
-						Pair<Thunk<A>, Stream<A>> decons = AbstractStream.this.delayedDecons();
-						return function.delayedApply(decons._1(), decons._2()).iterator();
-					}
-				};
-			}
-		};
+		return new DelayedThenStream<A, B>(this, function);
 	}
 
 	@Override

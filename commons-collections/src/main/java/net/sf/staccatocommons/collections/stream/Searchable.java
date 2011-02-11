@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.lang.None;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 

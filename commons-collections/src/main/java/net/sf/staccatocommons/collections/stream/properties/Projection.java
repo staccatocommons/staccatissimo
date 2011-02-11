@@ -18,6 +18,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccatocommons.collections.stream.Stream;
+
 /**
  * {@link Projection} annotates {@link Stream} methods that return without
  * performing any processing on its element, but instead, returning a new
