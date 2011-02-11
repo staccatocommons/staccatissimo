@@ -1,0 +1,119 @@
+Staccato-Commons-Check by examples
+
+ <The complete code can be
+  found {{{https:/staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-check-examples}here}}>
+
+ Lest  suppose we are implementing a juice recipes system, that can produce juice using ingredients.
+ In particular, we are now implementing a TropicalJuiceRecipe, based on bananas and pineapples.
+ We are going to inject dependencies through constructor, so our recipe will look like the following:
+
++---
+ class TropicalJuiceRecipe implements JuiceRecipe {
+    private final int suger;
+    private final OrangeJuice juice;
+    private final Collection<Banana> bananas;
+    private final Collection<Pineapple> pineapples;
+    /**
+     * Creates a new {@link TropicalJuiceRecipe}
+     * It takes orange juice, some sugar, some bananas and at least 2 pinaples.
+     * Juice must not have expired and that it must not be too acid.
+     */
+    public TropicalJuiceRecipe(int sugar, OrangeJuice juice, Collection<Banana> bananas,
+        Collection<Pineapple> pineapples) {
+        this.suger = sugar;
+        this.juice = juice;
+        this.bananas = bananas;
+        this.pineapples = pineapples;
+
+    }
+    public Juice prepare() {
+        // Don't care....
+        return null;
+    }
+}
++----
+
+ As you see in the constructor Javadoc, our recipe has some constraints regarding its input ingredients, 
+ such restrictions are called preconditions. 
+ Our recipe will not work unless they are meet, so it is good practice to check them as soon as possible, and fail fast, if necessary. 
+ So just add the preconditions check, our constructor will look like the following:
+ 
++-----
+    /**
+     * Creates a new {@link TropicalJuiceRecipe}
+     * It takes orange juice, some sugar, some bananas and at least 2 pinaples.
+     * Juice must not have expired and that it must not be too acid.
+     */
+    public TropicalJuiceRecipe(int sugar, OrangeJuice juice, Collection<Banana> bananas,
+        Collection<Pineapple> pineapples) {
+        if (juice == null)
+            throw new IllegalArgumentException("juice must not be null");
+
+        if (!juice.isNotTooAcid())
+            throw new IllegalArgumentException("juice.isNotTooAcide must not be true");
+
+        if (juice.getExpirationDate().compareTo(new Date()) >= 0)
+            throw new IllegalArgumentException("juice.expirationDate must be greater than today");
+
+        if (sugar <= 0)
+            throw new IllegalArgumentException("sugar must be be greather than zero");
+
+        if (bananas == null)
+            throw new IllegalArgumentException("bananas must not be null");
+
+        if (bananas.isEmpty())
+            throw new IllegalArgumentException("bananas must not be empty");
+
+        if (pineapples == null)
+            throw new IllegalArgumentException("pineapples must be null");
+
+        if (pineapples.size() < 2)
+            throw new IllegalArgumentException("pineapples must be of at least size 2");
+            
+        this.suger = sugar;
+        this.juice = juice;
+        this.bananas = bananas;
+        this.pineapples = pineapples;
+
+    }
++----- 
+ 
+  All such checks are necessary, but boilerplate, code. We are forced to manually write each condition, negate it,
+  generate a failure message, and throw an exception on failure. It works, but is not the Panacea.
+  
+  Here is where Staccato-Commons-Check comes to rescue:
+  
++---
+    /**
+     * Creates a new {@link TropicalJuiceRecipe}
+     * It takes orange juice, some sugar, some bananas and at least 2 pinaples.
+     * Juice must not have expired and that it must not be too acid.
+     */
+    public TropicalJuiceRecipe2(int sugar, OrangeJuice juice, Collection<Banana> bananas,
+        Collection<Pineapple> pineapples) {
+        Ensure
+            .that()
+            .isTrue("juice.notTooAcid", juice.isNotTooAcid())
+            .isGreaterThan("juice.expirationDate", juice.getExpirationDate(), new Date())
+            .isPositive("sugar", sugar)
+            .isNotEmpty("bananas", bananas)
+            .isMinSize("pineapples", pineapples, 2);
+        this.suger = sugar;
+        this.juice = juice;
+        this.bananas = bananas;
+        this.pineapples = pineapples;
+    }
++---         
+
+ The latter code is completely equivalent to previous one, but evidently shorter and easier to understand and maintain. 
+ If any of such condition is not met, an  IllegalArgumentException is thrown. Messages are generated automatically when needed
+ 
+ However, this is not the whole story. Throwing IllegaltArgumentException's is generally meaningful enough and 
+ indicates a precondition violation. But what happens if we want throw exceptions of a different class?
+ 
+  Ensure is just one of the entry points to the API - it is only meant for preconditions validation. For postconditions validation, 
+ there is another class, Assert, which shares the same interface that Ensure, but throws AssertionErrors instead.  Finally, if you want 
+ to throw arbitrary exceptions, even checked - not inheriting RuntimeException -, there is the Validate class. 
+
+  
+ 

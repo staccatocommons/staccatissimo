@@ -1,0 +1,60 @@
+Staccato-Commons-Check API Walkthrough 
+
+ The core of Staccato-Commons-CHeck is the <<<net.sf.staccatocommons.check.Check\<E\>>>> class.
+ It implements more than 40 common checks with automatic error messages building, in a method-chaining fashion. 
+ For example, the following code will check that <<<bar != null && foo.compareTo(bar) <= 0 && baz.size() == 1 && baz.contains(foo)>>>, 
+throwing an exception and generating a proper message if any of the constraints is violated: 
+
++--
+Check<... more about this parametrization later ...> check = ...obtain a reference to a check...
+check.isNotNull("bar", bar)
+     .isGreaterThan("foo", foo, bar)
+     .isSize("baz", baz, 1)
+     .contains("baz", baz, foo);
++-- 
+
+ All automatic check methods take at least two arguments: a mnemonic for the object - normally the variable 
+ or attribute name - and the object to check. It is not necessary to pass any extra message, as all the invocation have enough information
+ to generate them.
+
+ In addition to those checks, it offers general boolean condition tests and forced failures methods. For example:
+
++---- 
+check.that(account.hasEnoughFonds(),  "Account %s must have enough fonds", account);
+  
+check.failure("Code should not have reached here");
++--- 
+ 
+ Those methods take at least a message argument, as they have no enough information to construct one.  
+ 
+ <<<Check>>> class, however, is abstract, and does not define the specific exception to be thrown on failure.  
+It is parameterized instead by the exception type it throws, and is responsibility of subclasses to define that.
+
+ To address that, the API provides three concrete implementations of <<<Check>>>:
+ 
+ * Ensure's: throws <<<java.lang.IllegalArgumentException>>>, and is used to check generic preconditions. 
+ A reference to it can be obtained through the <<<Ensure>>> utility class:
+   
++-----
+Ensure.that()
+    .isNotEmpty("bananas", bananas)
+    .isMinSize("pineapples", pineapples, 2);
++----- 
+ 
+ It offers also some class method shortcuts to the most frequent checks:
+ 
++----
+Ensure.isNotNull("jukebox", jukebox);
++---- 
+ 
+ * Assert's: Throws <<<java.lang.AssertionError>>>, and is used to check generic postconditions and invariants. There exists
+ an <<<Assert>>> utility class, similar to the <<<Ensure>>>. 
+ 
+ * Validate's: Throws exceptions of any given type - in particular, they do not need to be <<<java.lang.RuntimeException>>>s.
+It is used to perform domain specific validations. Instances of it can be created through <<<Validate.throwing(Class)>>> class method:
+
++---
+Validate.throwing(PhoneCallException.class)
+  .that(!line.isBuys(), "The line %s must not be busy", line)
+  .that(destination.isReachable(), "The destination %s is unreachable", destination); 
++----- 
