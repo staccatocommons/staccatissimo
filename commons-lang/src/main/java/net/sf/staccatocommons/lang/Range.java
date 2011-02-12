@@ -12,13 +12,15 @@
  */
 package net.sf.staccatocommons.lang;
 
+import java.io.Serializable;
+
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.sequence.StopConditions;
-import net.sf.staccatocommons.lang.value.ValueObject;
+import net.sf.staccatocommons.lang.value.RelevantState;
 import net.sf.staccatocommons.restrictions.ConditionallySerializable;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
@@ -35,10 +37,14 @@ import net.sf.staccatocommons.restrictions.value.Value;
 @Value
 @ConditionallyImmutable
 @ConditionallySerializable
-public class Range<T extends Comparable<T>> extends ValueObject implements ContainsAware<T>,
-	EmptyAware {
+public class Range<T extends Comparable<T>> implements ContainsAware<T>, EmptyAware, Serializable {
 
 	private static final long serialVersionUID = -1096861117755452369L;
+	private static final RelevantState<Range> state = new RelevantState<Range>(2) {
+		protected void collectState(Range object, StateCollector s) {
+			s.add(object.min).add(object.max);
+		}
+	};
 
 	private final T min;
 	private final T max;
@@ -118,6 +124,21 @@ public class Range<T extends Comparable<T>> extends ValueObject implements Conta
 	@Override
 	public boolean isEmpty() {
 		return getMin().compareTo(getMax()) == 0;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return state.equals(this, obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return state.hashCode(this);
+	}
+
+	@Override
+	public String toString() {
+		return state.toString(this);
 	}
 
 	/**

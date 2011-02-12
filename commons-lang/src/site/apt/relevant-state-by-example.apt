@@ -1,0 +1,207 @@
+Relevant State
+
+* Motivation
+
+ RelevantState is an abstract class aimed to consistently implement equals, hashcode, toString, and/or compareTo in an efficient 
+  way and without boilerplate code.
+  
+* The problem        
+
+  When designing value objects - that is, objects whose identity is not important, but its state instead -,
+ implementing an equals method properly is usually trickier than expected. 
+ Regardless of the object-oriented language chosen, the relevant fields
+  of the object must be selected carefully, and decide how the equality test with behave regarding subclasses, if any.
+  
+ Even when such design decision have been taken, there are many implementation issues. A proper equals method should be reflexive, 
+ symmetric, transitive and referentially transparent. Also, it should handle null's gracefully. Java Object.equals(Object) documents 
+ such 5 rules in {{{http://download.oracle.com/javase/6/docs/api/java/lang/Object.html#equals(java.lang.Object)}its javadoc}}.  
+ 
+ But this is not enough. In languages with hashing messages in the top of its object hierarchy, like Java, a hashcode method must 
+ also be implemented each time equals is implemented, 
+ {{{http://download.oracle.com/javase/6/docs/api/java/lang/Object.html#hashCode()}in a consistent manner}}, 
+ ensuring that it is referentially transparent,   
+ that equal objects produce equal hashcodes, and trying to produce different hashcodes for unequal objects.  
+ 
+  And what about if we want to make our objects comparable? Implementing the Comparable interface and its comparaTo method
+ imposes three {{{http://download.oracle.com/javase/6/docs/api/java/lang/Comparable.html#compareTo(T)}new rules}}, and suggest 
+ a fourth rule of implementing it consistently with equals. 
+ 
+  Finally, it is a good idea to also implement Object.toString(), using the same relevant fields used in equals, 
+  hashcode, and maybe compareTo.
+ 
+* The Solution(s)
+  
+  As you guess - or have experienced - this is a quite tedious task. There are three common approaches to address this issue:
+  
+  * Generate them with a tool. Modern IDEs usually offer some support for implementing them. 
+  
+  * Implement them by hand, using an API that simplifies it, like Apache Commons Lang builder:
+   ToStringBuilder, EqualsBuilder, HashCodeBuilder and CompareToBuilder
+   
+  * Implementing them using reflection, like, again, Apache Commons Lang builders. 
+   
+   Staccato-Commons-Lang RelvantState's fall in the second category, but removing most of the boilerplate 
+   code needed by the Apache Commons Lang builders. It is indeed, built on top of them.  
+   
+** Example
+
+  In the next examples we will compare first approach, second approach with Apache Commons Lang, 
+ and second approach with Staccato-Commons-Lang. 
+Third approach is not covered, as it implies an important performance penalty. 
+
+ So let's implement a simple class for a Customer value object.    
+   
++----
+ class Customer {
+    private String name;
+    private String surname;
+    // behavior, constructors, getters, other attributes, etc..
+ }
++---
+
+  Our class is quite simple, its relevant attributes are the customer name and surname. 
+ We will initially consider such fields as relevant, and implement equals, hashcode and toString using them.
+
+**  Using Code Generation
+ 
+   Using code generation facilities of Eclipse 3.6, we can get something like the following
+ 
++---------
+class Customer {
+
+    private String name;
+    private String surname;
+    private String lastName;
+
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((surname == null) ? 0 : surname.hashCode());
+        return result;
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Customer other = (Customer) obj;
+        if (lastName == null) {
+            if (other.lastName != null) {
+                return false;
+            }
+        } else if (!lastName.equals(other.lastName)) {
+            return false;
+        }
+        if (name == null) {
+            if (other.name != null) {
+                return false;
+            }
+        } else if (!name.equals(other.name)) {
+            return false;
+        }
+        if (surname == null) {
+            if (other.surname != null) {
+                return false;
+            }
+        } else if (!surname.equals(other.surname)) {
+            return false;
+        }
+        return true;
+    }
+
+    public String toString() {
+        return String.format("Customer(%s,%s,%s)", name, surname, lastName);
+    }
+}
++--------
+
+  Not too bad. We have implemented all those logic in a few clicks. But nothing is free, and we have to accept adding dozens of tangled, 
+  difficult to understand lines, lots of new branches that increase cyclomatic complexity. Such generated code does not only kill
+  many software metrics, but is also hard to maintain, and test. A developer could accidentally modify on of such lines, and no one 
+  will notice it. Adding or removing relevant fields, or modifying their types is also problematic, 
+  as needs new code generation cycles.       
+
+**  Using Apache Commons Builders
+  
++---
+  class Customer {
+
+    private String name;
+    private String middleName;
+    private String lastName;
+
+    public int hashCode() {
+        return new HashCodeBuilder() //
+            .append(name)
+            .append(middleName)
+            .append(lastName)
+            .toHashCode();
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Customer other = (Customer) obj;
+        return new EqualsBuilder()
+            .append(name, other.name)
+            .append(middleName, other.middleName)
+            .append(lastName, other.lastName)
+            .isEquals();
+    }
+
+    public String toString() {
+        return new ToStringBuilder(this) //
+            .append(name)
+            .append(middleName)
+            .append(lastName)
+            .toString();
+    }
+}
++---  
+
+**  Using Staccato-Commons-Lang RelevantState
+  
+   The key concept behind of it is, instead of defining how to implement each equals/hashcode/compareTo/toString method, 
+  defining only once which are the relevant fields of an object, which conform its state. Then, all such operations are delegated
+  to that state. 
+  
++-----
+class Customer {
+    private String name;
+    private String surname;
+    private String lastName;
+
+    public int hashCode() {
+        return state.hashCode(this);
+    }
+
+    public boolean equals(Object obj) {
+        return state.equals(this, obj);
+    }
+
+    public String toString() {
+        return state.toString(this);
+    }
+
+    private static RelevantState<Customer> state = new RelevantState<Customer>(3) {
+        protected void collectState(Customer o, StateCollector c) {
+            c.add(o.name).add(o.surname).add(o.lastName);
+        }
+    };
+}
++----  

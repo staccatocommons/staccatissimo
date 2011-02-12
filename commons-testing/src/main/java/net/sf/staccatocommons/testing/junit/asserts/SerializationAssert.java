@@ -26,11 +26,12 @@ import java.io.Serializable;
  */
 public class SerializationAssert {
 
-	public static <T extends Serializable> void assertCanSerialize(T object) {
+	public static void assertCanSerialize(Serializable object) {
 		ByteArrayOutputStream ba = new ByteArrayOutputStream();
 		try {
 			new ObjectOutputStream(ba).writeObject(object);
-			T result = (T) new ObjectInputStream(new ByteArrayInputStream(ba.toByteArray())).readObject();
+			Serializable result = (Serializable) new ObjectInputStream(new ByteArrayInputStream(
+				ba.toByteArray())).readObject();
 			assertEquals(result, object);
 		} catch (Exception e) {
 			fail("Should not have thrown an exception " + e.toString());

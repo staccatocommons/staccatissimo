@@ -38,31 +38,30 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 
  * <pre>
  * class Customer {
- *  
- *   private String name;
- *   private Date birthday;
- *   private Date joinDate;
- *   
- *   .....
- *   public int hashCode() {
- *    return state.hashCode(this);
- *   }
- * 	
- *   public boolean equals(Object obj) {
- *    return state.equals(this, obj);
- *   }
- *   
- *   public String toString() {
- *    return val.toString(this);
- *   }
- *   .....
- *   
- *   private static RelevantState&lt;&lt;&gt; state = new TupleState&lt;Customer&gt;(3) {
- *    protected void collectState(Customer o, StateCollector c) {
- *     c.add(o.name).add(o.birthday).add(joinDate); 
- * 		} 
- *   };
- * }
+ * 
+ * 	private String name;
+ * 	private Date birthday;
+ * 	private Date joinDate;
+ * 
+ *  //...
+ * 
+ * 	public int hashCode() {
+ * 		return state.hashCode(this);
+ * 	}
+ * 
+ * 	public boolean equals(Object obj) {
+ * 		return state.equals(this, obj);
+ * 	}
+ * 
+ * 	public String toString() {
+ * 		return state.toString(this);
+ * 	}
+ * 
+ * 	private static RelevantState<Customer> state = new RelevantState<Customer>(3) {
+ * 		protected void collectState(Customer o, StateCollector c) {
+ * 			c.add(o.name).add(o.birthday).add(o.joinDate);
+ * 		}
+ * 	};
  * 
  * </pre>
  * 
