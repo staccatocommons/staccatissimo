@@ -44,5 +44,17 @@
                  Extracted iterators to staccato-commons-iterators
             </action>          
 		</release>
+		<release version="1.0-alpha-4" date="TBD" description="Laziness">
+            <action dev="flbulgarelli" type="update">
+                 Replaced plain iterators in Stream by thriterators
+            </action>
+            <action dev="flbulgarelli" type="update">
+                 Modified get and size implementation in Stream in order to 
+                 take advange of thriterators
+            </action>
+            <action dev="flbulgarelli" type="add">
+                 GroupBy in Stream
+            </action>          
+        </release>
 	</body>
 </document>

@@ -1,0 +1,25 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+	<properties>
+		<title>Staccato-Commons-Iterators Changes History</title>
+		<author>flbulgarelli</author>
+	</properties>
+	<body>
+		<release version="1.0-alpha-3" date="2011-01-30" description="Streams">
+			<action dev="flbulgarelli" type="add">
+			     Initial version, with empty, undefined, single element, char sequence, 
+			     cons, append
+			     and enumeration iterators
+			</action>
+		</release>
+		<release version="1.0-alpha-4" date="TBD" description="Laziness">
+            <action dev="flbulgarelli" type="add">
+                 Adding Thriters and Thriterators
+            </action>
+            <action dev="flbulgarelli" type="add">
+                 Adding delayed versions of cons, single and append iterators
+            </action>
+        </release>
+	</body>
+</document>

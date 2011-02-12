@@ -1,6 +1,6 @@
-Staccato-Commons-Check by examples
+Staccato-Commons-Check by example
 
- <The complete code can be
+ <The complete example code can be
   found {{{https:/staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-check-examples}here}}>
 
  Lest  suppose we are implementing a juice recipes system, that can produce juice using ingredients.

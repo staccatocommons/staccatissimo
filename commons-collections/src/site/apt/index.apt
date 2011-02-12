@@ -3,23 +3,27 @@ About Staccato-Commons-Collections
  Staccato-Commons-Collection is the collections library of the 
  {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}, focused on providing new abstractions that mix object oriented
  and functional style for dealing with collections. 
- It extend the existing Java Collections Framework by providing dozen of class methods for performing common operations like filtering, mapping, 
+ It extend the existing Java Collections Framework by providing dozen of class methods for performing common operations like
+ filtering, mapping, 
  folding, finding and zipping. 
- It also offers Streams, rich, fluent, lazy iterables that can wrap many different sources - much more than just collections, making
+ It also offers Streams, rich, fluent, lazy iterables that can wrap many different sources - much more than just collections - , making
  complex transformations on anything that is iterable extremely simple.  
- 
- On the other hand, Staccato-Commons-Collections is not aimed to provide new specific purpose collection implementations.    
  
 Alpha state 
 
- Staccato-Commons-Collections is currently in alpha state. Although most of previous features are implemented, tested and documented, it is not recommended to use in production systems yet. Types and packages may change in the near future without notice. 
- 
- 
+ Staccato-Commons-Collections is currently in alpha state.
+  Although most of previous features are implemented, tested and documented, 
+  it is not recommended to use in production systems yet. Types and packages may change in the near future without notice. 
+  
 Getting started
 
- Staccato-Commons-Collections exposes two APIs: 
+  Staccato-Commons-Collections resolves problems related with transforming
+  collection and collection-like objects. Descriptions of such problems, solutions and examples 
+  can be found in the following links:
+
+ * API walkthrough - a quick walk through the most notable elements of staccato-commons-collections
  
- * Iterables API - a bunch of utility classes that expose more than 50 common operation on iterables and maps.   
+ * {{docs/iterables-by-example.html}Iterables}} - more than 60 functional and imperative common transformations over collections, 
+ iterables and maps.  
  
- * Stream API - an ecosystem of interfaces and classes that model a Stream - a generic source of objects. 
- 
+ * {{{docs/stream-by-example.html}Stream}}. A "super" iterable - rich, fluent interfaced, lazy and generic.  

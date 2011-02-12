@@ -1,8 +1,9 @@
 About Staccato-Commons-Check
  
- Staccato-Commons-Check is the validation library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. 
-It offers classes for performing flexible, generic preconditions and postconditions and domain-specific validations. 
-
+ Staccato-Commons-Check is the validation library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}, 
+ which allows to perform generic and domain-specific preconditions and postconditions checks. It is is designed 
+ for being rich, easy to use and understand, flexible, extensible, and general purpose. 
+  
  Please notice Staccato-Commons-Check is a validation API targeted for implementing fail-fast programming, like validation 
 classes you can find in {{{http://commons.apache.org/lang/}Apache Commons Lang}}
 or {{{http://code.google.com/p/guava-libraries/}Guava}}. It is by no means a conversion and validation 
@@ -14,10 +15,14 @@ Alpha state
   Although most of previous features are implemented, tested and documented, it should not be used in productive systems yet. 
  
 Getting started
+
+  Staccato-Commons-Check resolves problems related with implementing preconditions and postconditions checks. 
+  Descriptions of such problems, solutions and examples can be found in the following links:
  
- Staccato-Commons-Check is a validation API designed for being rich, easy to use, flexible, extensible, and general purpose. If you want to 
- understand the API, have a look at the {{{examples.html}Staccato-Commons-Check by examples}}, and/or 
- the {{{api-walkthrough.html}API Walkthrough}}. 
+ * {{{docs/api-walkthrough.html}API Walkthrough}} 
+ 
+ * {{{docs/check-by-example.html}Check by example}}
+  
 
 What is next?
 
@@ -28,6 +33,3 @@ What is next?
  * Have a look to the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument/}Staccato-Commons-Restricions-Instrument}} API,
 which can instrument check annotations, by inserting at compile time calls to the Validation API previously described.      
 
-Road map
-
- Staccato-Commons-Check is in continuous development. Next releases are focused on augmenting extensibility and richness of both APIs.
