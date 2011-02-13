@@ -39,4 +39,5 @@ public final class BigDecimalType extends AbstractNumberType<BigDecimal> {
 	public BigDecimal one() {
 		return BigDecimal.ONE;
 	}
+
 }

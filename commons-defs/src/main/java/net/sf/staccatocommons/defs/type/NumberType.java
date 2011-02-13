@@ -16,7 +16,9 @@ import java.util.Comparator;
 
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
+import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
+import net.sf.staccatocommons.restrictions.effect.Transparent;
 import net.sf.staccatocommons.restrictions.value.Immutable;
 
 /**
@@ -206,23 +208,33 @@ public interface NumberType<A> extends Comparator<A> {
 	A one();
 
 	/**
+	 * Answers the absolute value of the given number. It is the same number, if
+	 * non negative, or the negated number, otherwise
+	 * 
+	 * @param n
+	 * @return <code>isNegative(n) ? negate(n) : n</code>
+	 */
+	A abs(A n);
+
+	/**
 	 * Answers a 2-arguments function that perform addition as specified by
 	 * {@link #add(Object, Object)}
 	 * 
 	 * @return a function that adds its two arguments using this
 	 *         {@link NumberType}
 	 */
-	@SideEffectFree
+	@Constant
 	Function2<A, A, A> add();
 
 	/**
 	 * Answers function that adds the given number to its argument, as specified
-	 * by {@link #add(Object, Object)}
+	 * by {@link #add(Object, Object)}. This message is a shortcut to
+	 * <code>add().apply(n)</code>
 	 * 
 	 * @return a function that adds its its argument with the given <code>n</code>
 	 *         using this {@link NumberType}
 	 */
-	@SideEffectFree
+	@Transparent
 	Function<A, A> add(A n);
 
 	/**
@@ -232,7 +244,25 @@ public interface NumberType<A> extends Comparator<A> {
 	 * @return a function that multiplies its two arguments using this
 	 *         {@link NumberType}
 	 */
-	@SideEffectFree
+	@Constant
 	Function2<A, A, A> multiply();
+
+	/**
+	 * Answers a function that negates its argument, as specified by
+	 * {@link #negate(Object)}
+	 * 
+	 * @return a function
+	 */
+	@Constant
+	Function<A, A> negate();
+
+	/**
+	 * Answers a function that returns the absolute value of its argument, as
+	 * specified by {@link #abs(Object)}
+	 * 
+	 * @return a funciton
+	 */
+	@Constant
+	Function<A, A> abs();
 
 }

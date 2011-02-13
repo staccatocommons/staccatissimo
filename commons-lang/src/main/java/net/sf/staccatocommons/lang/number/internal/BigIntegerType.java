@@ -39,4 +39,5 @@ public final class BigIntegerType extends AbstractNumberType<BigInteger> {
 	public BigInteger one() {
 		return BigInteger.ONE;
 	}
+
 }
