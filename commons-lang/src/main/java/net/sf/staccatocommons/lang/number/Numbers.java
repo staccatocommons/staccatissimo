@@ -76,9 +76,9 @@ public class Numbers {
 	 * {@link BigDecimal#valueOf(double)}, as the latter negates the exponent
 	 * </p>
 	 * 
-	 * @param val
-	 *          the mantissa - aka significand
-	 * @param scale
+	 * @param mantissa
+	 *          - aka significand
+	 * @param exponent
 	 *          the exponent
 	 * @return a BigDecimal whose value is mantissa × 10^exponent.
 	 */

@@ -47,22 +47,23 @@ public abstract class Block2<T1, T2> extends AbstractDelayable2<T1, T2, Void> im
 	 * 
 	 * @see #exec(Object, Object)
 	 * 
-	 * @param argument
+	 * @param arg0
+	 * @param arg1
 	 * @throws Exception
 	 */
-	protected void softExec(T1 argument1, T2 argument2) throws Exception {}
+	protected void softExec(T1 arg0, T2 arg1) throws Exception {}
 
 	@NonNull
-	public Block<T2> apply(final T1 argument1) {
+	public Block<T2> apply(final T1 arg0) {
 		return new Block<T2>() {
-			public void exec(T2 argument2) {
-				Block2.this.exec(argument1, argument2);
+			public void exec(T2 arg1) {
+				Block2.this.exec(arg0, arg1);
 			}
 		};
 	}
 
-	public Void apply(T1 arg1, T2 arg2) {
-		exec(arg1, arg2);
+	public Void apply(T1 arg0, T2 arg1) {
+		exec(arg0, arg1);
 		return null;
 	}
 
@@ -88,9 +89,9 @@ public abstract class Block2<T1, T2> extends AbstractDelayable2<T1, T2, Void> im
 	@NonNull
 	public final Block2<T1, T2> then(@NonNull final Executable2<T1, T2> other) {
 		return new Block2<T1, T2>() {
-			public void exec(T1 argument1, T2 argument2) {
-				Block2.this.exec(argument1, argument2);
-				other.exec(argument1, argument2);
+			public void exec(T1 arg0, T2 arg1) {
+				Block2.this.exec(arg0, arg1);
+				other.exec(arg0, arg1);
 			}
 		};
 	}

@@ -32,11 +32,11 @@ import net.sf.staccatocommons.restrictions.value.Value;
  * <p>
  * Tuples are aimed to be used in those situations where an object that just
  * relates others together is needed. Such object does not encapsulate any
- * business concept nor any specific behavior except of {@link #toString()},
- * {@link #equals(Object)}, {@link #hashCode()} and
- * {@link #compareTo(Object, Object)}. Tuples are thus not intended to be used
- * everywhere nor extended, but there are some concrete scenarios where they are
- * useful:
+ * business concept nor any specific behavior except of
+ * {@link Object#toString()}, {@link Object#equals(Object)},
+ * {@link Object#hashCode()} and {@link Comparable#compareTo(Object, Object)}.
+ * Tuples are thus not intended to be used everywhere nor extended, but there
+ * are some concrete scenarios where they are useful:
  * </p>
  * <ul>
  * <li>

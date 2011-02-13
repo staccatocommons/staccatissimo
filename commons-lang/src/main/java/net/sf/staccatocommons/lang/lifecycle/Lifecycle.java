@@ -114,7 +114,7 @@ public abstract class Lifecycle<ResourceType, ResultType> implements Thunk<Resul
 	 * This method is just a shortcut for
 	 * <code>Handle.throwing(this, exceptionClass)</code>
 	 * 
-	 * @see {@link Handle#throwing(Callable, Class)}
+	 * @see Handle#throwing(Callable, Class)
 	 */
 	public final <E extends Exception> ResultType throwing(Class<E> exceptionClass) throws E {
 		return Handle.throwing(this, exceptionClass);
@@ -127,7 +127,7 @@ public abstract class Lifecycle<ResourceType, ResultType> implements Thunk<Resul
 	 * This method is just a shortcut for
 	 * <code>Handle.throwing(this, exceptionClass1, exceptionClass2)</code>
 	 * 
-	 * @see {@link Handle#throwing(Callable, Class,Class)}
+	 * @see Handle#throwing(Callable, Class, Class)
 	 */
 	public final <E1 extends Exception, E2 extends Exception> ResultType throwing(
 		Class<E1> exceptionClass1, Class<E2> exceptionClass2) throws E1, E2 {

@@ -38,9 +38,9 @@ public abstract class Block3<T1, T2, T3> extends AbstractDelayable3<T1, T2, T3, 
 	 * throw. Subclasses may override this behavior.
 	 * 
 	 */
-	public void exec(T1 arg1, T2 arg2, T3 arg3) {
+	public void exec(T1 arg0, T2 arg1, T3 arg2) {
 		try {
-			softExec(arg1, arg2, arg3);
+			softExec(arg0, arg1, arg2);
 		} catch (Exception e) {
 			throw SoftException.soften(e);
 		}
@@ -51,46 +51,46 @@ public abstract class Block3<T1, T2, T3> extends AbstractDelayable3<T1, T2, T3, 
 	 * 
 	 * @see #exec(Object, Object, Object)
 	 * 
-	 * @param arg1
+	 * @param arg0
 	 *          operation first argument
-	 * @param arg2
+	 * @param arg1
 	 *          operation second argument
-	 * @param arg3
+	 * @param arg2
 	 *          operation third argument
 	 * @throws Exception
 	 */
-	protected void softExec(T1 arg1, T2 arg2, T3 arg3) throws Exception {}
+	protected void softExec(T1 arg0, T2 arg1, T3 arg2) throws Exception {}
 
-	public final Void apply(T1 arg1, T2 arg2, T3 arg3) {
-		exec(arg1, arg2, arg3);
+	public final Void apply(T1 arg0, T2 arg1, T3 arg2) {
+		exec(arg0, arg1, arg2);
 		return null;
 	};
 
 	@NonNull
-	public Block2<T2, T3> apply(final T1 arg) {
+	public Block2<T2, T3> apply(final T1 arg0) {
 		return new Block2<T2, T3>() {
 			public void exec(T2 arg1, T3 arg2) {
-				Block3.this.exec(arg, arg1, arg2);
+				Block3.this.exec(arg0, arg1, arg2);
 			}
 		};
 	}
 
 	@NonNull
-	public Block<T3> apply(final T1 arg1, final T2 arg2) {
+	public Block<T3> apply(final T1 arg0, final T2 arg1) {
 		return new Block<T3>() {
-			public void exec(T3 arg) {
-				Block3.this.exec(arg1, arg2, arg);
+			public void exec(T3 arg2) {
+				Block3.this.exec(arg0, arg1, arg2);
 			}
 		};
 	}
 
 	public Block3<T1, T2, T3> nullSafe() {
 		return new Block3<T1, T2, T3>() {
-			public void exec(T1 arg1, T2 arg2, T3 arg3) {
-				if (arg1 == null || arg2 == null || arg3 == null) {
+			public void exec(T1 arg0, T2 arg1, T3 arg2) {
+				if (arg0 == null || arg1 == null || arg2 == null) {
 					return;
 				}
-				Block3.this.exec(arg1, arg2, arg3);
+				Block3.this.exec(arg0, arg1, arg2);
 			};
 		};
 	}
@@ -107,9 +107,9 @@ public abstract class Block3<T1, T2, T3> extends AbstractDelayable3<T1, T2, T3, 
 	@NonNull
 	public Block3<T1, T2, T3> then(@NonNull final Executable3<T1, T2, T3> other) {
 		return new Block3<T1, T2, T3>() {
-			public void exec(T1 arg1, T2 arg2, T3 arg3) {
-				Block3.this.exec(arg1, arg2, arg3);
-				other.exec(arg1, arg2, arg3);
+			public void exec(T1 arg0, T2 arg1, T3 arg2) {
+				Block3.this.exec(arg0, arg1, arg2);
+				other.exec(arg0, arg1, arg2);
 			}
 		};
 	}

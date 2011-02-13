@@ -174,8 +174,8 @@ public class Sequence<A> implements Iterable<A>, ImplicitNumberType<A>, Serializ
 	 * @param generator
 	 *          a function used to generated each element from the sequence after
 	 *          the initial element
-	 * @param a
-	 *          predicate is satisfied when sequencing should stop, that is, when
+	 * @param stopCondition  a  
+	 *          predicate that is satisfied when sequencing should stop, that is, when
 	 *          the given element and subsequent should not be retrieved.
 	 * @return a new Sequence
 	 */

@@ -26,6 +26,8 @@ Getting Started
   
   * Lifecycle
   
+  * Number and NumberTypes - Compactly express BigInteger and BigDecimal literals, and deal with numeric types polimorphically.  
+  
    
   
  

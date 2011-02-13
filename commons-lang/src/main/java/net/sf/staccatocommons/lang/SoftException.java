@@ -132,7 +132,7 @@ public class SoftException extends UnhandledException {
 	 * @return the value of the {@link Thunk}, if it succeeds
 	 * @throws Exception
 	 *           if {@link Thunk#value()} failed
-	 * @see {@link Thunk}
+	 * @see Thunk
 	 * @see #harden(RuntimeException)
 	 */
 	public static <T> T valueOrHarden(@NonNull Thunk<T> thunk) throws Exception {
