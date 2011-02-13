@@ -13,7 +13,7 @@ Getting Started
   Staccato-Commons-Lang resolves simple and common everyday problems. Descriptions of such problems, solutions and examples 
   can be found in the following links:
   
-  * {{{docs/relevant-state-by-example.html}RelevantState}} - Consistently implementing equals, hashcode, toString, and/or compareTo in an efficient 
+  * {{{relevant-state-by-example.html}RelevantState}} - Consistently implementing equals, hashcode, toString, and/or compareTo in an efficient 
   way and without boilerplate code. 
   
   * Prioritized - Prioritizing elements in sorted collections

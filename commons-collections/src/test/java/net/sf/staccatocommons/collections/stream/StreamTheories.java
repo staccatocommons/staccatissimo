@@ -55,7 +55,7 @@ public abstract class StreamTheories {
 	private boolean emptyImpossible;
 
 	/**
-	 * Test method for {@link bstractStream#take(int)} .
+	 * Test method for {@link AbstractStream#take(int)} .
 	 */
 	@Theory
 	public final void take(int size, Stream<?> stream) {

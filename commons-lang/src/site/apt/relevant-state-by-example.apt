@@ -1,6 +1,6 @@
 Relevant State
 
-* Motivation
+* Introduction
 
  RelevantState is an abstract class aimed to consistently implement equals, hashcode, toString, and/or compareTo in an efficient 
   way and without boilerplate code.

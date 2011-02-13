@@ -1,0 +1,53 @@
+Stream by example
+
+* Introduction 
+ 
+ Streams are potentially infinite iterable objects that have a very rich interface and
+  perform most operations in a lazy manner and functional style.
+  They are designed to make complex, lazy transformations on iterable 
+  or iterable-like objects easier. Although they are primary targeted for dealing with collections, other Staccato-Commons
+  projects offer other alternative implementations that extend their scope.  
+  
+  On the other hand, for performing simple, eager transformations on just iterables, eventually in a more imperative style, 
+ have a look at {{{iterables-by-example.html}Iterables by example}}.
+  
+* The problem
+  
+  Quite frequently, developers need to perform in-memory transformations over collections, like selecting,
+  filtering or mapping elements. In Java, without any support for those operation neither at language nor standard library level, 
+  developers have usually to implement them writing ad-hoc methods. Code like the following is far too common:
+  
++---
+ Collection<Service> getDownServices(){ 
+  Collection<Service> downServices = new ArrayList<Service>();
+  for(Service service : services)
+    if(service.isDown())
+    downServices.add(service);
+  return downServices;   
+ }   
++--- 
+ 
+  The problem of such code is that it is reinventing the wheel. In this case, developer is implementing the logic of filtering
+  once and again, which sooner or later will be a maintenance headache. 
+  
+  Fortunately, many Java frameworks exists that attack those problems, each one with its pros and cons:
+   {{{http://commons.apache.org/collections/}Apache Commons Collections}}, 
+  {{{http://code.google.com/p/guava-libraries/}Guava (formerly Google Collections)}},
+   {{{http://code.google.com/p/totallylazy/}TotallyLazy}},
+  {{{http://functionaljava.org/}FunctionalJava}}, 
+  {{{http://www.op4j.org/}Op4J}}, {{{http://quaere.codehaus.org/}Quaere}} 
+  and of course, Staccato-Commons-Collections.
+  
+  It is not our intention to make a comparison between all those frameworks.
+  As said before, all them have both strengths and flaws, and the developer should decide which fits better. 
+  Instead, we will just present the solutions Staccato-Commons-Collections offers.
+  
+  
+* The Solution
+
+ Coming soon...
+
+       
+       
+      
+      

@@ -6,15 +6,17 @@
   </bannerLeft>  
   <body>
     <links>
-      <item name="Restrictions" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions" />
-      <item name="Defs" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs" />
-      <item name="Check" href="http://staccatocommons.sourceforge.net/staccatissimo/commonscheck"/>      
-      <item name="Lang" href="http://staccatocommons.sourceforge.net/staccatissimo/commonslang" />
-      <item name="Iterators" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators"/>
-      <item name="Collections" href="http://staccatocommons.sourceforge.net/staccatissimo/commonscollections"/>
-      <item name="IO" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsio"/>
-      <item name="Instrument" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument"/>
-      <item name="Restrictions-Instrument" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument"/>
+      <item name="Restrictions" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/index.html" />
+      <item name="Defs" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/index.html" />
+      <item name="Check" href="http://staccatocommons.sourceforge.net/staccatissimo/commonscheck/index.html"/>      
+      <item name="Lang" href="http://staccatocommons.sourceforge.net/staccatissimo/commonslang/index.html" />
+      <item name="Iterators" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators/index.html"/>
+      <item name="Collections" href="http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/index.html"/>
+      <item name="IO" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsio/index.html"/>
+      <item name="Instrument" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument/index.html"/>
+      <item name="Restrictions-Instrument" href="http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument/index.html"/>
+      <item name="Restrictions-Instrument-Maven-Plugin" 
+        href="http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrumentmavenplugin/index.html"/>
     </links>
 
     <menu name="Staccato-Commons">

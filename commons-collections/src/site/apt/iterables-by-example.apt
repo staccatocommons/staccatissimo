@@ -1,0 +1,16 @@
+Iterables by example
+
+* Introduction 
+ 
+ Staccato-Commons-Collections offers some utility classes to perform simple transformations on iterables, collections 
+ and maps: {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs/net/sf/staccatocommons/collections/iterable/Iterables.html}Iterables}},
+  {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs/net/sf/staccatocommons/collections/iterable/ModifiableIterables.html}ModifiableIterables}}, 
+  {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs/net/sf/staccatocommons/collections/Lists.html}Lists}} 
+  and {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs/net/sf/staccatocommons/collections/Maps.html}Maps}}. 
+  
+  On the other hand, for performing complex, lazy transformations on more than just iterables in a more functional way, 
+ have a look at {{{stream-by-example.html}Stream by example}}.
+
+* The problem
+
+ Coming soon...
