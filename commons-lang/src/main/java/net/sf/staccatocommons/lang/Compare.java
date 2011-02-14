@@ -201,7 +201,7 @@ public class Compare {
 	 * @return a new {@link AbstractFunction2}
 	 */
 	@NonNull
-	public static <A> Function2<A, A, A> min(final Comparator<A> comparator) {
+	public static <A> Function2<A, A, A> min(final Comparator<? super A> comparator) {
 		return new AbstractFunction2<A, A, A>() {
 			public A apply(A arg0, A arg1) {
 				return Compare.min(arg0, arg1, comparator);
@@ -218,7 +218,7 @@ public class Compare {
 	 * @return a new {@link AbstractFunction2}
 	 */
 	@NonNull
-	public static <A> Function2<A, A, A> max(final Comparator<A> comparator) {
+	public static <A> Function2<A, A, A> max(final Comparator<? super A> comparator) {
 		return new AbstractFunction2<A, A, A>() {
 			public A apply(A arg0, A arg1) {
 				return Compare.max(arg0, arg1, comparator);
@@ -238,7 +238,7 @@ public class Compare {
 	 */
 	@NonNull
 	@ForceRestrictions
-	public static <T> T max(@NonNull T c1, @NonNull T c2, @NonNull Comparator<T> comparator) {
+	public static <T> T max(@NonNull T c1, @NonNull T c2, @NonNull Comparator<? super T> comparator) {
 		return comparator.compare(c1, c2) >= 0 ? c1 : c2;
 	}
 
@@ -254,7 +254,7 @@ public class Compare {
 	 */
 	@NonNull
 	@ForceRestrictions
-	public static <T> T min(@NonNull T c1, @NonNull T c2, Comparator<T> comparator) {
+	public static <T> T min(@NonNull T c1, @NonNull T c2, Comparator<? super T> comparator) {
 		return comparator.compare(c1, c2) <= 0 ? c1 : c2;
 	}
 
