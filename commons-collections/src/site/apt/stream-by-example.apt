@@ -13,22 +13,36 @@ Stream by example
   
 * The problem
   
-  Quite frequently, developers need to perform in-memory transformations over collections, like selecting,
+  Quite frequently, developers need to perform in-memory complex, chained transformations over collections, like selecting,
   filtering or mapping elements. In Java, without any support for those operation neither at language nor standard library level, 
   developers have usually to implement them writing ad-hoc methods. Code like the following is far too common:
   
 +---
- Collection<Service> getDownServices(){ 
-  Collection<Service> downServices = new ArrayList<Service>();
-  for(Service service : services)
-    if(service.isDown())
-    downServices.add(service);
-  return downServices;   
- }   
+   Collection<Incident> getMostUrgentProblems() {
+        List<Incident> incidents = new ArrayList<Incident>();
+        for (Service service : services) {
+            if (service.isDown()) {
+                incidents.add(service.getMostRecentIncident());
+            }
+        }
+        Collections.sort(incidents, new Comparator<Incident>() {
+            public int compare(Incident arg0, Incident arg1) {
+                return arg0.getPriority() - arg1.getPriority();
+            }
+        });
+        if (incidents.size() > 5) {
+            for (Iterator<Incident> iter = incidents.listIterator(5); iter.hasNext();) {
+                iter.next();
+                iter.remove();
+            }
+        }
+        return incidents;
+    }
 +--- 
  
-  The problem of such code is that it is reinventing the wheel. In this case, developer is implementing the logic of filtering
-  once and again, which sooner or later will be a maintenance headache. 
+  The problem of such code is that it is reinventing the wheel, mixing different transformations in one.  In this case, developer is
+  filtering down services, mapping their most recent incidents, and getting top 5 most urgent issues by priority - 4 operations 
+  that need to be coded, tested, and probably debugged. 
   
   Fortunately, many Java frameworks exists that attack those problems, each one with its pros and cons:
    {{{http://commons.apache.org/collections/}Apache Commons Collections}}, 
@@ -43,9 +57,52 @@ Stream by example
   Instead, we will just present the solutions Staccato-Commons-Collections offers.
   
   
+  
 * The Solution
 
- Coming soon...
+ Streams are the Staccato-Commons solution for performing such operations on iterables. They are generic wrappers that implement many of those
+common transformation in a lazy manner - that is, no processing is actually performed in most cases unless it it actually necessary, which
+enables them to perform efficiently chained operations on demand on both small and very large sequences of elements. They can be constructed  
+literally by specifying their elements (Cons utility class), by specifying the elements generation strategy (Iterate utility class), 
+by decorating other Iterables (Streams utility class) or using sources like databases result sets, directories, files, etc
+ (provided by the rest of Staccato-Commons projects). 
+ 
+ For example, the previous code can be refactored to use Streams:
+
++----
+    Collection<Incident> getMostUrgentProblems2() {
+        return Streams.from(services).filter(new Predicate<Service>() {
+            public boolean eval(Service argument) {
+                return argument.isDown();
+            }
+        }).map(new AbstractFunction<Service, Incident>() {
+            public Incident apply(Service arg) {
+                return arg.getMostRecentIncident();
+            }
+        }).sortOn(new AbstractFunction<Incident, Integer>() {
+            public Integer apply(Incident arg) {
+                return arg.getPriority();
+            }
+        }).take(5).toList();
+    }
++---- 
+ 
+** Examples 
+
+*** Filtering and mapping   
+
+*** Summing
+
+*** FlatMapping and Zipping 
+
+*** Appending and accessing
+
+*** Appending undefined elements and getting size
+ 
+ 
+ 
+    
+  
 
        
        

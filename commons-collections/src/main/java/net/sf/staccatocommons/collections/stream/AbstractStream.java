@@ -41,6 +41,7 @@ import net.sf.staccatocommons.collections.stream.impl.internal.FilterStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FlatMapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.GroupByStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.MapStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.SortedStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeWhileStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ZipStream;
@@ -269,9 +270,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return Iterables.toList(this);
 	}
 
-	public Stream<A> toRepetableStream() {
+	public Stream<A> freeze() {
 		return new ListStream<A>(toList()) {
-			public Stream<A> toRepetableStream() {
+			public Stream<A> freeze() {
 				return this;
 			}
 
@@ -446,21 +447,21 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public A maximum() {
-		return maximumBy((Comparator<A>) Compare.<Comparable> natural());
+		return maximumBy(natural());
 	}
 
 	@Override
 	public A minimum() {
-		return minimumBy((Comparator<A>) Compare.<Comparable> natural());
+		return minimumBy(natural());
 	}
 
 	@Override
-	public A maximumBy(Comparator<A> comparator) {
+	public A maximumBy(Comparator<? super A> comparator) {
 		return reduce(max(comparator));
 	}
 
 	@Override
-	public A minimumBy(Comparator<A> comparator) {
+	public A minimumBy(Comparator<? super A> comparator) {
 		return reduce(min(comparator));
 	}
 
@@ -474,6 +475,22 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	public <B extends Comparable<B>> A minimumOn(Applicable<A, B> function)
 		throws NoSuchElementException {
 		return minimumBy(Compare.on(function));
+	}
+
+	public Stream<A> sort() {
+		return sortBy(natural());
+	}
+
+	public Stream<A> sortBy(Comparator<A> comparator) {
+		return new SortedStream<A>(this, comparator);
+	}
+
+	public <B extends Comparable<B>> Stream<A> sortOn(Applicable<A, B> function) {
+		return sortBy(Compare.on(function));
+	}
+
+	private Comparator<A> natural() {
+		return (Comparator<A>) Compare.<Comparable> natural();
 	}
 
 	@Override

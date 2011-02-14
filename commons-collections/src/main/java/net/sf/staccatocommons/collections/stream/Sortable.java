@@ -24,10 +24,11 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Sortable<A> {
 
-	// TODO
-	// Stream<A> sort();
-	// Stream<A> sortBy(Comparator<A> comparator);
-	// Stream<A> sortOn(Applicable<A,A,A> function);
+	Stream<A> sort();
+
+	Stream<A> sortBy(Comparator<A> comparator);
+
+	<B extends Comparable<B>> Stream<A> sortOn(Applicable<A, B> function);
 
 	/**
 	 * Answers the min element of the stream, using the given
@@ -39,7 +40,7 @@ public interface Sortable<A> {
 	 *           if the stream is empty.
 	 */
 	@NonNull
-	A minimumBy(@NonNull Comparator<A> comparator) throws NoSuchElementException;
+	A minimumBy(@NonNull Comparator<? super A> comparator) throws NoSuchElementException;
 
 	/**
 	 * Answers the minimum element of the stream, using the given
@@ -75,7 +76,7 @@ public interface Sortable<A> {
 	 *           if the stream is empty.
 	 */
 	@NonNull
-	A maximumBy(@NonNull Comparator<A> comparator) throws NoSuchElementException;
+	A maximumBy(@NonNull Comparator<? super A> comparator) throws NoSuchElementException;
 
 	/**
 	 * Answers the maximum element of the stream, using the given

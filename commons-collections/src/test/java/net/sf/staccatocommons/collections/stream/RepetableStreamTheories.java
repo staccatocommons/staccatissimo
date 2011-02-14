@@ -255,7 +255,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 	@Theory
 	public <A> void testElementEqual(Stream<A> stream) throws Exception {
 		assertTrue(stream.equivalent(stream));
-		assertTrue(stream.equivalent(stream.toRepetableStream()));
+		assertTrue(stream.equivalent(stream.freeze()));
 		assertTrue(stream.equivalent(stream.toList()));
 		assertTrue(stream.equivalent(stream.toArray((Class<A>) Object.class)));
 	}

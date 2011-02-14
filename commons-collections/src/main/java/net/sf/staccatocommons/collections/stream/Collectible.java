@@ -46,17 +46,6 @@ public interface Collectible<A> {
 	List<A> toList();
 
 	/**
-	 * Converts this stream into a new ordered one that is not lazy and that has
-	 * repeatable iteration order.
-	 * 
-	 * @return a new {@link Stream} that retrieves elements from the next
-	 *         iteration of this Stream.
-	 */
-	@NonNull
-	@Repeatable
-	Stream<A> toRepetableStream();
-
-	/**
 	 * Create a new array that has the same elements that the retrived by this
 	 * {@link Stream}
 	 * 
@@ -67,4 +56,14 @@ public interface Collectible<A> {
 	@NonNull
 	A[] toArray(@NonNull Class<? extends A> clazz);
 
+	/**
+	 * Freezes this steram by converting it into a new ordered one that is not
+	 * lazy and that has repeatable iteration order.
+	 * 
+	 * @return a new {@link Stream} that retrieves elements from the next
+	 *         iteration of this Stream.
+	 */
+	@NonNull
+	@Repeatable
+	Stream<A> freeze();
 }
