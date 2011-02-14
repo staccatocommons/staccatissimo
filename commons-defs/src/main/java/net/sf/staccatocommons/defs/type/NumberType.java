@@ -196,7 +196,7 @@ public interface NumberType<A> extends Comparator<A> {
 	 * 
 	 * @return the addition identity element
 	 */
-	@SideEffectFree
+	@Constant
 	A zero();
 
 	/**
@@ -204,7 +204,7 @@ public interface NumberType<A> extends Comparator<A> {
 	 * 
 	 * @return the multiplication identity element
 	 */
-	@SideEffectFree
+	@Constant
 	A one();
 
 	/**
