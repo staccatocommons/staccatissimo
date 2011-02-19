@@ -270,7 +270,7 @@ public class Compare {
 	@NonNull
 	@ForceRestrictions
 	public static <A, B extends Comparable<B>> Comparator<A> on(
-		@NonNull final Applicable<A, B> function) {
+		@NonNull final Applicable<? super A, B> function) {
 		return new Comparator<A>() {
 			public int compare(A arg0, A arg1) {
 				return function.apply(arg0).compareTo(function.apply(arg1));
