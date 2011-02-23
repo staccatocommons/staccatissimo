@@ -25,12 +25,13 @@ import net.sf.staccatocommons.restrictions.effect.Transparent;
  * {@link Restriction} that denotes that the return value of a method is always
  * the same object. <strong>This does not necessary mean that the returned
  * object is a singleton</strong>.
- * 
+ * <p>
  * Although theoretically a method may be constant and still not
  * {@link Transparent} - because of not being {@link SideEffectFree}, in
  * practice this is a bug source. Thus, {@link Constant} annotated methods
  * <strong>must</strong> be {@link Transparent}, and they do not need to be
- * anotated with that annotation too, as it is implied.
+ * annotated with that annotation too, as it is implied.
+ * </p>
  * 
  * @author flbulgarelli
  */
