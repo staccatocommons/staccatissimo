@@ -78,6 +78,23 @@ public class Strings {
 	}
 
 	/**
+	 * Returns a new {@link Predicate} that answers if its {@link String} argument
+	 * starts with a given prefix
+	 * 
+	 * @param string
+	 * @return a new Predicate that evaluates <code>args.startsWith(string)</code>
+	 */
+	@NonNull
+	public static Predicate<String> startsWith(@NonNull final String string) {
+		return new Predicate<String>() {
+			@Override
+			public boolean eval(String args) {
+				return args.startsWith(string);
+			}
+		};
+	}
+
+	/**
 	 * Returns a function that returns the result of sending
 	 * {@link Object#toString()} to its argument
 	 * 
@@ -93,4 +110,5 @@ public class Strings {
 			}
 		};
 	}
+
 }
