@@ -466,13 +466,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public <B extends Comparable<B>> A maximumOn(Applicable<A, B> function)
+	public <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function)
 		throws NoSuchElementException {
 		return maximumBy(Compare.on(function));
 	}
 
 	@Override
-	public <B extends Comparable<B>> A minimumOn(Applicable<A, B> function)
+	public <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function)
 		throws NoSuchElementException {
 		return minimumBy(Compare.on(function));
 	}
@@ -485,7 +485,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new SortedStream<A>(this, comparator);
 	}
 
-	public <B extends Comparable<B>> Stream<A> sortOn(Applicable<A, B> function) {
+	public <B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function) {
 		return sortBy(Compare.on(function));
 	}
 

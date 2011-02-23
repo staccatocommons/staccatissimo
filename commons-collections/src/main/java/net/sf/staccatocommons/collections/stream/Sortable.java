@@ -28,7 +28,7 @@ public interface Sortable<A> {
 
 	Stream<A> sortBy(Comparator<A> comparator);
 
-	<B extends Comparable<B>> Stream<A> sortOn(Applicable<A, B> function);
+	<B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function);
 
 	/**
 	 * Answers the min element of the stream, using the given
@@ -51,7 +51,7 @@ public interface Sortable<A> {
 	 * @throws NoSuchElementException
 	 *           if the stream is empty.
 	 */
-	<B extends Comparable<B>> A minimumOn(@NonNull Applicable<A, B> function)
+	<B extends Comparable<B>> A minimumOn(@NonNull Applicable<? super A, B> function)
 		throws NoSuchElementException;
 
 	/**
@@ -87,7 +87,7 @@ public interface Sortable<A> {
 	 * @throws NoSuchElementException
 	 *           if the stream is empty.
 	 */
-	<B extends Comparable<B>> A maximumOn(@NonNull Applicable<A, B> function)
+	<B extends Comparable<B>> A maximumOn(@NonNull Applicable<? super A, B> function)
 		throws NoSuchElementException;
 
 	/**
