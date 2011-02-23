@@ -34,6 +34,12 @@
 			<artifactId>commons-iterators</artifactId>
 			<version>1.0-alpha-4-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.staccatocommons</groupId>
+			<artifactId>commons-lambda</artifactId>
+			<version>1.0-alpha-4-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<reporting>
 		<plugins>
@@ -70,23 +76,23 @@
 			<build>
 				<plugins>
 					<plugin>
-                        <groupId>net.sf.staccatocommons</groupId>
-                        <artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
-                        <version>1.0-alpha-4-SNAPSHOT</version>
-                        <configuration>
-                            <ignoreReturnChecks>true</ignoreReturnChecks>
-                            <ignoreConstants>false</ignoreConstants>
-                            <ignoreChecks>false</ignoreChecks>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>process-classes</phase>
-                                <goals>
-                                    <goal>instrument</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
+						<groupId>net.sf.staccatocommons</groupId>
+						<artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
+						<version>1.0-alpha-4-SNAPSHOT</version>
+						<configuration>
+							<ignoreReturnChecks>true</ignoreReturnChecks>
+							<ignoreConstants>false</ignoreConstants>
+							<ignoreChecks>false</ignoreChecks>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>process-classes</phase>
+								<goals>
+									<goal>instrument</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
 				</plugins>
 			</build>
 		</profile>

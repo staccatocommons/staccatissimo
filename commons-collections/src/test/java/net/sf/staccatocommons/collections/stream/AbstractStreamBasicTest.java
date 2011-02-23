@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import static net.sf.staccatocommons.lambda.Lambda.*;
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static net.sf.staccatocommons.lang.number.Numbers.*;
 import static net.sf.staccatocommons.lang.sequence.StopConditions.*;
@@ -23,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
@@ -37,9 +37,9 @@ import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.tuple.Pair;
-import net.sf.staccatocommons.lang.tuple.Triple;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -51,6 +51,14 @@ import org.junit.Test;
  * 
  */
 public class AbstractStreamBasicTest {
+
+	/**
+	 * 
+	 */
+	@BeforeClass
+	public static void before() {
+		lambda($(Stream.class).toList());
+	}
 
 	/** Test for sum */
 	@Test
@@ -234,11 +242,7 @@ public class AbstractStreamBasicTest {
 				_(new Object(), 12, "foo"),
 				_(new Object(), 9, "bye"),
 				_(new Object(), 6, ""))
-			.maximumOn(new AbstractFunction<Triple<Object, Integer, String>, Integer>() {
-				public Integer apply(Triple<Object, Integer, String> arg) {
-					return arg._2();
-				}
-			})
+			.maximumOn(second(Integer.class))
 			._3();
 		assertEquals("foo", max);
 		assertEquals(150, (int) Cons.from(90, 10, 30, 6, 150, 65).maximum());
@@ -262,11 +266,7 @@ public class AbstractStreamBasicTest {
 					Arrays.asList(5)),
 				new ListStream<Integer>(Arrays.asList(1, 1, 2, 4, 4, 4, 5))
 					.groupBy(Equiv.<Integer> equalOrNull())
-					.map(new AbstractFunction<Stream<Integer>, List<Integer>>() {
-						public List<Integer> apply(Stream<Integer> arg) {
-							return arg.toList();
-						}
-					})
+					.map(lambda($(Stream.class).toList()))
 					.toList());
 	}
 }

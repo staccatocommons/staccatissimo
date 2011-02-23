@@ -17,6 +17,7 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
@@ -64,12 +65,7 @@ public class IterablesUnitTest {
 	 */
 	@Test
 	public void testFilter() throws Exception {
-		List<String> result = Iterables.filter(stringsList, new Predicate<String>() {
-			@Override
-			public boolean eval(String s) {
-				return s.startsWith("H");
-			}
-		});
+		List<String> result = Iterables.filter(stringsList, Strings.startsWith("H"));
 		assertEquals(asList("Hello"), result);
 	}
 
@@ -107,12 +103,7 @@ public class IterablesUnitTest {
 	/** Test for {@link Iterables#findOrNone(Iterable, Evaluable)} */
 	@Test
 	public void testFindOrNone() throws Exception {
-		Option<String> result = Iterables.findOrNone(stringsList, new Predicate<String>() {
-			@Override
-			public boolean eval(String s) {
-				return s.startsWith("H");
-			}
-		});
+		Option<String> result = Iterables.findOrNone(stringsList, Strings.startsWith("H"));
 		assertEquals("Hello", result.value());
 	}
 

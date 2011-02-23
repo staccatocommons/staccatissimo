@@ -86,6 +86,20 @@ by decorating other Iterables (Streams utility class) or using sources like data
         }).take(5).toList();
     }
 +---- 
+
+Or event cleaner, if using Staccato-Commons-Lambda:
+
++---
+    Collection<Incident> getMostUrgentProblems3() {
+        return Streams
+            .from(services)
+            .filter(lambda($(Service.class).isDown()))
+            .map(lambda($(Service.class).getMostRecentIncident()))
+            .sortOn(lambda($(Incident.class).getPriority()))
+            .take(5)
+            .toList();
+    }
++---
  
 ** Examples 
 
