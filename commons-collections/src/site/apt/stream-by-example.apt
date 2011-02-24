@@ -105,13 +105,38 @@ Or event cleaner, if using Staccato-Commons-Lambda:
 
 *** Filtering and mapping   
 
-*** Summing
++---
+    import static net.sf.staccatocommons.lang.Compare.*;
+    import static net.sf.staccatocommons.lang.number.NumberTypes.*;
+    
+    //Answer a the next integers of those > 30 in the list
+    Cons.from(20, 60, 9, 31, 26)
+        .filter(greaterThan(30))
+        .map(add(1));
++---
+
+*** Mapping and getting average
+
++---
+    List<BusinessArea> businessAreas = ...;
+
+   //Return the average bucket of the business areas
+    Streams.from(businessAreas) //
+        .map(lambda($(BusinessArea.class).getBucket()))
+        .average(bigDecimal());
++---
+
+*** Comparing elements
 
 *** FlatMapping and Zipping 
 
 *** Appending and accessing
 
 *** Appending undefined elements and getting size
+
+*** Getting max element
+
+*** Getting any element except of the first one, if possible 
  
  
  
