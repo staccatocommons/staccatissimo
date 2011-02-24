@@ -86,9 +86,7 @@ by decorating other Iterables (Streams utility class) or using sources like data
         }).take(5).toList();
     }
 +---- 
-
-Or event cleaner, if using Staccato-Commons-Lambda:
-
+ Or event cleaner, if using Staccato-Commons-Lambda:
 +---
     Collection<Incident> getMostUrgentProblems3() {
         return Streams
@@ -100,10 +98,9 @@ Or event cleaner, if using Staccato-Commons-Lambda:
             .toList();
     }
 +---
- 
-** Examples 
+* Examples 
 
-*** Filtering and mapping   
+** Filtering and mapping   
 
 +---
     import static net.sf.staccatocommons.lang.Compare.*;
@@ -115,7 +112,7 @@ Or event cleaner, if using Staccato-Commons-Lambda:
         .map(add(1));
 +---
 
-*** Mapping and getting average
+** Mapping and getting average
 
 +---
     interface BusinessArea { BigDecimal getBucket(); }
@@ -128,17 +125,17 @@ Or event cleaner, if using Staccato-Commons-Lambda:
         .average();
 +---
 
-*** Comparing elements
+** Comparing elements
 
-*** FlatMapping and Zipping 
+** FlatMapping and Zipping 
 
-*** Appending and accessing
+** Appending and accessing
 
-*** Appending undefined elements and getting size
+** Appending undefined elements and getting size
 
-*** Getting max element
+** Getting max element
 
-*** Dropping and getting any element 
+** Dropping and getting any element 
 
 +---
     interface Fruit {}
@@ -154,12 +151,3 @@ Or event cleaner, if using Staccato-Commons-Lambda:
 
 +--
  
- 
- 
-    
-  
-
-       
-       
-      
-      
