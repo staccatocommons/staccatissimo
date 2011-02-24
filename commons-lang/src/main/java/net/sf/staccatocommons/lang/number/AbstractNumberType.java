@@ -16,8 +16,9 @@ import java.io.Serializable;
 
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
+import net.sf.staccatocommons.lang.number.internal.NumberTypeFunction;
+import net.sf.staccatocommons.lang.number.internal.NumberTypeFunction2;
 
 /**
  * @author flbulgarelli
@@ -80,7 +81,7 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 
 	public Function<A, A> negate() {
 		// XXX make constant
-		return new NumberTypeFunction() {
+		return new NumberTypeFunction<A>(this) {
 			public A apply(A arg) {
 				return negate(arg);
 			}
@@ -89,7 +90,7 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 
 	public Function<A, A> abs() {
 		// XXX make constant
-		return new NumberTypeFunction() {
+		return new NumberTypeFunction<A>(this) {
 			public A apply(A arg) {
 				return abs(arg);
 			}
@@ -124,49 +125,4 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 			return multiply(arg1, arg2);
 		}
 	}
-
-	abstract class NumberTypeFunction extends AbstractFunction<A, A> implements ImplicitNumberType<A> {
-
-		public NumberType<A> numberType() {
-			return AbstractNumberType.this;
-		}
-	}
-}
-
-/**
- * NumberTypeFunctions, override {@link AbstractFunction2#apply(Object)} so that
- * the resulting function is flipped and it implements
- * {@link ImplicitNumberType} too
- * 
- * @author flbulgarelli
- * 
- */
-abstract class NumberTypeFunction2<A> extends AbstractFunction2<A, A, A> implements
-	ImplicitNumberType<A> {
-
-	private final NumberType<A> type;
-
-	public NumberTypeFunction2(NumberType<A> type) {
-		super();
-		this.type = type;
-	}
-
-	public final NumberType<A> numberType() {
-		return type;
-	}
-
-	public Function<A, A> apply(final A arg1) {
-		abstract class NumberTypeFunction extends AbstractFunction<A, A> implements
-			ImplicitNumberType<A> {
-			public NumberType<A> numberType() {
-				return NumberTypeFunction2.this.numberType();
-			}
-		}
-		return new NumberTypeFunction() {
-			public A apply(A arg) {
-				return NumberTypeFunction2.this.apply(arg, arg1);
-			}
-		};
-	}
-
 }
