@@ -17,13 +17,21 @@ import java.util.Iterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
- * @author flbulgarelli
+ * Utility class for creating {@link Thriter}s
  * 
+ * @author flbulgarelli
  */
 public class Thriters {
 
 	private Thriters() {}
 
+	/**
+	 * Answers a @link Thriter} that wraps the given iterator
+	 * 
+	 * @param <A>
+	 * @param iter
+	 * @return a new {@link Thriter}
+	 */
 	@NonNull
 	public static <A> Thriter<A> from(@NonNull Iterator<? extends A> iter) {
 		return Thriterators.from(iter);

@@ -24,6 +24,16 @@ public class Thriterators {
 
 	private Thriterators() {}
 
+	/**
+	 * Answers a {@link Thriterator} that wraps the given {@link Iterator}. If it
+	 * is already a {@link Thriterator}, this method just returns its argument.
+	 * 
+	 * @param <A>
+	 * @param iter
+	 * @return a new {@link Thriterator} that wraps the given iterator, if it is
+	 *         not already a {@link Thriterator}. The given <code>iter</code>,
+	 *         otherwise
+	 */
 	@NonNull
 	public static <A> Thriterator<A> from(@NonNull Iterator<? extends A> iter) {
 		if (iter instanceof Thriterator)
