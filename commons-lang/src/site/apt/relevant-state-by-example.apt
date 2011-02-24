@@ -2,7 +2,8 @@ Relevant State
 
 * Introduction
 
- RelevantState is an abstract class aimed to consistently implement equals, hashcode, toString, and/or compareTo in an efficient 
+ {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs/net/sf/staccatocommons/lang/value/RelevantState.html}RelevantState}}
+ is an abstract class aimed to consistently implement equals, hashcode, toString, and/or compareTo in an efficient 
   way and without boilerplate code.
   
 * The problem        
@@ -35,7 +36,8 @@ Relevant State
   
   * Generate them with a tool. Modern IDEs usually offer some support for implementing them. 
   
-  * Implement them by hand, using an API that simplifies it, like Apache Commons Lang builder:
+  * Implement them by hand, using an API that simplifies it, like 
+  {{{http://commons.apache.org/lang/api-2.3/org/apache/commons/lang/builder/package-summary.html}Apache Commons Lang builders}}:
    ToStringBuilder, EqualsBuilder, HashCodeBuilder and CompareToBuilder
    
   * Implementing them using reflection, like, again, Apache Commons Lang builders. 
@@ -64,7 +66,7 @@ Third approach is not covered, as it implies an important performance penalty.
 
 **  Using Code Generation
  
-   Using code generation facilities of Eclipse 3.6, we can get something like the following
+   Using code generation facilities of {{{http://www.eclipse.org/}Eclipse Java IDE}}, we can get something like the following
  
 +---------
 class Customer {
