@@ -269,4 +269,17 @@ public class AbstractStreamBasicTest {
 					.map(lambda($(Stream.class).toList()))
 					.toList());
 	}
+
+	/**
+	 * Test for {@link AbstractStream#sort()}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testSort() throws Exception {
+		Stream<Integer> sort = Cons.from(10, 20, 6, 9, 18, 6, 26, 32).sort();
+		assertEquals(6, (int) sort.first());
+		assertEquals(32, (int) sort.last());
+		assertTrue(sort.equivalent(6, 6, 9, 10, 18, 20, 26, 32));
+	}
 }

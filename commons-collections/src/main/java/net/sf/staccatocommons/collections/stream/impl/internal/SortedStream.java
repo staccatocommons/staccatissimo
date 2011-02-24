@@ -38,15 +38,15 @@ public class SortedStream<A> extends WrapperStream<A> {
 	}
 
 	public Thriterator<A> iterator() {
-		return Thriterators.from(toSet().iterator());
+		return Thriterators.from(toList().iterator());
 	}
 
 	public List<A> toList() {
-		return Iterables.toSortedList(this, comparator);
+		return Iterables.toSortedList(getSource(), comparator);
 	}
 
 	public Set<A> toSet() {
-		return Iterables.toSortedSet(this, comparator);
+		return Iterables.toSortedSet(getSource(), comparator);
 	}
 
 	public A first() {
