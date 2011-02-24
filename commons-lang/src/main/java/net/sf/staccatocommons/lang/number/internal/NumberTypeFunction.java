@@ -22,24 +22,24 @@ import net.sf.staccatocommons.lang.number.ImplicitNumberType;
  * 
  * @author flbulgarelli
  * 
- * @param <A>
+ * @param <B>
  */
-public abstract class NumberTypeFunction<A> extends AbstractFunction<A, A> implements
-	ImplicitNumberType<A> {
+public abstract class NumberTypeFunction<A, B> extends AbstractFunction<A, B> implements
+	ImplicitNumberType<B> {
 
 	/**
 	 * 
 	 */
-	private final NumberType<A> numberType;
+	private final NumberType<B> numberType;
 
 	/**
 	 * Creates a new {@link NumberTypeFunction}
 	 */
-	public NumberTypeFunction(NumberType<A> abstractNumberType) {
+	public NumberTypeFunction(NumberType<B> abstractNumberType) {
 		numberType = abstractNumberType;
 	}
 
-	public NumberType<A> numberType() {
+	public NumberType<B> numberType() {
 		return numberType;
 	}
 }

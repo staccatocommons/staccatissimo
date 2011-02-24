@@ -81,7 +81,7 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 
 	public Function<A, A> negate() {
 		// XXX make constant
-		return new NumberTypeFunction<A>(this) {
+		return new NumberTypeFunction<A, A>(this) {
 			public A apply(A arg) {
 				return negate(arg);
 			}
@@ -90,7 +90,7 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 
 	public Function<A, A> abs() {
 		// XXX make constant
-		return new NumberTypeFunction<A>(this) {
+		return new NumberTypeFunction<A, A>(this) {
 			public A apply(A arg) {
 				return abs(arg);
 			}
