@@ -52,4 +52,8 @@ public class SortedStream<A> extends WrapperStream<A> {
 	public A first() {
 		return minimumBy(comparator);
 	}
+
+	public A last() {
+		return maximumBy(comparator);
+	}
 }

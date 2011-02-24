@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -24,10 +25,34 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Sortable<A> {
 
+	/**
+	 * Sorts this Stream, using their element's natural ordering
+	 * 
+	 * @return a new {@link Stream}
+	 */
+	@NonNull
+	@Projection
 	Stream<A> sort();
 
-	Stream<A> sortBy(Comparator<A> comparator);
+	/**
+	 * Sorts this Stream, using the given comparator
+	 * 
+	 * @param comparator
+	 * @return a new {@link Stream}
+	 */
+	@Projection
+	@NonNull
+	Stream<A> sortBy(@NonNull Comparator<A> comparator);
 
+	/**
+	 * Sorts this Stream, using <code>Compare.on(function)</code> as comparator
+	 * 
+	 * @param <B>
+	 * @param function
+	 * @return a new {@link Stream}
+	 */
+	@Projection
+	@NonNull
 	<B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function);
 
 	/**
