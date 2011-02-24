@@ -118,12 +118,14 @@ Or event cleaner, if using Staccato-Commons-Lambda:
 *** Mapping and getting average
 
 +---
+    interface BusinessArea { BigDecimal getBucket(); }
+
     List<BusinessArea> businessAreas = ...;
 
    //Return the average bucket of the business areas
     Streams.from(businessAreas) //
         .map(lambda($(BusinessArea.class).getBucket()))
-        .average(bigDecimal());
+        .average();
 +---
 
 *** Comparing elements
@@ -136,7 +138,21 @@ Or event cleaner, if using Staccato-Commons-Lambda:
 
 *** Getting max element
 
-*** Getting any element except of the first one, if possible 
+*** Dropping and getting any element 
+
++---
+    interface Fruit {}
+    class Apple implements Fruit {};
+    Collection<Fruit> fruits = ...;
+    
+    //Answers any fruit, except of the first one.
+    //If there is no fruit, or just one fruit element, 
+    //returns a new Apple.
+    Streams.from(fruits)
+               .drop(1)
+               .anyOrElse(new Apple());
+
++--
  
  
  
