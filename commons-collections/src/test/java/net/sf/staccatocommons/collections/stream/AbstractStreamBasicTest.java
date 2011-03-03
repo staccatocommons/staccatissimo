@@ -140,16 +140,16 @@ public class AbstractStreamBasicTest {
 			.equivalent(1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6));
 	}
 
-	/** Test for {@link AbstractStream#concat(Iterable)} ***/
+	/** Test for {@link AbstractStream#append(Iterable)} ***/
 	@Test
 	public void concat() {
 		assertEquals(
 			Arrays.asList(10, 90, 60, 1, 2, 20),
-			Cons.from(10, 90, 60).concat(Arrays.asList(1, 2)).concat(Cons.from(20)).toList());
+			Cons.from(10, 90, 60).append(Arrays.asList(1, 2)).append(Cons.from(20)).toList());
 
 		assertEquals(
 			Arrays.asList("foo"),
-			Cons.from("foo").concat(Streams.from(new AbstractUnmodifiableIterator<String>() {
+			Cons.from("foo").append(Streams.from(new AbstractUnmodifiableIterator<String>() {
 				public boolean hasNext() {
 					return true;
 				}
@@ -203,12 +203,21 @@ public class AbstractStreamBasicTest {
 	 * Test for {@link Stream#intersperse(Object)}
 	 */
 	@Test
-	public void testIntersperseRepeatable() throws Exception {
-		Stream<Integer> interspersed = Cons.from(10, 20, 30).intersperse(1);
+	public void testMemorize() throws Exception {
+		Stream<Integer> interspersed = Cons.from(10, 20, 30).intersperse(1).memorize();
 		assertEquals(10, (int) interspersed.first());
 		assertEquals(10, (int) interspersed.first());
 		assertEquals(1, (int) interspersed.second());
 		assertEquals(20, (int) interspersed.third());
+
+		Stream<Integer> mapped = Cons.from(10, 20, 30).map(add(1));
+		assertEquals(21, (int) mapped.second());
+		assertEquals(11, (int) mapped.first());
+		assertEquals(31, (int) mapped.third());
+		assertEquals(31, (int) mapped.third());
+		assertEquals(11, (int) mapped.first());
+		assertEquals(21, (int) mapped.second());
+
 	}
 
 	/** Test for {@link Stream#streamPartition(Evaluable)} */
@@ -282,4 +291,33 @@ public class AbstractStreamBasicTest {
 		assertEquals(32, (int) sort.last());
 		assertTrue(sort.equivalent(6, 6, 9, 10, 18, 20, 26, 32));
 	}
+
+	@Test
+	public void testRep() throws Exception {
+		Stream<Integer> s = Cons.from(1, 3).intersperse(0);
+		assertFalse(s.isEmpty());
+		assertFalse(s.isEmpty());
+		assertFalse(s.isEmpty());
+		assertFalse(s.isEmpty());
+
+		s = s.tail();
+		assertFalse(s.isEmpty());
+		assertFalse(s.isEmpty());
+
+		s = s.tail();
+		assertFalse(s.isEmpty());
+
+		s = s.tail();
+		assertTrue(s.isEmpty());
+
+	}
+
+	// TODO cycle
+	// TODO replicate
+
+	@Test
+	public void testLongStream() throws Exception {
+		System.out.println(Iterate.from(1, add(1)).intersperse(0).take(20000).size());
+	}
+
 }

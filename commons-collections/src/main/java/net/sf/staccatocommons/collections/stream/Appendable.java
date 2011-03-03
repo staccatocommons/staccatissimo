@@ -38,7 +38,7 @@ public interface Appendable<A> {
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable
-	Stream<A> concat(@NonNull Iterable<A> other);
+	Stream<A> append(@NonNull Iterable<A> other);
 
 	/**
 	 * Concatenates this Stream with the undefined Stream. Equivalent to
@@ -47,7 +47,7 @@ public interface Appendable<A> {
 	 * @return a new {@link Stream}
 	 * @see Streams#undefined()
 	 */
-	Stream<A> concatUndefined();
+	Stream<A> appendUndefined();
 
 	/**
 	 * Adds an element as the last one of the stream.

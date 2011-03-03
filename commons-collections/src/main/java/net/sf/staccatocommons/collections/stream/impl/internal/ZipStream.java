@@ -12,7 +12,10 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
+import static java.lang.Math.*;
+import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
+import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.iterators.ZipIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
@@ -29,7 +32,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public final class ZipStream<C, A, B> extends AbstractStream<C> {
 	private final Iterable<B> iterable;
 	private final Function2<A, B, C> function;
-	private final AbstractStream<A> abstractStream;
+	private final AbstractStream<A> stream;
 
 	/**
 	 * Creates a new {@link ZipStream}
@@ -38,13 +41,22 @@ public final class ZipStream<C, A, B> extends AbstractStream<C> {
 		@NonNull Function2<A, B, C> function) {
 		this.iterable = iterable;
 		this.function = function;
-		this.abstractStream = abstractStream;
+		this.stream = abstractStream;
 	}
 
 	public Thriterator<C> iterator() {
-		return new ZipIterator(
-			abstractStream.iterator(),
-			Thriterators.from(iterable.iterator()),
-			function);
+		return new ZipIterator(stream.iterator(), Thriterators.from(iterable.iterator()), function);
+	}
+
+	public int size() {
+		return min(stream.size(), Iterables.size(iterable));
+	}
+
+	public boolean isEmpty() {
+		return stream.isEmpty() || Iterables.isEmpty(iterable);
+	}
+
+	public Stream<C> dettach() {
+		return this;
 	}
 }

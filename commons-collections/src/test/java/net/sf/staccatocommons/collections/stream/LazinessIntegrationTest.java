@@ -13,9 +13,6 @@
 package net.sf.staccatocommons.collections.stream;
 
 import static org.junit.Assert.*;
-
-import java.util.concurrent.Callable;
-
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 
@@ -61,7 +58,7 @@ public class LazinessIntegrationTest {
 	public void testIntersparseAndSize() throws Exception {
 		Cons //
 			.from(10, 20)
-			.concatUndefined()
+			.appendUndefined()
 			.intersperse(1)
 			.size();
 	}
@@ -71,7 +68,7 @@ public class LazinessIntegrationTest {
 	public void testIntersparseAndTake() throws Exception {
 		assertTrue(Cons //
 			.from(10, 20)
-			.concatUndefined()
+			.appendUndefined()
 			.intersperse(1)
 			.take(4)
 			.equivalent(10, 1, 20, 1));
@@ -84,11 +81,7 @@ public class LazinessIntegrationTest {
 			.from(10, 20)
 			.append(21)
 			.append(Thunks.constant(22))
-			.append(Thunks.from(new Callable<Integer>() {
-				public Integer call() throws Exception {
-					throw new Exception();
-				}
-			}))
+			.appendUndefined()
 			.append(Thunks.constant(25))
 			.intersperse(1)
 			.last());
@@ -99,7 +92,7 @@ public class LazinessIntegrationTest {
 	public void testConcatAndSize() throws Exception {
 		int size = Cons //
 			.from(10)
-			.concatUndefined()
+			.appendUndefined()
 			.size();
 		assertEquals(2, size);
 	}
@@ -110,7 +103,7 @@ public class LazinessIntegrationTest {
 		int size = //
 		Cons //
 			.from(10)
-			.concatUndefined()
+			.appendUndefined()
 			.append(20)
 			.size();
 		assertEquals(3, size);
@@ -122,7 +115,7 @@ public class LazinessIntegrationTest {
 		assertEquals(6,//
 			Cons //
 				.from(10, 20, 30)
-				.concatUndefined()
+				.appendUndefined()
 				.prepend(20)
 				.prepend(30)
 				.size());

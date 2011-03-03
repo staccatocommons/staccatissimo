@@ -12,26 +12,23 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.collections.stream.RepetableStreamTheories;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedConsStream;
-import net.sf.staccatocommons.lang.thunk.Thunks;
+import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedPrependStream;
 
 import org.junit.Before;
 import org.junit.experimental.theories.DataPoints;
 
 /**
- * Test for {@link DelayedConsStream}
+ * Test for {@link DelayedPrependStream}
  * 
  * @author flbulgarelli
  * 
  */
 
-public class DelayedConsStreamUnitTest extends RepetableStreamTheories {
+public class ConsStreamUnitTest extends RepetableStreamTheories {
 
 	/**
 	 * Setups the test
@@ -43,8 +40,8 @@ public class DelayedConsStreamUnitTest extends RepetableStreamTheories {
 
 	/** Data points */
 	@DataPoints
-	public static Stream[] stream = new Stream[] {
-			Cons.from(Thunks.constant(10), Arrays.asList(15, 20, 30)),
-			Cons.from(Thunks.constant(1), Collections.<Integer> emptyList()), };
+	public static Stream[] stream = new Stream[] { //
+	Cons.from(10, Cons.from(15, 20, 30)), //
+			Cons.from(1, Streams.empty()) };
 
 }

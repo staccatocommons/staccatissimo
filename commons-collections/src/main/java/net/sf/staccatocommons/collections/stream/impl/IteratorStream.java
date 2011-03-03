@@ -32,7 +32,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @param <A>
  *          element type
  */
-public final class IteratorStream<A> extends AbstractStream<A> {
+public class IteratorStream<A> extends AbstractStream<A> {
 
 	private final Thriterator<A> iterator;
 
@@ -47,8 +47,12 @@ public final class IteratorStream<A> extends AbstractStream<A> {
 		this.iterator = Thriterators.from(iterator);
 	}
 
-	public Thriterator<A> iterator() {
+	public final Thriterator<A> iterator() {
 		return iterator;
+	}
+
+	public Stream<A> dettach() {
+		return this;
 	}
 
 	public Pair<A, Stream<A>> decons() {

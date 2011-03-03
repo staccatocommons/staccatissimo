@@ -56,6 +56,13 @@ public interface Collectible<A> {
 	@NonNull
 	A[] toArray(@NonNull Class<? extends A> clazz);
 
+	// grants consistent isEmpty
+	Stream<A> dettach();
+
+	// grants repeatability and laziness
+	@Repeatable
+	Stream<A> memorize();
+
 	/**
 	 * Freezes this steram by converting it into a new ordered one that is not
 	 * lazy and that has repeatable iteration order.
@@ -65,5 +72,7 @@ public interface Collectible<A> {
 	 */
 	@NonNull
 	@Repeatable
-	Stream<A> freeze();
+	// grants repeatability and strictness
+	Stream<A> force();
+
 }

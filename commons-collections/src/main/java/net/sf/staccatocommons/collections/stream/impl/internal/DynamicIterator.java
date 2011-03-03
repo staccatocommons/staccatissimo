@@ -14,6 +14,7 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
@@ -45,6 +46,11 @@ public abstract class DynamicIterator<A> extends AbstractThriterator<A> {
 	public A current() throws NoSuchElementException {
 		checkDynamic();
 		return iter.current();
+	}
+
+	public Thunk<A> delayedCurrent() {
+		checkDynamic();
+		return iter.delayedCurrent();
 	}
 
 	private void checkDynamic() {

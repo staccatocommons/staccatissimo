@@ -28,14 +28,14 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public final class ConcatStream<A> extends AbstractStream<A> {
+public final class AppendIterableStream<A> extends AbstractStream<A> {
 	private final Stream<A> stream;
 	private final Iterable<A> other;
 
 	/**
-	 * Creates a new {@link ConcatStream}
+	 * Creates a new {@link AppendIterableStream}
 	 */
-	public ConcatStream(@NonNull Stream<A> stream, @NonNull Iterable<A> other) {
+	public AppendIterableStream(@NonNull Stream<A> stream, @NonNull Iterable<A> other) {
 		this.stream = stream;
 		this.other = other;
 	}

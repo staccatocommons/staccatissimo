@@ -69,4 +69,12 @@ public class Iterate {
 	public static <A> Stream<A> from(@NonNull A seed, @NonNull Applicable<A, A> generator) {
 		return Streams.from(Sequence.from(seed, generator, StopConditions.<A> stopNever()));
 	}
+
+	// /**
+	// *
+	// */
+	// private static <A> Stream<A> replicate(@NonNull A element) {
+	// return from(element, Functions.<A> identity());
+	// }
+
 }

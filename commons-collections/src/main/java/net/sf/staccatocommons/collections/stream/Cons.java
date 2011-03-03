@@ -16,12 +16,12 @@ import java.util.Arrays;
 
 import net.sf.staccatocommons.collections.stream.impl.ConsStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.SingleStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedConsStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedSingleStream;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -105,8 +105,8 @@ public class Cons {
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable
-	public static <A> Stream<A> from(final A head, @NonNull final Iterable<? extends A> tail) {
-		return new ConsStream<A>(head, tail);
+	public static <A> Stream<A> from(final A head, @NonNull final Stream<? extends A> tail) {
+		return new ConsStream<A>(Thunks.constant(head), (Stream<A>) tail);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class Cons {
 	@NonNull
 	@Projection
 	@ConditionallyRepeatable
-	public static <A> Stream<A> from(final Thunk<A> head, @NonNull final Iterable<? extends A> tail) {
-		return new DelayedConsStream<A>(head, tail);
+	public static <A> Stream<A> from(final Thunk<A> head, @NonNull final Stream<? extends A> tail) {
+		return new ConsStream<A>(head, (Stream<A>) tail);
 	}
 }

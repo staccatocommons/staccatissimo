@@ -27,13 +27,13 @@ import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
 public class DelayedConsIteratorUnitTest extends IteratorTheories {
 
 	protected Iterator<?> createTwoElementsIterator() {
-		return new DelayedConsIterator<Integer>( //
+		return new DelayedPrependIterator<Integer>( //
 			new ConstantThunk<Integer>(1), //
 			Thriters.from(Arrays.asList(10).iterator()));
 	}
 
 	protected Iterator<?> createOneElementIterator() {
-		return new DelayedConsIterator<Integer>( //
+		return new DelayedPrependIterator<Integer>( //
 			new ConstantThunk<Integer>(1), //
 			EmptyIterator.<Integer> empty());
 	}

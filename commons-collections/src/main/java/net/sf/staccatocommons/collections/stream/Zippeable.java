@@ -13,7 +13,6 @@
 package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
-import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.function.Function2;
@@ -53,7 +52,6 @@ public interface Zippeable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	public <B, C> Stream<C> zip(@NonNull Iterable<B> iterable, Function2<A, B, C> function);
 
 	/**
@@ -76,7 +74,6 @@ public interface Zippeable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	public <B> Stream<Pair<A, B>> zip(@NonNull Iterable<B> iterable);
 
 }

@@ -26,66 +26,66 @@ import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
  * @author flbulgarelli
  * 
  */
-public class ConsIterator<A> extends AdvanceThriterator<A> {
+public class PrependIterator<A> extends AdvanceThriterator<A> {
 
-	private final A head;
-	private final Thriter<? extends A> tail;
-	private boolean headConsumed;
-	private boolean tailAdvanced;
+	private final A element;
+	private final Thriter<? extends A> iter;
+	private boolean elementConsumed;
+	private boolean iterAdvanced;
 
 	/**
-	 * Creates a new {@link ConsIterator}
+	 * Creates a new {@link PrependIterator}
 	 */
-	public ConsIterator(A head, Thriter<? extends A> tail) {
-		this.head = head;
-		this.tail = tail;
+	public PrependIterator(A element, Thriter<? extends A> iterator) {
+		this.element = element;
+		this.iter = iterator;
 	}
 
 	/**
-	 * Creates a new {@link ConsIterator}
+	 * Creates a new {@link PrependIterator}
 	 */
-	public ConsIterator(A head, Iterator<? extends A> tail) {
-		this(head, Thriters.from(tail));
+	public PrependIterator(A element, Iterator<? extends A> iterator) {
+		this(element, Thriters.from(iterator));
 	}
 
 	/**
-	 * Creates a new {@link ConsIterator}
+	 * Creates a new {@link PrependIterator}
 	 */
-	public ConsIterator(A head, Thriterator<? extends A> tail) {
-		this(head, (Thriter<A>) tail);
+	public PrependIterator(A element, Thriterator<? extends A> iterator) {
+		this(element, (Thriter<A>) iterator);
 	}
 
 	public final boolean hasNext() {
-		return !headConsumed || tail.hasNext();
+		return !elementConsumed || iter.hasNext();
 	}
 
 	public final void advanceNext() throws NoSuchElementException {
-		if (!headConsumed) {
-			headConsumed = true;
+		if (!elementConsumed) {
+			elementConsumed = true;
 		} else {
-			tail.advanceNext();
-			tailAdvanced = true;
+			iter.advanceNext();
+			iterAdvanced = true;
 		}
 	}
 
 	public final A current() throws NoSuchElementException {
-		if (tailAdvanced)
-			return tail.current();
-		return headValue();
+		if (iterAdvanced)
+			return iter.current();
+		return elementValue();
 	}
 
-	protected A headValue() {
-		return head;
+	protected A elementValue() {
+		return element;
 	}
 
-	protected Thunk<A> headThunk() {
-		return new ConstantThunk<A>(head);
+	protected Thunk<A> elementThunk() {
+		return new ConstantThunk<A>(element);
 	}
 
 	public Thunk<A> delayedCurrent() {
-		if (tailAdvanced)
-			return (Thunk<A>) tail.delayedCurrent();
-		return headThunk();
+		if (iterAdvanced)
+			return (Thunk<A>) iter.delayedCurrent();
+		return elementThunk();
 	}
 
 }

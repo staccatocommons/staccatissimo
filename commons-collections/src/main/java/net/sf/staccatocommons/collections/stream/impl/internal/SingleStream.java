@@ -12,7 +12,9 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import net.sf.staccatocommons.collections.stream.AbstractStream;
+import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.collections.stream.impl.StrictStream;
 import net.sf.staccatocommons.iterators.SingleIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
@@ -20,7 +22,7 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
  * @author flbulgarelli
  * 
  */
-public class SingleStream<A> extends AbstractStream<A> {
+public class SingleStream<A> extends StrictStream<A> {
 
 	private A element;
 
@@ -33,6 +35,10 @@ public class SingleStream<A> extends AbstractStream<A> {
 
 	public Thriterator<A> iterator() {
 		return SingleIterator.from(element);
+	}
+
+	public Stream<A> tail() {
+		return Streams.empty();
 	}
 
 }

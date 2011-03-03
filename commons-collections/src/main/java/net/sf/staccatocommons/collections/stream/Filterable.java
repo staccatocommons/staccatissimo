@@ -14,7 +14,6 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.List;
 
-import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.tuple.Pair;
@@ -39,7 +38,6 @@ public interface Filterable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	Stream<A> filter(@NonNull Evaluable<? super A> predicate);
 
 	/**
@@ -51,7 +49,6 @@ public interface Filterable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	Stream<A> takeWhile(@NonNull Evaluable<? super A> predicate);
 
 	/**
@@ -64,7 +61,6 @@ public interface Filterable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	Stream<A> take(@NotNegative int amountOfElements);
 
 	/**
@@ -76,7 +72,6 @@ public interface Filterable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	Stream<A> dropWhile(@NonNull Evaluable<? super A> predicate);
 
 	/**
@@ -91,7 +86,6 @@ public interface Filterable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	Stream<A> drop(@NotNegative int amountOfElements);
 
 	/***

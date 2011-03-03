@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.List;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
-import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -27,7 +26,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * @param <A>
  */
-public class CollectionStream<A> extends AbstractStream<A> {
+public class CollectionStream<A> extends StrictStream<A> {
 
 	private final Collection<? extends A> collection;
 

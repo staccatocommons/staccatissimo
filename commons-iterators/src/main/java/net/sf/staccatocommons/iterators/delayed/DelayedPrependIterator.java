@@ -13,28 +13,28 @@
 package net.sf.staccatocommons.iterators.delayed;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.ConsIterator;
+import net.sf.staccatocommons.iterators.PrependIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class DelayedConsIterator<A> extends ConsIterator<A> {
+public class DelayedPrependIterator<A> extends PrependIterator<A> {
 
 	/**
-	 * Creates a new {@link ConsIterator}
+	 * Creates a new {@link PrependIterator}
 	 */
-	public DelayedConsIterator(Thunk<A> head, Thriter<? extends A> tail) {
+	public DelayedPrependIterator(Thunk<A> head, Thriter<? extends A> tail) {
 		super((A) head, tail);
 	}
 
-	protected A headValue() {
+	protected A elementValue() {
 		return headThunk().value();
 	}
 
 	protected Thunk<A> headThunk() {
-		return (Thunk<A>) super.headValue();
+		return (Thunk<A>) super.elementValue();
 	}
 
 }

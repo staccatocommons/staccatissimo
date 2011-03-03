@@ -30,13 +30,13 @@ public class UndefinedIterator<A> extends AdvanceThriterator<A> {
 	}
 
 	public void advanceNext() throws NoSuchElementException {
+		if (advanced) {
+			throw new NoSuchElementException();
+		}
 		advanced = true;
 	}
 
 	public A current() throws NoSuchElementException {
-		if (advanced) {
-			throw new NoSuchElementException();
-		}
 		throw new RuntimeException("Undefined");
 	}
 

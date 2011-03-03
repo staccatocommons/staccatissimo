@@ -30,9 +30,12 @@ import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
+import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
+import net.sf.staccatocommons.collections.stream.impl.MemorizedStream;
+import net.sf.staccatocommons.collections.stream.impl.PrependStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.ConcatStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.AppendIterableStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DeconsThenStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DelayedThenStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;
@@ -46,6 +49,7 @@ import net.sf.staccatocommons.collections.stream.impl.internal.TakeStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeWhileStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ZipStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedAppendStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedPrependStream;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
@@ -202,12 +206,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public Stream<A> concat(final Iterable<A> other) {
-		return new ConcatStream<A>(this, other);
+	public Stream<A> append(final Iterable<A> other) {
+		return new AppendIterableStream<A>(this, other);
 	}
 
-	public Stream<A> concatUndefined() {
-		return concat(Streams.<A> undefined());
+	public Stream<A> appendUndefined() {
+		return append(Streams.<A> undefined());
 	}
 
 	@Override
@@ -270,9 +274,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return Iterables.toList(this);
 	}
 
-	public Stream<A> freeze() {
+	public Stream<A> force() {
 		return new ListStream<A>(toList()) {
-			public Stream<A> freeze() {
+			public Stream<A> dettach() {
 				return this;
 			}
 
@@ -280,6 +284,14 @@ public abstract class AbstractStream<A> implements Stream<A> {
 				return Collections.unmodifiableList(getList());
 			}
 		};
+	}
+
+	public Stream<A> memorize() {
+		return new MemorizedStream<A>(this);
+	}
+
+	public Stream<A> dettach() {
+		return new IteratorStream<A>(iterator());
 	}
 
 	@Override
@@ -345,7 +357,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 			public Stream<A> delayedApply(Thunk<A> head, Stream<A> tail) {
 				if (tail.isEmpty())
 					return Cons.from(head);
-				return tail.intersperse(sep).prepend(sep).prepend(head);
+				return Cons.from(head, Cons.from(sep, tail.intersperse(sep)));
 			}
 		});
 	}
@@ -359,11 +371,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	public Stream<A> prepend(A element) {
-		return Cons.from(element, this);
+		return new PrependStream<A>(element, this);
 	}
 
 	public Stream<A> prepend(Thunk<A> element) {
-		return Cons.from(element, this);
+		return new DelayedPrependStream<A>(element, this);
 	}
 
 	public <B> Stream<B> then(final DeconsApplicable<A, B> function) {

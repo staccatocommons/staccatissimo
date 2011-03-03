@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -32,7 +31,6 @@ public interface Interscalable<A> {
 	 * @return a new {@link Stream}
 	 */
 	@NonNull
-	@ConditionallyRepeatable
 	@Projection
 	Stream<A> intersperse(A element);
 

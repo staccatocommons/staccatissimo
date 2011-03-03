@@ -12,79 +12,51 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import static net.sf.staccatocommons.lang.tuple.Tuples.*;
-import net.sf.staccatocommons.collections.iterable.Iterables;
-import net.sf.staccatocommons.collections.stream.AbstractStream;
+import java.util.NoSuchElementException;
+
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedPrependStream;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.iterators.ConsIterator;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.iterators.thriter.Thriterators;
-import net.sf.staccatocommons.lang.number.ImplicitNumberType;
-import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
-/**
- * 
- * A {@link ConsStream} is a {@link Stream} that retrieves first a single
- * element - the head - and the elements from another {@link Iterable} - the
- * tail.
- * 
- * @author flbulgarelli
- * 
- * @param <A>
- */
-public class ConsStream<A> extends AbstractStream<A> {
-	private final Iterable<? extends A> tail;
-	private final A head;
+public class ConsStream<A> extends DelayedPrependStream<A> {
 
-	/**
-	 * Creates a new {@link ConsStream}
-	 */
-	public ConsStream(A head, @NonNull Iterable<? extends A> tail) {
-		this.tail = tail;
-		this.head = head;
+	public ConsStream(@NonNull Thunk<A> head, Stream<A> tail) {
+		super(head, tail);
 	}
 
 	public Thriterator<A> iterator() {
-		return new ConsIterator<A>(head(), tailIterator());
-	}
+		return new AdvanceThriterator<A>() {
 
-	public final boolean isEmpty() {
-		return false;
-	}
+			private Thunk<A> current = null;
+			private Stream<A> next = ConsStream.this;
+			private boolean hasNext = true;
 
-	public final Pair<A, Stream<A>> decons() {
-		return _(head(), tail());
-	}
+			public boolean hasNext() {
 
-	public Pair<Thunk<A>, Stream<A>> delayedDecons() {
-		return _(Thunks.constant(head), tail());
-	}
+				return hasNext;
+			}
 
-	public A head() {
-		return head;
-	}
+			public void advanceNext() throws NoSuchElementException {
+				if (!hasNext())
+					throw new NoSuchElementException();
+				Pair<Thunk<A>, Stream<A>> decons = next.delayedDecons();
+				current = decons.first();
+				next = decons.second().dettach();
+				hasNext = !next.isEmpty();
+			}
 
-	public final Stream<A> tail() {
-		return Streams.from(tail);
-	}
+			public A current() {
+				return current.value();
+			}
 
-	public final A get(int n) {
-		if (n == 0)
-			return head();
-		return Iterables.get(tail, n - 1);
-	}
-
-	public final NumberType<A> numberType() {
-		return ((ImplicitNumberType<A>) tail).numberType();
-	}
-
-	protected final Thriterator<? extends A> tailIterator() {
-		return Thriterators.from(tail.iterator());
+			public Thunk<A> delayedCurrent() {
+				return current;
+			}
+		};
 	}
 
 }

@@ -14,7 +14,6 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
@@ -52,7 +51,6 @@ public interface Deconstructable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	<B> Stream<B> then(@NonNull DeconsApplicable<A, B> function);
 
 	// XXX this method name is confusing. It should be "then" and take a different
@@ -74,6 +72,8 @@ public interface Deconstructable<A> {
 	 *         applying the given function to this stream
 	 * @see #delayedDecons()
 	 */
+	@NonNull
+	@Projection
 	<B> Stream<B> delayedThen(@NonNull DeconsApplicable<A, B> function);
 
 	/**
@@ -104,6 +104,7 @@ public interface Deconstructable<A> {
 	 * @throws NoSuchElementException
 	 *           if stream is empty
 	 */
+	@NonNull
 	Pair<Thunk<A>, Stream<A>> delayedDecons();
 
 	/**
@@ -126,7 +127,6 @@ public interface Deconstructable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	Stream<A> tail();
 
 	/**

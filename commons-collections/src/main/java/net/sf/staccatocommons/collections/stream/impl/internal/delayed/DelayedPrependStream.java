@@ -15,9 +15,9 @@ package net.sf.staccatocommons.collections.stream.impl.internal.delayed;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.collections.stream.impl.ConsStream;
+import net.sf.staccatocommons.collections.stream.impl.PrependStream;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.delayed.DelayedConsIterator;
+import net.sf.staccatocommons.iterators.delayed.DelayedPrependIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -26,17 +26,17 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public class DelayedConsStream<A> extends ConsStream<A> {
+public class DelayedPrependStream<A> extends PrependStream<A> {
 
 	/**
-	 * Creates a new {@link DelayedConsStream}
+	 * Creates a new {@link DelayedPrependStream}
 	 */
-	public DelayedConsStream(@NonNull Thunk<A> head, @NonNull Iterable<? extends A> tail) {
+	public DelayedPrependStream(@NonNull Thunk<A> head, @NonNull Stream<A> tail) {
 		super((A) head, tail);
 	}
 
 	public Thriterator<A> iterator() {
-		return new DelayedConsIterator<A>(headThunk(), tailIterator());
+		return new DelayedPrependIterator<A>(headThunk(), tailIterator());
 	}
 
 	public Pair<Thunk<A>, Stream<A>> delayedDecons() {
