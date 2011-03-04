@@ -1,30 +1,29 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
  * @author flbulgarelli
  * 
  * @param <B>
- * @param <A>
  */
-public final class DeconsThenStream<B, A> extends AbstractThenStream<A, B> {
+public final class DelayedDeconsThenStream<A, B> extends AbstractThenStream<A, B> {
 	private final DeconsApplicable<A, B> function;
 
 	/**
-	 * Creates a new {@link DeconsThenStream}
+	 * Creates a new {@link DelayedDeconsThenStream}
 	 */
-	public DeconsThenStream(Stream<A> stream, DeconsApplicable<A, B> function) {
+	public DelayedDeconsThenStream(Stream<A> stream, DeconsApplicable<A, B> function) {
 		super(stream);
 		this.function = function;
 	}
 
-	@Override
 	protected Stream<B> apply() {
 		if (getStream().isEmpty())
 			return function.emptyApply();
-		Pair<A, Stream<A>> decons = getStream().decons();
-		return function.apply(decons._1(), decons._2());
+		Pair<Thunk<A>, Stream<A>> decons = getStream().delayedDecons();
+		return function.delayedApply(decons._1(), decons._2());
 	}
 }

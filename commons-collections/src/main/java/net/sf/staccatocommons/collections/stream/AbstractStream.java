@@ -34,10 +34,10 @@ import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.MemorizedStream;
 import net.sf.staccatocommons.collections.stream.impl.PrependStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendIterableStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DeconsThenStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.DelayedThenStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.DelayedDeconsThenStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropWhileStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FilterStream;
@@ -383,7 +383,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	public <B> Stream<B> delayedThen(final DeconsApplicable<A, B> function) {
-		return new DelayedThenStream<A, B>(this, function);
+		return new DelayedDeconsThenStream<A, B>(this, function);
 	}
 
 	@Override

@@ -1,18 +1,14 @@
 package net.sf.staccatocommons.collections.stream;
 
+import net.sf.staccatocommons.collections.stream.impl.internal.AbstractThenStream;
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * @author flbulgarelli
  * 
  * @param <B>
  */
-public final class ThenStream<A, B> extends AbstractStream<B> {
-	/**
-	 * 
-	 */
-	private final AbstractStream<A> stream;
+public final class ThenStream<A, B> extends AbstractThenStream<A, B> {
 	/**
 	 * 
 	 */
@@ -21,13 +17,13 @@ public final class ThenStream<A, B> extends AbstractStream<B> {
 	/**
 	 * Creates a new {@link ThenStream}
 	 */
-	public ThenStream(AbstractStream<A> abstractStream,
-		Applicable<Stream<A>, ? extends Stream<B>> function) {
-		stream = abstractStream;
+	public ThenStream(AbstractStream<A> stream, Applicable<Stream<A>, ? extends Stream<B>> function) {
+		super(stream);
 		this.function = function;
 	}
 
-	public Thriterator<B> iterator() {
-		return function.apply(stream).iterator();
+	protected Stream<B> apply() {
+		return function.apply(getStream());
 	}
+
 }

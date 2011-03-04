@@ -317,7 +317,7 @@ public class AbstractStreamBasicTest {
 
 	@Test
 	public void testLongStream() throws Exception {
-		System.out.println(Iterate.from(1, add(1)).intersperse(0).take(20000).size());
+		assertEquals(90000, Iterate.from(1, add(1)).intersperse(0).take(90000).size());
 	}
 
 }
