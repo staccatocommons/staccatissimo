@@ -12,18 +12,16 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.impl.internal.WrapperStream;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
-import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.iterators.thriter.Thriterators;
 
 /**
  * @author flbulgarelli
@@ -31,7 +29,8 @@ import net.sf.staccatocommons.iterators.thriter.Thriterators;
  */
 public class MemorizedStream<A> extends WrapperStream<A> {
 
-	private List<A> previous = new LinkedList<A>(); // FIXME not totally lazy
+	private List<Thunk<A>> previous = new LinkedList<Thunk<A>>(); // FIXME not
+																																// totally lazy
 	private Thriterator<A> remaining;
 
 	public MemorizedStream(Stream<A> source) {
@@ -43,10 +42,21 @@ public class MemorizedStream<A> extends WrapperStream<A> {
 		return previous.isEmpty() && !remaining.hasNext();
 	}
 
+	public Stream<A> dettach() {
+		return this;
+	}
+
+	public Stream<A> memorize() {
+		return this;
+	}
+
 	public Thriterator<A> iterator() {
-		final Iterator<A> previouslyIter = previous.iterator();
+		final ListIterator<Thunk<A>> previousIter = previous.listIterator();
 		return new AdvanceThriterator<A>() {
+			private Thunk<A> current;
 			private Thriterator<A> iter;
+			private boolean remaningIterationStarted = false;
+			private boolean iterUpdated = false;
 
 			public boolean hasNext() {
 				updateIter();
@@ -54,26 +64,20 @@ public class MemorizedStream<A> extends WrapperStream<A> {
 			}
 
 			private void updateIter() {
-				if (previouslyIter.hasNext()) {
-					iter = Thriterators.from(previouslyIter);
-				} else {
-					iter = new NextThriterator<A>() {
-						public boolean hasNext() {
-							return remaining.hasNext();
-						}
-
-						public A next() {
-							A next = remaining.next();
-							previous.add(next);
-							return next;
-						}
-					};
+				if (iterUpdated || remaningIterationStarted)
+					return;
+				iterUpdated = true;
+				if (!previousIter.hasNext()) {
+					remaningIterationStarted = true;
+					iter = newRemaningIterator();
+				} else if (iter == null) {
+					iter = newPreviousIerIterator();
 				}
 			}
 
 			public void advanceNext() throws NoSuchElementException {
-				if (!hasNext())
-					throw new NoSuchElementException();
+				updateIter();
+				iterUpdated = false;
 				iter.advanceNext();
 			}
 
@@ -83,6 +87,50 @@ public class MemorizedStream<A> extends WrapperStream<A> {
 
 			public Thunk<A> delayedCurrent() {
 				return iter.delayedCurrent();
+			}
+
+			public AdvanceThriterator<A> newPreviousIerIterator() {
+				return new AdvanceThriterator<A>() {
+
+					public boolean hasNext() {
+						return previousIter.hasNext();
+					}
+
+					public void advanceNext() throws NoSuchElementException {
+						current = previousIter.next();
+					}
+
+					public A current() {
+						return delayedCurrent().value();
+					}
+
+					public Thunk<A> delayedCurrent() {
+						return current;
+					}
+
+				};
+			}
+
+			public Thriterator<A> newRemaningIterator() {
+				return new AdvanceThriterator<A>() {
+					public boolean hasNext() {
+						return remaining.hasNext();
+					}
+
+					public void advanceNext() throws NoSuchElementException {
+						remaining.advanceNext();
+						current = remaining.delayedCurrent();
+						previousIter.add(current);
+					}
+
+					public A current() {
+						return delayedCurrent().value();
+					}
+
+					public Thunk<A> delayedCurrent() {
+						return current;
+					}
+				};
 			}
 		};
 	}

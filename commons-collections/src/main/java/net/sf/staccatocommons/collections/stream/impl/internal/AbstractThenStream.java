@@ -23,7 +23,6 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
- * 
  */
 public abstract class AbstractThenStream<A, B> extends AbstractStream<B> {
 

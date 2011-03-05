@@ -22,8 +22,19 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
+/**
+ * A {@link DelayedPrependStream} that iterates through its elements by
+ * iteratively splitting it in head and tail.
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <A>
+ */
 public class ConsStream<A> extends DelayedPrependStream<A> {
 
+	/**
+	 * Creates a new {@link ConsStream}
+	 */
 	public ConsStream(@NonNull Thunk<A> head, Stream<A> tail) {
 		super(head, tail);
 	}

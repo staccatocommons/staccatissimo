@@ -209,6 +209,10 @@ public class AbstractStreamBasicTest {
 		assertEquals(10, (int) interspersed.first());
 		assertEquals(1, (int) interspersed.second());
 		assertEquals(20, (int) interspersed.third());
+		assertEquals(30, (int) interspersed.get(4));
+		assertEquals(1, (int) interspersed.get(3));
+		assertEquals(1, (int) interspersed.get(3));
+		assertEquals(30, (int) interspersed.get(4));
 
 		Stream<Integer> mapped = Cons.from(10, 20, 30).map(add(1));
 		assertEquals(21, (int) mapped.second());
@@ -218,6 +222,45 @@ public class AbstractStreamBasicTest {
 		assertEquals(11, (int) mapped.first());
 		assertEquals(21, (int) mapped.second());
 
+	}
+
+	/**
+	 * Test that memorized streams are equivalent to themselves
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMemorizeEquivSelf() throws Exception {
+		Stream<Integer> stream = Streams.from(Arrays.asList(10, 20, 30).iterator());
+		assertFalse(stream.equivalent(stream));
+
+		Stream<Integer> memorized = Streams.from(Arrays.asList(10, 20, 30).iterator()).memorize();
+		assertTrue(memorized.equivalent(memorized));
+	}
+
+	/**
+	 * Tests that memorized streams are completely lazy in the particular case of
+	 * a append stream
+	 */
+	@Test
+	public void testMemorizeLazyOnAppend() throws Exception {
+		Stream<Integer> stream = Cons.from(10, 98).append(65).appendUndefined().append(9).memorize();
+		assertEquals(stream.last(), stream.last());
+	}
+
+	/**
+	 * Tests that memorized streams are completely lazy, in the particular case of
+	 * a map stream
+	 */
+	@Test
+	public void testMemorizeLazyOnMap() throws Exception {
+		Stream<Integer> stream = Cons.from(10, 0, 20).map(new AbstractFunction<Integer, Integer>() {
+			public Integer apply(Integer arg) {
+				return 1 / arg;
+			}
+		}).memorize();
+
+		assertEquals(stream.third(), stream.third());
 	}
 
 	/** Test for {@link Stream#streamPartition(Evaluable)} */
@@ -309,12 +352,12 @@ public class AbstractStreamBasicTest {
 
 		s = s.tail();
 		assertTrue(s.isEmpty());
-
 	}
 
 	// TODO cycle
 	// TODO replicate
 
+	/** Test that no StackOverflow is raised on large, recursive streams */
 	@Test
 	public void testLongStream() throws Exception {
 		assertEquals(90000, Iterate.from(1, add(1)).intersperse(0).take(90000).size());
