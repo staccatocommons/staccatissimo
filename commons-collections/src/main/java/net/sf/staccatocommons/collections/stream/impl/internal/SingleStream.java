@@ -15,8 +15,8 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.collections.stream.impl.StrictStream;
-import net.sf.staccatocommons.iterators.SingleIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 
 /**
  * @author flbulgarelli
@@ -34,7 +34,7 @@ public class SingleStream<A> extends StrictStream<A> {
 	}
 
 	public Thriterator<A> iterator() {
-		return SingleIterator.from(element);
+		return Thriterators.from(element);
 	}
 
 	public Stream<A> tail() {

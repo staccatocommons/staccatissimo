@@ -14,8 +14,9 @@ package net.sf.staccatocommons.collections.stream.impl;
 
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.iterators.UndefinedIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -28,7 +29,7 @@ public class UndefinedStream<A> extends AbstractStream<A> {
 	private static final UndefinedStream INSTANCE = new UndefinedStream();
 
 	public Thriterator<A> iterator() {
-		return new UndefinedIterator<A>();
+		return Thriterators.from(Thunks.<A> undefined());
 	}
 
 	/**
