@@ -1,0 +1,11 @@
+Some words about Singleton's
+
+It is most times misunderstood. We prefer not to use it becasue:
+
+ difficult to grant.... This is particulary true with serialization tools. 
+ lazy initialzation sync issues. This is not part of the pattern by no means, but is a common practice associated to it that is frequently find in books
+ 
+
+
+
+We prefer to view as an optimization improvement. Proper behaviour should not relly on the fact it is singleton. It is better to call it const

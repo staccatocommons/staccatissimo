@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import static net.sf.staccatocommons.testing.junit.asserts.ObjectAssert.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
@@ -62,7 +62,7 @@ public class IteratorStreamUnitTest extends StreamTheories {
 			.from(Arrays.asList(90, 50, "foo").iterator())
 			.decons();
 		assertEquals(90, decons._1());
-		assertInstanceof(decons._2(), IteratorStream.class);
+		assertThat(decons._2(), instanceOf(IteratorStream.class));
 		assertEquals(Arrays.asList(50, "foo"), decons._2().toList());
 	}
 

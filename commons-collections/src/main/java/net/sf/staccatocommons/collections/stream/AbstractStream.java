@@ -546,14 +546,14 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		});
 	}
 
-	// crossg [xs,ys] = xs >>= \x -> ys >>= \y -> return [x,y]
-	// crossg (xs:xss) = xs >>= \x -> (crossg xss) >>= \ys -> return (x:ys)
 	public Stream<Stream<A>> fullCross(Stream<Stream<A>> other) {
 		Ensure.that().isNotEmpty("other", (EmptyAware) other);
-		return crossStream(other.prepend(this));
+		return fcross(other.prepend(this));
 	}
 
-	private static <A> Stream<Stream<A>> crossStream(Stream<Stream<A>> other) {
+	// fcross [xs,ys] = xs >>= \x -> ys >>= \y -> return [x,y]
+	// fcross (xs:xss) = xs >>= \x -> (fcross xss) >>= \ys -> return (x:ys)
+	private static <A> Stream<Stream<A>> fcross(Stream<Stream<A>> other) {
 		return other.then(new AbstractFunction<Stream<Stream<A>>, Stream<Stream<A>>>() {
 			public Stream<Stream<A>> apply(Stream<Stream<A>> _xss) {
 				final Stream<Stream<A>> xss = _xss.memorize();
@@ -570,12 +570,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 				return xss.head().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
 					public Stream<Stream<A>> apply(final A x) {
-						return crossStream(xss.tail()).flatMap(
-							new AbstractFunction<Stream<A>, Stream<Stream<A>>>() {
-								public Stream<Stream<A>> apply(Stream<A> ys) {
-									return Cons.from(Cons.from(x, ys));
-								}
-							});
+						return fcross(xss.tail()).flatMap(new AbstractFunction<Stream<A>, Stream<Stream<A>>>() {
+							public Stream<Stream<A>> apply(Stream<A> ys) {
+								return Cons.from(Cons.from(x, ys));
+							}
+						});
 					}
 				});
 			}

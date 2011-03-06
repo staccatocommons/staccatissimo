@@ -198,6 +198,8 @@ public class AbstractStreamBasicTest {
 			.intersperse(1)
 			.take(4)
 			.equivalent(4, 1, 5, 1));
+
+		assertEquals("[56,0,1]", Cons.from(56, 1).intersperse(0).toString());
 	}
 
 	/**
