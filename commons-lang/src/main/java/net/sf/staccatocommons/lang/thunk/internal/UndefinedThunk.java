@@ -10,25 +10,33 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators;
+package net.sf.staccatocommons.lang.thunk.internal;
 
-import java.util.Iterator;
-
-import net.sf.staccatocommons.iterators.thriter.Thriterators;
-import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class AppendIteratorUnitTest extends IteratorTheories {
+public class UndefinedThunk<A> implements Thunk<A> {
 
-	protected Iterator<?> createTwoElementsIterator() {
-		return new AppendIterator<Integer>(Thriterators.from(20), 10);
+	public A value() {
+		throw new RuntimeException("Undefined");
 	}
 
-	protected Iterator<?> createOneElementIterator() {
-		return new AppendIterator(EmptyIterator.empty(), 10);
+	public String toString() {
+		return "Undefined";
+	}
+
+	/**
+	 * @return
+	 */
+	@Constant
+	@NonNull
+	public static <A> Thunk<A> undefined() {
+		return new UndefinedThunk<A>();
 	}
 
 }

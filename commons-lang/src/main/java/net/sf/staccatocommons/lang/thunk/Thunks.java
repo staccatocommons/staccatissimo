@@ -21,6 +21,7 @@ import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
 import net.sf.staccatocommons.lang.thunk.internal.CallableThunk;
 import net.sf.staccatocommons.lang.thunk.internal.DateThunk;
 import net.sf.staccatocommons.lang.thunk.internal.NullThunk;
+import net.sf.staccatocommons.lang.thunk.internal.UndefinedThunk;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
@@ -74,8 +75,8 @@ public class Thunks {
 	}
 
 	/**
-	 * Returns a thunk whose value is retrieved sending {@link Callable#call()}
-	 * to the given {@link Callable}
+	 * Returns a thunk whose value is retrieved sending {@link Callable#call()} to
+	 * the given {@link Callable}
 	 * 
 	 * @param <A>
 	 * @param callable
@@ -84,6 +85,10 @@ public class Thunks {
 	@NonNull
 	public static <A> Thunk<A> from(@NonNull Callable<A> callable) {
 		return new CallableThunk<A>(callable);
+	}
+
+	public static <A> Thunk<A> undefined() {
+		return UndefinedThunk.undefined();
 	}
 
 	/**

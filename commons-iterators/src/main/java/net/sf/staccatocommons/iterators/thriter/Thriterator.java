@@ -14,6 +14,8 @@ package net.sf.staccatocommons.iterators.thriter;
 
 import java.util.Iterator;
 
+import net.sf.staccatocommons.defs.EmptyAware;
+
 /**
  * An object that both implements {@link Iterator} and {@link Thriter}
  * 
@@ -22,6 +24,6 @@ import java.util.Iterator;
  * @param <A>
  *          the type of elements retrieved by this {@link Thriterator}
  */
-public interface Thriterator<A> extends Thriter<A>, Iterator<A> {
+public interface Thriterator<A> extends Thriter<A>, Iterator<A>, EmptyAware {
 
 }

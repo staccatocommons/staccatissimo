@@ -32,4 +32,9 @@ public abstract class AbstractThriterator<A> extends AbstractUnmodifiableIterato
 		return delayedCurrent();
 	}
 
+	@Override
+	public final boolean isEmpty() {
+		return !hasNext();
+	}
+
 }

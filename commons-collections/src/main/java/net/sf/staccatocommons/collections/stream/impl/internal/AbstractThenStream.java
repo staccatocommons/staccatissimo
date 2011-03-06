@@ -28,6 +28,9 @@ public abstract class AbstractThenStream<A, B> extends AbstractStream<B> {
 
 	private final Stream<A> stream;
 
+	/**
+	 * Creates a new {@link AbstractThenStream}
+	 */
 	public AbstractThenStream(@NonNull Stream<A> stream) {
 		this.stream = stream;
 	}

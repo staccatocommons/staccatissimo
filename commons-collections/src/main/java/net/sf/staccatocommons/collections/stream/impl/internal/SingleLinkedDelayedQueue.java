@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl;
+package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.NoSuchElementException;
 
@@ -19,10 +19,14 @@ import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.thunk.Thunks;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 import org.apache.commons.lang.StringUtils;
 
 /**
+ * A basic implementation of a single FIFO linked list, with lazy elements
+ * 
  * @author flbulgarelli
  * 
  */
@@ -31,7 +35,13 @@ public class SingleLinkedDelayedQueue<A> implements Iterable<A>, EmptyAware {
 	private final Cell<A> head = new Cell<A>(Thunks.<A> undefined());
 	private Cell<A> last = head;
 
-	public void add(Thunk<A> element) {
+	/**
+	 * Adds an element at the end of the queue
+	 * 
+	 * @param element
+	 */
+	@ForceRestrictions
+	public void add(@NonNull Thunk<A> element) {
 		Cell<A> prev = last;
 		last = new Cell<A>(element);
 		prev.next = last;

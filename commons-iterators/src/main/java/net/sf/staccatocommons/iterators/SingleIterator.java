@@ -15,8 +15,6 @@ package net.sf.staccatocommons.iterators;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
-import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * An iterator that retrieves a single given element
@@ -48,18 +46,5 @@ public class SingleIterator<A> extends AdvanceThriterator<A> {
 
 	public A current() throws NoSuchElementException {
 		return element;
-	}
-
-	/**
-	 * Answers a {@link SingleIterator} that retrieves the given element
-	 * 
-	 * @param <A>
-	 * @param element
-	 *          the element to retrieve
-	 * @return a new {@link SingleIterator}
-	 */
-	@NonNull
-	public static <A> Thriterator<A> from(A element) {
-		return new SingleIterator<A>(element);
 	}
 }

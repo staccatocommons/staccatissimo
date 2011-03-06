@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.collections.iterable.Iterables;
@@ -52,6 +53,7 @@ import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedAp
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedPrependStream;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Thunk;
@@ -62,8 +64,8 @@ import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
-import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -505,11 +507,6 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return (Comparator<A>) Compare.<Comparable> natural();
 	}
 
-	@Override
-	public final String toString() {
-		return ToString.toString(this);
-	}
-
 	public NumberType<A> numberType() {
 		throw new ClassCastException("Source can not be casted to ImplicitNumerType");
 	}
@@ -530,6 +527,63 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	 */
 	public Stream<Stream<A>> groupBy(final Evaluable2<A, A> pred) {
 		return new GroupByStream<A>(this, pred);
+	}
+
+	// this >>= (\x -> other >>= (\y -> return (x,y)))
+	public <B> Stream<Pair<A, B>> cross(final Stream<B> other) {
+		return then(new AbstractFunction<Stream<A>, Stream<Pair<A, B>>>() {
+			public Stream<Pair<A, B>> apply(Stream<A> stram) {
+				return flatMap(new AbstractFunction<A, Stream<Pair<A, B>>>() {
+					public Stream<Pair<A, B>> apply(final A x) {
+						return other.flatMap(new AbstractFunction<B, Stream<Pair<A, B>>>() {
+							public Stream<Pair<A, B>> apply(B y) {
+								return Cons.from(_(x, y));
+							}
+						});
+					}
+				});
+			}
+		});
+	}
+
+	// crossg [xs,ys] = xs >>= \x -> ys >>= \y -> return [x,y]
+	// crossg (xs:xss) = xs >>= \x -> (crossg xss) >>= \ys -> return (x:ys)
+	public Stream<Stream<A>> fullCross(Stream<Stream<A>> other) {
+		Ensure.that().isNotEmpty("other", (EmptyAware) other);
+		return crossStream(other.prepend(this));
+	}
+
+	private static <A> Stream<Stream<A>> crossStream(Stream<Stream<A>> other) {
+		return other.then(new AbstractFunction<Stream<Stream<A>>, Stream<Stream<A>>>() {
+			public Stream<Stream<A>> apply(Stream<Stream<A>> _xss) {
+				final Stream<Stream<A>> xss = _xss.memorize();
+				if (xss.size() == 2)
+					return xss.first().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
+						public Stream<Stream<A>> apply(final A x) {
+							return xss.second().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
+								public Stream<Stream<A>> apply(A y) {
+									return Cons.from(Cons.from(x, y));
+								}
+							});
+						}
+					});
+
+				return xss.head().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
+					public Stream<Stream<A>> apply(final A x) {
+						return crossStream(xss.tail()).flatMap(
+							new AbstractFunction<Stream<A>, Stream<Stream<A>>>() {
+								public Stream<Stream<A>> apply(Stream<A> ys) {
+									return Cons.from(Cons.from(x, ys));
+								}
+							});
+					}
+				});
+			}
+		});
+	}
+
+	public String toString() {
+		return "[" + joinStrings(",") + "]";
 	}
 
 }

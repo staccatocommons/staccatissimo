@@ -14,6 +14,9 @@ package net.sf.staccatocommons.iterators.thriter;
 
 import java.util.Iterator;
 
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.iterators.SingleIterator;
+import net.sf.staccatocommons.iterators.delayed.DelayedSingleIterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -23,6 +26,23 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public class Thriterators {
 
 	private Thriterators() {}
+
+	/**
+	 * Answers a {@link SingleIterator} that retrieves the given element
+	 * 
+	 * @param <A>
+	 * @param element
+	 *          the element to retrieve
+	 * @return a new {@link SingleIterator}
+	 */
+	@NonNull
+	public static <A> Thriterator<A> from(A element) {
+		return new SingleIterator<A>(element);
+	}
+
+	public static <A> Thriterator<A> from(@NonNull Thunk<A> thunk) {
+		return new DelayedSingleIterator<A>(thunk);
+	}
 
 	/**
 	 * Answers a {@link Thriterator} that wraps the given {@link Iterator}. If it

@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
@@ -26,8 +27,7 @@ public abstract class WrapperStream<A> extends AbstractStream<A> {
 	/**
 	 * Creates a new {@link WrapperStream}
 	 */
-	public WrapperStream(Stream<A> source) {
-		super();
+	public WrapperStream(@NonNull Stream<A> source) {
 		this.source = source;
 	}
 

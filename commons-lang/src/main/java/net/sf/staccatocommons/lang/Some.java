@@ -16,7 +16,7 @@ import java.util.Iterator;
 
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.SingleIterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.value.BasicEquals;
 import net.sf.staccatocommons.restrictions.ConditionallySerializable;
@@ -86,7 +86,7 @@ public final class Some<T> extends Option<T> {
 	}
 
 	public Iterator<T> iterator() {
-		return SingleIterator.from(value);
+		return Thriterators.from(value);
 	}
 
 	public boolean contains(T element) {

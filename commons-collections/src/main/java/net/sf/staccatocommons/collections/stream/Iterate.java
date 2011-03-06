@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
@@ -43,7 +42,6 @@ public class Iterate {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	public static <A> Stream<A> from(@NonNull A seed, @NonNull Applicable<A, A> generator,
 		@NonNull Evaluable<A> stopCondition) {
 		return Streams.from(Sequence.from(seed, generator, stopCondition));
@@ -65,9 +63,14 @@ public class Iterate {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	public static <A> Stream<A> from(@NonNull A seed, @NonNull Applicable<A, A> generator) {
 		return Streams.from(Sequence.from(seed, generator, StopConditions.<A> stopNever()));
+	}
+
+	@NonNull
+	@Projection
+	public static Stream<Integer> fromTo(int start, int stop) {
+		return Streams.from(Sequence.fromTo(start, stop));
 	}
 
 	// /**

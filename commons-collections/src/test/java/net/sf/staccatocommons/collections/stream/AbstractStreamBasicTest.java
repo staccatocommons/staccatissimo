@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
@@ -359,8 +360,37 @@ public class AbstractStreamBasicTest {
 
 	/** Test that no StackOverflow is raised on large, recursive streams */
 	@Test
-	public void testLongStream() throws Exception {
+	public void testRecursiveLongStream() throws Exception {
 		assertEquals(90000, Iterate.from(1, add(1)).intersperse(0).take(90000).size());
 	}
 
+	/** Test that no StackOverflow is raised on large, flat mapped streams */
+	@Test
+	public void testLongFlatMapStream() throws Exception {
+		Iterate.fromTo(1, 4000).cross(Iterate.fromTo(1, 4000)).size();
+	}
+
+	/** Tests simple crossing */
+	@Test
+	public void testCross() throws Exception {
+		assertTrue(Iterate
+			.fromTo(1, 20)
+			.cross(Iterate.fromTo(20, 40))
+			.equivalent(Iterables.cross(Sequence.fromTo(1, 20), Sequence.fromTo(20, 40))));
+	}
+
+	/**
+	 * Tests full-crossing
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testFullCross() throws Exception {
+		assertEquals(
+			"[[1,3,5],[1,3,6],[1,4,5],[1,4,6],[2,3,5],[2,3,6],[2,4,5],[2,4,6]]",
+			Cons
+				.from(1, 2)
+				.fullCross(Cons.<Stream<Integer>> from(Cons.from(3, 4), Cons.from(5, 6)))
+				.toString());
+	}
 }

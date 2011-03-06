@@ -144,6 +144,7 @@ public interface Stream<A> extends //
 	Appendable<A>,//
 	Collectible<A>, //
 	ContainsAware<A>, //
+	Crossable<A>, //
 	Deconstructable<A>, //
 	Filterable<A>, //
 	Foldable<A>,//

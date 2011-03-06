@@ -43,4 +43,8 @@ public final class ConstantThunk<T> implements Serializable, Thunk<T> {
 		return value;
 	}
 
+	public String toString() {
+		return "ConstantThunk(" + String.valueOf(value) + ")";
+	}
+
 }
