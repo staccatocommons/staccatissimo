@@ -87,6 +87,15 @@ public class Thunks {
 		return new CallableThunk<A>(callable);
 	}
 
+	/**
+	 * Returns a thunk that when evaluated throws a {@link RuntimeException}. This
+	 * Thunk is said to have an undefined element.
+	 * 
+	 * @param <A>
+	 * @return a {@link Constant} undefined thunk
+	 */
+	@NonNull
+	@Constant
 	public static <A> Thunk<A> undefined() {
 		return UndefinedThunk.undefined();
 	}

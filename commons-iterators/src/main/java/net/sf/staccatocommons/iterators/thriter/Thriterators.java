@@ -28,18 +28,26 @@ public class Thriterators {
 	private Thriterators() {}
 
 	/**
-	 * Answers a {@link SingleIterator} that retrieves the given element
+	 * Answers a {@link Thriterator} that retrieves the given element
 	 * 
 	 * @param <A>
 	 * @param element
 	 *          the element to retrieve
-	 * @return a new {@link SingleIterator}
+	 * @return a new {@link Thriterator}
 	 */
 	@NonNull
 	public static <A> Thriterator<A> from(A element) {
 		return new SingleIterator<A>(element);
 	}
 
+	/**
+	 * Answers a {@link Thriterator} that retrieves the given thunk's value
+	 * 
+	 * @param <A>
+	 * @param thunk
+	 *          the thunk whose element is retrieved
+	 * @return a new {@link Thriterator}
+	 */
 	public static <A> Thriterator<A> from(@NonNull Thunk<A> thunk) {
 		return new DelayedSingleIterator<A>(thunk);
 	}

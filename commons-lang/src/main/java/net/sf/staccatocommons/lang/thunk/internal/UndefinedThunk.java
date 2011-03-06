@@ -31,7 +31,7 @@ public class UndefinedThunk<A> implements Thunk<A> {
 	}
 
 	/**
-	 * @return
+	 * @return a {@link Constant} {@link UndefinedThunk}
 	 */
 	@Constant
 	@NonNull
