@@ -170,7 +170,6 @@ public interface Stream<A> extends //
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
 	<B> Stream<B> then(@NonNull Applicable<Stream<A>, ? extends Stream<B>> function);
 
 	Thriterator<A> iterator();

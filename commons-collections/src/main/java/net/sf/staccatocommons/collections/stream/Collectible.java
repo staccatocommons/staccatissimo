@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
+import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -57,10 +58,18 @@ public interface Collectible<A> {
 	A[] toArray(@NonNull Class<? extends A> clazz);
 
 	// grants consistent isEmpty
+	@Projection
 	Stream<A> dettach();
 
-	// grants repeatability and laziness
+	/**
+	 * Memorizes stream elements and their order, by answering a lazy stream with
+	 * repeatable iteration order that caches elements evaluated during iteration.
+	 * 
+	 * @return a new {@link Stream} that memorizes elements evaluated during
+	 *         iteration
+	 */
 	@Repeatable
+	@Projection
 	Stream<A> memorize();
 
 	/**
@@ -72,7 +81,6 @@ public interface Collectible<A> {
 	 */
 	@NonNull
 	@Repeatable
-	// grants repeatability and strictness
 	Stream<A> force();
 
 }

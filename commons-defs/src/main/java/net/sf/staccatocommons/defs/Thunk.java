@@ -41,9 +41,10 @@ public interface Thunk<T> {
 
 	/**
 	 * Returns the value provided. Sending this message to the {@link Thunk} is
-	 * also known as "evaluating the Thunk".
+	 * also known as <em>evaluating the thunk</em>.
 	 * 
-	 * @return the provided object.
+	 * @return the provided object. It is sometimes referred as the
+	 *         <em>thunk's element</em>
 	 */
 	T value();
 
