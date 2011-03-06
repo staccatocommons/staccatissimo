@@ -26,17 +26,27 @@ import org.junit.runner.RunWith;
 @RunWith(Theories.class)
 public abstract class WellDefinedEqualsTheories {
 
+	/**
+	 * Tests that equality is reflexive: o1.equals(o1)
+	 */
 	@Theory
 	public void testEqualsReflexive(Object o1) throws Exception {
 		assertTrue(o1.equals(o1));
 	}
 
+	/**
+	 * Test that equality is symmetric
+	 */
 	@Theory
-	public void testEqualsSymetric(Object o1, Object o2) throws Exception {
+	public void testEqualsSymmetric(Object o1, Object o2) throws Exception {
 		assumeTrue(o1.equals(o2));
 		assertTrue(o2.equals(o1));
 	}
 
+	/**
+	 * Tests that equality is transitive: if o1.equals(o2) and o2.equals(o3), then
+	 * o1.equals(o3)
+	 */
 	@Theory
 	public void testEqualsTransitive(Object o1, Object o2, Object o3) throws Exception {
 		assumeTrue(o1.equals(o2));
@@ -63,6 +73,9 @@ public abstract class WellDefinedEqualsTheories {
 		assertFalse(o1.equals(null));
 	}
 
+	/**
+	 * Tests that hashcode is repeatable as long as receptor is not mutated
+	 */
 	@Theory
 	public void testHasCodeConsistent(Object o1) throws Exception {
 		assertEquals(o1.hashCode(), o1.hashCode());
