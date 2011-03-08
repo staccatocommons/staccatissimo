@@ -87,7 +87,7 @@ by decorating other Iterables (Streams utility class) or using sources like data
     }
 +---- 
 
- Or event cleaner, if using Staccato-Commons-Lambda:
+ Or event cleaner, if using {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslambda/index.html}Staccato-Commons-Lambda}}:
  
 +---
     Collection<Incident> getMostUrgentProblems3() {
@@ -110,9 +110,10 @@ by decorating other Iterables (Streams utility class) or using sources like data
     import static net.sf.staccatocommons.lang.number.NumberTypes.*;
     
     //Answer a the next integers of those > 30 in the list
-    Cons.from(20, 60, 9, 31, 26)
-        .filter(greaterThan(30))
-        .map(add(1));
+    Cons
+     .from(20, 60, 9, 31, 26)
+     .filter(greaterThan(30))
+     .map(add(1));
 +---
 
 ** Mapping and getting average
@@ -123,22 +124,13 @@ by decorating other Iterables (Streams utility class) or using sources like data
     List<BusinessArea> businessAreas = ...;
 
    //Return the average bucket of the business areas
-    Streams.from(businessAreas) //
-        .map(lambda($(BusinessArea.class).getBucket()))
-        .average();
+    Streams
+     .from(businessAreas) //
+     .map(lambda($(BusinessArea.class).getBucket()))
+     .average();
 +---
 
-** Comparing elements
-
-** FlatMapping and Zipping 
-
-** Appending and accessing
-
-** Appending undefined elements and getting size
-
-** Getting max element
-
-** Dropping and getting any element 
+** Dropping and getting any element
 
 +---
     interface Fruit {}
@@ -148,9 +140,56 @@ by decorating other Iterables (Streams utility class) or using sources like data
     //Answers any fruit, except of the first one.
     //If there is no fruit, or just one fruit element, 
     //returns a new Apple.
-    Streams.from(fruits)
-               .drop(1)
-               .anyOrElse(new Apple());
+    Streams
+      .from(fruits)
+      .drop(1)
+      .anyOrElse(new Apple());
 
 +--
+
+** Getting the Cartesian product and testing all elements
+
++---
+    interface Buyer {
+        boolean buys(Product product);
+    }
+    interface Product {}
+
+    Collection<Product> products = ...;
+    Collection<Buyer> buyers = ...;
+
+    //Answers if all buyers can buy all the products
+    Streams
+      .from(buyers)
+      .cross(Streams.from(products))
+      .all(new Predicate<Pair<Buyer, Product>>() {
+          public boolean eval(Pair<Buyer, Product> p) {
+              return p.first().buys(p.second());
+          }
+      });
+
++---  
+
+** Random access over streams with undefined elements
+
++---
+ //Answers the third element of the stream [1/50,1/0,1/60,1/10].
+ // Notice that second element is undefined - evaluating it would result in an ArithmeticException,
+ // but thanks to stream laziness, the operation succeeds  
+ Cons 
+    .from(50, 0, 60, 10)
+    .map(integer().inverse())
+    .third();
+
++--- 
+
+** Comparing elements
+
+** FlatMapping and Zipping 
+
+** Appending and getting size
+
+** Getting max element
+
+
  

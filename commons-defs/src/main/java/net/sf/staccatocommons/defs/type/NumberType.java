@@ -155,6 +155,17 @@ public interface NumberType<A> extends Comparator<A> {
 	 */
 	A increment(A n);
 
+	A inverse(A n);
+
+	/**
+	 * Answers the absolute value of the given number. It is the same number, if
+	 * non negative, or the negated number, otherwise
+	 * 
+	 * @param n
+	 * @return <code>isNegative(n) ? negate(n) : n</code>
+	 */
+	A abs(A n);
+
 	/**
 	 * Answers if the given number is greater than zero
 	 * 
@@ -208,15 +219,6 @@ public interface NumberType<A> extends Comparator<A> {
 	A one();
 
 	/**
-	 * Answers the absolute value of the given number. It is the same number, if
-	 * non negative, or the negated number, otherwise
-	 * 
-	 * @param n
-	 * @return <code>isNegative(n) ? negate(n) : n</code>
-	 */
-	A abs(A n);
-
-	/**
 	 * Answers a 2-arguments function that perform addition as specified by
 	 * {@link #add(Object, Object)}
 	 * 
@@ -264,5 +266,8 @@ public interface NumberType<A> extends Comparator<A> {
 	 */
 	@Constant
 	Function<A, A> abs();
+
+	@Constant
+	Function<A, A> inverse();
 
 }

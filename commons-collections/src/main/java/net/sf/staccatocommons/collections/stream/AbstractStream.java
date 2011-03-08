@@ -530,8 +530,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new GroupByStream<A>(this, pred);
 	}
 
+	public <B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other) {
+		return cross(Streams.from(other));
+	}
+
 	// this >>= (\x -> other >>= (\y -> return (x,y)))
-	public <B> Stream<Pair<A, B>> cross(final Stream<B> other) {
+	@ForceRestrictions
+	public <B> Stream<Pair<A, B>> cross(@NonNull final Stream<B> other) {
 		return then(new AbstractFunction<Stream<A>, Stream<Pair<A, B>>>() {
 			public Stream<Pair<A, B>> apply(Stream<A> stram) {
 				return flatMap(new AbstractFunction<A, Stream<Pair<A, B>>>() {
@@ -547,7 +552,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		});
 	}
 
-	public Stream<Stream<A>> fullCross(Stream<Stream<A>> other) {
+	@ForceRestrictions
+	public Stream<Stream<A>> fullCross(@NonNull Stream<Stream<A>> other) {
 		Ensure.that().isNotEmpty("other", (EmptyAware) other);
 		return fcross(other.prepend(this));
 	}

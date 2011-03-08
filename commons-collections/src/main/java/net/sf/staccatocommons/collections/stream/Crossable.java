@@ -38,6 +38,8 @@ public interface Crossable<A> {
 	@Projection
 	<B> Stream<Pair<A, B>> cross(@NonNull Stream<B> other);
 
+	<B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other);
+
 	@NonNull
 	@Projection
 	Stream<Stream<A>> fullCross(Stream<Stream<A>> other);

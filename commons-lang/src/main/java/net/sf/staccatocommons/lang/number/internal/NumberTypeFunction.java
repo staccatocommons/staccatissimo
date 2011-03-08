@@ -32,6 +32,7 @@ public abstract class NumberTypeFunction<A, B> extends AbstractFunction<A, B> im
 	 */
 	private final NumberType<B> numberType;
 
+	// FIXME implementors normally have two references to the number type
 	/**
 	 * Creates a new {@link NumberTypeFunction}
 	 */

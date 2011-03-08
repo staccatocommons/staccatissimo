@@ -79,11 +79,15 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 		return add().apply(n);
 	}
 
+	public A inverse(A n) {
+		return divide(one(), n);
+	}
+
 	public Function<A, A> negate() {
 		// XXX make constant
 		return new NumberTypeFunction<A, A>(this) {
 			public A apply(A arg) {
-				return negate(arg);
+				return numberType().negate(arg);
 			}
 		};
 	}
@@ -92,7 +96,16 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 		// XXX make constant
 		return new NumberTypeFunction<A, A>(this) {
 			public A apply(A arg) {
-				return abs(arg);
+				return numberType().abs(arg);
+			}
+		};
+	}
+
+	public Function<A, A> inverse() {
+		// XXX make constant
+		return new NumberTypeFunction<A, A>(this) {
+			public A apply(A arg) {
+				return numberType().inverse(arg);
 			}
 		};
 	}
