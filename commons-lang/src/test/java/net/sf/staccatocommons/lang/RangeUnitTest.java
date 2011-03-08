@@ -13,8 +13,8 @@
 package net.sf.staccatocommons.lang;
 
 import static net.sf.staccatocommons.lang.Range.*;
+import static net.sf.staccatocommons.testing.junit.jmock.MiscMatchers.*;
 import static org.junit.Assert.*;
-import net.sf.staccatocommons.testing.junit.asserts.SerializationAssert;
 
 import org.junit.Test;
 
@@ -73,6 +73,6 @@ public class RangeUnitTest {
 	/***/
 	@Test
 	public void testSerialization() throws Exception {
-		SerializationAssert.assertCanSerialize(Range.from(50, 90));
+		assertThat(Range.from(50, 90), canSerialize());
 	}
 }

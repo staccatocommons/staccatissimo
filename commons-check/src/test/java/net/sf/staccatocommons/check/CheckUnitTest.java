@@ -5,6 +5,7 @@ import static junit.framework.Assert.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -15,9 +16,9 @@ import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.defs.type.SizeAwareType;
-import net.sf.staccatocommons.testing.junit.jmock.Expectations;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
+import org.jmock.Expectations;
 import org.junit.Test;
 
 /**

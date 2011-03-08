@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections;
 
-import static net.sf.staccatocommons.testing.junit.asserts.CollectionAssert.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Collections;
@@ -41,7 +41,7 @@ public class MapsUnitTest {
 	 */
 	@Test
 	public void testAnyKey() {
-		assertIn(Maps.anyKey(map).value(), "Foo", "Bar", "Foobar");
+		assertThat(Maps.anyKey(map).value(), isOneOf("Foo", "Bar", "Foobar"));
 		assertTrue(Maps.anyKey(Collections.emptyMap()).isUndefined());
 	}
 
@@ -50,7 +50,7 @@ public class MapsUnitTest {
 	 */
 	@Test
 	public void testAnyKeyOrNull() {
-		assertIn(Maps.anyKeyOrNull(map), "Foo", "Bar", "Foobar");
+		assertThat(Maps.anyKeyOrNull(map), isOneOf("Foo", "Bar", "Foobar"));
 		assertNull(Maps.anyKeyOrNull(Collections.emptyMap()));
 	}
 
@@ -59,7 +59,7 @@ public class MapsUnitTest {
 	 */
 	@Test
 	public void testAnyValue() {
-		assertIn(Maps.anyValue(map).value(), 50, 90, 120);
+		assertThat(Maps.anyValue(map).value(), isOneOf(50, 90, 120));
 		assertNull(Maps.anyValueOrNull(Collections.emptyMap()));
 	}
 

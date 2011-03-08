@@ -113,6 +113,9 @@ public abstract class JUnit4MockObjectTestCase {
 		return context.mock(typeToMock, name);
 	}
 
+	/**
+	 * Verifies that all expectations have being met
+	 */
 	@After
 	public void assertIsSatisfied() {
 		context.assertIsSatisfied();

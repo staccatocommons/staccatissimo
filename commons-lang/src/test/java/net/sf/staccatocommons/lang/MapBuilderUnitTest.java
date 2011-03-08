@@ -14,8 +14,7 @@ package net.sf.staccatocommons.lang;
 
 import static net.sf.staccatocommons.lang.MapBuilder.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
-import static net.sf.staccatocommons.testing.junit.asserts.CollectionAssert.*;
-import static org.hamcrest.core.IsInstanceOf.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
@@ -44,10 +43,10 @@ public class MapBuilderUnitTest {
 			.with("three", 3)
 			.with(_("four", 4))
 			.build();
-		assertContainsEntry(map, "one", 1);
-		assertContainsEntry(map, "two", 2);
-		assertContainsEntry(map, "three", 3);
-		assertContainsEntry(map, "four", 4);
+		assertThat(map, hasEntry("one", 1));
+		assertThat(map, hasEntry("two", 2));
+		assertThat(map, hasEntry("three", 3));
+		assertThat(map, hasEntry("four", 4));
 	}
 
 	/** Test for {@link MapBuilder#build()} when it has been already be built */

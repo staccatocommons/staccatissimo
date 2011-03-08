@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.iterable;
 
-import static net.sf.staccatocommons.testing.junit.asserts.CollectionAssert.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -96,8 +96,8 @@ public class ModifiableIterablesUnitTest {
 			new ArrayList<Integer>(),
 			Predicates.in(5, 9));
 
-		assertContains(moved, 5);
-		assertContains(moved, 9);
+		assertThat(moved, hasItem(5));
+		assertThat(moved, hasItem(9));
 		assertEquals(Arrays.asList(4, 10), ints);
 	}
 
