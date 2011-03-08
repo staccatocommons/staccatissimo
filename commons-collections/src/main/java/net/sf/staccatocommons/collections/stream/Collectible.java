@@ -58,6 +58,8 @@ public interface Collectible<A> {
 	A[] toArray(@NonNull Class<? extends A> clazz);
 
 	// grants consistent isEmpty
+	// XXX not consistently implemented in Map
+	// XXX semantics not well defined
 	@Projection
 	Stream<A> dettach();
 

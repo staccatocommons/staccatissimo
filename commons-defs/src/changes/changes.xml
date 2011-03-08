@@ -20,7 +20,8 @@
 				EmptyAwareType and SizeAwareType 
             </action>
 			<action dev="flbulgarelli" type="add">
-				Add Transparent and SideEffectFree restrictons
+				Add Transparent and
+				SideEffectFree restrictons
 			</action>
 			<action dev="flbulgarelli" type="update">
 				Renamed Provider to Thunk, in
@@ -32,11 +33,22 @@
 			<action dev="flbulgarelli" type="add">
 				Added Evaluable2
             </action>
-            <action dev="flbulgarelli" type="add">
-                Added ContainsAwareType
+			<action dev="flbulgarelli" type="add">
+				Added ContainsAwareType
             </action>
-            <action dev="flbulgarelli" type="add">
-                Added Constant restriction
+			<action dev="flbulgarelli" type="add">
+				Added Constant restriction
+            </action>
+		</release>
+		<release version="1.0-alpha-4" date="2011-03-08" description="Laziness">
+			<action dev="flbulgarelli" type="add">
+				Added Deleyables 
+            </action>
+			<action dev="flbulgarelli" type="add">
+				Added Functions
+            </action>
+			<action dev="flbulgarelli" type="add">
+				Added inverse, negate and abs methods and functions to NumberType
             </action>
 		</release>
 	</body>
