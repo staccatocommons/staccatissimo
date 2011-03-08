@@ -15,7 +15,7 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.PrependIterator;
+import net.sf.staccatocommons.iterators.PrependThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.lang.tuple.Pair;
@@ -33,7 +33,7 @@ import net.sf.staccatocommons.lang.tuple.Pair;
 public class PrependStream<A> extends WrapperStream<A> {
 
 	public Thriterator<A> iterator() {
-		return new PrependIterator<A>(head(), tailIterator());
+		return new PrependThriterator<A>(head(), tailIterator());
 	}
 
 	private final A head;

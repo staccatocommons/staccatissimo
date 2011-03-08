@@ -17,34 +17,28 @@ import java.util.NoSuchElementException;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 
 /**
- * An iterator that retrieves a single given element
- * 
  * @author flbulgarelli
  * 
  */
-public class SingleIterator<A> extends AdvanceThriterator<A> {
+public abstract class IndexedThriterator<A> extends AdvanceThriterator<A> {
 
-	private final A element;
-	private boolean consumed;
+	private int pos = 0;
 
-	/**
-	 * Creates a new {@link SingleIterator}
-	 */
-	public SingleIterator(A element) {
-		this.element = element;
+	public final boolean hasNext() {
+		return pos < length();
 	}
 
-	public boolean hasNext() {
-		return !consumed;
-	}
-
-	public void advanceNext() throws NoSuchElementException {
-		if (!hasNext())
+	public final void advanceNext() throws NoSuchElementException {
+		if (pos == length())
 			throw new NoSuchElementException();
-		consumed = true;
+		pos++;
 	}
 
-	public A current() throws NoSuchElementException {
-		return element;
+	public final A current() throws NoSuchElementException {
+		return elementAt(pos - 1);
 	}
+
+	protected abstract A elementAt(int position);
+
+	protected abstract int length();
 }

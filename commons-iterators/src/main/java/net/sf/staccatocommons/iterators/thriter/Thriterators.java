@@ -15,8 +15,11 @@ package net.sf.staccatocommons.iterators.thriter;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.SingleIterator;
+import net.sf.staccatocommons.iterators.ArrayThriterator;
+import net.sf.staccatocommons.iterators.EmptyThriterator;
+import net.sf.staccatocommons.iterators.SingleThriterator;
 import net.sf.staccatocommons.iterators.delayed.DelayedSingleIterator;
+import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -26,6 +29,12 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public class Thriterators {
 
 	private Thriterators() {}
+
+	@NonNull
+	@Constant
+	public static <T> Thriterator<T> empty() {
+		return EmptyThriterator.empty();
+	}
 
 	/**
 	 * Answers a {@link Thriterator} that retrieves the given element
@@ -37,7 +46,19 @@ public class Thriterators {
 	 */
 	@NonNull
 	public static <A> Thriterator<A> from(A element) {
-		return new SingleIterator<A>(element);
+		return new SingleThriterator<A>(element);
+	}
+
+	/**
+	 * Answers a {@link Thriterator} that retrieves elements from the given array
+	 * 
+	 * @param <A>
+	 * @param elements
+	 * @return a new {@link Thriterator}
+	 */
+	@NonNull
+	public static <A> Thriterator<A> from(@NonNull A... elements) {
+		return new ArrayThriterator<A>(elements);
 	}
 
 	/**
@@ -66,7 +87,7 @@ public class Thriterators {
 	public static <A> Thriterator<A> from(@NonNull Iterator<? extends A> iter) {
 		if (iter instanceof Thriterator)
 			return (Thriterator<A>) iter;
-		return new IteratorThriter<A>(iter);
+		return new IteratorThriterator<A>(iter);
 	}
 
 }

@@ -23,7 +23,7 @@ import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.StreamTheories;
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.iterators.EmptyIterator;
+import net.sf.staccatocommons.iterators.EmptyThriterator;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class IteratorStreamUnitTest extends StreamTheories {
 	/** data point */
 	@DataPoint
 	public static Stream emptyIter() {
-		return Streams.from(EmptyIterator.empty());
+		return Streams.from(EmptyThriterator.empty());
 	}
 
 	/** data point */

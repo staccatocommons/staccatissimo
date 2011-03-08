@@ -24,11 +24,11 @@ import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
 public class AppendIteratorUnitTest extends IteratorTheories {
 
 	protected Iterator<?> createTwoElementsIterator() {
-		return new AppendIterator<Integer>(Thriterators.from(20), 10);
+		return new AppendThriterator<Integer>(Thriterators.from(20), 10);
 	}
 
 	protected Iterator<?> createOneElementIterator() {
-		return new AppendIterator(EmptyIterator.empty(), 10);
+		return new AppendThriterator(EmptyThriterator.empty(), 10);
 	}
 
 }

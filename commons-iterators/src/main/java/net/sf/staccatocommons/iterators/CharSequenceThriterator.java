@@ -12,23 +12,31 @@
  */
 package net.sf.staccatocommons.iterators;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
- * 
- * Test for verifyng the cheks processor is enabled and working fine
- * 
  * @author flbulgarelli
  * 
  */
-public class ClassesInstrumentedDummyTest {
+public class CharSequenceThriterator extends IndexedThriterator<Character> {
 
-	/** Test that the constant instrumenter is working */
-	@Test
-	public void testConst() throws Exception {
-		assertSame(EmptyThriterator.empty(), EmptyThriterator.empty());
+	private final CharSequence charSequence;
+
+	/**
+	 * Creates a new {@link CharSequenceThriterator}
+	 * 
+	 * @param charSequence
+	 *          the sequence to wrap
+	 */
+	public CharSequenceThriterator(@NonNull CharSequence charSequence) {
+		this.charSequence = charSequence;
 	}
 
+	protected int length() {
+		return charSequence.length();
+	}
+
+	protected Character elementAt(int position) {
+		return charSequence.charAt(position);
+	}
 }

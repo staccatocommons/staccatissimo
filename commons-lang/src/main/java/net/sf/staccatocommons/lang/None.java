@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.EmptyIterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.value.Immutable;
 import net.sf.staccatocommons.restrictions.value.Value;
@@ -74,7 +74,7 @@ public final class None<T> extends Option<T> {
 	}
 
 	public Iterator<T> iterator() {
-		return EmptyIterator.empty();
+		return Thriterators.empty();
 	}
 
 	@Override

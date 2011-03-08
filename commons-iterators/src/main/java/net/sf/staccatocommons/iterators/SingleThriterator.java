@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team
+ Copyright (c) 2011, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -15,38 +15,36 @@ package net.sf.staccatocommons.iterators;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
+ * An iterator that retrieves a single given element
+ * 
  * @author flbulgarelli
  * 
  */
-public class CharSequenceIterator extends AdvanceThriterator<Character> {
+public class SingleThriterator<A> extends AdvanceThriterator<A> {
 
-	private final CharSequence charSequence;
-	private int pos = 0;
+	private final A element;
+	private boolean consumed;
 
 	/**
-	 * Creates a new {@link CharSequenceIterator}
-	 * 
-	 * @param charSequence
-	 *          the sequence to wrap
+	 * Creates a new {@link SingleThriterator}
 	 */
-	public CharSequenceIterator(@NonNull CharSequence charSequence) {
-		this.charSequence = charSequence;
+	public SingleThriterator(A element) {
+		this.element = element;
 	}
 
 	public boolean hasNext() {
-		return pos < charSequence.length();
+		return !consumed;
 	}
 
 	public void advanceNext() throws NoSuchElementException {
-		if (pos == charSequence.length())
+		if (!hasNext())
 			throw new NoSuchElementException();
-		pos++;
+		consumed = true;
 	}
 
-	public Character current() throws NoSuchElementException {
-		return charSequence.charAt(pos - 1);
+	public A current() throws NoSuchElementException {
+		return element;
 	}
 }

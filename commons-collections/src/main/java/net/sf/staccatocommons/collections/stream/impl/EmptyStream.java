@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.collections.stream.impl;
 
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.iterators.EmptyIterator;
+import net.sf.staccatocommons.iterators.EmptyThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.Constant;
 
@@ -32,7 +32,7 @@ public final class EmptyStream<A> extends StrictStream<A> {
 
 	@Override
 	public Thriterator<A> iterator() {
-		return EmptyIterator.empty();
+		return EmptyThriterator.empty();
 	}
 
 	/** Answers a constant instance */

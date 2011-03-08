@@ -31,7 +31,6 @@ import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
-import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
@@ -148,17 +147,7 @@ public class AbstractStreamBasicTest {
 			Arrays.asList(10, 90, 60, 1, 2, 20),
 			Cons.from(10, 90, 60).append(Arrays.asList(1, 2)).append(Cons.from(20)).toList());
 
-		assertEquals(
-			Arrays.asList("foo"),
-			Cons.from("foo").append(Streams.from(new AbstractUnmodifiableIterator<String>() {
-				public boolean hasNext() {
-					return true;
-				}
-
-				public String next() {
-					throw new RuntimeException("baz");
-				}
-			})).take(1).toList());
+		assertEquals(Arrays.asList("foo"), Cons.from("foo").appendUndefined().take(1).toList());
 	}
 
 	/** Tets for indexof */

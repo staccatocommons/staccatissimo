@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.EmptyIterator;
+import net.sf.staccatocommons.iterators.EmptyThriterator;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
@@ -54,7 +54,7 @@ public class MemorizedStream<A> extends WrapperStream<A> {
 	public Thriterator<A> iterator() {
 		if (remaining.isEmpty()) {
 			if (previous.isEmpty())
-				return EmptyIterator.empty();
+				return EmptyThriterator.empty();
 			return previous.iterator();
 		}
 		final Thriterator<A> previousIter = previous.iterator();

@@ -13,14 +13,14 @@
 package net.sf.staccatocommons.iterators.delayed;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.AppendIterator;
+import net.sf.staccatocommons.iterators.AppendThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class DelayedAppendIterator<A> extends AppendIterator<A> {
+public class DelayedAppendIterator<A> extends AppendThriterator<A> {
 
 	/**
 	 * Creates a new {@link DelayedAppendIterator}

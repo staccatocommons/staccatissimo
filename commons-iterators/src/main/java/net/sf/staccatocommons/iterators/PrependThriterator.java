@@ -21,61 +21,56 @@ import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class AppendIterator<A> extends AdvanceThriterator<A> {
+public class PrependThriterator<A> extends AdvanceThriterator<A> {
 
-	private final Thriter<? extends A> iterator;
 	private final A element;
-	private boolean unconsumed = true;
+	private final Thriter<? extends A> iter;
+	private boolean elementConsumed;
+	private boolean iterAdvanced;
 
 	/**
-	 * 
-	 * Creates a new {@link AppendIterator}
+	 * Creates a new {@link PrependThriterator}
 	 */
-	public AppendIterator(@NonNull Thriter<? extends A> iterator, A element) {
-		this.iterator = iterator;
+	public PrependThriterator(A element, Thriter<? extends A> iterator) {
 		this.element = element;
+		this.iter = iterator;
 	}
 
 	/**
-	 * 
-	 * Creates a new {@link AppendIterator}
+	 * Creates a new {@link PrependThriterator}
 	 */
-	public AppendIterator(@NonNull Iterator<? extends A> iterator, A element) {
-		this((Thriter<? extends A>) Thriterators.from(iterator), element);
+	public PrependThriterator(A element, Iterator<? extends A> iterator) {
+		this(element, (Thriter<A>) Thriterators.from(iterator));
 	}
 
 	/**
-	 * 
-	 * Creates a new {@link AppendIterator}
+	 * Creates a new {@link PrependThriterator}
 	 */
-	public AppendIterator(@NonNull Thriterator<? extends A> iterator, A element) {
-		this((Thriter<? extends A>) iterator, element);
+	public PrependThriterator(A element, Thriterator<? extends A> iterator) {
+		this(element, (Thriter<A>) iterator);
 	}
 
 	public final boolean hasNext() {
-		if (iterator.hasNext())
-			return true;
-		return unconsumed;
+		return !elementConsumed || iter.hasNext();
 	}
 
 	public final void advanceNext() throws NoSuchElementException {
-		if (iterator.hasNext())
-			iterator.advanceNext();
-		else if (unconsumed)
-			unconsumed = false;
-		else
-			throw new NoSuchElementException();
+		if (!elementConsumed) {
+			elementConsumed = true;
+		} else {
+			iter.advanceNext();
+			iterAdvanced = true;
+		}
 	}
 
 	public final A current() throws NoSuchElementException {
-		if (unconsumed)
-			return iterator.current();
+		if (iterAdvanced)
+			return iter.current();
 		return elementValue();
 	}
 
@@ -88,8 +83,8 @@ public class AppendIterator<A> extends AdvanceThriterator<A> {
 	}
 
 	public Thunk<A> delayedCurrent() {
-		if (unconsumed)
-			return (Thunk<A>) iterator.delayedCurrent();
+		if (iterAdvanced)
+			return (Thunk<A>) iter.delayedCurrent();
 		return elementThunk();
 	}
 

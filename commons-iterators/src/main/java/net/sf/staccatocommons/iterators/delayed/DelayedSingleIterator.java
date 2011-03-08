@@ -15,14 +15,14 @@ package net.sf.staccatocommons.iterators.delayed;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.SingleIterator;
+import net.sf.staccatocommons.iterators.SingleThriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class DelayedSingleIterator<A> extends SingleIterator<A> {
+public class DelayedSingleIterator<A> extends SingleThriterator<A> {
 
 	/**
 	 * Creates a new {@link DelayedSingleIterator}

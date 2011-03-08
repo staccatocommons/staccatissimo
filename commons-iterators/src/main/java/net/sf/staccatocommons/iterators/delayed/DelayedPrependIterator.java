@@ -13,17 +13,17 @@
 package net.sf.staccatocommons.iterators.delayed;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.PrependIterator;
+import net.sf.staccatocommons.iterators.PrependThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class DelayedPrependIterator<A> extends PrependIterator<A> {
+public class DelayedPrependIterator<A> extends PrependThriterator<A> {
 
 	/**
-	 * Creates a new {@link PrependIterator}
+	 * Creates a new {@link PrependThriterator}
 	 */
 	public DelayedPrependIterator(Thunk<A> head, Thriter<? extends A> tail) {
 		super((A) head, tail);

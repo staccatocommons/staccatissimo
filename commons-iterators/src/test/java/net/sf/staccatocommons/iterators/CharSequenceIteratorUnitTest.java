@@ -23,10 +23,10 @@ import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
 public class CharSequenceIteratorUnitTest extends IteratorTheories {
 
 	protected Iterator<?> createTwoElementsIterator() {
-		return new CharSequenceIterator("ab");
+		return new CharSequenceThriterator("ab");
 	}
 
 	protected Iterator<?> createOneElementIterator() {
-		return new CharSequenceIterator("a");
+		return new CharSequenceThriterator("a");
 	}
 }

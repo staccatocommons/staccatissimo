@@ -16,7 +16,7 @@ import java.util.Iterator;
 
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.iterators.PrependIterator;
+import net.sf.staccatocommons.iterators.PrependThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -44,6 +44,6 @@ public class DropWhileStream<A> extends WrapperStream<A> {
 		}
 		if (next == null)
 			return Thriterators.from(iter);
-		return new PrependIterator<A>(next, iter);
+		return new PrependThriterator<A>(next, iter);
 	}
 }

@@ -10,9 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators.thriter;
-
-import java.util.Iterator;
+package net.sf.staccatocommons.iterators;
 
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -20,23 +18,23 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public class IteratorThriter<A> extends NextThriterator<A> {
+public class ArrayThriterator<A> extends IndexedThriterator<A> {
 
-	private final Iterator<? extends A> iter;
+	private final A[] array;
 
 	/**
-	 * Creates a new {@link IteratorThriter}
+	 * Creates a new {@link ArrayThriterator}
 	 */
-	public IteratorThriter(@NonNull Iterator<? extends A> iter) {
-		this.iter = iter;
+	public ArrayThriterator(@NonNull A[] array) {
+		this.array = array;
 	}
 
-	public boolean hasNext() {
-		return iter.hasNext();
+	protected A elementAt(int position) {
+		return array[position];
 	}
 
-	public A next() {
-		return iter.next();
+	protected int length() {
+		return array.length;
 	}
 
 }

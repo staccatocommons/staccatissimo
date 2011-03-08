@@ -29,7 +29,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  *          the element type
  * 
  */
-public final class EmptyIterator<T> extends AbstractThriterator<T> {
+public final class EmptyThriterator<T> extends AbstractThriterator<T> {
 
 	@Override
 	public boolean hasNext() {
@@ -57,7 +57,7 @@ public final class EmptyIterator<T> extends AbstractThriterator<T> {
 	@NonNull
 	@Constant
 	public static <T> Thriterator<T> empty() {
-		return new EmptyIterator();
+		return new EmptyThriterator();
 	}
 
 }

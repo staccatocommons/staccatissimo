@@ -26,14 +26,16 @@ Simple Iterators by example
 
  TODO
 
-** Iterator that throws an exception
+** Undefined Iterator (iterator that throws an exception)
 
  TODO
 
-** Appended iterator
+** Appended and Prepend iterators
 
  TODO
 
-** Prepended Iterator
+** Delayed Iterators
 
- TODO
+ TODO 
+ 
+** Next-Get Iterators 

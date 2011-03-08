@@ -10,25 +10,33 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators;
+package net.sf.staccatocommons.iterators.thriter;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
-import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class ConsIteratorUnitTest extends IteratorTheories {
+public class IteratorThriterator<A> extends NextThriterator<A> {
 
-	protected Iterator<?> createTwoElementsIterator() {
-		return new PrependThriterator(50, Arrays.asList(10).iterator());
+	private final Iterator<? extends A> iter;
+
+	/**
+	 * Creates a new {@link IteratorThriterator}
+	 */
+	public IteratorThriterator(@NonNull Iterator<? extends A> iter) {
+		this.iter = iter;
 	}
 
-	protected Iterator<?> createOneElementIterator() {
-		return new PrependThriterator(60, EmptyThriterator.empty());
+	public boolean hasNext() {
+		return iter.hasNext();
+	}
+
+	public A next() {
+		return iter.next();
 	}
 
 }

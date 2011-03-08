@@ -1,6 +1,6 @@
 package net.sf.staccatocommons.collections.stream.impl;
 
-import net.sf.staccatocommons.iterators.CharSequenceIterator;
+import net.sf.staccatocommons.iterators.CharSequenceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -19,6 +19,6 @@ public final class CharSequenceStream extends StrictStream<Character> {
 	}
 
 	public Thriterator<Character> iterator() {
-		return new CharSequenceIterator(charSequence);
+		return new CharSequenceThriterator(charSequence);
 	}
 }

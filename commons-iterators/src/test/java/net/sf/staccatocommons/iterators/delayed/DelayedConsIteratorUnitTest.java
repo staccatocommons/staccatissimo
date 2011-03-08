@@ -12,10 +12,8 @@
  */
 package net.sf.staccatocommons.iterators.delayed;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
-import net.sf.staccatocommons.iterators.EmptyIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
 import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
@@ -29,13 +27,13 @@ public class DelayedConsIteratorUnitTest extends IteratorTheories {
 	protected Iterator<?> createTwoElementsIterator() {
 		return new DelayedPrependIterator<Integer>( //
 			new ConstantThunk<Integer>(1), //
-			Thriterators.from(Arrays.asList(10).iterator()));
+			Thriterators.from(10));
 	}
 
 	protected Iterator<?> createOneElementIterator() {
 		return new DelayedPrependIterator<Integer>( //
 			new ConstantThunk<Integer>(1), //
-			EmptyIterator.<Integer> empty());
+			Thriterators.<Integer> empty());
 	}
 
 }
