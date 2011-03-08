@@ -35,6 +35,7 @@ import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.MemorizedStream;
 import net.sf.staccatocommons.collections.stream.impl.PrependStream;
+import net.sf.staccatocommons.collections.stream.impl.ThenStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendIterableStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DeconsThenStream;

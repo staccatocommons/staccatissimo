@@ -86,7 +86,9 @@ by decorating other Iterables (Streams utility class) or using sources like data
         }).take(5).toList();
     }
 +---- 
+
  Or event cleaner, if using Staccato-Commons-Lambda:
+ 
 +---
     Collection<Incident> getMostUrgentProblems3() {
         return Streams
@@ -98,6 +100,7 @@ by decorating other Iterables (Streams utility class) or using sources like data
             .toList();
     }
 +---
+
 * Examples 
 
 ** Filtering and mapping   

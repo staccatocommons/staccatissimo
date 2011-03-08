@@ -81,7 +81,33 @@
 					<tagBase>${staccatissimo.scm.base}/releases/${project.artifactId}</tagBase>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<excludePackageNames>*.internal</excludePackageNames>
+					<bottom><![CDATA[<a href="http://sourceforge.net/projects/staccatocommons"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13" width="120" height="30" alt="Get Staccato-Commons at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>]]></bottom>
+					<additionalparam>-link
+						http://staccatocommons.sourceforge.net/staccatissimo/commonscheck/apidocs
+						-link
+						http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs
+						-link
+						http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs
+						-link
+						http://staccatocommons.sourceforge.net/staccatissimo/commonsio/apidocs
+						-link
+						http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs
+						-link
+						http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs
+						-link
+						http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators/apidocs</additionalparam>
+					<useStandardDocletOptions>true</useStandardDocletOptions>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
 		</plugins>
+
 	</build>
 	<reporting>
 		<plugins>
@@ -115,30 +141,8 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.7</version>
 				<configuration>
-					<excludePackageNames>*.internal</excludePackageNames>
-					<bottom><![CDATA[<a href="http://sourceforge.net/projects/staccatocommons"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13" width="120" height="30" alt="Get Staccato-Commons at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>]]></bottom>
-					<!-- <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet> -->
-					<!-- <docletArtifact> -->
-					<!-- <groupId>org.umlgraph</groupId> -->
-					<!-- <artifactId>doclet</artifactId> -->
-					<!-- <version>5.1</version> -->
-					<!-- </docletArtifact> -operations -visibility -types -enumerations 
-						-enumconstants -collapsible -->
-					<additionalparam>-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonscheck/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonsio/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators/apidocs</additionalparam>
-					<useStandardDocletOptions>true</useStandardDocletOptions>
+					<skip>true</skip>
+					<noindex>true</noindex>
 				</configuration>
 			</plugin>
 			<plugin>
