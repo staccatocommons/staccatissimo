@@ -10,12 +10,11 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators;
+package net.sf.staccatocommons.collections.internal.iterator;
 
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -24,35 +23,37 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public class ZipIterator<A, B, C> extends AdvanceThriterator<C> {
-	final Thriter<A> thriter1;
-	final Thriter<B> thriter2;
-	final Function2<A, B, C> function;
+public class TakeIterator<A> extends AdvanceThriterator<A> {
+
+	private int remaining;
+	private final Thriter<A> thriter;
 
 	/**
-	 * Creates a new {@link ZipIterator}
+	 * Creates a new {@link TakeIterator} that takes up to {@code n} elements from
+	 * the given {@code thritter}
 	 */
-	public ZipIterator(@NonNull Thriter<A> thriter1, @NonNull Thriter<B> thriter2,
-		@NonNull Function2<A, B, C> function) {
-		this.thriter1 = thriter1;
-		this.thriter2 = thriter2;
-		this.function = function;
+	public TakeIterator(int n, @NonNull Thriter<A> thriter) {
+		this.thriter = thriter;
+		this.remaining = n;
 	}
 
 	public boolean hasNext() {
-		return thriter1.hasNext() && thriter2.hasNext();
+		return remaining > 0 && thriter.hasNext();
 	}
 
 	public void advanceNext() throws NoSuchElementException {
-		thriter1.advanceNext();
-		thriter2.advanceNext();
+		if (!hasNext())
+			throw new NoSuchElementException();
+		thriter.advanceNext();
+		remaining--;
 	}
 
-	public C current() throws NoSuchElementException {
-		return function.apply(thriter1.current(), thriter2.current());
+	public A current() throws NoSuchElementException {
+		return thriter.current();
 	}
 
-	public Thunk<C> delayedCurrent() {
-		return function.delayed(thriter1.current(), thriter2.current());
+	public Thunk<A> delayedCurrent() {
+		return thriter.delayedCurrent();
 	}
+
 }

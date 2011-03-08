@@ -13,11 +13,11 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import static java.lang.Math.*;
+import net.sf.staccatocommons.collections.internal.iterator.ZipIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.function.Function2;
-import net.sf.staccatocommons.iterators.ZipIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.restrictions.check.NonNull;

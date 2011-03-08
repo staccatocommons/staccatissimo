@@ -1,0 +1,39 @@
+Simple Iterators by example
+
+* Introduction 
+ 
+ Simple Iterators are a small library of reusable standalone iterators and iterator wrappers, that implement common, simple, 
+ iteration strategies. The main benefit of such iterators over other libraries that expose similar functionality is that they are 
+ dependency-lightweight, well integrated with staccato-commons interfaces, but not being tied to any collections library. 
+ 
+ All those simple iterators are also thriters, allowing them to be used lazily.   
+  
+* The problem
+  
+  TODO
+  
+* The Solution
+
+  TODO
+  
+* Examples 
+
+** Empty iterator
+
+ TODO
+
+** Single element iterator
+
+ TODO
+
+** Iterator that throws an exception
+
+ TODO
+
+** Appended iterator
+
+ TODO
+
+** Prepended Iterator
+
+ TODO

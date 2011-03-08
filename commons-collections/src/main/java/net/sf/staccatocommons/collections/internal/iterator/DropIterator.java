@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators;
+package net.sf.staccatocommons.collections.internal.iterator;
 
 import java.util.NoSuchElementException;
 
@@ -23,32 +23,36 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public class TakeIterator<A> extends AdvanceThriterator<A> {
+public class DropIterator<A> extends AdvanceThriterator<A> {
 
-	private int remaining;
+	private int n;
 	private final Thriter<A> thriter;
 
 	/**
-	 * Creates a new {@link TakeIterator} that takes up to {@code n} elements from
-	 * the given {@code thritter}
+	 * Creates a new {@link DropIterator}
 	 */
-	public TakeIterator(int n, @NonNull Thriter<A> thriter) {
+	public DropIterator(int n, @NonNull Thriter<A> thriter) {
+		this.n = n;
 		this.thriter = thriter;
-		this.remaining = n;
 	}
 
 	public boolean hasNext() {
-		return remaining > 0 && thriter.hasNext();
+		while (n > 0) {
+			if (!thriter.hasNext())
+				return false;
+			thriter.advanceNext();
+			n--;
+		}
+		return thriter.hasNext();
 	}
 
-	public void advanceNext() throws NoSuchElementException {
+	public void advanceNext() {
 		if (!hasNext())
 			throw new NoSuchElementException();
 		thriter.advanceNext();
-		remaining--;
 	}
 
-	public A current() throws NoSuchElementException {
+	public A current() {
 		return thriter.current();
 	}
 

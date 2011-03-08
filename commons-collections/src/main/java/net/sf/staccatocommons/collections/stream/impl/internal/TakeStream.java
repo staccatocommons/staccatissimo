@@ -17,9 +17,9 @@ import static java.lang.Math.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.staccatocommons.collections.internal.iterator.TakeIterator;
 import net.sf.staccatocommons.collections.iterable.ModifiableIterables;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.iterators.TakeIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;

@@ -10,11 +10,10 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators;
-
-import java.util.NoSuchElementException;
+package net.sf.staccatocommons.collections.internal.iterator;
 
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -23,41 +22,33 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public class DropIterator<A> extends AdvanceThriterator<A> {
+public class MapIterator<A, B> extends AdvanceThriterator<B> {
 
-	private int n;
-	private final Thriter<A> thriter;
+	final Function<? super A, ? extends B> function;
+	final Thriter<? extends A> thriter;
 
 	/**
-	 * Creates a new {@link DropIterator}
+	 * Creates a new {@link MapIterator}
 	 */
-	public DropIterator(int n, @NonNull Thriter<A> thriter) {
-		this.n = n;
+	public MapIterator(@NonNull Function<? super A, ? extends B> function,
+		@NonNull Thriter<? extends A> thriter) {
+		this.function = function;
 		this.thriter = thriter;
 	}
 
 	public boolean hasNext() {
-		while (n > 0) {
-			if (!thriter.hasNext())
-				return false;
-			thriter.advanceNext();
-			n--;
-		}
 		return thriter.hasNext();
 	}
 
 	public void advanceNext() {
-		if (!hasNext())
-			throw new NoSuchElementException();
 		thriter.advanceNext();
 	}
 
-	public A current() {
-		return thriter.current();
+	public B current() {
+		return function.apply(thriter.current());
 	}
 
-	public Thunk<A> delayedCurrent() {
-		return thriter.delayedCurrent();
+	public Thunk<B> delayedCurrent() {
+		return (Thunk<B>) function.delayed(thriter.current());
 	}
-
 }
