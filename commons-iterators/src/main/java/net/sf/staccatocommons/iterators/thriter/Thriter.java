@@ -22,7 +22,7 @@ import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
  * A {@link Thriter} - acronym for <strong>Thr</strong>ee-messages
  * <strong>Iter</strong>ator - is an object that can traverse elements of type
  * {@code A} from a collection-like object, much like an {@link Iterator} does,
- * but using three messages instead of two.
+ * but using three messages instead of two, enabling new lazy features.
  * 
  * Such messages are {@link #hasNext()}, {@link #advanceNext()} and
  * {@link #current()}:

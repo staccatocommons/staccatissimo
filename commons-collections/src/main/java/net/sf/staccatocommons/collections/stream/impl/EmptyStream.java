@@ -45,4 +45,8 @@ public final class EmptyStream<A> extends StrictStream<A> {
 		return true;
 	}
 
+	public int size() {
+		return 0;
+	}
+
 }

@@ -1,0 +1,115 @@
+Thriters by example
+
+* Introduction
+
+ Thriters - acronym for <<Thr>>ee-messages<<Iter>>ators are an alternate 
+ iterator model that, like standard Java iterators,
+ allow to traverse collection-like objects, but 
+ but using three messages instead of two - <<hasNext>>, <<advanceNext>> and <<current>>. Although
+ such iterators are more complex, they decouple the logic of advancing to the next element and evaluating it,
+ thus enabling to traverse the collection in new, lazier manners.   
+  
+* The problem
+
+ Lets suppose a normal iterator that traverses a graph of Strings. Iterating over all such Strings looks like the following:
+ 
++--
+ while(iter.hasNext()){
+    String next = iter.next();
+    { .. process element .. }
+ }
++--
+
+ In many situations this is just enough, if the process element block actually needs to evaluate each element, for example: 
+ 
++---
+  //selects strings longer than 10 characters
+  Collection<Integer> longStrings = new LinkedList<Integer>();
+  while(iter.hasNext()){
+    String next = iter.next();
+    if(element.length() > 10)
+     longStrings.add(element);
+  }
++---   
+
+ But perhaps not every element needs to be evaluated. For example:
+
++---
+  //selects strings in even positions
+  Collection<Integer> longStrings = new LinkedList<Integer>();
+  int i = 0;
+  while(iter.hasNext()){
+    String next = iter.next();
+    if(i % 2 == 0)
+     longStrings.add(element);
+  }
++--- 
+
+ This is in many cases not a problem, when iterator is traversing strict iterables like java.util.Collection or array,
+ where elements have a defined, loaded in memory value before starting iteration. But in iterators that compute elements 
+ on demand, evaluating unnecessary elements is a matter. 
+
+* The solution
+
+ TODO
+
+* Examples 
+
+** Getting the second element of a Thriterator 
+
++---
+
+ //Last statement returns the second element,
+ // without having evaluated the first one
+  thriter.advance();
+  thriter.advance();
+  thriter.current();
+  
++-----  
+
+** Calculating size of a Thriterator
+
++----
+    //Gets size of the thriter without evaluating any of
+    //the elements 
+    int size = 0;
+    Thriter<A> iter = this.iterator();
+    while (iter.hasNext()) {
+        iter.advanceNext();
+        size++;
+    }
++--------
+
+** Evaluating elements in an order different of its iteration
+
++---
+   //Evaluates first or second element depending on the third one
+   Thunk<InterestingObject> element1 = thriterator.delayedNext();
+   Thunk<InterestingObject> element2 = thriterator.delayedNext();
+   InterestingObject element3 = thriterator.next();
+   
+   if(!element3.value().isInteresting())
+    element2.value()
+   else
+    element2.value();  
+
++---
+
+
+** Converting from Iterator into Thriter and back
+
++---
+   //Answers a Thriterator, which both implements iterator and thriter
+   //Converting an iterator into thriterator does not make it lazy, 
+   //but enables to use it in combination with lazy
+   //Thriterator wrappers
+   Thriterator<A> thriterator = Thriterators.from(iter);
+   Thriter<A> thriter = thriterator;
+   
+   //Al concerte thriters do also implement Thriterator, which already implements 
+   //Iterator 
+   Iterator<A> iter  = thriterator;
+
++---
+
+

@@ -20,15 +20,38 @@ Simple Iterators by example
 
 ** Empty iterator
 
- TODO
++--
+  //An iterator that has no elements
+  Thriterator<Tax> taxesIter = Thriterators.empty();
+  taxesIter.hasNext(); //Always false
+  taxesIter.isEmpty(); //Always true
+  taxesIter.next(); //always throws a NoSuchElementException
++---
 
 ** Single element iterator
 
- TODO
++--
+  
+  //An iterator that returns the given element once
+  Thriterator<Integer> iter = Thriterators.from(50);
+  iter.hasNext(); //true
+  iter.next(); //50
+  iter.hasNext(); //false
+  
++--
 
 ** Undefined Iterator (iterator that throws an exception)
 
- TODO
++--  
+  //An iterator that has only one element, and
+  //that throws an exception 
+  Thriterator<Integer> iter = Thriterators.undefined();
+  iter.hasNext(); //true
+  try{ 
+    iter.next();  /*throws an exception*/
+  }catch(RuntimeExeption e) { /*ignore*/ }
+  iter.hasNext(); //false
++--
 
 ** Appended and Prepend iterators
 
@@ -39,3 +62,5 @@ Simple Iterators by example
  TODO 
  
 ** Next-Get Iterators 
+
+ TODO

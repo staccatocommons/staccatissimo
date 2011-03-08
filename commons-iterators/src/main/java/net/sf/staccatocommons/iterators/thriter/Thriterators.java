@@ -30,9 +30,16 @@ public class Thriterators {
 
 	private Thriterators() {}
 
+	/**
+	 * Answers a {@link Thriterator} that retrieves no elements, that is,
+	 * <code>thriterator.isEmpty()</code> is always <code>true</code>
+	 * 
+	 * @param <A>
+	 * @return a constant empty {@link Thriterator}
+	 */
 	@NonNull
 	@Constant
-	public static <T> Thriterator<T> empty() {
+	public static <A> Thriterator<A> empty() {
 		return EmptyThriterator.empty();
 	}
 
