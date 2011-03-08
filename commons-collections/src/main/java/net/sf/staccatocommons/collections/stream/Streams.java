@@ -25,7 +25,7 @@ import net.sf.staccatocommons.collections.stream.impl.EmptyStream;
 import net.sf.staccatocommons.collections.stream.impl.IterableStream;
 import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
-import net.sf.staccatocommons.collections.stream.impl.UndefinedStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.UndefinedStream;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;

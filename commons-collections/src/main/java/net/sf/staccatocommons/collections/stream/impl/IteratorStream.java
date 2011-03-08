@@ -51,11 +51,11 @@ public class IteratorStream<A> extends AbstractStream<A> {
 		return iterator;
 	}
 
-	public Stream<A> dettach() {
+	public final Stream<A> dettach() {
 		return this;
 	}
 
-	public Pair<A, Stream<A>> decons() {
+	public final Pair<A, Stream<A>> decons() {
 		validate.that(!isEmpty(), "Empty streams can not be deconstructed");
 		return _(head(), (Stream<A>) this);
 	}

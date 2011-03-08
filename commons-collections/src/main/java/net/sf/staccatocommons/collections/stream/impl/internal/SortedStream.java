@@ -25,7 +25,7 @@ import net.sf.staccatocommons.iterators.thriter.Thriterators;
  * @author flbulgarelli
  * 
  */
-public class SortedStream<A> extends WrapperStream<A> {
+public final class SortedStream<A> extends WrapperStream<A> {
 
 	private final Comparator<? super A> comparator;
 

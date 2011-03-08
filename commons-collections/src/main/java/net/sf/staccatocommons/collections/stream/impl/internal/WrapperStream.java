@@ -31,11 +31,11 @@ public abstract class WrapperStream<A> extends AbstractStream<A> {
 		this.source = source;
 	}
 
-	protected Stream<A> getSource() {
+	protected final Stream<A> getSource() {
 		return source;
 	}
 
-	public NumberType<A> numberType() {
+	public final NumberType<A> numberType() {
 		return getSource().numberType();
 	}
 

@@ -10,13 +10,11 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl;
+package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.impl.internal.SingleLinkedDelayedQueue;
-import net.sf.staccatocommons.collections.stream.impl.internal.WrapperStream;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.EmptyIterator;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;

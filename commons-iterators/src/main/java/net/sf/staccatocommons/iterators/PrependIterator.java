@@ -19,7 +19,7 @@ import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.iterators.thriter.Thriters;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
 
 /**
@@ -45,7 +45,7 @@ public class PrependIterator<A> extends AdvanceThriterator<A> {
 	 * Creates a new {@link PrependIterator}
 	 */
 	public PrependIterator(A element, Iterator<? extends A> iterator) {
-		this(element, Thriters.from(iterator));
+		this(element, (Thriter<A>) Thriterators.from(iterator));
 	}
 
 	/**

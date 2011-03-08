@@ -12,36 +12,52 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import net.sf.staccatocommons.collections.stream.AbstractStream;
+import java.util.NoSuchElementException;
+
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
-import net.sf.staccatocommons.lang.thunk.Thunks;
-import net.sf.staccatocommons.restrictions.Constant;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class UndefinedStream<A> extends AbstractStream<A> {
+public final class SingleStream<A> extends StrictStream<A> {
 
-	private static final UndefinedStream INSTANCE = new UndefinedStream();
-
-	public Thriterator<A> iterator() {
-		return Thriterators.from(Thunks.<A> undefined());
-	}
+	private A element;
 
 	/**
-	 * Answers an undefined stream
-	 * 
-	 * @param <A>
-	 * @return a undefined {@link Stream}
+	 * Creates a new {@link SingleStream}
 	 */
-	@NonNull
-	@Constant
-	public static <A> Stream<A> undefined() {
-		return INSTANCE;
+	public SingleStream(A element) {
+		this.element = element;
+	}
+
+	public Thriterator<A> iterator() {
+		return Thriterators.from(element);
+	}
+
+	public int size() {
+		return 1;
+	}
+
+	public Stream<A> tail() {
+		return Streams.empty();
+	}
+
+	public A get(int n) {
+		if (n == 0)
+			return element;
+		throw new NoSuchElementException("At " + n);
+	}
+
+	public boolean isBefore(A previous, A next) {
+		return false;
+	}
+
+	public boolean isEmpty() {
+		return false;
 	}
 
 }

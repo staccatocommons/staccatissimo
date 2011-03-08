@@ -33,24 +33,24 @@ import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
-import net.sf.staccatocommons.collections.stream.impl.MemorizedStream;
-import net.sf.staccatocommons.collections.stream.impl.PrependStream;
-import net.sf.staccatocommons.collections.stream.impl.ThenStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendIterableStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DeconsThenStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.DelayedDeconsThenStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropWhileStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FilterStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FlatMapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.GroupByStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.MapStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.MemorizedStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.PrependStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.SortedStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeWhileStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.ThenStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ZipStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedAppendStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedDeconsThenStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedPrependStream;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
@@ -101,7 +101,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public boolean isEmpty() {
-		return Iterables.isEmpty(this);
+		return iterator().isEmpty();
 	}
 
 	@Override
@@ -279,10 +279,6 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	public Stream<A> force() {
 		return new ListStream<A>(toList()) {
-			public Stream<A> dettach() {
-				return this;
-			}
-
 			public List<A> toList() {
 				return Collections.unmodifiableList(getList());
 			}

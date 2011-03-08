@@ -35,17 +35,17 @@ public class ListStream<A> extends CollectionStream<A> {
 	}
 
 	@Override
-	public A get(int n) {
+	public final A get(int n) {
 		return getList().get(n);
+	}
+
+	@Override
+	public final int indexOf(A element) {
+		return getList().indexOf(element);
 	}
 
 	protected List<A> getList() {
 		return (List<A>) getCollection();
-	}
-
-	@Override
-	public int indexOf(A element) {
-		return getList().indexOf(element);
 	}
 
 }

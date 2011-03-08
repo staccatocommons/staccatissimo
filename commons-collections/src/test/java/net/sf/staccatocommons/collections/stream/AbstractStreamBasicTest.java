@@ -338,8 +338,11 @@ public class AbstractStreamBasicTest {
 		assertTrue(sort.equivalent(6, 6, 9, 10, 18, 20, 26, 32));
 	}
 
+	/**
+	 * Test that isEmpty is repeatable in intersperse
+	 */
 	@Test
-	public void testRep() throws Exception {
+	public void testIntersperseEmptyRepeatable() throws Exception {
 		Stream<Integer> s = Cons.from(1, 3).intersperse(0);
 		assertFalse(s.isEmpty());
 		assertFalse(s.isEmpty());

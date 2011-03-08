@@ -19,7 +19,7 @@ import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.iterators.thriter.Thriters;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -47,7 +47,7 @@ public class AppendIterator<A> extends AdvanceThriterator<A> {
 	 * Creates a new {@link AppendIterator}
 	 */
 	public AppendIterator(@NonNull Iterator<? extends A> iterator, A element) {
-		this(Thriters.from(iterator), element);
+		this((Thriter<? extends A>) Thriterators.from(iterator), element);
 	}
 
 	/**

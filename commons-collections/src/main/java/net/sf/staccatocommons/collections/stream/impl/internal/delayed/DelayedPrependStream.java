@@ -15,7 +15,7 @@ package net.sf.staccatocommons.collections.stream.impl.internal.delayed;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.collections.stream.impl.PrependStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.PrependStream;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.delayed.DelayedPrependIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;

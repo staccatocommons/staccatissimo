@@ -45,7 +45,7 @@ public class IterableStream<A> extends AbstractStream<A> {
 		return Thriterators.from(iterable.iterator());
 	}
 
-	public NumberType<A> numberType() {
+	public final NumberType<A> numberType() {
 		return ((ImplicitNumberType<A>) iterable).numberType();
 	}
 

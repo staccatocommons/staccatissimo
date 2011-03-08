@@ -10,12 +10,11 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl;
+package net.sf.staccatocommons.collections.stream.impl.internal.delayed;
 
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedPrependStream;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
@@ -30,7 +29,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * @param <A>
  */
-public class ConsStream<A> extends DelayedPrependStream<A> {
+public final class ConsStream<A> extends DelayedPrependStream<A> {
 
 	/**
 	 * Creates a new {@link ConsStream}

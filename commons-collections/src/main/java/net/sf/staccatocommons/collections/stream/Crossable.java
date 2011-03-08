@@ -38,6 +38,17 @@ public interface Crossable<A> {
 	@Projection
 	<B> Stream<Pair<A, B>> cross(@NonNull Stream<B> other);
 
+	/**
+	 * Answers the cartesian product of this {@link Stream} and the given
+	 * {@link Iterable}
+	 * 
+	 * @param <B>
+	 * @param other
+	 * @return <code>cross(Streams.from(other))</code>
+	 * @see #cross(Stream)
+	 */
+	@NonNull
+	@Projection
 	<B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other);
 
 	@NonNull

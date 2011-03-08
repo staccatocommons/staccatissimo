@@ -14,8 +14,8 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.Arrays;
 
-import net.sf.staccatocommons.collections.stream.impl.ConsStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.SingleStream;
+import net.sf.staccatocommons.collections.stream.impl.SingleStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.delayed.ConsStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedSingleStream;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;

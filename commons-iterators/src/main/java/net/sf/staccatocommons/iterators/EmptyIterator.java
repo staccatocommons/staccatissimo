@@ -31,17 +31,6 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public final class EmptyIterator<T> extends AbstractThriterator<T> {
 
-	/**
-	 * @param <T>
-	 *          the type of the iterator element
-	 * @return the singleton instance
-	 */
-	@NonNull
-	@Constant
-	public static <T> Thriterator<T> empty() {
-		return new EmptyIterator();
-	}
-
 	@Override
 	public boolean hasNext() {
 		return false;
@@ -58,6 +47,17 @@ public final class EmptyIterator<T> extends AbstractThriterator<T> {
 
 	public T current() throws NoSuchElementException {
 		return next();
+	}
+
+	/**
+	 * @param <T>
+	 *          the type of the iterator element
+	 * @return the singleton instance
+	 */
+	@NonNull
+	@Constant
+	public static <T> Thriterator<T> empty() {
+		return new EmptyIterator();
 	}
 
 }

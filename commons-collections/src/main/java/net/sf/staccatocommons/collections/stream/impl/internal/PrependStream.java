@@ -10,11 +10,10 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl;
+package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.impl.internal.WrapperStream;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.PrependIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;

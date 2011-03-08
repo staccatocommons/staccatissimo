@@ -1,6 +1,7 @@
-package net.sf.staccatocommons.collections.stream.impl.internal;
+package net.sf.staccatocommons.collections.stream.impl.internal.delayed;
 
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.collections.stream.impl.internal.AbstractThenStream;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.tuple.Pair;
 

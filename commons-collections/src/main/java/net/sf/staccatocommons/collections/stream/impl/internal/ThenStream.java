@@ -1,8 +1,7 @@
-package net.sf.staccatocommons.collections.stream.impl;
+package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.impl.internal.AbstractThenStream;
 import net.sf.staccatocommons.defs.Applicable;
 
 /**

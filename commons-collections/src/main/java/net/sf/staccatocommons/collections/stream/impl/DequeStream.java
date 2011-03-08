@@ -53,11 +53,11 @@ public class DequeStream<A> extends CollectionStream<A> {
 		};
 	}
 
-	public A first() {
+	public final A first() {
 		return getCollection().getFirst();
 	}
 
-	public A last() {
+	public final A last() {
 		return getCollection().getFirst();
 	}
 

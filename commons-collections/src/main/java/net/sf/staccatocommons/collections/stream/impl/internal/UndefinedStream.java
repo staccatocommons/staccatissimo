@@ -12,33 +12,36 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
+import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.collections.stream.impl.StrictStream;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
+import net.sf.staccatocommons.lang.thunk.Thunks;
+import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class SingleStream<A> extends StrictStream<A> {
+public final class UndefinedStream<A> extends AbstractStream<A> {
 
-	private A element;
-
-	/**
-	 * Creates a new {@link SingleStream}
-	 */
-	public SingleStream(A element) {
-		this.element = element;
-	}
+	private static final UndefinedStream INSTANCE = new UndefinedStream();
 
 	public Thriterator<A> iterator() {
-		return Thriterators.from(element);
+		return Thriterators.from(Thunks.<A> undefined());
 	}
 
-	public Stream<A> tail() {
-		return Streams.empty();
+	/**
+	 * Answers an undefined stream
+	 * 
+	 * @param <A>
+	 * @return a undefined {@link Stream}
+	 */
+	@NonNull
+	@Constant
+	public static <A> Stream<A> undefined() {
+		return INSTANCE;
 	}
 
 }

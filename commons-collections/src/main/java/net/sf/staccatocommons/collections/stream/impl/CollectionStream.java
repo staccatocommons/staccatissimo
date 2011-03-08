@@ -41,12 +41,12 @@ public class CollectionStream<A> extends StrictStream<A> {
 	}
 
 	@Override
-	public int size() {
+	public final int size() {
 		return collection.size();
 	}
 
 	@Override
-	public boolean contains(A element) {
+	public final boolean contains(A element) {
 		return collection.contains(element);
 	}
 
@@ -56,7 +56,7 @@ public class CollectionStream<A> extends StrictStream<A> {
 	}
 
 	@Override
-	public Thriterator<A> iterator() {
+	public final Thriterator<A> iterator() {
 		return Thriterators.from(collection.iterator());
 	}
 
@@ -65,6 +65,7 @@ public class CollectionStream<A> extends StrictStream<A> {
 		return Iterables.toList(getCollection());
 	}
 
+	@Override
 	public A[] toArray(Class<? extends A> clazz) {
 		return toArray(clazz, getCollection());
 	}
