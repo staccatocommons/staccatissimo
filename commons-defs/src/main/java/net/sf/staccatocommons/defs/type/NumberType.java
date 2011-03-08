@@ -155,6 +155,16 @@ public interface NumberType<A> extends Comparator<A> {
 	 */
 	A increment(A n);
 
+	/**
+	 * Answers that inverse of a given number, that is, <code>n^-1</code>
+	 * 
+	 * For any number x for which division is defined, a {@link NumberType} nt
+	 * <strong>must</strong> grant that
+	 * <code>nt.divide(nt.one(), x).compareTo(nt.inverse(x)) == 0</code>
+	 * 
+	 * @param n
+	 * @return <code>1/n</code>
+	 */
 	A inverse(A n);
 
 	/**
@@ -267,6 +277,12 @@ public interface NumberType<A> extends Comparator<A> {
 	@Constant
 	Function<A, A> abs();
 
+	/**
+	 * Answers a function that returns the ivnerse of its argument, as defined by
+	 * {@link #inverse(Object)}
+	 * 
+	 * @return a function
+	 */
 	@Constant
 	Function<A, A> inverse();
 
