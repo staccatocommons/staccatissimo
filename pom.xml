@@ -9,6 +9,7 @@
   <modules>
     <module>commons-testing</module>
     <module>commons-parent-pom</module>
+    <module>commons-lambda</module>
     <module>commons-lang</module>
     <module>commons-restrictions</module>
     <module>commons-defs</module>
