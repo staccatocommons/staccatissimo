@@ -9,11 +9,9 @@ About Staccato-Commons-Collections
  It also offers Streams, rich, fluent, lazy iterables that can wrap many different sources - much more than just collections - , making
  complex transformations on anything that is iterable extremely simple.  
  
-Alpha state 
+Beta state 
 
- Staccato-Commons-Collections is currently in alpha state.
-  Although most of previous features are implemented, tested and documented, 
-  it is not recommended to use in production systems yet. Types and packages may change in the near future without notice. 
+ Staccato-Commons-Collections is currently in beta state. It should not be used in productive systems yet. 
   
 Getting started
 

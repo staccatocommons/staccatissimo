@@ -4,10 +4,9 @@ About Staccato-Commons-Restrictions
 It contains annotations that express restrictions in the form of preconditions, postconditions an invariants over objects and messages, 
 focused on documentation reuse. 
 
-Alpha state 
+Beta state 
 
- Staccato-Commons-Restrictions is currently in alpha state.
-  Although most of previous features are implemented, tested and documented, it should not be used in productive systems yet. 
+ Staccato-Commons-Restrictions is currently in beta state. It should not be used in productive systems yet. 
  
 Getting started
 
