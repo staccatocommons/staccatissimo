@@ -49,7 +49,7 @@
 				staccato-commons-iterators
             </action>
 		</release>
-		<release version="1.0-alpha-4" date="2011-03-08" description="Laziness">
+		<release version="1.0-alpha-4" date="2011-03-11" description="Laziness">
 			<action dev="flbulgarelli" type="update">
 				Replaced plain iterators in
 				Stream by thriterators

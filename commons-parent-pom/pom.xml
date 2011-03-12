@@ -81,33 +81,7 @@
 					<tagBase>${staccatissimo.scm.base}/releases/${project.artifactId}</tagBase>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.7</version>
-				<configuration>
-					<excludePackageNames>*.internal</excludePackageNames>
-					<bottom><![CDATA[<a href="http://sourceforge.net/projects/staccatocommons"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13" width="120" height="30" alt="Get Staccato-Commons at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>]]></bottom>
-					<additionalparam>-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonscheck/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonsio/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs
-						-link
-						http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators/apidocs</additionalparam>
-					<useStandardDocletOptions>true</useStandardDocletOptions>
-					<skip>false</skip>
-				</configuration>
-			</plugin>
 		</plugins>
-
 	</build>
 	<reporting>
 		<plugins>
@@ -140,10 +114,29 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.7</version>
-				<configuration>
-					<skip>true</skip>
-					<noindex>true</noindex>
-				</configuration>
+                <configuration>
+                    <excludePackageNames>*.internal</excludePackageNames>
+                    <bottom><![CDATA[<a href="http://sourceforge.net/projects/staccatocommons"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13" width="120" height="30" alt="Get Staccato-Commons at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>]]></bottom>
+                    <useStandardDocletOptions>true</useStandardDocletOptions>
+                    <links>
+                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonscheck/apidocs</link>
+                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators/apidocs</link>
+                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs</link>
+                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs</link>
+                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonsio/apidocs</link>
+                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs</link>
+                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs</link>
+                    </links>
+                    <skip>false</skip>
+                </configuration>
+				<reportSets>
+					<reportSet>
+						<id>default</id>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

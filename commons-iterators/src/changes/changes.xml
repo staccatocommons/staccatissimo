@@ -13,7 +13,7 @@
 			     and enumeration iterators
 			</action>
 		</release>
-		<release version="1.0-alpha-4" date="TBD" description="Laziness">
+		<release version="1.0-alpha-4" date="2011-03-11" description="Laziness">
             <action dev="flbulgarelli" type="add">
                  Adding Thriters and Thriterators
             </action>

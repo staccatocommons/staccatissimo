@@ -12,11 +12,39 @@
  */
 package net.sf.staccatocommons.check;
 
+import net.sf.staccatocommons.restrictions.effect.Transparent;
+
 /**
  * {@link Validate} is a generic {@link Check} that on failure will throw a and
  * exception of a parameterized class.
  * 
- * TODO add code samples
+ * Typical usage is the following:
+ * 
+ * <pre>
+ * 	Validate
+ * 		.throwing(MyExceptionType.class)
+ *    .that(condition1, message1)
+ *    .that(condition2, message2)
+ *    ..etc..
+ * </pre>
+ * 
+ * Since {@link Check}s are {@link Transparent}, and thus thread safe, it is
+ * possible to cache {@link Validate} instances as class atributes and reuse
+ * them across different validations. Example:
+ * 
+ * <pre>
+ *   private static Validate&lt;IllegalStateException&gt; validate 
+ *   	= Validate.throwing(IllegalStateException.class);
+ *   
+ *   public void foo() {
+ *      validate.that(...);
+ *   }
+ *   
+ *   public void bar(){
+ *      validate.that(...);
+ *   }
+ * 
+ * </pre>
  * 
  * @author flbulgarelli
  * @param <ExceptionType>

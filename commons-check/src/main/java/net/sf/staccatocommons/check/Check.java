@@ -27,6 +27,7 @@ import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.type.EmptyAwareType;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.defs.type.SizeAwareType;
+import net.sf.staccatocommons.restrictions.effect.Transparent;
 
 /**
  * {@link Check}s are objects that validate conditions. It is heavily inspired
@@ -55,6 +56,7 @@ import net.sf.staccatocommons.defs.type.SizeAwareType;
  * should be used, if is its an an attribute or property is being used, its
  * property name should be used.
  * 
+ * Checks are {@link Transparent}
  * 
  * @author flbulgarelli
  * 
@@ -67,6 +69,7 @@ import net.sf.staccatocommons.defs.type.SizeAwareType;
  *          failures
  * 
  */
+@Transparent
 public abstract class Check<ExceptionType extends Throwable> {
 
 	/* Minimal Ops */

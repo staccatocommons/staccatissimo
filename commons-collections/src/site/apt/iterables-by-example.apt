@@ -42,5 +42,33 @@ Iterables by example
   As said before, all them have both strengths and flaws, and the developer should decide which fits better. 
   Instead, we will just present the solutions Staccato-Commons-Collections offers.
   
+* The Solution  
   
-  Coming soon...
+  Iterables, ModifiableIterables, Maps and Lists are utility classes that provide around 60 common operations over Collections. 
+  Although those methods share similar names with those of Streams, they are implemented in a non-lazy manner, and are targeted
+  for performing simple, non-chained operations. With exception of ModifiableIterables, all those operations are side-effect free - they 
+  do not modify their arguments. 
+  
+  For example, previous code can be refactored using Iterables:
+  
++---
+ Collection<Service> getDownServices() { 
+  return Iterables.filter(services, new Predicate<Service>() {
+    public boolean eval(Service service) {
+     return service.isDown();
+    }}); 
+  }
++--- 
+
+ Or, using {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslambda}Staccato-Commons-Lambda}}:
+
++---
+ Collection<Service> getDownServices() {
+   return Iterables.filter(services, lambda($(Service.class).isDown());
+ }
++---  
+  
+   
+  
+  
+  

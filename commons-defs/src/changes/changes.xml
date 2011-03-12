@@ -40,7 +40,7 @@
 				Added Constant restriction
             </action>
 		</release>
-		<release version="1.0-alpha-4" date="2011-03-08" description="Laziness">
+		<release version="1.0-alpha-4" date="2011-03-11" description="Laziness">
 			<action dev="flbulgarelli" type="add">
 				Added Deleyables 
             </action>

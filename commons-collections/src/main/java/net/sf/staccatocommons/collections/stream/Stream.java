@@ -25,7 +25,7 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
 import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 /**
@@ -105,8 +105,15 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  * for example {@link Iterator}s are a non repeatable iteration order source.
  * Streams that always ensure this property are marked as {@link Repeatable}.
  * Streams that may have it depending on its source are marked as
- * {@link ConditionallyRepeatable}</li>
- * <li>Immutability TODO</li>
+ * {@link ConditionallyRepeatable}. Otherwise, stream implementors and methods
+ * that return streams must be treated as non-repeatable-in-practice, either
+ * because they do not satisfy previous condition, or its not efficient to do
+ * that. Any Stream can be converted into an efficient {@link Repeatable} by
+ * sending {@link #memorize()} or {@link #force()}. Consult their javadoc for
+ * details.</li>
+ * <li>Streams are in the general case not {@link Unmodifiable}, as streams with
+ * modifiable sources like iterators will be modified by any of the stream
+ * methods not marked as {@link SideEffectFree}.</li>
  * <li>Referential transparency TODO</li>
  * <li>Random access TODO</li>
  * </ul>
@@ -137,8 +144,6 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  * @param <A>
  *          the type of object the stream is source of
  */
-@Unmodifiable
-@ConditionallyImmutable
 public interface Stream<A> extends //
 	Accessible<A>, //
 	Appendable<A>,//

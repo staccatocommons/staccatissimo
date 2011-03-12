@@ -67,10 +67,6 @@ the surrounding the annotation discovered by the instrumenter, which gives acces
 which correspond to each AnnotationHandler: <<<MethodAnnotationContext>>>, <<<ConstructorAnnotationContext>>>, <<<ArgumentAnnotationContext>>> 
 and <<<ClassAnnotationContext>>>.    
  
-** InstrumentionMark
-
- TODO 
- 
 * A complete example
 
  <The complete code can be found {{{https:/staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-instrument-examples}here}}>

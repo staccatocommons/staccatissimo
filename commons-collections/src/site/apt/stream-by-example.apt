@@ -183,21 +183,28 @@ by decorating other Iterables (Streams utility class) or using sources like data
 
 +--- 
 
-** Comparing elements
+** Appending, FlatMapping and getting max element
 
- TODO
++---
+    interface Holding { 
+        Collection<Company> getCompanies();
+    }
+    interface Company {
+        BigDecimal getRevenue();
+    }
+    
+    Collection<Holding> otherHoldings = ...;
+    Holding thisHolding = ...;
+    
+    //Answer the company that has the highest revenue, among all the companies 
+    //of thisHolding and otherHoldings
+    Cons
+        .from(thisHolding)
+        .append(otherHoldings)
+        .flatMap(lambda($(Holding.class).getCompanies()))
+        .maximumOn(lambda($(Company.class).getRevenue()));
++---
 
-** FlatMapping and Zipping
-
- TODO 
-
-** Appending and getting size
-
- TODO
-
-** Getting max element
-
- TODO
 
 
  

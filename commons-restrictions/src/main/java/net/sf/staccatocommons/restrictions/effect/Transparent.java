@@ -37,11 +37,15 @@ import net.sf.staccatocommons.restrictions.value.Immutable;
  * is no reason no annotate {@link Transparent} classes or methods as
  * {@link SideEffectFree}, as it is implicit.
  * 
+ * As a consequence of being {@link Immutable}, {@link Transparent} classes are
+ * thread safe.
+ * 
  * @author flbulgarelli
  * @see <a
  *      href="http://en.wikipedia.org/wiki/Referential_transparency_(computer_science)">Referential
  *      transparency</a>
- * @see Transparent
+ * @see SideEffectFree
+ * @see Immutable
  */
 @Documented
 @Inherited

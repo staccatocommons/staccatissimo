@@ -49,9 +49,8 @@ Thriters by example
  where elements have a defined, loaded in memory value before starting iteration. But in iterators that compute elements 
  on demand, evaluating unnecessary elements is a matter. 
 
-* The solution
-
- TODO
+~~* The solution
+~~ TODO
 
 * Examples 
 

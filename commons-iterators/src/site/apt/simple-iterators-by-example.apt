@@ -8,14 +8,6 @@ Simple Iterators by example
  
  All those simple iterators are also thriters, allowing them to be used lazily.   
   
-* The problem
-  
-  TODO
-  
-* The Solution
-
-  TODO
-  
 * Examples 
 
 ** Empty iterator
@@ -53,14 +45,9 @@ Simple Iterators by example
   iter.hasNext(); //false
 +--
 
-** Appended and Prepend iterators
-
- TODO
-
-** Delayed Iterators
-
- TODO 
- 
-** Next-Get Iterators 
-
- TODO
+~~** Appended and Prepend iterators
+~~ TODO
+~~** Delayed Iterators
+~~TODO 
+~~** Next-Get Iterators 
+~~ TODO
