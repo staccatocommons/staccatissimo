@@ -3,18 +3,18 @@
   <parent>
     <artifactId>commons-parent-pom</artifactId>
     <groupId>net.sf.staccatocommons</groupId>
-    <version>1.0-alpha-4-SNAPSHOT</version>
+    <version>1.0-alpha-4</version>
   </parent>
   <groupId>net.sf.staccatocommons</groupId>
   <artifactId>commons-check-examples</artifactId>
-  <version>1.0-alpha-4-SNAPSHOT</version>
+  <version>1.0-alpha-4</version>
   <name>Staccato-Commons-Check-Examples</name>
   <description>Examples of usage of Commons-Check</description>
   <dependencies>
   	<dependency>
   		<groupId>net.sf.staccatocommons</groupId>
   		<artifactId>commons-check</artifactId>
-  		<version>1.0-alpha-4-SNAPSHOT</version>
+  		<version>1.0-alpha-4</version>
   	</dependency>
   </dependencies>
 </project>

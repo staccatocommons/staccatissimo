@@ -5,7 +5,7 @@
 	<artifactId>commons-lang</artifactId>
 	<name>Staccato-Commons-Lang</name>
 	<description>Staccato-Commons core classes</description>
-	<version>1.0-alpha-4-SNAPSHOT</version>
+	<version>1.0-alpha-4</version>
 	<inceptionYear>2010</inceptionYear>
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonslang</url>
 	<scm>
@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>net.sf.staccatocommons</groupId>
 		<artifactId>commons-parent-pom</artifactId>
-		<version>1.0-alpha-4-SNAPSHOT</version>
+		<version>1.0-alpha-4</version>
 	</parent>
 	<distributionManagement>
 		<site>
@@ -45,17 +45,17 @@
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-defs</artifactId>
-			<version>1.0-alpha-4-SNAPSHOT</version>
+			<version>1.0-alpha-4</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-check</artifactId>
-			<version>1.0-alpha-4-SNAPSHOT</version>
+			<version>1.0-alpha-4</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-iterators</artifactId>
-			<version>1.0-alpha-4-SNAPSHOT</version>
+			<version>1.0-alpha-4</version>
 		</dependency>
 	</dependencies>
 	<profiles>
@@ -86,7 +86,7 @@
 					<plugin>
 						<groupId>net.sf.staccatocommons</groupId>
 						<artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
-						<version>1.0-alpha-4-SNAPSHOT</version>
+						<version>1.0-alpha-4</version>
 						<configuration>
 							<ignoreReturnChecks>true</ignoreReturnChecks>
 							<ignoreConstants>false</ignoreConstants>
