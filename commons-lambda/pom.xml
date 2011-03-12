@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>commons-parent-pom</artifactId>
+		<groupId>net.sf.staccatocommons</groupId>
+		<version>1.0-beta-1-SNAPSHOT</version>
+	</parent>
+	<groupId>net.sf.staccatocommons</groupId>
+	<artifactId>commons-lambda</artifactId>
+	<name>Staccato-Commons-Lambda</name>
+	<version>1.0-beta-1-SNAPSHOT</version>
+	<inceptionYear>2011</inceptionYear>
+	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonslambda</url>
+	<scm>
+        <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lambda</connection>
+        <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lambda</developerConnection>
+        <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-lambda/</url>
+    </scm>
+    <distributionManagement>
+        <site>
+            <id> ${distribution.site.id}</id>
+            <url>${distribution.site.url}/staccatissimo/commonslambda</url>
+        </site>
+    </distributionManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-proxy</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.14.0-GA</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.staccatocommons</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>1.0-beta-1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</project>
