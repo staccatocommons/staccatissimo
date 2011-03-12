@@ -36,7 +36,7 @@ import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendIterableStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.DeconsThenStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.DeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropWhileStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FilterStream;
@@ -48,10 +48,10 @@ import net.sf.staccatocommons.collections.stream.impl.internal.PrependStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.SortedStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeWhileStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.ThenStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.TransformStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ZipStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedAppendStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedDeconsThenStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedDeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedPrependStream;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
@@ -340,8 +340,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public <B> Stream<B> then(final Applicable<Stream<A>, ? extends Stream<B>> function) {
-		return new ThenStream<A, B>(this, function);
+	public <B> Stream<B> transform(final Applicable<Stream<A>, ? extends Stream<B>> function) {
+		return new TransformStream<A, B>(this, function);
 	}
 
 	/**
@@ -353,8 +353,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	 * 
 	 */
 	public Stream<A> intersperse(final A sep) {
-		return delayedThen(new DeconsFunction<A, A>() {
-			public Stream<A> delayedApply(Thunk<A> head, Stream<A> tail) {
+		return transform(new AbstractDelayedDeconsApplicable<A, A>() {
+			public Stream<A> apply(Thunk<A> head, Stream<A> tail) {
 				if (tail.isEmpty())
 					return cons(head);
 				return cons(head, cons(sep, tail.intersperse(sep)));
@@ -378,12 +378,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new DelayedPrependStream<A>(element, this);
 	}
 
-	public <B> Stream<B> then(final DeconsApplicable<A, B> function) {
-		return new DeconsThenStream<B, A>(this, function);
+	public <B> Stream<B> transform(final DeconsApplicable<A, B> function) {
+		return new DeconsTransformStream<B, A>(this, function);
 	}
 
-	public <B> Stream<B> delayedThen(final DeconsApplicable<A, B> function) {
-		return new DelayedDeconsThenStream<A, B>(this, function);
+	public <B> Stream<B> transform(final DelayedDeconsApplicable<A, B> function) {
+		return new DelayedDeconsTransformStream<A, B>(this, function);
 	}
 
 	@Override
@@ -534,7 +534,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	// this >>= (\x -> other >>= (\y -> return (x,y)))
 	@ForceRestrictions
 	public <B> Stream<Pair<A, B>> cross(@NonNull final Stream<B> other) {
-		return then(new AbstractFunction<Stream<A>, Stream<Pair<A, B>>>() {
+		return transform(new AbstractFunction<Stream<A>, Stream<Pair<A, B>>>() {
 			public Stream<Pair<A, B>> apply(Stream<A> stram) {
 				return flatMap(new AbstractFunction<A, Stream<Pair<A, B>>>() {
 					public Stream<Pair<A, B>> apply(final A x) {
@@ -558,7 +558,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	// fcross [xs,ys] = xs >>= \x -> ys >>= \y -> return [x,y]
 	// fcross (xs:xss) = xs >>= \x -> (fcross xss) >>= \ys -> return (x:ys)
 	private static <A> Stream<Stream<A>> fcross(Stream<Stream<A>> other) {
-		return other.then(new AbstractFunction<Stream<Stream<A>>, Stream<Stream<A>>>() {
+		return other.transform(new AbstractFunction<Stream<Stream<A>>, Stream<Stream<A>>>() {
 			public Stream<Stream<A>> apply(Stream<Stream<A>> _xss) {
 				final Stream<Stream<A>> xss = _xss.memorize();
 				if (xss.size() == 2)

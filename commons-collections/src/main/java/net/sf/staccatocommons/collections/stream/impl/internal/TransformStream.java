@@ -9,16 +9,16 @@ import net.sf.staccatocommons.defs.Applicable;
  * 
  * @param <B>
  */
-public final class ThenStream<A, B> extends AbstractThenStream<A, B> {
+public final class TransformStream<A, B> extends AbstractTransformStream<A, B> {
 	/**
 	 * 
 	 */
 	private final Applicable<Stream<A>, ? extends Stream<B>> function;
 
 	/**
-	 * Creates a new {@link ThenStream}
+	 * Creates a new {@link TransformStream}
 	 */
-	public ThenStream(AbstractStream<A> stream, Applicable<Stream<A>, ? extends Stream<B>> function) {
+	public TransformStream(AbstractStream<A> stream, Applicable<Stream<A>, ? extends Stream<B>> function) {
 		super(stream);
 		this.function = function;
 	}

@@ -18,13 +18,11 @@ import java.util.Iterator;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
-import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.lang.sequence.Sequence;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
 import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
@@ -162,20 +160,8 @@ public interface Stream<A> extends //
 	SizeAware, //
 	Sortable<A>, //
 	Testeable<A>, //
+	Transformable<A>, //
 	Zippeable<A> {
-
-	/**
-	 * Lazily applies the given function to this {@link Stream}
-	 * 
-	 * @param <B>
-	 * @param function
-	 *          the function to apply to this stream
-	 * @return a new stream that will retrieve elements from the result of
-	 *         applying the given function to this stream
-	 */
-	@NonNull
-	@Projection
-	<B> Stream<B> then(@NonNull Applicable<Stream<A>, ? extends Stream<B>> function);
 
 	Thriterator<A> iterator();
 

@@ -100,7 +100,7 @@ public class Directory {
 	 */
 	@NonNull
 	public Stream<File> getBreadthFirstFileStream() {
-		return Streams.cons(file.listFiles()).then(BreadthFirst.INSTANCE);
+		return Streams.cons(file.listFiles()).transform(BreadthFirst.INSTANCE);
 	}
 
 	/**
@@ -190,6 +190,6 @@ final class BreadthFirst extends AbstractFunction<Stream<File>, Stream<File>> {
 				public Iterable<File> apply(File arg) {
 					return Arrays.asList(arg.listFiles());
 				}
-			}).then(this));
+			}).transform(this));
 	}
 }

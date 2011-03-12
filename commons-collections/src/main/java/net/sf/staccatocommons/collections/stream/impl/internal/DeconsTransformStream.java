@@ -9,13 +9,13 @@ import net.sf.staccatocommons.lang.tuple.Pair;
  * @param <B>
  * @param <A>
  */
-public final class DeconsThenStream<B, A> extends AbstractThenStream<A, B> {
+public final class DeconsTransformStream<B, A> extends AbstractTransformStream<A, B> {
 	private final DeconsApplicable<A, B> function;
 
 	/**
-	 * Creates a new {@link DeconsThenStream}
+	 * Creates a new {@link DeconsTransformStream}
 	 */
-	public DeconsThenStream(Stream<A> stream, DeconsApplicable<A, B> function) {
+	public DeconsTransformStream(Stream<A> stream, DeconsApplicable<A, B> function) {
 		super(stream);
 		this.function = function;
 	}

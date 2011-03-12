@@ -17,10 +17,10 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
-import net.sf.staccatocommons.collections.stream.DeconsFunction;
-import net.sf.staccatocommons.collections.stream.Deconstructable.DeconsApplicable;
+import net.sf.staccatocommons.collections.stream.AbstractDeconsApplicable;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.collections.stream.Transformable.DeconsApplicable;
 import net.sf.staccatocommons.defs.Evaluable;
 
 import org.junit.Test;
@@ -29,11 +29,11 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class DeconsThenStreamTest {
+public class DeconsTransformStreamTest {
 
 	/**
 	 * Dropwhile definition in functional-style. First equation is inherited from
-	 * {@link DeconsFunction}
+	 * {@link AbstractDeconsApplicable}
 	 * 
 	 * <pre>
 	 * dw _ [] = []
@@ -42,7 +42,7 @@ public class DeconsThenStreamTest {
 	 * </pre>
 	 * */
 	public static <A> Stream<A> dropWhile(final Evaluable<A> pred, Stream<A> stream) {
-		return stream.then(new DeconsFunction<A, A>() {
+		return stream.transform(new AbstractDeconsApplicable<A, A>() {
 			public Stream<A> apply(A head, Stream<A> tail) {
 				if (pred.eval(head))
 					return dropWhile(pred, tail);
@@ -54,7 +54,7 @@ public class DeconsThenStreamTest {
 	/**
 	 * Highlevel test that defines recursively a lazy dropWhile function
 	 * compatible with {@link Stream#dropWhile(Evaluable)}, but in a recursive way
-	 * using {@link Stream#then(DeconsApplicable)}
+	 * using {@link Stream#transform(DeconsApplicable)}
 	 * 
 	 * @throws Exception
 	 */

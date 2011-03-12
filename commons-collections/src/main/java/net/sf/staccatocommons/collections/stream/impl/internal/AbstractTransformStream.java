@@ -24,14 +24,14 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 /**
  * @author flbulgarelli
  */
-public abstract class AbstractThenStream<A, B> extends AbstractStream<B> {
+public abstract class AbstractTransformStream<A, B> extends AbstractStream<B> {
 
 	private final Stream<A> stream;
 
 	/**
-	 * Creates a new {@link AbstractThenStream}
+	 * Creates a new {@link AbstractTransformStream}
 	 */
-	public AbstractThenStream(@NonNull Stream<A> stream) {
+	public AbstractTransformStream(@NonNull Stream<A> stream) {
 		this.stream = stream;
 	}
 
