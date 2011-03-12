@@ -14,7 +14,7 @@ Getting Started
  There are two ways of using it, this introduction will just show one of them - using a shared lambda factory. The alternative, 
  more performant but a bit more verbose way - using local lambda factories - is discussed in the API docs. 
  
- * Instantiating 1 argument function     
+* Instantiating 1 argument functions    
  
  The simplest function to create are one argument functions. Without Staccato-Commons-Lambda, implementing such functions require to extend
  AbstractFunction. For example, a function that return book's ISBN looks like the following:
@@ -33,9 +33,37 @@ Getting Started
   lambda($(Book.class).getIsbn()); 
 +--- 
  
-  Which is although odd at first glance, is much more intention revealing. 
+  Which, although is odd at first glance, is much more intention revealing.
+   
+  Functions that can be instantiated using this syntax are not restricted to getters, for example:
+
++---
+  lambda($(List.class).size());  
+  lambda($(List.class).contains("hello"));
+  lambda($(List.class).get(2));
++--  
   
-~~ Functions that can be instantiated using this syntax are not restricted to getters, for example:
-~~TODO    
+
+* Instantiating 2 and 3 arguments functions
+
+  Creating instances of Function2 and Function3 is also quite simple. For example, the following code:
+  
++----
+  new AbstractFunction2<Book, WeightUnit, BigDecimal>(){
+   public BigDecimal apply(Book book, WeightUnit unit) {
+     return book.getWeigth(unit);
+   }
+  };
++---
+
+  can be rewritten using lambdas:
+
++---
+  lambda2($(Book.class).getWeight(_(WeightUnit.class));
++---  
+
+     
+  
+  
   
   

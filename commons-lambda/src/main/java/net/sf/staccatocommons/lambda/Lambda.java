@@ -19,6 +19,7 @@ import java.util.Collection;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
+import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 
 import org.apache.commons.proxy.ProxyFactory;
@@ -136,8 +137,15 @@ public final class Lambda {
 	}
 
 	/**
+	 * Answers a {@link Function} that when applied sends to its argument the
+	 * message previously sent to the last stubbed type. The returned function is
+	 * {@link ImplicitNumberType}
+	 * 
+	 * Refer to the use cases described in {@link Lambda}
+	 * 
 	 * @param returnType
-	 * @return
+	 *          meaningless, this argument is simply ignored
+	 * @return a new {@link Function}
 	 * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.math.BigDecimal)
 	 */
 	public static Function<Object, BigDecimal> lambda(BigDecimal returnType) {
@@ -145,8 +153,15 @@ public final class Lambda {
 	}
 
 	/**
+	 * Answers a {@link Function} that when applied sends to its argument the
+	 * message previously sent to the last stubbed type. The returned function is
+	 * {@link ImplicitNumberType}
+	 * 
+	 * Refer to the use cases described in {@link Lambda}
+	 * 
 	 * @param returnType
-	 * @return
+	 *          meaningless, this argument is simply ignored
+	 * @return a new {@link Function}
 	 * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.math.BigInteger)
 	 */
 	public static Function<Object, BigInteger> lambda(BigInteger returnType) {
@@ -154,8 +169,15 @@ public final class Lambda {
 	}
 
 	/**
+	 * Answers a {@link Function} that when applied sends to its argument the
+	 * message previously sent to the last stubbed type. The returned function is
+	 * {@link ImplicitNumberType}
+	 * 
+	 * Refer to the use cases described in {@link Lambda}
+	 * 
 	 * @param returnType
-	 * @return
+	 *          meaningless, this argument is simply ignored
+	 * @return a new {@link Function}
 	 * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.lang.Integer)
 	 */
 	public static Function<Object, Integer> lambda(Integer returnType) {
@@ -198,4 +220,11 @@ public final class Lambda {
 	private static LambdaFactory getSharedLambdaFactory() {
 		return SHARED_LAMBDA_FACTORY.get();
 	}
+
+	public static <A> A _(Class<A> clazz) {
+		return null;
+	}
+
+	public static final Object _ = null;
+
 }

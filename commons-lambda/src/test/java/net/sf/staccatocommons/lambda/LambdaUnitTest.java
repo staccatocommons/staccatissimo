@@ -143,7 +143,7 @@ public class LambdaUnitTest {
 	 */
 	@Test
 	public void testLambda2() {
-		Function2<Object, Object, Boolean> lambda2 = lambda2($(Collection.class).remove(null));
+		Function2<Object, Object, Boolean> lambda2 = lambda2($(Collection.class).remove(_));
 		ArrayList<Integer> list = new ArrayList<Integer>(Arrays.asList(60, 20, 3));
 
 		assertFalse(lambda2.apply(list, 25));
