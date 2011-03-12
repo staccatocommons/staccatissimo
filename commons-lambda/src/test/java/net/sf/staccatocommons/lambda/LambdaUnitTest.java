@@ -13,8 +13,12 @@
 package net.sf.staccatocommons.lambda;
 
 import static net.sf.staccatocommons.lambda.Lambda.*;
+import static net.sf.staccatocommons.lang.number.NumberTypes.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -30,6 +34,7 @@ import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 
 import org.junit.Ignore;
@@ -106,28 +111,31 @@ public class LambdaUnitTest {
 	/**
 	 * Test method for {@link LambdaFactory#lambda(java.lang.Integer)}.
 	 */
-	@Ignore
 	@Test
 	public void testLambdaInteger() {
-		fail("Not yet implemented");
+		Function<Object, Integer> lambda = lambda($(Collection.class).size());
+		assertThat(lambda, instanceOf(ImplicitNumberType.class));
+		assertSame(((ImplicitNumberType<Integer>) lambda).numberType(), integer());
 	}
 
 	/**
 	 * Test method for {@link LambdaFactory#lambda(java.math.BigDecimal)}.
 	 */
-	@Ignore
 	@Test
 	public void testLambdaBigDecimal() {
-		fail("Not yet implemented");
+		Function<Object, BigDecimal> lambda = lambda($(Mock.class).bd());
+		assertThat(lambda, instanceOf(ImplicitNumberType.class));
+		assertSame(((ImplicitNumberType<BigDecimal>) lambda).numberType(), bigDecimal());
 	}
 
 	/**
 	 * Test method for {@link LambdaFactory#lambda(java.math.BigInteger)}.
 	 */
-	@Ignore
 	@Test
 	public void testLambdaBigInteger() {
-		fail("Not yet implemented");
+		Function<Object, BigInteger> lambda = lambda($(Mock.class).bi());
+		assertThat(lambda, instanceOf(ImplicitNumberType.class));
+		assertSame(((ImplicitNumberType<BigInteger>) lambda).numberType(), bigInteger());
 	}
 
 	/**
@@ -150,6 +158,15 @@ public class LambdaUnitTest {
 	@Test
 	public void testLambda3() {
 		fail("Not yet implemented");
+	}
+
+	/***/
+	public interface Mock {
+		/***/
+		BigDecimal bd();
+
+		/***/
+		BigInteger bi();
 	}
 
 }

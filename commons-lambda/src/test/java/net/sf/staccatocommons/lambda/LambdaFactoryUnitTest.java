@@ -61,4 +61,14 @@ public class LambdaFactoryUnitTest {
 		l.$(Queue.class);
 	}
 
+	/** Tests that lambda factory throws an exception it does not became unsuable */
+	@Test
+	public void testThrowsException() throws Exception {
+		LambdaFactory l = Lambda.factory();
+		try {
+			l.lambda(l.$(String.class).isEmpty());
+		} catch (Exception e) { /* ignore */}
+		assertNotNull(l.lambda(l.$(Tuple.FirstAware.class).first()));
+	}
+
 }

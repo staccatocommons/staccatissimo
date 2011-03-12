@@ -28,6 +28,7 @@ import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.function.AbstractFunction3;
+import net.sf.staccatocommons.lang.number.ImplicitNumberType;
 import net.sf.staccatocommons.lang.number.internal.NumberTypeFunction;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -103,8 +104,9 @@ public final class LambdaFactory {
 	@NonNull
 	public <A> A $(@NonNull Class<A> clazz) {
 		state.that(!firstStep, "Wrong invocation order");
+		A stub = (A) proxyFactory.createInvokerProxy(handler, new Class[] { clazz });
 		firstStep = true;
-		return (A) proxyFactory.createInvokerProxy(handler, new Class[] { clazz });
+		return stub;
 	}
 
 	/**
@@ -149,16 +151,52 @@ public final class LambdaFactory {
 		};
 	}
 
+	/**
+	 * Answers a {@link Function} that when applied sends to its argument the
+	 * message previously sent to the last stubbed type. The returned function is
+	 * {@link ImplicitNumberType}
+	 * 
+	 * Refer to the use cases described in {@link Lambda}
+	 * 
+	 * @param returnType
+	 *          meaningless, this argument is simply ignored
+	 * @return a new {@link Function}
+	 * @see Lambda
+	 */
 	@NonNull
 	public Function<Object, Integer> lambda(Integer returnType) {
 		return numberFunction(integer());
 	}
 
+	/**
+	 * Answers a {@link Function} that when applied sends to its argument the
+	 * message previously sent to the last stubbed type. The returned function is
+	 * {@link ImplicitNumberType}
+	 * 
+	 * Refer to the use cases described in {@link Lambda}
+	 * 
+	 * @param returnType
+	 *          meaningless, this argument is simply ignored
+	 * @return a new {@link Function}
+	 * @see Lambda
+	 */
 	@NonNull
 	public Function<Object, BigDecimal> lambda(BigDecimal returnType) {
 		return numberFunction(bigDecimal());
 	}
 
+	/**
+	 * Answers a {@link Function} that when applied sends to its argument the
+	 * message previously sent to the last stubbed type. The returned function is
+	 * {@link ImplicitNumberType}
+	 * 
+	 * Refer to the use cases described in {@link Lambda}
+	 * 
+	 * @param returnType
+	 *          meaningless, this argument is simply ignored
+	 * @return a new {@link Function}
+	 * @see Lambda
+	 */
 	@NonNull
 	public Function<Object, BigInteger> lambda(BigInteger returnType) {
 		return numberFunction(bigInteger());
