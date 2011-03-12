@@ -1,13 +1,13 @@
 Maven Integration
 
- The recommended way of using Staccato-Commons-IO in your project is by adding 
+ The recommended way of using Staccato-Commons-Restrictions in your project is by adding 
  it as a Maven2 dependency: 
 
 +---------
     <dependencies>
         <dependency>
             <groupId>net.sf.staccatocommons</groupId>
-            <artifactId>commons-io</artifactId>
+            <artifactId>commons-restrictions</artifactId>
             <version>1.0-alpha-4</version>
         </dependency>
     </dependencies>
