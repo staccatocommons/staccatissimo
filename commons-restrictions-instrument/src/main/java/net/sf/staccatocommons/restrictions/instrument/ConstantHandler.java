@@ -27,6 +27,8 @@ import net.sf.staccatocommons.instrument.handler.deactivator.Deactivable;
 import net.sf.staccatocommons.instrument.handler.deactivator.StackedDeactivableSupport;
 import net.sf.staccatocommons.restrictions.Constant;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author flbulgarelli
  * 
@@ -34,7 +36,6 @@ import net.sf.staccatocommons.restrictions.Constant;
 public class ConstantHandler implements MethodAnnotationHandler<Constant>, Deactivable {
 
 	private static final String METHOD_TEMPLATE = "return %s;";
-	private static final String FIELD_TEMPLATE = "public static final %s %s;";
 	private static final String INITIALIZER_NAME_TEMPLATE = "%sInitializer";
 	private StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport();
 
@@ -47,6 +48,7 @@ public class ConstantHandler implements MethodAnnotationHandler<Constant>, Deact
 
 	public void postProcessAnnotatedMethod(Constant annotation, MethodAnnotationContext context)
 		throws CannotCompileException, NotFoundException {
+		final ConstantKind constantKind = ConstantKind.CLASS;
 
 		if (!deactivableSupport.isActive())
 			return;
@@ -76,15 +78,17 @@ public class ConstantHandler implements MethodAnnotationHandler<Constant>, Deact
 		CtClass clazz = originalMethod.getDeclaringClass();
 		String methodName = originalMethod.getName();
 		String fieldType = originalMethod.getReturnType().getName();
-		String fieldName = toJavaConstantString(methodName);
-		CtField field = CtField.make(String.format(FIELD_TEMPLATE, fieldType, fieldName), clazz);
+		String fieldName = constantKind.getFieldName(methodName);
+		CtField field = CtField.make(
+			String.format(constantKind.getFieldTemplate(), fieldType, fieldName),
+			clazz);
 
 		CtMethod initializer = CtNewMethod.copy(
 			originalMethod,
 			String.format(INITIALIZER_NAME_TEMPLATE, methodName),
 			clazz,
 			null);
-		initializer.setModifiers(Modifier.PRIVATE | Modifier.STATIC);
+		initializer.setModifiers(constantKind.getInitializerModifiers());
 		clazz.addMethod(initializer);
 		clazz.addField(field, Initializer.byCall(clazz, initializer.getName()));
 
@@ -97,6 +101,60 @@ public class ConstantHandler implements MethodAnnotationHandler<Constant>, Deact
 
 	public final void activate() {
 		deactivableSupport.activate();
+	}
+
+	private enum ConstantKind {
+
+		INSTANCE {
+			public String getFieldTemplate() {
+				return "private final %s %s;";
+			}
+
+			public String getFieldName(String methodName) {
+				return toJavaFieldString(methodName);
+			}
+
+		},
+		CLASS {
+			public String getFieldTemplate() {
+				return "private static final %s %s;";
+			}
+
+			public int getInitializerModifiers() {
+				return super.getInitializerModifiers() | Modifier.STATIC;
+			}
+
+			public String getFieldName(String methodName) {
+				return toJavaConstantString(methodName);
+			}
+		};
+
+		/**
+		 * gets field template
+		 */
+		public abstract String getFieldTemplate();
+
+		/**
+		 * the field name given a methodName
+		 */
+		public abstract String getFieldName(String methodName);
+
+		/** Gets initializaer modifiers */
+		public int getInitializerModifiers() {
+			return Modifier.PRIVATE;
+		}
+
+	}
+
+	private static String toJavaFieldString(String original) {
+		if (original.startsWith("get")) {
+			return StringUtils.uncapitalize(original.replaceFirst("get", ""));
+		}
+		if (original.startsWith("is")) {
+			return StringUtils.uncapitalize(original.replaceFirst("is", ""));
+		}
+		return original;
+
 	}
 
 	/** Converts a method name into a constant name */

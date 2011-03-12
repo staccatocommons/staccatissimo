@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.restrictions.instrument;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import net.sf.staccatocommons.restrictions.Constant;
@@ -50,5 +51,11 @@ public class Mock {
 	@Constant
 	public static Date getDateConstructor() {
 		return new Date();
+	}
+
+	/***/
+	@Constant
+	public BigDecimal getBigDecimal() {
+		return new BigDecimal(this.hashCode());
 	}
 }

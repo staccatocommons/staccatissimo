@@ -12,11 +12,13 @@
  */
 package net.sf.staccatocommons.restrictions.instrument;
 
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
 import net.sf.staccatocommons.io.Directory;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -49,6 +51,20 @@ public class InstrumentationIntegrationTest {
 		Assert.assertSame(Mock.getDateFieldAcess(), Mock.getDateFieldAcess());
 		Assert.assertNotSame(Mock.getDateInvokationWithNoArgs(), Mock.getDateInvokationWithNoArgs());
 		Assert.assertNotSame(Mock.getDateInvokationWithArg(), Mock.getDateInvokationWithArg());
+	}
+
+	/**
+	 * Test that Constant works in instance methods
+	 * 
+	 * @throws Exception
+	 */
+	@Ignore("Not implemented yet")
+	@Test
+	public void testConstInstance() throws Exception {
+		Mock m1 = new Mock();
+		assertSame(m1.getBigDecimal(), m1.getBigDecimal());
+		Mock m2 = new Mock();
+		assertNotSame(m2.getBigDecimal(), m1.getBigDecimal());
 	}
 
 }
