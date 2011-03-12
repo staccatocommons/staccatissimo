@@ -40,12 +40,23 @@ public class StreamsUnitTest {
 	@Test
 	public void testFromSeq() {
 		assertEquals(
-			Iterate.from(10, add(20), upTo(50)).toList(),
+			Streams.iterate(10, add(20), upTo(50)).toList(),
 			Streams.from(Sequence.fromToBy(10, 50, 20)).toList());
 
 		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),//
-			Iterate.from(1, add(1)).take(10).toList());
+			Streams.iterate(1, add(1)).take(10).toList());
+	}
 
+	/**
+	 * Test method for replicate with null argument
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testReplicate() throws Exception {
+		Stream<Object> replicate = Streams.replicate(null).memorize();
+		assertNull(replicate.first());
+		assertNull(replicate.third());
 	}
 
 }

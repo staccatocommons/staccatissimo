@@ -55,7 +55,7 @@ public interface Collectible<A> {
 	 * @return a new array
 	 */
 	@NonNull
-	A[] toArray(@NonNull Class<? extends A> clazz);
+	A[] toArray(@NonNull Class<? super A> clazz);
 
 	// grants consistent isEmpty
 	// XXX not consistently implemented in Map

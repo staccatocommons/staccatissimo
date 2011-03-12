@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import static net.sf.staccatocommons.lang.Compare.*;
-import net.sf.staccatocommons.collections.stream.Cons;
+import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 
 /**
@@ -23,11 +23,11 @@ import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 public class TakeWhileIteratorUnitTest extends IterableTheories {
 
 	protected Iterable<?> createTwoElementsIterable() {
-		return Cons.from(4, 5, 6).takeWhile(lessThan(6));
+		return Streams.cons(4, 5, 6).takeWhile(lessThan(6));
 	}
 
 	protected Iterable<?> createOneElementIterable() {
-		return Cons.from(10, 15, 90).takeWhile(lessThan(12));
+		return Streams.cons(10, 15, 90).takeWhile(lessThan(12));
 	}
 
 }

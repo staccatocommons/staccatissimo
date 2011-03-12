@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 
 import net.sf.staccatocommons.collections.stream.AbstractStream;
-import net.sf.staccatocommons.collections.stream.Cons;
+import net.sf.staccatocommons.collections.stream.Streams;
 
 import org.junit.Test;
 
@@ -32,10 +32,10 @@ public class DropStreamUnitTest {
 	 */
 	@Test
 	public void testDrop() {
-		assertEquals(Arrays.asList(90, 100), Cons.from(59, 10, 90, 100).drop(2).toList());
-		assertEquals(Arrays.asList(), Cons.from(59, 10, 90, 100).drop(4).toList());
-		assertEquals(Arrays.asList(), Cons.from(59, 10, 90, 100).drop(100).toList());
-		assertEquals(Arrays.asList(59, 10, 90, 100), Cons.from(59, 10, 90, 100).drop(0).toList());
+		assertEquals(Arrays.asList(90, 100), Streams.cons(59, 10, 90, 100).drop(2).toList());
+		assertEquals(Arrays.asList(), Streams.cons(59, 10, 90, 100).drop(4).toList());
+		assertEquals(Arrays.asList(), Streams.cons(59, 10, 90, 100).drop(100).toList());
+		assertEquals(Arrays.asList(59, 10, 90, 100), Streams.cons(59, 10, 90, 100).drop(0).toList());
 	}
 
 }

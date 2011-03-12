@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.collections.stream.RepetableStreamTheories;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
@@ -41,7 +40,7 @@ public class ConsStreamUnitTest extends RepetableStreamTheories {
 	/** Data points */
 	@DataPoints
 	public static Stream[] stream = new Stream[] { //
-	Cons.from(10, Cons.from(15, 20, 30)), //
-			Cons.from(1, Streams.empty()) };
+	Streams.cons(10, Streams.cons(15, 20, 30)), //
+			Streams.cons(1, Streams.empty()) };
 
 }

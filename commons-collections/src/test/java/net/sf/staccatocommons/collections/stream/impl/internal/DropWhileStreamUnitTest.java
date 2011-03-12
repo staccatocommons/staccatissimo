@@ -17,8 +17,8 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
-import net.sf.staccatocommons.collections.stream.Cons;
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.defs.Evaluable;
 
 import org.junit.Test;
@@ -34,16 +34,16 @@ public class DropWhileStreamUnitTest {
 	@Test
 	public void tesDropWhile() throws Exception {
 		assertEquals(Arrays.asList(1, 9, 2, 0),//
-			Cons.from(1, 9, 2, 0).dropWhile(greaterThan(5)).toList());
+			Streams.cons(1, 9, 2, 0).dropWhile(greaterThan(5)).toList());
 
 		assertEquals(Arrays.asList(),//
-			Cons.from(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(0)).toList());
+			Streams.cons(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(0)).toList());
 
 		assertEquals(Arrays.asList(1, 9, 2, 0),//
-			Cons.from(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(2)).toList());
+			Streams.cons(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(2)).toList());
 
 		assertEquals(Arrays.asList(0),//
-			Cons.from(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(1)).toList());
+			Streams.cons(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(1)).toList());
 	}
 
 }

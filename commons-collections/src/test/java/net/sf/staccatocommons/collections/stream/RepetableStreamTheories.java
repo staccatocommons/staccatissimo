@@ -257,7 +257,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 		assertTrue(stream.equivalent(stream));
 		assertTrue(stream.equivalent(stream.force()));
 		assertTrue(stream.equivalent(stream.toList()));
-		assertTrue(stream.equivalent(stream.toArray((Class<A>) Object.class)));
+		assertTrue(stream.equivalent(stream.toArray(Object.class)));
 	}
 
 	/** Test method for {@link AbstractStream#zip(Iterable)} */

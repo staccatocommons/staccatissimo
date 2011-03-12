@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import static net.sf.staccatocommons.collections.stream.Streams.*;
 import static net.sf.staccatocommons.lang.Compare.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
@@ -294,11 +295,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public A[] toArray(Class<? extends A> clazz) {
+	public A[] toArray(Class<? super A> clazz) {
 		return toArray(clazz, toList());
 	}
 
-	protected A[] toArray(Class<? extends A> clazz, Collection<A> readOnlyColView) {
+	protected A[] toArray(Class<? super A> clazz, Collection<A> readOnlyColView) {
 		return readOnlyColView.toArray((A[]) Array.newInstance(clazz, readOnlyColView.size()));
 	}
 
@@ -355,8 +356,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return delayedThen(new DeconsFunction<A, A>() {
 			public Stream<A> delayedApply(Thunk<A> head, Stream<A> tail) {
 				if (tail.isEmpty())
-					return Cons.from(head);
-				return Cons.from(head, Cons.from(sep, tail.intersperse(sep)));
+					return cons(head);
+				return cons(head, cons(sep, tail.intersperse(sep)));
 			}
 		});
 	}
@@ -539,7 +540,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 					public Stream<Pair<A, B>> apply(final A x) {
 						return other.flatMap(new AbstractFunction<B, Stream<Pair<A, B>>>() {
 							public Stream<Pair<A, B>> apply(B y) {
-								return Cons.from(_(x, y));
+								return cons(_(x, y));
 							}
 						});
 					}
@@ -565,7 +566,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 						public Stream<Stream<A>> apply(final A x) {
 							return xss.second().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
 								public Stream<Stream<A>> apply(A y) {
-									return Cons.from(Cons.from(x, y));
+									return cons(cons(x, y));
 								}
 							});
 						}
@@ -575,7 +576,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 					public Stream<Stream<A>> apply(final A x) {
 						return fcross(xss.tail()).flatMap(new AbstractFunction<Stream<A>, Stream<Stream<A>>>() {
 							public Stream<Stream<A>> apply(Stream<A> ys) {
-								return Cons.from(Cons.from(x, ys));
+								return cons(cons(x, ys));
 							}
 						});
 					}

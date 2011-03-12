@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import static net.sf.staccatocommons.lang.function.Functions.*;
-import net.sf.staccatocommons.collections.stream.Cons;
+import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 
 /**
@@ -23,11 +23,11 @@ import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 public class MapIteratorUnitTest extends IterableTheories {
 
 	protected Iterable<?> createTwoElementsIterable() {
-		return Cons.from(10, 80).map(identity());
+		return Streams.cons(10, 80).map(identity());
 	}
 
 	protected Iterable<?> createOneElementIterable() {
-		return Cons.from(10).map(identity());
+		return Streams.cons(10).map(identity());
 	}
 
 }

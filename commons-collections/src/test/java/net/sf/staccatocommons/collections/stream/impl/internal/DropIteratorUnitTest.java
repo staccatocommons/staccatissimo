@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import net.sf.staccatocommons.collections.stream.Cons;
+import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 
 /**
@@ -22,11 +22,11 @@ import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 public class DropIteratorUnitTest extends IterableTheories {
 
 	protected Iterable<?> createTwoElementsIterable() {
-		return Cons.from(4, 5, 9, 10, 6).drop(3);
+		return Streams.cons(4, 5, 9, 10, 6).drop(3);
 	}
 
 	protected Iterable<?> createOneElementIterable() {
-		return Cons.from(65, 90, 6).drop(2);
+		return Streams.cons(65, 90, 6).drop(2);
 	}
 
 }

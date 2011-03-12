@@ -56,8 +56,8 @@ public class LazinessIntegrationTest {
 	/***/
 	@Test
 	public void testIntersparseAndSize() throws Exception {
-		Cons //
-			.from(10, 20)
+		Streams
+			.cons(10, 20)
 			.appendUndefined()
 			.intersperse(1)
 			.size();
@@ -66,8 +66,8 @@ public class LazinessIntegrationTest {
 	/***/
 	@Test
 	public void testIntersparseAndTake() throws Exception {
-		assertTrue(Cons //
-			.from(10, 20)
+		assertTrue(Streams
+			.cons(10, 20)
 			.appendUndefined()
 			.intersperse(1)
 			.take(4)
@@ -77,8 +77,8 @@ public class LazinessIntegrationTest {
 	/***/
 	@Test
 	public void testIntersparseAndAppend() throws Exception {
-		assertEquals(25, (int) Cons //
-			.from(10, 20)
+		assertEquals(25, (int) Streams
+			.cons(10, 20)
 			.append(21)
 			.append(Thunks.constant(22))
 			.appendUndefined()
@@ -90,8 +90,8 @@ public class LazinessIntegrationTest {
 	/***/
 	@Test
 	public void testConcatAndSize() throws Exception {
-		int size = Cons //
-			.from(10)
+		int size = Streams
+			.cons(10)
 			.appendUndefined()
 			.size();
 		assertEquals(2, size);
@@ -101,8 +101,8 @@ public class LazinessIntegrationTest {
 	@Test
 	public void testAppendAndSize() throws Exception {
 		int size = //
-		Cons //
-			.from(10)
+		Streams
+			.cons(10)
 			.appendUndefined()
 			.append(20)
 			.size();
@@ -113,8 +113,8 @@ public class LazinessIntegrationTest {
 	@Test
 	public void testConsAndSize() throws Exception {
 		assertEquals(6,//
-			Cons //
-				.from(10, 20, 30)
+			Streams
+				.cons(10, 20, 30)
 				.appendUndefined()
 				.prepend(20)
 				.prepend(30)
@@ -122,7 +122,7 @@ public class LazinessIntegrationTest {
 	}
 
 	protected Stream<Integer> integersStream() {
-		return Cons.from(10, 20, 30, null, 50).map(new AbstractFunction<Integer, Integer>() {
+		return Streams.cons(10, 20, 30, null, 50).map(new AbstractFunction<Integer, Integer>() {
 			public Integer apply(Integer arg) {
 				return arg - 0;
 			}

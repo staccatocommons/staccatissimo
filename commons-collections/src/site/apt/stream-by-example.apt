@@ -63,8 +63,8 @@ Stream by example
  Streams are the Staccato-Commons solution for performing such operations on iterables. They are generic wrappers that implement many of those
 common transformation in a lazy manner - that is, no processing is actually performed in most cases unless it it actually necessary, which
 enables them to perform efficiently chained operations on demand on both small and very large sequences of elements. They can be constructed  
-literally by specifying their elements (Cons utility class), by specifying the elements generation strategy (Iterate utility class), 
-by decorating other Iterables (Streams utility class) or using sources like databases result sets, directories, files, etc
+literally by specifying their elements, by specifying the elements generation strategy, 
+by decorating other Iterables  or using sources like databases result sets, directories, files, etc
  (provided by the rest of Staccato-Commons projects). 
  
  For example, the previous code can be refactored to use Streams:
@@ -110,8 +110,8 @@ by decorating other Iterables (Streams utility class) or using sources like data
     import static net.sf.staccatocommons.lang.number.NumberTypes.*;
     
     //Answer a the next integers of those > 30 in the list
-    Cons
-     .from(20, 60, 9, 31, 26)
+    Streams
+     .cons(20, 60, 9, 31, 26)
      .filter(greaterThan(30))
      .map(add(1));
 +---
@@ -176,8 +176,8 @@ by decorating other Iterables (Streams utility class) or using sources like data
  //Answers the third element of the stream [1/50,1/0,1/60,1/10].
  // Notice that second element is undefined - evaluating it would result in an ArithmeticException,
  // but thanks to stream laziness, the operation succeeds  
- Cons 
-    .from(50, 0, 60, 10)
+ Streams 
+    .cons(50, 0, 60, 10)
     .map(integer().inverse())
     .third();
 
@@ -198,8 +198,8 @@ by decorating other Iterables (Streams utility class) or using sources like data
     
     //Answer the company that has the highest revenue, among all the companies 
     //of thisHolding and otherHoldings
-    Cons
-        .from(thisHolding)
+    Streams
+        .cons(thisHolding)
         .append(otherHoldings)
         .flatMap(lambda($(Holding.class).getCompanies()))
         .maximumOn(lambda($(Company.class).getRevenue()));

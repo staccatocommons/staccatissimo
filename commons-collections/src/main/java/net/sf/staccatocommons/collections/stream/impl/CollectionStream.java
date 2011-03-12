@@ -66,7 +66,7 @@ public class CollectionStream<A> extends StrictStream<A> {
 	}
 
 	@Override
-	public A[] toArray(Class<? extends A> clazz) {
+	public A[] toArray(Class<? super A> clazz) {
 		return toArray(clazz, getCollection());
 	}
 

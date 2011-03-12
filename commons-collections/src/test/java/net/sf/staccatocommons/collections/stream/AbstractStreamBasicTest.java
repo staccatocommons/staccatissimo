@@ -63,20 +63,20 @@ public class AbstractStreamBasicTest {
 	/** Test for sum */
 	@Test
 	public void sum() throws Exception {
-		assertEquals((Integer) 65, Cons.from(10, 20, 35).sum(integer()));
+		assertEquals((Integer) 65, Streams.cons(10, 20, 35).sum(integer()));
 	}
 
 	/** Test for product */
 	@Test
 	public void product() throws Exception {
-		assertEquals(1 * 2 * 3, (int) Cons.from(0, 1, 2).map(add(1)).product(integer()));
+		assertEquals(1 * 2 * 3, (int) Streams.cons(0, 1, 2).map(add(1)).product(integer()));
 	}
 
 	/** Test for implicit sum */
 	@Test
 	public void sumImplicit() throws Exception {
 		assertEquals((Integer) 70, //
-			Iterate.from(10, add(3)) //
+			Streams.iterate(10, add(3)) //
 				.take(7)
 				.filter(Compare.lessThan(25))
 				.tail()
@@ -86,14 +86,14 @@ public class AbstractStreamBasicTest {
 	/** Test for {@link Stream#average()} **/
 	@Test
 	public void testAvg() throws Exception {
-		assertEquals(9.6, Cons.from(10.0, 12.0, 15.0, 2.0, 9.0).average(double_()), 0.01);
-		assertEquals(6, (int) Iterate.from(1, add(1), upTo(11)).average());
+		assertEquals(9.6, Streams.cons(10.0, 12.0, 15.0, 2.0, 9.0).average(double_()), 0.01);
+		assertEquals(6, (int) Streams.iterate(1, add(1), upTo(11)).average());
 	}
 
 	/** Test for {@link Stream#average()} **/
 	@Test(expected = NoSuchElementException.class)
 	public void testAvgEmptyStream() throws Exception {
-		Cons.<Double> from().average(double_());
+		Streams.<Double> cons().average(double_());
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void fold() {
 		Stream<Collection<String>> stream = //
-		Cons.<Collection<String>> from(Arrays.asList("foo", "baz"), Collections.singleton("bar"));
+		Streams.<Collection<String>> cons(Arrays.asList("foo", "baz"), Collections.singleton("bar"));
 
 		Collection<String> result = stream.fold(
 			new ArrayList<String>(),
@@ -120,7 +120,7 @@ public class AbstractStreamBasicTest {
 	 */
 	@Test
 	public void testReduce() {
-		Stream<BigInteger> bigints = Cons.from(i(100), i(800), i(260));
+		Stream<BigInteger> bigints = Streams.cons(i(100), i(800), i(260));
 		assertEquals(i(1160), bigints.reduce(bigInteger().add()));
 	}
 
@@ -129,8 +129,8 @@ public class AbstractStreamBasicTest {
 	 */
 	@Test
 	public void flatMap() throws Exception {
-		assertTrue(Iterate//
-			.from(4, add(1))
+		assertTrue(Streams
+			.iterate(4, add(1))
 			.take(3)
 			.flatMap(new AbstractFunction<Integer, Iterable<Integer>>() {
 				public Iterable<Integer> apply(Integer arg) {
@@ -145,38 +145,38 @@ public class AbstractStreamBasicTest {
 	public void concat() {
 		assertEquals(
 			Arrays.asList(10, 90, 60, 1, 2, 20),
-			Cons.from(10, 90, 60).append(Arrays.asList(1, 2)).append(Cons.from(20)).toList());
+			Streams.cons(10, 90, 60).append(Arrays.asList(1, 2)).append(Streams.cons(20)).toList());
 
-		assertEquals(Arrays.asList("foo"), Cons.from("foo").appendUndefined().take(1).toList());
+		assertEquals(Arrays.asList("foo"), Streams.cons("foo").appendUndefined().take(1).toList());
 	}
 
 	/** Tets for indexof */
 	@Test
 	public void testIndexof() throws Exception {
 		assertEquals(3, Streams.from(Arrays.asList(12, 69, null, 1).iterator()).indexOf(1));
-		assertEquals(0, Cons.from(10, 90).indexOf(10));
-		assertEquals(-1, Cons.from(10, 90).indexOf(87));
+		assertEquals(0, Streams.cons(10, 90).indexOf(10));
+		assertEquals(-1, Streams.cons(10, 90).indexOf(87));
 	}
 
 	/** Tets for positionOf */
 	@Test
 	public void testPositionOf() throws Exception {
-		assertEquals(1, Cons.from(2, 10, 90).positionOf(10));
+		assertEquals(1, Streams.cons(2, 10, 90).positionOf(10));
 	}
 
 	/** Tets for positionOf */
 	@Test(expected = NoSuchElementException.class)
 	public void testPositionOfBad() throws Exception {
-		Cons.from(10, 90).positionOf(87);
+		Streams.cons(10, 90).positionOf(87);
 	}
 
 	/** Test for {@link Stream#intersperse(Object)} */
 	@Test
 	public void testIntersperse() throws Exception {
-		System.out.println(Cons.from(4, 5).intersperse(10).joinStrings(""));
+		System.out.println(Streams.cons(4, 5).intersperse(10).joinStrings(""));
 		assertTrue( //
-		Cons //
-			.from(4, 5, 6)
+		Streams
+			.cons(4, 5, 6)
 			.intersperse(1)
 			.equivalent(4, 1, 5, 1, 6));
 
@@ -188,7 +188,7 @@ public class AbstractStreamBasicTest {
 			.take(4)
 			.equivalent(4, 1, 5, 1));
 
-		assertEquals("[56,0,1]", Cons.from(56, 1).intersperse(0).toString());
+		assertEquals("[56,0,1]", Streams.cons(56, 1).intersperse(0).toString());
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class AbstractStreamBasicTest {
 	 */
 	@Test
 	public void testMemorize() throws Exception {
-		Stream<Integer> interspersed = Cons.from(10, 20, 30).intersperse(1).memorize();
+		Stream<Integer> interspersed = Streams.cons(10, 20, 30).intersperse(1).memorize();
 		assertEquals(10, (int) interspersed.first());
 		assertEquals(10, (int) interspersed.first());
 		assertEquals(1, (int) interspersed.second());
@@ -206,7 +206,7 @@ public class AbstractStreamBasicTest {
 		assertEquals(1, (int) interspersed.get(3));
 		assertEquals(30, (int) interspersed.get(4));
 
-		Stream<Integer> mapped = Cons.from(10, 20, 30).map(add(1));
+		Stream<Integer> mapped = Streams.cons(10, 20, 30).map(add(1));
 		assertEquals(21, (int) mapped.second());
 		assertEquals(11, (int) mapped.first());
 		assertEquals(31, (int) mapped.third());
@@ -236,7 +236,7 @@ public class AbstractStreamBasicTest {
 	 */
 	@Test
 	public void testMemorizeLazyOnAppend() throws Exception {
-		Stream<Integer> stream = Cons.from(10, 98).append(65).appendUndefined().append(9).memorize();
+		Stream<Integer> stream = Streams.cons(10, 98).append(65).appendUndefined().append(9).memorize();
 		assertEquals(stream.last(), stream.last());
 	}
 
@@ -246,7 +246,7 @@ public class AbstractStreamBasicTest {
 	 */
 	@Test
 	public void testMemorizeLazyOnMap() throws Exception {
-		Stream<Integer> stream = Cons.from(10, 0, 20).map(new AbstractFunction<Integer, Integer>() {
+		Stream<Integer> stream = Streams.cons(10, 0, 20).map(new AbstractFunction<Integer, Integer>() {
 			public Integer apply(Integer arg) {
 				return 1 / arg;
 			}
@@ -258,8 +258,8 @@ public class AbstractStreamBasicTest {
 	/** Test for {@link Stream#streamPartition(Evaluable)} */
 	@Test
 	public void testPartition() throws Exception {
-		Pair<Stream<Integer>, Stream<Integer>> partition = Cons
-			.from(50, 60, 1, 6, 9, 10, 100)
+		Pair<Stream<Integer>, Stream<Integer>> partition = Streams
+			.cons(50, 60, 1, 6, 9, 10, 100)
 			.streamPartition(Compare.greaterThan(9));
 
 		assertTrue(partition._1().equivalent(50, 60, 10, 100));
@@ -271,8 +271,8 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void testReverse() throws Exception {
 		assertTrue(//
-		Cons //
-			.from(50, 30, 9, 12, 0, 3, -5, null)
+		Streams
+			.cons(50, 30, 9, 12, 0, 3, -5, null)
 			.reverse()
 			.equivalent(null, -5, 3, 0, 12, 9, 30, 50));
 	}
@@ -280,8 +280,8 @@ public class AbstractStreamBasicTest {
 	/** Test for {@link Stream#maximum()} */
 	@Test
 	public void testMaximum() throws Exception {
-		String max = Cons
-			.from(
+		String max = Streams
+			.cons(
 				_(new Object(), 10, "hello"),
 				_(new Object(), 12, "foo"),
 				_(new Object(), 9, "bye"),
@@ -289,13 +289,13 @@ public class AbstractStreamBasicTest {
 			.maximumOn(second(Integer.class))
 			._3();
 		assertEquals("foo", max);
-		assertEquals(150, (int) Cons.from(90, 10, 30, 6, 150, 65).maximum());
+		assertEquals(150, (int) Streams.cons(90, 10, 30, 6, 150, 65).maximum());
 	}
 
 	/** Test for {@link Stream#minimum()} */
 	@Test
 	public void testMinimum() throws Exception {
-		assertEquals(6, (int) Cons.from(90, 10, 30, 6, 150, 65).minimum());
+		assertEquals(6, (int) Streams.cons(90, 10, 30, 6, 150, 65).minimum());
 	}
 
 	/** Test for {@link AbstractStream#groupBy(Evaluable2)} */
@@ -321,7 +321,7 @@ public class AbstractStreamBasicTest {
 	 */
 	@Test
 	public void testSort() throws Exception {
-		Stream<Integer> sort = Cons.from(10, 20, 6, 9, 18, 6, 26, 32).sort();
+		Stream<Integer> sort = Streams.cons(10, 20, 6, 9, 18, 6, 26, 32).sort();
 		assertEquals(6, (int) sort.first());
 		assertEquals(32, (int) sort.last());
 		assertTrue(sort.equivalent(6, 6, 9, 10, 18, 20, 26, 32));
@@ -332,7 +332,7 @@ public class AbstractStreamBasicTest {
 	 */
 	@Test
 	public void testIntersperseEmptyRepeatable() throws Exception {
-		Stream<Integer> s = Cons.from(1, 3).intersperse(0);
+		Stream<Integer> s = Streams.cons(1, 3).intersperse(0);
 		assertFalse(s.isEmpty());
 		assertFalse(s.isEmpty());
 		assertFalse(s.isEmpty());
@@ -349,27 +349,24 @@ public class AbstractStreamBasicTest {
 		assertTrue(s.isEmpty());
 	}
 
-	// TODO cycle
-	// TODO replicate
-
 	/** Test that no StackOverflow is raised on large, recursive streams */
 	@Test
 	public void testRecursiveLongStream() throws Exception {
-		assertEquals(90000, Iterate.from(1, add(1)).intersperse(0).take(90000).size());
+		assertEquals(90000, Streams.iterate(1, add(1)).intersperse(0).take(90000).size());
 	}
 
 	/** Test that no StackOverflow is raised on large, flat mapped streams */
 	@Test
 	public void testLongFlatMapStream() throws Exception {
-		Iterate.fromTo(1, 4000).cross(Iterate.fromTo(1, 4000)).size();
+		Streams.iterate(1, 4000).cross(Streams.iterate(1, 4000)).size();
 	}
 
 	/** Tests simple crossing */
 	@Test
 	public void testCross() throws Exception {
-		assertTrue(Iterate
-			.fromTo(1, 20)
-			.cross(Iterate.fromTo(20, 40))
+		assertTrue(Streams
+			.iterate(1, 20)
+			.cross(Streams.iterate(20, 40))
 			.equivalent(Iterables.cross(Sequence.fromTo(1, 20), Sequence.fromTo(20, 40))));
 	}
 
@@ -382,9 +379,9 @@ public class AbstractStreamBasicTest {
 	public void testFullCross() throws Exception {
 		assertEquals(
 			"[[1,3,5],[1,3,6],[1,4,5],[1,4,6],[2,3,5],[2,3,6],[2,4,5],[2,4,6]]",
-			Cons
-				.from(1, 2)
-				.fullCross(Cons.<Stream<Integer>> from(Cons.from(3, 4), Cons.from(5, 6)))
+			Streams
+				.cons(1, 2)
+				.fullCross(Streams.<Stream<Integer>> cons(Streams.cons(3, 4), Streams.cons(5, 6)))
 				.toString());
 	}
 }

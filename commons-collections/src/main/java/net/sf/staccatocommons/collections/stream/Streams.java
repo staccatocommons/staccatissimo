@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.Enumeration;
@@ -25,23 +26,195 @@ import net.sf.staccatocommons.collections.stream.impl.EmptyStream;
 import net.sf.staccatocommons.collections.stream.impl.IterableStream;
 import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
+import net.sf.staccatocommons.collections.stream.impl.SingleStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.UndefinedStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.delayed.ConsStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedSingleStream;
 import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.EnumerationIterator;
+import net.sf.staccatocommons.lang.function.Functions;
+import net.sf.staccatocommons.lang.sequence.Sequence;
+import net.sf.staccatocommons.lang.sequence.StopConditions;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Class methods for creating very simple {@link Stream}s wrapping existing
- * classes from the Java collections framework
+ * classes from the Java collections framework, specifiying its elements and
  * 
  * @author flbulgarelli
  */
 public class Streams {
 
 	private Streams() {}
+
+	/**
+	 * Creates a new {@link Stream} that retrieves elements from a head's thunk,
+	 * and another {@link Iterable}, called tail.
+	 * 
+	 * This operation is known and <em>cons(tructing)</em>, and can be undone by
+	 * sending {@link Stream#delayedDecons()} to the resulting Stream.
+	 * 
+	 * The returned stream is {@link Repeatable} as long as the thunk's head value
+	 * is always equal, and the tail is repeatable.
+	 * 
+	 * @param <A>
+	 * @param head
+	 * @param tail
+	 * @return a new {@link Stream}
+	 */
+	@NonNull
+	@Projection
+	@ConditionallyRepeatable
+	public static <A> Stream<A> cons(final Thunk<A> head, @NonNull final Stream<? extends A> tail) {
+		return new ConsStream<A>(head, (Stream<A>) tail);
+	}
+
+	/**
+	 * Creates a new {@link Stream} that retrieves elements from a head, and
+	 * another {@link Iterable}, called tail.
+	 * 
+	 * This operation is known and <em>cons(tructing)</em>, and can be undone by
+	 * sending {@link Stream#decons()} to the resulting Stream.
+	 * 
+	 * * The returned stream is {@link Repeatable} as long as the tail is
+	 * repeatable.
+	 * 
+	 * @param <A>
+	 * @param head
+	 * @param tail
+	 * @return a new {@link Stream}
+	 */
+	@NonNull
+	@Projection
+	@ConditionallyRepeatable
+	public static <A> Stream<A> cons(final A head, @NonNull final Stream<? extends A> tail) {
+		return new ConsStream<A>(Thunks.constant(head), (Stream<A>) tail);
+	}
+
+	/**
+	 * Creates a new {@link Stream} that retrieves the elements from the given
+	 * array. This stream permits efficient random access and grants repeatable
+	 * iteration order.
+	 * 
+	 * @param <A>
+	 *          the element type
+	 * @param elements
+	 *          the array that is Stream source
+	 * @return a new stream that gets its elements from an array
+	 */
+	@NonNull
+	@Repeatable
+	@Projection
+	public static <A> Stream<A> cons(@NonNull A... elements) {
+		return from(Arrays.asList(elements));
+	}
+
+	/**
+	 * Creates a one-element new Stream that will retrieve the thunk's value.
+	 * 
+	 * This stream is {@link Repeatable} as long as the thunk's value is always
+	 * equal.
+	 * 
+	 * @param <A>
+	 * @param element
+	 * @return a new
+	 * 
+	 * @see Thunk#value()
+	 */
+	@Projection
+	@ConditionallyRepeatable
+	@NonNull
+	public static <A> Stream<A> cons(Thunk<A> element) {
+		return new DelayedSingleStream(element);
+	}
+
+	/**
+	 * Creates a new Stream that will retrieve just the given element
+	 * 
+	 * @param <A>
+	 * @param element
+	 *          the single element the new {@link Stream} will retrieve
+	 * @return a new {@link Stream}
+	 */
+	@NonNull
+	@Repeatable
+	@Projection
+	public static <A> Stream<A> cons(A element) {
+		return new SingleStream<A>(element);
+	}
+
+	/**
+	 * Creates a new infinite {@link Stream} that retrieves element from the
+	 * sequence
+	 * <code>Sequence.from(start, generator, StopConditions.stopNever())</code>
+	 * 
+	 * @param <A>
+	 * @param seed
+	 *          the initial element of the sequence
+	 * @param generator
+	 *          a function used to generated each element from the sequence after
+	 *          the initial element
+	 * @return a new {@link Stream}
+	 * @see Sequence#from(Object, Applicable, Evaluable)
+	 */
+	@NonNull
+	@Projection
+	public static <A> Stream<A> iterate(@NonNull A seed, @NonNull Applicable<A, A> generator) {
+		return from(Sequence.from(seed, generator, StopConditions.<A> stopNever()));
+	}
+
+	/**
+	 * Creates a new {@link Stream} that retrieves element from the sequence
+	 * <code>Sequence.from(start, generator, stopCondition)</code>
+	 * 
+	 * @param <A>
+	 * @param seed
+	 *          the initial element of the sequence
+	 * @param generator
+	 *          a function used to generated each element from the sequence after
+	 *          the initial element
+	 * @param stopCondition
+	 *          predicate is satisfied when sequencing should stop, that is, when
+	 *          the given element and subsequent should not be retrieved.
+	 * @return a new {@link Stream}
+	 * @see Sequence#from(Object, Applicable, Evaluable)
+	 */
+	@NonNull
+	@Projection
+	public static <A> Stream<A> iterate(@NonNull A seed, @NonNull Applicable<A, A> generator,
+		@NonNull Evaluable<A> stopCondition) {
+		return from(Sequence.from(seed, generator, stopCondition));
+	}
+
+	@NonNull
+	@Projection
+	public static Stream<Integer> iterate(int start, int stop) {
+		return from(Sequence.fromTo(start, stop));
+	}
+
+	/**
+	 * Answers an infinite Stream that indefinitely retrieves the given element.
+	 * 
+	 * @param <A>
+	 * @param element
+	 * @return a new {@link Stream} that replicates the given element
+	 */
+	@NonNull
+	@Projection
+	public static <A> Stream<A> replicate(A element) {
+		return iterate(element, Functions.<A> identity());
+	}
+
+	// private static <A> Stream<A> cycle(@NonNull A element) {
+	// //return iterate(element, Functions.<A> identity());
+	// }
 
 	/**
 	 * Create a new {@link Stream} that retrieves elements from the given
@@ -160,6 +333,10 @@ public class Streams {
 		return new DequeStream<A>(list);
 	}
 
+	// public static <K, V> Stream<Entry<K, V>> from(Map<K, V> iterable) {
+	// return new MapEntryStream<K, V>(iterable);
+	// }
+
 	/**
 	 * Answers a {@link Stream} that has no elements. This stream is immutable and
 	 * singleton
@@ -188,11 +365,5 @@ public class Streams {
 	public static <A> Stream<A> undefined() {
 		return UndefinedStream.undefined();
 	}
-
-	// public static <K, V> Stream<Entry<K, V>> from(Map<K, V> iterable) {
-	// return new MapEntryTranaversable<K, V>(iterable);
-	// }
-
-	// fail
 
 }
