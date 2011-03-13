@@ -20,10 +20,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <p>
  * {@link Restriction}s is a meta-annotation for annotation types that express
  * constraints over annotated elements.
- * </p>
  * <p>
  * Restrictions may express preconditions, postconditions or invariants,
  * depending on the specific annotation type and on the annotated element:
@@ -35,7 +33,8 @@ import java.lang.annotation.Target;
  * <li>Postconditions and invariants means client code <strong>must</strong>
  * assume the constraint the annotated element does not violate the constraint,
  * and should not check it. If annotated element violates this postcondition,
- * there is a bug in the implementor code</li>
+ * there is a bug in the implementor code. Implementors <strong>may</strong>
+ * throw an {@link AssertionError}</li>
  * </ul>
  * </p>
  * <p>

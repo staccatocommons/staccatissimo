@@ -16,8 +16,9 @@ Beta state
  making consistent and meaningful documentation easier to write. 
   
   With such principles in mind, the Restrictions API is composed by source and class level annotations that express constraints
-  over code elements, and the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs/net/sf/staccatocommons/defs/restriction/Restriction.html}Restriction}} 
- meta-annotation, that express the semantics of such annotations.
+  over code elements, and the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/Restriction.html}Restriction}} 
+ meta-annotation, that express the semantics of such annotations, like for example, how both implementor and client code should behave 
+ on constraints violations, or how do they react to inheritance. 
  
   Although it is primary targeted for documenting such constraints, many of them may be processed in a non intrusive ways through
  {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument/index.html}Staccato-Commons-Restrictions-Instrument}}.
@@ -25,7 +26,6 @@ Beta state
   In addition to that, the project <encapsulates> consistent use of words of must, must not, etc. with {{{http://www.ietf.org/rfc/rfc2119.txt}RFC2119}} across Javadoc. 
  This means that whenever such words are used within Staccato-Commons-Restrictions and the rest of the projects, they
  must be interpreted following such guidelines.  
-  
  
 * Examples
 
@@ -54,6 +54,20 @@ Beta state
   //Precondition: Username must match be non null and match the given regexp
   public void setUserName(@Matches(USERNAME_REGEXP) username);
 +---
+
+** Instantiation restriction
+
+ Instantiation restriction are constraints about the number of different instances 
+ a method returns. They express postconditions.  
+ 
++---
+  
+  //Postcondition: this method always returns the same instance. 
+  //This does not mean it is a singleton - in fact Staccato-Commons discourages them 
+  @Constant
+  public static <T> Predicate<T> notNull() { ... }
+
++---   
      
 ~~TODO NotZero, Positive
 ~~** Effect Restrictions
@@ -85,12 +99,14 @@ Beta state
    //Directive for processors: restrictions in this constructor
    //should be ignored, as they are manually handled.  
    @IgnoreRestrictions
-   public CopyOnWriteMemoryArea(@NotEmpty MemoryArea original) {
-    ..
-   } 
+   public CopyOnWriteMemoryArea(@NotEmpty MemoryArea original) { ... } 
 +--
 
 
-~~** Defining custom restrictions
+~** Defining custom restrictions
+~ 
+~ Staccato-Commons-Restriction provides many common restrictions out of the box, but there are lots of business-specific
+~ constraints not covered by it. Thus, Staccato-Commons encourages you to define your own restrictions and    
+ 
 
 
