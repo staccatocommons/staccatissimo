@@ -173,12 +173,8 @@ public class AbstractStreamBasicTest {
 	/** Test for {@link Stream#intersperse(Object)} */
 	@Test
 	public void testIntersperse() throws Exception {
-		System.out.println(Streams.cons(4, 5).intersperse(10).joinStrings(""));
 		assertTrue( //
-		Streams
-			.cons(4, 5, 6)
-			.intersperse(1)
-			.equivalent(4, 1, 5, 1, 6));
+		Streams.cons(4, 5, 6).intersperse(1).equivalent(4, 1, 5, 1, 6));
 
 		assertTrue( //
 		Streams
@@ -271,10 +267,7 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void testReverse() throws Exception {
 		assertTrue(//
-		Streams
-			.cons(50, 30, 9, 12, 0, 3, -5, null)
-			.reverse()
-			.equivalent(null, -5, 3, 0, 12, 9, 30, 50));
+		Streams.cons(50, 30, 9, 12, 0, 3, -5, null).reverse().equivalent(null, -5, 3, 0, 12, 9, 30, 50));
 	}
 
 	/** Test for {@link Stream#maximum()} */
