@@ -37,6 +37,7 @@ import java.net.URL;
  * <li>{@link #getName()} : same behavior of {@link File}</li>
  * <li>{@link #getPath()} : same behavior of {@link File}</li>
  * <li>{@link #toString()} : same behavior of {@link File}</li>
+ * <li>{@link #getAbsolutePath()} : same behavior of {@link File}</li>
  * </ul>
  * 
  * @author flbulgarelli
@@ -80,28 +81,23 @@ public class FileMock extends File {
 	}
 
 	public String getAbsolutePath() {
-		// TODO Auto-generated method stub
 		return super.getAbsolutePath();
 	}
 
 	public File getCanonicalFile() throws IOException {
-		// TODO Auto-generated method stub
-		return super.getCanonicalFile();
+		throw new UnsupportedOperationException();
 	}
 
 	public String getCanonicalPath() throws IOException {
-		// TODO Auto-generated method stub
-		return super.getCanonicalPath();
+		throw new UnsupportedOperationException();
 	}
 
 	public String getParent() {
-		// TODO Auto-generated method stub
-		return super.getParent();
+		throw new UnsupportedOperationException();
 	}
 
 	public File getParentFile() {
-		// TODO Auto-generated method stub
-		return super.getParentFile();
+		throw new UnsupportedOperationException();
 	}
 
 	public int hashCode() {
@@ -115,13 +111,11 @@ public class FileMock extends File {
 	}
 
 	public String[] list() {
-		// TODO Auto-generated method stub
-		return super.list();
+		throw new UnsupportedOperationException();
 	}
 
 	public String[] list(FilenameFilter filter) {
-		// TODO Auto-generated method stub
-		return super.list(filter);
+		throw new UnsupportedOperationException();
 	}
 
 	public File[] listFiles(FileFilter filter) {
