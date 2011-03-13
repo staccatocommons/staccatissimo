@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  */
 public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter {
 
-	private final Logger handlersLogger = LoggerFactory.getLogger("Processor-Logger");
+	private final Logger logger = LoggerFactory.getLogger("Processor-Logger");
 
 	private final AnnotationProcessor<ClassAnnotationHandler> classProcessor;
 	private final AnnotationProcessor<MethodAnnotationHandler> methodProcessor;
@@ -116,11 +116,13 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 		if (clazz.isInterface())
 			return;
 
-		if (alreadyProcessed(clazz))
+		if (alreadyProcessed(clazz)) {
+			logger.debug("Class {} was already processed. Ignoring", clazz);
 			return;
+		}
 
 		final ClassAnnotationContext context = //
-		new DefaultClassAnnotationContext(classPool, handlersLogger, clazz);
+		new DefaultClassAnnotationContext(classPool, logger, clazz);
 		classProcessor.processUsing(
 			clazz.getAnnotations(),
 			new Block2<Object, ClassAnnotationHandler>() {
@@ -160,7 +162,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 		ClassNotFoundException {
 		final DefaultMethodAnnotationContext methodContext = new DefaultMethodAnnotationContext(
 			classPool,
-			handlersLogger);
+			logger);
 		methodContext.setMethod(method);
 		Object[] availableAnnotations = method.getAvailableAnnotations();
 
@@ -194,7 +196,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 		ClassNotFoundException {
 		final DefaultConstructorAnnotationContext context = new DefaultConstructorAnnotationContext(
 			classPool,
-			handlersLogger);
+			logger);
 		context.setConstructor(constructor);
 		Object[] availableAnnotations = constructor.getAvailableAnnotations();
 
@@ -223,7 +225,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 		Object[][] parameterAnnotations = behaviour.getAvailableParameterAnnotations();
 		final DefaultArgumentAnnotationContext argumentContext = new DefaultArgumentAnnotationContext(
 			classPool,
-			handlersLogger);
+			logger);
 		argumentContext.setBehavior(behaviour);
 		for (int i = 0; i < parameterAnnotations.length; i++) {
 			argumentContext.setParameterNumber(i);

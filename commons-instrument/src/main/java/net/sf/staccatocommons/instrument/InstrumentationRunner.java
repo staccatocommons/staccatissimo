@@ -58,7 +58,7 @@ public final class InstrumentationRunner {
 	 */
 	public static void runInstrumentation(@NonNull InstrumenterConfigurer configurer,
 		@NonNull Directory processDirectory, @NonNull String extraPath) throws Exception {
-		ClassPool classPool = ClassPool.getDefault();
+		ClassPool classPool = new ClassPool(true);
 		classPool.appendPathList(extraPath);
 		classPool.appendClassPath(processDirectory.getAbsolutePath());
 		InstrumenterImpl instrumenter = new InstrumenterImpl(classPool);
