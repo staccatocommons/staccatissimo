@@ -2,6 +2,7 @@
 <project name="Staccato-Commons">
   <bannerLeft>
     <name>Staccato-Commons</name>
+    <src>http://staccatocommons.sourceforge.net/images/staccatocommons-large.png</src>
     <href>http://staccatocommons.sourceforge.net/</href>
   </bannerLeft>  
   <body>
