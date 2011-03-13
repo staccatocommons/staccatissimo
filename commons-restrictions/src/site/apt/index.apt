@@ -1,52 +1,96 @@
 About Staccato-Commons-Restrictions
  
  Staccato-Commons-Restrictions is the core annotations library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. 
-It contains annotations that express restrictions in the form of preconditions, postconditions an invariants over objects and messages, 
-focused on documentation reuse. 
+It contains annotations that express restrictions, that can be used in the form of preconditions, postconditions or invariants 
+over objects and messages, focused on documentation reuse. 
 
 Beta state 
 
  Staccato-Commons-Restrictions is currently in beta state. It should not be used in productive systems yet. 
- 
-Getting started
 
-  The Restrictions API is composed by a bunch of source and class level annotations that express constraints over code elements, 
- and the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs/net/sf/staccatocommons/defs/restriction/Restriction.html}Restriction}} 
- meta-annotation, that express the semantics of such annotations. 
- 
-  The API is primary targeted for documenting such constraints, in order to reuse documentation of properties of code.
- However, many of them may be processed in a non intrusive ways through Staccato-Commons-Restrictions-Instrument, a tool capable 
- of enforcing them.   
+* Introduction
 
-  Restrictions delivered with this library fall in the following categories: 
+  Staccato-Commons-Restrictions promotes reuse of common code properties expressed in the form of constraints, like NotNull, 
+  Positive, SideEffectFree or Unmodifiable. Just like executable code, such restrictions can be encapsulated 
+ - by defining the restrictions semantics once and only once - and composed - by creating new restrictions aggregating existing ones, thus
+ making consistent and meaningful documentation easier to write. 
   
-  * Restriction meta-annotation: express the general contract of a restriction
-  
-  * Check Restrictions: for signaling simple postconditions over method returns types, 
-  and preconditions over constructor and methods arguments, including:
+  With such principles in mind, the Restrictions API is composed by source and class level annotations that express constraints
+  over code elements, and the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs/net/sf/staccatocommons/defs/restriction/Restriction.html}Restriction}} 
+ meta-annotation, that express the semantics of such annotations.
  
-     * MinSize, MaxSize and Size: constraints about sizes of collection-like elements 
-    
-     * Matches: constraints about regular expressions matching over Strings
-     
-     * NotNull: constraint about nullability of objects
-     
-     * NotZero, NotNegative, Positive: constraints about sign of numeric types
-     
-     []
-     
-  * Effect Restrictions
-   
-  * Value Restrictions
-   
-  * Processing directives for tools that interpret restrictions.    
-
- []
-
- In addition to that, the project <encapsulates> imposes consistent use of words of must, must not, etc. with {{{http://www.ietf.org/rfc/rfc2119.txt}RFC2119}} across Javadoc. 
+  Although it is primary targeted for documenting such constraints, many of them may be processed in a non intrusive ways through
+ {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument/index.html}Staccato-Commons-Restrictions-Instrument}}.
+ 
+  In addition to that, the project <encapsulates> consistent use of words of must, must not, etc. with {{{http://www.ietf.org/rfc/rfc2119.txt}RFC2119}} across Javadoc. 
  This means that whenever such words are used within Staccato-Commons-Restrictions and the rest of the projects, they
  must be interpreted following such guidelines.  
-   
-Examples
+  
+ 
+* Examples
 
-  Coming soon...
+** Check restrictions
+
+ Check restrictions are simple constraints that can annotate indistinctly return values, parameters 
+ and attributes, to express postconditions, preconditions and invariants, respectively. Not all them are targeted for being used in 
+ combination with any type, for instance, NotNull should not be used with primitive types, and NotEmpty should not be used
+ with objects without methods or public attributes like length, size or isEmpty:   
+
+~~TODO Nullability
+~~TODO MinSize 
+
++---
+  //Postcondition: the returned value is always > 0
+  @Positive
+  protected int activeThreadsCount() { ... }
+
+  //Invariant: the size of the string builder is always <= 256 characters
+  @MaxSize(256)
+  private StringBuilder builder;
+
+  //Precondition: recipients collection must be not  null and not empty
+  public void sendTo(@NotEmpty Collection<User> recipients);
+
+  //Precondition: Username must match be non null and match the given regexp
+  public void setUserName(@Matches(USERNAME_REGEXP) username);
++---
+     
+~~TODO NotZero, Positive
+~~** Effect Restrictions
+~~TODO
+
+** Value Restrictions
+
+ Value Restrictions are constrains over types regarding their state changes and identity. 
+ They always express invariants over instances of such types:   
+
++-----
+  //Invariant: state of Currency instances is always constant
+  @Immutable
+  public class Currency { ... }
+  
+  //Invariant: BoundingBox equals, hashcode and toString are implemented
+  //based on the BoundingBox state instead of identity
+  @Value
+  public class BoundingBox { ... }
+ 
++----
+   
+** Processing directives for tools that interpret restrictions. 
+
+ Processing directives are annotation that exists just for passing hints to automated annotations processors regarding
+ when they should be processed:    
+
++---
+   //Directive for processors: restrictions in this constructor
+   //should be ignored, as they are manually handled.  
+   @IgnoreRestrictions
+   public CopyOnWriteMemoryArea(@NotEmpty MemoryArea original) {
+    ..
+   } 
++--
+
+
+~~** Defining custom restrictions
+
+
