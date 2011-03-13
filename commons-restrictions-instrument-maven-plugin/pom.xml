@@ -11,31 +11,40 @@
 	<version>1.0-beta-1-SNAPSHOT</version>
 	<name>Staccato-Commons-Restrictions-Instrument-Maven-Plugin</name>
 	<packaging>maven-plugin</packaging>
-    <description>A Maven Mojo for instrummenting restrictions with as part of the build process</description>
-    <url>http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrumentmavenplugin</url>
-    <scm>
-        <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument-maven-plugin</connection>
-        <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument-maven-plugin</developerConnection>
-        <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-restrictions-instrument-maven-plugin/</url>
-    </scm>
-	<issueManagement>
-		<url>http://sourceforge.net/tracker/?group_id=317949</url>
-	</issueManagement>
+	<description>A Maven Mojo for instrummenting restrictions with as part of the build process</description>
+	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrumentmavenplugin</url>
+	<scm>
+		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument-maven-plugin</connection>
+		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument-maven-plugin</developerConnection>
+		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-restrictions-instrument-maven-plugin/</url>
+	</scm>
+	<distributionManagement>
+        <site>
+            <id> ${distribution.site.id}</id>
+            <url>${distribution.site.url}/staccatissimo/commonsrestrictionsinstrumentmavenplugin</url>
+        </site>
+    </distributionManagement>
+<!--	<issueManagement>-->
+<!--		<url>http://sourceforge.net/tracker/?group_id=317949</url>-->
+<!--	</issueManagement>-->
+	<prerequisites>
+		<maven>2.0</maven>
+	</prerequisites>
 	<build>
-		<plugins>
-			<!-- <plugin> -->
-			<!-- <groupId>org.apache.maven.plugins</groupId> -->
-			<!-- <artifactId>maven-docck-plugin</artifactId> -->
-			<!-- <version>1.0</version> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <goals> -->
-			<!-- <goal>check</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
-		</plugins>
+<!--		<plugins>-->
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-docck-plugin</artifactId>-->
+<!--				<version>1.0</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<goals>-->
+<!--							<goal>check</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+<!--		</plugins>-->
 	</build>
 	<dependencies>
 		<dependency>
