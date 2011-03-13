@@ -15,9 +15,9 @@ package net.sf.staccatocommons.instrument.internal;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.instrument.handler.AnnotationHandler;
-import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.block.Block2;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 
@@ -25,36 +25,35 @@ import net.sf.staccatocommons.lang.predicate.Predicate;
  * @author flbulgarelli
  * 
  */
-class AnnotationProcessor<T extends AnnotationHandler> {
+class AnnotationProcessor<HandlerType extends AnnotationHandler> {
 
-	private final Collection<T> handlers;
+	private final Collection<HandlerType> handlers;
 
 	/**
 	 * Creates a new {@link AnnotationProcessor}
 	 */
 	public AnnotationProcessor() {
-		this.handlers = new LinkedList<T>();
+		this.handlers = new LinkedList<HandlerType>();
 	}
 
-	public void processUsing(final Object[] annotations, Block2<Object, T> block) {
+	public void processUsing(final Object[] annotations, Block2<Object, HandlerType> block) {
 		for (Object annotation : annotations)
-			getHandler(annotation).ifDefined(block.apply(annotation));
+			for (HandlerType handler : getHandlers(annotation)) {
+				block.exec(annotation, handler);
+			}
 	}
 
-	// FIXME not consistent with documentation, if more than one is found that can
-	// process, the rest are ignored
-	// TODO linear time, should use a multimap
-	private Option<T> getHandler(final Object annotation) {
-		return Streams.from(handlers).findOrNone(//
-			new Predicate<T>() {
-				public boolean eval(T argument) {
+	private Stream<HandlerType> getHandlers(final Object annotation) {
+		return Streams.from(handlers).filter(//
+			new Predicate<HandlerType>() {
+				public boolean eval(HandlerType argument) {
 					return argument.getSupportedAnnotationType().isAssignableFrom(annotation.getClass());
 				}
 			});
 	}
 
 	/** Adds a handler */
-	public void addHandler(T handler) {
+	public void addHandler(HandlerType handler) {
 		this.handlers.add(handler);
 	}
 
