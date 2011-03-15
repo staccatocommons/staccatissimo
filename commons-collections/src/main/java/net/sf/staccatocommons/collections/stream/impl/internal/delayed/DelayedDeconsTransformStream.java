@@ -25,6 +25,6 @@ public final class DelayedDeconsTransformStream<A, B> extends AbstractTransformS
 		if (getStream().isEmpty())
 			return function.emptyApply();
 		Pair<Thunk<A>, Stream<A>> decons = getStream().delayedDecons();
-		return function.apply(decons._1(), decons._2());
+		return function.apply(decons._0(), decons._1());
 	}
 }

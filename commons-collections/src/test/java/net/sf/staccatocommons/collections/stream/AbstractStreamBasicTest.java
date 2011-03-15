@@ -258,8 +258,8 @@ public class AbstractStreamBasicTest {
 			.cons(50, 60, 1, 6, 9, 10, 100)
 			.streamPartition(Compare.greaterThan(9));
 
-		assertTrue(partition._1().equivalent(50, 60, 10, 100));
-		assertTrue(partition._2().equivalent(1, 6, 9));
+		assertTrue(partition._0().equivalent(50, 60, 10, 100));
+		assertTrue(partition._1().equivalent(1, 6, 9));
 
 	}
 
@@ -280,7 +280,7 @@ public class AbstractStreamBasicTest {
 				_(new Object(), 9, "bye"),
 				_(new Object(), 6, ""))
 			.maximumOn(second(Integer.class))
-			._3();
+			._2();
 		assertEquals("foo", max);
 		assertEquals(150, (int) Streams.cons(90, 10, 30, 6, 150, 65).maximum());
 	}

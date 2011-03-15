@@ -61,9 +61,9 @@ public class IteratorStreamUnitTest extends StreamTheories {
 		Pair<Object, Stream<Object>> decons = Streams
 			.from(Arrays.asList(90, 50, "foo").iterator())
 			.decons();
-		assertEquals(90, decons._1());
-		assertThat(decons._2(), instanceOf(IteratorStream.class));
-		assertEquals(Arrays.asList(50, "foo"), decons._2().toList());
+		assertEquals(90, decons._0());
+		assertThat(decons._1(), instanceOf(IteratorStream.class));
+		assertEquals(Arrays.asList(50, "foo"), decons._1().toList());
 	}
 
 	/**

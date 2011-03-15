@@ -40,7 +40,7 @@ public class Tuples {
 	public static <A> Function<Tuple.FirstAware<A>, A> first() {
 		return new AbstractFunction<Tuple.FirstAware<A>, A>() {
 			public A apply(Tuple.FirstAware<A> arg) {
-				return arg._1();
+				return arg._0();
 			}
 		};
 	}
@@ -72,7 +72,7 @@ public class Tuples {
 	public static <A> Function<Tuple.SecondAware<A>, A> second() {
 		return new AbstractFunction<Tuple.SecondAware<A>, A>() {
 			public A apply(Tuple.SecondAware<A> arg) {
-				return arg._2();
+				return arg._1();
 			}
 		};
 	}
@@ -102,7 +102,7 @@ public class Tuples {
 	public static <A> Function<ThirdAware<A>, A> third() {
 		return new AbstractFunction<Tuple.ThirdAware<A>, A>() {
 			public A apply(Tuple.ThirdAware<A> arg) {
-				return arg._3();
+				return arg._2();
 			}
 		};
 	}
@@ -119,7 +119,7 @@ public class Tuples {
 	public static <A> Function<FourthAware<A>, A> fourth() {
 		return new AbstractFunction<FourthAware<A>, A>() {
 			public A apply(FourthAware<A> arg) {
-				return arg._4();
+				return arg._3();
 			}
 		};
 	}

@@ -124,7 +124,7 @@ public abstract class Tuple implements Serializable {
 		 * @return {@link #first()}
 		 * 
 		 */
-		A _1();
+		A _0();
 
 	}
 
@@ -151,7 +151,7 @@ public abstract class Tuple implements Serializable {
 		 * @return {@link #second()}
 		 * 
 		 */
-		A _2();
+		A _1();
 	}
 
 	/**
@@ -176,7 +176,7 @@ public abstract class Tuple implements Serializable {
 		 * 
 		 * @return the third component
 		 */
-		A _3();
+		A _2();
 	}
 
 	/**
@@ -198,7 +198,7 @@ public abstract class Tuple implements Serializable {
 		 * 
 		 * @return the fourth component
 		 */
-		A _4();
+		A _3();
 	}
 
 	protected static abstract class TupleState<A extends Tuple> extends RelevantState<A> {

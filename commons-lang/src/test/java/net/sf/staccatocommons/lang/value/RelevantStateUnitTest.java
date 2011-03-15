@@ -31,7 +31,7 @@ public class RelevantStateUnitTest {
 	private RelevantState<Triple> val = //
 	new RelevantState<Triple>(3) {
 		protected void collectState(Triple o, StateCollector b) {
-			b.add(o._1()).add(o._2()).add(o._3());
+			b.add(o._0()).add(o._1()).add(o._2());
 		}
 	};
 
@@ -96,7 +96,7 @@ public class RelevantStateUnitTest {
 		RelevantState<Triple<Integer, Boolean, Long>> rs = //
 		new RelevantState<Triple<Integer, Boolean, Long>>(3) {
 			protected void collectState(Triple<Integer, Boolean, Long> object, StateCollector s) {
-				s.add((int) object._1()).add((boolean) object._2()).add((long) object._3());
+				s.add((int) object._0()).add((boolean) object._1()).add((long) object._2());
 			}
 		};
 		assertTrue(rs.eval(_(10, true, 5L), _(10, true, 5L)));

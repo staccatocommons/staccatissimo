@@ -29,16 +29,16 @@ public class QuadrupleUnitTest extends TupleAbstractUnitTest {
 	public void testComponents() throws Exception {
 		Quadruple<Integer, String, String, String> quad = _(9, "Hello", "World", "!");
 		assertEquals((Integer) 9, quad.first());
-		assertSame(quad._1(), quad.first());
+		assertSame(quad._0(), quad.first());
 
 		assertEquals("Hello", quad.second());
-		assertSame(quad._2(), quad.second());
+		assertSame(quad._1(), quad.second());
 
 		assertEquals("World", quad.third());
-		assertSame(quad._3(), quad.third());
+		assertSame(quad._2(), quad.third());
 
 		assertEquals("!", quad.fourth());
-		assertSame(quad._4(), quad.fourth());
+		assertSame(quad._3(), quad.fourth());
 	}
 
 	@Override

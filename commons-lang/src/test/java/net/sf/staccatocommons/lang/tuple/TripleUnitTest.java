@@ -30,13 +30,13 @@ public class TripleUnitTest extends TupleAbstractUnitTest {
 	public void testComponents() throws Exception {
 		Triple<Integer, String, String> triple = _(9, "Hello", "World");
 		assertEquals((Integer) 9, triple.first());
-		assertSame(triple._1(), triple.first());
+		assertSame(triple._0(), triple.first());
 
 		assertEquals("Hello", triple.second());
-		assertSame(triple._2(), triple.second());
+		assertSame(triple._1(), triple.second());
 
 		assertEquals("World", triple.third());
-		assertSame(triple._3(), triple.third());
+		assertSame(triple._2(), triple.third());
 	}
 
 	@Override

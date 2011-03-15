@@ -84,20 +84,20 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
 		return fourth;
 	}
 
-	public T1 _1() {
+	public T1 _0() {
 		return first();
 	}
 
-	public T2 _2() {
+	public T2 _1() {
 		return second();
 	}
 
-	public T3 _3() {
+	public T3 _2() {
 		return third();
 	}
 
 	@Override
-	public T4 _4() {
+	public T4 _3() {
 		return fourth();
 	}
 

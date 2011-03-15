@@ -33,8 +33,8 @@ public class PairUnitTest extends TupleAbstractUnitTest {
 		Pair<Integer, String> pair = _(9, "Hello");
 		assertEquals((Integer) 9, pair.first());
 		assertEquals("Hello", pair.second());
-		assertSame(pair._1(), pair.first());
-		assertSame(pair._2(), pair.second());
+		assertSame(pair._0(), pair.first());
+		assertSame(pair._1(), pair.second());
 
 	}
 

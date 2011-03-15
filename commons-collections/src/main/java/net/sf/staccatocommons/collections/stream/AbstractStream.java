@@ -317,7 +317,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	@Override
 	public final Pair<Stream<A>, Stream<A>> streamPartition(Evaluable<? super A> predicate) {
 		Pair<List<A>, List<A>> partition = partition(predicate);
-		return _(Streams.from(partition._1()), Streams.from(partition._2()));
+		return _(Streams.from(partition._0()), Streams.from(partition._1()));
 	}
 
 	@Override

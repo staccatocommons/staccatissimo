@@ -65,7 +65,7 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 	}
 
 	@Override
-	public T1 _1() {
+	public T1 _0() {
 		return first;
 	}
 
@@ -75,7 +75,7 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 	}
 
 	@Override
-	public T2 _2() {
+	public T2 _1() {
 		return second;
 	}
 

@@ -25,6 +25,6 @@ public final class DeconsTransformStream<B, A> extends AbstractTransformStream<A
 		if (getStream().isEmpty())
 			return function.emptyApply();
 		Pair<A, Stream<A>> decons = getStream().decons();
-		return function.apply(decons._1(), decons._2());
+		return function.apply(decons._0(), decons._1());
 	}
 }

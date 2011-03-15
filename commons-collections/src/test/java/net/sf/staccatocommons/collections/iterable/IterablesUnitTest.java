@@ -221,8 +221,8 @@ public class IterablesUnitTest {
 				}
 			});
 
-		assertEquals(Iterables.toList(Sequence.fromToBy(10, 20, 2)), partition._1());
-		assertEquals(Iterables.toList(Sequence.fromToBy(11, 20, 2)), partition._2());
+		assertEquals(Iterables.toList(Sequence.fromToBy(10, 20, 2)), partition._0());
+		assertEquals(Iterables.toList(Sequence.fromToBy(11, 20, 2)), partition._1());
 	}
 
 	/**
