@@ -27,8 +27,15 @@ import java.io.Writer;
 
 import net.sf.staccatocommons.io.serialization.lifecycle.CharSerializationLifecycle;
 
-public abstract class AbstractCharSerializationManager implements
-	CharSerializationManager {
+/**
+ * An abstract implementation of {@link CharSerializationManager} that provides
+ * default implementations for its methods except of {@link #serialize(Reader)}
+ * and {@link #deserialize(Reader)}
+ * 
+ * @author flbulgarelli
+ * 
+ */
+public abstract class AbstractCharSerializationManager implements CharSerializationManager {
 
 	@Override
 	public <T> T deserialize(String string) {

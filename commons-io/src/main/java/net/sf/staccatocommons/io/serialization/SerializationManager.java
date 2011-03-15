@@ -66,6 +66,9 @@ import org.apache.commons.lang.SerializationException;
 public interface SerializationManager {
 
 	/**
+	 * Writes the given <code>target</code> object to the given
+	 * <code>outputStream</code>.
+	 * 
 	 * This method does not close the outputStream
 	 * 
 	 * @param target

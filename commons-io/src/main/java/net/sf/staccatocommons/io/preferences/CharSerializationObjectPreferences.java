@@ -87,13 +87,31 @@ public class CharSerializationObjectPreferences implements ObjectPreferences {
 		preferences.remove(key);
 	}
 
-	public static ObjectPreferences userNodeForPackage(Class<?> clazz,
-		CharSerializationManager serializarionManager) {
+	/**
+	 * Answers an user node {@link ObjectPreferences} for the given class package
+	 * 
+	 * @param clazz
+	 * @param serializarionManager
+	 *          the {@link CharSerializationManager} to deserialize and serialize
+	 *          the objects
+	 * @return a new {@link ObjectPreferences}
+	 */
+	public static ObjectPreferences userNodeForPackage(@NonNull Class<?> clazz,
+		@NonNull CharSerializationManager serializarionManager) {
 		return new CharSerializationObjectPreferences(
 			Preferences.userNodeForPackage(clazz),
 			serializarionManager);
 	}
 
+	/**
+	 * Answers a system node {@link ObjectPreferences} for the given class package
+	 * 
+	 * @param clazz
+	 * @param serializarionManager
+	 *          the {@link CharSerializationManager} to deserialize and serialize
+	 *          the objects
+	 * @return a new {@link ObjectPreferences}
+	 */
 	public static ObjectPreferences systemNodeForPackage(Class<?> clazz,
 		CharSerializationManager serializarionManager) {
 		return new CharSerializationObjectPreferences(
