@@ -149,8 +149,8 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 		}
 
 		@Override
-		public A apply(A arg1, A arg2) {
-			return numberType().add(arg1, arg2);
+		public A apply(A arg0, A arg1) {
+			return numberType().add(arg0, arg1);
 		}
 
 	}
@@ -165,8 +165,8 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 		}
 
 		@Override
-		public A apply(A arg1, A arg2) {
-			return numberType().multiply(arg1, arg2);
+		public A apply(A arg0, A arg1) {
+			return numberType().multiply(arg0, arg1);
 		}
 
 	}

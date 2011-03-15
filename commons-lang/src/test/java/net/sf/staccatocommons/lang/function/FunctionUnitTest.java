@@ -56,7 +56,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.AbstractFunction#of(Thunk)}.
+	 * {@link net.sf.staccatocommons.lang.function.AbstractFunction#delayed(Thunk)}.
 	 */
 	@Test
 	public void testOf0() {
@@ -66,7 +66,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 				will(returnValue(20));
 			}
 		});
-		assertEquals((Long) 10L, f.of(g0).value());
+		assertEquals((Long) 10L, f.delayed(g0).value());
 	}
 
 	/**

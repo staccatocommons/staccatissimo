@@ -23,16 +23,16 @@ package net.sf.staccatocommons.defs;
  * 
  * @author flbulgarelli
  * 
- * @param <T1>
+ * @param <A>
  *          the type of the first argument
- * @param <T2>
+ * @param <B>
  *          the type of the second argument
  * 
  * @see Applicative Recomendations for implementing
  * @see Evaluable
  */
 @Applicative
-public interface Evaluable2<T1, T2> {
+public interface Evaluable2<A, B> {
 
 	/**
 	 * Evaluates two argument. If the arguments evaluates to true they are said to
@@ -45,6 +45,6 @@ public interface Evaluable2<T1, T2> {
 	 * 
 	 * @return if the arguments meet this evaluable condition
 	 */
-	boolean eval(T1 arg0, T2 arg1);
+	boolean eval(A arg0, B arg1);
 
 }

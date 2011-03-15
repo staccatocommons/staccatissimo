@@ -20,30 +20,30 @@ package net.sf.staccatocommons.defs;
  * 
  * @author flbulgarelli
  * 
- * @param <T1>
+ * @param <A>
  *          first argument type
- * @param <T2>
+ * @param <B>
  *          second argument type
- * @param <T3>
+ * @param <C>
  *          third argument type
- * @param <R>
+ * @param <D>
  *          return type
  * @see Applicative Recomendations for implementing
  */
 @Applicative
-public interface Applicable3<T1, T2, T3, R> {
+public interface Applicable3<A, B, C, D> {
 
 	/**
 	 * Performs a transformation on the given element, and returns its result.
 	 * 
-	 * @param arg1
+	 * @param arg0
 	 *          the first transformation argument
-	 * @param arg2
+	 * @param arg1
 	 *          the second transformation argument
-	 * @param arg3
+	 * @param arg2
 	 *          the third transformation argument
 	 * @return the transformation result
 	 */
-	R apply(T1 arg1, T2 arg2, T3 arg3);
+	D apply(A arg0, B arg1, C arg2);
 
 }

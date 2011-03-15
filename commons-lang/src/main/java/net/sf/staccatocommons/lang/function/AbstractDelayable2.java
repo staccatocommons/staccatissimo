@@ -15,6 +15,8 @@ package net.sf.staccatocommons.lang.function;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Delayable2;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * @author flbulgarelli
@@ -37,14 +39,25 @@ public abstract class AbstractDelayable2<A, B, C> implements Applicable2<A, B, C
 	 * Delays execution of this block by returning a void thunk that will evaluate
 	 * <code>exec(arg1, arg2)</code> each time its value is required
 	 * 
+	 * @param arg0
 	 * @param arg1
-	 * @param arg2
 	 * @return a new void {@link Thunk}
 	 */
-	public Thunk<C> delayed(final A arg1, final B arg2) {
+	public Thunk<C> delayed(final A arg0, final B arg1) {
 		return new Thunk<C>() {
 			public C value() {
-				return apply(arg1, arg2);
+				return apply(arg0, arg1);
+			}
+		};
+	}
+
+	@ForceRestrictions
+	@NonNull
+	@Override
+	public Thunk<C> delayed(@NonNull final Thunk<A> thunk0, @NonNull final Thunk<B> thunk1) {
+		return new Thunk<C>() {
+			public C value() {
+				return apply(thunk0.value(), thunk1.value());
 			}
 		};
 	}

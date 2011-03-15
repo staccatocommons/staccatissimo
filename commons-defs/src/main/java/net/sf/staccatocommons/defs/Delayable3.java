@@ -40,12 +40,25 @@ public interface Delayable3<A, B, C, D> {
 	 * {@link Thunk} that will perform the actual transformation each time it is
 	 * evaluated.
 	 * 
+	 * @param arg0
 	 * @param arg1
 	 * @param arg2
-	 * @param arg3
 	 * @return a new {@link Thunk}.
 	 */
 	@NonNull
-	Thunk<D> delayed(final A arg1, final B arg2, final C arg3);
+	Thunk<D> delayed(final A arg0, final B arg1, final C arg2);
+
+	/**
+	 * Asynchronously applies this {@link Delayable3}, by returning a
+	 * {@link Thunk} that will perform the actual transformation on the given
+	 * thunk's values each time it is evaluated.
+	 * 
+	 * @param arg0
+	 * @param arg1
+	 * @param arg2
+	 * @return a new {@link Thunk}.
+	 */
+	@NonNull
+	Thunk<D> delayed(@NonNull Thunk<A> thunk0, @NonNull Thunk<B> thunk1, @NonNull Thunk<C> thunk2);
 
 }

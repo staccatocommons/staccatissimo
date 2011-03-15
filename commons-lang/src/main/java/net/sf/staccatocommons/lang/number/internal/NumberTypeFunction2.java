@@ -31,7 +31,7 @@ public abstract class NumberTypeFunction2<A> extends AbstractFunction2<A, A, A> 
 		return type;
 	}
 
-	public Function<A, A> apply(final A arg1) {
+	public Function<A, A> apply(final A arg0) {
 		abstract class NumberTypeFunction extends AbstractFunction<A, A> implements
 			ImplicitNumberType<A> {
 			public NumberType<A> numberType() {
@@ -39,8 +39,8 @@ public abstract class NumberTypeFunction2<A> extends AbstractFunction2<A, A, A> 
 			}
 		}
 		return new NumberTypeFunction() {
-			public A apply(A arg) {
-				return NumberTypeFunction2.this.apply(arg, arg1);
+			public A apply(A arg1) {
+				return NumberTypeFunction2.this.apply(arg1, arg0);
 			}
 		};
 	}

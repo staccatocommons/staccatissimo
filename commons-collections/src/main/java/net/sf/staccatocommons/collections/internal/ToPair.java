@@ -30,8 +30,8 @@ public final class ToPair<A, B> extends AbstractFunction2<A, B, Pair<A, B>> {
 	private static final AbstractFunction2 INSTANCE = new ToPair();
 
 	@Override
-	public Pair<A, B> apply(A arg1, B arg2) {
-		return _(arg1, arg2);
+	public Pair<A, B> apply(A arg0, B arg1) {
+		return _(arg0, arg1);
 	}
 
 	/**

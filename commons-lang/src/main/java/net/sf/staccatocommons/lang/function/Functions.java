@@ -73,8 +73,8 @@ public class Functions {
 		if (applicable instanceof Function2)
 			return (Function2<A, B, C>) applicable;
 		return new AbstractFunction2<A, B, C>() {
-			public C apply(A arg1, B arg2) {
-				return applicable.apply(arg1, arg2);
+			public C apply(A arg0, B arg1) {
+				return applicable.apply(arg0, arg1);
 			}
 		};
 	}

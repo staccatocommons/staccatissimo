@@ -450,9 +450,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		}
 		final Ref size = new Ref();
 		return numberType.divide(fold(numberType.zero(), new AbstractFunction2<A, A, A>() {
-			public A apply(A arg1, A arg2) {
+			public A apply(A arg0, A arg1) {
 				size.val = numberType.increment(size.val);
-				return numberType.add(arg1, arg2);
+				return numberType.add(arg0, arg1);
 			}
 		}), size.val);
 	}

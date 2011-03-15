@@ -68,6 +68,18 @@ public class Numbers {
 	}
 
 	/**
+	 * Synonym for {@link BigDecimal#valueOf(long, int)}
+	 * 
+	 * @param val
+	 * @param scale
+	 * @return a {@link BigDecimal} whose value is mantissa × 10^-scale
+	 */
+	@NonNull
+	public static BigDecimal d(long val, int scale) {
+		return BigDecimal.valueOf(val, scale);
+	}
+
+	/**
 	 * Answers a big decimal of the given value expressed in calculator
 	 * "E notation": <code>mantissa E exponent</code>. In scientific notation, its
 	 * value is <code>mantissa × 10^exponent</code>.

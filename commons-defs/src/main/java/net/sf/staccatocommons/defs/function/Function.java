@@ -46,7 +46,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
 	 *         <code>thunk</code>
 	 */
 	@NonNull
-	Thunk<B> of(@NonNull final Thunk<? extends A> thunk);
+	Thunk<B> delayed(@NonNull final Thunk<? extends A> thunk);
 
 	/**
 	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
@@ -65,7 +65,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
 	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
 	 * this lambda with another {@link Applicable2}, resulting in a new
 	 * {@link Function2} that when applied returns
-	 * <code>this.apply(other.apply(arg1, arg2)</code>
+	 * <code>this.apply(other.apply(arg0, arg1)</code>
 	 * 
 	 * @param <Tp1>
 	 * @param <Tp2>
@@ -80,7 +80,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
 	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
 	 * this lambda with another {@link Applicable3}, resulting in a new
 	 * {@link Function3} that when applied returns
-	 * <code>this.apply(other.apply(arg1,arg2,arg3)</code>
+	 * <code>this.apply(other.apply(arg0,arg1,arg2)</code>
 	 * 
 	 * @param <Tp1>
 	 * @param <Tp2>

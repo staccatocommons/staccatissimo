@@ -33,12 +33,12 @@ public interface Applicable2<T1, T2, R> {
 	 * Performs a transformation on the given element, and returns its result.
 	 * This method <strong>should not</strong> have side effects
 	 * 
-	 * @param arg1
+	 * @param arg0
 	 *          the first transformation argument
-	 * @param arg2
+	 * @param arg1
 	 *          the second transformation argument
 	 * @return the transformation result
 	 */
-	R apply(T1 arg1, T2 arg2);
+	R apply(T1 arg0, T2 arg1);
 
 }

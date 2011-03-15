@@ -92,8 +92,8 @@ public class Function3UnitTest extends JUnit4MockObjectTestCase {
 	@Test
 	public void testNullSafe() throws Exception {
 		AbstractFunction3<Integer, Integer, Integer, Integer> add = new AbstractFunction3<Integer, Integer, Integer, Integer>() {
-			public Integer apply(Integer arg1, Integer arg2, Integer arg3) {
-				return arg1 + arg2 + arg3;
+			public Integer apply(Integer arg0, Integer arg1, Integer arg2) {
+				return arg0 + arg1 + arg2;
 			}
 		};
 		assertNull(add.nullSafe().apply(null, 1, 2));

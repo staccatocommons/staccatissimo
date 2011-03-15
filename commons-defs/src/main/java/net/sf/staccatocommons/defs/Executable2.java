@@ -23,14 +23,14 @@ package net.sf.staccatocommons.defs;
  * 
  * @author flbulgarelli
  * 
- * @param <T1>
+ * @param <A>
  *          first computation argument type
- * @param <T2>
+ * @param <B>
  *          second computation argument type
  * @see Applicative Recomendations for implementing
  */
 @Applicative
-public interface Executable2<T1, T2> {
+public interface Executable2<A, B> {
 
 	/**
 	 * Performs a side-effect computation.
@@ -39,6 +39,6 @@ public interface Executable2<T1, T2> {
 	 * @param arg0
 	 * @param arg1
 	 */
-	void exec(T1 arg0, T2 arg1);
+	void exec(A arg0, B arg1);
 
 }

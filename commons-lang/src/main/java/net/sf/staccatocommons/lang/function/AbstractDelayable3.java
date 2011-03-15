@@ -15,6 +15,8 @@ package net.sf.staccatocommons.lang.function;
 import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Delayable3;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * @author flbulgarelli
@@ -34,19 +36,24 @@ public abstract class AbstractDelayable3<A, B, C, D> implements Applicable3<A, B
 		super();
 	}
 
-	/**
-	 * Delays execution of this block by returning a void thunk that will evaluate
-	 * <code>exec(arg1, arg2, arg3)</code> each time its value is required
-	 * 
-	 * @param arg1
-	 * @param arg2
-	 * @param arg3
-	 * @return a new void {@link Thunk}
-	 */
-	public Thunk<D> delayed(final A arg1, final B arg2, final C arg3) {
+	@Override
+	@NonNull
+	public Thunk<D> delayed(final A arg0, final B arg1, final C arg2) {
 		return new Thunk<D>() {
 			public D value() {
-				return apply(arg1, arg2, arg3);
+				return apply(arg0, arg1, arg2);
+			}
+		};
+	}
+
+	@Override
+	@NonNull
+	@ForceRestrictions
+	public Thunk<D> delayed(@NonNull final Thunk<A> thunk0, @NonNull final Thunk<B> thunk1,
+		@NonNull final Thunk<C> thunk2) {
+		return new Thunk<D>() {
+			public D value() {
+				return apply(thunk0.value(), thunk1.value(), thunk2.value());
 			}
 		};
 	}

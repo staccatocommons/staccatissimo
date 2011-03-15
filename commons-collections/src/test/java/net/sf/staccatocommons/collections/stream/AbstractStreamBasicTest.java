@@ -107,9 +107,9 @@ public class AbstractStreamBasicTest {
 		Collection<String> result = stream.fold(
 			new ArrayList<String>(),
 			new AbstractFunction2<Collection<String>, Collection<String>, Collection<String>>() {
-				public Collection<String> apply(Collection<String> arg1, Collection<String> arg2) {
-					arg1.addAll(arg2);
-					return arg1;
+				public Collection<String> apply(Collection<String> arg0, Collection<String> arg1) {
+					arg0.addAll(arg1);
+					return arg0;
 				}
 			});
 		assertEquals(Arrays.asList("foo", "baz", "bar"), result);

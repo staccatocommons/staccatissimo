@@ -49,16 +49,16 @@ public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>,
 	 * Partially applies the function, passing only its first argument
 	 */
 	@NonNull
-	Function2<B, C, D> apply(final A arg1);
+	Function2<B, C, D> apply(final A arg0);
 
 	/**
 	 * Partially applies the function, passing only its first and second arguments
 	 */
 	@NonNull
-	Function<C, D> apply(final A arg1, final B arg2);
+	Function<C, D> apply(final A arg0, final B arg1);
 
 	@NonNull
-	D apply(A arg1, B arg2, C arg3);
+	D apply(A arg0, B arg1, C arg2);
 
 	/**
 	 * Answers a new function that returns null if any of its arguments is null,

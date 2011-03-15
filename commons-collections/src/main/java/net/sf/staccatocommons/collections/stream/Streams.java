@@ -204,11 +204,11 @@ public class Streams {
 	 * 
 	 * @param <A>
 	 * @param element
-	 * @return a new {@link Stream} that replicates the given element
+	 * @return a new {@link Stream} that repeats the given element
 	 */
 	@NonNull
 	@Projection
-	public static <A> Stream<A> replicate(A element) {
+	public static <A> Stream<A> repeat(A element) {
 		return iterate(element, Functions.<A> identity());
 	}
 

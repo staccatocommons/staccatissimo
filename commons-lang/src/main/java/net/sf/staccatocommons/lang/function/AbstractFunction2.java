@@ -28,28 +28,28 @@ public abstract class AbstractFunction2<A, B, C> extends AbstractDelayable2<A, B
 	Function2<A, B, C> {
 
 	@NonNull
-	public Function<B, C> apply(final A arg1) {
+	public Function<B, C> apply(final A arg0) {
 		return new AbstractFunction<B, C>() {
-			public C apply(B arg2) {
-				return AbstractFunction2.this.apply(arg1, arg2);
+			public C apply(B arg1) {
+				return AbstractFunction2.this.apply(arg0, arg1);
 			}
 		};
 	}
 
 	public Function2<B, A, C> flip() {
 		return new AbstractFunction2<B, A, C>() {
-			public C apply(B arg2, A arg1) {
-				return AbstractFunction2.this.apply(arg1, arg2);
+			public C apply(B arg1, A arg0) {
+				return AbstractFunction2.this.apply(arg0, arg1);
 			}
 		};
 	}
 
 	public final Function2<A, B, C> nullSafe() {
 		return new AbstractFunction2<A, B, C>() {
-			public C apply(A arg1, B arg2) {
-				if (arg1 == null || arg2 == null)
+			public C apply(A arg0, B arg1) {
+				if (arg0 == null || arg1 == null)
 					return null;
-				return AbstractFunction2.this.apply(arg1, arg2);
+				return AbstractFunction2.this.apply(arg0, arg1);
 			}
 		};
 	}

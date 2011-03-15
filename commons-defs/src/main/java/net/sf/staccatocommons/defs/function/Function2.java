@@ -47,13 +47,13 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
 	 * Partially applies the function passing just its first parameter
 	 */
 	@NonNull
-	Function<B, C> apply(final A arg1);
+	Function<B, C> apply(final A arg0);
 
 	/**
 	 * Applies the function
 	 */
 	@NonNull
-	C apply(A arg1, B arg2);
+	C apply(A arg0, B arg1);
 
 	/**
 	 * Inverts function parameters order
