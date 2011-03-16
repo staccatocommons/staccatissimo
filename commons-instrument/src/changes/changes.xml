@@ -1,0 +1,17 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+	<properties>
+		<title>Staccato-Commons-Defs Changes History</title>
+		<author>flbulgarelli</author>
+	</properties>
+	<body>
+		<release version="1.0-beta-1" date="2011-03-15" description="Build">
+			<action dev="flbulgarelli" type="fix">
+				Fixing build problem that
+				prevented the instrumenter to be run as a plugin inside an aggregate
+				maven project 
+			</action>
+		</release>
+	</body>
+</document>
