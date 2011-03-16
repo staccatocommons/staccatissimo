@@ -4,12 +4,12 @@
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.0-beta-1</version>
+		<version>1.0-beta-2-SNAPSHOT</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-io</artifactId>
 	<name>Staccato-Commons-IO</name>
-	<version>1.0-beta-1</version>
+	<version>1.0-beta-2-SNAPSHOT</version>
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsio</url>
 	<distributionManagement>
 		<site>
@@ -31,12 +31,12 @@
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>1.0-beta-1</version>
+			<version>1.0-beta-2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>1.0-beta-1</version>
+			<version>1.0-beta-2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
@@ -87,7 +87,7 @@
 					<plugin>
 						<groupId>net.sf.staccatocommons</groupId>
 						<artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
-						<version>1.0-beta-1</version>
+						<version>1.0-beta-2-SNAPSHOT</version>
 						<configuration>
 							<ignoreReturnChecks>true</ignoreReturnChecks>
 							<ignoreConstants>false</ignoreConstants>
