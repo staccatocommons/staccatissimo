@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.internal.All;
 import net.sf.staccatocommons.lang.predicate.internal.Any;
 import net.sf.staccatocommons.lang.predicate.internal.Equals;
@@ -40,7 +41,7 @@ public class Predicates {
 
 	/**
 	 * @param <T>
-	 * @return A {@link Predicate} that always returns <code>true</code>
+	 * @return A {@link AbstractPredicate} that always returns <code>true</code>
 	 */
 	@NonNull
 	@Constant
@@ -50,7 +51,7 @@ public class Predicates {
 
 	/**
 	 * @param <T>
-	 * @return A {@link Predicate} that always returns <code>false</code>
+	 * @return A {@link AbstractPredicate} that always returns <code>false</code>
 	 */
 	@NonNull
 	@Constant
@@ -66,7 +67,7 @@ public class Predicates {
 	 * Returns a preficate that tests if its argument is not null
 	 * 
 	 * @param <T>
-	 * @return A constant {@link Predicate}
+	 * @return A constant {@link AbstractPredicate}
 	 */
 	@NonNull
 	@Constant
@@ -78,7 +79,7 @@ public class Predicates {
 	 * Returns a predicate that tests if its argument is null
 	 * 
 	 * @param <T>
-	 * @return A singleton {@link Predicate}
+	 * @return A singleton {@link AbstractPredicate}
 	 */
 	@NonNull
 	@Constant
@@ -92,7 +93,7 @@ public class Predicates {
 	 * 
 	 * @param <T>
 	 * @param value
-	 * @return a new {@link Predicate}
+	 * @return a new {@link AbstractPredicate}
 	 */
 	@NonNull
 	public static <T> Predicate<T> equal(T value) {
@@ -105,7 +106,7 @@ public class Predicates {
 	 * 
 	 * @param <T>
 	 * @param value
-	 * @return a new {@link Predicate}
+	 * @return a new {@link AbstractPredicate}
 	 */
 	@NonNull
 	public static <T> Predicate<T> same(T value) {
@@ -118,12 +119,12 @@ public class Predicates {
 	 * 
 	 * @param <T>
 	 * @param clazz
-	 * @return a new {@link Predicate}
+	 * @return a new {@link AbstractPredicate}
 	 */
 	@ForceRestrictions
 	@NonNull
 	public static <T> Predicate<T> isInstanceOf(@NonNull final Class<? extends T> clazz) {
-		return new Predicate<T>() {
+		return new AbstractPredicate<T>() {
 			public boolean eval(T argument) {
 				return clazz.isAssignableFrom(argument.getClass());
 			}
@@ -136,7 +137,7 @@ public class Predicates {
 	 * 
 	 * @param <T>
 	 * @param values
-	 * @return a new {@link Predicate}
+	 * @return a new {@link AbstractPredicate}
 	 */
 	@NonNull
 	public static <T> Predicate<T> in(@NonNull T... values) {
@@ -149,7 +150,7 @@ public class Predicates {
 	 * 
 	 * @param <T>
 	 * @param values
-	 * @return a new {@link Predicate}
+	 * @return a new {@link AbstractPredicate}
 	 */
 	@NonNull
 	public static <T> Predicate<T> in(@NonNull Collection<T> values) {
@@ -217,17 +218,17 @@ public class Predicates {
 	 */
 
 	/**
-	 * Converts the given {@link Evaluable} into a {@link Predicate}. If it is
+	 * Converts the given {@link Evaluable} into a {@link AbstractPredicate}. If it is
 	 * already a Predicate, returns it.
 	 * 
 	 * @param evaluable
 	 * @param <T>
-	 * @return a {@link Predicate} view of the given evaluable, or the evaluable,
-	 *         it is a {@link Predicate} already
+	 * @return a {@link AbstractPredicate} view of the given evaluable, or the evaluable,
+	 *         it is a {@link AbstractPredicate} already
 	 */
 	@NonNull
 	public static <T> Predicate<T> from(@NonNull Evaluable<? super T> evaluable) {
-		if (evaluable instanceof Predicate)
+		if (evaluable instanceof AbstractPredicate)
 			return (Predicate) evaluable;
 		return new EvaluablePredicate<T>(evaluable);
 	}

@@ -19,7 +19,7 @@ import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
-import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.tuple.Pair;
@@ -215,7 +215,7 @@ public class IterablesUnitTest {
 	public void testPartition() throws Exception {
 		Pair<List<Integer>, List<Integer>> partition = Iterables.partition(
 			Sequence.fromTo(10, 20),
-			new Predicate<Integer>() {
+			new AbstractPredicate<Integer>() {
 				public boolean eval(Integer argument) {
 					return argument % 2 == 0;
 				}

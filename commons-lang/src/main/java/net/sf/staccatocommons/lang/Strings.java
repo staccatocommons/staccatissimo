@@ -15,8 +15,9 @@ package net.sf.staccatocommons.lang;
 import java.util.regex.Pattern;
 
 import net.sf.staccatocommons.defs.function.Function;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
-import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.EqualsIgnoreCase;
 import net.sf.staccatocommons.lang.predicate.internal.Matches;
@@ -86,7 +87,7 @@ public class Strings {
 	 */
 	@NonNull
 	public static Predicate<String> startsWith(@NonNull final String string) {
-		return new Predicate<String>() {
+		return new AbstractPredicate<String>() {
 			@Override
 			public boolean eval(String args) {
 				return args.startsWith(string);

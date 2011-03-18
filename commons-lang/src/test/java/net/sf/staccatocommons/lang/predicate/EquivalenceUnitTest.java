@@ -27,23 +27,23 @@ import org.junit.Test;
  */
 public class EquivalenceUnitTest {
 
-	/** Test method for {@link Predicates#equalOrNull()} */
+	/** Test method for {@link Predicates#equal()} */
 	@Test
 	public void testEquality() throws Exception {
-		assertFalse(Equiv.<Integer> equalOrNull().eval(4, 9));
-		assertTrue(Equiv.<String> equalOrNull().eval("Foo", "Foo"));
-		assertTrue(Equiv.<String> equalOrNull().eval(null, null));
-		assertFalse(Equiv.<String> equalOrNull().eval(null, "foo"));
+		assertFalse(Equiv.<Integer> equal().eval(4, 9));
+		assertTrue(Equiv.<String> equal().eval("Foo", "Foo"));
+		assertTrue(Equiv.<String> equal().nullSafe().eval(null, null));
+		assertFalse(Equiv.<String> equal().nullSafe().eval(null, "foo"));
 	}
 
-	/** Test method for {@link Predicates#compareOrNull()} */
+	/** Test method for {@link Predicates#compare()} */
 	@Test
-	public void testCompareOrNull() throws Exception {
-		assertFalse(Equiv.<Integer> compareOrNull().eval(4, 5));
-		assertTrue(Equiv.<String> compareOrNull().eval("Foo", "Foo"));
-		assertTrue(Equiv.<String> compareOrNull().eval(null, null));
-		assertFalse(Equiv.<String> compareOrNull().eval(null, ""));
-		assertFalse(Equiv.<String> compareOrNull().eval("", null));
+	public void testCompare() throws Exception {
+		assertFalse(Equiv.<Integer> compare().eval(4, 5));
+		assertTrue(Equiv.<String> compare().eval("Foo", "Foo"));
+		assertTrue(Equiv.<String> compare().nullSafe().eval(null, null));
+		assertFalse(Equiv.<String> compare().nullSafe().eval(null, ""));
+		assertFalse(Equiv.<String> compare().nullSafe().eval("", null));
 
 	}
 

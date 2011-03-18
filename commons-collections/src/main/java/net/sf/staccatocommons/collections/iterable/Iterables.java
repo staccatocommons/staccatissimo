@@ -400,7 +400,7 @@ public class Iterables {
 	 */
 	public static <A> boolean equivalent(@NonNull Iterable<? extends A> iterable1,
 		@NonNull Iterable<? extends A> iterable2) {
-		return equivalentBy(iterable1, iterable2, Equiv.equalOrNull());
+		return equivalentBy(iterable1, iterable2, Equiv.equal().nullSafe());
 	}
 
 	/**
@@ -814,8 +814,8 @@ public class Iterables {
 
 	/**
 	 * Answers the sum of the elements of the given {@link Iterable} that
-	 * implements {@link NumberTypeAware}, using the {@link NumberType}
-	 * provided by it.
+	 * implements {@link NumberTypeAware}, using the {@link NumberType} provided
+	 * by it.
 	 * 
 	 * @return the result of adding each element of the {@link Iterable}, using
 	 *         the implicit number type, or zero, if <code>iterable</code> is
@@ -854,8 +854,8 @@ public class Iterables {
 
 	/**
 	 * Answers the product of the elements of the given {@link Iterable} that
-	 * implements {@link NumberTypeAware}, using the {@link NumberType}
-	 * provided by it.
+	 * implements {@link NumberTypeAware}, using the {@link NumberType} provided
+	 * by it.
 	 * 
 	 * @return the result of multiplying each element of the {@link Iterable},
 	 *         using the implicit number type, or one, if <code>iterable</code> is

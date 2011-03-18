@@ -12,13 +12,13 @@
  */
 package net.sf.staccatocommons.lang.predicate;
 
-import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * <p>
- * A {@link Predicate} is an abstract {@link Evaluable}.
+ * A {@link AbstractPredicate} is an abstract {@link Evaluable}.
  * </p>
  * <p>
  * Predicates in addition understand the basic boolean logic messages
@@ -31,7 +31,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @param <T>
  *          the type of argument to evaluate
  */
-public abstract class Predicate<T> implements Evaluable<T>, Applicable<T, Boolean> {
+public abstract class AbstractPredicate<T> implements Predicate<T> {
 
 	@Override
 	public abstract boolean eval(@NonNull T argument);
@@ -41,19 +41,19 @@ public abstract class Predicate<T> implements Evaluable<T>, Applicable<T, Boolea
 	}
 
 	/**
-	 * @return a {@link Predicate} that negates this {@link Predicate}'s result.
-	 *         Non Null.
+	 * @return a {@link AbstractPredicate} that negates this
+	 *         {@link AbstractPredicate}'s result. Non Null.
 	 */
 	@NonNull
 	public Predicate<T> not() {
-		final class Not extends Predicate<T> {
+		final class Not extends AbstractPredicate<T> {
 			public boolean eval(T argument) {
-				return !Predicate.this.eval(argument);
+				return !AbstractPredicate.this.eval(argument);
 			}
 
 			@Override
-			public Predicate<T> not() {
-				return Predicate.this;
+			public AbstractPredicate<T> not() {
+				return AbstractPredicate.this;
 			}
 		}
 		return new Not();
@@ -61,7 +61,7 @@ public abstract class Predicate<T> implements Evaluable<T>, Applicable<T, Boolea
 
 	/**
 	 * Returns a predicate that, performs a short-circuit logical-or between this
-	 * {@link Predicate}'s {@link #eval(Object)} and other
+	 * {@link AbstractPredicate}'s {@link #eval(Object)} and other
 	 * 
 	 * @param other
 	 *          another {@link Evaluable}. Non null.
@@ -70,9 +70,9 @@ public abstract class Predicate<T> implements Evaluable<T>, Applicable<T, Boolea
 	 */
 	@NonNull
 	public Predicate<T> or(@NonNull final Evaluable<? super T> other) {
-		final class Or extends Predicate<T> {
+		final class Or extends AbstractPredicate<T> {
 			public boolean eval(T argument) {
-				return Predicate.this.eval(argument) || other.eval(argument);
+				return AbstractPredicate.this.eval(argument) || other.eval(argument);
 			}
 		}
 		return new Or();
@@ -80,7 +80,7 @@ public abstract class Predicate<T> implements Evaluable<T>, Applicable<T, Boolea
 
 	/**
 	 * Returns a predicate that performs a short-circuit logical-and between this
-	 * {@link Predicate}'s {@link #eval(Object)} and other
+	 * {@link AbstractPredicate}'s {@link #eval(Object)} and other
 	 * 
 	 * @param other
 	 *          another {@link Evaluable}. Non null.
@@ -89,12 +89,16 @@ public abstract class Predicate<T> implements Evaluable<T>, Applicable<T, Boolea
 	 */
 	@NonNull
 	public Predicate<T> and(@NonNull final Evaluable<? super T> other) {
-		final class And extends Predicate<T> {
+		final class And extends AbstractPredicate<T> {
 			public boolean eval(T argument) {
-				return Predicate.this.eval(argument) && other.eval(argument);
+				return AbstractPredicate.this.eval(argument) && other.eval(argument);
 			}
 		}
 		return new And();
+	}
+
+	public Predicate<T> nullSafe() {
+		return Predicates.<T> null_().or(this);
 	}
 
 	public String toString() {

@@ -19,8 +19,8 @@ import java.util.Collection;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.number.NumberTypeAware;
-import net.sf.staccatocommons.lang.predicate.Predicate;
 
 import org.apache.commons.proxy.ProxyFactory;
 import org.apache.commons.proxy.factory.javassist.JavassistProxyFactory;

@@ -23,6 +23,7 @@ import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
@@ -30,7 +31,7 @@ import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.function.AbstractFunction3;
 import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.lang.number.internal.NumberTypeFunction;
-import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
@@ -116,14 +117,14 @@ public final class LambdaFactory {
 	 * 
 	 * @param returnType
 	 *          meaningless, this argument is simply ignored
-	 * @return a new {@link Predicate}
+	 * @return a new {@link AbstractPredicate}
 	 * @see Lambda
 	 */
 	@NonNull
 	public Predicate<Object> lambda(boolean returnType) {
 		final Method method = handler.getMethod();
 		final Object[] args = handler.getArgs();
-		return new Predicate<Object>() {
+		return new AbstractPredicate<Object>() {
 			public boolean eval(Object argument) {
 				return invoke(method, argument, args);
 			}

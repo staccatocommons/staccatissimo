@@ -1,6 +1,6 @@
 package net.sf.staccatocommons.lang.predicate.internal;
 
-import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 
 /**
  * @author flbulgarelli

@@ -302,7 +302,7 @@ public class AbstractStreamBasicTest {
 					Arrays.asList(4, 4, 4),
 					Arrays.asList(5)),
 				new ListStream<Integer>(Arrays.asList(1, 1, 2, 4, 4, 4, 5))
-					.groupBy(Equiv.<Integer> equalOrNull())
+					.groupBy(Equiv.<Integer> equal())
 					.map(lambda($(Stream.class).toList()))
 					.toList());
 	}

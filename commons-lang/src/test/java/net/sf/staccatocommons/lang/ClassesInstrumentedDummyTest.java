@@ -49,7 +49,7 @@ public class ClassesInstrumentedDummyTest {
 	@Test
 	public void testConstInstrumented() throws Exception {
 		assertSame(Predicates.true_(), Predicates.true_());
-		assertSame(Equiv.equalOrNull(), Equiv.equalOrNull());
-		assertSame(Equiv.<Integer> compareOrNull(), Equiv.<Integer> compareOrNull());
+		assertSame(Equiv.equal(), Equiv.equal());
+		assertSame(Equiv.<Integer> compare(), Equiv.<Integer> compare());
 	}
 }

@@ -19,11 +19,9 @@ import java.io.OutputStream;
 import org.apache.commons.lang.SerializationException;
 
 /**
- * <p>
  * A {@link SerializationManager} is an object capable of both converting an
  * object into an {@link OutputStream} and recovering it from an
  * {@link InputStream}
- * </p>
  * <p>
  * This interface does not make any assumption regarding the strategy and format
  * in which the object is serialized, it may be in plain text, like JSON, or in

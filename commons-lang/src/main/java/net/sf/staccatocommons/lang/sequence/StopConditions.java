@@ -12,8 +12,8 @@
  */
 package net.sf.staccatocommons.lang.sequence;
 
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.Compare;
-import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 

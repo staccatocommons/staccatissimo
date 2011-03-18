@@ -19,7 +19,7 @@ import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.instrument.handler.AnnotationHandler;
 import net.sf.staccatocommons.lang.block.Block2;
-import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 
 /**
  * @author flbulgarelli
@@ -45,7 +45,7 @@ class AnnotationProcessor<HandlerType extends AnnotationHandler> {
 
 	private Stream<HandlerType> getHandlers(final Object annotation) {
 		return Streams.from(handlers).filter(//
-			new Predicate<HandlerType>() {
+			new AbstractPredicate<HandlerType>() {
 				public boolean eval(HandlerType argument) {
 					return argument.getSupportedAnnotationType().isAssignableFrom(annotation.getClass());
 				}

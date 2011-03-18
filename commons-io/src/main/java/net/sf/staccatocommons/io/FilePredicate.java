@@ -16,17 +16,17 @@ import java.io.File;
 import java.io.FileFilter;
 
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
- * A {@link Predicate} that wraps a {@link FileFilter} and acts as a FileFilter
+ * A {@link AbstractPredicate} that wraps a {@link FileFilter} and acts as a FileFilter
  * api to {@link Evaluable} api bridge
  * 
  * @author flbulgarelli
  * 
  */
-public class FilePredicate extends Predicate<File> implements FileFilter {
+public class FilePredicate extends AbstractPredicate<File> implements FileFilter {
 
 	private final FileFilter fileFilter;
 

@@ -33,9 +33,9 @@ import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.number.NumberTypeAware;
-import net.sf.staccatocommons.lang.predicate.Predicate;
 
 import org.junit.Ignore;
 import org.junit.Test;

@@ -31,10 +31,10 @@ public class PredicateUnitTest {
 	public void setUp() throws Exception {
 	}
 
-	/** Test for {@link Predicate#apply(Object)} */
+	/** Test for {@link AbstractPredicate#apply(Object)} */
 	@Test
 	public void testApply() throws Exception {
-		Predicate<Object> predicate = new Predicate<Object>() {
+		AbstractPredicate<Object> predicate = new AbstractPredicate<Object>() {
 			public boolean eval(Object argument) {
 				return argument == null;
 			}
@@ -45,16 +45,16 @@ public class PredicateUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.predicate.Predicate#not()}.
+	 * {@link net.sf.staccatocommons.lang.predicate.AbstractPredicate#not()}.
 	 */
 	@Test
 	public void testNot() {
-		assertTrue(new Predicate<Object>() {
+		assertTrue(new AbstractPredicate<Object>() {
 			public boolean eval(Object argument) {
 				return false;
 			}
 		}.not().eval(new Object()));
-		assertFalse(new Predicate<Object>() {
+		assertFalse(new AbstractPredicate<Object>() {
 			public boolean eval(Object argument) {
 				return true;
 			}
@@ -63,12 +63,12 @@ public class PredicateUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.predicate.Predicate#or(net.sf.staccatocommons.defs.Evaluable)}
+	 * {@link net.sf.staccatocommons.lang.predicate.AbstractPredicate#or(net.sf.staccatocommons.defs.Evaluable)}
 	 * .
 	 */
 	@Test
 	public void testOr() {
-		assertTrue(new Predicate<Integer>() {
+		assertTrue(new AbstractPredicate<Integer>() {
 			public boolean eval(Integer argument) {
 				return argument < 15;
 			}
@@ -78,7 +78,7 @@ public class PredicateUnitTest {
 			}
 		}).eval(10));
 
-		assertFalse(new Predicate<Integer>() {
+		assertFalse(new AbstractPredicate<Integer>() {
 			public boolean eval(Integer argument) {
 				return argument > 15;
 			}
@@ -92,12 +92,12 @@ public class PredicateUnitTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.predicate.Predicate#and(net.sf.staccatocommons.defs.Evaluable)}
+	 * {@link net.sf.staccatocommons.lang.predicate.AbstractPredicate#and(net.sf.staccatocommons.defs.Evaluable)}
 	 * .
 	 */
 	@Test
 	public void testAnd() {
-		assertTrue(new Predicate<Integer>() {
+		assertTrue(new AbstractPredicate<Integer>() {
 			public boolean eval(Integer argument) {
 				return argument < 15;
 			}
@@ -107,7 +107,7 @@ public class PredicateUnitTest {
 			}
 		}).eval(10));
 
-		assertFalse(new Predicate<Integer>() {
+		assertFalse(new AbstractPredicate<Integer>() {
 			public boolean eval(Integer argument) {
 				return argument < 15;
 			}

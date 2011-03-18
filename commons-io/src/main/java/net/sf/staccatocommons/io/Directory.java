@@ -20,7 +20,7 @@ import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
-import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -180,7 +180,7 @@ final class BreadthFirst extends AbstractFunction<Stream<File>, Stream<File>> {
 		if (files.isEmpty())
 			return Streams.empty();
 		Pair<Stream<File>, Stream<File>> partion = files //
-			.streamPartition(new Predicate<File>() {
+			.streamPartition(new AbstractPredicate<File>() {
 				public boolean eval(File argument) {
 					return !argument.isDirectory();
 				}

@@ -24,7 +24,7 @@ import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.lang.function.Functions;
-import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.lang.thunk.internal.NullThunk;
@@ -244,7 +244,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 	 */
 	@Theory
 	public <A> void testContains(final Stream<A> stream) {
-		assertTrue(stream.all(new Predicate<A>() {
+		assertTrue(stream.all(new AbstractPredicate<A>() {
 			public boolean eval(A argument) {
 				return stream.contains(argument);
 			}

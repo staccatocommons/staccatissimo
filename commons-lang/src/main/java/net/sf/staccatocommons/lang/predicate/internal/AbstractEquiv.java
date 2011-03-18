@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Staccato-Commons Team
+ Copyright (c) 2011, The Staccato-Commons Team
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -12,19 +12,21 @@
  */
 package net.sf.staccatocommons.lang.predicate.internal;
 
-import java.io.Serializable;
-
-import net.sf.staccatocommons.lang.internal.ToString;
-import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
+import net.sf.staccatocommons.defs.predicate.Predicate2;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
+import net.sf.staccatocommons.restrictions.Constant;
 
 /**
  * @author flbulgarelli
+ * 
  */
-abstract class NonAnnonymousPredicate<T> extends AbstractPredicate<T> implements Serializable {
+public abstract class AbstractEquiv<A> extends AbstractPredicate2<A, A> {
 
-	private static final long serialVersionUID = 2953242687325764205L;
+	private Predicate2<A, A> nullSafe = super.nullSafe();
 
-	public final String toString() {
-		return ToString.toString(this);
+	@Constant
+	public final Predicate2<A, A> nullSafe() {
+		return nullSafe;
 	}
+
 }

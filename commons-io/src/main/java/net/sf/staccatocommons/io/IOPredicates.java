@@ -14,7 +14,7 @@ package net.sf.staccatocommons.io;
 
 import java.io.File;
 
-import net.sf.staccatocommons.lang.predicate.Predicate;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.apache.commons.io.filefilter.SuffixFileFilter;

@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.lang.predicate;
 
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.defs.Evaluable2;
+import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lang.predicate.internal.CompareTest;
 import net.sf.staccatocommons.lang.predicate.internal.EqualTest;
 import net.sf.staccatocommons.restrictions.Constant;
@@ -21,7 +21,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
- * Factory class methods for creating common, simple {@link Evaluable2} that
+ * Factory class methods for creating common, simple {@link Predicate2} that
  * implement the notion of and equivalence test, that is, a reflexive, symmetric
  * and transitive relation between its arguments.
  * 
@@ -35,39 +35,51 @@ public class Equiv {
 	private Equiv() {}
 
 	/**
-	 * Answers an {@link Evaluable2} that performs an equality test between its
-	 * nullable arguments, that it returns true if both are null or both are non
-	 * null and equal
+	 * Answers an {@link Predicate2} that performs an equality test between its
+	 * arguments, that it returns true if both are equal
 	 * 
 	 * @param <A>
-	 * @return a constant {@link Evaluable2} that performs an equality test
+	 * @return a constant {@link Predicate2} that performs an equality test
 	 */
 	@NonNull
 	@Constant
-	public static <A> Evaluable2<A, A> equalOrNull() {
-		return EqualTest.equalTest();
+	public static <A> Predicate2<A, A> equal() {
+		return EqualTest.<A> equalTest();
 	}
 
 	/**
-	 * Answers an {@link Evaluable2} that performs an compare test between its
-	 * nullable {@link Comparable} arguments, that it returns true if both are
-	 * null or <code>arg0.compareTo(arg1) == 0</code>
+	 * Answers an {@link Predicate2} that performs an equality test between its
+	 * nullable arguments, that it returns true if both are equal or null.
 	 * 
 	 * @param <A>
-	 * @return a constant {@link Evaluable2} that performs a compare test
+	 * @return <code>Equiv.equal().nullSafe()</code>
 	 */
 	@NonNull
 	@Constant
-	public static <A extends Comparable<A>> Evaluable2<A, A> compareOrNull() {
-		return CompareTest.compareTest();
+	public static <A> Predicate2<A, A> equalNullSafe() {
+		return Equiv.<A> equal().nullSafe();
 	}
 
 	/**
-	 * Answers an {@link Evaluable2} that performs an equality test to the result
+	 * Answers an {@link Predicate2} that performs an compare test between its
+	 * {@link Comparable} arguments, that it returns
+	 * <code>arg0.compareTo(arg1) == 0</code>
+	 * 
+	 * @param <A>
+	 * @return a constant {@link Predicate2} that performs a compare test
+	 */
+	@NonNull
+	@Constant
+	public static <A extends Comparable<A>> Predicate2<A, A> compare() {
+		return CompareTest.<A> compareTest();
+	}
+
+	/**
+	 * Answers an {@link Predicate2} that performs an equality test to the result
 	 * of applying the given function to its arguments.
 	 * 
-	 * This is mostly usefull then the given function is just a property accesor,
-	 * for example, the following code will answer an {@link Evaluable2} that
+	 * This is mostly useful then the given function is just a property accesor,
+	 * for example, the following code will answer an {@link Predicate2} that
 	 * compares <code>Employee</code>s names:
 	 * 
 	 * <pre>
@@ -81,19 +93,16 @@ public class Equiv {
 	 * @param <A>
 	 * @param <B>
 	 * @param function
-	 * @return a new {@link Evaluable2}
+	 * @return a new {@link Predicate2}
 	 */
 	@NonNull
 	@ForceRestrictions
-	public static <A, B extends Comparable<B>> Evaluable2<A, A> on(
-		@NonNull final Applicable<A, B> function) {
-		return new Evaluable2<A, A>() {
+	public static <A, B> Predicate2<A, A> on(@NonNull final Applicable<A, B> function) {
+		return new AbstractPredicate2<A, A>() {
 			public boolean eval(A arg0, A arg1) {
 				return function.apply(arg0).equals(function.apply(arg1));
 			}
 		};
 	}
-
-	// TODO have a similar or strategy for nulls with eval2
 
 }

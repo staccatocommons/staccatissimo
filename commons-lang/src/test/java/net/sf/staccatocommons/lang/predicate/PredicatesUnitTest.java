@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
