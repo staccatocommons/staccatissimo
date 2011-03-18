@@ -25,7 +25,7 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.lang.internal.ToString;
-import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.restrictions.ConditionallySerializable;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
@@ -46,7 +46,7 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  */
 @ConditionallyImmutable
 @ConditionallySerializable
-public class Sequence<A> implements Iterable<A>, ImplicitNumberType<A>, Serializable {
+public class Sequence<A> implements Iterable<A>, NumberTypeAware<A>, Serializable {
 
 	private static final long serialVersionUID = 8811454338704704525L;
 
@@ -105,7 +105,7 @@ public class Sequence<A> implements Iterable<A>, ImplicitNumberType<A>, Serializ
 	}
 
 	public NumberType<A> numberType() {
-		return ((ImplicitNumberType<A>) generator).numberType();
+		return ((NumberTypeAware<A>) generator).numberType();
 	}
 
 	/**

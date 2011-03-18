@@ -35,7 +35,7 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -814,7 +814,7 @@ public class Iterables {
 
 	/**
 	 * Answers the sum of the elements of the given {@link Iterable} that
-	 * implements {@link ImplicitNumberType}, using the {@link NumberType}
+	 * implements {@link NumberTypeAware}, using the {@link NumberType}
 	 * provided by it.
 	 * 
 	 * @return the result of adding each element of the {@link Iterable}, using
@@ -823,7 +823,7 @@ public class Iterables {
 	 * @see Iterables#sum(Iterable, NumberType)
 	 */
 	@NonNull
-	public static <A, I extends Iterable<A> & ImplicitNumberType<A>> A sum(@NonNull I iterable) {
+	public static <A, I extends Iterable<A> & NumberTypeAware<A>> A sum(@NonNull I iterable) {
 		return sum(iterable, iterable.numberType());
 	}
 
@@ -854,7 +854,7 @@ public class Iterables {
 
 	/**
 	 * Answers the product of the elements of the given {@link Iterable} that
-	 * implements {@link ImplicitNumberType}, using the {@link NumberType}
+	 * implements {@link NumberTypeAware}, using the {@link NumberType}
 	 * provided by it.
 	 * 
 	 * @return the result of multiplying each element of the {@link Iterable},
@@ -863,7 +863,7 @@ public class Iterables {
 	 * @see Iterables#product(Iterable, NumberType)
 	 */
 	@NonNull
-	public static <A, I extends Iterable<A> & ImplicitNumberType<A>> A product(@NonNull I iterable) {
+	public static <A, I extends Iterable<A> & NumberTypeAware<A>> A product(@NonNull I iterable) {
 		return product(iterable, iterable.numberType());
 	}
 

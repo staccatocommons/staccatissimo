@@ -4,19 +4,19 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
-import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * NumberTypeFunctions, override {@link AbstractFunction2#apply(Object)} so that
  * the resulting function is flipped and it implements
- * {@link ImplicitNumberType} too
+ * {@link NumberTypeAware} too
  * 
  * @author flbulgarelli
  * 
  */
 public abstract class NumberTypeFunction2<A> extends AbstractFunction2<A, A, A> implements
-	ImplicitNumberType<A> {
+	NumberTypeAware<A> {
 
 	private final NumberType<A> type;
 
@@ -33,7 +33,7 @@ public abstract class NumberTypeFunction2<A> extends AbstractFunction2<A, A, A> 
 
 	public Function<A, A> apply(final A arg0) {
 		abstract class NumberTypeFunction extends AbstractFunction<A, A> implements
-			ImplicitNumberType<A> {
+			NumberTypeAware<A> {
 			public NumberType<A> numberType() {
 				return NumberTypeFunction2.this.numberType();
 			}

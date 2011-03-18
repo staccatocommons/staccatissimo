@@ -181,7 +181,7 @@ public class NumberTypesUnitTest {
 	 */
 	@Theory
 	public <A> void testIsImplicitProvider(NumberType<A> nt) {
-		assertSame(nt, ((ImplicitNumberType<A>) nt.add()).numberType());
-		assertSame(nt, ((ImplicitNumberType<A>) nt.multiply()).numberType());
+		assertSame(nt, ((NumberTypeAware<A>) nt.add()).numberType());
+		assertSame(nt, ((NumberTypeAware<A>) nt.multiply()).numberType());
 	}
 }

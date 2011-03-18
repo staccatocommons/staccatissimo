@@ -18,7 +18,7 @@ import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -64,7 +64,7 @@ public final class MapStream<A, B> extends AbstractStream<B> {
 	}
 
 	public NumberType<B> numberType() {
-		return ((ImplicitNumberType<B>) function).numberType();
+		return ((NumberTypeAware<B>) function).numberType();
 	}
 
 }

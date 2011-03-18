@@ -16,7 +16,7 @@ import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
-import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -46,7 +46,7 @@ public class IterableStream<A> extends AbstractStream<A> {
 	}
 
 	public final NumberType<A> numberType() {
-		return ((ImplicitNumberType<A>) iterable).numberType();
+		return ((NumberTypeAware<A>) iterable).numberType();
 	}
 
 }

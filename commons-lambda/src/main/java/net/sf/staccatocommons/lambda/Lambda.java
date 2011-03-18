@@ -19,7 +19,7 @@ import java.util.Collection;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
-import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 
 import org.apache.commons.proxy.ProxyFactory;
@@ -139,7 +139,7 @@ public final class Lambda {
 	/**
 	 * Answers a {@link Function} that when applied sends to its argument the
 	 * message previously sent to the last stubbed type. The returned function is
-	 * {@link ImplicitNumberType}
+	 * {@link NumberTypeAware}
 	 * 
 	 * Refer to the use cases described in {@link Lambda}
 	 * 
@@ -155,7 +155,7 @@ public final class Lambda {
 	/**
 	 * Answers a {@link Function} that when applied sends to its argument the
 	 * message previously sent to the last stubbed type. The returned function is
-	 * {@link ImplicitNumberType}
+	 * {@link NumberTypeAware}
 	 * 
 	 * Refer to the use cases described in {@link Lambda}
 	 * 
@@ -171,7 +171,7 @@ public final class Lambda {
 	/**
 	 * Answers a {@link Function} that when applied sends to its argument the
 	 * message previously sent to the last stubbed type. The returned function is
-	 * {@link ImplicitNumberType}
+	 * {@link NumberTypeAware}
 	 * 
 	 * Refer to the use cases described in {@link Lambda}
 	 * 

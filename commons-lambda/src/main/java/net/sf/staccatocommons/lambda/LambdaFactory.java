@@ -28,7 +28,7 @@ import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.function.AbstractFunction3;
-import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.lang.number.internal.NumberTypeFunction;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -154,7 +154,7 @@ public final class LambdaFactory {
 	/**
 	 * Answers a {@link Function} that when applied sends to its argument the
 	 * message previously sent to the last stubbed type. The returned function is
-	 * {@link ImplicitNumberType}
+	 * {@link NumberTypeAware}
 	 * 
 	 * Refer to the use cases described in {@link Lambda}
 	 * 
@@ -171,7 +171,7 @@ public final class LambdaFactory {
 	/**
 	 * Answers a {@link Function} that when applied sends to its argument the
 	 * message previously sent to the last stubbed type. The returned function is
-	 * {@link ImplicitNumberType}
+	 * {@link NumberTypeAware}
 	 * 
 	 * Refer to the use cases described in {@link Lambda}
 	 * 
@@ -188,7 +188,7 @@ public final class LambdaFactory {
 	/**
 	 * Answers a {@link Function} that when applied sends to its argument the
 	 * message previously sent to the last stubbed type. The returned function is
-	 * {@link ImplicitNumberType}
+	 * {@link NumberTypeAware}
 	 * 
 	 * Refer to the use cases described in {@link Lambda}
 	 * 

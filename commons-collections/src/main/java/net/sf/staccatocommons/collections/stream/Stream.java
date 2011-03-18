@@ -21,7 +21,7 @@ import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
 import net.sf.staccatocommons.restrictions.value.Unmodifiable;
@@ -151,7 +151,7 @@ public interface Stream<A> extends //
 	Deconstructable<A>, //
 	Filterable<A>, //
 	Foldable<A>,//
-	ImplicitNumberType<A>, //
+	NumberTypeAware<A>, //
 	Interscalable<A>, //
 	Iterable<A>, //
 	Mappable<A>, //

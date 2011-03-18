@@ -15,17 +15,17 @@ package net.sf.staccatocommons.lang.number.internal;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
-import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.number.NumberTypeAware;
 
 /**
- * A {@link Function} that implements {@link ImplicitNumberType}
+ * A {@link Function} that implements {@link NumberTypeAware}
  * 
  * @author flbulgarelli
  * 
  * @param <B>
  */
 public abstract class NumberTypeFunction<A, B> extends AbstractFunction<A, B> implements
-	ImplicitNumberType<B> {
+	NumberTypeAware<B> {
 
 	/**
 	 * 

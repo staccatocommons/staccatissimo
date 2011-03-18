@@ -34,7 +34,7 @@ import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.number.ImplicitNumberType;
+import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.lang.predicate.Predicate;
 
 import org.junit.Ignore;
@@ -114,8 +114,8 @@ public class LambdaUnitTest {
 	@Test
 	public void testLambdaInteger() {
 		Function<Object, Integer> lambda = lambda($(Collection.class).size());
-		assertThat(lambda, instanceOf(ImplicitNumberType.class));
-		assertSame(((ImplicitNumberType<Integer>) lambda).numberType(), integer());
+		assertThat(lambda, instanceOf(NumberTypeAware.class));
+		assertSame(((NumberTypeAware<Integer>) lambda).numberType(), integer());
 	}
 
 	/**
@@ -124,8 +124,8 @@ public class LambdaUnitTest {
 	@Test
 	public void testLambdaBigDecimal() {
 		Function<Object, BigDecimal> lambda = lambda($(Mock.class).bd());
-		assertThat(lambda, instanceOf(ImplicitNumberType.class));
-		assertSame(((ImplicitNumberType<BigDecimal>) lambda).numberType(), bigDecimal());
+		assertThat(lambda, instanceOf(NumberTypeAware.class));
+		assertSame(((NumberTypeAware<BigDecimal>) lambda).numberType(), bigDecimal());
 	}
 
 	/**
@@ -134,8 +134,8 @@ public class LambdaUnitTest {
 	@Test
 	public void testLambdaBigInteger() {
 		Function<Object, BigInteger> lambda = lambda($(Mock.class).bi());
-		assertThat(lambda, instanceOf(ImplicitNumberType.class));
-		assertSame(((ImplicitNumberType<BigInteger>) lambda).numberType(), bigInteger());
+		assertThat(lambda, instanceOf(NumberTypeAware.class));
+		assertSame(((NumberTypeAware<BigInteger>) lambda).numberType(), bigInteger());
 	}
 
 	/**

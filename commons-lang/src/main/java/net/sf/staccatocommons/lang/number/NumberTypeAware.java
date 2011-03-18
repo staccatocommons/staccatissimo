@@ -18,7 +18,7 @@ import net.sf.staccatocommons.defs.type.NumberType;
  * @author flbulgarelli
  * 
  */
-public interface ImplicitNumberType<A> {
+public interface NumberTypeAware<A> {
 
 	/**
 	 * @return an implicit numeric type
