@@ -27,8 +27,7 @@ import net.sf.staccatocommons.io.serialization.lifecycle.SerializationLifecycle;
  * 
  * @author flbulgarelli
  */
-public abstract class AbstractByteSerializationManager implements
-	ByteSerializationManager {
+public abstract class AbstractByteSerializationManager implements SerializationManager {
 
 	@Override
 	public <T> T deserialize(final File input) {

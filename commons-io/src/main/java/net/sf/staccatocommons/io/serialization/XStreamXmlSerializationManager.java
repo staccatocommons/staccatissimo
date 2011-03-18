@@ -27,9 +27,10 @@ import com.thoughtworks.xstream.core.BaseException;
  * 
  * @author flbulgarelli
  * 
- *///TODO move to legato. No technology-specific classes should be in staccatissimo
-public class XStreamXmlSerializationManager extends
-	AbstractCharSerializationManager implements XmlSerializationManager {
+ */
+// TODO move to legato. No technology-specific classes should be in
+// staccatissimo
+public class XStreamXmlSerializationManager extends AbstractCharSerializationManager {
 
 	private final XStream xstream;
 

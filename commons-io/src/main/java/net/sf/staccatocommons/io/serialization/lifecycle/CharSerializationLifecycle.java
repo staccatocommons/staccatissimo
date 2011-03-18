@@ -18,22 +18,65 @@ import java.io.Reader;
 import java.io.Writer;
 
 import net.sf.staccatocommons.io.serialization.CharSerializationManager;
+import net.sf.staccatocommons.lang.lifecycle.CloseableLifecycle;
 import net.sf.staccatocommons.lang.lifecycle.Lifecycle;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
+/**
+ * {@link CharSerializationLifecycle} are abstract {@link Lifecycle}s that open
+ * a writer or reader, serialize or deserialize an object, and close the open
+ * resource.
+ * <p>
+ * Typical usage of the serialization lifecycle is the following:
+ * </p>
+ * 
+ * <pre>
+ * new CharSerializationLifecycle.Serialize(aSerializationManager, anObject) {
+ * 	public Writer initialize() throws IOException {
+ * 		return ...create your writer here...;
+ * 	}
+ * }.value();
+ * </pre>
+ * 
+ * <p>
+ * On the other hand, typical usage is the deserialization lifecycle is the
+ * following:
+ * </p>
+ * 
+ * <pre>
+ * T result = new CharSerializationLifecycle.Deserialize&lt;T&gt;(aSerializarionManager) {
+ * 	public Reader initialize() throws Exception {
+ * 		return ..create your reader hear...;
+ * 	}
+ * }.value();
+ * </pre>
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <TargetType>
+ * @param <ReturnType>
+ */
 public abstract class CharSerializationLifecycle<TargetType extends Closeable, ReturnType> extends
-	SerializationLifecycle<TargetType, ReturnType> {
+	CloseableLifecycle<TargetType, ReturnType> {
 
-	public CharSerializationLifecycle(@NonNull CharSerializationManager serializationManager) {
-		super(serializationManager);
+	private CharSerializationManager charSerializationManager;
+
+	/**
+	 * Creates a new {@link CharSerializationLifecycle}
+	 * 
+	 * @param charSerializationManager
+	 *          the {@link CharSerializationManager} used to serialize or
+	 *          deserialize an object as part of this {@link Lifecycle}
+	 */
+	public CharSerializationLifecycle(@NonNull CharSerializationManager charSerializationManager) {
+		this.charSerializationManager = charSerializationManager;
 	}
 
 	/**
 	 * Answers the underlying {@link CharSerializationManager}
 	 */
-	@Override
 	public CharSerializationManager getSerializationManager() {
-		return (CharSerializationManager) super.getSerializationManager();
+		return charSerializationManager;
 	}
 
 	/**
