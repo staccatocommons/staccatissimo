@@ -336,13 +336,25 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return Iterables.equivalent(this, other);
 	}
 
-	public boolean equivalentBy(Iterable<? extends A> other, Evaluable2<A, A> equalty) {
+	@Override
+	public boolean equivalentBy(Evaluable2<A, A> equalty, Iterable<? extends A> other) {
 		return Iterables.equivalentBy(this, other, equalty);
 	}
 
-	public <B extends Comparable<B>> boolean equivalentOn(Iterable<? extends A> iterable,
-		Applicable<A, B> function) {
-		return Iterables.equivalentBy(this, iterable, Equiv.on(function));
+	@Override
+	public boolean equivalentBy(Evaluable2<A, A> equalityTest, A... elements) {
+		return equivalentBy(equalityTest, Arrays.asList(elements));
+	}
+
+	@Override
+	public <B> boolean equivalentOn(Applicable<? super A, ? extends B> function,
+		Iterable<? extends A> iterable) {
+		return equivalentBy(Equiv.on(function), iterable);
+	}
+
+	@Override
+	public <B> boolean equivalentOn(Applicable<? super A, ? extends B> function, A... elements) {
+		return equivalentOn(function, Arrays.asList(elements));
 	}
 
 	@Override
@@ -358,6 +370,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	 * </pre>
 	 * 
 	 */
+	@Override
 	public Stream<A> intersperse(final A sep) {
 		return transform(new AbstractDelayedDeconsApplicable<A, A>() {
 			public Stream<A> apply(Thunk<A> head, Stream<A> tail) {

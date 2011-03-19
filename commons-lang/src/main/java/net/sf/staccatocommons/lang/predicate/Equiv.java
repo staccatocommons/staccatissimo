@@ -99,7 +99,8 @@ public class Equiv {
 	 */
 	@NonNull
 	@ForceRestrictions
-	public static <A, B> Predicate2<A, A> on(@NonNull final Applicable<A, B> function) {
+	public static <A, B> Predicate2<A, A> on(
+		@NonNull final Applicable<? super A, ? extends B> function) {
 		return new AbstractPredicate2<A, A>() {
 			public boolean eval(A arg0, A arg1) {
 				return function.apply(arg0).equals(function.apply(arg1));

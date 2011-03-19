@@ -82,15 +82,31 @@ public interface Testeable<A> {
 	 * given {@link Iterable}, and in the same order, using the given
 	 * <code>equalityTest</code> for determining equivalence between elements.
 	 * 
-	 * @param iterable
 	 * @param equalityTest
+	 * @param iterable
+	 * 
 	 * @return <code>true</code> if this stream has the same number of elements
 	 *         that the given <code>iterable</code>, and each pair formed by
 	 *         elements of this stream and given <code>iterable</code> at same
 	 *         position satisfies the given {@link Evaluable2}
 	 */
-	boolean equivalentBy(@NonNull Iterable<? extends A> iterable,
-		@NonNull Evaluable2<A, A> equalityTest);
+	boolean equivalentBy(@NonNull Evaluable2<A, A> equalityTest,
+		@NonNull Iterable<? extends A> iterable);
+
+	/**
+	 * Test that the elements of this stream are equivalent to the given
+	 * <code>elements</code>, and in the same order, using the given
+	 * <code>equalityTest</code> for determining equivalence between elements.
+	 * 
+	 * @param equalityTest
+	 * @param iterable
+	 * 
+	 * @return <code>true</code> if this stream has the same number of elements
+	 *         that the given <code>elements</code>, and each pair formed by
+	 *         elements of this stream and given <code>elements</code> at same
+	 *         position satisfies the given {@link Evaluable2}
+	 */
+	boolean equivalentBy(@NonNull Evaluable2<A, A> equalityTest, A... elements);
 
 	/**
 	 * Test that the elements of this stream are equivalent to the elements of the
@@ -98,15 +114,32 @@ public interface Testeable<A> {
 	 * <code>Equiv.on(function)</code> for determining equivalence between
 	 * elements.
 	 * 
-	 * @param iterable
 	 * @param function
+	 * @param iterable
+	 * 
 	 * @return <code>true</code> if this stream has the same number of elements
 	 *         that the given <code>iterable</code>, and each pair formed by
 	 *         elements of this stream and given <code>iterable</code> at same
 	 *         position satisfies the {@link Evaluable2}
 	 *         <code>Equiv.on(function)</code>
 	 */
-	<B extends Comparable<B>> boolean equivalentOn(@NonNull Iterable<? extends A> iterable,
-		@NonNull Applicable<A, B> function);
+	<B> boolean equivalentOn(@NonNull Applicable<? super A, ? extends B> function,
+		@NonNull Iterable<? extends A> iterable);
+
+	/**
+	 * Test that the elements of this stream are equivalent to the given elements,
+	 * and in the same order, using the <code>Equiv.on(function)</code> for
+	 * determining equivalence between elements.
+	 * 
+	 * @param function
+	 * @param iterable
+	 * 
+	 * @return <code>true</code> if this stream has the same number of elements
+	 *         that the given <code>elements</code>, and each pair formed by
+	 *         elements of this stream and the given <code>elements</code> at same
+	 *         position satisfies the {@link Evaluable2}
+	 *         <code>Equiv.on(function)</code>
+	 */
+	<B> boolean equivalentOn(@NonNull Applicable<? super A, ? extends B> function, A... elements);
 
 }

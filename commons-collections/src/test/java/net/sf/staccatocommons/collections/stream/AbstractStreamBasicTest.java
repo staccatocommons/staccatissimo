@@ -387,13 +387,18 @@ public class AbstractStreamBasicTest {
 		assertTrue(Streams.cons(90, 2, 6, 3, 6).isBefore(2, 6));
 	}
 
-	// /**
-	// * Tests
-	// * {@link Stream#equivalentOn(Iterable,
-	// net.sf.staccatocommons.defs.Applicable)}
-	// */
-	// @Test
-	// public void testEquivOn() throws Exception {
-	// assertTrue(Streams.iterate(10, 15).equi)
-	// }
+	/**
+	 * Tests
+	 * {@link Stream#equivalentOn(net.sf.staccatocommons.defs.Applicable, Iterable)}
+	 */
+	@Test
+	public void testEquivOn() throws Exception {
+		// Test that both streams have as as elements collections of the same size
+		assertTrue(Streams//
+			.cons(Arrays.asList(10, 20), Arrays.asList(5, 26, 9))
+			.equivalentOn(
+				lambda($(Collection.class).size()),
+				Arrays.asList(0, 0),
+				Arrays.asList(5, 6, 96)));
+	}
 }
