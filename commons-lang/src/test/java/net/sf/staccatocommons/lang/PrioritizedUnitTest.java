@@ -33,7 +33,7 @@ public class PrioritizedUnitTest {
 		List<String> value = Collections.emptyList();
 		int priority = 5;
 
-		Prioritized<List<String>, Integer> p1 = Prioritized.from(value, priority);
+		Prioritized<List<String>, Integer> p1 = Prioritized.from(priority, value);
 
 		assertSame(value, p1.value());
 		assertSame(priority, p1.getPriority());
@@ -49,8 +49,8 @@ public class PrioritizedUnitTest {
 		List<String> value2 = Arrays.asList("Hello", "World", "Fooe");
 		int priority2 = 1;
 
-		Prioritized<List<String>, Integer> p1 = Prioritized.from(value1, priority1);
-		Prioritized<List<String>, Integer> p2 = Prioritized.from(value2, priority2);
+		Prioritized<List<String>, Integer> p1 = Prioritized.from(priority1, value1);
+		Prioritized<List<String>, Integer> p2 = Prioritized.from(priority2, value2);
 
 		assertTrue(p2.compareTo(p1) <= 0);
 
@@ -63,6 +63,7 @@ public class PrioritizedUnitTest {
 	 */
 	@Test
 	public void testEquals() throws Exception {
-		assertEquals(Prioritized.from(50, 90), Prioritized.from(20, 90));
+		assertEquals(Prioritized.from(90, 50), Prioritized.from(90, 20));
 	}
+
 }

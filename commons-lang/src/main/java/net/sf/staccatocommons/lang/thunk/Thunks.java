@@ -17,7 +17,9 @@ import java.util.Date;
 import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.thunk.internal.CallableThunk;
 import net.sf.staccatocommons.lang.thunk.internal.DateThunk;
 import net.sf.staccatocommons.lang.thunk.internal.NullThunk;
@@ -114,6 +116,22 @@ public class Thunks {
 			public Void value() {
 				runnable.run();
 				return null;
+			}
+		};
+	}
+
+	/**
+	 * Returns a {@link Function} that evaluates its Thunk argument
+	 * 
+	 * @param <A>
+	 * @return a constant {@link Function}
+	 */
+	@Constant
+	@NonNull
+	public static <A> Function<Thunk<A>, A> value() {
+		return new AbstractFunction<Thunk<A>, A>() {
+			public A apply(Thunk<A> arg) {
+				return arg.value();
 			}
 		};
 	}

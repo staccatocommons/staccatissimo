@@ -213,6 +213,10 @@ public final class LambdaFactory {
 		};
 	}
 
+	/*
+	 * FIXME currification order is not clear, should it be interpreted right to
+	 * left or left to right?
+	 */
 	public <A> Function2<Object, Object, A> lambda2(A returnType) {
 		final Method method = handler.getMethod();
 		final Object[] args = handler.getArgsCopy();

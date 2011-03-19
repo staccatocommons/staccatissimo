@@ -49,12 +49,12 @@ public class Prioritized<T, P extends Comparable<P>> implements Comparable<Prior
 	/**
 	 * Creates a new {@link Prioritized}
 	 * 
-	 * @param value
-	 *          the provided - prioritized - value. Nullable.
 	 * @param priority
 	 *          the priority. Non Null.
+	 * @param value
+	 *          the provided - prioritized - value. Nullable.
 	 */
-	public Prioritized(T value, @NonNull P priority) {
+	public Prioritized(@NonNull P priority, T value) {
 		this.value = value;
 		this.priority = priority;
 	}
@@ -89,23 +89,24 @@ public class Prioritized<T, P extends Comparable<P>> implements Comparable<Prior
 	}
 
 	public String toString() {
-		return state.toString(this);
+		return String.format("Prioritized(%s,%s)", priority, value);
 	}
 
 	/**
 	 * Factory method that creates a {@link Prioritized}
 	 * 
-	 * @param <T>
-	 * @param <P>
-	 * @param value
-	 *          the provided value. Non Nullable.
 	 * @param priority
 	 *          Non Null.
+	 * @param value
+	 *          the provided value. Non Nullable.
+	 * 
+	 * @param <T>
+	 * @param <P>
 	 * @return a new {@link Prioritized}
 	 */
 	@NonNull
-	public static <T, P extends Comparable<P>> Prioritized<T, P> from(T value, P priority) {
-		return new Prioritized<T, P>(value, priority);
+	public static <T, P extends Comparable<P>> Prioritized<T, P> from(P priority, T value) {
+		return new Prioritized<T, P>(priority, value);
 	}
 
 }

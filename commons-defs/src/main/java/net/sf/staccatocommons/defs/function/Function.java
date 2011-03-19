@@ -17,7 +17,6 @@ import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Delayable;
 import net.sf.staccatocommons.defs.NullSafeAware;
-import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -34,19 +33,6 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public interface Function<A, B> extends Applicable<A, B>, //
 	NullSafeAware<Function<A, B>>, //
 	Delayable<A, B> {
-
-	/**
-	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
-	 * this lambda with a {@link Thunk}, resulting in a new {@link Thunk} that
-	 * when {@link Thunk#value()} is sent, returns
-	 * <code>this.apply(thunk.value())</code>
-	 * 
-	 * @param thunk
-	 * @return a new {@link Thunk}, <code>this</code> composed with
-	 *         <code>thunk</code>
-	 */
-	@NonNull
-	Thunk<B> delayed(@NonNull final Thunk<? extends A> thunk);
 
 	/**
 	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>

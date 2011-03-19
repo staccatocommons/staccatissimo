@@ -58,7 +58,6 @@ public interface Collectible<A> {
 	@NonNull
 	A[] toArray(@NonNull Class<? super A> clazz);
 
-	// XXX not consistently implemented in Map
 	/**
 	 * Converts this interface in a proper {@link EmptyAware} by returning a
 	 * Stream that has a side-effect-free {@link EmptyAware#isEmpty()}, that is,

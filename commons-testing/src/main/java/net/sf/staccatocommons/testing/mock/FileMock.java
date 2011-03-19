@@ -101,12 +101,10 @@ public class FileMock extends File {
 	}
 
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
 
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
 		return super.equals(obj);
 	}
 
@@ -155,7 +153,7 @@ public class FileMock extends File {
 	}
 
 	public int compareTo(File pathname) {
-		throw new UnsupportedOperationException();
+		return super.compareTo(pathname);
 	}
 
 	public boolean createNewFile() throws IOException {

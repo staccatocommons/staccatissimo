@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.lang.Prioritized;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
@@ -134,4 +135,11 @@ public class ThunksUnitTest extends JUnit4MockObjectTestCase {
 		assertNotSame(currentTime, Thunks.currentDate());
 	}
 
+	/**
+	 * Test for {@link Thunks#value()}
+	 */
+	@Test
+	public void testValue() throws Exception {
+		assertEquals("Hello", Thunks.<String> value().apply(Prioritized.from(10, "Hello")));
+	}
 }

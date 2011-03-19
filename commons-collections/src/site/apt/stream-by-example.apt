@@ -87,7 +87,7 @@ by decorating other Iterables  or using sources like databases result sets, dire
     }
 +---- 
 
- Or event cleaner, if using {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslambda/index.html}Staccato-Commons-Lambda}}:
+ Or even cleaner, if using {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslambda/index.html}Staccato-Commons-Lambda}}:
  
 +---
     Collection<Incident> getMostUrgentProblems3() {

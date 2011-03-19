@@ -1,0 +1,33 @@
+Prioritized
+
+* Introduction
+
+ {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs/net/sf/staccatocommons/lang/Prioritized.html}Prioritized}}
+ is a simple generic wrapper for assigning arbitrary priorities to existing objects. 
+  
+* The problem        
+
+  Along the Java Collections Framework, there exists some collection classes, like PriorityQueue and TreeSet,
+ that relay in comparable element
+  - either naturally or through a Comparator - objects
+ in order to implement ordering and/or unique constraints. However, sometimes such elements do not simply have such ordering 
+ information. 
+   
+  For example, lets consider a files upload queue, where file contents are uploaded to a server in an order determined
+ by an arbitrary priority assigned by user:
+ 
++----
+
+  class FileUploader {
+    
+    private PriorityQueue filesQueue = new PriorityQueue();
+    
+    public void addFile(File file, int priority) {
+      filesQueue.add( ... )
+    }  
+    
+  } 
+
++----
+ 
+ 
