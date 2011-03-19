@@ -47,6 +47,8 @@ public class Equiv {
 		return EqualTest.<A> equalTest();
 	}
 
+	// TODO add same()
+
 	/**
 	 * Answers an {@link Predicate2} that performs an equality test between its
 	 * nullable arguments, that it returns true if both are equal or null.

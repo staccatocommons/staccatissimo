@@ -51,7 +51,7 @@ public class IteratorStream<A> extends AbstractStream<A> {
 		return iterator;
 	}
 
-	public final Stream<A> dettach() {
+	public final Stream<A> toEmptyAware() {
 		return this;
 	}
 

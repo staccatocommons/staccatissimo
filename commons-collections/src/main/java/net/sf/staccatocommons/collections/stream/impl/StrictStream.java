@@ -21,7 +21,7 @@ import net.sf.staccatocommons.collections.stream.Stream;
  */
 public abstract class StrictStream<A> extends AbstractStream<A> {
 
-	public final Stream<A> dettach() {
+	public final Stream<A> toEmptyAware() {
 		return this;
 	}
 

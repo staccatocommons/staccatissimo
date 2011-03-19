@@ -12,6 +12,8 @@
  */
 package net.sf.staccatocommons.defs;
 
+import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
+
 /**
  * Interface for objects that understand {@link #isEmpty()} message.
  * 
@@ -21,7 +23,8 @@ package net.sf.staccatocommons.defs;
 public interface EmptyAware {
 
 	/**
-	 * Answers if this {@link EmptyAware} is empty
+	 * Answers if this {@link EmptyAware} is empty. This message
+	 * <strong>should</strong> be {@link SideEffectFree}
 	 * 
 	 * @return if the object is empty.
 	 */

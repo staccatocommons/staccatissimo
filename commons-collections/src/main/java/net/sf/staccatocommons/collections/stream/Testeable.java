@@ -38,6 +38,13 @@ public interface Testeable<A> {
 	boolean all(@NonNull Evaluable<? super A> predicate);
 
 	/**
+	 * Tests if all elements are equal
+	 * 
+	 * @return if all the elements are equal
+	 */
+	boolean allEqual();
+
+	/**
 	 * Tests if at least one element satisfies the given {@link Evaluable}
 	 * 
 	 * @param predicate

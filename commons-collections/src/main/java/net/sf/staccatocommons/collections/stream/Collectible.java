@@ -18,6 +18,7 @@ import java.util.Set;
 
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
+import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -57,15 +58,23 @@ public interface Collectible<A> {
 	@NonNull
 	A[] toArray(@NonNull Class<? super A> clazz);
 
-	// grants consistent isEmpty
 	// XXX not consistently implemented in Map
-	// XXX semantics not well defined
+	/**
+	 * Converts this interface in a proper {@link EmptyAware} by returning a
+	 * Stream that has a side-effect-free {@link EmptyAware#isEmpty()}, that is,
+	 * that will consistently return <code>true</code> or <code>false</code> as
+	 * long as no other messages are sent to it. The resulting stream may not be
+	 * {@link Repeatable}, though.
+	 * 
+	 * @return a Stream with a side effect {@link EmptyAware#isEmpty} method
+	 */
 	@Projection
-	Stream<A> dettach();
+	Stream<A> toEmptyAware();
 
 	/**
 	 * Memorizes stream elements and their order, by answering a lazy stream with
 	 * repeatable iteration order that caches elements evaluated during iteration.
+	 * 
 	 * 
 	 * @return a new {@link Stream} that memorizes elements evaluated during
 	 *         iteration
@@ -75,8 +84,8 @@ public interface Collectible<A> {
 	Stream<A> memorize();
 
 	/**
-	 * Freezes this steram by converting it into a new ordered one that is not
-	 * lazy and that has repeatable iteration order.
+	 * Forces stream elements evaluation by converting it into a new ordered one
+	 * that is not lazy and that has repeatable iteration order.
 	 * 
 	 * @return a new {@link Stream} that retrieves elements from the next
 	 *         iteration of this Stream.

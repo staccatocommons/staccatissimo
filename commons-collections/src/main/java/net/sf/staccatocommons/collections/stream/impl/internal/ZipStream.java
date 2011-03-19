@@ -32,7 +32,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public final class ZipStream<C, A, B> extends AbstractStream<C> {
 	private final Iterable<B> iterable;
 	private final Function2<A, B, C> function;
-	private final AbstractStream<A> stream;
+	private final Stream<A> stream;
 
 	/**
 	 * Creates a new {@link ZipStream}
@@ -54,9 +54,5 @@ public final class ZipStream<C, A, B> extends AbstractStream<C> {
 
 	public boolean isEmpty() {
 		return stream.isEmpty() || Iterables.isEmpty(iterable);
-	}
-
-	public Stream<C> dettach() {
-		return this;
 	}
 }

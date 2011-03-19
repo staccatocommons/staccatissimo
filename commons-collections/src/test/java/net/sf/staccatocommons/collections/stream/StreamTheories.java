@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import static net.sf.staccatocommons.lambda.Lambda.*;
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 import static net.sf.staccatocommons.lang.predicate.Predicates.*;
 import static org.junit.Assert.*;
@@ -20,6 +21,7 @@ import static org.junit.Assume.*;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.Compare;
@@ -207,6 +209,16 @@ public abstract class StreamTheories {
 				}
 			}
 		});
+	}
+
+	/** Tests that if **/
+	@Theory
+	public void toEmptyAwareMakesIsEmptyRepeatable(Stream<?> stream) throws Exception {
+		assertTrue(Streams
+			.repeat(stream.toEmptyAware())
+			.map(lambda((Boolean) $(EmptyAware.class).isEmpty()))
+			.take(10)
+			.allEqual());
 	}
 
 	/** Ignores test that require empty streams */

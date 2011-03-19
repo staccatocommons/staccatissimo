@@ -195,6 +195,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
+	public boolean allEqual() {
+		// TODO pass equalty function
+		return Iterables.allEqual(this);
+	}
+
+	@Override
 	public boolean any(Evaluable<? super A> predicate) {
 		return Iterables.any(this, predicate);
 	}
@@ -290,7 +296,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new MemorizedStream<A>(this);
 	}
 
-	public Stream<A> dettach() {
+	public Stream<A> toEmptyAware() {
 		return new IteratorStream<A>(iterator());
 	}
 

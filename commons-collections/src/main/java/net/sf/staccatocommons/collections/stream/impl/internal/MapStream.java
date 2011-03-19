@@ -54,8 +54,8 @@ public final class MapStream<A, B> extends AbstractStream<B> {
 		return stream.isEmpty();
 	}
 
-	public Stream<B> dettach() {
-		return this;
+	public Stream<B> toEmptyAware() {
+		return new MapStream<A, B>(stream.toEmptyAware(), function);
 	}
 
 	@Override

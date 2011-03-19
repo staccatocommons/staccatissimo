@@ -43,7 +43,7 @@ public class MemorizedStream<A> extends WrapperStream<A> {
 		return previous.isEmpty() && !remaining.hasNext();
 	}
 
-	public Stream<A> dettach() {
+	public Stream<A> toEmptyAware() {
 		return this;
 	}
 

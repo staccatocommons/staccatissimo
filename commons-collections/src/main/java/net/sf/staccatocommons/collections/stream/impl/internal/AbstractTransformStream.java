@@ -43,8 +43,8 @@ public abstract class AbstractTransformStream<A, B> extends AbstractStream<B> {
 		return apply().get(n);
 	}
 
-	public final Stream<B> dettach() {
-		return apply().dettach();
+	public final Stream<B> toEmptyAware() {
+		return apply().toEmptyAware();
 	}
 
 	public final Pair<Thunk<B>, Stream<B>> delayedDecons() {

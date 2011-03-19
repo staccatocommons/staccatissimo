@@ -76,7 +76,7 @@ public class PrependStream<A> extends WrapperStream<A> {
 		return getSource().iterator();
 	}
 
-	public final Stream<A> dettach() {
+	public final Stream<A> toEmptyAware() {
 		return this;
 	}
 

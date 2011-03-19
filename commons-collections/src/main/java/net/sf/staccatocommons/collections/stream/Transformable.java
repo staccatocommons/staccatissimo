@@ -79,6 +79,10 @@ public interface Transformable<A> {
 	@Projection
 	<B> Stream<B> transform(@NonNull DelayedDeconsApplicable<A, B> function);
 
+	/**
+	 * @author flbulgarelli
+	 * @param <A>
+	 */
 	public static interface EmptyApplicable<A> {
 		/**
 		 * Applies this transformation when this Stream can not be deconstructed in

@@ -377,4 +377,23 @@ public class AbstractStreamBasicTest {
 				.fullCross(Streams.<Stream<Integer>> cons(Streams.cons(3, 4), Streams.cons(5, 6)))
 				.toString());
 	}
+
+	/**
+	 * Tests {@link Stream#isBefore(Object, Object)}
+	 */
+	@Test
+	public void testIsBefore() throws Exception {
+		assertFalse(Streams.cons(90, 2, 6, 3, 6).isBefore(6, 2));
+		assertTrue(Streams.cons(90, 2, 6, 3, 6).isBefore(2, 6));
+	}
+
+	// /**
+	// * Tests
+	// * {@link Stream#equivalentOn(Iterable,
+	// net.sf.staccatocommons.defs.Applicable)}
+	// */
+	// @Test
+	// public void testEquivOn() throws Exception {
+	// assertTrue(Streams.iterate(10, 15).equi)
+	// }
 }
