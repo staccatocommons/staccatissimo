@@ -218,7 +218,15 @@ public abstract class StreamTheories {
 			.repeat(stream.toEmptyAware())
 			.map(lambda((Boolean) $(EmptyAware.class).isEmpty()))
 			.take(10)
-			.allEqual());
+			.allEquiv());
+	}
+
+	/** Tests that memorizing grants repeatable iteration order */
+	@Theory
+	public <A> void memorizeGrantsRepeatableIterationOrder(Stream<A> stream) throws Exception {
+		Stream<A> memorized = stream.memorize();
+		assertEquals(memorized.isEmpty(), memorized.isEmpty());
+		assertTrue(memorized.equiv(memorized));
 	}
 
 	/** Ignores test that require empty streams */

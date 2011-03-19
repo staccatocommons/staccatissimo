@@ -44,13 +44,13 @@ public class LazinessIntegrationTest {
 	/***/
 	@Test
 	public void testMapAndDrop() throws Exception {
-		assertTrue(integersStream().drop(4).equivalent(50));
+		assertTrue(integersStream().drop(4).equiv(50));
 	}
 
 	/***/
 	@Test
 	public void testMapAndTake() throws Exception {
-		assertTrue(integersStream().take(3).equivalent(10, 20, 30));
+		assertTrue(integersStream().take(3).equiv(10, 20, 30));
 	}
 
 	/***/
@@ -71,7 +71,7 @@ public class LazinessIntegrationTest {
 			.appendUndefined()
 			.intersperse(1)
 			.take(4)
-			.equivalent(10, 1, 20, 1));
+			.equiv(10, 1, 20, 1));
 	}
 
 	/***/

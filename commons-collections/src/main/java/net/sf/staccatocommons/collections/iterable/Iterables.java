@@ -271,6 +271,32 @@ public class Iterables {
 	}
 
 	/**
+	 * Answers if all elements in the collection are equivalent using the given
+	 * <code>equivTest</code>.
+	 * 
+	 * @param <A>
+	 * @param iterable
+	 *          May be empty.
+	 * @param equivTest
+	 *          a predicate used to determine if two elements are equivalent
+	 * @return <code>true</code>if all element are the same object.
+	 *         <code>false</code> otherwise. As a particular case of this rule, if
+	 *         this collection is empty or has only one element, it will return
+	 *         <code>true</code>.
+	 */
+	public static <A> boolean allEquivBy(@NonNull Iterable<A> iterable,
+		Evaluable2<? super A, ? super A> equivTest) {
+		Iterator<A> iter = iterable.iterator();
+		if (!iter.hasNext())
+			return true;
+		A any = iter.next();
+		while (iter.hasNext())
+			if (!equivTest.eval(any, iter.next()))
+				return false;
+		return true;
+	}
+
+	/**
 	 * Answers if all elements in the collection are equal.
 	 * 
 	 * @param <A>
@@ -281,14 +307,7 @@ public class Iterables {
 	 *         empty or has only one element, it will return <code>true</code>.
 	 */
 	public static <A> boolean allEqual(@NonNull Iterable<A> iterable) {
-		Iterator<A> iter = iterable.iterator();
-		if (!iter.hasNext())
-			return true;
-		A any = iter.next();
-		while (iter.hasNext())
-			if (!ObjectUtils.equals(any, iter.next()))
-				return false;
-		return true;
+		return allEquivBy(iterable, Equiv.<A> equal());
 	}
 
 	/**
@@ -303,14 +322,7 @@ public class Iterables {
 	 *         <code>true</code>.
 	 */
 	public static <A> boolean allSame(@NonNull Iterable<A> iterable) {
-		Iterator<A> iter = iterable.iterator();
-		if (!iter.hasNext())
-			return true;
-		A any = iter.next();
-		while (iter.hasNext())
-			if (any != iter.next())
-				return false;
-		return true;
+		return allEquivBy(iterable, Equiv.<A> same());
 	}
 
 	/**
@@ -398,9 +410,9 @@ public class Iterables {
 	 *         elements of both iterables at same position are equal.
 	 *         <code>false</code> otherwise
 	 */
-	public static <A> boolean equivalent(@NonNull Iterable<? extends A> iterable1,
+	public static <A> boolean equiv(@NonNull Iterable<? extends A> iterable1,
 		@NonNull Iterable<? extends A> iterable2) {
-		return equivalentBy(iterable1, iterable2, Equiv.equal().nullSafe());
+		return equivBy(iterable1, iterable2, Equiv.equal().nullSafe());
 	}
 
 	/**
@@ -415,7 +427,7 @@ public class Iterables {
 	 *         elements of both iterables at same position are equivalent using
 	 *         the given <code>eqivTest</code>. <code>false</code> otherwise
 	 */
-	public static <A> boolean equivalentBy(@NonNull Iterable<? extends A> iterable1,
+	public static <A> boolean equivBy(@NonNull Iterable<? extends A> iterable1,
 		@NonNull Iterable<? extends A> iterable2, Evaluable2<A, A> equivTest) {
 		Iterator<? extends A> iter = iterable1.iterator();
 		Iterator<? extends A> otherIter = iterable2.iterator();

@@ -58,7 +58,7 @@ public class DequeStream<A> extends CollectionStream<A> {
 	}
 
 	public final A last() {
-		return getCollection().getFirst();
+		return getCollection().getLast();
 	}
 
 	protected Deque<A> getCollection() {

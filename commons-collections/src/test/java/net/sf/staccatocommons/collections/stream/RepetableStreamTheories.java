@@ -160,7 +160,6 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 	@Theory
 	public void testFirst(Stream stream) {
 		assumeThat(stream.size(), greaterThan(0));
-		assumeThat(stream.first(), is(stream.first()));
 		assertEquals(stream.get(0), stream.first());
 		assertEquals(stream.first(), stream.head());
 	}
@@ -172,7 +171,6 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 	@Theory
 	public void testSecond(Stream stream) {
 		assumeThat(stream.size(), greaterThan(1));
-		assumeThat(stream.second(), is(stream.second()));
 		assertEquals(stream.get(1), stream.second());
 	}
 
@@ -185,7 +183,6 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 	@Theory
 	public void testThird(Stream stream) {
 		assumeThat(stream.size(), greaterThan(2));
-		assumeThat(stream.third(), is(stream.third()));
 		assertEquals(stream.get(2), stream.third());
 	}
 
@@ -198,7 +195,6 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 	@Theory
 	public void testLast(Stream stream) {
 		assumeTrue(!stream.isEmpty());
-		assumeThat(stream.last(), is(stream.last()));
 		assertEquals(stream.get(stream.size() - 1), stream.last());
 	}
 
@@ -251,13 +247,13 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 		}));
 	}
 
-	/** Test for {@link Stream#equivalent(Iterable)} */
+	/** Test for {@link Stream#equiv(Iterable)} */
 	@Theory
 	public <A> void testElementEqual(Stream<A> stream) throws Exception {
-		assertTrue(stream.equivalent(stream));
-		assertTrue(stream.equivalent(stream.force()));
-		assertTrue(stream.equivalent(stream.toList()));
-		assertTrue(stream.equivalent(stream.toArray(Object.class)));
+		assertTrue(stream.equiv(stream));
+		assertTrue(stream.equiv(stream.force()));
+		assertTrue(stream.equiv(stream.toList()));
+		assertTrue(stream.equiv(stream.toArray(Object.class)));
 	}
 
 	/** Test method for {@link AbstractStream#zip(Iterable)} */

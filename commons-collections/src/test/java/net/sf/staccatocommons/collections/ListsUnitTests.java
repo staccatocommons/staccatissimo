@@ -14,8 +14,10 @@ package net.sf.staccatocommons.collections;
 
 import static junit.framework.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
@@ -60,6 +62,15 @@ public class ListsUnitTests {
 	/**
 	 * Test for {@link Lists#addAfter(java.util.List, Object, Object)}
 	 */
+	@Test(expected = NoSuchElementException.class)
+	public void testAddAfterUnexistent() throws Exception {
+		LinkedList<Integer> list = oneThreeList();
+		Lists.addAfter(list, 2, 9);
+	}
+
+	/**
+	 * Test for {@link Lists#addAfter(java.util.List, Object, Object)}
+	 */
 	@Test
 	public void testAddAfter_tail() throws Exception {
 
@@ -86,6 +97,24 @@ public class ListsUnitTests {
 	@Test
 	public void testThird_OK() throws Exception {
 		assertEquals((Integer) 3, Lists.third(Arrays.asList(1, 2, 3)));
+	}
+
+	/** Test for {@link Lists#last(java.util.List)} */
+	@Test
+	public void testLast() throws Exception {
+		assertEquals(10, (int) Lists.last(Arrays.asList(20, 10)));
+		assertEquals(10, (int) Lists.last(Arrays.asList(10)));
+	}
+
+	/** Test for {@link Lists#removeLast(java.util.List)} */
+	@Test
+	public void testRemoveLast() throws Exception {
+		ArrayList<Integer> l = new ArrayList<Integer>();
+		l.add(4);
+		l.add(20);
+		l.add(9);
+		Lists.removeLast(l);
+		assertEquals(Arrays.asList(4, 20), l);
 	}
 
 	private LinkedList<Integer> oneThreeList() {

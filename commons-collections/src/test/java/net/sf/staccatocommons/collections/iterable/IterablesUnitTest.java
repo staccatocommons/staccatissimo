@@ -271,13 +271,13 @@ public class IterablesUnitTest {
 			Iterables.cross(Arrays.asList(1, 2), Arrays.asList('a', 'b')));
 	}
 
-	/** Test for {@link Iterables#equivalent(Iterable, Iterable)} */
+	/** Test for {@link Iterables#equiv(Iterable, Iterable)} */
 	@Test
 	public void testElementsEquals() throws Exception {
-		assertFalse(Iterables.equivalent(Arrays.asList(10, 20), Arrays.asList(10, 26)));
-		assertFalse(Iterables.equivalent(Arrays.asList(10, 20), Arrays.asList(10, 20, 6)));
-		assertFalse(Iterables.equivalent(Arrays.asList(10, 20, 4), Arrays.asList(10, 20)));
-		assertTrue(Iterables.equivalent(Arrays.asList(10, 20, 4), Arrays.asList(10, 20, 4)));
+		assertFalse(Iterables.equiv(Arrays.asList(10, 20), Arrays.asList(10, 26)));
+		assertFalse(Iterables.equiv(Arrays.asList(10, 20), Arrays.asList(10, 20, 6)));
+		assertFalse(Iterables.equiv(Arrays.asList(10, 20, 4), Arrays.asList(10, 20)));
+		assertTrue(Iterables.equiv(Arrays.asList(10, 20, 4), Arrays.asList(10, 20, 4)));
 	}
 
 	/**
@@ -289,5 +289,26 @@ public class IterablesUnitTest {
 		assertEquals(
 			Arrays.asList(3, 6, 9, 12, 50, 60),
 			Iterables.toList(Iterables.toSortedSet(Arrays.asList(50, 60, 12, 6, 9, 3))));
+	}
+
+	/**
+	 * Test for {@link Iterables#get(Iterable, int)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testGet() throws Exception {
+		assertEquals(5, (int) Iterables.get(Arrays.asList(1, 5, 95, 6), 1));
+		assertEquals(1, (int) Iterables.get(Arrays.asList(1, 5, 95, 6), 0));
+	}
+
+	/**
+	 * Test for {@link Iterables#get(Iterable, int)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testGetThrowsIndexOutOfBounds() throws Exception {
+		Iterables.get(Arrays.asList(1, 5, 95, 6), 4);
 	}
 }

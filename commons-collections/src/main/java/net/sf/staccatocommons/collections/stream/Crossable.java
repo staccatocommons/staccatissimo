@@ -51,7 +51,14 @@ public interface Crossable<A> {
 	@Projection
 	<B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other);
 
+	/**
+	 * Answers the cartesian product of this {@link Stream} and each one of the
+	 * given <code>streamOfStreams</code>
+	 * 
+	 * @param streamOfStreams
+	 * @return a new {@link Stream} projection
+	 */
 	@NonNull
 	@Projection
-	Stream<Stream<A>> fullCross(Stream<Stream<A>> other);
+	Stream<Stream<A>> fullCross(@NonNull Stream<Stream<A>> streamOfStreams);
 }

@@ -86,7 +86,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public abstract class AbstractStream<A> implements Stream<A> {
 
-	protected static final Validate<NoSuchElementException> validate = Validate
+	protected static final Validate<NoSuchElementException> validateElement = Validate
 		.throwing(NoSuchElementException.class);
 
 	@Override
@@ -135,7 +135,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	@Override
 	public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
-		validate.that(!isEmpty(), "Can not reduce an empty stream");
+		validateElement.that(!isEmpty(), "Can not reduce an empty stream");
 		return Iterables.reduce(this, function);
 	}
 
@@ -195,9 +195,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public boolean allEqual() {
-		// TODO pass equalty function
+	public boolean allEquiv() {
 		return Iterables.allEqual(this);
+	}
+
+	@Override
+	public boolean allEquivBy(Evaluable2<? super A, ? super A> equivTest) {
+		return Iterables.allEquivBy(this, equivTest);
 	}
 
 	@Override
@@ -327,34 +331,34 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public final boolean equivalent(A... elements) {
-		return equivalent(Arrays.asList(elements));
+	public final boolean equiv(A... elements) {
+		return equiv(Arrays.asList(elements));
 	}
 
 	@Override
-	public boolean equivalent(Iterable<? extends A> other) {
-		return Iterables.equivalent(this, other);
+	public boolean equiv(Iterable<? extends A> other) {
+		return Iterables.equiv(this, other);
 	}
 
 	@Override
-	public boolean equivalentBy(Evaluable2<A, A> equalty, Iterable<? extends A> other) {
-		return Iterables.equivalentBy(this, other, equalty);
+	public boolean equivBy(Evaluable2<A, A> equalty, Iterable<? extends A> other) {
+		return Iterables.equivBy(this, other, equalty);
 	}
 
 	@Override
-	public boolean equivalentBy(Evaluable2<A, A> equalityTest, A... elements) {
-		return equivalentBy(equalityTest, Arrays.asList(elements));
+	public boolean equivBy(Evaluable2<A, A> equalityTest, A... elements) {
+		return equivBy(equalityTest, Arrays.asList(elements));
 	}
 
 	@Override
-	public <B> boolean equivalentOn(Applicable<? super A, ? extends B> function,
+	public <B> boolean equivOn(Applicable<? super A, ? extends B> function,
 		Iterable<? extends A> iterable) {
-		return equivalentBy(Equiv.on(function), iterable);
+		return equivBy(Equiv.on(function), iterable);
 	}
 
 	@Override
-	public <B> boolean equivalentOn(Applicable<? super A, ? extends B> function, A... elements) {
-		return equivalentOn(function, Arrays.asList(elements));
+	public <B> boolean equivOn(Applicable<? super A, ? extends B> function, A... elements) {
+		return equivOn(function, Arrays.asList(elements));
 	}
 
 	@Override
@@ -412,23 +416,23 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
 	public Pair<A, Stream<A>> decons() {
 		Iterator<A> iter = iterator();
-		validate.that(iter.hasNext(), "Empty streams have no head");
+		validateElement.that(iter.hasNext(), "Empty streams have no head");
 		return _(iter.next(), Streams.from(iter));
 	}
 
 	public Pair<Thunk<A>, Stream<A>> delayedDecons() {
 		Thriterator<A> iter = iterator();
-		validate.that(iter.hasNext(), "Empty streams have no head");
+		validateElement.that(iter.hasNext(), "Empty streams have no head");
 		return _(iter.delayedNext(), Streams.from(iter));
 	}
 
 	public Stream<A> tail() {
-		validate.that(!isEmpty(), "Empty streams have not tail");
+		validateElement.that(!isEmpty(), "Empty streams have not tail");
 		return drop(1);
 	}
 
 	public A head() {
-		validate.that(!isEmpty(), "Empty streams have not head");
+		validateElement.that(!isEmpty(), "Empty streams have not head");
 		return first();
 	}
 
@@ -463,7 +467,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	public A average(final NumberType<A> numberType) {
-		validate.that(!isEmpty(), "Can not get average on an empty stream");
+		validateElement.that(!isEmpty(), "Can not get average on an empty stream");
 		class Ref {
 			A val = numberType.zero();
 		}
@@ -525,7 +529,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	public NumberType<A> numberType() {
-		throw new ClassCastException("Source can not be casted to ImplicitNumerType");
+		throw new ClassCastException("Source can not be casted to NumerTypeAware");
 	}
 
 	public Stream<A> reverse() {

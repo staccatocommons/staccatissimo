@@ -137,7 +137,7 @@ public class AbstractStreamBasicTest {
 					return Sequence.fromTo(1, arg);
 				}
 			})
-			.equivalent(1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6));
+			.equiv(1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6));
 	}
 
 	/** Test for {@link AbstractStream#append(Iterable)} ***/
@@ -174,7 +174,7 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void testIntersperse() throws Exception {
 		assertTrue( //
-		Streams.cons(4, 5, 6).intersperse(1).equivalent(4, 1, 5, 1, 6));
+		Streams.cons(4, 5, 6).intersperse(1).equiv(4, 1, 5, 1, 6));
 
 		assertTrue( //
 		Streams
@@ -182,7 +182,7 @@ public class AbstractStreamBasicTest {
 			.append(10)
 			.intersperse(1)
 			.take(4)
-			.equivalent(4, 1, 5, 1));
+			.equiv(4, 1, 5, 1));
 
 		assertEquals("[56,0,1]", Streams.cons(56, 1).intersperse(0).toString());
 	}
@@ -210,20 +210,6 @@ public class AbstractStreamBasicTest {
 		assertEquals(11, (int) mapped.first());
 		assertEquals(21, (int) mapped.second());
 
-	}
-
-	/**
-	 * Test that memorized streams are equivalent to themselves
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testMemorizeEquivSelf() throws Exception {
-		Stream<Integer> stream = Streams.from(Arrays.asList(10, 20, 30).iterator());
-		assertFalse(stream.equivalent(stream));
-
-		Stream<Integer> memorized = Streams.from(Arrays.asList(10, 20, 30).iterator()).memorize();
-		assertTrue(memorized.equivalent(memorized));
 	}
 
 	/**
@@ -258,8 +244,8 @@ public class AbstractStreamBasicTest {
 			.cons(50, 60, 1, 6, 9, 10, 100)
 			.streamPartition(Compare.greaterThan(9));
 
-		assertTrue(partition._0().equivalent(50, 60, 10, 100));
-		assertTrue(partition._1().equivalent(1, 6, 9));
+		assertTrue(partition._0().equiv(50, 60, 10, 100));
+		assertTrue(partition._1().equiv(1, 6, 9));
 
 	}
 
@@ -267,7 +253,7 @@ public class AbstractStreamBasicTest {
 	@Test
 	public void testReverse() throws Exception {
 		assertTrue(//
-		Streams.cons(50, 30, 9, 12, 0, 3, -5, null).reverse().equivalent(null, -5, 3, 0, 12, 9, 30, 50));
+		Streams.cons(50, 30, 9, 12, 0, 3, -5, null).reverse().equiv(null, -5, 3, 0, 12, 9, 30, 50));
 	}
 
 	/** Test for {@link Stream#maximum()} */
@@ -317,7 +303,7 @@ public class AbstractStreamBasicTest {
 		Stream<Integer> sort = Streams.cons(10, 20, 6, 9, 18, 6, 26, 32).sort();
 		assertEquals(6, (int) sort.first());
 		assertEquals(32, (int) sort.last());
-		assertTrue(sort.equivalent(6, 6, 9, 10, 18, 20, 26, 32));
+		assertTrue(sort.equiv(6, 6, 9, 10, 18, 20, 26, 32));
 	}
 
 	/**
@@ -360,7 +346,7 @@ public class AbstractStreamBasicTest {
 		assertTrue(Streams
 			.iterate(1, 20)
 			.cross(Streams.iterate(20, 40))
-			.equivalent(Iterables.cross(Sequence.fromTo(1, 20), Sequence.fromTo(20, 40))));
+			.equiv(Iterables.cross(Sequence.fromTo(1, 20), Sequence.fromTo(20, 40))));
 	}
 
 	/**
@@ -389,16 +375,13 @@ public class AbstractStreamBasicTest {
 
 	/**
 	 * Tests
-	 * {@link Stream#equivalentOn(net.sf.staccatocommons.defs.Applicable, Iterable)}
+	 * {@link Stream#equivOn(net.sf.staccatocommons.defs.Applicable, Iterable)}
 	 */
 	@Test
 	public void testEquivOn() throws Exception {
 		// Test that both streams have as as elements collections of the same size
 		assertTrue(Streams//
 			.cons(Arrays.asList(10, 20), Arrays.asList(5, 26, 9))
-			.equivalentOn(
-				lambda($(Collection.class).size()),
-				Arrays.asList(0, 0),
-				Arrays.asList(5, 6, 96)));
+			.equivOn(lambda($(Collection.class).size()), Arrays.asList(0, 0), Arrays.asList(5, 6, 96)));
 	}
 }

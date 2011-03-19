@@ -16,6 +16,7 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lang.predicate.internal.CompareTest;
 import net.sf.staccatocommons.lang.predicate.internal.EqualTest;
+import net.sf.staccatocommons.lang.predicate.internal.SameTest;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
@@ -47,7 +48,18 @@ public class Equiv {
 		return EqualTest.<A> equalTest();
 	}
 
-	// TODO add same()
+	/**
+	 * Answers an {@link Predicate2} that performs an identity test between its
+	 * arguments, that it returns true if both are the same object
+	 * 
+	 * @param <A>
+	 * @return a constant {@link Predicate2} that performs an identity test
+	 */
+	@NonNull
+	@Constant
+	public static <A> Predicate2<A, A> same() {
+		return SameTest.<A> sameTest();
+	}
 
 	/**
 	 * Answers an {@link Predicate2} that performs an equality test between its
