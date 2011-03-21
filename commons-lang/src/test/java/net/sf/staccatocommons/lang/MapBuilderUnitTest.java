@@ -17,12 +17,11 @@ import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.SortedMap;
 
 import net.sf.staccatocommons.lang.builder.BuilderAlreadyUsedException;
+import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
 
 import org.junit.Test;
 
@@ -65,7 +64,7 @@ public class MapBuilderUnitTest {
 	 */
 	@Test
 	public void testHashMapWith() {
-		assertThat(mapWith("FOO", 5).build(), instanceOf(HashMap.class));
+		assertThat(mapWith("FOO", 5).build(), instanceOf(Map.class));
 	}
 
 	/**
@@ -75,7 +74,7 @@ public class MapBuilderUnitTest {
 	 */
 	@Test
 	public void testLinkedMapWith() {
-		assertThat(linkedMapWith("FOO", 5).build(), instanceOf(LinkedHashMap.class));
+		assertThat(linkedMapWith("FOO", 5).build(), instanceOf(Map.class));
 	}
 
 	/**
@@ -85,7 +84,22 @@ public class MapBuilderUnitTest {
 	 */
 	@Test
 	public void testTreeMapWith() {
-		assertThat(treeMapWith("FOO", 5).build(), instanceOf(TreeMap.class));
+		assertThat(treeMapWith("FOO", 5).build(), instanceOf(SortedMap.class));
+	}
+
+	/**
+	 * Tests that maps returned by {@link MapBuilder#mapWith(Object, Object)} are
+	 * {@link ConditionallyImmutable} .
+	 */
+	@Test(expected = UnsupportedOperationException.class)
+	public void testMapIsImmutable() {
+		Map<String, Integer> map = MapBuilder //
+			.mapWith("Tom", 10)
+			.with("Annie", 5)
+			.with("Mary", 12)
+			.build();
+
+		map.put("John", 6);
 	}
 
 }

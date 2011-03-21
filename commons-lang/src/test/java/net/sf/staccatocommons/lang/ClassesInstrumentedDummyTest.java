@@ -34,7 +34,7 @@ public class ClassesInstrumentedDummyTest {
 	@SuppressWarnings("unused")
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorsInstrumented() {
-		new MapBuilder(null);
+		new MapBuilder(null, null);
 	}
 
 	/**

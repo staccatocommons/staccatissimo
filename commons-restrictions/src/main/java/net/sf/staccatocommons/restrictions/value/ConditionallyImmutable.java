@@ -18,9 +18,9 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Arrays;
 
 import net.sf.staccatocommons.restrictions.Restriction;
-
 
 /**
  * <p>
@@ -34,6 +34,12 @@ import net.sf.staccatocommons.restrictions.Restriction;
  * that have as attributes generic types or interfaces that do not make any
  * assumption about immutability
  * </p>
+ * <p>
+ * Typical example of {@link ConditionallyImmutable} classes are Lists returned
+ * by {@link Arrays#asList(Object...)}, which are immutable as long as their
+ * elements are immutable too.
+ * </p>
+ * 
  * 
  * @author flbulgarelli
  * @see Restriction

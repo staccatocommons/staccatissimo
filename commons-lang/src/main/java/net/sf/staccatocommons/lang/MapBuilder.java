@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.lang;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,12 +20,19 @@ import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.builder.Builder;
 import net.sf.staccatocommons.lang.builder.BuilderAlreadyUsedException;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.function.Functions;
+import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 /**
- * A {@link Builder} for {@link Map}s
+ * A {@link Builder} for {@link Map}s. The resulting
  * 
  * @author fbulgarelli
  * 
@@ -35,6 +43,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 
 	private M map;
+	private final Applicable<M, M> postprocessor;
 
 	/**
 	 * 
@@ -43,8 +52,9 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @param map
 	 *          the map to build. Non null
 	 */
-	public MapBuilder(@NonNull M map) {
+	public MapBuilder(@NonNull M map, @NonNull Applicable<M, M> postprocessor) {
 		this.map = map;
+		this.postprocessor = postprocessor;
 	}
 
 	/**
@@ -80,12 +90,13 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 		this.map = null;
 		if (map == null)
 			throw new BuilderAlreadyUsedException();
-		return map;
+		return postprocessor.apply(map);
 	}
 
 	/**
-	 * Creates a new {@link MapBuilder} using the given map implementation and the
-	 * first key and value
+	 * Creates a new {@link MapBuilder} using the given map instance and
+	 * postprocessor that would be applied to the built map before being returned.
+	 * If no postprocessing is requred, pass {@link Functions#identity()}
 	 * 
 	 * @param <K>
 	 *          type of key
@@ -94,20 +105,40 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 * @param <M>
 	 *          type of {@link Map}
 	 * @param map
-	 *          non null.
-	 * @param key
-	 * @param value
+	 *          the map to build
+	 * @param postprocessor
+	 *          the {@link Applicable} to be applied to the given map before
+	 *          returning it. If the {@link Applicable} returns a different map
+	 *          instead of modifying it, then that map is returned.
 	 * @return a new {@link MapBuilder}
 	 */
 	@NonNull
-	public static <K, V, M extends Map<K, V>> MapBuilder<K, V, M> mapWith(@NonNull M map, K key,
-		V value) {
-		return new MapBuilder<K, V, M>(map).with(key, value);
+	public static <K, V, M extends Map<K, V>> MapBuilder<K, V, M> from(@NonNull M map,
+		Applicable<M, M> postprocessor) {
+		return new MapBuilder<K, V, M>(map, postprocessor);
+	}
+
+	/**
+	 * Creates a new {@link MapBuilder} that uses the given map instance, and
+	 * using {@link #toUnmodifiableMap()} as postprocessor. The map built by the
+	 * returned {@link Builder} grants to be {@link Unmodifiable}
+	 * 
+	 * @param <K>
+	 * @param <V>
+	 * @param map
+	 * @return a new {@link MapBuilder} that builds unmodifiable views of the
+	 *         given map
+	 */
+	@NonNull
+	public static <K, V> MapBuilder<K, V, Map<K, V>> from(@NonNull Map<K, V> map) {
+		return from(map, MapBuilder.<K, V> toUnmodifiableMap());
 	}
 
 	/**
 	 * Creates a new {@link MapBuilder} using a {@link HashMap} as map
-	 * implementation and the first key and value
+	 * implementation and the first key and value. The map built by the returned
+	 * {@link Builder} grants to be {@link Unmodifiable} grants to be
+	 * {@link ConditionallyImmutable}
 	 * 
 	 * @param <K>
 	 *          type of key
@@ -119,12 +150,14 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 */
 	@NonNull
 	public static <K, V> MapBuilder<K, V, Map<K, V>> mapWith(K key, V value) {
-		return mapWith((Map<K, V>) new HashMap<K, V>(), key, value);
+		return from(new HashMap<K, V>()).with(key, value);
 	}
 
 	/**
 	 * Creates a new {@link MapBuilder} using a {@link LinkedHashMap} as map
-	 * implementation and the first key and value
+	 * implementation and the first key and value. The map built by the returned
+	 * {@link Builder} grants to be {@link Unmodifiable} grants to be
+	 * {@link ConditionallyImmutable}
 	 * 
 	 * @param <K>
 	 *          type of key
@@ -136,12 +169,14 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 */
 	@NonNull
 	public static <K, V> MapBuilder<K, V, Map<K, V>> linkedMapWith(K key, V value) {
-		return mapWith((Map<K, V>) new LinkedHashMap<K, V>(), key, value);
+		return from(new LinkedHashMap<K, V>()).with(key, value);
 	}
 
 	/**
 	 * Creates a new {@link MapBuilder} using a {@link TreeMap} as map
-	 * implementation and the first key and value
+	 * implementation and the first key and value. The map built by the returned
+	 * {@link Builder} grants to be {@link Unmodifiable} grants to be
+	 * {@link ConditionallyImmutable}
 	 * 
 	 * @param <K>
 	 *          type of key
@@ -153,7 +188,40 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	 */
 	@NonNull
 	public static <K, V> MapBuilder<K, V, SortedMap<K, V>> treeMapWith(K key, V value) {
-		return mapWith((SortedMap<K, V>) new TreeMap<K, V>(), key, value);
+		return from(new TreeMap<K, V>(), MapBuilder.<K, V> toUnmodifiableSortedMap()).with(key, value);
+	}
+
+	/**
+	 * A constant function that returns an unmodifiable view of its map argument
+	 * 
+	 * @param <K>
+	 * @param <V>
+	 * @return a constant {@link Function}
+	 */
+	@Constant
+	public static <K, V> Function<Map<K, V>, Map<K, V>> toUnmodifiableMap() {
+		return new AbstractFunction<Map<K, V>, Map<K, V>>() {
+			public Map<K, V> apply(Map<K, V> arg) {
+				return Collections.unmodifiableMap(arg);
+			}
+		};
+	}
+
+	/**
+	 * A constant function that returns an unmodifiable view of its sortedmap
+	 * argument
+	 * 
+	 * @param <K>
+	 * @param <V>
+	 * @return a constant {@link Function}
+	 */
+	@Constant
+	public static <K, V> Function<SortedMap<K, V>, SortedMap<K, V>> toUnmodifiableSortedMap() {
+		return new AbstractFunction<SortedMap<K, V>, SortedMap<K, V>>() {
+			public SortedMap<K, V> apply(SortedMap<K, V> arg) {
+				return Collections.unmodifiableSortedMap(arg);
+			}
+		};
 	}
 
 }
