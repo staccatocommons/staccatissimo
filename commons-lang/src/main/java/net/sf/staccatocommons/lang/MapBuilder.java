@@ -32,7 +32,9 @@ import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
 import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 /**
- * A {@link Builder} for {@link Map}s. The resulting
+ * A {@link Builder} for {@link Map}s. With the exception of
+ * {@link #from(Map, Applicable)}, all factory methods of {@link MapBuilder}
+ * grant to return builders that build {@link Unmodifiable} maps
  * 
  * @author fbulgarelli
  * 
@@ -43,8 +45,9 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 
 	private M map;
-	private final Applicable<M, M> postprocessor;
+	private Applicable<M, M> postprocessor;
 
+	// TODO support for custom constraints
 	/**
 	 * 
 	 * Creates a new {@link MapBuilder}
