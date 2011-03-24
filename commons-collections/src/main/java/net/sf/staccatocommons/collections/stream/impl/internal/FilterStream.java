@@ -40,7 +40,7 @@ public final class FilterStream<A> extends WrapperStream<A> {
 	public Thriterator<A> iterator() {
 		final Iterator<A> iter = getSource().iterator();
 		return Thriterators.from(new NextGetIterator<A>() {
-			protected Boolean updateNext() {
+			protected boolean updateNext() {
 				while (iter.hasNext())
 					if (predicate.eval(setNext(iter.next())))
 						return true;

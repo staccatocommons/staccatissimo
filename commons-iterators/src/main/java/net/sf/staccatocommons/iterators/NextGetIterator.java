@@ -46,10 +46,14 @@ public abstract class NextGetIterator<A> extends AbstractUnmodifiableIterator<A>
 	 *          the next element to retrieve
 	 * @return <code>next</code>
 	 */
-	public final A setNext(A next) {
+	protected final A setNext(A next) {
 		this.next = next;
 		return next;
 	}
 
-	protected abstract Boolean updateNext();
+	protected final A getNext() {
+		return next;
+	}
+
+	protected abstract boolean updateNext();
 }

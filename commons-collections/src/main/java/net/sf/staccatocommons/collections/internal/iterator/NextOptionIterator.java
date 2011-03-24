@@ -21,7 +21,7 @@ import net.sf.staccatocommons.lang.Option;
  */
 public abstract class NextOptionIterator<A> extends NextGetIterator<A> {
 
-	protected final Boolean updateNext() {
+	protected final boolean updateNext() {
 		Option<A> nextOption = nextOption();
 		if (nextOption.isDefined()) {
 			setNext(nextOption.value());

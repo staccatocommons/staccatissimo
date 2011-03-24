@@ -40,7 +40,7 @@ public final class TakeWhileStream<A> extends WrapperStream<A> {
 	public Thriterator<A> iterator() {
 		final Iterator<A> iter = getSource().iterator();
 		return Thriterators.from(new NextGetIterator<A>() {
-			protected Boolean updateNext() {
+			protected boolean updateNext() {
 				return iter.hasNext() && predicate.eval(setNext(iter.next()));
 			}
 		});

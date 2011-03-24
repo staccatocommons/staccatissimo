@@ -68,6 +68,7 @@ import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -346,18 +347,18 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public boolean equivBy(Evaluable2<A, A> equalityTest, A... elements) {
+	public final boolean equivBy(Evaluable2<A, A> equalityTest, A... elements) {
 		return equivBy(equalityTest, Arrays.asList(elements));
 	}
 
 	@Override
-	public <B> boolean equivOn(Applicable<? super A, ? extends B> function,
+	public final <B> boolean equivOn(Applicable<? super A, ? extends B> function,
 		Iterable<? extends A> iterable) {
 		return equivBy(Equiv.on(function), iterable);
 	}
 
 	@Override
-	public <B> boolean equivOn(Applicable<? super A, ? extends B> function, A... elements) {
+	public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, A... elements) {
 		return equivOn(function, Arrays.asList(elements));
 	}
 
@@ -501,13 +502,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
 	}
 
 	@Override
-	public <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function)
+	public final <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function)
 		throws NoSuchElementException {
 		return maximumBy(Compare.on(function));
 	}
 
 	@Override
-	public <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function)
+	public final <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function)
 		throws NoSuchElementException {
 		return minimumBy(Compare.on(function));
 	}
@@ -520,7 +521,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 		return new SortedStream<A>(this, comparator);
 	}
 
-	public <B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function) {
+	public final <B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function) {
 		return sortBy(Compare.on(function));
 	}
 
@@ -568,6 +569,15 @@ public abstract class AbstractStream<A> implements Stream<A> {
 						});
 					}
 				});
+			}
+		});
+	}
+
+	// TODO
+	<B> Stream<Pair<A, B>> join(Stream<B> other, final Evaluable2<A, B> predicate) {
+		return cross(other).filter(new AbstractPredicate<Pair<A, B>>() {
+			public boolean eval(Pair<A, B> argument) {
+				return predicate.eval(argument._0(), argument._1());
 			}
 		});
 	}

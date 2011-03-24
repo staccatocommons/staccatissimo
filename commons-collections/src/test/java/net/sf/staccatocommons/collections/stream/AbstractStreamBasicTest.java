@@ -277,6 +277,7 @@ public class AbstractStreamBasicTest {
 		assertEquals(6, (int) Streams.cons(90, 10, 30, 6, 150, 65).minimum());
 	}
 
+	// TODO group by operation are poor
 	/** Test for {@link AbstractStream#groupBy(Evaluable2)} */
 	@Test
 	public void foo() {
