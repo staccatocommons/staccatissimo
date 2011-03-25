@@ -29,9 +29,9 @@ import net.sf.staccatocommons.restrictions.Restriction;
  * <p>
  * {@link Unmodifiable}s can still implement lazy initialization and/or caching,
  * as long as it remains encapsulated and is not exposed publicly
+ * </p>
  * 
  * @author flbulgarelli
- *         </p>
  * @see Restriction
  */
 @Documented

@@ -15,7 +15,7 @@ Getting Started
   * {{{relevant-state-by-example.html}RelevantState}} - Consistently implementing equals, hashcode, toString, and/or compareTo in an efficient 
   way and without boilerplate code. 
   
-  * Prioritized - Prioritizing elements in sorted collections
+  * {{{prioritized-by-example.html}Prioritized}} - Prioritizing elements in sorted collections
   
   * Nulls and Option - Handling nulls and optional values
   

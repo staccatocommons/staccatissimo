@@ -34,7 +34,7 @@ import net.sf.staccatocommons.restrictions.value.Value;
 @Value
 @ConditionallyImmutable
 @ConditionallySerializable
-public class Prioritized<T, P extends Comparable<P>> implements Comparable<Prioritized<T, P>>,
+public class Prioritized<P extends Comparable<P>, T> implements Comparable<Prioritized<P, T>>,
 	Thunk<T>, Serializable {
 
 	private static final long serialVersionUID = 7131041003021112454L;
@@ -71,8 +71,8 @@ public class Prioritized<T, P extends Comparable<P>> implements Comparable<Prior
 		return priority;
 	}
 
-	public int compareTo(Prioritized<T, P> other) {
-		return getPriority().compareTo(other.getPriority());
+	public int compareTo(Prioritized<P, T> other) {
+		return state.compareTo(this, other);
 	}
 
 	/**
@@ -105,8 +105,8 @@ public class Prioritized<T, P extends Comparable<P>> implements Comparable<Prior
 	 * @return a new {@link Prioritized}
 	 */
 	@NonNull
-	public static <T, P extends Comparable<P>> Prioritized<T, P> from(P priority, T value) {
-		return new Prioritized<T, P>(priority, value);
+	public static <T, P extends Comparable<P>> Prioritized<P, T> from(P priority, T value) {
+		return new Prioritized<P, T>(priority, value);
 	}
 
 }

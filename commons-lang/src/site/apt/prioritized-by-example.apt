@@ -4,7 +4,7 @@ Prioritized
 
  {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs/net/sf/staccatocommons/lang/Prioritized.html}Prioritized}}
  is a simple generic wrapper for assigning arbitrary priorities to existing objects. 
-  
+   
 * The problem        
 
   Along the Java Collections Framework, there exists some collection classes, like PriorityQueue and TreeSet,
@@ -17,17 +17,53 @@ Prioritized
  by an arbitrary priority assigned by user:
  
 +----
-
   class FileUploader {
-    
-    private PriorityQueue filesQueue = new PriorityQueue();
+    private PriorityQueue<...> filesQueue = new PriorityQueue<...>();
     
     public void addFile(File file, int priority) {
-      filesQueue.add( ... )
+      filesQueue.add( ... );
     }  
-    
+    ...
   } 
-
 +----
  
+ Which type of object should we add to the queue? We can't add a plain File, as we would loose the priority, so we need the wrap the 
+ file with something that understands about priorities. It should be simple task, shoudn't it?:
+
++---- 
+ class PrioritizedFile implements Comparable<PrioritizedFile> {
+   private final File file;
+   private final int priority;
+   public PrioritizedFile(int priority, File file) {
+        this.file = file;
+        this.priority = priority;
+    }
+   public int compareTo(Prioritized<T, P> other) {
+       return priority.compareTo(other.priority);
+   }
+ }
++---- 
+
+  But wait!  This is not enough, as it is strongly recommended that Comparable objects also implement equals in a consistent way, 
+ and this means implementing also hashcode. And having a proper toString is also desirable. And if you need to serialize 
+ at some point your collection using a Serialization-API-based tool, this requires implementing serializable. And don't forget 
+ to test it! 
+ We ended up needing a lot of boilerplate code for a task that should have been trivial. And another problem with this approach
+ is that it is completely ad-hoc. This wrapper is only useful on this situation. If we need then one prioritizing, lets, say, 
+ Customers, we need a new implementation. 
  
+* The Solution
+
+  So, the solution is quite obvious: have a generic Prioritized class that implements all those aspects, which Staccato-Commons delivers.
+ Using it, the previous FileUploader can be written like the following:
+ 
++----
+  class FileUploader {
+    private PriorityQueue<Prioritized<Integer,File>> filesQueue = new PriorityQueue<Prioritized<Integer,File>>();
+    
+    public void addFile(File file, int priority) {
+      filesQueue.add( Prioritized.from(priority, file) );
+    }  
+    ....
+  } 
++----  
