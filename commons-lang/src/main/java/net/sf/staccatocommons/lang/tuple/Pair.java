@@ -12,14 +12,15 @@
  */
 package net.sf.staccatocommons.lang.tuple;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import net.sf.staccatocommons.lang.tuple.Tuple.FirstAware;
 import net.sf.staccatocommons.lang.tuple.Tuple.SecondAware;
 import net.sf.staccatocommons.lang.value.RelevantState;
-import net.sf.staccatocommons.restrictions.ConditionallySerializable;
+import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.value.Immutable;
 import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
@@ -33,8 +34,7 @@ import net.sf.staccatocommons.restrictions.value.Value;
  *          second component type
  */
 @Value
-@ConditionallyImmutable
-@ConditionallySerializable
+@Conditionally({ Immutable.class, Serializable.class })
 public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>>,
 	Map.Entry<T1, T2>, FirstAware<T1>, SecondAware<T2> {
 

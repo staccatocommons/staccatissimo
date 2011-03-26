@@ -12,10 +12,9 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import java.io.Serializable;
 import java.util.Collection;
-import java.util.Iterator;
 
-import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.ContainsAware;
@@ -24,20 +23,21 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
+import net.sf.staccatocommons.restrictions.effect.Transparent;
 import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 /**
- * A {@link Stream} is a lazy, rich-interfaced, functional-style, unmodifiable,
+ * A {@link Stream} is a lazy, rich-interfaced, functional-style,
  * {@link Iterable} object that can retrieve an arbitrary - and potentially
  * unbound - amount of other objects of a parameterized type.
  * 
- * 
  * <h2>Introduction</h2>
  * <p>
- * Stream generalize the concept of an unmodifiable {@link Collection}, by
- * exposing many methods analogous to most of the side-effect-free operation of
- * that interface, and adding dozens of new ones. However, Streams are not meant
- * to replace the <a href=
+ * Streams generalize the concept of a source of objects. They re rich rich,
+ * lazy {@link Iterable} wrappers that expose many methods analogous to most of
+ * the side-effect-free operation of the {@link Collection} interface, and
+ * adding dozens of new ones. However, Streams are not meant to replace the <a
+ * href=
  * "http://download.oracle.com/javase/6/docs/technotes/guides/collections/index.html"
  * >Java Collection Framework</a>, but to be used on to of it.
  * </p>
@@ -59,7 +59,8 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  * <p>
  * However, unlike most collections, an Stream does not normally generate the
  * objects it retrieves, but it gets from another objects, which is called the
- * Stream's <em>source</em>.
+ * Stream's <em>source</em>. So, with a few exceptions, Streams are just
+ * wrappers around other object.
  * </p>
  * 
  * <h2>Streams properties</h2>
@@ -71,44 +72,40 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  * <li>Laziness: {@link Stream}s are lazy, that means, messages sent to it will
  * normally return fast, and no processing will be done until it is really
  * needed. All such methods are marked as {@link Projection}, and return Streams
- * - but, on the other hand, not all method that return Streams are lazy.</li>
+ * </li>
  * <li>Rich interfaced: {@link Stream}s offer a highly rich interface, this
  * interface exposes more than 50 methods. However, not like the
  * {@link Collection} interface, {@link Stream}s do not have subinterfaces nor
- * optional operations, and concrete Streams, do not necessary implement all
- * them in an efficient way.</li>
+ * optional operations.</li>
  * <li>Functional style: Stream methods names follow conventions that will be
  * familiar to any functional programmer. However, please notice that being
- * named in a functional way does not mean they pure functional. Such methods
- * will be side-effect-free and transparent only as long as source meets certain
- * conditions.</li>
- * <li>Unmodifiable: Streams do not expose any method that mutates its source
- * nor its elements, and its iterators do not support the
- * {@link Iterator#remove()}. However, certain sources and elements may still be
- * mutated externally, and iteration over the source might mutate them.</li>
+ * named in a functional way does not mean they are pure functional. Such
+ * methods will be {@link SideEffectFree} and {@link Transparent} only as long
+ * as source meets certain conditions.</li>
+ * <li>Operation oriented: Streams are not persistent classes, and do not
+ * implement {@link Serializable}. They are normally created, used, and disposed
+ * in the scope of a method execution, whenever a chain of operations over the
+ * stream's source need to be performed. Thus, they should not be used as
+ * attributes of long-living objects.</li>
  * </ul>
+ * 
  * On the other hand, conditional properties are:
  * <ul>
  * <li>Repeatable iteration order: having an {@link Iterable} a repeatable
- * iteration order means that iterating over the stream does not alter by itself
- * the elements and elements retrieval order of the next iteration. In other
- * words, an iterable is repeatable if and only if:
+ * iteration order means that iterating over the stream - either directly or
+ * indirectly through any of its methods - does not alter by itself the elements
+ * and elements retrieval order of the next iteration. In other words, an
+ * iterable is repeatable if and only if:
  * 
  * <pre>
- * Streams.from(iterable).equivalent(iterable);
+ * Streams.from(iterable).equiv(iterable);
  * </pre>
  * 
  * Is always <code>true</code>, as long as the iterable or its elements are not
- * externally mutated. Streams have this property as long as its source has it -
- * for example {@link Iterator}s are a non repeatable iteration order source.
- * Streams that always ensure this property are marked as {@link Repeatable}.
- * Streams that may have it depending on its source are marked as
- * {@link ConditionallyRepeatable}. Otherwise, stream implementors and methods
- * that return streams must be treated as non-repeatable-in-practice, either
- * because they do not satisfy previous condition, or its not efficient to do
- * that. Any Stream can be converted into an efficient {@link Repeatable} by
- * sending {@link #memorize()} or {@link #force()}. Consult their javadoc for
- * details.</li>
+ * externally mutated. Only those streams marked as {@link Repeatable} grant to
+ * meet such property. However, any Stream can be converted into an efficient
+ * {@link Repeatable} by sending {@link #memorize()} or {@link #force()}.
+ * Consult their javadoc for details.</li>
  * <li>Streams are in the general case not {@link Unmodifiable}, as streams with
  * modifiable sources like iterators will be modified by any of the stream
  * methods not marked as {@link SideEffectFree}.</li>

@@ -12,9 +12,10 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
+import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -37,16 +38,21 @@ public interface Appendable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
+	@Conditionally(Repeatable.class)
 	Stream<A> append(@NonNull Iterable<A> other);
 
 	/**
 	 * Concatenates this Stream with the undefined Stream. Equivalent to
 	 * <code>concat(Streams.undefined())</code>
 	 * 
-	 * @return a new {@link Stream}
+	 * @return a new {@link Stream}, {@link Repeatable} as long as {@code this} is
+	 *         repeatable
 	 * @see Streams#undefined()
 	 */
+
+	@NonNull
+	@Projection
+	@Conditionally(Repeatable.class)
 	Stream<A> appendUndefined();
 
 	/**
@@ -58,7 +64,7 @@ public interface Appendable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
+	@Conditionally(Repeatable.class)
 	Stream<A> append(A element);
 
 	/**
@@ -70,7 +76,7 @@ public interface Appendable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
+	@Conditionally(Repeatable.class)
 	Stream<A> append(@NonNull Thunk<A> thunk);
 
 	/**
@@ -82,7 +88,7 @@ public interface Appendable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
+	@Conditionally(Repeatable.class)
 	Stream<A> prepend(A element);
 
 	/**
@@ -94,7 +100,7 @@ public interface Appendable<A> {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
+	@Conditionally(Repeatable.class)
 	Stream<A> prepend(@NonNull Thunk<A> thunk);
 
 }

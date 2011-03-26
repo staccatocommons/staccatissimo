@@ -21,10 +21,10 @@ import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.restrictions.ConditionallySerializable;
+import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.value.Immutable;
 import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
@@ -66,8 +66,7 @@ import net.sf.staccatocommons.restrictions.value.Value;
  * 
  */
 @Value
-@ConditionallyImmutable
-@ConditionallySerializable
+@Conditionally({ Immutable.class, Serializable.class })
 public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, ContainsAware<T>,
 	Serializable {
 

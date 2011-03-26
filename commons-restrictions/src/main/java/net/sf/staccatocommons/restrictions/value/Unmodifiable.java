@@ -22,13 +22,18 @@ import java.lang.annotation.Target;
 import net.sf.staccatocommons.restrictions.Restriction;
 
 /**
- * {@link Unmodifiable}s are objects that do not expose publicly any method that
- * may modify receiver internal state. However, object's state can still be
+ * Unmodifiables are objects that do not expose publicly any method that may
+ * modify receiver internal state, if any. However, object's state can still be
  * mutated indirectly, if it holds and/or exposes references to objects that may
  * be mutated
  * <p>
- * {@link Unmodifiable}s can still implement lazy initialization and/or caching,
- * as long as it remains encapsulated and is not exposed publicly
+ * Unmodifiables can still implement lazy initialization and/or caching, as long
+ * as it remains encapsulated and is not exposed publicly
+ * </p>
+ * <p>
+ * Types annotated as {@link Unmodifiable} denote that all their instances grant
+ * to have such property. Methods annotated as {@link Unmodifiable} denote that
+ * all the objects returned by them have such property.
  * </p>
  * 
  * @author flbulgarelli
@@ -38,7 +43,7 @@ import net.sf.staccatocommons.restrictions.Restriction;
 @Inherited
 @Restriction
 @Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.TYPE)
+@Target({ ElementType.TYPE, ElementType.METHOD })
 public @interface Unmodifiable {
 
 }

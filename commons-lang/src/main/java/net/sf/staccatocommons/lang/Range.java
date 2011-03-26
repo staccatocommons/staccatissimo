@@ -21,9 +21,9 @@ import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.sequence.StopConditions;
 import net.sf.staccatocommons.lang.value.RelevantState;
-import net.sf.staccatocommons.restrictions.ConditionallySerializable;
+import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.value.Immutable;
 import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
@@ -35,8 +35,7 @@ import net.sf.staccatocommons.restrictions.value.Value;
  * @param <T>
  */
 @Value
-@ConditionallyImmutable
-@ConditionallySerializable
+@Conditionally({ Immutable.class, Serializable.class })
 public class Range<T extends Comparable<T>> implements ContainsAware<T>, EmptyAware, Serializable {
 
 	private static final long serialVersionUID = -1096861117755452369L;

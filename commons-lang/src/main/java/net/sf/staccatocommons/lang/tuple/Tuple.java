@@ -18,9 +18,9 @@ import java.util.List;
 
 import net.sf.staccatocommons.lang.tuple.internal.TupleToStringStyle;
 import net.sf.staccatocommons.lang.value.RelevantState;
-import net.sf.staccatocommons.restrictions.ConditionallySerializable;
+import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.value.Immutable;
 import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
@@ -75,8 +75,7 @@ import net.sf.staccatocommons.restrictions.value.Value;
  * @see Quadruple
  */
 @Value
-@ConditionallyImmutable
-@ConditionallySerializable
+@Conditionally({ Immutable.class, Serializable.class })
 public abstract class Tuple implements Serializable {
 
 	private static final long serialVersionUID = -3943649706502147516L;

@@ -28,7 +28,6 @@ import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
 import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 /**
@@ -140,8 +139,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	/**
 	 * Creates a new {@link MapBuilder} using a {@link HashMap} as map
 	 * implementation and the first key and value. The map built by the returned
-	 * {@link Builder} grants to be {@link Unmodifiable} grants to be
-	 * {@link ConditionallyImmutable}
+	 * {@link Builder} grants to be {@link Unmodifiable}
 	 * 
 	 * @param <K>
 	 *          type of key
@@ -159,8 +157,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	/**
 	 * Creates a new {@link MapBuilder} using a {@link LinkedHashMap} as map
 	 * implementation and the first key and value. The map built by the returned
-	 * {@link Builder} grants to be {@link Unmodifiable} grants to be
-	 * {@link ConditionallyImmutable}
+	 * {@link Builder} grants to be {@link Unmodifiable}
 	 * 
 	 * @param <K>
 	 *          type of key
@@ -178,8 +175,7 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 	/**
 	 * Creates a new {@link MapBuilder} using a {@link TreeMap} as map
 	 * implementation and the first key and value. The map built by the returned
-	 * {@link Builder} grants to be {@link Unmodifiable} grants to be
-	 * {@link ConditionallyImmutable}
+	 * {@link Builder} grants to be {@link Unmodifiable}
 	 * 
 	 * @param <K>
 	 *          type of key

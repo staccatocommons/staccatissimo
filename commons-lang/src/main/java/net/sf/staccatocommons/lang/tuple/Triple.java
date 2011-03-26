@@ -12,13 +12,15 @@
  */
 package net.sf.staccatocommons.lang.tuple;
 
+import java.io.Serializable;
+
 import net.sf.staccatocommons.lang.tuple.Tuple.FirstAware;
 import net.sf.staccatocommons.lang.tuple.Tuple.SecondAware;
 import net.sf.staccatocommons.lang.tuple.Tuple.ThirdAware;
 import net.sf.staccatocommons.lang.value.RelevantState;
-import net.sf.staccatocommons.restrictions.ConditionallySerializable;
+import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.value.ConditionallyImmutable;
+import net.sf.staccatocommons.restrictions.value.Immutable;
 import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
@@ -32,8 +34,7 @@ import net.sf.staccatocommons.restrictions.value.Value;
  * 
  */
 @Value
-@ConditionallyImmutable
-@ConditionallySerializable
+@Conditionally({ Immutable.class, Serializable.class })
 public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple<T1, T2, T3>>,
 	FirstAware<T1>, SecondAware<T2>, ThirdAware<T3> {
 

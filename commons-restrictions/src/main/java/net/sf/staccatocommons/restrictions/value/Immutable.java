@@ -22,12 +22,18 @@ import java.lang.annotation.Target;
 import net.sf.staccatocommons.restrictions.Restriction;
 
 /**
- * Classes annotated as {@link Immutable} indicate that their instances are
- * {@link Unmodifiable}, and also either all their attributes are primitives or
- * immutable objects - {@link String}s, {@link Integer}, or have no attributes
- * at all.
- * 
+ * {@link Immutable}s are objects whose state, if any, can not be mutated in any
+ * way. Such objects either have no attributes - statless - or are
+ * {@link Unmodifiable} whose attributes are primitive or immutable. Examples of
+ * immutable objects are strings and {@code Collections.emptyList()}.
+ * <p>
+ * * Classes annotated as {@link Immutable} indicate that all their instances
+ * have such property. Methods annotated as {@link Immutable} denote that all
+ * the objects returned by them have such property.
+ * </p>
+ * <p>
  * {@link Immutable}s are inherently thread-safe.
+ * </p>
  * 
  * @author fbulgarelli
  * @see Restriction
@@ -36,7 +42,7 @@ import net.sf.staccatocommons.restrictions.Restriction;
 @Inherited
 @Restriction
 @Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.TYPE)
+@Target({ ElementType.TYPE, ElementType.METHOD })
 public @interface Immutable {
 
 }

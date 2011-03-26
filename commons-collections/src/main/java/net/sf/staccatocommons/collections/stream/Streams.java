@@ -30,7 +30,6 @@ import net.sf.staccatocommons.collections.stream.impl.SingleStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.UndefinedStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.ConsStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedSingleStream;
-import net.sf.staccatocommons.collections.stream.properties.ConditionallyRepeatable;
 import net.sf.staccatocommons.collections.stream.properties.Projection;
 import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.Applicable;
@@ -41,6 +40,7 @@ import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.sequence.StopConditions;
 import net.sf.staccatocommons.lang.thunk.Thunks;
+import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -71,7 +71,7 @@ public class Streams {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
+	@Conditionally(Repeatable.class)
 	public static <A> Stream<A> cons(final Thunk<A> head, @NonNull final Stream<? extends A> tail) {
 		return new ConsStream<A>(head, (Stream<A>) tail);
 	}
@@ -93,7 +93,7 @@ public class Streams {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
+	@Conditionally(Repeatable.class)
 	public static <A> Stream<A> cons(final A head, @NonNull final Stream<? extends A> tail) {
 		return new ConsStream<A>(Thunks.constant(head), (Stream<A>) tail);
 	}
@@ -128,9 +128,9 @@ public class Streams {
 	 * 
 	 * @see Thunk#value()
 	 */
-	@Projection
-	@ConditionallyRepeatable
 	@NonNull
+	@Projection
+	@Repeatable
 	public static <A> Stream<A> cons(Thunk<A> element) {
 		return new DelayedSingleStream(element);
 	}
@@ -175,7 +175,7 @@ public class Streams {
 	 * <code>Sequence.from(start, generator, stopCondition)</code>
 	 * 
 	 * @param <A>
-	 * @param seed
+	 * @param start
 	 *          the initial element of the sequence
 	 * @param generator
 	 *          a function used to generated each element from the sequence after
@@ -188,11 +188,21 @@ public class Streams {
 	 */
 	@NonNull
 	@Projection
-	public static <A> Stream<A> iterate(@NonNull A seed, @NonNull Applicable<A, A> generator,
+	public static <A> Stream<A> iterate(@NonNull A start, @NonNull Applicable<A, A> generator,
 		@NonNull Evaluable<A> stopCondition) {
-		return from(Sequence.from(seed, generator, stopCondition));
+		return from(Sequence.from(start, generator, stopCondition));
 	}
 
+	/**
+	 * Creates a new {@link Stream} that retrieves element from the sequence
+	 * <code>Sequence.from(start, stop)</code>
+	 * 
+	 * @param start
+	 *          the seed of the sequence
+	 * @param stop
+	 *          the stop value
+	 * @return a new {@link Stream}
+	 */
 	@NonNull
 	@Projection
 	public static Stream<Integer> iterate(int start, int stop) {
@@ -229,7 +239,7 @@ public class Streams {
 	 */
 	@NonNull
 	@Projection
-	@ConditionallyRepeatable
+	@Conditionally(Repeatable.class)
 	public static <A> Stream<A> from(@NonNull Iterable<? extends A> iterable) {
 		return iterable instanceof Stream ? (Stream<A>) iterable : new IterableStream<A>(iterable);
 	}
