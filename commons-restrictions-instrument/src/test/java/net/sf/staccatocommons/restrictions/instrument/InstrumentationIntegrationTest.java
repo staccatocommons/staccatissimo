@@ -18,7 +18,6 @@ import net.sf.staccatocommons.io.Directory;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -58,7 +57,6 @@ public class InstrumentationIntegrationTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Ignore("Not implemented yet")
 	@Test
 	public void testConstInstance() throws Exception {
 		Mock m1 = new Mock();

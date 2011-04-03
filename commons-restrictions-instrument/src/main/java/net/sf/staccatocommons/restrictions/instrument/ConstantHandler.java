@@ -48,17 +48,13 @@ public class ConstantHandler implements MethodAnnotationHandler<Constant>, Deact
 
 	public void postProcessAnnotatedMethod(Constant annotation, MethodAnnotationContext context)
 		throws CannotCompileException, NotFoundException {
-		final ConstantKind constantKind = ConstantKind.CLASS;
 
 		if (!deactivableSupport.isActive())
 			return;
 
 		CtMethod originalMethod = context.getMethod();
-		if (!Modifier.isStatic(originalMethod.getModifiers())) {
-			context.logInfoMessage("{}: this processor does not support @Constant processing "
-				+ "on non static methods", context.getMethod().getLongName());
-			return;
-		}
+		final ConstantKind constantKind = !Modifier //
+			.isStatic(originalMethod.getModifiers()) ? ConstantKind.INSTANCE : ConstantKind.CLASS;
 
 		if (originalMethod.getParameterTypes().length > 0) {
 			context.logInfoMessage("{}: has one or more parameters. Not processing", context
@@ -90,7 +86,7 @@ public class ConstantHandler implements MethodAnnotationHandler<Constant>, Deact
 			null);
 		initializer.setModifiers(constantKind.getInitializerModifiers());
 		clazz.addMethod(initializer);
-		clazz.addField(field, Initializer.byCall(clazz, initializer.getName()));
+		clazz.addField(field, Initializer.byExpr(initializer.getName() + "()"));
 
 		originalMethod.setBody(String.format(METHOD_TEMPLATE, fieldName));
 	}
