@@ -19,6 +19,7 @@ import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.number.internal.NumberTypeFunction;
 import net.sf.staccatocommons.lang.number.internal.NumberTypeFunction2;
+import net.sf.staccatocommons.restrictions.Constant;
 
 /**
  * @author flbulgarelli
@@ -28,16 +29,6 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 	Serializable {
 
 	private static final long serialVersionUID = -2727245678088637829L;
-
-	private final AbstractFunction2<A, A, A> add = new Add<A>(this);
-
-	private final AbstractFunction2<A, A, A> multiply = new Multiply<A>(this);
-
-	private final Function<A, A> negate = new Negate<A>(this);
-
-	private Function<A, A> abs = new Abs<A>(this);
-
-	private final Function<A, A> inverse = new Inverse<A>(this);
 
 	public boolean isZero(A n) {
 		return compare(n, zero()) == 0;
@@ -72,13 +63,15 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 	}
 
 	@Override
+	@Constant
 	public AbstractFunction2<A, A, A> add() {
-		return add;
+		return new Add<A>(this);
 	}
 
 	@Override
+	@Constant
 	public AbstractFunction2<A, A, A> multiply() {
-		return multiply;
+		return new Multiply<A>(this);
 	}
 
 	public Function<A, A> add(A n) {
@@ -89,16 +82,19 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 		return divide(one(), n);
 	}
 
+	@Constant
 	public Function<A, A> negate() {
-		return negate;
+		return new Negate<A>(this);
 	}
 
+	@Constant
 	public Function<A, A> abs() {
-		return abs;
+		return new Abs<A>(this);
 	}
 
+	@Constant
 	public Function<A, A> inverse() {
-		return inverse;
+		return new Inverse<A>(this);
 	}
 
 	private static final class Inverse<A> extends NumberTypeFunction<A, A> {

@@ -54,7 +54,7 @@ public abstract class AbstractDelayable2<A, B, C> implements Applicable2<A, B, C
 	@ForceRestrictions
 	@NonNull
 	@Override
-	public Thunk<C> delayed(@NonNull final Thunk<A> thunk0, @NonNull final Thunk<B> thunk1) {
+	public Thunk<C> delayedValue(@NonNull final Thunk<A> thunk0, @NonNull final Thunk<B> thunk1) {
 		return new Thunk<C>() {
 			public C value() {
 				return apply(thunk0.value(), thunk1.value());

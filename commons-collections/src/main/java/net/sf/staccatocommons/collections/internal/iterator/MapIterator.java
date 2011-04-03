@@ -49,6 +49,6 @@ public class MapIterator<A, B> extends AdvanceThriterator<B> {
 	}
 
 	public Thunk<B> delayedCurrent() {
-		return (Thunk<B>) function.delayed(thriter.delayedCurrent());
+		return (Thunk<B>) function.delayedValue(thriter.delayedCurrent());
 	}
 }

@@ -53,6 +53,6 @@ public class ZipIterator<A, B, C> extends AdvanceThriterator<C> {
 	}
 
 	public Thunk<C> delayedCurrent() {
-		return function.delayed(thriter1.delayedCurrent(), thriter2.delayedCurrent());
+		return function.delayedValue(thriter1.delayedCurrent(), thriter2.delayedCurrent());
 	}
 }

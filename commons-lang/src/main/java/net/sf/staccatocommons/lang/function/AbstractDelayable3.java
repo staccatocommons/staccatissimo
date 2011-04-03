@@ -49,7 +49,7 @@ public abstract class AbstractDelayable3<A, B, C, D> implements Applicable3<A, B
 	@Override
 	@NonNull
 	@ForceRestrictions
-	public Thunk<D> delayed(@NonNull final Thunk<A> thunk0, @NonNull final Thunk<B> thunk1,
+	public Thunk<D> delayedValue(@NonNull final Thunk<A> thunk0, @NonNull final Thunk<B> thunk1,
 		@NonNull final Thunk<C> thunk2) {
 		return new Thunk<D>() {
 			public D value() {

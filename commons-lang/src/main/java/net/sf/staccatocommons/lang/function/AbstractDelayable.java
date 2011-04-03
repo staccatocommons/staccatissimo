@@ -36,7 +36,7 @@ public abstract class AbstractDelayable<A, B> implements Applicable<A, B>, Delay
 	@NonNull
 	@ForceRestrictions
 	@Override
-	public Thunk<B> delayed(@NonNull final Thunk<? extends A> thunk) {
+	public Thunk<B> delayedValue(@NonNull final Thunk<? extends A> thunk) {
 		return new Thunk<B>() {
 			public B value() {
 				return apply(thunk.value());

@@ -41,7 +41,7 @@ public final class IdentityFunction<A> extends AbstractFunction<A, A> implements
 
 	@NonNull
 	@Override
-	public Thunk<A> delayed(Thunk<? extends A> thunk) {
+	public Thunk<A> delayedValue(Thunk<? extends A> thunk) {
 		return (Thunk<A>) thunk;
 	}
 

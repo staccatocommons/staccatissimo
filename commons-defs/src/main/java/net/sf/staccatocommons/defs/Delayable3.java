@@ -59,6 +59,6 @@ public interface Delayable3<A, B, C, D> {
 	 * @return a new {@link Thunk}.
 	 */
 	@NonNull
-	Thunk<D> delayed(@NonNull Thunk<A> thunk0, @NonNull Thunk<B> thunk1, @NonNull Thunk<C> thunk2);
+	Thunk<D> delayedValue(@NonNull Thunk<A> thunk0, @NonNull Thunk<B> thunk1, @NonNull Thunk<C> thunk2);
 
 }
