@@ -12,7 +12,8 @@ Getting Started
   Staccato-Commons-Lang resolves simple and common everyday problems. Descriptions of such problems, solutions and examples 
   can be found in the following links:
   
-  * {{{relevant-state-by-example.html}RelevantState}} - Consistently implementing equals, hashcode, toString, and/or compareTo in an efficient 
+  * {{{relevant-state-by-example.html}RelevantState}} and BasicEquals
+   - Consistently implementing equals, hashcode, toString, and/or compareTo in an efficient 
   way and without boilerplate code. 
   
   * {{{prioritized-by-example.html}Prioritized}} - Prioritizing elements in sorted collections
@@ -21,11 +22,28 @@ Getting Started
   
   * Handle - Handling exceptions in a high level way
   
-  * Tuple
+  * Range - Expressing a range of comparable objects
+  
+  * Builders - Templates for creating builder-pattern style objects
+  
+  * MapBuilder and CollectionBuilder - Builders for creating unmodifiable collections and maps
+  
+  * Compare - Functions and utilities for comparing elements
+  
+  * Sequences - An iterable source of objects where next object is computed based on the previous     
+  
+  * Tuples
   
   * Lifecycle
   
-  * Number and NumberTypes - Compactly express BigInteger and BigDecimal literals, and deal with numeric types polimorphically.  
+  * Predicates, Functions and Thunks - abstract and concrete implementations 
+  of the rich, function-like interface defined by staccato-commons-defs
+  
+  * Equiv - Common equality relation implementations 
+  
+  * SoftExceptions
+     
+  * Numbers and NumberTypes - Compactly express BigInteger and BigDecimal literals, and deal with numeric types polimorphically.  
   
    
   
