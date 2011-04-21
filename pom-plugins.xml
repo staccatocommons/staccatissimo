@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright (c) 2011, The Staccato-Commons Team
+
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU Lesser General Public License as published by
+     the Free Software Foundation; version 3 of the License.
+
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU Lesser General Public License for more details.
+
+-->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.staccatocommons</groupId>
   <artifactId>staccatocommons-module-plugins</artifactId>
-  <version>1.0-beta-1</version>
+  <version>1.0-beta-2-SNAPSHOT</version>
   <name>Staccato-Commons Plugins Project Module</name>
   <packaging>pom</packaging>
 
