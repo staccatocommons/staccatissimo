@@ -1,0 +1,92 @@
+~~
+~~  Copyright (c) 2011, The Staccato-Commons Team
+~~
+~~  This program is free software; you can redistribute it and/or modify
+~~  it under the terms of the GNU Lesser General Public License as published by
+~~  the Free Software Foundation; version 3 of the License.
+~~
+~~  This program is distributed in the hope that it will be useful,
+~~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~~  GNU Lesser General Public License for more details.
+~~
+
+What is Staccato-Commons?
+ 
+ Staccato-Commons is a FLOSS project that extends and integrates existing Java frameworks in order to fill their gaps and unificate abstractions, focusing on productivity and maintainability, in a full object oriented way and using functional programming techniques.
+
+Staccato-Commons Principles
+
+ Staccato-Commons follows some design guidelines, called Staccato-Commons Principles, which all its code must observe:
+ 
+ * Java-centric. Staccato-Commons is written in pure Java, and it does not define nor use configuration files. 
+  
+ * Object Oriented. Staccato-Commons offers object oriented solutions - or solutions that explode objected orientation as much as Java can offer - and is implemented using the same techniques and design concepts.
+  
+ * Functional. Staccato-Commons solutions make use of techniques and concepts taken from functional programming. It encourages immutable objects, pure code - without side effect - messages, laziness, and higher order programming using function-like objects.
+ 
+ * Generic. Staccato-Commons intesively uses Java Generics
+ 
+ * Rich, fluent interfaces. Staccato-Commons classes and interfaces  maximize the amount of useful, fluent methods exposed, in order to make client code cleaner and simpler. Complexity is not handled by client.
+ 
+ * DRY. Staccato-Commons libraries have ease of usage and code reuse as a priority, both for its implementation and the client code. It does not reinvent the wheel defining new interfaces and classes, when they are already there.     
+ 
+ * Documented and Contract-First. Staccato-Commons codebase is fully documented using Javadoc and source annotations, focusing on well defining contracts between the apis and the client code.  
+ 
+ * Pragmatic. Staccato-Commons is not a research project. It offers solutions that work.
+   
+Staccato-Commons Organization
+ 
+ The project is divided into two main categories:
+ 
+ * Staccatissimo.  Extensions to general purpose libraries like  {{{http://commons.apache.org/lang/}Apache Commons Lang}} and the JDK itself. They are the core of Staccato-Commons: stable classes, annotations and interfaces, on which all the Staccato-Commons projects depend. It is in alpha state.  
+ 
+ * Legato - extensions to any other frameworks that does not fall in the previous category. It is in planning state. 
+ 
+Main Projects 
+
+ These are the projects currently in active development:
+ 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions}staccato-commons-restrictions}}: 
+ a library of annotations that express restrictions and properties of code, in order to augment documentation reuse, maintainability
+ and consistency. Many of those annotations may be processed by to staccato-commons-restriction-instrument tool. 
+ 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs}staccato-commons-defs}}: 
+ the core Staccatisimo definitions, a minimal library of interfaces that are deliberately very abstract, with well 
+ defined but generic semantics, in order to augment code reuse. They are the glue of Staccato-Commons    
+
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslang}staccato-commons-lang}}: simple 
+ but essential abstractions for the rest of the projects, like Options, Lifecycles and Tuples. It contains also abstract and/or 
+ concrete implementations of most of the interfaces in staccato-commons-defs, like NumberTypes, and facilities for implementing 
+ equals, hashcode, toString and compareTo in a consistent way, without performance impacts or boilerplate code.    
+ 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheck}staccato-commons-check}}:
+  a general purpose, abstract validation ecosystem, with concrete classes for checking preconditions and postconditions 
+ 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators}staccato-commons-iterators}}: a library of generic, reusable
+  common iterators, and thriters, advanced powerful iterator-like objects that permit lazy iterations impossible before them.      
+ 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscollections}staccato-commons-collections}}:
+  dozens of class methods for iterables handling, in both a functional and a more imperative style,
+  and Streams, the "super"-iterable - rich, lazy, and generic enough to handle much more than just collections.
+   
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsio}staccato-commons-io}}:
+  integration between the Staccato libraries and java.io.  
+ 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument}staccato-commons-instrument}}: 
+ an extensible, compile-time, annotation processing tool with class-instrumentation capabilities. 
+ 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument}staccato-commons-restrictions-instrument}} and 
+{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrumentmavenplugin}staccato-commons-restrictions-instrument-maven-plugin}} 
+ 
+ * staccato-commons-testing
+     
+Planned projects
+
+ These are projects that are in planning stages and are likely to be publicly available in the near future:
+   
+  * staccato-commons-types: a library that provides implementations of many type-classes defined in commons-defs. 
+  
+  
+  
+  
