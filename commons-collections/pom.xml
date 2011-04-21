@@ -15,7 +15,7 @@
 	<scm>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-collections</connection>
 		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-collections</developerConnection>
-		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-collections/</url>
+		<url>${staccatissimo.scm.view.base}/trunk/commons-collections/</url>
 	</scm>
 	<distributionManagement>
 		<site>
@@ -40,6 +40,12 @@
 			<version>1.0-beta-2-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+            <groupId>net.sf.staccatocommons</groupId>
+            <artifactId>commons-testing</artifactId>
+            <version>1.0-beta-2-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 	<reporting>
 		<plugins>

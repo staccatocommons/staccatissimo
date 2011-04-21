@@ -20,7 +20,7 @@
 	<scm>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-io</connection>
 		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-io</developerConnection>
-		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-io/</url>
+		<url>${staccatissimo.scm.view.base}/trunk/commons-io/</url>
 	</scm>
 	<dependencies>
 		<dependency>
@@ -49,6 +49,12 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.6.1</version>
 		</dependency>
+       <dependency>
+            <groupId>net.sf.staccatocommons</groupId>
+            <artifactId>commons-testing</artifactId>
+            <version>1.0-beta-2-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 	<reporting>
 		<plugins>

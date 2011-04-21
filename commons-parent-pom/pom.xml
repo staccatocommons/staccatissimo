@@ -23,6 +23,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<staccatissimo.scm.base>https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo</staccatissimo.scm.base>
+		<staccatissimo.scm.view.base>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo</staccatissimo.scm.view.base>
 	</properties>
 	<developers>
 		<developer>
@@ -30,14 +31,14 @@
 		</developer>
 	</developers>
 	<scm>
-        <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-parent-pom</developerConnection>
-        <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-parent-pom</connection>
-        <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-parent-pom/</url>
-    </scm>
+		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-parent-pom</developerConnection>
+		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-parent-pom</connection>
+		<url>${staccatissimo.scm.view.base}/trunk/commons-parent-pom/</url>
+	</scm>
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}</url>
+			<url>${distribution.site.url}/staccatissimo/commonsparentpom</url>
 		</site>
 	</distributionManagement>
 	<build>
@@ -145,11 +146,6 @@
 				<reportSets>
 					<reportSet>
 						<reports>
-<!--							<report>dependencies</report> -->
-							<!-- <report>project-team</report> -->
-							<!-- <report>mailing-list</report> -->
-							<!-- <report>cim</report> -->
-							<!-- <report>issue-tracking</report> -->
 							<report>license</report>
 							<report>scm</report>
 						</reports>
@@ -158,12 +154,4 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<dependencies>
-		<dependency>
-			<groupId>net.sf.staccatocommons</groupId>
-			<artifactId>commons-testing</artifactId>
-			<version>1.0-beta-2-SNAPSHOT</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
 </project>

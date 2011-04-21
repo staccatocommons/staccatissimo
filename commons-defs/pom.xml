@@ -15,7 +15,7 @@
 	<scm>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-defs</connection>
 		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-defs</developerConnection>
-		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-defs/</url>
+		<url>${staccatissimo.scm.view.base}/trunk/commons-defs/</url>
 	</scm>
 	<dependencies>
 		<dependency>

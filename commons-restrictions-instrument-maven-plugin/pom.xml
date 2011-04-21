@@ -16,7 +16,7 @@
 	<scm>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument-maven-plugin</connection>
 		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument-maven-plugin</developerConnection>
-		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-restrictions-instrument-maven-plugin/</url>
+		<url>${staccatissimo.scm.view.base}/trunk/commons-restrictions-instrument-maven-plugin/</url>
 	</scm>
 	<distributionManagement>
         <site>

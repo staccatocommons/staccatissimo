@@ -11,7 +11,7 @@
 	<scm>
 		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lang</developerConnection>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lang</connection>
-		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-lang/</url>
+		<url>${staccatissimo.scm.view.base}/trunk/commons-lang/</url>
 	</scm>
 	<parent>
 		<groupId>net.sf.staccatocommons</groupId>
@@ -57,6 +57,12 @@
 			<artifactId>commons-iterators</artifactId>
 			<version>1.0-beta-2-SNAPSHOT</version>
 		</dependency>
+        <dependency>
+            <groupId>net.sf.staccatocommons</groupId>
+            <artifactId>commons-testing</artifactId>
+            <version>1.0-beta-2-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 	<profiles>
 		<profile>

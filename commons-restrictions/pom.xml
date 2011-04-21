@@ -20,6 +20,6 @@
 	<scm>
 		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions</developerConnection>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions</connection>
-		<url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-restrictions/</url>
+		<url>${staccatissimo.scm.view.base}/trunk/commons-restrictions/</url>
 	</scm>
 </project>
