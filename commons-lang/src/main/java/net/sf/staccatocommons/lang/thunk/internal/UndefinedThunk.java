@@ -22,21 +22,21 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class UndefinedThunk<A> implements Thunk<A> {
 
-	public A value() {
-		throw new RuntimeException("Undefined");
-	}
+  public A value() {
+    throw new RuntimeException("Undefined");
+  }
 
-	public String toString() {
-		return "Undefined";
-	}
+  public String toString() {
+    return "Undefined";
+  }
 
-	/**
-	 * @return a {@link Constant} {@link UndefinedThunk}
-	 */
-	@Constant
-	@NonNull
-	public static <A> Thunk<A> undefined() {
-		return new UndefinedThunk<A>();
-	}
+  /**
+   * @return a {@link Constant} {@link UndefinedThunk}
+   */
+  @Constant
+  @NonNull
+  public static <A> Thunk<A> undefined() {
+    return new UndefinedThunk<A>();
+  }
 
 }

@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.handler.deactivator;
 
 /**
@@ -23,14 +22,14 @@ package net.sf.staccatocommons.instrument.handler.deactivator;
  */
 public interface Deactivable {
 
-	/**
-	 * Requests the handler to be deactivated. This request can be ignored.
-	 */
-	void activate();
+  /**
+   * Requests the handler to be deactivated. This request can be ignored.
+   */
+  void activate();
 
-	/**
-	 * Requests the handler to be activated. This request can be ignored.
-	 */
-	void deactivate();
+  /**
+   * Requests the handler to be activated. This request can be ignored.
+   */
+  void deactivate();
 
 }

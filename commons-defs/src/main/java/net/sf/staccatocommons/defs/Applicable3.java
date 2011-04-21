@@ -34,17 +34,17 @@ package net.sf.staccatocommons.defs;
 @Applicative
 public interface Applicable3<A, B, C, D> {
 
-	/**
-	 * Performs a transformation on the given element, and returns its result.
-	 * 
-	 * @param arg0
-	 *          the first transformation argument
-	 * @param arg1
-	 *          the second transformation argument
-	 * @param arg2
-	 *          the third transformation argument
-	 * @return the transformation result
-	 */
-	D apply(A arg0, B arg1, C arg2);
+  /**
+   * Performs a transformation on the given element, and returns its result.
+   * 
+   * @param arg0
+   *          the first transformation argument
+   * @param arg1
+   *          the second transformation argument
+   * @param arg2
+   *          the third transformation argument
+   * @return the transformation result
+   */
+  D apply(A arg0, B arg1, C arg2);
 
 }

@@ -23,12 +23,12 @@ import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
  */
 public class TakeWhileIteratorUnitTest extends IterableTheories {
 
-	protected Iterable<?> createTwoElementsIterable() {
-		return Streams.cons(4, 5, 6).takeWhile(lessThan(6));
-	}
+  protected Iterable<?> createTwoElementsIterable() {
+    return Streams.cons(4, 5, 6).takeWhile(lessThan(6));
+  }
 
-	protected Iterable<?> createOneElementIterable() {
-		return Streams.cons(10, 15, 90).takeWhile(lessThan(12));
-	}
+  protected Iterable<?> createOneElementIterable() {
+    return Streams.cons(10, 15, 90).takeWhile(lessThan(12));
+  }
 
 }

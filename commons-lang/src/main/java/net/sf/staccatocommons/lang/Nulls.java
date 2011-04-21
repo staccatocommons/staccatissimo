@@ -24,32 +24,32 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class Nulls {
 
-	/**
-	 * Returns the given value, if non null, or other, otherwise.
-	 * 
-	 * @param <T>
-	 * @param value
-	 *          nullable.
-	 * @param other
-	 *          nullable, although it has little sense to be be null
-	 * @return <code> value != null ? value : other</code>
-	 */
-	public static <T> T coalesce(T value, T other) {
-		return value != null ? value : other;
-	}
+  /**
+   * Returns the given value, if non null, or other, otherwise.
+   * 
+   * @param <T>
+   * @param value
+   *          nullable.
+   * @param other
+   *          nullable, although it has little sense to be be null
+   * @return <code> value != null ? value : other</code>
+   */
+  public static <T> T coalesce(T value, T other) {
+    return value != null ? value : other;
+  }
 
-	/**
-	 * Returns the given value, if non null, or the value provided by the given
-	 * {@link Thunk}, otherwise.
-	 * 
-	 * @param <T>
-	 * @param value
-	 *          nullable.
-	 * @param thunk
-	 *          non null.
-	 * @return <code>value != null ? value : thunk.value()</code>
-	 */
-	public static <T> T coalesce(T value, @NonNull Thunk<T> thunk) {
-		return value != null ? value : thunk.value();
-	}
+  /**
+   * Returns the given value, if non null, or the value provided by the given
+   * {@link Thunk}, otherwise.
+   * 
+   * @param <T>
+   * @param value
+   *          nullable.
+   * @param thunk
+   *          non null.
+   * @return <code>value != null ? value : thunk.value()</code>
+   */
+  public static <T> T coalesce(T value, @NonNull Thunk<T> thunk) {
+    return value != null ? value : thunk.value();
+  }
 }

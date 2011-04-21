@@ -37,71 +37,71 @@ import org.apache.maven.plugin.MojoFailureException;
  */
 public abstract class InstrumentMojoSupport {
 
-	private final String location;
+  private final String location;
 
-	private final Artifact artifact;
+  private final Artifact artifact;
 
-	private final List<Artifact> pluginArtifactsList;
+  private final List<Artifact> pluginArtifactsList;
 
-	private final Mojo mojo;
+  private final Mojo mojo;
 
-	/**
-	 * Creates a new {@link InstrumentMojoSupport}
-	 */
-	public InstrumentMojoSupport(@NonNull Mojo mojo, @NonNull String location,
-		@NonNull Artifact artifact, List<Artifact> pluginArtifactsList) {
-		Ensure.isNotNull("mojo", mojo);
-		Ensure.isNotNull("location", location);
-		Ensure.isNotNull("artifact", artifact);
-		Ensure.isNotNull("pluginArtifactsList", pluginArtifactsList);
-		this.mojo = mojo;
-		this.location = location;
-		this.artifact = artifact;
-		this.pluginArtifactsList = pluginArtifactsList;
-	}
+  /**
+   * Creates a new {@link InstrumentMojoSupport}
+   */
+  public InstrumentMojoSupport(@NonNull Mojo mojo, @NonNull String location, @NonNull Artifact artifact,
+    List<Artifact> pluginArtifactsList) {
+    Ensure.isNotNull("mojo", mojo);
+    Ensure.isNotNull("location", location);
+    Ensure.isNotNull("artifact", artifact);
+    Ensure.isNotNull("pluginArtifactsList", pluginArtifactsList);
+    this.mojo = mojo;
+    this.location = location;
+    this.artifact = artifact;
+    this.pluginArtifactsList = pluginArtifactsList;
+  }
 
-	/**
-	 * Executes the mojo
-	 * 
-	 * @throws MojoExecutionException
-	 * @throws MojoFailureException
-	 */
-	public void execute() throws MojoExecutionException, MojoFailureException {
-		mojo.getLog().info("Instrumenting classes located in " + location);
-		String extraClasspath = createClassPathString();
-		mojo.getLog().debug("Using classpath " + extraClasspath);
-		try {
-			InstrumentationRunner.runInstrumentation(//
-				createConfigurer(),
-				new Directory(location),
-				extraClasspath);
-		} catch (Exception e) {
-			mojo.getLog().error(e.getMessage());
-			throw new MojoExecutionException("Unexpected error", e);
-		}
-		mojo.getLog().info("Classes instrumented sucessfully");
-	}
+  /**
+   * Executes the mojo
+   * 
+   * @throws MojoExecutionException
+   * @throws MojoFailureException
+   */
+  public void execute() throws MojoExecutionException, MojoFailureException {
+    mojo.getLog().info("Instrumenting classes located in " + location);
+    String extraClasspath = createClassPathString();
+    mojo.getLog().debug("Using classpath " + extraClasspath);
+    try {
+      InstrumentationRunner.runInstrumentation(//
+        createConfigurer(),
+        new Directory(location),
+        extraClasspath);
+    } catch (Exception e) {
+      mojo.getLog().error(e.getMessage());
+      throw new MojoExecutionException("Unexpected error", e);
+    }
+    mojo.getLog().info("Classes instrumented sucessfully");
+  }
 
-	private String createClassPathString() {
-		return Streams //
-			.from(pluginArtifactsList)
-			.filter(Predicates.equal(artifact).not())
-			.map(new AbstractFunction<Artifact, String>() {
-				public String apply(Artifact arg) {
-					try {
-						return arg.getFile().getCanonicalPath();
-					} catch (IOException e) {
-						throw SoftException.soften(e);
-					}
-				}
-			})
-			.joinStrings(File.pathSeparator);
-	}
+  private String createClassPathString() {
+    return Streams //
+      .from(pluginArtifactsList)
+      .filter(Predicates.equal(artifact).not())
+      .map(new AbstractFunction<Artifact, String>() {
+        public String apply(Artifact arg) {
+          try {
+            return arg.getFile().getCanonicalPath();
+          } catch (IOException e) {
+            throw SoftException.soften(e);
+          }
+        }
+      })
+      .joinStrings(File.pathSeparator);
+  }
 
-	/**
-	 * Create the instrumenter configurer
-	 */
-	@NonNull
-	protected abstract InstrumenterConfigurer createConfigurer();
+  /**
+   * Create the instrumenter configurer
+   */
+  @NonNull
+  protected abstract InstrumenterConfigurer createConfigurer();
 
 }

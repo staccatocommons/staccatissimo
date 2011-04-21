@@ -21,11 +21,11 @@ import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
  */
 public class TakeIteratorUnitTest extends IterableTheories {
 
-	protected Iterable<?> createTwoElementsIterable() {
-		return Streams.cons(4, 5, 6).take(2);
-	}
+  protected Iterable<?> createTwoElementsIterable() {
+    return Streams.cons(4, 5, 6).take(2);
+  }
 
-	protected Iterable<?> createOneElementIterable() {
-		return Streams.cons(10, 15, 90).take(1);
-	}
+  protected Iterable<?> createOneElementIterable() {
+    return Streams.cons(10, 15, 90).take(1);
+  }
 }

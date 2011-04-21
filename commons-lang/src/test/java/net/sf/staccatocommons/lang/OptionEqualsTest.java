@@ -24,19 +24,18 @@ import org.junit.experimental.theories.DataPoints;
  */
 public class OptionEqualsTest extends WellDefinedEqualsTheories {
 
-	/** Options data points */
-	@DataPoints
-	public static Object[] options = { Option.none(), Option.some(10), Option.some(5),
-			Option.some(5), newNone() };
+  /** Options data points */
+  @DataPoints
+  public static Object[] options = { Option.none(), Option.some(10), Option.some(5), Option.some(5), newNone() };
 
-	private static Object newNone() {
-		try {
-			Constructor<None> constructor = None.class.getDeclaredConstructor();
-			constructor.setAccessible(true);
-			return constructor.newInstance();
-		} catch (Exception e) {
-			throw SoftException.soften(e);
-		}
-	}
+  private static Object newNone() {
+    try {
+      Constructor<None> constructor = None.class.getDeclaredConstructor();
+      constructor.setAccessible(true);
+      return constructor.newInstance();
+    } catch (Exception e) {
+      throw SoftException.soften(e);
+    }
+  }
 
 }

@@ -37,14 +37,14 @@ import net.sf.staccatocommons.restrictions.value.Immutable;
 @Immutable
 public interface SizeAwareType<A> extends EmptyAwareType<A> {
 
-	/**
-	 * Answeres the size of the given object that understand the concept of
-	 * "having size".
-	 * 
-	 * @param sizeAware
-	 * @return the <code>sizeAware</code> size
-	 */
-	@SideEffectFree
-	int size(@NonNull A sizeAware);
+  /**
+   * Answeres the size of the given object that understand the concept of
+   * "having size".
+   * 
+   * @param sizeAware
+   * @return the <code>sizeAware</code> size
+   */
+  @SideEffectFree
+  int size(@NonNull A sizeAware);
 
 }

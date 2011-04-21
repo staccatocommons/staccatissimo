@@ -35,47 +35,46 @@ import net.sf.staccatocommons.restrictions.instrument.check.SizeHandler;
  */
 public class RestrictionConfigurer implements InstrumenterConfigurer {
 
-	private final boolean ignoreReturnChecks;
-	private final boolean ignoreChecks;
-	private final boolean ignoreConstants;
+  private final boolean ignoreReturnChecks;
+  private final boolean ignoreChecks;
+  private final boolean ignoreConstants;
 
-	/**
-	 * Creates a new {@link RestrictionConfigurer}
-	 */
-	public RestrictionConfigurer(boolean ignoreCheckReturns, boolean ignoreChecks,
-		boolean ignoreConstants) {
-		this.ignoreReturnChecks = ignoreCheckReturns;
-		this.ignoreChecks = ignoreChecks;
-		this.ignoreConstants = ignoreConstants;
-	}
+  /**
+   * Creates a new {@link RestrictionConfigurer}
+   */
+  public RestrictionConfigurer(boolean ignoreCheckReturns, boolean ignoreChecks, boolean ignoreConstants) {
+    this.ignoreReturnChecks = ignoreCheckReturns;
+    this.ignoreChecks = ignoreChecks;
+    this.ignoreConstants = ignoreConstants;
+  }
 
-	public void configureInstrumenter(InstrumenterConfiguration instrumenter) {
-		IgnoreCheckHandler ignoreCheckHandler = new IgnoreCheckHandler();
-		ForceChecksHandler forceCheckHandler = new ForceChecksHandler();
+  public void configureInstrumenter(InstrumenterConfiguration instrumenter) {
+    IgnoreCheckHandler ignoreCheckHandler = new IgnoreCheckHandler();
+    ForceChecksHandler forceCheckHandler = new ForceChecksHandler();
 
-		instrumenter.addAnnotationHanlder(ignoreCheckHandler).addAnnotationHanlder(forceCheckHandler);
+    instrumenter.addAnnotationHanlder(ignoreCheckHandler).addAnnotationHanlder(forceCheckHandler);
 
-		Collection<AnnotationHandler<?>> handlers = new LinkedList<AnnotationHandler<?>>();
+    Collection<AnnotationHandler<?>> handlers = new LinkedList<AnnotationHandler<?>>();
 
-		if (!ignoreChecks) {
-			handlers.addAll(Arrays.asList( //
-				new NotNullHandler(ignoreReturnChecks),
-				new SizeHandler(ignoreReturnChecks),
-				new NotEmptyHandler(ignoreReturnChecks),
-				new PositiveHandler(ignoreReturnChecks),
-				new MatchesHandler(ignoreReturnChecks),
-				new NotNegativeHandler(ignoreReturnChecks),
-				new MinSizeHandler(ignoreReturnChecks),
-				new MaxSizeHandler(ignoreReturnChecks)));
-		}
-		if (!ignoreConstants) {
-			handlers.add(new ConstantHandler());
-		}
-		for (AnnotationHandler handler : handlers) {
-			ignoreCheckHandler.addDeactivable((Deactivable) handler);
-			forceCheckHandler.addDeactivable((Deactivable) handler);
-			instrumenter.addAnnotationHanlder(handler);
-		}
-		instrumenter.setInstrumentationMark(RestrictionInstrumentationMark.INSTANCE);
-	}
+    if (!ignoreChecks) {
+      handlers.addAll(Arrays.asList( //
+        new NotNullHandler(ignoreReturnChecks),
+        new SizeHandler(ignoreReturnChecks),
+        new NotEmptyHandler(ignoreReturnChecks),
+        new PositiveHandler(ignoreReturnChecks),
+        new MatchesHandler(ignoreReturnChecks),
+        new NotNegativeHandler(ignoreReturnChecks),
+        new MinSizeHandler(ignoreReturnChecks),
+        new MaxSizeHandler(ignoreReturnChecks)));
+    }
+    if (!ignoreConstants) {
+      handlers.add(new ConstantHandler());
+    }
+    for (AnnotationHandler handler : handlers) {
+      ignoreCheckHandler.addDeactivable((Deactivable) handler);
+      forceCheckHandler.addDeactivable((Deactivable) handler);
+      instrumenter.addAnnotationHanlder(handler);
+    }
+    instrumenter.setInstrumentationMark(RestrictionInstrumentationMark.INSTANCE);
+  }
 }

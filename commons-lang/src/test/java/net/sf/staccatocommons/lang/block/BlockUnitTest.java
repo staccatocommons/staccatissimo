@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.block;
 
 import static org.junit.Assert.*;
@@ -31,52 +30,52 @@ import org.junit.Test;
  */
 public class BlockUnitTest extends JUnit4MockObjectTestCase {
 
-	Block<MutableInt> block;
-	private Executable<MutableInt> executable;
+  Block<MutableInt> block;
+  private Executable<MutableInt> executable;
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		executable = mock(Executable.class);
-	}
+  /**
+   * @throws java.lang.Exception
+   */
+  @Before
+  public void setUp() throws Exception {
+    executable = mock(Executable.class);
+  }
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.block.Block#then(net.sf.staccatocommons.defs.Executable)}
-	 * .
-	 */
-	@Test
-	public void testThen() {
-		block = new Block<MutableInt>() {
-			public void exec(MutableInt argument) {
-				assertEquals(0, argument.getValue());
-				argument.add(1);
-			}
-		};
-		checking(new Expectations() {
-			{
-				one(executable).exec(new MutableInt(1));
-			}
-		});
-		block.then(executable).exec(new MutableInt(0));
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.lang.block.Block#then(net.sf.staccatocommons.defs.Executable)}
+   * .
+   */
+  @Test
+  public void testThen() {
+    block = new Block<MutableInt>() {
+      public void exec(MutableInt argument) {
+        assertEquals(0, argument.getValue());
+        argument.add(1);
+      }
+    };
+    checking(new Expectations() {
+      {
+        one(executable).exec(new MutableInt(1));
+      }
+    });
+    block.then(executable).exec(new MutableInt(0));
+  }
 
-	/** Test for {@link Block#delayed(Object)} */
-	@Test
-	public void testDelayed() throws Exception {
-		block = new Block<MutableInt>() {
-			public void exec(MutableInt argument) {
-				argument.increment();
-			}
-		};
-		MutableInt mi = new MutableInt(5);
-		Thunk<Void> p = block.delayed(mi);
-		p.value();
-		p.value();
-		p.value();
-		assertEquals(mi.getValue(), 8);
-	}
+  /** Test for {@link Block#delayed(Object)} */
+  @Test
+  public void testDelayed() throws Exception {
+    block = new Block<MutableInt>() {
+      public void exec(MutableInt argument) {
+        argument.increment();
+      }
+    };
+    MutableInt mi = new MutableInt(5);
+    Thunk<Void> p = block.delayed(mi);
+    p.value();
+    p.value();
+    p.value();
+    assertEquals(mi.getValue(), 8);
+  }
 
 }

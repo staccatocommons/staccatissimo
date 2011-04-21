@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang;
 
 import static org.junit.Assert.*;
@@ -29,37 +28,36 @@ import org.junit.Test;
  */
 public class SoftExceptionUnitTest {
 
-	/***/
-	@Test
-	public void testSoften_Runtime() {
-		IllegalArgumentException exception = new IllegalArgumentException("bad input");
-		RuntimeException soften = SoftException.soften(exception);
-		assertSame(exception, soften);
-	}
+  /***/
+  @Test
+  public void testSoften_Runtime() {
+    IllegalArgumentException exception = new IllegalArgumentException("bad input");
+    RuntimeException soften = SoftException.soften(exception);
+    assertSame(exception, soften);
+  }
 
-	/***/
-	@Test
-	public void testSoften_Checked() {
-		IOException exception = new IOException("bad file");
-		RuntimeException soften = SoftException.soften(exception);
-		assertSame(exception, soften.getCause());
-	}
+  /***/
+  @Test
+  public void testSoften_Checked() {
+    IOException exception = new IOException("bad file");
+    RuntimeException soften = SoftException.soften(exception);
+    assertSame(exception, soften.getCause());
+  }
 
-	/** Test for {@link SoftException#harden(RuntimeException)} */
-	@Test
-	public void testHarden() throws Exception {
-		Exception checked = new IOException();
-		RuntimeException unchecked = new RuntimeException();
-		RuntimeException uncheckdWithNestedError = new RuntimeException(new IOError(checked));
-		RuntimeException uncheckdWithNestedUnchecked = new RuntimeException(new RuntimeException("foo"));
+  /** Test for {@link SoftException#harden(RuntimeException)} */
+  @Test
+  public void testHarden() throws Exception {
+    Exception checked = new IOException();
+    RuntimeException unchecked = new RuntimeException();
+    RuntimeException uncheckdWithNestedError = new RuntimeException(new IOError(checked));
+    RuntimeException uncheckdWithNestedUnchecked = new RuntimeException(new RuntimeException("foo"));
 
-		assertSame(checked, SoftException.harden(SoftException.soften(checked)));
-		assertSame(unchecked, SoftException.harden(unchecked));
-		assertSame(checked, SoftException.harden(new RuntimeException(checked)));
-		assertSame(checked, //
-			SoftException
-				.harden(new RuntimeException(new RuntimeException(new RuntimeException(checked)))));
-		assertSame(uncheckdWithNestedError, SoftException.harden(uncheckdWithNestedError));
-		assertSame(uncheckdWithNestedUnchecked, SoftException.harden(uncheckdWithNestedUnchecked));
-	}
+    assertSame(checked, SoftException.harden(SoftException.soften(checked)));
+    assertSame(unchecked, SoftException.harden(unchecked));
+    assertSame(checked, SoftException.harden(new RuntimeException(checked)));
+    assertSame(checked, //
+      SoftException.harden(new RuntimeException(new RuntimeException(new RuntimeException(checked)))));
+    assertSame(uncheckdWithNestedError, SoftException.harden(uncheckdWithNestedError));
+    assertSame(uncheckdWithNestedUnchecked, SoftException.harden(uncheckdWithNestedUnchecked));
+  }
 }

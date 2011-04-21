@@ -39,110 +39,109 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Foldable<A> {
 
-	/**
-	 * (Left)folds this {@link Stream} using an initial value and the given
-	 * two-arg function
-	 * 
-	 * @param <B>
-	 * @param initial
-	 * @param function
-	 * @return the folding result
-	 */
-	<B> B fold(B initial, @NonNull Applicable2<? super B, ? super A, ? extends B> function);
+  /**
+   * (Left)folds this {@link Stream} using an initial value and the given
+   * two-arg function
+   * 
+   * @param <B>
+   * @param initial
+   * @param function
+   * @return the folding result
+   */
+  <B> B fold(B initial, @NonNull Applicable2<? super B, ? super A, ? extends B> function);
 
-	/**
-	 * (Left)folds the tail of this {@link Stream} using the first element of the
-	 * stream as initial value
-	 * 
-	 * @param function
-	 * @return the folding result
-	 * @throws NoSuchElementException
-	 *           if the {@link Stream} is empty
-	 */
-	A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function)
-		throws NoSuchElementException;
+  /**
+   * (Left)folds the tail of this {@link Stream} using the first element of the
+   * stream as initial value
+   * 
+   * @param function
+   * @return the folding result
+   * @throws NoSuchElementException
+   *           if the {@link Stream} is empty
+   */
+  A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function) throws NoSuchElementException;
 
-	/**
-	 * (Left)folds this {@link Stream} concatenating each elements toString with a
-	 * separator
-	 * 
-	 * @param separator
-	 * @return the string representation of each element concatenated using a
-	 *         separator
-	 */
-	@NonNull
-	String joinStrings(@NonNull String separator);
+  /**
+   * (Left)folds this {@link Stream} concatenating each elements toString with a
+   * separator
+   * 
+   * @param separator
+   * @return the string representation of each element concatenated using a
+   *         separator
+   */
+  @NonNull
+  String joinStrings(@NonNull String separator);
 
-	/**
-	 * Answers the sum of the elements of this {@link Stream} using the given
-	 * {@link NumberType}
-	 * 
-	 * @param numberType
-	 * @return the result of adding each element, or zero, if this stream is empty
-	 * @see Iterables#sum(Iterable, NumberType)
-	 */
-	@NonNull
-	A sum(@NonNull NumberType<A> numberType);
+  /**
+   * Answers the sum of the elements of this {@link Stream} using the given
+   * {@link NumberType}
+   * 
+   * @param numberType
+   * @return the result of adding each element, or zero, if this stream is empty
+   * @see Iterables#sum(Iterable, NumberType)
+   */
+  @NonNull
+  A sum(@NonNull NumberType<A> numberType);
 
-	/**
-	 * Answers the product of the elements of this {@link Stream} using the given
-	 * {@link NumberType}
-	 * 
-	 * @param numberType
-	 * @return the result of multiplying each element, or one, if this stream is
-	 *         empty
-	 * @see Iterables#product(Iterable, NumberType)
-	 */
-	@NonNull
-	A product(@NonNull NumberType<A> numberType);
+  /**
+   * Answers the product of the elements of this {@link Stream} using the given
+   * {@link NumberType}
+   * 
+   * @param numberType
+   * @return the result of multiplying each element, or one, if this stream is
+   *         empty
+   * @see Iterables#product(Iterable, NumberType)
+   */
+  @NonNull
+  A product(@NonNull NumberType<A> numberType);
 
-	/**
-	 * Answers the sum of the elements of this {@link Stream} using the Stream's
-	 * source as {@link NumberTypeAware}
-	 * 
-	 * @return the result of adding each element, or zero, if this stream is empty
-	 * @throws ClassCastException
-	 *           if the source is not an implicit number type
-	 * @see Iterables#sum(Iterable)
-	 */
-	@NonNull
-	A sum() throws ClassCastException;
+  /**
+   * Answers the sum of the elements of this {@link Stream} using the Stream's
+   * source as {@link NumberTypeAware}
+   * 
+   * @return the result of adding each element, or zero, if this stream is empty
+   * @throws ClassCastException
+   *           if the source is not an implicit number type
+   * @see Iterables#sum(Iterable)
+   */
+  @NonNull
+  A sum() throws ClassCastException;
 
-	/**
-	 * Answers the product of the elements of this {@link Stream} using the
-	 * Stream's source as {@link NumberTypeAware}
-	 * 
-	 * @return the result of multiplying each element, or one, if this stream is
-	 *         empty
-	 * @throws ClassCastException
-	 *           if the source is not an implicit number type
-	 * @see Iterables#product(Iterable)
-	 */
-	@NonNull
-	A product() throws ClassCastException;
+  /**
+   * Answers the product of the elements of this {@link Stream} using the
+   * Stream's source as {@link NumberTypeAware}
+   * 
+   * @return the result of multiplying each element, or one, if this stream is
+   *         empty
+   * @throws ClassCastException
+   *           if the source is not an implicit number type
+   * @see Iterables#product(Iterable)
+   */
+  @NonNull
+  A product() throws ClassCastException;
 
-	/**
-	 * Answers the average of the stream elements, using the given
-	 * {@link NumberType} for performing addition and division.
-	 * 
-	 * @param numberType
-	 * @return the average of the stream elements
-	 * @throws NoSuchElementException
-	 *           if the stream is empty
-	 */
-	A average(@NonNull NumberType<A> numberType) throws NoSuchElementException;
+  /**
+   * Answers the average of the stream elements, using the given
+   * {@link NumberType} for performing addition and division.
+   * 
+   * @param numberType
+   * @return the average of the stream elements
+   * @throws NoSuchElementException
+   *           if the stream is empty
+   */
+  A average(@NonNull NumberType<A> numberType) throws NoSuchElementException;
 
-	/**
-	 * Answers the average of the stream elements, using the stream's source as an
-	 * {@link NumberTypeAware}.
-	 * 
-	 * @return the average of the stream elements
-	 * @throws NoSuchElementException
-	 *           if the stream is empty
-	 * @throws ClassCastException
-	 *           if the source is not an implicit number type
-	 * @see #average(NumberType)
-	 */
-	A average() throws ClassCastException, NoSuchElementException;
+  /**
+   * Answers the average of the stream elements, using the stream's source as an
+   * {@link NumberTypeAware}.
+   * 
+   * @return the average of the stream elements
+   * @throws NoSuchElementException
+   *           if the stream is empty
+   * @throws ClassCastException
+   *           if the source is not an implicit number type
+   * @see #average(NumberType)
+   */
+  A average() throws ClassCastException, NoSuchElementException;
 
 }

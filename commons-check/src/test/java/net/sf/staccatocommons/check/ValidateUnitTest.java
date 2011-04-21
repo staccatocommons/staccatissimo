@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.check;
 
 import org.junit.Test;
@@ -22,13 +21,13 @@ import org.junit.Test;
  */
 public class ValidateUnitTest {
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.check.Validate#throwing(java.lang.Class)}.
-	 */
-	@Test(expected = IllegalStateException.class)
-	public void testThrowing() {
-		Validate.throwing(IllegalStateException.class).isNotEmpty("foo", "");
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.check.Validate#throwing(java.lang.Class)}.
+   */
+  @Test(expected = IllegalStateException.class)
+  public void testThrowing() {
+    Validate.throwing(IllegalStateException.class).isNotEmpty("foo", "");
+  }
 
 }

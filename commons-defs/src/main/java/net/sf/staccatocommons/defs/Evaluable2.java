@@ -34,17 +34,17 @@ package net.sf.staccatocommons.defs;
 @Applicative
 public interface Evaluable2<A, B> {
 
-	/**
-	 * Evaluates two argument. If the arguments evaluates to true they are said to
-	 * satisfy or meet this condition.
-	 * 
-	 * @param arg0
-	 *          the first argument
-	 * @param arg1
-	 *          the second argument
-	 * 
-	 * @return if the arguments meet this evaluable condition
-	 */
-	boolean eval(A arg0, B arg1);
+  /**
+   * Evaluates two argument. If the arguments evaluates to true they are said to
+   * satisfy or meet this condition.
+   * 
+   * @param arg0
+   *          the first argument
+   * @param arg1
+   *          the second argument
+   * 
+   * @return if the arguments meet this evaluable condition
+   */
+  boolean eval(A arg0, B arg1);
 
 }

@@ -26,43 +26,43 @@ import net.sf.staccatocommons.iterators.thriter.Thriterators;
  */
 public class DequeStream<A> extends CollectionStream<A> {
 
-	/**
-	 * Creates a new {@link DequeStream}
-	 */
-	public DequeStream(Collection collection) {
-		super(collection);
-	}
+  /**
+   * Creates a new {@link DequeStream}
+   */
+  public DequeStream(Collection collection) {
+    super(collection);
+  }
 
-	public Stream reverse() {
-		return new AbstractStream<A>() {
-			public Thriterator<A> iterator() {
-				return Thriterators.from(getCollection().descendingIterator());
-			}
+  public Stream reverse() {
+    return new AbstractStream<A>() {
+      public Thriterator<A> iterator() {
+        return Thriterators.from(getCollection().descendingIterator());
+      }
 
-			public boolean contains(A element) {
-				return DequeStream.this.contains(element);
-			}
+      public boolean contains(A element) {
+        return DequeStream.this.contains(element);
+      }
 
-			public boolean isEmpty() {
-				return DequeStream.this.isEmpty();
-			}
+      public boolean isEmpty() {
+        return DequeStream.this.isEmpty();
+      }
 
-			public Stream<A> reverse() {
-				return DequeStream.this;
-			}
-		};
-	}
+      public Stream<A> reverse() {
+        return DequeStream.this;
+      }
+    };
+  }
 
-	public final A first() {
-		return getCollection().getFirst();
-	}
+  public final A first() {
+    return getCollection().getFirst();
+  }
 
-	public final A last() {
-		return getCollection().getLast();
-	}
+  public final A last() {
+    return getCollection().getLast();
+  }
 
-	protected Deque<A> getCollection() {
-		return (Deque<A>) super.getCollection();
-	}
+  protected Deque<A> getCollection() {
+    return (Deque<A>) super.getCollection();
+  }
 
 }

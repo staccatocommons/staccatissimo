@@ -35,47 +35,43 @@ import org.junit.experimental.theories.DataPoint;
  */
 public class IteratorStreamUnitTest extends StreamTheories {
 
-	/** data point */
-	@DataPoint
-	public static Stream emptyIter() {
-		return Streams.from(EmptyThriterator.empty());
-	}
+  /** data point */
+  @DataPoint
+  public static Stream emptyIter() {
+    return Streams.from(EmptyThriterator.empty());
+  }
 
-	/** data point */
-	@DataPoint
-	public static Stream oneElementsIter() {
-		return Streams.from(Arrays.asList(90, 50, 60, 230).iterator());
-	}
+  /** data point */
+  @DataPoint
+  public static Stream oneElementsIter() {
+    return Streams.from(Arrays.asList(90, 50, 60, 230).iterator());
+  }
 
-	/** data point */
-	@DataPoint
-	public static Stream twoElementsIter() {
-		return Streams.from(Collections.singletonList(90).iterator());
-	}
+  /** data point */
+  @DataPoint
+  public static Stream twoElementsIter() {
+    return Streams.from(Collections.singletonList(90).iterator());
+  }
 
-	/**
-	 * Test method for {@link IteratorStream#decons()}.
-	 */
-	@Test
-	public void testDecons() {
-		Pair<Object, Stream<Object>> decons = Streams
-			.from(Arrays.asList(90, 50, "foo").iterator())
-			.decons();
-		assertEquals(90, decons._0());
-		assertThat(decons._1(), instanceOf(IteratorStream.class));
-		assertEquals(Arrays.asList(50, "foo"), decons._1().toList());
-	}
+  /**
+   * Test method for {@link IteratorStream#decons()}.
+   */
+  @Test
+  public void testDecons() {
+    Pair<Object, Stream<Object>> decons = Streams.from(Arrays.asList(90, 50, "foo").iterator()).decons();
+    assertEquals(90, decons._0());
+    assertThat(decons._1(), instanceOf(IteratorStream.class));
+    assertEquals(Arrays.asList(50, "foo"), decons._1().toList());
+  }
 
-	/**
-	 * Test method for {@link IteratorStream#IteratorStream(java.util.Iterator)}.
-	 */
-	@Test
-	public void testIteratorStream() {
-		assertEquals(Arrays.asList(90, 56, 60), Streams
-			.from(Arrays.asList(90, 56, 60).iterator())
-			.toList());
+  /**
+   * Test method for {@link IteratorStream#IteratorStream(java.util.Iterator)}.
+   */
+  @Test
+  public void testIteratorStream() {
+    assertEquals(Arrays.asList(90, 56, 60), Streams.from(Arrays.asList(90, 56, 60).iterator()).toList());
 
-		Set<String> set = Iterables.toSet(Arrays.asList("foo", "bar", "baz", "foobar"));
-		assertEquals(set, Streams.from(set).toSet());
-	}
+    Set<String> set = Iterables.toSet(Arrays.asList("foo", "bar", "baz", "foobar"));
+    assertEquals(set, Streams.from(set).toSet());
+  }
 }

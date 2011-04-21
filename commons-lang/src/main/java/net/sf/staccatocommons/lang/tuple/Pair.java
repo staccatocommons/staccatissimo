@@ -36,95 +36,95 @@ import net.sf.staccatocommons.restrictions.value.Value;
  */
 @Value
 @Conditionally({ Immutable.class, Serializable.class })
-public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>>,
-	Map.Entry<T1, T2>, FirstAware<T1>, SecondAware<T2> {
+public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>>, Map.Entry<T1, T2>, FirstAware<T1>,
+  SecondAware<T2> {
 
-	private static final long serialVersionUID = -6479045670420592337L;
-	private static final RelevantState<Pair> val = new TupleState<Pair>(2) {
-		protected void collectState(Pair o, StateCollector s) {
-			s.add(o.first).add(o.second);
-		}
-	};
+  private static final long serialVersionUID = -6479045670420592337L;
+  private static final RelevantState<Pair> val = new TupleState<Pair>(2) {
+    protected void collectState(Pair o, StateCollector s) {
+      s.add(o.first).add(o.second);
+    }
+  };
 
-	private final T1 first;
-	private final T2 second;
+  private final T1 first;
+  private final T2 second;
 
-	/**
-	 * Creates a new pair.
-	 * 
-	 * @param fist
-	 * @param second
-	 */
-	public Pair(T1 fist, T2 second) {
-		this.first = fist;
-		this.second = second;
-	}
+  /**
+   * Creates a new pair.
+   * 
+   * @param fist
+   * @param second
+   */
+  public Pair(T1 fist, T2 second) {
+    this.first = fist;
+    this.second = second;
+  }
 
-	@Override
-	public T1 first() {
-		return first;
-	}
+  @Override
+  public T1 first() {
+    return first;
+  }
 
-	@Override
-	public T1 _0() {
-		return first;
-	}
+  @Override
+  public T1 _0() {
+    return first;
+  }
 
-	@Override
-	public T2 second() {
-		return second;
-	}
+  @Override
+  public T2 second() {
+    return second;
+  }
 
-	@Override
-	public T2 _1() {
-		return second;
-	}
+  @Override
+  public T2 _1() {
+    return second;
+  }
 
-	/**
-	 * Creates a new tuple, with swaped components
-	 * 
-	 * @return a new pair, never null.
-	 */
-	@NonNull
-	public Pair<T2, T1> swap() {
-		return new Pair<T2, T1>(second, first);
-	}
+  /**
+   * Creates a new tuple, with swaped components
+   * 
+   * @return a new pair, never null.
+   */
+  @NonNull
+  public Pair<T2, T1> swap() {
+    return new Pair<T2, T1>(second, first);
+  }
 
-	@Override
-	public String toString() {
-		return val.toString(this);
-	}
+  @Override
+  public String toString() {
+    return val.toString(this);
+  }
 
-	@NonNull
-	@Override
-	public Object[] toArray() {
-		return new Object[] { first, second };
-	}
+  @NonNull
+  @Override
+  public Object[] toArray() {
+    return new Object[] { first, second };
+  }
 
-	public int compareTo(Pair<T1, T2> other) {
-		return val.compareTo(this, other);
-	}
+  public int compareTo(Pair<T1, T2> other) {
+    return val.compareTo(this, other);
+  }
 
-	@Override
-	public int hashCode() {
-		return val.hashCode(this);
-	}
+  @Override
+  public int hashCode() {
+    return val.hashCode(this);
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		return val.equals(this, obj);
-	}
+  @Override
+  public boolean equals(Object obj) {
+    return val.equals(this, obj);
+  }
 
-	public T1 getKey() {
-		return first();
-	}
+  public T1 getKey() {
+    return first();
+  }
 
-	public T2 getValue() {
-		return second();
-	}
+  public T2 getValue() {
+    return second();
+  }
 
-	public T2 setValue(T2 arg0) {
-		throw new UnsupportedOperationException();
-	}
+  public T2 setValue(T2 arg0) {
+    throw new UnsupportedOperationException();
+  }
 
 }

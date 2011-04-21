@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.block;
 
 import org.apache.commons.lang.mutable.MutableInt;
@@ -23,21 +22,21 @@ import org.jmock.lib.action.CustomAction;
  * 
  */
 final class IncrementAction extends CustomAction {
-	/**
-	 * 
-	 */
-	private final MutableInt mi;
+  /**
+   * 
+   */
+  private final MutableInt mi;
 
-	/**
-	 * Creates a new {@link IncrementAction}
-	 */
-	IncrementAction(MutableInt mi) {
-		super("increment");
-		this.mi = mi;
-	}
+  /**
+   * Creates a new {@link IncrementAction}
+   */
+  IncrementAction(MutableInt mi) {
+    super("increment");
+    this.mi = mi;
+  }
 
-	public Object invoke(Invocation invocation) throws Throwable {
-		mi.increment();
-		return null;
-	}
+  public Object invoke(Invocation invocation) throws Throwable {
+    mi.increment();
+    return null;
+  }
 }

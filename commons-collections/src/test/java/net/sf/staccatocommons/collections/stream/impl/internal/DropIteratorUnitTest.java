@@ -21,12 +21,12 @@ import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
  */
 public class DropIteratorUnitTest extends IterableTheories {
 
-	protected Iterable<?> createTwoElementsIterable() {
-		return Streams.cons(4, 5, 9, 10, 6).drop(3);
-	}
+  protected Iterable<?> createTwoElementsIterable() {
+    return Streams.cons(4, 5, 9, 10, 6).drop(3);
+  }
 
-	protected Iterable<?> createOneElementIterable() {
-		return Streams.cons(65, 90, 6).drop(2);
-	}
+  protected Iterable<?> createOneElementIterable() {
+    return Streams.cons(65, 90, 6).drop(2);
+  }
 
 }

@@ -22,21 +22,21 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class IteratorThriterator<A> extends NextThriterator<A> {
 
-	private final Iterator<? extends A> iter;
+  private final Iterator<? extends A> iter;
 
-	/**
-	 * Creates a new {@link IteratorThriterator}
-	 */
-	public IteratorThriterator(@NonNull Iterator<? extends A> iter) {
-		this.iter = iter;
-	}
+  /**
+   * Creates a new {@link IteratorThriterator}
+   */
+  public IteratorThriterator(@NonNull Iterator<? extends A> iter) {
+    this.iter = iter;
+  }
 
-	public boolean hasNext() {
-		return iter.hasNext();
-	}
+  public boolean hasNext() {
+    return iter.hasNext();
+  }
 
-	public A next() {
-		return iter.next();
-	}
+  public A next() {
+    return iter.next();
+  }
 
 }

@@ -22,19 +22,19 @@ import net.sf.staccatocommons.iterators.thriter.Thriter;
  */
 public class DelayedAppendIterator<A> extends AppendThriterator<A> {
 
-	/**
-	 * Creates a new {@link DelayedAppendIterator}
-	 */
-	public DelayedAppendIterator(Thriter<? extends A> iterator, Thunk<A> element) {
-		super(iterator, (A) element);
-	}
+  /**
+   * Creates a new {@link DelayedAppendIterator}
+   */
+  public DelayedAppendIterator(Thriter<? extends A> iterator, Thunk<A> element) {
+    super(iterator, (A) element);
+  }
 
-	protected A elementValue() {
-		return ((Thunk<A>) super.elementValue()).value();
-	}
+  protected A elementValue() {
+    return ((Thunk<A>) super.elementValue()).value();
+  }
 
-	protected Thunk<A> elementThunk() {
-		return (Thunk<A>) super.elementValue();
-	}
+  protected Thunk<A> elementThunk() {
+    return (Thunk<A>) super.elementValue();
+  }
 
 }

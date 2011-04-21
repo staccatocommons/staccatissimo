@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections;
 
 import java.util.Arrays;
@@ -28,33 +27,33 @@ import org.junit.Test;
  */
 public class ClassesInstrumentedDummyTest {
 
-	/**
-	 * Verifies that, at least, the notNull processor is working
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testArgumentsInstrumented() {
-		Lists.first(Arrays.asList());
-	}
+  /**
+   * Verifies that, at least, the notNull processor is working
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testArgumentsInstrumented() {
+    Lists.first(Arrays.asList());
+  }
 
-	/**
-	 * Verifies that, at least, the notEmpty processor is working
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testArgumentsInstrumented2() {
-		Lists.first(null);
-	}
+  /**
+   * Verifies that, at least, the notEmpty processor is working
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testArgumentsInstrumented2() {
+    Lists.first(null);
+  }
 
-	/** Verifies that minsize processor is working */
-	@Test(expected = IllegalArgumentException.class)
-	public void testThird_BadSize() throws Exception {
-		Lists.third(Arrays.asList(1, 2));
-	}
+  /** Verifies that minsize processor is working */
+  @Test(expected = IllegalArgumentException.class)
+  public void testThird_BadSize() throws Exception {
+    Lists.third(Arrays.asList(1, 2));
+  }
 
-	/**
-	 * Verified that not negative is working
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testDrop_BadAmount() throws Exception {
-		Streams.cons(90, 50, 30).drop(-2);
-	}
+  /**
+   * Verified that not negative is working
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testDrop_BadAmount() throws Exception {
+    Streams.cons(90, 50, 30).drop(-2);
+  }
 }

@@ -27,33 +27,38 @@ import net.sf.staccatocommons.iterators.thriter.Thriterators;
  */
 public final class SortedStream<A> extends WrapperStream<A> {
 
-	private final Comparator<? super A> comparator;
+  private final Comparator<? super A> comparator;
 
-	/**
-	 * Creates a new {@link SortedStream}
-	 */
-	public SortedStream(Stream<A> source, Comparator<A> comparator) {
-		super(source);
-		this.comparator = comparator;
-	}
+  /**
+   * Creates a new {@link SortedStream}
+   */
+  public SortedStream(Stream<A> source, Comparator<A> comparator) {
+    super(source);
+    this.comparator = comparator;
+  }
 
-	public Thriterator<A> iterator() {
-		return Thriterators.from(toList().iterator());
-	}
+  @Override
+  public Thriterator<A> iterator() {
+    return Thriterators.from(toList().iterator());
+  }
 
-	public List<A> toList() {
-		return Iterables.toSortedList(getSource(), comparator);
-	}
+  @Override
+  public List<A> toList() {
+    return Iterables.toSortedList(getSource(), comparator);
+  }
 
-	public Set<A> toSet() {
-		return Iterables.toSortedSet(getSource(), comparator);
-	}
+  @Override
+  public Set<A> toSet() {
+    return Iterables.toSortedSet(getSource(), comparator);
+  }
 
-	public A first() {
-		return minimumBy(comparator);
-	}
+  @Override
+  public A first() {
+    return minimumBy(comparator);
+  }
 
-	public A last() {
-		return maximumBy(comparator);
-	}
+  @Override
+  public A last() {
+    return maximumBy(comparator);
+  }
 }

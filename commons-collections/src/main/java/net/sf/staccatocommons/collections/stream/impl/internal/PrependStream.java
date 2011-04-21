@@ -32,52 +32,59 @@ import net.sf.staccatocommons.lang.tuple.Pair;
  */
 public class PrependStream<A> extends WrapperStream<A> {
 
-	public Thriterator<A> iterator() {
-		return new PrependThriterator<A>(head(), tailIterator());
-	}
+  public Thriterator<A> iterator() {
+    return new PrependThriterator<A>(head(), tailIterator());
+  }
 
-	private final A head;
+  private final A head;
 
-	/**
-	 * Creates a new {@link PrependStream}
-	 */
-	public PrependStream(A head, Stream<A> source) {
-		super(source);
-		this.head = head;
-	}
+  /**
+   * Creates a new {@link PrependStream}
+   */
+  public PrependStream(A head, Stream<A> source) {
+    super(source);
+    this.head = head;
+  }
 
-	public final boolean isEmpty() {
-		return false;
-	}
+  @Override
+  public final boolean isEmpty() {
+    return false;
+  }
 
-	public final Pair<A, Stream<A>> decons() {
-		return _(head(), tail());
-	}
+  @Override
+  public final Pair<A, Stream<A>> decons() {
+    return _(head(), tail());
+  }
 
-	public Pair<Thunk<A>, Stream<A>> delayedDecons() {
-		return _(Thunks.constant(head), tail());
-	}
+  @Override
+  public Pair<Thunk<A>, Stream<A>> delayedDecons() {
+    return _(Thunks.constant(head), tail());
+  }
 
-	public A head() {
-		return head;
-	}
+  @Override
+  public A head() {
+    return head;
+  }
 
-	public final Stream<A> tail() {
-		return getSource();
-	}
+  @Override
+  public final Stream<A> tail() {
+    return getSource();
+  }
 
-	public final A get(int n) {
-		if (n == 0)
-			return head();
-		return getSource().get(n - 1);
-	}
+  @Override
+  public final A get(int n) {
+    if (n == 0)
+      return head();
+    return getSource().get(n - 1);
+  }
 
-	protected final Thriterator<? extends A> tailIterator() {
-		return getSource().iterator();
-	}
+  protected final Thriterator<? extends A> tailIterator() {
+    return getSource().iterator();
+  }
 
-	public final Stream<A> toEmptyAware() {
-		return this;
-	}
+  @Override
+  public final Stream<A> toEmptyAware() {
+    return this;
+  }
 
 }

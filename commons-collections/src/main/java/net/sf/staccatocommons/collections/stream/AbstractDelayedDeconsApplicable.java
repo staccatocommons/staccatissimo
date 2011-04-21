@@ -18,14 +18,13 @@ import net.sf.staccatocommons.collections.stream.Transformable.DelayedDeconsAppl
  * @author flbulgarelli
  * 
  */
-public abstract class AbstractDelayedDeconsApplicable<A, B> implements
-	DelayedDeconsApplicable<A, B> {
+public abstract class AbstractDelayedDeconsApplicable<A, B> implements DelayedDeconsApplicable<A, B> {
 
-	/**
-	 * Returns an empty stream
-	 */
-	public Stream<B> emptyApply() {
-		return Streams.empty();
-	}
+  /**
+   * Returns an empty stream
+   */
+  public Stream<B> emptyApply() {
+    return Streams.empty();
+  }
 
 }

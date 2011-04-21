@@ -33,13 +33,13 @@ package net.sf.staccatocommons.defs;
 @Applicative
 public interface Executable2<A, B> {
 
-	/**
-	 * Performs a side-effect computation.
-	 * 
-	 * @see Executable#exec(Object)
-	 * @param arg0
-	 * @param arg1
-	 */
-	void exec(A arg0, B arg1);
+  /**
+   * Performs a side-effect computation.
+   * 
+   * @see Executable#exec(Object)
+   * @param arg0
+   * @param arg1
+   */
+  void exec(A arg0, B arg1);
 
 }

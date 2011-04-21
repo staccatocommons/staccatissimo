@@ -28,29 +28,26 @@ import org.apache.commons.lang.SerializationException;
  * 
  * @author flbulgarelli
  */
-public class ObjectStreamByteSerializationManager extends
-	AbstractByteSerializationManager {
+public class ObjectStreamByteSerializationManager extends AbstractByteSerializationManager {
 
-	@Override
-	public <T> T deserialize(InputStream inputStream)
-		throws SerializationException {
-		try {
-			return (T) new ObjectInputStream(inputStream).readObject();
-		} catch (IOException e) {
-			throw new SerializationException(e);
-		} catch (ClassNotFoundException e) {
-			throw new SerializationException(e);
-		}
-	}
+  @Override
+  public <T> T deserialize(InputStream inputStream) throws SerializationException {
+    try {
+      return (T) new ObjectInputStream(inputStream).readObject();
+    } catch (IOException e) {
+      throw new SerializationException(e);
+    } catch (ClassNotFoundException e) {
+      throw new SerializationException(e);
+    }
+  }
 
-	@Override
-	public void serialize(Object target, OutputStream outputStream)
-		throws SerializationException {
-		try {
-			new ObjectOutputStream(outputStream).writeObject(target);
-		} catch (IOException e) {
-			throw new SerializationException(e);
-		}
-	}
+  @Override
+  public void serialize(Object target, OutputStream outputStream) throws SerializationException {
+    try {
+      new ObjectOutputStream(outputStream).writeObject(target);
+    } catch (IOException e) {
+      throw new SerializationException(e);
+    }
+  }
 
 }

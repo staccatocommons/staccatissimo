@@ -24,22 +24,22 @@ import net.sf.staccatocommons.restrictions.check.NotNegative;
  */
 public class DropStream<A> extends WrapperStream<A> {
 
-	private final int amountOfElements;
+  private final int amountOfElements;
 
-	/**
-	 * Creates a new {@link DropStream}
-	 */
-	public DropStream(@NonNull Stream<A> stream, int amountOfElements) {
-		super(stream);
-		this.amountOfElements = amountOfElements;
-	}
+  /**
+   * Creates a new {@link DropStream}
+   */
+  public DropStream(@NonNull Stream<A> stream, int amountOfElements) {
+    super(stream);
+    this.amountOfElements = amountOfElements;
+  }
 
-	public Thriterator<A> iterator() {
-		return new DropIterator<A>(amountOfElements, getSource().iterator());
-	}
+  public Thriterator<A> iterator() {
+    return new DropIterator<A>(amountOfElements, getSource().iterator());
+  }
 
-	@Override
-	public Stream<A> drop(@NotNegative int amountOfElements) {
-		return new DropStream<A>(getSource(), amountOfElements + this.amountOfElements);
-	}
+  @Override
+  public Stream<A> drop(@NotNegative int amountOfElements) {
+    return new DropStream<A>(getSource(), amountOfElements + this.amountOfElements);
+  }
 }

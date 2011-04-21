@@ -22,37 +22,37 @@ import org.junit.Test;
  */
 public class AssertUnitTest {
 
-	/**
-	 * Test method for {@link Assert#fail(String, Object...)}.
-	 */
-	@Test
-	public void testFail() {
-		try {
-			Assert.fail("Something %s happen", "really bad");
-			fail();
-		} catch (AssertionError e) {
-			assertEquals("Something really bad happen", e.getMessage());
-		}
-	}
+  /**
+   * Test method for {@link Assert#fail(String, Object...)}.
+   */
+  @Test
+  public void testFail() {
+    try {
+      Assert.fail("Something %s happen", "really bad");
+      fail();
+    } catch (AssertionError e) {
+      assertEquals("Something really bad happen", e.getMessage());
+    }
+  }
 
-	/**
-	 * Test method for {@link Assert#fail(String, Object, String)}.
-	 */
-	@Test
-	public void testFailWithVar() {
-		try {
-			Assert.fail("foo", 5, "it should haven been 4");
-			fail();
-		} catch (AssertionError e) {
-			assertEquals("foo=[5] : it should haven been 4", e.getMessage());
-		}
-	}
+  /**
+   * Test method for {@link Assert#fail(String, Object, String)}.
+   */
+  @Test
+  public void testFailWithVar() {
+    try {
+      Assert.fail("foo", 5, "it should haven been 4");
+      fail();
+    } catch (AssertionError e) {
+      assertEquals("foo=[5] : it should haven been 4", e.getMessage());
+    }
+  }
 
-	/** Test for shortcuts */
-	@Test
-	public void testShortcuts() throws Exception {
-		Assert.isNotNull("var", 5);
-		Assert.isNull("var", null);
-	}
+  /** Test for shortcuts */
+  @Test
+  public void testShortcuts() throws Exception {
+    Assert.isNotNull("var", 5);
+    Assert.isNull("var", null);
+  }
 
 }

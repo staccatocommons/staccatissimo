@@ -29,68 +29,68 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class AppendThriterator<A> extends AdvanceThriterator<A> {
 
-	private final Thriter<? extends A> iterator;
-	private final A element;
-	private boolean unconsumed = true;
+  private final Thriter<? extends A> iterator;
+  private final A element;
+  private boolean unconsumed = true;
 
-	/**
-	 * 
-	 * Creates a new {@link AppendThriterator}
-	 */
-	public AppendThriterator(@NonNull Thriter<? extends A> iterator, A element) {
-		this.iterator = iterator;
-		this.element = element;
-	}
+  /**
+   * 
+   * Creates a new {@link AppendThriterator}
+   */
+  public AppendThriterator(@NonNull Thriter<? extends A> iterator, A element) {
+    this.iterator = iterator;
+    this.element = element;
+  }
 
-	/**
-	 * 
-	 * Creates a new {@link AppendThriterator}
-	 */
-	public AppendThriterator(@NonNull Iterator<? extends A> iterator, A element) {
-		this((Thriter<? extends A>) Thriterators.from(iterator), element);
-	}
+  /**
+   * 
+   * Creates a new {@link AppendThriterator}
+   */
+  public AppendThriterator(@NonNull Iterator<? extends A> iterator, A element) {
+    this((Thriter<? extends A>) Thriterators.from(iterator), element);
+  }
 
-	/**
-	 * 
-	 * Creates a new {@link AppendThriterator}
-	 */
-	public AppendThriterator(@NonNull Thriterator<? extends A> iterator, A element) {
-		this((Thriter<? extends A>) iterator, element);
-	}
+  /**
+   * 
+   * Creates a new {@link AppendThriterator}
+   */
+  public AppendThriterator(@NonNull Thriterator<? extends A> iterator, A element) {
+    this((Thriter<? extends A>) iterator, element);
+  }
 
-	public final boolean hasNext() {
-		if (iterator.hasNext())
-			return true;
-		return unconsumed;
-	}
+  public final boolean hasNext() {
+    if (iterator.hasNext())
+      return true;
+    return unconsumed;
+  }
 
-	public final void advanceNext() throws NoSuchElementException {
-		if (iterator.hasNext())
-			iterator.advanceNext();
-		else if (unconsumed)
-			unconsumed = false;
-		else
-			throw new NoSuchElementException();
-	}
+  public final void advanceNext() throws NoSuchElementException {
+    if (iterator.hasNext())
+      iterator.advanceNext();
+    else if (unconsumed)
+      unconsumed = false;
+    else
+      throw new NoSuchElementException();
+  }
 
-	public final A current() throws NoSuchElementException {
-		if (unconsumed)
-			return iterator.current();
-		return elementValue();
-	}
+  public final A current() throws NoSuchElementException {
+    if (unconsumed)
+      return iterator.current();
+    return elementValue();
+  }
 
-	protected A elementValue() {
-		return element;
-	}
+  protected A elementValue() {
+    return element;
+  }
 
-	protected Thunk<A> elementThunk() {
-		return new ConstantThunk<A>(element);
-	}
+  protected Thunk<A> elementThunk() {
+    return new ConstantThunk<A>(element);
+  }
 
-	public Thunk<A> delayedCurrent() {
-		if (unconsumed)
-			return (Thunk<A>) iterator.delayedCurrent();
-		return elementThunk();
-	}
+  public Thunk<A> delayedCurrent() {
+    if (unconsumed)
+      return (Thunk<A>) iterator.delayedCurrent();
+    return elementThunk();
+  }
 
 }

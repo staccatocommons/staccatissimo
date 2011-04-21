@@ -24,7 +24,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @param <A>
  */
 public abstract class AbstractSizeAwareType<A> implements SizeAwareType<A> {
-	public final boolean isEmpty(@NonNull A emptyAware) {
-		return size(emptyAware) == 0;
-	}
+  public final boolean isEmpty(@NonNull A emptyAware) {
+    return size(emptyAware) == 0;
+  }
 }

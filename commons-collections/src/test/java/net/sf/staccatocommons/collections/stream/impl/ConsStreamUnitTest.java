@@ -29,18 +29,18 @@ import org.junit.experimental.theories.DataPoints;
 
 public class ConsStreamUnitTest extends RepetableStreamTheories {
 
-	/**
-	 * Setups the test
-	 */
-	@Before
-	public void setup() {
-		emptyIsImpossible();
-	}
+  /**
+   * Setups the test
+   */
+  @Before
+  public void setup() {
+    emptyIsImpossible();
+  }
 
-	/** Data points */
-	@DataPoints
-	public static Stream[] stream = new Stream[] { //
-	Streams.cons(10, Streams.cons(15, 20, 30)), //
-			Streams.cons(1, Streams.empty()) };
+  /** Data points */
+  @DataPoints
+  public static Stream[] stream = new Stream[] { //
+  Streams.cons(10, Streams.cons(15, 20, 30)), //
+      Streams.cons(1, Streams.empty()) };
 
 }

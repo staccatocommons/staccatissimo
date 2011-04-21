@@ -20,20 +20,20 @@ package net.sf.staccatocommons.lang.predicate.internal;
  * @param <T>
  */
 public final class GreaterThan<T extends Comparable<T>> extends NonAnnonymousPredicate<T> {
-	private static final long serialVersionUID = 8841731221163195322L;
-	private final T value;
+  private static final long serialVersionUID = 8841731221163195322L;
+  private final T value;
 
-	/**
-	 * 
-	 * Creates a new {@link GreaterThan}
-	 * 
-	 * @param value
-	 */
-	public GreaterThan(T value) {
-		this.value = value;
-	}
+  /**
+   * 
+   * Creates a new {@link GreaterThan}
+   * 
+   * @param value
+   */
+  public GreaterThan(T value) {
+    this.value = value;
+  }
 
-	public boolean eval(T arg) {
-		return arg.compareTo(value) > 0;
-	}
+  public boolean eval(T arg) {
+    return arg.compareTo(value) > 0;
+  }
 }

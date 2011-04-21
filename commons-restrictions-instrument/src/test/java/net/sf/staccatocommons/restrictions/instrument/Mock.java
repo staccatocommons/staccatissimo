@@ -23,39 +23,39 @@ import net.sf.staccatocommons.restrictions.Constant;
  */
 public class Mock {
 
-	private static Date today = new Date();
+  private static Date today = new Date();
 
-	/***/
-	@Constant
-	public static Date getDateFieldAcess() {
-		return today;
-	}
+  /***/
+  @Constant
+  public static Date getDateFieldAcess() {
+    return today;
+  }
 
-	/***/
-	@Constant
-	public static Date getDateInvokationWithArg() {
-		return java.sql.Date.valueOf("2011-01-01");
-	}
+  /***/
+  @Constant
+  public static Date getDateInvokationWithArg() {
+    return java.sql.Date.valueOf("2011-01-01");
+  }
 
-	/***/
-	@Constant
-	public static Date getDateInvokationWithNoArgs() {
-		return getDateNoConstant();
-	}
+  /***/
+  @Constant
+  public static Date getDateInvokationWithNoArgs() {
+    return getDateNoConstant();
+  }
 
-	private static Date getDateNoConstant() {
-		return new Date();
-	}
+  private static Date getDateNoConstant() {
+    return new Date();
+  }
 
-	/****/
-	@Constant
-	public static Date getDateConstructor() {
-		return new Date();
-	}
+  /****/
+  @Constant
+  public static Date getDateConstructor() {
+    return new Date();
+  }
 
-	/***/
-	@Constant
-	public BigDecimal getBigDecimal() {
-		return new BigDecimal(this.hashCode());
-	}
+  /***/
+  @Constant
+  public BigDecimal getBigDecimal() {
+    return new BigDecimal(this.hashCode());
+  }
 }

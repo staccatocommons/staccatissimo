@@ -41,100 +41,100 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @Conditionally({ Immutable.class, Serializable.class })
 public final class Some<T> extends Option<T> {
 
-	private static final long serialVersionUID = 5981912873938772033L;
+  private static final long serialVersionUID = 5981912873938772033L;
 
-	private static final Some<?> SOME_NULL = new Some<Object>(null);
-	private final T value;
+  private static final Some<?> SOME_NULL = new Some<Object>(null);
+  private final T value;
 
-	/**
-	 * Creates a Some instance with the given value
-	 * 
-	 * @param value
-	 *          the value wrapped. Nullable.
-	 */
-	public Some(T value) {
-		this.value = value;
-	}
+  /**
+   * Creates a Some instance with the given value
+   * 
+   * @param value
+   *          the value wrapped. Nullable.
+   */
+  public Some(T value) {
+    this.value = value;
+  }
 
-	@Override
-	public T value() {
-		return value;
-	}
+  @Override
+  public T value() {
+    return value;
+  }
 
-	@Override
-	public boolean isDefined() {
-		return true;
-	}
+  @Override
+  public boolean isDefined() {
+    return true;
+  }
 
-	@Override
-	public T valueOrElse(T ifUndefined) {
-		return value;
-	}
+  @Override
+  public T valueOrElse(T ifUndefined) {
+    return value;
+  }
 
-	@Override
-	public T valueOrElse(Thunk<? extends T> ifUndefined) {
-		return value;
-	}
+  @Override
+  public T valueOrElse(Thunk<? extends T> ifUndefined) {
+    return value;
+  }
 
-	@Override
-	public T valueOrNull() {
-		return value;
-	}
+  @Override
+  public T valueOrNull() {
+    return value;
+  }
 
-	@Override
-	public void ifDefined(@NonNull Executable<T> block) {
-		block.exec(value);
-	}
+  @Override
+  public void ifDefined(@NonNull Executable<T> block) {
+    block.exec(value);
+  }
 
-	public Iterator<T> iterator() {
-		return Thriterators.from(value);
-	}
+  public Iterator<T> iterator() {
+    return Thriterators.from(value);
+  }
 
-	public boolean contains(T element) {
-		return ObjectUtils.equals(value, element);
-	}
+  public boolean contains(T element) {
+    return ObjectUtils.equals(value, element);
+  }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder()//
-			.append(value)
-			.toHashCode();
-	}
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder()//
+      .append(value)
+      .toHashCode();
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		BasicEquals be = BasicEquals.from(this, obj);
-		if (be.isEqualsDone())
-			return be.toEquals();
-		Some<?> that = (Some<?>) obj;
-		return new EqualsBuilder()//
-			.append(this.value, that.value)
-			.isEquals();
-	}
+  @Override
+  public boolean equals(Object obj) {
+    BasicEquals be = BasicEquals.from(this, obj);
+    if (be.isEqualsDone())
+      return be.toEquals();
+    Some<?> that = (Some<?>) obj;
+    return new EqualsBuilder()//
+      .append(this.value, that.value)
+      .isEquals();
+  }
 
-	@Override
-	public int size() {
-		return 1;
-	}
+  @Override
+  public int size() {
+    return 1;
+  }
 
-	@Override
-	public boolean isEmpty() {
-		return false;
-	}
+  @Override
+  public boolean isEmpty() {
+    return false;
+  }
 
-	@Override
-	public String toString() {
-		return ToString.toString(this);
-	}
+  @Override
+  public String toString() {
+    return ToString.toString(this);
+  }
 
-	public static <T> Some<T> some(T value) {
-		if (value != null)
-			return new Some<T>(value);
-		return someNull();
-	}
+  public static <T> Some<T> some(T value) {
+    if (value != null)
+      return new Some<T>(value);
+    return someNull();
+  }
 
-	public static <T> Some<T> someNull() {
-		return (Some<T>) SOME_NULL;
-	}
+  public static <T> Some<T> someNull() {
+    return (Some<T>) SOME_NULL;
+  }
 
 }

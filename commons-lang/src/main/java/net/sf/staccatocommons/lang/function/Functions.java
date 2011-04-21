@@ -31,90 +31,90 @@ import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
  */
 public class Functions {
 
-	private Functions() {}
+  private Functions() {}
 
-	/**
-	 * Converts the given {@link Applicable} into a {@link Function} by casting
-	 * it, is possible, or creating a new function that delegates its apply method
-	 * to it.
-	 * 
-	 * @param <A>
-	 * @param <B>
-	 * @param applicable
-	 *          the {@link Applicable} to convert
-	 * @return new a function that applies the given {@link Applicable}, if it is
-	 *         not already a {@link Function}, or the given
-	 *         <code>applicable</code> casted to {@link Function}, otherwise
-	 */
-	@NonNull
-	public static <A, B> Function<A, B> from(@NonNull Applicable<? super A, ? extends B> applicable) {
-		if (applicable instanceof Function)
-			return (Function<A, B>) applicable;
-		return new ApplicableFunction<A, B>(applicable);
-	}
+  /**
+   * Converts the given {@link Applicable} into a {@link Function} by casting
+   * it, is possible, or creating a new function that delegates its apply method
+   * to it.
+   * 
+   * @param <A>
+   * @param <B>
+   * @param applicable
+   *          the {@link Applicable} to convert
+   * @return new a function that applies the given {@link Applicable}, if it is
+   *         not already a {@link Function}, or the given
+   *         <code>applicable</code> casted to {@link Function}, otherwise
+   */
+  @NonNull
+  public static <A, B> Function<A, B> from(@NonNull Applicable<? super A, ? extends B> applicable) {
+    if (applicable instanceof Function)
+      return (Function<A, B>) applicable;
+    return new ApplicableFunction<A, B>(applicable);
+  }
 
-	/**
-	 * Converts the given {@link Applicable2} into a {@link Function2} by casting
-	 * it, is possible, or creating a new function that delegates its apply method
-	 * to it.
-	 * 
-	 * @param <A>
-	 * @param <B>
-	 * @param <C>
-	 * @param applicable
-	 *          the {@link Applicable} to convert
-	 * @return new a function that applies the given {@link Applicable2}, if it is
-	 *         not already a {@link Function2}, or the given
-	 *         <code>applicable</code> casted to {@link Function2}, otherwise
-	 */
-	@NonNull
-	@ForceRestrictions
-	public static <A, B, C> Function2<A, B, C> from(
-		@NonNull final Applicable2<? super A, ? super B, ? extends C> applicable) {
-		if (applicable instanceof Function2)
-			return (Function2<A, B, C>) applicable;
-		return new AbstractFunction2<A, B, C>() {
-			public C apply(A arg0, B arg1) {
-				return applicable.apply(arg0, arg1);
-			}
-		};
-	}
+  /**
+   * Converts the given {@link Applicable2} into a {@link Function2} by casting
+   * it, is possible, or creating a new function that delegates its apply method
+   * to it.
+   * 
+   * @param <A>
+   * @param <B>
+   * @param <C>
+   * @param applicable
+   *          the {@link Applicable} to convert
+   * @return new a function that applies the given {@link Applicable2}, if it is
+   *         not already a {@link Function2}, or the given
+   *         <code>applicable</code> casted to {@link Function2}, otherwise
+   */
+  @NonNull
+  @ForceRestrictions
+  public static <A, B, C> Function2<A, B, C> from(
+    @NonNull final Applicable2<? super A, ? super B, ? extends C> applicable) {
+    if (applicable instanceof Function2)
+      return (Function2<A, B, C>) applicable;
+    return new AbstractFunction2<A, B, C>() {
+      public C apply(A arg0, B arg1) {
+        return applicable.apply(arg0, arg1);
+      }
+    };
+  }
 
-	/**
-	 * Returns the identity function, that is, a {@link Function} that takes an
-	 * argument and returns it.
-	 * 
-	 * @param <A>
-	 * @return the constant identity function
-	 */
-	@NonNull
-	@Constant
-	public static <A> Function<A, A> identity() {
-		return IdentityFunction.identity();
-	}
+  /**
+   * Returns the identity function, that is, a {@link Function} that takes an
+   * argument and returns it.
+   * 
+   * @param <A>
+   * @return the constant identity function
+   */
+  @NonNull
+  @Constant
+  public static <A> Function<A, A> identity() {
+    return IdentityFunction.identity();
+  }
 
-	/**
-	 * Returns a function that takes one argument, and regardless of it, returns a
-	 * given value
-	 * 
-	 * @param <A>
-	 * @param <B>
-	 * @param value
-	 *          the value the function will return when applied
-	 * @return a new function
-	 */
-	@NonNull
-	public static <A, B> Function<A, B> constant(B value) {
-		return new ConstantFunction<A, B>(value);
-	}
+  /**
+   * Returns a function that takes one argument, and regardless of it, returns a
+   * given value
+   * 
+   * @param <A>
+   * @param <B>
+   * @param value
+   *          the value the function will return when applied
+   * @return a new function
+   */
+  @NonNull
+  public static <A, B> Function<A, B> constant(B value) {
+    return new ConstantFunction<A, B>(value);
+  }
 
-	// TODO
-	// public static <A, B> Function<A, B> constant2(B value) {
-	// return new ConstantLambda<A, B>(value);
-	// }
-	//
-	// public static <A, B> Function<A, B> constant3(B value) {
-	// return new ConstantLambda<A, B>(value);
-	// }
+  // TODO
+  // public static <A, B> Function<A, B> constant2(B value) {
+  // return new ConstantLambda<A, B>(value);
+  // }
+  //
+  // public static <A, B> Function<A, B> constant3(B value) {
+  // return new ConstantLambda<A, B>(value);
+  // }
 
 }

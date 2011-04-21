@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.context.internal;
 
 import javassist.ClassPool;
@@ -28,38 +27,38 @@ import org.slf4j.Logger;
  * 
  */
 public class DefaultConstructorAnnotationContext extends AbstractAnnotationContext implements
-	ConstructorAnnotationContext {
+  ConstructorAnnotationContext {
 
-	private CtConstructor constructor;
+  private CtConstructor constructor;
 
-	/**
-	 * Creates a new {@link DefaultConstructorAnnotationContext}
-	 */
-	public DefaultConstructorAnnotationContext(@NonNull ClassPool pool, @NonNull Logger logger) {
-		super(pool, logger);
-	}
+  /**
+   * Creates a new {@link DefaultConstructorAnnotationContext}
+   */
+  public DefaultConstructorAnnotationContext(@NonNull ClassPool pool, @NonNull Logger logger) {
+    super(pool, logger);
+  }
 
-	/**
-	 * @return the constructor
-	 */
-	public CtConstructor getConstructor() {
-		return constructor;
-	}
+  /**
+   * @return the constructor
+   */
+  public CtConstructor getConstructor() {
+    return constructor;
+  }
 
-	public CtClass getDeclaringClass() {
-		return getConstructor().getDeclaringClass();
-	}
+  public CtClass getDeclaringClass() {
+    return getConstructor().getDeclaringClass();
+  }
 
-	/**
-	 * @param constructor
-	 *          the constructor to set
-	 */
-	public void setConstructor(CtConstructor constructor) {
-		this.constructor = constructor;
-	}
+  /**
+   * @param constructor
+   *          the constructor to set
+   */
+  public void setConstructor(CtConstructor constructor) {
+    this.constructor = constructor;
+  }
 
-	public CtClass getElementType() throws NotFoundException {
-		return constructor.getDeclaringClass();
-	}
+  public CtClass getElementType() throws NotFoundException {
+    return constructor.getDeclaringClass();
+  }
 
 }

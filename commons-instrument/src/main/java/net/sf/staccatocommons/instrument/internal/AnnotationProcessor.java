@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.internal;
 
 import java.util.Collection;
@@ -29,34 +28,34 @@ import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
  */
 class AnnotationProcessor<HandlerType extends AnnotationHandler> {
 
-	private final Collection<HandlerType> handlers;
+  private final Collection<HandlerType> handlers;
 
-	/**
-	 * Creates a new {@link AnnotationProcessor}
-	 */
-	public AnnotationProcessor() {
-		this.handlers = new LinkedList<HandlerType>();
-	}
+  /**
+   * Creates a new {@link AnnotationProcessor}
+   */
+  public AnnotationProcessor() {
+    this.handlers = new LinkedList<HandlerType>();
+  }
 
-	public void processUsing(final Object[] annotations, Block2<Object, HandlerType> block) {
-		for (Object annotation : annotations)
-			for (HandlerType handler : getHandlers(annotation)) {
-				block.exec(annotation, handler);
-			}
-	}
+  public void processUsing(final Object[] annotations, Block2<Object, HandlerType> block) {
+    for (Object annotation : annotations)
+      for (HandlerType handler : getHandlers(annotation)) {
+        block.exec(annotation, handler);
+      }
+  }
 
-	private Stream<HandlerType> getHandlers(final Object annotation) {
-		return Streams.from(handlers).filter(//
-			new AbstractPredicate<HandlerType>() {
-				public boolean eval(HandlerType argument) {
-					return argument.getSupportedAnnotationType().isAssignableFrom(annotation.getClass());
-				}
-			});
-	}
+  private Stream<HandlerType> getHandlers(final Object annotation) {
+    return Streams.from(handlers).filter(//
+      new AbstractPredicate<HandlerType>() {
+        public boolean eval(HandlerType argument) {
+          return argument.getSupportedAnnotationType().isAssignableFrom(annotation.getClass());
+        }
+      });
+  }
 
-	/** Adds a handler */
-	public void addHandler(HandlerType handler) {
-		this.handlers.add(handler);
-	}
+  /** Adds a handler */
+  public void addHandler(HandlerType handler) {
+    this.handlers.add(handler);
+  }
 
 }

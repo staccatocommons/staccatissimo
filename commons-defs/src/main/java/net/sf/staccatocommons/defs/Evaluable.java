@@ -32,24 +32,24 @@ package net.sf.staccatocommons.defs;
 @Applicative
 public interface Evaluable<T> {
 
-	/**
-	 * Evaluates an argument. If the argument evaluates to true is said to satisfy
-	 * or meet this condition.
-	 * 
-	 * {@link Evaluable} implementors should not try to handle nulls. Instead, the
-	 * preferred way of getting a null safe {@link Evaluable} is composing it with
-	 * the null or non-null predicates from staccato-commons-lang:
-	 * 
-	 * <pre>
-	 * Predicates.null_().or(theActualEvaluable)
-	 * Predicates.notNull().and(theActualEvaluable)
-	 * </pre>
-	 * 
-	 * @param argument
-	 *          the argument to evaluate.
-	 * 
-	 * @return if the argument meets this evaluable condition
-	 */
-	boolean eval(T argument);
+  /**
+   * Evaluates an argument. If the argument evaluates to true is said to satisfy
+   * or meet this condition.
+   * 
+   * {@link Evaluable} implementors should not try to handle nulls. Instead, the
+   * preferred way of getting a null safe {@link Evaluable} is composing it with
+   * the null or non-null predicates from staccato-commons-lang:
+   * 
+   * <pre>
+   * Predicates.null_().or(theActualEvaluable)
+   * Predicates.notNull().and(theActualEvaluable)
+   * </pre>
+   * 
+   * @param argument
+   *          the argument to evaluate.
+   * 
+   * @return if the argument meets this evaluable condition
+   */
+  boolean eval(T argument);
 
 }

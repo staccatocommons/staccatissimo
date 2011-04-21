@@ -24,27 +24,27 @@ import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
  */
 public class SingleThriterator<A> extends AdvanceThriterator<A> {
 
-	private final A element;
-	private boolean consumed;
+  private final A element;
+  private boolean consumed;
 
-	/**
-	 * Creates a new {@link SingleThriterator}
-	 */
-	public SingleThriterator(A element) {
-		this.element = element;
-	}
+  /**
+   * Creates a new {@link SingleThriterator}
+   */
+  public SingleThriterator(A element) {
+    this.element = element;
+  }
 
-	public boolean hasNext() {
-		return !consumed;
-	}
+  public boolean hasNext() {
+    return !consumed;
+  }
 
-	public void advanceNext() throws NoSuchElementException {
-		if (!hasNext())
-			throw new NoSuchElementException();
-		consumed = true;
-	}
+  public void advanceNext() throws NoSuchElementException {
+    if (!hasNext())
+      throw new NoSuchElementException();
+    consumed = true;
+  }
 
-	public A current() throws NoSuchElementException {
-		return element;
-	}
+  public A current() throws NoSuchElementException {
+    return element;
+  }
 }

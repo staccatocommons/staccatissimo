@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.internal;
 
 import java.lang.annotation.Annotation;
@@ -46,200 +45,172 @@ import org.slf4j.LoggerFactory;
  */
 public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter {
 
-	private final Logger logger = LoggerFactory.getLogger("Processor-Logger");
+  private final Logger logger = LoggerFactory.getLogger("Processor-Logger");
 
-	private final AnnotationProcessor<ClassAnnotationHandler> classProcessor;
-	private final AnnotationProcessor<MethodAnnotationHandler> methodProcessor;
-	private final AnnotationProcessor<ArgumentAnnotationHandler> argumentProcessor;
-	private final AnnotationProcessor<ConstructorAnnotationHandler> constructorProcessor;
-	private InstrumentationMark instrumentationMark;
-	private final ClassPool classPool;
-	private int handlersCount;
+  private final AnnotationProcessor<ClassAnnotationHandler> classProcessor;
+  private final AnnotationProcessor<MethodAnnotationHandler> methodProcessor;
+  private final AnnotationProcessor<ArgumentAnnotationHandler> argumentProcessor;
+  private final AnnotationProcessor<ConstructorAnnotationHandler> constructorProcessor;
+  private InstrumentationMark instrumentationMark;
+  private final ClassPool classPool;
+  private int handlersCount;
 
-	/**
-	 * Creates a new {@link InstrumenterImpl}
-	 * 
-	 * @param classPool
-	 * 
-	 * @param processors
-	 */
-	public InstrumenterImpl(ClassPool classPool) {
-		this.classProcessor = new AnnotationProcessor();
-		this.methodProcessor = new AnnotationProcessor();
-		this.argumentProcessor = new AnnotationProcessor();
-		this.constructorProcessor = new AnnotationProcessor();
-		this.classPool = classPool;
-	}
+  /**
+   * Creates a new {@link InstrumenterImpl}
+   * 
+   * @param classPool
+   * 
+   * @param processors
+   */
+  public InstrumenterImpl(ClassPool classPool) {
+    this.classProcessor = new AnnotationProcessor();
+    this.methodProcessor = new AnnotationProcessor();
+    this.argumentProcessor = new AnnotationProcessor();
+    this.constructorProcessor = new AnnotationProcessor();
+    this.classPool = classPool;
+  }
 
-	/**
-	 * @param instrumentationMark
-	 *          the instrumentationMark to set
-	 * @return this
-	 */
-	public InstrumenterConfiguration setInstrumentationMark(InstrumentationMark instrumentationMark) {
-		this.instrumentationMark = instrumentationMark;
-		return this;
-	}
+  /**
+   * @param instrumentationMark
+   *          the instrumentationMark to set
+   * @return this
+   */
+  public InstrumenterConfiguration setInstrumentationMark(InstrumentationMark instrumentationMark) {
+    this.instrumentationMark = instrumentationMark;
+    return this;
+  }
 
-	public InstrumenterConfiguration addAnnotationHanlder(AnnotationHandler handler) {
-		if (handler instanceof ClassAnnotationHandler)
-			classProcessor.addHandler((ClassAnnotationHandler) handler);
+  public InstrumenterConfiguration addAnnotationHanlder(AnnotationHandler handler) {
+    if (handler instanceof ClassAnnotationHandler)
+      classProcessor.addHandler((ClassAnnotationHandler) handler);
 
-		if (handler instanceof ArgumentAnnotationHandler)
-			argumentProcessor.addHandler((ArgumentAnnotationHandler) handler);
+    if (handler instanceof ArgumentAnnotationHandler)
+      argumentProcessor.addHandler((ArgumentAnnotationHandler) handler);
 
-		if (handler instanceof ConstructorAnnotationHandler)
-			constructorProcessor.addHandler((ConstructorAnnotationHandler) handler);
+    if (handler instanceof ConstructorAnnotationHandler)
+      constructorProcessor.addHandler((ConstructorAnnotationHandler) handler);
 
-		if (handler instanceof MethodAnnotationHandler)
-			methodProcessor.addHandler((MethodAnnotationHandler) handler);
+    if (handler instanceof MethodAnnotationHandler)
+      methodProcessor.addHandler((MethodAnnotationHandler) handler);
 
-		handlersCount++;
-		return this;
-	}
+    handlersCount++;
+    return this;
+  }
 
-	/**
-	 * Ensures that at least a handler has being registered, and the
-	 * instrumentation mark was set
-	 */
-	public void ensureConfigured() {
-		Validate.throwing(IllegalStateException.class) //
-			.isNotNull("instrumentarionMark", instrumentationMark)
-			.isGreaterThan("handlers.count", handlersCount, 0);
-	}
+  /**
+   * Ensures that at least a handler has being registered, and the
+   * instrumentation mark was set
+   */
+  public void ensureConfigured() {
+    Validate.throwing(IllegalStateException.class) //
+      .isNotNull("instrumentarionMark", instrumentationMark)
+      .isGreaterThan("handlers.count", handlersCount, 0);
+  }
 
-	/**
-	 * @param clazz
-	 * @throws ClassNotFoundException
-	 * @throws CannotCompileException
-	 */
-	public void instrumentClass(final CtClass clazz) throws CannotCompileException,
-		ClassNotFoundException {
-		if (clazz.isInterface())
-			return;
+  /**
+   * @param clazz
+   * @throws ClassNotFoundException
+   * @throws CannotCompileException
+   */
+  public void instrumentClass(final CtClass clazz) throws CannotCompileException, ClassNotFoundException {
+    if (clazz.isInterface())
+      return;
 
-		if (alreadyProcessed(clazz)) {
-			logger.debug("Class {} was already processed. Ignoring", clazz);
-			return;
-		}
+    if (alreadyProcessed(clazz)) {
+      logger.debug("Class {} was already processed. Ignoring", clazz);
+      return;
+    }
 
-		final ClassAnnotationContext context = //
-		new DefaultClassAnnotationContext(classPool, logger, clazz);
-		classProcessor.processUsing(
-			clazz.getAnnotations(),
-			new Block2<Object, ClassAnnotationHandler>() {
-				protected void softExec(Object annotation, ClassAnnotationHandler handler) throws Exception {
-					handler.preProcessAnnotatedClass((Annotation) annotation, context);
-				}
-			});
+    final ClassAnnotationContext context = //
+    new DefaultClassAnnotationContext(classPool, logger, clazz);
+    classProcessor.processUsing(clazz.getAnnotations(), new Block2<Object, ClassAnnotationHandler>() {
+      protected void softExec(Object annotation, ClassAnnotationHandler handler) throws Exception {
+        handler.preProcessAnnotatedClass((Annotation) annotation, context);
+      }
+    });
 
-		for (CtMethod method : clazz.getDeclaredMethods())
-			if (!Modifier.isAbstract(method.getModifiers()))
-				instrumentMethod(method);
+    for (CtMethod method : clazz.getDeclaredMethods())
+      if (!Modifier.isAbstract(method.getModifiers()))
+        instrumentMethod(method);
 
-		for (CtConstructor constructor : clazz.getDeclaredConstructors())
-			instrumentConstructor(constructor);
+    for (CtConstructor constructor : clazz.getDeclaredConstructors())
+      instrumentConstructor(constructor);
 
-		classProcessor.processUsing(
-			clazz.getAnnotations(),
-			new Block2<Object, ClassAnnotationHandler>() {
-				protected void softExec(Object annotation, ClassAnnotationHandler handler) throws Exception {
-					handler.postProcessAnnotatedClass((Annotation) annotation, context);
-				}
-			});
+    classProcessor.processUsing(clazz.getAnnotations(), new Block2<Object, ClassAnnotationHandler>() {
+      protected void softExec(Object annotation, ClassAnnotationHandler handler) throws Exception {
+        handler.postProcessAnnotatedClass((Annotation) annotation, context);
+      }
+    });
 
-		markAsProcessed(clazz);
-	}
+    markAsProcessed(clazz);
+  }
 
-	private void markAsProcessed(CtClass clazz) {
-		clazz.setAttribute(instrumentationMark.getMarkAttributeName(), //
-			instrumentationMark.getMarkAttributeValue());
-	}
+  private void markAsProcessed(CtClass clazz) {
+    clazz.setAttribute(instrumentationMark.getMarkAttributeName(), //
+      instrumentationMark.getMarkAttributeValue());
+  }
 
-	private boolean alreadyProcessed(CtClass clazz) {
-		return clazz.getAttribute(instrumentationMark.getMarkAttributeName()) != null;
-	}
+  private boolean alreadyProcessed(CtClass clazz) {
+    return clazz.getAttribute(instrumentationMark.getMarkAttributeName()) != null;
+  }
 
-	private void instrumentMethod(CtMethod method) throws CannotCompileException,
-		ClassNotFoundException {
-		final DefaultMethodAnnotationContext methodContext = new DefaultMethodAnnotationContext(
-			classPool,
-			logger);
-		methodContext.setMethod(method);
-		Object[] availableAnnotations = method.getAvailableAnnotations();
+  private void instrumentMethod(CtMethod method) throws CannotCompileException, ClassNotFoundException {
+    final DefaultMethodAnnotationContext methodContext = new DefaultMethodAnnotationContext(classPool, logger);
+    methodContext.setMethod(method);
+    Object[] availableAnnotations = method.getAvailableAnnotations();
 
-		methodProcessor.processUsing(
-			availableAnnotations,
-			new Block2<Object, MethodAnnotationHandler>() {
-				protected void softExec(Object annotation, MethodAnnotationHandler handler)
-					throws Exception {
-					handler.preProcessAnnotatedMethod((Annotation) annotation, methodContext);
-				}
-			});
+    methodProcessor.processUsing(availableAnnotations, new Block2<Object, MethodAnnotationHandler>() {
+      protected void softExec(Object annotation, MethodAnnotationHandler handler) throws Exception {
+        handler.preProcessAnnotatedMethod((Annotation) annotation, methodContext);
+      }
+    });
 
-		instrumentArguments(method);
+    instrumentArguments(method);
 
-		methodProcessor.processUsing(
-			availableAnnotations,
-			new Block2<Object, MethodAnnotationHandler>() {
-				protected void softExec(Object annotation, MethodAnnotationHandler handler)
-					throws Exception {
-					handler.postProcessAnnotatedMethod((Annotation) annotation, methodContext);
-				}
-			});
-	}
+    methodProcessor.processUsing(availableAnnotations, new Block2<Object, MethodAnnotationHandler>() {
+      protected void softExec(Object annotation, MethodAnnotationHandler handler) throws Exception {
+        handler.postProcessAnnotatedMethod((Annotation) annotation, methodContext);
+      }
+    });
+  }
 
-	/**
-	 * @param constructor
-	 * @throws CannotCompileException
-	 * @throws ClassNotFoundException
-	 */
-	private void instrumentConstructor(CtConstructor constructor) throws CannotCompileException,
-		ClassNotFoundException {
-		final DefaultConstructorAnnotationContext context = new DefaultConstructorAnnotationContext(
-			classPool,
-			logger);
-		context.setConstructor(constructor);
-		Object[] availableAnnotations = constructor.getAvailableAnnotations();
+  /**
+   * @param constructor
+   * @throws CannotCompileException
+   * @throws ClassNotFoundException
+   */
+  private void instrumentConstructor(CtConstructor constructor) throws CannotCompileException, ClassNotFoundException {
+    final DefaultConstructorAnnotationContext context = new DefaultConstructorAnnotationContext(classPool, logger);
+    context.setConstructor(constructor);
+    Object[] availableAnnotations = constructor.getAvailableAnnotations();
 
-		constructorProcessor.processUsing(
-			availableAnnotations,
-			new Block2<Object, ConstructorAnnotationHandler>() {
-				protected void softExec(Object annotation, ConstructorAnnotationHandler handler)
-					throws Exception {
-					handler.preProcessAnnotatedConstructor((Annotation) annotation, context);
-				}
-			});
+    constructorProcessor.processUsing(availableAnnotations, new Block2<Object, ConstructorAnnotationHandler>() {
+      protected void softExec(Object annotation, ConstructorAnnotationHandler handler) throws Exception {
+        handler.preProcessAnnotatedConstructor((Annotation) annotation, context);
+      }
+    });
 
-		instrumentArguments(constructor);
+    instrumentArguments(constructor);
 
-		constructorProcessor.processUsing(
-			availableAnnotations,
-			new Block2<Object, ConstructorAnnotationHandler>() {
-				protected void softExec(Object annotation, ConstructorAnnotationHandler handler)
-					throws Exception {
-					handler.postProcessAnnotatedConstructor((Annotation) annotation, context);
-				}
-			});
-	}
+    constructorProcessor.processUsing(availableAnnotations, new Block2<Object, ConstructorAnnotationHandler>() {
+      protected void softExec(Object annotation, ConstructorAnnotationHandler handler) throws Exception {
+        handler.postProcessAnnotatedConstructor((Annotation) annotation, context);
+      }
+    });
+  }
 
-	private void instrumentArguments(CtBehavior behaviour) throws CannotCompileException {
-		Object[][] parameterAnnotations = behaviour.getAvailableParameterAnnotations();
-		final DefaultArgumentAnnotationContext argumentContext = new DefaultArgumentAnnotationContext(
-			classPool,
-			logger);
-		argumentContext.setBehavior(behaviour);
-		for (int i = 0; i < parameterAnnotations.length; i++) {
-			argumentContext.setParameterNumber(i);
-			argumentProcessor.processUsing(
-				parameterAnnotations[i],
-				new Block2<Object, ArgumentAnnotationHandler>() {
-					protected void softExec(Object annotation, ArgumentAnnotationHandler handler)
-						throws Exception {
-						handler.processAnnotatedArgument((Annotation) annotation, argumentContext);
-					}
-				});
-		}
-	}
+  private void instrumentArguments(CtBehavior behaviour) throws CannotCompileException {
+    Object[][] parameterAnnotations = behaviour.getAvailableParameterAnnotations();
+    final DefaultArgumentAnnotationContext argumentContext = new DefaultArgumentAnnotationContext(classPool, logger);
+    argumentContext.setBehavior(behaviour);
+    for (int i = 0; i < parameterAnnotations.length; i++) {
+      argumentContext.setParameterNumber(i);
+      argumentProcessor.processUsing(parameterAnnotations[i], new Block2<Object, ArgumentAnnotationHandler>() {
+        protected void softExec(Object annotation, ArgumentAnnotationHandler handler) throws Exception {
+          handler.processAnnotatedArgument((Annotation) annotation, argumentContext);
+        }
+      });
+    }
+  }
 
 }

@@ -35,134 +35,129 @@ import net.sf.staccatocommons.restrictions.check.NotNegative;
  */
 public class ModifiableIterables {
 
-	/*
-	 * Removing
-	 */
+  /*
+   * Removing
+   */
 
-	/**
-	 * Removes from the given iterable all the elements that evaluate to true
-	 * 
-	 * @param iterable
-	 * @param predicate
-	 * @param <T>
-	 * @param <I>
-	 * @return the given iterable
-	 */
-	@NonNull
-	public static <T, I extends Iterable<T>> I removeAll(@NonNull I iterable,
-		@NonNull Evaluable<? super T> predicate) {
-		for (Iterator<T> iter = iterable.iterator(); iter.hasNext();)
-			if (predicate.eval(iter.next()))
-				iter.remove();
-		return iterable;
-	}
+  /**
+   * Removes from the given iterable all the elements that evaluate to true
+   * 
+   * @param iterable
+   * @param predicate
+   * @param <T>
+   * @param <I>
+   * @return the given iterable
+   */
+  @NonNull
+  public static <T, I extends Iterable<T>> I removeAll(@NonNull I iterable, @NonNull Evaluable<? super T> predicate) {
+    for (Iterator<T> iter = iterable.iterator(); iter.hasNext();)
+      if (predicate.eval(iter.next()))
+        iter.remove();
+    return iterable;
+  }
 
-	/**
-	 * Removes elements from the given iterable, while each element evaluates to
-	 * true
-	 * 
-	 * @param <T>
-	 * @param iterable
-	 * @param predicate
-	 */
-	public static <T, I extends Iterable<T>> I removeWhile(@NonNull I iterable,
-		@NonNull Evaluable<? super T> predicate) {
-		for (Iterator<? extends T> iter = iterable.iterator(); iter.hasNext()
-			&& predicate.eval(iter.next());)
-			iter.remove();
-		return iterable;
-	}
+  /**
+   * Removes elements from the given iterable, while each element evaluates to
+   * true
+   * 
+   * @param <T>
+   * @param iterable
+   * @param predicate
+   */
+  public static <T, I extends Iterable<T>> I removeWhile(@NonNull I iterable, @NonNull Evaluable<? super T> predicate) {
+    for (Iterator<? extends T> iter = iterable.iterator(); iter.hasNext() && predicate.eval(iter.next());)
+      iter.remove();
+    return iterable;
+  }
 
-	/**
-	 * Removes up to N elements from the given iterable
-	 * 
-	 * @param <I>
-	 * 
-	 * @param iterable
-	 * @param amountOfElements
-	 *          Non negative
-	 * @return the given iterable
-	 */
-	@NonNull
-	public static <I extends Iterable<?>> I remove(@NonNull I iterable,
-		@NotNegative int amountOfElements) {
-		Iterator<?> iter = iterable.iterator();
-		for (int i = 0; i < amountOfElements && iter.hasNext(); i++)
-			iter.remove();
-		return iterable;
-	}
+  /**
+   * Removes up to N elements from the given iterable
+   * 
+   * @param <I>
+   * 
+   * @param iterable
+   * @param amountOfElements
+   *          Non negative
+   * @return the given iterable
+   */
+  @NonNull
+  public static <I extends Iterable<?>> I remove(@NonNull I iterable, @NotNegative int amountOfElements) {
+    Iterator<?> iter = iterable.iterator();
+    for (int i = 0; i < amountOfElements && iter.hasNext(); i++)
+      iter.remove();
+    return iterable;
+  }
 
-	/*
-	 * Adding
-	 */
+  /*
+   * Adding
+   */
 
-	/**
-	 * Adds all the elements from a given {@link Iterable} to a given collection
-	 * 
-	 * @param collection
-	 * @param iterable
-	 * @param <T>
-	 * @param <C>
-	 * @return the given collection
-	 * 
-	 */
-	@NonNull
-	public static <T, C extends Collection<T>> C addAll(@NonNull C collection,
-		@NonNull Iterable<? extends T> iterable) {
-		addAllInternal(collection, iterable);
-		return collection;
-	}
+  /**
+   * Adds all the elements from a given {@link Iterable} to a given collection
+   * 
+   * @param collection
+   * @param iterable
+   * @param <T>
+   * @param <C>
+   * @return the given collection
+   * 
+   */
+  @NonNull
+  public static <T, C extends Collection<T>> C addAll(@NonNull C collection, @NonNull Iterable<? extends T> iterable) {
+    addAllInternal(collection, iterable);
+    return collection;
+  }
 
-	/*
-	 * Moving
-	 */
-	/**
-	 * Removes all elements from the given iterable that evalute to true, and adds
-	 * them to the given collection
-	 * 
-	 * @param iterable
-	 * @param collection
-	 * @param predicate
-	 * @param <T>
-	 * @param <C>
-	 * @return the given collection
-	 * 
-	 */
-	@NonNull
-	public static <T, C extends Collection<T>> C move(@NonNull Iterable<T> iterable,
-		@NonNull C collection, @NonNull Evaluable<T> predicate) {
-		for (Iterator<T> iter = iterable.iterator(); iter.hasNext();) {
-			T element = iter.next();
-			if (predicate.eval(element)) {
-				iter.remove();
-				collection.add(element);
-			}
-		}
-		return collection;
-	}
+  /*
+   * Moving
+   */
+  /**
+   * Removes all elements from the given iterable that evalute to true, and adds
+   * them to the given collection
+   * 
+   * @param iterable
+   * @param collection
+   * @param predicate
+   * @param <T>
+   * @param <C>
+   * @return the given collection
+   * 
+   */
+  @NonNull
+  public static <T, C extends Collection<T>> C move(@NonNull Iterable<T> iterable, @NonNull C collection,
+    @NonNull Evaluable<T> predicate) {
+    for (Iterator<T> iter = iterable.iterator(); iter.hasNext();) {
+      T element = iter.next();
+      if (predicate.eval(element)) {
+        iter.remove();
+        collection.add(element);
+      }
+    }
+    return collection;
+  }
 
-	/**
-	 * Removes at most n elements from the given iterable, and adds it to the
-	 * output collection
-	 * 
-	 * @param <T>
-	 * @param <C>
-	 * @param iterable
-	 * @param amountOfElements
-	 *          the max amount of elements to select from the iterable. Must be >=
-	 *          0
-	 * @param collection
-	 * @return the output collection
-	 */
-	@NonNull
-	public static <T, C extends Collection<T>> C move(@NonNull Iterable<T> iterable,
-		@NotNegative int amountOfElements, @NonNull C collection) {
-		Iterator<? extends T> iter = iterable.iterator();
-		for (int i = 0; i < amountOfElements && iter.hasNext(); i++) {
-			collection.add(iter.next());
-			iter.remove();
-		}
-		return collection;
-	}
+  /**
+   * Removes at most n elements from the given iterable, and adds it to the
+   * output collection
+   * 
+   * @param <T>
+   * @param <C>
+   * @param iterable
+   * @param amountOfElements
+   *          the max amount of elements to select from the iterable. Must be >=
+   *          0
+   * @param collection
+   * @return the output collection
+   */
+  @NonNull
+  public static <T, C extends Collection<T>> C move(@NonNull Iterable<T> iterable, @NotNegative int amountOfElements,
+    @NonNull C collection) {
+    Iterator<? extends T> iter = iterable.iterator();
+    for (int i = 0; i < amountOfElements && iter.hasNext(); i++) {
+      collection.add(iter.next());
+      iter.remove();
+    }
+    return collection;
+  }
 
 }

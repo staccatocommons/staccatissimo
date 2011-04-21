@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.restrictions.instrument.check;
 
 import javassist.CannotCompileException;
@@ -26,38 +25,38 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class NotNullHandler extends AbstractCheckAnnotationHandler<NonNull> {
 
-	/**
-	 * Creates a new {@link NotNullHandler}
-	 */
-	public NotNullHandler(boolean ignoreReturns) {
-		super(ignoreReturns);
-	}
+  /**
+   * Creates a new {@link NotNullHandler}
+   */
+  public NotNullHandler(boolean ignoreReturns) {
+    super(ignoreReturns);
+  }
 
-	@Override
-	public Class<NonNull> getSupportedAnnotationType() {
-		return NonNull.class;
-	}
+  @Override
+  public Class<NonNull> getSupportedAnnotationType() {
+    return NonNull.class;
+  }
 
-	@Override
-	protected String getVarMnemonic(NonNull nonNull) {
-		return nonNull.value();
-	}
+  @Override
+  protected String getVarMnemonic(NonNull nonNull) {
+    return nonNull.value();
+  }
 
-	public void processAnnotatedArgument(NonNull annotation, ArgumentAnnotationContext context)
-		throws CannotCompileException, NotFoundException {
-		if (context.isConstructorArgument()) {
-			super.processAnnotatedArgument(annotation, context);
-		} else {
-			deactivate();
-			super.processAnnotatedArgument(annotation, context);
-			activate();
-		}
-	}
+  public void processAnnotatedArgument(NonNull annotation, ArgumentAnnotationContext context)
+    throws CannotCompileException, NotFoundException {
+    if (context.isConstructorArgument()) {
+      super.processAnnotatedArgument(annotation, context);
+    } else {
+      deactivate();
+      super.processAnnotatedArgument(annotation, context);
+      activate();
+    }
+  }
 
-	@Override
-	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		NonNull annotation, AnnotationContext context) {
-		return String.format("isNotNull( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
-	}
+  @Override
+  protected String createCheckCode(String argumentMnemonic, String argumentIdentifier, NonNull annotation,
+    AnnotationContext context) {
+    return String.format("isNotNull( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
+  }
 
 }

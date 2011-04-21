@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.restrictions.instrument.check;
 
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
@@ -23,29 +22,29 @@ import net.sf.staccatocommons.restrictions.check.Matches;
  */
 public class MatchesHandler extends AbstractCheckAnnotationHandler<Matches> {
 
-	/**
-	 * Creates a new {@link MatchesHandler}
-	 */
-	public MatchesHandler(boolean ignoreReturns) {
-		super(ignoreReturns);
-	}
+  /**
+   * Creates a new {@link MatchesHandler}
+   */
+  public MatchesHandler(boolean ignoreReturns) {
+    super(ignoreReturns);
+  }
 
-	@Override
-	public Class<Matches> getSupportedAnnotationType() {
-		return Matches.class;
-	}
+  @Override
+  public Class<Matches> getSupportedAnnotationType() {
+    return Matches.class;
+  }
 
-	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		Matches annotation, AnnotationContext context) {
-		return String.format(
-			"that().matches( \"%s\", %s, \"%s\")",
-			argumentMnemonic,
-			argumentIdentifier,
-			annotation.value());
-	}
+  protected String createCheckCode(String argumentMnemonic, String argumentIdentifier, Matches annotation,
+    AnnotationContext context) {
+    return String.format(
+      "that().matches( \"%s\", %s, \"%s\")",
+      argumentMnemonic,
+      argumentIdentifier,
+      annotation.value());
+  }
 
-	protected String getVarMnemonic(Matches annotation) {
-		return annotation.var();
-	}
+  protected String getVarMnemonic(Matches annotation) {
+    return annotation.var();
+  }
 
 }

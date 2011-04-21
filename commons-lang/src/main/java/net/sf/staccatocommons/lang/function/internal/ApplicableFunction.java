@@ -21,17 +21,17 @@ import net.sf.staccatocommons.lang.function.AbstractFunction;
  */
 public class ApplicableFunction<A, B> extends AbstractFunction<A, B> {
 
-	private Applicable<? super A, ? extends B> applicable;
+  private Applicable<? super A, ? extends B> applicable;
 
-	/**
-	 * Creates a new {@link ApplicableFunction}
-	 */
-	public ApplicableFunction(Applicable<? super A, ? extends B> applicable) {
-		this.applicable = applicable;
-	}
+  /**
+   * Creates a new {@link ApplicableFunction}
+   */
+  public ApplicableFunction(Applicable<? super A, ? extends B> applicable) {
+    this.applicable = applicable;
+  }
 
-	public B apply(A arg) {
-		return applicable.apply(arg);
-	}
+  public B apply(A arg) {
+    return applicable.apply(arg);
+  }
 
 }

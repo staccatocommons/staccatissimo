@@ -20,16 +20,16 @@ package net.sf.staccatocommons.lang.builder;
  */
 public class ObjectUnderConstructionException extends IllegalStateException {
 
-	private static final long serialVersionUID = -7428589945799220264L;
+  private static final long serialVersionUID = -7428589945799220264L;
 
-	/**
-	 * Creates a new {@link ObjectUnderConstructionException} with the given
-	 * message
-	 * 
-	 * @param message
-	 */
-	public ObjectUnderConstructionException(String message) {
-		super(message);
-	}
+  /**
+   * Creates a new {@link ObjectUnderConstructionException} with the given
+   * message
+   * 
+   * @param message
+   */
+  public ObjectUnderConstructionException(String message) {
+    super(message);
+  }
 
 }

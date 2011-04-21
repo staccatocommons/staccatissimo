@@ -25,17 +25,17 @@ import org.apache.commons.lang.SerializationException;
  */
 public interface CharSerializationManager extends SerializationManager {
 
-	// TODO: need the streams to be externally closed? -- yes they do
-	void serialize(Object target, OutputStream output) throws SerializationException;
+  // TODO: need the streams to be externally closed? -- yes they do
+  void serialize(Object target, OutputStream output) throws SerializationException;
 
-	void serialize(Object target, Writer output) throws SerializationException;
+  void serialize(Object target, Writer output) throws SerializationException;
 
-	String serialize(Object target) throws SerializationException;
+  String serialize(Object target) throws SerializationException;
 
-	<T> T deserialize(InputStream input) throws SerializationException;
+  <T> T deserialize(InputStream input) throws SerializationException;
 
-	<T> T deserialize(Reader input) throws SerializationException;
+  <T> T deserialize(Reader input) throws SerializationException;
 
-	<T> T deserialize(String input) throws SerializationException;
+  <T> T deserialize(String input) throws SerializationException;
 
 }

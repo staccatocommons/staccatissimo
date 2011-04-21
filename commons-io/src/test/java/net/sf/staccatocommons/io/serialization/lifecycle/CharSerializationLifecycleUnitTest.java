@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.io.serialization.lifecycle;
 
 import static junit.framework.Assert.*;
@@ -35,78 +34,78 @@ import org.junit.Test;
  */
 public class CharSerializationLifecycleUnitTest extends JUnit4MockObjectTestCase {
 
-	private CharSerializationManager serializarionManager;
+  private CharSerializationManager serializarionManager;
 
-	/** Setups the test */
-	@Before
-	public void setup() {
-		serializarionManager = mock(CharSerializationManager.class);
-	}
+  /** Setups the test */
+  @Before
+  public void setup() {
+    serializarionManager = mock(CharSerializationManager.class);
+  }
 
-	/***/
-	@Test
-	public void testSerialize() throws Exception {
-		final Object target = new Object();
-		final Writer writer = new TestWriter();
+  /***/
+  @Test
+  public void testSerialize() throws Exception {
+    final Object target = new Object();
+    final Writer writer = new TestWriter();
 
-		checking(new Expectations() {
-			{
-				one(serializarionManager).serialize(target, writer);
-			}
-		});
+    checking(new Expectations() {
+      {
+        one(serializarionManager).serialize(target, writer);
+      }
+    });
 
-		new CharSerializationLifecycle.Serialize(serializarionManager, target) {
-			public Writer initialize() throws IOException {
-				return writer;
-			}
-		}.value();
-	}
+    new CharSerializationLifecycle.Serialize(serializarionManager, target) {
+      public Writer initialize() throws IOException {
+        return writer;
+      }
+    }.value();
+  }
 
-	/***/
-	@Test
-	public void testDeserialize() throws Exception {
-		final Object target = new Object();
-		final Reader reader = new TestReader();
+  /***/
+  @Test
+  public void testDeserialize() throws Exception {
+    final Object target = new Object();
+    final Reader reader = new TestReader();
 
-		checking(new Expectations() {
-			{
-				one(serializarionManager).deserialize(reader);
-				will(returnValue(target));
-			}
-		});
+    checking(new Expectations() {
+      {
+        one(serializarionManager).deserialize(reader);
+        will(returnValue(target));
+      }
+    });
 
-		Object result = new CharSerializationLifecycle.Deserialize<Object>(serializarionManager) {
-			@Override
-			public Reader initialize() throws IOException {
-				return reader;
-			}
-		}.value();
+    Object result = new CharSerializationLifecycle.Deserialize<Object>(serializarionManager) {
+      @Override
+      public Reader initialize() throws IOException {
+        return reader;
+      }
+    }.value();
 
-		assertSame(target, result);
-	}
+    assertSame(target, result);
+  }
 
-	private final class TestWriter extends Writer {
-		@Override
-		public void close() throws IOException {}
+  private final class TestWriter extends Writer {
+    @Override
+    public void close() throws IOException {}
 
-		@Override
-		public void flush() throws IOException {}
+    @Override
+    public void flush() throws IOException {}
 
-		@Override
-		public void write(char[] cbuf, int off, int len) throws IOException {}
-	}
+    @Override
+    public void write(char[] cbuf, int off, int len) throws IOException {}
+  }
 
-	private final class TestReader extends Reader {
+  private final class TestReader extends Reader {
 
-		@Override
-		public void close() throws IOException {
+    @Override
+    public void close() throws IOException {
 
-		}
+    }
 
-		@Override
-		public int read(char[] cbuf, int off, int len) throws IOException {
-			return 0;
-		}
+    @Override
+    public int read(char[] cbuf, int off, int len) throws IOException {
+      return 0;
+    }
 
-	}
+  }
 }

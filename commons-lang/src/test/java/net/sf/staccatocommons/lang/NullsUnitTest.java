@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang;
 
 import static org.junit.Assert.*;
@@ -27,18 +26,18 @@ import org.junit.Test;
  */
 public class NullsUnitTest {
 
-	/***/
-	@Test
-	public void testNonNullOrElseTT() {
-		assertEquals("Foo", Nulls.coalesce(null, "Foo"));
-		assertEquals("Bar", Nulls.coalesce("Bar", "Foo"));
-	}
+  /***/
+  @Test
+  public void testNonNullOrElseTT() {
+    assertEquals("Foo", Nulls.coalesce(null, "Foo"));
+    assertEquals("Bar", Nulls.coalesce("Bar", "Foo"));
+  }
 
-	/***/
-	@Test
-	public void testNonNullOrElseTProviderOfT() {
-		assertEquals("Foo", Nulls.coalesce(null, Thunks.constant("Foo")));
-		assertEquals("Bar", Nulls.coalesce("Bar", Thunks.constant("Foo")));
-	}
+  /***/
+  @Test
+  public void testNonNullOrElseTProviderOfT() {
+    assertEquals("Foo", Nulls.coalesce(null, Thunks.constant("Foo")));
+    assertEquals("Bar", Nulls.coalesce("Bar", Thunks.constant("Foo")));
+  }
 
 }

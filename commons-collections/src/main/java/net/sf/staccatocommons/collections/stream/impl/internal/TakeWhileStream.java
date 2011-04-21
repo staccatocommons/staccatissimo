@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.Iterator;
@@ -29,26 +28,29 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  */
 public final class TakeWhileStream<A> extends WrapperStream<A> {
-	private final Evaluable<? super A> predicate;
+  private final Evaluable<? super A> predicate;
 
-	/**
-	 * Creates a new {@link TakeWhileStream}
-	 */
-	public TakeWhileStream(@NonNull Stream<A> stream, @NonNull Evaluable<? super A> predicate) {
-		super(stream);
-		this.predicate = predicate;
-	}
+  /**
+   * Creates a new {@link TakeWhileStream}
+   */
+  public TakeWhileStream(@NonNull Stream<A> stream, @NonNull Evaluable<? super A> predicate) {
+    super(stream);
+    this.predicate = predicate;
+  }
 
-	public Thriterator<A> iterator() {
-		final Iterator<A> iter = getSource().iterator();
-		return Thriterators.from(new NextGetIterator<A>() {
-			protected boolean updateNext() {
-				return iter.hasNext() && predicate.eval(setNext(iter.next()));
-			}
-		});
-	}
+  @Override
+  public Thriterator<A> iterator() {
+    final Iterator<A> iter = getSource().iterator();
+    return Thriterators.from(new NextGetIterator<A>() {
+      @Override
+      protected boolean updateNext() {
+        return iter.hasNext() && predicate.eval(setNext(iter.next()));
+      }
+    });
+  }
 
-	public Stream<A> takeWhile(Evaluable<? super A> predicate) {
-		return new TakeWhileStream<A>(getSource(), Predicates.from(this.predicate).and(predicate));
-	}
+  @Override
+  public Stream<A> takeWhile(Evaluable<? super A> predicate) {
+    return new TakeWhileStream<A>(getSource(), Predicates.from(this.predicate).and(predicate));
+  }
 }

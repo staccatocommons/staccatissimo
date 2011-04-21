@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.context.internal;
 
 import java.util.Set;
@@ -33,68 +32,68 @@ import org.slf4j.Logger;
  */
 public abstract class AbstractAnnotationContext implements AnnotationContext {
 
-	private final Logger logger;
-	private final ClassPool classPool;
+  private final Logger logger;
+  private final ClassPool classPool;
 
-	private Set<String> presentAnnotations;
+  private Set<String> presentAnnotations;
 
-	/**
-	 * Creates a new {@link AbstractAnnotationContext}
-	 */
-	public AbstractAnnotationContext(@NonNull ClassPool pool, @NonNull Logger logger) {
-		Ensure.isNotNull("pool", pool);
-		Ensure.isNotNull("logger", logger);
-		this.logger = logger;
-		this.classPool = pool;
-	}
+  /**
+   * Creates a new {@link AbstractAnnotationContext}
+   */
+  public AbstractAnnotationContext(@NonNull ClassPool pool, @NonNull Logger logger) {
+    Ensure.isNotNull("pool", pool);
+    Ensure.isNotNull("logger", logger);
+    this.logger = logger;
+    this.classPool = pool;
+  }
 
-	/**
-	 * @return the logger
-	 */
-	public Logger getLogger() {
-		return logger;
-	}
+  /**
+   * @return the logger
+   */
+  public Logger getLogger() {
+    return logger;
+  }
 
-	@Override
-	public void logDebugMessage(String message, Object... arguments) {
-		getLogger().debug(message, arguments);
-	}
+  @Override
+  public void logDebugMessage(String message, Object... arguments) {
+    getLogger().debug(message, arguments);
+  }
 
-	@Override
-	public void logInfoMessage(String message, Object... arguments) {
-		getLogger().info(message, arguments);
-	}
+  @Override
+  public void logInfoMessage(String message, Object... arguments) {
+    getLogger().info(message, arguments);
+  }
 
-	@Override
-	public void logWarnMessage(String message, Object... arguments) {
-		getLogger().warn(message, arguments);
-	}
+  @Override
+  public void logWarnMessage(String message, Object... arguments) {
+    getLogger().warn(message, arguments);
+  }
 
-	@Override
-	public void logErrorMessage(String message, Object... arguments) {
-		getLogger().error(message, arguments);
-	}
+  @Override
+  public void logErrorMessage(String message, Object... arguments) {
+    getLogger().error(message, arguments);
+  }
 
-	public final ClassPool getClassPool() {
-		return classPool;
-	}
+  public final ClassPool getClassPool() {
+    return classPool;
+  }
 
-	public CtClass getClass(String className) throws NotFoundException {
-		Ensure.isNotNull("className", className);
-		return getClassPool().get(className);
-	}
+  public CtClass getClass(String className) throws NotFoundException {
+    Ensure.isNotNull("className", className);
+    return getClassPool().get(className);
+  }
 
-	/**
-	 * @return the presentAnnotations
-	 */
-	public Set<String> getPresentAnnotationsTypes(Object[] annotations) {
-		if (presentAnnotations == null) {
-			presentAnnotations = Streams.cons(annotations).map(new AbstractFunction<Object, String>() {
-				public String apply(Object arg) {
-					return arg.getClass().getName();
-				}
-			}).toSet();
-		}
-		return presentAnnotations;
-	}
+  /**
+   * @return the presentAnnotations
+   */
+  public Set<String> getPresentAnnotationsTypes(Object[] annotations) {
+    if (presentAnnotations == null) {
+      presentAnnotations = Streams.cons(annotations).map(new AbstractFunction<Object, String>() {
+        public String apply(Object arg) {
+          return arg.getClass().getName();
+        }
+      }).toSet();
+    }
+    return presentAnnotations;
+  }
 }

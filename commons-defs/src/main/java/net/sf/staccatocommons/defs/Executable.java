@@ -31,12 +31,12 @@ package net.sf.staccatocommons.defs;
  */
 public interface Executable<T> {
 
-	/**
-	 * Performs a side-effect computation.
-	 * 
-	 * @param argument
-	 *          the argument of the computation.
-	 */
-	void exec(T argument);
+  /**
+   * Performs a side-effect computation.
+   * 
+   * @param argument
+   *          the argument of the computation.
+   */
+  void exec(T argument);
 
 }

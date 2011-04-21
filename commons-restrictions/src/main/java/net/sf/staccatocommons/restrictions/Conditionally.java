@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.restrictions;
 
 import java.lang.annotation.Documented;
@@ -59,8 +58,8 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 @Target({ ElementType.TYPE, ElementType.METHOD })
 public @interface Conditionally {
 
-	/**
-	 * An array with interfaces and/or restriction annotations
-	 */
-	Class[] value();
+  /**
+   * An array with interfaces and/or restriction annotations
+   */
+  Class[] value();
 }

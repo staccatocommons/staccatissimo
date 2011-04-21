@@ -26,19 +26,19 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @param <A>
  */
 public class ThunkCallable<A> implements Callable<A> {
-	private final Thunk<A> thunk;
+  private final Thunk<A> thunk;
 
-	/**
-	 * Creates a new {@link ThunkCallable}
-	 * 
-	 * @param thunk
-	 *          the {@link Thunk} to wrap
-	 */
-	public ThunkCallable(@NonNull Thunk<A> thunk) {
-		this.thunk = thunk;
-	}
+  /**
+   * Creates a new {@link ThunkCallable}
+   * 
+   * @param thunk
+   *          the {@link Thunk} to wrap
+   */
+  public ThunkCallable(@NonNull Thunk<A> thunk) {
+    this.thunk = thunk;
+  }
 
-	public A call() throws Exception {
-		return SoftException.valueOrHarden(thunk);
-	}
+  public A call() throws Exception {
+    return SoftException.valueOrHarden(thunk);
+  }
 }

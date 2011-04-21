@@ -22,11 +22,11 @@ import net.sf.staccatocommons.restrictions.Constant;
  */
 public abstract class AbstractEquiv<A> extends AbstractPredicate2<A, A> {
 
-	private Predicate2<A, A> nullSafe = super.nullSafe();
+  private Predicate2<A, A> nullSafe = super.nullSafe();
 
-	@Constant
-	public final Predicate2<A, A> nullSafe() {
-		return nullSafe;
-	}
+  @Constant
+  public final Predicate2<A, A> nullSafe() {
+    return nullSafe;
+  }
 
 }

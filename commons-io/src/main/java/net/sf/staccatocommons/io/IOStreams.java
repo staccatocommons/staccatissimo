@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.io;
 
 import java.io.EOFException;
@@ -36,69 +35,69 @@ import org.apache.commons.io.LineIterator;
  */
 public class IOStreams {
 
-	private IOStreams() {}
+  private IOStreams() {}
 
-	/**
-	 * Answers a {@link Stream} that retrieves words from the given
-	 * {@link Readable}
-	 * 
-	 * @param readable
-	 * @return a new single-iteration {@link Stream}
-	 */
-	@NonNull
-	public static Stream<String> fromWords(@NonNull Readable readable) {
-		return Streams.from(new Scanner(readable));
-	}
+  /**
+   * Answers a {@link Stream} that retrieves words from the given
+   * {@link Readable}
+   * 
+   * @param readable
+   * @return a new single-iteration {@link Stream}
+   */
+  @NonNull
+  public static Stream<String> fromWords(@NonNull Readable readable) {
+    return Streams.from(new Scanner(readable));
+  }
 
-	/**
-	 * Answers a {@link Stream} that retrieves lines from the given
-	 * {@link Readable}
-	 * 
-	 * @param readable
-	 * @return a new single-iteration {@link Stream}
-	 */
-	@NonNull
-	public static Stream<String> fromLines(@NonNull Reader readable) {
-		return Streams.from(new LineIterator(readable));
-	}
+  /**
+   * Answers a {@link Stream} that retrieves lines from the given
+   * {@link Readable}
+   * 
+   * @param readable
+   * @return a new single-iteration {@link Stream}
+   */
+  @NonNull
+  public static Stream<String> fromLines(@NonNull Reader readable) {
+    return Streams.from(new LineIterator(readable));
+  }
 
-	/**
-	 * Answers a {@link Stream} that retrieves tokens that match the given regular
-	 * expression from the given {@link Readable}
-	 * 
-	 * @param readable
-	 * @param regexp
-	 * @return a new single-iteration {@link Stream}
-	 */
-	@NonNull
-	public static Stream<String> fromTokens(@NonNull Readable readable, @NonNull String regexp) {
-		return Streams.from(new Scanner(readable).useDelimiter(regexp));
-	}
+  /**
+   * Answers a {@link Stream} that retrieves tokens that match the given regular
+   * expression from the given {@link Readable}
+   * 
+   * @param readable
+   * @param regexp
+   * @return a new single-iteration {@link Stream}
+   */
+  @NonNull
+  public static Stream<String> fromTokens(@NonNull Readable readable, @NonNull String regexp) {
+    return Streams.from(new Scanner(readable).useDelimiter(regexp));
+  }
 
-	/**
-	 * Answers a {@link Stream} that retrieves objects from the given
-	 * {@link ObjectInput}
-	 * 
-	 * @param <A>
-	 *          the type of object to read from the given <code>redable</code>
-	 * @param readable
-	 *          an {@link ObjectInput} that is the source of the returned
-	 *          {@link Stream}
-	 * @return a new single-iteration {@link Stream}
-	 */
-	@NonNull
-	public static <A> Stream<A> fromObjects(@NonNull final ObjectInput readable) {
-		return Streams.from(new NextOptionIterator<A>() {
-			protected Option<A> nextOption() {
-				try {
-					return Option.some((A) readable.readObject());
-				} catch (EOFException e) {
-					return Option.none();
-				} catch (Exception e) {
-					throw SoftException.soften(e);
-				}
-			}
-		});
-	}
+  /**
+   * Answers a {@link Stream} that retrieves objects from the given
+   * {@link ObjectInput}
+   * 
+   * @param <A>
+   *          the type of object to read from the given <code>redable</code>
+   * @param readable
+   *          an {@link ObjectInput} that is the source of the returned
+   *          {@link Stream}
+   * @return a new single-iteration {@link Stream}
+   */
+  @NonNull
+  public static <A> Stream<A> fromObjects(@NonNull final ObjectInput readable) {
+    return Streams.from(new NextOptionIterator<A>() {
+      protected Option<A> nextOption() {
+        try {
+          return Option.some((A) readable.readObject());
+        } catch (EOFException e) {
+          return Option.none();
+        } catch (Exception e) {
+          throw SoftException.soften(e);
+        }
+      }
+    });
+  }
 
 }

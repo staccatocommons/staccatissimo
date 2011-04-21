@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.lifecycle;
 
 import java.io.Closeable;
@@ -28,29 +27,29 @@ import org.junit.Test;
  */
 public class CloseableLifecycleUnitTest extends JUnit4MockObjectTestCase {
 
-	private Closeable closeable;
+  private Closeable closeable;
 
-	/***/
-	@Before
-	public void setup() {
-		closeable = mock(Closeable.class);
-	}
+  /***/
+  @Before
+  public void setup() {
+    closeable = mock(Closeable.class);
+  }
 
-	/***/
-	@Test
-	public void testDispose() throws Exception {
-		checking(new Expectations() {
-			{
-				one(closeable).close();
-			}
-		});
-		new CloseableLifecycle<Closeable, Void>() {
-			@Override
-			public Closeable initialize() throws IOException {
-				return null;
-			}
-		}.dispose(closeable);
+  /***/
+  @Test
+  public void testDispose() throws Exception {
+    checking(new Expectations() {
+      {
+        one(closeable).close();
+      }
+    });
+    new CloseableLifecycle<Closeable, Void>() {
+      @Override
+      public Closeable initialize() throws IOException {
+        return null;
+      }
+    }.dispose(closeable);
 
-	}
+  }
 
 }

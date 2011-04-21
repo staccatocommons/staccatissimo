@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.internal;
 
 import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
@@ -24,19 +23,18 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 public final class ToString {
 
-	private ToString() {
-	}
+  private ToString() {}
 
-	/**
-	 * Invokes ToStringBuilder.reflectionToString with the NamedTuple
-	 * ToStringStyle
-	 * 
-	 * @param o
-	 *          the object
-	 * @return the reflective toString
-	 */
-	public static String toString(Object o) {
-		return ToStringBuilder.reflectionToString(o, NamedTupleToStringStyle.getInstance());
-	}
+  /**
+   * Invokes ToStringBuilder.reflectionToString with the NamedTuple
+   * ToStringStyle
+   * 
+   * @param o
+   *          the object
+   * @return the reflective toString
+   */
+  public static String toString(Object o) {
+    return ToStringBuilder.reflectionToString(o, NamedTupleToStringStyle.getInstance());
+  }
 
 }

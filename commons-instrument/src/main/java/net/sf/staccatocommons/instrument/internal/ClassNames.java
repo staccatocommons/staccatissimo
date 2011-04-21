@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.internal;
 
 import java.io.File;
@@ -27,20 +26,19 @@ import org.apache.commons.io.FilenameUtils;
  */
 public class ClassNames {
 
-	/** Returns the class name of a given classFile */
-	public static String getClassName(Directory classDirectory, File classFile) {
-		String classFileAbsolutePath = classFile.getAbsolutePath();
-		String classDirectoryAbsolutePath = classDirectory.getAbsolutePath();
-		return FilenameUtils //
-			.removeExtension(makeRelativeTo(classDirectoryAbsolutePath, classFileAbsolutePath))
-			.replace(File.separator, ".");
-	}
+  /** Returns the class name of a given classFile */
+  public static String getClassName(Directory classDirectory, File classFile) {
+    String classFileAbsolutePath = classFile.getAbsolutePath();
+    String classDirectoryAbsolutePath = classDirectory.getAbsolutePath();
+    return FilenameUtils //
+      .removeExtension(makeRelativeTo(classDirectoryAbsolutePath, classFileAbsolutePath))
+      .replace(File.separator, ".");
+  }
 
-	private static String makeRelativeTo(String absoluteNormalizedBaseDirectoryName,
-		String absoluteNormalizedFileName) {
-		return absoluteNormalizedFileName//
-			.replaceFirst(Pattern //
-				.quote(absoluteNormalizedBaseDirectoryName + File.separator), "");
-	}
+  private static String makeRelativeTo(String absoluteNormalizedBaseDirectoryName, String absoluteNormalizedFileName) {
+    return absoluteNormalizedFileName//
+      .replaceFirst(Pattern //
+        .quote(absoluteNormalizedBaseDirectoryName + File.separator), "");
+  }
 
 }

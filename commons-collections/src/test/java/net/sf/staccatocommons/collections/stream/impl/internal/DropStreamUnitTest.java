@@ -27,15 +27,15 @@ import org.junit.Test;
  */
 public class DropStreamUnitTest {
 
-	/**
-	 * Test method for {@link AbstractStream#drop(int)} .
-	 */
-	@Test
-	public void testDrop() {
-		assertEquals(Arrays.asList(90, 100), Streams.cons(59, 10, 90, 100).drop(2).toList());
-		assertEquals(Arrays.asList(), Streams.cons(59, 10, 90, 100).drop(4).toList());
-		assertEquals(Arrays.asList(), Streams.cons(59, 10, 90, 100).drop(100).toList());
-		assertEquals(Arrays.asList(59, 10, 90, 100), Streams.cons(59, 10, 90, 100).drop(0).toList());
-	}
+  /**
+   * Test method for {@link AbstractStream#drop(int)} .
+   */
+  @Test
+  public void testDrop() {
+    assertEquals(Arrays.asList(90, 100), Streams.cons(59, 10, 90, 100).drop(2).toList());
+    assertEquals(Arrays.asList(), Streams.cons(59, 10, 90, 100).drop(4).toList());
+    assertEquals(Arrays.asList(), Streams.cons(59, 10, 90, 100).drop(100).toList());
+    assertEquals(Arrays.asList(59, 10, 90, 100), Streams.cons(59, 10, 90, 100).drop(0).toList());
+  }
 
 }

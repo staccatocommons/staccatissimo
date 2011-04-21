@@ -28,54 +28,51 @@ import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
  * @param <A>
  * @param <B>
  */
-public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> implements
-	Function<A, B> {
+public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> implements Function<A, B> {
 
-	@NonNull
-	@ForceRestrictions
-	public <C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other) {
-		return new AbstractFunction<C, B>() {
-			public B apply(C arg) {
-				return AbstractFunction.this.apply(other.apply(arg));
-			}
-		};
-	}
+  @NonNull
+  @ForceRestrictions
+  public <C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other) {
+    return new AbstractFunction<C, B>() {
+      public B apply(C arg) {
+        return AbstractFunction.this.apply(other.apply(arg));
+      }
+    };
+  }
 
-	@NonNull
-	@ForceRestrictions
-	public <Tp1, Tp2> Function2<Tp1, Tp2, B> of(
-		@NonNull final Applicable2<Tp1, Tp2, ? extends A> other) {
-		return new AbstractFunction2<Tp1, Tp2, B>() {
-			public B apply(Tp1 arg0, Tp2 arg1) {
-				return AbstractFunction.this.apply(other.apply(arg0, arg1));
-			}
-		};
-	}
+  @NonNull
+  @ForceRestrictions
+  public <Tp1, Tp2> Function2<Tp1, Tp2, B> of(@NonNull final Applicable2<Tp1, Tp2, ? extends A> other) {
+    return new AbstractFunction2<Tp1, Tp2, B>() {
+      public B apply(Tp1 arg0, Tp2 arg1) {
+        return AbstractFunction.this.apply(other.apply(arg0, arg1));
+      }
+    };
+  }
 
-	@NonNull
-	@ForceRestrictions
-	public <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(
-		@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other) {
-		return new AbstractFunction3<Tp1, Tp2, Tp3, B>() {
-			public B apply(Tp1 arg0, Tp2 arg1, Tp3 arg2) {
-				return AbstractFunction.this.apply(other.apply(arg0, arg1, arg2));
-			}
-		};
-	}
+  @NonNull
+  @ForceRestrictions
+  public <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other) {
+    return new AbstractFunction3<Tp1, Tp2, Tp3, B>() {
+      public B apply(Tp1 arg0, Tp2 arg1, Tp3 arg2) {
+        return AbstractFunction.this.apply(other.apply(arg0, arg1, arg2));
+      }
+    };
+  }
 
-	@NonNull
-	public Function<A, B> nullSafe() {
-		return new AbstractFunction<A, B>() {
-			public B apply(A arg) {
-				if (arg == null)
-					return null;
-				return AbstractFunction.this.apply(arg);
-			}
-		};
-	}
+  @NonNull
+  public Function<A, B> nullSafe() {
+    return new AbstractFunction<A, B>() {
+      public B apply(A arg) {
+        if (arg == null)
+          return null;
+        return AbstractFunction.this.apply(arg);
+      }
+    };
+  }
 
-	public String toString() {
-		return "Function";
-	}
+  public String toString() {
+    return "Function";
+  }
 
 }

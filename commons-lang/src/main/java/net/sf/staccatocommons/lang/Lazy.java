@@ -36,40 +36,40 @@ import net.sf.staccatocommons.defs.Thunk;
  */
 public abstract class Lazy<T> implements Thunk<T> {
 
-	private Option<T> lazyValue = Option.none();
+  private Option<T> lazyValue = Option.none();
 
-	/**
-	 * Initializes the lazy value if necessary, and returns it.
-	 * 
-	 * @return the lazy value
-	 */
-	public T value() {
-		if (lazyValue.isUndefined())
-			lazyValue = Option.some(init());
-		return lazyValue.value();
-	}
+  /**
+   * Initializes the lazy value if necessary, and returns it.
+   * 
+   * @return the lazy value
+   */
+  public T value() {
+    if (lazyValue.isUndefined())
+      lazyValue = Option.some(init());
+    return lazyValue.value();
+  }
 
-	/**
-	 * Initializes the lazy value. This code will never be evaluated, if
-	 * {@link #value()} is never sent, or evaluated once and only once, if
-	 * {@link #value()} is sent at least once.
-	 * 
-	 * @return the initialized value. May be null.
-	 */
-	protected abstract T init();
+  /**
+   * Initializes the lazy value. This code will never be evaluated, if
+   * {@link #value()} is never sent, or evaluated once and only once, if
+   * {@link #value()} is sent at least once.
+   * 
+   * @return the initialized value. May be null.
+   */
+  protected abstract T init();
 
-	/**
-	 * A synchronized {@link Lazy} thunk
-	 * 
-	 * @author flbulgarelli
-	 * 
-	 * @param <T>
-	 */
-	public static abstract class Atomic<T> extends Lazy<T> {
+  /**
+   * A synchronized {@link Lazy} thunk
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <T>
+   */
+  public static abstract class Atomic<T> extends Lazy<T> {
 
-		public final synchronized T value() {
-			return super.value();
-		}
-	}
+    public final synchronized T value() {
+      return super.value();
+    }
+  }
 
 }

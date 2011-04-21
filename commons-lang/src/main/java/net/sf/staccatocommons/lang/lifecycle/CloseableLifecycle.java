@@ -24,10 +24,10 @@ import java.io.Closeable;
  * @param <ReturnType>
  */
 public abstract class CloseableLifecycle<TargetType extends Closeable, ReturnType> extends
-	Lifecycle<TargetType, ReturnType> {
+  Lifecycle<TargetType, ReturnType> {
 
-	public final void dispose(TargetType target) throws Exception {
-		target.close();
-	}
+  public final void dispose(TargetType target) throws Exception {
+    target.close();
+  }
 
 }

@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.io;
 
 import static org.junit.Assert.*;
@@ -28,37 +27,33 @@ import org.junit.Test;
  */
 public class ReadStrategiesUnitTest {
 
-	private static final String SAMPLE_TEXT = "this is line 1\n this is line 2 \n this is line three";
-	private Reader readable;
+  private static final String SAMPLE_TEXT = "this is line 1\n this is line 2 \n this is line three";
+  private Reader readable;
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		readable = new StringReader(SAMPLE_TEXT);
-	}
+  /**
+   * @throws java.lang.Exception
+   */
+  @Before
+  public void setUp() throws Exception {
+    readable = new StringReader(SAMPLE_TEXT);
+  }
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.io.ReadStrategies#readLines()}.
-	 */
-	@Test
-	public void testReadLines() {
-		assertEquals(
-			"this is line 1| this is line 2 | this is line three",
-			IOStreams.fromLines(readable).joinStrings("|"));
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.io.ReadStrategies#readLines()}.
+   */
+  @Test
+  public void testReadLines() {
+    assertEquals("this is line 1| this is line 2 | this is line three", IOStreams.fromLines(readable).joinStrings("|"));
+  }
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.io.ReadStrategies#readWords()}.
-	 */
-	@Test
-	public void testReadWords() {
-		assertEquals("this|is|line|1|this|is|line|2|this|is|line|three", IOStreams
-			.fromWords(readable)
-			.joinStrings("|"));
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.io.ReadStrategies#readWords()}.
+   */
+  @Test
+  public void testReadWords() {
+    assertEquals("this|is|line|1|this|is|line|2|this|is|line|three", IOStreams.fromWords(readable).joinStrings("|"));
+  }
 
 }

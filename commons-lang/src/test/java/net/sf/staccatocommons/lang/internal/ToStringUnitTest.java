@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.internal;
 
 import static org.junit.Assert.*;
@@ -24,18 +23,18 @@ import org.junit.Test;
  */
 public class ToStringUnitTest {
 
-	static class Foo {
-		int x = 10;
-		int y = 90;
-	}
+  static class Foo {
+    int x = 10;
+    int y = 90;
+  }
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.internal.ToString#toString(java.lang.Object)}
-	 */
-	@Test
-	public void testToStringObject() {
-		assertEquals("ToStringUnitTest.Foo(10,90)", ToString.toString(new Foo()));
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.lang.internal.ToString#toString(java.lang.Object)}
+   */
+  @Test
+  public void testToStringObject() {
+    assertEquals("ToStringUnitTest.Foo(10,90)", ToString.toString(new Foo()));
+  }
 
 }

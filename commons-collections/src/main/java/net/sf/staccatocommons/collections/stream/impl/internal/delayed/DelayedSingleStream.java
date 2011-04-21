@@ -24,17 +24,17 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class DelayedSingleStream<A> extends AbstractStream<A> {
 
-	private final Thunk<A> thunk;
+  private final Thunk<A> thunk;
 
-	/**
-	 * Creates a new {@link DelayedSingleStream}
-	 */
-	public DelayedSingleStream(@NonNull Thunk<A> thunk) {
-		this.thunk = thunk;
-	}
+  /**
+   * Creates a new {@link DelayedSingleStream}
+   */
+  public DelayedSingleStream(@NonNull Thunk<A> thunk) {
+    this.thunk = thunk;
+  }
 
-	public Thriterator<A> iterator() {
-		return new DelayedSingleIterator<A>(thunk);
-	}
+  public Thriterator<A> iterator() {
+    return new DelayedSingleIterator<A>(thunk);
+  }
 
 }

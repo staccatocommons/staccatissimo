@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.io;
 
 import java.io.File;
@@ -22,32 +21,32 @@ import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
- * A {@link AbstractPredicate} that wraps a {@link FileFilter} and acts as a FileFilter
- * api to {@link Evaluable} api bridge
+ * A {@link AbstractPredicate} that wraps a {@link FileFilter} and acts as a
+ * FileFilter api to {@link Evaluable} api bridge
  * 
  * @author flbulgarelli
  * 
  */
 public class FilePredicate extends AbstractPredicate<File> implements FileFilter {
 
-	private final FileFilter fileFilter;
+  private final FileFilter fileFilter;
 
-	/**
-	 * Creates a new {@link FilePredicate} that wraps the given {@link FileFilter}
-	 * 
-	 * @param fileFilter
-	 *          the file filter to wrap
-	 */
-	public FilePredicate(@NonNull FileFilter fileFilter) {
-		this.fileFilter = fileFilter;
-	}
+  /**
+   * Creates a new {@link FilePredicate} that wraps the given {@link FileFilter}
+   * 
+   * @param fileFilter
+   *          the file filter to wrap
+   */
+  public FilePredicate(@NonNull FileFilter fileFilter) {
+    this.fileFilter = fileFilter;
+  }
 
-	public boolean eval(@NonNull File argument) {
-		return accept(argument);
-	}
+  public boolean eval(@NonNull File argument) {
+    return accept(argument);
+  }
 
-	public boolean accept(@NonNull File pathname) {
-		return fileFilter.accept(pathname);
-	}
+  public boolean accept(@NonNull File pathname) {
+    return fileFilter.accept(pathname);
+  }
 
 }

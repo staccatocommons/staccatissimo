@@ -24,31 +24,34 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class MapIterator<A, B> extends AdvanceThriterator<B> {
 
-	final Function<? super A, ? extends B> function;
-	final Thriter<? extends A> thriter;
+  private final Function<? super A, ? extends B> function;
+  private final Thriter<? extends A> thriter;
 
-	/**
-	 * Creates a new {@link MapIterator}
-	 */
-	public MapIterator(@NonNull Function<? super A, ? extends B> function,
-		@NonNull Thriter<? extends A> thriter) {
-		this.function = function;
-		this.thriter = thriter;
-	}
+  /**
+   * Creates a new {@link MapIterator}
+   */
+  public MapIterator(@NonNull Function<? super A, ? extends B> function, @NonNull Thriter<? extends A> thriter) {
+    this.function = function;
+    this.thriter = thriter;
+  }
 
-	public boolean hasNext() {
-		return thriter.hasNext();
-	}
+  @Override
+  public boolean hasNext() {
+    return thriter.hasNext();
+  }
 
-	public void advanceNext() {
-		thriter.advanceNext();
-	}
+  @Override
+  public void advanceNext() {
+    thriter.advanceNext();
+  }
 
-	public B current() {
-		return function.apply(thriter.current());
-	}
+  @Override
+  public B current() {
+    return function.apply(thriter.current());
+  }
 
-	public Thunk<B> delayedCurrent() {
-		return (Thunk<B>) function.delayedValue(thriter.delayedCurrent());
-	}
+  @Override
+  public Thunk<B> delayedCurrent() {
+    return (Thunk<B>) function.delayedValue(thriter.delayedCurrent());
+  }
 }

@@ -25,32 +25,32 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class Matches extends NonAnnonymousPredicate<String> {
 
-	private static final long serialVersionUID = -4663999428767203678L;
-	private Pattern pattern;
+  private static final long serialVersionUID = -4663999428767203678L;
+  private Pattern pattern;
 
-	/**
-	 * Creates a new {@link Matches} using a regular expression
-	 * 
-	 * @param regexp
-	 *          the regular expression. Non null.
-	 */
-	public Matches(String regexp) {
-		this.pattern = Pattern.compile(regexp);
-	}
+  /**
+   * Creates a new {@link Matches} using a regular expression
+   * 
+   * @param regexp
+   *          the regular expression. Non null.
+   */
+  public Matches(String regexp) {
+    this.pattern = Pattern.compile(regexp);
+  }
 
-	/**
-	 * Creates a new {@link Matches} using a {@link Pattern}.
-	 * 
-	 * @param pattern
-	 *          the pattern. Non null
-	 */
-	public Matches(Pattern pattern) {
-		this.pattern = pattern;
-	}
+  /**
+   * Creates a new {@link Matches} using a {@link Pattern}.
+   * 
+   * @param pattern
+   *          the pattern. Non null
+   */
+  public Matches(Pattern pattern) {
+    this.pattern = pattern;
+  }
 
-	@Override
-	public boolean eval(@NonNull String input) {
-		return pattern.matcher(input).matches();
-	}
+  @Override
+  public boolean eval(@NonNull String input) {
+    return pattern.matcher(input).matches();
+  }
 
 }

@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang;
 
 import java.io.Serializable;
@@ -68,136 +67,135 @@ import net.sf.staccatocommons.restrictions.value.Value;
  */
 @Value
 @Conditionally({ Immutable.class, Serializable.class })
-public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, ContainsAware<T>,
-	Serializable {
+public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, ContainsAware<T>, Serializable {
 
-	private static final long serialVersionUID = -4635925023376621559L;
+  private static final long serialVersionUID = -4635925023376621559L;
 
-	/**
-	 * Package level visibility to allow subclasses inside package
-	 */
-	Option() {}
+  /**
+   * Package level visibility to allow subclasses inside package
+   */
+  Option() {}
 
-	/**
-	 * Gets the optional value, if defined, or throws an
-	 * {@link NoSuchElementException}, otherwise.
-	 * 
-	 * @return The optional value. This value is nullable, if client code
-	 *         considers null as possible, valid values. Non null otherwise.
-	 *         Please prefer the second approach, as normally, null values are
-	 *         there in code to represent optional data, so nullable values in
-	 *         optional values is in most scenarios completely redundant,
-	 *         unnecessary an error prone.
-	 * @throws NoSuchElementException
-	 *           if this option is undefined, and thus there is no value.
-	 */
-	public abstract T value() throws NoSuchElementException;
+  /**
+   * Gets the optional value, if defined, or throws an
+   * {@link NoSuchElementException}, otherwise.
+   * 
+   * @return The optional value. This value is nullable, if client code
+   *         considers null as possible, valid values. Non null otherwise.
+   *         Please prefer the second approach, as normally, null values are
+   *         there in code to represent optional data, so nullable values in
+   *         optional values is in most scenarios completely redundant,
+   *         unnecessary an error prone.
+   * @throws NoSuchElementException
+   *           if this option is undefined, and thus there is no value.
+   */
+  public abstract T value() throws NoSuchElementException;
 
-	/**
-	 * Returns if the value has been defined or not.
-	 * 
-	 * @return true is the value is defined. False otherwise
-	 */
-	public abstract boolean isDefined();
+  /**
+   * Returns if the value has been defined or not.
+   * 
+   * @return true is the value is defined. False otherwise
+   */
+  public abstract boolean isDefined();
 
-	/**
-	 * 
-	 * @return !{@link #isDefined()}
-	 */
-	public boolean isUndefined() {
-		return !isDefined();
-	}
+  /**
+   * 
+   * @return !{@link #isDefined()}
+   */
+  public boolean isUndefined() {
+    return !isDefined();
+  }
 
-	/**
-	 * Factory method for creating an undefined value. This method guarantees to
-	 * return always the same instance.
-	 * 
-	 * @param <T>
-	 *          the type of optional value
-	 * @return A constant {@link None} instance
-	 */
-	@Constant
-	public static <T> None<T> none() {
-		return None.none();
-	}
+  /**
+   * Factory method for creating an undefined value. This method guarantees to
+   * return always the same instance.
+   * 
+   * @param <T>
+   *          the type of optional value
+   * @return A constant {@link None} instance
+   */
+  @Constant
+  public static <T> None<T> none() {
+    return None.none();
+  }
 
-	/**
-	 * Returns the value of this {@link Option}, or the provided object if
-	 * undefined
-	 * 
-	 * @param other
-	 *          the return value in case this {@link Option} is undefined
-	 * @return <code>this.value()</code> if defined, other <code>otherwise</code>
-	 */
-	public abstract T valueOrElse(T other);
+  /**
+   * Returns the value of this {@link Option}, or the provided object if
+   * undefined
+   * 
+   * @param other
+   *          the return value in case this {@link Option} is undefined
+   * @return <code>this.value()</code> if defined, other <code>otherwise</code>
+   */
+  public abstract T valueOrElse(T other);
 
-	/**
-	 * Returns the value of this {@link Option}, or the provided object if
-	 * undefined
-	 * 
-	 * @param other
-	 *          the thunk of the return value in case this {@link Option} is
-	 *          undefined
-	 * @return <code>this.value()</code> if defined, other.value()
-	 *         <code>otherwise</code>
-	 */
-	public abstract T valueOrElse(Thunk<? extends T> other);
+  /**
+   * Returns the value of this {@link Option}, or the provided object if
+   * undefined
+   * 
+   * @param other
+   *          the thunk of the return value in case this {@link Option} is
+   *          undefined
+   * @return <code>this.value()</code> if defined, other.value()
+   *         <code>otherwise</code>
+   */
+  public abstract T valueOrElse(Thunk<? extends T> other);
 
-	/**
-	 * Returns the value of this {@link Option}, or <code>null</code>, if
-	 * undefined.
-	 * 
-	 * @return <code>this.value()</code> if defined, or <code>null</code>,
-	 *         otherwise
-	 */
-	public abstract T valueOrNull();
+  /**
+   * Returns the value of this {@link Option}, or <code>null</code>, if
+   * undefined.
+   * 
+   * @return <code>this.value()</code> if defined, or <code>null</code>,
+   *         otherwise
+   */
+  public abstract T valueOrNull();
 
-	/**
-	 * Executed the given block if this option is defined
-	 * 
-	 * @param block
-	 */
-	public abstract void ifDefined(@NonNull Executable<T> block);
+  /**
+   * Executed the given block if this option is defined
+   * 
+   * @param block
+   */
+  public abstract void ifDefined(@NonNull Executable<T> block);
 
-	/**
-	 * Factory method for creating defined values.This method does not guarantee
-	 * either to return the same or different instances for the same argument.
-	 * 
-	 * @param <T>
-	 *          the type of optional value
-	 * @param value
-	 *          May be null (although is discouraged). See {@link #value()} for
-	 *          details
-	 * @return Some(value)
-	 */
-	public static <T> Some<T> some(T value) {
-		return Some.some(value);
-	}
+  /**
+   * Factory method for creating defined values.This method does not guarantee
+   * either to return the same or different instances for the same argument.
+   * 
+   * @param <T>
+   *          the type of optional value
+   * @param value
+   *          May be null (although is discouraged). See {@link #value()} for
+   *          details
+   * @return Some(value)
+   */
+  public static <T> Some<T> some(T value) {
+    return Some.some(value);
+  }
 
-	/**
-	 * Factory method for creating defined, null values. This method is just a
-	 * shortcut for some(null). Guaranteed to return always the same instance.
-	 * 
-	 * @param <T>
-	 * @return A shared null instance
-	 */
-	public static <T> Some<T> someNull() {
-		return Some.someNull();
-	}
+  /**
+   * Factory method for creating defined, null values. This method is just a
+   * shortcut for some(null). Guaranteed to return always the same instance.
+   * 
+   * @param <T>
+   * @return A shared null instance
+   */
+  public static <T> Some<T> someNull() {
+    return Some.someNull();
+  }
 
-	/**
-	 * Creates an option (defined or not), mapping null values to undefined
-	 * options, and non nulls to defined option. This method lets client code to
-	 * convert between null-as-undefined and
-	 * 
-	 * @param <T>
-	 * @param value
-	 * @return <code>value != null ? Option.some(value) : Option.none()</code>
-	 */
-	public static <T> Option<T> nullToNone(T value) {
-		if (value == null)
-			return none();
-		return some(value);
-	}
+  /**
+   * Creates an option (defined or not), mapping null values to undefined
+   * options, and non nulls to defined option. This method lets client code to
+   * convert between null-as-undefined and
+   * 
+   * @param <T>
+   * @param value
+   * @return <code>value != null ? Option.some(value) : Option.none()</code>
+   */
+  public static <T> Option<T> nullToNone(T value) {
+    if (value == null)
+      return none();
+    return some(value);
+  }
 
 }

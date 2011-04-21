@@ -22,13 +22,13 @@ import org.junit.Test;
  */
 public class EmptyIteratorUnitTest {
 
-	/**
-	 * Test method for {@link EmptyThriterator#empty()}.
-	 */
-	@Test
-	public void testEmpty() {
-		assertFalse(EmptyThriterator.empty().hasNext());
-		assertFalse(EmptyThriterator.empty().hasNext());
-	}
+  /**
+   * Test method for {@link EmptyThriterator#empty()}.
+   */
+  @Test
+  public void testEmpty() {
+    assertFalse(EmptyThriterator.empty().hasNext());
+    assertFalse(EmptyThriterator.empty().hasNext());
+  }
 
 }

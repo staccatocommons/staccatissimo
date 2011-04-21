@@ -24,22 +24,18 @@ import net.sf.staccatocommons.lang.number.NumberTypeAware;
  * 
  * @param <B>
  */
-public abstract class NumberTypeFunction<A, B> extends AbstractFunction<A, B> implements
-	NumberTypeAware<B> {
+public abstract class NumberTypeFunction<A, B> extends AbstractFunction<A, B> implements NumberTypeAware<B> {
 
-	/**
-	 * 
-	 */
-	private final NumberType<B> numberType;
+  private final NumberType<B> numberType;
 
-	/**
-	 * Creates a new {@link NumberTypeFunction}
-	 */
-	public NumberTypeFunction(NumberType<B> abstractNumberType) {
-		numberType = abstractNumberType;
-	}
+  /**
+   * Creates a new {@link NumberTypeFunction}
+   */
+  public NumberTypeFunction(NumberType<B> abstractNumberType) {
+    numberType = abstractNumberType;
+  }
 
-	public NumberType<B> numberType() {
-		return numberType;
-	}
+  public NumberType<B> numberType() {
+    return numberType;
+  }
 }

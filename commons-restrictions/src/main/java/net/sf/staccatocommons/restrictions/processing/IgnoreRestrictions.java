@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.restrictions.processing;
 
 import java.lang.annotation.ElementType;
@@ -22,9 +21,9 @@ import java.lang.annotation.Target;
 import net.sf.staccatocommons.restrictions.Restriction;
 
 /**
- * {@link IgnoreRestrictions} is a directive for automated annotation processors,
- * indicating that {@link Restriction}s in the annotated element and its
- * descendants <strong>must not</strong> be processed
+ * {@link IgnoreRestrictions} is a directive for automated annotation
+ * processors, indicating that {@link Restriction}s in the annotated element and
+ * its descendants <strong>must not</strong> be processed
  * 
  * This annotation is incompatible with {@link ForceRestrictions} - an element
  * <strong>must not</strong> be annotated with {@link IgnoreRestrictions} and

@@ -24,27 +24,27 @@ import net.sf.staccatocommons.defs.Thunk;
  */
 public final class ConstantThunk<T> implements Serializable, Thunk<T> {
 
-	private static final long serialVersionUID = -7769276251688297460L;
+  private static final long serialVersionUID = -7769276251688297460L;
 
-	private final T value;
+  private final T value;
 
-	/**
-	 * 
-	 * Creates a new {@link ConstantThunk}
-	 * 
-	 * @param value
-	 *          the value to provide
-	 */
-	public ConstantThunk(T value) {
-		this.value = value;
-	}
+  /**
+   * 
+   * Creates a new {@link ConstantThunk}
+   * 
+   * @param value
+   *          the value to provide
+   */
+  public ConstantThunk(T value) {
+    this.value = value;
+  }
 
-	public T value() {
-		return value;
-	}
+  public T value() {
+    return value;
+  }
 
-	public String toString() {
-		return "ConstantThunk(" + String.valueOf(value) + ")";
-	}
+  public String toString() {
+    return "ConstantThunk(" + String.valueOf(value) + ")";
+  }
 
 }

@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang;
 
 import static org.junit.Assert.*;
@@ -28,44 +27,44 @@ import org.junit.Test;
  * @author flbulgarelli
  */
 public class PrioritizedUnitTest {
-	/***/
-	@Test
-	public void testFrom() {
+  /***/
+  @Test
+  public void testFrom() {
 
-		List<String> value = Collections.emptyList();
-		int priority = 5;
+    List<String> value = Collections.emptyList();
+    int priority = 5;
 
-		Prioritized<Integer, List<String>> p1 = Prioritized.from(priority, value);
+    Prioritized<Integer, List<String>> p1 = Prioritized.from(priority, value);
 
-		assertSame(value, p1.value());
-		assertSame(priority, p1.getPriority());
-	}
+    assertSame(value, p1.value());
+    assertSame(priority, p1.getPriority());
+  }
 
-	/***/
-	@Test
-	public void testCompare() {
+  /***/
+  @Test
+  public void testCompare() {
 
-		List<String> value1 = Collections.emptyList();
-		int priority1 = 5;
+    List<String> value1 = Collections.emptyList();
+    int priority1 = 5;
 
-		List<String> value2 = Arrays.asList("Hello", "World", "Fooe");
-		int priority2 = 1;
+    List<String> value2 = Arrays.asList("Hello", "World", "Fooe");
+    int priority2 = 1;
 
-		Prioritized<Integer, List<String>> p1 = Prioritized.from(priority1, value1);
-		Prioritized<Integer, List<String>> p2 = Prioritized.from(priority2, value2);
+    Prioritized<Integer, List<String>> p1 = Prioritized.from(priority1, value1);
+    Prioritized<Integer, List<String>> p2 = Prioritized.from(priority2, value2);
 
-		assertTrue(p2.compareTo(p1) <= 0);
+    assertTrue(p2.compareTo(p1) <= 0);
 
-	}
+  }
 
-	/**
-	 * Test for {@link Prioritized#equals(Object)}
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testEquals() throws Exception {
-		assertEquals(Prioritized.from(90, 50), Prioritized.from(90, 20));
-	}
+  /**
+   * Test for {@link Prioritized#equals(Object)}
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void testEquals() throws Exception {
+    assertEquals(Prioritized.from(90, 50), Prioritized.from(90, 20));
+  }
 
 }

@@ -54,60 +54,60 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class Numbers {
 
-	private Numbers() {}
+  private Numbers() {}
 
-	/**
-	 * Synonym for {@link BigDecimal#valueOf(long)}
-	 * 
-	 * @param val
-	 * @return a BigDecimal whose value is val
-	 */
-	@NonNull
-	public static BigDecimal d(long val) {
-		return BigDecimal.valueOf(val);
-	}
+  /**
+   * Synonym for {@link BigDecimal#valueOf(long)}
+   * 
+   * @param val
+   * @return a BigDecimal whose value is val
+   */
+  @NonNull
+  public static BigDecimal d(long val) {
+    return BigDecimal.valueOf(val);
+  }
 
-	/**
-	 * Synonym for {@link BigDecimal#valueOf(long, int)}
-	 * 
-	 * @param val
-	 * @param scale
-	 * @return a {@link BigDecimal} whose value is mantissa × 10^-scale
-	 */
-	@NonNull
-	public static BigDecimal d(long val, int scale) {
-		return BigDecimal.valueOf(val, scale);
-	}
+  /**
+   * Synonym for {@link BigDecimal#valueOf(long, int)}
+   * 
+   * @param val
+   * @param scale
+   * @return a {@link BigDecimal} whose value is mantissa × 10^-scale
+   */
+  @NonNull
+  public static BigDecimal d(long val, int scale) {
+    return BigDecimal.valueOf(val, scale);
+  }
 
-	/**
-	 * Answers a big decimal of the given value expressed in calculator
-	 * "E notation": <code>mantissa E exponent</code>. In scientific notation, its
-	 * value is <code>mantissa × 10^exponent</code>.
-	 * <p>
-	 * <strong>Warning:</strong> This method is <strong>not</strong> a synonym of
-	 * {@link BigDecimal#valueOf(double)}, as the latter negates the exponent
-	 * </p>
-	 * 
-	 * @param mantissa
-	 *          - aka significand
-	 * @param exponent
-	 *          the exponent
-	 * @return a BigDecimal whose value is mantissa × 10^exponent.
-	 */
-	@NonNull
-	public static BigDecimal e(long mantissa, int exponent) {
-		return BigDecimal.valueOf(mantissa, -exponent);
-	}
+  /**
+   * Answers a big decimal of the given value expressed in calculator
+   * "E notation": <code>mantissa E exponent</code>. In scientific notation, its
+   * value is <code>mantissa × 10^exponent</code>.
+   * <p>
+   * <strong>Warning:</strong> This method is <strong>not</strong> a synonym of
+   * {@link BigDecimal#valueOf(double)}, as the latter negates the exponent
+   * </p>
+   * 
+   * @param mantissa
+   *          - aka significand
+   * @param exponent
+   *          the exponent
+   * @return a BigDecimal whose value is mantissa × 10^exponent.
+   */
+  @NonNull
+  public static BigDecimal e(long mantissa, int exponent) {
+    return BigDecimal.valueOf(mantissa, -exponent);
+  }
 
-	/**
-	 * Synonym for {@link BigInteger#valueOf(long)}
-	 * 
-	 * @param val
-	 * @return a BigInteger with the specified value.
-	 */
-	@NonNull
-	public static BigInteger i(long val) {
-		return BigInteger.valueOf(val);
-	}
+  /**
+   * Synonym for {@link BigInteger#valueOf(long)}
+   * 
+   * @param val
+   * @return a BigInteger with the specified value.
+   */
+  @NonNull
+  public static BigInteger i(long val) {
+    return BigInteger.valueOf(val);
+  }
 
 }

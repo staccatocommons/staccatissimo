@@ -27,53 +27,53 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Zippeable<A> {
 
-	/**
-	 * Returns a {@link Stream} formed by the result of applying the given
-	 * <code>function</code> to each pair of elements from <code>this</code> and
-	 * the given <code>iterable</code>.
-	 * 
-	 * If any if either <code>this</code> or the given iterable is shorter than
-	 * the other one, the remaining elements are discarded.
-	 * 
-	 * @param <B>
-	 *          the type to the <code>iterable</code> to zip with this
-	 *          {@link Stream}
-	 * @param <C>
-	 *          the resulting Stream element type
-	 * @param iterable
-	 *          the {@link Iterable} to zip with this Stream
-	 * @param function
-	 *          the function to apply to each pair
-	 * @return a new Stream formed applying the given {@link Applicable2} to each
-	 *         pair this Stream and the given iterable. The resulting Stream size
-	 *         is the minimum of both iterables sizes, or infinite, if both this
-	 *         and <code>iterable</code> are
-	 * @see Iterables#zip(Iterable, Iterable)
-	 */
-	@NonNull
-	@Projection
-	public <B, C> Stream<C> zip(@NonNull Iterable<B> iterable, Function2<A, B, C> function);
+  /**
+   * Returns a {@link Stream} formed by the result of applying the given
+   * <code>function</code> to each pair of elements from <code>this</code> and
+   * the given <code>iterable</code>.
+   * 
+   * If any if either <code>this</code> or the given iterable is shorter than
+   * the other one, the remaining elements are discarded.
+   * 
+   * @param <B>
+   *          the type to the <code>iterable</code> to zip with this
+   *          {@link Stream}
+   * @param <C>
+   *          the resulting Stream element type
+   * @param iterable
+   *          the {@link Iterable} to zip with this Stream
+   * @param function
+   *          the function to apply to each pair
+   * @return a new Stream formed applying the given {@link Applicable2} to each
+   *         pair this Stream and the given iterable. The resulting Stream size
+   *         is the minimum of both iterables sizes, or infinite, if both this
+   *         and <code>iterable</code> are
+   * @see Iterables#zip(Iterable, Iterable)
+   */
+  @NonNull
+  @Projection
+  <B, C> Stream<C> zip(@NonNull Iterable<B> iterable, Function2<A, B, C> function);
 
-	/**
-	 * Returns a {@link Stream} formed by by pair of element from
-	 * <code>this</code> and the given <code>iterable</code>.
-	 * 
-	 * If any if either <code>this</code> or the given iterable is shorter than
-	 * the other one, the remaining elements are discarded.
-	 * 
-	 * @param <B>
-	 *          the type to the <code>iterable</code> to zip with this
-	 *          {@link Stream}
-	 * @param iterable
-	 * @return a new Stream formed applying the given {@link Applicable2} to each
-	 *         pair this Stream and the given iterable. The resulting Stream size
-	 *         is the minimum of both iterables sizes, or infinite, if both this
-	 *         and <code>iterable</code> are
-	 * @see Iterables#zip(Iterable, Iterable)
-	 * @see #zip(Iterable, Function2)
-	 */
-	@NonNull
-	@Projection
-	public <B> Stream<Pair<A, B>> zip(@NonNull Iterable<B> iterable);
+  /**
+   * Returns a {@link Stream} formed by by pair of element from
+   * <code>this</code> and the given <code>iterable</code>.
+   * 
+   * If any if either <code>this</code> or the given iterable is shorter than
+   * the other one, the remaining elements are discarded.
+   * 
+   * @param <B>
+   *          the type to the <code>iterable</code> to zip with this
+   *          {@link Stream}
+   * @param iterable
+   * @return a new Stream formed applying the given {@link Applicable2} to each
+   *         pair this Stream and the given iterable. The resulting Stream size
+   *         is the minimum of both iterables sizes, or infinite, if both this
+   *         and <code>iterable</code> are
+   * @see Iterables#zip(Iterable, Iterable)
+   * @see #zip(Iterable, Function2)
+   */
+  @NonNull
+  @Projection
+  <B> Stream<Pair<A, B>> zip(@NonNull Iterable<B> iterable);
 
 }

@@ -21,12 +21,12 @@ import org.junit.Test;
  */
 public class ConstantHandlerUnitTest {
 
-	/** Tests that method names are properly converted into field names */
-	@Test
-	public void testFieldNames() {
-		Assert.assertEquals("DATE_OF_FOO_BAR", ConstantHandler.toJavaConstantString("getDateOfFooBar"));
-		Assert.assertEquals("GOOD", ConstantHandler.toJavaConstantString("isGood"));
-		Assert.assertEquals("GETTER_FOR_FOO", ConstantHandler.toJavaConstantString("getterForFoo"));
-	}
+  /** Tests that method names are properly converted into field names */
+  @Test
+  public void testFieldNames() {
+    Assert.assertEquals("DATE_OF_FOO_BAR", ConstantHandler.toJavaConstantString("getDateOfFooBar"));
+    Assert.assertEquals("GOOD", ConstantHandler.toJavaConstantString("isGood"));
+    Assert.assertEquals("GETTER_FOR_FOO", ConstantHandler.toJavaConstantString("getterForFoo"));
+  }
 
 }

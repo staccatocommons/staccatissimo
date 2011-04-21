@@ -27,40 +27,40 @@ import java.util.Set;
  */
 public class InPredicate<T> extends NonAnnonymousPredicate<T> {
 
-	private static final long serialVersionUID = -7713535502282119414L;
-	private final Set<T> elements;
+  private static final long serialVersionUID = -7713535502282119414L;
+  private final Set<T> elements;
 
-	/**
-	 * Creates a new {@link InPredicate}
-	 */
-	public InPredicate(Collection<T> elements) {
-		this(new HashSet<T>());
-		this.elements.addAll(elements);
-	}
+  /**
+   * Creates a new {@link InPredicate}
+   */
+  public InPredicate(Collection<T> elements) {
+    this(new HashSet<T>());
+    this.elements.addAll(elements);
+  }
 
-	/**
-	 * 
-	 * Creates a new {@link InPredicate}
-	 * 
-	 * @param elements
-	 */
-	public InPredicate(Set<T> elements) {
-		this.elements = elements;
-	}
+  /**
+   * 
+   * Creates a new {@link InPredicate}
+   * 
+   * @param elements
+   */
+  public InPredicate(Set<T> elements) {
+    this.elements = elements;
+  }
 
-	/**
-	 * 
-	 * Creates a new {@link InPredicate}
-	 * 
-	 * @param elements
-	 */
-	public InPredicate(T... elements) {
-		this(new HashSet<T>());
-		Collections.addAll(this.elements, elements);
-	}
+  /**
+   * 
+   * Creates a new {@link InPredicate}
+   * 
+   * @param elements
+   */
+  public InPredicate(T... elements) {
+    this(new HashSet<T>());
+    Collections.addAll(this.elements, elements);
+  }
 
-	public boolean eval(T e) {
-		return this.elements.contains(e);
-	}
+  public boolean eval(T e) {
+    return this.elements.contains(e);
+  }
 
 }

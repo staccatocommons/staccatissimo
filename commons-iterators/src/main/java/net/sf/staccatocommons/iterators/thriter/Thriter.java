@@ -47,8 +47,8 @@ import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
  * 
  * <pre>
  * while (thriter.hasNext) {
- * 	thriter.advanceNext();
- * 	A elem = thriter.current();
+ *   thriter.advanceNext();
+ *   A elem = thriter.current();
  * }
  * </pre>
  * 
@@ -86,52 +86,52 @@ import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
  */
 public interface Thriter<A> {
 
-	/**
-	 * Answers if the thriter has more elements, that is, if sending
-	 * {@link #advanceNext()} would not result in a {@link NoSuchElementException}
-	 * 
-	 * @return if the {@link Thriter} has more elements
-	 */
-	@SideEffectFree
-	boolean hasNext();
+  /**
+   * Answers if the thriter has more elements, that is, if sending
+   * {@link #advanceNext()} would not result in a {@link NoSuchElementException}
+   * 
+   * @return if the {@link Thriter} has more elements
+   */
+  @SideEffectFree
+  boolean hasNext();
 
-	/**
-	 * Advances to the thriter to the position of the next element.
-	 * 
-	 * @throws NoSuchElementException
-	 *           if there are no more elements
-	 */
-	void advanceNext() throws NoSuchElementException;
+  /**
+   * Advances to the thriter to the position of the next element.
+   * 
+   * @throws NoSuchElementException
+   *           if there are no more elements
+   */
+  void advanceNext() throws NoSuchElementException;
 
-	/**
-	 * Answers element at the current position of this {@link Thriter}. Result of
-	 * this method if {@link #advanceNext()} was never evaluated before is
-	 * undefined.
-	 * 
-	 * @return the current element
-	 */
-	A current();
+  /**
+   * Answers element at the current position of this {@link Thriter}. Result of
+   * this method if {@link #advanceNext()} was never evaluated before is
+   * undefined.
+   * 
+   * @return the current element
+   */
+  A current();
 
-	/**
-	 * Answers a {@link Thunk} that, when evaluated through {@link Thunk#value()},
-	 * will return the current element of this {@link Thriter} at the time of
-	 * being {@link #delayedCurrent()} sent.
-	 * 
-	 * This means, that the value of the returned thunk <strong>must</strong> must
-	 * always equals, even if this {@link Thriter} was advanced later.
-	 * 
-	 * @return a {@link Thunk} tha provides {@link #current()} at the time of this
-	 *         message being sent.
-	 */
-	@NonNull
-	Thunk<A> delayedCurrent();
+  /**
+   * Answers a {@link Thunk} that, when evaluated through {@link Thunk#value()},
+   * will return the current element of this {@link Thriter} at the time of
+   * being {@link #delayedCurrent()} sent.
+   * 
+   * This means, that the value of the returned thunk <strong>must</strong> must
+   * always equals, even if this {@link Thriter} was advanced later.
+   * 
+   * @return a {@link Thunk} tha provides {@link #current()} at the time of this
+   *         message being sent.
+   */
+  @NonNull
+  Thunk<A> delayedCurrent();
 
-	/**
-	 * Advances this thriter and the returns {@link #delayedCurrent()}
-	 * 
-	 * @return {@link #delayedCurrent()}
-	 */
-	@NonNull
-	Thunk<A> delayedNext();
+  /**
+   * Advances this thriter and the returns {@link #delayedCurrent()}
+   * 
+   * @return {@link #delayedCurrent()}
+   */
+  @NonNull
+  Thunk<A> delayedNext();
 
 }

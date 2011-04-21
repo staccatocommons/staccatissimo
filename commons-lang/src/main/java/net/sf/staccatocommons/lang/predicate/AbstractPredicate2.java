@@ -19,28 +19,28 @@ import net.sf.staccatocommons.defs.predicate.Predicate2;
  */
 public abstract class AbstractPredicate2<A, B> implements Predicate2<A, B> {
 
-	public final Boolean apply(A arg0, B arg1) {
-		return eval(arg0, arg1);
-	}
+  public final Boolean apply(A arg0, B arg1) {
+    return eval(arg0, arg1);
+  }
 
-	public Predicate2<A, B> nullSafe() {
-		return new NullSafePredicate2();
-	}
+  public Predicate2<A, B> nullSafe() {
+    return new NullSafePredicate2();
+  }
 
-	/**
-	 * @author flbulgarelli
-	 */
-	protected final class NullSafePredicate2 extends AbstractPredicate2<A, B> {
-		public boolean eval(A arg0, B arg1) {
-			if (arg0 == null)
-				return arg1 == null;
-			if (arg1 == null)
-				return false;
-			return AbstractPredicate2.this.eval(arg0, arg1);
-		}
+  /**
+   * @author flbulgarelli
+   */
+  protected final class NullSafePredicate2 extends AbstractPredicate2<A, B> {
+    public boolean eval(A arg0, B arg1) {
+      if (arg0 == null)
+        return arg1 == null;
+      if (arg1 == null)
+        return false;
+      return AbstractPredicate2.this.eval(arg0, arg1);
+    }
 
-		public Predicate2<A, B> nullSafe() {
-			return this;
-		}
-	}
+    public Predicate2<A, B> nullSafe() {
+      return this;
+    }
+  }
 }

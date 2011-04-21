@@ -22,29 +22,29 @@ import net.sf.staccatocommons.restrictions.check.MinSize;
  */
 public class MinSizeHandler extends AbstractCheckAnnotationHandler<MinSize> {
 
-	/**
-	 * Creates a new {@link MinSizeHandler}
-	 */
-	public MinSizeHandler(boolean ignoreReturns) {
-		super(ignoreReturns);
-	}
+  /**
+   * Creates a new {@link MinSizeHandler}
+   */
+  public MinSizeHandler(boolean ignoreReturns) {
+    super(ignoreReturns);
+  }
 
-	public Class<MinSize> getSupportedAnnotationType() {
-		return MinSize.class;
-	}
+  public Class<MinSize> getSupportedAnnotationType() {
+    return MinSize.class;
+  }
 
-	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		MinSize annotation, AnnotationContext context) throws NotFoundException {
-		return String.format(
-			"that().isMinSize( \"%s\", %s, %s, %s)",
-			argumentMnemonic,
-			argumentIdentifier,
-			annotation.value(),
-			SizeAwareTypeCode.getSizeAwareCode(context));
-	}
+  protected String createCheckCode(String argumentMnemonic, String argumentIdentifier, MinSize annotation,
+    AnnotationContext context) throws NotFoundException {
+    return String.format(
+      "that().isMinSize( \"%s\", %s, %s, %s)",
+      argumentMnemonic,
+      argumentIdentifier,
+      annotation.value(),
+      SizeAwareTypeCode.getSizeAwareCode(context));
+  }
 
-	protected String getVarMnemonic(MinSize annotation) {
-		return annotation.var();
-	}
+  protected String getVarMnemonic(MinSize annotation) {
+    return annotation.var();
+  }
 
 }

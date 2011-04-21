@@ -26,36 +26,35 @@ import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
  * @param <C>
  * @param <D>
  */
-public abstract class AbstractDelayable3<A, B, C, D> implements Applicable3<A, B, C, D>,
-	Delayable3<A, B, C, D> {
+public abstract class AbstractDelayable3<A, B, C, D> implements Applicable3<A, B, C, D>, Delayable3<A, B, C, D> {
 
-	/**
-	 * Creates a new {@link AbstractDelayable3}
-	 */
-	public AbstractDelayable3() {
-		super();
-	}
+  /**
+   * Creates a new {@link AbstractDelayable3}
+   */
+  public AbstractDelayable3() {
+    super();
+  }
 
-	@Override
-	@NonNull
-	public Thunk<D> delayed(final A arg0, final B arg1, final C arg2) {
-		return new Thunk<D>() {
-			public D value() {
-				return apply(arg0, arg1, arg2);
-			}
-		};
-	}
+  @Override
+  @NonNull
+  public Thunk<D> delayed(final A arg0, final B arg1, final C arg2) {
+    return new Thunk<D>() {
+      public D value() {
+        return apply(arg0, arg1, arg2);
+      }
+    };
+  }
 
-	@Override
-	@NonNull
-	@ForceRestrictions
-	public Thunk<D> delayedValue(@NonNull final Thunk<A> thunk0, @NonNull final Thunk<B> thunk1,
-		@NonNull final Thunk<C> thunk2) {
-		return new Thunk<D>() {
-			public D value() {
-				return apply(thunk0.value(), thunk1.value(), thunk2.value());
-			}
-		};
-	}
+  @Override
+  @NonNull
+  @ForceRestrictions
+  public Thunk<D> delayedValue(@NonNull final Thunk<A> thunk0, @NonNull final Thunk<B> thunk1,
+    @NonNull final Thunk<C> thunk2) {
+    return new Thunk<D>() {
+      public D value() {
+        return apply(thunk0.value(), thunk1.value(), thunk2.value());
+      }
+    };
+  }
 
 }

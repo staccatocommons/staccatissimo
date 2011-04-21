@@ -25,34 +25,37 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  */
 public class ZipIterator<A, B, C> extends AdvanceThriterator<C> {
-	final Thriter<A> thriter1;
-	final Thriter<B> thriter2;
-	final Function2<A, B, C> function;
+  private final Thriter<A> thriter1;
+  private final Thriter<B> thriter2;
+  private final Function2<A, B, C> function;
 
-	/**
-	 * Creates a new {@link ZipIterator}
-	 */
-	public ZipIterator(@NonNull Thriter<A> thriter1, @NonNull Thriter<B> thriter2,
-		@NonNull Function2<A, B, C> function) {
-		this.thriter1 = thriter1;
-		this.thriter2 = thriter2;
-		this.function = function;
-	}
+  /**
+   * Creates a new {@link ZipIterator}
+   */
+  public ZipIterator(@NonNull Thriter<A> thriter1, @NonNull Thriter<B> thriter2, @NonNull Function2<A, B, C> function) {
+    this.thriter1 = thriter1;
+    this.thriter2 = thriter2;
+    this.function = function;
+  }
 
-	public boolean hasNext() {
-		return thriter1.hasNext() && thriter2.hasNext();
-	}
+  @Override
+  public boolean hasNext() {
+    return thriter1.hasNext() && thriter2.hasNext();
+  }
 
-	public void advanceNext() throws NoSuchElementException {
-		thriter1.advanceNext();
-		thriter2.advanceNext();
-	}
+  @Override
+  public void advanceNext() throws NoSuchElementException {
+    thriter1.advanceNext();
+    thriter2.advanceNext();
+  }
 
-	public C current() throws NoSuchElementException {
-		return function.apply(thriter1.current(), thriter2.current());
-	}
+  @Override
+  public C current() throws NoSuchElementException {
+    return function.apply(thriter1.current(), thriter2.current());
+  }
 
-	public Thunk<C> delayedCurrent() {
-		return function.delayedValue(thriter1.delayedCurrent(), thriter2.delayedCurrent());
-	}
+  @Override
+  public Thunk<C> delayedCurrent() {
+    return function.delayedValue(thriter1.delayedCurrent(), thriter2.delayedCurrent());
+  }
 }

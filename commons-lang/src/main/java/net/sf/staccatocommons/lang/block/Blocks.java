@@ -23,15 +23,15 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class Blocks {
 
-	/**
-	 * Returns a block that does nothing
-	 * 
-	 * @param <T>
-	 * @return an empty block
-	 */
-	@NonNull
-	public static <T> Block<T> empty() {
-		return Empty.getInstance();
-	}
+  /**
+   * Returns a block that does nothing
+   * 
+   * @param <T>
+   * @return an empty block
+   */
+  @NonNull
+  public static <T> Block<T> empty() {
+    return Empty.getInstance();
+  }
 
 }

@@ -25,28 +25,28 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class ListStream<A> extends CollectionStream<A> {
 
-	/**
-	 * Creates a new {@link ListStream}
-	 * 
-	 * @param iterable
-	 *          the list to wrap
-	 */
-	public ListStream(@NonNull List<? extends A> iterable) {
-		super(iterable);
-	}
+  /**
+   * Creates a new {@link ListStream}
+   * 
+   * @param iterable
+   *          the list to wrap
+   */
+  public ListStream(@NonNull List<? extends A> iterable) {
+    super(iterable);
+  }
 
-	@Override
-	public final A get(int n) {
-		return getList().get(n);
-	}
+  @Override
+  public final A get(int n) {
+    return getList().get(n);
+  }
 
-	@Override
-	public final int indexOf(A element) {
-		return getList().indexOf(element);
-	}
+  @Override
+  public final int indexOf(A element) {
+    return getList().indexOf(element);
+  }
 
-	protected List<A> getList() {
-		return (List<A>) getCollection();
-	}
+  protected List<A> getList() {
+    return (List<A>) getCollection();
+  }
 
 }

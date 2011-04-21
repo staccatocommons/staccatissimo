@@ -30,32 +30,32 @@ import org.hamcrest.Matchers;
  */
 public class MiscMatchers {
 
-	@SuppressWarnings("unchecked")
-	public static <T> Matcher<Collection<T>> anyCollection(Class<T> c) {
-		return (Matcher) Matchers.any(Collection.class);
-	}
+  @SuppressWarnings("unchecked")
+  public static <T> Matcher<Collection<T>> anyCollection(Class<T> c) {
+    return (Matcher) Matchers.any(Collection.class);
+  }
 
-	/**
-	 * Answers a matchers that tests if its argument can be serialized and
-	 * deserialized returning equal objects
-	 * 
-	 * @param <T>
-	 * @return a new {@link Matcher}
-	 */
-	public static <T> Matcher<T> canSerialize() {
-		return new CustomMatcher<T>("Must be serializable") {
-			public boolean matches(Object object) {
-				try {
-					ByteArrayOutputStream ba = new ByteArrayOutputStream();
-					new ObjectOutputStream(ba).writeObject(object);
-					Serializable result = (Serializable) new ObjectInputStream(new ByteArrayInputStream(
-						ba.toByteArray())).readObject();
-					return result.equals(object);
-				} catch (Exception e) {
-					return false;
-				}
-			}
-		};
-	}
+  /**
+   * Answers a matchers that tests if its argument can be serialized and
+   * deserialized returning equal objects
+   * 
+   * @param <T>
+   * @return a new {@link Matcher}
+   */
+  public static <T> Matcher<T> canSerialize() {
+    return new CustomMatcher<T>("Must be serializable") {
+      public boolean matches(Object object) {
+        try {
+          ByteArrayOutputStream ba = new ByteArrayOutputStream();
+          new ObjectOutputStream(ba).writeObject(object);
+          Serializable result = (Serializable) new ObjectInputStream(new ByteArrayInputStream(ba.toByteArray()))
+            .readObject();
+          return result.equals(object);
+        } catch (Exception e) {
+          return false;
+        }
+      }
+    };
+  }
 
 }

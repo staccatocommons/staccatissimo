@@ -28,23 +28,23 @@ import net.sf.staccatocommons.lang.SoftException;
  */
 public class CallableThunk<T> implements Serializable, Thunk<T> {
 
-	private static final long serialVersionUID = 6303570980842439165L;
+  private static final long serialVersionUID = 6303570980842439165L;
 
-	private Callable<T> callable;
+  private Callable<T> callable;
 
-	/**
-	 * Creates a new {@link CallableThunk}
-	 * 
-	 * @param callable
-	 *          the {@link Callable} which will provide the value.
-	 * 
-	 */
-	public CallableThunk(Callable<T> callable) {
-		this.callable = callable;
-	}
+  /**
+   * Creates a new {@link CallableThunk}
+   * 
+   * @param callable
+   *          the {@link Callable} which will provide the value.
+   * 
+   */
+  public CallableThunk(Callable<T> callable) {
+    this.callable = callable;
+  }
 
-	public T value() {
-		return SoftException.callOrSoften(callable);
-	}
+  public T value() {
+    return SoftException.callOrSoften(callable);
+  }
 
 }

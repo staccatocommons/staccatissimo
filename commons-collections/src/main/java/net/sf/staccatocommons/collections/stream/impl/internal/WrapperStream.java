@@ -22,21 +22,22 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public abstract class WrapperStream<A> extends AbstractStream<A> {
 
-	private final Stream<A> source;
+  private final Stream<A> source;
 
-	/**
-	 * Creates a new {@link WrapperStream}
-	 */
-	public WrapperStream(@NonNull Stream<A> source) {
-		this.source = source;
-	}
+  /**
+   * Creates a new {@link WrapperStream}
+   */
+  public WrapperStream(@NonNull Stream<A> source) {
+    this.source = source;
+  }
 
-	protected final Stream<A> getSource() {
-		return source;
-	}
+  protected final Stream<A> getSource() {
+    return source;
+  }
 
-	public final NumberType<A> numberType() {
-		return getSource().numberType();
-	}
+  @Override
+  public final NumberType<A> numberType() {
+    return getSource().numberType();
+  }
 
 }

@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.restrictions.instrument;
 
 import javassist.CannotCompileException;
@@ -29,49 +28,47 @@ import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
  * 
  */
 public class IgnoreCheckHandler extends AbstractActivationAnnotationHandler<IgnoreRestrictions> implements
-	ClassAnnotationHandler<IgnoreRestrictions>, ConstructorAnnotationHandler<IgnoreRestrictions>,
-	MethodAnnotationHandler<IgnoreRestrictions> {
+  ClassAnnotationHandler<IgnoreRestrictions>, ConstructorAnnotationHandler<IgnoreRestrictions>,
+  MethodAnnotationHandler<IgnoreRestrictions> {
 
-	/**
-	 * Creates a new {@link IgnoreCheckHandler}
-	 */
-	public IgnoreCheckHandler() {
-		super();
-	}
+  /**
+   * Creates a new {@link IgnoreCheckHandler}
+   */
+  public IgnoreCheckHandler() {
+    super();
+  }
 
-	public Class<IgnoreRestrictions> getSupportedAnnotationType() {
-		return IgnoreRestrictions.class;
-	}
+  public Class<IgnoreRestrictions> getSupportedAnnotationType() {
+    return IgnoreRestrictions.class;
+  }
 
-	public void preProcessAnnotatedMethod(IgnoreRestrictions annotation, MethodAnnotationContext context) {
-		deactivateAll();
-	}
+  public void preProcessAnnotatedMethod(IgnoreRestrictions annotation, MethodAnnotationContext context) {
+    deactivateAll();
+  }
 
-	public void postProcessAnnotatedMethod(IgnoreRestrictions annotation, MethodAnnotationContext context) {
-		activateAll();
-	}
+  public void postProcessAnnotatedMethod(IgnoreRestrictions annotation, MethodAnnotationContext context) {
+    activateAll();
+  }
 
-	public void preProcessAnnotatedConstructor(IgnoreRestrictions annotation,
-		ConstructorAnnotationContext context) {
-		deactivateAll();
-	}
+  public void preProcessAnnotatedConstructor(IgnoreRestrictions annotation, ConstructorAnnotationContext context) {
+    deactivateAll();
+  }
 
-	public void postProcessAnnotatedConstructor(IgnoreRestrictions annotation,
-		ConstructorAnnotationContext context) {
-		activateAll();
-	}
+  public void postProcessAnnotatedConstructor(IgnoreRestrictions annotation, ConstructorAnnotationContext context) {
+    activateAll();
+  }
 
-	@Override
-	public void preProcessAnnotatedClass(IgnoreRestrictions annotation, ClassAnnotationContext context)
-		throws CannotCompileException {
-		deactivateAll();
+  @Override
+  public void preProcessAnnotatedClass(IgnoreRestrictions annotation, ClassAnnotationContext context)
+    throws CannotCompileException {
+    deactivateAll();
 
-	}
+  }
 
-	@Override
-	public void postProcessAnnotatedClass(IgnoreRestrictions annotation, ClassAnnotationContext context)
-		throws CannotCompileException {
-		activateAll();
-	}
+  @Override
+  public void postProcessAnnotatedClass(IgnoreRestrictions annotation, ClassAnnotationContext context)
+    throws CannotCompileException {
+    activateAll();
+  }
 
 }

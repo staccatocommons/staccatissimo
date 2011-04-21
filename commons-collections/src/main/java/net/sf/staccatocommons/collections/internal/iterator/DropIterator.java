@@ -25,39 +25,43 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class DropIterator<A> extends AdvanceThriterator<A> {
 
-	private int n;
-	private final Thriter<A> thriter;
+  private int n;
+  private final Thriter<A> thriter;
 
-	/**
-	 * Creates a new {@link DropIterator}
-	 */
-	public DropIterator(int n, @NonNull Thriter<A> thriter) {
-		this.n = n;
-		this.thriter = thriter;
-	}
+  /**
+   * Creates a new {@link DropIterator}
+   */
+  public DropIterator(int n, @NonNull Thriter<A> thriter) {
+    this.n = n;
+    this.thriter = thriter;
+  }
 
-	public boolean hasNext() {
-		while (n > 0) {
-			if (!thriter.hasNext())
-				return false;
-			thriter.advanceNext();
-			n--;
-		}
-		return thriter.hasNext();
-	}
+  @Override
+  public boolean hasNext() {
+    while (n > 0) {
+      if (!thriter.hasNext())
+        return false;
+      thriter.advanceNext();
+      n--;
+    }
+    return thriter.hasNext();
+  }
 
-	public void advanceNext() {
-		if (!hasNext())
-			throw new NoSuchElementException();
-		thriter.advanceNext();
-	}
+  @Override
+  public void advanceNext() {
+    if (!hasNext())
+      throw new NoSuchElementException();
+    thriter.advanceNext();
+  }
 
-	public A current() {
-		return thriter.current();
-	}
+  @Override
+  public A current() {
+    return thriter.current();
+  }
 
-	public Thunk<A> delayedCurrent() {
-		return thriter.delayedCurrent();
-	}
+  @Override
+  public Thunk<A> delayedCurrent() {
+    return thriter.delayedCurrent();
+  }
 
 }

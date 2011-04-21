@@ -25,35 +25,35 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class TakeIterator<A> extends AdvanceThriterator<A> {
 
-	private int remaining;
-	private final Thriter<A> thriter;
+  private int remaining;
+  private final Thriter<A> thriter;
 
-	/**
-	 * Creates a new {@link TakeIterator} that takes up to {@code n} elements from
-	 * the given {@code thritter}
-	 */
-	public TakeIterator(int n, @NonNull Thriter<A> thriter) {
-		this.thriter = thriter;
-		this.remaining = n;
-	}
+  /**
+   * Creates a new {@link TakeIterator} that takes up to {@code n} elements from
+   * the given {@code thritter}
+   */
+  public TakeIterator(int n, @NonNull Thriter<A> thriter) {
+    this.thriter = thriter;
+    this.remaining = n;
+  }
 
-	public boolean hasNext() {
-		return remaining > 0 && thriter.hasNext();
-	}
+  public boolean hasNext() {
+    return remaining > 0 && thriter.hasNext();
+  }
 
-	public void advanceNext() throws NoSuchElementException {
-		if (!hasNext())
-			throw new NoSuchElementException();
-		thriter.advanceNext();
-		remaining--;
-	}
+  public void advanceNext() throws NoSuchElementException {
+    if (!hasNext())
+      throw new NoSuchElementException();
+    thriter.advanceNext();
+    remaining--;
+  }
 
-	public A current() throws NoSuchElementException {
-		return thriter.current();
-	}
+  public A current() throws NoSuchElementException {
+    return thriter.current();
+  }
 
-	public Thunk<A> delayedCurrent() {
-		return thriter.delayedCurrent();
-	}
+  public Thunk<A> delayedCurrent() {
+    return thriter.delayedCurrent();
+  }
 
 }

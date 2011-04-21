@@ -37,78 +37,78 @@ import net.sf.staccatocommons.restrictions.value.Value;
 @Immutable
 public final class None<T> extends Option<T> {
 
-	private static final long serialVersionUID = 6950027007611799776L;
+  private static final long serialVersionUID = 6950027007611799776L;
 
-	@SuppressWarnings("unchecked")
-	private static final None<?> instance = new None();
+  @SuppressWarnings("unchecked")
+  private static final None<?> instance = new None();
 
-	private None() {}
+  private None() {}
 
-	@Override
-	public T value() {
-		throw new NoSuchElementException();
-	}
+  @Override
+  public T value() {
+    throw new NoSuchElementException();
+  }
 
-	@Override
-	public boolean isDefined() {
-		return false;
-	}
+  @Override
+  public boolean isDefined() {
+    return false;
+  }
 
-	@Override
-	public T valueOrElse(T ifUndefined) {
-		return ifUndefined;
-	}
+  @Override
+  public T valueOrElse(T ifUndefined) {
+    return ifUndefined;
+  }
 
-	@Override
-	public T valueOrElse(@NonNull Thunk<? extends T> ifUndefined) {
-		return ifUndefined.value();
-	}
+  @Override
+  public T valueOrElse(@NonNull Thunk<? extends T> ifUndefined) {
+    return ifUndefined.value();
+  }
 
-	@Override
-	public void ifDefined(Executable<T> block) {
+  @Override
+  public void ifDefined(Executable<T> block) {
 
-	}
+  }
 
-	@Override
-	public T valueOrNull() {
-		return null;
-	}
+  @Override
+  public T valueOrNull() {
+    return null;
+  }
 
-	public Iterator<T> iterator() {
-		return Thriterators.empty();
-	}
+  public Iterator<T> iterator() {
+    return Thriterators.empty();
+  }
 
-	@Override
-	public int size() {
-		return 0;
-	}
+  @Override
+  public int size() {
+    return 0;
+  }
 
-	@Override
-	public boolean isEmpty() {
-		return true;
-	}
+  @Override
+  public boolean isEmpty() {
+    return true;
+  }
 
-	@Override
-	public boolean contains(Object element) {
-		return false;
-	}
+  @Override
+  public boolean contains(Object element) {
+    return false;
+  }
 
-	public int hashCode() {
-		return 37;
-	}
+  public int hashCode() {
+    return 37;
+  }
 
-	public boolean equals(Object obj) {
-		return obj == this || obj instanceof None;
-	}
+  public boolean equals(Object obj) {
+    return obj == this || obj instanceof None;
+  }
 
-	@Override
-	public String toString() {
-		return "None";
-	}
+  @Override
+  public String toString() {
+    return "None";
+  }
 
-	@NonNull
-	public static <T> None<T> none() {
-		return (None<T>) instance;
-	}
+  @NonNull
+  public static <T> None<T> none() {
+    return (None<T>) instance;
+  }
 
 }

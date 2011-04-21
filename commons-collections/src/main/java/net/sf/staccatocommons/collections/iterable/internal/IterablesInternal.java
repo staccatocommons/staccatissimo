@@ -26,47 +26,47 @@ import net.sf.staccatocommons.defs.Evaluable;
  */
 public class IterablesInternal {
 
-	/***/
-	public static final String ITERABLE = "iterable";
+  /***/
+  public static final String ITERABLE = "iterable";
 
-	/***/
-	public static <T> void addAllInternal(Collection<T> collection, Iterable<? extends T> iterable) {
-		for (T element : iterable)
-			collection.add(element);
-	}
+  /***/
+  public static <T> void addAllInternal(Collection<T> collection, Iterable<? extends T> iterable) {
+    for (T element : iterable)
+      collection.add(element);
+  }
 
-	/***/
-	public static <T, C extends Collection<T>> C takeInternal(Iterable<T> iterable,
-		int amountOfElements, C outputCollection) {
-		Iterator<T> iter = iterable.iterator();
-		for (int i = 0; i < amountOfElements && iter.hasNext(); i++)
-			outputCollection.add(iter.next());
-		return outputCollection;
-	}
+  /***/
+  public static <T, C extends Collection<T>> C takeInternal(Iterable<T> iterable, int amountOfElements,
+    C outputCollection) {
+    Iterator<T> iter = iterable.iterator();
+    for (int i = 0; i < amountOfElements && iter.hasNext(); i++)
+      outputCollection.add(iter.next());
+    return outputCollection;
+  }
 
-	/***/
-	public static <T, C extends Collection<T>> C filterInternal(Iterable<T> iterable,
-		Evaluable<? super T> predicate, C collection) {
-		for (T element : iterable)
-			if (predicate.eval(element))
-				collection.add(element);
-		return collection;
-	}
+  /***/
+  public static <T, C extends Collection<T>> C filterInternal(Iterable<T> iterable, Evaluable<? super T> predicate,
+    C collection) {
+    for (T element : iterable)
+      if (predicate.eval(element))
+        collection.add(element);
+    return collection;
+  }
 
-	/***/
-	public static <I, O, C extends Collection<O>> C collectInternal(Iterable<I> iterable,
-		Applicable<? super I, ? extends O> function, C outputCollection) {
-		for (I element : iterable)
-			outputCollection.add(function.apply(element));
-		return outputCollection;
-	}
+  /***/
+  public static <I, O, C extends Collection<O>> C collectInternal(Iterable<I> iterable,
+    Applicable<? super I, ? extends O> function, C outputCollection) {
+    for (I element : iterable)
+      outputCollection.add(function.apply(element));
+    return outputCollection;
+  }
 
-	/***/
-	public static <T> boolean containsInternal(Iterable<T> iterable, T element) {
-		for (T each : iterable)
-			if (each.equals(element))
-				return true;
-		return false;
-	}
+  /***/
+  public static <T> boolean containsInternal(Iterable<T> iterable, T element) {
+    for (T each : iterable)
+      if (each.equals(element))
+        return true;
+    return false;
+  }
 
 }

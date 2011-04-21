@@ -23,15 +23,15 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Interscalable<A> {
 
-	/**
-	 * Inserts the given <code>element</code> between each retrieved element of
-	 * this {@link Stream}
-	 * 
-	 * @param element
-	 * @return a new {@link Stream}
-	 */
-	@NonNull
-	@Projection
-	Stream<A> intersperse(A element);
+  /**
+   * Inserts the given <code>element</code> between each retrieved element of
+   * this {@link Stream}
+   * 
+   * @param element
+   * @return a new {@link Stream}
+   */
+  @NonNull
+  @Projection
+  Stream<A> intersperse(A element);
 
 }

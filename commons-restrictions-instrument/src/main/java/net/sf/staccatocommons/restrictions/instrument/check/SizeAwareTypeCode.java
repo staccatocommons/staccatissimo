@@ -25,42 +25,40 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class SizeAwareTypeCode {
 
-	private static final String SIZE_AWARE_TYPES = "net.sf.staccatocommons.check.internal.SizeAwareTypes.";
+  private static final String SIZE_AWARE_TYPES = "net.sf.staccatocommons.check.internal.SizeAwareTypes.";
 
-	/**
-	 * Answers a code snippet that returns a {@link SizeAwareType} for the given
-	 * annotated argument
-	 * 
-	 * @param context
-	 * @return the code snippet that switches over the annotated argument type.
-	 *         The fallback of such switch is {@link SizeAwareTypes#SIZE_AWARE}
-	 * @throws NotFoundException
-	 */
-	public static String getSizeAwareCode(@NonNull AnnotationContext context)
-		throws NotFoundException {
-		return SIZE_AWARE_TYPES + getSizeAwareCodeInternal(context);
-	}
+  /**
+   * Answers a code snippet that returns a {@link SizeAwareType} for the given
+   * annotated argument
+   * 
+   * @param context
+   * @return the code snippet that switches over the annotated argument type.
+   *         The fallback of such switch is {@link SizeAwareTypes#SIZE_AWARE}
+   * @throws NotFoundException
+   */
+  public static String getSizeAwareCode(@NonNull AnnotationContext context) throws NotFoundException {
+    return SIZE_AWARE_TYPES + getSizeAwareCodeInternal(context);
+  }
 
-	private static String getSizeAwareCodeInternal(AnnotationContext context)
-		throws NotFoundException {
-		CtClass ctClass = context.getElementType();
-		if (ctClass.isArray())
-			return "ARRAY";
+  private static String getSizeAwareCodeInternal(AnnotationContext context) throws NotFoundException {
+    CtClass ctClass = context.getElementType();
+    if (ctClass.isArray())
+      return "ARRAY";
 
-		if (ctClass.getName().equals("java.lang.String"))
-			return "CHAR_SEQUENCE";
+    if (ctClass.getName().equals("java.lang.String"))
+      return "CHAR_SEQUENCE";
 
-		String classname = "java.util.Collection";
-		if (ctClass.subtypeOf(context.getClass(classname)))
-			return "COLLECTION";
+    String classname = "java.util.Collection";
+    if (ctClass.subtypeOf(context.getClass(classname)))
+      return "COLLECTION";
 
-		if (ctClass.subtypeOf(context.getClass("java.util.Map")))
-			return "MAP";
+    if (ctClass.subtypeOf(context.getClass("java.util.Map")))
+      return "MAP";
 
-		if (ctClass.subtypeOf(context.getClass("java.lang.CharSequence")))
-			return "CHAR_SEQUENCE";
+    if (ctClass.subtypeOf(context.getClass("java.lang.CharSequence")))
+      return "CHAR_SEQUENCE";
 
-		return "SIZE_AWARE";
-	}
+    return "SIZE_AWARE";
+  }
 
 }

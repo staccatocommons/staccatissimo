@@ -23,18 +23,18 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class SameTest extends AbstractPredicate2 {
 
-	public boolean eval(Object arg0, Object arg1) {
-		return arg0 == arg1;
-	}
+  public boolean eval(Object arg0, Object arg1) {
+    return arg0 == arg1;
+  }
 
-	/**
-	 * 
-	 * @return a constant {@link SameTest}
-	 */
-	@NonNull
-	@Constant
-	public static <A> Predicate2<A, A> sameTest() {
-		return new SameTest();
-	}
+  /**
+   * 
+   * @return a constant {@link SameTest}
+   */
+  @NonNull
+  @Constant
+  public static <A> Predicate2<A, A> sameTest() {
+    return new SameTest();
+  }
 
 }

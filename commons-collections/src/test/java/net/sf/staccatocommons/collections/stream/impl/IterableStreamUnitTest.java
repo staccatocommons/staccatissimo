@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl;
 
 import java.util.Collections;
@@ -29,11 +28,11 @@ import org.junit.experimental.theories.DataPoints;
  */
 public class IterableStreamUnitTest extends RepetableStreamTheories {
 
-	/** Set of iterable Streams to test */
-	@DataPoints
-	public static Stream[] streams = new Stream[] { Streams.from(Sequence.fromToBy(85, 3, 190)),
-			Streams.from((Iterable<Integer>) Streams.cons(5, 9, 10, 156).toSet()),
-			Streams.from((Iterable<Integer>) Collections.singleton(5)),
-			Streams.from((Iterable<Integer>) Collections.<Integer> emptyList()) };
+  /** Set of iterable Streams to test */
+  @DataPoints
+  public static Stream[] streams = new Stream[] { Streams.from(Sequence.fromToBy(85, 3, 190)),
+      Streams.from((Iterable<Integer>) Streams.cons(5, 9, 10, 156).toSet()),
+      Streams.from((Iterable<Integer>) Collections.singleton(5)),
+      Streams.from((Iterable<Integer>) Collections.<Integer> emptyList()) };
 
 }

@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.predicate.internal;
 
 import net.sf.staccatocommons.defs.Evaluable;
@@ -23,22 +22,22 @@ import net.sf.staccatocommons.defs.Evaluable;
  */
 public class EvaluablePredicate<T> extends NonAnnonymousPredicate<T> {
 
-	private static final long serialVersionUID = -7926781232880056763L;
-	private final Evaluable<? super T> evaluable;
+  private static final long serialVersionUID = -7926781232880056763L;
+  private final Evaluable<? super T> evaluable;
 
-	/**
-	 * 
-	 * Creates a new {@link EvaluablePredicate}
-	 * 
-	 * @param evaluable
-	 */
-	public EvaluablePredicate(Evaluable<? super T> evaluable) {
-		this.evaluable = evaluable;
-	}
+  /**
+   * 
+   * Creates a new {@link EvaluablePredicate}
+   * 
+   * @param evaluable
+   */
+  public EvaluablePredicate(Evaluable<? super T> evaluable) {
+    this.evaluable = evaluable;
+  }
 
-	@Override
-	public boolean eval(T argument) {
-		return evaluable.eval(argument);
-	}
+  @Override
+  public boolean eval(T argument) {
+    return evaluable.eval(argument);
+  }
 
 }

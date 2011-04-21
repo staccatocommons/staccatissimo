@@ -32,63 +32,63 @@ import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
  * 
  */
 public class Mock {
-	/***/
-	public Mock() {}
+  /***/
+  public Mock() {}
 
-	/***/
-	public Mock(@NonNull Object argument, @NonNull Integer argument2) {}
+  /***/
+  public Mock(@NonNull Object argument, @NonNull Integer argument2) {}
 
-	/***/
-	@IgnoreRestrictions
-	public Mock(@NonNull Object argument, @NonNull Long argument2) {}
+  /***/
+  @IgnoreRestrictions
+  public Mock(@NonNull Object argument, @NonNull Long argument2) {}
 
-	/***/
-	@ForceRestrictions
-	public Mock(@NonNull Object argument, @NonNull String argument2) {}
+  /***/
+  @ForceRestrictions
+  public Mock(@NonNull Object argument, @NonNull String argument2) {}
 
-	/***/
-	@NonNull
-	public Object defaultReturnNonNull() {
-		return null;
-	}
+  /***/
+  @NonNull
+  public Object defaultReturnNonNull() {
+    return null;
+  }
 
-	/***/
-	@ForceRestrictions
-	public void forceChecksNonNullMethodArgument(@NonNull Object argument) {}
+  /***/
+  @ForceRestrictions
+  public void forceChecksNonNullMethodArgument(@NonNull Object argument) {}
 
-	/***/
-	@IgnoreRestrictions
-	public void ignoreChecksNonNullMethodArgument(@NonNull Object argument) {}
+  /***/
+  @IgnoreRestrictions
+  public void ignoreChecksNonNullMethodArgument(@NonNull Object argument) {}
 
-	/***/
-	public void defaultNonNullMethodArgument(@NonNull Object argument) {}
+  /***/
+  public void defaultNonNullMethodArgument(@NonNull Object argument) {}
 
-	/***/
-	public void defaultSizeMethodArgument(@Size(1) List<?> argument) {}
+  /***/
+  public void defaultSizeMethodArgument(@Size(1) List<?> argument) {}
 
-	/***/
-	public void defaultNotEmptyMethodArgument(@NotEmpty String argument) {}
+  /***/
+  public void defaultNotEmptyMethodArgument(@NotEmpty String argument) {}
 
-	/***/
-	public void defaultPositiveMethodArgument(@Positive BigDecimal argument) {}
+  /***/
+  public void defaultPositiveMethodArgument(@Positive BigDecimal argument) {}
 
-	/***/
-	public void defaultNotNegative(@NotNegative int i) {
+  /***/
+  public void defaultNotNegative(@NotNegative int i) {
 
-	}
+  }
 
-	/***/
-	public void defaulMinSize(@MinSize(4) List<Integer> asList) {
+  /***/
+  public void defaulMinSize(@MinSize(4) List<Integer> asList) {
 
-	}
+  }
 
-	/***/
-	public void defaulMaxSize(@MaxSize(2) Collection<?> col) {
+  /***/
+  public void defaulMaxSize(@MaxSize(2) Collection<?> col) {
 
-	}
+  }
 
-	/***/
-	public void defaulNotZero(@NotZero long l) {
+  /***/
+  public void defaulNotZero(@NotZero long l) {
 
-	}
+  }
 }

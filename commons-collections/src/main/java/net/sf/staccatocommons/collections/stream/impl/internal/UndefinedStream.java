@@ -26,22 +26,22 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public final class UndefinedStream<A> extends AbstractStream<A> {
 
-	private static final UndefinedStream INSTANCE = new UndefinedStream();
+  private static final UndefinedStream INSTANCE = new UndefinedStream();
 
-	public Thriterator<A> iterator() {
-		return Thriterators.from(Thunks.<A> undefined());
-	}
+  public Thriterator<A> iterator() {
+    return Thriterators.from(Thunks.<A> undefined());
+  }
 
-	/**
-	 * Answers an undefined stream
-	 * 
-	 * @param <A>
-	 * @return a undefined {@link Stream}
-	 */
-	@NonNull
-	@Constant
-	public static <A> Stream<A> undefined() {
-		return INSTANCE;
-	}
+  /**
+   * Answers an undefined stream
+   * 
+   * @param <A>
+   * @return a undefined {@link Stream}
+   */
+  @NonNull
+  @Constant
+  public static <A> Stream<A> undefined() {
+    return INSTANCE;
+  }
 
 }

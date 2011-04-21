@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.restrictions.instrument.check;
 
 import java.lang.annotation.Annotation;
@@ -33,109 +32,102 @@ import net.sf.staccatocommons.lang.SoftException;
  * @author flbulgarelli
  * 
  */
-public abstract class AbstractCheckAnnotationHandler<T extends Annotation> implements
-	MethodAnnotationHandler<T>, ArgumentAnnotationHandler<T>, Deactivable {
+public abstract class AbstractCheckAnnotationHandler<T extends Annotation> implements MethodAnnotationHandler<T>,
+  ArgumentAnnotationHandler<T>, Deactivable {
 
-	protected static final String ENSURE_FULLY_QUALIFIED_NAME = "net.sf.staccatocommons.check.Ensure.";
-	protected static final String ASSERT_FULLY_QUALIFIED_NAME = "net.sf.staccatocommons.check.Assert.";
-	private final StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport(
-		activeByDefault());
-	private final boolean ignoreReturns;
+  protected static final String ENSURE_FULLY_QUALIFIED_NAME = "net.sf.staccatocommons.check.Ensure.";
+  protected static final String ASSERT_FULLY_QUALIFIED_NAME = "net.sf.staccatocommons.check.Assert.";
+  private final StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport(activeByDefault());
+  private final boolean ignoreReturns;
 
-	/**
-	 * Creates a new {@link AbstractCheckAnnotationHandler} specifying if check
-	 * annotation in methods should be interpreted as checks over its return value
-	 * and processed
-	 * 
-	 * @param ignoreReturns
-	 *          if check annotation over returns should be processed
-	 */
-	public AbstractCheckAnnotationHandler(boolean ignoreReturns) {
-		this.ignoreReturns = ignoreReturns;
-	}
+  /**
+   * Creates a new {@link AbstractCheckAnnotationHandler} specifying if check
+   * annotation in methods should be interpreted as checks over its return value
+   * and processed
+   * 
+   * @param ignoreReturns
+   *          if check annotation over returns should be processed
+   */
+  public AbstractCheckAnnotationHandler(boolean ignoreReturns) {
+    this.ignoreReturns = ignoreReturns;
+  }
 
-	@Override
-	public void processAnnotatedArgument(T annotation, ArgumentAnnotationContext context)
-		throws CannotCompileException, NotFoundException {
-		if (!deactivableSupport.isActive())
-			return;
-		try {
-			context.getArgumentBehavior().insertBefore(
-				ENSURE_FULLY_QUALIFIED_NAME + createArgumentCheck(annotation, context) + ";");
-		} catch (CannotCompileException e) {
-			logError(context, context.getArgumentBehavior(), e);
-			throw e;
-		}
-	}
+  @Override
+  public void processAnnotatedArgument(T annotation, ArgumentAnnotationContext context) throws CannotCompileException,
+    NotFoundException {
+    if (!deactivableSupport.isActive())
+      return;
+    try {
+      context.getArgumentBehavior().insertBefore(
+        ENSURE_FULLY_QUALIFIED_NAME + createArgumentCheck(annotation, context) + ";");
+    } catch (CannotCompileException e) {
+      logError(context, context.getArgumentBehavior(), e);
+      throw e;
+    }
+  }
 
-	@Override
-	public void preProcessAnnotatedMethod(T annotation, MethodAnnotationContext context)
-		throws NotFoundException {
-		if (ignoreReturns || !deactivableSupport.isActive())
-			return;
-		// TODO handle properly
-		Ensure.that(!context.isVoid(), "Context must not be void: %s", context
-			.getMethod()
-			.getLongName());
-		try {
-			context.getMethod().insertAfter(
-				ASSERT_FULLY_QUALIFIED_NAME + createMethodCheck(annotation, context) + ";");
-		} catch (CannotCompileException e) {
-			logError(context, context.getMethod(), e);
-			throw SoftException.soften(e);
-		}
-	}
+  @Override
+  public void preProcessAnnotatedMethod(T annotation, MethodAnnotationContext context) throws NotFoundException {
+    if (ignoreReturns || !deactivableSupport.isActive())
+      return;
+    // TODO handle properly
+    Ensure.that(!context.isVoid(), "Context must not be void: %s", context.getMethod().getLongName());
+    try {
+      context.getMethod().insertAfter(ASSERT_FULLY_QUALIFIED_NAME + createMethodCheck(annotation, context) + ";");
+    } catch (CannotCompileException e) {
+      logError(context, context.getMethod(), e);
+      throw SoftException.soften(e);
+    }
+  }
 
-	private void logError(AnnotationContext context, CtBehavior be, CannotCompileException e) {
-		context.logErrorMessage("Could not insert argument check on method {}: {}", //
-			be.getLongName(),
-			e.getMessage());
-	}
+  private void logError(AnnotationContext context, CtBehavior be, CannotCompileException e) {
+    context.logErrorMessage("Could not insert argument check on method {}: {}", //
+      be.getLongName(),
+      e.getMessage());
+  }
 
-	@Override
-	public void postProcessAnnotatedMethod(T annotation, MethodAnnotationContext context) {}
+  @Override
+  public void postProcessAnnotatedMethod(T annotation, MethodAnnotationContext context) {}
 
-	protected String createArgumentCheck(T annotation, ArgumentAnnotationContext context)
-		throws NotFoundException {
-		return createCheckCode(
-			getArgumentMnemonic(context, getVarMnemonic(annotation)),
-			context.getArgumentIdentifier(),
-			annotation,
-			context);
-	}
+  protected String createArgumentCheck(T annotation, ArgumentAnnotationContext context) throws NotFoundException {
+    return createCheckCode(
+      getArgumentMnemonic(context, getVarMnemonic(annotation)),
+      context.getArgumentIdentifier(),
+      annotation,
+      context);
+  }
 
-	private String getArgumentMnemonic(ArgumentAnnotationContext context, String annotatedVarName) {
-		return annotatedVarName.isEmpty() ? "var" + context.getArgumentNumber() : annotatedVarName;
-	}
+  private String getArgumentMnemonic(ArgumentAnnotationContext context, String annotatedVarName) {
+    return annotatedVarName.isEmpty() ? "var" + context.getArgumentNumber() : annotatedVarName;
+  }
 
-	private String createMethodCheck(T annotation, MethodAnnotationContext context)
-		throws NotFoundException {
-		return createCheckCode(
-			getReturnName(getVarMnemonic(annotation)),
-			context.getReturnIdentifier(),
-			annotation,
-			context);
-	}
+  private String createMethodCheck(T annotation, MethodAnnotationContext context) throws NotFoundException {
+    return createCheckCode(
+      getReturnName(getVarMnemonic(annotation)),
+      context.getReturnIdentifier(),
+      annotation,
+      context);
+  }
 
-	protected String getReturnName(String returnName) {
-		return returnName.isEmpty() ? "returnValue" : returnName;
-	}
+  protected String getReturnName(String returnName) {
+    return returnName.isEmpty() ? "returnValue" : returnName;
+  }
 
-	public final void deactivate() {
-		deactivableSupport.deactivate();
-	}
+  public final void deactivate() {
+    deactivableSupport.deactivate();
+  }
 
-	public final void activate() {
-		deactivableSupport.activate();
-	}
+  public final void activate() {
+    deactivableSupport.activate();
+  }
 
-	protected abstract String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		T annotation, AnnotationContext context) throws NotFoundException;
+  protected abstract String createCheckCode(String argumentMnemonic, String argumentIdentifier, T annotation,
+    AnnotationContext context) throws NotFoundException;
 
-	protected abstract String getVarMnemonic(T annotation);
+  protected abstract String getVarMnemonic(T annotation);
 
-	protected boolean activeByDefault() {
-		return true;
-	}
+  protected boolean activeByDefault() {
+    return true;
+  }
 
 }

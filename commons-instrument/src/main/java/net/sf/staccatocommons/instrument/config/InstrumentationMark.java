@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.config;
 
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -30,16 +29,16 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface InstrumentationMark {
 
-	/**
-	 * @return an attribute value added to processed class files
-	 */
-	@NonNull
-	byte[] getMarkAttributeValue();
+  /**
+   * @return an attribute value added to processed class files
+   */
+  @NonNull
+  byte[] getMarkAttributeValue();
 
-	/**
-	 * @return an attribute keyF added to processed class files
-	 */
-	@NonNull
-	String getMarkAttributeName();
+  /**
+   * @return an attribute keyF added to processed class files
+   */
+  @NonNull
+  String getMarkAttributeName();
 
 }

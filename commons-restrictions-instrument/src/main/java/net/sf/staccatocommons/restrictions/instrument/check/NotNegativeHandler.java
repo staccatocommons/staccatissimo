@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.restrictions.instrument.check;
 
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
@@ -23,24 +22,24 @@ import net.sf.staccatocommons.restrictions.check.NotNegative;
  */
 public class NotNegativeHandler extends AbstractCheckAnnotationHandler<NotNegative> {
 
-	/**
-	 * Creates a new {@link NotNegativeHandler}
-	 */
-	public NotNegativeHandler(boolean ignoreReturns) {
-		super(ignoreReturns);
-	}
+  /**
+   * Creates a new {@link NotNegativeHandler}
+   */
+  public NotNegativeHandler(boolean ignoreReturns) {
+    super(ignoreReturns);
+  }
 
-	public Class<NotNegative> getSupportedAnnotationType() {
-		return NotNegative.class;
-	}
+  public Class<NotNegative> getSupportedAnnotationType() {
+    return NotNegative.class;
+  }
 
-	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		NotNegative annotation, AnnotationContext context) {
-		return String.format("that().isNotNegative( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
-	}
+  protected String createCheckCode(String argumentMnemonic, String argumentIdentifier, NotNegative annotation,
+    AnnotationContext context) {
+    return String.format("that().isNotNegative( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
+  }
 
-	protected String getVarMnemonic(NotNegative annotation) {
-		return annotation.value();
-	}
+  protected String getVarMnemonic(NotNegative annotation) {
+    return annotation.value();
+  }
 
 }

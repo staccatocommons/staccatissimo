@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.tuple.internal;
 
 import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
@@ -23,19 +22,19 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public class TupleToStringStyle extends NamedTupleToStringStyle {
 
-	private static final long serialVersionUID = -6109911670151971997L;
-	private static final ToStringStyle INSTANCE = new TupleToStringStyle();
+  private static final long serialVersionUID = -6109911670151971997L;
+  private static final ToStringStyle INSTANCE = new TupleToStringStyle();
 
-	/**
-	 * Creates a new {@link TupleToStringStyle}
-	 */
-	public TupleToStringStyle() {
-		super();
-		setUseClassName(false);
-	}
+  /**
+   * Creates a new {@link TupleToStringStyle}
+   */
+  public TupleToStringStyle() {
+    super();
+    setUseClassName(false);
+  }
 
-	public static ToStringStyle getInstance() {
-		return INSTANCE;
-	}
+  public static ToStringStyle getInstance() {
+    return INSTANCE;
+  }
 
 }

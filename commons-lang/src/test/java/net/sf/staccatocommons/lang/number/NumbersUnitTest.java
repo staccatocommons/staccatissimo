@@ -25,29 +25,29 @@ import org.junit.Test;
  */
 public class NumbersUnitTest {
 
-	/**
-	 * Test method for {@link net.sf.staccatocommons.lang.number.Numbers#d(long)}.
-	 */
-	@Test
-	public void testD() {
-		assertEquals("500", d(500).toString());
-	}
+  /**
+   * Test method for {@link net.sf.staccatocommons.lang.number.Numbers#d(long)}.
+   */
+  @Test
+  public void testD() {
+    assertEquals("500", d(500).toString());
+  }
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.number.Numbers#e(long, int)}.
-	 */
-	@Test
-	public void testE() {
-		assertEquals("89.56", e(8956, -2).toString());
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.lang.number.Numbers#e(long, int)}.
+   */
+  @Test
+  public void testE() {
+    assertEquals("89.56", e(8956, -2).toString());
+  }
 
-	/**
-	 * Test method for {@link net.sf.staccatocommons.lang.number.Numbers#i(long)}.
-	 */
-	@Test
-	public void testI() {
-		assertEquals("596", i(596).toString());
-	}
+  /**
+   * Test method for {@link net.sf.staccatocommons.lang.number.Numbers#i(long)}.
+   */
+  @Test
+  public void testI() {
+    assertEquals("596", i(596).toString());
+  }
 
 }

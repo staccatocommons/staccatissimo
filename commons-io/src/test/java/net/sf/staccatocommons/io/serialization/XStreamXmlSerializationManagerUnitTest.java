@@ -11,15 +11,14 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.io.serialization;
 
 /** Test for {@link XStreamXmlSerializationManager} */
 public class XStreamXmlSerializationManagerUnitTest extends SerializationManagerAbstractUnitTest {
 
-	@Override
-	protected SerializationManager createSerializationManager() {
-		return new XStreamXmlSerializationManager();
-	}
+  @Override
+  protected SerializationManager createSerializationManager() {
+    return new XStreamXmlSerializationManager();
+  }
 
 }

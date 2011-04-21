@@ -21,16 +21,19 @@ import net.sf.staccatocommons.collections.stream.Stream;
  */
 public abstract class StrictStream<A> extends AbstractStream<A> {
 
-	public final Stream<A> toEmptyAware() {
-		return this;
-	}
+  @Override
+  public final Stream<A> toEmptyAware() {
+    return this;
+  }
 
-	public final Stream<A> memorize() {
-		return this;
-	}
+  @Override
+  public final Stream<A> memorize() {
+    return this;
+  }
 
-	public final Stream<A> force() {
-		return this;
-	}
+  @Override
+  public final Stream<A> force() {
+    return this;
+  }
 
 }

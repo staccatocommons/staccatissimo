@@ -23,10 +23,10 @@ import net.sf.staccatocommons.defs.Thunk;
  */
 public class DateThunk implements Thunk<Date> {
 
-	/** An instance */
-	public static final DateThunk INSTANCE = new DateThunk();
+  /** An instance */
+  public static final DateThunk INSTANCE = new DateThunk();
 
-	public Date value() {
-		return new Date();
-	}
+  public Date value() {
+    return new Date();
+  }
 }

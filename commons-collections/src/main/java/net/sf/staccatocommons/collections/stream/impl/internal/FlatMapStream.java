@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.Iterator;
@@ -31,40 +30,40 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @param <I>
  */
 public final class FlatMapStream<A, B> extends AbstractStream<B> {
-	private final Stream<A> stream;
-	private final Applicable<? super A, ? extends Iterable<? extends B>> function;
+  private final Stream<A> stream;
+  private final Applicable<? super A, ? extends Iterable<? extends B>> function;
 
-	/**
-	 * Creates a new {@link FlatMapStream}
-	 */
-	public FlatMapStream(@NonNull Stream<A> stream,
-		@NonNull Applicable<? super A, ? extends Iterable<? extends B>> function) {
-		this.stream = stream;
-		this.function = function;
-	}
+  /**
+   * Creates a new {@link FlatMapStream}
+   */
+  public FlatMapStream(@NonNull Stream<A> stream,
+    @NonNull Applicable<? super A, ? extends Iterable<? extends B>> function) {
+    this.stream = stream;
+    this.function = function;
+  }
 
-	public Thriterator<B> iterator() {
+  public Thriterator<B> iterator() {
 
-		final Iterator<A> iter = stream.iterator();
-		return new NextThriterator<B>() {
-			private Iterator<? extends B> subIter = null;
+    final Iterator<A> iter = stream.iterator();
+    return new NextThriterator<B>() {
+      private Iterator<? extends B> subIter = null;
 
-			public boolean hasNext() {
-				if (subIter != null && subIter.hasNext())
-					return true;
-				while (iter.hasNext()) {
-					subIter = function.apply(iter.next()).iterator();
-					if (subIter.hasNext())
-						return true;
-				}
-				return false;
-			}
+      public boolean hasNext() {
+        if (subIter != null && subIter.hasNext())
+          return true;
+        while (iter.hasNext()) {
+          subIter = function.apply(iter.next()).iterator();
+          if (subIter.hasNext())
+            return true;
+        }
+        return false;
+      }
 
-			public B next() {
-				if (subIter == null)
-					throw new NoSuchElementException();
-				return subIter.next();
-			}
-		};
-	}
+      public B next() {
+        if (subIter == null)
+          throw new NoSuchElementException();
+        return subIter.next();
+      }
+    };
+  }
 }

@@ -20,7 +20,6 @@ import net.sf.staccatocommons.defs.NullSafeAware;
  * @author flbulgarelli
  * 
  */
-public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Boolean>,
-	NullSafeAware<Predicate2<A, B>> {
+public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Boolean>, NullSafeAware<Predicate2<A, B>> {
 
 }

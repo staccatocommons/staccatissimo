@@ -28,56 +28,56 @@ import org.junit.Test;
  */
 public class DefaultArgumentAnnotationContextUnitTest extends AbstractAnnotationContextUnitTest {
 
-	private ArgumentAnnotationContext context;
-	private CtMethod method;
+  private ArgumentAnnotationContext context;
+  private CtMethod method;
 
-	/**
-	 * Instatiates the context
-	 * 
-	 * @throws NotFoundException
-	 **/
-	@Before
-	public void createContext() throws NotFoundException {
-		context = new DefaultArgumentAnnotationContext(pool, logger);
-		method = pool.getMethod("net.sf.staccatocommons.lang.sequence.Sequence", "from");
-		((DefaultArgumentAnnotationContext) context).setBehavior(method);
-		((DefaultArgumentAnnotationContext) context).setParameterNumber(1);
-	}
+  /**
+   * Instatiates the context
+   * 
+   * @throws NotFoundException
+   **/
+  @Before
+  public void createContext() throws NotFoundException {
+    context = new DefaultArgumentAnnotationContext(pool, logger);
+    method = pool.getMethod("net.sf.staccatocommons.lang.sequence.Sequence", "from");
+    ((DefaultArgumentAnnotationContext) context).setBehavior(method);
+    ((DefaultArgumentAnnotationContext) context).setParameterNumber(1);
+  }
 
-	/**
-	 * Test method for
-	 * {@link DefaultArgumentAnnotationContext#getArgumentBehavior()} .
-	 */
-	@Test
-	public void testGetArgumentBehavior() {
-		assertSame(method, context.getArgumentBehavior());
-	}
+  /**
+   * Test method for
+   * {@link DefaultArgumentAnnotationContext#getArgumentBehavior()} .
+   */
+  @Test
+  public void testGetArgumentBehavior() {
+    assertSame(method, context.getArgumentBehavior());
+  }
 
-	/**
-	 * Test method for
-	 * {@link DefaultArgumentAnnotationContext#getArgumentNumber()} .
-	 */
-	@Test
-	public void testGetArgumentNumber() {
-		assertEquals(1, context.getArgumentNumber());
-	}
+  /**
+   * Test method for
+   * {@link DefaultArgumentAnnotationContext#getArgumentNumber()} .
+   */
+  @Test
+  public void testGetArgumentNumber() {
+    assertEquals(1, context.getArgumentNumber());
+  }
 
-	/**
-	 * Test method for
-	 * {@link DefaultArgumentAnnotationContext#isConstructorArgument()} .
-	 */
-	@Test
-	public void testIsConstructorArgument() {
-		assertFalse(context.isConstructorArgument());
-	}
+  /**
+   * Test method for
+   * {@link DefaultArgumentAnnotationContext#isConstructorArgument()} .
+   */
+  @Test
+  public void testIsConstructorArgument() {
+    assertFalse(context.isConstructorArgument());
+  }
 
-	/**
-	 * Test method for
-	 * {@link DefaultArgumentAnnotationContext#getArgumentIdentifier()} .
-	 */
-	@Test
-	public void testGetArgumentIdentifier() {
-		assertEquals("$2", context.getArgumentIdentifier());
-	}
+  /**
+   * Test method for
+   * {@link DefaultArgumentAnnotationContext#getArgumentIdentifier()} .
+   */
+  @Test
+  public void testGetArgumentIdentifier() {
+    assertEquals("$2", context.getArgumentIdentifier());
+  }
 
 }

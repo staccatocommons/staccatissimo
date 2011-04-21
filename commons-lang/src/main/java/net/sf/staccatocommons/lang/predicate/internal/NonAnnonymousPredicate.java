@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.predicate.internal;
 
 import java.io.Serializable;
@@ -24,9 +23,9 @@ import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
  */
 abstract class NonAnnonymousPredicate<T> extends AbstractPredicate<T> implements Serializable {
 
-	private static final long serialVersionUID = 2953242687325764205L;
+  private static final long serialVersionUID = 2953242687325764205L;
 
-	public final String toString() {
-		return ToString.toString(this);
-	}
+  public final String toString() {
+    return ToString.toString(this);
+  }
 }

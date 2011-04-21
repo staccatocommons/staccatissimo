@@ -27,29 +27,29 @@ import org.junit.Test;
  */
 public class EquivalenceUnitTest {
 
-	/** Test method for {@link Predicates#equal()} */
-	@Test
-	public void testEquality() throws Exception {
-		assertFalse(Equiv.<Integer> equal().eval(4, 9));
-		assertTrue(Equiv.<String> equal().eval("Foo", "Foo"));
-		assertTrue(Equiv.<String> equal().nullSafe().eval(null, null));
-		assertFalse(Equiv.<String> equal().nullSafe().eval(null, "foo"));
-	}
+  /** Test method for {@link Predicates#equal()} */
+  @Test
+  public void testEquality() throws Exception {
+    assertFalse(Equiv.<Integer> equal().eval(4, 9));
+    assertTrue(Equiv.<String> equal().eval("Foo", "Foo"));
+    assertTrue(Equiv.<String> equal().nullSafe().eval(null, null));
+    assertFalse(Equiv.<String> equal().nullSafe().eval(null, "foo"));
+  }
 
-	/** Test method for {@link Predicates#compare()} */
-	@Test
-	public void testCompare() throws Exception {
-		assertFalse(Equiv.<Integer> compare().eval(4, 5));
-		assertTrue(Equiv.<String> compare().eval("Foo", "Foo"));
-		assertTrue(Equiv.<String> compare().nullSafe().eval(null, null));
-		assertFalse(Equiv.<String> compare().nullSafe().eval(null, ""));
-		assertFalse(Equiv.<String> compare().nullSafe().eval("", null));
+  /** Test method for {@link Predicates#compare()} */
+  @Test
+  public void testCompare() throws Exception {
+    assertFalse(Equiv.<Integer> compare().eval(4, 5));
+    assertTrue(Equiv.<String> compare().eval("Foo", "Foo"));
+    assertTrue(Equiv.<String> compare().nullSafe().eval(null, null));
+    assertFalse(Equiv.<String> compare().nullSafe().eval(null, ""));
+    assertFalse(Equiv.<String> compare().nullSafe().eval("", null));
 
-	}
+  }
 
-	/** Test for {@link Equiv#on(Applicable)} */
-	@Test
-	public void testOn() throws Exception {
-		assertTrue(Equiv.on(first(Integer.class)).eval(_(10, 20), _(10, 5)));
-	}
+  /** Test for {@link Equiv#on(Applicable)} */
+  @Test
+  public void testOn() throws Exception {
+    assertTrue(Equiv.on(first(Integer.class)).eval(_(10, 20), _(10, 5)));
+  }
 }

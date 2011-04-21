@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.defs;
 
 /**
@@ -40,13 +39,13 @@ package net.sf.staccatocommons.defs;
 @Applicative
 public interface Thunk<T> {
 
-	/**
-	 * Returns the value provided. Sending this message to the {@link Thunk} is
-	 * also known as <em>evaluating the thunk</em>.
-	 * 
-	 * @return the provided object. It is sometimes referred as the
-	 *         <em>thunk's element</em>
-	 */
-	T value();
+  /**
+   * Returns the value provided. Sending this message to the {@link Thunk} is
+   * also known as <em>evaluating the thunk</em>.
+   * 
+   * @return the provided object. It is sometimes referred as the
+   *         <em>thunk's element</em>
+   */
+  T value();
 
 }

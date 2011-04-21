@@ -22,8 +22,8 @@ package net.sf.staccatocommons.defs;
  * <code>exec</code> method arities from 1 to 3 - {@link
  * net.sf.staccato.commons.lang.Executable}, {@link
  * net.sf.staccatocommons.defs.Executable2} and {@link
- * net.sf.staccatocommons.defs.Executable3}. There does not exists an
- * executable with <code>exec</code> method arity of zero, as it would overlapp
- * with {@link java.lang.Runnable} interface. So, whenever an hypothetical
- * Executable0 would be necessary, use {@link java.lang.Runnable} instead
+ * net.sf.staccatocommons.defs.Executable3}. There does not exists an executable
+ * with <code>exec</code> method arity of zero, as it would overlapp with {@link
+ * java.lang.Runnable} interface. So, whenever an hypothetical Executable0 would
+ * be necessary, use {@link java.lang.Runnable} instead
  */

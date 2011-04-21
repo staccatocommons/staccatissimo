@@ -39,20 +39,20 @@ import net.sf.staccatocommons.restrictions.Restriction;
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
 public @interface Between {
 
-	/**
-	 * @return the inclusive lower bound
-	 */
-	long min();
+  /**
+   * @return the inclusive lower bound
+   */
+  long min();
 
-	/**
-	 * @return the inclusive upper bound
-	 */
-	long max();
+  /**
+   * @return the inclusive upper bound
+   */
+  long max();
 
-	/**
-	 * @return The variable name of the constrained element, or the empty string
-	 *         if unspecified. This value may help tools that analyze this
-	 *         annotation without access to source code.
-	 */
-	String var() default "";
+  /**
+   * @return The variable name of the constrained element, or the empty string
+   *         if unspecified. This value may help tools that analyze this
+   *         annotation without access to source code.
+   */
+  String var() default "";
 }

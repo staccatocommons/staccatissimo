@@ -30,64 +30,65 @@ import org.slf4j.Logger;
  */
 public class SizeAwareTypeCodeUnitTest extends JUnit4MockObjectTestCase {
 
-	private Logger logger;
-	private ClassPool pool;
+  private Logger logger;
+  private ClassPool pool;
 
-	/**
-	 */
-	@Before
-	public void setup() {
-		logger = mock(Logger.class);
-		pool = ClassPool.getDefault();
-	}
+  /**
+   * 
+   */
+  @Before
+  public void setup() {
+    logger = mock(Logger.class);
+    pool = ClassPool.getDefault();
+  }
 
-	/** Test for collection context */
-	@Test
-	public void testGetSizeAwareCode_ConcreteCollection() throws Exception {
-		String code = SizeAwareTypeCode.getSizeAwareCode(//
-			new DefaultClassAnnotationContext(pool, logger,//
-				pool.get(Arrays.asList(4).getClass().getName())));
+  /** Test for collection context */
+  @Test
+  public void testGetSizeAwareCode_ConcreteCollection() throws Exception {
+    String code = SizeAwareTypeCode.getSizeAwareCode(//
+      new DefaultClassAnnotationContext(pool, logger,//
+        pool.get(Arrays.asList(4).getClass().getName())));
 
-		assertTrue("Should use collection:" + code, code.endsWith("COLLECTION"));
-	}
+    assertTrue("Should use collection:" + code, code.endsWith("COLLECTION"));
+  }
 
-	/** Test for string context */
-	@Test
-	public void testGetSizeAwareCode_String() throws Exception {
-		String code = SizeAwareTypeCode.getSizeAwareCode(//
-			new DefaultClassAnnotationContext(pool, logger,//
-				pool.get(String.class.getName())));
+  /** Test for string context */
+  @Test
+  public void testGetSizeAwareCode_String() throws Exception {
+    String code = SizeAwareTypeCode.getSizeAwareCode(//
+      new DefaultClassAnnotationContext(pool, logger,//
+        pool.get(String.class.getName())));
 
-		assertTrue("Should use String:" + code, code.endsWith("CHAR_SEQUENCE"));
-	}
+    assertTrue("Should use String:" + code, code.endsWith("CHAR_SEQUENCE"));
+  }
 
-	/** Test for array context */
-	@Test
-	public void testGetSizeAwareCode_Array() throws Exception {
-		String code = SizeAwareTypeCode.getSizeAwareCode(//
-			new DefaultClassAnnotationContext(pool, logger,//
-				pool.get("int[]")));
+  /** Test for array context */
+  @Test
+  public void testGetSizeAwareCode_Array() throws Exception {
+    String code = SizeAwareTypeCode.getSizeAwareCode(//
+      new DefaultClassAnnotationContext(pool, logger,//
+        pool.get("int[]")));
 
-		assertTrue("Should use Array:" + code, code.endsWith("ARRAY"));
-	}
+    assertTrue("Should use Array:" + code, code.endsWith("ARRAY"));
+  }
 
-	/** Test for array context */
-	@Test
-	public void testGetSizeAwareCode_ConcreteMap() throws Exception {
-		String code = SizeAwareTypeCode.getSizeAwareCode(//
-			new DefaultClassAnnotationContext(pool, logger,//
-				pool.get("java.util.HashMap")));
+  /** Test for array context */
+  @Test
+  public void testGetSizeAwareCode_ConcreteMap() throws Exception {
+    String code = SizeAwareTypeCode.getSizeAwareCode(//
+      new DefaultClassAnnotationContext(pool, logger,//
+        pool.get("java.util.HashMap")));
 
-		assertTrue("Should use Map:" + code, code.endsWith("MAP"));
-	}
+    assertTrue("Should use Map:" + code, code.endsWith("MAP"));
+  }
 
-	/** Test for array context */
-	@Test
-	public void testGetSizeAwareCode_Map() throws Exception {
-		String code = SizeAwareTypeCode.getSizeAwareCode(//
-			new DefaultClassAnnotationContext(pool, logger,//
-				pool.get("java.util.Map")));
+  /** Test for array context */
+  @Test
+  public void testGetSizeAwareCode_Map() throws Exception {
+    String code = SizeAwareTypeCode.getSizeAwareCode(//
+      new DefaultClassAnnotationContext(pool, logger,//
+        pool.get("java.util.Map")));
 
-		assertTrue("Should use Map:" + code, code.endsWith("MAP"));
-	}
+    assertTrue("Should use Map:" + code, code.endsWith("MAP"));
+  }
 }

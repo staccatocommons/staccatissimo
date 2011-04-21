@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.restrictions.instrument.check;
 
 import javassist.NotFoundException;
@@ -24,29 +23,29 @@ import net.sf.staccatocommons.restrictions.check.Size;
  */
 public class SizeHandler extends AbstractCheckAnnotationHandler<Size> {
 
-	/**
-	 * Creates a new {@link SizeHandler}
-	 */
-	public SizeHandler(boolean ignoreReturns) {
-		super(ignoreReturns);
-	}
+  /**
+   * Creates a new {@link SizeHandler}
+   */
+  public SizeHandler(boolean ignoreReturns) {
+    super(ignoreReturns);
+  }
 
-	public Class<Size> getSupportedAnnotationType() {
-		return Size.class;
-	}
+  public Class<Size> getSupportedAnnotationType() {
+    return Size.class;
+  }
 
-	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		Size annotation, AnnotationContext context) throws NotFoundException {
-		return String.format(
-			"that().isSize(\"%s\", %s, %s, %s)",
-			argumentMnemonic,
-			argumentIdentifier,
-			annotation.value(),
-			SizeAwareTypeCode.getSizeAwareCode(context));
-	}
+  protected String createCheckCode(String argumentMnemonic, String argumentIdentifier, Size annotation,
+    AnnotationContext context) throws NotFoundException {
+    return String.format(
+      "that().isSize(\"%s\", %s, %s, %s)",
+      argumentMnemonic,
+      argumentIdentifier,
+      annotation.value(),
+      SizeAwareTypeCode.getSizeAwareCode(context));
+  }
 
-	protected String getVarMnemonic(Size annotation) {
-		return annotation.var();
-	}
+  protected String getVarMnemonic(Size annotation) {
+    return annotation.var();
+  }
 
 }

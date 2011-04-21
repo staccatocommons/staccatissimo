@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.sequence;
 
 import net.sf.staccatocommons.defs.predicate.Predicate;
@@ -24,33 +23,33 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class StopConditions {
 
-	/**
-	 * @param <T>
-	 * @return <code>Predicates.false_()</code>
-	 */
-	@NonNull
-	public static <T> Predicate<T> stopNever() {
-		return Predicates.false_();
-	}
+  /**
+   * @param <T>
+   * @return <code>Predicates.false_()</code>
+   */
+  @NonNull
+  public static <T> Predicate<T> stopNever() {
+    return Predicates.false_();
+  }
 
-	/**
-	 * @param <T>
-	 * @param value
-	 * @return <code>Predicates.lowerThan(value)</code>
-	 */
-	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> downTo(@NonNull T value) {
-		return Compare.lessThan(value);
-	}
+  /**
+   * @param <T>
+   * @param value
+   * @return <code>Predicates.lowerThan(value)</code>
+   */
+  @NonNull
+  public static <T extends Comparable<T>> Predicate<T> downTo(@NonNull T value) {
+    return Compare.lessThan(value);
+  }
 
-	/**
-	 * @param <T>
-	 * @param value
-	 * @return <code>Predicates.greaterThan(value)</code>
-	 */
-	@NonNull
-	public static <T extends Comparable<T>> Predicate<T> upTo(@NonNull T value) {
-		return Compare.greaterThan(value);
-	}
+  /**
+   * @param <T>
+   * @param value
+   * @return <code>Predicates.greaterThan(value)</code>
+   */
+  @NonNull
+  public static <T extends Comparable<T>> Predicate<T> upTo(@NonNull T value) {
+    return Compare.greaterThan(value);
+  }
 
 }

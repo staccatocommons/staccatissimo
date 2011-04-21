@@ -26,31 +26,29 @@ import org.slf4j.Logger;
  * @author flbulgarelli
  * 
  */
-public class DefaultClassAnnotationContext extends AbstractAnnotationContext implements
-	ClassAnnotationContext {
+public class DefaultClassAnnotationContext extends AbstractAnnotationContext implements ClassAnnotationContext {
 
-	private final CtClass clazz;
+  private final CtClass clazz;
 
-	/**
-	 * Creates a new {@link DefaultClassAnnotationContext}
-	 */
-	public DefaultClassAnnotationContext(@NonNull ClassPool pool, @NonNull Logger logger,
-		@NonNull CtClass clazz) {
-		super(pool, logger);
-		Ensure.isNotNull("clazz", clazz);
-		this.clazz = clazz;
-	}
+  /**
+   * Creates a new {@link DefaultClassAnnotationContext}
+   */
+  public DefaultClassAnnotationContext(@NonNull ClassPool pool, @NonNull Logger logger, @NonNull CtClass clazz) {
+    super(pool, logger);
+    Ensure.isNotNull("clazz", clazz);
+    this.clazz = clazz;
+  }
 
-	public CtClass getAnnotatedClass() {
-		return clazz;
-	}
+  public CtClass getAnnotatedClass() {
+    return clazz;
+  }
 
-	public CtClass getDeclaringClass() throws NotFoundException {
-		return Nulls.coalesce(clazz.getDeclaringClass(), clazz);
-	}
+  public CtClass getDeclaringClass() throws NotFoundException {
+    return Nulls.coalesce(clazz.getDeclaringClass(), clazz);
+  }
 
-	public CtClass getElementType() throws NotFoundException {
-		return clazz;
-	}
+  public CtClass getElementType() throws NotFoundException {
+    return clazz;
+  }
 
 }

@@ -49,9 +49,9 @@ import org.apache.commons.proxy.factory.javassist.JavassistProxyFactory;
  * 
  * <pre>
  * new Predicate&lt;Collection&gt;() {
- * 	public boolean eval(Collection arg) {
- * 		return arg.isEmpty();
- * 	}
+ *   public boolean eval(Collection arg) {
+ *     return arg.isEmpty();
+ *   }
  * };
  * </pre>
  * 
@@ -81,150 +81,150 @@ import org.apache.commons.proxy.factory.javassist.JavassistProxyFactory;
  */
 public final class Lambda {
 
-	private static final ThreadLocal<LambdaFactory> SHARED_LAMBDA_FACTORY = new ThreadLocal<LambdaFactory>() {
-		protected LambdaFactory initialValue() {
-			return factory();
-		};
-	};
+  private static final ThreadLocal<LambdaFactory> SHARED_LAMBDA_FACTORY = new ThreadLocal<LambdaFactory>() {
+    protected LambdaFactory initialValue() {
+      return factory();
+    };
+  };
 
-	/**
-	 * Stubs a type for creating a lambda. The resulting stub
-	 * <strong>must</strong> receive one and only one message.
-	 * 
-	 * Not all {@link LambdaFactory}s can stub all types - ie, stubbing
-	 * interfaces, concrete classes or final classes. Their stubbing capabilities
-	 * depend on the {@link ProxyFactory} passed as constructor argument to this
-	 * {@link LambdaFactory}
-	 * 
-	 * @param <A>
-	 * @param clazz
-	 *          the type to stub
-	 * @return a new stub
-	 * @see net.sf.staccatocommons.lambda.LambdaFactory#$(java.lang.Class)
-	 */
-	public static <A> A $(Class<A> clazz) {
-		return getSharedLambdaFactory().$(clazz);
-	}
+  /**
+   * Stubs a type for creating a lambda. The resulting stub
+   * <strong>must</strong> receive one and only one message.
+   * 
+   * Not all {@link LambdaFactory}s can stub all types - ie, stubbing
+   * interfaces, concrete classes or final classes. Their stubbing capabilities
+   * depend on the {@link ProxyFactory} passed as constructor argument to this
+   * {@link LambdaFactory}
+   * 
+   * @param <A>
+   * @param clazz
+   *          the type to stub
+   * @return a new stub
+   * @see net.sf.staccatocommons.lambda.LambdaFactory#$(java.lang.Class)
+   */
+  public static <A> A $(Class<A> clazz) {
+    return getSharedLambdaFactory().$(clazz);
+  }
 
-	/**
-	 * Answers a {@link Function} that when applied sends to its argument the
-	 * message previously sent to the last stubbed type. Refer to the use cases
-	 * described in {@link Lambda}
-	 * 
-	 * @param returnType
-	 *          meaningless, this argument is simply ignored
-	 * @return a new {@link Function}
-	 * 
-	 * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.lang.Object)
-	 */
-	public static <A> Function<Object, A> lambda(A returnType) {
-		return getSharedLambdaFactory().lambda(returnType);
-	}
+  /**
+   * Answers a {@link Function} that when applied sends to its argument the
+   * message previously sent to the last stubbed type. Refer to the use cases
+   * described in {@link Lambda}
+   * 
+   * @param returnType
+   *          meaningless, this argument is simply ignored
+   * @return a new {@link Function}
+   * 
+   * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.lang.Object)
+   */
+  public static <A> Function<Object, A> lambda(A returnType) {
+    return getSharedLambdaFactory().lambda(returnType);
+  }
 
-	/**
-	 * Answers a {@link Predicate} that when evaluated sends to its argument the
-	 * message previously sent to the last stubbed type. Refer to the use cases
-	 * described in {@link Lambda}
-	 * 
-	 * @param returnType
-	 *          meaningless, this argument is simply ignored
-	 * @return a new {@link Predicate}
-	 * @see Lambda
-	 * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(boolean)
-	 */
-	public static Predicate<Object> lambda(boolean returnType) {
-		return getSharedLambdaFactory().lambda(returnType);
-	}
+  /**
+   * Answers a {@link Predicate} that when evaluated sends to its argument the
+   * message previously sent to the last stubbed type. Refer to the use cases
+   * described in {@link Lambda}
+   * 
+   * @param returnType
+   *          meaningless, this argument is simply ignored
+   * @return a new {@link Predicate}
+   * @see Lambda
+   * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(boolean)
+   */
+  public static Predicate<Object> lambda(boolean returnType) {
+    return getSharedLambdaFactory().lambda(returnType);
+  }
 
-	/**
-	 * Answers a {@link Function} that when applied sends to its argument the
-	 * message previously sent to the last stubbed type. The returned function is
-	 * {@link NumberTypeAware}
-	 * 
-	 * Refer to the use cases described in {@link Lambda}
-	 * 
-	 * @param returnType
-	 *          meaningless, this argument is simply ignored
-	 * @return a new {@link Function}
-	 * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.math.BigDecimal)
-	 */
-	public static Function<Object, BigDecimal> lambda(BigDecimal returnType) {
-		return getSharedLambdaFactory().lambda(returnType);
-	}
+  /**
+   * Answers a {@link Function} that when applied sends to its argument the
+   * message previously sent to the last stubbed type. The returned function is
+   * {@link NumberTypeAware}
+   * 
+   * Refer to the use cases described in {@link Lambda}
+   * 
+   * @param returnType
+   *          meaningless, this argument is simply ignored
+   * @return a new {@link Function}
+   * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.math.BigDecimal)
+   */
+  public static Function<Object, BigDecimal> lambda(BigDecimal returnType) {
+    return getSharedLambdaFactory().lambda(returnType);
+  }
 
-	/**
-	 * Answers a {@link Function} that when applied sends to its argument the
-	 * message previously sent to the last stubbed type. The returned function is
-	 * {@link NumberTypeAware}
-	 * 
-	 * Refer to the use cases described in {@link Lambda}
-	 * 
-	 * @param returnType
-	 *          meaningless, this argument is simply ignored
-	 * @return a new {@link Function}
-	 * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.math.BigInteger)
-	 */
-	public static Function<Object, BigInteger> lambda(BigInteger returnType) {
-		return getSharedLambdaFactory().lambda(returnType);
-	}
+  /**
+   * Answers a {@link Function} that when applied sends to its argument the
+   * message previously sent to the last stubbed type. The returned function is
+   * {@link NumberTypeAware}
+   * 
+   * Refer to the use cases described in {@link Lambda}
+   * 
+   * @param returnType
+   *          meaningless, this argument is simply ignored
+   * @return a new {@link Function}
+   * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.math.BigInteger)
+   */
+  public static Function<Object, BigInteger> lambda(BigInteger returnType) {
+    return getSharedLambdaFactory().lambda(returnType);
+  }
 
-	/**
-	 * Answers a {@link Function} that when applied sends to its argument the
-	 * message previously sent to the last stubbed type. The returned function is
-	 * {@link NumberTypeAware}
-	 * 
-	 * Refer to the use cases described in {@link Lambda}
-	 * 
-	 * @param returnType
-	 *          meaningless, this argument is simply ignored
-	 * @return a new {@link Function}
-	 * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.lang.Integer)
-	 */
-	public static Function<Object, Integer> lambda(Integer returnType) {
-		return getSharedLambdaFactory().lambda(returnType);
-	}
+  /**
+   * Answers a {@link Function} that when applied sends to its argument the
+   * message previously sent to the last stubbed type. The returned function is
+   * {@link NumberTypeAware}
+   * 
+   * Refer to the use cases described in {@link Lambda}
+   * 
+   * @param returnType
+   *          meaningless, this argument is simply ignored
+   * @return a new {@link Function}
+   * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.lang.Integer)
+   */
+  public static Function<Object, Integer> lambda(Integer returnType) {
+    return getSharedLambdaFactory().lambda(returnType);
+  }
 
-	/**
-	 * @param <A>
-	 * @param returnType
-	 * @return
-	 * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda2(java.lang.Object)
-	 */
-	public static <A> Function2<Object, Object, A> lambda2(A returnType) {
-		return getSharedLambdaFactory().lambda2(returnType);
-	}
+  /**
+   * @param <A>
+   * @param returnType
+   * @return
+   * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda2(java.lang.Object)
+   */
+  public static <A> Function2<Object, Object, A> lambda2(A returnType) {
+    return getSharedLambdaFactory().lambda2(returnType);
+  }
 
-	/**
-	 * Answers a new {@link Function3} using a shared, thread safe
-	 * {@link LambdaFactory}
-	 * 
-	 * @param <A>
-	 * @param returnType
-	 * @return a new {@link Function3}
-	 * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda3(java.lang.Object)
-	 */
-	public static <A> Function3<Object, Object, Object, A> lambda3(A returnType) {
-		return getSharedLambdaFactory().lambda3(returnType);
-	}
+  /**
+   * Answers a new {@link Function3} using a shared, thread safe
+   * {@link LambdaFactory}
+   * 
+   * @param <A>
+   * @param returnType
+   * @return a new {@link Function3}
+   * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda3(java.lang.Object)
+   */
+  public static <A> Function3<Object, Object, Object, A> lambda3(A returnType) {
+    return getSharedLambdaFactory().lambda3(returnType);
+  }
 
-	/**
-	 * Answers a new {@link LambdaFactory} that is capable of stubbing interfaces
-	 * and non-final classes
-	 * 
-	 * @return a new {@link LambdaFactory}
-	 */
-	public static LambdaFactory factory() {
-		return new LambdaFactory(new JavassistProxyFactory());
-	}
+  /**
+   * Answers a new {@link LambdaFactory} that is capable of stubbing interfaces
+   * and non-final classes
+   * 
+   * @return a new {@link LambdaFactory}
+   */
+  public static LambdaFactory factory() {
+    return new LambdaFactory(new JavassistProxyFactory());
+  }
 
-	private static LambdaFactory getSharedLambdaFactory() {
-		return SHARED_LAMBDA_FACTORY.get();
-	}
+  private static LambdaFactory getSharedLambdaFactory() {
+    return SHARED_LAMBDA_FACTORY.get();
+  }
 
-	public static <A> A _(Class<A> clazz) {
-		return null;
-	}
+  public static <A> A _(Class<A> clazz) {
+    return null;
+  }
 
-	public static final Object _ = null;
+  public static final Object _ = null;
 
 }

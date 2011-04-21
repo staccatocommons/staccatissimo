@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.function;
 
 import static org.junit.Assert.*;
@@ -30,54 +29,54 @@ import org.junit.Test;
  */
 public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {}
+  /**
+   * @throws java.lang.Exception
+   */
+  @Before
+  public void setUp() throws Exception {}
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.Functions#identity()}.
-	 */
-	@Test
-	public void testIdentity() {
-		Integer i = 5;
-		assertSame(i, Functions.identity().apply(i));
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.lang.function.Functions#identity()}.
+   */
+  @Test
+  public void testIdentity() {
+    Integer i = 5;
+    assertSame(i, Functions.identity().apply(i));
+  }
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.function.Functions#constant(java.lang.Object)}
-	 * .
-	 */
-	@Test
-	public void testConstant() {
-		Integer i = 0;
-		assertSame(i, Functions.constant(i).apply(1));
-		assertSame(i, Functions.constant(i).apply(0));
-		assertSame(i, Functions.constant(i).apply(2));
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.lang.function.Functions#constant(java.lang.Object)}
+   * .
+   */
+  @Test
+  public void testConstant() {
+    Integer i = 0;
+    assertSame(i, Functions.constant(i).apply(1));
+    assertSame(i, Functions.constant(i).apply(0));
+    assertSame(i, Functions.constant(i).apply(2));
+  }
 
-	/** Test for {@link Functions#from(Applicable)} */
-	@Test
-	public void testFromApplicable() throws Exception {
-		final Applicable<Integer, Character> applicable = mock(Applicable.class);
+  /** Test for {@link Functions#from(Applicable)} */
+  @Test
+  public void testFromApplicable() throws Exception {
+    final Applicable<Integer, Character> applicable = mock(Applicable.class);
 
-		checking(new Expectations() {
-			{
-				one(applicable).apply(5);
-				will(returnValue('a'));
-			}
-		});
-		Function<Object, Object> identity = Functions.identity();
-		assertEquals((Character) 'a', Functions.from(applicable).apply(5));
-		assertSame(identity, Functions.from(identity));
-	}
+    checking(new Expectations() {
+      {
+        one(applicable).apply(5);
+        will(returnValue('a'));
+      }
+    });
+    Function<Object, Object> identity = Functions.identity();
+    assertEquals((Character) 'a', Functions.from(applicable).apply(5));
+    assertSame(identity, Functions.from(identity));
+  }
 
-	/** Test for {@link Functions#toString_()} */
-	@Test
-	public void testToString() throws Exception {
-		assertEquals("50", Strings.toString_().apply(50));
-	}
+  /** Test for {@link Functions#toString_()} */
+  @Test
+  public void testToString() throws Exception {
+    assertEquals("50", Strings.toString_().apply(50));
+  }
 }

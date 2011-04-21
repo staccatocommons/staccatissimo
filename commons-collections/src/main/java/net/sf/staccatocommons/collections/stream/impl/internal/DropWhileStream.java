@@ -26,24 +26,24 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  */
 public class DropWhileStream<A> extends WrapperStream<A> {
-	private final Evaluable<? super A> predicate;
+  private final Evaluable<? super A> predicate;
 
-	/**
-	 * Creates a new {@link TakeWhileStream}
-	 */
-	public DropWhileStream(@NonNull Stream<A> stream, @NonNull Evaluable<? super A> predicate) {
-		super(stream);
-		this.predicate = predicate;
-	}
+  /**
+   * Creates a new {@link TakeWhileStream}
+   */
+  public DropWhileStream(@NonNull Stream<A> stream, @NonNull Evaluable<? super A> predicate) {
+    super(stream);
+    this.predicate = predicate;
+  }
 
-	public Thriterator<A> iterator() {
-		final Iterator<A> iter = getSource().iterator();
-		A next = null;
-		while (iter.hasNext() && predicate.eval(next = iter.next())) {
-			next = null;
-		}
-		if (next == null)
-			return Thriterators.from(iter);
-		return new PrependThriterator<A>(next, iter);
-	}
+  public Thriterator<A> iterator() {
+    final Iterator<A> iter = getSource().iterator();
+    A next = null;
+    while (iter.hasNext() && predicate.eval(next = iter.next())) {
+      next = null;
+    }
+    if (next == null)
+      return Thriterators.from(iter);
+    return new PrependThriterator<A>(next, iter);
+  }
 }

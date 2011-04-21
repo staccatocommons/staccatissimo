@@ -40,18 +40,18 @@ import net.sf.staccatocommons.restrictions.Restriction;
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
 public @interface MaxSize {
 
-	/**
-	 * The maximum value of the annotated element's size
-	 * 
-	 * @return the max size.
-	 */
-	@Positive
-	int value();
+  /**
+   * The maximum value of the annotated element's size
+   * 
+   * @return the max size.
+   */
+  @Positive
+  int value();
 
-	/**
-	 * @return The variable name of the constrained element, or the empty string
-	 *         if unspecified. This value may help tools that analyze this
-	 *         annotation without access to source code.
-	 */
-	String var() default "";
+  /**
+   * @return The variable name of the constrained element, or the empty string
+   *         if unspecified. This value may help tools that analyze this
+   *         annotation without access to source code.
+   */
+  String var() default "";
 }

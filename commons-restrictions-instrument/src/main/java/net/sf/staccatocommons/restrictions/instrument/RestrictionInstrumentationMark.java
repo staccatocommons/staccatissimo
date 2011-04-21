@@ -21,11 +21,11 @@ import net.sf.staccatocommons.instrument.config.SimpleInstrumentationMark;
  */
 public class RestrictionInstrumentationMark {
 
-	/**
-	 * returns the Restriction instrumentation mark
-	 */
-	public static final InstrumentationMark INSTANCE = new SimpleInstrumentationMark(
-		"commons-restriction-instrument",
-		"instrumented");
+  /**
+   * returns the Restriction instrumentation mark
+   */
+  public static final InstrumentationMark INSTANCE = new SimpleInstrumentationMark(
+    "commons-restriction-instrument",
+    "instrumented");
 
 }

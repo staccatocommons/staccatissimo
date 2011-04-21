@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.value;
 
 import static org.junit.Assert.*;
@@ -27,21 +26,18 @@ import org.junit.Test;
  */
 public class NamedTupleToStringStyleTest {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
+  /**
+   * @throws java.lang.Exception
+   */
+  @Before
+  public void setUp() throws Exception {}
 
-	/**
-	 * @throws Exception
-	 */
-	@Test
-	public void testStyle() throws Exception {
-		assertEquals("Range(5,9)", ToStringBuilder.reflectionToString(
-			Range.from(5, 9),
-			new NamedTupleToStringStyle()));
-	}
+  /**
+   * @throws Exception
+   */
+  @Test
+  public void testStyle() throws Exception {
+    assertEquals("Range(5,9)", ToStringBuilder.reflectionToString(Range.from(5, 9), new NamedTupleToStringStyle()));
+  }
 
 }

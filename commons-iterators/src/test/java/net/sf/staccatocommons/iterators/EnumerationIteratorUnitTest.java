@@ -24,18 +24,18 @@ import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
  */
 public class EnumerationIteratorUnitTest extends IteratorTheories {
 
-	protected Iterator<?> createTwoElementsIterator() {
+  protected Iterator<?> createTwoElementsIterator() {
 
-		Hashtable<String, String> hashtable = new Hashtable<String, String>();
-		hashtable.put("foo", "bar");
-		hashtable.put("baz", "foobar");
-		return new EnumerationIterator(hashtable.keys());
-	}
+    Hashtable<String, String> hashtable = new Hashtable<String, String>();
+    hashtable.put("foo", "bar");
+    hashtable.put("baz", "foobar");
+    return new EnumerationIterator(hashtable.keys());
+  }
 
-	protected Iterator<?> createOneElementIterator() {
-		return new EnumerationIterator( //
-			new Hashtable<String, String>( //
-				Collections.singletonMap("bar", "baz")).keys());
-	}
+  protected Iterator<?> createOneElementIterator() {
+    return new EnumerationIterator( //
+      new Hashtable<String, String>( //
+        Collections.singletonMap("bar", "baz")).keys());
+  }
 
 }

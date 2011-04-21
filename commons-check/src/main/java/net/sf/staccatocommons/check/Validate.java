@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.check;
 
 import net.sf.staccatocommons.restrictions.effect.Transparent;
@@ -56,37 +55,37 @@ import net.sf.staccatocommons.restrictions.effect.Transparent;
  */
 public final class Validate<ExceptionType extends Throwable> extends Check<ExceptionType> {
 
-	private final Class<ExceptionType> exceptionType;
+  private final Class<ExceptionType> exceptionType;
 
-	/**
-	 * Creates a new {@link Validate}
-	 * 
-	 * @param exceptionType
-	 *          the class of the exception to throw on failure
-	 */
-	private Validate(Class<ExceptionType> exceptionType) {
-		this.exceptionType = exceptionType;
-	}
+  /**
+   * Creates a new {@link Validate}
+   * 
+   * @param exceptionType
+   *          the class of the exception to throw on failure
+   */
+  private Validate(Class<ExceptionType> exceptionType) {
+    this.exceptionType = exceptionType;
+  }
 
-	/**
-	 * Created a new {@link Validate} that will throw an exception of the given
-	 * class on failure
-	 * 
-	 * @param <E>
-	 * @param exceptionType
-	 *          the class of exception to throw on check failure
-	 * @return a new {@link Validate}
-	 */
-	public static <E extends Throwable> Validate<E> throwing(Class<E> exceptionType) {
-		return new Validate<E>(exceptionType);
-	}
+  /**
+   * Created a new {@link Validate} that will throw an exception of the given
+   * class on failure
+   * 
+   * @param <E>
+   * @param exceptionType
+   *          the class of exception to throw on check failure
+   * @return a new {@link Validate}
+   */
+  public static <E extends Throwable> Validate<E> throwing(Class<E> exceptionType) {
+    return new Validate<E>(exceptionType);
+  }
 
-	protected ExceptionType createException(Failure failure) {
-		try {
-			return exceptionType.getConstructor(String.class).newInstance(failure.createMessage());
-		} catch (Exception e) {
-			throw new AssertionError(e);
-		}
-	}
+  protected ExceptionType createException(Failure failure) {
+    try {
+      return exceptionType.getConstructor(String.class).newInstance(failure.createMessage());
+    } catch (Exception e) {
+      throw new AssertionError(e);
+    }
+  }
 
 }

@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.value;
 
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -56,105 +55,105 @@ import org.apache.commons.lang.builder.EqualsBuilder;
  */
 public enum BasicEquals {
 
-	/**
-	 * {@link BasicEquals} test result where the two objects are always equal,
-	 * because their are the same object
-	 */
-	ALWAYS {
-		@Override
-		public boolean toEquals() {
-			return true;
-		}
+  /**
+   * {@link BasicEquals} test result where the two objects are always equal,
+   * because their are the same object
+   */
+  ALWAYS {
+    @Override
+    public boolean toEquals() {
+      return true;
+    }
 
-		public boolean isEqualsDone() {
-			return true;
-		}
-	},
-	/**
-	 * {@link BasicEquals} test result where the two objects can never be equal,
-	 * as either have different classes, or the second one is null
-	 */
-	NEVER {
-		@Override
-		public boolean toEquals() {
-			return false;
-		}
+    public boolean isEqualsDone() {
+      return true;
+    }
+  },
+  /**
+   * {@link BasicEquals} test result where the two objects can never be equal,
+   * as either have different classes, or the second one is null
+   */
+  NEVER {
+    @Override
+    public boolean toEquals() {
+      return false;
+    }
 
-		public boolean isEqualsDone() {
-			return true;
-		}
-	},
-	/**
-	 * {@link BasicEquals} test result where the two objects may be equal if and
-	 * only if the have a similar internal state
-	 */
-	MAYBE {
-		@Override
-		public boolean toEquals() {
-			throw new IllegalStateException();
-		}
+    public boolean isEqualsDone() {
+      return true;
+    }
+  },
+  /**
+   * {@link BasicEquals} test result where the two objects may be equal if and
+   * only if the have a similar internal state
+   */
+  MAYBE {
+    @Override
+    public boolean toEquals() {
+      throw new IllegalStateException();
+    }
 
-		public boolean isEqualsDone() {
-			return false;
-		}
-	};
+    public boolean isEqualsDone() {
+      return false;
+    }
+  };
 
-	/**
-	 * Performs a {@link BasicEquals} test
-	 * 
-	 * @param <T>
-	 * @param this_
-	 *          the "left hand" object to test equalty, that is, the object to
-	 *          wich the equals message has been sent
-	 * @param that
-	 *          the "right hand" objet of the equlty test, that is, the object
-	 *          that is parameter of the the equals message the
-	 * @return {@link #NEVER} if <code>that</code> is null or its class is not the
-	 *         same that <code>this_.getClass()</code>, {@link #ALWAYS} if both
-	 *         objects are the same, or {@link #MAYBE} otherwise
-	 */
-	@NonNull
-	@ForceRestrictions
-	public static <T> BasicEquals from(@NonNull T this_, Object that) {
-		if (that == null)
-			return NEVER;
-		if (that == this_)
-			return ALWAYS;
-		if (that.getClass() != this_.getClass())
-			return NEVER;
-		return MAYBE;
-	}
+  /**
+   * Performs a {@link BasicEquals} test
+   * 
+   * @param <T>
+   * @param this_
+   *          the "left hand" object to test equalty, that is, the object to
+   *          wich the equals message has been sent
+   * @param that
+   *          the "right hand" objet of the equlty test, that is, the object
+   *          that is parameter of the the equals message the
+   * @return {@link #NEVER} if <code>that</code> is null or its class is not the
+   *         same that <code>this_.getClass()</code>, {@link #ALWAYS} if both
+   *         objects are the same, or {@link #MAYBE} otherwise
+   */
+  @NonNull
+  @ForceRestrictions
+  public static <T> BasicEquals from(@NonNull T this_, Object that) {
+    if (that == null)
+      return NEVER;
+    if (that == this_)
+      return ALWAYS;
+    if (that.getClass() != this_.getClass())
+      return NEVER;
+    return MAYBE;
+  }
 
-	// @NonNull
-	// @ForceChecks
-	// public static <T> BasicEquals from(@NonNull Class<T> thisClass, @NonNull T
-	// this_, Object that) {
-	// if (that == null)
-	// return NEVER;
-	// if (that == this_)
-	// return ALWAYS;
-	// if (!thisClass.isAssignableFrom(that.getClass()))
-	// return NEVER;
-	// return MAYBE;
-	// }
+  // @NonNull
+  // @ForceChecks
+  // public static <T> BasicEquals from(@NonNull Class<T> thisClass, @NonNull T
+  // this_, Object that) {
+  // if (that == null)
+  // return NEVER;
+  // if (that == this_)
+  // return ALWAYS;
+  // if (!thisClass.isAssignableFrom(that.getClass()))
+  // return NEVER;
+  // return MAYBE;
+  // }
 
-	/**
-	 * Returns the equals test based on this basic equals test result. This method
-	 * <strong>must</strong> only be called if there is enough information to
-	 * determine it, that is, if {@link #isEqualsDone()}.
-	 * 
-	 * @return true if this is {@link #ALWAYS} or false if this is {@link #NEVER}
-	 * @throws IllegalStateException
-	 *           of this is {@link #MAYBE}
-	 */
-	public abstract boolean toEquals();
+  /**
+   * Returns the equals test based on this basic equals test result. This method
+   * <strong>must</strong> only be called if there is enough information to
+   * determine it, that is, if {@link #isEqualsDone()}.
+   * 
+   * @return true if this is {@link #ALWAYS} or false if this is {@link #NEVER}
+   * @throws IllegalStateException
+   *           of this is {@link #MAYBE}
+   */
+  public abstract boolean toEquals();
 
-	/**
-	 * Answers if this basic equalty-test result is enough to determine if the two
-	 * objects given are equal or not
-	 * 
-	 * @return <code>true</code> for {@link #NEVER} and {@link #ALWAYS},
-	 *         <code>false</code> for {@link #MAYBE}
-	 */
-	public abstract boolean isEqualsDone();
+  /**
+   * Answers if this basic equalty-test result is enough to determine if the two
+   * objects given are equal or not
+   * 
+   * @return <code>true</code> for {@link #NEVER} and {@link #ALWAYS},
+   *         <code>false</code> for {@link #MAYBE}
+   */
+  public abstract boolean isEqualsDone();
 }

@@ -25,25 +25,25 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public final class SimpleInstrumentationMark implements InstrumentationMark {
 
-	private String markName;
-	private String markValue;
+  private String markName;
+  private String markValue;
 
-	/**
-	 * Creates a new {@link SimpleInstrumentationMark}
-	 */
-	public SimpleInstrumentationMark(@NonNull String markName, @NonNull String markValue) {
-		this.markName = markName;
-		this.markValue = markValue;
-	}
+  /**
+   * Creates a new {@link SimpleInstrumentationMark}
+   */
+  public SimpleInstrumentationMark(@NonNull String markName, @NonNull String markValue) {
+    this.markName = markName;
+    this.markValue = markValue;
+  }
 
-	/**
-	 * @return The version number, as a class file version attribute value
-	 */
-	public final byte[] getMarkAttributeValue() {
-		return markValue.getBytes(Charset.forName("UTF-8"));
-	}
+  /**
+   * @return The version number, as a class file version attribute value
+   */
+  public byte[] getMarkAttributeValue() {
+    return markValue.getBytes(Charset.forName("UTF-8"));
+  }
 
-	public String getMarkAttributeName() {
-		return markName;
-	}
+  public String getMarkAttributeName() {
+    return markName;
+  }
 }

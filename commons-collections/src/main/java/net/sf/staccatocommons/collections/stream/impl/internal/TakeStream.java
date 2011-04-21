@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import static java.lang.Math.*;
@@ -32,28 +31,30 @@ import net.sf.staccatocommons.restrictions.check.NotNegative;
  */
 public final class TakeStream<A> extends WrapperStream<A> {
 
-	private final int amountOfElements;
+  private final int amountOfElements;
 
-	/**
-	 * Creates a new {@link TakeStream}
-	 */
-	public TakeStream(@NonNull Stream<A> stream, int amountOfElements) {
-		super(stream);
-		this.amountOfElements = amountOfElements;
-	}
+  /**
+   * Creates a new {@link TakeStream}
+   */
+  public TakeStream(@NonNull Stream<A> stream, int amountOfElements) {
+    super(stream);
+    this.amountOfElements = amountOfElements;
+  }
 
-	public Thriterator<A> iterator() {
-		return new TakeIterator<A>(amountOfElements, getSource().iterator());
-	}
+  @Override
+  public Thriterator<A> iterator() {
+    return new TakeIterator<A>(amountOfElements, getSource().iterator());
+  }
 
-	@Override
-	public Stream<A> take(@NotNegative int amountOfElements) {
-		return new TakeStream<A>(getSource(), min(amountOfElements, this.amountOfElements));
-	}
+  @Override
+  public Stream<A> take(@NotNegative int amountOfElements) {
+    return new TakeStream<A>(getSource(), min(amountOfElements, this.amountOfElements));
+  }
 
-	public List<A> toList() {
-		ArrayList<A> list = new ArrayList<A>(amountOfElements);
-		ModifiableIterables.addAll(list, this);
-		return list;
-	}
+  @Override
+  public List<A> toList() {
+    ArrayList<A> list = new ArrayList<A>(amountOfElements);
+    ModifiableIterables.addAll(list, this);
+    return list;
+  }
 }

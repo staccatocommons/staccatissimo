@@ -20,9 +20,9 @@ import net.sf.staccatocommons.defs.type.NumberType;
  */
 public interface NumberTypeAware<A> {
 
-	/**
-	 * @return an implicit numeric type
-	 */
-	NumberType<A> numberType();
+  /**
+   * @return an implicit numeric type
+   */
+  NumberType<A> numberType();
 
 }

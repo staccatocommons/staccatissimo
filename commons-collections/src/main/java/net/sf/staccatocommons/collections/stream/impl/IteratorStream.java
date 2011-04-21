@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl;
 
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
@@ -36,29 +35,29 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class IteratorStream<A> extends AbstractStream<A> {
 
-	private final Thriterator<A> iterator;
+  private final Thriterator<A> iterator;
 
-	/**
-	 * 
-	 * Creates a new {@link IteratorStream}
-	 * 
-	 * @param iterator
-	 *          the iterator to wrap
-	 */
-	public IteratorStream(@NonNull Iterator<? extends A> iterator) {
-		this.iterator = Thriterators.from(iterator);
-	}
+  /**
+   * 
+   * Creates a new {@link IteratorStream}
+   * 
+   * @param iterator
+   *          the iterator to wrap
+   */
+  public IteratorStream(@NonNull Iterator<? extends A> iterator) {
+    this.iterator = Thriterators.from(iterator);
+  }
 
-	public final Thriterator<A> iterator() {
-		return iterator;
-	}
+  public final Thriterator<A> iterator() {
+    return iterator;
+  }
 
-	public final Stream<A> toEmptyAware() {
-		return this;
-	}
+  public final Stream<A> toEmptyAware() {
+    return this;
+  }
 
-	public final Pair<A, Stream<A>> decons() {
-		validateElement.that(!isEmpty(), "Empty streams can not be deconstructed");
-		return _(head(), (Stream<A>) this);
-	}
+  public final Pair<A, Stream<A>> decons() {
+    validateElement.that(!isEmpty(), "Empty streams can not be deconstructed");
+    return _(head(), (Stream<A>) this);
+  }
 }

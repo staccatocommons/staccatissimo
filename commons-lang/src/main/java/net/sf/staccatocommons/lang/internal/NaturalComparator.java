@@ -24,22 +24,22 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class NaturalComparator<A extends Comparable<A>> implements Comparator<A>, Serializable {
 
-	private static final long serialVersionUID = 2687644878633769309L;
+  private static final long serialVersionUID = 2687644878633769309L;
 
-	public int compare(A o1, A o2) {
-		return o1.compareTo(o2);
-	}
+  public int compare(A o1, A o2) {
+    return o1.compareTo(o2);
+  }
 
-	/**
-	 * Answers a {@link NaturalComparator}
-	 * 
-	 * @param <A>
-	 * @return a natural comparator
-	 */
-	@NonNull
-	@Constant
-	public static <A extends Comparable<A>> Comparator<A> natural() {
-		return new NaturalComparator();
-	}
+  /**
+   * Answers a {@link NaturalComparator}
+   * 
+   * @param <A>
+   * @return a natural comparator
+   */
+  @NonNull
+  @Constant
+  public static <A extends Comparable<A>> Comparator<A> natural() {
+    return new NaturalComparator();
+  }
 
 }

@@ -33,48 +33,48 @@ import com.thoughtworks.xstream.core.BaseException;
 // staccatissimo
 public class XStreamXmlSerializationManager extends AbstractCharSerializationManager {
 
-	private final XStream xstream;
+  private final XStream xstream;
 
-	/**
-	 * Creates a new XStreamSerializationManager using a new XStream()
-	 */
-	public XStreamXmlSerializationManager() {
-		this(new XStream());
-	}
+  /**
+   * Creates a new XStreamSerializationManager using a new XStream()
+   */
+  public XStreamXmlSerializationManager() {
+    this(new XStream());
+  }
 
-	/**
-	 * Creates a new {@link XStreamXmlSerializationManager} using a given
-	 * {@link XStream} instance.
-	 * 
-	 * @param xstream
-	 */
-	public XStreamXmlSerializationManager(XStream xstream) {
-		this.xstream = xstream;
-	}
+  /**
+   * Creates a new {@link XStreamXmlSerializationManager} using a given
+   * {@link XStream} instance.
+   * 
+   * @param xstream
+   */
+  public XStreamXmlSerializationManager(XStream xstream) {
+    this.xstream = xstream;
+  }
 
-	@Override
-	public <T> T deserialize(Reader reader) {
-		try {
-			return (T) xstream.fromXML(reader);
-		} catch (BaseException e) {
-			throw new SerializationException(e);
-		}
-	}
+  @Override
+  public <T> T deserialize(Reader reader) {
+    try {
+      return (T) xstream.fromXML(reader);
+    } catch (BaseException e) {
+      throw new SerializationException(e);
+    }
+  }
 
-	@Override
-	public void serialize(Object object, Writer writer) {
-		try {
-			xstream.toXML(object, writer);
-		} catch (BaseException e) {
-			throw new SerializationException(e);
-		}
-	}
+  @Override
+  public void serialize(Object object, Writer writer) {
+    try {
+      xstream.toXML(object, writer);
+    } catch (BaseException e) {
+      throw new SerializationException(e);
+    }
+  }
 
-	/**
-	 * @return the underlying {@link XStream} object
-	 */
-	public XStream getXstream() {
-		return xstream;
-	}
+  /**
+   * @return the underlying {@link XStream} object
+   */
+  public XStream getXstream() {
+    return xstream;
+  }
 
 }

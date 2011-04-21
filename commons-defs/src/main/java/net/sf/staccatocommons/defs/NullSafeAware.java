@@ -28,17 +28,17 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface NullSafeAware<A> {
 
-	/**
-	 * Answers a new {@link Applicative} of type {@code A} that accepts nulls for
-	 * its applicative method.
-	 * 
-	 * The return value of the applicative method of the returned object for a
-	 * null input is not specified by this interface. In particular, it
-	 * <strong>may</strong> be <code>null</code> in such cases.
-	 * 
-	 * @return a new null-safe {@link Applicable} of type {@code A}. Non null.
-	 */
-	@NonNull
-	A nullSafe();
+  /**
+   * Answers a new {@link Applicative} of type {@code A} that accepts nulls for
+   * its applicative method.
+   * 
+   * The return value of the applicative method of the returned object for a
+   * null input is not specified by this interface. In particular, it
+   * <strong>may</strong> be <code>null</code> in such cases.
+   * 
+   * @return a new null-safe {@link Applicable} of type {@code A}. Non null.
+   */
+  @NonNull
+  A nullSafe();
 
 }

@@ -30,24 +30,24 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class IterableStream<A> extends AbstractStream<A> {
 
-	private final Iterable<? extends A> iterable;
+  private final Iterable<? extends A> iterable;
 
-	/**
-	 * Creates a new {@link IterableStream} that wraps the given {@link Iterable}
-	 * 
-	 * @param iterable
-	 */
-	public IterableStream(@NonNull Iterable<? extends A> iterable) {
-		this.iterable = iterable;
-	}
+  /**
+   * Creates a new {@link IterableStream} that wraps the given {@link Iterable}
+   * 
+   * @param iterable
+   */
+  public IterableStream(@NonNull Iterable<? extends A> iterable) {
+    this.iterable = iterable;
+  }
 
-	@Override
-	public Thriterator<A> iterator() {
-		return Thriterators.from(iterable.iterator());
-	}
+  @Override
+  public Thriterator<A> iterator() {
+    return Thriterators.from(iterable.iterator());
+  }
 
-	public final NumberType<A> numberType() {
-		return ((NumberTypeAware<A>) iterable).numberType();
-	}
+  public final NumberType<A> numberType() {
+    return ((NumberTypeAware<A>) iterable).numberType();
+  }
 
 }

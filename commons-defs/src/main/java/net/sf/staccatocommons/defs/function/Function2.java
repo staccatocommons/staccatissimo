@@ -40,28 +40,28 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  *          function return type
  * 
  */
-public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, Function<B, C>>,
-	Delayable2<A, B, C>, NullSafeAware<Function2<A, B, C>> {
+public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, Function<B, C>>, Delayable2<A, B, C>,
+  NullSafeAware<Function2<A, B, C>> {
 
-	/**
-	 * Partially applies the function passing just its first parameter
-	 */
-	@NonNull
-	Function<B, C> apply(final A arg0);
+  /**
+   * Partially applies the function passing just its first parameter
+   */
+  @NonNull
+  Function<B, C> apply(final A arg0);
 
-	/**
-	 * Applies the function
-	 */
-	@NonNull
-	C apply(A arg0, B arg1);
+  /**
+   * Applies the function
+   */
+  @NonNull
+  C apply(A arg0, B arg1);
 
-	/**
-	 * Inverts function parameters order
-	 * 
-	 * @return a new {@link Function2} that produces the same result of this one
-	 *         when applied, but with arguments flipped
-	 */
-	@NonNull
-	Function2<B, A, C> flip();
+  /**
+   * Inverts function parameters order
+   * 
+   * @return a new {@link Function2} that produces the same result of this one
+   *         when applied, but with arguments flipped
+   */
+  @NonNull
+  Function2<B, A, C> flip();
 
 }

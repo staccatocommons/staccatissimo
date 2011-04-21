@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.internal;
 
 import javassist.CannotCompileException;
@@ -19,15 +18,15 @@ import javassist.CtClass;
 
 /**
  * @author flbulgarelli
- *
+ * 
  */
 public interface Instrumenter {
 
-	/**
-	 * @param clazz
-	 * @throws ClassNotFoundException
-	 * @throws CannotCompileException
-	 */
-	void instrumentClass(final CtClass clazz) throws CannotCompileException, ClassNotFoundException;
+  /**
+   * @param clazz
+   * @throws ClassNotFoundException
+   * @throws CannotCompileException
+   */
+  void instrumentClass(final CtClass clazz) throws CannotCompileException, ClassNotFoundException;
 
 }

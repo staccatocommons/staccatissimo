@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.block;
 
 import static junit.framework.Assert.*;
@@ -34,81 +33,81 @@ import org.junit.Test;
  */
 public class Block3UnitTest extends JUnit4MockObjectTestCase {
 
-	Block3<MutableInt, String, Character> block;
-	Executable3<MutableInt, String, Character> executable, otherExecutable;
+  Block3<MutableInt, String, Character> block;
+  Executable3<MutableInt, String, Character> executable, otherExecutable;
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		executable = mock(Executable3.class);
-		otherExecutable = mock(Executable3.class, "other");
-		block = new Block3<MutableInt, String, Character>() {
-			public void exec(MutableInt arg1, String arg2, Character arg3) {
-				executable.exec(arg1, arg2, arg3);
-			}
-		};
-	}
+  /**
+   * @throws java.lang.Exception
+   */
+  @Before
+  public void setUp() throws Exception {
+    executable = mock(Executable3.class);
+    otherExecutable = mock(Executable3.class, "other");
+    block = new Block3<MutableInt, String, Character>() {
+      public void exec(MutableInt arg1, String arg2, Character arg3) {
+        executable.exec(arg1, arg2, arg3);
+      }
+    };
+  }
 
-	/**
-	 * Test method for {@link Block3#exec(Object, Object, Object)} when softExec
-	 * is overriden
-	 */
-	@Test(expected = SoftException.class)
-	public void testSoftExec() throws Exception {
-		block = new Block3<MutableInt, String, Character>() {
-			protected void softExec(MutableInt arg1, String arg2, Character arg3) throws Exception {
-				throw new IOException();
-			}
-		};
-		block.exec(new MutableInt(5), "", 'a');
-	}
+  /**
+   * Test method for {@link Block3#exec(Object, Object, Object)} when softExec
+   * is overriden
+   */
+  @Test(expected = SoftException.class)
+  public void testSoftExec() throws Exception {
+    block = new Block3<MutableInt, String, Character>() {
+      protected void softExec(MutableInt arg1, String arg2, Character arg3) throws Exception {
+        throw new IOException();
+      }
+    };
+    block.exec(new MutableInt(5), "", 'a');
+  }
 
-	/**
-	 * Test for {@link Block3#apply(Object)} and
-	 * {@link Block3#apply(Object, Object)}
-	 */
-	@Test
-	public void testApply() throws Exception {
-		checking(new Expectations() {
-			{
-				exactly(3).of(executable).exec(new MutableInt(5), "", 'a');
-			}
-		});
-		block.exec(new MutableInt(5), "", 'a');
-		block.apply(new MutableInt(5)).exec("", 'a');
-		block.apply(new MutableInt(5), "").exec('a');
-	}
+  /**
+   * Test for {@link Block3#apply(Object)} and
+   * {@link Block3#apply(Object, Object)}
+   */
+  @Test
+  public void testApply() throws Exception {
+    checking(new Expectations() {
+      {
+        exactly(3).of(executable).exec(new MutableInt(5), "", 'a');
+      }
+    });
+    block.exec(new MutableInt(5), "", 'a');
+    block.apply(new MutableInt(5)).exec("", 'a');
+    block.apply(new MutableInt(5), "").exec('a');
+  }
 
-	/**
-	 * Test method for {@link Block3#then(Executable3)} .
-	 */
-	@Test
-	public void testThen() {
-		final MutableInt mi = new MutableInt(5);
-		checking(new Expectations() {
-			{
-				one(executable).exec(new MutableInt(5), "", 'a');
-				will(new IncrementAction(mi));
-				one(otherExecutable).exec(new MutableInt(6), "", 'a');
-			}
-		});
-		block.then(otherExecutable).exec(mi, "", 'a');
-		assertEquals(6, mi.getValue());
-	}
+  /**
+   * Test method for {@link Block3#then(Executable3)} .
+   */
+  @Test
+  public void testThen() {
+    final MutableInt mi = new MutableInt(5);
+    checking(new Expectations() {
+      {
+        one(executable).exec(new MutableInt(5), "", 'a');
+        will(new IncrementAction(mi));
+        one(otherExecutable).exec(new MutableInt(6), "", 'a');
+      }
+    });
+    block.then(otherExecutable).exec(mi, "", 'a');
+    assertEquals(6, mi.getValue());
+  }
 
-	/** Test for {@link Block3#delayed(Object, Object, Object)} */
-	@Test
-	public void testDelayed() {
-		MutableInt mi = new MutableInt(10);
-		Thunk<Void> delayed = block.delayed(mi, "hello", 'a');
-		checking(new Expectations() {
-			{
-				exactly(2).of(executable).exec(new MutableInt(10), "hello", 'a');
-			}
-		});
-		delayed.value();
-		delayed.value();
-	}
+  /** Test for {@link Block3#delayed(Object, Object, Object)} */
+  @Test
+  public void testDelayed() {
+    MutableInt mi = new MutableInt(10);
+    Thunk<Void> delayed = block.delayed(mi, "hello", 'a');
+    checking(new Expectations() {
+      {
+        exactly(2).of(executable).exec(new MutableInt(10), "hello", 'a');
+      }
+    });
+    delayed.value();
+    delayed.value();
+  }
 }

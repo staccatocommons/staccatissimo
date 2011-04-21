@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.thunk;
 
 import static org.junit.Assert.*;
@@ -35,113 +34,113 @@ import org.junit.Test;
  */
 public class ThunksUnitTest extends JUnit4MockObjectTestCase {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {}
+  /**
+   * @throws java.lang.Exception
+   */
+  @Before
+  public void setUp() throws Exception {}
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.thunk.Thunks#constant(java.lang.Object)}
-	 * .
-	 */
-	@Test
-	public void testConstant() {
-		Object value = new Object();
-		assertSame(value, Thunks.constant(value).value());
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.lang.thunk.Thunks#constant(java.lang.Object)}
+   * .
+   */
+  @Test
+  public void testConstant() {
+    Object value = new Object();
+    assertSame(value, Thunks.constant(value).value());
+  }
 
-	/** Test method fot {@link Thunks#null_()} */
-	@Test
-	public void testNull_() throws Exception {
-		assertNull(Thunks.null_().value());
-	}
+  /** Test method fot {@link Thunks#null_()} */
+  @Test
+  public void testNull_() throws Exception {
+    assertNull(Thunks.null_().value());
+  }
 
-	/** Test method for {@link Thunks#from(Callable)} */
-	@Test
-	public void testCallable() throws Exception {
-		final Callable<Integer> callable = mock(Callable.class);
-		checking(new Expectations() {
-			{
-				one(callable).call();
-				will(returnValue(50));
-			}
-		});
-		Thunk<Integer> callableProvider = Thunks.from(callable);
-		assertEquals(50, (int) callableProvider.value());
-	}
+  /** Test method for {@link Thunks#from(Callable)} */
+  @Test
+  public void testCallable() throws Exception {
+    final Callable<Integer> callable = mock(Callable.class);
+    checking(new Expectations() {
+      {
+        one(callable).call();
+        will(returnValue(50));
+      }
+    });
+    Thunk<Integer> callableProvider = Thunks.from(callable);
+    assertEquals(50, (int) callableProvider.value());
+  }
 
-	/** Test method for {@link Thunks#from(Callable)} */
-	@Test(expected = SoftException.class)
-	public void testCallable_Exception() throws Exception {
-		final Callable<Integer> callable = mock(Callable.class);
-		checking(new Expectations() {
-			{
-				one(callable).call();
-				will(throwException(new IOException()));
-			}
-		});
-		Thunks.from(callable).value();
-	}
+  /** Test method for {@link Thunks#from(Callable)} */
+  @Test(expected = SoftException.class)
+  public void testCallable_Exception() throws Exception {
+    final Callable<Integer> callable = mock(Callable.class);
+    checking(new Expectations() {
+      {
+        one(callable).call();
+        will(throwException(new IOException()));
+      }
+    });
+    Thunks.from(callable).value();
+  }
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.thunk.internal.CallableThunk#value()}
-	 * when callable throws an exception.
-	 */
-	@Test(expected = SoftException.class)
-	public void testCallableValue_Exception() {
-		Thunks.from(new Callable<String>() {
-			@Override
-			public String call() throws Exception {
-				throw new IOException();
-			}
-		}).value();
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.lang.thunk.internal.CallableThunk#value()}
+   * when callable throws an exception.
+   */
+  @Test(expected = SoftException.class)
+  public void testCallableValue_Exception() {
+    Thunks.from(new Callable<String>() {
+      @Override
+      public String call() throws Exception {
+        throw new IOException();
+      }
+    }).value();
+  }
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.lang.thunk.internal.CallableThunk#value()}
-	 * when call succeeds.
-	 */
-	@Test
-	public void testCallableValue_OK() {
-		assertEquals("Hello", Thunks.from(new Callable<String>() {
-			@Override
-			public String call() throws Exception {
-				return "Hello";
-			}
-		}).value());
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.lang.thunk.internal.CallableThunk#value()}
+   * when call succeeds.
+   */
+  @Test
+  public void testCallableValue_OK() {
+    assertEquals("Hello", Thunks.from(new Callable<String>() {
+      @Override
+      public String call() throws Exception {
+        return "Hello";
+      }
+    }).value());
+  }
 
-	/**
-	 * Test method for {@link Thunks#from(Runnable)}
-	 */
-	@Test
-	public void testRunnable() {
-		final Runnable runnable = mock(Runnable.class);
-		checking(new Expectations() {
-			{
-				one(runnable).run();
-			}
-		});
-		assertNull(Thunks.from(runnable).value());
-	}
+  /**
+   * Test method for {@link Thunks#from(Runnable)}
+   */
+  @Test
+  public void testRunnable() {
+    final Runnable runnable = mock(Runnable.class);
+    checking(new Expectations() {
+      {
+        one(runnable).run();
+      }
+    });
+    assertNull(Thunks.from(runnable).value());
+  }
 
-	/** Test method for {@link Thunks#currentDate()} */
-	@Test
-	public void testCurrentDate() throws Exception {
-		Date currentTime = Thunks.currentDate().value();
-		assertNotNull(currentTime);
-		assertNotSame(currentTime, Thunks.currentDate());
-	}
+  /** Test method for {@link Thunks#currentDate()} */
+  @Test
+  public void testCurrentDate() throws Exception {
+    Date currentTime = Thunks.currentDate().value();
+    assertNotNull(currentTime);
+    assertNotSame(currentTime, Thunks.currentDate());
+  }
 
-	/**
-	 * Test for {@link Thunks#value()}
-	 */
-	@Test
-	public void testValue() throws Exception {
-		assertEquals("Hello", Thunks.<String> value().apply(Prioritized.from(10, "Hello")));
-	}
+  /**
+   * Test for {@link Thunks#value()}
+   */
+  @Test
+  public void testValue() throws Exception {
+    assertEquals("Hello", Thunks.<String> value().apply(Prioritized.from(10, "Hello")));
+  }
 }

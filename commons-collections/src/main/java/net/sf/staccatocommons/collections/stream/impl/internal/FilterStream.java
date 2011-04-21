@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.Iterator;
@@ -29,29 +28,29 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  */
 public final class FilterStream<A> extends WrapperStream<A> {
-	private final Evaluable<? super A> predicate;
+  private final Evaluable<? super A> predicate;
 
-	/**
-	 * Creates a new {@link FilterStream}
-	 */
-	public FilterStream(@NonNull Stream<A> stream, @NonNull Evaluable<? super A> predicate) {
-		super(stream);
-		this.predicate = predicate;
-	}
+  /**
+   * Creates a new {@link FilterStream}
+   */
+  public FilterStream(@NonNull Stream<A> stream, @NonNull Evaluable<? super A> predicate) {
+    super(stream);
+    this.predicate = predicate;
+  }
 
-	public Thriterator<A> iterator() {
-		final Iterator<A> iter = getSource().iterator();
-		return Thriterators.from(new NextGetIterator<A>() {
-			protected boolean updateNext() {
-				while (iter.hasNext())
-					if (predicate.eval(setNext(iter.next())))
-						return true;
-				return false;
-			}
-		});
-	}
+  public Thriterator<A> iterator() {
+    final Iterator<A> iter = getSource().iterator();
+    return Thriterators.from(new NextGetIterator<A>() {
+      protected boolean updateNext() {
+        while (iter.hasNext())
+          if (predicate.eval(setNext(iter.next())))
+            return true;
+        return false;
+      }
+    });
+  }
 
-	public Stream<A> filter(Evaluable<? super A> predicate) {
-		return new FilterStream<A>(getSource(), Predicates.from(this.predicate).and(predicate));
-	}
+  public Stream<A> filter(Evaluable<? super A> predicate) {
+    return new FilterStream<A>(getSource(), Predicates.from(this.predicate).and(predicate));
+  }
 }

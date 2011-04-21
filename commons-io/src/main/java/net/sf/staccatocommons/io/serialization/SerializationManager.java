@@ -64,31 +64,31 @@ import org.apache.commons.lang.SerializationException;
 // for IO
 public interface SerializationManager {
 
-	/**
-	 * Writes the given <code>target</code> object to the given
-	 * <code>outputStream</code>.
-	 * 
-	 * This method does not close the outputStream
-	 * 
-	 * @param target
-	 * @param outputStream
-	 * @throws SerializationException
-	 */
-	void serialize(Object target, OutputStream outputStream) throws SerializationException;
+  /**
+   * Writes the given <code>target</code> object to the given
+   * <code>outputStream</code>.
+   * 
+   * This method does not close the outputStream
+   * 
+   * @param target
+   * @param outputStream
+   * @throws SerializationException
+   */
+  void serialize(Object target, OutputStream outputStream) throws SerializationException;
 
-	/**
-	 * This method does not close the inputStream
-	 * 
-	 * @param <T>
-	 * @param inputStream
-	 * @return
-	 * @throws SerializationException
-	 * @throws {@link ClassCastException}
-	 */
-	<T> T deserialize(InputStream inputStream) throws SerializationException;
+  /**
+   * This method does not close the inputStream
+   * 
+   * @param <T>
+   * @param inputStream
+   * @return
+   * @throws SerializationException
+   * @throws {@link ClassCastException}
+   */
+  <T> T deserialize(InputStream inputStream) throws SerializationException;
 
-	<T> T deserialize(File input);
+  <T> T deserialize(File input);
 
-	void serialize(Object target, File output);
+  void serialize(Object target, File output);
 
 }

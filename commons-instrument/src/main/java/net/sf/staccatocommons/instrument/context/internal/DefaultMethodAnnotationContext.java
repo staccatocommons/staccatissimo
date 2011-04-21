@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.context.internal;
 
 import javassist.ClassPool;
@@ -26,52 +25,51 @@ import org.slf4j.Logger;
  * @author flbulgarelli
  * 
  */
-public class DefaultMethodAnnotationContext extends AbstractAnnotationContext implements
-	MethodAnnotationContext {
+public class DefaultMethodAnnotationContext extends AbstractAnnotationContext implements MethodAnnotationContext {
 
-	private CtMethod method;
+  private CtMethod method;
 
-	/**
-	 * Creates a new {@link DefaultMethodAnnotationContext}
-	 */
-	public DefaultMethodAnnotationContext(ClassPool pool, Logger logger) {
-		super(pool, logger);
-	}
+  /**
+   * Creates a new {@link DefaultMethodAnnotationContext}
+   */
+  public DefaultMethodAnnotationContext(ClassPool pool, Logger logger) {
+    super(pool, logger);
+  }
 
-	/**
-	 * @return the method
-	 */
-	public CtMethod getMethod() {
-		return method;
-	}
+  /**
+   * @return the method
+   */
+  public CtMethod getMethod() {
+    return method;
+  }
 
-	/**
-	 * @param method
-	 *          the method to set
-	 */
-	public void setMethod(CtMethod method) {
-		this.method = method;
-	}
+  /**
+   * @param method
+   *          the method to set
+   */
+  public void setMethod(CtMethod method) {
+    this.method = method;
+  }
 
-	@Override
-	public String getReturnIdentifier() {
-		return "$_";
-	}
+  @Override
+  public String getReturnIdentifier() {
+    return "$_";
+  }
 
-	public CtClass getDeclaringClass() {
-		return getMethod().getDeclaringClass();
-	}
+  public CtClass getDeclaringClass() {
+    return getMethod().getDeclaringClass();
+  }
 
-	@Override
-	public boolean isVoid() {
-		try {
-			return getMethod().getReturnType().getName().equals("void");
-		} catch (NotFoundException e) {
-			return false;
-		}
-	}
+  @Override
+  public boolean isVoid() {
+    try {
+      return getMethod().getReturnType().getName().equals("void");
+    } catch (NotFoundException e) {
+      return false;
+    }
+  }
 
-	public CtClass getElementType() throws NotFoundException {
-		return getMethod().getReturnType();
-	}
+  public CtClass getElementType() throws NotFoundException {
+    return getMethod().getReturnType();
+  }
 }

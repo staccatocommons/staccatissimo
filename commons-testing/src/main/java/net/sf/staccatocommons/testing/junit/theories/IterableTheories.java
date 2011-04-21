@@ -19,16 +19,16 @@ import java.util.Iterator;
  */
 public abstract class IterableTheories extends IteratorTheories {
 
-	protected final Iterator<?> createOneElementIterator() {
-		return createOneElementIterable().iterator();
-	}
+  protected final Iterator<?> createOneElementIterator() {
+    return createOneElementIterable().iterator();
+  }
 
-	protected final Iterator<?> createTwoElementsIterator() {
-		return createTwoElementsIterable().iterator();
-	}
+  protected final Iterator<?> createTwoElementsIterator() {
+    return createTwoElementsIterable().iterator();
+  }
 
-	protected abstract Iterable<?> createOneElementIterable();
+  protected abstract Iterable<?> createOneElementIterable();
 
-	protected abstract Iterable<?> createTwoElementsIterable();
+  protected abstract Iterable<?> createTwoElementsIterable();
 
 }

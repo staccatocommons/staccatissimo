@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.handler;
 
 import java.lang.annotation.Annotation;
@@ -27,40 +26,40 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface ConstructorAnnotationHandler<A extends Annotation> extends AnnotationHandler<A> {
 
-	/**
-	 * Process an <code>annotation</code> discovered in a constructor by the
-	 * instrumenter, instrumenting the given <code>context</code> where the
-	 * annotation was found. This message is sent by the instrumenter before
-	 * discovering any argument annotation.
-	 * 
-	 * @param annotation
-	 *          the annotation to process
-	 * @param context
-	 *          the instrumentable context where the annotation was found
-	 * @throws CannotCompileException
-	 *           if compilation errors occur during instrumentation
-	 * @throws NotFoundException
-	 *           if any type needed by instrumentation was not found
-	 */
-	void preProcessAnnotatedConstructor(@NonNull A annotation,
-		@NonNull ConstructorAnnotationContext context) throws CannotCompileException, NotFoundException;
+  /**
+   * Process an <code>annotation</code> discovered in a constructor by the
+   * instrumenter, instrumenting the given <code>context</code> where the
+   * annotation was found. This message is sent by the instrumenter before
+   * discovering any argument annotation.
+   * 
+   * @param annotation
+   *          the annotation to process
+   * @param context
+   *          the instrumentable context where the annotation was found
+   * @throws CannotCompileException
+   *           if compilation errors occur during instrumentation
+   * @throws NotFoundException
+   *           if any type needed by instrumentation was not found
+   */
+  void preProcessAnnotatedConstructor(@NonNull A annotation, @NonNull ConstructorAnnotationContext context)
+    throws CannotCompileException, NotFoundException;
 
-	/**
-	 * Process an <code>annotation</code> discovered in a constructor by the
-	 * instrumenter, instrumenting the given <code>context</code> where the
-	 * annotation was found. This message is sent by the instrumenter after
-	 * discovering all arguments annotations.
-	 * 
-	 * @param annotation
-	 *          the annotation to process
-	 * @param context
-	 *          the instrumentable context where the annotation was found
-	 * @throws CannotCompileException
-	 *           if compilation errors occur during instrumentation
-	 * @throws NotFoundException
-	 *           if any type needed by instrumentation was not found
-	 */
-	void postProcessAnnotatedConstructor(@NonNull A annotation,
-		@NonNull ConstructorAnnotationContext context) throws CannotCompileException, NotFoundException;
+  /**
+   * Process an <code>annotation</code> discovered in a constructor by the
+   * instrumenter, instrumenting the given <code>context</code> where the
+   * annotation was found. This message is sent by the instrumenter after
+   * discovering all arguments annotations.
+   * 
+   * @param annotation
+   *          the annotation to process
+   * @param context
+   *          the instrumentable context where the annotation was found
+   * @throws CannotCompileException
+   *           if compilation errors occur during instrumentation
+   * @throws NotFoundException
+   *           if any type needed by instrumentation was not found
+   */
+  void postProcessAnnotatedConstructor(@NonNull A annotation, @NonNull ConstructorAnnotationContext context)
+    throws CannotCompileException, NotFoundException;
 
 }

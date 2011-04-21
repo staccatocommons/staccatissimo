@@ -34,76 +34,76 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public abstract class AbstractPredicate<T> implements Predicate<T> {
 
-	@Override
-	public abstract boolean eval(@NonNull T argument);
+  @Override
+  public abstract boolean eval(@NonNull T argument);
 
-	public Boolean apply(T arg) {
-		return eval(arg);
-	}
+  public Boolean apply(T arg) {
+    return eval(arg);
+  }
 
-	/**
-	 * @return a {@link AbstractPredicate} that negates this
-	 *         {@link AbstractPredicate}'s result. Non Null.
-	 */
-	@NonNull
-	public Predicate<T> not() {
-		final class Not extends AbstractPredicate<T> {
-			public boolean eval(T argument) {
-				return !AbstractPredicate.this.eval(argument);
-			}
+  /**
+   * @return a {@link AbstractPredicate} that negates this
+   *         {@link AbstractPredicate}'s result. Non Null.
+   */
+  @NonNull
+  public Predicate<T> not() {
+    final class Not extends AbstractPredicate<T> {
+      public boolean eval(T argument) {
+        return !AbstractPredicate.this.eval(argument);
+      }
 
-			@Override
-			public AbstractPredicate<T> not() {
-				return AbstractPredicate.this;
-			}
-		}
-		return new Not();
-	}
+      @Override
+      public AbstractPredicate<T> not() {
+        return AbstractPredicate.this;
+      }
+    }
+    return new Not();
+  }
 
-	/**
-	 * Returns a predicate that, performs a short-circuit logical-or between this
-	 * {@link AbstractPredicate}'s {@link #eval(Object)} and other
-	 * 
-	 * @param other
-	 *          another {@link Evaluable}. Non null.
-	 * @return A new predicate that performs the short circuited or between this
-	 *         and other when evaluated. Non Null
-	 */
-	@NonNull
-	public Predicate<T> or(@NonNull final Evaluable<? super T> other) {
-		final class Or extends AbstractPredicate<T> {
-			public boolean eval(T argument) {
-				return AbstractPredicate.this.eval(argument) || other.eval(argument);
-			}
-		}
-		return new Or();
-	}
+  /**
+   * Returns a predicate that, performs a short-circuit logical-or between this
+   * {@link AbstractPredicate}'s {@link #eval(Object)} and other
+   * 
+   * @param other
+   *          another {@link Evaluable}. Non null.
+   * @return A new predicate that performs the short circuited or between this
+   *         and other when evaluated. Non Null
+   */
+  @NonNull
+  public Predicate<T> or(@NonNull final Evaluable<? super T> other) {
+    final class Or extends AbstractPredicate<T> {
+      public boolean eval(T argument) {
+        return AbstractPredicate.this.eval(argument) || other.eval(argument);
+      }
+    }
+    return new Or();
+  }
 
-	/**
-	 * Returns a predicate that performs a short-circuit logical-and between this
-	 * {@link AbstractPredicate}'s {@link #eval(Object)} and other
-	 * 
-	 * @param other
-	 *          another {@link Evaluable}. Non null.
-	 * @return A new predicate that performs the short circuited logical-and
-	 *         between this and other when evaluated. Non Null
-	 */
-	@NonNull
-	public Predicate<T> and(@NonNull final Evaluable<? super T> other) {
-		final class And extends AbstractPredicate<T> {
-			public boolean eval(T argument) {
-				return AbstractPredicate.this.eval(argument) && other.eval(argument);
-			}
-		}
-		return new And();
-	}
+  /**
+   * Returns a predicate that performs a short-circuit logical-and between this
+   * {@link AbstractPredicate}'s {@link #eval(Object)} and other
+   * 
+   * @param other
+   *          another {@link Evaluable}. Non null.
+   * @return A new predicate that performs the short circuited logical-and
+   *         between this and other when evaluated. Non Null
+   */
+  @NonNull
+  public Predicate<T> and(@NonNull final Evaluable<? super T> other) {
+    final class And extends AbstractPredicate<T> {
+      public boolean eval(T argument) {
+        return AbstractPredicate.this.eval(argument) && other.eval(argument);
+      }
+    }
+    return new And();
+  }
 
-	public Predicate<T> nullSafe() {
-		return Predicates.<T> null_().or(this);
-	}
+  public Predicate<T> nullSafe() {
+    return Predicates.<T> null_().or(this);
+  }
 
-	public String toString() {
-		return "Predicate";
-	}
+  public String toString() {
+    return "Predicate";
+  }
 
 }

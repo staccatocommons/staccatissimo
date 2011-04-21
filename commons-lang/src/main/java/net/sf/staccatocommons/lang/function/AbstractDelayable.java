@@ -24,24 +24,24 @@ import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
  */
 public abstract class AbstractDelayable<A, B> implements Applicable<A, B>, Delayable<A, B> {
 
-	@Override
-	public Thunk<B> delayed(final A arg) {
-		return new Thunk<B>() {
-			public B value() {
-				return AbstractDelayable.this.apply(arg);
-			}
-		};
-	}
+  @Override
+  public Thunk<B> delayed(final A arg) {
+    return new Thunk<B>() {
+      public B value() {
+        return AbstractDelayable.this.apply(arg);
+      }
+    };
+  }
 
-	@NonNull
-	@ForceRestrictions
-	@Override
-	public Thunk<B> delayedValue(@NonNull final Thunk<? extends A> thunk) {
-		return new Thunk<B>() {
-			public B value() {
-				return apply(thunk.value());
-			}
-		};
-	}
+  @NonNull
+  @ForceRestrictions
+  @Override
+  public Thunk<B> delayedValue(@NonNull final Thunk<? extends A> thunk) {
+    return new Thunk<B>() {
+      public B value() {
+        return apply(thunk.value());
+      }
+    };
+  }
 
 }

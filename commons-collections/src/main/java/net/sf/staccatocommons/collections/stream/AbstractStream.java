@@ -88,539 +88,556 @@ import org.apache.commons.lang.StringUtils;
  */
 public abstract class AbstractStream<A> implements Stream<A> {
 
-	protected static final Validate<NoSuchElementException> validateElement = Validate
-		.throwing(NoSuchElementException.class);
-
-	@Override
-	public int size() {
-		int size = 0;
-		Thriter<A> iter = this.iterator();
-		while (iter.hasNext()) {
-			iter.advanceNext();
-			size++;
-		}
-		return size;
-	}
-
-	@Override
-	public boolean isEmpty() {
-		return iterator().isEmpty();
-	}
-
-	@Override
-	public boolean contains(A element) {
-		return IterablesInternal.containsInternal(this, element);
-	}
-
-	@Override
-	public Stream<A> filter(final Evaluable<? super A> predicate) {
-		return new FilterStream<A>(this, predicate);
-	}
-
-	@Override
-	public Stream<A> takeWhile(final Evaluable<? super A> predicate) {
-		return new TakeWhileStream<A>(this, predicate);
-	}
-
-	@Override
-	public Stream<A> take(@NotNegative final int amountOfElements) {
-		return new TakeStream<A>(this, amountOfElements);
-	}
-
-	public Stream<A> dropWhile(Evaluable<? super A> predicate) {
-		return new DropWhileStream<A>(this, predicate);
-	}
-
-	public Stream<A> drop(@NotNegative int amountOfElements) {
-		return new DropStream<A>(this, amountOfElements);
-	}
-
-	@Override
-	public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
-		validateElement.that(!isEmpty(), "Can not reduce an empty stream");
-		return Iterables.reduce(this, function);
-	}
-
-	@Override
-	public <O> O fold(O initial, Applicable2<? super O, ? super A, ? extends O> function) {
-		return Iterables.fold(this, initial, function);
-	}
-
-	@Override
-	public A any() {
-		return Iterables.any(this);
-	}
-
-	@Override
-	public Option<A> anyOrNone() {
-		return Iterables.anyOrNone(this);
-	}
-
-	@Override
-	public A anyOrNull() {
-		return anyOrNone().valueOrNull();
-	}
-
-	@Override
-	public A anyOrElse(Thunk<A> thunk) {
-		return anyOrNone().valueOrElse(thunk);
-	}
-
-	@Override
-	public A anyOrElse(A value) {
-		return anyOrNone().valueOrElse(value);
-	}
-
-	@Override
-	public A find(Evaluable<? super A> predicate) {
-		return Iterables.find(this, predicate);
-	}
-
-	@Override
-	public Option<A> findOrNone(Evaluable<? super A> predicate) {
-		return Iterables.findOrNone(this, predicate);
-	}
-
-	@Override
-	public A findOrNull(Evaluable<? super A> predicate) {
-		return findOrNone(predicate).valueOrNull();
-	}
-
-	@Override
-	public A findOrElse(Evaluable<? super A> predicate, Thunk<? extends A> thunk) {
-		return findOrNone(predicate).valueOrElse(thunk);
-	}
-
-	@Override
-	public boolean all(Evaluable<? super A> predicate) {
-		return Iterables.all(this, predicate);
-	}
-
-	@Override
-	public boolean allEquiv() {
-		return Iterables.allEqual(this);
-	}
-
-	@Override
-	public boolean allEquivBy(Evaluable2<? super A, ? super A> equivTest) {
-		return Iterables.allEquivBy(this, equivTest);
-	}
-
-	@Override
-	public boolean any(Evaluable<? super A> predicate) {
-		return Iterables.any(this, predicate);
-	}
-
-	@Override
-	public <B> Stream<B> map(final Function<? super A, ? extends B> function) {
-		return new MapStream<A, B>(this, function);
-	}
-
-	@Override
-	public <B> Stream<B> flatMap(final Function<? super A, ? extends Iterable<? extends B>> function) {
-		return new FlatMapStream<A, B>(this, function);
-	}
-
-	@Override
-	public Stream<A> append(final Iterable<A> other) {
-		return new AppendIterableStream<A>(this, other);
-	}
-
-	public Stream<A> appendUndefined() {
-		return append(Streams.<A> undefined());
-	}
-
-	@Override
-	public A first() {
-		return get(0);
-	}
-
-	@Override
-	public A second() {
-		return get(1);
-	}
-
-	@Override
-	public A third() {
-		return get(2);
-	}
-
-	@Override
-	public A last() {
-		return get(size() - 1);
-	}
-
-	@Override
-	public A get(int n) {
-		Thriterator<A> iter = this.iterator();
-		for (int i = 0; i <= n; i++)
-			try {
-				iter.advanceNext();
-			} catch (NoSuchElementException e) {
-				throw new IndexOutOfBoundsException("At " + n);
-			}
-		return iter.current();
-	}
-
-	@Override
-	public int indexOf(A element) {
-		return Iterables.indexOf(this, element);
-	}
-
-	@Override
-	public final int positionOf(A element) {
-		int index = indexOf(element);
-		if (index == -1)
-			throw new NoSuchElementException(element.toString());
-		return index;
-	}
-
-	@Override
-	public boolean isBefore(A previous, A next) {
-		return Iterables.isBefore(this, previous, next);
-	}
-
-	@Override
-	public Set<A> toSet() {
-		return Iterables.toSet(this);
-	}
-
-	@Override
-	public List<A> toList() {
-		return Iterables.toList(this);
-	}
-
-	public Stream<A> force() {
-		return new ListStream<A>(toList()) {
-			public List<A> toList() {
-				return Collections.unmodifiableList(getList());
-			}
-		};
-	}
-
-	public Stream<A> memorize() {
-		return new MemorizedStream<A>(this);
-	}
-
-	public Stream<A> toEmptyAware() {
-		return new IteratorStream<A>(iterator());
-	}
-
-	@Override
-	public A[] toArray(Class<? super A> clazz) {
-		return toArray(clazz, toList());
-	}
-
-	protected A[] toArray(Class<? super A> clazz, Collection<A> readOnlyColView) {
-		return readOnlyColView.toArray((A[]) Array.newInstance(clazz, readOnlyColView.size()));
-	}
-
-	@Override
-	@ForceRestrictions
-	public String joinStrings(@NonNull String separator) {
-		return StringUtils.join(iterator(), separator);
-	}
-
-	@Override
-	public Pair<List<A>, List<A>> partition(Evaluable<? super A> predicate) {
-		return Iterables.partition(this, predicate);
-	}
-
-	@Override
-	public final Pair<Stream<A>, Stream<A>> streamPartition(Evaluable<? super A> predicate) {
-		Pair<List<A>, List<A>> partition = partition(predicate);
-		return _(Streams.from(partition._0()), Streams.from(partition._1()));
-	}
-
-	@Override
-	public final boolean equiv(A... elements) {
-		return equiv(Arrays.asList(elements));
-	}
-
-	@Override
-	public boolean equiv(Iterable<? extends A> other) {
-		return Iterables.equiv(this, other);
-	}
-
-	@Override
-	public boolean equivBy(Evaluable2<A, A> equalty, Iterable<? extends A> other) {
-		return Iterables.equivBy(this, other, equalty);
-	}
-
-	@Override
-	public final boolean equivBy(Evaluable2<A, A> equalityTest, A... elements) {
-		return equivBy(equalityTest, Arrays.asList(elements));
-	}
-
-	@Override
-	public final <B> boolean equivOn(Applicable<? super A, ? extends B> function,
-		Iterable<? extends A> iterable) {
-		return equivBy(Equiv.on(function), iterable);
-	}
-
-	@Override
-	public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, A... elements) {
-		return equivOn(function, Arrays.asList(elements));
-	}
-
-	@Override
-	public <B> Stream<B> transform(final Applicable<Stream<A>, ? extends Stream<B>> function) {
-		return new TransformStream<A, B>(this, function);
-	}
-
-	/**
-	 * <pre>
-	 * intersperse _   []      = []
-	 * intersperse _   [x]     = [x]
-	 * intersperse sep (x:xs)  = x : sep : intersperse sep xs
-	 * </pre>
-	 * 
-	 */
-	@Override
-	public Stream<A> intersperse(final A sep) {
-		return transform(new AbstractDelayedDeconsApplicable<A, A>() {
-			public Stream<A> apply(Thunk<A> head, Stream<A> tail) {
-				if (tail.isEmpty())
-					return cons(head);
-				return cons(head, cons(sep, tail.intersperse(sep)));
-			}
-		});
-	}
-
-	public Stream<A> append(A element) {
-		return new AppendStream<A>(this, element);
-	}
-
-	public Stream<A> append(Thunk<A> element) {
-		return new DelayedAppendStream<A>(this, element);
-	}
-
-	public Stream<A> prepend(A element) {
-		return new PrependStream<A>(element, this);
-	}
-
-	public Stream<A> prepend(Thunk<A> element) {
-		return new DelayedPrependStream<A>(element, this);
-	}
-
-	public <B> Stream<B> transform(final DeconsApplicable<A, B> function) {
-		return new DeconsTransformStream<B, A>(this, function);
-	}
-
-	public <B> Stream<B> transform(final DelayedDeconsApplicable<A, B> function) {
-		return new DelayedDeconsTransformStream<A, B>(this, function);
-	}
-
-	@Override
-	public <B> Stream<Pair<A, B>> zip(Iterable<B> iterable) {
-		return zip(iterable, ToPair.<A, B> getInstance());
-	}
-
-	public Pair<A, Stream<A>> decons() {
-		Iterator<A> iter = iterator();
-		validateElement.that(iter.hasNext(), "Empty streams have no head");
-		return _(iter.next(), Streams.from(iter));
-	}
-
-	public Pair<Thunk<A>, Stream<A>> delayedDecons() {
-		Thriterator<A> iter = iterator();
-		validateElement.that(iter.hasNext(), "Empty streams have no head");
-		return _(iter.delayedNext(), Streams.from(iter));
-	}
-
-	public Stream<A> tail() {
-		validateElement.that(!isEmpty(), "Empty streams have not tail");
-		return drop(1);
-	}
-
-	public A head() {
-		validateElement.that(!isEmpty(), "Empty streams have not head");
-		return first();
-	}
-
-	@ForceRestrictions
-	public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable,
-		@NonNull final Function2<A, B, C> function) {
-		return new ZipStream<C, A, B>(this, iterable, function);
-	}
-
-	@Override
-	public A sum() {
-		return Iterables.sum(this);
-	}
-
-	@Override
-	public A sum(NumberType<A> numberType) {
-		return Iterables.sum(this, numberType);
-	}
-
-	@Override
-	public A product() {
-		return Iterables.product(this);
-	}
-
-	@Override
-	public A product(NumberType<A> numberType) {
-		return Iterables.product(this, numberType);
-	}
-
-	public A average() {
-		return average(numberType());
-	}
-
-	public A average(final NumberType<A> numberType) {
-		validateElement.that(!isEmpty(), "Can not get average on an empty stream");
-		class Ref {
-			A val = numberType.zero();
-		}
-		final Ref size = new Ref();
-		return numberType.divide(fold(numberType.zero(), new AbstractFunction2<A, A, A>() {
-			public A apply(A arg0, A arg1) {
-				size.val = numberType.increment(size.val);
-				return numberType.add(arg0, arg1);
-			}
-		}), size.val);
-	}
-
-	@Override
-	public A maximum() {
-		return maximumBy(natural());
-	}
-
-	@Override
-	public A minimum() {
-		return minimumBy(natural());
-	}
-
-	@Override
-	public A maximumBy(Comparator<? super A> comparator) {
-		return reduce(max(comparator));
-	}
-
-	@Override
-	public A minimumBy(Comparator<? super A> comparator) {
-		return reduce(min(comparator));
-	}
-
-	@Override
-	public final <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function)
-		throws NoSuchElementException {
-		return maximumBy(Compare.on(function));
-	}
-
-	@Override
-	public final <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function)
-		throws NoSuchElementException {
-		return minimumBy(Compare.on(function));
-	}
-
-	public Stream<A> sort() {
-		return sortBy(natural());
-	}
-
-	public Stream<A> sortBy(Comparator<A> comparator) {
-		return new SortedStream<A>(this, comparator);
-	}
-
-	public final <B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function) {
-		return sortBy(Compare.on(function));
-	}
-
-	private Comparator<A> natural() {
-		return (Comparator<A>) Compare.<Comparable> natural();
-	}
-
-	public NumberType<A> numberType() {
-		throw new ClassCastException("Source can not be casted to NumerTypeAware");
-	}
-
-	public Stream<A> reverse() {
-		if (this.isEmpty())
-			return Streams.empty();
-		LinkedList<A> reversedList = new LinkedList<A>();
-		for (A element : this)
-			reversedList.addFirst(element);
-		return Streams.from((List<A>) reversedList);
-	}
-
-	/***
-	 * @param pred
-	 * @return a new {@link Stream}. Although the resulting stream itself is lazy,
-	 *         its stream elements are not.
-	 */
-	public Stream<Stream<A>> groupBy(final Evaluable2<A, A> pred) {
-		return new GroupByStream<A>(this, pred);
-	}
-
-	public <B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other) {
-		return cross(Streams.from(other));
-	}
-
-	// this >>= (\x -> other >>= (\y -> return (x,y)))
-	@ForceRestrictions
-	public <B> Stream<Pair<A, B>> cross(@NonNull final Stream<B> other) {
-		return transform(new AbstractFunction<Stream<A>, Stream<Pair<A, B>>>() {
-			public Stream<Pair<A, B>> apply(Stream<A> stram) {
-				return flatMap(new AbstractFunction<A, Stream<Pair<A, B>>>() {
-					public Stream<Pair<A, B>> apply(final A x) {
-						return other.flatMap(new AbstractFunction<B, Stream<Pair<A, B>>>() {
-							public Stream<Pair<A, B>> apply(B y) {
-								return cons(_(x, y));
-							}
-						});
-					}
-				});
-			}
-		});
-	}
-
-	// TODO
-	<B> Stream<Pair<A, B>> join(Stream<B> other, final Evaluable2<A, B> predicate) {
-		return cross(other).filter(new AbstractPredicate<Pair<A, B>>() {
-			public boolean eval(Pair<A, B> argument) {
-				return predicate.eval(argument._0(), argument._1());
-			}
-		});
-	}
-
-	@ForceRestrictions
-	public Stream<Stream<A>> fullCross(@NonNull Stream<Stream<A>> other) {
-		Ensure.that().isNotEmpty("other", (EmptyAware) other);
-		return fcross(other.prepend(this));
-	}
-
-	// fcross [xs,ys] = xs >>= \x -> ys >>= \y -> return [x,y]
-	// fcross (xs:xss) = xs >>= \x -> (fcross xss) >>= \ys -> return (x:ys)
-	private static <A> Stream<Stream<A>> fcross(Stream<Stream<A>> other) {
-		return other.transform(new AbstractFunction<Stream<Stream<A>>, Stream<Stream<A>>>() {
-			public Stream<Stream<A>> apply(Stream<Stream<A>> _xss) {
-				final Stream<Stream<A>> xss = _xss.memorize();
-				if (xss.size() == 2)
-					return xss.first().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
-						public Stream<Stream<A>> apply(final A x) {
-							return xss.second().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
-								public Stream<Stream<A>> apply(A y) {
-									return cons(cons(x, y));
-								}
-							});
-						}
-					});
-
-				return xss.head().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
-					public Stream<Stream<A>> apply(final A x) {
-						return fcross(xss.tail()).flatMap(new AbstractFunction<Stream<A>, Stream<Stream<A>>>() {
-							public Stream<Stream<A>> apply(Stream<A> ys) {
-								return cons(cons(x, ys));
-							}
-						});
-					}
-				});
-			}
-		});
-	}
-
-	public String toString() {
-		return "[" + joinStrings(",") + "]";
-	}
+  protected static final Validate<NoSuchElementException> validateElement = Validate
+    .throwing(NoSuchElementException.class);
+
+  @Override
+  public int size() {
+    int size = 0;
+    Thriter<A> iter = this.iterator();
+    while (iter.hasNext()) {
+      iter.advanceNext();
+      size++;
+    }
+    return size;
+  }
+
+  @Override
+  public boolean isEmpty() {
+    return iterator().isEmpty();
+  }
+
+  @Override
+  public boolean contains(A element) {
+    return IterablesInternal.containsInternal(this, element);
+  }
+
+  @Override
+  public Stream<A> filter(final Evaluable<? super A> predicate) {
+    return new FilterStream<A>(this, predicate);
+  }
+
+  @Override
+  public Stream<A> takeWhile(final Evaluable<? super A> predicate) {
+    return new TakeWhileStream<A>(this, predicate);
+  }
+
+  @Override
+  public Stream<A> take(@NotNegative final int amountOfElements) {
+    return new TakeStream<A>(this, amountOfElements);
+  }
+
+  @Override
+  public Stream<A> dropWhile(Evaluable<? super A> predicate) {
+    return new DropWhileStream<A>(this, predicate);
+  }
+
+  @Override
+  public Stream<A> drop(@NotNegative int amountOfElements) {
+    return new DropStream<A>(this, amountOfElements);
+  }
+
+  @Override
+  public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
+    validateElement.that(!isEmpty(), "Can not reduce an empty stream");
+    return Iterables.reduce(this, function);
+  }
+
+  @Override
+  public <O> O fold(O initial, Applicable2<? super O, ? super A, ? extends O> function) {
+    return Iterables.fold(this, initial, function);
+  }
+
+  @Override
+  public A any() {
+    return Iterables.any(this);
+  }
+
+  @Override
+  public Option<A> anyOrNone() {
+    return Iterables.anyOrNone(this);
+  }
+
+  @Override
+  public A anyOrNull() {
+    return anyOrNone().valueOrNull();
+  }
+
+  @Override
+  public A anyOrElse(Thunk<A> thunk) {
+    return anyOrNone().valueOrElse(thunk);
+  }
+
+  @Override
+  public A anyOrElse(A value) {
+    return anyOrNone().valueOrElse(value);
+  }
+
+  @Override
+  public A find(Evaluable<? super A> predicate) {
+    return Iterables.find(this, predicate);
+  }
+
+  @Override
+  public Option<A> findOrNone(Evaluable<? super A> predicate) {
+    return Iterables.findOrNone(this, predicate);
+  }
+
+  @Override
+  public A findOrNull(Evaluable<? super A> predicate) {
+    return findOrNone(predicate).valueOrNull();
+  }
+
+  @Override
+  public A findOrElse(Evaluable<? super A> predicate, Thunk<? extends A> thunk) {
+    return findOrNone(predicate).valueOrElse(thunk);
+  }
+
+  @Override
+  public boolean all(Evaluable<? super A> predicate) {
+    return Iterables.all(this, predicate);
+  }
+
+  @Override
+  public boolean allEquiv() {
+    return Iterables.allEqual(this);
+  }
+
+  @Override
+  public boolean allEquivBy(Evaluable2<? super A, ? super A> equivTest) {
+    return Iterables.allEquivBy(this, equivTest);
+  }
+
+  @Override
+  public boolean any(Evaluable<? super A> predicate) {
+    return Iterables.any(this, predicate);
+  }
+
+  @Override
+  public <B> Stream<B> map(final Function<? super A, ? extends B> function) {
+    return new MapStream<A, B>(this, function);
+  }
+
+  @Override
+  public <B> Stream<B> flatMap(final Function<? super A, ? extends Iterable<? extends B>> function) {
+    return new FlatMapStream<A, B>(this, function);
+  }
+
+  @Override
+  public Stream<A> append(final Iterable<A> other) {
+    return new AppendIterableStream<A>(this, other);
+  }
+
+  public Stream<A> appendUndefined() {
+    return append(Streams.<A> undefined());
+  }
+
+  @Override
+  public A first() {
+    return get(0);
+  }
+
+  @Override
+  public A second() {
+    return get(1);
+  }
+
+  @Override
+  public A third() {
+    return get(2);
+  }
+
+  @Override
+  public A last() {
+    return get(size() - 1);
+  }
+
+  @Override
+  public A get(int n) {
+    Thriterator<A> iter = this.iterator();
+    for (int i = 0; i <= n; i++)
+      try {
+        iter.advanceNext();
+      } catch (NoSuchElementException e) {
+        throw new IndexOutOfBoundsException("At " + n);
+      }
+    return iter.current();
+  }
+
+  @Override
+  public int indexOf(A element) {
+    return Iterables.indexOf(this, element);
+  }
+
+  @Override
+  public final int positionOf(A element) {
+    int index = indexOf(element);
+    if (index == -1)
+      throw new NoSuchElementException(element.toString());
+    return index;
+  }
+
+  @Override
+  public boolean isBefore(A previous, A next) {
+    return Iterables.isBefore(this, previous, next);
+  }
+
+  @Override
+  public Set<A> toSet() {
+    return Iterables.toSet(this);
+  }
+
+  @Override
+  public List<A> toList() {
+    return Iterables.toList(this);
+  }
+
+  @Override
+  public Stream<A> force() {
+    return new ListStream<A>(toList()) {
+      @Override
+      public List<A> toList() {
+        return Collections.unmodifiableList(getList());
+      }
+    };
+  }
+
+  @Override
+  public Stream<A> memorize() {
+    return new MemorizedStream<A>(this);
+  }
+
+  @Override
+  public Stream<A> toEmptyAware() {
+    return new IteratorStream<A>(iterator());
+  }
+
+  @Override
+  public A[] toArray(Class<? super A> clazz) {
+    return toArray(clazz, toList());
+  }
+
+  protected A[] toArray(Class<? super A> clazz, Collection<A> readOnlyColView) {
+    return readOnlyColView.toArray((A[]) Array.newInstance(clazz, readOnlyColView.size()));
+  }
+
+  @Override
+  @ForceRestrictions
+  public String joinStrings(@NonNull String separator) {
+    return StringUtils.join(iterator(), separator);
+  }
+
+  @Override
+  public Pair<List<A>, List<A>> partition(Evaluable<? super A> predicate) {
+    return Iterables.partition(this, predicate);
+  }
+
+  @Override
+  public final Pair<Stream<A>, Stream<A>> streamPartition(Evaluable<? super A> predicate) {
+    Pair<List<A>, List<A>> partition = partition(predicate);
+    return _(Streams.from(partition._0()), Streams.from(partition._1()));
+  }
+
+  @Override
+  public final boolean equiv(A... elements) {
+    return equiv(Arrays.asList(elements));
+  }
+
+  @Override
+  public boolean equiv(Iterable<? extends A> other) {
+    return Iterables.equiv(this, other);
+  }
+
+  @Override
+  public boolean equivBy(Evaluable2<A, A> equalty, Iterable<? extends A> other) {
+    return Iterables.equivBy(this, other, equalty);
+  }
+
+  @Override
+  public final boolean equivBy(Evaluable2<A, A> equalityTest, A... elements) {
+    return equivBy(equalityTest, Arrays.asList(elements));
+  }
+
+  @Override
+  public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, Iterable<? extends A> iterable) {
+    return equivBy(Equiv.on(function), iterable);
+  }
+
+  @Override
+  public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, A... elements) {
+    return equivOn(function, Arrays.asList(elements));
+  }
+
+  @Override
+  public <B> Stream<B> transform(final Applicable<Stream<A>, ? extends Stream<B>> function) {
+    return new TransformStream<A, B>(this, function);
+  }
+
+  /**
+   * <pre>
+   * intersperse _   []      = []
+   * intersperse _   [x]     = [x]
+   * intersperse sep (x:xs)  = x : sep : intersperse sep xs
+   * </pre>
+   * 
+   */
+  @Override
+  public Stream<A> intersperse(final A sep) {
+    return transform(new AbstractDelayedDeconsApplicable<A, A>() {
+      public Stream<A> apply(Thunk<A> head, Stream<A> tail) {
+        if (tail.isEmpty())
+          return cons(head);
+        return cons(head, cons(sep, tail.intersperse(sep)));
+      }
+    });
+  }
+
+  @Override
+  public Stream<A> append(A element) {
+    return new AppendStream<A>(this, element);
+  }
+
+  @Override
+  public Stream<A> append(Thunk<A> element) {
+    return new DelayedAppendStream<A>(this, element);
+  }
+
+  @Override
+  public Stream<A> prepend(A element) {
+    return new PrependStream<A>(element, this);
+  }
+
+  @Override
+  public Stream<A> prepend(Thunk<A> element) {
+    return new DelayedPrependStream<A>(element, this);
+  }
+
+  @Override
+  public <B> Stream<B> transform(final DeconsApplicable<A, B> function) {
+    return new DeconsTransformStream<B, A>(this, function);
+  }
+
+  @Override
+  public <B> Stream<B> transform(final DelayedDeconsApplicable<A, B> function) {
+    return new DelayedDeconsTransformStream<A, B>(this, function);
+  }
+
+  @Override
+  public <B> Stream<Pair<A, B>> zip(Iterable<B> iterable) {
+    return zip(iterable, ToPair.<A, B> getInstance());
+  }
+
+  @Override
+  public Pair<A, Stream<A>> decons() {
+    Iterator<A> iter = iterator();
+    validateElement.that(iter.hasNext(), "Empty streams have no head");
+    return _(iter.next(), Streams.from(iter));
+  }
+
+  @Override
+  public Pair<Thunk<A>, Stream<A>> delayedDecons() {
+    Thriterator<A> iter = iterator();
+    validateElement.that(iter.hasNext(), "Empty streams have no head");
+    return _(iter.delayedNext(), Streams.from(iter));
+  }
+
+  @Override
+  public Stream<A> tail() {
+    validateElement.that(!isEmpty(), "Empty streams have not tail");
+    return drop(1);
+  }
+
+  @Override
+  public A head() {
+    validateElement.that(!isEmpty(), "Empty streams have not head");
+    return first();
+  }
+
+  @ForceRestrictions
+  public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable, @NonNull final Function2<A, B, C> function) {
+    return new ZipStream<C, A, B>(this, iterable, function);
+  }
+
+  @Override
+  public A sum() {
+    return Iterables.sum(this);
+  }
+
+  @Override
+  public A sum(NumberType<A> numberType) {
+    return Iterables.sum(this, numberType);
+  }
+
+  @Override
+  public A product() {
+    return Iterables.product(this);
+  }
+
+  @Override
+  public A product(NumberType<A> numberType) {
+    return Iterables.product(this, numberType);
+  }
+
+  @Override
+  public A average() {
+    return average(numberType());
+  }
+
+  @Override
+  public A average(final NumberType<A> numberType) {
+    validateElement.that(!isEmpty(), "Can not get average on an empty stream");
+    class Ref {
+      A val = numberType.zero();
+    }
+    final Ref size = new Ref();
+    return numberType.divide(fold(numberType.zero(), new AbstractFunction2<A, A, A>() {
+      public A apply(A arg0, A arg1) {
+        size.val = numberType.increment(size.val);
+        return numberType.add(arg0, arg1);
+      }
+    }), size.val);
+  }
+
+  @Override
+  public A maximum() {
+    return maximumBy(natural());
+  }
+
+  @Override
+  public A minimum() {
+    return minimumBy(natural());
+  }
+
+  @Override
+  public A maximumBy(Comparator<? super A> comparator) {
+    return reduce(max(comparator));
+  }
+
+  @Override
+  public A minimumBy(Comparator<? super A> comparator) {
+    return reduce(min(comparator));
+  }
+
+  @Override
+  public final <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function) throws NoSuchElementException {
+    return maximumBy(Compare.on(function));
+  }
+
+  @Override
+  public final <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function) throws NoSuchElementException {
+    return minimumBy(Compare.on(function));
+  }
+
+  public Stream<A> sort() {
+    return sortBy(natural());
+  }
+
+  public Stream<A> sortBy(Comparator<A> comparator) {
+    return new SortedStream<A>(this, comparator);
+  }
+
+  public final <B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function) {
+    return sortBy(Compare.on(function));
+  }
+
+  private Comparator<A> natural() {
+    return (Comparator<A>) Compare.<Comparable> natural();
+  }
+
+  @Override
+  public NumberType<A> numberType() {
+    throw new ClassCastException("Source can not be casted to NumerTypeAware");
+  }
+
+  public Stream<A> reverse() {
+    if (this.isEmpty())
+      return Streams.empty();
+    LinkedList<A> reversedList = new LinkedList<A>();
+    for (A element : this)
+      reversedList.addFirst(element);
+    return Streams.from((List<A>) reversedList);
+  }
+
+  /***
+   * @param pred
+   * @return a new {@link Stream}. Although the resulting stream itself is lazy,
+   *         its stream elements are not.
+   */
+  public Stream<Stream<A>> groupBy(final Evaluable2<A, A> pred) {
+    return new GroupByStream<A>(this, pred);
+  }
+
+  public <B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other) {
+    return cross(Streams.from(other));
+  }
+
+  // this >>= (\x -> other >>= (\y -> return (x,y)))
+  @ForceRestrictions
+  public <B> Stream<Pair<A, B>> cross(@NonNull final Stream<B> other) {
+    return transform(new AbstractFunction<Stream<A>, Stream<Pair<A, B>>>() {
+      public Stream<Pair<A, B>> apply(Stream<A> stram) {
+        return flatMap(new AbstractFunction<A, Stream<Pair<A, B>>>() {
+          public Stream<Pair<A, B>> apply(final A x) {
+            return other.flatMap(new AbstractFunction<B, Stream<Pair<A, B>>>() {
+              public Stream<Pair<A, B>> apply(B y) {
+                return cons(_(x, y));
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
+  // TODO
+  <B> Stream<Pair<A, B>> join(Stream<B> other, final Evaluable2<A, B> predicate) {
+    return cross(other).filter(new AbstractPredicate<Pair<A, B>>() {
+      @Override
+      public boolean eval(Pair<A, B> argument) {
+        return predicate.eval(argument._0(), argument._1());
+      }
+    });
+  }
+
+  @ForceRestrictions
+  public Stream<Stream<A>> fullCross(@NonNull Stream<Stream<A>> other) {
+    Ensure.that().isNotEmpty("other", (EmptyAware) other);
+    return fcross(other.prepend(this));
+  }
+
+  // fcross [xs,ys] = xs >>= \x -> ys >>= \y -> return [x,y]
+  // fcross (xs:xss) = xs >>= \x -> (fcross xss) >>= \ys -> return (x:ys)
+  private static <A> Stream<Stream<A>> fcross(Stream<Stream<A>> other) {
+    return other.transform(new AbstractFunction<Stream<Stream<A>>, Stream<Stream<A>>>() {
+      public Stream<Stream<A>> apply(Stream<Stream<A>> _xss) {
+        final Stream<Stream<A>> xss = _xss.memorize();
+        if (xss.size() == 2)
+          return xss.first().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
+            public Stream<Stream<A>> apply(final A x) {
+              return xss.second().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
+                public Stream<Stream<A>> apply(A y) {
+                  return cons(cons(x, y));
+                }
+              });
+            }
+          });
+
+        return xss.head().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
+          public Stream<Stream<A>> apply(final A x) {
+            return fcross(xss.tail()).flatMap(new AbstractFunction<Stream<A>, Stream<Stream<A>>>() {
+              public Stream<Stream<A>> apply(Stream<A> ys) {
+                return cons(cons(x, ys));
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
+  @Override
+  public String toString() {
+    return "[" + joinStrings(",") + "]";
+  }
 
 }

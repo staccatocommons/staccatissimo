@@ -23,12 +23,12 @@ import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
  */
 public class MemorizedIteratorUnitTest extends IterableTheories {
 
-	protected Iterable<?> createTwoElementsIterable() {
-		return new MemorizedStream(Streams.from(Arrays.asList(10, 20).iterator()));
-	}
+  protected Iterable<?> createTwoElementsIterable() {
+    return new MemorizedStream(Streams.from(Arrays.asList(10, 20).iterator()));
+  }
 
-	protected Iterable<?> createOneElementIterable() {
-		return new MemorizedStream(Streams.cons(10));
-	}
+  protected Iterable<?> createOneElementIterable() {
+    return new MemorizedStream(Streams.cons(10));
+  }
 
 }

@@ -35,30 +35,30 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 @Applicative
 public interface Delayable3<A, B, C, D> {
 
-	/**
-	 * Asynchronously applies this {@link Delayable3}, by returning a
-	 * {@link Thunk} that will perform the actual transformation each time it is
-	 * evaluated.
-	 * 
-	 * @param arg0
-	 * @param arg1
-	 * @param arg2
-	 * @return a new {@link Thunk}.
-	 */
-	@NonNull
-	Thunk<D> delayed(final A arg0, final B arg1, final C arg2);
+  /**
+   * Asynchronously applies this {@link Delayable3}, by returning a
+   * {@link Thunk} that will perform the actual transformation each time it is
+   * evaluated.
+   * 
+   * @param arg0
+   * @param arg1
+   * @param arg2
+   * @return a new {@link Thunk}.
+   */
+  @NonNull
+  Thunk<D> delayed(final A arg0, final B arg1, final C arg2);
 
-	/**
-	 * Asynchronously applies this {@link Delayable3}, by returning a
-	 * {@link Thunk} that will perform the actual transformation on the given
-	 * thunk's values each time it is evaluated.
-	 * 
-	 * @param arg0
-	 * @param arg1
-	 * @param arg2
-	 * @return a new {@link Thunk}.
-	 */
-	@NonNull
-	Thunk<D> delayedValue(@NonNull Thunk<A> thunk0, @NonNull Thunk<B> thunk1, @NonNull Thunk<C> thunk2);
+  /**
+   * Asynchronously applies this {@link Delayable3}, by returning a
+   * {@link Thunk} that will perform the actual transformation on the given
+   * thunk's values each time it is evaluated.
+   * 
+   * @param arg0
+   * @param arg1
+   * @param arg2
+   * @return a new {@link Thunk}.
+   */
+  @NonNull
+  Thunk<D> delayedValue(@NonNull Thunk<A> thunk0, @NonNull Thunk<B> thunk1, @NonNull Thunk<C> thunk2);
 
 }

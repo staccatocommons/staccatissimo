@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.context;
 
 import javassist.CtBehavior;
@@ -24,24 +23,24 @@ import javassist.CtBehavior;
  */
 public interface ArgumentAnnotationContext extends AnnotationContext {
 
-	/**
-	 * @return the behavior whose parameter is annotated
-	 */
-	CtBehavior getArgumentBehavior();
+  /**
+   * @return the behavior whose parameter is annotated
+   */
+  CtBehavior getArgumentBehavior();
 
-	/**
-	 * @return if the annotated argument is a constructor or method parameter
-	 */
-	boolean isConstructorArgument();
+  /**
+   * @return if the annotated argument is a constructor or method parameter
+   */
+  boolean isConstructorArgument();
 
-	/**
-	 * @return the annotated argument number, zero based
-	 */
-	int getArgumentNumber();
+  /**
+   * @return the annotated argument number, zero based
+   */
+  int getArgumentNumber();
 
-	/**
-	 * @return the annotated argument name
-	 */
-	String getArgumentIdentifier();
+  /**
+   * @return the annotated argument name
+   */
+  String getArgumentIdentifier();
 
 }

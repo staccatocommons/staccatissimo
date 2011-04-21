@@ -38,95 +38,94 @@ import net.sf.staccatocommons.restrictions.value.Value;
  */
 @Value
 @Conditionally({ Immutable.class, Serializable.class })
-public final class Quadruple<T1, T2, T3, T4> extends Tuple implements
-	Comparable<Quadruple<T1, T2, T3, T4>>, FirstAware<T1>, SecondAware<T2>, ThirdAware<T3>,
-	FourthAware<T4> {
+public final class Quadruple<T1, T2, T3, T4> extends Tuple implements Comparable<Quadruple<T1, T2, T3, T4>>,
+  FirstAware<T1>, SecondAware<T2>, ThirdAware<T3>, FourthAware<T4> {
 
-	private static final long serialVersionUID = -1072243152313731077L;
-	private static final RelevantState<Quadruple> val = new TupleState<Quadruple>(4) {
-		protected void collectState(Quadruple o, StateCollector b) {
-			b.add(o.first).add(o.second).add(o.third).add(o.fourth);
-		}
-	};
+  private static final long serialVersionUID = -1072243152313731077L;
+  private static final RelevantState<Quadruple> val = new TupleState<Quadruple>(4) {
+    protected void collectState(Quadruple o, StateCollector b) {
+      b.add(o.first).add(o.second).add(o.third).add(o.fourth);
+    }
+  };
 
-	private final T1 first;
-	private final T2 second;
-	private final T3 third;
-	private final T4 fourth;
+  private final T1 first;
+  private final T2 second;
+  private final T3 third;
+  private final T4 fourth;
 
-	/**
-	 * Creates a new {@link Quadruple}
-	 * 
-	 * @param first
-	 * @param second
-	 * @param third
-	 * @param fourth
-	 */
-	public Quadruple(T1 first, T2 second, T3 third, T4 fourth) {
-		this.first = first;
-		this.second = second;
-		this.third = third;
-		this.fourth = fourth;
-	}
+  /**
+   * Creates a new {@link Quadruple}
+   * 
+   * @param first
+   * @param second
+   * @param third
+   * @param fourth
+   */
+  public Quadruple(T1 first, T2 second, T3 third, T4 fourth) {
+    this.first = first;
+    this.second = second;
+    this.third = third;
+    this.fourth = fourth;
+  }
 
-	public T1 first() {
-		return first;
-	}
+  public T1 first() {
+    return first;
+  }
 
-	public T2 second() {
-		return second;
-	}
+  public T2 second() {
+    return second;
+  }
 
-	public T3 third() {
-		return third;
-	}
+  public T3 third() {
+    return third;
+  }
 
-	@Override
-	public T4 fourth() {
-		return fourth;
-	}
+  @Override
+  public T4 fourth() {
+    return fourth;
+  }
 
-	public T1 _0() {
-		return first();
-	}
+  public T1 _0() {
+    return first();
+  }
 
-	public T2 _1() {
-		return second();
-	}
+  public T2 _1() {
+    return second();
+  }
 
-	public T3 _2() {
-		return third();
-	}
+  public T3 _2() {
+    return third();
+  }
 
-	@Override
-	public T4 _3() {
-		return fourth();
-	}
+  @Override
+  public T4 _3() {
+    return fourth();
+  }
 
-	@Override
-	public String toString() {
-		return val.toString(this);
-	}
+  @Override
+  public String toString() {
+    return val.toString(this);
+  }
 
-	@NonNull
-	@Override
-	public Object[] toArray() {
-		return new Object[] { first, second, third, fourth };
-	}
+  @NonNull
+  @Override
+  public Object[] toArray() {
+    return new Object[] { first, second, third, fourth };
+  }
 
-	@Override
-	public int compareTo(Quadruple<T1, T2, T3, T4> other) {
-		return val.compareTo(this, other);
-	}
+  @Override
+  public int compareTo(Quadruple<T1, T2, T3, T4> other) {
+    return val.compareTo(this, other);
+  }
 
-	@Override
-	public int hashCode() {
-		return val.hashCode(this);
-	}
+  @Override
+  public int hashCode() {
+    return val.hashCode(this);
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		return val.equals(this, obj);
-	}
+  @Override
+  public boolean equals(Object obj) {
+    return val.equals(this, obj);
+  }
 
 }

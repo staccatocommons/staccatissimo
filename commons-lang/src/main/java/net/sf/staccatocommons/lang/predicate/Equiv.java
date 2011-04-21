@@ -33,91 +33,90 @@ import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
  */
 public class Equiv {
 
-	private Equiv() {}
+  private Equiv() {}
 
-	/**
-	 * Answers an {@link Predicate2} that performs an equality test between its
-	 * arguments, that it returns true if both are equal
-	 * 
-	 * @param <A>
-	 * @return a constant {@link Predicate2} that performs an equality test
-	 */
-	@NonNull
-	@Constant
-	public static <A> Predicate2<A, A> equal() {
-		return EqualTest.<A> equalTest();
-	}
+  /**
+   * Answers an {@link Predicate2} that performs an equality test between its
+   * arguments, that it returns true if both are equal
+   * 
+   * @param <A>
+   * @return a constant {@link Predicate2} that performs an equality test
+   */
+  @NonNull
+  @Constant
+  public static <A> Predicate2<A, A> equal() {
+    return EqualTest.<A> equalTest();
+  }
 
-	/**
-	 * Answers an {@link Predicate2} that performs an identity test between its
-	 * arguments, that it returns true if both are the same object
-	 * 
-	 * @param <A>
-	 * @return a constant {@link Predicate2} that performs an identity test
-	 */
-	@NonNull
-	@Constant
-	public static <A> Predicate2<A, A> same() {
-		return SameTest.<A> sameTest();
-	}
+  /**
+   * Answers an {@link Predicate2} that performs an identity test between its
+   * arguments, that it returns true if both are the same object
+   * 
+   * @param <A>
+   * @return a constant {@link Predicate2} that performs an identity test
+   */
+  @NonNull
+  @Constant
+  public static <A> Predicate2<A, A> same() {
+    return SameTest.<A> sameTest();
+  }
 
-	/**
-	 * Answers an {@link Predicate2} that performs an equality test between its
-	 * nullable arguments, that it returns true if both are equal or null.
-	 * 
-	 * @param <A>
-	 * @return <code>Equiv.equal().nullSafe()</code>
-	 */
-	@NonNull
-	@Constant
-	public static <A> Predicate2<A, A> equalNullSafe() {
-		return Equiv.<A> equal().nullSafe();
-	}
+  /**
+   * Answers an {@link Predicate2} that performs an equality test between its
+   * nullable arguments, that it returns true if both are equal or null.
+   * 
+   * @param <A>
+   * @return <code>Equiv.equal().nullSafe()</code>
+   */
+  @NonNull
+  @Constant
+  public static <A> Predicate2<A, A> equalNullSafe() {
+    return Equiv.<A> equal().nullSafe();
+  }
 
-	/**
-	 * Answers an {@link Predicate2} that performs an compare test between its
-	 * {@link Comparable} arguments, that it returns
-	 * <code>arg0.compareTo(arg1) == 0</code>
-	 * 
-	 * @param <A>
-	 * @return a constant {@link Predicate2} that performs a compare test
-	 */
-	@NonNull
-	@Constant
-	public static <A extends Comparable<A>> Predicate2<A, A> compare() {
-		return CompareTest.<A> compareTest();
-	}
+  /**
+   * Answers an {@link Predicate2} that performs an compare test between its
+   * {@link Comparable} arguments, that it returns
+   * <code>arg0.compareTo(arg1) == 0</code>
+   * 
+   * @param <A>
+   * @return a constant {@link Predicate2} that performs a compare test
+   */
+  @NonNull
+  @Constant
+  public static <A extends Comparable<A>> Predicate2<A, A> compare() {
+    return CompareTest.<A> compareTest();
+  }
 
-	/**
-	 * Answers an {@link Predicate2} that performs an equality test to the result
-	 * of applying the given function to its arguments.
-	 * 
-	 * This is mostly useful then the given function is just a property accesor,
-	 * for example, the following code will answer an {@link Predicate2} that
-	 * compares <code>Employee</code>s names:
-	 * 
-	 * <pre>
-	 * Equivalence.on(new Function&lt;Customer, String&gt;() {
-	 * 	public String apply(Customer cus) {
-	 * 		return cust.getName();
-	 * 	}
-	 * });
-	 * </pre>
-	 * 
-	 * @param <A>
-	 * @param <B>
-	 * @param function
-	 * @return a new {@link Predicate2}
-	 */
-	@NonNull
-	@ForceRestrictions
-	public static <A, B> Predicate2<A, A> on(
-		@NonNull final Applicable<? super A, ? extends B> function) {
-		return new AbstractPredicate2<A, A>() {
-			public boolean eval(A arg0, A arg1) {
-				return function.apply(arg0).equals(function.apply(arg1));
-			}
-		};
-	}
+  /**
+   * Answers an {@link Predicate2} that performs an equality test to the result
+   * of applying the given function to its arguments.
+   * 
+   * This is mostly useful then the given function is just a property accesor,
+   * for example, the following code will answer an {@link Predicate2} that
+   * compares <code>Employee</code>s names:
+   * 
+   * <pre>
+   * Equivalence.on(new Function&lt;Customer, String&gt;() {
+   *   public String apply(Customer cus) {
+   *     return cust.getName();
+   *   }
+   * });
+   * </pre>
+   * 
+   * @param <A>
+   * @param <B>
+   * @param function
+   * @return a new {@link Predicate2}
+   */
+  @NonNull
+  @ForceRestrictions
+  public static <A, B> Predicate2<A, A> on(@NonNull final Applicable<? super A, ? extends B> function) {
+    return new AbstractPredicate2<A, A>() {
+      public boolean eval(A arg0, A arg1) {
+        return function.apply(arg0).equals(function.apply(arg1));
+      }
+    };
+  }
 
 }

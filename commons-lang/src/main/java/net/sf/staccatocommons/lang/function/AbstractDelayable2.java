@@ -25,41 +25,40 @@ import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
  * @param <B>
  * @param <C>
  */
-public abstract class AbstractDelayable2<A, B, C> implements Applicable2<A, B, C>,
-	Delayable2<A, B, C> {
+public abstract class AbstractDelayable2<A, B, C> implements Applicable2<A, B, C>, Delayable2<A, B, C> {
 
-	/**
-	 * Creates a new {@link AbstractDelayable2}
-	 */
-	public AbstractDelayable2() {
-		super();
-	}
+  /**
+   * Creates a new {@link AbstractDelayable2}
+   */
+  public AbstractDelayable2() {
+    super();
+  }
 
-	/**
-	 * Delays execution of this block by returning a void thunk that will evaluate
-	 * <code>exec(arg1, arg2)</code> each time its value is required
-	 * 
-	 * @param arg0
-	 * @param arg1
-	 * @return a new void {@link Thunk}
-	 */
-	public Thunk<C> delayed(final A arg0, final B arg1) {
-		return new Thunk<C>() {
-			public C value() {
-				return apply(arg0, arg1);
-			}
-		};
-	}
+  /**
+   * Delays execution of this block by returning a void thunk that will evaluate
+   * <code>exec(arg1, arg2)</code> each time its value is required
+   * 
+   * @param arg0
+   * @param arg1
+   * @return a new void {@link Thunk}
+   */
+  public Thunk<C> delayed(final A arg0, final B arg1) {
+    return new Thunk<C>() {
+      public C value() {
+        return apply(arg0, arg1);
+      }
+    };
+  }
 
-	@ForceRestrictions
-	@NonNull
-	@Override
-	public Thunk<C> delayedValue(@NonNull final Thunk<A> thunk0, @NonNull final Thunk<B> thunk1) {
-		return new Thunk<C>() {
-			public C value() {
-				return apply(thunk0.value(), thunk1.value());
-			}
-		};
-	}
+  @ForceRestrictions
+  @NonNull
+  @Override
+  public Thunk<C> delayedValue(@NonNull final Thunk<A> thunk0, @NonNull final Thunk<B> thunk1) {
+    return new Thunk<C>() {
+      public C value() {
+        return apply(thunk0.value(), thunk1.value());
+      }
+    };
+  }
 
 }

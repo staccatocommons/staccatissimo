@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.config;
 
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
@@ -32,16 +31,16 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface InstrumenterConfigurer {
 
-	/**
-	 * Configures the given <code>instrumenter</code>.
-	 * <p>
-	 * Implementors <strong>must</strong> set an instrumentation mark to the
-	 * instrumenter and add at least one handler to it
-	 * </p>
-	 * 
-	 * @param instrumenter
-	 *          the instrumenter to configure
-	 */
-	void configureInstrumenter(@NonNull InstrumenterConfiguration instrumenter);
+  /**
+   * Configures the given <code>instrumenter</code>.
+   * <p>
+   * Implementors <strong>must</strong> set an instrumentation mark to the
+   * instrumenter and add at least one handler to it
+   * </p>
+   * 
+   * @param instrumenter
+   *          the instrumenter to configure
+   */
+  void configureInstrumenter(@NonNull InstrumenterConfiguration instrumenter);
 
 }

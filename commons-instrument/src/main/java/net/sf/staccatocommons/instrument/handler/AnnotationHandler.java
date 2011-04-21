@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.handler;
 
 import java.lang.annotation.Annotation;
@@ -44,12 +43,12 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface AnnotationHandler<A extends Annotation> {
 
-	/**
-	 * Answers the annotation this processor can process
-	 * 
-	 * @return an annotation type
-	 */
-	@NonNull
-	Class<A> getSupportedAnnotationType();
+  /**
+   * Answers the annotation this processor can process
+   * 
+   * @return an annotation type
+   */
+  @NonNull
+  Class<A> getSupportedAnnotationType();
 
 }

@@ -20,21 +20,21 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class ArrayThriterator<A> extends IndexedThriterator<A> {
 
-	private final A[] array;
+  private final A[] array;
 
-	/**
-	 * Creates a new {@link ArrayThriterator}
-	 */
-	public ArrayThriterator(@NonNull A[] array) {
-		this.array = array;
-	}
+  /**
+   * Creates a new {@link ArrayThriterator}
+   */
+  public ArrayThriterator(@NonNull A[] array) {
+    this.array = array;
+  }
 
-	protected A elementAt(int position) {
-		return array[position];
-	}
+  protected A elementAt(int position) {
+    return array[position];
+  }
 
-	protected int length() {
-		return array.length;
-	}
+  protected int length() {
+    return array.length;
+  }
 
 }

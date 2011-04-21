@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.io.serialization;
 
 /**
@@ -19,11 +18,10 @@ package net.sf.staccatocommons.io.serialization;
  * 
  * @author flbulgarelli
  */
-public class ObjectStreamByteSerializationManagerUnitTest extends
-	SerializationManagerAbstractUnitTest {
+public class ObjectStreamByteSerializationManagerUnitTest extends SerializationManagerAbstractUnitTest {
 
-	@Override
-	protected SerializationManager createSerializationManager() {
-		return new ObjectStreamByteSerializationManager();
-	}
+  @Override
+  protected SerializationManager createSerializationManager() {
+    return new ObjectStreamByteSerializationManager();
+  }
 }

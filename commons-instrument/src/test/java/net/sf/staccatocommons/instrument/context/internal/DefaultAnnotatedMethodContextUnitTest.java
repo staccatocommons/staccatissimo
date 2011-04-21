@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.context.internal;
 
 import static org.junit.Assert.*;
@@ -25,40 +24,40 @@ import org.junit.Test;
  */
 public class DefaultAnnotatedMethodContextUnitTest extends AbstractAnnotationContextUnitTest {
 
-	private DefaultMethodAnnotationContext context;
+  private DefaultMethodAnnotationContext context;
 
-	/**
-	 * creates the context
-	 */
-	@Before
-	public void createContext() {
-		context = new DefaultMethodAnnotationContext(pool, logger);
-	}
+  /**
+   * creates the context
+   */
+  @Before
+  public void createContext() {
+    context = new DefaultMethodAnnotationContext(pool, logger);
+  }
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.instrument.internal.DefaultMethodContext#getReturnIdentifier()}
-	 * .
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testGetReturnName() throws Exception {
-		context.setMethod(pool.getMethod("net.sf.staccatocommons.lang.Option", "value"));
-		assertEquals("$_", context.getReturnIdentifier());
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.instrument.internal.DefaultMethodContext#getReturnIdentifier()}
+   * .
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void testGetReturnName() throws Exception {
+    context.setMethod(pool.getMethod("net.sf.staccatocommons.lang.Option", "value"));
+    assertEquals("$_", context.getReturnIdentifier());
+  }
 
-	/**
-	 * Test method for
-	 * {@link net.sf.staccatocommons.instrument.internal.DefaultMethodContext#isVoid()}
-	 * .
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testIsVoid() throws Exception {
-		context.setMethod(pool.getMethod("net.sf.staccatocommons.lang.Option", "ifDefined"));
-		assertTrue(context.isVoid());
-	}
+  /**
+   * Test method for
+   * {@link net.sf.staccatocommons.instrument.internal.DefaultMethodContext#isVoid()}
+   * .
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void testIsVoid() throws Exception {
+    context.setMethod(pool.getMethod("net.sf.staccatocommons.lang.Option", "ifDefined"));
+    assertTrue(context.isVoid());
+  }
 
 }

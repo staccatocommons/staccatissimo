@@ -15,7 +15,6 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.NoSuchElementException;
 
-
 /**
  * {@link Stream} interface for accessing elements in an ordered manner.
  * 
@@ -33,65 +32,65 @@ import java.util.NoSuchElementException;
  */
 public interface Accessible<A> {
 
-	/**
-	 * @return the first element
-	 */
-	A first();
+  /**
+   * @return the first element
+   */
+  A first();
 
-	/**
-	 * @return the second element
-	 */
-	A second();
+  /**
+   * @return the second element
+   */
+  A second();
 
-	/**
-	 * @return the third element
-	 */
-	A third();
+  /**
+   * @return the third element
+   */
+  A third();
 
-	/**
-	 * 
-	 * @param n
-	 * @return the n-th element, zero based
-	 */
-	A get(int n);
+  /**
+   * 
+   * @param n
+   * @return the n-th element, zero based
+   */
+  A get(int n);
 
-	/**
-	 * @return the last element
-	 */
-	A last();
+  /**
+   * @return the last element
+   */
+  A last();
 
-	/**
-	 * Answers the zero-based index of the given element
-	 * 
-	 * @param element
-	 * @return the index of the element, or -1, if it is not contained by this
-	 *         stream
-	 */
-	int indexOf(A element);
+  /**
+   * Answers the zero-based index of the given element
+   * 
+   * @param element
+   * @return the index of the element, or -1, if it is not contained by this
+   *         stream
+   */
+  int indexOf(A element);
 
-	/**
-	 * Answers the index of the given <strong>present</strong> element. This
-	 * method behaves exactly like {@link #indexOf(Object)}, with the only
-	 * difference that it will throw a {@link NoSuchElementException} if the given
-	 * element is not present on the stream
-	 * 
-	 * @param element
-	 * @return the index of the given element
-	 * @throws NoSuchElementException
-	 *           if the element is no contained by this {@link Stream}
-	 */
-	int positionOf(A element);
+  /**
+   * Answers the index of the given <strong>present</strong> element. This
+   * method behaves exactly like {@link #indexOf(Object)}, with the only
+   * difference that it will throw a {@link NoSuchElementException} if the given
+   * element is not present on the stream
+   * 
+   * @param element
+   * @return the index of the given element
+   * @throws NoSuchElementException
+   *           if the element is no contained by this {@link Stream}
+   */
+  int positionOf(A element);
 
-	/**
-	 * Answers if both arguments are contained by this stream, and the first one
-	 * is before the second one. This method works even for stream that can be
-	 * iterated only once
-	 * 
-	 * @param previous
-	 * @param next
-	 * @return if both elements are contained by this {@link Stream}, and the
-	 *         first is before the second one
-	 */
-	boolean isBefore(A previous, A next);
+  /**
+   * Answers if both arguments are contained by this stream, and the first one
+   * is before the second one. This method works even for stream that can be
+   * iterated only once
+   * 
+   * @param previous
+   * @param next
+   * @return if both elements are contained by this {@link Stream}, and the
+   *         first is before the second one
+   */
+  boolean isBefore(A previous, A next);
 
 }

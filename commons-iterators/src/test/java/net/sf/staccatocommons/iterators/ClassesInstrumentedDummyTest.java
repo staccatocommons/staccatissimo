@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.iterators;
 
 import static org.junit.Assert.*;
@@ -27,10 +26,10 @@ import org.junit.Test;
  */
 public class ClassesInstrumentedDummyTest {
 
-	/** Test that the constant instrumenter is working */
-	@Test
-	public void testConst() throws Exception {
-		assertSame(EmptyThriterator.empty(), EmptyThriterator.empty());
-	}
+  /** Test that the constant instrumenter is working */
+  @Test
+  public void testConst() throws Exception {
+    assertSame(EmptyThriterator.empty(), EmptyThriterator.empty());
+  }
 
 }

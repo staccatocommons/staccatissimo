@@ -31,42 +31,42 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public final class ConsStream<A> extends DelayedPrependStream<A> {
 
-	/**
-	 * Creates a new {@link ConsStream}
-	 */
-	public ConsStream(@NonNull Thunk<A> head, Stream<A> tail) {
-		super(head, tail);
-	}
+  /**
+   * Creates a new {@link ConsStream}
+   */
+  public ConsStream(@NonNull Thunk<A> head, Stream<A> tail) {
+    super(head, tail);
+  }
 
-	public Thriterator<A> iterator() {
-		return new AdvanceThriterator<A>() {
+  public Thriterator<A> iterator() {
+    return new AdvanceThriterator<A>() {
 
-			private Thunk<A> current = null;
-			private Stream<A> next = ConsStream.this;
-			private boolean hasNext = true;
+      private Thunk<A> current = null;
+      private Stream<A> next = ConsStream.this;
+      private boolean hasNext = true;
 
-			public boolean hasNext() {
+      public boolean hasNext() {
 
-				return hasNext;
-			}
+        return hasNext;
+      }
 
-			public void advanceNext() throws NoSuchElementException {
-				if (!hasNext())
-					throw new NoSuchElementException();
-				Pair<Thunk<A>, Stream<A>> decons = next.delayedDecons();
-				current = decons.first();
-				next = decons.second().toEmptyAware();
-				hasNext = !next.isEmpty();
-			}
+      public void advanceNext() throws NoSuchElementException {
+        if (!hasNext())
+          throw new NoSuchElementException();
+        Pair<Thunk<A>, Stream<A>> decons = next.delayedDecons();
+        current = decons.first();
+        next = decons.second().toEmptyAware();
+        hasNext = !next.isEmpty();
+      }
 
-			public A current() {
-				return current.value();
-			}
+      public A current() {
+        return current.value();
+      }
 
-			public Thunk<A> delayedCurrent() {
-				return current;
-			}
-		};
-	}
+      public Thunk<A> delayedCurrent() {
+        return current;
+      }
+    };
+  }
 
 }

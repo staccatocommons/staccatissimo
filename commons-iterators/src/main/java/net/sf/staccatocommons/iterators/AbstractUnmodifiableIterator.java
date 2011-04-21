@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.iterators;
 
 import java.util.Iterator;
@@ -29,16 +28,16 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  */
 public abstract class AbstractUnmodifiableIterator<T> implements Iterator<T> {
 
-	/**
-	 * Creates a new {@link AbstractUnmodifiableIterator}
-	 */
-	public AbstractUnmodifiableIterator() {
-		super();
-	}
+  /**
+   * Creates a new {@link AbstractUnmodifiableIterator}
+   */
+  public AbstractUnmodifiableIterator() {
+    super();
+  }
 
-	@Override
-	public final void remove() {
-		throw new UnsupportedOperationException("This Iterator does not support unmodifiable");
-	}
+  @Override
+  public final void remove() {
+    throw new UnsupportedOperationException("This Iterator does not support unmodifiable");
+  }
 
 }

@@ -22,40 +22,38 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * NumberTypeFunctions, override {@link AbstractFunction2#apply(Object)} so that
- * the resulting function is flipped and it implements
- * {@link NumberTypeAware} too
+ * the resulting function is flipped and it implements {@link NumberTypeAware}
+ * too
  * 
  * @author flbulgarelli
  * 
  */
-public abstract class NumberTypeFunction2<A> extends AbstractFunction2<A, A, A> implements
-	NumberTypeAware<A> {
+public abstract class NumberTypeFunction2<A> extends AbstractFunction2<A, A, A> implements NumberTypeAware<A> {
 
-	private final NumberType<A> type;
+  private final NumberType<A> type;
 
-	/**
-	 * Creates a new {@link NumberTypeFunction2}
-	 */
-	public NumberTypeFunction2(@NonNull NumberType<A> type) {
-		this.type = type;
-	}
+  /**
+   * Creates a new {@link NumberTypeFunction2}
+   */
+  public NumberTypeFunction2(@NonNull NumberType<A> type) {
+    this.type = type;
+  }
 
-	public final NumberType<A> numberType() {
-		return type;
-	}
+  public final NumberType<A> numberType() {
+    return type;
+  }
 
-	public Function<A, A> apply(final A arg0) {
-		abstract class NumberTypeFunction extends AbstractFunction<A, A> implements
-			NumberTypeAware<A> {
-			public NumberType<A> numberType() {
-				return NumberTypeFunction2.this.numberType();
-			}
-		}
-		return new NumberTypeFunction() {
-			public A apply(A arg1) {
-				return NumberTypeFunction2.this.apply(arg1, arg0);
-			}
-		};
-	}
+  public Function<A, A> apply(final A arg0) {
+    abstract class NumberTypeFunction extends AbstractFunction<A, A> implements NumberTypeAware<A> {
+      public NumberType<A> numberType() {
+        return NumberTypeFunction2.this.numberType();
+      }
+    }
+    return new NumberTypeFunction() {
+      public A apply(A arg1) {
+        return NumberTypeFunction2.this.apply(arg1, arg0);
+      }
+    };
+  }
 
 }

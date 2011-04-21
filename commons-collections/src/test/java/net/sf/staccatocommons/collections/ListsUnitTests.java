@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections;
 
 import static junit.framework.Assert.*;
@@ -31,98 +30,98 @@ import org.junit.Test;
  */
 public class ListsUnitTests {
 
-	/**
-	 * Test for {@link Lists#addBefore(java.util.List, Object, Object)}
-	 */
-	@Test
-	public void testAddBefore_middle() throws Exception {
-		LinkedList<Integer> list = oneThreeList();
-		Lists.addBefore(list, 2, 3);
-		assertEquals(Arrays.asList(1, 2, 3), list);
-	}
+  /**
+   * Test for {@link Lists#addBefore(java.util.List, Object, Object)}
+   */
+  @Test
+  public void testAddBefore_middle() throws Exception {
+    LinkedList<Integer> list = oneThreeList();
+    Lists.addBefore(list, 2, 3);
+    assertEquals(Arrays.asList(1, 2, 3), list);
+  }
 
-	/**
-	 * Test for {@link Lists#addBefore(java.util.List, Object, Object)}
-	 */
-	@Test
-	public void testAddBefore_head() throws Exception {
-		LinkedList<Integer> list = oneThreeList();
-		Lists.addBefore(list, 2, 1);
-		assertEquals(Arrays.asList(2, 1, 3), list);
-	}
+  /**
+   * Test for {@link Lists#addBefore(java.util.List, Object, Object)}
+   */
+  @Test
+  public void testAddBefore_head() throws Exception {
+    LinkedList<Integer> list = oneThreeList();
+    Lists.addBefore(list, 2, 1);
+    assertEquals(Arrays.asList(2, 1, 3), list);
+  }
 
-	/**
-	 * Test for {@link Lists#addAfter(java.util.List, Object, Object)}
-	 */
-	@Test
-	public void testAddAfter_middle() throws Exception {
-		LinkedList<Integer> list = oneThreeList();
-		Lists.addAfter(list, 2, 1);
-		assertEquals(Arrays.asList(1, 2, 3), list);
-	}
+  /**
+   * Test for {@link Lists#addAfter(java.util.List, Object, Object)}
+   */
+  @Test
+  public void testAddAfter_middle() throws Exception {
+    LinkedList<Integer> list = oneThreeList();
+    Lists.addAfter(list, 2, 1);
+    assertEquals(Arrays.asList(1, 2, 3), list);
+  }
 
-	/**
-	 * Test for {@link Lists#addAfter(java.util.List, Object, Object)}
-	 */
-	@Test(expected = NoSuchElementException.class)
-	public void testAddAfterUnexistent() throws Exception {
-		LinkedList<Integer> list = oneThreeList();
-		Lists.addAfter(list, 2, 9);
-	}
+  /**
+   * Test for {@link Lists#addAfter(java.util.List, Object, Object)}
+   */
+  @Test(expected = NoSuchElementException.class)
+  public void testAddAfterUnexistent() throws Exception {
+    LinkedList<Integer> list = oneThreeList();
+    Lists.addAfter(list, 2, 9);
+  }
 
-	/**
-	 * Test for {@link Lists#addAfter(java.util.List, Object, Object)}
-	 */
-	@Test
-	public void testAddAfter_tail() throws Exception {
+  /**
+   * Test for {@link Lists#addAfter(java.util.List, Object, Object)}
+   */
+  @Test
+  public void testAddAfter_tail() throws Exception {
 
-		LinkedList<Integer> list = oneThreeList();
+    LinkedList<Integer> list = oneThreeList();
 
-		Lists.addAfter(list, 2, 3);
+    Lists.addAfter(list, 2, 3);
 
-		assertEquals(Arrays.asList(1, 3, 2), list);
-	}
+    assertEquals(Arrays.asList(1, 3, 2), list);
+  }
 
-	/** Test for {@link Lists#first(java.util.List)} */
-	@Test
-	public void testFirst_OK() throws Exception {
-		assertEquals((Integer) 1, Lists.first(Arrays.asList(1, 2, 3)));
-	}
+  /** Test for {@link Lists#first(java.util.List)} */
+  @Test
+  public void testFirst_OK() throws Exception {
+    assertEquals((Integer) 1, Lists.first(Arrays.asList(1, 2, 3)));
+  }
 
-	/** Test for {@link Lists#second(java.util.List)} */
-	@Test
-	public void testSecond_OK() throws Exception {
-		assertEquals((Integer) 2, Lists.second(Arrays.asList(1, 2, 3)));
-	}
+  /** Test for {@link Lists#second(java.util.List)} */
+  @Test
+  public void testSecond_OK() throws Exception {
+    assertEquals((Integer) 2, Lists.second(Arrays.asList(1, 2, 3)));
+  }
 
-	/** Test for {@link Lists#third(java.util.List)} */
-	@Test
-	public void testThird_OK() throws Exception {
-		assertEquals((Integer) 3, Lists.third(Arrays.asList(1, 2, 3)));
-	}
+  /** Test for {@link Lists#third(java.util.List)} */
+  @Test
+  public void testThird_OK() throws Exception {
+    assertEquals((Integer) 3, Lists.third(Arrays.asList(1, 2, 3)));
+  }
 
-	/** Test for {@link Lists#last(java.util.List)} */
-	@Test
-	public void testLast() throws Exception {
-		assertEquals(10, (int) Lists.last(Arrays.asList(20, 10)));
-		assertEquals(10, (int) Lists.last(Arrays.asList(10)));
-	}
+  /** Test for {@link Lists#last(java.util.List)} */
+  @Test
+  public void testLast() throws Exception {
+    assertEquals(10, (int) Lists.last(Arrays.asList(20, 10)));
+    assertEquals(10, (int) Lists.last(Arrays.asList(10)));
+  }
 
-	/** Test for {@link Lists#removeLast(java.util.List)} */
-	@Test
-	public void testRemoveLast() throws Exception {
-		ArrayList<Integer> l = new ArrayList<Integer>();
-		l.add(4);
-		l.add(20);
-		l.add(9);
-		Lists.removeLast(l);
-		assertEquals(Arrays.asList(4, 20), l);
-	}
+  /** Test for {@link Lists#removeLast(java.util.List)} */
+  @Test
+  public void testRemoveLast() throws Exception {
+    ArrayList<Integer> l = new ArrayList<Integer>();
+    l.add(4);
+    l.add(20);
+    l.add(9);
+    Lists.removeLast(l);
+    assertEquals(Arrays.asList(4, 20), l);
+  }
 
-	private LinkedList<Integer> oneThreeList() {
-		LinkedList<Integer> list = new LinkedList<Integer>();
-		list.add(1);
-		list.add(3);
-		return list;
-	}
+  private LinkedList<Integer> oneThreeList() {
+    LinkedList<Integer> list = new LinkedList<Integer>();
+    list.add(1);
+    list.add(3);
+    return list;
+  }
 }

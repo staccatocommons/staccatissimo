@@ -25,39 +25,45 @@ import net.sf.staccatocommons.iterators.thriter.Thriterators;
  */
 public final class SingleStream<A> extends StrictStream<A> {
 
-	private A element;
+  private A element;
 
-	/**
-	 * Creates a new {@link SingleStream}
-	 */
-	public SingleStream(A element) {
-		this.element = element;
-	}
+  /**
+   * Creates a new {@link SingleStream}
+   */
+  public SingleStream(A element) {
+    this.element = element;
+  }
 
-	public Thriterator<A> iterator() {
-		return Thriterators.from(element);
-	}
+  @Override
+  public Thriterator<A> iterator() {
+    return Thriterators.from(element);
+  }
 
-	public int size() {
-		return 1;
-	}
+  @Override
+  public int size() {
+    return 1;
+  }
 
-	public Stream<A> tail() {
-		return Streams.empty();
-	}
+  @Override
+  public Stream<A> tail() {
+    return Streams.empty();
+  }
 
-	public A get(int n) {
-		if (n == 0)
-			return element;
-		throw new NoSuchElementException("At " + n);
-	}
+  @Override
+  public A get(int n) {
+    if (n == 0)
+      return element;
+    throw new NoSuchElementException("At " + n);
+  }
 
-	public boolean isBefore(A previous, A next) {
-		return false;
-	}
+  @Override
+  public boolean isBefore(A previous, A next) {
+    return false;
+  }
 
-	public boolean isEmpty() {
-		return false;
-	}
+  @Override
+  public boolean isEmpty() {
+    return false;
+  }
 
 }

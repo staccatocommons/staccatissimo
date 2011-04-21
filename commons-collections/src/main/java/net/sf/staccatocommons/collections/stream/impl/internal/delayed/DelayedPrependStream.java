@@ -28,26 +28,29 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class DelayedPrependStream<A> extends PrependStream<A> {
 
-	/**
-	 * Creates a new {@link DelayedPrependStream}
-	 */
-	public DelayedPrependStream(@NonNull Thunk<A> head, @NonNull Stream<A> tail) {
-		super((A) head, tail);
-	}
+  /**
+   * Creates a new {@link DelayedPrependStream}
+   */
+  public DelayedPrependStream(@NonNull Thunk<A> head, @NonNull Stream<A> tail) {
+    super((A) head, tail);
+  }
 
-	public Thriterator<A> iterator() {
-		return new DelayedPrependIterator<A>(headThunk(), tailIterator());
-	}
+  @Override
+  public Thriterator<A> iterator() {
+    return new DelayedPrependIterator<A>(headThunk(), tailIterator());
+  }
 
-	public Pair<Thunk<A>, Stream<A>> delayedDecons() {
-		return _(headThunk(), Streams.from(tail()));
-	}
+  @Override
+  public Pair<Thunk<A>, Stream<A>> delayedDecons() {
+    return _(headThunk(), Streams.from(tail()));
+  }
 
-	public A head() {
-		return headThunk().value();
-	}
+  @Override
+  public A head() {
+    return headThunk().value();
+  }
 
-	protected final Thunk<A> headThunk() {
-		return (Thunk<A>) super.head();
-	}
+  protected final Thunk<A> headThunk() {
+    return (Thunk<A>) super.head();
+  }
 }

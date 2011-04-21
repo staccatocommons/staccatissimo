@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.iterators;
 
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -22,23 +21,23 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class CharSequenceThriterator extends IndexedThriterator<Character> {
 
-	private final CharSequence charSequence;
+  private final CharSequence charSequence;
 
-	/**
-	 * Creates a new {@link CharSequenceThriterator}
-	 * 
-	 * @param charSequence
-	 *          the sequence to wrap
-	 */
-	public CharSequenceThriterator(@NonNull CharSequence charSequence) {
-		this.charSequence = charSequence;
-	}
+  /**
+   * Creates a new {@link CharSequenceThriterator}
+   * 
+   * @param charSequence
+   *          the sequence to wrap
+   */
+  public CharSequenceThriterator(@NonNull CharSequence charSequence) {
+    this.charSequence = charSequence;
+  }
 
-	protected int length() {
-		return charSequence.length();
-	}
+  protected int length() {
+    return charSequence.length();
+  }
 
-	protected Character elementAt(int position) {
-		return charSequence.charAt(position);
-	}
+  protected Character elementAt(int position) {
+    return charSequence.charAt(position);
+  }
 }

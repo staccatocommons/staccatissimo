@@ -61,229 +61,229 @@ import net.sf.staccatocommons.restrictions.value.Immutable;
 @Immutable
 public interface NumberType<A> extends Comparator<A> {
 
-	/**
-	 * Adds two numbers, and returns the result.
-	 * 
-	 * @param n0
-	 *          first addition operand
-	 * @param n1
-	 *          second addition operand
-	 * @return <code>n0 + n1</code>
-	 */
-	A add(A n0, A n1);
+  /**
+   * Adds two numbers, and returns the result.
+   * 
+   * @param n0
+   *          first addition operand
+   * @param n1
+   *          second addition operand
+   * @return <code>n0 + n1</code>
+   */
+  A add(A n0, A n1);
 
-	/**
-	 * Subtracts two numbers, and returns the result.
-	 * 
-	 * For any {@link Number}s x and y, a side-effect-free {@link NumberType}s nt
-	 * <strong>must</strong> grant that
-	 * <code>nt.subtract(x, y) == nt.add(x, nt.negate(y))</code>
-	 * 
-	 * @param n0
-	 *          first subtraction operand
-	 * @param n1
-	 *          second subtraction operand
-	 * @return <code>n0 - n1</code>
-	 */
-	A subtract(A n0, A n1);
+  /**
+   * Subtracts two numbers, and returns the result.
+   * 
+   * For any {@link Number}s x and y, a side-effect-free {@link NumberType}s nt
+   * <strong>must</strong> grant that
+   * <code>nt.subtract(x, y) == nt.add(x, nt.negate(y))</code>
+   * 
+   * @param n0
+   *          first subtraction operand
+   * @param n1
+   *          second subtraction operand
+   * @return <code>n0 - n1</code>
+   */
+  A subtract(A n0, A n1);
 
-	/**
-	 * Multiplies two numbers, and returns the result
-	 * 
-	 * @param n0
-	 *          first multiplication operand
-	 * @param n1
-	 *          second multiplication operand
-	 * @return <code>n0 * n1</code>
-	 */
-	A multiply(A n0, A n1);
+  /**
+   * Multiplies two numbers, and returns the result
+   * 
+   * @param n0
+   *          first multiplication operand
+   * @param n1
+   *          second multiplication operand
+   * @return <code>n0 * n1</code>
+   */
+  A multiply(A n0, A n1);
 
-	/**
-	 * Divides two numbers, and returns the result.
-	 * 
-	 * @param n0
-	 *          first division operand
-	 * @param n1
-	 *          second division operand
-	 * @throws ArithmeticException
-	 *           if second argument is zero and the numeric type A does not
-	 *           support zero division
-	 * @return <code>n0 / n1</code>
-	 */
-	A divide(A n0, A n1) throws ArithmeticException;
+  /**
+   * Divides two numbers, and returns the result.
+   * 
+   * @param n0
+   *          first division operand
+   * @param n1
+   *          second division operand
+   * @throws ArithmeticException
+   *           if second argument is zero and the numeric type A does not
+   *           support zero division
+   * @return <code>n0 / n1</code>
+   */
+  A divide(A n0, A n1) throws ArithmeticException;
 
-	/**
-	 * Negates a given number
-	 * 
-	 * @param n
-	 *          the number to negate
-	 * @return <code>-n</code>
-	 */
-	A negate(A n);
+  /**
+   * Negates a given number
+   * 
+   * @param n
+   *          the number to negate
+   * @return <code>-n</code>
+   */
+  A negate(A n);
 
-	/**
-	 * Decrements the given number.
-	 * 
-	 * For any {@link Number} x, a side-effect-free {@link NumberType}s nt it
-	 * <strong>must</strong> grant that
-	 * <code>nt.decrement(x) == nt.subtract(x, nt.one())</code>
-	 * 
-	 * As a particular case, it <strong>must</strong> grant that
-	 * <code>nt.compare(nt.zero(), nt.decrement(nt.one())) == 0</code>
-	 * 
-	 * 
-	 * @param n
-	 *          the number to decrement
-	 * @return <code>n - 1</code>
-	 */
-	A decrement(A n);
+  /**
+   * Decrements the given number.
+   * 
+   * For any {@link Number} x, a side-effect-free {@link NumberType}s nt it
+   * <strong>must</strong> grant that
+   * <code>nt.decrement(x) == nt.subtract(x, nt.one())</code>
+   * 
+   * As a particular case, it <strong>must</strong> grant that
+   * <code>nt.compare(nt.zero(), nt.decrement(nt.one())) == 0</code>
+   * 
+   * 
+   * @param n
+   *          the number to decrement
+   * @return <code>n - 1</code>
+   */
+  A decrement(A n);
 
-	/**
-	 * Increments a given number
-	 * 
-	 * For any {@link Number} x, a side-effect-free {@link NumberType}s nt
-	 * <strong>must</strong> grant that
-	 * <code>nt.increment(x) == nt.add(x, nt.one())</code>
-	 * 
-	 * As a particular case, it <strong>must</strong> grant that
-	 * <code>nt.compare(nt.one(), nt.increment(nt.zero())) == 0</code>
-	 * 
-	 * 
-	 * @param n
-	 *          the number increment
-	 * @return <code>n + 1</code>
-	 */
-	A increment(A n);
+  /**
+   * Increments a given number
+   * 
+   * For any {@link Number} x, a side-effect-free {@link NumberType}s nt
+   * <strong>must</strong> grant that
+   * <code>nt.increment(x) == nt.add(x, nt.one())</code>
+   * 
+   * As a particular case, it <strong>must</strong> grant that
+   * <code>nt.compare(nt.one(), nt.increment(nt.zero())) == 0</code>
+   * 
+   * 
+   * @param n
+   *          the number increment
+   * @return <code>n + 1</code>
+   */
+  A increment(A n);
 
-	/**
-	 * Answers that inverse of a given number, that is, <code>n^-1</code>
-	 * 
-	 * For any number x for which division is defined, a {@link NumberType} nt
-	 * <strong>must</strong> grant that
-	 * <code>nt.divide(nt.one(), x).compareTo(nt.inverse(x)) == 0</code>
-	 * 
-	 * @param n
-	 * @return <code>1/n</code>
-	 */
-	A inverse(A n);
+  /**
+   * Answers that inverse of a given number, that is, <code>n^-1</code>
+   * 
+   * For any number x for which division is defined, a {@link NumberType} nt
+   * <strong>must</strong> grant that
+   * <code>nt.divide(nt.one(), x).compareTo(nt.inverse(x)) == 0</code>
+   * 
+   * @param n
+   * @return <code>1/n</code>
+   */
+  A inverse(A n);
 
-	/**
-	 * Answers the absolute value of the given number. It is the same number, if
-	 * non negative, or the negated number, otherwise
-	 * 
-	 * @param n
-	 * @return <code>isNegative(n) ? negate(n) : n</code>
-	 */
-	A abs(A n);
+  /**
+   * Answers the absolute value of the given number. It is the same number, if
+   * non negative, or the negated number, otherwise
+   * 
+   * @param n
+   * @return <code>isNegative(n) ? negate(n) : n</code>
+   */
+  A abs(A n);
 
-	/**
-	 * Answers if the given number is greater than zero
-	 * 
-	 * * For any {@link Number} x, a {@link NumberType}s nt <strong>must</strong>
-	 * grant that <code>nt.isZero(x) == (nt.compare(x, zero()) > 0)</code>
-	 * 
-	 * @param n
-	 * @return if the number is positive
-	 */
-	@SideEffectFree
-	boolean isPositive(A n);
+  /**
+   * Answers if the given number is greater than zero
+   * 
+   * * For any {@link Number} x, a {@link NumberType}s nt <strong>must</strong>
+   * grant that <code>nt.isZero(x) == (nt.compare(x, zero()) > 0)</code>
+   * 
+   * @param n
+   * @return if the number is positive
+   */
+  @SideEffectFree
+  boolean isPositive(A n);
 
-	/**
-	 * Answers if the given number is less than zero
-	 * 
-	 * For any {@link Number} x, a {@link NumberType}s nt <strong>must</strong>
-	 * grant that <code>nt.isZero(x) == (nt.compare(x, zero()) < 0)</code>
-	 * 
-	 * @param n
-	 * @return if the number is negative
-	 */
-	@SideEffectFree
-	boolean isNegative(A n);
+  /**
+   * Answers if the given number is less than zero
+   * 
+   * For any {@link Number} x, a {@link NumberType}s nt <strong>must</strong>
+   * grant that <code>nt.isZero(x) == (nt.compare(x, zero()) < 0)</code>
+   * 
+   * @param n
+   * @return if the number is negative
+   */
+  @SideEffectFree
+  boolean isNegative(A n);
 
-	/**
-	 * Answers if the given number is zero.
-	 * 
-	 * For any {@link Number} x, a {@link NumberType}s nt <strong>must</strong>
-	 * grant that <code>nt.isZero(x) == (nt.compare(x, nt.zero()) == 0)</code>
-	 * 
-	 * @param n
-	 * @return if the number is zero
-	 */
-	@SideEffectFree
-	boolean isZero(A n);
+  /**
+   * Answers if the given number is zero.
+   * 
+   * For any {@link Number} x, a {@link NumberType}s nt <strong>must</strong>
+   * grant that <code>nt.isZero(x) == (nt.compare(x, nt.zero()) == 0)</code>
+   * 
+   * @param n
+   * @return if the number is zero
+   */
+  @SideEffectFree
+  boolean isZero(A n);
 
-	/**
-	 * Answers the representation of 0 for this {@link NumberType}
-	 * 
-	 * @return the addition identity element
-	 */
-	@Constant
-	A zero();
+  /**
+   * Answers the representation of 0 for this {@link NumberType}
+   * 
+   * @return the addition identity element
+   */
+  @Constant
+  A zero();
 
-	/**
-	 * Answers the representation of 1 for this {@link NumberType}
-	 * 
-	 * @return the multiplication identity element
-	 */
-	@Constant
-	A one();
+  /**
+   * Answers the representation of 1 for this {@link NumberType}
+   * 
+   * @return the multiplication identity element
+   */
+  @Constant
+  A one();
 
-	/**
-	 * Answers a 2-arguments function that perform addition as specified by
-	 * {@link #add(Object, Object)}
-	 * 
-	 * @return a function that adds its two arguments using this
-	 *         {@link NumberType}
-	 */
-	@Constant
-	Function2<A, A, A> add();
+  /**
+   * Answers a 2-arguments function that perform addition as specified by
+   * {@link #add(Object, Object)}
+   * 
+   * @return a function that adds its two arguments using this
+   *         {@link NumberType}
+   */
+  @Constant
+  Function2<A, A, A> add();
 
-	/**
-	 * Answers function that adds the given number to its argument, as specified
-	 * by {@link #add(Object, Object)}. This message is a shortcut to
-	 * <code>add().apply(n)</code>
-	 * 
-	 * @return a function that adds its its argument with the given <code>n</code>
-	 *         using this {@link NumberType}
-	 */
-	@Transparent
-	Function<A, A> add(A n);
+  /**
+   * Answers function that adds the given number to its argument, as specified
+   * by {@link #add(Object, Object)}. This message is a shortcut to
+   * <code>add().apply(n)</code>
+   * 
+   * @return a function that adds its its argument with the given <code>n</code>
+   *         using this {@link NumberType}
+   */
+  @Transparent
+  Function<A, A> add(A n);
 
-	/**
-	 * Answers a 2-arguments function that perform multiplication as specified by
-	 * {@link #multiply(Object, Object)}
-	 * 
-	 * @return a function that multiplies its two arguments using this
-	 *         {@link NumberType}
-	 */
-	@Constant
-	Function2<A, A, A> multiply();
+  /**
+   * Answers a 2-arguments function that perform multiplication as specified by
+   * {@link #multiply(Object, Object)}
+   * 
+   * @return a function that multiplies its two arguments using this
+   *         {@link NumberType}
+   */
+  @Constant
+  Function2<A, A, A> multiply();
 
-	/**
-	 * Answers a function that negates its argument, as specified by
-	 * {@link #negate(Object)}
-	 * 
-	 * @return a function
-	 */
-	@Constant
-	Function<A, A> negate();
+  /**
+   * Answers a function that negates its argument, as specified by
+   * {@link #negate(Object)}
+   * 
+   * @return a function
+   */
+  @Constant
+  Function<A, A> negate();
 
-	/**
-	 * Answers a function that returns the absolute value of its argument, as
-	 * specified by {@link #abs(Object)}
-	 * 
-	 * @return a funciton
-	 */
-	@Constant
-	Function<A, A> abs();
+  /**
+   * Answers a function that returns the absolute value of its argument, as
+   * specified by {@link #abs(Object)}
+   * 
+   * @return a funciton
+   */
+  @Constant
+  Function<A, A> abs();
 
-	/**
-	 * Answers a function that returns the ivnerse of its argument, as defined by
-	 * {@link #inverse(Object)}
-	 * 
-	 * @return a function
-	 */
-	@Constant
-	Function<A, A> inverse();
+  /**
+   * Answers a function that returns the ivnerse of its argument, as defined by
+   * {@link #inverse(Object)}
+   * 
+   * @return a function
+   */
+  @Constant
+  Function<A, A> inverse();
 
 }

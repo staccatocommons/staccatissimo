@@ -22,29 +22,29 @@ import net.sf.staccatocommons.restrictions.check.MaxSize;
  */
 public class MaxSizeHandler extends AbstractCheckAnnotationHandler<MaxSize> {
 
-	/**
-	 * Creates a new {@link MaxSizeHandler}
-	 */
-	public MaxSizeHandler(boolean ignoreReturns) {
-		super(ignoreReturns);
-	}
+  /**
+   * Creates a new {@link MaxSizeHandler}
+   */
+  public MaxSizeHandler(boolean ignoreReturns) {
+    super(ignoreReturns);
+  }
 
-	public Class<MaxSize> getSupportedAnnotationType() {
-		return MaxSize.class;
-	}
+  public Class<MaxSize> getSupportedAnnotationType() {
+    return MaxSize.class;
+  }
 
-	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		MaxSize annotation, AnnotationContext context) throws NotFoundException {
-		return String.format(
-			"that().isMaxSize(\"%s\", %s, %s, %s)",
-			argumentMnemonic,
-			argumentIdentifier,
-			annotation.value(),
-			SizeAwareTypeCode.getSizeAwareCode(context));
-	}
+  protected String createCheckCode(String argumentMnemonic, String argumentIdentifier, MaxSize annotation,
+    AnnotationContext context) throws NotFoundException {
+    return String.format(
+      "that().isMaxSize(\"%s\", %s, %s, %s)",
+      argumentMnemonic,
+      argumentIdentifier,
+      annotation.value(),
+      SizeAwareTypeCode.getSizeAwareCode(context));
+  }
 
-	protected String getVarMnemonic(MaxSize annotation) {
-		return annotation.var();
-	}
+  protected String getVarMnemonic(MaxSize annotation) {
+    return annotation.var();
+  }
 
 }

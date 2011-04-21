@@ -22,11 +22,11 @@ import net.sf.staccatocommons.collections.stream.Transformable.DeconsApplicable;
  */
 public abstract class AbstractDeconsApplicable<A, B> implements DeconsApplicable<A, B> {
 
-	/**
-	 * Returns an empty stream
-	 */
-	public Stream<B> emptyApply() {
-		return Streams.empty();
-	}
+  /**
+   * Returns an empty stream
+   */
+  public Stream<B> emptyApply() {
+    return Streams.empty();
+  }
 
 }

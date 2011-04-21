@@ -58,83 +58,83 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @param <ReturnType>
  */
 public abstract class CharSerializationLifecycle<TargetType extends Closeable, ReturnType> extends
-	CloseableLifecycle<TargetType, ReturnType> {
+  CloseableLifecycle<TargetType, ReturnType> {
 
-	private CharSerializationManager charSerializationManager;
+  private CharSerializationManager charSerializationManager;
 
-	/**
-	 * Creates a new {@link CharSerializationLifecycle}
-	 * 
-	 * @param charSerializationManager
-	 *          the {@link CharSerializationManager} used to serialize or
-	 *          deserialize an object as part of this {@link Lifecycle}
-	 */
-	public CharSerializationLifecycle(@NonNull CharSerializationManager charSerializationManager) {
-		this.charSerializationManager = charSerializationManager;
-	}
+  /**
+   * Creates a new {@link CharSerializationLifecycle}
+   * 
+   * @param charSerializationManager
+   *          the {@link CharSerializationManager} used to serialize or
+   *          deserialize an object as part of this {@link Lifecycle}
+   */
+  public CharSerializationLifecycle(@NonNull CharSerializationManager charSerializationManager) {
+    this.charSerializationManager = charSerializationManager;
+  }
 
-	/**
-	 * Answers the underlying {@link CharSerializationManager}
-	 */
-	public CharSerializationManager getSerializationManager() {
-		return charSerializationManager;
-	}
+  /**
+   * Answers the underlying {@link CharSerializationManager}
+   */
+  public CharSerializationManager getSerializationManager() {
+    return charSerializationManager;
+  }
 
-	/**
-	 * A {@link Lifecycle} that serializes a single object using a
-	 * {@link CharSerializationManager}
-	 * 
-	 * @author flbulgarelli
-	 */
-	public static abstract class Serialize extends CharSerializationLifecycle<Writer, Void> {
+  /**
+   * A {@link Lifecycle} that serializes a single object using a
+   * {@link CharSerializationManager}
+   * 
+   * @author flbulgarelli
+   */
+  public static abstract class Serialize extends CharSerializationLifecycle<Writer, Void> {
 
-		private final Object target;
+    private final Object target;
 
-		/**
-		 * Creates a new {@link CharSerializationLifecycle.Serialize}
-		 * 
-		 * @param serializationManager
-		 *          the {@link CharSerializationManager} used for performing the
-		 *          serialization
-		 * @param target
-		 *          the object to serialize
-		 */
-		public Serialize(@NonNull CharSerializationManager serializationManager, Object target) {
-			super(serializationManager);
-			this.target = target;
-		}
+    /**
+     * Creates a new {@link CharSerializationLifecycle.Serialize}
+     * 
+     * @param serializationManager
+     *          the {@link CharSerializationManager} used for performing the
+     *          serialization
+     * @param target
+     *          the object to serialize
+     */
+    public Serialize(@NonNull CharSerializationManager serializationManager, Object target) {
+      super(serializationManager);
+      this.target = target;
+    }
 
-		@Override
-		public void doVoidWork(Writer output) throws IOException {
-			getSerializationManager().serialize(target, output);
-		}
-	}
+    @Override
+    public void doVoidWork(Writer output) throws IOException {
+      getSerializationManager().serialize(target, output);
+    }
+  }
 
-	/**
-	 * A {@link Lifecycle} that deserializes a single object of type {@code A}
-	 * using a {@link CharSerializationManager}
-	 * 
-	 * @author flbulgarelli
-	 * 
-	 * @param <A>
-	 */
-	public static abstract class Deserialize<A> extends CharSerializationLifecycle<Reader, A> {
+  /**
+   * A {@link Lifecycle} that deserializes a single object of type {@code A}
+   * using a {@link CharSerializationManager}
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <A>
+   */
+  public static abstract class Deserialize<A> extends CharSerializationLifecycle<Reader, A> {
 
-		/**
-		 * Creates a new {@link CharSerializationLifecycle.Deserialize}
-		 * 
-		 * @param serializationManager
-		 *          the {@link CharSerializationManager} used to deserialize the
-		 *          object
-		 */
-		public Deserialize(@NonNull CharSerializationManager serializationManager) {
-			super(serializationManager);
-		}
+    /**
+     * Creates a new {@link CharSerializationLifecycle.Deserialize}
+     * 
+     * @param serializationManager
+     *          the {@link CharSerializationManager} used to deserialize the
+     *          object
+     */
+    public Deserialize(@NonNull CharSerializationManager serializationManager) {
+      super(serializationManager);
+    }
 
-		@Override
-		public A doWork(Reader input) throws IOException {
-			return getSerializationManager().deserialize(input);
-		}
-	}
+    @Override
+    public A doWork(Reader input) throws IOException {
+      return getSerializationManager().deserialize(input);
+    }
+  }
 
 }

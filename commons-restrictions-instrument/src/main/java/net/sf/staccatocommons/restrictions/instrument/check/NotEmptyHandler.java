@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.restrictions.instrument.check;
 
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
@@ -23,25 +22,25 @@ import net.sf.staccatocommons.restrictions.check.NotEmpty;
  */
 public class NotEmptyHandler extends AbstractCheckAnnotationHandler<NotEmpty> {
 
-	/**
-	 * Creates a new {@link NotEmptyHandler}
-	 */
-	public NotEmptyHandler(boolean ignoreReturns) {
-		super(ignoreReturns);
-	}
+  /**
+   * Creates a new {@link NotEmptyHandler}
+   */
+  public NotEmptyHandler(boolean ignoreReturns) {
+    super(ignoreReturns);
+  }
 
-	@Override
-	public Class<NotEmpty> getSupportedAnnotationType() {
-		return NotEmpty.class;
-	}
+  @Override
+  public Class<NotEmpty> getSupportedAnnotationType() {
+    return NotEmpty.class;
+  }
 
-	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		NotEmpty annotation, AnnotationContext context) {
-		return String.format("that().isNotEmpty( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
-	}
+  protected String createCheckCode(String argumentMnemonic, String argumentIdentifier, NotEmpty annotation,
+    AnnotationContext context) {
+    return String.format("that().isNotEmpty( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
+  }
 
-	protected String getVarMnemonic(NotEmpty annotation) {
-		return annotation.value();
-	}
+  protected String getVarMnemonic(NotEmpty annotation) {
+    return annotation.value();
+  }
 
 }

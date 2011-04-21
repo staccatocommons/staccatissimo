@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.io.serialization;
 
 import static org.junit.Assert.*;
@@ -35,45 +34,45 @@ import org.junit.Test;
  */
 public abstract class SerializationManagerAbstractUnitTest {
 
-	private SerializationManager serializationManager;
+  private SerializationManager serializationManager;
 
-	/** Setups the test */
-	@Before
-	public void setUp() {
-		serializationManager = createSerializationManager();
-	}
+  /** Setups the test */
+  @Before
+  public void setUp() {
+    serializationManager = createSerializationManager();
+  }
 
-	protected abstract SerializationManager createSerializationManager();
+  protected abstract SerializationManager createSerializationManager();
 
-	/***/
-	@Test
-	public void testSerializeDeserialize() {
-		GregorianCalendar valueObject = new GregorianCalendar(2011, 5, 6);
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		serializationManager.serialize(valueObject, out);
-		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
-		assertEquals(valueObject, serializationManager.deserialize(in));
-	}
+  /***/
+  @Test
+  public void testSerializeDeserialize() {
+    GregorianCalendar valueObject = new GregorianCalendar(2011, 5, 6);
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    serializationManager.serialize(valueObject, out);
+    ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+    assertEquals(valueObject, serializationManager.deserialize(in));
+  }
 
-	/***/
-	@Test(expected = SerializationException.class)
-	public void testDeserialize_IOFails() {
-		serializationManager.serialize(new Object(), new OutputStream() {
-			@Override
-			public void write(int b) throws IOException {
-				throw new IOException();
-			}
-		});
-	}
+  /***/
+  @Test(expected = SerializationException.class)
+  public void testDeserialize_IOFails() {
+    serializationManager.serialize(new Object(), new OutputStream() {
+      @Override
+      public void write(int b) throws IOException {
+        throw new IOException();
+      }
+    });
+  }
 
-	/***/
-	@Test(expected = SerializationException.class)
-	public void testSerialize_IOFails() {
-		serializationManager.deserialize(new InputStream() {
-			@Override
-			public int read() throws IOException {
-				throw new IOException();
-			}
-		});
-	}
+  /***/
+  @Test(expected = SerializationException.class)
+  public void testSerialize_IOFails() {
+    serializationManager.deserialize(new InputStream() {
+      @Override
+      public int read() throws IOException {
+        throw new IOException();
+      }
+    });
+  }
 }

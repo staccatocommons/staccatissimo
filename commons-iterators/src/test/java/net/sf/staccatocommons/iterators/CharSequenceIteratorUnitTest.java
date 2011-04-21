@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.iterators;
 
 import java.util.Iterator;
@@ -24,11 +23,11 @@ import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
  */
 public class CharSequenceIteratorUnitTest extends IteratorTheories {
 
-	protected Iterator<?> createTwoElementsIterator() {
-		return new CharSequenceThriterator("ab");
-	}
+  protected Iterator<?> createTwoElementsIterator() {
+    return new CharSequenceThriterator("ab");
+  }
 
-	protected Iterator<?> createOneElementIterator() {
-		return new CharSequenceThriterator("a");
-	}
+  protected Iterator<?> createOneElementIterator() {
+    return new CharSequenceThriterator("a");
+  }
 }

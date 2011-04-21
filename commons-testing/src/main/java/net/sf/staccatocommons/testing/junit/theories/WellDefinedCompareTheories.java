@@ -23,65 +23,65 @@ import org.junit.experimental.theories.Theory;
  */
 public class WellDefinedCompareTheories extends WellDefinedEqualsTheories {
 
-	private boolean consistentWithEquals;
+  private boolean consistentWithEquals;
 
-	/**
-	 * Creates a new {@link WellDefinedCompareTheories}
-	 * 
-	 * @param consistentWithEquals
-	 *          if this theories must assume that the comparables under test are
-	 *          consistent with equals
-	 */
-	public WellDefinedCompareTheories(boolean consistentWithEquals) {
-		this.consistentWithEquals = consistentWithEquals;
-	}
+  /**
+   * Creates a new {@link WellDefinedCompareTheories}
+   * 
+   * @param consistentWithEquals
+   *          if this theories must assume that the comparables under test are
+   *          consistent with equals
+   */
+  public WellDefinedCompareTheories(boolean consistentWithEquals) {
+    this.consistentWithEquals = consistentWithEquals;
+  }
 
-	/**
-	 * Test that sign of comparing x and y is the opposite of comparing y and x
-	 * (rule nº1)
-	 */
-	@Theory
-	public void testRule1(Comparable o1, Comparable o2) throws Exception {
-		assertEquals(signum(o1.compareTo(o2)), -signum(o2.compareTo(o1)));
-	}
+  /**
+   * Test that sign of comparing x and y is the opposite of comparing y and x
+   * (rule nº1)
+   */
+  @Theory
+  public void testRule1(Comparable o1, Comparable o2) throws Exception {
+    assertEquals(signum(o1.compareTo(o2)), -signum(o2.compareTo(o1)));
+  }
 
-	/**
-	 * Test that comparison is transitive (rule nº2)
-	 */
-	@Theory
-	public void testTransitive(Comparable o1, Comparable o2, Comparable o3) throws Exception {
-		assumeTrue(o1.compareTo(o2) > 0);
-		assumeTrue(o2.compareTo(o3) > 0);
-		assertTrue(o1.compareTo(o3) > 0);
-	}
+  /**
+   * Test that comparison is transitive (rule nº2)
+   */
+  @Theory
+  public void testTransitive(Comparable o1, Comparable o2, Comparable o3) throws Exception {
+    assumeTrue(o1.compareTo(o2) > 0);
+    assumeTrue(o2.compareTo(o3) > 0);
+    assertTrue(o1.compareTo(o3) > 0);
+  }
 
-	/**
-	 * Test rule nº3
-	 */
-	@Theory
-	public void testRule3(Comparable o1, Comparable o2, Comparable o3) throws Exception {
-		assumeTrue(o1.compareTo(o2) == 0);
-		assertEquals(signum(o1.compareTo(o3)), signum(o2.compareTo(o3)));
-	}
+  /**
+   * Test rule nº3
+   */
+  @Theory
+  public void testRule3(Comparable o1, Comparable o2, Comparable o3) throws Exception {
+    assumeTrue(o1.compareTo(o2) == 0);
+    assertEquals(signum(o1.compareTo(o3)), signum(o2.compareTo(o3)));
+  }
 
-	/**
-	 * Theory that tests consistency of compareTo with equals.
-	 * 
-	 * @param o1
-	 * @param o2
-	 * @throws Exception
-	 */
-	@Theory
-	public void testConsistentWithEquals(Comparable o1, Comparable o2) throws Exception {
-		assumeTrue(consistentWithEquals);
-		assertEquals(o1.equals(o2), o1.compareTo(o2) == 0);
-	}
+  /**
+   * Theory that tests consistency of compareTo with equals.
+   * 
+   * @param o1
+   * @param o2
+   * @throws Exception
+   */
+  @Theory
+  public void testConsistentWithEquals(Comparable o1, Comparable o2) throws Exception {
+    assumeTrue(consistentWithEquals);
+    assertEquals(o1.equals(o2), o1.compareTo(o2) == 0);
+  }
 
-	private static int signum(int x) {
-		if (x < 0)
-			return -1;
-		if (x > 0)
-			return 1;
-		return 0;
-	}
+  private static int signum(int x) {
+    if (x < 0)
+      return -1;
+    if (x > 0)
+      return 1;
+    return 0;
+  }
 }

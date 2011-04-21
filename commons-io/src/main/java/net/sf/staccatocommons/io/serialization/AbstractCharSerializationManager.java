@@ -38,43 +38,43 @@ import net.sf.staccatocommons.io.serialization.lifecycle.CharSerializationLifecy
  */
 public abstract class AbstractCharSerializationManager implements CharSerializationManager {
 
-	@Override
-	public <T> T deserialize(String string) {
-		return deserialize(new StringReader(string));
-	}
+  @Override
+  public <T> T deserialize(String string) {
+    return deserialize(new StringReader(string));
+  }
 
-	@Override
-	public <T> T deserialize(InputStream inputStream) {
-		return deserialize(new InputStreamReader(inputStream));
-	}
+  @Override
+  public <T> T deserialize(InputStream inputStream) {
+    return deserialize(new InputStreamReader(inputStream));
+  }
 
-	@Override
-	public String serialize(Object target) {
-		StringWriter writer = new StringWriter();
-		serialize(target, writer);
-		return writer.toString();
-	}
+  @Override
+  public String serialize(Object target) {
+    StringWriter writer = new StringWriter();
+    serialize(target, writer);
+    return writer.toString();
+  }
 
-	@Override
-	public void serialize(Object target, OutputStream output) {
-		serialize(target, new OutputStreamWriter(output));
-	}
+  @Override
+  public void serialize(Object target, OutputStream output) {
+    serialize(target, new OutputStreamWriter(output));
+  }
 
-	@Override
-	public <T> T deserialize(final File input) {
-		return new CharSerializationLifecycle.Deserialize<T>(this) {
-			public Reader initialize() throws IOException {
-				return new FileReader(input);
-			}
-		}.value();
-	}
+  @Override
+  public <T> T deserialize(final File input) {
+    return new CharSerializationLifecycle.Deserialize<T>(this) {
+      public Reader initialize() throws IOException {
+        return new FileReader(input);
+      }
+    }.value();
+  }
 
-	@Override
-	public void serialize(Object target, final File output) {
-		new CharSerializationLifecycle.Serialize(this, target) {
-			public Writer initialize() throws IOException {
-				return new FileWriter(output);
-			}
-		}.value();
-	}
+  @Override
+  public void serialize(Object target, final File output) {
+    new CharSerializationLifecycle.Serialize(this, target) {
+      public Writer initialize() throws IOException {
+        return new FileWriter(output);
+      }
+    }.value();
+  }
 }

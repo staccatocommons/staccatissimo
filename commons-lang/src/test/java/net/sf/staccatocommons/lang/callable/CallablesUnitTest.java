@@ -27,26 +27,26 @@ import org.junit.Test;
  */
 public class CallablesUnitTest {
 
-	/**
-	 * Test method for {@link Callables#from(Thunk)} on exception
-	 */
-	@Test(expected = IOException.class)
-	public void testCall_failure() throws Exception {
-		Callables.from(new Thunk<Void>() {
-			public Void value() {
-				throw SoftException.soften(new IOException());
-			};
-		}).call();
-	}
+  /**
+   * Test method for {@link Callables#from(Thunk)} on exception
+   */
+  @Test(expected = IOException.class)
+  public void testCall_failure() throws Exception {
+    Callables.from(new Thunk<Void>() {
+      public Void value() {
+        throw SoftException.soften(new IOException());
+      };
+    }).call();
+  }
 
-	/** Test method for {@link Callables#from(Thunk)} */
-	@Test
-	public void testCall() throws Exception {
-		assertEquals(5, (int) Callables.from(new Thunk<Integer>() {
-			public Integer value() {
-				return 5;
-			}
-		}).call());
-	}
+  /** Test method for {@link Callables#from(Thunk)} */
+  @Test
+  public void testCall() throws Exception {
+    assertEquals(5, (int) Callables.from(new Thunk<Integer>() {
+      public Integer value() {
+        return 5;
+      }
+    }).call());
+  }
 
 }

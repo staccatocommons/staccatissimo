@@ -23,12 +23,12 @@ import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
  */
 public interface EmptyAware {
 
-	/**
-	 * Answers if this {@link EmptyAware} is empty. This message
-	 * <strong>should</strong> be {@link SideEffectFree}
-	 * 
-	 * @return if the object is empty.
-	 */
-	boolean isEmpty();
+  /**
+   * Answers if this {@link EmptyAware} is empty. This message
+   * <strong>should</strong> be {@link SideEffectFree}
+   * 
+   * @return if the object is empty.
+   */
+  boolean isEmpty();
 
 }

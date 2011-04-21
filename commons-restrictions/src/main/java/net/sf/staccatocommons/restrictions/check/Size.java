@@ -39,15 +39,15 @@ import net.sf.staccatocommons.restrictions.Restriction;
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
 public @interface Size {
 
-	/**
-	 * @return The variable name of the constrained element, or the empty string
-	 *         if unspecified. This value may help tools that analyze this
-	 *         annotation without access to source code.
-	 */
-	String var() default "";
+  /**
+   * @return The variable name of the constrained element, or the empty string
+   *         if unspecified. This value may help tools that analyze this
+   *         annotation without access to source code.
+   */
+  String var() default "";
 
-	/**
-	 * @return the size the annotated element must have
-	 */
-	public int value();
+  /**
+   * @return the size the annotated element must have
+   */
+  public int value();
 }

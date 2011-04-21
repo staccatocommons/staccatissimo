@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.io;
 
 import java.io.File;
@@ -27,34 +26,34 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class IOFunctions {
 
-	/**
-	 * Answers a function that returns the name of a file
-	 * 
-	 * @return a {@link Function} that returns <code>arg.getName()</code>
-	 */
-	@NonNull
-	@Constant
-	public static Function<File, String> fileName() {
-		return new AbstractFunction<File, String>() {
-			public String apply(File arg) {
-				return arg.getName();
-			}
-		};
-	}
+  /**
+   * Answers a function that returns the name of a file
+   * 
+   * @return a {@link Function} that returns <code>arg.getName()</code>
+   */
+  @NonNull
+  @Constant
+  public static Function<File, String> fileName() {
+    return new AbstractFunction<File, String>() {
+      public String apply(File arg) {
+        return arg.getName();
+      }
+    };
+  }
 
-	/**
-	 * Answers a function that returns the path of a file
-	 * 
-	 * @return a {@link Function} that returns <code>arg.getPath()</code>
-	 */
-	@NonNull
-	@Constant
-	public static Function<File, String> filePath() {
-		return new AbstractFunction<File, String>() {
-			public String apply(File arg) {
-				return arg.getPath();
-			}
-		};
-	}
+  /**
+   * Answers a function that returns the path of a file
+   * 
+   * @return a {@link Function} that returns <code>arg.getPath()</code>
+   */
+  @NonNull
+  @Constant
+  public static Function<File, String> filePath() {
+    return new AbstractFunction<File, String>() {
+      public String apply(File arg) {
+        return arg.getPath();
+      }
+    };
+  }
 
 }

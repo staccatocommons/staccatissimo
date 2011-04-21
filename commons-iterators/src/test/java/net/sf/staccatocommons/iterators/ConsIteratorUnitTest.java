@@ -23,12 +23,12 @@ import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
  */
 public class ConsIteratorUnitTest extends IteratorTheories {
 
-	protected Iterator<?> createTwoElementsIterator() {
-		return new PrependThriterator(50, Arrays.asList(10).iterator());
-	}
+  protected Iterator<?> createTwoElementsIterator() {
+    return new PrependThriterator(50, Arrays.asList(10).iterator());
+  }
 
-	protected Iterator<?> createOneElementIterator() {
-		return new PrependThriterator(60, EmptyThriterator.empty());
-	}
+  protected Iterator<?> createOneElementIterator() {
+    return new PrependThriterator(60, EmptyThriterator.empty());
+  }
 
 }

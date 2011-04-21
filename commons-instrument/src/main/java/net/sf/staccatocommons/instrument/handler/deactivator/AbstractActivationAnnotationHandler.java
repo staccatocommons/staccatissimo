@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.handler.deactivator;
 
 import java.lang.annotation.Annotation;
@@ -26,36 +25,35 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public abstract class AbstractActivationAnnotationHandler<A extends Annotation> implements
-	AnnotationHandler<A> {
+public abstract class AbstractActivationAnnotationHandler<A extends Annotation> implements AnnotationHandler<A> {
 
-	private final Collection<Deactivable> handlers = new LinkedList<Deactivable>();
+  private final Collection<Deactivable> handlers = new LinkedList<Deactivable>();
 
-	/**
-	 * Register a deactivable object that will be activated or deactivated after
-	 * the occurrence certain annotation processing events
-	 * 
-	 * @param deactivable
-	 */
-	public void addDeactivable(@NonNull Deactivable deactivable) {
-		Ensure.isNotNull("deactivable", deactivable);
-		handlers.add(deactivable);
-	}
+  /**
+   * Register a deactivable object that will be activated or deactivated after
+   * the occurrence certain annotation processing events
+   * 
+   * @param deactivable
+   */
+  public void addDeactivable(@NonNull Deactivable deactivable) {
+    Ensure.isNotNull("deactivable", deactivable);
+    handlers.add(deactivable);
+  }
 
-	/**
-	 * Deactivates all the registered {@link Deactivable} handlers
-	 */
-	protected void deactivateAll() {
-		for (Deactivable deactivable : handlers)
-			deactivable.deactivate();
-	}
+  /**
+   * Deactivates all the registered {@link Deactivable} handlers
+   */
+  protected void deactivateAll() {
+    for (Deactivable deactivable : handlers)
+      deactivable.deactivate();
+  }
 
-	/**
-	 * Activates all the registered {@link Deactivable} handlers
-	 */
-	protected void activateAll() {
-		for (Deactivable deactivable : handlers)
-			deactivable.activate();
-	}
+  /**
+   * Activates all the registered {@link Deactivable} handlers
+   */
+  protected void activateAll() {
+    for (Deactivable deactivable : handlers)
+      deactivable.activate();
+  }
 
 }

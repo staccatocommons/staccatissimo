@@ -12,20 +12,19 @@
  */
 package net.sf.staccatocommons.iterators.thriter;
 
-
 /**
  * @author flbulgarelli
  * 
  */
 public abstract class NextThriterator<A> extends AbstractThriterator<A> {
 
-	private A next;
+  private A next;
 
-	public final void advanceNext() {
-		next = next();
-	}
+  public final void advanceNext() {
+    next = next();
+  }
 
-	public final A current() {
-		return next;
-	}
+  public final A current() {
+    return next;
+  }
 }

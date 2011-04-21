@@ -22,30 +22,30 @@ import net.sf.staccatocommons.defs.type.EmptyAwareType;
  */
 public class EmptyAwareTypes {
 
-	/**
-	 * An {@link EmptyAwareType} for {@link EmptyAware}s. It implements
-	 * {@link EmptyAwareType#isEmpty(Object)} sending {@link EmptyAware#isEmpty()}
-	 * to its argument.
-	 */
-	public static final EmptyAwareType<EmptyAware> EMPTY_AWARE = new EmptyAwareType<EmptyAware>() {
-		public boolean isEmpty(EmptyAware emptyAware) {
-			return emptyAware.isEmpty();
-		}
-	};
+  /**
+   * An {@link EmptyAwareType} for {@link EmptyAware}s. It implements
+   * {@link EmptyAwareType#isEmpty(Object)} sending {@link EmptyAware#isEmpty()}
+   * to its argument.
+   */
+  public static final EmptyAwareType<EmptyAware> EMPTY_AWARE = new EmptyAwareType<EmptyAware>() {
+    public boolean isEmpty(EmptyAware emptyAware) {
+      return emptyAware.isEmpty();
+    }
+  };
 
-	/**
-	 * An {@link EmptyAwareType} for {@link Iterables}s. Iterables are considered
-	 * to be empty if its sending hasNext to its {@link Iterable#iterator()}
-	 * returns <code>false</code>.
-	 * 
-	 * This empty aware type properly implements {@link EmptyAwareType}, being its
-	 * isEmpty method sideEffectFree, because an iterator must be implemented so
-	 * that its has next method is sideEffectFree, too.
-	 * 
-	 */
-	public static final EmptyAwareType<Iterable<?>> ITERABLE = new EmptyAwareType<Iterable<?>>() {
-		public boolean isEmpty(Iterable<?> emptyAware) {
-			return !emptyAware.iterator().hasNext();
-		}
-	};
+  /**
+   * An {@link EmptyAwareType} for {@link Iterables}s. Iterables are considered
+   * to be empty if its sending hasNext to its {@link Iterable#iterator()}
+   * returns <code>false</code>.
+   * 
+   * This empty aware type properly implements {@link EmptyAwareType}, being its
+   * isEmpty method sideEffectFree, because an iterator must be implemented so
+   * that its has next method is sideEffectFree, too.
+   * 
+   */
+  public static final EmptyAwareType<Iterable<?>> ITERABLE = new EmptyAwareType<Iterable<?>>() {
+    public boolean isEmpty(Iterable<?> emptyAware) {
+      return !emptyAware.iterator().hasNext();
+    }
+  };
 }

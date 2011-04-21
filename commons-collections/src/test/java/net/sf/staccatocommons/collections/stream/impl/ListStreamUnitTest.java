@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl;
 
 import static org.junit.Assert.*;
@@ -33,22 +32,21 @@ import org.junit.experimental.theories.Theory;
  */
 public class ListStreamUnitTest extends RepetableStreamTheories {
 
-	/**
-	 * data set of lists
-	 */
-	@DataPoints
-	public static Stream<Integer>[] streams = new Stream[] {
-			Streams.from(Arrays.asList(4, 5, 6, 5, 33, 0)), //
-			Streams.from(Collections.emptyList()),//
-			Streams.from(Collections.singletonList(5)) };
+  /**
+   * data set of lists
+   */
+  @DataPoints
+  public static Stream<Integer>[] streams = new Stream[] { Streams.from(Arrays.asList(4, 5, 6, 5, 33, 0)), //
+      Streams.from(Collections.emptyList()),//
+      Streams.from(Collections.singletonList(5)) };
 
-	/** Integer datapoints */
-	@DataPoints
-	public static Integer[] integers = new Integer[] { 0, -50, 5 };
+  /** Integer datapoints */
+  @DataPoints
+  public static Integer[] integers = new Integer[] { 0, -50, 5 };
 
-	/** Tets for indexof */
-	@Theory
-	public void testIndexof(Stream<Integer> stream, Integer element) throws Exception {
-		assertEquals(Iterables.indexOf(stream, element), stream.indexOf(element));
-	}
+  /** Tets for indexof */
+  @Theory
+  public void testIndexof(Stream<Integer> stream, Integer element) throws Exception {
+    assertEquals(Iterables.indexOf(stream, element), stream.indexOf(element));
+  }
 }

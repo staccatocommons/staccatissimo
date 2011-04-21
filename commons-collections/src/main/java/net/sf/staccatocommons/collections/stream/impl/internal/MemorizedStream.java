@@ -26,87 +26,93 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
  */
 public class MemorizedStream<A> extends WrapperStream<A> {
 
-	private SingleLinkedDelayedQueue<A> previous = new SingleLinkedDelayedQueue<A>();
+  private SingleLinkedDelayedQueue<A> previous = new SingleLinkedDelayedQueue<A>();
 
-	private Thriterator<A> remaining;
+  private Thriterator<A> remaining;
 
-	/**
-	 * 
-	 * Creates a new {@link MemorizedStream}
-	 */
-	public MemorizedStream(Stream<A> source) {
-		super(source);
-		this.remaining = source.iterator();
-	}
+  /**
+   * 
+   * Creates a new {@link MemorizedStream}
+   */
+  public MemorizedStream(Stream<A> source) {
+    super(source);
+    this.remaining = source.iterator();
+  }
 
-	public boolean isEmpty() {
-		return previous.isEmpty() && !remaining.hasNext();
-	}
+  @Override
+  public boolean isEmpty() {
+    return previous.isEmpty() && !remaining.hasNext();
+  }
 
-	public Stream<A> toEmptyAware() {
-		return this;
-	}
+  @Override
+  public Stream<A> toEmptyAware() {
+    return this;
+  }
 
-	public Stream<A> memorize() {
-		return this;
-	}
+  @Override
+  public Stream<A> memorize() {
+    return this;
+  }
 
-	public Thriterator<A> iterator() {
-		if (remaining.isEmpty()) {
-			if (previous.isEmpty())
-				return EmptyThriterator.empty();
-			return previous.iterator();
-		}
-		final Thriterator<A> previousIter = previous.iterator();
-		return new AdvanceThriterator<A>() {
-			private Thunk<A> current;
-			private Thriterator<A> iter = previousIter;
-			private boolean remainingIterationStarted = false;
+  @Override
+  public Thriterator<A> iterator() {
+    if (remaining.isEmpty()) {
+      if (previous.isEmpty())
+        return EmptyThriterator.empty();
+      return previous.iterator();
+    }
+    final Thriterator<A> previousIter = previous.iterator();
+    return new AdvanceThriterator<A>() {
+      private Thunk<A> current;
+      private Thriterator<A> iter = previousIter;
+      private boolean remainingIterationStarted = false;
 
-			public boolean hasNext() {
-				if (remainingIterationStarted)
-					return iter.hasNext();
-				return remaining.hasNext();
-			}
+      public boolean hasNext() {
+        if (remainingIterationStarted)
+          return iter.hasNext();
+        return remaining.hasNext();
+      }
 
-			public void advanceNext() throws NoSuchElementException {
-				if (!remainingIterationStarted && !iter.hasNext()) {
-					iter = newRemaningIterator();
-					remainingIterationStarted = true;
-				}
-				iter.advanceNext();
-			}
+      public void advanceNext() throws NoSuchElementException {
+        if (!remainingIterationStarted && !iter.hasNext()) {
+          iter = newRemaningIterator();
+          remainingIterationStarted = true;
+        }
+        iter.advanceNext();
+      }
 
-			public A current() {
-				return iter.current();
-			}
+      public A current() {
+        return iter.current();
+      }
 
-			public Thunk<A> delayedCurrent() {
-				return iter.delayedCurrent();
-			}
+      @Override
+      public Thunk<A> delayedCurrent() {
+        return iter.delayedCurrent();
+      }
 
-			public Thriterator<A> newRemaningIterator() {
-				return new AdvanceThriterator<A>() {
-					public boolean hasNext() {
-						return remaining.hasNext();
-					}
+      public Thriterator<A> newRemaningIterator() {
+        return new AdvanceThriterator<A>() {
+          public boolean hasNext() {
+            return remaining.hasNext();
+          }
 
-					public void advanceNext() throws NoSuchElementException {
-						remaining.advanceNext();
-						current = remaining.delayedCurrent();
-						previous.add(current);
-					}
+          public void advanceNext() throws NoSuchElementException {
+            remaining.advanceNext();
+            current = remaining.delayedCurrent();
+            previous.add(current);
+          }
 
-					public A current() {
-						return delayedCurrent().value();
-					}
+          public A current() {
+            return delayedCurrent().value();
+          }
 
-					public Thunk<A> delayedCurrent() {
-						return current;
-					}
-				};
-			}
-		};
-	}
+          @Override
+          public Thunk<A> delayedCurrent() {
+            return current;
+          }
+        };
+      }
+    };
+  }
 
 }

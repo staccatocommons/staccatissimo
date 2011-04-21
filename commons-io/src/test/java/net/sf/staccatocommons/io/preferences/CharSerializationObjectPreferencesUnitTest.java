@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.io.preferences;
 
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
@@ -42,104 +41,104 @@ import com.thoughtworks.xstream.XStream;
  */
 public class CharSerializationObjectPreferencesUnitTest extends JUnit4MockObjectTestCase {
 
-	private static final String KEY = "key";
-	private CharSerializationObjectPreferences objectPreferences;
-	private Preferences preferences;
-	private CharSerializationManager manager;
+  private static final String KEY = "key";
+  private CharSerializationObjectPreferences objectPreferences;
+  private Preferences preferences;
+  private CharSerializationManager manager;
 
-	/***/
-	@Before
-	public void setup() {
-		setImposteriser(ClassImposteriser.INSTANCE);
-		preferences = mock(Preferences.class);
-		manager = new XStreamXmlSerializationManager(new XStream());
-		objectPreferences = new CharSerializationObjectPreferences(preferences, manager);
-	}
+  /***/
+  @Before
+  public void setup() {
+    setImposteriser(ClassImposteriser.INSTANCE);
+    preferences = mock(Preferences.class);
+    manager = new XStreamXmlSerializationManager(new XStream());
+    objectPreferences = new CharSerializationObjectPreferences(preferences, manager);
+  }
 
-	/** test for {@link ObjectPreferences#getNode()} */
-	@Test
-	public void testGetPreferences() {
-		assertSame(preferences, objectPreferences.getNode());
-	}
+  /** test for {@link ObjectPreferences#getNode()} */
+  @Test
+  public void testGetPreferences() {
+    assertSame(preferences, objectPreferences.getNode());
+  }
 
-	/** Test for {@link ObjectPreferences#put(String, Object)} */
-	// TODO bad test. provide binding capabilities. it is not actually of interest
-	// of this test to know that the string is escaped
-	@Test
-	public void testPutAndGet() {
-		final Calendar calendar = new GregorianCalendar(2010, Calendar.MAY, 25);
-		final String calendarXML = manager.serialize(calendar);
-		checking(new Expectations() {
-			{
-				one(preferences).put(KEY, calendarXML);
-				one(preferences).get(with(KEY), with(any(String.class)));
-				will(returnValue(calendarXML));
-			}
-		});
-		objectPreferences.put(KEY, calendar);
-		assertEquals(calendar, objectPreferences.get(KEY, null));
+  /** Test for {@link ObjectPreferences#put(String, Object)} */
+  // TODO bad test. provide binding capabilities. it is not actually of interest
+  // of this test to know that the string is escaped
+  @Test
+  public void testPutAndGet() {
+    final Calendar calendar = new GregorianCalendar(2010, Calendar.MAY, 25);
+    final String calendarXML = manager.serialize(calendar);
+    checking(new Expectations() {
+      {
+        one(preferences).put(KEY, calendarXML);
+        one(preferences).get(with(KEY), with(any(String.class)));
+        will(returnValue(calendarXML));
+      }
+    });
+    objectPreferences.put(KEY, calendar);
+    assertEquals(calendar, objectPreferences.get(KEY, null));
 
-	}
+  }
 
-	/** Test for {@link ObjectPreferences#get(String, Object)} */
-	@Test
-	public void testGetInvallidValue() throws Exception {
-		checking(new Expectations() {
-			{
-				one(preferences).get(KEY, null);
-				will(returnValue("fdsfsdfsd<>!!"));
-			}
-		});
-		Triple<Integer, Integer, String> defaultValue = _(90, 56, "Hello");
-		Triple<Integer, Integer, String> value = objectPreferences.get(KEY, defaultValue);
-		assertEquals(defaultValue, value);
-	}
+  /** Test for {@link ObjectPreferences#get(String, Object)} */
+  @Test
+  public void testGetInvallidValue() throws Exception {
+    checking(new Expectations() {
+      {
+        one(preferences).get(KEY, null);
+        will(returnValue("fdsfsdfsd<>!!"));
+      }
+    });
+    Triple<Integer, Integer, String> defaultValue = _(90, 56, "Hello");
+    Triple<Integer, Integer, String> value = objectPreferences.get(KEY, defaultValue);
+    assertEquals(defaultValue, value);
+  }
 
-	/** Test for {@link ObjectPreferences#get(String, Object)} */
-	@Test
-	public void testGetUnsetValue() throws Exception {
-		checking(new Expectations() {
-			{
-				one(preferences).get(KEY, null);
-				will(returnValue(null));
-			}
-		});
-		Triple<Integer, Integer, String> defaultValue = _(90, 56, "Bye");
-		Triple<Integer, Integer, String> value = objectPreferences.get(KEY, defaultValue);
-		assertEquals(defaultValue, value);
-	}
+  /** Test for {@link ObjectPreferences#get(String, Object)} */
+  @Test
+  public void testGetUnsetValue() throws Exception {
+    checking(new Expectations() {
+      {
+        one(preferences).get(KEY, null);
+        will(returnValue(null));
+      }
+    });
+    Triple<Integer, Integer, String> defaultValue = _(90, 56, "Bye");
+    Triple<Integer, Integer, String> value = objectPreferences.get(KEY, defaultValue);
+    assertEquals(defaultValue, value);
+  }
 
-	/** Test for {@link ObjectPreferences#flush()} */
-	@Test
-	public void testFlush() throws BackingStoreException {
-		checking(new Expectations() {
-			{
-				one(preferences).flush();
-			}
-		});
-		objectPreferences.flush();
-	}
+  /** Test for {@link ObjectPreferences#flush()} */
+  @Test
+  public void testFlush() throws BackingStoreException {
+    checking(new Expectations() {
+      {
+        one(preferences).flush();
+      }
+    });
+    objectPreferences.flush();
+  }
 
-	/** Test for {@link ObjectPreferences#sync()} */
-	@Test
-	public void testSync() throws BackingStoreException {
-		checking(new Expectations() {
-			{
-				one(preferences).sync();
-			}
-		});
-		objectPreferences.sync();
-	}
+  /** Test for {@link ObjectPreferences#sync()} */
+  @Test
+  public void testSync() throws BackingStoreException {
+    checking(new Expectations() {
+      {
+        one(preferences).sync();
+      }
+    });
+    objectPreferences.sync();
+  }
 
-	/** Test for {@link ObjectPreferences#remove(String)} */
-	@Test
-	public void testRemove() {
-		checking(new Expectations() {
-			{
-				one(preferences).remove(KEY);
-			}
-		});
-		objectPreferences.remove(KEY);
-	}
+  /** Test for {@link ObjectPreferences#remove(String)} */
+  @Test
+  public void testRemove() {
+    checking(new Expectations() {
+      {
+        one(preferences).remove(KEY);
+      }
+    });
+    objectPreferences.remove(KEY);
+  }
 
 }

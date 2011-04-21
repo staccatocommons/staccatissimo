@@ -23,37 +23,37 @@ import java.util.NoSuchElementException;
  */
 public abstract class NextGetIterator<A> extends AbstractUnmodifiableIterator<A> {
 
-	private A next;
-	private Boolean hasNext;
+  private A next;
+  private Boolean hasNext;
 
-	public final boolean hasNext() {
-		if (hasNext == null)
-			hasNext = updateNext();
-		return hasNext;
-	}
+  public final boolean hasNext() {
+    if (hasNext == null)
+      hasNext = updateNext();
+    return hasNext;
+  }
 
-	public final A next() {
-		if (!hasNext())
-			throw new NoSuchElementException();
-		hasNext = null;
-		return next;
-	}
+  public final A next() {
+    if (!hasNext())
+      throw new NoSuchElementException();
+    hasNext = null;
+    return next;
+  }
 
-	/**
-	 * Sets the next value to iterate over.
-	 * 
-	 * @param next
-	 *          the next element to retrieve
-	 * @return <code>next</code>
-	 */
-	protected final A setNext(A next) {
-		this.next = next;
-		return next;
-	}
+  /**
+   * Sets the next value to iterate over.
+   * 
+   * @param next
+   *          the next element to retrieve
+   * @return <code>next</code>
+   */
+  protected final A setNext(A next) {
+    this.next = next;
+    return next;
+  }
 
-	protected final A getNext() {
-		return next;
-	}
+  protected final A getNext() {
+    return next;
+  }
 
-	protected abstract boolean updateNext();
+  protected abstract boolean updateNext();
 }

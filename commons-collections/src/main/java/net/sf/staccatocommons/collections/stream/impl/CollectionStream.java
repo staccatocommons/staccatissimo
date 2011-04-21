@@ -29,50 +29,50 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class CollectionStream<A> extends StrictStream<A> {
 
-	private final Collection<? extends A> collection;
+  private final Collection<? extends A> collection;
 
-	/**
-	 * Creates a new {@link CollectionStream}
-	 * 
-	 * @param collection
-	 *          the collection to wrap
-	 */
-	public CollectionStream(@NonNull Collection<? extends A> collection) {
-		this.collection = collection;
-	}
+  /**
+   * Creates a new {@link CollectionStream}
+   * 
+   * @param collection
+   *          the collection to wrap
+   */
+  public CollectionStream(@NonNull Collection<? extends A> collection) {
+    this.collection = collection;
+  }
 
-	@Override
-	public final int size() {
-		return collection.size();
-	}
+  @Override
+  public final int size() {
+    return collection.size();
+  }
 
-	@Override
-	public final boolean contains(A element) {
-		return collection.contains(element);
-	}
+  @Override
+  public final boolean contains(A element) {
+    return collection.contains(element);
+  }
 
-	@Override
-	public boolean isEmpty() {
-		return collection.isEmpty();
-	}
+  @Override
+  public boolean isEmpty() {
+    return collection.isEmpty();
+  }
 
-	@Override
-	public final Thriterator<A> iterator() {
-		return Thriterators.from(collection.iterator());
-	}
+  @Override
+  public final Thriterator<A> iterator() {
+    return Thriterators.from(collection.iterator());
+  }
 
-	@Override
-	public List<A> toList() {
-		return Iterables.toList(getCollection());
-	}
+  @Override
+  public List<A> toList() {
+    return Iterables.toList(getCollection());
+  }
 
-	@Override
-	public A[] toArray(Class<? super A> clazz) {
-		return toArray(clazz, getCollection());
-	}
+  @Override
+  public A[] toArray(Class<? super A> clazz) {
+    return toArray(clazz, getCollection());
+  }
 
-	protected Collection<A> getCollection() {
-		return (Collection<A>) collection;
-	}
+  protected Collection<A> getCollection() {
+    return (Collection<A>) collection;
+  }
 
 }

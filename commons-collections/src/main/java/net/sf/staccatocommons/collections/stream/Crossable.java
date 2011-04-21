@@ -26,39 +26,39 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Crossable<A> {
 
-	/**
-	 * Answers the Cartesian product of this stream and the given one
-	 * 
-	 * @param <B>
-	 * @param other
-	 * @return a new {@link Stream} projection
-	 * @see Iterables#cross(Iterable, Iterable)
-	 */
-	@NonNull
-	@Projection
-	<B> Stream<Pair<A, B>> cross(@NonNull Stream<B> other);
+  /**
+   * Answers the Cartesian product of this stream and the given one
+   * 
+   * @param <B>
+   * @param other
+   * @return a new {@link Stream} projection
+   * @see Iterables#cross(Iterable, Iterable)
+   */
+  @NonNull
+  @Projection
+  <B> Stream<Pair<A, B>> cross(@NonNull Stream<B> other);
 
-	/**
-	 * Answers the cartesian product of this {@link Stream} and the given
-	 * {@link Iterable}
-	 * 
-	 * @param <B>
-	 * @param other
-	 * @return <code>cross(Streams.from(other))</code>
-	 * @see #cross(Stream)
-	 */
-	@NonNull
-	@Projection
-	<B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other);
+  /**
+   * Answers the cartesian product of this {@link Stream} and the given
+   * {@link Iterable}
+   * 
+   * @param <B>
+   * @param other
+   * @return <code>cross(Streams.from(other))</code>
+   * @see #cross(Stream)
+   */
+  @NonNull
+  @Projection
+  <B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other);
 
-	/**
-	 * Answers the cartesian product of this {@link Stream} and each one of the
-	 * given <code>streamOfStreams</code>
-	 * 
-	 * @param streamOfStreams
-	 * @return a new {@link Stream} projection
-	 */
-	@NonNull
-	@Projection
-	Stream<Stream<A>> fullCross(@NonNull Stream<Stream<A>> streamOfStreams);
+  /**
+   * Answers the cartesian product of this {@link Stream} and each one of the
+   * given <code>streamOfStreams</code>
+   * 
+   * @param streamOfStreams
+   * @return a new {@link Stream} projection
+   */
+  @NonNull
+  @Projection
+  Stream<Stream<A>> fullCross(@NonNull Stream<Stream<A>> streamOfStreams);
 }

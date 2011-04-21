@@ -24,19 +24,19 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class DelayedSingleIterator<A> extends SingleThriterator<A> {
 
-	/**
-	 * Creates a new {@link DelayedSingleIterator}
-	 */
-	public DelayedSingleIterator(@NonNull Thunk<A> element) {
-		super((A) element);
-	}
+  /**
+   * Creates a new {@link DelayedSingleIterator}
+   */
+  public DelayedSingleIterator(@NonNull Thunk<A> element) {
+    super((A) element);
+  }
 
-	public A current() throws NoSuchElementException {
-		return ((Thunk<A>) super.current()).value();
-	}
+  public A current() throws NoSuchElementException {
+    return ((Thunk<A>) super.current()).value();
+  }
 
-	public Thunk<A> delayedCurrent() {
-		return (Thunk<A>) super.current();
-	}
+  public Thunk<A> delayedCurrent() {
+    return (Thunk<A>) super.current();
+  }
 
 }

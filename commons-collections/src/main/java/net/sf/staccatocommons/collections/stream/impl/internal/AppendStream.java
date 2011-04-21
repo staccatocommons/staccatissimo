@@ -22,18 +22,18 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
  */
 public class AppendStream<A> extends WrapperStream<A> {
 
-	private final A element;
+  private final A element;
 
-	/**
-	 * Creates a new {@link AppendStream}
-	 */
-	public AppendStream(Stream<A> source, A element) {
-		super(source);
-		this.element = element;
-	}
+  /**
+   * Creates a new {@link AppendStream}
+   */
+  public AppendStream(Stream<A> source, A element) {
+    super(source);
+    this.element = element;
+  }
 
-	public Thriterator<A> iterator() {
-		return new AppendThriterator(getSource().iterator(), element);
-	}
+  public Thriterator<A> iterator() {
+    return new AppendThriterator(getSource().iterator(), element);
+  }
 
 }

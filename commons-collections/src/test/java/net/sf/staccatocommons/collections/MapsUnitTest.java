@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections;
 
 import static org.hamcrest.Matchers.*;
@@ -32,47 +31,43 @@ import org.junit.Test;
  * 
  */
 public class MapsUnitTest {
-	private Map<String, Integer> map = MapBuilder
-		.mapWith("Foo", 50)
-		.with("Bar", 90)
-		.with("Foobar", 120)
-		.build();
+  private Map<String, Integer> map = MapBuilder.mapWith("Foo", 50).with("Bar", 90).with("Foobar", 120).build();
 
-	/**
-	 * Test method for {@link Maps#anyKey(Map)}
-	 */
-	@Test
-	public void testAnyKey() {
-		assertThat(Maps.anyKey(map).value(), isOneOf("Foo", "Bar", "Foobar"));
-		assertTrue(Maps.anyKey(Collections.emptyMap()).isUndefined());
-	}
+  /**
+   * Test method for {@link Maps#anyKey(Map)}
+   */
+  @Test
+  public void testAnyKey() {
+    assertThat(Maps.anyKey(map).value(), isOneOf("Foo", "Bar", "Foobar"));
+    assertTrue(Maps.anyKey(Collections.emptyMap()).isUndefined());
+  }
 
-	/**
-	 * Test method for {@link Maps#anyKeyOrNull(Map)}
-	 */
-	@Test
-	public void testAnyKeyOrNull() {
-		assertThat(Maps.anyKeyOrNull(map), isOneOf("Foo", "Bar", "Foobar"));
-		assertNull(Maps.anyKeyOrNull(Collections.emptyMap()));
-	}
+  /**
+   * Test method for {@link Maps#anyKeyOrNull(Map)}
+   */
+  @Test
+  public void testAnyKeyOrNull() {
+    assertThat(Maps.anyKeyOrNull(map), isOneOf("Foo", "Bar", "Foobar"));
+    assertNull(Maps.anyKeyOrNull(Collections.emptyMap()));
+  }
 
-	/**
-	 * Test method for {@link Maps#anyKeyValue(Map)}
-	 */
-	@Test
-	public void testAnyValue() {
-		assertThat(Maps.anyValue(map).value(), isOneOf(50, 90, 120));
-		assertNull(Maps.anyValueOrNull(Collections.emptyMap()));
-	}
+  /**
+   * Test method for {@link Maps#anyKeyValue(Map)}
+   */
+  @Test
+  public void testAnyValue() {
+    assertThat(Maps.anyValue(map).value(), isOneOf(50, 90, 120));
+    assertNull(Maps.anyValueOrNull(Collections.emptyMap()));
+  }
 
-	/**
-	 * Test method for {@link Maps#get(Map, Object)}
-	 */
-	@Test
-	public void testGet() throws Exception {
-		assertEquals(50, (int) Maps.get(map, "Foo").value());
-		assertTrue(Maps.get(map, "FOO").isUndefined());
-		assertEquals(Option.someNull(), Maps.get(MapBuilder.mapWith(10, null).build(), 10));
+  /**
+   * Test method for {@link Maps#get(Map, Object)}
+   */
+  @Test
+  public void testGet() throws Exception {
+    assertEquals(50, (int) Maps.get(map, "Foo").value());
+    assertTrue(Maps.get(map, "FOO").isUndefined());
+    assertEquals(Option.someNull(), Maps.get(MapBuilder.mapWith(10, null).build(), 10));
 
-	}
+  }
 }

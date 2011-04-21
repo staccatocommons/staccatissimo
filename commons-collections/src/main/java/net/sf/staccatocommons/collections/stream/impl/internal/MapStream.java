@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import net.sf.staccatocommons.collections.internal.iterator.MapIterator;
@@ -29,44 +28,49 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @param <B>
  */
 public final class MapStream<A, B> extends AbstractStream<B> {
-	private final Stream<A> stream;
-	private final Function<? super A, ? extends B> function;
+  private final Stream<A> stream;
+  private final Function<? super A, ? extends B> function;
 
-	/**
-	 * Creates a new {@link MapStream}
-	 */
-	public MapStream(@NonNull Stream<A> stream, @NonNull Function<? super A, ? extends B> function) {
-		this.stream = stream;
-		this.function = function;
-	}
+  /**
+   * Creates a new {@link MapStream}
+   */
+  public MapStream(@NonNull Stream<A> stream, @NonNull Function<? super A, ? extends B> function) {
+    this.stream = stream;
+    this.function = function;
+  }
 
-	public Thriterator<B> iterator() {
-		return new MapIterator<A, B>(function, stream.iterator());
-	}
+  public Thriterator<B> iterator() {
+    return new MapIterator<A, B>(function, stream.iterator());
+  }
 
-	public B get(int n) {
-		return function.apply(stream.get(n));
-	}
+  @Override
+  public B get(int n) {
+    return function.apply(stream.get(n));
+  }
 
-	public int size() {
-		return stream.size();
-	}
+  @Override
+  public int size() {
+    return stream.size();
+  }
 
-	public boolean isEmpty() {
-		return stream.isEmpty();
-	}
+  @Override
+  public boolean isEmpty() {
+    return stream.isEmpty();
+  }
 
-	public Stream<B> toEmptyAware() {
-		return new MapStream<A, B>(stream.toEmptyAware(), function);
-	}
+  @Override
+  public Stream<B> toEmptyAware() {
+    return new MapStream<A, B>(stream.toEmptyAware(), function);
+  }
 
-	@Override
-	public <C> Stream<C> map(final Function<? super B, ? extends C> function) {
-		return new MapStream<A, C>(stream, function.of(this.function));
-	}
+  @Override
+  public <C> Stream<C> map(final Function<? super B, ? extends C> function) {
+    return new MapStream<A, C>(stream, function.of(this.function));
+  }
 
-	public NumberType<B> numberType() {
-		return ((NumberTypeAware<B>) function).numberType();
-	}
+  @Override
+  public NumberType<B> numberType() {
+    return ((NumberTypeAware<B>) function).numberType();
+  }
 
 }

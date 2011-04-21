@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.predicate;
 
 import java.util.Arrays;
@@ -39,200 +38,200 @@ import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
  */
 public class Predicates {
 
-	private Predicates() {}
+  private Predicates() {}
 
-	/**
-	 * @param <T>
-	 * @return A {@link AbstractPredicate} that always returns <code>true</code>
-	 */
-	@NonNull
-	@Constant
-	public static <T> Predicate<T> true_() {
-		return True.getInstance();
-	}
+  /**
+   * @param <T>
+   * @return A {@link AbstractPredicate} that always returns <code>true</code>
+   */
+  @NonNull
+  @Constant
+  public static <T> Predicate<T> true_() {
+    return True.getInstance();
+  }
 
-	/**
-	 * @param <T>
-	 * @return A {@link AbstractPredicate} that always returns <code>false</code>
-	 */
-	@NonNull
-	@Constant
-	public static <T> Predicate<T> false_() {
-		return False.getInstance();
-	}
+  /**
+   * @param <T>
+   * @return A {@link AbstractPredicate} that always returns <code>false</code>
+   */
+  @NonNull
+  @Constant
+  public static <T> Predicate<T> false_() {
+    return False.getInstance();
+  }
 
-	/*
-	 * Object predicates
-	 */
+  /*
+   * Object predicates
+   */
 
-	/**
-	 * Returns a preficate that tests if its argument is not null
-	 * 
-	 * @param <T>
-	 * @return A constant {@link AbstractPredicate}
-	 */
-	@NonNull
-	@Constant
-	public static <T> Predicate<T> notNull() {
-		return NullPredicates.notNull();
-	}
+  /**
+   * Returns a preficate that tests if its argument is not null
+   * 
+   * @param <T>
+   * @return A constant {@link AbstractPredicate}
+   */
+  @NonNull
+  @Constant
+  public static <T> Predicate<T> notNull() {
+    return NullPredicates.notNull();
+  }
 
-	/**
-	 * Returns a predicate that tests if its argument is null
-	 * 
-	 * @param <T>
-	 * @return A singleton {@link AbstractPredicate}
-	 */
-	@NonNull
-	@Constant
-	public static <T> Predicate<T> null_() {
-		return NullPredicates.null_();
-	}
+  /**
+   * Returns a predicate that tests if its argument is null
+   * 
+   * @param <T>
+   * @return A singleton {@link AbstractPredicate}
+   */
+  @NonNull
+  @Constant
+  public static <T> Predicate<T> null_() {
+    return NullPredicates.null_();
+  }
 
-	/**
-	 * Returns a predicate that tests if its argument is equal to the given value:
-	 * <code>argument.equals(value)</code>
-	 * 
-	 * @param <T>
-	 * @param value
-	 * @return a new {@link AbstractPredicate}
-	 */
-	@NonNull
-	public static <T> Predicate<T> equal(T value) {
-		return new Equals<T>(value);
-	}
+  /**
+   * Returns a predicate that tests if its argument is equal to the given value:
+   * <code>argument.equals(value)</code>
+   * 
+   * @param <T>
+   * @param value
+   * @return a new {@link AbstractPredicate}
+   */
+  @NonNull
+  public static <T> Predicate<T> equal(T value) {
+    return new Equals<T>(value);
+  }
 
-	/**
-	 * Returns a predicate that tests if its argument is the same that the given
-	 * value
-	 * 
-	 * @param <T>
-	 * @param value
-	 * @return a new {@link AbstractPredicate}
-	 */
-	@NonNull
-	public static <T> Predicate<T> same(T value) {
-		return new Same<T>(value);
-	}
+  /**
+   * Returns a predicate that tests if its argument is the same that the given
+   * value
+   * 
+   * @param <T>
+   * @param value
+   * @return a new {@link AbstractPredicate}
+   */
+  @NonNull
+  public static <T> Predicate<T> same(T value) {
+    return new Same<T>(value);
+  }
 
-	/**
-	 * Returns a predicate that tests if its argument is instance of the given
-	 * class
-	 * 
-	 * @param <T>
-	 * @param clazz
-	 * @return a new {@link AbstractPredicate}
-	 */
-	@ForceRestrictions
-	@NonNull
-	public static <T> Predicate<T> isInstanceOf(@NonNull final Class<? extends T> clazz) {
-		return new AbstractPredicate<T>() {
-			public boolean eval(T argument) {
-				return clazz.isAssignableFrom(argument.getClass());
-			}
-		};
-	}
+  /**
+   * Returns a predicate that tests if its argument is instance of the given
+   * class
+   * 
+   * @param <T>
+   * @param clazz
+   * @return a new {@link AbstractPredicate}
+   */
+  @ForceRestrictions
+  @NonNull
+  public static <T> Predicate<T> isInstanceOf(@NonNull final Class<? extends T> clazz) {
+    return new AbstractPredicate<T>() {
+      public boolean eval(T argument) {
+        return clazz.isAssignableFrom(argument.getClass());
+      }
+    };
+  }
 
-	/**
-	 * Returns a predicate that tests if its argument is equal to any of the given
-	 * values
-	 * 
-	 * @param <T>
-	 * @param values
-	 * @return a new {@link AbstractPredicate}
-	 */
-	@NonNull
-	public static <T> Predicate<T> in(@NonNull T... values) {
-		return new InPredicate<T>(values);
-	}
+  /**
+   * Returns a predicate that tests if its argument is equal to any of the given
+   * values
+   * 
+   * @param <T>
+   * @param values
+   * @return a new {@link AbstractPredicate}
+   */
+  @NonNull
+  public static <T> Predicate<T> in(@NonNull T... values) {
+    return new InPredicate<T>(values);
+  }
 
-	/**
-	 * Returns a predicate that tests if its argument is equal to any of the
-	 * values in the given collection
-	 * 
-	 * @param <T>
-	 * @param values
-	 * @return a new {@link AbstractPredicate}
-	 */
-	@NonNull
-	public static <T> Predicate<T> in(@NonNull Collection<T> values) {
-		return new InPredicate<T>(values);
-	}
+  /**
+   * Returns a predicate that tests if its argument is equal to any of the
+   * values in the given collection
+   * 
+   * @param <T>
+   * @param values
+   * @return a new {@link AbstractPredicate}
+   */
+  @NonNull
+  public static <T> Predicate<T> in(@NonNull Collection<T> values) {
+    return new InPredicate<T>(values);
+  }
 
-	/*
-	 * String predicates
-	 */
+  /*
+   * String predicates
+   */
 
-	/**
-	 * Returns a predicate that evaluates to true if and only if all the given
-	 * predicates evaluate true
-	 * 
-	 * @param <T>
-	 * @param predicates
-	 * @return the all predicate
-	 */
-	@NonNull
-	public static <T> Predicate<T> all(@NonNull Evaluable<T>... predicates) {
-		return all(Arrays.asList(predicates));
-	}
+  /**
+   * Returns a predicate that evaluates to true if and only if all the given
+   * predicates evaluate true
+   * 
+   * @param <T>
+   * @param predicates
+   * @return the all predicate
+   */
+  @NonNull
+  public static <T> Predicate<T> all(@NonNull Evaluable<T>... predicates) {
+    return all(Arrays.asList(predicates));
+  }
 
-	/**
-	 * Returns a predicate that evaluates to true if and only if all the given
-	 * predicates evaluate true
-	 * 
-	 * @param <T>
-	 * @param predicates
-	 * @return the all predicate
-	 */
-	@NonNull
-	public static <T> Predicate<T> all(@NonNull Iterable<Evaluable<T>> predicates) {
-		return new All<T>(predicates);
-	}
+  /**
+   * Returns a predicate that evaluates to true if and only if all the given
+   * predicates evaluate true
+   * 
+   * @param <T>
+   * @param predicates
+   * @return the all predicate
+   */
+  @NonNull
+  public static <T> Predicate<T> all(@NonNull Iterable<Evaluable<T>> predicates) {
+    return new All<T>(predicates);
+  }
 
-	/**
-	 * Returns a predicate that evaluates to false if and only if all the given
-	 * predicates evaluate false
-	 * 
-	 * @param <T>
-	 * @param predicates
-	 * @return the any predicate
-	 */
-	@NonNull
-	public static <T> Predicate<T> any(@NonNull Evaluable<T>... predicates) {
-		return any(Arrays.asList(predicates));
-	}
+  /**
+   * Returns a predicate that evaluates to false if and only if all the given
+   * predicates evaluate false
+   * 
+   * @param <T>
+   * @param predicates
+   * @return the any predicate
+   */
+  @NonNull
+  public static <T> Predicate<T> any(@NonNull Evaluable<T>... predicates) {
+    return any(Arrays.asList(predicates));
+  }
 
-	/**
-	 * Returns a predicate that evaluates to false if and only if all the given
-	 * predicates evaluate false
-	 * 
-	 * @param <T>
-	 * @param predicates
-	 * @return the any predicate
-	 */
-	@NonNull
-	public static <T> Predicate<T> any(@NonNull Iterable<Evaluable<T>> predicates) {
-		return new Any<T>(predicates);
-	}
+  /**
+   * Returns a predicate that evaluates to false if and only if all the given
+   * predicates evaluate false
+   * 
+   * @param <T>
+   * @param predicates
+   * @return the any predicate
+   */
+  @NonNull
+  public static <T> Predicate<T> any(@NonNull Iterable<Evaluable<T>> predicates) {
+    return new Any<T>(predicates);
+  }
 
-	/*
-	 * Comparable predicates
-	 */
+  /*
+   * Comparable predicates
+   */
 
-	/**
-	 * Converts the given {@link Evaluable} into a {@link AbstractPredicate}. If it is
-	 * already a Predicate, returns it.
-	 * 
-	 * @param evaluable
-	 * @param <T>
-	 * @return a {@link AbstractPredicate} view of the given evaluable, or the evaluable,
-	 *         it is a {@link AbstractPredicate} already
-	 */
-	@NonNull
-	public static <T> Predicate<T> from(@NonNull Evaluable<? super T> evaluable) {
-		if (evaluable instanceof AbstractPredicate)
-			return (Predicate) evaluable;
-		return new EvaluablePredicate<T>(evaluable);
-	}
+  /**
+   * Converts the given {@link Evaluable} into a {@link AbstractPredicate}. If
+   * it is already a Predicate, returns it.
+   * 
+   * @param evaluable
+   * @param <T>
+   * @return a {@link AbstractPredicate} view of the given evaluable, or the
+   *         evaluable, it is a {@link AbstractPredicate} already
+   */
+  @NonNull
+  public static <T> Predicate<T> from(@NonNull Evaluable<? super T> evaluable) {
+    if (evaluable instanceof AbstractPredicate)
+      return (Predicate) evaluable;
+    return new EvaluablePredicate<T>(evaluable);
+  }
 
 }

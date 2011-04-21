@@ -26,29 +26,29 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Mappable<A> {
 
-	/**
-	 * Transforms each element using the given function
-	 * 
-	 * @param <B>
-	 * @param function
-	 *          the mapper used to transform each element, applying it
-	 * @return a new {@link Stream} projection that will retrieve the result of
-	 *         applying the given function to each element
-	 */
-	@NonNull
-	@Projection
-	<B> Stream<B> map(@NonNull Function<? super A, ? extends B> function);
+  /**
+   * Transforms each element using the given function
+   * 
+   * @param <B>
+   * @param function
+   *          the mapper used to transform each element, applying it
+   * @return a new {@link Stream} projection that will retrieve the result of
+   *         applying the given function to each element
+   */
+  @NonNull
+  @Projection
+  <B> Stream<B> map(@NonNull Function<? super A, ? extends B> function);
 
-	/**
-	 * Transformes each element using the given function, and concatenates
-	 * (flattens) the result
-	 * 
-	 * @param <B>
-	 * @param function
-	 * @return a new {@link Stream} that will retrieve the result of transforming
-	 *         each element and concatenating those transformations
-	 */
-	@NonNull
-	@Projection
-	<B> Stream<B> flatMap(@NonNull Function<? super A, ? extends Iterable<? extends B>> function);
+  /**
+   * Transformes each element using the given function, and concatenates
+   * (flattens) the result
+   * 
+   * @param <B>
+   * @param function
+   * @return a new {@link Stream} that will retrieve the result of transforming
+   *         each element and concatenating those transformations
+   */
+  @NonNull
+  @Projection
+  <B> Stream<B> flatMap(@NonNull Function<? super A, ? extends Iterable<? extends B>> function);
 }

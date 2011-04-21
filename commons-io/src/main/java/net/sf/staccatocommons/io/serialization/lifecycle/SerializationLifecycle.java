@@ -24,68 +24,68 @@ import net.sf.staccatocommons.lang.lifecycle.Lifecycle;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 public abstract class SerializationLifecycle<TargetType extends Closeable, ReturnType> extends
-	CloseableLifecycle<TargetType, ReturnType> {
+  CloseableLifecycle<TargetType, ReturnType> {
 
-	private final SerializationManager serializationManager;
+  private final SerializationManager serializationManager;
 
-	/**
-	 * Creates a new {@link SerializationLifecycle}
-	 * 
-	 * @param serializationManager
-	 */
-	public SerializationLifecycle(@NonNull SerializationManager serializationManager) {
-		this.serializationManager = serializationManager;
-	}
+  /**
+   * Creates a new {@link SerializationLifecycle}
+   * 
+   * @param serializationManager
+   */
+  public SerializationLifecycle(@NonNull SerializationManager serializationManager) {
+    this.serializationManager = serializationManager;
+  }
 
-	/**
-	 * Answers the underlying {@link SerializationManager}
-	 * 
-	 * @return the {@link SerializationManager} used by this
-	 *         {@link SerializationLifecycle}
-	 */
-	@NonNull
-	public SerializationManager getSerializationManager() {
-		return serializationManager;
-	}
+  /**
+   * Answers the underlying {@link SerializationManager}
+   * 
+   * @return the {@link SerializationManager} used by this
+   *         {@link SerializationLifecycle}
+   */
+  @NonNull
+  public SerializationManager getSerializationManager() {
+    return serializationManager;
+  }
 
-	/**
-	 * A {@link Lifecycle} that serializes a single object using a
-	 * {@link SerializationManager}
-	 * 
-	 * @author flbulgarelli
-	 */
-	public static abstract class Serialize extends SerializationLifecycle<OutputStream, Void> {
+  /**
+   * A {@link Lifecycle} that serializes a single object using a
+   * {@link SerializationManager}
+   * 
+   * @author flbulgarelli
+   */
+  public static abstract class Serialize extends SerializationLifecycle<OutputStream, Void> {
 
-		private final Object target;
+    private final Object target;
 
-		public Serialize(@NonNull SerializationManager serializationManager, Object target) {
-			super(serializationManager);
-			this.target = target;
-		}
+    public Serialize(@NonNull SerializationManager serializationManager, Object target) {
+      super(serializationManager);
+      this.target = target;
+    }
 
-		@Override
-		public void doVoidWork(@NonNull OutputStream output) throws IOException {
-			getSerializationManager().serialize(target, output);
-		}
-	}
+    @Override
+    public void doVoidWork(@NonNull OutputStream output) throws IOException {
+      getSerializationManager().serialize(target, output);
+    }
+  }
 
-	/**
-	 * A {@link Lifecycle} that deserializes a single object of type {@code A}
-	 * using a {@link SerializationManager}
-	 * 
-	 * @author flbulgarelli
-	 * 
-	 * @param <A>
-	 */
-	public static abstract class Deserialize<A> extends SerializationLifecycle<InputStream, A> {
+  /**
+   * A {@link Lifecycle} that deserializes a single object of type {@code A}
+   * using a {@link SerializationManager}
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <A>
+   */
+  public static abstract class Deserialize<A> extends SerializationLifecycle<InputStream, A> {
 
-		public Deserialize(@NonNull SerializationManager serializationManager) {
-			super(serializationManager);
-		}
+    public Deserialize(@NonNull SerializationManager serializationManager) {
+      super(serializationManager);
+    }
 
-		protected A doWork(@NonNull InputStream resource) throws Exception {
-			return getSerializationManager().deserialize(resource);
-		}
-	}
+    protected A doWork(@NonNull InputStream resource) throws Exception {
+      return getSerializationManager().deserialize(resource);
+    }
+  }
 
 }

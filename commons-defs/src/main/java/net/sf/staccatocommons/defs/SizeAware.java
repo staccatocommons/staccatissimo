@@ -22,20 +22,20 @@ package net.sf.staccatocommons.defs;
  */
 public interface SizeAware extends EmptyAware {
 
-	/**
-	 * Answers the size of this size aware. It <strong>should</strong> be a non
-	 * negative int.
-	 * 
-	 * @return the size
-	 */
-	int size();
+  /**
+   * Answers the size of this size aware. It <strong>should</strong> be a non
+   * negative int.
+   * 
+   * @return the size
+   */
+  int size();
 
-	/**
-	 * Answers if this {@link SizeAware} is empty. It <strong>should</strong> be
-	 * true that
-	 * 
-	 * <code>aSizeAware.isEmpty() == (aSizeAware.size() == 0)</code>
-	 */
-	@Override
-	public boolean isEmpty();
+  /**
+   * Answers if this {@link SizeAware} is empty. It <strong>should</strong> be
+   * true that
+   * 
+   * <code>aSizeAware.isEmpty() == (aSizeAware.size() == 0)</code>
+   */
+  @Override
+  public boolean isEmpty();
 }

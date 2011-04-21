@@ -24,20 +24,20 @@ import net.sf.staccatocommons.lang.tuple.Pair;
  * @param <B>
  */
 public final class DelayedDeconsTransformStream<A, B> extends AbstractTransformStream<A, B> {
-	private final DelayedDeconsApplicable<A, B> function;
+  private final DelayedDeconsApplicable<A, B> function;
 
-	/**
-	 * Creates a new {@link DelayedDeconsTransformStream}
-	 */
-	public DelayedDeconsTransformStream(Stream<A> stream, DelayedDeconsApplicable<A, B> function) {
-		super(stream);
-		this.function = function;
-	}
+  /**
+   * Creates a new {@link DelayedDeconsTransformStream}
+   */
+  public DelayedDeconsTransformStream(Stream<A> stream, DelayedDeconsApplicable<A, B> function) {
+    super(stream);
+    this.function = function;
+  }
 
-	protected Stream<B> apply() {
-		if (getStream().isEmpty())
-			return function.emptyApply();
-		Pair<Thunk<A>, Stream<A>> decons = getStream().delayedDecons();
-		return function.apply(decons._0(), decons._1());
-	}
+  protected Stream<B> apply() {
+    if (getStream().isEmpty())
+      return function.emptyApply();
+    Pair<Thunk<A>, Stream<A>> decons = getStream().delayedDecons();
+    return function.apply(decons._0(), decons._1());
+  }
 }

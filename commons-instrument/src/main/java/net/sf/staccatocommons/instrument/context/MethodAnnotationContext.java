@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.context;
 
 import javassist.CtMethod;
@@ -24,19 +23,19 @@ import javassist.CtMethod;
  */
 public interface MethodAnnotationContext extends AnnotationContext {
 
-	/**
-	 * @return the annoted method
-	 */
-	CtMethod getMethod();
+  /**
+   * @return the annoted method
+   */
+  CtMethod getMethod();
 
-	/**
-	 * @return The name of the pseudo-variable that represents the return value
-	 */
-	String getReturnIdentifier();
+  /**
+   * @return The name of the pseudo-variable that represents the return value
+   */
+  String getReturnIdentifier();
 
-	/**
-	 * @return if the annotated method is void
-	 */
-	boolean isVoid();
+  /**
+   * @return if the annotated method is void
+   */
+  boolean isVoid();
 
 }

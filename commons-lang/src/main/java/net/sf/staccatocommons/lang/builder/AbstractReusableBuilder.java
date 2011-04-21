@@ -42,43 +42,41 @@ import net.sf.staccatocommons.lang.internal.ToString;
  */
 public abstract class AbstractReusableBuilder<T> implements ReusableBuilder<T> {
 
-	private static final DoneCheck check = new DoneCheck();
+  private static final DoneCheck check = new DoneCheck();
 
-	/**
-	 * Checks the builder is ready for creating a new object, sending
-	 * {@link #checkDone(DoneCheck)} messages, and then creates it, sending
-	 * {@link #buildObject()}.
-	 * 
-	 * @see ReusableBuilder#build()
-	 */
-	public final T build() throws ObjectUnderConstructionException {
-		checkDone(check);
-		return buildObject();
-	}
+  /**
+   * Checks the builder is ready for creating a new object, sending
+   * {@link #checkDone(DoneCheck)} messages, and then creates it, sending
+   * {@link #buildObject()}.
+   * 
+   * @see ReusableBuilder#build()
+   */
+  public final T build() throws ObjectUnderConstructionException {
+    checkDone(check);
+    return buildObject();
+  }
 
-	protected void checkDone(DoneCheck check) throws ObjectUnderConstructionException {
-	}
+  protected void checkDone(DoneCheck check) throws ObjectUnderConstructionException {}
 
-	protected abstract T buildObject();
+  protected abstract T buildObject();
 
-	@Override
-	public String toString() {
-		return ToString.toString(this);
-	}
+  @Override
+  public String toString() {
+    return ToString.toString(this);
+  }
 
-	/**
-	 * A {@link Check} that throws an {@link ObjectUnderConstructionException}
-	 * when checks fail
-	 */
-	public static final class DoneCheck extends Check<ObjectUnderConstructionException> {
+  /**
+   * A {@link Check} that throws an {@link ObjectUnderConstructionException}
+   * when checks fail
+   */
+  public static final class DoneCheck extends Check<ObjectUnderConstructionException> {
 
-		private DoneCheck() {
-		}
+    private DoneCheck() {}
 
-		protected ObjectUnderConstructionException createException(Failure failure) {
-			return new ObjectUnderConstructionException(failure.createMessage());
-		}
+    protected ObjectUnderConstructionException createException(Failure failure) {
+      return new ObjectUnderConstructionException(failure.createMessage());
+    }
 
-	}
+  }
 
 }

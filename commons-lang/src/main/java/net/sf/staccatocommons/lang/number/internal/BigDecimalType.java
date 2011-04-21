@@ -23,34 +23,34 @@ import net.sf.staccatocommons.lang.number.AbstractNumberType;
  */
 public final class BigDecimalType extends AbstractNumberType<BigDecimal> {
 
-	private static final long serialVersionUID = 4097436616137740515L;
-	/**
-	 * An instance
-	 */
-	public static final BigDecimalType TYPE = new BigDecimalType();
+  private static final long serialVersionUID = 4097436616137740515L;
+  /**
+   * An instance
+   */
+  public static final BigDecimalType TYPE = new BigDecimalType();
 
-	public BigDecimal add(BigDecimal n0, BigDecimal n1) {
-		return n0.add(n1);
-	}
+  public BigDecimal add(BigDecimal n0, BigDecimal n1) {
+    return n0.add(n1);
+  }
 
-	public BigDecimal multiply(BigDecimal n0, BigDecimal n1) {
-		return n0.multiply(n1);
-	}
+  public BigDecimal multiply(BigDecimal n0, BigDecimal n1) {
+    return n0.multiply(n1);
+  }
 
-	public BigDecimal divide(BigDecimal n0, BigDecimal n1) {
-		return n0.divide(n1);
-	}
+  public BigDecimal divide(BigDecimal n0, BigDecimal n1) {
+    return n0.divide(n1);
+  }
 
-	public BigDecimal negate(BigDecimal n) {
-		return n.negate();
-	}
+  public BigDecimal negate(BigDecimal n) {
+    return n.negate();
+  }
 
-	public BigDecimal zero() {
-		return BigDecimal.ZERO;
-	}
+  public BigDecimal zero() {
+    return BigDecimal.ZERO;
+  }
 
-	public BigDecimal one() {
-		return BigDecimal.ONE;
-	}
+  public BigDecimal one() {
+    return BigDecimal.ONE;
+  }
 
 }

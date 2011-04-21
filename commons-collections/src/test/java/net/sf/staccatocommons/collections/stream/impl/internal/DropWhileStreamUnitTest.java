@@ -30,20 +30,20 @@ import org.junit.Test;
  */
 public class DropWhileStreamUnitTest {
 
-	/** Test for {@link Stream#dropWhile(Evaluable)} */
-	@Test
-	public void tesDropWhile() throws Exception {
-		assertEquals(Arrays.asList(1, 9, 2, 0),//
-			Streams.cons(1, 9, 2, 0).dropWhile(greaterThan(5)).toList());
+  /** Test for {@link Stream#dropWhile(Evaluable)} */
+  @Test
+  public void tesDropWhile() throws Exception {
+    assertEquals(Arrays.asList(1, 9, 2, 0),//
+      Streams.cons(1, 9, 2, 0).dropWhile(greaterThan(5)).toList());
 
-		assertEquals(Arrays.asList(),//
-			Streams.cons(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(0)).toList());
+    assertEquals(Arrays.asList(),//
+      Streams.cons(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(0)).toList());
 
-		assertEquals(Arrays.asList(1, 9, 2, 0),//
-			Streams.cons(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(2)).toList());
+    assertEquals(Arrays.asList(1, 9, 2, 0),//
+      Streams.cons(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(2)).toList());
 
-		assertEquals(Arrays.asList(0),//
-			Streams.cons(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(1)).toList());
-	}
+    assertEquals(Arrays.asList(0),//
+      Streams.cons(1, 9, 2, 0).dropWhile(greaterThanOrEqualTo(1)).toList());
+  }
 
 }

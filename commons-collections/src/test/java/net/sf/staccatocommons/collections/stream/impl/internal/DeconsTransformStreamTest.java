@@ -31,44 +31,39 @@ import org.junit.Test;
  */
 public class DeconsTransformStreamTest {
 
-	/**
-	 * Dropwhile definition in functional-style. First equation is inherited from
-	 * {@link AbstractDeconsApplicable}
-	 * 
-	 * <pre>
-	 * dw _ [] = []
-	 * dw f (x:xs) | f x = dw f xs
-	 *             | otherwise  = x:xs
-	 * </pre>
-	 * */
-	public static <A> Stream<A> dropWhile(final Evaluable<A> pred, Stream<A> stream) {
-		return stream.transform(new AbstractDeconsApplicable<A, A>() {
-			public Stream<A> apply(A head, Stream<A> tail) {
-				if (pred.eval(head))
-					return dropWhile(pred, tail);
-				return Streams.cons(head, tail);
-			}
-		});
-	}
+  /**
+   * Dropwhile definition in functional-style. First equation is inherited from
+   * {@link AbstractDeconsApplicable}
+   * 
+   * <pre>
+   * dw _ [] = []
+   * dw f (x:xs) | f x = dw f xs
+   *             | otherwise  = x:xs
+   * </pre>
+   * */
+  public static <A> Stream<A> dropWhile(final Evaluable<A> pred, Stream<A> stream) {
+    return stream.transform(new AbstractDeconsApplicable<A, A>() {
+      public Stream<A> apply(A head, Stream<A> tail) {
+        if (pred.eval(head))
+          return dropWhile(pred, tail);
+        return Streams.cons(head, tail);
+      }
+    });
+  }
 
-	/**
-	 * Highlevel test that defines recursively a lazy dropWhile function
-	 * compatible with {@link Stream#dropWhile(Evaluable)}, but in a recursive way
-	 * using {@link Stream#transform(DeconsApplicable)}
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testThen() throws Exception {
-		assertEquals(Arrays.asList(1, 9, 2, 0), dropWhile(greaterThan(5), Streams.cons(1, 9, 2, 0))
-			.toList());
-		assertEquals(Arrays.asList(), dropWhile(greaterThanOrEqualTo(0), Streams.cons(1, 9, 2, 0))
-			.toList());
-		assertEquals(
-			Arrays.asList(1, 9, 2, 0),
-			dropWhile(greaterThanOrEqualTo(2), Streams.cons(1, 9, 2, 0)).toList());
-		assertEquals(Arrays.asList(0), dropWhile(greaterThanOrEqualTo(1), Streams.cons(1, 9, 2, 0))
-			.toList());
-	}
+  /**
+   * Highlevel test that defines recursively a lazy dropWhile function
+   * compatible with {@link Stream#dropWhile(Evaluable)}, but in a recursive way
+   * using {@link Stream#transform(DeconsApplicable)}
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void testThen() throws Exception {
+    assertEquals(Arrays.asList(1, 9, 2, 0), dropWhile(greaterThan(5), Streams.cons(1, 9, 2, 0)).toList());
+    assertEquals(Arrays.asList(), dropWhile(greaterThanOrEqualTo(0), Streams.cons(1, 9, 2, 0)).toList());
+    assertEquals(Arrays.asList(1, 9, 2, 0), dropWhile(greaterThanOrEqualTo(2), Streams.cons(1, 9, 2, 0)).toList());
+    assertEquals(Arrays.asList(0), dropWhile(greaterThanOrEqualTo(1), Streams.cons(1, 9, 2, 0)).toList());
+  }
 
 }

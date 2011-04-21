@@ -32,70 +32,70 @@ import org.junit.runner.RunWith;
 @RunWith(Theories.class)
 public abstract class IteratorTheories {
 
-	/** Sizes of 1 and 2 **/
-	@DataPoints
-	public static int[] sizes = new int[] { 1, 2 };
+  /** Sizes of 1 and 2 **/
+  @DataPoints
+  public static int[] sizes = new int[] { 1, 2 };
 
-	/**
-	 * Test that for an iterator of a given size, next can be invoked size times
-	 * 
-	 * @param size
-	 * @throws Exception
-	 */
-	@Theory
-	public void testNext(int size) throws Exception {
-		Iterator<?> it = createIterator(size);
-		for (int i = 0; i < size; i++) {
-			it.next();
-		}
-	}
+  /**
+   * Test that for an iterator of a given size, next can be invoked size times
+   * 
+   * @param size
+   * @throws Exception
+   */
+  @Theory
+  public void testNext(int size) throws Exception {
+    Iterator<?> it = createIterator(size);
+    for (int i = 0; i < size; i++) {
+      it.next();
+    }
+  }
 
-	/**
-	 * Tests that iterator.next throws NoSuchElement exception on end
-	 */
-	@Theory
-	@Test(expected = NoSuchElementException.class)
-	public void testNextThrowsNoSuchElementException(int size) throws Exception {
-		Iterator<?> it = createIterator(size);
-		for (int i = 0; i < size + 1; i++) {
-			it.next();
-		}
-	}
+  /**
+   * Tests that iterator.next throws NoSuchElement exception on end
+   */
+  @Theory
+  @Test(expected = NoSuchElementException.class)
+  public void testNextThrowsNoSuchElementException(int size) throws Exception {
+    Iterator<?> it = createIterator(size);
+    for (int i = 0; i < size + 1; i++) {
+      it.next();
+    }
+  }
 
-	/**
-	 * Tests that the hasNext method of an iterator is repeable as long as
-	 * iterator.next is not invoked
-	 */
-	@Theory
-	public void testHasNextIsRepeatable(int size) throws Exception {
-		Iterator<?> it = createIterator(size);
-		for (int i = 0; i < size + 2; i++) {
-			assertTrue("On iteration " + i, it.hasNext());
-		}
-	}
+  /**
+   * Tests that the hasNext method of an iterator is repeable as long as
+   * iterator.next is not invoked
+   */
+  @Theory
+  public void testHasNextIsRepeatable(int size) throws Exception {
+    Iterator<?> it = createIterator(size);
+    for (int i = 0; i < size + 2; i++) {
+      assertTrue("On iteration " + i, it.hasNext());
+    }
+  }
 
-	/**
-	 * Creates an iterable for the given size
-	 */
-	public Iterator<?> createIterator(int size) {
-		switch (size) {
-		case 1:
-			return createOneElementIterator();
-		case 2:
-			return createTwoElementsIterator();
-		default:
-			throw new AssertionError();
-		}
-	}
+  /**
+   * Creates an iterable for the given size
+   */
+  public Iterator<?> createIterator(int size) {
+    switch (size) {
+    case 1:
+      return createOneElementIterator();
+    case 2:
+      return createTwoElementsIterator();
+    default:
+      throw new AssertionError();
+    }
+  }
 
-	/**
-	 * @return
-	 */
-	protected abstract Iterator<?> createTwoElementsIterator();
+  /**
+   * @return
+   */
+  protected abstract Iterator<?> createTwoElementsIterator();
 
-	/**
-	 * @return
-	 */
-	protected abstract Iterator<?> createOneElementIterator();
+  /**
+   * @return
+   */
+  protected abstract Iterator<?> createOneElementIterator();
 
 }

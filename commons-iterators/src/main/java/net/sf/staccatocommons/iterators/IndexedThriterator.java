@@ -22,23 +22,23 @@ import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
  */
 public abstract class IndexedThriterator<A> extends AdvanceThriterator<A> {
 
-	private int pos = 0;
+  private int pos = 0;
 
-	public final boolean hasNext() {
-		return pos < length();
-	}
+  public final boolean hasNext() {
+    return pos < length();
+  }
 
-	public final void advanceNext() throws NoSuchElementException {
-		if (pos == length())
-			throw new NoSuchElementException();
-		pos++;
-	}
+  public final void advanceNext() throws NoSuchElementException {
+    if (pos == length())
+      throw new NoSuchElementException();
+    pos++;
+  }
 
-	public final A current() throws NoSuchElementException {
-		return elementAt(pos - 1);
-	}
+  public final A current() throws NoSuchElementException {
+    return elementAt(pos - 1);
+  }
 
-	protected abstract A elementAt(int position);
+  protected abstract A elementAt(int position);
 
-	protected abstract int length();
+  protected abstract int length();
 }

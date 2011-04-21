@@ -26,46 +26,52 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public abstract class AbstractTransformStream<A, B> extends AbstractStream<B> {
 
-	private final Stream<A> stream;
+  private final Stream<A> stream;
 
-	/**
-	 * Creates a new {@link AbstractTransformStream}
-	 */
-	public AbstractTransformStream(@NonNull Stream<A> stream) {
-		this.stream = stream;
-	}
+  /**
+   * Creates a new {@link AbstractTransformStream}
+   */
+  public AbstractTransformStream(@NonNull Stream<A> stream) {
+    this.stream = stream;
+  }
 
-	public final Thriterator<B> iterator() {
-		return apply().iterator();
-	}
+  @Override
+  public final Thriterator<B> iterator() {
+    return apply().iterator();
+  }
 
-	public final B get(int n) {
-		return apply().get(n);
-	}
+  @Override
+  public final B get(int n) {
+    return apply().get(n);
+  }
 
-	public final Stream<B> toEmptyAware() {
-		return apply().toEmptyAware();
-	}
+  @Override
+  public final Stream<B> toEmptyAware() {
+    return apply().toEmptyAware();
+  }
 
-	public final Pair<Thunk<B>, Stream<B>> delayedDecons() {
-		return apply().delayedDecons();
-	}
+  @Override
+  public final Pair<Thunk<B>, Stream<B>> delayedDecons() {
+    return apply().delayedDecons();
+  }
 
-	public final boolean isEmpty() {
-		return apply().isEmpty();
-	}
+  @Override
+  public final boolean isEmpty() {
+    return apply().isEmpty();
+  }
 
-	public final List<B> toList() {
-		return apply().toList();
-	}
+  @Override
+  public final List<B> toList() {
+    return apply().toList();
+  }
 
-	protected abstract Stream<B> apply();
+  protected abstract Stream<B> apply();
 
-	/**
-	 * @return the stream
-	 */
-	protected Stream<A> getStream() {
-		return stream;
-	}
+  /**
+   * @return the stream
+   */
+  protected Stream<A> getStream() {
+    return stream;
+  }
 
 }

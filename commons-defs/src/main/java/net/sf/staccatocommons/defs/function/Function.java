@@ -31,61 +31,60 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  *          function return type
  */
 public interface Function<A, B> extends Applicable<A, B>, //
-	NullSafeAware<Function<A, B>>, //
-	Delayable<A, B> {
+  NullSafeAware<Function<A, B>>, //
+  Delayable<A, B> {
 
-	/**
-	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
-	 * this lambda with another {@link Applicable}, resulting in a new
-	 * {@link Function} that when applied returns
-	 * <code>this.apply(other.apply(arg)</code>
-	 * 
-	 * @param <C>
-	 * @param other
-	 * @return a new function, <code>this</code> composed with <code>other</code>
-	 */
-	@NonNull
-	<C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other);
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
+   * this lambda with another {@link Applicable}, resulting in a new
+   * {@link Function} that when applied returns
+   * <code>this.apply(other.apply(arg)</code>
+   * 
+   * @param <C>
+   * @param other
+   * @return a new function, <code>this</code> composed with <code>other</code>
+   */
+  @NonNull
+  <C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other);
 
-	/**
-	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
-	 * this lambda with another {@link Applicable2}, resulting in a new
-	 * {@link Function2} that when applied returns
-	 * <code>this.apply(other.apply(arg0, arg1)</code>
-	 * 
-	 * @param <Tp1>
-	 * @param <Tp2>
-	 * @param other
-	 *          non null
-	 * @return a new function, this composed with other. Non null.
-	 */
-	@NonNull
-	<Tp1, Tp2> Function2<Tp1, Tp2, B> of(@NonNull final Applicable2<Tp1, Tp2, ? extends A> other);
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
+   * this lambda with another {@link Applicable2}, resulting in a new
+   * {@link Function2} that when applied returns
+   * <code>this.apply(other.apply(arg0, arg1)</code>
+   * 
+   * @param <Tp1>
+   * @param <Tp2>
+   * @param other
+   *          non null
+   * @return a new function, this composed with other. Non null.
+   */
+  @NonNull
+  <Tp1, Tp2> Function2<Tp1, Tp2, B> of(@NonNull final Applicable2<Tp1, Tp2, ? extends A> other);
 
-	/**
-	 * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
-	 * this lambda with another {@link Applicable3}, resulting in a new
-	 * {@link Function3} that when applied returns
-	 * <code>this.apply(other.apply(arg0,arg1,arg2)</code>
-	 * 
-	 * @param <Tp1>
-	 * @param <Tp2>
-	 * @param <Tp3>
-	 * @param other
-	 *          non null
-	 * @return a new function, this composed with other. Non null
-	 */
-	@NonNull
-	<Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(
-		@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other);
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
+   * this lambda with another {@link Applicable3}, resulting in a new
+   * {@link Function3} that when applied returns
+   * <code>this.apply(other.apply(arg0,arg1,arg2)</code>
+   * 
+   * @param <Tp1>
+   * @param <Tp2>
+   * @param <Tp3>
+   * @param other
+   *          non null
+   * @return a new function, this composed with other. Non null
+   */
+  @NonNull
+  <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other);
 
-	/**
-	 * Answers a new function that returns null if is argument is null, or the
-	 * result of applying this function, otherwise.
-	 * 
-	 * @return a new null-safe {@link Function}
-	 */
-	@NonNull
-	Function<A, B> nullSafe();
+  /**
+   * Answers a new function that returns null if is argument is null, or the
+   * result of applying this function, otherwise.
+   * 
+   * @return a new null-safe {@link Function}
+   */
+  @NonNull
+  Function<A, B> nullSafe();
 
 }

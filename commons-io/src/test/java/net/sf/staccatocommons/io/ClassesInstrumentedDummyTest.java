@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.io;
 
 import static org.junit.Assert.*;
@@ -27,19 +26,19 @@ import org.junit.Test;
  */
 public class ClassesInstrumentedDummyTest {
 
-	/**
-	 * Verifies that, at least, the notNull processor is working on constructors
-	 */
-	@SuppressWarnings("unused")
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorsInstrumented() {
-		new Directory((String) null);
-	}
+  /**
+   * Verifies that, at least, the notNull processor is working on constructors
+   */
+  @SuppressWarnings("unused")
+  @Test(expected = IllegalArgumentException.class)
+  public void testConstructorsInstrumented() {
+    new Directory((String) null);
+  }
 
-	/** Test that the constant instrumenter is working */
-	@Test
-	public void testConst() throws Exception {
-		assertSame(IOFunctions.fileName(), IOFunctions.fileName());
-	}
+  /** Test that the constant instrumenter is working */
+  @Test
+  public void testConst() throws Exception {
+    assertSame(IOFunctions.fileName(), IOFunctions.fileName());
+  }
 
 }

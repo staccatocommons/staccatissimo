@@ -41,32 +41,31 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  *          function return type
  * 
  */
-public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>,
-	Applicable2<A, B, Function<C, D>>, Applicable<A, Function2<B, C, D>>,
-	NullSafeAware<Function3<A, B, C, D>>, Delayable3<A, B, C, D> {
+public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>, Applicable2<A, B, Function<C, D>>,
+  Applicable<A, Function2<B, C, D>>, NullSafeAware<Function3<A, B, C, D>>, Delayable3<A, B, C, D> {
 
-	/**
-	 * Partially applies the function, passing only its first argument
-	 */
-	@NonNull
-	Function2<B, C, D> apply(final A arg0);
+  /**
+   * Partially applies the function, passing only its first argument
+   */
+  @NonNull
+  Function2<B, C, D> apply(final A arg0);
 
-	/**
-	 * Partially applies the function, passing only its first and second arguments
-	 */
-	@NonNull
-	Function<C, D> apply(final A arg0, final B arg1);
+  /**
+   * Partially applies the function, passing only its first and second arguments
+   */
+  @NonNull
+  Function<C, D> apply(final A arg0, final B arg1);
 
-	@NonNull
-	D apply(A arg0, B arg1, C arg2);
+  @NonNull
+  D apply(A arg0, B arg1, C arg2);
 
-	/**
-	 * Answers a new function that returns null if any of its arguments is null,
-	 * or the result of applying this function, otherwise.
-	 * 
-	 * @return a new null-safe {@link Function3}
-	 */
-	@NonNull
-	Function3<A, B, C, D> nullSafe();
+  /**
+   * Answers a new function that returns null if any of its arguments is null,
+   * or the result of applying this function, otherwise.
+   * 
+   * @return a new null-safe {@link Function3}
+   */
+  @NonNull
+  Function3<A, B, C, D> nullSafe();
 
 }

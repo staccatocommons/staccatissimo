@@ -32,23 +32,23 @@ import org.junit.experimental.theories.DataPoints;
  */
 public class DequeStreamUnitTest extends RepetableStreamTheories {
 
-	/**
-	 * data set of lists
-	 */
-	@DataPoints
-	public static Stream<Integer>[] streams = new Stream[] {
-			Streams.from((Deque<?>) new LinkedList()), //
-			Streams.from((Deque<?>) new LinkedList(Arrays.asList(50, 3, 9))),//
-			Streams.from((Deque<?>) new LinkedList(Arrays.asList(50, 3, 9))).reverse(),
-			Streams.from((Deque<?>) new LinkedList(Collections.singletonList(10))) };
+  /**
+   * data set of lists
+   */
+  @DataPoints
+  public static Stream<Integer>[] streams = new Stream[] {
+      Streams.from((Deque<?>) new LinkedList()), //
+      Streams.from((Deque<?>) new LinkedList(Arrays.asList(50, 3, 9))),//
+      Streams.from((Deque<?>) new LinkedList(Arrays.asList(50, 3, 9))).reverse(),
+      Streams.from((Deque<?>) new LinkedList(Collections.singletonList(10))) };
 
-	/** Tests for reverse */
-	@Test
-	public void testReverse() throws Exception {
-		Deque<Integer> linkedList = new LinkedList<Integer>();
-		linkedList.add(50);
-		linkedList.add(60);
-		linkedList.add(80);
-		assertTrue(Streams.from(linkedList).reverse().equiv(80, 60, 50));
-	}
+  /** Tests for reverse */
+  @Test
+  public void testReverse() throws Exception {
+    Deque<Integer> linkedList = new LinkedList<Integer>();
+    linkedList.add(50);
+    linkedList.add(60);
+    linkedList.add(80);
+    assertTrue(Streams.from(linkedList).reverse().equiv(80, 60, 50));
+  }
 }

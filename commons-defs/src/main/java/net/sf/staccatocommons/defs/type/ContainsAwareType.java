@@ -33,15 +33,15 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface ContainsAwareType<A, B> {
 
-	/**
-	 * Answers if the given <code>container</code> that is aware of the concept of
-	 * contain elements, contains the given <code>element</code>
-	 * 
-	 * @param container
-	 *          - non null.
-	 * @param element
-	 * @return if the given <code>container</code> contains the given element.
-	 */
-	boolean contains(@NonNull A container, B element);
+  /**
+   * Answers if the given <code>container</code> that is aware of the concept of
+   * contain elements, contains the given <code>element</code>
+   * 
+   * @param container
+   *          - non null.
+   * @param element
+   * @return if the given <code>container</code> contains the given element.
+   */
+  boolean contains(@NonNull A container, B element);
 
 }

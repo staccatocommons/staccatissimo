@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.restrictions.instrument.check;
 
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
@@ -23,24 +22,24 @@ import net.sf.staccatocommons.restrictions.check.Positive;
  */
 public class PositiveHandler extends AbstractCheckAnnotationHandler<Positive> {
 
-	/**
-	 * Creates a new {@link PositiveHandler}
-	 */
-	public PositiveHandler(boolean ignoreReturns) {
-		super(ignoreReturns);
-	}
+  /**
+   * Creates a new {@link PositiveHandler}
+   */
+  public PositiveHandler(boolean ignoreReturns) {
+    super(ignoreReturns);
+  }
 
-	public Class<Positive> getSupportedAnnotationType() {
-		return Positive.class;
-	}
+  public Class<Positive> getSupportedAnnotationType() {
+    return Positive.class;
+  }
 
-	protected String createCheckCode(String argumentMnemonic, String argumentIdentifier,
-		Positive annotation, AnnotationContext context) {
-		return String.format("that().isPositive( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
-	}
+  protected String createCheckCode(String argumentMnemonic, String argumentIdentifier, Positive annotation,
+    AnnotationContext context) {
+    return String.format("that().isPositive( \"%s\", %s)", argumentMnemonic, argumentIdentifier);
+  }
 
-	protected String getVarMnemonic(Positive annotation) {
-		return annotation.value();
-	}
+  protected String getVarMnemonic(Positive annotation) {
+    return annotation.value();
+  }
 
 }

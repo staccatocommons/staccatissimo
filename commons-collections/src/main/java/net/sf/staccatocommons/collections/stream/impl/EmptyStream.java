@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl;
 
 import net.sf.staccatocommons.collections.stream.Stream;
@@ -25,30 +24,32 @@ import net.sf.staccatocommons.restrictions.Constant;
  */
 public final class EmptyStream<A> extends StrictStream<A> {
 
-	private static final Stream INSTANCE = new EmptyStream();
+  private static final Stream INSTANCE = new EmptyStream();
 
-	/**
-	 * Creates a new {@link EmptyStream}
-	 */
-	private EmptyStream() {}
+  /**
+   * Creates a new {@link EmptyStream}
+   */
+  private EmptyStream() {}
 
-	@Override
-	public Thriterator<A> iterator() {
-		return EmptyThriterator.empty();
-	}
+  @Override
+  public Thriterator<A> iterator() {
+    return EmptyThriterator.empty();
+  }
 
-	/** Answers a constant instance */
-	@Constant
-	public static <T> Stream<T> empty() {
-		return INSTANCE;
-	}
+  /** Answers a constant instance */
+  @Constant
+  public static <T> Stream<T> empty() {
+    return INSTANCE;
+  }
 
-	public boolean isEmpty() {
-		return true;
-	}
+  @Override
+  public boolean isEmpty() {
+    return true;
+  }
 
-	public int size() {
-		return 0;
-	}
+  @Override
+  public int size() {
+    return 0;
+  }
 
 }

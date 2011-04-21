@@ -25,106 +25,104 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Sortable<A> {
 
-	/**
-	 * Sorts this Stream, using their element's natural ordering
-	 * 
-	 * @return a new {@link Stream}
-	 */
-	@NonNull
-	@Projection
-	Stream<A> sort();
+  /**
+   * Sorts this Stream, using their element's natural ordering
+   * 
+   * @return a new {@link Stream}
+   */
+  @NonNull
+  @Projection
+  Stream<A> sort();
 
-	/**
-	 * Sorts this Stream, using the given comparator
-	 * 
-	 * @param comparator
-	 * @return a new {@link Stream}
-	 */
-	@Projection
-	@NonNull
-	Stream<A> sortBy(@NonNull Comparator<A> comparator);
+  /**
+   * Sorts this Stream, using the given comparator
+   * 
+   * @param comparator
+   * @return a new {@link Stream}
+   */
+  @Projection
+  @NonNull
+  Stream<A> sortBy(@NonNull Comparator<A> comparator);
 
-	/**
-	 * Sorts this Stream, using <code>Compare.on(function)</code> as comparator
-	 * 
-	 * @param <B>
-	 * @param function
-	 * @return a new {@link Stream}
-	 */
-	@Projection
-	@NonNull
-	<B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function);
+  /**
+   * Sorts this Stream, using <code>Compare.on(function)</code> as comparator
+   * 
+   * @param <B>
+   * @param function
+   * @return a new {@link Stream}
+   */
+  @Projection
+  @NonNull
+  <B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function);
 
-	/**
-	 * Answers the min element of the stream, using the given
-	 * <code>comparator</code> to compare elements.
-	 * 
-	 * @param comparator
-	 * @return the minimum element.
-	 * @throws NoSuchElementException
-	 *           if the stream is empty.
-	 */
-	@NonNull
-	A minimumBy(@NonNull Comparator<? super A> comparator) throws NoSuchElementException;
+  /**
+   * Answers the min element of the stream, using the given
+   * <code>comparator</code> to compare elements.
+   * 
+   * @param comparator
+   * @return the minimum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   */
+  @NonNull
+  A minimumBy(@NonNull Comparator<? super A> comparator) throws NoSuchElementException;
 
-	/**
-	 * Answers the minimum element of the stream, using the given
-	 * <code>Compare.on(function)</code> to compare elements.
-	 * 
-	 * @param function
-	 * @return the minimum element.
-	 * @throws NoSuchElementException
-	 *           if the stream is empty.
-	 */
-	<B extends Comparable<B>> A minimumOn(@NonNull Applicable<? super A, B> function)
-		throws NoSuchElementException;
+  /**
+   * Answers the minimum element of the stream, using the given
+   * <code>Compare.on(function)</code> to compare elements.
+   * 
+   * @param function
+   * @return the minimum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   */
+  <B extends Comparable<B>> A minimumOn(@NonNull Applicable<? super A, B> function) throws NoSuchElementException;
 
-	/**
-	 * Answers the minimum element of the stream, using elements natural order.
-	 * 
-	 * @return the minimum element.
-	 * @throws NoSuchElementException
-	 *           if the stream is empty.
-	 * @throws ClassCastException
-	 *           if elements are not comparable
-	 */
-	@NonNull
-	A minimum() throws ClassCastException, NoSuchElementException;
+  /**
+   * Answers the minimum element of the stream, using elements natural order.
+   * 
+   * @return the minimum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   * @throws ClassCastException
+   *           if elements are not comparable
+   */
+  @NonNull
+  A minimum() throws ClassCastException, NoSuchElementException;
 
-	/**
-	 * Answers the maximum element of the stream, using the given
-	 * <code>comparator</code> to compare elements.
-	 * 
-	 * @param comparator
-	 * @return the maximum element.
-	 * @throws NoSuchElementException
-	 *           if the stream is empty.
-	 */
-	@NonNull
-	A maximumBy(@NonNull Comparator<? super A> comparator) throws NoSuchElementException;
+  /**
+   * Answers the maximum element of the stream, using the given
+   * <code>comparator</code> to compare elements.
+   * 
+   * @param comparator
+   * @return the maximum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   */
+  @NonNull
+  A maximumBy(@NonNull Comparator<? super A> comparator) throws NoSuchElementException;
 
-	/**
-	 * Answers the maximum element of the stream, using the given
-	 * <code>Compare.on(function)</code> to compare elements.
-	 * 
-	 * @param function
-	 * @return the maximum element.
-	 * @throws NoSuchElementException
-	 *           if the stream is empty.
-	 */
-	<B extends Comparable<B>> A maximumOn(@NonNull Applicable<? super A, B> function)
-		throws NoSuchElementException;
+  /**
+   * Answers the maximum element of the stream, using the given
+   * <code>Compare.on(function)</code> to compare elements.
+   * 
+   * @param function
+   * @return the maximum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   */
+  <B extends Comparable<B>> A maximumOn(@NonNull Applicable<? super A, B> function) throws NoSuchElementException;
 
-	/**
-	 * Answers the maximum element of the stream, using elements natural order.
-	 * 
-	 * @return the maximum element.
-	 * @throws NoSuchElementException
-	 *           if the stream is empty.
-	 * @throws ClassCastException
-	 *           if elements are not comparable
-	 */
-	@NonNull
-	A maximum() throws ClassCastException, NoSuchElementException;
+  /**
+   * Answers the maximum element of the stream, using elements natural order.
+   * 
+   * @return the maximum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   * @throws ClassCastException
+   *           if elements are not comparable
+   */
+  @NonNull
+  A maximum() throws ClassCastException, NoSuchElementException;
 
 }

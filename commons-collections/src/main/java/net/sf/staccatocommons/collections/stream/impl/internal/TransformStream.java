@@ -23,21 +23,19 @@ import net.sf.staccatocommons.defs.Applicable;
  * @param <B>
  */
 public final class TransformStream<A, B> extends AbstractTransformStream<A, B> {
-	/**
-	 * 
-	 */
-	private final Applicable<Stream<A>, ? extends Stream<B>> function;
 
-	/**
-	 * Creates a new {@link TransformStream}
-	 */
-	public TransformStream(AbstractStream<A> stream, Applicable<Stream<A>, ? extends Stream<B>> function) {
-		super(stream);
-		this.function = function;
-	}
+  private final Applicable<Stream<A>, ? extends Stream<B>> function;
 
-	protected Stream<B> apply() {
-		return function.apply(getStream());
-	}
+  /**
+   * Creates a new {@link TransformStream}
+   */
+  public TransformStream(AbstractStream<A> stream, Applicable<Stream<A>, ? extends Stream<B>> function) {
+    super(stream);
+    this.function = function;
+  }
+
+  protected Stream<B> apply() {
+    return function.apply(getStream());
+  }
 
 }

@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.block;
 
 import static org.junit.Assert.*;
@@ -24,12 +23,12 @@ import org.junit.Test;
  */
 public class BlocksUnitTest {
 
-	/**
-	 * Test method for {@link net.sf.staccatocommons.lang.block.Blocks#empty()}.
-	 */
-	@Test
-	public void testEmpty() {
-		assertNotNull(Blocks.empty());
-	}
+  /**
+   * Test method for {@link net.sf.staccatocommons.lang.block.Blocks#empty()}.
+   */
+  @Test
+  public void testEmpty() {
+    assertNotNull(Blocks.empty());
+  }
 
 }

@@ -35,15 +35,15 @@ import net.sf.staccatocommons.restrictions.value.Immutable;
 @Immutable
 public interface EmptyAwareType<A> {
 
-	/**
-	 * Answers if the given object that is aware of the concept of "emptyness" is
-	 * empty or not.
-	 * 
-	 * @param emptyAware
-	 *          - non null.
-	 * @return is the given <code>emptyAware</code> is empty
-	 */
-	@SideEffectFree
-	boolean isEmpty(@NonNull A emptyAware);
+  /**
+   * Answers if the given object that is aware of the concept of "emptyness" is
+   * empty or not.
+   * 
+   * @param emptyAware
+   *          - non null.
+   * @return is the given <code>emptyAware</code> is empty
+   */
+  @SideEffectFree
+  boolean isEmpty(@NonNull A emptyAware);
 
 }

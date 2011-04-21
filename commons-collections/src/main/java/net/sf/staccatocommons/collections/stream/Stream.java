@@ -141,26 +141,26 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  *          the type of object the stream is source of
  */
 public interface Stream<A> extends //
-	Accessible<A>, //
-	Appendable<A>,//
-	Collectible<A>, //
-	ContainsAware<A>, //
-	Crossable<A>, //
-	Deconstructable<A>, //
-	Filterable<A>, //
-	Foldable<A>,//
-	NumberTypeAware<A>, //
-	Interscalable<A>, //
-	Iterable<A>, //
-	Mappable<A>, //
-	Reversable<A>, //
-	Searchable<A>,//
-	SizeAware, //
-	Sortable<A>, //
-	Testeable<A>, //
-	Transformable<A>, //
-	Zippeable<A> {
+  Accessible<A>, //
+  Appendable<A>,//
+  Collectible<A>, //
+  ContainsAware<A>, //
+  Crossable<A>, //
+  Deconstructable<A>, //
+  Filterable<A>, //
+  Foldable<A>,//
+  NumberTypeAware<A>, //
+  Interscalable<A>, //
+  Iterable<A>, //
+  Mappable<A>, //
+  Reversable<A>, //
+  Searchable<A>,//
+  SizeAware, //
+  Sortable<A>, //
+  Testeable<A>, //
+  Transformable<A>, //
+  Zippeable<A> {
 
-	Thriterator<A> iterator();
+  Thriterator<A> iterator();
 
 }

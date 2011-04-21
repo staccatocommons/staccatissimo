@@ -28,13 +28,13 @@ package net.sf.staccatocommons.defs;
 @Applicative
 public interface Applicable<T, R> {
 
-	/**
-	 * Performs a transformation on the given element, and returns its result.
-	 * 
-	 * @param arg
-	 *          the transformation
-	 * @return the transformation result
-	 */
-	R apply(T arg);
+  /**
+   * Performs a transformation on the given element, and returns its result.
+   * 
+   * @param arg
+   *          the transformation
+   * @return the transformation result
+   */
+  R apply(T arg);
 
 }

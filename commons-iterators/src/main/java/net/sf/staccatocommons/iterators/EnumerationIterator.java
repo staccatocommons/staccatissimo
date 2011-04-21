@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.iterators;
 
 import java.util.Enumeration;
@@ -24,21 +23,21 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class EnumerationIterator<A> extends AbstractUnmodifiableIterator<A> {
 
-	private final Enumeration<? extends A> enumeration;
+  private final Enumeration<? extends A> enumeration;
 
-	/**
-	 * Creates a new {@link EnumerationIterator}
-	 */
-	public EnumerationIterator(@NonNull Enumeration<? extends A> enumeration) {
-		this.enumeration = enumeration;
-	}
+  /**
+   * Creates a new {@link EnumerationIterator}
+   */
+  public EnumerationIterator(@NonNull Enumeration<? extends A> enumeration) {
+    this.enumeration = enumeration;
+  }
 
-	public boolean hasNext() {
-		return enumeration.hasMoreElements();
-	}
+  public boolean hasNext() {
+    return enumeration.hasMoreElements();
+  }
 
-	public A next() {
-		return enumeration.nextElement();
-	}
+  public A next() {
+    return enumeration.nextElement();
+  }
 
 }

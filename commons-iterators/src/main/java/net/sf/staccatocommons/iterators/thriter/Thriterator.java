@@ -26,11 +26,11 @@ import net.sf.staccatocommons.defs.EmptyAware;
  */
 public interface Thriterator<A> extends Thriter<A>, Iterator<A>, EmptyAware {
 
-	/**
-	 * Answers if this {@link Thriterator} is empty
-	 * 
-	 * @return <code>!hasNext()</code>
-	 */
-	boolean isEmpty();
+  /**
+   * Answers if this {@link Thriterator} is empty
+   * 
+   * @return <code>!hasNext()</code>
+   */
+  boolean isEmpty();
 
 }

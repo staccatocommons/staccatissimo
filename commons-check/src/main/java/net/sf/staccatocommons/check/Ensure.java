@@ -23,69 +23,67 @@ package net.sf.staccatocommons.check;
  */
 public final class Ensure {
 
-	private static final Check<IllegalArgumentException> check = new Check<IllegalArgumentException>() {
+  private static final Check<IllegalArgumentException> check = new Check<IllegalArgumentException>() {
 
-		protected IllegalArgumentException createException(Failure failure) {
-			return new IllegalArgumentException(failure.createMessage());
-		}
-	};
+    protected IllegalArgumentException createException(Failure failure) {
+      return new IllegalArgumentException(failure.createMessage());
+    }
+  };
 
-	private Ensure() {
-	}
+  private Ensure() {}
 
-	/**
-	 * Shortcut to <code>Ensure.that().fail(varName,var,message,args)</code>
-	 * 
-	 * @see Check#fail(String, Object, String, Object...)
-	 */
-	public static void fail(String varName, Object var, String message, Object... args) {
-		that().fail(varName, var, message, args);
-	}
+  /**
+   * Shortcut to <code>Ensure.that().fail(varName,var,message,args)</code>
+   * 
+   * @see Check#fail(String, Object, String, Object...)
+   */
+  public static void fail(String varName, Object var, String message, Object... args) {
+    that().fail(varName, var, message, args);
+  }
 
-	/**
-	 * Shortcut to
-	 * <code>Ensure.that().is(varName,var,condition,message,args)</code>
-	 * 
-	 * @see Check#that(String, Object, boolean, String, Object...)
-	 */
-	public static void that(String varName, Object var, boolean condition, String message,
-		Object... messageArgs) {
-		that().that(varName, var, condition, message, messageArgs);
-	}
+  /**
+   * Shortcut to
+   * <code>Ensure.that().is(varName,var,condition,message,args)</code>
+   * 
+   * @see Check#that(String, Object, boolean, String, Object...)
+   */
+  public static void that(String varName, Object var, boolean condition, String message, Object... messageArgs) {
+    that().that(varName, var, condition, message, messageArgs);
+  }
 
-	/**
-	 * Shortcut to <code>Ensure.that().is(condition,message,args)</code>
-	 * 
-	 * @see Check#that(boolean, String, Object...)
-	 */
-	public static void that(boolean condition, String message, Object... messageArgs) {
-		that().that(condition, message, messageArgs);
-	}
+  /**
+   * Shortcut to <code>Ensure.that().is(condition,message,args)</code>
+   * 
+   * @see Check#that(boolean, String, Object...)
+   */
+  public static void that(boolean condition, String message, Object... messageArgs) {
+    that().that(condition, message, messageArgs);
+  }
 
-	/**
-	 * Shortcut to <code>Ensure.that().isNotNull(variableName, variable)</code>
-	 * 
-	 * @see Check#isNotNull(String, Object)
-	 */
-	public static void isNotNull(String variableName, Object variable) {
-		that().isNotNull(variableName, variable);
-	}
+  /**
+   * Shortcut to <code>Ensure.that().isNotNull(variableName, variable)</code>
+   * 
+   * @see Check#isNotNull(String, Object)
+   */
+  public static void isNotNull(String variableName, Object variable) {
+    that().isNotNull(variableName, variable);
+  }
 
-	/**
-	 * Shortcut to <code>Ensure.that().isNull(variableName, variable)</code>
-	 * 
-	 * @see Check#isNull(String, Object)
-	 */
-	public static void isNull(String variableName, Object variable) {
-		that().isNull(variableName, variable);
-	}
+  /**
+   * Shortcut to <code>Ensure.that().isNull(variableName, variable)</code>
+   * 
+   * @see Check#isNull(String, Object)
+   */
+  public static void isNull(String variableName, Object variable) {
+    that().isNull(variableName, variable);
+  }
 
-	/**
-	 * @return a singleton {@link Check} that throws
-	 *         {@link IllegalArgumentException}s on check failure
-	 */
-	public static Check<IllegalArgumentException> that() {
-		return check;
-	}
+  /**
+   * @return a singleton {@link Check} that throws
+   *         {@link IllegalArgumentException}s on check failure
+   */
+  public static Check<IllegalArgumentException> that() {
+    return check;
+  }
 
 }

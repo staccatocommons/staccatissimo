@@ -25,18 +25,19 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class DelayedAppendStream<A> extends WrapperStream<A> {
 
-	private Thunk<A> element;
+  private Thunk<A> element;
 
-	/**
-	 * Creates a new {@link DelayedAppendStream}
-	 */
-	public DelayedAppendStream(@NonNull Stream<A> source, @NonNull Thunk<A> element) {
-		super(source);
-		this.element = element;
-	}
+  /**
+   * Creates a new {@link DelayedAppendStream}
+   */
+  public DelayedAppendStream(@NonNull Stream<A> source, @NonNull Thunk<A> element) {
+    super(source);
+    this.element = element;
+  }
 
-	public Thriterator<A> iterator() {
-		return new DelayedAppendIterator(getSource().iterator(), element);
-	}
+  @Override
+  public Thriterator<A> iterator() {
+    return new DelayedAppendIterator(getSource().iterator(), element);
+  }
 
 }

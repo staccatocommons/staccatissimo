@@ -25,19 +25,19 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class Callables {
 
-	/**
-	 * Converts the givne {@link Thunk} into a {@link Callable}, whose
-	 * {@link Callable#call()} method answers the thunk's value, and hardens any
-	 * exception thrown by the thunk's evaluation.
-	 * 
-	 * @param <A>
-	 * @param thunk
-	 * @return a new {@link Callable}
-	 * 
-	 * @see SoftException#harden(RuntimeException)
-	 */
-	public static <A> Callable<A> from(@NonNull Thunk<A> thunk) {
-		return new ThunkCallable<A>(thunk);
-	}
+  /**
+   * Converts the givne {@link Thunk} into a {@link Callable}, whose
+   * {@link Callable#call()} method answers the thunk's value, and hardens any
+   * exception thrown by the thunk's evaluation.
+   * 
+   * @param <A>
+   * @param thunk
+   * @return a new {@link Callable}
+   * 
+   * @see SoftException#harden(RuntimeException)
+   */
+  public static <A> Callable<A> from(@NonNull Thunk<A> thunk) {
+    return new ThunkCallable<A>(thunk);
+  }
 
 }

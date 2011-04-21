@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.context;
 
 import javassist.CtConstructor;
@@ -25,10 +24,10 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface ConstructorAnnotationContext extends AnnotationContext {
 
-	/**
-	 * @return the annotated constructor
-	 */
-	@NonNull
-	CtConstructor getConstructor();
+  /**
+   * @return the annotated constructor
+   */
+  @NonNull
+  CtConstructor getConstructor();
 
 }

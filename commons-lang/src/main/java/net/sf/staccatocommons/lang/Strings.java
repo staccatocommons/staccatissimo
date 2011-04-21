@@ -29,87 +29,87 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  */
 public class Strings {
-	/**
-	 * Returns a new {@link Predicate} that tests
-	 * <code>argument.equalsIgnoreCase(value)</code>
-	 * 
-	 * @param value
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static Predicate<String> equalsIgnoreCase(@NonNull String value) {
-		return new EqualsIgnoreCase(value);
-	}
+  /**
+   * Returns a new {@link Predicate} that tests
+   * <code>argument.equalsIgnoreCase(value)</code>
+   * 
+   * @param value
+   * @return a new predicate
+   */
+  @NonNull
+  public static Predicate<String> equalsIgnoreCase(@NonNull String value) {
+    return new EqualsIgnoreCase(value);
+  }
 
-	/**
-	 * Returns a new {@link Predicate} that tests
-	 * <code>argument.matches(value)</code>
-	 * 
-	 * @param regexp
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static Predicate<String> matches(@NonNull String regexp) {
-		return new Matches(regexp);
-	}
+  /**
+   * Returns a new {@link Predicate} that tests
+   * <code>argument.matches(value)</code>
+   * 
+   * @param regexp
+   * @return a new predicate
+   */
+  @NonNull
+  public static Predicate<String> matches(@NonNull String regexp) {
+    return new Matches(regexp);
+  }
 
-	/**
-	 * Returns a new {@link Predicate} that tests
-	 * <code>pattern.matcher(value).matches()</code>
-	 * 
-	 * @param pattern
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static Predicate<String> matches(@NonNull Pattern pattern) {
-		return new Matches(pattern);
-	}
+  /**
+   * Returns a new {@link Predicate} that tests
+   * <code>pattern.matcher(value).matches()</code>
+   * 
+   * @param pattern
+   * @return a new predicate
+   */
+  @NonNull
+  public static Predicate<String> matches(@NonNull Pattern pattern) {
+    return new Matches(pattern);
+  }
 
-	/**
-	 * Returns a new {@link Predicate} that tests
-	 * <code>argument.contains(substring)</code>
-	 * 
-	 * @param substring
-	 *          the substring to test if it is contained
-	 * @return a new predicate
-	 */
-	@NonNull
-	public static Predicate<String> contains(@NonNull String substring) {
-		return new ContainsSubstringPredicate(substring);
-	}
+  /**
+   * Returns a new {@link Predicate} that tests
+   * <code>argument.contains(substring)</code>
+   * 
+   * @param substring
+   *          the substring to test if it is contained
+   * @return a new predicate
+   */
+  @NonNull
+  public static Predicate<String> contains(@NonNull String substring) {
+    return new ContainsSubstringPredicate(substring);
+  }
 
-	/**
-	 * Returns a new {@link Predicate} that answers if its {@link String} argument
-	 * starts with a given prefix
-	 * 
-	 * @param string
-	 * @return a new Predicate that evaluates <code>args.startsWith(string)</code>
-	 */
-	@NonNull
-	public static Predicate<String> startsWith(@NonNull final String string) {
-		return new AbstractPredicate<String>() {
-			@Override
-			public boolean eval(String args) {
-				return args.startsWith(string);
-			}
-		};
-	}
+  /**
+   * Returns a new {@link Predicate} that answers if its {@link String} argument
+   * starts with a given prefix
+   * 
+   * @param string
+   * @return a new Predicate that evaluates <code>args.startsWith(string)</code>
+   */
+  @NonNull
+  public static Predicate<String> startsWith(@NonNull final String string) {
+    return new AbstractPredicate<String>() {
+      @Override
+      public boolean eval(String args) {
+        return args.startsWith(string);
+      }
+    };
+  }
 
-	/**
-	 * Returns a function that returns the result of sending
-	 * {@link Object#toString()} to its argument
-	 * 
-	 * @param <A>
-	 * @return a function that returns <code>arg.toString()</code>
-	 */
-	@NonNull
-	@Constant
-	public static <A> Function<A, String> toString_() {
-		return new AbstractFunction<A, String>() {
-			public String apply(A arg) {
-				return arg.toString();
-			}
-		};
-	}
+  /**
+   * Returns a function that returns the result of sending
+   * {@link Object#toString()} to its argument
+   * 
+   * @param <A>
+   * @return a function that returns <code>arg.toString()</code>
+   */
+  @NonNull
+  @Constant
+  public static <A> Function<A, String> toString_() {
+    return new AbstractFunction<A, String>() {
+      public String apply(A arg) {
+        return arg.toString();
+      }
+    };
+  }
 
 }

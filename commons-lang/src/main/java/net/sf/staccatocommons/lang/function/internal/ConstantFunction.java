@@ -28,33 +28,33 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @param <O>
  */
 public final class ConstantFunction<I, O> extends AbstractFunction<I, O> implements Serializable {
-	private static final long serialVersionUID = 5134677209037542760L;
+  private static final long serialVersionUID = 5134677209037542760L;
 
-	private final O value;
+  private final O value;
 
-	/**
-	 * Creates a new {@link ConstantFunction}
-	 * 
-	 * @param value
-	 */
-	public ConstantFunction(O value) {
-		this.value = value;
-	}
+  /**
+   * Creates a new {@link ConstantFunction}
+   * 
+   * @param value
+   */
+  public ConstantFunction(O value) {
+    this.value = value;
+  }
 
-	public O apply(I argument) {
-		return value;
-	}
+  public O apply(I argument) {
+    return value;
+  }
 
-	@Override
-	@NonNull
-	public Function<I, O> nullSafe() {
-		return this;
-	}
+  @Override
+  @NonNull
+  public Function<I, O> nullSafe() {
+    return this;
+  }
 
-	@NonNull
-	@Override
-	public Thunk<O> delayed(I arg) {
-		return Thunks.constant(value);
-	}
+  @NonNull
+  @Override
+  public Thunk<O> delayed(I arg) {
+    return Thunks.constant(value);
+  }
 
 }

@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.internal;
 
 import static net.sf.staccatocommons.testing.mock.FileMock.*;
@@ -31,48 +30,48 @@ import org.junit.Test;
  */
 public class ClassNamesUnitTest {
 
-	/**
-	 * Test method for {@link ClassNames#getClassName(Directory, File)}
-	 */
-	@Test
-	public void testGetClassName_AbsolutePath() {
-		assertEquals("com.foo.Foo",//
-			ClassNames.getClassName(//
-				new Directory(dir("/home/user/classes")),
-				new File("/home/user/classes/com/foo/Foo.class")));
-	}
+  /**
+   * Test method for {@link ClassNames#getClassName(Directory, File)}
+   */
+  @Test
+  public void testGetClassName_AbsolutePath() {
+    assertEquals("com.foo.Foo",//
+      ClassNames.getClassName(//
+        new Directory(dir("/home/user/classes")),
+        new File("/home/user/classes/com/foo/Foo.class")));
+  }
 
-	/**
-	 * Test method for {@link ClassNames#getClassName(Directory, File)}
-	 */
-	@Test
-	public void testGetClassName_AbsolutePathWithEndSeparator() {
-		assertEquals("com.foo.Foo",//
-			ClassNames.getClassName(//
-				new Directory(dir("/home/user/classes/")),
-				new File("/home/user/classes/com/foo/Foo.class")));
-	}
+  /**
+   * Test method for {@link ClassNames#getClassName(Directory, File)}
+   */
+  @Test
+  public void testGetClassName_AbsolutePathWithEndSeparator() {
+    assertEquals("com.foo.Foo",//
+      ClassNames.getClassName(//
+        new Directory(dir("/home/user/classes/")),
+        new File("/home/user/classes/com/foo/Foo.class")));
+  }
 
-	/**
-	 * Test method for {@link ClassNames#getClassName(Directory, File)}
-	 */
-	@Test
-	public void testGetClassName_RelativePaths() {
-		assertEquals("com.foo.Foo",//
-			ClassNames.getClassName(//
-				new Directory(dir("classes")),
-				new File("classes/com/foo/Foo.class")));
-	}
+  /**
+   * Test method for {@link ClassNames#getClassName(Directory, File)}
+   */
+  @Test
+  public void testGetClassName_RelativePaths() {
+    assertEquals("com.foo.Foo",//
+      ClassNames.getClassName(//
+        new Directory(dir("classes")),
+        new File("classes/com/foo/Foo.class")));
+  }
 
-	/**
-	 * Test method for {@link ClassNames#getClassName(Directory, File)}
-	 */
-	@Test
-	public void testGetClassName_InnerClasses() {
-		assertEquals("com.foo.Foo$Internal",//
-			ClassNames.getClassName(//
-				new Directory(dir("classes")),
-				new File("classes/com/foo/Foo$Internal.class")));
-	}
+  /**
+   * Test method for {@link ClassNames#getClassName(Directory, File)}
+   */
+  @Test
+  public void testGetClassName_InnerClasses() {
+    assertEquals("com.foo.Foo$Internal",//
+      ClassNames.getClassName(//
+        new Directory(dir("classes")),
+        new File("classes/com/foo/Foo$Internal.class")));
+  }
 
 }

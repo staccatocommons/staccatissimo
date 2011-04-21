@@ -34,79 +34,78 @@ import net.sf.staccatocommons.restrictions.value.Value;
  */
 @Value
 @Conditionally({ Immutable.class, Serializable.class })
-public class Prioritized<P extends Comparable<P>, T> implements Comparable<Prioritized<P, T>>,
-	Thunk<T>, Serializable {
+public class Prioritized<P extends Comparable<P>, T> implements Comparable<Prioritized<P, T>>, Thunk<T>, Serializable {
 
-	private static final long serialVersionUID = 7131041003021112454L;
-	private static final RelevantState<Prioritized> state = new RelevantState<Prioritized>(1) {
-		protected void collectState(Prioritized object, StateCollector s) {
-			s.add(object.priority);
-		}
-	};
-	private final P priority;
-	private final T value;
+  private static final long serialVersionUID = 7131041003021112454L;
+  private static final RelevantState<Prioritized> state = new RelevantState<Prioritized>(1) {
+    protected void collectState(Prioritized object, StateCollector s) {
+      s.add(object.priority);
+    }
+  };
+  private final P priority;
+  private final T value;
 
-	/**
-	 * Creates a new {@link Prioritized}
-	 * 
-	 * @param priority
-	 *          the priority. Non Null.
-	 * @param value
-	 *          the provided - prioritized - value. Nullable.
-	 */
-	public Prioritized(@NonNull P priority, T value) {
-		this.value = value;
-		this.priority = priority;
-	}
+  /**
+   * Creates a new {@link Prioritized}
+   * 
+   * @param priority
+   *          the priority. Non Null.
+   * @param value
+   *          the provided - prioritized - value. Nullable.
+   */
+  public Prioritized(@NonNull P priority, T value) {
+    this.value = value;
+    this.priority = priority;
+  }
 
-	public T value() {
-		return value;
-	}
+  public T value() {
+    return value;
+  }
 
-	/**
-	 * @return the priority used to determine order in comparison
-	 */
-	@NonNull
-	public P getPriority() {
-		return priority;
-	}
+  /**
+   * @return the priority used to determine order in comparison
+   */
+  @NonNull
+  public P getPriority() {
+    return priority;
+  }
 
-	public int compareTo(Prioritized<P, T> other) {
-		return state.compareTo(this, other);
-	}
+  public int compareTo(Prioritized<P, T> other) {
+    return state.compareTo(this, other);
+  }
 
-	/**
-	 * Test for equalty. In order to be consistent with
-	 * {@link #compareTo(Prioritized)}, this method will only consider the
-	 * priority attribute in the test
-	 */
-	public boolean equals(Object obj) {
-		return state.equals(this, obj);
-	}
+  /**
+   * Test for equalty. In order to be consistent with
+   * {@link #compareTo(Prioritized)}, this method will only consider the
+   * priority attribute in the test
+   */
+  public boolean equals(Object obj) {
+    return state.equals(this, obj);
+  }
 
-	public int hashCode() {
-		return state.hashCode(this);
-	}
+  public int hashCode() {
+    return state.hashCode(this);
+  }
 
-	public String toString() {
-		return String.format("Prioritized(%s,%s)", priority, value);
-	}
+  public String toString() {
+    return String.format("Prioritized(%s,%s)", priority, value);
+  }
 
-	/**
-	 * Factory method that creates a {@link Prioritized}
-	 * 
-	 * @param priority
-	 *          Non Null.
-	 * @param value
-	 *          the provided value. Non Nullable.
-	 * 
-	 * @param <T>
-	 * @param <P>
-	 * @return a new {@link Prioritized}
-	 */
-	@NonNull
-	public static <T, P extends Comparable<P>> Prioritized<P, T> from(P priority, T value) {
-		return new Prioritized<P, T>(priority, value);
-	}
+  /**
+   * Factory method that creates a {@link Prioritized}
+   * 
+   * @param priority
+   *          Non Null.
+   * @param value
+   *          the provided value. Non Nullable.
+   * 
+   * @param <T>
+   * @param <P>
+   * @return a new {@link Prioritized}
+   */
+  @NonNull
+  public static <T, P extends Comparable<P>> Prioritized<P, T> from(P priority, T value) {
+    return new Prioritized<P, T>(priority, value);
+  }
 
 }

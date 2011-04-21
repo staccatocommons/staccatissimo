@@ -28,59 +28,59 @@ import net.sf.staccatocommons.defs.type.SizeAwareType;
  */
 public class SizeAwareTypes {
 
-	private SizeAwareTypes() {}
+  private SizeAwareTypes() {}
 
-	/**
-	 * {@link SizeAwareType} for {@link SizeAware}s
-	 */
-	public static final SizeAwareType<SizeAware> SIZE_AWARE = new AbstractSizeAwareType<SizeAware>() {
-		public int size(SizeAware sizeAware) {
-			return sizeAware.size();
-		}
-	};
+  /**
+   * {@link SizeAwareType} for {@link SizeAware}s
+   */
+  public static final SizeAwareType<SizeAware> SIZE_AWARE = new AbstractSizeAwareType<SizeAware>() {
+    public int size(SizeAware sizeAware) {
+      return sizeAware.size();
+    }
+  };
 
-	/**
-	 * {@link SizeAwareType} for {@link CharSequence}s
-	 */
-	public static final SizeAwareType<CharSequence> CHAR_SEQUENCE = new AbstractSizeAwareType<CharSequence>() {
-		public int size(CharSequence sizeAware) {
-			return sizeAware.length();
-		}
-	};
+  /**
+   * {@link SizeAwareType} for {@link CharSequence}s
+   */
+  public static final SizeAwareType<CharSequence> CHAR_SEQUENCE = new AbstractSizeAwareType<CharSequence>() {
+    public int size(CharSequence sizeAware) {
+      return sizeAware.length();
+    }
+  };
 
-	/**
-	 * {@link SizeAwareType} for {@link Collection}s
-	 */
-	public static final SizeAwareType<Collection<?>> COLLECTION = new SizeAwareType<Collection<?>>() {
-		public int size(Collection<?> sizeAware) {
-			return sizeAware.size();
-		}
+  /**
+   * {@link SizeAwareType} for {@link Collection}s
+   */
+  public static final SizeAwareType<Collection<?>> COLLECTION = new SizeAwareType<Collection<?>>() {
+    public int size(Collection<?> sizeAware) {
+      return sizeAware.size();
+    }
 
-		public boolean isEmpty(Collection<?> emptyAware) {
-			return emptyAware.isEmpty();
-		}
-	};
+    public boolean isEmpty(Collection<?> emptyAware) {
+      return emptyAware.isEmpty();
+    }
+  };
 
-	/**
-	 * {@link SizeAwareType} for {@link Map}s
-	 */
-	public static final SizeAwareType<Map<?, ?>> MAP = new SizeAwareType<Map<?, ?>>() {
-		public int size(Map<?, ?> sizeAware) {
-			return sizeAware.size();
-		}
+  /**
+   * {@link SizeAwareType} for {@link Map}s
+   */
+  public static final SizeAwareType<Map<?, ?>> MAP = new SizeAwareType<Map<?, ?>>() {
+    public int size(Map<?, ?> sizeAware) {
+      return sizeAware.size();
+    }
 
-		public boolean isEmpty(Map<?, ?> emptyAware) {
-			return emptyAware.isEmpty();
-		}
-	};
+    public boolean isEmpty(Map<?, ?> emptyAware) {
+      return emptyAware.isEmpty();
+    }
+  };
 
-	/**
-	 * A {@link SizeAwareType} for arrays
-	 */
-	public static final SizeAwareType<Object> ARRAY = new AbstractSizeAwareType<Object>() {
-		public int size(Object sizeAware) {
-			return Array.getLength(sizeAware);
-		}
-	};
+  /**
+   * A {@link SizeAwareType} for arrays
+   */
+  public static final SizeAwareType<Object> ARRAY = new AbstractSizeAwareType<Object>() {
+    public int size(Object sizeAware) {
+      return Array.getLength(sizeAware);
+    }
+  };
 
 }

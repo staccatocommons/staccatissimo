@@ -30,29 +30,32 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @param <B>
  */
 public final class ZipStream<C, A, B> extends AbstractStream<C> {
-	private final Iterable<B> iterable;
-	private final Function2<A, B, C> function;
-	private final Stream<A> stream;
+  private final Iterable<B> iterable;
+  private final Function2<A, B, C> function;
+  private final Stream<A> stream;
 
-	/**
-	 * Creates a new {@link ZipStream}
-	 */
-	public ZipStream(@NonNull AbstractStream<A> abstractStream, @NonNull Iterable<B> iterable,
-		@NonNull Function2<A, B, C> function) {
-		this.iterable = iterable;
-		this.function = function;
-		this.stream = abstractStream;
-	}
+  /**
+   * Creates a new {@link ZipStream}
+   */
+  public ZipStream(@NonNull AbstractStream<A> abstractStream, @NonNull Iterable<B> iterable,
+    @NonNull Function2<A, B, C> function) {
+    this.iterable = iterable;
+    this.function = function;
+    this.stream = abstractStream;
+  }
 
-	public Thriterator<C> iterator() {
-		return new ZipIterator(stream.iterator(), Thriterators.from(iterable.iterator()), function);
-	}
+  @Override
+  public Thriterator<C> iterator() {
+    return new ZipIterator(stream.iterator(), Thriterators.from(iterable.iterator()), function);
+  }
 
-	public int size() {
-		return min(stream.size(), Iterables.size(iterable));
-	}
+  @Override
+  public int size() {
+    return min(stream.size(), Iterables.size(iterable));
+  }
 
-	public boolean isEmpty() {
-		return stream.isEmpty() || Iterables.isEmpty(iterable);
-	}
+  @Override
+  public boolean isEmpty() {
+    return stream.isEmpty() || Iterables.isEmpty(iterable);
+  }
 }

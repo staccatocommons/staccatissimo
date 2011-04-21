@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.predicate.internal;
 
 /**
@@ -20,20 +19,20 @@ package net.sf.staccatocommons.lang.predicate.internal;
  */
 public class LessThan<T extends Comparable<T>> extends NonAnnonymousPredicate<T> {
 
-	private static final long serialVersionUID = 459305478306868635L;
-	private final T value;
+  private static final long serialVersionUID = 459305478306868635L;
+  private final T value;
 
-	/**
-	 * Creates a new {@link LessThan}
-	 * 
-	 * @param value
-	 */
-	public LessThan(T value) {
-		this.value = value;
-	}
+  /**
+   * Creates a new {@link LessThan}
+   * 
+   * @param value
+   */
+  public LessThan(T value) {
+    this.value = value;
+  }
 
-	public boolean eval(T argument) {
-		return argument.compareTo(value) < 0;
-	}
+  public boolean eval(T argument) {
+    return argument.compareTo(value) < 0;
+  }
 
 }

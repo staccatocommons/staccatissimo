@@ -79,135 +79,135 @@ import net.sf.staccatocommons.restrictions.value.Value;
 @Conditionally({ Immutable.class, Serializable.class })
 public abstract class Tuple implements Serializable {
 
-	private static final long serialVersionUID = -3943649706502147516L;
+  private static final long serialVersionUID = -3943649706502147516L;
 
-	Tuple() {}
+  Tuple() {}
 
-	/**
-	 * Converts this tuple into an array
-	 * 
-	 * @return an new Object[] containing each of the elements of this tuple
-	 */
-	@NonNull
-	public abstract Object[] toArray();
+  /**
+   * Converts this tuple into an array
+   * 
+   * @return an new Object[] containing each of the elements of this tuple
+   */
+  @NonNull
+  public abstract Object[] toArray();
 
-	/**
-	 * Gets an unmodifiable list containing each components of this tuple as
-	 * elements
-	 * 
-	 * @return a non null, unmodifiable list
-	 */
-	@NonNull
-	public List<Object> toList() {
-		return Arrays.asList(toArray());
-	}
+  /**
+   * Gets an unmodifiable list containing each components of this tuple as
+   * elements
+   * 
+   * @return a non null, unmodifiable list
+   */
+  @NonNull
+  public List<Object> toList() {
+    return Arrays.asList(toArray());
+  }
 
-	/**
-	 * Interface for accessing the first element of a tuple
-	 * 
-	 * @author flbulgarelli
-	 * 
-	 * @param <A>
-	 */
-	public static interface FirstAware<A> {
+  /**
+   * Interface for accessing the first element of a tuple
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <A>
+   */
+  public static interface FirstAware<A> {
 
-		/**
-		 * Answers the first component
-		 * 
-		 * @return the first component
-		 */
-		A first();
+    /**
+     * Answers the first component
+     * 
+     * @return the first component
+     */
+    A first();
 
-		/**
-		 * Synonym for {@link #first()}
-		 * 
-		 * @return {@link #first()}
-		 * 
-		 */
-		A _0();
+    /**
+     * Synonym for {@link #first()}
+     * 
+     * @return {@link #first()}
+     * 
+     */
+    A _0();
 
-	}
+  }
 
-	/**
-	 * Interface for accessing the second element of a tuple
-	 * 
-	 * @author flbulgarelli
-	 * 
-	 * @param <A>
-	 */
+  /**
+   * Interface for accessing the second element of a tuple
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <A>
+   */
 
-	public static interface SecondAware<A> {
+  public static interface SecondAware<A> {
 
-		/**
-		 * Answers the second component
-		 * 
-		 * @return the second component
-		 */
-		A second();
+    /**
+     * Answers the second component
+     * 
+     * @return the second component
+     */
+    A second();
 
-		/**
-		 * Synonym for {@link #second()}
-		 * 
-		 * @return {@link #second()}
-		 * 
-		 */
-		A _1();
-	}
+    /**
+     * Synonym for {@link #second()}
+     * 
+     * @return {@link #second()}
+     * 
+     */
+    A _1();
+  }
 
-	/**
-	 * Interface for accessing the third element of a tuple
-	 * 
-	 * @author flbulgarelli
-	 * 
-	 * @param <A>
-	 */
+  /**
+   * Interface for accessing the third element of a tuple
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <A>
+   */
 
-	public static interface ThirdAware<A> {
-		/**
-		 * Answers the third component
-		 * 
-		 * @return the third component
-		 */
-		A third();
+  public static interface ThirdAware<A> {
+    /**
+     * Answers the third component
+     * 
+     * @return the third component
+     */
+    A third();
 
-		/**
-		 * 
-		 * Synonym for {@link #third()}
-		 * 
-		 * @return the third component
-		 */
-		A _2();
-	}
+    /**
+     * 
+     * Synonym for {@link #third()}
+     * 
+     * @return the third component
+     */
+    A _2();
+  }
 
-	/**
-	 * Interface for accessing the fourth element of a tuple
-	 * 
-	 * @author flbulgarelli
-	 * 
-	 * @param <A>
-	 */
-	public static interface FourthAware<A> {
+  /**
+   * Interface for accessing the fourth element of a tuple
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <A>
+   */
+  public static interface FourthAware<A> {
 
-		/**
-		 * @return the fourth component
-		 */
-		A fourth();
+    /**
+     * @return the fourth component
+     */
+    A fourth();
 
-		/**
-		 * Synonym for {@link #fourth()}
-		 * 
-		 * @return the fourth component
-		 */
-		A _3();
-	}
+    /**
+     * Synonym for {@link #fourth()}
+     * 
+     * @return the fourth component
+     */
+    A _3();
+  }
 
-	protected static abstract class TupleState<A extends Tuple> extends RelevantState<A> {
-		/**
-		 * Creates a new {@link TupleState}
-		 */
-		public TupleState(int relevantAttributesCount) {
-			super(relevantAttributesCount, TupleToStringStyle.getInstance());
-		}
-	}
+  protected static abstract class TupleState<A extends Tuple> extends RelevantState<A> {
+    /**
+     * Creates a new {@link TupleState}
+     */
+    public TupleState(int relevantAttributesCount) {
+      super(relevantAttributesCount, TupleToStringStyle.getInstance());
+    }
+  }
 
 }

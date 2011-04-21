@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import static net.sf.staccatocommons.lang.function.Functions.*;
@@ -24,12 +23,12 @@ import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
  */
 public class MapIteratorUnitTest extends IterableTheories {
 
-	protected Iterable<?> createTwoElementsIterable() {
-		return Streams.cons(10, 80).map(identity());
-	}
+  protected Iterable<?> createTwoElementsIterable() {
+    return Streams.cons(10, 80).map(identity());
+  }
 
-	protected Iterable<?> createOneElementIterable() {
-		return Streams.cons(10).map(identity());
-	}
+  protected Iterable<?> createOneElementIterable() {
+    return Streams.cons(10).map(identity());
+  }
 
 }

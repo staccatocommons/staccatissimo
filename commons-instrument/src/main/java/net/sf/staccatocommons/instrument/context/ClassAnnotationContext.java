@@ -22,12 +22,12 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface ClassAnnotationContext extends AnnotationContext {
 
-	/**
-	 * Answers the annotated class
-	 * 
-	 * @return the class
-	 */
-	@NonNull
-	CtClass getAnnotatedClass();
+  /**
+   * Answers the annotated class
+   * 
+   * @return the class
+   */
+  @NonNull
+  CtClass getAnnotatedClass();
 
 }

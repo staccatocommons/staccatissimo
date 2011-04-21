@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang;
 
 import static org.junit.Assert.*;
@@ -30,28 +29,28 @@ import org.junit.Test;
  */
 public class ClassesInstrumentedDummyTest {
 
-	/**
-	 * Verifies that, at least, the notNull processor is working on constructors
-	 */
-	@SuppressWarnings("unused")
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorsInstrumented() {
-		new MapBuilder(null, null);
-	}
+  /**
+   * Verifies that, at least, the notNull processor is working on constructors
+   */
+  @SuppressWarnings("unused")
+  @Test(expected = IllegalArgumentException.class)
+  public void testConstructorsInstrumented() {
+    new MapBuilder(null, null);
+  }
 
-	/**
-	 * Verifies that, at least, the notNull processor is working on methods
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testMethodsInstrumented() {
-		Compare.min(null, 5);
-	}
+  /**
+   * Verifies that, at least, the notNull processor is working on methods
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testMethodsInstrumented() {
+    Compare.min(null, 5);
+  }
 
-	/** Verifies that {@link Constant} was instrumented */
-	@Test
-	public void testConstInstrumented() throws Exception {
-		assertSame(Predicates.true_(), Predicates.true_());
-		assertSame(Equiv.equal(), Equiv.equal());
-		assertSame(Equiv.<Integer> compare(), Equiv.<Integer> compare());
-	}
+  /** Verifies that {@link Constant} was instrumented */
+  @Test
+  public void testConstInstrumented() throws Exception {
+    assertSame(Predicates.true_(), Predicates.true_());
+    assertSame(Equiv.equal(), Equiv.equal());
+    assertSame(Equiv.<Integer> compare(), Equiv.<Integer> compare());
+  }
 }

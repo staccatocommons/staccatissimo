@@ -36,10 +36,10 @@ import net.sf.staccatocommons.restrictions.Restriction;
 @Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.PARAMETER, ElementType.FIELD, ElementType.METHOD })
 public @interface Positive {
-	/**
-	 * @return The variable name of the constrained element, or the empty string
-	 *         if unspecified. This value may help tools that analyze this
-	 *         annotation without access to source code.
-	 */
-	String value() default "";
+  /**
+   * @return The variable name of the constrained element, or the empty string
+   *         if unspecified. This value may help tools that analyze this
+   *         annotation without access to source code.
+   */
+  String value() default "";
 }

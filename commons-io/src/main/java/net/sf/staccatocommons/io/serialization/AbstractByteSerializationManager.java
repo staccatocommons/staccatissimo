@@ -30,22 +30,22 @@ import net.sf.staccatocommons.io.serialization.lifecycle.SerializationLifecycle;
  */
 public abstract class AbstractByteSerializationManager implements SerializationManager {
 
-	@Override
-	public <T> T deserialize(final File input) {
-		return new SerializationLifecycle.Deserialize<T>(this) {
-			public InputStream initialize() throws IOException {
-				return new FileInputStream(input);
-			}
-		}.value();
-	}
+  @Override
+  public <T> T deserialize(final File input) {
+    return new SerializationLifecycle.Deserialize<T>(this) {
+      public InputStream initialize() throws IOException {
+        return new FileInputStream(input);
+      }
+    }.value();
+  }
 
-	@Override
-	public void serialize(Object target, final File output) {
-		new SerializationLifecycle.Serialize(this, target) {
-			public OutputStream initialize() throws IOException {
-				return new FileOutputStream(output);
-			}
-		}.value();
-	}
+  @Override
+  public void serialize(Object target, final File output) {
+    new SerializationLifecycle.Serialize(this, target) {
+      public OutputStream initialize() throws IOException {
+        return new FileOutputStream(output);
+      }
+    }.value();
+  }
 
 }

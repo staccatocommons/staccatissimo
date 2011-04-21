@@ -28,23 +28,22 @@ import org.junit.experimental.theories.DataPoint;
  */
 public class MapStreamUnitTest extends StreamTheories {
 
-	/** data point */
-	@DataPoint
-	public static Stream empty() {
-		return new MapStream(Streams.empty(), Functions.identity());
-	}
+  /** data point */
+  @DataPoint
+  public static Stream empty() {
+    return new MapStream(Streams.empty(), Functions.identity());
+  }
 
-	/** data point */
-	@DataPoint
-	public static Stream oneElement() {
-		return new MapStream(Streams.cons(10), Functions.identity());
-	}
+  /** data point */
+  @DataPoint
+  public static Stream oneElement() {
+    return new MapStream(Streams.cons(10), Functions.identity());
+  }
 
-	/** data point */
-	@DataPoint
-	public static Stream twoElementsNonRepetable() {
-		return new MapStream(Streams.from(Arrays.asList(20, 30, 40).iterator()).filter(
-			Compare.greaterThan(25)), add(10));
-	}
+  /** data point */
+  @DataPoint
+  public static Stream twoElementsNonRepetable() {
+    return new MapStream(Streams.from(Arrays.asList(20, 30, 40).iterator()).filter(Compare.greaterThan(25)), add(10));
+  }
 
 }

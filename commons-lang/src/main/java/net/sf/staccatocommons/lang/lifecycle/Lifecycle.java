@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.lifecycle;
 
 import java.util.concurrent.Callable;
@@ -71,122 +70,121 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @param <ResultType>
  *          the type of result returned by this lifecycle
  */
-public abstract class Lifecycle<ResourceType, ResultType> implements Thunk<ResultType>,
-	Callable<ResultType> {
+public abstract class Lifecycle<ResourceType, ResultType> implements Thunk<ResultType>, Callable<ResultType> {
 
-	/**
-	 * Executes this {@link Lifecycle}, initializing the resource it handles,
-	 * doing some work with it, disposing the resource and returning the work
-	 * result.
-	 * 
-	 * Any checked or unchecked exception produced during the flow execution will
-	 * be catch, soften and rethrown.
-	 * 
-	 * 
-	 * @throws RuntimeException
-	 *           if any exception is thrown during the flow execution
-	 * @return the result of the work over the resource
-	 * @see SoftException#soften(Exception)
-	 */
-	public ResultType call() throws Exception {
-		ResourceType resource = null;
-		try {
-			resource = initialize();
-			return doWork(resource);
-		} finally {
-			if (resource != null)
-				dispose(resource);
-		}
-	}
+  /**
+   * Executes this {@link Lifecycle}, initializing the resource it handles,
+   * doing some work with it, disposing the resource and returning the work
+   * result.
+   * 
+   * Any checked or unchecked exception produced during the flow execution will
+   * be catch, soften and rethrown.
+   * 
+   * 
+   * @throws RuntimeException
+   *           if any exception is thrown during the flow execution
+   * @return the result of the work over the resource
+   * @see SoftException#soften(Exception)
+   */
+  public ResultType call() throws Exception {
+    ResourceType resource = null;
+    try {
+      resource = initialize();
+      return doWork(resource);
+    } finally {
+      if (resource != null)
+        dispose(resource);
+    }
+  }
 
-	/**
-	 * Sends the {@link #call()} message, softening any exception that may occur.
-	 * 
-	 * @see SoftException#callOrSoften(Callable)
-	 */
-	@Override
-	public ResultType value() {
-		return SoftException.callOrSoften(this);
-	}
+  /**
+   * Sends the {@link #call()} message, softening any exception that may occur.
+   * 
+   * @see SoftException#callOrSoften(Callable)
+   */
+  @Override
+  public ResultType value() {
+    return SoftException.callOrSoften(this);
+  }
 
-	/**
-	 * Handles exceptions of type <code>exceptionClass</code> that may occur when
-	 * sending {@link #call()}.
-	 * 
-	 * This method is just a shortcut for
-	 * <code>Handle.throwing(this, exceptionClass)</code>
-	 * 
-	 * @see Handle#throwing(Callable, Class)
-	 */
-	public final <E extends Exception> ResultType throwing(Class<E> exceptionClass) throws E {
-		return Handle.throwing(this, exceptionClass);
-	}
+  /**
+   * Handles exceptions of type <code>exceptionClass</code> that may occur when
+   * sending {@link #call()}.
+   * 
+   * This method is just a shortcut for
+   * <code>Handle.throwing(this, exceptionClass)</code>
+   * 
+   * @see Handle#throwing(Callable, Class)
+   */
+  public final <E extends Exception> ResultType throwing(Class<E> exceptionClass) throws E {
+    return Handle.throwing(this, exceptionClass);
+  }
 
-	/**
-	 * Handles exceptions of type <code>exceptionClass1</code> and
-	 * <code>exceptionClass2</code> that may occur when sending {@link #call()}.
-	 * 
-	 * This method is just a shortcut for
-	 * <code>Handle.throwing(this, exceptionClass1, exceptionClass2)</code>
-	 * 
-	 * @see Handle#throwing(Callable, Class, Class)
-	 */
-	public final <E1 extends Exception, E2 extends Exception> ResultType throwing(
-		Class<E1> exceptionClass1, Class<E2> exceptionClass2) throws E1, E2 {
-		return Handle.throwing(this, exceptionClass1, exceptionClass2);
-	}
+  /**
+   * Handles exceptions of type <code>exceptionClass1</code> and
+   * <code>exceptionClass2</code> that may occur when sending {@link #call()}.
+   * 
+   * This method is just a shortcut for
+   * <code>Handle.throwing(this, exceptionClass1, exceptionClass2)</code>
+   * 
+   * @see Handle#throwing(Callable, Class, Class)
+   */
+  public final <E1 extends Exception, E2 extends Exception> ResultType throwing(Class<E1> exceptionClass1,
+    Class<E2> exceptionClass2) throws E1, E2 {
+    return Handle.throwing(this, exceptionClass1, exceptionClass2);
+  }
 
-	/**
-	 * Initializes and gets a resource of ResourceType
-	 * 
-	 * @return the initialized resources
-	 * @throws Exception
-	 *           if any error occurs
-	 */
-	protected abstract ResourceType initialize() throws Exception;
+  /**
+   * Initializes and gets a resource of ResourceType
+   * 
+   * @return the initialized resources
+   * @throws Exception
+   *           if any error occurs
+   */
+  protected abstract ResourceType initialize() throws Exception;
 
-	/**
-	 * Makes usage of a resource, and returns a result
-	 * 
-	 * {@link Lifecycle}s parameterized to have a {@link Void} result
-	 * <strong>should not</strong> override this method, but
-	 * {@link #doVoidWork(Object)} instead
-	 * 
-	 * @param resource
-	 *          the resource to use
-	 * @return the result of using the resource, of ResultType. It may be null, if
-	 *         and only if ResultType is {@link Void}
-	 * @throws Exception
-	 *           if any error occurs
-	 */
-	protected ResultType doWork(@NonNull ResourceType resource) throws Exception {
-		doVoidWork(resource);
-		return null;
-	}
+  /**
+   * Makes usage of a resource, and returns a result
+   * 
+   * {@link Lifecycle}s parameterized to have a {@link Void} result
+   * <strong>should not</strong> override this method, but
+   * {@link #doVoidWork(Object)} instead
+   * 
+   * @param resource
+   *          the resource to use
+   * @return the result of using the resource, of ResultType. It may be null, if
+   *         and only if ResultType is {@link Void}
+   * @throws Exception
+   *           if any error occurs
+   */
+  protected ResultType doWork(@NonNull ResourceType resource) throws Exception {
+    doVoidWork(resource);
+    return null;
+  }
 
-	/**
-	 * Makes usage of a resource, without returning a result.
-	 * 
-	 * This method <strong>should</strong> only be overriden in {@link Lifecycle}s
-	 * parameterized to have a {@link Void} result. If it is not the case,
-	 * override {@link #doWork(Object)} instead.
-	 * 
-	 * @param resource
-	 *          the resource to use
-	 * @throws Exception
-	 *           is any error occurs
-	 */
-	protected void doVoidWork(@NonNull ResourceType resource) throws Exception {}
+  /**
+   * Makes usage of a resource, without returning a result.
+   * 
+   * This method <strong>should</strong> only be overriden in {@link Lifecycle}s
+   * parameterized to have a {@link Void} result. If it is not the case,
+   * override {@link #doWork(Object)} instead.
+   * 
+   * @param resource
+   *          the resource to use
+   * @throws Exception
+   *           is any error occurs
+   */
+  protected void doVoidWork(@NonNull ResourceType resource) throws Exception {}
 
-	/**
-	 * Disposes the resource.
-	 * 
-	 * Default implementation does nothing, subclasses may want to override this
-	 * method to add disposal logic
-	 * 
-	 * @param resource
-	 * @throws Exception
-	 *           if any error occurs
-	 */
-	protected void dispose(@NonNull ResourceType resource) throws Exception {}
+  /**
+   * Disposes the resource.
+   * 
+   * Default implementation does nothing, subclasses may want to override this
+   * method to add disposal logic
+   * 
+   * @param resource
+   * @throws Exception
+   *           if any error occurs
+   */
+  protected void dispose(@NonNull ResourceType resource) throws Exception {}
 }

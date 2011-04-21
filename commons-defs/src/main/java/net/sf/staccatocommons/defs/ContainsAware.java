@@ -23,13 +23,13 @@ package net.sf.staccatocommons.defs;
  */
 public interface ContainsAware<T> {
 
-	/**
-	 * Answers if this contains-aware contains the given <code>element</code>
-	 * 
-	 * @param element
-	 * 
-	 * @return if the element is contained
-	 */
-	public boolean contains(T element);
+  /**
+   * Answers if this contains-aware contains the given <code>element</code>
+   * 
+   * @param element
+   * 
+   * @return if the element is contained
+   */
+  public boolean contains(T element);
 
 }

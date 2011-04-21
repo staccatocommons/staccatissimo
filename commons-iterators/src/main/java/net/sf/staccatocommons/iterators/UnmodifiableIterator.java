@@ -25,36 +25,36 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public final class UnmodifiableIterator<T> extends AbstractUnmodifiableIterator<T> {
 
-	private final Iterator<? extends T> iter;
+  private final Iterator<? extends T> iter;
 
-	/**
-	 * Creates a new {@link UnmodifiableIterator}
-	 */
-	public UnmodifiableIterator(Iterator<? extends T> iter) {
-		this.iter = iter;
-	}
+  /**
+   * Creates a new {@link UnmodifiableIterator}
+   */
+  public UnmodifiableIterator(Iterator<? extends T> iter) {
+    this.iter = iter;
+  }
 
-	@Override
-	public boolean hasNext() {
-		return iter.hasNext();
-	}
+  @Override
+  public boolean hasNext() {
+    return iter.hasNext();
+  }
 
-	@Override
-	public T next() {
-		return iter.next();
-	}
+  @Override
+  public T next() {
+    return iter.next();
+  }
 
-	/**
-	 * Answers an {@link Iterator} view of the given <code>iter</code> that does
-	 * not support {@link #remove()}
-	 * 
-	 * @param <A>
-	 * @param element
-	 * @return a new {@link UnmodifiableIterator}
-	 */
-	@NonNull
-	public static <A> Iterator<A> from(Iterator<? extends A> iter) {
-		return new UnmodifiableIterator<A>(iter);
-	}
+  /**
+   * Answers an {@link Iterator} view of the given <code>iter</code> that does
+   * not support {@link #remove()}
+   * 
+   * @param <A>
+   * @param element
+   * @return a new {@link UnmodifiableIterator}
+   */
+  @NonNull
+  public static <A> Iterator<A> from(Iterator<? extends A> iter) {
+    return new UnmodifiableIterator<A>(iter);
+  }
 
 }

@@ -20,21 +20,21 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class ContainsSubstringPredicate extends NonAnnonymousPredicate<String> {
 
-	private static final long serialVersionUID = -1561905956909887950L;
-	private final String substring;
+  private static final long serialVersionUID = -1561905956909887950L;
+  private final String substring;
 
-	/**
-	 * Creates a new {@link ContainsSubstringPredicate}
-	 * 
-	 * @param substring
-	 */
-	public ContainsSubstringPredicate(String substring) {
-		this.substring = substring;
-	}
+  /**
+   * Creates a new {@link ContainsSubstringPredicate}
+   * 
+   * @param substring
+   */
+  public ContainsSubstringPredicate(String substring) {
+    this.substring = substring;
+  }
 
-	@Override
-	public boolean eval(@NonNull String arg) {
-		return arg.contains(substring);
-	}
+  @Override
+  public boolean eval(@NonNull String arg) {
+    return arg.contains(substring);
+  }
 
 }

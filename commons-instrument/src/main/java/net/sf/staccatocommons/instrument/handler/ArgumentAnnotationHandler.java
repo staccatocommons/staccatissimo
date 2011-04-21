@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.instrument.handler;
 
 import java.lang.annotation.Annotation;
@@ -30,20 +29,20 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface ArgumentAnnotationHandler<A extends Annotation> extends AnnotationHandler<A> {
 
-	/**
-	 * Process an annotation discovered by the instrumenter, instrumenting the
-	 * given <code>context</code> where the annoation was found
-	 * 
-	 * @param annotation
-	 *          the annotation to process
-	 * @param context
-	 *          the instrumentable context where the annotation was found
-	 * @throws CannotCompileException
-	 *           if any compilation errors occurs
-	 * @throws NotFoundException
-	 *           if any type needed by instrumentation was not found
-	 */
-	void processAnnotatedArgument(@NonNull A annotation, @NonNull ArgumentAnnotationContext context)
-		throws CannotCompileException, NotFoundException;
+  /**
+   * Process an annotation discovered by the instrumenter, instrumenting the
+   * given <code>context</code> where the annoation was found
+   * 
+   * @param annotation
+   *          the annotation to process
+   * @param context
+   *          the instrumentable context where the annotation was found
+   * @throws CannotCompileException
+   *           if any compilation errors occurs
+   * @throws NotFoundException
+   *           if any type needed by instrumentation was not found
+   */
+  void processAnnotatedArgument(@NonNull A annotation, @NonNull ArgumentAnnotationContext context)
+    throws CannotCompileException, NotFoundException;
 
 }

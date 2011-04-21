@@ -22,16 +22,16 @@ import org.junit.Test;
  */
 public class SimpleInstrumentationMarkUnitTest {
 
-	/**
-	 * Test method for
-	 * {@link SimpleInstrumentationMark#SimpleInstrumentationMark(java.lang.String, java.lang.String)}
-	 * .
-	 */
-	@Test
-	public void testSimpleInstrumentationMark() {
-		SimpleInstrumentationMark mark = new SimpleInstrumentationMark("mark-key", "mark-value");
-		assertEquals("mark-key", mark.getMarkAttributeName());
-		assertEquals("mark-value", new String(mark.getMarkAttributeValue()));
-	}
+  /**
+   * Test method for
+   * {@link SimpleInstrumentationMark#SimpleInstrumentationMark(java.lang.String, java.lang.String)}
+   * .
+   */
+  @Test
+  public void testSimpleInstrumentationMark() {
+    SimpleInstrumentationMark mark = new SimpleInstrumentationMark("mark-key", "mark-value");
+    assertEquals("mark-key", mark.getMarkAttributeName());
+    assertEquals("mark-value", new String(mark.getMarkAttributeValue()));
+  }
 
 }

@@ -32,57 +32,57 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Deconstructable<A> {
 
-	/**
-	 * Answers this stream split into head and tail.
-	 * 
-	 * This method is preferred over {@link #head()} and {@link #tail()}, as it
-	 * will work as expected even on non repeatable iteration streams.
-	 * 
-	 * @return a pair containing the head and the tail of this stream. The tail is
-	 *         {@link NonNull} and a {@link Projection}, but it is always
-	 *         non-repeatable.
-	 * @throws NoSuchElementException
-	 *           if stream is empty
-	 */
-	@NonNull
-	Pair<A, Stream<A>> decons();
+  /**
+   * Answers this stream split into head and tail.
+   * 
+   * This method is preferred over {@link #head()} and {@link #tail()}, as it
+   * will work as expected even on non repeatable iteration streams.
+   * 
+   * @return a pair containing the head and the tail of this stream. The tail is
+   *         {@link NonNull} and a {@link Projection}, but it is always
+   *         non-repeatable.
+   * @throws NoSuchElementException
+   *           if stream is empty
+   */
+  @NonNull
+  Pair<A, Stream<A>> decons();
 
-	/**
-	 * Answers this non-empty stream split into a head thunk and tail.
-	 * 
-	 * This method is preferred over {@link #decons()} when the head value of the
-	 * {@link Stream} is potentially irrelevant, as this methods grants to suceeds
-	 * even in those cases where {@link #head()} fails.
-	 * 
-	 * @return a pair containing a thunk that will provide the head, and the tail
-	 *         of this stream. The tail is {@link NonNull} and a
-	 *         {@link Projection}, but it is always non-repeatable.
-	 * @throws NoSuchElementException
-	 *           if stream is empty
-	 */
-	@NonNull
-	Pair<Thunk<A>, Stream<A>> delayedDecons();
+  /**
+   * Answers this non-empty stream split into a head thunk and tail.
+   * 
+   * This method is preferred over {@link #decons()} when the head value of the
+   * {@link Stream} is potentially irrelevant, as this methods grants to suceeds
+   * even in those cases where {@link #head()} fails.
+   * 
+   * @return a pair containing a thunk that will provide the head, and the tail
+   *         of this stream. The tail is {@link NonNull} and a
+   *         {@link Projection}, but it is always non-repeatable.
+   * @throws NoSuchElementException
+   *           if stream is empty
+   */
+  @NonNull
+  Pair<Thunk<A>, Stream<A>> delayedDecons();
 
-	/**
-	 * Answers the head of the {@link Stream}, which is the first element of the
-	 * stream.
-	 * 
-	 * @return {@link Stream#first()}
-	 * @throws NoSuchElementException
-	 *           if stream is empty
-	 */
-	A head();
+  /**
+   * Answers the head of the {@link Stream}, which is the first element of the
+   * stream.
+   * 
+   * @return {@link Stream#first()}
+   * @throws NoSuchElementException
+   *           if stream is empty
+   */
+  A head();
 
-	/**
-	 * Answers the tail of the {@link Stream}
-	 * 
-	 * @return an {@link Stream} that retrieves all its elements, except of the
-	 *         first one
-	 * @throws NoSuchElementException
-	 *           if stream is empty
-	 */
-	@NonNull
-	@Projection
-	Stream<A> tail();
+  /**
+   * Answers the tail of the {@link Stream}
+   * 
+   * @return an {@link Stream} that retrieves all its elements, except of the
+   *         first one
+   * @throws NoSuchElementException
+   *           if stream is empty
+   */
+  @NonNull
+  @Projection
+  Stream<A> tail();
 
 }

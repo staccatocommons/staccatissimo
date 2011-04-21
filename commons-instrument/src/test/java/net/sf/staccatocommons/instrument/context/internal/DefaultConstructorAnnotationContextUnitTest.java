@@ -23,20 +23,18 @@ import org.junit.Test;
  */
 public class DefaultConstructorAnnotationContextUnitTest extends AbstractAnnotationContextUnitTest {
 
-	/**
-	 * Test method for
-	 * {@link DefaultConstructorAnnotationContext#getConstructor()}.
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testGetConstructor() throws Exception {
-		DefaultConstructorAnnotationContext context = new DefaultConstructorAnnotationContext(
-			pool,
-			logger);
-		CtConstructor constructor = pool.get("net.sf.staccatocommons.lang.Range").getConstructors()[0];
-		context.setConstructor(constructor);
-		assertSame(constructor, context.getConstructor());
-	}
+  /**
+   * Test method for
+   * {@link DefaultConstructorAnnotationContext#getConstructor()}.
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void testGetConstructor() throws Exception {
+    DefaultConstructorAnnotationContext context = new DefaultConstructorAnnotationContext(pool, logger);
+    CtConstructor constructor = pool.get("net.sf.staccatocommons.lang.Range").getConstructors()[0];
+    context.setConstructor(constructor);
+    assertSame(constructor, context.getConstructor());
+  }
 
 }

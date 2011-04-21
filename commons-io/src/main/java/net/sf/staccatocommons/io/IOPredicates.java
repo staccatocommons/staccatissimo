@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.io;
 
 import java.io.File;
@@ -27,15 +26,15 @@ import org.apache.commons.io.filefilter.SuffixFileFilter;
  */
 public class IOPredicates {
 
-	/**
-	 * Answers a predicate that evaluates if a file ends with a given suffix
-	 * 
-	 * @param suffixes
-	 * @return a new {@link Predicate}
-	 * @see SuffixFileFilter
-	 */
-	@NonNull
-	public static Predicate<File> suffix(@NonNull String... suffixes) {
-		return new FilePredicate(new SuffixFileFilter(suffixes));
-	}
+  /**
+   * Answers a predicate that evaluates if a file ends with a given suffix
+   * 
+   * @param suffixes
+   * @return a new {@link Predicate}
+   * @see SuffixFileFilter
+   */
+  @NonNull
+  public static Predicate<File> suffix(@NonNull String... suffixes) {
+    return new FilePredicate(new SuffixFileFilter(suffixes));
+  }
 }

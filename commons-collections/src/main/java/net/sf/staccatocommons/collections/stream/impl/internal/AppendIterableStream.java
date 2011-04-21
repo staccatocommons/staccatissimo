@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.NoSuchElementException;
@@ -31,49 +30,50 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  */
 public final class AppendIterableStream<A> extends AbstractStream<A> {
-	private final Stream<A> stream;
-	private final Iterable<A> other;
+  private final Stream<A> stream;
+  private final Iterable<A> other;
 
-	/**
-	 * Creates a new {@link AppendIterableStream}
-	 */
-	public AppendIterableStream(@NonNull Stream<A> stream, @NonNull Iterable<A> other) {
-		this.stream = stream;
-		this.other = other;
-	}
+  /**
+   * Creates a new {@link AppendIterableStream}
+   */
+  public AppendIterableStream(@NonNull Stream<A> stream, @NonNull Iterable<A> other) {
+    this.stream = stream;
+    this.other = other;
+  }
 
-	public Thriterator<A> iterator() {// FIXME bad impl
-		return new AdvanceThriterator<A>() {
-			private Thriter<A> iter = stream.iterator();
-			private boolean second = false;
+  @Override
+  public Thriterator<A> iterator() {// FIXME bad impl
+    return new AdvanceThriterator<A>() {
+      private Thriter<A> iter = stream.iterator();
+      private boolean second = false;
 
-			public boolean hasNext() {
-				if (iter.hasNext())
-					return true;
+      public boolean hasNext() {
+        if (iter.hasNext())
+          return true;
 
-				if (second)
-					return false;
+        if (second)
+          return false;
 
-				iter = Thriterators.from(other.iterator());
-				second = true;
-				return iter.hasNext();
-			}
+        iter = Thriterators.from(other.iterator());
+        second = true;
+        return iter.hasNext();
+      }
 
-			public void advanceNext() throws NoSuchElementException {
-				iter.advanceNext();
-			}
+      public void advanceNext() throws NoSuchElementException {
+        iter.advanceNext();
+      }
 
-			public A current() throws NoSuchElementException {
-				return iter.current();
-			}
+      public A current() throws NoSuchElementException {
+        return iter.current();
+      }
 
-			public Thunk<A> delayedCurrent() {
-				return iter.delayedCurrent();
-			}
-		};
-	}
+      public Thunk<A> delayedCurrent() {
+        return iter.delayedCurrent();
+      }
+    };
+  }
 
-	public NumberType<A> numberType() {
-		return stream.numberType();
-	}
+  public NumberType<A> numberType() {
+    return stream.numberType();
+  }
 }

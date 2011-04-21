@@ -32,36 +32,36 @@ import net.sf.staccatocommons.defs.function.Function3;
  * 
  * @see AbstractFunction
  */
-public abstract class AbstractFunction3<A, B, C, D> extends AbstractDelayable3<A, B, C, D>
-	implements Function3<A, B, C, D> {
+public abstract class AbstractFunction3<A, B, C, D> extends AbstractDelayable3<A, B, C, D> implements
+  Function3<A, B, C, D> {
 
-	public final Function3<A, B, C, D> nullSafe() {
-		return new AbstractFunction3<A, B, C, D>() {
-			public D apply(A arg0, B arg1, C arg2) {
-				if (arg0 == null || arg1 == null || arg2 == null)
-					return null;
-				return AbstractFunction3.this.apply(arg0, arg1, arg2);
-			}
-		};
-	}
+  public final Function3<A, B, C, D> nullSafe() {
+    return new AbstractFunction3<A, B, C, D>() {
+      public D apply(A arg0, B arg1, C arg2) {
+        if (arg0 == null || arg1 == null || arg2 == null)
+          return null;
+        return AbstractFunction3.this.apply(arg0, arg1, arg2);
+      }
+    };
+  }
 
-	public Function<C, D> apply(final A arg0, final B arg1) {
-		return new AbstractFunction<C, D>() {
-			public D apply(C arg3) {
-				return AbstractFunction3.this.apply(arg0, arg1, arg3);
-			}
-		};
-	}
+  public Function<C, D> apply(final A arg0, final B arg1) {
+    return new AbstractFunction<C, D>() {
+      public D apply(C arg3) {
+        return AbstractFunction3.this.apply(arg0, arg1, arg3);
+      }
+    };
+  }
 
-	public Function2<B, C, D> apply(final A arg0) {
-		return new AbstractFunction2<B, C, D>() {
-			public D apply(B arg1, C arg2) {
-				return AbstractFunction3.this.apply(arg0, arg1, arg2);
-			}
-		};
-	}
+  public Function2<B, C, D> apply(final A arg0) {
+    return new AbstractFunction2<B, C, D>() {
+      public D apply(B arg1, C arg2) {
+        return AbstractFunction3.this.apply(arg0, arg1, arg2);
+      }
+    };
+  }
 
-	public String toString() {
-		return "Function3";
-	}
+  public String toString() {
+    return "Function3";
+  }
 }

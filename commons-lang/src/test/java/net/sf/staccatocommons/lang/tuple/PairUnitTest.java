@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.tuple;
 
 import static junit.framework.Assert.*;
@@ -30,67 +29,67 @@ import org.junit.Test;
  */
 public class PairUnitTest extends TupleAbstractUnitTest {
 
-	@Override
-	public void testComponents() throws Exception {
-		Pair<Integer, String> pair = _(9, "Hello");
-		assertEquals((Integer) 9, pair.first());
-		assertEquals("Hello", pair.second());
-		assertSame(pair._0(), pair.first());
-		assertSame(pair._1(), pair.second());
+  @Override
+  public void testComponents() throws Exception {
+    Pair<Integer, String> pair = _(9, "Hello");
+    assertEquals((Integer) 9, pair.first());
+    assertEquals("Hello", pair.second());
+    assertSame(pair._0(), pair.first());
+    assertSame(pair._1(), pair.second());
 
-	}
+  }
 
-	@Override
-	public void testComparability() throws Exception {
-		assertTrue(_(50, 2).compareTo(_(50, 2)) == 0);
-		assertTrue(_(50, 2).compareTo(_(50, 9)) < 0);
-		assertTrue(_(50, 2).compareTo(_(100, 1)) < 0);
-		assertTrue(_(50, 2).compareTo(_(10, 1)) > 0);
-		assertTrue(_(50, 2).compareTo(_(10, 10)) > 0);
-	}
+  @Override
+  public void testComparability() throws Exception {
+    assertTrue(_(50, 2).compareTo(_(50, 2)) == 0);
+    assertTrue(_(50, 2).compareTo(_(50, 9)) < 0);
+    assertTrue(_(50, 2).compareTo(_(100, 1)) < 0);
+    assertTrue(_(50, 2).compareTo(_(10, 1)) > 0);
+    assertTrue(_(50, 2).compareTo(_(10, 10)) > 0);
+  }
 
-	@Override
-	public void testEqualty() throws Exception {
-		assertEquals(_(5, 90L), _(5, 90L));
-		assertFalse(_("Hello", 5).equals(_("World", 5)));
-		Date date = new Date();
-		assertEquals(_(40, date).hashCode(), _(40, date.clone()).hashCode());
-	}
+  @Override
+  public void testEqualty() throws Exception {
+    assertEquals(_(5, 90L), _(5, 90L));
+    assertFalse(_("Hello", 5).equals(_("World", 5)));
+    Date date = new Date();
+    assertEquals(_(40, date).hashCode(), _(40, date.clone()).hashCode());
+  }
 
-	/** Test for {@link Pair#swap()} */
-	@Test
-	public void testSwap() throws Exception {
-		Calendar calendar = Calendar.getInstance();
-		assertEquals(_(90, calendar), _(calendar, 90).swap());
-	}
+  /** Test for {@link Pair#swap()} */
+  @Test
+  public void testSwap() throws Exception {
+    Calendar calendar = Calendar.getInstance();
+    assertEquals(_(90, calendar), _(calendar, 90).swap());
+  }
 
-	@Override
-	public void testToString() throws Exception {
-		assertEquals("(90,6)", _(90, 6).toString());
-	}
+  @Override
+  public void testToString() throws Exception {
+    assertEquals("(90,6)", _(90, 6).toString());
+  }
 
-	/***/
-	@Test
-	public void testAsEntry_Get() throws Exception {
-		assertEquals("Hello", _("Hello", 40).getKey());
-		assertEquals("Hello", _(40, "Hello").getValue());
-	}
+  /***/
+  @Test
+  public void testAsEntry_Get() throws Exception {
+    assertEquals("Hello", _("Hello", 40).getKey());
+    assertEquals("Hello", _(40, "Hello").getValue());
+  }
 
-	/***/
-	@Test(expected = UnsupportedOperationException.class)
-	public void testAsEntry_Set() throws Exception {
-		_(40, 9).setValue(4);
-	}
+  /***/
+  @Test(expected = UnsupportedOperationException.class)
+  public void testAsEntry_Set() throws Exception {
+    _(40, 9).setValue(4);
+  }
 
-	@Override
-	public void testToArray() throws Exception {
-		Pair<Integer, Integer> pair = _(90, 6);
-		Object[] a = pair.toArray();
-		assertEquals(pair, _(a[0], a[1]));
-	}
+  @Override
+  public void testToArray() throws Exception {
+    Pair<Integer, Integer> pair = _(90, 6);
+    Object[] a = pair.toArray();
+    assertEquals(pair, _(a[0], a[1]));
+  }
 
-	@Override
-	protected Tuple sampleTuple() {
-		return _("", 5);
-	}
+  @Override
+  protected Tuple sampleTuple() {
+    return _("", 5);
+  }
 }
