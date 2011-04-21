@@ -4,9 +4,15 @@
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-parent-pom</artifactId>
 	<packaging>pom</packaging>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<version>1.0-beta-2-SNAPSHOT</version>
-	<url>http://staccatocommons.sourceforge.net/</url>
+	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsparentpom</url>
 	<name>Staccato-Commons-Parent-Pom</name>
+	<description>Staccato-Commons base pom</description>
 	<licenses>
 		<license>
 			<name>GNU Lesser General Public License v3 </name>
@@ -18,15 +24,21 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<staccatissimo.scm.base>https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo</staccatissimo.scm.base>
 	</properties>
+	<developers>
+		<developer>
+			<id>flbulgarelli</id>
+		</developer>
+	</developers>
+	<scm>
+        <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-parent-pom</developerConnection>
+        <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-parent-pom</connection>
+        <url>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo/trunk/commons-parent-pom/</url>
+    </scm>
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
 			<url>${distribution.site.url}</url>
 		</site>
-		<repository>
-			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}/maven2</url>
-		</repository>
 	</distributionManagement>
 	<build>
 		<plugins>
@@ -51,18 +63,6 @@
 				<version>2.3</version>
 				<configuration>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -114,21 +114,21 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.7</version>
-                <configuration>
-                    <excludePackageNames>*.internal</excludePackageNames>
-                    <bottom><![CDATA[<a href="http://sourceforge.net/projects/staccatocommons"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13" width="120" height="30" alt="Get Staccato-Commons at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>]]></bottom>
-                    <useStandardDocletOptions>true</useStandardDocletOptions>
-                    <links>
-                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonscheck/apidocs</link>
-                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators/apidocs</link>
-                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs</link>
-                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs</link>
-                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonsio/apidocs</link>
-                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs</link>
-                        <link>http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs</link>
-                    </links>
-                    <skip>false</skip>
-                </configuration>
+				<configuration>
+					<excludePackageNames>*.internal</excludePackageNames>
+					<bottom><![CDATA[<a href="http://sourceforge.net/projects/staccatocommons"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13" width="120" height="30" alt="Get Staccato-Commons at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>]]></bottom>
+					<useStandardDocletOptions>true</useStandardDocletOptions>
+					<links>
+						<link>http://staccatocommons.sourceforge.net/staccatissimo/commonscheck/apidocs</link>
+						<link>http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators/apidocs</link>
+						<link>http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs</link>
+						<link>http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs</link>
+						<link>http://staccatocommons.sourceforge.net/staccatissimo/commonsio/apidocs</link>
+						<link>http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs</link>
+						<link>http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs</link>
+					</links>
+					<skip>false</skip>
+				</configuration>
 				<reportSets>
 					<reportSet>
 						<id>default</id>
@@ -145,7 +145,7 @@
 				<reportSets>
 					<reportSet>
 						<reports>
-							<!-- <report>dependencies</report> -->
+<!--							<report>dependencies</report> -->
 							<!-- <report>project-team</report> -->
 							<!-- <report>mailing-list</report> -->
 							<!-- <report>cim</report> -->
