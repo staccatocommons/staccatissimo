@@ -17,6 +17,7 @@ import static net.sf.staccatocommons.collections.iterable.internal.IterablesInte
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -464,7 +465,7 @@ public class Iterables {
   @NonNull
   public static <A, B> List<B> map(@NonNull Collection<A> collection,
     @NonNull Applicable<? super A, ? extends B> function) {
-    return collectInternal( //
+    return collectInternal(//
       collection,
       function,
       new ArrayList<B>(collection.size()));
@@ -574,6 +575,18 @@ public class Iterables {
     TreeSet<A> sortedSet = new TreeSet<A>();
     addAllInternal(sortedSet, iterable);
     return sortedSet;
+  }
+
+  /**
+   * Converts the given elements into a {@link Set}.
+   * 
+   * @param <A>
+   * @param elements
+   * @return a new {@link Set} that contains the elements given without
+   *         repetitions
+   */
+  public static <A> Set<A> toSet(A... elements) {
+    return toSet((Iterable) Arrays.asList(elements));
   }
 
   /**
