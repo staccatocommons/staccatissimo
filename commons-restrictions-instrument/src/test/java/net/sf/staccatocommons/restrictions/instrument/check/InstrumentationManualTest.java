@@ -51,7 +51,7 @@ public class InstrumentationManualTest {
    * {@link ForceRestrictions}
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testForceNonNullMethodArg_Null() throws Exception {
+  public void testForceNonNullMethodArgNull() throws Exception {
     new Mock().forceChecksNonNullMethodArgument(null);
   }
 

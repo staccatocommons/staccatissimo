@@ -45,12 +45,12 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 
   /** Functions data points */
   @DataPoints
-  public static Function[] functions = new Function[] { Functions.constant(59), Functions.identity(),
+  public static final Function[] FUNCTIONS = new Function[] { Functions.constant(59), Functions.identity(),
       Strings.toString_() };
 
   /** thunks data points */
   @DataPoints
-  public static Thunk<Integer>[] thunks = new Thunk[] { NullThunk.null_(), //
+  public static final Thunk<Integer>[] THUNKS = new Thunk[] { NullThunk.null_(), //
       Thunks.constant(90) //
   };
 
@@ -203,7 +203,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
    */
   @Theory
   @Test(expected = IndexOutOfBoundsException.class)
-  public void testGet_NoSuchElement(Stream stream) {
+  public void testGetNoSuchElement(Stream stream) {
     stream.get(stream.size());
   }
 
@@ -238,6 +238,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
   @Theory
   public <A> void testContains(final Stream<A> stream) {
     assertTrue(stream.all(new AbstractPredicate<A>() {
+      @Override
       public boolean eval(A argument) {
         return stream.contains(argument);
       }

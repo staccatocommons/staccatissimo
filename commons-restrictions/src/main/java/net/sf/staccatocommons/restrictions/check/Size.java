@@ -49,5 +49,5 @@ public @interface Size {
   /**
    * @return the size the annotated element must have
    */
-  public int value();
+  int value();
 }

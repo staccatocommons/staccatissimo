@@ -42,7 +42,7 @@ public final class AppendIterableStream<A> extends AbstractStream<A> {
   }
 
   @Override
-  public Thriterator<A> iterator() {// FIXME bad impl
+  public Thriterator<A> iterator() { // FIXME bad impl
     return new AdvanceThriterator<A>() {
       private Thriter<A> iter = stream.iterator();
       private boolean second = false;
@@ -67,12 +67,14 @@ public final class AppendIterableStream<A> extends AbstractStream<A> {
         return iter.current();
       }
 
+      @Override
       public Thunk<A> delayedCurrent() {
         return iter.delayedCurrent();
       }
     };
   }
 
+  @Override
   public NumberType<A> numberType() {
     return stream.numberType();
   }

@@ -34,7 +34,7 @@ public abstract class IteratorTheories {
 
   /** Sizes of 1 and 2 **/
   @DataPoints
-  public static int[] sizes = new int[] { 1, 2 };
+  public static final int[] SIZES = new int[] { 1, 2 };
 
   /**
    * Test that for an iterator of a given size, next can be invoked size times

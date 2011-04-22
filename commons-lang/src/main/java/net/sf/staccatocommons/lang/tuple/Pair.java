@@ -40,7 +40,7 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
   SecondAware<T2> {
 
   private static final long serialVersionUID = -6479045670420592337L;
-  private static final RelevantState<Pair> val = new TupleState<Pair>(2) {
+  private static final RelevantState<Pair> VAL = new TupleState<Pair>(2) {
     protected void collectState(Pair o, StateCollector s) {
       s.add(o.first).add(o.second);
     }
@@ -92,7 +92,7 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
 
   @Override
   public String toString() {
-    return val.toString(this);
+    return VAL.toString(this);
   }
 
   @NonNull
@@ -102,17 +102,17 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
   }
 
   public int compareTo(Pair<T1, T2> other) {
-    return val.compareTo(this, other);
+    return VAL.compareTo(this, other);
   }
 
   @Override
   public int hashCode() {
-    return val.hashCode(this);
+    return VAL.hashCode(this);
   }
 
   @Override
   public boolean equals(Object obj) {
-    return val.equals(this, obj);
+    return VAL.equals(this, obj);
   }
 
   public T1 getKey() {

@@ -41,7 +41,7 @@ public interface Predicate<A> extends Evaluable<A>, Applicable<A, Boolean>, Null
    *         and other when evaluated.
    */
   @NonNull
-  public Predicate<A> or(@NonNull final Evaluable<? super A> other);
+  Predicate<A> or(@NonNull final Evaluable<? super A> other);
 
   /**
    * Returns a predicate that performs a short-circuit logical-and between this

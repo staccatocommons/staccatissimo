@@ -33,9 +33,9 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * <pre>
  * new CharSerializationLifecycle.Serialize(aSerializationManager, anObject) {
- * 	public Writer initialize() throws IOException {
- * 		return ...create your writer here...;
- * 	}
+ *  public Writer initialize() throws IOException {
+ *    return ...create your writer here...;
+ *  }
  * }.value();
  * </pre>
  * 
@@ -46,9 +46,9 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * <pre>
  * T result = new CharSerializationLifecycle.Deserialize&lt;T&gt;(aSerializarionManager) {
- * 	public Reader initialize() throws Exception {
- * 		return ..create your reader hear...;
- * 	}
+ *  public Reader initialize() throws Exception {
+ *   return ..create your reader hear...;
+ *  }
  * }.value();
  * </pre>
  * 
@@ -86,7 +86,7 @@ public abstract class CharSerializationLifecycle<TargetType extends Closeable, R
    * 
    * @author flbulgarelli
    */
-  public static abstract class Serialize extends CharSerializationLifecycle<Writer, Void> {
+  public abstract static class Serialize extends CharSerializationLifecycle<Writer, Void> {
 
     private final Object target;
 
@@ -118,7 +118,7 @@ public abstract class CharSerializationLifecycle<TargetType extends Closeable, R
    * 
    * @param <A>
    */
-  public static abstract class Deserialize<A> extends CharSerializationLifecycle<Reader, A> {
+  public abstract static class Deserialize<A> extends CharSerializationLifecycle<Reader, A> {
 
     /**
      * Creates a new {@link CharSerializationLifecycle.Deserialize}

@@ -98,7 +98,7 @@ public class LazinessIntegrationTest {
   /***/
   @Test
   public void testConsAndSize() throws Exception {
-    assertEquals(6,//
+    assertEquals(6, //
       Streams.cons(10, 20, 30).appendUndefined().prepend(20).prepend(30).size());
   }
 

@@ -70,14 +70,14 @@ public class PairUnitTest extends TupleAbstractUnitTest {
 
   /***/
   @Test
-  public void testAsEntry_Get() throws Exception {
+  public void testAsEntryGet() throws Exception {
     assertEquals("Hello", _("Hello", 40).getKey());
     assertEquals("Hello", _(40, "Hello").getValue());
   }
 
   /***/
   @Test(expected = UnsupportedOperationException.class)
-  public void testAsEntry_Set() throws Exception {
+  public void testAsEntrySet() throws Exception {
     _(40, 9).setValue(4);
   }
 

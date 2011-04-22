@@ -30,6 +30,6 @@ public interface ContainsAware<T> {
    * 
    * @return if the element is contained
    */
-  public boolean contains(T element);
+  boolean contains(T element);
 
 }

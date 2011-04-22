@@ -42,7 +42,7 @@ public abstract class StreamTheories {
 
   /** predicates for testing */
   @DataPoints
-  public static Predicate[] predicates = new Predicate[] { Predicates.equal(5),
+  public static final Predicate[] PREDICATES = new Predicate[] { Predicates.equal(5),
       isInstanceOf(Integer.class).and(Compare.greaterThan(90)), //
       false_(), //
       true_(), //
@@ -52,7 +52,7 @@ public abstract class StreamTheories {
 
   /** Sizes for testing */
   @DataPoints
-  public static int[] sizes = new int[] { 0, 1, 4, 90 };
+  public static final int[] SIZES = new int[] { 0, 1, 4, 90 };
 
   private boolean emptyImpossible;
 
@@ -69,8 +69,9 @@ public abstract class StreamTheories {
    * .
    */
   @Theory
-  public final void reduce_OnEmpty(Stream<Integer> stream) {
+  public final void reduceOnEmpty(Stream<Integer> stream) {
     assumeEmpty(stream, new Block<Stream>() {
+      @Override
       public void exec(Stream argument) {
         try {
           argument.reduce(integer().add());
@@ -90,7 +91,7 @@ public abstract class StreamTheories {
    * @param stream
    */
   @Theory
-  public final void anyOrNone_NotEmpty(Stream<?> stream) {
+  public final void anyOrNoneNotEmpty(Stream<?> stream) {
     assumeTrue(!stream.isEmpty());
     assertTrue(stream.anyOrNone().isDefined());
   }
@@ -100,7 +101,7 @@ public abstract class StreamTheories {
    */
   @Theory
   @Test(expected = NoSuchElementException.class)
-  public final void find_NoSuchElement(Stream<?> stream) {
+  public final void findNoSuchElement(Stream<?> stream) {
     stream.find(Predicates.false_());
   }
 
@@ -112,7 +113,7 @@ public abstract class StreamTheories {
    * @param stream
    */
   @Theory
-  public final void all_NotEmpty(Stream<?> stream) {
+  public final void allNotEmpty(Stream<?> stream) {
     assumeTrue(!stream.isEmpty());
     assertTrue(stream.all(Predicates.true_()));
   }
@@ -121,6 +122,7 @@ public abstract class StreamTheories {
   @Theory
   public final <A> void emptyStreamSatisfyAnyPredicate(Stream<A> stream, final Evaluable<A> predicate) {
     assumeEmpty(stream, new Block<Stream>() {
+      @Override
       public void exec(Stream stream) {
         assertTrue(stream.all(predicate));
       }
@@ -140,6 +142,7 @@ public abstract class StreamTheories {
   @Theory
   public final <A> void emptyStreamsSatisfyNoPredicate(Stream<A> stream, final Evaluable<A> predicate) {
     assumeEmpty(stream, new Block<Stream>() {
+      @Override
       public void exec(Stream stream) {
         assertFalse(stream.any(predicate));
       }
@@ -150,6 +153,7 @@ public abstract class StreamTheories {
   @Theory
   public final void anyOrNullEqualsNullInEmptyStream(Stream<?> stream) {
     assumeEmpty(stream, new Block<Stream>() {
+      @Override
       public void exec(Stream stream) {
         assertNull(stream.anyOrNull());
       }
@@ -168,6 +172,7 @@ public abstract class StreamTheories {
   @Theory
   public final <A> void deconsFailsOnEmptyStream(Stream<A> stream) throws Exception {
     assumeEmpty(stream, new Block<Stream>() {
+      @Override
       public void exec(Stream stream) {
         try {
           stream.decons();
@@ -183,6 +188,7 @@ public abstract class StreamTheories {
   @Theory
   public void tailFailsInEmptyStream(Stream<?> stream) {
     assumeEmpty(stream, new Block<Stream>() {
+      @Override
       public void exec(Stream stream) {
         try {
           stream.tail();
@@ -198,6 +204,7 @@ public abstract class StreamTheories {
   @Theory
   public void headFailsInEmptyStream(Stream<?> stream) {
     assumeEmpty(stream, new Block<Stream>() {
+      @Override
       public void exec(Stream stream) {
         try {
           stream.head();

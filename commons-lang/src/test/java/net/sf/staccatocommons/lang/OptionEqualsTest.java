@@ -26,7 +26,7 @@ public class OptionEqualsTest extends WellDefinedEqualsTheories {
 
   /** Options data points */
   @DataPoints
-  public static Object[] options = { Option.none(), Option.some(10), Option.some(5), Option.some(5), newNone() };
+  public static final Object[] OPTIONS = { Option.none(), Option.some(10), Option.some(5), Option.some(5), newNone() };
 
   private static Object newNone() {
     try {

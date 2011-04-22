@@ -24,6 +24,7 @@ import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
  */
 public class EnumerationIteratorUnitTest extends IteratorTheories {
 
+  @Override
   protected Iterator<?> createTwoElementsIterator() {
 
     Hashtable<String, String> hashtable = new Hashtable<String, String>();
@@ -32,9 +33,10 @@ public class EnumerationIteratorUnitTest extends IteratorTheories {
     return new EnumerationIterator(hashtable.keys());
   }
 
+  @Override
   protected Iterator<?> createOneElementIterator() {
-    return new EnumerationIterator( //
-      new Hashtable<String, String>( //
+    return new EnumerationIterator(//
+      new Hashtable<String, String>(//
         Collections.singletonMap("bar", "baz")).keys());
   }
 

@@ -39,7 +39,7 @@ public class ConsStreamUnitTest extends RepetableStreamTheories {
 
   /** Data points */
   @DataPoints
-  public static Stream[] stream = new Stream[] { //
+  public static final Stream[] STREAMS = new Stream[] { //
   Streams.cons(10, Streams.cons(15, 20, 30)), //
       Streams.cons(1, Streams.empty()) };
 

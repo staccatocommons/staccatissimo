@@ -57,7 +57,7 @@ public class BasicEqualsUnitTest {
    * Test for {@link BasicEquals#toEquals()} on {@link BasicEquals#MAYBE}
    */
   @Test(expected = IllegalStateException.class)
-  public void testToEquals_Maybe() {
+  public void testToEqualsMaybe() {
     BasicEquals.MAYBE.toEquals();
   }
 

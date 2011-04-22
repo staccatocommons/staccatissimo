@@ -44,7 +44,7 @@ public class RestrictionsInstrumentMojo extends AbstractMojo {
    * @required
    * @parameter expression="${plugin.artifacts}"
    */
-  protected List<Artifact> pluginArtifactsList;
+  private List<Artifact> pluginArtifactsList;
 
   /**
    * If check annotation on methods should be ignored, or should be processed
@@ -88,6 +88,7 @@ public class RestrictionsInstrumentMojo extends AbstractMojo {
     getLog().info("*** Staccato-Commons-Restrictions-Instrument *** ");
     new InstrumentMojoSupport(this, location, artifact, pluginArtifactsList) {
 
+      @Override
       protected InstrumenterConfigurer createConfigurer() {
         return new RestrictionConfigurer(ignoreReturnChecks, ignoreChecks, ignoreConstants);
       }

@@ -44,9 +44,9 @@ public class SizeAwareTypeCodeUnitTest extends JUnit4MockObjectTestCase {
 
   /** Test for collection context */
   @Test
-  public void testGetSizeAwareCode_ConcreteCollection() throws Exception {
+  public void testGetSizeAwareCodeConcreteCollection() throws Exception {
     String code = SizeAwareTypeCode.getSizeAwareCode(//
-      new DefaultClassAnnotationContext(pool, logger,//
+      new DefaultClassAnnotationContext(pool, logger, //
         pool.get(Arrays.asList(4).getClass().getName())));
 
     assertTrue("Should use collection:" + code, code.endsWith("COLLECTION"));
@@ -54,9 +54,9 @@ public class SizeAwareTypeCodeUnitTest extends JUnit4MockObjectTestCase {
 
   /** Test for string context */
   @Test
-  public void testGetSizeAwareCode_String() throws Exception {
+  public void testGetSizeAwareCodeString() throws Exception {
     String code = SizeAwareTypeCode.getSizeAwareCode(//
-      new DefaultClassAnnotationContext(pool, logger,//
+      new DefaultClassAnnotationContext(pool, logger, //
         pool.get(String.class.getName())));
 
     assertTrue("Should use String:" + code, code.endsWith("CHAR_SEQUENCE"));
@@ -64,9 +64,9 @@ public class SizeAwareTypeCodeUnitTest extends JUnit4MockObjectTestCase {
 
   /** Test for array context */
   @Test
-  public void testGetSizeAwareCode_Array() throws Exception {
+  public void testGetSizeAwareCodeArray() throws Exception {
     String code = SizeAwareTypeCode.getSizeAwareCode(//
-      new DefaultClassAnnotationContext(pool, logger,//
+      new DefaultClassAnnotationContext(pool, logger, //
         pool.get("int[]")));
 
     assertTrue("Should use Array:" + code, code.endsWith("ARRAY"));
@@ -74,9 +74,9 @@ public class SizeAwareTypeCodeUnitTest extends JUnit4MockObjectTestCase {
 
   /** Test for array context */
   @Test
-  public void testGetSizeAwareCode_ConcreteMap() throws Exception {
+  public void testGetSizeAwareCodeConcreteMap() throws Exception {
     String code = SizeAwareTypeCode.getSizeAwareCode(//
-      new DefaultClassAnnotationContext(pool, logger,//
+      new DefaultClassAnnotationContext(pool, logger, //
         pool.get("java.util.HashMap")));
 
     assertTrue("Should use Map:" + code, code.endsWith("MAP"));
@@ -84,9 +84,9 @@ public class SizeAwareTypeCodeUnitTest extends JUnit4MockObjectTestCase {
 
   /** Test for array context */
   @Test
-  public void testGetSizeAwareCode_Map() throws Exception {
+  public void testGetSizeAwareCodeMap() throws Exception {
     String code = SizeAwareTypeCode.getSizeAwareCode(//
-      new DefaultClassAnnotationContext(pool, logger,//
+      new DefaultClassAnnotationContext(pool, logger, //
         pool.get("java.util.Map")));
 
     assertTrue("Should use Map:" + code, code.endsWith("MAP"));

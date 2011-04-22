@@ -65,8 +65,9 @@ public abstract class Lazy<T> implements Thunk<T> {
    * 
    * @param <T>
    */
-  public static abstract class Atomic<T> extends Lazy<T> {
+  public abstract static class Atomic<T> extends Lazy<T> {
 
+    @Override
     public final synchronized T value() {
       return super.value();
     }

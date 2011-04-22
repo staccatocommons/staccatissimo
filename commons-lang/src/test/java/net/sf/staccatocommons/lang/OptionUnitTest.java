@@ -34,14 +34,14 @@ import org.junit.Test;
 public class OptionUnitTest extends JUnit4MockObjectTestCase {
   /***/
   @Test
-  public void testValue_defined() {
+  public void testValuedefined() {
     Integer i = 5;
     assertSame(i, some(i).value());
   }
 
   /***/
   @Test(expected = NoSuchElementException.class)
-  public void testValue_undefined() {
+  public void testValueundefined() {
     none().value();
   }
 

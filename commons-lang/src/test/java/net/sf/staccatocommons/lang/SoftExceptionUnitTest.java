@@ -30,7 +30,7 @@ public class SoftExceptionUnitTest {
 
   /***/
   @Test
-  public void testSoften_Runtime() {
+  public void testSoftenRuntime() {
     IllegalArgumentException exception = new IllegalArgumentException("bad input");
     RuntimeException soften = SoftException.soften(exception);
     assertSame(exception, soften);
@@ -38,7 +38,7 @@ public class SoftExceptionUnitTest {
 
   /***/
   @Test
-  public void testSoften_Checked() {
+  public void testSoftenChecked() {
     IOException exception = new IOException("bad file");
     RuntimeException soften = SoftException.soften(exception);
     assertSame(exception, soften.getCause());

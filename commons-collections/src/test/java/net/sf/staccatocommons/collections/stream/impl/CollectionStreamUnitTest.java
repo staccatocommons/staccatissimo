@@ -31,7 +31,8 @@ public class CollectionStreamUnitTest extends RepetableStreamTheories {
 
   /** Set of CollectionStreams to test */
   @DataPoints
-  public static Stream[] streams = new Stream[] { Streams.from((Collection<Integer>) Arrays.asList(4, 5, 6, 9, 33, 0)),
+  public static final Stream[] STREAMS = new Stream[] {
+      Streams.from((Collection<Integer>) Arrays.asList(4, 5, 6, 9, 33, 0)),
       Streams.from((Collection<Integer>) Arrays.<Integer> asList()), Streams.from(Collections.EMPTY_SET),
       Streams.from(Collections.singleton(5)), Streams.from((Collection<Integer>) Arrays.asList(900, 5)) };
 

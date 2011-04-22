@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CharSerializationObjectPreferences implements ObjectPreferences {
 
-  private static final Logger log = LoggerFactory.getLogger(CharSerializationObjectPreferences.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CharSerializationObjectPreferences.class);
 
   private final Preferences preferences;
   private final CharSerializationManager serializationManager;
@@ -61,14 +61,14 @@ public class CharSerializationObjectPreferences implements ObjectPreferences {
   public <T> T get(@NonNull String key, T defaultValue) {
     String valueAsString = preferences.get(key, null);
     if (valueAsString == null) {
-      log.debug("Preference " + key + "not found. Loading defaults");
+      LOG.debug("Preference " + key + "not found. Loading defaults");
       return defaultValue;
     }
     try {
       return (T) serializationManager.deserialize(valueAsString);
     } catch (SerializationException e) {
-      log.warn("Could not read valid value for preference " + key + ", loading defaults " + defaultValue);
-      log.debug("Loading preference " + key + "threw an exception", e);
+      LOG.warn("Could not read valid value for preference " + key + ", loading defaults " + defaultValue);
+      LOG.debug("Loading preference " + key + "threw an exception", e);
       return defaultValue;
     }
   }

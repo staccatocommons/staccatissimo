@@ -36,13 +36,13 @@ public class ListStreamUnitTest extends RepetableStreamTheories {
    * data set of lists
    */
   @DataPoints
-  public static Stream<Integer>[] streams = new Stream[] { Streams.from(Arrays.asList(4, 5, 6, 5, 33, 0)), //
-      Streams.from(Collections.emptyList()),//
+  public static final Stream<Integer>[] STREAMS = new Stream[] { Streams.from(Arrays.asList(4, 5, 6, 5, 33, 0)), //
+      Streams.from(Collections.emptyList()), //
       Streams.from(Collections.singletonList(5)) };
 
   /** Integer datapoints */
   @DataPoints
-  public static Integer[] integers = new Integer[] { 0, -50, 5 };
+  public static final Integer[] INTEGERS = new Integer[] { 0, -50, 5 };
 
   /** Tets for indexof */
   @Theory

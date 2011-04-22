@@ -23,7 +23,7 @@ package net.sf.staccatocommons.check;
  */
 public final class Ensure {
 
-  private static final Check<IllegalArgumentException> check = new Check<IllegalArgumentException>() {
+  private static final Check<IllegalArgumentException> CHECK = new Check<IllegalArgumentException>() {
 
     protected IllegalArgumentException createException(Failure failure) {
       return new IllegalArgumentException(failure.createMessage());
@@ -83,7 +83,7 @@ public final class Ensure {
    *         {@link IllegalArgumentException}s on check failure
    */
   public static Check<IllegalArgumentException> that() {
-    return check;
+    return CHECK;
   }
 
 }

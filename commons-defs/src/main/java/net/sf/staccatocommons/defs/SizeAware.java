@@ -37,5 +37,5 @@ public interface SizeAware extends EmptyAware {
    * <code>aSizeAware.isEmpty() == (aSizeAware.size() == 0)</code>
    */
   @Override
-  public boolean isEmpty();
+  boolean isEmpty();
 }

@@ -41,7 +41,7 @@ public class StreamsUnitTest {
   public void testFromSeq() {
     assertEquals(Streams.iterate(10, add(20), upTo(50)).toList(), Streams.from(Sequence.fromToBy(10, 50, 20)).toList());
 
-    assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),//
+    assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), //
       Streams.iterate(1, add(1)).take(10).toList());
   }
 

@@ -31,9 +31,6 @@ import org.junit.Test;
  */
 public class DirectoryUnitTest {
 
-  /**
-	 * 
-	 */
   private static final String DIRECTORY_TEST_PATHNAME = "src/test/resources/directory-test";
   private File root;
 
@@ -46,9 +43,9 @@ public class DirectoryUnitTest {
       dir("root/d1", //
         file("root/d1/f1"),
         file("root/d1/f2")),
-      dir("root/d2",//
+      dir("root/d2", //
         dir("root/d2/d3"),
-        dir("root/d2/d4",//
+        dir("root/d2/d4", //
           file("root/d2/d4/f3")),
         file("root/d2/f4")),
       file("root/f5"));

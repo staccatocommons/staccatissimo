@@ -169,13 +169,22 @@ public class AbstractStreamBasicTest {
   /** Test for {@link Stream#intersperse(Object)} */
   @Test
   public void testIntersperse() throws Exception {
-    assertTrue( //
-    Streams.cons(4, 5, 6).intersperse(1).equiv(4, 1, 5, 1, 6));
+    assertTrue(Streams//
+      .cons(4, 5, 6)
+      .intersperse(1)
+      .equiv(4, 1, 5, 1, 6));
 
-    assertTrue( //
-    Streams.from(Arrays.asList(4, 5).iterator()).append(10).intersperse(1).take(4).equiv(4, 1, 5, 1));
+    assertTrue(Streams//
+      .from(Arrays.asList(4, 5).iterator())
+      .append(10)
+      .intersperse(1)
+      .take(4)
+      .equiv(4, 1, 5, 1));
 
-    assertEquals("[56,0,1]", Streams.cons(56, 1).intersperse(0).toString());
+    assertEquals("[56,0,1]", Streams//
+      .cons(56, 1)
+      .intersperse(0)
+      .toString());
   }
 
   /**

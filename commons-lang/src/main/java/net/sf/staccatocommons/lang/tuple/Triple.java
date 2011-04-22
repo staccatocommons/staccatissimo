@@ -40,7 +40,7 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
   SecondAware<T2>, ThirdAware<T3> {
 
   private static final long serialVersionUID = 5811264763831754560L;
-  private static final RelevantState<Triple> val = new TupleState<Triple>(3) {
+  private static final RelevantState<Triple> VAL = new TupleState<Triple>(3) {
     protected void collectState(Triple o, StateCollector b) {
       b.add(o.first).add(o.second).add(o.third);
     }
@@ -144,7 +144,7 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
 
   @Override
   public String toString() {
-    return val.toString(this);
+    return VAL.toString(this);
   }
 
   @Override
@@ -155,16 +155,16 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
 
   @Override
   public int hashCode() {
-    return val.hashCode(this);
+    return VAL.hashCode(this);
   }
 
   @Override
   public boolean equals(Object obj) {
-    return val.equals(this, obj);
+    return VAL.equals(this, obj);
   }
 
   public int compareTo(Triple<T1, T2, T3> other) {
-    return val.compareTo(this, other);
+    return VAL.compareTo(this, other);
   }
 
 }

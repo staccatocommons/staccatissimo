@@ -34,8 +34,8 @@ public class ClassNamesUnitTest {
    * Test method for {@link ClassNames#getClassName(Directory, File)}
    */
   @Test
-  public void testGetClassName_AbsolutePath() {
-    assertEquals("com.foo.Foo",//
+  public void testGetClassNameAbsolutePath() {
+    assertEquals("com.foo.Foo", //
       ClassNames.getClassName(//
         new Directory(dir("/home/user/classes")),
         new File("/home/user/classes/com/foo/Foo.class")));
@@ -45,8 +45,8 @@ public class ClassNamesUnitTest {
    * Test method for {@link ClassNames#getClassName(Directory, File)}
    */
   @Test
-  public void testGetClassName_AbsolutePathWithEndSeparator() {
-    assertEquals("com.foo.Foo",//
+  public void testGetClassNameAbsolutePathWithEndSeparator() {
+    assertEquals("com.foo.Foo", //
       ClassNames.getClassName(//
         new Directory(dir("/home/user/classes/")),
         new File("/home/user/classes/com/foo/Foo.class")));
@@ -56,8 +56,8 @@ public class ClassNamesUnitTest {
    * Test method for {@link ClassNames#getClassName(Directory, File)}
    */
   @Test
-  public void testGetClassName_RelativePaths() {
-    assertEquals("com.foo.Foo",//
+  public void testGetClassNameRelativePaths() {
+    assertEquals("com.foo.Foo", //
       ClassNames.getClassName(//
         new Directory(dir("classes")),
         new File("classes/com/foo/Foo.class")));
@@ -67,8 +67,8 @@ public class ClassNamesUnitTest {
    * Test method for {@link ClassNames#getClassName(Directory, File)}
    */
   @Test
-  public void testGetClassName_InnerClasses() {
-    assertEquals("com.foo.Foo$Internal",//
+  public void testGetClassNameInnerClasses() {
+    assertEquals("com.foo.Foo$Internal", //
       ClassNames.getClassName(//
         new Directory(dir("classes")),
         new File("classes/com/foo/Foo$Internal.class")));

@@ -45,7 +45,7 @@ public class ClassesInstrumentedDummyTest {
 
   /** Verifies that minsize processor is working */
   @Test(expected = IllegalArgumentException.class)
-  public void testThird_BadSize() throws Exception {
+  public void testThirdBadSize() throws Exception {
     Lists.third(Arrays.asList(1, 2));
   }
 
@@ -53,7 +53,7 @@ public class ClassesInstrumentedDummyTest {
    * Verified that not negative is working
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testDrop_BadAmount() throws Exception {
+  public void testDropBadAmount() throws Exception {
     Streams.cons(90, 50, 30).drop(-2);
   }
 }

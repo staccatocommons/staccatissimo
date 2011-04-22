@@ -42,7 +42,7 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements Comparable
   FirstAware<T1>, SecondAware<T2>, ThirdAware<T3>, FourthAware<T4> {
 
   private static final long serialVersionUID = -1072243152313731077L;
-  private static final RelevantState<Quadruple> val = new TupleState<Quadruple>(4) {
+  private static final RelevantState<Quadruple> VAL = new TupleState<Quadruple>(4) {
     protected void collectState(Quadruple o, StateCollector b) {
       b.add(o.first).add(o.second).add(o.third).add(o.fourth);
     }
@@ -104,7 +104,7 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements Comparable
 
   @Override
   public String toString() {
-    return val.toString(this);
+    return VAL.toString(this);
   }
 
   @NonNull
@@ -115,17 +115,17 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements Comparable
 
   @Override
   public int compareTo(Quadruple<T1, T2, T3, T4> other) {
-    return val.compareTo(this, other);
+    return VAL.compareTo(this, other);
   }
 
   @Override
   public int hashCode() {
-    return val.hashCode(this);
+    return VAL.hashCode(this);
   }
 
   @Override
   public boolean equals(Object obj) {
-    return val.equals(this, obj);
+    return VAL.equals(this, obj);
   }
 
 }

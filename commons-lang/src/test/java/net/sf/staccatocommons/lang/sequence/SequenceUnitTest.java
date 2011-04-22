@@ -37,7 +37,7 @@ public class SequenceUnitTest {
 
   /***/
   @Test
-  public void testFromTo_Asc() {
+  public void testFromToAsc() {
     Sequence<Integer> seq = Sequence.fromTo(1, 5);
     assertNotNull(seq);
     assertEquals(Arrays.asList(1, 2, 3, 4, 5), asList(seq));
@@ -46,7 +46,7 @@ public class SequenceUnitTest {
 
   /***/
   @Test
-  public void testFromTo_Desc() {
+  public void testFromToDesc() {
     Sequence<Integer> seq = Sequence.fromTo(9, 4);
     assertNotNull(seq);
     assertEquals(Arrays.asList(9, 8, 7, 6, 5, 4), asList(seq));
@@ -55,7 +55,7 @@ public class SequenceUnitTest {
 
   /***/
   @Test
-  public void testFromToBy_Asc() {
+  public void testFromToByAsc() {
     Sequence<Integer> seq = Sequence.fromToBy(1, 10, 2);
     assertNotNull(seq);
     assertEquals(Arrays.asList(1, 3, 5, 7, 9), asList(seq));
@@ -63,7 +63,7 @@ public class SequenceUnitTest {
 
   /***/
   @Test
-  public void testFromToBy_Desc() {
+  public void testFromToByDesc() {
     Sequence<Integer> seq = Sequence.fromToBy(5, 1, -1);
 
     assertNotNull(seq);
@@ -72,7 +72,7 @@ public class SequenceUnitTest {
 
   /***/
   @Test
-  public void testFromToBy_Desc2() {
+  public void testFromToByDesc2() {
     Sequence<Integer> seq = Sequence.fromToBy(10, 3, -2);
 
     assertNotNull(seq);

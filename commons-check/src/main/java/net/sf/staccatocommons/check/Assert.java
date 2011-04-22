@@ -21,7 +21,8 @@ package net.sf.staccatocommons.check;
  */
 public final class Assert {
 
-  private static final Check<AssertionError> check = new Check<AssertionError>() {
+  private static final Check<AssertionError> CHECK = new Check<AssertionError>() {
+    @Override
     protected AssertionError createException(Failure failure) {
       return new AssertionError(failure.createMessage());
     }
@@ -89,6 +90,6 @@ public final class Assert {
    *         check failure
    */
   public static Check<AssertionError> that() {
-    return check;
+    return CHECK;
   }
 }

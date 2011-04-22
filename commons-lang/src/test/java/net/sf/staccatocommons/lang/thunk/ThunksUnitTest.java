@@ -51,7 +51,7 @@ public class ThunksUnitTest extends JUnit4MockObjectTestCase {
     assertSame(value, Thunks.constant(value).value());
   }
 
-  /** Test method fot {@link Thunks#null_()} */
+  /** Test method for {@link Thunks#null_()} */
   @Test
   public void testNull_() throws Exception {
     assertNull(Thunks.null_().value());
@@ -73,7 +73,7 @@ public class ThunksUnitTest extends JUnit4MockObjectTestCase {
 
   /** Test method for {@link Thunks#from(Callable)} */
   @Test(expected = SoftException.class)
-  public void testCallable_Exception() throws Exception {
+  public void testCallableException() throws Exception {
     final Callable<Integer> callable = mock(Callable.class);
     checking(new Expectations() {
       {
@@ -90,7 +90,7 @@ public class ThunksUnitTest extends JUnit4MockObjectTestCase {
    * when callable throws an exception.
    */
   @Test(expected = SoftException.class)
-  public void testCallableValue_Exception() {
+  public void testCallableValueException() {
     Thunks.from(new Callable<String>() {
       @Override
       public String call() throws Exception {
@@ -105,7 +105,7 @@ public class ThunksUnitTest extends JUnit4MockObjectTestCase {
    * when call succeeds.
    */
   @Test
-  public void testCallableValue_OK() {
+  public void testCallableValueOK() {
     assertEquals("Hello", Thunks.from(new Callable<String>() {
       @Override
       public String call() throws Exception {

@@ -53,8 +53,8 @@ public class SingleLinkedDelayedQueue<A> implements Iterable<A>, EmptyAware {
   }
 
   private static final class Cell<A> {
-    final Thunk<A> element;
-    Cell<A> next;
+    private final Thunk<A> element;
+    private Cell<A> next;
 
     public Cell(Thunk<A> element) {
       this.element = element;

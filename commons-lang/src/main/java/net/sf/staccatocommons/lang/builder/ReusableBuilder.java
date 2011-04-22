@@ -40,6 +40,6 @@ public interface ReusableBuilder<T> extends Builder<T> {
    * @see Builder#build()
    */
   @Override
-  public T build() throws ObjectUnderConstructionException;
+  T build() throws ObjectUnderConstructionException;
 
 }

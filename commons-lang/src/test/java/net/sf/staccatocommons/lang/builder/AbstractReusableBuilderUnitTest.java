@@ -29,14 +29,14 @@ public class AbstractReusableBuilderUnitTest {
 
   /***/
   @Test
-  public void testDone_OK() throws Exception {
+  public void testDoneOK() throws Exception {
     Map<String, String> c = new TestBuilder().withY("hello").withX("world").build();
     assertNotNull(c);
   }
 
   /***/
   @Test(expected = ObjectUnderConstructionException.class)
-  public void testDone_NotFinished() throws Exception {
+  public void testDoneNotFinished() throws Exception {
     new TestBuilder() //
       .withX("hello")
       .build();
@@ -44,7 +44,7 @@ public class AbstractReusableBuilderUnitTest {
 
   /***/
   @Test
-  public void testDone_InvokedTwice() throws Exception {
+  public void testDoneInvokedTwice() throws Exception {
     TestBuilder builder = new TestBuilder() //
       .withY("hello")
       .withX("world");

@@ -34,7 +34,7 @@ public class ListsUnitTests {
    * Test for {@link Lists#addBefore(java.util.List, Object, Object)}
    */
   @Test
-  public void testAddBefore_middle() throws Exception {
+  public void testAddBeforeMiddle() throws Exception {
     LinkedList<Integer> list = oneThreeList();
     Lists.addBefore(list, 2, 3);
     assertEquals(Arrays.asList(1, 2, 3), list);
@@ -44,7 +44,7 @@ public class ListsUnitTests {
    * Test for {@link Lists#addBefore(java.util.List, Object, Object)}
    */
   @Test
-  public void testAddBefore_head() throws Exception {
+  public void testAddBeforeHead() throws Exception {
     LinkedList<Integer> list = oneThreeList();
     Lists.addBefore(list, 2, 1);
     assertEquals(Arrays.asList(2, 1, 3), list);
@@ -54,7 +54,7 @@ public class ListsUnitTests {
    * Test for {@link Lists#addAfter(java.util.List, Object, Object)}
    */
   @Test
-  public void testAddAfter_middle() throws Exception {
+  public void testAddAfterMiddle() throws Exception {
     LinkedList<Integer> list = oneThreeList();
     Lists.addAfter(list, 2, 1);
     assertEquals(Arrays.asList(1, 2, 3), list);
@@ -73,7 +73,7 @@ public class ListsUnitTests {
    * Test for {@link Lists#addAfter(java.util.List, Object, Object)}
    */
   @Test
-  public void testAddAfter_tail() throws Exception {
+  public void testAddAftertail() throws Exception {
 
     LinkedList<Integer> list = oneThreeList();
 
@@ -84,19 +84,19 @@ public class ListsUnitTests {
 
   /** Test for {@link Lists#first(java.util.List)} */
   @Test
-  public void testFirst_OK() throws Exception {
+  public void testFirstOK() throws Exception {
     assertEquals((Integer) 1, Lists.first(Arrays.asList(1, 2, 3)));
   }
 
   /** Test for {@link Lists#second(java.util.List)} */
   @Test
-  public void testSecond_OK() throws Exception {
+  public void testSecondOK() throws Exception {
     assertEquals((Integer) 2, Lists.second(Arrays.asList(1, 2, 3)));
   }
 
   /** Test for {@link Lists#third(java.util.List)} */
   @Test
-  public void testThird_OK() throws Exception {
+  public void testThirdOK() throws Exception {
     assertEquals((Integer) 3, Lists.third(Arrays.asList(1, 2, 3)));
   }
 

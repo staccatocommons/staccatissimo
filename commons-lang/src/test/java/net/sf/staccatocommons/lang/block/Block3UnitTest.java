@@ -33,8 +33,8 @@ import org.junit.Test;
  */
 public class Block3UnitTest extends JUnit4MockObjectTestCase {
 
-  Block3<MutableInt, String, Character> block;
-  Executable3<MutableInt, String, Character> executable, otherExecutable;
+  private Block3<MutableInt, String, Character> block;
+  private Executable3<MutableInt, String, Character> executable, otherExecutable;
 
   /**
    * @throws java.lang.Exception
@@ -44,6 +44,7 @@ public class Block3UnitTest extends JUnit4MockObjectTestCase {
     executable = mock(Executable3.class);
     otherExecutable = mock(Executable3.class, "other");
     block = new Block3<MutableInt, String, Character>() {
+      @Override
       public void exec(MutableInt arg1, String arg2, Character arg3) {
         executable.exec(arg1, arg2, arg3);
       }
@@ -57,6 +58,7 @@ public class Block3UnitTest extends JUnit4MockObjectTestCase {
   @Test(expected = SoftException.class)
   public void testSoftExec() throws Exception {
     block = new Block3<MutableInt, String, Character>() {
+      @Override
       protected void softExec(MutableInt arg1, String arg2, Character arg3) throws Exception {
         throw new IOException();
       }

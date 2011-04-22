@@ -57,7 +57,7 @@ public class RestrictionConfigurer implements InstrumenterConfigurer {
     Collection<AnnotationHandler<?>> handlers = new LinkedList<AnnotationHandler<?>>();
 
     if (!ignoreChecks) {
-      handlers.addAll(Arrays.asList( //
+      handlers.addAll(Arrays.asList(//
         new NotNullHandler(ignoreReturnChecks),
         new SizeHandler(ignoreReturnChecks),
         new NotEmptyHandler(ignoreReturnChecks),

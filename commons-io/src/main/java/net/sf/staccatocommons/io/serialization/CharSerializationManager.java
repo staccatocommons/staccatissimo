@@ -25,7 +25,7 @@ import org.apache.commons.lang.SerializationException;
  */
 public interface CharSerializationManager extends SerializationManager {
 
-  // TODO: need the streams to be externally closed? -- yes they do
+  // TODO need the streams to be externally closed? -- yes they do
   void serialize(Object target, OutputStream output) throws SerializationException;
 
   void serialize(Object target, Writer output) throws SerializationException;

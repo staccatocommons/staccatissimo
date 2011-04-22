@@ -31,11 +31,11 @@ import org.junit.Test;
  */
 public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
-  AbstractFunction<Integer, Long> f;
-  Thunk<Integer> g0;
-  Applicable<Character, Integer> g1;
-  Applicable2<Character, String, Integer> g2;
-  Applicable3<Character, String, Integer, Integer> g3;
+  private AbstractFunction<Integer, Long> f;
+  private Thunk<Integer> g0;
+  private Applicable<Character, Integer> g1;
+  private Applicable2<Character, String, Integer> g2;
+  private Applicable3<Character, String, Integer, Integer> g3;
 
   /**
    * 

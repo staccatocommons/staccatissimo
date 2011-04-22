@@ -42,7 +42,7 @@ import net.sf.staccatocommons.lang.internal.ToString;
  */
 public abstract class AbstractReusableBuilder<T> implements ReusableBuilder<T> {
 
-  private static final DoneCheck check = new DoneCheck();
+  private static final DoneCheck CHECK = new DoneCheck();
 
   /**
    * Checks the builder is ready for creating a new object, sending
@@ -52,7 +52,7 @@ public abstract class AbstractReusableBuilder<T> implements ReusableBuilder<T> {
    * @see ReusableBuilder#build()
    */
   public final T build() throws ObjectUnderConstructionException {
-    checkDone(check);
+    checkDone(CHECK);
     return buildObject();
   }
 

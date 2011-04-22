@@ -33,8 +33,8 @@ import org.junit.Test;
  */
 public class Function2UnitTest extends JUnit4MockObjectTestCase {
 
-  AbstractFunction2<Integer, String, Character> function;
-  Applicable2<Integer, String, Character> applicable;
+  private AbstractFunction2<Integer, String, Character> function;
+  private Applicable2<Integer, String, Character> applicable;
 
   /** Instantiates both function and applicable */
   @Before

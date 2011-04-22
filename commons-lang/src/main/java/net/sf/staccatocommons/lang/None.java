@@ -40,7 +40,7 @@ public final class None<T> extends Option<T> {
   private static final long serialVersionUID = 6950027007611799776L;
 
   @SuppressWarnings("unchecked")
-  private static final None<?> instance = new None();
+  private static final None<?> INSTANCE = new None();
 
   private None() {}
 
@@ -108,7 +108,7 @@ public final class None<T> extends Option<T> {
 
   @NonNull
   public static <T> None<T> none() {
-    return (None<T>) instance;
+    return (None<T>) INSTANCE;
   }
 
 }

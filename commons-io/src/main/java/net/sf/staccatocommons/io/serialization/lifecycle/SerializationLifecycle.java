@@ -54,7 +54,7 @@ public abstract class SerializationLifecycle<TargetType extends Closeable, Retur
    * 
    * @author flbulgarelli
    */
-  public static abstract class Serialize extends SerializationLifecycle<OutputStream, Void> {
+  public abstract static class Serialize extends SerializationLifecycle<OutputStream, Void> {
 
     private final Object target;
 
@@ -77,12 +77,13 @@ public abstract class SerializationLifecycle<TargetType extends Closeable, Retur
    * 
    * @param <A>
    */
-  public static abstract class Deserialize<A> extends SerializationLifecycle<InputStream, A> {
+  public abstract static class Deserialize<A> extends SerializationLifecycle<InputStream, A> {
 
     public Deserialize(@NonNull SerializationManager serializationManager) {
       super(serializationManager);
     }
 
+    @Override
     protected A doWork(@NonNull InputStream resource) throws Exception {
       return getSerializationManager().deserialize(resource);
     }

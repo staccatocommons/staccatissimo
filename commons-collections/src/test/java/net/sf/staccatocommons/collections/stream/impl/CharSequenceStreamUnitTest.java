@@ -28,8 +28,8 @@ public class CharSequenceStreamUnitTest extends RepetableStreamTheories {
 
   /** Streams for testing */
   @DataPoints
-  public static Stream[] streams = new Stream[] { //
-  Streams.from(""),//
+  public static final Stream[] STREAMS = new Stream[] { //
+  Streams.from(""), //
       Streams.from("hello"), //
       Streams.from("h") //
   };

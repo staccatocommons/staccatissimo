@@ -609,8 +609,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
   // fcross (xs:xss) = xs >>= \x -> (fcross xss) >>= \ys -> return (x:ys)
   private static <A> Stream<Stream<A>> fcross(Stream<Stream<A>> other) {
     return other.transform(new AbstractFunction<Stream<Stream<A>>, Stream<Stream<A>>>() {
-      public Stream<Stream<A>> apply(Stream<Stream<A>> _xss) {
-        final Stream<Stream<A>> xss = _xss.memorize();
+      public Stream<Stream<A>> apply(Stream<Stream<A>> xss_) {
+        final Stream<Stream<A>> xss = xss_.memorize();
         if (xss.size() == 2)
           return xss.first().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
             public Stream<Stream<A>> apply(final A x) {

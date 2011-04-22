@@ -56,7 +56,7 @@ public abstract class SerializationManagerAbstractUnitTest {
 
   /***/
   @Test(expected = SerializationException.class)
-  public void testDeserialize_IOFails() {
+  public void testDeserializeIOFails() {
     serializationManager.serialize(new Object(), new OutputStream() {
       @Override
       public void write(int b) throws IOException {
@@ -67,7 +67,7 @@ public abstract class SerializationManagerAbstractUnitTest {
 
   /***/
   @Test(expected = SerializationException.class)
-  public void testSerialize_IOFails() {
+  public void testSerializeIOFails() {
     serializationManager.deserialize(new InputStream() {
       @Override
       public int read() throws IOException {

@@ -201,7 +201,7 @@ public abstract class Tuple implements Serializable {
     A _3();
   }
 
-  protected static abstract class TupleState<A extends Tuple> extends RelevantState<A> {
+  protected abstract static class TupleState<A extends Tuple> extends RelevantState<A> {
     /**
      * Creates a new {@link TupleState}
      */

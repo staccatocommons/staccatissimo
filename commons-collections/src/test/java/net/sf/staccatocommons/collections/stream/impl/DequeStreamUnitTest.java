@@ -36,9 +36,9 @@ public class DequeStreamUnitTest extends RepetableStreamTheories {
    * data set of lists
    */
   @DataPoints
-  public static Stream<Integer>[] streams = new Stream[] {
+  public static final Stream<Integer>[] STREAMS = new Stream[] {
       Streams.from((Deque<?>) new LinkedList()), //
-      Streams.from((Deque<?>) new LinkedList(Arrays.asList(50, 3, 9))),//
+      Streams.from((Deque<?>) new LinkedList(Arrays.asList(50, 3, 9))), //
       Streams.from((Deque<?>) new LinkedList(Arrays.asList(50, 3, 9))).reverse(),
       Streams.from((Deque<?>) new LinkedList(Collections.singletonList(10))) };
 

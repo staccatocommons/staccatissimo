@@ -85,7 +85,7 @@ public interface ObjectPreferences {
    *          the key to remove
    * @see {@link Preferences#remove(String)}
    */
-  public void remove(String key);
+  void remove(String key);
 
   /**
    * <p>

@@ -30,7 +30,7 @@ import org.junit.Test;
  */
 public class BlockUnitTest extends JUnit4MockObjectTestCase {
 
-  Block<MutableInt> block;
+  private Block<MutableInt> block;
   private Executable<MutableInt> executable;
 
   /**
@@ -49,6 +49,7 @@ public class BlockUnitTest extends JUnit4MockObjectTestCase {
   @Test
   public void testThen() {
     block = new Block<MutableInt>() {
+      @Override
       public void exec(MutableInt argument) {
         assertEquals(0, argument.getValue());
         argument.add(1);
@@ -66,6 +67,7 @@ public class BlockUnitTest extends JUnit4MockObjectTestCase {
   @Test
   public void testDelayed() throws Exception {
     block = new Block<MutableInt>() {
+      @Override
       public void exec(MutableInt argument) {
         argument.increment();
       }

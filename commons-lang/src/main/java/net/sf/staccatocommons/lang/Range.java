@@ -40,7 +40,7 @@ import net.sf.staccatocommons.restrictions.value.Value;
 public class Range<T extends Comparable<T>> implements ContainsAware<T>, EmptyAware, Serializable {
 
   private static final long serialVersionUID = -1096861117755452369L;
-  private static final RelevantState<Range> state = new RelevantState<Range>(2) {
+  private static final RelevantState<Range> STATE = new RelevantState<Range>(2) {
     protected void collectState(Range object, StateCollector s) {
       s.add(object.min).add(object.max);
     }
@@ -127,17 +127,17 @@ public class Range<T extends Comparable<T>> implements ContainsAware<T>, EmptyAw
 
   @Override
   public boolean equals(Object obj) {
-    return state.equals(this, obj);
+    return STATE.equals(this, obj);
   }
 
   @Override
   public int hashCode() {
-    return state.hashCode(this);
+    return STATE.hashCode(this);
   }
 
   @Override
   public String toString() {
-    return state.toString(this);
+    return STATE.toString(this);
   }
 
   /**

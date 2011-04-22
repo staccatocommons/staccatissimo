@@ -24,14 +24,16 @@ import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
  */
 public class DelayedConsIteratorUnitTest extends IteratorTheories {
 
+  @Override
   protected Iterator<?> createTwoElementsIterator() {
-    return new DelayedPrependIterator<Integer>( //
+    return new DelayedPrependIterator<Integer>(//
       new ConstantThunk<Integer>(1), //
       Thriterators.from(10));
   }
 
+  @Override
   protected Iterator<?> createOneElementIterator() {
-    return new DelayedPrependIterator<Integer>( //
+    return new DelayedPrependIterator<Integer>(//
       new ConstantThunk<Integer>(1), //
       Thriterators.<Integer> empty());
   }

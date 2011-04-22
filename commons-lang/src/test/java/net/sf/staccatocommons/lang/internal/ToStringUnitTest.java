@@ -23,9 +23,10 @@ import org.junit.Test;
  */
 public class ToStringUnitTest {
 
+  @SuppressWarnings("unused")
   static class Foo {
-    int x = 10;
-    int y = 90;
+    private int x = 10;
+    private int y = 90;
   }
 
   /**

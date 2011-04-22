@@ -22,8 +22,8 @@ import net.sf.staccatocommons.restrictions.effect.Transparent;
  * Typical usage is the following:
  * 
  * <pre>
- * 	Validate
- * 		.throwing(MyExceptionType.class)
+ *  Validate
+ *    .throwing(MyExceptionType.class)
  *    .that(condition1, message1)
  *    .that(condition2, message2)
  *    ..etc..
@@ -35,7 +35,7 @@ import net.sf.staccatocommons.restrictions.effect.Transparent;
  * 
  * <pre>
  *   private static Validate&lt;IllegalStateException&gt; validate 
- *   	= Validate.throwing(IllegalStateException.class);
+ *    = Validate.throwing(IllegalStateException.class);
  *   
  *   public void foo() {
  *      validate.that(...);
@@ -80,6 +80,7 @@ public final class Validate<ExceptionType extends Throwable> extends Check<Excep
     return new Validate<E>(exceptionType);
   }
 
+  @Override
   protected ExceptionType createException(Failure failure) {
     try {
       return exceptionType.getConstructor(String.class).newInstance(failure.createMessage());

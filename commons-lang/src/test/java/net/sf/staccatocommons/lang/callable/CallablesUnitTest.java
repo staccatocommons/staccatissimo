@@ -31,7 +31,7 @@ public class CallablesUnitTest {
    * Test method for {@link Callables#from(Thunk)} on exception
    */
   @Test(expected = IOException.class)
-  public void testCall_failure() throws Exception {
+  public void testCallfailure() throws Exception {
     Callables.from(new Thunk<Void>() {
       public Void value() {
         throw SoftException.soften(new IOException());

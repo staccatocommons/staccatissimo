@@ -33,7 +33,7 @@ public class NumberTypesUnitTest {
 
   /***/
   @DataPoints
-  public static NumberType<?>[] types = new NumberType[] {//
+  public static final NumberType<?>[] TYPES = new NumberType[] {//
   integer(), bigInteger(), bigDecimal(), float_(), double_(), long_() };
 
   /**

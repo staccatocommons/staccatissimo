@@ -142,19 +142,19 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  */
 public interface Stream<A> extends //
   Accessible<A>, //
-  Appendable<A>,//
+  Appendable<A>, //
   Collectible<A>, //
   ContainsAware<A>, //
   Crossable<A>, //
   Deconstructable<A>, //
   Filterable<A>, //
-  Foldable<A>,//
+  Foldable<A>, //
   NumberTypeAware<A>, //
   Interscalable<A>, //
   Iterable<A>, //
   Mappable<A>, //
   Reversable<A>, //
-  Searchable<A>,//
+  Searchable<A>, //
   SizeAware, //
   Sortable<A>, //
   Testeable<A>, //

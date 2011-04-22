@@ -31,8 +31,8 @@ import org.junit.Test;
  */
 public class Function3UnitTest extends JUnit4MockObjectTestCase {
 
-  AbstractFunction3<Integer, String, Boolean, Character> function;
-  Applicable3<Integer, String, Boolean, Character> applicable;
+  private AbstractFunction3<Integer, String, Boolean, Character> function;
+  private Applicable3<Integer, String, Boolean, Character> applicable;
 
   /** Instantiates both function and applicable */
   @Before

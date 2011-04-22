@@ -37,7 +37,7 @@ import net.sf.staccatocommons.restrictions.value.Value;
 public class Prioritized<P extends Comparable<P>, T> implements Comparable<Prioritized<P, T>>, Thunk<T>, Serializable {
 
   private static final long serialVersionUID = 7131041003021112454L;
-  private static final RelevantState<Prioritized> state = new RelevantState<Prioritized>(1) {
+  private static final RelevantState<Prioritized> STATE = new RelevantState<Prioritized>(1) {
     protected void collectState(Prioritized object, StateCollector s) {
       s.add(object.priority);
     }
@@ -71,7 +71,7 @@ public class Prioritized<P extends Comparable<P>, T> implements Comparable<Prior
   }
 
   public int compareTo(Prioritized<P, T> other) {
-    return state.compareTo(this, other);
+    return STATE.compareTo(this, other);
   }
 
   /**
@@ -80,11 +80,11 @@ public class Prioritized<P extends Comparable<P>, T> implements Comparable<Prior
    * priority attribute in the test
    */
   public boolean equals(Object obj) {
-    return state.equals(this, obj);
+    return STATE.equals(this, obj);
   }
 
   public int hashCode() {
-    return state.hashCode(this);
+    return STATE.hashCode(this);
   }
 
   public String toString() {

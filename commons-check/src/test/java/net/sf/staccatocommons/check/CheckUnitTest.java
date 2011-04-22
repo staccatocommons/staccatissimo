@@ -111,7 +111,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * methods
    */
   @Test
-  public void testisNotNegative_Zero() {
+  public void testisNotNegativeZero() {
     c.isNotNegative(VAR_NAME, 0L);
     c.isNotNegative(VAR_NAME, 0);
     c.isNotNegative(VAR_NAME, 0.0);
@@ -124,7 +124,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * test for {@link Check#isNotNegative(String, BigDecimal)} and similar
    */
   @Test
-  public void testNonNegative_Positive() {
+  public void testNonNegativePositive() {
     c
       .isNotNegative(VAR_NAME, 9)
       .isNotNegative(VAR_NAME, 9L)
@@ -156,7 +156,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * Test for {@link Check#isNotEmpty(String, CharSequence)}
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testisNotEmptyCharSequence_Fail() {
+  public void testisNotEmptyCharSequenceFail() {
     c.isNotEmpty(VAR_NAME, "");
   }
 
@@ -164,7 +164,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * Test for {@link Check#isNotEmpty(String, Collection)}
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testNotEmptyCollection_Fail() {
+  public void testNotEmptyCollectionFail() {
     c.isNotEmpty(VAR_NAME, Collections.emptyList());
   }
 
@@ -187,7 +187,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    */
 
   @Test(expected = IllegalArgumentException.class)
-  public void testPositive_Negative() {
+  public void testPositiveNegative() {
     c.isPositive(VAR_NAME, -5);
   }
 
@@ -195,7 +195,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * Test for {@link Check#isPositive(String, int)}
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testPositive_Zero() {
+  public void testPositiveZero() {
     c.isPositive(VAR_NAME, 0);
   }
 
@@ -223,7 +223,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * Test for {@link Check#isPositive(String, int)} on failure
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testPositive_IntegerFail() {
+  public void testPositiveIntegerFail() {
     c.isPositive(VAR_NAME, -50);
   }
 
@@ -231,7 +231,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * Test for {@link Check#isPositive(String, int)} on failure
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testPositive_Null_Fail() {
+  public void testPositiveNullFail() {
     c.isPositive(VAR_NAME, (BigDecimal) null);
   }
 
@@ -239,7 +239,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * Test for {@link Check#isPositive(String, int)} on failure
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testPositive_BigIntegerFail() {
+  public void testPositiveBigIntegerFail() {
     c.isPositive(VAR_NAME, BigInteger.valueOf(-10));
   }
 
@@ -265,7 +265,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
 
   /** Test for {@link Check#isSize(String, Object, int, SizeAwareType)} */
   @Test(expected = IllegalArgumentException.class)
-  public void testSize_Fail() throws Exception {
+  public void testSizeFail() throws Exception {
     c.isSize(VAR_NAME, Arrays.asList(4, 5, 6), 2);
   }
 
@@ -291,7 +291,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * @throws Exception
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testMinSize_Fail() throws Exception {
+  public void testMinSizeFail() throws Exception {
     c.isMinSize(VAR_NAME, Arrays.asList(4), 2, SizeAwareTypes.COLLECTION);
   }
 
@@ -301,7 +301,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * @throws Exception
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testMaxSize_Fail() throws Exception {
+  public void testMaxSizeFail() throws Exception {
     c.isMaxSize(VAR_NAME, Arrays.asList(4, 1, 3), 2, SizeAwareTypes.COLLECTION);
   }
 
@@ -358,7 +358,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * test for {@link Check#isNotNull(String, Object)}
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testNotNull_Fail() {
+  public void testNotNullFail() {
     c.isNotNull(VAR_NAME, null);
   }
 
@@ -366,7 +366,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * Test for {@link Check#isNull(String, Object)} on failure
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testNull_Fail() {
+  public void testNullFail() {
     c.isNull(VAR_NAME, new Object());
   }
 
@@ -392,7 +392,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * on failure
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testIsBetween_Fail() throws Exception {
+  public void testIsBetweenFail() throws Exception {
     c.isBetween(VAR_NAME, 8, 10, 90);
   }
 
@@ -431,7 +431,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * @throws Exception
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testGtCompare_fail() throws Exception {
+  public void testGtCompareFail() throws Exception {
     c.isGreaterThan(VAR_NAME, 50, 50);
   }
 
@@ -441,7 +441,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
    * @throws Exception
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testLtCompare_fail() throws Exception {
+  public void testLtCompareFail() throws Exception {
     c.isLessThan(VAR_NAME, 50, 50);
   }
 
@@ -473,7 +473,7 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
 
   /** Test for {@link Check#isIn(String, Object, ContainsAware)} */
   @Test(expected = IllegalArgumentException.class)
-  public void testIn_Fail() throws Exception {
+  public void testInFail() throws Exception {
     c.isIn(VAR_NAME, 10, new ContainsAware<Integer>() {
       public boolean contains(Integer element) {
         return false;
