@@ -13,7 +13,7 @@
 		<name>Staccato-Commons</name>
 		<url>http://staccatocommons.sourceforge.net/</url>
 	</organization>
-	<version>1.0-beta-2</version>
+	<version>1.0-SNAPSHOT</version>
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsparentpom</url>
 	<name>Staccato-Commons-Parent-Pom</name>
 	<description>Staccato-Commons base pom</description>

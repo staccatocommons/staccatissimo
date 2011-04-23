@@ -4,13 +4,13 @@
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.0-beta-2</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-defs</artifactId>
 	<inceptionYear>2010</inceptionYear>
 	<name>Staccato-Commons-Defs</name>
-	<version>1.0-beta-2</version>
+	<version>1.0-SNAPSHOT</version>
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs</url>
 	<scm>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-defs</connection>
@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-restrictions</artifactId>
-			<version>1.0-beta-2</version>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<distributionManagement>
