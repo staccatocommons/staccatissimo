@@ -24,6 +24,10 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 /**
+ * Instruments a project build path with
+ * staccato-commons-restrictions-instrument, processing restriction annotations
+ * supported by the tool
+ * 
  * @author flbulgarelli
  * @goal instrument
  */

@@ -1,0 +1,17 @@
+    --------------------------
+    Frequently Asked Questions
+    --------------------------
+    --------------------------
+    --------------------------
+
+Frequently Asked Questions
+
+ * Which files are processed?
+  
+    All classfile resulting of the compilation process. This includes classes compiled
+   after generated sources. 
+
+ * Does this introduce runtime dependencies?
+ 
+  Yes, your code will need a runtime dependency on staccato-commons-check
+  

@@ -19,32 +19,33 @@
 		<url>${staccatissimo.scm.view.base}/trunk/commons-restrictions-instrument-maven-plugin/</url>
 	</scm>
 	<distributionManagement>
-        <site>
-            <id> ${distribution.site.id}</id>
-            <url>${distribution.site.url}/staccatissimo/commonsrestrictionsinstrumentmavenplugin</url>
-        </site>
-    </distributionManagement>
-<!--	<issueManagement>-->
-<!--		<url>http://sourceforge.net/tracker/?group_id=317949</url>-->
-<!--	</issueManagement>-->
+		<site>
+			<id> ${distribution.site.id}</id>
+			<url>${distribution.site.url}/staccatissimo/commonsrestrictionsinstrumentmavenplugin</url>
+		</site>
+	</distributionManagement>
+	<issueManagement>
+	    <system>SourceForge</system>
+		<url>http://sourceforge.net/tracker/?group_id=317949</url>
+	</issueManagement>
 	<prerequisites>
 		<maven>2.0</maven>
 	</prerequisites>
 	<build>
-<!--		<plugins>-->
-<!--			<plugin>-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<artifactId>maven-docck-plugin</artifactId>-->
-<!--				<version>1.0</version>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<goals>-->
-<!--							<goal>check</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
-<!--		</plugins>-->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-docck-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
@@ -63,4 +64,13 @@
 			<version>2.2.1</version>
 		</dependency>
 	</dependencies>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
