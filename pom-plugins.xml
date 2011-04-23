@@ -18,7 +18,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.staccatocommons</groupId>
   <artifactId>staccatocommons-module-plugins</artifactId>
-  <version>1.0-beta-2-SNAPSHOT</version>
+  <version>1.0-beta-2</version>
   <name>Staccato-Commons Plugins Project Module</name>
   <packaging>pom</packaging>
 

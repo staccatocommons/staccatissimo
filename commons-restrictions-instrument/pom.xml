@@ -4,12 +4,12 @@
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.0-beta-2-SNAPSHOT</version>
+		<version>1.0-beta-2</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-restrictions-instrument</artifactId>
 	<name>Staccato-Commons-Restrictions-Instrument</name>
-	<version>1.0-beta-2-SNAPSHOT</version>
+	<version>1.0-beta-2</version>
 	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument</url>
 	<scm>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument</connection>
@@ -26,12 +26,12 @@
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-instrument</artifactId>
-			<version>1.0-beta-2-SNAPSHOT</version>
+			<version>1.0-beta-2</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-testing</artifactId>
-			<version>1.0-beta-2-SNAPSHOT</version>
+			<version>1.0-beta-2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
