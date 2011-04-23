@@ -69,9 +69,9 @@ public final class InstrumentationRunner {
   }
 
   private static class InstrumentationContext {
-    public Directory processDirectory;
-    public ClassPool classPool;
-    public Instrumenter classInstrumenter;
+    private Directory processDirectory;
+    private ClassPool classPool;
+    private Instrumenter classInstrumenter;
 
     private InstrumentationContext(Instrumenter classInstrumenter, Directory processDirectory, ClassPool pool)
       throws NotFoundException {

@@ -57,7 +57,7 @@ public class IteratorStream<A> extends AbstractStream<A> {
   }
 
   public final Pair<A, Stream<A>> decons() {
-    validateElement.that(!isEmpty(), "Empty streams can not be deconstructed");
+    VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams can not be deconstructed");
     return _(head(), (Stream<A>) this);
   }
 }

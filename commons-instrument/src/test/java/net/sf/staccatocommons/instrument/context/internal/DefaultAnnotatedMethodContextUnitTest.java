@@ -31,7 +31,7 @@ public class DefaultAnnotatedMethodContextUnitTest extends AbstractAnnotationCon
    */
   @Before
   public void createContext() {
-    context = new DefaultMethodAnnotationContext(pool, logger);
+    context = new DefaultMethodAnnotationContext(getPool(), getLogger());
   }
 
   /**
@@ -43,7 +43,7 @@ public class DefaultAnnotatedMethodContextUnitTest extends AbstractAnnotationCon
    */
   @Test
   public void testGetReturnName() throws Exception {
-    context.setMethod(pool.getMethod("net.sf.staccatocommons.lang.Option", "value"));
+    context.setMethod(getPool().getMethod("net.sf.staccatocommons.lang.Option", "value"));
     assertEquals("$_", context.getReturnIdentifier());
   }
 
@@ -56,7 +56,7 @@ public class DefaultAnnotatedMethodContextUnitTest extends AbstractAnnotationCon
    */
   @Test
   public void testIsVoid() throws Exception {
-    context.setMethod(pool.getMethod("net.sf.staccatocommons.lang.Option", "ifDefined"));
+    context.setMethod(getPool().getMethod("net.sf.staccatocommons.lang.Option", "ifDefined"));
     assertTrue(context.isVoid());
   }
 

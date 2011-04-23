@@ -88,7 +88,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public abstract class AbstractStream<A> implements Stream<A> {
 
-  protected static final Validate<NoSuchElementException> validateElement = Validate
+  protected static final Validate<NoSuchElementException> VALIDATE_ELEMENT = Validate
     .throwing(NoSuchElementException.class);
 
   @Override
@@ -139,7 +139,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
-    validateElement.that(!isEmpty(), "Can not reduce an empty stream");
+    VALIDATE_ELEMENT.that(!isEmpty(), "Can not reduce an empty stream");
     return Iterables.reduce(this, function);
   }
 
@@ -430,26 +430,26 @@ public abstract class AbstractStream<A> implements Stream<A> {
   @Override
   public Pair<A, Stream<A>> decons() {
     Iterator<A> iter = iterator();
-    validateElement.that(iter.hasNext(), "Empty streams have no head");
+    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams have no head");
     return _(iter.next(), Streams.from(iter));
   }
 
   @Override
   public Pair<Thunk<A>, Stream<A>> delayedDecons() {
     Thriterator<A> iter = iterator();
-    validateElement.that(iter.hasNext(), "Empty streams have no head");
+    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams have no head");
     return _(iter.delayedNext(), Streams.from(iter));
   }
 
   @Override
   public Stream<A> tail() {
-    validateElement.that(!isEmpty(), "Empty streams have not tail");
+    VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams have not tail");
     return drop(1);
   }
 
   @Override
   public A head() {
-    validateElement.that(!isEmpty(), "Empty streams have not head");
+    VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams have not head");
     return first();
   }
 
@@ -485,7 +485,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public A average(final NumberType<A> numberType) {
-    validateElement.that(!isEmpty(), "Can not get average on an empty stream");
+    VALIDATE_ELEMENT.that(!isEmpty(), "Can not get average on an empty stream");
     class Ref {
       A val = numberType.zero();
     }

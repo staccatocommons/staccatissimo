@@ -49,7 +49,7 @@ import org.apache.commons.proxy.invoker.NullInvoker;
  */
 public final class LambdaFactory {
 
-  private static final Validate<IllegalStateException> state = Validate.throwing(IllegalStateException.class);
+  private static final Validate<IllegalStateException> STATE = Validate.throwing(IllegalStateException.class);
   private final ProxyFactory proxyFactory;
   private final Handler handler = new Handler();
   private boolean firstStep = false;
@@ -72,7 +72,7 @@ public final class LambdaFactory {
     }
 
     public Method getMethod() {
-      state.that(firstStep, "Wrong invocation order");
+      STATE.that(firstStep, "Wrong invocation order");
       firstStep = false;
       return method;
     }
@@ -103,7 +103,7 @@ public final class LambdaFactory {
   @ForceRestrictions
   @NonNull
   public <A> A $(@NonNull Class<A> clazz) {
-    state.that(!firstStep, "Wrong invocation order");
+    STATE.that(!firstStep, "Wrong invocation order");
     A stub = (A) proxyFactory.createInvokerProxy(handler, new Class[] { clazz });
     firstStep = true;
     return stub;

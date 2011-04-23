@@ -60,7 +60,7 @@ import org.apache.commons.lang.SerializationException;
  */
 // TODO it should grant that either both throw a serialization exception, or
 // none.
-// TODO: should have two different exceptions: one for format and the other one
+// TODO should have two different exceptions: one for format and the other one
 // for IO
 public interface SerializationManager {
 
