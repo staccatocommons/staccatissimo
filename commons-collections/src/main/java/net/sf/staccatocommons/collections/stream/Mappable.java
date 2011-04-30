@@ -40,8 +40,8 @@ public interface Mappable<A> {
   <B> Stream<B> map(@NonNull Function<? super A, ? extends B> function);
 
   /**
-   * Transformes each element using the given function, and concatenates
-   * (flattens) the result
+   * Transformes each element into an iterable using the given function, and
+   * concatenates (flattens) the result
    * 
    * @param <B>
    * @param function
@@ -51,4 +51,17 @@ public interface Mappable<A> {
   @NonNull
   @Projection
   <B> Stream<B> flatMap(@NonNull Function<? super A, ? extends Iterable<? extends B>> function);
+
+  /**
+   * Transformes each element into an array using the given function, and
+   * concatenates (flattens) the result
+   * 
+   * @param <B>
+   * @param function
+   * @return a new {@link Stream} that will retrieve the result of transforming
+   *         each element and concatenating those trsansformations
+   */
+  @NonNull
+  @Projection
+  <B> Stream<B> flatMapArray(@NonNull Function<? super A, ? extends B[]> function);
 }

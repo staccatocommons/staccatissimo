@@ -223,6 +223,10 @@ public abstract class AbstractStream<A> implements Stream<A> {
     return new FlatMapStream<A, B>(this, function);
   }
 
+  public <B> Stream<B> flatMapArray(@NonNull Function<? super A, ? extends B[]> function) {
+    return flatMap(AbstractStream.<B> toIterable().of(function));
+  }
+
   @Override
   public Stream<A> append(final Iterable<A> other) {
     return new AppendIterableStream<A>(this, other);
@@ -638,6 +642,14 @@ public abstract class AbstractStream<A> implements Stream<A> {
   @Override
   public String toString() {
     return "[" + joinStrings(",") + "]";
+  }
+
+  private static <A> Function<A[], Iterable<A>> toIterable() {
+    return new AbstractFunction<A[], Iterable<A>>() {
+      public Iterable<A> apply(A[] arg) {
+        return Arrays.asList(arg);
+      }
+    };
   }
 
 }
