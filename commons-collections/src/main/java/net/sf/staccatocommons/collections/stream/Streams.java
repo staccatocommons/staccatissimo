@@ -38,6 +38,7 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.EnumerationIterator;
 import net.sf.staccatocommons.lang.function.Functions;
+import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.sequence.StopConditions;
 import net.sf.staccatocommons.lang.thunk.Thunks;
@@ -168,7 +169,27 @@ public class Streams {
   @NonNull
   @Projection
   public static <A> Stream<A> iterate(@NonNull A seed, @NonNull Applicable<A, A> generator) {
-    return from(Sequence.from(seed, generator, StopConditions.<A> stopNever()));
+    return from(Sequence.from(seed, generator, StopConditions.stopNever()));
+  }
+
+  /**
+   * Creates a new infinite {@link Stream} that retrieves element from the
+   * sequence
+   * <code>Sequence.from(start, generator, StopConditions.stopNever())</code>
+   * 
+   * @param <A>
+   * @param seed
+   *          the initial element of the sequence
+   * @param generator
+   *          a function used to generated each element from the sequence after
+   *          the initial element
+   * @return a new {@link Stream}
+   * @see Sequence#from(Object, Applicable, Evaluable)
+   */
+  @NonNull
+  @Projection
+  public static <A> Stream<A> iterateUntilNull(@NonNull A seed, @NonNull Applicable<A, A> generator) {
+    return from(Sequence.from(seed, generator, Predicates.null_()));
   }
 
   /**
