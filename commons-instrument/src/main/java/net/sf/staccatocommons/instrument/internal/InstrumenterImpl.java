@@ -123,7 +123,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
 
     final ClassAnnotationContext context = //
     new DefaultClassAnnotationContext(classPool, logger, clazz);
-    classProcessor.processUsing(clazz.getAnnotations(), new Block2<Object, ClassAnnotationHandler>() {
+    classProcessor.processUsing(clazz.getAvailableAnnotations(), new Block2<Object, ClassAnnotationHandler>() {
       protected void softExec(Object annotation, ClassAnnotationHandler handler) throws Exception {
         handler.preProcessAnnotatedClass((Annotation) annotation, context);
       }
@@ -136,7 +136,7 @@ public class InstrumenterImpl implements InstrumenterConfiguration, Instrumenter
     for (CtConstructor constructor : clazz.getDeclaredConstructors())
       instrumentConstructor(constructor);
 
-    classProcessor.processUsing(clazz.getAnnotations(), new Block2<Object, ClassAnnotationHandler>() {
+    classProcessor.processUsing(clazz.getAvailableAnnotations(), new Block2<Object, ClassAnnotationHandler>() {
       protected void softExec(Object annotation, ClassAnnotationHandler handler) throws Exception {
         handler.postProcessAnnotatedClass((Annotation) annotation, context);
       }
