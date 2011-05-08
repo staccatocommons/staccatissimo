@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.restrictions.instrument.maven;
 
-import java.util.List;
+import java.util.Collection;
 
 import net.sf.staccatocommons.instrument.config.InstrumenterConfigurer;
 import net.sf.staccatocommons.instrument.maven.InstrumentMojoSupport;
@@ -34,21 +34,18 @@ import org.apache.maven.plugin.MojoFailureException;
 public class RestrictionsInstrumentMojo extends AbstractMojo {
 
   /**
-   * The location to instrument. It is <project directory>/target/classes by
-   * default
-   * 
+   * @readonly
    * @required
-   * @parameter expression="${instrument.location}"
-   *            default-value="${project.build.directory}/classes"
+   * @parameter expression="${project.build.outputDirectory}"
    */
   private String location;
 
   /**
    * @readonly
    * @required
-   * @parameter expression="${plugin.artifacts}"
+   * @parameter expression="${project.artifacts}"
    */
-  private List<Artifact> pluginArtifactsList;
+  private Collection<Artifact> projectArtifactsList;
 
   /**
    * If check annotation on methods should be ignored, or should be processed
@@ -90,7 +87,7 @@ public class RestrictionsInstrumentMojo extends AbstractMojo {
 
   public void execute() throws MojoExecutionException, MojoFailureException {
     getLog().info("*** Staccato-Commons-Restrictions-Instrument *** ");
-    new InstrumentMojoSupport(this, location, artifact, pluginArtifactsList) {
+    new InstrumentMojoSupport(this, location, artifact, projectArtifactsList) {
 
       @Override
       protected InstrumenterConfigurer createConfigurer() {

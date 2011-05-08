@@ -14,7 +14,7 @@ package net.sf.staccatocommons.instrument.maven;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.collections.stream.Streams;
@@ -41,7 +41,7 @@ public abstract class InstrumentMojoSupport {
 
   private final Artifact artifact;
 
-  private final List<Artifact> pluginArtifactsList;
+  private final Collection<Artifact> projectArtifactsList;
 
   private final Mojo mojo;
 
@@ -49,15 +49,15 @@ public abstract class InstrumentMojoSupport {
    * Creates a new {@link InstrumentMojoSupport}
    */
   public InstrumentMojoSupport(@NonNull Mojo mojo, @NonNull String location, @NonNull Artifact artifact,
-    List<Artifact> pluginArtifactsList) {
+    Collection<Artifact> projectArtifactsList) {
     Ensure.isNotNull("mojo", mojo);
     Ensure.isNotNull("location", location);
     Ensure.isNotNull("artifact", artifact);
-    Ensure.isNotNull("pluginArtifactsList", pluginArtifactsList);
+    Ensure.isNotNull("projectArtifactsList", projectArtifactsList);
     this.mojo = mojo;
     this.location = location;
     this.artifact = artifact;
-    this.pluginArtifactsList = pluginArtifactsList;
+    this.projectArtifactsList = projectArtifactsList;
   }
 
   /**
@@ -84,7 +84,7 @@ public abstract class InstrumentMojoSupport {
 
   private String createClassPathString() {
     return Streams //
-      .from(pluginArtifactsList)
+      .from(projectArtifactsList)
       .filter(Predicates.equal(artifact).not())
       .map(new AbstractFunction<Artifact, String>() {
         public String apply(Artifact arg) {
