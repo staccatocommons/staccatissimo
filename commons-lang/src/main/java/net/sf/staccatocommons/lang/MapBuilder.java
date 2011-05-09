@@ -29,6 +29,7 @@ import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 /**
@@ -45,9 +46,8 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
 
   private M map;
-  private Applicable<M, M> postprocessor;
+  private Applicable<M, M> wrapperFunction;
 
-  // TODO support for custom constraints
   /**
    * 
    * Creates a new {@link MapBuilder}
@@ -55,9 +55,9 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
    * @param map
    *          the map to build. Non null
    */
-  public MapBuilder(@NonNull M map, @NonNull Applicable<M, M> postprocessor) {
+  public MapBuilder(@NonNull M map, @NonNull Applicable<M, M> wrapperFunction) {
     this.map = map;
-    this.postprocessor = postprocessor;
+    this.wrapperFunction = wrapperFunction;
   }
 
   /**
@@ -87,37 +87,43 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
     return this;
   }
 
+  /**
+   * Sets the wrapper function, that is, the {@link Applicable} to apply to the
+   * resulting map before returning it through {@link #build()}.
+   * 
+   * By default, maps are wrapped with unmodifiable wrappers, but this behavior
+   * can be changed through this method.
+   * 
+   * @param wrapperFunction
+   * @return this
+   */
+  @ForceRestrictions
+  @NonNull
+  public MapBuilder<K, V, M> withWrapper(@NonNull Applicable<M, M> wrapperFunction) {
+    this.wrapperFunction = wrapperFunction;
+    return this;
+  }
+
+  /**
+   * Disables wrapping, which means that a built map will be returned just as it
+   * was created.
+   * 
+   * As a consequence, the map returned by {@link #build()} will be modifiable.
+   * 
+   * @return this
+   */
+  @NonNull
+  public MapBuilder<K, V, M> unwrap() {
+    return withWrapper(Functions.<M> identity());
+  }
+
   @NonNull
   public M build() {
     M map = this.map;
     this.map = null;
     if (map == null)
       throw new BuilderAlreadyUsedException();
-    return postprocessor.apply(map);
-  }
-
-  /**
-   * Creates a new {@link MapBuilder} using the given map instance and
-   * postprocessor that would be applied to the built map before being returned.
-   * If no postprocessing is requred, pass {@link Functions#identity()}
-   * 
-   * @param <K>
-   *          type of key
-   * @param <V>
-   *          type of value
-   * @param <M>
-   *          type of {@link Map}
-   * @param map
-   *          the map to build
-   * @param postprocessor
-   *          the {@link Applicable} to be applied to the given map before
-   *          returning it. If the {@link Applicable} returns a different map
-   *          instead of modifying it, then that map is returned.
-   * @return a new {@link MapBuilder}
-   */
-  @NonNull
-  public static <K, V, M extends Map<K, V>> MapBuilder<K, V, M> from(@NonNull M map, Applicable<M, M> postprocessor) {
-    return new MapBuilder<K, V, M>(map, postprocessor);
+    return wrapperFunction.apply(map);
   }
 
   /**
@@ -188,6 +194,30 @@ public class MapBuilder<K, V, M extends Map<K, V>> implements Builder<M> {
   @NonNull
   public static <K, V> MapBuilder<K, V, SortedMap<K, V>> treeMapWith(K key, V value) {
     return from(new TreeMap<K, V>(), MapBuilder.<K, V> toUnmodifiableSortedMap()).with(key, value);
+  }
+
+  /**
+   * Creates a new {@link MapBuilder} using the given map instance and
+   * wrapperFunction that would be applied to the built map before being
+   * returned. If no wrapping is required, pass {@link Functions#identity()}
+   * 
+   * @param <K>
+   *          type of key
+   * @param <V>
+   *          type of value
+   * @param <M>
+   *          type of {@link Map}
+   * @param map
+   *          the map to build
+   * @param wrapperFunction
+   *          the {@link Applicable} to be applied to the given map before
+   *          returning it. If the {@link Applicable} returns a different map
+   *          instead of modifying it, then that map is returned.
+   * @return a new {@link MapBuilder}
+   */
+  @NonNull
+  private static <K, V, M extends Map<K, V>> MapBuilder<K, V, M> from(@NonNull M map, Applicable<M, M> wrapperFunction) {
+    return new MapBuilder<K, V, M>(map, wrapperFunction);
   }
 
   /**
