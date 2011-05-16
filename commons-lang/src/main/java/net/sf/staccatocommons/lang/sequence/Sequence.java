@@ -52,7 +52,7 @@ public class Sequence<A> implements Iterable<A>, NumberTypeAware<A>, Serializabl
 
   private final A seed;
 
-  private final Applicable<A, A> generator;
+  private final Applicable<? super A, ? extends A> generator;
 
   private final Evaluable<? super A> stopCondition;
 
@@ -69,7 +69,8 @@ public class Sequence<A> implements Iterable<A>, NumberTypeAware<A>, Serializabl
    *          predicate is satisfied when sequencing should stop, that is, when
    *          the given element and subsequent should not be retrieved.
    */
-  public Sequence(A seed, @NonNull Applicable<A, A> generator, @NonNull Evaluable<? super A> stopCondition) {
+  public Sequence(A seed, @NonNull Applicable<? super A, ? extends A> generator,
+    @NonNull Evaluable<? super A> stopCondition) {
     this.seed = seed;
     this.generator = generator;
     this.stopCondition = stopCondition;
@@ -88,7 +89,7 @@ public class Sequence<A> implements Iterable<A>, NumberTypeAware<A>, Serializabl
    */
   @NonNull
   public Applicable<A, A> getGenerator() {
-    return generator;
+    return (Applicable<A, A>) generator;
   }
 
   /**
@@ -180,7 +181,7 @@ public class Sequence<A> implements Iterable<A>, NumberTypeAware<A>, Serializabl
    * @return a new Sequence
    */
   @NonNull
-  public static <A> Sequence<A> from(A seed, @NonNull Applicable<A, A> generator,
+  public static <A> Sequence<A> from(A seed, @NonNull Applicable<? super A, ? extends A> generator,
     @NonNull Evaluable<? super A> stopCondition) {
     return new Sequence<A>(seed, generator, stopCondition);
   }

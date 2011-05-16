@@ -168,7 +168,7 @@ public class Streams {
    */
   @NonNull
   @Projection
-  public static <A> Stream<A> iterate(@NonNull A seed, @NonNull Applicable<A, A> generator) {
+  public static <A> Stream<A> iterate(@NonNull A seed, @NonNull Applicable<? super A, ? extends A> generator) {
     return from(Sequence.from(seed, generator, StopConditions.stopNever()));
   }
 
@@ -188,7 +188,7 @@ public class Streams {
    */
   @NonNull
   @Projection
-  public static <A> Stream<A> iterateUntilNull(@NonNull A seed, @NonNull Applicable<A, A> generator) {
+  public static <A> Stream<A> iterateUntilNull(@NonNull A seed, @NonNull Applicable<? super A, ? extends A> generator) {
     return from(Sequence.from(seed, generator, Predicates.null_()));
   }
 
