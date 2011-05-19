@@ -141,7 +141,7 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  *          the type of object the stream is source of
  */
 public interface Stream<A> extends //
-  Accessible<A>, //
+  Indexed<A>, //
   Appendable<A>, //
   Collectible<A>, //
   ContainsAware<A>, //

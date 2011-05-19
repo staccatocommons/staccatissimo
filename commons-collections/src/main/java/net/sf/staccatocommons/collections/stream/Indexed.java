@@ -15,6 +15,10 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.collections.stream.properties.Projection;
+import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+
 /**
  * {@link Stream} interface for accessing elements in an ordered manner.
  * 
@@ -30,7 +34,7 @@ import java.util.NoSuchElementException;
  * 
  * @param <A>
  */
-public interface Accessible<A> {
+public interface Indexed<A> {
 
   /**
    * @return the first element
@@ -92,5 +96,28 @@ public interface Accessible<A> {
    *         first is before the second one
    */
   boolean isBefore(A previous, A next);
+
+  /**
+   * Preserves elements that whose index satisfy the given
+   * <code>predicate</code>
+   * 
+   * @param predicate
+   * @return a new {@link Stream} projection that will retrieve only elements
+   *         whose index evaluate to true
+   */
+  @NonNull
+  @Projection
+  Stream<A> filterIndex(@NonNull Evaluable<Integer> predicate);
+
+  /**
+   * Answers a streams that retrieves all the elements of this one, except of
+   * that at the given index
+   * 
+   * @param predicate
+   * @return a new {@link Stream} that skips the element at the given index
+   */
+  @NonNull
+  @Projection
+  Stream<A> skipIndex(int index);
 
 }

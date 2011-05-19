@@ -27,6 +27,17 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public interface Crossable<A> {
 
   /**
+   * Answers the Cartesian product of this stream and itseld
+   * 
+   * @param other
+   * @return a new {@link Stream} projection
+   * @see Iterables#cross(Iterable, Iterable)
+   */
+  @NonNull
+  @Projection
+  Stream<Pair<A, A>> cross();
+
+  /**
    * Answers the Cartesian product of this stream and the given one
    * 
    * @param <B>

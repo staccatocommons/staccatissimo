@@ -41,6 +41,10 @@ public interface Filterable<A> {
   @Projection
   Stream<A> filter(@NonNull Evaluable<? super A> predicate);
 
+  @NonNull
+  @Projection
+  Stream<A> skip(@NonNull A element);
+
   /**
    * Preserves all elements while they satisfy the given <code>predicate</code>
    * 

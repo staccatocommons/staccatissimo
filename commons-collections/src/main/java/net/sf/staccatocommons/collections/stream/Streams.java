@@ -244,6 +244,10 @@ public class Streams {
     return iterate(element, Functions.<A> identity());
   }
 
+  public static <A> Stream<A> repeat(@NonNull Thunk<A> factory) {
+    return iterate(factory.value(), Functions.constant(factory));
+  }
+
   // private static <A> Stream<A> cycle(@NonNull A element) {
   // //return iterate(element, Functions.<A> identity());
   // }

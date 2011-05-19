@@ -71,6 +71,7 @@ import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.Equiv;
+import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
@@ -115,6 +116,10 @@ public abstract class AbstractStream<A> implements Stream<A> {
   @Override
   public Stream<A> filter(final Evaluable<? super A> predicate) {
     return new FilterStream<A>(this, predicate);
+  }
+
+  public Stream<A> skip(A element) {
+    return filter(Predicates.equal(element));
   }
 
   @Override
@@ -266,6 +271,14 @@ public abstract class AbstractStream<A> implements Stream<A> {
         throw new IndexOutOfBoundsException("At " + n);
       }
     return iter.current();
+  }
+
+  public Stream<A> filterIndex(Evaluable<Integer> predicate) {
+    return null;
+  }
+
+  public Stream<A> skipIndex(int index) {
+    return filterIndex(Predicates.equal(index));
   }
 
   @Override
@@ -569,6 +582,10 @@ public abstract class AbstractStream<A> implements Stream<A> {
    */
   public Stream<Stream<A>> groupBy(final Evaluable2<A, A> pred) {
     return new GroupByStream<A>(this, pred);
+  }
+
+  public Stream<Pair<A, A>> cross() {
+    return cross(this);
   }
 
   public <B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other) {

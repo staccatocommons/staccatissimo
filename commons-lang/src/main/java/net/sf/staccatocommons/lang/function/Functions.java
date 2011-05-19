@@ -81,15 +81,6 @@ public class Functions {
     };
   }
 
-  @NonNull
-  public static <A, B> Function<A, B> from(final Thunk<B> thunk) {
-    return new AbstractFunction<A, B>() {
-      public B apply(A arg) {
-        return thunk.value();
-      }
-    };
-  }
-
   /**
    * Returns the identity function, that is, a {@link Function} that takes an
    * argument and returns it.
@@ -116,6 +107,15 @@ public class Functions {
   @NonNull
   public static <A, B> Function<A, B> constant(B value) {
     return new ConstantFunction<A, B>(value);
+  }
+
+  @NonNull
+  public static <A, B> Function<A, B> constant(final Thunk<B> thunk) {
+    return new AbstractFunction<A, B>() {
+      public B apply(A arg) {
+        return thunk.value();
+      }
+    };
   }
 
   // TODO
