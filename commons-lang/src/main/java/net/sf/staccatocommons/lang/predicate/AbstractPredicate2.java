@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.lang.predicate;
 
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
 
 /**
@@ -21,6 +22,14 @@ public abstract class AbstractPredicate2<A, B> implements Predicate2<A, B> {
 
   public final Boolean apply(A arg0, B arg1) {
     return eval(arg0, arg1);
+  }
+
+  public Predicate<B> apply(final A arg) {
+    return new AbstractPredicate<B>() {
+      public boolean eval(B argument) {
+        return AbstractPredicate2.this.apply(arg, argument);
+      }
+    };
   }
 
   public Predicate2<A, B> nullSafe() {

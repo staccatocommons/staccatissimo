@@ -13,7 +13,11 @@
 package net.sf.staccatocommons.lang.tuple;
 
 import net.sf.staccatocommons.defs.function.Function;
+import net.sf.staccatocommons.defs.function.Function2;
+import net.sf.staccatocommons.defs.predicate.Predicate;
+import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.tuple.Tuple.FourthAware;
 import net.sf.staccatocommons.lang.tuple.Tuple.ThirdAware;
 import net.sf.staccatocommons.restrictions.Constant;
@@ -179,6 +183,22 @@ public class Tuples {
   @NonNull
   public static <T1, T2> Pair<T1, T2> _(T1 first, T2 second) {
     return new Pair<T1, T2>(first, second);
+  }
+
+  public static <A, B, C> Function<Pair<A, B>, C> uncurry(final Function2<A, B, C> function) {
+    return new AbstractFunction<Pair<A, B>, C>() {
+      public C apply(Pair<A, B> argument) {
+        return function.apply(argument.first(), argument.second());
+      }
+    };
+  }
+
+  public static <A, B> Predicate<Pair<A, B>> uncurry(final Predicate2<A, B> predicate) {
+    return new AbstractPredicate<Pair<A, B>>() {
+      public boolean eval(Pair<A, B> argument) {
+        return predicate.eval(argument.first(), argument.second());
+      }
+    };
   }
 
 }

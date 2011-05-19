@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.defs.predicate;
 
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.NullSafeAware;
@@ -20,6 +21,7 @@ import net.sf.staccatocommons.defs.NullSafeAware;
  * @author flbulgarelli
  * 
  */
-public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Boolean>, NullSafeAware<Predicate2<A, B>> {
+public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Boolean>, Applicable<A, Predicate<B>>,
+  NullSafeAware<Predicate2<A, B>> {
 
 }

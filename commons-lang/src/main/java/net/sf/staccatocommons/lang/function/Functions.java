@@ -15,6 +15,7 @@ package net.sf.staccatocommons.lang.function;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.lang.function.internal.ApplicableFunction;
@@ -76,6 +77,15 @@ public class Functions {
     return new AbstractFunction2<A, B, C>() {
       public C apply(A arg0, B arg1) {
         return applicable.apply(arg0, arg1);
+      }
+    };
+  }
+
+  @NonNull
+  public static <A, B> Function<A, B> from(final Thunk<B> thunk) {
+    return new AbstractFunction<A, B>() {
+      public B apply(A arg) {
+        return thunk.value();
       }
     };
   }
