@@ -90,11 +90,11 @@ public class Predicates {
 
   /**
    * Returns a predicate that tests if its argument is equal to the given value:
-   * <code>argument.equals(value)</code>
+   * <code>argument.equals(value)</code>.
    * 
    * @param <T>
    * @param value
-   * @return a new {@link AbstractPredicate}
+   * @return <code>Equiv.equal().apply(value)</code>
    */
   @NonNull
   public static <T> Predicate<T> equal(T value) {
@@ -107,7 +107,7 @@ public class Predicates {
    * 
    * @param <T>
    * @param value
-   * @return a new {@link AbstractPredicate}
+   * @return <code>Equiv.same().apply(value)</code>
    */
   @NonNull
   public static <T> Predicate<T> same(T value) {

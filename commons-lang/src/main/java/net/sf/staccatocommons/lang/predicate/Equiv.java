@@ -58,7 +58,7 @@ public class Equiv {
   @NonNull
   @Constant
   public static <A> Predicate2<A, A> same() {
-    return SameTest.<A> sameTest();
+    return SameTest.<A> same();
   }
 
   /**

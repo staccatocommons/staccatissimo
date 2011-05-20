@@ -12,8 +12,9 @@
  */
 package net.sf.staccatocommons.lang.predicate.internal;
 
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
-import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
+import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -21,10 +22,16 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public class SameTest extends AbstractPredicate2 {
+public final class SameTest<A> extends AbstractEquiv<A> {
 
-  public boolean eval(Object arg0, Object arg1) {
+  private static final long serialVersionUID = 5767947639495599795L;
+
+  public boolean eval(A arg0, A arg1) {
     return arg0 == arg1;
+  }
+
+  public Predicate apply(A arg) {
+    return Predicates.same(arg);
   }
 
   /**
@@ -33,7 +40,7 @@ public class SameTest extends AbstractPredicate2 {
    */
   @NonNull
   @Constant
-  public static <A> Predicate2<A, A> sameTest() {
+  public static <A> Predicate2<A, A> same() {
     return new SameTest();
   }
 

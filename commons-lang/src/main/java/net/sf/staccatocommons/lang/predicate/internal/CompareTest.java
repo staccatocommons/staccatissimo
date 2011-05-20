@@ -24,6 +24,8 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public final class CompareTest<A extends Comparable<A>> extends AbstractEquiv<A> {
 
+  private static final long serialVersionUID = 2333778927729616411L;
+
   public boolean eval(A arg0, A arg1) {
     return arg0.compareTo(arg1) == 0;
   }
