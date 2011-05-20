@@ -45,6 +45,7 @@ import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * Class methods for creating very simple {@link Stream}s wrapping existing
@@ -244,6 +245,9 @@ public class Streams {
     return iterate(element, Functions.<A> identity());
   }
 
+  @NonNull
+  @Projection
+  @ForceRestrictions
   public static <A> Stream<A> repeat(@NonNull Thunk<A> factory) {
     return iterate(factory.value(), Functions.constant(factory));
   }

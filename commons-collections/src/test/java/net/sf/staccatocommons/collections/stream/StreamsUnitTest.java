@@ -52,7 +52,7 @@ public class StreamsUnitTest {
    */
   @Test
   public void testRepeat() throws Exception {
-    Stream<Object> replicate = Streams.repeat(null).memorize();
+    Stream<Object> replicate = Streams.repeat((Object) null).memorize();
     assertNull(replicate.first());
     assertNull(replicate.third());
   }
