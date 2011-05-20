@@ -63,6 +63,7 @@ public class Tuples {
   @Constant
   @NonNull
   public static <A> Function<Tuple.FirstAware<A>, A> first(Class<A> clazz) {
+    // XXX remove?
     return first();
   }
 
@@ -93,6 +94,7 @@ public class Tuples {
    * @return a constant function
    */
   public static <A> Function<Tuple.SecondAware<A>, A> second(Class<A> clazz) {
+    // XXX remove?
     return second();
   }
 
@@ -187,6 +189,18 @@ public class Tuples {
     return new Pair<T1, T2>(first, second);
   }
 
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Currying">Curries</a> the given
+   * {@code function} that takes a single {@link Pair}, by returning a new one
+   * that takes two arguments, one for each component of the pair
+   * 
+   * @param <A>
+   * @param <B>
+   * @param <C>
+   * @param function
+   *          the function to curry
+   * @return a new {@link Function2}
+   */
   public static <A, B, C> Function2<A, B, C> curry(final Function<Pair<A, B>, C> function) {
     return new AbstractFunction2<A, B, C>() {
       public C apply(A arg0, B arg1) {
@@ -195,6 +209,18 @@ public class Tuples {
     };
   }
 
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Currying">Curries</a> the given
+   * {@code predicate} that takes a single {@link Pair}, by returning a new one
+   * that takes two arguments, one for each component of the pair
+   * 
+   * @param <A>
+   * @param <B>
+   * @param <C>
+   * @param predicate
+   *          the function to curry
+   * @return a new {@link Predicate2}
+   */
   public static <A, B> Predicate2<A, B> curry(final Predicate<Pair<A, B>> predicate) {
     return new AbstractPredicate2<A, B>() {
       public boolean eval(A arg0, B arg1) {

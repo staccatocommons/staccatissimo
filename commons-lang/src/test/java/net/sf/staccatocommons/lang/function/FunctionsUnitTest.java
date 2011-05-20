@@ -14,9 +14,13 @@
 package net.sf.staccatocommons.lang.function;
 
 import static org.junit.Assert.*;
+
+import java.util.Date;
+
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.Strings;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -79,4 +83,18 @@ public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
   public void testToString() throws Exception {
     assertEquals("50", Strings.toString_().apply(50));
   }
+
+  Object _ = null;
+
+  /**
+   * Tests {@link Functions#constant(net.sf.staccatocommons.defs.Thunk)}
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void testConstThunk() throws Exception {
+    Function<Object, Date> constant = Functions.constant(Thunks.currentDate());
+    assertNotSame(constant.apply(_), constant.apply(_));
+  }
+
 }

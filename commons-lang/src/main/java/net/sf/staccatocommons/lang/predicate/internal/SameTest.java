@@ -26,6 +26,7 @@ public final class SameTest<A> extends AbstractEquiv<A> {
 
   private static final long serialVersionUID = 5767947639495599795L;
 
+  // FIXME nullsafeness?
   public boolean eval(A arg0, A arg1) {
     return arg0 == arg1;
   }

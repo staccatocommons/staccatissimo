@@ -23,6 +23,7 @@ import net.sf.staccatocommons.lang.function.internal.ConstantFunction;
 import net.sf.staccatocommons.lang.function.internal.IdentityFunction;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.effect.Transparent;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
@@ -83,7 +84,7 @@ public class Functions {
 
   /**
    * Returns the identity function, that is, a {@link Function} that takes an
-   * argument and returns it.
+   * argument and returns it. This functions grants to be {@link Transparent}
    * 
    * @param <A>
    * @return the constant identity function
@@ -96,7 +97,8 @@ public class Functions {
 
   /**
    * Returns a function that takes one argument, and regardless of it, returns a
-   * given value
+   * given value. This function grants to be {@link Transparent} and
+   * {@link Constant}
    * 
    * @param <A>
    * @param <B>
@@ -109,6 +111,21 @@ public class Functions {
     return new ConstantFunction<A, B>(value);
   }
 
+  /**
+   * Returns a function that takes one argument, and regadless of it, returns
+   * the given thunk's value.
+   * <p>
+   * This function grants to be {@link Transparent} and {@link Constant} only as
+   * long as the given {@code thunk} is transparent too. As a consequence,
+   * passing a non-transparent {@link Thunk} may be effective, but
+   * counterintuitive, as the resulting function would not be constant at all.
+   * </p>
+   * 
+   * @param <A>
+   * @param <B>
+   * @param thunk
+   * @return a new function
+   */
   @NonNull
   public static <A, B> Function<A, B> constant(final Thunk<B> thunk) {
     return new AbstractFunction<A, B>() {
