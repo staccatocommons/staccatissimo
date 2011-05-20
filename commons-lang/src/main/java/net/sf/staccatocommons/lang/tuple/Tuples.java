@@ -17,7 +17,9 @@ import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
 import net.sf.staccatocommons.lang.tuple.Tuple.FourthAware;
 import net.sf.staccatocommons.lang.tuple.Tuple.ThirdAware;
 import net.sf.staccatocommons.restrictions.Constant;
@@ -183,6 +185,22 @@ public class Tuples {
   @NonNull
   public static <T1, T2> Pair<T1, T2> _(T1 first, T2 second) {
     return new Pair<T1, T2>(first, second);
+  }
+
+  public static <A, B, C> Function2<A, B, C> curry(final Function<Pair<A, B>, C> function) {
+    return new AbstractFunction2<A, B, C>() {
+      public C apply(A arg0, B arg1) {
+        return function.apply(_(arg0, arg1));
+      }
+    };
+  }
+
+  public static <A, B> Predicate2<A, B> curry(final Predicate<Pair<A, B>> predicate) {
+    return new AbstractPredicate2<A, B>() {
+      public boolean eval(A arg0, B arg1) {
+        return predicate.eval(_(arg0, arg1));
+      };
+    };
   }
 
   public static <A, B, C> Function<Pair<A, B>, C> uncurry(final Function2<A, B, C> function) {
