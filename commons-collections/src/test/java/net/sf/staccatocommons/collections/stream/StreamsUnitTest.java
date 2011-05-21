@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 
 import org.junit.Test;
@@ -52,9 +53,25 @@ public class StreamsUnitTest {
    */
   @Test
   public void testRepeat() throws Exception {
-    Stream<Object> replicate = Streams.repeat((Object) null).memorize();
-    assertNull(replicate.first());
-    assertNull(replicate.third());
+    Stream<Object> repeat = Streams.repeat((Object) null).memorize();
+    assertNull(repeat.first());
+    assertNull(repeat.third());
+  }
+
+  /**
+   * Test method for repeat(Thunk)
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void testRepeatThunk() throws Exception {
+    Streams.repeat(new Thunk<Integer>() {
+      int i = 0;
+
+      public Integer value() {
+        return i++;
+      }
+    }).take(4).equiv(0, 1, 2, 3);
   }
 
 }

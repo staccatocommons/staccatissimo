@@ -60,10 +60,10 @@ public interface Collectible<A> {
   A[] toArray(@NonNull Class<? super A> clazz);
 
   /**
-   * Converts this interface in a proper {@link EmptyAware} by returning a
-   * Stream that has a side-effect-free {@link EmptyAware#isEmpty()}, that is,
-   * that will consistently return <code>true</code> or <code>false</code> as
-   * long as no other messages are sent to it. The resulting stream may not be
+   * Converts this Stream in a proper {@link EmptyAware} by returning a Stream
+   * that has a side-effect-free {@link EmptyAware#isEmpty()}, that is, that
+   * will consistently return <code>true</code> or <code>false</code> as long as
+   * no other messages are sent to it. The resulting stream may not be
    * {@link Repeatable}, though.
    * 
    * @return a Stream with a side effect {@link EmptyAware#isEmpty} method
@@ -84,8 +84,8 @@ public interface Collectible<A> {
   Stream<A> memorize();
 
   /**
-   * Forces stream elements evaluation by converting it into a new ordered one
-   * that is not lazy and that has repeatable iteration order.
+   * Forces stream elements evaluation by converting it into a new ordered
+   * stream one that is not lazy and that has repeatable iteration order.
    * 
    * @return a new {@link Stream} that retrieves elements from the next
    *         iteration of this Stream.
