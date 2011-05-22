@@ -18,8 +18,11 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -33,10 +36,12 @@ public class TuplesUnitTest {
    * Test method for {@link Tuples#curry(Function)}
    */
   @Test
-  @Ignore
   public void testCurryFunctionOfPairOfABC() {
-    // XXX
-    fail("Not yet implemented");
+    assertEquals("aaa", curry(new AbstractFunction<Pair<Integer, Character>, String>() {
+      public String apply(Pair<Integer, Character> arg) {
+        return StringUtils.repeat(arg._1().toString(), arg._0());
+      }
+    }).apply(3, 'a'));
   }
 
   /**
@@ -52,9 +57,12 @@ public class TuplesUnitTest {
    * Test method for {@link Tuples#uncurry(Function2)} .
    */
   @Test
-  @Ignore
   public void testUncurryFunction2OfABC() {
-    fail("Not yet implemented");
+    assertEquals("aaa", uncurry(new AbstractFunction2<Integer, Character, String>() {
+      public String apply(Integer arg0, Character arg1) {
+        return StringUtils.repeat(arg1.toString(), arg0);
+      }
+    }).apply(_(3, 'a')));
   }
 
   /**

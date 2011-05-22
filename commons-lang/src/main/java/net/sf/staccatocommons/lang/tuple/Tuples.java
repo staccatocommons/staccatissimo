@@ -229,6 +229,17 @@ public class Tuples {
     };
   }
 
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Currying">Uncurries</a> the given
+   * two-args {@code function}, by returning a {@link Function} that takes a
+   * single pair, being its components each of the original function parameters
+   * 
+   * @param <A>
+   * @param <B>
+   * @param <C>
+   * @param function
+   * @return a new {@link Function}
+   */
   public static <A, B, C> Function<Pair<A, B>, C> uncurry(final Function2<A, B, C> function) {
     return new AbstractFunction<Pair<A, B>, C>() {
       public C apply(Pair<A, B> argument) {
@@ -237,6 +248,17 @@ public class Tuples {
     };
   }
 
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Currying">Uncurries</a> the given
+   * two-args {@code predicate}, by returning a {@link Predicate} that takes a
+   * single pair, being its components each of the original predicate parameters
+   * 
+   * @param <A>
+   * @param <B>
+   * @param <C>
+   * @param function
+   * @return a new {@link Predicate}
+   */
   public static <A, B> Predicate<Pair<A, B>> uncurry(final Predicate2<A, B> predicate) {
     return new AbstractPredicate<Pair<A, B>>() {
       public boolean eval(Pair<A, B> argument) {
