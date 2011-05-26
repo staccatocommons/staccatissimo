@@ -26,19 +26,5 @@ Maven Integration
     </dependencies>
 +---------- 
   
- In order to do that, you will need to declare 
- the Staccato-Commons-Repository in your pom first:
 
-+-----------
-    <repositories>
-      <repository>
-         <id>staccato-commons</id>
-         <name>Staccato-Commons Repository</name>
-         <url>http://staccatocommons.sourceforge.net/maven2/</url>
-         <releases>
-            <enabled>true</enabled>
-         </releases>         
-      </repository>
-   </repositories>
-+-----------   
  
