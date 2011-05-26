@@ -21,7 +21,7 @@ Maven Integration
 * Snapshots Repository
  
  If you want to have latest but potentially unstable versions of Staccato-Commons, just add the Snapshots repository to your pom
-or settings.xmls
+or settings.xml
 
 +-----------
     <repositories>
@@ -44,7 +44,7 @@ or settings.xmls
  <<Depraceted>> <Since Staccato-Commons is in Maven Central Repo, this configuration is no longer necessary>  
 
   If you wan to have access to release before 1.0-beta-2,  you can you will need to declare the Staccato-Commons Repository first in your
-  pom o settings.xml:
+  pom or settings.xml:
   
 +-----------
     <repositories>
