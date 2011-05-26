@@ -22,7 +22,7 @@ classes you can find in {{{http://commons.apache.org/lang/}Apache Commons Lang}}
 or {{{http://code.google.com/p/guava-libraries/}Guava}}. It is by no means a conversion and validation 
 API like {{{http://commons.apache.org/validator/}Apache Commons Validator}}    
  
-Beta state 
+Beta State 
 
  Staccato-Commons-Check is currently in beta state. It should not be used in productive systems yet. 
  

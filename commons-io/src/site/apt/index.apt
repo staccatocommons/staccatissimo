@@ -15,7 +15,7 @@ About Staccato-Commons-IO
  
  Staccato-Commons-IO is the IO library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. It integrates the lang and collection library into the Java IO API, offering a bridge between FileFilter and predicates, Directories, IOStreams, object preferences and serialization managers
  
-Beta state 
+Beta State 
 
  Staccato-Commons-IO is currently in beta state. It should not be used in productive systems yet. 
  

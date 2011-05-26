@@ -19,7 +19,7 @@ About Staccato-Commons-Restrictions-Instrument
 preconditions and postconditions checks for most of check restrictions annotations, and of ensuring that
 {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/index.html}Constant}} methods effectively are.   
  
-Beta state 
+Beta State 
 
  Staccato-Commons-Restrictions-Instrument is currently in beta state. It should not be used in productive systems yet. 
  

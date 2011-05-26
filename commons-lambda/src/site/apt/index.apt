@@ -17,7 +17,7 @@ About Staccato-Commons-Lambda
 Functions and Evaluables in a DSL style, without using anonymous classes. This project is aimed to simplify higher-order programming 
 within Staccato-Commons until Java adds lambdas to its language (planned for Java 8) 
 
-Beta state 
+Beta State 
 
  Staccato-Commons-Lambda is currently in beta state. It should not be used in productive systems yet.
  

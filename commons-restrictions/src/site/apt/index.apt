@@ -17,7 +17,7 @@ About Staccato-Commons-Restrictions
 It contains annotations that express restrictions, that can be used in the form of preconditions, postconditions or invariants 
 over objects and messages, focused on documentation reuse. 
 
-Beta state 
+Beta State 
 
  Staccato-Commons-Restrictions is currently in beta state. It should not be used in productive systems yet. 
 
@@ -116,10 +116,10 @@ Beta state
 +--
 
 
-~** Defining custom restrictions
-~ 
-~ Staccato-Commons-Restriction provides many common restrictions out of the box, but there are lots of business-specific
-~ constraints not covered by it. Thus, Staccato-Commons encourages you to define your own restrictions and    
+~~ ** Defining custom restrictions
+~~ 
+~~ Staccato-Commons-Restriction provides many common restrictions out of the box, but there are lots of business-specific
+~~ constraints not covered by it. Thus, Staccato-Commons encourages you to define your own restrictions and    
  
 
 
