@@ -13,10 +13,39 @@
 
 Maven Integration
 
+* <<New!>> Staccato-Commons in Central
+ 
  The recommended way of using one or more Staccato-Commons libraries in your project is by adding 
- them as Maven2 dependences. In order to do that, you will need to declare 
- the Staccato-Commons-Repository first in your pom:
+ them as Maven2 dependences. Since 1.0-beta-2, all jars are at Maven Central Repository.
 
+* Snapshots Repository
+ 
+ If you want to have latest but potentially unstable versions of Staccato-Commons, just add the Snapshots repository to your pom
+or settings.xmls
+
++-----------
+    <repositories>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
++-----------   
+ 
+* Old internal repository
+
+ <<Depraceted>> <Since Staccato-Commons is in Maven Central Repo, this configuration is no longer necessary>  
+
+  If you wan to have access to release before 1.0-beta-2,  you can you will need to declare the Staccato-Commons Repository first in your
+  pom o settings.xml:
+  
 +-----------
     <repositories>
       <repository>

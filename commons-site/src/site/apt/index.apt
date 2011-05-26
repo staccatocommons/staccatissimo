@@ -43,7 +43,7 @@ Staccato-Commons Organization
  
  * Legato - extensions to any other frameworks that does not fall in the previous category. It is in planning state. 
  
-Main Projects 
+Projects 
 
  These are the projects currently in active development:
  
@@ -79,13 +79,11 @@ Main Projects
  * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument}staccato-commons-restrictions-instrument}} and 
 {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrumentmavenplugin}staccato-commons-restrictions-instrument-maven-plugin}} 
  
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslambda}staccato-commons-lambda}} 
+ 
+ 
  * staccato-commons-testing
      
-Planned projects
-
- These are projects that are in planning stages and are likely to be publicly available in the near future:
-   
-  * staccato-commons-types: a library that provides implementations of many type-classes defined in commons-defs. 
   
   
   
