@@ -79,6 +79,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -276,7 +277,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   public Stream<A> filterIndex(Evaluable<Integer> predicate) {
-    return null;
+    // FIXME
+    throw new NotImplementedException();
   }
 
   public Stream<A> skipIndex(int index) {

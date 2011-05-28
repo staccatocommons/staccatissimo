@@ -381,4 +381,14 @@ public class AbstractStreamBasicTest {
     assertTrue(Streams.cons(Streams.iterate(2, 4), Streams.cons(4, 4, 4)).equiv(
       Streams.cons(Streams.cons(2, 3, 4), Streams.repeat(4).take(3))));
   }
+
+  /**
+   * Tests the {@link Stream#skipIndex(int)} method
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void skipIndex() throws Exception {
+    assertFalse(Streams.cons("hello", "hola", "hallo", "ohayou").skipIndex(2).contains("hallo"));
+  }
 }
