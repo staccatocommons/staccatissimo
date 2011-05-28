@@ -70,6 +70,7 @@ import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
+import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.predicate.Predicates;
@@ -503,6 +504,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public A average(final NumberType<A> numberType) {
+    // TODO remove isEmpty test, remember that this message is not always
+    // side-effect free
     VALIDATE_ELEMENT.that(!isEmpty(), "Can not get average on an empty stream");
     class Ref {
       A val = numberType.zero();
@@ -661,34 +664,24 @@ public abstract class AbstractStream<A> implements Stream<A> {
     });
   }
 
-  // @Override
-  // public final String toString() {
-  // StringBuilder sb = new StringBuilder();
-  // try {
-  // print(sb);
-  // } catch (IOException e) {
-  // throw new AssertionError(e);
-  // }
-  // return sb.toString();
-  // }
-  // TODO
-  public String toString() {
-    return "[" + StringUtils.join(this.iterator(), ",") + "]";
-  }
-
-  // TODO joinStrings should forward to print on streams
   // TODO equiv should forward to equiv on stream objects
-  // TODO print should forward to print on streams
 
   @Override
   public final void print(java.lang.Appendable o) throws IOException {
     o.append('[');
-    o.append(this.head().toString());
-    for (A element : this.tail()) {
+    printElement(o, head());
+    for (A element : tail()) {
       o.append(", ");
-      o.append(String.valueOf(element));
+      printElement(o, element);
     }
     o.append(']');
+  }
+
+  private void printElement(java.lang.Appendable o, A element) throws IOException {
+    if (element instanceof Stream<?>)
+      ((Stream<?>) element).print(o);
+    else
+      o.append(String.valueOf(element));
   }
 
   @Override
@@ -707,12 +700,27 @@ public abstract class AbstractStream<A> implements Stream<A> {
     println(System.out);
   }
 
+  @Override
+  public final String printString() {
+    try {
+      StringBuilder sb = new StringBuilder();
+      print(sb);
+      return sb.toString();
+    } catch (IOException e) {
+      throw new AssertionError(e);
+    }
+  }
+
   private static <A> Function<A[], Iterable<A>> toIterable() {
     return new AbstractFunction<A[], Iterable<A>>() {
       public Iterable<A> apply(A[] arg) {
         return Arrays.asList(arg);
       }
     };
+  }
+
+  public final String toString() {
+    return ToString.toString(this);
   }
 
 }

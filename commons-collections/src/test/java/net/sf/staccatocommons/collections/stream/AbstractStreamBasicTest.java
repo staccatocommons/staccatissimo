@@ -38,7 +38,6 @@ import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -181,10 +180,10 @@ public class AbstractStreamBasicTest {
       .take(4)
       .equiv(4, 1, 5, 1));
 
-    assertEquals("[56,0,1]", Streams//
+    assertEquals("[56, 0, 1]", Streams//
       .cons(56, 1)
       .intersperse(0)
-      .toString());
+      .printString());
   }
 
   /**
@@ -275,13 +274,10 @@ public class AbstractStreamBasicTest {
   // TODO group by operation are poor
   /** Test for {@link AbstractStream#groupBy(Evaluable2)} */
   @Test
-  public void foo() {
-    Assert.assertEquals(
-      Arrays.asList(Arrays.asList(1, 1), Arrays.asList(2), Arrays.asList(4, 4, 4), Arrays.asList(5)),
-      new ListStream<Integer>(Arrays.asList(1, 1, 2, 4, 4, 4, 5))
-        .groupBy(Equiv.<Integer> equal())
-        .map(lambda($(Stream.class).toList()))
-        .toList());
+  public void testGroupBy() {
+    assertTrue(new ListStream<Integer>(Arrays.asList(1, 1, 2, 4, 4, 4, 5)) //
+      .groupBy(Equiv.<Integer> equal())
+      .equiv(Streams.cons(1, 1), Streams.cons(2), Streams.cons(4, 4, 4), Streams.cons(5)));
   }
 
   /**
@@ -347,9 +343,11 @@ public class AbstractStreamBasicTest {
    */
   @Test
   public void testFullCross() throws Exception {
-    assertEquals(
-      "[[1,3,5],[1,3,6],[1,4,5],[1,4,6],[2,3,5],[2,3,6],[2,4,5],[2,4,6]]",
-      Streams.cons(1, 2).fullCross(Streams.<Stream<Integer>> cons(Streams.cons(3, 4), Streams.cons(5, 6))).toString());
+    assertEquals("[[1, 3, 5], [1, 3, 6], [1, 4, 5], [1, 4, 6], [2, 3, 5], [2, 3, 6], [2, 4, 5], [2, 4, 6]]", //
+      Streams
+        .cons(1, 2)
+        .fullCross(Streams.<Stream<Integer>> cons(Streams.cons(3, 4), Streams.cons(5, 6)))
+        .printString());
   }
 
   /**
@@ -371,5 +369,16 @@ public class AbstractStreamBasicTest {
     assertTrue(Streams//
       .cons(Arrays.asList(10, 20), Arrays.asList(5, 26, 9))
       .equivOn(lambda($(Collection.class).size()), Arrays.asList(0, 0), Arrays.asList(5, 6, 96)));
+  }
+
+  /**
+   * Tests that equivalence test works on streams of streams
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void testEquivStreamOfStreams() throws Exception {
+    assertTrue(Streams.cons(Streams.iterate(2, 4), Streams.cons(4, 4, 4)).equiv(
+      Streams.cons(Streams.cons(2, 3, 4), Streams.repeat(4).take(3))));
   }
 }

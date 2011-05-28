@@ -122,6 +122,10 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  * consistent, that is, multiple invocations of those methods for same arguments
  * must return always the same value.
  * 
+ * Instead, Streams provide {@link #equiv(Iterable)} message for
+ * elements-in-order comparison, and {@link #printString()} for printing
+ * elements to an string.
+ * 
  * <h2>Concrete Streams</h2>
  * 
  * Staccato-Commnons-Collections offers several concrete implementations of

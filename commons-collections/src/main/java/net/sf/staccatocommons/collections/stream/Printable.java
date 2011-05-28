@@ -67,6 +67,6 @@ public interface Printable<A> {
    * 
    * @return a string with the stream elements
    */
-  String toString();
+  String printString();
 
 }
