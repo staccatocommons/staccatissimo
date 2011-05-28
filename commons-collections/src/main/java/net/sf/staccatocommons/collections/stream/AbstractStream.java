@@ -17,6 +17,7 @@ import static net.sf.staccatocommons.collections.stream.Streams.*;
 import static net.sf.staccatocommons.lang.Compare.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
@@ -575,7 +576,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
     return Streams.from((List<A>) reversedList);
   }
 
+  // TODO move to top level
   /***
+   * TODO pass aggregation function? This case would a particular one of
+   * groupBy(pred, concat())
+   * 
    * @param pred
    * @return a new {@link Stream}. Although the resulting stream itself is lazy,
    *         its stream elements are not.
@@ -656,9 +661,50 @@ public abstract class AbstractStream<A> implements Stream<A> {
     });
   }
 
-  @Override
+  // @Override
+  // public final String toString() {
+  // StringBuilder sb = new StringBuilder();
+  // try {
+  // print(sb);
+  // } catch (IOException e) {
+  // throw new AssertionError(e);
+  // }
+  // return sb.toString();
+  // }
+  // TODO
   public String toString() {
-    return "[" + joinStrings(",") + "]";
+    return "[" + StringUtils.join(this.iterator(), ",") + "]";
+  }
+
+  // TODO joinStrings should forward to print on streams
+  // TODO equiv should forward to equiv on stream objects
+  // TODO print should forward to print on streams
+
+  @Override
+  public final void print(java.lang.Appendable o) throws IOException {
+    o.append('[');
+    o.append(this.head().toString());
+    for (A element : this.tail()) {
+      o.append(", ");
+      o.append(String.valueOf(element));
+    }
+    o.append(']');
+  }
+
+  @Override
+  public final void print() throws IOException {
+    println(System.out);
+  }
+
+  @Override
+  public final void println(java.lang.Appendable o) throws IOException {
+    print(o);
+    o.append('\n');
+  }
+
+  @Override
+  public final void println() throws IOException {
+    println(System.out);
   }
 
   private static <A> Function<A[], Iterable<A>> toIterable() {

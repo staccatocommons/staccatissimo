@@ -83,11 +83,11 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  * named in a functional way does not mean they are pure functional. Such
  * methods will be {@link SideEffectFree} and {@link Transparent} only as long
  * as source meets certain conditions.</li>
- * <li>Operation oriented: Streams are not persistent classes, and do not
- * implement {@link Serializable}. They are normally created, used, and disposed
- * in the scope of a method execution, whenever a chain of operations over the
- * stream's source need to be performed. Thus, they should not be used as
- * attributes of long-living objects.</li>
+ * <li>Operation oriented: Streams are not value objects nor persistent classes,
+ * and do not implement {@link Serializable}. They are normally created, used,
+ * and disposed in the scope of a method execution, whenever a chain of
+ * operations over the stream's source need to be performed. Thus, they should
+ * not be used as attributes of long-living objects.</li>
  * </ul>
  * 
  * On the other hand, conditional properties are:
@@ -115,7 +115,12 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  * </ul>
  * 
  * <h2>Reference semantics</h2>
- * TODO Streams are not values.
+ * 
+ * Stream are <strong>not</strong> value objects, and they do not override
+ * {@link #equals(Object)}, {@link #hashCode()} and {@link #toString()}, as
+ * doing so would break the general intention of such methods of being
+ * consistent, that is, multiple invocations of those methods for same arguments
+ * must return always the same value.
  * 
  * <h2>Concrete Streams</h2>
  * 
@@ -153,6 +158,7 @@ public interface Stream<A> extends //
   Interscalable<A>, //
   Iterable<A>, //
   Mappable<A>, //
+  Printable<A>, //
   Reversable<A>, //
   Searchable<A>, //
   SizeAware, //
