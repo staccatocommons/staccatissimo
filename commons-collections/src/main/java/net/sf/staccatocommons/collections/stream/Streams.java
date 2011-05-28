@@ -245,11 +245,20 @@ public class Streams {
     return iterate(element, Functions.<A> identity());
   }
 
+  /**
+   * Answers an infinite Stream that indefinitely retrieves the given thunk's
+   * value.
+   * 
+   * @param <A>
+   * @param thunk
+   *          the {@link Thunk} whose value to repeat
+   * @return a new {@link Stream}
+   */
   @NonNull
   @Projection
   @ForceRestrictions
-  public static <A> Stream<A> repeat(@NonNull Thunk<A> factory) {
-    return iterate(factory.value(), Functions.constant(factory));
+  public static <A> Stream<A> repeat(@NonNull Thunk<A> thunk) {
+    return iterate(thunk.value(), Functions.constant(thunk));
   }
 
   // private static <A> Stream<A> cycle(@NonNull A element) {
