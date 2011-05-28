@@ -27,4 +27,7 @@ public abstract class NextThriterator<A> extends AbstractThriterator<A> {
   public final A current() {
     return next;
   }
+
+  // FIXME BUGGY, current will not be updated if next is called externally
+  // FIXME BUGGY, may hasNext change current value?
 }

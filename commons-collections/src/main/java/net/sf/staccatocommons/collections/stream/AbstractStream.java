@@ -41,6 +41,7 @@ import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropWhileStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.FilterIndexStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FilterStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FlatMapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.GroupByStream;
@@ -79,7 +80,6 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -122,7 +122,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   public Stream<A> skip(A element) {
-    return filter(Predicates.equal(element));
+    return filter(Predicates.equal(element).not());
   }
 
   @Override
@@ -276,13 +276,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
     return iter.current();
   }
 
-  public Stream<A> filterIndex(Evaluable<Integer> predicate) {
-    // FIXME
-    throw new NotImplementedException();
+  public final Stream<A> filterIndex(Evaluable<Integer> predicate) {
+    return new FilterIndexStream<A>(this, predicate);
   }
 
-  public Stream<A> skipIndex(int index) {
-    return filterIndex(Predicates.equal(index));
+  public final Stream<A> skipIndex(int index) {
+    return filterIndex(Predicates.equal(index).not());
   }
 
   @Override
