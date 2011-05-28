@@ -84,7 +84,7 @@ by decorating other Iterables  or using sources like databases result sets, dire
 
 +----
     Collection<Incident> getMostUrgentProblems2() {
-        return Streams.from(services).filter(new Predicate<Service>() {
+        return Streams.from(services).filter(new AbstractPredicate<Service>() {
             public boolean eval(Service argument) {
                 return argument.isDown();
             }
@@ -175,7 +175,7 @@ by decorating other Iterables  or using sources like databases result sets, dire
     Streams
       .from(buyers)
       .cross(Streams.from(products))
-      .all(new Predicate<Pair<Buyer, Product>>() {
+      .all(new AsbtractPredicate<Pair<Buyer, Product>>() {
           public boolean eval(Pair<Buyer, Product> p) {
               return p.first().buys(p.second());
           }

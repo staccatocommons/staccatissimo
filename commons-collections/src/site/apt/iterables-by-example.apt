@@ -66,7 +66,7 @@ Iterables by example
   
 +---
  Collection<Service> getDownServices() { 
-  return Iterables.filter(services, new Predicate<Service>() {
+  return Iterables.filter(services, new AbstractPredicate<Service>() {
     public boolean eval(Service service) {
      return service.isDown();
     }}); 
