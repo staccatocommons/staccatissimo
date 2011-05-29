@@ -44,7 +44,6 @@ public class Predicates {
    * @param <T>
    * @return A {@link AbstractPredicate} that always returns <code>true</code>
    */
-  @NonNull
   @Constant
   public static <T> Predicate<T> true_() {
     return True.getInstance();
@@ -54,7 +53,6 @@ public class Predicates {
    * @param <T>
    * @return A {@link AbstractPredicate} that always returns <code>false</code>
    */
-  @NonNull
   @Constant
   public static <T> Predicate<T> false_() {
     return False.getInstance();
@@ -70,7 +68,6 @@ public class Predicates {
    * @param <T>
    * @return A constant {@link AbstractPredicate}
    */
-  @NonNull
   @Constant
   public static <T> Predicate<T> notNull() {
     return NullPredicates.notNull();
@@ -82,7 +79,6 @@ public class Predicates {
    * @param <T>
    * @return A singleton {@link AbstractPredicate}
    */
-  @NonNull
   @Constant
   public static <T> Predicate<T> null_() {
     return NullPredicates.null_();

@@ -56,7 +56,6 @@ public class NumberTypes {
    * @return a {@link BigDecimal} numberType
    */
   @Constant
-  @NonNull
   public static NumberType<BigDecimal> bigDecimal() {
     return BigDecimalType.TYPE;
   }
@@ -73,7 +72,6 @@ public class NumberTypes {
    * @return a {@link BigInteger} numberType
    */
   @Constant
-  @NonNull
   public static NumberType<BigInteger> bigInteger() {
     return BigIntegerType.TYPE;
   }
@@ -84,7 +82,6 @@ public class NumberTypes {
    * @return a {@link Double} numberType
    */
   @Constant
-  @NonNull
   public static NumberType<Double> double_() {
     return DoubleType.TYPE;
   }
@@ -95,7 +92,6 @@ public class NumberTypes {
    * @return a {@link Float} numberType
    */
   @Constant
-  @NonNull
   public static NumberType<Float> float_() {
     return FloatType.TYPE;
   }
@@ -106,7 +102,6 @@ public class NumberTypes {
    * @return a {@link BigInteger} numberType
    */
   @Constant
-  @NonNull
   public static NumberType<Integer> integer() {
     return IntegerType.TYPE;
   }
@@ -117,7 +112,6 @@ public class NumberTypes {
    * @return a {@link Long} numberType
    */
   @Constant
-  @NonNull
   public static NumberType<Long> long_() {
     return LongType.TYPE;
   }

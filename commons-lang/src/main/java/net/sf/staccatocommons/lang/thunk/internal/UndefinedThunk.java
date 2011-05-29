@@ -14,7 +14,6 @@ package net.sf.staccatocommons.lang.thunk.internal;
 
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.restrictions.Constant;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
@@ -34,7 +33,6 @@ public class UndefinedThunk<A> implements Thunk<A> {
    * @return a {@link Constant} {@link UndefinedThunk}
    */
   @Constant
-  @NonNull
   public static <A> Thunk<A> undefined() {
     return new UndefinedThunk<A>();
   }

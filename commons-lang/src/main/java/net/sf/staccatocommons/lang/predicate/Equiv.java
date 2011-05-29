@@ -42,7 +42,6 @@ public class Equiv {
    * @param <A>
    * @return a constant {@link Predicate2} that performs an equality test
    */
-  @NonNull
   @Constant
   public static <A> Predicate2<A, A> equal() {
     return EqualTest.<A> equalTest();
@@ -55,7 +54,6 @@ public class Equiv {
    * @param <A>
    * @return a constant {@link Predicate2} that performs an identity test
    */
-  @NonNull
   @Constant
   public static <A> Predicate2<A, A> same() {
     return SameTest.<A> same();
@@ -68,7 +66,6 @@ public class Equiv {
    * @param <A>
    * @return <code>Equiv.equal().nullSafe()</code>
    */
-  @NonNull
   @Constant
   public static <A> Predicate2<A, A> equalNullSafe() {
     return Equiv.<A> equal().nullSafe();
@@ -82,7 +79,6 @@ public class Equiv {
    * @param <A>
    * @return a constant {@link Predicate2} that performs a compare test
    */
-  @NonNull
   @Constant
   public static <A extends Comparable<A>> Predicate2<A, A> compare() {
     return CompareTest.<A> compareTest();

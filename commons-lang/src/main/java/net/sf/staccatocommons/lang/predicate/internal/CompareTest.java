@@ -15,7 +15,6 @@ package net.sf.staccatocommons.lang.predicate.internal;
 
 import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.restrictions.Constant;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
@@ -33,7 +32,6 @@ public final class CompareTest<A extends Comparable<A>> extends AbstractEquiv<A>
   /**
    * @return a constant instance
    */
-  @NonNull
   @Constant
   public static <A extends Comparable<A>> Predicate2<A, A> compareTest() {
     return new CompareTest();

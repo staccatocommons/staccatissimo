@@ -89,7 +89,6 @@ public class Functions {
    * @param <A>
    * @return the constant identity function
    */
-  @NonNull
   @Constant
   public static <A> Function<A, A> identity() {
     return IdentityFunction.identity();

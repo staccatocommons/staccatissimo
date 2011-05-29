@@ -102,7 +102,6 @@ public class Strings {
    * @param <A>
    * @return a function that returns <code>arg.toString()</code>
    */
-  @NonNull
   @Constant
   public static <A> Function<A, String> toString_() {
     return new AbstractFunction<A, String>() {

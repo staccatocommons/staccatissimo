@@ -58,7 +58,6 @@ public class Thunks {
    * @param <A>
    * @return a constant thunk of nulls
    */
-  @NonNull
   @Constant
   public static <A> Thunk<A> null_() {
     return NullThunk.null_();
@@ -69,7 +68,6 @@ public class Thunks {
    * 
    * @return a constant thunk that provides <code>new Date()</code>
    */
-  @NonNull
   @Constant
   public static Thunk<Date> currentDate() {
     return DateThunk.INSTANCE;
@@ -95,7 +93,6 @@ public class Thunks {
    * @param <A>
    * @return a {@link Constant} undefined thunk
    */
-  @NonNull
   @Constant
   public static <A> Thunk<A> undefined() {
     return UndefinedThunk.undefined();
@@ -126,7 +123,6 @@ public class Thunks {
    * @return a constant {@link Function}
    */
   @Constant
-  @NonNull
   public static <A> Function<Thunk<A>, A> value() {
     return new AbstractFunction<Thunk<A>, A>() {
       public A apply(Thunk<A> arg) {

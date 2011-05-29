@@ -353,7 +353,6 @@ public class Compare {
    * @return a natural {@link Comparator}
    */
   @Constant
-  @NonNull
   public static <A extends Comparable<A>> Comparator<A> natural() {
     return NaturalComparator.natural();
   }

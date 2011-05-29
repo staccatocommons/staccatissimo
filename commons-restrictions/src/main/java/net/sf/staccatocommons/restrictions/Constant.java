@@ -18,6 +18,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
 import net.sf.staccatocommons.restrictions.effect.Transparent;
 
@@ -31,6 +32,10 @@ import net.sf.staccatocommons.restrictions.effect.Transparent;
  * practice this is a bug source. Thus, {@link Constant} annotated methods
  * <strong>must</strong> be {@link Transparent}, and they do not need to be
  * annotated with that annotation too, as it is implied.
+ * </p>
+ * <p>
+ * Constant methods <strong>must</strong> be not null, thus they do not need to
+ * be annotated as {@link NonNull}, as it is implied
  * </p>
  * 
  * @author flbulgarelli

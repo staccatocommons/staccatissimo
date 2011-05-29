@@ -16,7 +16,6 @@ import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.restrictions.Constant;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
@@ -39,7 +38,6 @@ public final class SameTest<A> extends AbstractEquiv<A> {
    * 
    * @return a constant {@link SameTest}
    */
-  @NonNull
   @Constant
   public static <A> Predicate2<A, A> same() {
     return new SameTest();

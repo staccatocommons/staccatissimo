@@ -42,7 +42,6 @@ public class Tuples {
    * @return a constant function
    */
   @Constant
-  @NonNull
   public static <A> Function<Tuple.FirstAware<A>, A> first() {
     return new AbstractFunction<Tuple.FirstAware<A>, A>() {
       public A apply(Tuple.FirstAware<A> arg) {
@@ -61,7 +60,6 @@ public class Tuples {
    * @return a constant function
    */
   @Constant
-  @NonNull
   public static <A> Function<Tuple.FirstAware<A>, A> first(Class<A> clazz) {
     // XXX remove?
     return first();
@@ -75,7 +73,6 @@ public class Tuples {
    * @return a constant function
    */
   @Constant
-  @NonNull
   public static <A> Function<Tuple.SecondAware<A>, A> second() {
     return new AbstractFunction<Tuple.SecondAware<A>, A>() {
       public A apply(Tuple.SecondAware<A> arg) {
@@ -106,7 +103,6 @@ public class Tuples {
    * @return a constant function
    */
   @Constant
-  @NonNull
   public static <A> Function<ThirdAware<A>, A> third() {
     return new AbstractFunction<Tuple.ThirdAware<A>, A>() {
       public A apply(Tuple.ThirdAware<A> arg) {
@@ -123,7 +119,6 @@ public class Tuples {
    * @return a constant function
    */
   @Constant
-  @NonNull
   public static <A> Function<FourthAware<A>, A> fourth() {
     return new AbstractFunction<FourthAware<A>, A>() {
       public A apply(FourthAware<A> arg) {

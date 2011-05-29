@@ -17,7 +17,6 @@ import java.util.NoSuchElementException;
 import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.Constant;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * An iterator that retrieves no elements. Calling {@link #hasNext()} will
@@ -54,7 +53,6 @@ public final class EmptyThriterator<T> extends AbstractThriterator<T> {
    *          the type of the iterator element
    * @return the singleton instance
    */
-  @NonNull
   @Constant
   public static <T> Thriterator<T> empty() {
     return new EmptyThriterator();

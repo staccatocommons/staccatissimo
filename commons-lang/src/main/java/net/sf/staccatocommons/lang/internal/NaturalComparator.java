@@ -16,7 +16,6 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 import net.sf.staccatocommons.restrictions.Constant;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
@@ -36,7 +35,6 @@ public class NaturalComparator<A extends Comparable<A>> implements Comparator<A>
    * @param <A>
    * @return a natural comparator
    */
-  @NonNull
   @Constant
   public static <A extends Comparable<A>> Comparator<A> natural() {
     return new NaturalComparator();

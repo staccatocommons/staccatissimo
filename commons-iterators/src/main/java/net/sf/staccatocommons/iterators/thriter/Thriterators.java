@@ -37,7 +37,6 @@ public class Thriterators {
    * @param <A>
    * @return a constant empty {@link Thriterator}
    */
-  @NonNull
   @Constant
   public static <A> Thriterator<A> empty() {
     return EmptyThriterator.empty();

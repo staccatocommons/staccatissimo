@@ -394,7 +394,6 @@ public class Streams {
    *          the element type
    * @return a singleton empty {@link Stream}
    */
-  @NonNull
   @Constant
   @Repeatable
   public static <A> Stream<A> empty() {
@@ -409,7 +408,6 @@ public class Streams {
    * @return a single elemtn Stream that throws an exception when accessing its
    *         only element
    */
-  @NonNull
   @Constant
   public static <A> Stream<A> undefined() {
     return UndefinedStream.undefined();
