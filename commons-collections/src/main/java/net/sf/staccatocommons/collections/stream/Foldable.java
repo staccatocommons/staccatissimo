@@ -126,8 +126,9 @@ public interface Foldable<A> {
    * 
    * @param numberType
    * @return the average of the stream elements
-   * @throws NoSuchElementException
-   *           if the stream is empty
+   * @throws ArithmeticException
+   *           if the stream is empty and number type does not support zero
+   *           division
    */
   A average(@NonNull NumberType<A> numberType) throws NoSuchElementException;
 
@@ -136,8 +137,9 @@ public interface Foldable<A> {
    * {@link NumberTypeAware}.
    * 
    * @return the average of the stream elements
-   * @throws NoSuchElementException
-   *           if the stream is empty
+   * @throws ArithmeticException
+   *           if the stream is empty and number type does not support zero
+   *           division
    * @throws ClassCastException
    *           if the source is not an implicit number type
    * @see #average(NumberType)

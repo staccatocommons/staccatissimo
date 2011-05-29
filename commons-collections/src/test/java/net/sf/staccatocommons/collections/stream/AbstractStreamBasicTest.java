@@ -90,9 +90,9 @@ public class AbstractStreamBasicTest {
   }
 
   /** Test for {@link Stream#average()} **/
-  @Test(expected = NoSuchElementException.class)
+  @Test(expected = ArithmeticException.class)
   public void testAvgEmptyStream() throws Exception {
-    Streams.<Double> cons().average(double_());
+    Streams.<Integer> cons().average(integer());
   }
 
   /**

@@ -147,8 +147,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
-    VALIDATE_ELEMENT.that(!isEmpty(), "Can not reduce an empty stream");
-    return Iterables.reduce(this, function);
+    try {
+      return Iterables.reduce(this, function);
+    } catch (IllegalArgumentException e) {
+      return VALIDATE_ELEMENT.fail("Can not reduce an empty stream");
+    }
   }
 
   @Override
@@ -463,14 +466,18 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public Stream<A> tail() {
+    // FIXME
     VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams have not tail");
     return drop(1);
   }
 
   @Override
   public A head() {
-    VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams have not head");
-    return first();
+    try {
+      return first();
+    } catch (IndexOutOfBoundsException e) {
+      return VALIDATE_ELEMENT.fail("Empty streams have no head");
+    }
   }
 
   @ForceRestrictions
@@ -505,9 +512,6 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public A average(final NumberType<A> numberType) {
-    // TODO remove isEmpty test, remember that this message is not always
-    // side-effect free
-    VALIDATE_ELEMENT.that(!isEmpty(), "Can not get average on an empty stream");
     class Ref {
       A val = numberType.zero();
     }
@@ -572,10 +576,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   public Stream<A> reverse() {
-    if (this.isEmpty())
+    Stream<A> source = this.toEmptyAware();
+    if (source.isEmpty())
       return Streams.empty();
     LinkedList<A> reversedList = new LinkedList<A>();
-    for (A element : this)
+    for (A element : source)
       reversedList.addFirst(element);
     return Streams.from((List<A>) reversedList);
   }
