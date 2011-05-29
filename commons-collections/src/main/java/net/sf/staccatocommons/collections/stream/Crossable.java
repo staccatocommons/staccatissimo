@@ -27,7 +27,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public interface Crossable<A> {
 
   /**
-   * Answers the Cartesian product of this stream and itseld
+   * Answers the Cartesian product of this stream and itself
    * 
    * @param other
    * @return a new {@link Stream} projection
@@ -72,4 +72,8 @@ public interface Crossable<A> {
   @NonNull
   @Projection
   Stream<Stream<A>> fullCross(@NonNull Stream<Stream<A>> streamOfStreams);
+
+  // TODO rename cross() to selfCross?
+  // TODO fullCross to genericCross?
+
 }
