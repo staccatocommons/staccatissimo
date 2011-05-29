@@ -37,7 +37,6 @@ public interface Appendable<A> {
    * @param other
    * @return a new {@link Stream}
    */
-  @NonNull
   @Projection
   @Conditionally(Repeatable.class)
   Stream<A> append(@NonNull Iterable<A> other);
@@ -51,7 +50,6 @@ public interface Appendable<A> {
    * @see Streams#undefined()
    */
 
-  @NonNull
   @Projection
   @Conditionally(Repeatable.class)
   Stream<A> appendUndefined();
@@ -63,7 +61,6 @@ public interface Appendable<A> {
    * @return a new {@link Stream} that retrieves this {@link Stream} elements,
    *         and then, the given <code>element</code>
    */
-  @NonNull
   @Projection
   @Conditionally(Repeatable.class)
   Stream<A> append(A element);
@@ -75,7 +72,6 @@ public interface Appendable<A> {
    * @return a new {@link Stream} that retrieves this {@link Stream} elements,
    *         and then, the value of the given <code>thunk</code>
    */
-  @NonNull
   @Projection
   @Conditionally(Repeatable.class)
   Stream<A> append(@NonNull Thunk<A> thunk);
@@ -87,7 +83,6 @@ public interface Appendable<A> {
    * @return a new {@link Stream} that retrieves the given <code>element</code>,
    *         and then, this {@link Stream} elements.
    */
-  @NonNull
   @Projection
   @Conditionally(Repeatable.class)
   Stream<A> prepend(A element);
@@ -99,7 +94,6 @@ public interface Appendable<A> {
    * @return a new {@link Stream} that retrieves the value of the given
    *         <code>thunk</code>, and then, this {@link Stream} elements.
    */
-  @NonNull
   @Projection
   @Conditionally(Repeatable.class)
   Stream<A> prepend(@NonNull Thunk<A> thunk);

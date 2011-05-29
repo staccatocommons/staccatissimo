@@ -37,11 +37,9 @@ public interface Filterable<A> {
    * @return a new {@link Stream} projection that will retrieve only elements
    *         that evaluate to true
    */
-  @NonNull
   @Projection
   Stream<A> filter(@NonNull Evaluable<? super A> predicate);
 
-  @NonNull
   @Projection
   Stream<A> skip(@NonNull A element);
 
@@ -52,7 +50,6 @@ public interface Filterable<A> {
    * @return a new {@link Stream} projection that will retrieve all elements
    *         from this stream, as long as none of them evaluates to false.
    */
-  @NonNull
   @Projection
   Stream<A> takeWhile(@NonNull Evaluable<? super A> predicate);
 
@@ -64,7 +61,6 @@ public interface Filterable<A> {
    * @param amountOfElements
    * @return a new {@link Stream} projection that will retrieve up to N elements
    */
-  @NonNull
   @Projection
   Stream<A> take(@NotNegative int amountOfElements);
 
@@ -75,7 +71,6 @@ public interface Filterable<A> {
    * @return a new {@link Stream} projection that will skip all elements as long
    *         as they satisfy the given {@link Evaluable}
    */
-  @NonNull
   @Projection
   Stream<A> dropWhile(@NonNull Evaluable<? super A> predicate);
 
@@ -89,7 +84,6 @@ public interface Filterable<A> {
    * @return a new {@link Stream} that discards up to the given
    *         <code>amountOfElements</code>
    */
-  @NonNull
   @Projection
   Stream<A> drop(@NotNegative int amountOfElements);
 

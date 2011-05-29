@@ -81,7 +81,6 @@ public interface Deconstructable<A> {
    * @throws NoSuchElementException
    *           if stream is empty
    */
-  @NonNull
   @Projection
   Stream<A> tail();
 

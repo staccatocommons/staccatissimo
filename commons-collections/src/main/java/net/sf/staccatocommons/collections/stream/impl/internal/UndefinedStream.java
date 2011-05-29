@@ -18,7 +18,6 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.restrictions.Constant;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
@@ -38,7 +37,6 @@ public final class UndefinedStream<A> extends AbstractStream<A> {
    * @param <A>
    * @return a undefined {@link Stream}
    */
-  @NonNull
   @Constant
   public static <A> Stream<A> undefined() {
     return INSTANCE;

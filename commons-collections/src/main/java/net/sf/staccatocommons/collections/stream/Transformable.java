@@ -36,7 +36,6 @@ public interface Transformable<A> {
    * @return a new stream that will retrieve elements from the result of
    *         applying the given function to this stream
    */
-  @NonNull
   @Projection
   <B> Stream<B> transform(@NonNull Applicable<Stream<A>, ? extends Stream<B>> function);
 
@@ -55,7 +54,6 @@ public interface Transformable<A> {
    *         applying the given function to this stream
    * @see #decons()
    */
-  @NonNull
   @Projection
   <B> Stream<B> transform(@NonNull DeconsApplicable<A, B> function);
 
@@ -75,7 +73,6 @@ public interface Transformable<A> {
    *         applying the given function to this stream
    * @see #delayedDecons()
    */
-  @NonNull
   @Projection
   <B> Stream<B> transform(@NonNull DelayedDeconsApplicable<A, B> function);
 

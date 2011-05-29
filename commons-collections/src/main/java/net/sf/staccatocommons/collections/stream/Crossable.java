@@ -33,7 +33,6 @@ public interface Crossable<A> {
    * @return a new {@link Stream} projection
    * @see Iterables#cross(Iterable, Iterable)
    */
-  @NonNull
   @Projection
   Stream<Pair<A, A>> cross();
 
@@ -45,7 +44,6 @@ public interface Crossable<A> {
    * @return a new {@link Stream} projection
    * @see Iterables#cross(Iterable, Iterable)
    */
-  @NonNull
   @Projection
   <B> Stream<Pair<A, B>> cross(@NonNull Stream<B> other);
 
@@ -58,7 +56,6 @@ public interface Crossable<A> {
    * @return <code>cross(Streams.from(other))</code>
    * @see #cross(Stream)
    */
-  @NonNull
   @Projection
   <B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other);
 
@@ -69,7 +66,6 @@ public interface Crossable<A> {
    * @param streamOfStreams
    * @return a new {@link Stream} projection
    */
-  @NonNull
   @Projection
   Stream<Stream<A>> fullCross(@NonNull Stream<Stream<A>> streamOfStreams);
 

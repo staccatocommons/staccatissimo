@@ -20,6 +20,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * {@link Projection} annotates {@link Stream} methods that return without
@@ -34,6 +35,9 @@ import net.sf.staccatocommons.collections.stream.Stream;
  * Such methods do also work with very large o potentially infinte streams -
  * being the transformations applied on demand, it is not necessary to have the
  * whole bunch of element in memory at the same time.
+ * 
+ * {@link Projection} <strong>must</strong> be non null, so there is no need to
+ * annotate them as {@link NonNull}, as it is implied.
  * 
  * @author flbulgarelli
  */

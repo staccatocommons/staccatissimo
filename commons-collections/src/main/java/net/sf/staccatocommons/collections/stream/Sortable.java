@@ -30,7 +30,6 @@ public interface Sortable<A> {
    * 
    * @return a new {@link Stream}
    */
-  @NonNull
   @Projection
   Stream<A> sort();
 
@@ -41,7 +40,6 @@ public interface Sortable<A> {
    * @return a new {@link Stream}
    */
   @Projection
-  @NonNull
   Stream<A> sortBy(@NonNull Comparator<A> comparator);
 
   /**
@@ -52,7 +50,6 @@ public interface Sortable<A> {
    * @return a new {@link Stream}
    */
   @Projection
-  @NonNull
   <B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function);
 
   /**

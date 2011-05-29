@@ -35,7 +35,6 @@ public interface Mappable<A> {
    * @return a new {@link Stream} projection that will retrieve the result of
    *         applying the given function to each element
    */
-  @NonNull
   @Projection
   <B> Stream<B> map(@NonNull Function<? super A, ? extends B> function);
 
@@ -48,7 +47,6 @@ public interface Mappable<A> {
    * @return a new {@link Stream} that will retrieve the result of transforming
    *         each element and concatenating those transformations
    */
-  @NonNull
   @Projection
   <B> Stream<B> flatMap(@NonNull Function<? super A, ? extends Iterable<? extends B>> function);
 
@@ -61,7 +59,6 @@ public interface Mappable<A> {
    * @return a new {@link Stream} that will retrieve the result of transforming
    *         each element and concatenating those trsansformations
    */
-  @NonNull
   @Projection
   <B> Stream<B> flatMapArray(@NonNull Function<? super A, ? extends B[]> function);
 }

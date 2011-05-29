@@ -50,7 +50,6 @@ public interface Zippeable<A> {
    *         and <code>iterable</code> are
    * @see Iterables#zip(Iterable, Iterable)
    */
-  @NonNull
   @Projection
   <B, C> Stream<C> zip(@NonNull Iterable<B> iterable, Function2<A, B, C> function);
 
@@ -72,7 +71,6 @@ public interface Zippeable<A> {
    * @see Iterables#zip(Iterable, Iterable)
    * @see #zip(Iterable, Function2)
    */
-  @NonNull
   @Projection
   <B> Stream<Pair<A, B>> zip(@NonNull Iterable<B> iterable);
 

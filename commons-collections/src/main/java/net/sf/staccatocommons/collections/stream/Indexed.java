@@ -105,7 +105,6 @@ public interface Indexed<A> {
    * @return a new {@link Stream} projection that will retrieve only elements
    *         whose index evaluate to true
    */
-  @NonNull
   @Projection
   Stream<A> filterIndex(@NonNull Evaluable<Integer> predicate);
 
@@ -116,7 +115,6 @@ public interface Indexed<A> {
    * @param predicate
    * @return a new {@link Stream} that skips the element at the given index
    */
-  @NonNull
   @Projection
   Stream<A> skipIndex(int index);
 

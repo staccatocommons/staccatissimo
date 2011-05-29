@@ -72,7 +72,6 @@ public class Streams {
    * @param tail
    * @return a new {@link Stream}
    */
-  @NonNull
   @Projection
   @Conditionally(Repeatable.class)
   public static <A> Stream<A> cons(final Thunk<A> head, @NonNull final Stream<? extends A> tail) {
@@ -94,7 +93,6 @@ public class Streams {
    * @param tail
    * @return a new {@link Stream}
    */
-  @NonNull
   @Projection
   @Conditionally(Repeatable.class)
   public static <A> Stream<A> cons(final A head, @NonNull final Stream<? extends A> tail) {
@@ -112,7 +110,6 @@ public class Streams {
    *          the array that is Stream source
    * @return a new stream that gets its elements from an array
    */
-  @NonNull
   @Repeatable
   @Projection
   public static <A> Stream<A> cons(@NonNull A... elements) {
@@ -131,7 +128,6 @@ public class Streams {
    * 
    * @see Thunk#value()
    */
-  @NonNull
   @Projection
   @Repeatable
   public static <A> Stream<A> cons(Thunk<A> element) {
@@ -146,7 +142,6 @@ public class Streams {
    *          the single element the new {@link Stream} will retrieve
    * @return a new {@link Stream}
    */
-  @NonNull
   @Repeatable
   @Projection
   public static <A> Stream<A> cons(A element) {
@@ -167,7 +162,6 @@ public class Streams {
    * @return a new {@link Stream}
    * @see Sequence#from(Object, Applicable, Evaluable)
    */
-  @NonNull
   @Projection
   public static <A> Stream<A> iterate(@NonNull A seed, @NonNull Applicable<? super A, ? extends A> generator) {
     return from(Sequence.from(seed, generator, StopConditions.stopNever()));
@@ -187,7 +181,6 @@ public class Streams {
    * @return a new {@link Stream}
    * @see Sequence#from(Object, Applicable, Evaluable)
    */
-  @NonNull
   @Projection
   public static <A> Stream<A> iterateUntilNull(@NonNull A seed, @NonNull Applicable<? super A, ? extends A> generator) {
     return from(Sequence.from(seed, generator, Predicates.null_()));
@@ -209,7 +202,6 @@ public class Streams {
    * @return a new {@link Stream}
    * @see Sequence#from(Object, Applicable, Evaluable)
    */
-  @NonNull
   @Projection
   public static <A> Stream<A> iterate(@NonNull A start, @NonNull Applicable<A, A> generator,
     @NonNull Evaluable<A> stopCondition) {
@@ -226,7 +218,6 @@ public class Streams {
    *          the stop value
    * @return a new {@link Stream}
    */
-  @NonNull
   @Projection
   public static Stream<Integer> iterate(int start, int stop) {
     return from(Sequence.fromTo(start, stop));
@@ -239,7 +230,6 @@ public class Streams {
    * @param element
    * @return a new {@link Stream} that repeats the given element
    */
-  @NonNull
   @Projection
   public static <A> Stream<A> repeat(A element) {
     return iterate(element, Functions.<A> identity());
@@ -254,7 +244,6 @@ public class Streams {
    *          the {@link Thunk} whose value to repeat
    * @return a new {@link Stream}
    */
-  @NonNull
   @Projection
   @ForceRestrictions
   public static <A> Stream<A> repeat(@NonNull Thunk<A> thunk) {
@@ -276,7 +265,6 @@ public class Streams {
    * @return the given iterable, if it is {@link Stream}, a new stream that
    *         wraps it, otherwise
    */
-  @NonNull
   @Projection
   @Conditionally(Repeatable.class)
   public static <A> Stream<A> from(@NonNull Iterable<? extends A> iterable) {
@@ -293,7 +281,6 @@ public class Streams {
    *          source of the the new {@link Stream}
    * @return a new {@link Stream}
    */
-  @NonNull
   @Projection
   public static <A> Stream<A> from(@NonNull Iterator<? extends A> iterator) {
     return new IteratorStream<A>(iterator);
@@ -309,7 +296,6 @@ public class Streams {
    *          source of the new {@link Stream}
    * @return a new {@link Stream}
    */
-  @NonNull
   @Projection
   public static <A> Stream<A> from(@NonNull Enumeration<? extends A> enumeration) {
     return from(new EnumerationIterator<A>(enumeration));
@@ -323,7 +309,6 @@ public class Streams {
    *          source of the of characters of the new Stream
    * @return a new {@link Stream}
    */
-  @NonNull
   @Repeatable
   @Projection
   public static Stream<Character> from(@NonNull final CharSequence charSequence) {
@@ -339,7 +324,6 @@ public class Streams {
    *          source of the new {@link Stream}
    * @return a new {@link Stream}
    */
-  @NonNull
   @Repeatable
   @Projection
   public static <A> Stream<A> from(@NonNull Collection<? extends A> collection) {
@@ -357,7 +341,6 @@ public class Streams {
    *          the source of the new {@link Stream}
    * @return a new {@link Stream}
    */
-  @NonNull
   @Repeatable
   @Projection
   public static <A> Stream<A> from(@NonNull List<? extends A> list) {
