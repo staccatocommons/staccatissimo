@@ -34,7 +34,6 @@ import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
-import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendIterableStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
@@ -331,11 +330,6 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   @Override
-  public Stream<A> toEmptyAware() {
-    return new IteratorStream<A>(iterator());
-  }
-
-  @Override
   public A[] toArray(Class<? super A> clazz) {
     return toArray(clazz, toList());
   }
@@ -576,11 +570,10 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   public Stream<A> reverse() {
-    Stream<A> source = this.toEmptyAware();
-    if (source.isEmpty())
+    if (this.isEmpty())
       return Streams.empty();
     LinkedList<A> reversedList = new LinkedList<A>();
-    for (A element : source)
+    for (A element : this)
       reversedList.addFirst(element);
     return Streams.from((List<A>) reversedList);
   }

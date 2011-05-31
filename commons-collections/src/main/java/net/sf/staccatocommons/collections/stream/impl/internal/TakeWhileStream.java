@@ -18,8 +18,6 @@ import java.util.Iterator;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.iterators.NextGetIterator;
-import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -27,7 +25,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public final class TakeWhileStream<A> extends WrapperStream<A> {
+public final class TakeWhileStream<A> extends NextGetWrapperStream<A> {
   private final Evaluable<? super A> predicate;
 
   /**
@@ -39,14 +37,14 @@ public final class TakeWhileStream<A> extends WrapperStream<A> {
   }
 
   @Override
-  public Thriterator<A> iterator() {
+  public Iterator<A> nextGetIterator() {
     final Iterator<A> iter = getSource().iterator();
-    return Thriterators.from(new NextGetIterator<A>() {
+    return new NextGetIterator<A>() {
       @Override
       protected boolean updateNext() {
         return iter.hasNext() && predicate.eval(setNext(iter.next()));
       }
-    });
+    };
   }
 
   @Override

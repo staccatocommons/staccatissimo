@@ -81,10 +81,4 @@ public class PrependStream<A> extends WrapperStream<A> {
   protected final Thriterator<? extends A> tailIterator() {
     return getSource().iterator();
   }
-
-  @Override
-  public final Stream<A> toEmptyAware() {
-    return this;
-  }
-
 }

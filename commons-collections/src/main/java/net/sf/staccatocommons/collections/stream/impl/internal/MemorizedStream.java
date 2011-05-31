@@ -45,11 +45,6 @@ public class MemorizedStream<A> extends WrapperStream<A> {
   }
 
   @Override
-  public Stream<A> toEmptyAware() {
-    return this;
-  }
-
-  @Override
   public Stream<A> memorize() {
     return this;
   }

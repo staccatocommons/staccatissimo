@@ -55,7 +55,7 @@ public final class ConsStream<A> extends DelayedPrependStream<A> {
           throw new NoSuchElementException();
         Pair<Thunk<A>, Stream<A>> decons = next.delayedDecons();
         current = decons.first();
-        next = decons.second().toEmptyAware();
+        next = decons.second();
         hasNext = !next.isEmpty();
       }
 

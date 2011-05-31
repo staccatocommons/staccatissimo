@@ -218,12 +218,8 @@ public abstract class StreamTheories {
 
   /** Tests that if **/
   @Theory
-  public void toEmptyAwareMakesIsEmptyRepeatable(Stream<?> stream) throws Exception {
-    assertTrue(Streams
-      .repeat(stream.toEmptyAware())
-      .map(lambda((Boolean) $(EmptyAware.class).isEmpty()))
-      .take(10)
-      .allEquiv());
+  public void emptyIsAlwaysConsistent(Stream<?> stream) throws Exception {
+    assertTrue(Streams.repeat(stream).map(lambda((Boolean) $(EmptyAware.class).isEmpty())).take(10).allEquiv());
   }
 
   /** Tests that memorizing grants repeatable iteration order */

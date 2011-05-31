@@ -19,7 +19,6 @@ import java.util.Set;
 
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.collections.restrictions.Repeatable;
-import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -58,18 +57,6 @@ public interface Collectible<A> {
    */
   @NonNull
   A[] toArray(@NonNull Class<? super A> clazz);
-
-  /**
-   * Converts this Stream in a proper {@link EmptyAware} by returning a Stream
-   * that has a side-effect-free {@link EmptyAware#isEmpty()}, that is, that
-   * will consistently return <code>true</code> or <code>false</code> as long as
-   * no other messages are sent to it. The resulting stream may not be
-   * {@link Repeatable}, though.
-   * 
-   * @return a Stream with a side effect {@link EmptyAware#isEmpty} method
-   */
-  @Projection
-  Stream<A> toEmptyAware();
 
   /**
    * Memorizes stream elements and their order, by answering a lazy stream with

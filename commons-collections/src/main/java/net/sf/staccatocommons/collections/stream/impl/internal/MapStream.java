@@ -59,11 +59,6 @@ public final class MapStream<A, B> extends AbstractStream<B> {
   }
 
   @Override
-  public Stream<B> toEmptyAware() {
-    return new MapStream<A, B>(stream.toEmptyAware(), function);
-  }
-
-  @Override
   public <C> Stream<C> map(final Function<? super B, ? extends C> function) {
     return new MapStream<A, C>(stream, function.of(this.function));
   }

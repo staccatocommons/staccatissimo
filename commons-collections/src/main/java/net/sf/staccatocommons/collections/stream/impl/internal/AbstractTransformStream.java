@@ -27,6 +27,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public abstract class AbstractTransformStream<A, B> extends AbstractStream<B> {
 
   private final Stream<A> stream;
+  private Stream<B> streamCached;
 
   /**
    * Creates a new {@link AbstractTransformStream}
@@ -37,32 +38,33 @@ public abstract class AbstractTransformStream<A, B> extends AbstractStream<B> {
 
   @Override
   public final Thriterator<B> iterator() {
-    return apply().iterator();
+    return applyCached().iterator();
   }
 
   @Override
   public final B get(int n) {
-    return apply().get(n);
-  }
-
-  @Override
-  public final Stream<B> toEmptyAware() {
-    return apply().toEmptyAware();
+    return applyCached().get(n);
   }
 
   @Override
   public final Pair<Thunk<B>, Stream<B>> delayedDecons() {
-    return apply().delayedDecons();
+    return applyCached().delayedDecons();
   }
 
   @Override
   public final boolean isEmpty() {
-    return apply().isEmpty();
+    return applyCached().isEmpty();
   }
 
   @Override
   public final List<B> toList() {
-    return apply().toList();
+    return applyCached().toList();
+  }
+
+  private Stream<B> applyCached() {
+    if (streamCached == null)
+      streamCached = apply();
+    return streamCached;
   }
 
   protected abstract Stream<B> apply();
