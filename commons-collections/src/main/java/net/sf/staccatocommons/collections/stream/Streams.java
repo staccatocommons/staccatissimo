@@ -20,6 +20,8 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
+import net.sf.staccatocommons.collections.restrictions.Projection;
+import net.sf.staccatocommons.collections.restrictions.Repeatable;
 import net.sf.staccatocommons.collections.stream.impl.CharSequenceStream;
 import net.sf.staccatocommons.collections.stream.impl.CollectionStream;
 import net.sf.staccatocommons.collections.stream.impl.DequeStream;
@@ -31,8 +33,6 @@ import net.sf.staccatocommons.collections.stream.impl.SingleStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.UndefinedStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.ConsStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedSingleStream;
-import net.sf.staccatocommons.collections.stream.properties.Projection;
-import net.sf.staccatocommons.collections.stream.properties.Repeatable;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Thunk;

@@ -17,8 +17,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import net.sf.staccatocommons.collections.stream.properties.Projection;
-import net.sf.staccatocommons.collections.stream.properties.Repeatable;
+import net.sf.staccatocommons.collections.restrictions.Projection;
+import net.sf.staccatocommons.collections.restrictions.Repeatable;
 import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 

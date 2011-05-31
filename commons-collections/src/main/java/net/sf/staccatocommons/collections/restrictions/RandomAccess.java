@@ -10,26 +10,12 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream;
-
-import net.sf.staccatocommons.collections.restrictions.Projection;
+package net.sf.staccatocommons.collections.restrictions;
 
 /**
- * Interface for interscalating elements in a stream
- * 
  * @author flbulgarelli
  * 
  */
-public interface Interscalable<A> {
-
-  /**
-   * Inserts the given <code>element</code> between each retrieved element of
-   * this {@link Stream}
-   * 
-   * @param element
-   * @return a new {@link Stream}
-   */
-  @Projection
-  Stream<A> intersperse(A element);
+public @interface RandomAccess {
 
 }

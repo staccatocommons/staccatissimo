@@ -13,8 +13,8 @@
 
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccatocommons.collections.stream.properties.Projection;
-import net.sf.staccatocommons.collections.stream.properties.Repeatable;
+import net.sf.staccatocommons.collections.restrictions.Projection;
+import net.sf.staccatocommons.collections.restrictions.Repeatable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.check.NonNull;

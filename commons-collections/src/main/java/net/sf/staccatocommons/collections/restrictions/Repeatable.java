@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.properties;
+package net.sf.staccatocommons.collections.restrictions;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

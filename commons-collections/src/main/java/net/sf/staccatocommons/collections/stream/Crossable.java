@@ -13,7 +13,7 @@
 package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
-import net.sf.staccatocommons.collections.stream.properties.Projection;
+import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 

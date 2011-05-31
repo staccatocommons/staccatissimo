@@ -391,4 +391,13 @@ public class AbstractStreamBasicTest {
   public void skipIndex() throws Exception {
     assertFalse(Streams.cons("hello", "hola", "hallo", "ohayou").skipIndex(2).contains("hallo"));
   }
+
+  @Test
+  public void testFilter() throws Exception {
+    Stream<Integer> s = Streams.from(Arrays.asList(11, 6, 9, 36, 39, 1, 32, 1).iterator()).filter(
+      Compare.greaterThan(38));
+    assertFalse(s.isEmpty());
+    assertFalse(s.isEmpty());
+
+  }
 }

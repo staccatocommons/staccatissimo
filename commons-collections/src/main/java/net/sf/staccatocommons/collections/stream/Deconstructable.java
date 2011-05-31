@@ -14,7 +14,7 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.collections.stream.properties.Projection;
+import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
