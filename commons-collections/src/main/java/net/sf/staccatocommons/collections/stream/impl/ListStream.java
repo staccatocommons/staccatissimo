@@ -49,4 +49,9 @@ public class ListStream<A> extends CollectionStream<A> {
     return (List<A>) getCollection();
   }
 
+  @Override
+  public A last() {
+    return get(size() - 1);
+  }
+
 }

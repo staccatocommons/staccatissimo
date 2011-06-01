@@ -148,7 +148,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
   public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
     try {
       return Iterables.reduce(this, function);
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) { // FIXME why illegal argument ???
       return VALIDATE_ELEMENT.fail("Can not reduce an empty stream");
     }
   }
@@ -263,7 +263,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public A last() {
-    return get(size() - 1);
+    Thriterator<A> iter = iterator();
+    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams have no elements");
+    while (iter.hasNext())
+      iter.advanceNext();
+    return iter.current();
   }
 
   @Override
@@ -447,20 +451,20 @@ public abstract class AbstractStream<A> implements Stream<A> {
   @Override
   public Pair<A, Stream<A>> decons() {
     Iterator<A> iter = iterator();
-    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams have no head");
-    return _(iter.next(), Streams.from(iter));
+    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams can not be deconstructed");
+    return _(iter.next(), Streams.from(iter)); // FIXME properties are lost
   }
 
   @Override
   public Pair<Thunk<A>, Stream<A>> delayedDecons() {
     Thriterator<A> iter = iterator();
-    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams have no head");
+    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams can not be deconstructed");
     return _(iter.delayedNext(), Streams.from(iter));
   }
 
   @Override
   public Stream<A> tail() {
-    // FIXME
+    // TODO not very efficient
     VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams have not tail");
     return drop(1);
   }
