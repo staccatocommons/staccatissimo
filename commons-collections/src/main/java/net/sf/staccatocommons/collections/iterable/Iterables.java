@@ -425,7 +425,7 @@ public class Iterables {
    *         the given <code>eqivTest</code>. <code>false</code> otherwise
    */
   public static <A> boolean equivBy(@NonNull Iterable<? extends A> iterable1, @NonNull Iterable<? extends A> iterable2,
-    Evaluable2<A, A> equivTest) {
+    Evaluable2<? super A, ? super A> equivTest) {
     Iterator<? extends A> iter = iterable1.iterator();
     Iterator<? extends A> otherIter = iterable2.iterator();
     while (iter.hasNext()) {

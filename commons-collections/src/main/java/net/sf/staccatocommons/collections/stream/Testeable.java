@@ -102,7 +102,7 @@ public interface Testeable<A> {
    *         elements of this stream and given <code>iterable</code> at same
    *         position satisfies the given {@link Evaluable2}
    */
-  boolean equivBy(@NonNull Evaluable2<A, A> equalityTest, @NonNull Iterable<? extends A> iterable);
+  boolean equivBy(@NonNull Evaluable2<? super A, ? super A> equalityTest, @NonNull Iterable<? extends A> iterable);
 
   /**
    * Test that the elements of this stream are equivalent to the given
@@ -117,7 +117,7 @@ public interface Testeable<A> {
    *         elements of this stream and given <code>elements</code> at same
    *         position satisfies the given {@link Evaluable2}
    */
-  boolean equivBy(@NonNull Evaluable2<A, A> equalityTest, A... elements);
+  boolean equivBy(@NonNull Evaluable2<? super A, ? super A> equalityTest, A... elements);
 
   /**
    * Test that the elements of this stream are equivalent to the elements of the

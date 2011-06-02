@@ -63,6 +63,7 @@ import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
+import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
@@ -72,9 +73,11 @@ import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
@@ -366,16 +369,29 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public boolean equiv(Iterable<? extends A> other) {
-    return Iterables.equiv(this, other);
+    return equivBy(equalOrEquiv(), other);
+  }
+
+  @Constant
+  private static <A> Predicate2<A, A> equalOrEquiv() {
+    return new AbstractPredicate2<A, A>() {
+      public boolean eval(A arg0, A arg1) {
+        if (Equiv.equalNullSafe().eval(arg0, arg1))
+          return true;
+        if (arg0 instanceof Stream<?> && arg1 instanceof Stream<?>)
+          return ((Stream) arg0).equiv((Stream) arg1);
+        return false;
+      }
+    };
   }
 
   @Override
-  public boolean equivBy(Evaluable2<A, A> equalty, Iterable<? extends A> other) {
+  public boolean equivBy(Evaluable2<? super A, ? super A> equalty, Iterable<? extends A> other) {
     return Iterables.equivBy(this, other, equalty);
   }
 
   @Override
-  public final boolean equivBy(Evaluable2<A, A> equalityTest, A... elements) {
+  public final boolean equivBy(Evaluable2<? super A, ? super A> equalityTest, A... elements) {
     return equivBy(equalityTest, Arrays.asList(elements));
   }
 
