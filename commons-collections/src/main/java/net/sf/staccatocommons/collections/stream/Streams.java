@@ -396,4 +396,20 @@ public class Streams {
     return UndefinedStream.undefined();
   }
 
+  /**
+   * Answers the Stream class, but preserving its element generic type. This
+   * method is mostly aimed to be used with Staccato-Commons-Lambda:
+   * 
+   * <pre>
+   * lambda($(Streams.&lt;User&gt; type()).toList())
+   * </pre>
+   * 
+   * @param <A>
+   * @return (Class&lt;Stream&lt;A&gt;&gt;) Stream.class
+   */
+  @Constant
+  public static <A> Class<Stream<A>> type() {
+    return (Class) Stream.class;
+  }
+
 }

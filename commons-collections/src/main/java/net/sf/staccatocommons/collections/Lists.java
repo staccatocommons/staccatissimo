@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.MinSize;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotEmpty;
@@ -144,6 +145,18 @@ public class Lists {
    */
   public static <A> A last(@NotEmpty List<A> list) {
     return list.get(list.size() - 1);
+  }
+
+  /**
+   * Answers the List class, but preserving its element generic type. This
+   * method is mostly aimed to be used with Staccato-Commons-Lambda
+   * 
+   * @param <A>
+   * @return (Class&lt;List&lt;A&gt;&gt;) List
+   */
+  @Constant
+  public static <A> Class<List<A>> type() {
+    return (Class) List.class;
   }
 
 }
