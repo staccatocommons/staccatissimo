@@ -56,7 +56,7 @@ public class AbstractStreamBasicTest {
    */
   @BeforeClass
   public static void before() {
-    lambda($(Stream.class).toList());
+    lambda($(Streams.type()).toList());
   }
 
   /** Test for sum */
@@ -392,8 +392,11 @@ public class AbstractStreamBasicTest {
     assertFalse(Streams.cons("hello", "hola", "hallo", "ohayou").skipIndex(2).contains("hallo"));
   }
 
+  /**
+   * Tests that empty is repeatable for filter operation
+   */
   @Test
-  public void testFilter() throws Exception {
+  public void testEmptyRepeatable() throws Exception {
     Stream<Integer> s = Streams.from(Arrays.asList(11, 6, 9, 36, 39, 1, 32, 1).iterator()).filter(
       Compare.greaterThan(38));
     assertFalse(s.isEmpty());
