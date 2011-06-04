@@ -12,8 +12,10 @@
  */
 package net.sf.staccatocommons.lang.predicate;
 
+import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
@@ -30,6 +32,41 @@ public abstract class AbstractPredicate2<A, B> implements Predicate2<A, B> {
         return AbstractPredicate2.this.apply(arg, argument);
       }
     };
+  }
+
+  @NonNull
+  public Predicate2<A, B> not() {
+    final class Not extends AbstractPredicate2<A, B> {
+      public boolean eval(A arg0, B arg1) {
+        return !AbstractPredicate2.this.eval(arg0, arg1);
+      }
+
+      @Override
+      public Predicate2<A, B> not() {
+        return AbstractPredicate2.this;
+      }
+    }
+    return new Not();
+  }
+
+  @NonNull
+  public Predicate2<A, B> or(@NonNull final Evaluable2<? super A, ? super B> other) {
+    final class Or extends AbstractPredicate2<A, B> {
+      public boolean eval(A arg0, B arg1) {
+        return AbstractPredicate2.this.eval(arg0, arg1) || other.eval(arg0, arg1);
+      }
+    }
+    return new Or();
+  }
+
+  @NonNull
+  public Predicate2<A, B> and(@NonNull final Evaluable2<? super A, ? super B> other) {
+    final class And extends AbstractPredicate2<A, B> {
+      public boolean eval(A arg0, B arg1) {
+        return AbstractPredicate2.this.eval(arg0, arg1) && other.eval(arg0, arg1);
+      }
+    }
+    return new And();
   }
 
   public Predicate2<A, B> nullSafe() {

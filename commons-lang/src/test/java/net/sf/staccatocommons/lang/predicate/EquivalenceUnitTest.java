@@ -15,6 +15,7 @@ package net.sf.staccatocommons.lang.predicate;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.lang.predicate.internal.EqualTest;
 
 import org.junit.Test;
 
@@ -51,5 +52,13 @@ public class EquivalenceUnitTest {
   @Test
   public void testOn() throws Exception {
     assertTrue(Equiv.on(first(Integer.class)).eval(_(10, 20), _(10, 5)));
+  }
+
+  /**
+   * Tests {@link EqualTest#not()}
+   */
+  @Test
+  public void testNot() throws Exception {
+    assertTrue(Equiv.equal().not().eval(10, 12));
   }
 }
