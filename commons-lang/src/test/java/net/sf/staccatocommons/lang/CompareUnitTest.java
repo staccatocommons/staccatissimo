@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Date;
 
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.lang.tuple.Tuples;
 
 import org.junit.Test;
 
@@ -124,8 +125,8 @@ public class CompareUnitTest {
   /*** Test for {@link Compare#on(Applicable)} */
   @Test
   public void testOn() throws Exception {
-    assertEquals(0, Compare.on(first(Integer.class)).compare(_(20, 30), _(20, 40)));
-    assertTrue(Compare.on(second(Integer.class)).compare(_(20, 30), _(20, 40)) < 0);
+    assertEquals(0, Compare.on(Tuples.<Integer> first()).compare(_(20, 30), _(20, 40)));
+    assertTrue(Compare.on(Tuples.<Integer> second()).compare(_(20, 30), _(20, 40)) < 0);
   }
 
 }
