@@ -51,21 +51,6 @@ public class Tuples {
   }
 
   /**
-   * Answers a function that returns the first component of a tuple, specifying
-   * the concrete type of the function
-   * 
-   * @param <A>
-   *          type of the first element
-   * @param clazz
-   * @return a constant function
-   */
-  @Constant
-  public static <A> Function<Tuple.FirstAware<A>, A> first(Class<A> clazz) {
-    // XXX remove?
-    return first();
-  }
-
-  /**
    * Answers a function that returns the second component of a tuple
    * 
    * @param <A>
@@ -79,20 +64,6 @@ public class Tuples {
         return arg._1();
       }
     };
-  }
-
-  /**
-   * Answers a function that returns the first component of a tuple, specifying
-   * the concrete type of the function
-   * 
-   * @param <A>
-   *          type of the first element
-   * @param clazz
-   * @return a constant function
-   */
-  public static <A> Function<Tuple.SecondAware<A>, A> second(Class<A> clazz) {
-    // XXX remove?
-    return second();
   }
 
   /**
