@@ -128,6 +128,14 @@ public interface Searchable<A> {
    */
   A findOrElse(@NonNull Evaluable<? super A> predicate, @NonNull Thunk<? extends A> thunk);
 
-  // TODO findOrElse(element)
+  /**
+   * Looks for an element that satisfies the given {@link Evaluable}. If such
+   * element exists, returns it. Otherwise, returns the given
+   * <code>element</code> .
+   * 
+   * @param predicate
+   * @return <code>findOrElse(predicate, Thunks.constant(element))</code>
+   */
+  A findOrElse(@NonNull Evaluable<? super A> predicate, @NonNull A element);
 
 }

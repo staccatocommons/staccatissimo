@@ -21,13 +21,10 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
-import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.lang.function.AbstractFunction2;
 
 /**
  * @author flbulgarelli
@@ -37,11 +34,6 @@ import net.sf.staccatocommons.lang.function.AbstractFunction2;
 public final class GroupByStream<A> extends AbstractStream<Stream<A>> {
   private final Evaluable2<A, A> pred;
   private final Stream<A> stream;
-  private final Applicable2<A, Stream<A>, Stream<A>> aggregateFunction = new AbstractFunction2<A, Stream<A>, Stream<A>>() {
-    public Stream<A> apply(A arg0, Stream<A> arg1) {
-      return Streams.cons(arg0, arg1);
-    }
-  };
 
   /**
    * Creates a new {@link GroupByStream}

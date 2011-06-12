@@ -52,10 +52,6 @@ public class IteratorStream<A> extends AbstractStream<A> {
     return iterator;
   }
 
-  public final Stream<A> toEmptyAware() {
-    return this;
-  }
-
   public final Pair<A, Stream<A>> decons() {
     VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams can not be deconstructed");
     return _(head(), (Stream<A>) this);

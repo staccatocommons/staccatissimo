@@ -67,9 +67,6 @@ public interface Crossable<A> {
    * @return a new {@link Stream} projection
    */
   @Projection
-  Stream<Stream<A>> fullCross(@NonNull Stream<Stream<A>> streamOfStreams);
-
-  // TODO rename cross() to selfCross?
-  // TODO fullCross to genericCross?
+  Stream<Stream<A>> crossStreams(@NonNull Stream<Stream<A>> streamOfStreams);
 
 }

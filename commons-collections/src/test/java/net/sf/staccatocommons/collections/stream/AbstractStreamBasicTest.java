@@ -37,6 +37,7 @@ import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.lang.tuple.Tuples;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -259,7 +260,7 @@ public class AbstractStreamBasicTest {
   public void testMaximum() throws Exception {
     String max = Streams
       .cons(_(new Object(), 10, "hello"), _(new Object(), 12, "foo"), _(new Object(), 9, "bye"), _(new Object(), 6, ""))
-      .maximumOn(second(Integer.class))
+      .maximumOn(Tuples.<Integer> second())
       ._2();
     assertEquals("foo", max);
     assertEquals(150, (int) Streams.cons(90, 10, 30, 6, 150, 65).maximum());
@@ -346,7 +347,7 @@ public class AbstractStreamBasicTest {
     assertEquals("[[1, 3, 5], [1, 3, 6], [1, 4, 5], [1, 4, 6], [2, 3, 5], [2, 3, 6], [2, 4, 5], [2, 4, 6]]", //
       Streams
         .cons(1, 2)
-        .fullCross(Streams.<Stream<Integer>> cons(Streams.cons(3, 4), Streams.cons(5, 6)))
+        .crossStreams(Streams.<Stream<Integer>> cons(Streams.cons(3, 4), Streams.cons(5, 6)))
         .printString());
   }
 

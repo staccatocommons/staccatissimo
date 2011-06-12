@@ -16,7 +16,6 @@ package net.sf.staccatocommons.collections.stream;
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.collections.restrictions.Repeatable;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -38,7 +37,6 @@ public interface Appendable<A> {
    * @return a new {@link Stream}
    */
   @Projection
-  @Conditionally(Repeatable.class)
   Stream<A> append(@NonNull Iterable<A> other);
 
   /**
@@ -51,7 +49,6 @@ public interface Appendable<A> {
    */
 
   @Projection
-  @Conditionally(Repeatable.class)
   Stream<A> appendUndefined();
 
   /**
@@ -62,7 +59,6 @@ public interface Appendable<A> {
    *         and then, the given <code>element</code>
    */
   @Projection
-  @Conditionally(Repeatable.class)
   Stream<A> append(A element);
 
   /**
@@ -73,7 +69,6 @@ public interface Appendable<A> {
    *         and then, the value of the given <code>thunk</code>
    */
   @Projection
-  @Conditionally(Repeatable.class)
   Stream<A> append(@NonNull Thunk<A> thunk);
 
   /**
@@ -84,7 +79,6 @@ public interface Appendable<A> {
    *         and then, this {@link Stream} elements.
    */
   @Projection
-  @Conditionally(Repeatable.class)
   Stream<A> prepend(A element);
 
   /**
@@ -95,7 +89,6 @@ public interface Appendable<A> {
    *         <code>thunk</code>, and then, this {@link Stream} elements.
    */
   @Projection
-  @Conditionally(Repeatable.class)
   Stream<A> prepend(@NonNull Thunk<A> thunk);
 
 }
