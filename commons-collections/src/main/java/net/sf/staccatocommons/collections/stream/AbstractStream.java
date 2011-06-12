@@ -72,7 +72,6 @@ import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.internal.ToString;
-import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.predicate.Predicates;
@@ -204,6 +203,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
   @Override
   public A findOrElse(Evaluable<? super A> predicate, Thunk<? extends A> thunk) {
     return findOrNone(predicate).valueOrElse(thunk);
+  }
+
+  @Override
+  public A findOrElse(Evaluable<? super A> predicate, A element) {
+    return findOrNone(predicate).valueOrElse(element);
   }
 
   @Override
@@ -374,15 +378,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Constant
   private static <A> Predicate2<A, A> equalOrEquiv() {
-    return new AbstractPredicate2<A, A>() {
+    return Equiv.<A> equalNullSafe().or(new AbstractPredicate2<A, A>() {
       public boolean eval(A arg0, A arg1) {
-        if (Equiv.equalNullSafe().eval(arg0, arg1))
-          return true;
-        if (arg0 instanceof Stream<?> && arg1 instanceof Stream<?>)
-          return ((Stream) arg0).equiv((Stream) arg1);
-        return false;
+        return arg0 instanceof Stream<?> && arg1 instanceof Stream<?> && ((Stream) arg0).equiv((Stream) arg1);
       }
-    };
+    });
   }
 
   @Override
@@ -637,18 +637,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
     });
   }
 
-  // TODO
-  <B> Stream<Pair<A, B>> join(Stream<B> other, final Evaluable2<A, B> predicate) {
-    return cross(other).filter(new AbstractPredicate<Pair<A, B>>() {
-      @Override
-      public boolean eval(Pair<A, B> argument) {
-        return predicate.eval(argument._0(), argument._1());
-      }
-    });
-  }
-
   @ForceRestrictions
-  public Stream<Stream<A>> fullCross(@NonNull Stream<Stream<A>> other) {
+  public Stream<Stream<A>> crossStreams(@NonNull Stream<Stream<A>> other) {
     Ensure.that().isNotEmpty("other", (EmptyAware) other);
     return fcross(other.prepend(this));
   }
@@ -682,8 +672,6 @@ public abstract class AbstractStream<A> implements Stream<A> {
       }
     });
   }
-
-  // TODO equiv should forward to equiv on stream objects
 
   @Override
   public final void print(java.lang.Appendable o) throws IOException {
@@ -730,6 +718,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
     }
   }
 
+  @Constant
   private static <A> Function<A[], Iterable<A>> toIterable() {
     return new AbstractFunction<A[], Iterable<A>>() {
       public Iterable<A> apply(A[] arg) {
