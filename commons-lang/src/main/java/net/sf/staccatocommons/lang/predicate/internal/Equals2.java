@@ -13,7 +13,10 @@
 
 package net.sf.staccatocommons.lang.predicate.internal;
 
+import net.sf.staccatocommons.defs.NullSafe;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
+import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.restrictions.Constant;
 
 /**
@@ -21,19 +24,25 @@ import net.sf.staccatocommons.restrictions.Constant;
  * 
  * @param <A>
  */
-public final class CompareTest<A extends Comparable<A>> extends AbstractEquiv<A> {
-
-  private static final long serialVersionUID = 2333778927729616411L;
+@NullSafe
+public final class Equals2<A> extends NonAnnonymousPredicate2<A> {
+  private static final long serialVersionUID = -5196215375584803443L;
 
   public boolean eval(A arg0, A arg1) {
-    return arg0.compareTo(arg1) == 0;
+    return arg0.equals(arg1);
+  }
+
+  public Predicate<A> apply(A arg) {
+    if (arg == null)
+      return Predicates.null_();
+    return Predicates.equal(arg);
   }
 
   /**
    * @return a constant instance
    */
   @Constant
-  public static <A extends Comparable<A>> Predicate2<A, A> compareTest() {
-    return new CompareTest();
+  public static <A> Predicate2<A, A> equalTest() {
+    return new Equals2();
   }
 }

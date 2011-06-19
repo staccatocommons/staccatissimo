@@ -15,9 +15,10 @@ package net.sf.staccatocommons.defs.function;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
+import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Delayable3;
+import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.defs.NullSafeAware;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * {@link Function3}s are rich interfaced {@link Applicable3}s - two arguments
@@ -41,22 +42,20 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  *          function return type
  * 
  */
+@Applicative
 public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>, Applicable2<A, B, Function<C, D>>,
   Applicable<A, Function2<B, C, D>>, NullSafeAware<Function3<A, B, C, D>>, Delayable3<A, B, C, D> {
 
   /**
    * Partially applies the function, passing only its first argument
    */
-  @NonNull
   Function2<B, C, D> apply(final A arg0);
 
   /**
    * Partially applies the function, passing only its first and second arguments
    */
-  @NonNull
   Function<C, D> apply(final A arg0, final B arg1);
 
-  @NonNull
   D apply(A arg0, B arg1, C arg2);
 
   /**
@@ -65,7 +64,7 @@ public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>, Applicab
    * 
    * @return a new null-safe {@link Function3}
    */
-  @NonNull
+  @NullSafe
   Function3<A, B, C, D> nullSafe();
 
 }

@@ -21,11 +21,10 @@ import net.sf.staccatocommons.restrictions.Constant;
  * @author flbulgarelli
  * 
  */
-public final class SameTest<A> extends AbstractEquiv<A> {
+public final class Same2<A> extends NonAnnonymousPredicate2<A> {
 
   private static final long serialVersionUID = 5767947639495599795L;
 
-  // FIXME nullsafeness?
   public boolean eval(A arg0, A arg1) {
     return arg0 == arg1;
   }
@@ -34,13 +33,17 @@ public final class SameTest<A> extends AbstractEquiv<A> {
     return Predicates.same(arg);
   }
 
+  public Predicate2<A, A> nullSafe() {
+    return this;
+  }
+
   /**
    * 
-   * @return a constant {@link SameTest}
+   * @return a constant {@link Same2}
    */
   @Constant
   public static <A> Predicate2<A, A> same() {
-    return new SameTest();
+    return new Same2();
   }
 
 }

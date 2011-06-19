@@ -289,7 +289,6 @@ public class Compare {
    * @param value
    * @return a new predicate
    */
-  @NonNull
   public static <T extends Comparable<T>> Predicate<T> lessThan(@NonNull T value) {
     return new LessThan<T>(value);
   }
@@ -306,7 +305,6 @@ public class Compare {
    * @param value
    * @return a new predicate
    */
-  @NonNull
   public static <T extends Comparable<T>> Predicate<T> lessThanOrEqualTo(@NonNull T value) {
     return greaterThan(value).not();
   }
@@ -323,7 +321,6 @@ public class Compare {
    * @param value
    * @return a new predicate
    */
-  @NonNull
   public static <T extends Comparable<T>> Predicate<T> greaterThan(@NonNull T value) {
     return new GreaterThan<T>(value);
   }
@@ -340,7 +337,6 @@ public class Compare {
    * @param value
    * @return a new predicate
    */
-  @NonNull
   public static <T extends Comparable<T>> Predicate<T> greaterThanOrEqualTo(@NonNull T value) {
     return lessThan(value).not();
   }

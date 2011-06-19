@@ -13,6 +13,7 @@
 
 package net.sf.staccatocommons.defs;
 
+
 /**
  * {@link Applicable3}s are transformations that take three arguments and have a
  * return value, by implementing an {@link #apply(Object, Object, Object)}

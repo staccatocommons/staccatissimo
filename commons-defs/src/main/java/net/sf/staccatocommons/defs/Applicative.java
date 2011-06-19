@@ -19,6 +19,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import net.sf.staccatocommons.restrictions.Restriction;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
 import net.sf.staccatocommons.restrictions.effect.Transparent;
 import net.sf.staccatocommons.restrictions.value.Immutable;
@@ -45,6 +46,23 @@ import net.sf.staccatocommons.restrictions.value.Immutable;
  * {@link Serializable}</li>
  * </ul>
  * <p>
+ * Methods that return {@link Applicative}s <strong>must</strong> be
+ * {@link NonNull} and {@link Transparent}.
+ * 
+ * <p>
+ * In addition, methods that return {@link Applicative}s and are annotated with
+ * restrictions, alter {@link Restriction} semantic in some way: they do not
+ * indicate that the method is restricted, but that the applicative's method is
+ * restricted. For example, in the following code:
+ * 
+ * <pre>
+ * &#064;Transparent
+ * Thunk&lt;Integer&gt; foo();
+ * </pre>
+ * 
+ * The {@link Transparent} annotations does not indicate that method foo() is
+ * transparent, but that the applicative method of the returned Thunks, that is,
+ * Thunk.value(), is transparent.
  * 
  * @author flbulgarelli
  */

@@ -134,7 +134,7 @@ public class Functions {
     };
   }
 
-  // TODO
+  // XXX
   // public static <A, B> Function<A, B> constant2(B value) {
   // return new ConstantLambda<A, B>(value);
   // }

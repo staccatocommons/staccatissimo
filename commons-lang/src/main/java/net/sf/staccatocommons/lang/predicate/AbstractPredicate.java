@@ -45,7 +45,6 @@ public abstract class AbstractPredicate<T> implements Predicate<T> {
    * @return a {@link AbstractPredicate} that negates this
    *         {@link AbstractPredicate}'s result. Non Null.
    */
-  @NonNull
   public Predicate<T> not() {
     final class Not extends AbstractPredicate<T> {
       public boolean eval(T argument) {
@@ -69,7 +68,6 @@ public abstract class AbstractPredicate<T> implements Predicate<T> {
    * @return A new predicate that performs the short circuited or between this
    *         and other when evaluated. Non Null
    */
-  @NonNull
   public Predicate<T> or(@NonNull final Evaluable<? super T> other) {
     final class Or extends AbstractPredicate<T> {
       public boolean eval(T argument) {
@@ -88,7 +86,6 @@ public abstract class AbstractPredicate<T> implements Predicate<T> {
    * @return A new predicate that performs the short circuited logical-and
    *         between this and other when evaluated. Non Null
    */
-  @NonNull
   public Predicate<T> and(@NonNull final Evaluable<? super T> other) {
     final class And extends AbstractPredicate<T> {
       public boolean eval(T argument) {
@@ -98,7 +95,11 @@ public abstract class AbstractPredicate<T> implements Predicate<T> {
     return new And();
   }
 
-  public Predicate<T> nullSafe() {
+  public final Predicate<T> andNotNull() {
+    return Predicates.<T> notNull().and(this);
+  }
+
+  public final Predicate<T> orNull() {
     return Predicates.<T> null_().or(this);
   }
 

@@ -14,24 +14,16 @@ package net.sf.staccatocommons.lang.predicate.internal;
 
 import java.io.Serializable;
 
-import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
-import net.sf.staccatocommons.restrictions.Constant;
 
 /**
  * @author flbulgarelli
  * 
  */
-abstract class AbstractEquiv<A> extends AbstractPredicate2<A, A> implements Serializable {
+abstract class NonAnnonymousPredicate2<A> extends AbstractPredicate2<A, A> implements Serializable {
 
   private static final long serialVersionUID = 970024052968678236L;
-  private Predicate2<A, A> nullSafe = super.nullSafe();
-
-  @Constant
-  public final Predicate2<A, A> nullSafe() {
-    return nullSafe;
-  }
 
   public final String toString() {
     return ToString.toString(this);

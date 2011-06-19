@@ -14,9 +14,9 @@ package net.sf.staccatocommons.lang.predicate;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
-import net.sf.staccatocommons.lang.predicate.internal.CompareTest;
-import net.sf.staccatocommons.lang.predicate.internal.EqualTest;
-import net.sf.staccatocommons.lang.predicate.internal.SameTest;
+import net.sf.staccatocommons.lang.predicate.internal.Compare2;
+import net.sf.staccatocommons.lang.predicate.internal.Equals2;
+import net.sf.staccatocommons.lang.predicate.internal.Same2;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
@@ -36,18 +36,6 @@ public class Equiv {
   private Equiv() {}
 
   /**
-   * Answers an {@link Predicate2} that performs an equality test between its
-   * arguments, that it returns true if both are equal
-   * 
-   * @param <A>
-   * @return a constant {@link Predicate2} that performs an equality test
-   */
-  @Constant
-  public static <A> Predicate2<A, A> equal() {
-    return EqualTest.<A> equalTest();
-  }
-
-  /**
    * Answers an {@link Predicate2} that performs an identity test between its
    * arguments, that it returns true if both are the same object
    * 
@@ -56,7 +44,19 @@ public class Equiv {
    */
   @Constant
   public static <A> Predicate2<A, A> same() {
-    return SameTest.<A> same();
+    return Same2.<A> same();
+  }
+
+  /**
+   * Answers an {@link Predicate2} that performs an equality test between its
+   * arguments, that it returns true if both are equal
+   * 
+   * @param <A>
+   * @return a constant {@link Predicate2} that performs an equality test
+   */
+  @Constant
+  public static <A> Predicate2<A, A> equal() {
+    return Equals2.<A> equalTest();
   }
 
   /**
@@ -81,7 +81,7 @@ public class Equiv {
    */
   @Constant
   public static <A extends Comparable<A>> Predicate2<A, A> compare() {
-    return CompareTest.<A> compareTest();
+    return Compare2.<A> compareTest();
   }
 
   /**
@@ -105,7 +105,6 @@ public class Equiv {
    * @param function
    * @return a new {@link Predicate2}
    */
-  @NonNull
   @ForceRestrictions
   public static <A, B> Predicate2<A, A> on(@NonNull final Applicable<? super A, ? extends B> function) {
     return new AbstractPredicate2<A, A>() {
@@ -114,5 +113,4 @@ public class Equiv {
       }
     };
   }
-
 }

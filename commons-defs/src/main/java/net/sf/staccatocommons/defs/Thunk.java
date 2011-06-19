@@ -13,6 +13,7 @@
 
 package net.sf.staccatocommons.defs;
 
+
 /**
  * A {@link Thunk} is a computation that takes no arguments a returns a value.
  * In other words, is an object that is capable of providing another one,

@@ -14,6 +14,7 @@ package net.sf.staccatocommons.lambda;
 
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -108,6 +109,14 @@ public final class LambdaFactory {
     firstStep = true;
     return stub;
   }
+
+  // public <A> A $(@NonNull A object) {
+  // STATE.that(!firstStep, "Wrong invocation order");
+  // A stub = (A) proxyFactory.createInvokerProxy(handler,
+  // object.getClass().getInterfaces());
+  // firstStep = true;
+  // return stub;
+  // }
 
   /**
    * Answers a {@link Predicate} that when evaluated sends to its argument the
@@ -213,8 +222,8 @@ public final class LambdaFactory {
   }
 
   /*
-   * FIXME currification order is not clear, should it be interpreted right to
-   * left or left to right?
+   * FIXME partial application order is not clear, should it be interpreted
+   * right to left or left to right?
    */
   public <A> Function2<Object, Object, A> lambda2(A returnType) {
     final Method method = handler.getMethod();
@@ -245,8 +254,11 @@ public final class LambdaFactory {
   private <T> T invoke(final Method method, Object receptor, Object[] args) {
     try {
       return (T) method.invoke(receptor, args);
-    } catch (Exception e) {
+    } catch (IllegalAccessException e) {
       throw SoftException.soften(e);
+    } catch (InvocationTargetException e) {
+      Unchecker.throwUnchecked(e.getCause());
+      return null;
     }
   }
 

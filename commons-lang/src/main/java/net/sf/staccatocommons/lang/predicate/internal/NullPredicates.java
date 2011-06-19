@@ -63,7 +63,5 @@ public final class NullPredicates {
     public Predicate<T> not() {
       return NOT_NULL;
     }
-
   }
-
 }

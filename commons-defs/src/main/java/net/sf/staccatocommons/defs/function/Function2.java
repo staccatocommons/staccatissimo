@@ -14,9 +14,10 @@ package net.sf.staccatocommons.defs.function;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Delayable2;
+import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.defs.NullSafeAware;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * {@link Function2}s are rich interfaced {@link Applicable2}s - two arguments
@@ -40,19 +41,18 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  *          function return type
  * 
  */
+@Applicative
 public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, Function<B, C>>, Delayable2<A, B, C>,
   NullSafeAware<Function2<A, B, C>> {
 
   /**
    * Partially applies the function passing just its first parameter
    */
-  @NonNull
   Function<B, C> apply(final A arg0);
 
   /**
    * Applies the function
    */
-  @NonNull
   C apply(A arg0, B arg1);
 
   /**
@@ -61,7 +61,14 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    * @return a new {@link Function2} that produces the same result of this one
    *         when applied, but with arguments flipped
    */
-  @NonNull
   Function2<B, A, C> flip();
 
+  /**
+   * Answers a new function that returns null if any of its arguments is null,
+   * or the result of applying this function, otherwise.
+   * 
+   * @return a new null-safe {@link Function2}
+   */
+  @NullSafe
+  Function2<A, B, C> nullSafe();
 }

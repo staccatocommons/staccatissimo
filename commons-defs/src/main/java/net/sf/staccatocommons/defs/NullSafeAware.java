@@ -16,8 +16,8 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * A {@link NullSafeAware}s are object that may be converted to an
- * {@link Applicative} object of type {@code A} that accepts nulls in its
- * applicative method.
+ * {@link Applicative} object of type {@code A} that is {@link NullSafe}, that
+ * is, that accepts nulls in its applicative method.
  * 
  * {@link NullSafeAware}s parameterized by type {@code A}
  * <strong>should</strong> be of type {@code A} too.
@@ -30,7 +30,8 @@ public interface NullSafeAware<A> {
 
   /**
    * Answers a new {@link Applicative} of type {@code A} that accepts nulls for
-   * its applicative method.
+   * its applicative method, that is, it will not throw any exception if any of
+   * its arguments is null.
    * 
    * The return value of the applicative method of the returned object for a
    * null input is not specified by this interface. In particular, it
@@ -39,6 +40,7 @@ public interface NullSafeAware<A> {
    * @return a new null-safe {@link Applicable} of type {@code A}. Non null.
    */
   @NonNull
+  @NullSafe
   A nullSafe();
 
 }

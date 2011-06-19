@@ -18,7 +18,6 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
-import net.sf.staccatocommons.restrictions.effect.Transparent;
 import net.sf.staccatocommons.restrictions.value.Immutable;
 
 /**
@@ -246,7 +245,6 @@ public interface NumberType<A> extends Comparator<A> {
    * @return a function that adds its its argument with the given <code>n</code>
    *         using this {@link NumberType}
    */
-  @Transparent
   Function<A, A> add(A n);
 
   /**

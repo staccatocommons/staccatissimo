@@ -46,7 +46,6 @@ public class Thunks {
    *          {@link Thunk#value()}
    * @return a new thunk
    */
-  @NonNull
   public static <A> Thunk<A> constant(A value) {
     return new ConstantThunk<A>(value);
 
@@ -81,7 +80,6 @@ public class Thunks {
    * @param callable
    * @return a new {@link Thunk} that wraps the given callable
    */
-  @NonNull
   public static <A> Thunk<A> from(@NonNull Callable<A> callable) {
     return new CallableThunk<A>(callable);
   }
@@ -105,7 +103,6 @@ public class Thunks {
    * @param runnable
    * @return a new {@link Thunk} that wraps the given {@link Runnable}
    */
-  @NonNull
   @ForceRestrictions
   public static Thunk<Void> from(@NonNull final Runnable runnable) {
     return new Thunk<Void>() {

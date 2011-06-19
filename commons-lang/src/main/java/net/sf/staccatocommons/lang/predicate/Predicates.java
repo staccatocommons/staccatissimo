@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.internal.All;
 import net.sf.staccatocommons.lang.predicate.internal.Any;
@@ -45,6 +46,7 @@ public class Predicates {
    * @return A {@link AbstractPredicate} that always returns <code>true</code>
    */
   @Constant
+  @NullSafe
   public static <T> Predicate<T> true_() {
     return True.getInstance();
   }
@@ -54,6 +56,7 @@ public class Predicates {
    * @return A {@link AbstractPredicate} that always returns <code>false</code>
    */
   @Constant
+  @NullSafe
   public static <T> Predicate<T> false_() {
     return False.getInstance();
   }
@@ -69,6 +72,7 @@ public class Predicates {
    * @return A constant {@link AbstractPredicate}
    */
   @Constant
+  @NullSafe
   public static <T> Predicate<T> notNull() {
     return NullPredicates.notNull();
   }
@@ -80,6 +84,7 @@ public class Predicates {
    * @return A singleton {@link AbstractPredicate}
    */
   @Constant
+  @NullSafe
   public static <T> Predicate<T> null_() {
     return NullPredicates.null_();
   }
@@ -92,7 +97,6 @@ public class Predicates {
    * @param value
    * @return <code>Equiv.equal().apply(value)</code>
    */
-  @NonNull
   public static <T> Predicate<T> equal(T value) {
     return new Equals<T>(value);
   }
@@ -105,7 +109,7 @@ public class Predicates {
    * @param value
    * @return <code>Equiv.same().apply(value)</code>
    */
-  @NonNull
+  @NullSafe
   public static <T> Predicate<T> same(T value) {
     return new Same<T>(value);
   }
@@ -119,7 +123,6 @@ public class Predicates {
    * @return a new {@link AbstractPredicate}
    */
   @ForceRestrictions
-  @NonNull
   public static <T> Predicate<T> isInstanceOf(@NonNull final Class<? extends T> clazz) {
     return new AbstractPredicate<T>() {
       public boolean eval(T argument) {
@@ -136,7 +139,6 @@ public class Predicates {
    * @param values
    * @return a new {@link AbstractPredicate}
    */
-  @NonNull
   public static <T> Predicate<T> in(@NonNull T... values) {
     return new InPredicate<T>(values);
   }
@@ -149,7 +151,6 @@ public class Predicates {
    * @param values
    * @return a new {@link AbstractPredicate}
    */
-  @NonNull
   public static <T> Predicate<T> in(@NonNull Collection<T> values) {
     return new InPredicate<T>(values);
   }
@@ -166,7 +167,6 @@ public class Predicates {
    * @param predicates
    * @return the all predicate
    */
-  @NonNull
   public static <T> Predicate<T> all(@NonNull Evaluable<T>... predicates) {
     return all(Arrays.asList(predicates));
   }
@@ -179,7 +179,6 @@ public class Predicates {
    * @param predicates
    * @return the all predicate
    */
-  @NonNull
   public static <T> Predicate<T> all(@NonNull Iterable<Evaluable<T>> predicates) {
     return new All<T>(predicates);
   }
@@ -192,7 +191,6 @@ public class Predicates {
    * @param predicates
    * @return the any predicate
    */
-  @NonNull
   public static <T> Predicate<T> any(@NonNull Evaluable<T>... predicates) {
     return any(Arrays.asList(predicates));
   }
@@ -205,7 +203,6 @@ public class Predicates {
    * @param predicates
    * @return the any predicate
    */
-  @NonNull
   public static <T> Predicate<T> any(@NonNull Iterable<Evaluable<T>> predicates) {
     return new Any<T>(predicates);
   }
@@ -223,7 +220,6 @@ public class Predicates {
    * @return a {@link AbstractPredicate} view of the given evaluable, or the
    *         evaluable, it is a {@link AbstractPredicate} already
    */
-  @NonNull
   public static <T> Predicate<T> from(@NonNull Evaluable<? super T> evaluable) {
     if (evaluable instanceof AbstractPredicate)
       return (Predicate) evaluable;

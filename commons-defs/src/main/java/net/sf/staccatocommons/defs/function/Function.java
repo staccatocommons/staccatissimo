@@ -15,7 +15,9 @@ package net.sf.staccatocommons.defs.function;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
+import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Delayable;
+import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.defs.NullSafeAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -30,6 +32,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @param <B>
  *          function return type
  */
+@Applicative
 public interface Function<A, B> extends Applicable<A, B>, //
   NullSafeAware<Function<A, B>>, //
   Delayable<A, B> {
@@ -44,7 +47,6 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @param other
    * @return a new function, <code>this</code> composed with <code>other</code>
    */
-  @NonNull
   <C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other);
 
   /**
@@ -59,7 +61,6 @@ public interface Function<A, B> extends Applicable<A, B>, //
    *          non null
    * @return a new function, this composed with other. Non null.
    */
-  @NonNull
   <Tp1, Tp2> Function2<Tp1, Tp2, B> of(@NonNull final Applicable2<Tp1, Tp2, ? extends A> other);
 
   /**
@@ -75,7 +76,6 @@ public interface Function<A, B> extends Applicable<A, B>, //
    *          non null
    * @return a new function, this composed with other. Non null
    */
-  @NonNull
   <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other);
 
   /**
@@ -84,7 +84,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * 
    * @return a new null-safe {@link Function}
    */
-  @NonNull
+  @NullSafe
   Function<A, B> nullSafe();
 
 }

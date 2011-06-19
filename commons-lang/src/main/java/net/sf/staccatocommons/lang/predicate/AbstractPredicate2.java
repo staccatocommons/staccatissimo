@@ -34,7 +34,6 @@ public abstract class AbstractPredicate2<A, B> implements Predicate2<A, B> {
     };
   }
 
-  @NonNull
   public Predicate2<A, B> not() {
     final class Not extends AbstractPredicate2<A, B> {
       public boolean eval(A arg0, B arg1) {
@@ -49,7 +48,6 @@ public abstract class AbstractPredicate2<A, B> implements Predicate2<A, B> {
     return new Not();
   }
 
-  @NonNull
   public Predicate2<A, B> or(@NonNull final Evaluable2<? super A, ? super B> other) {
     final class Or extends AbstractPredicate2<A, B> {
       public boolean eval(A arg0, B arg1) {
@@ -59,7 +57,6 @@ public abstract class AbstractPredicate2<A, B> implements Predicate2<A, B> {
     return new Or();
   }
 
-  @NonNull
   public Predicate2<A, B> and(@NonNull final Evaluable2<? super A, ? super B> other) {
     final class And extends AbstractPredicate2<A, B> {
       public boolean eval(A arg0, B arg1) {

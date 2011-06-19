@@ -13,6 +13,7 @@
 
 package net.sf.staccatocommons.defs;
 
+
 /**
  * {@link Applicable2}s are transformations that take two arguments and have a
  * return value, by implementing an {@link #apply(Object, Object)} method

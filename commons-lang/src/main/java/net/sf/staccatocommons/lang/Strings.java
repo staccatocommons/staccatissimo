@@ -21,7 +21,6 @@ import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.EqualsIgnoreCase;
 import net.sf.staccatocommons.lang.predicate.internal.Matches;
-import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -36,7 +35,6 @@ public class Strings {
    * @param value
    * @return a new predicate
    */
-  @NonNull
   public static Predicate<String> equalsIgnoreCase(@NonNull String value) {
     return new EqualsIgnoreCase(value);
   }
@@ -48,7 +46,6 @@ public class Strings {
    * @param regexp
    * @return a new predicate
    */
-  @NonNull
   public static Predicate<String> matches(@NonNull String regexp) {
     return new Matches(regexp);
   }
@@ -60,7 +57,6 @@ public class Strings {
    * @param pattern
    * @return a new predicate
    */
-  @NonNull
   public static Predicate<String> matches(@NonNull Pattern pattern) {
     return new Matches(pattern);
   }
@@ -73,7 +69,6 @@ public class Strings {
    *          the substring to test if it is contained
    * @return a new predicate
    */
-  @NonNull
   public static Predicate<String> contains(@NonNull String substring) {
     return new ContainsSubstringPredicate(substring);
   }
@@ -85,7 +80,6 @@ public class Strings {
    * @param string
    * @return a new Predicate that evaluates <code>args.startsWith(string)</code>
    */
-  @NonNull
   public static Predicate<String> startsWith(@NonNull final String string) {
     return new AbstractPredicate<String>() {
       @Override
@@ -102,7 +96,6 @@ public class Strings {
    * @param <A>
    * @return a function that returns <code>arg.toString()</code>
    */
-  @Constant
   public static <A> Function<A, String> toString_() {
     return new AbstractFunction<A, String>() {
       public String apply(A arg) {

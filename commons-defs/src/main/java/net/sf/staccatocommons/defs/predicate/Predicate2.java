@@ -15,12 +15,14 @@ package net.sf.staccatocommons.defs.predicate;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable2;
+import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.defs.NullSafeAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
- * @author flbulgarelli
+ * A rich {@link Evaluable2}
  * 
+ * @author flbulgarelli
  */
 public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Boolean>, Applicable<A, Predicate<B>>,
   NullSafeAware<Predicate2<A, B>> {
@@ -30,7 +32,6 @@ public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Bo
    * 
    * @return a {@link Predicate2} that negates this {@link Predicate2}'s result.
    */
-  @NonNull
   Predicate2<A, B> not();
 
   /**
@@ -42,7 +43,6 @@ public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Bo
    * @return A new predicate that performs the short circuited or between this
    *         and other when evaluated.
    */
-  @NonNull
   Predicate2<A, B> or(@NonNull final Evaluable2<? super A, ? super B> other);
 
   /**
@@ -54,7 +54,14 @@ public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Bo
    * @return A new predicate that performs the short circuited logical-and
    *         between this and other when evaluated. Non Null
    */
-  @NonNull
   Predicate2<A, B> and(@NonNull final Evaluable2<? super A, ? super B> other);
+
+  /**
+   * Answers a {@link Predicate2} that returns <code>true</code> if both
+   * arguments are <code>null</code>, <code>false</code> if only one of them is
+   * <code>null</code>, or evalutes this predicate, otherwise.
+   */
+  @NullSafe
+  Predicate2<A, B> nullSafe();
 
 }

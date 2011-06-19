@@ -13,22 +13,24 @@
 package net.sf.staccatocommons.defs.predicate;
 
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.defs.NullSafeAware;
+import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
- * @author flbulgarelli
+ * A rich {@link Evaluable}
  * 
+ * @author flbulgarelli
  */
-public interface Predicate<A> extends Evaluable<A>, Applicable<A, Boolean>, NullSafeAware<Predicate<A>> {
+@Applicative
+public interface Predicate<A> extends Evaluable<A>, Applicable<A, Boolean> {
 
   /**
    * Negates this {@link Predicate}
    * 
    * @return a {@link Predicate} that negates this {@link Predicate}'s result.
    */
-  @NonNull
   Predicate<A> not();
 
   /**
@@ -40,7 +42,6 @@ public interface Predicate<A> extends Evaluable<A>, Applicable<A, Boolean>, Null
    * @return A new predicate that performs the short circuited or between this
    *         and other when evaluated.
    */
-  @NonNull
   Predicate<A> or(@NonNull final Evaluable<? super A> other);
 
   /**
@@ -52,6 +53,25 @@ public interface Predicate<A> extends Evaluable<A>, Applicable<A, Boolean>, Null
    * @return A new predicate that performs the short circuited logical-and
    *         between this and other when evaluated. Non Null
    */
-  @NonNull
   Predicate<A> and(@NonNull final Evaluable<? super A> other);
+
+  /**
+   * Returns a null-safe predicate that, when evaluated, answers
+   * <code>false</code> if its argument is null, or evaluates this predicate,
+   * otherwise.
+   * 
+   * @return a predicate that returns <code>arg != null && this.eval(arg)</code>
+   */
+  @NullSafe
+  Predicate<A> andNotNull();
+
+  /**
+   * Returns a null-safe predicate that, when evaluated, answers
+   * <code>true</code> if its argument is null, or evaluates this predicate,
+   * otherwise.
+   * 
+   * @return a predicate that returns <code>arg == null || this.eval(arg)</code>
+   */
+  @NullSafe
+  Predicate<A> orNull();
 }
