@@ -18,7 +18,6 @@ import java.io.File;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.restrictions.Constant;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
@@ -31,7 +30,6 @@ public class IOFunctions {
    * 
    * @return a {@link Function} that returns <code>arg.getName()</code>
    */
-  @NonNull
   @Constant
   public static Function<File, String> fileName() {
     return new AbstractFunction<File, String>() {
@@ -46,7 +44,6 @@ public class IOFunctions {
    * 
    * @return a {@link Function} that returns <code>arg.getPath()</code>
    */
-  @NonNull
   @Constant
   public static Function<File, String> filePath() {
     return new AbstractFunction<File, String>() {

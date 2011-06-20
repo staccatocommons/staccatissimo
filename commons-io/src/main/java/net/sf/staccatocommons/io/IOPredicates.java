@@ -33,7 +33,6 @@ public class IOPredicates {
    * @return a new {@link Predicate}
    * @see SuffixFileFilter
    */
-  @NonNull
   public static Predicate<File> suffix(@NonNull String... suffixes) {
     return new FilePredicate(new SuffixFileFilter(suffixes));
   }
