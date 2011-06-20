@@ -40,6 +40,13 @@ public interface Filterable<A> {
   @Projection
   Stream<A> filter(@NonNull Evaluable<? super A> predicate);
 
+  /**
+   * Preserves all elements but those that are equal to the given one
+   * 
+   * @param element
+   * @return a {@link Stream} that retrieves all elements that are not equal to
+   *         the given one
+   */
   @Projection
   Stream<A> skip(@NonNull A element);
 
