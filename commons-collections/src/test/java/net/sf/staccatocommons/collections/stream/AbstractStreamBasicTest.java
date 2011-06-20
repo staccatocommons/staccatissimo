@@ -74,20 +74,20 @@ public class AbstractStreamBasicTest {
 
   /** Test for implicit sum */
   @Test
-  public void sumImplicit() throws Exception {
+  public void filteredSum() throws Exception {
     assertEquals((Integer) 70, //
       Streams.iterate(10, add(3)) //
         .take(7)
         .filter(Compare.lessThan(25))
         .tail()
-        .sum());
+        .sum(integer()));
   }
 
   /** Test for {@link Stream#average()} **/
   @Test
   public void testAvg() throws Exception {
     assertEquals(9.6, Streams.cons(10.0, 12.0, 15.0, 2.0, 9.0).average(double_()), 0.01);
-    assertEquals(6, (int) Streams.iterate(1, add(1), upTo(11)).average());
+    assertEquals(6, (int) Streams.iterate(1, add(1), upTo(11)).average(integer()));
   }
 
   /** Test for {@link Stream#average()} **/

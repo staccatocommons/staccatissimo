@@ -18,7 +18,6 @@ import java.util.NoSuchElementException;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -96,31 +95,6 @@ public interface Foldable<A> {
   A product(@NonNull NumberType<A> numberType);
 
   /**
-   * Answers the sum of the elements of this {@link Stream} using the Stream's
-   * source as {@link NumberTypeAware}
-   * 
-   * @return the result of adding each element, or zero, if this stream is empty
-   * @throws ClassCastException
-   *           if the source is not an implicit number type
-   * @see Iterables#sum(Iterable)
-   */
-  @NonNull
-  A sum() throws ClassCastException;
-
-  /**
-   * Answers the product of the elements of this {@link Stream} using the
-   * Stream's source as {@link NumberTypeAware}
-   * 
-   * @return the result of multiplying each element, or one, if this stream is
-   *         empty
-   * @throws ClassCastException
-   *           if the source is not an implicit number type
-   * @see Iterables#product(Iterable)
-   */
-  @NonNull
-  A product() throws ClassCastException;
-
-  /**
    * Answers the average of the stream elements, using the given
    * {@link NumberType} for performing addition and division.
    * 
@@ -131,19 +105,5 @@ public interface Foldable<A> {
    *           division
    */
   A average(@NonNull NumberType<A> numberType) throws NoSuchElementException;
-
-  /**
-   * Answers the average of the stream elements, using the stream's source as an
-   * {@link NumberTypeAware}.
-   * 
-   * @return the average of the stream elements
-   * @throws ArithmeticException
-   *           if the stream is empty and number type does not support zero
-   *           division
-   * @throws ClassCastException
-   *           if the source is not an implicit number type
-   * @see #average(NumberType)
-   */
-  A average() throws ClassCastException, NoSuchElementException;
 
 }

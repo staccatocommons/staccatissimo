@@ -18,7 +18,6 @@ import java.util.NoSuchElementException;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
@@ -72,10 +71,5 @@ public final class AppendIterableStream<A> extends AbstractStream<A> {
         return iter.delayedCurrent();
       }
     };
-  }
-
-  @Override
-  public NumberType<A> numberType() {
-    return stream.numberType();
   }
 }

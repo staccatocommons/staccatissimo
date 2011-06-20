@@ -500,28 +500,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   @Override
-  public A sum() {
-    return Iterables.sum(this);
-  }
-
-  @Override
   public A sum(NumberType<A> numberType) {
     return Iterables.sum(this, numberType);
   }
 
   @Override
-  public A product() {
-    return Iterables.product(this);
-  }
-
-  @Override
   public A product(NumberType<A> numberType) {
     return Iterables.product(this, numberType);
-  }
-
-  @Override
-  public A average() {
-    return average(numberType());
   }
 
   @Override
@@ -582,11 +567,6 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   private Comparator<A> natural() {
     return (Comparator<A>) Compare.<Comparable> natural();
-  }
-
-  @Override
-  public NumberType<A> numberType() {
-    throw new ClassCastException("Source can not be casted to NumerTypeAware");
   }
 
   public Stream<A> reverse() {

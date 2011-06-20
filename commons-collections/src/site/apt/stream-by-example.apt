@@ -140,7 +140,7 @@ by decorating other Iterables  or using sources like databases result sets, dire
     Streams
      .from(businessAreas) //
      .map(lambda($(BusinessArea.class).getBucket()))
-     .average();
+     .average(bigDecimal());
 +---
 
 ** Dropping and getting any element

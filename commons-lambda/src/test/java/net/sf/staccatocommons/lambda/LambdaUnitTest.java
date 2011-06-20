@@ -13,8 +13,6 @@
 package net.sf.staccatocommons.lambda;
 
 import static net.sf.staccatocommons.lambda.Lambda.*;
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
-import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
@@ -35,7 +33,6 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.number.NumberTypeAware;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -106,36 +103,6 @@ public class LambdaUnitTest {
     Predicate<Object> lambda = lambda($(Collection.class).contains(50));
     assertFalse(lambda.eval(Arrays.asList(20, 65)));
     assertTrue(lambda.eval(Arrays.asList(20, 60, 50)));
-  }
-
-  /**
-   * Test method for {@link LambdaFactory#lambda(java.lang.Integer)}.
-   */
-  @Test
-  public void testLambdaInteger() {
-    Function<Object, Integer> lambda = lambda($(Collection.class).size());
-    assertThat(lambda, instanceOf(NumberTypeAware.class));
-    assertSame(((NumberTypeAware<Integer>) lambda).numberType(), integer());
-  }
-
-  /**
-   * Test method for {@link LambdaFactory#lambda(java.math.BigDecimal)}.
-   */
-  @Test
-  public void testLambdaBigDecimal() {
-    Function<Object, BigDecimal> lambda = lambda($(Mock.class).bd());
-    assertThat(lambda, instanceOf(NumberTypeAware.class));
-    assertSame(((NumberTypeAware<BigDecimal>) lambda).numberType(), bigDecimal());
-  }
-
-  /**
-   * Test method for {@link LambdaFactory#lambda(java.math.BigInteger)}.
-   */
-  @Test
-  public void testLambdaBigInteger() {
-    Function<Object, BigInteger> lambda = lambda($(Mock.class).bi());
-    assertThat(lambda, instanceOf(NumberTypeAware.class));
-    assertSame(((NumberTypeAware<BigInteger>) lambda).numberType(), bigInteger());
   }
 
   /**

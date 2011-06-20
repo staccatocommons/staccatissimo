@@ -12,15 +12,12 @@
  */
 package net.sf.staccatocommons.lambda;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Collection;
 
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.predicate.Predicate;
-import net.sf.staccatocommons.lang.number.NumberTypeAware;
 
 import org.apache.commons.proxy.ProxyFactory;
 import org.apache.commons.proxy.factory.javassist.JavassistProxyFactory;
@@ -133,54 +130,6 @@ public final class Lambda {
    * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(boolean)
    */
   public static Predicate<Object> lambda(boolean returnType) {
-    return getSharedLambdaFactory().lambda(returnType);
-  }
-
-  /**
-   * Answers a {@link Function} that when applied sends to its argument the
-   * message previously sent to the last stubbed type. The returned function is
-   * {@link NumberTypeAware}
-   * 
-   * Refer to the use cases described in {@link Lambda}
-   * 
-   * @param returnType
-   *          meaningless, this argument is simply ignored
-   * @return a new {@link Function}
-   * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.math.BigDecimal)
-   */
-  public static Function<Object, BigDecimal> lambda(BigDecimal returnType) {
-    return getSharedLambdaFactory().lambda(returnType);
-  }
-
-  /**
-   * Answers a {@link Function} that when applied sends to its argument the
-   * message previously sent to the last stubbed type. The returned function is
-   * {@link NumberTypeAware}
-   * 
-   * Refer to the use cases described in {@link Lambda}
-   * 
-   * @param returnType
-   *          meaningless, this argument is simply ignored
-   * @return a new {@link Function}
-   * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.math.BigInteger)
-   */
-  public static Function<Object, BigInteger> lambda(BigInteger returnType) {
-    return getSharedLambdaFactory().lambda(returnType);
-  }
-
-  /**
-   * Answers a {@link Function} that when applied sends to its argument the
-   * message previously sent to the last stubbed type. The returned function is
-   * {@link NumberTypeAware}
-   * 
-   * Refer to the use cases described in {@link Lambda}
-   * 
-   * @param returnType
-   *          meaningless, this argument is simply ignored
-   * @return a new {@link Function}
-   * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.lang.Integer)
-   */
-  public static Function<Object, Integer> lambda(Integer returnType) {
     return getSharedLambdaFactory().lambda(returnType);
   }
 

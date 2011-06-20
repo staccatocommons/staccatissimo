@@ -20,7 +20,6 @@ import net.sf.staccatocommons.collections.restrictions.Repeatable;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.lang.number.NumberTypeAware;
 
 /**
  * A {@link Stream} is a lazy, rich-interfaced, {@link Iterable}, chained
@@ -93,7 +92,6 @@ public interface Stream<A> extends //
   Deconstructable<A>, //
   Filterable<A>, //
   Foldable<A>, //
-  NumberTypeAware<A>, //
   Interscalable<A>, //
   Iterable<A>, //
   Mappable<A>, //

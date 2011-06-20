@@ -23,10 +23,8 @@ import java.util.NoSuchElementException;
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.AbstractUnmodifiableIterator;
 import net.sf.staccatocommons.lang.internal.ToString;
-import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.value.Immutable;
@@ -46,7 +44,7 @@ import net.sf.staccatocommons.restrictions.value.Unmodifiable;
  * @param <A>
  */
 @Conditionally({ Immutable.class, Serializable.class })
-public class Sequence<A> implements Iterable<A>, NumberTypeAware<A>, Serializable {
+public class Sequence<A> implements Iterable<A>, Serializable {
 
   private static final long serialVersionUID = 8811454338704704525L;
 
@@ -103,10 +101,6 @@ public class Sequence<A> implements Iterable<A>, NumberTypeAware<A>, Serializabl
 
   public String toString() {
     return ToString.toString(this);
-  }
-
-  public NumberType<A> numberType() {
-    return ((NumberTypeAware<A>) generator).numberType();
   }
 
   /**

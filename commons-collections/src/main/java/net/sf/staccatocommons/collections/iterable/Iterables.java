@@ -37,7 +37,6 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.number.NumberTypeAware;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -829,21 +828,6 @@ public class Iterables {
   }
 
   /**
-   * Answers the sum of the elements of the given {@link Iterable} that
-   * implements {@link NumberTypeAware}, using the {@link NumberType} provided
-   * by it.
-   * 
-   * @return the result of adding each element of the {@link Iterable}, using
-   *         the implicit number type, or zero, if <code>iterable</code> is
-   *         empty
-   * @see Iterables#sum(Iterable, NumberType)
-   */
-  @NonNull
-  public static <A, I extends Iterable<A> & NumberTypeAware<A>> A sum(@NonNull I iterable) {
-    return sum(iterable, iterable.numberType());
-  }
-
-  /**
    * Answers the sum of the numeric elements of the given {@link Iterable},
    * using the given {@link NumberType} to implement the addition. If the given
    * <code>iterable</code> is empty, it returns 0.
@@ -866,21 +850,6 @@ public class Iterables {
   @NonNull
   public static <A> A sum(@NonNull Iterable<A> iterable, @NonNull NumberType<A> type) {
     return fold(iterable, type.zero(), type.add());
-  }
-
-  /**
-   * Answers the product of the elements of the given {@link Iterable} that
-   * implements {@link NumberTypeAware}, using the {@link NumberType} provided
-   * by it.
-   * 
-   * @return the result of multiplying each element of the {@link Iterable},
-   *         using the implicit number type, or one, if <code>iterable</code> is
-   *         empty
-   * @see Iterables#product(Iterable, NumberType)
-   */
-  @NonNull
-  public static <A, I extends Iterable<A> & NumberTypeAware<A>> A product(@NonNull I iterable) {
-    return product(iterable, iterable.numberType());
   }
 
   /**

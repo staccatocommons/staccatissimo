@@ -14,7 +14,6 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -33,11 +32,6 @@ public abstract class WrapperStream<A> extends AbstractStream<A> {
 
   protected final Stream<A> getSource() {
     return source;
-  }
-
-  @Override
-  public final NumberType<A> numberType() {
-    return getSource().numberType();
   }
 
 }

@@ -12,12 +12,8 @@
  */
 package net.sf.staccatocommons.lambda;
 
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Arrays;
 
 import net.sf.staccatocommons.check.Validate;
@@ -25,13 +21,10 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.predicate.Predicate;
-import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.function.AbstractFunction3;
-import net.sf.staccatocommons.lang.number.NumberTypeAware;
-import net.sf.staccatocommons.lang.number.internal.NumberTypeFunction;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
@@ -154,67 +147,6 @@ public final class LambdaFactory {
     final Method method = handler.getMethod();
     final Object[] args = handler.getArgs();
     return new AbstractFunction<Object, A>() {
-      public A apply(Object receptor) {
-        return invoke(method, receptor, args);
-      }
-    };
-  }
-
-  /**
-   * Answers a {@link Function} that when applied sends to its argument the
-   * message previously sent to the last stubbed type. The returned function is
-   * {@link NumberTypeAware}
-   * 
-   * Refer to the use cases described in {@link Lambda}
-   * 
-   * @param returnType
-   *          meaningless, this argument is simply ignored
-   * @return a new {@link Function}
-   * @see Lambda
-   */
-  @NonNull
-  public Function<Object, Integer> lambda(Integer returnType) {
-    return numberFunction(integer());
-  }
-
-  /**
-   * Answers a {@link Function} that when applied sends to its argument the
-   * message previously sent to the last stubbed type. The returned function is
-   * {@link NumberTypeAware}
-   * 
-   * Refer to the use cases described in {@link Lambda}
-   * 
-   * @param returnType
-   *          meaningless, this argument is simply ignored
-   * @return a new {@link Function}
-   * @see Lambda
-   */
-  @NonNull
-  public Function<Object, BigDecimal> lambda(BigDecimal returnType) {
-    return numberFunction(bigDecimal());
-  }
-
-  /**
-   * Answers a {@link Function} that when applied sends to its argument the
-   * message previously sent to the last stubbed type. The returned function is
-   * {@link NumberTypeAware}
-   * 
-   * Refer to the use cases described in {@link Lambda}
-   * 
-   * @param returnType
-   *          meaningless, this argument is simply ignored
-   * @return a new {@link Function}
-   * @see Lambda
-   */
-  @NonNull
-  public Function<Object, BigInteger> lambda(BigInteger returnType) {
-    return numberFunction(bigInteger());
-  }
-
-  private <A> Function<Object, A> numberFunction(NumberType<A> type) {
-    final Method method = handler.getMethod();
-    final Object[] args = handler.getArgs();
-    return new NumberTypeFunction<Object, A>(type) {
       public A apply(Object receptor) {
         return invoke(method, receptor, args);
       }

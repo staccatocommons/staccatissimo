@@ -16,9 +16,8 @@ import java.io.Serializable;
 
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
-import net.sf.staccatocommons.lang.number.internal.NumberTypeFunction;
-import net.sf.staccatocommons.lang.number.internal.NumberTypeFunction2;
 import net.sf.staccatocommons.restrictions.Constant;
 
 /**
@@ -64,7 +63,11 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
   @Override
   @Constant
   public AbstractFunction2<A, A, A> add() {
-    return new Add<A>(this);
+    return new AbstractFunction2<A, A, A>() {
+      public A apply(A arg0, A arg1) {
+        return add(arg0, arg1);
+      }
+    };
   }
 
   @Override
@@ -83,71 +86,29 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
 
   @Constant
   public Function<A, A> negate() {
-    return new Negate<A>(this);
+    return new AbstractFunction<A, A>() {
+      public A apply(A arg) {
+        return inverse(arg);
+      }
+    };
   }
 
   @Constant
   public Function<A, A> abs() {
-    return new Abs<A>(this);
+    return new AbstractFunction<A, A>() {
+      public A apply(A arg) {
+        return abs(arg);
+      }
+    };
   }
 
   @Constant
   public Function<A, A> inverse() {
-    return new Inverse<A>(this);
-  }
-
-  private static final class Inverse<A> extends NumberTypeFunction<A, A> {
-    /**
-     * Creates a new {@link Inverse}
-     */
-    private Inverse(NumberType<A> abstractNumberType) {
-      super(abstractNumberType);
-    }
-
-    public A apply(A arg) {
-      return numberType().inverse(arg);
-    }
-  }
-
-  private static final class Abs<A> extends NumberTypeFunction<A, A> {
-    /**
-     * Creates a new {@link Abs}
-     */
-    private Abs(NumberType<A> abstractNumberType) {
-      super(abstractNumberType);
-    }
-
-    public A apply(A arg) {
-      return numberType().abs(arg);
-    }
-  }
-
-  private static final class Negate<A> extends NumberTypeFunction<A, A> {
-    /**
-     * Creates a new {@link Negate}
-     */
-    private Negate(NumberType<A> abstractNumberType) {
-      super(abstractNumberType);
-    }
-
-    public A apply(A arg) {
-      return numberType().negate(arg);
-    }
-  }
-
-  private static final class Add<A> extends NumberTypeFunction2<A> {
-    /**
-     * Creates a new {@link Add}
-     */
-    public Add(NumberType<A> type) {
-      super(type);
-    }
-
-    @Override
-    public A apply(A arg0, A arg1) {
-      return numberType().add(arg0, arg1);
-    }
-
+    return new AbstractFunction<A, A>() {
+      public A apply(A arg) {
+        return inverse(arg);
+      }
+    };
   }
 
   private static final class Multiply<A> extends NumberTypeFunction2<A> {
@@ -164,5 +125,21 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
       return numberType().multiply(arg0, arg1);
     }
 
+  }
+
+  private abstract static class NumberTypeFunction2<A> extends AbstractFunction2<A, A, A> {
+
+    private NumberType<A> numberType;
+
+    /**
+     * Creates a new {@link NumberTypeFunction2}
+     */
+    public NumberTypeFunction2(NumberType<A> type) {
+      this.numberType = type;
+    }
+
+    public NumberType<A> numberType() {
+      return numberType;
+    }
   }
 }
