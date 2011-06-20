@@ -13,42 +13,29 @@
 
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import static java.lang.Math.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.staccatocommons.collections.internal.iterator.TakeIterator;
 import net.sf.staccatocommons.collections.iterable.ModifiableIterables;
-import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.collections.stream.impl.IteratorStream;
+import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.check.NotNegative;
 
 /**
  * @author flbulgarelli
  * 
  */
-public final class TakeStream<A> extends WrapperStream<A> {
+public final class TakeStream<A> extends IteratorStream<A> {
 
   private final int amountOfElements;
 
   /**
    * Creates a new {@link TakeStream}
    */
-  public TakeStream(@NonNull Stream<A> stream, int amountOfElements) {
-    super(stream);
+  public TakeStream(@NonNull Thriter<A> iter, int amountOfElements) {
+    super(new TakeIterator<A>(amountOfElements, iter));
     this.amountOfElements = amountOfElements;
-  }
-
-  @Override
-  public Thriterator<A> iterator() {
-    return new TakeIterator<A>(amountOfElements, getSource().iterator());
-  }
-
-  @Override
-  public Stream<A> take(@NotNegative int amountOfElements) {
-    return new TakeStream<A>(getSource(), min(amountOfElements, this.amountOfElements));
   }
 
   @Override

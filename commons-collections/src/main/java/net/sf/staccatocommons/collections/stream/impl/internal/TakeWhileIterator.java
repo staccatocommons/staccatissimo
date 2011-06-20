@@ -15,40 +15,27 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.Iterator;
 
-import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.iterators.NextGetIterator;
-import net.sf.staccatocommons.lang.predicate.Predicates;
-import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public final class TakeWhileStream<A> extends NextGetWrapperStream<A> {
+public final class TakeWhileIterator<A> extends NextGetIterator<A> {
   private final Evaluable<? super A> predicate;
+  private final Iterator<A> iter;
 
   /**
-   * Creates a new {@link TakeWhileStream}
+   * Creates a new {@link TakeWhileIterator}
    */
-  public TakeWhileStream(@NonNull Stream<A> stream, @NonNull Evaluable<? super A> predicate) {
-    super(stream);
+  public TakeWhileIterator(Iterator<A> iter, Evaluable<? super A> predicate) {
     this.predicate = predicate;
+    this.iter = iter;
   }
 
   @Override
-  public Iterator<A> nextGetIterator() {
-    final Iterator<A> iter = getSource().iterator();
-    return new NextGetIterator<A>() {
-      @Override
-      protected boolean updateNext() {
-        return iter.hasNext() && predicate.eval(setNext(iter.next()));
-      }
-    };
-  }
-
-  @Override
-  public Stream<A> takeWhile(Evaluable<? super A> predicate) {
-    return new TakeWhileStream<A>(getSource(), Predicates.from(this.predicate).and(predicate));
+  protected boolean updateNext() {
+    return iter.hasNext() && predicate.eval(setNext(iter.next()));
   }
 }

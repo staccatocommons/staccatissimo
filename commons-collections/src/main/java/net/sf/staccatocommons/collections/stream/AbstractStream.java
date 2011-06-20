@@ -32,16 +32,16 @@ import java.util.Set;
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.collections.internal.ToPair;
+import net.sf.staccatocommons.collections.internal.iterator.DropIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendIterableStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DeconsTransformStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.DropStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropWhileStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.FilterIndexStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.FilterStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.FilterIndexIterator;
+import net.sf.staccatocommons.collections.stream.impl.internal.FilterIterator;
 import net.sf.staccatocommons.collections.stream.impl.internal.FlatMapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.GroupByStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.MapStream;
@@ -49,7 +49,7 @@ import net.sf.staccatocommons.collections.stream.impl.internal.MemorizedStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.PrependStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.SortedStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.TakeWhileStream;
+import net.sf.staccatocommons.collections.stream.impl.internal.TakeWhileIterator;
 import net.sf.staccatocommons.collections.stream.impl.internal.TransformStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ZipStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedAppendStream;
@@ -119,7 +119,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public Stream<A> filter(final Evaluable<? super A> predicate) {
-    return new FilterStream<A>(this, predicate);
+    return Streams.from(new FilterIterator<A>(iterator(), predicate));
   }
 
   public Stream<A> skip(A element) {
@@ -128,12 +128,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public Stream<A> takeWhile(final Evaluable<? super A> predicate) {
-    return new TakeWhileStream<A>(this, predicate);
+    return Streams.from(new TakeWhileIterator<A>(iterator(), predicate));
   }
 
   @Override
   public Stream<A> take(@NotNegative final int amountOfElements) {
-    return new TakeStream<A>(this, amountOfElements);
+    return new TakeStream<A>(iterator(), amountOfElements);
   }
 
   @Override
@@ -143,7 +143,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public Stream<A> drop(@NotNegative int amountOfElements) {
-    return new DropStream<A>(this, amountOfElements);
+    return Streams.from(new DropIterator<A>(amountOfElements, iterator()));
   }
 
   @Override
@@ -290,7 +290,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   public final Stream<A> filterIndex(Evaluable<Integer> predicate) {
-    return new FilterIndexStream<A>(this, predicate);
+    return Streams.from(new FilterIndexIterator<A>(iterator(), predicate));
   }
 
   public final Stream<A> skipIndex(int index) {
@@ -468,7 +468,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
   public Pair<A, Stream<A>> decons() {
     Iterator<A> iter = iterator();
     VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams can not be deconstructed");
-    return _(iter.next(), Streams.from(iter)); // FIXME properties are lost
+    return _(iter.next(), Streams.from(iter));
   }
 
   @Override
@@ -480,7 +480,6 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public Stream<A> tail() {
-    // TODO not very efficient
     VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams have not tail");
     return drop(1);
   }

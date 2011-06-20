@@ -15,41 +15,32 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.Iterator;
 
-import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.iterators.NextGetIterator;
-import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
- * 
  */
-public final class FilterStream<A> extends NextGetWrapperStream<A> {
-  private final Evaluable<? super A> predicate;
+public final class FilterIndexIterator<A> extends NextGetIterator<A> {
+  private final Evaluable<Integer> predicate;
+  private final Iterator<A> iter;
+  private int i = 0;
 
   /**
-   * Creates a new {@link FilterStream}
+   * Creates a new {@link FilterIndexIterator}
    */
-  public FilterStream(@NonNull Stream<A> stream, @NonNull Evaluable<? super A> predicate) {
-    super(stream);
+  public FilterIndexIterator(@NonNull Iterator<A> iter, @NonNull Evaluable<Integer> predicate) {
     this.predicate = predicate;
+    this.iter = iter;
   }
 
-  @Override
-  protected Iterator<A> nextGetIterator() {
-    final Iterator<A> iter = getSource().iterator();
-    return new NextGetIterator<A>() {
-      protected boolean updateNext() {
-        while (iter.hasNext())
-          if (predicate.eval(setNext(iter.next())))
-            return true;
-        return false;
-      }
-    };
-  }
-
-  public Stream<A> filter(Evaluable<? super A> predicate) {
-    return new FilterStream<A>(getSource(), Predicates.from(this.predicate).and(predicate));
+  protected boolean updateNext() {
+    while (iter.hasNext()) {
+      setNext(iter.next());
+      if (predicate.eval(i++))
+        return true;
+    }
+    return false;
   }
 }
