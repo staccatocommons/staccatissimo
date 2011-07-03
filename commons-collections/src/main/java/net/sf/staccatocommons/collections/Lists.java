@@ -13,6 +13,8 @@
 
 package net.sf.staccatocommons.collections;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -21,6 +23,7 @@ import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.MinSize;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotEmpty;
+import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 import org.apache.commons.lang.ObjectUtils;
 
@@ -159,4 +162,17 @@ public class Lists {
     return (Class) List.class;
   }
 
+  /**
+   * Answers a new {@link Unmodifiable} list with the given elements.
+   * 
+   * This method is not equivalent to {@link Arrays#asList(Object...)}, which
+   * answers mutable lists
+   * 
+   * @param <A>
+   * @param elements
+   * @return an unmodifiable list
+   */
+  public static <A> List<A> from(A... elements) {
+    return Collections.unmodifiableList(Arrays.asList(elements));
+  }
 }

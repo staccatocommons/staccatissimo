@@ -15,11 +15,15 @@ package net.sf.staccatocommons.collections;
 
 import static net.sf.staccatocommons.collections.iterable.Iterables.*;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
+import net.sf.staccatocommons.lang.MapBuilder;
 import net.sf.staccatocommons.lang.None;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 /**
  * Class methods for dealing with maps
@@ -126,6 +130,22 @@ public class Maps {
    */
   public static boolean isNullOrEmpty(Map<?, ?> map) {
     return map == null || map.isEmpty();
+  }
+
+  /**
+   * Answers a new {@link Unmodifiable} map with the given entries
+   * 
+   * @param <K>
+   * @param <V>
+   * @param entries
+   *          the new map entries
+   * @return a new unmodifiable map
+   */
+  public static <K, V> Map<K, V> from(Pair<K, V>... entries) {
+    MapBuilder<K, V, Map<K, V>> b = MapBuilder.from(new LinkedHashMap<K, V>(entries.length));
+    for (Pair<K, V> p : entries)
+      b.with(p);
+    return b.build();
   }
 
 }
