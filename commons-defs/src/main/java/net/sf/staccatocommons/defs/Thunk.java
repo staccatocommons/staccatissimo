@@ -13,7 +13,6 @@
 
 package net.sf.staccatocommons.defs;
 
-
 /**
  * A {@link Thunk} is a computation that takes no arguments a returns a value.
  * In other words, is an object that is capable of providing another one,
@@ -26,7 +25,7 @@ package net.sf.staccatocommons.defs;
  * 
  * <p>
  * Notice: the meaning of the term "Thunk" is sometimes vague and varies
- * depending the context and author. Within Staccato-Commons-Lang, thunk
+ * depending the context and author. Within Staccato-Commons, thunk
  * <strong>must</strong> be interpreted a "no arguments expression"
  * </p>
  * 
