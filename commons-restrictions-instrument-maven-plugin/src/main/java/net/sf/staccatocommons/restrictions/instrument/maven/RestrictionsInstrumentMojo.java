@@ -30,6 +30,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * 
  * @author flbulgarelli
  * @goal instrument
+ * @requiresDependencyResolution
  */
 public class RestrictionsInstrumentMojo extends AbstractMojo {
 

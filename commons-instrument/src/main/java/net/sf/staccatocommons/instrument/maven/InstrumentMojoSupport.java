@@ -23,7 +23,6 @@ import net.sf.staccatocommons.instrument.config.InstrumenterConfigurer;
 import net.sf.staccatocommons.io.Directory;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
-import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.apache.maven.artifact.Artifact;
@@ -85,7 +84,7 @@ public abstract class InstrumentMojoSupport {
   private String createClassPathString() {
     return Streams //
       .from(projectArtifactsList)
-      .filter(Predicates.equal(artifact).not())
+      .skip(artifact)
       .map(new AbstractFunction<Artifact, String>() {
         public String apply(Artifact arg) {
           try {
