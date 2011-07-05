@@ -79,7 +79,9 @@ Projects
  * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument}staccato-commons-restrictions-instrument}} and 
 {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrumentmavenplugin}staccato-commons-restrictions-instrument-maven-plugin}} 
  
- * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslambda}staccato-commons-lambda}} 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslambda}staccato-commons-lambda}}
+ 
+ * {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsdynamic}staccato-commons-dynamic}} 
  
  
  * staccato-commons-testing
