@@ -37,14 +37,14 @@
         href="http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrumentmavenplugin/index.html"/>
     </links>
 
-    <menu name="Staccato-Commons">
+    <menu name="Staccato-Commons" inherit="top">
       <item name="Introduction" href="index.html"/>
       <item name="Maven Integration" href="maven-integration.html"/>
       <item name="Download" href="http://sourceforge.net/projects/staccatocommons/files"/>
       <item name="Browse Code" href="http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons"/>      
       <item name="General Information" href="http://sourceforge.net/projects/staccatocommons/"/>
     </menu>    
-    <menu ref="reports"/>
+    <menu ref="reports" inherit="top"/>
   </body>
   <poweredBy>
     <logo name="Maven" href="http://maven.apache.org/"
