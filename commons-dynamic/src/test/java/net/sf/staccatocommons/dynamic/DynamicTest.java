@@ -220,4 +220,10 @@ public class DynamicTest {
     assertEquals(mi.intValue(), 1);
   }
 
+  /***/
+  @Test
+  public void fromClassName() throws Exception {
+    assertEquals(30, Dynamics.fromClassName("net.sf.staccatocommons.dynamic.DynamicTest$Adder").send("add", 10, 20));
+  }
+
 }

@@ -83,13 +83,13 @@ public final class ReflectiveDynamic extends AbstractDynamic {
     return method;
   }
 
-  private MethodDescriptor newDescriptor(final String selector, final Class... argTypes) {
+  private MethodDescriptor newDescriptor(final String selector, final Class<?>... argTypes) {
     MethodDescriptor key = new MethodDescriptor(target.getClass(), selector, argTypes);
     return key;
   }
 
-  private Method findMethod(final String selector, final Class[] argsTypes) {
-    for (Class c = target.getClass(); c != null; c = c.getSuperclass()) {
+  private Method findMethod(final String selector, final Class<?>[] argsTypes) {
+    for (Class<?> c = target.getClass(); c != null; c = c.getSuperclass()) {
       for (Method m : c.getDeclaredMethods()) {
         if (isDesiredMethod(selector, m, argsTypes)) {
           return m;
@@ -99,26 +99,26 @@ public final class ReflectiveDynamic extends AbstractDynamic {
     return null;
   }
 
-  private static boolean isDesiredMethod(final String selector, Method method, final Class[] argTypes) {
+  private static boolean isDesiredMethod(final String selector, Method method, final Class<?>[] argTypes) {
     return Modifier.isPublic(method.getModifiers()) //
       && method.getParameterTypes().length == argTypes.length //
       && method.getName().equals(selector) //
       && argTypesMatch(argTypes, method.getParameterTypes()); //
   }
 
-  private static boolean argTypesMatch(Class[] passedArgTypes, Class[] actualArgTypes) {
+  private static boolean argTypesMatch(Class<?>[] passedArgTypes, Class<?>[] actualArgTypes) {
     for (int i = 0; i < passedArgTypes.length; i++) {
-      Class actual = actualArgTypes[i];
-      Class passed = passedArgTypes[i];
+      Class<?> actual = actualArgTypes[i];
+      Class<?> passed = passedArgTypes[i];
       if (!(actual.isAssignableFrom(passed) || PrimitiveWrappers.isPrimitiveWrapperFor(actual, passed)))
         return false;
     }
     return true;
   }
 
-  private static Class[] getArgTypes(Object[] args) {
+  private static Class<?>[] getArgTypes(Object[] args) {
     int arguments = args.length;
-    Class[] parameterTypes = new Class[arguments];
+    Class<?>[] parameterTypes = new Class[arguments];
     for (int i = 0; i < arguments; i++) {
       parameterTypes[i] = args[i].getClass();
     }

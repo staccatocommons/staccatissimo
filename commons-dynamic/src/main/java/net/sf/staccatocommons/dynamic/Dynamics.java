@@ -14,6 +14,7 @@ package net.sf.staccatocommons.dynamic;
 
 import net.sf.staccatocommons.dynamic.internal.NullDynamic;
 import net.sf.staccatocommons.dynamic.internal.ReflectiveDynamic;
+import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -46,8 +47,9 @@ public class Dynamics {
    * @param object
    * @return a new {@link Dynamic}, or {@link #null_()}, if the object is null
    */
+  @NonNull
   public static Dynamic nullSafeFrom(Object object) {
-    return object != null ? from(object) : NULL;
+    return object != null ? from(object) : Dynamics.null_();
   }
 
   /**
@@ -58,8 +60,45 @@ public class Dynamics {
    * 
    * @return the null dynamic
    */
+  @Constant
   public static Dynamic null_() {
     return NULL;
+  }
+
+  /**
+   * Answer a new {@link Dynamic} that wraps a new instance of a class for its
+   * given classname
+   * 
+   * @param classname
+   *          the class name
+   * @return a new Dynamic wrapper for a new instance of the given class
+   * @throws InstantiationFailedException
+   *           if class can not be instantiated
+   */
+  public static Dynamic fromClassName(@NonNull String classname) {
+    try {
+      return fromClass(Class.forName(classname));
+    } catch (Exception e) {
+      throw new InstantiationFailedException(e);
+    }
+  }
+
+  /**
+   * Answer a new {@link Dynamic} that wraps a new instance of the given class
+   * 
+   * @param clazz
+   *          the class to instantiate
+   * @return a new Dynamic wrapper for a new instance of the given class
+   * @throws InstantiationFailedException
+   *           if class can not be instantiated
+   */
+  @NonNull
+  public static Dynamic fromClass(@NonNull Class<?> clazz) {
+    try {
+      return from(clazz.newInstance());
+    } catch (Exception e) {
+      throw new InstantiationFailedException(e);
+    }
   }
 
 }

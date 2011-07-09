@@ -20,14 +20,14 @@ import java.util.Arrays;
  * @author flbulgarelli
  */
 public final class MethodDescriptor {
-  private final Class receptor;
+  private final Class<?> receptor;
   private final String selector;
-  private final Class[] argTypes;
+  private final Class<?>[] argTypes;
 
   /**
    * Creates a new {@link MethodDescriptor}
    */
-  public MethodDescriptor(Class receptor, String name, Class[] argTypes) {
+  public MethodDescriptor(Class<?> receptor, String name, Class<?>[] argTypes) {
     this.receptor = receptor;
     this.selector = name;
     this.argTypes = argTypes;
@@ -83,7 +83,7 @@ public final class MethodDescriptor {
   /**
    * @return the argTypes
    */
-  public Class[] getArgTypes() {
+  public Class<?>[] getArgTypes() {
     return argTypes;
   }
 
@@ -94,7 +94,7 @@ public final class MethodDescriptor {
     return String.format("Message %s(%s) not understood by class %s", selector, toString(argTypes), receptor);
   }
 
-  private static String toString(Class[] argumentTypes) {
+  private static String toString(Class<?>[] argumentTypes) {
     if (argumentTypes.length == 0)
       return "";
     StringBuilder sb = new StringBuilder(argumentTypes[0].getName());

@@ -22,7 +22,7 @@ import java.util.Map;
 public class PrimitiveWrappers {
 
   @SuppressWarnings("serial")
-  private static final Map<Class, Class> MAP = new IdentityHashMap<Class, Class>(6) {
+  private static final Map<Class<?>, Class<?>> MAP = new IdentityHashMap<Class<?>, Class<?>>(6) {
     {
       put(Integer.TYPE, Integer.class);
       put(Long.TYPE, Long.class);
@@ -44,7 +44,7 @@ public class PrimitiveWrappers {
   }
 
   /** If a class is the wrapper of the another */
-  public static boolean isPrimitiveWrapperFor(Class original, Class wrapper) {
+  public static boolean isPrimitiveWrapperFor(Class<?> original, Class<?> wrapper) {
     return original.isPrimitive() && PrimitiveWrappers.getWrapperForType(original) == wrapper;
   }
 
