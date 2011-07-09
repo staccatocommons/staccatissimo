@@ -19,6 +19,7 @@ import java.util.Deque;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.collections.restrictions.Repeatable;
@@ -37,7 +38,8 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.EnumerationIterator;
-import net.sf.staccatocommons.lang.function.Functions;
+import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
+import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.sequence.StopConditions;
@@ -203,7 +205,7 @@ public class Streams {
    * @see Sequence#from(Object, Applicable, Evaluable)
    */
   @Projection
-  public static <A> Stream<A> iterate(@NonNull A start, @NonNull Applicable<A, A> generator,
+  public static <A> Stream<A> iterate(@NonNull A start, @NonNull Applicable<? super A, ? extends A> generator,
     @NonNull Evaluable<A> stopCondition) {
     return from(Sequence.from(start, generator, stopCondition));
   }
@@ -231,8 +233,22 @@ public class Streams {
    * @return a new {@link Stream} that repeats the given element
    */
   @Projection
-  public static <A> Stream<A> repeat(A element) {
-    return iterate(element, Functions.<A> identity());
+  public static <A> Stream<A> repeat(final A element) {
+    return from(new AbstractThriterator<A>() {
+      public boolean hasNext() {
+        return true;
+      }
+
+      public A next() {
+        return element;
+      }
+
+      public void advanceNext() throws NoSuchElementException {}
+
+      public A current() {
+        return element;
+      }
+    });
   }
 
   /**
@@ -246,8 +262,17 @@ public class Streams {
    */
   @Projection
   @ForceRestrictions
-  public static <A> Stream<A> repeat(@NonNull Thunk<A> thunk) {
-    return iterate(thunk.value(), Functions.constant(thunk));
+  public static <A> Stream<A> repeat(@NonNull final Thunk<A> thunk) {
+    return from(new NextThriterator<A>() {
+
+      public boolean hasNext() {
+        return true;
+      }
+
+      public A next() {
+        return thunk.value();
+      }// TODO revise
+    });
   }
 
   // private static <A> Stream<A> cycle(@NonNull A element) {

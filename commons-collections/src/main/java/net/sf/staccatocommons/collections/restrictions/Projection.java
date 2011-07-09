@@ -30,7 +30,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * Projection methods <strong>should</strong> return objects that share the same
  * interface of the receptor objection.
  * 
- * Porjections <strong>may</strong> be lazy or eager- that is, perform the
+ * Projections <strong>may</strong> be lazy or eager- that is, perform the
  * actual operation on demand or not.
  * 
  * {@link Projection} methods <strong>must</strong> be non null, so there is no
