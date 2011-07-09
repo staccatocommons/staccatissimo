@@ -269,9 +269,9 @@ public class Streams {
         return true;
       }
 
-      public A next() {
+      public A nextImpl() {
         return thunk.value();
-      }// TODO revise
+      }
     });
   }
 

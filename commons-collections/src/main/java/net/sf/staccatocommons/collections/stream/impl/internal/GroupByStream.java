@@ -55,7 +55,7 @@ public final class GroupByStream<A> extends AbstractStream<Stream<A>> {
         return remaining || iter.hasNext();
       }
 
-      public Stream<A> next() {
+      public Stream<A> nextImpl() {
         if (!hasNext())
           throw new NoSuchElementException();
         if (!remaining)

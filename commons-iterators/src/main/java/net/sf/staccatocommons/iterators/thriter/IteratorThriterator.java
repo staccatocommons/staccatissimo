@@ -35,7 +35,7 @@ public class IteratorThriterator<A> extends NextThriterator<A> {
     return iter.hasNext();
   }
 
-  public A next() {
+  public A nextImpl() {
     return iter.next();
   }
 

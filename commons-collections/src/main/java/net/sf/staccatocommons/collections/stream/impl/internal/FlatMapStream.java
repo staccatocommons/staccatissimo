@@ -59,7 +59,7 @@ public final class FlatMapStream<A, B> extends AbstractStream<B> {
         return false;
       }
 
-      public B next() {
+      public B nextImpl() {
         if (!hasNext())
           throw new NoSuchElementException();
         return subIter.next();
