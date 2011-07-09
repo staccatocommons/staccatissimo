@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream.impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
@@ -64,6 +65,10 @@ public class CollectionStream<A> extends StrictStream<A> {
   @Override
   public List<A> toList() {
     return Iterables.toList(getCollection());
+  }
+
+  public Set<A> toSet() {
+    return Iterables.toSet(getCollection());
   }
 
   @Override

@@ -58,4 +58,5 @@ public final class ZipStream<C, A, B> extends AbstractStream<C> {
   public boolean isEmpty() {
     return stream.isEmpty() || Iterables.isEmpty(iterable);
   }
+
 }

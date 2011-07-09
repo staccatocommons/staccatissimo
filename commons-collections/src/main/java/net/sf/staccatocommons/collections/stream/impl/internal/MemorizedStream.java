@@ -14,6 +14,7 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.EmptyThriterator;
@@ -24,7 +25,7 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
  * @author flbulgarelli
  * 
  */
-public class MemorizedStream<A> extends WrapperStream<A> {
+public class MemorizedStream<A> extends AbstractStream<A> {
 
   private SingleLinkedDelayedQueue<A> previous = new SingleLinkedDelayedQueue<A>();
 
@@ -34,9 +35,8 @@ public class MemorizedStream<A> extends WrapperStream<A> {
    * 
    * Creates a new {@link MemorizedStream}
    */
-  public MemorizedStream(Stream<A> source) {
-    super(source);
-    this.remaining = source.iterator();
+  public MemorizedStream(Thriterator<A> source) {
+    this.remaining = source;
   }
 
   @Override

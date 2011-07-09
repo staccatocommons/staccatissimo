@@ -13,14 +13,16 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.iterators.AppendThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.lang.predicate.Equiv;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class AppendStream<A> extends WrapperStream<A> {
+public class AppendStream<A> extends AbstractAppendStream<A> {
 
   private final A element;
 
@@ -34,6 +36,18 @@ public class AppendStream<A> extends WrapperStream<A> {
 
   public Thriterator<A> iterator() {
     return new AppendThriterator(getSource().iterator(), element);
+  }
+
+  public boolean all(Evaluable<? super A> predicate) {
+    return getSource().all(predicate) && predicate.eval(element);
+  }
+
+  public boolean any(Evaluable<? super A> predicate) {
+    return getSource().any(predicate) || predicate.eval(element);
+  }
+
+  public boolean contains(A element) {
+    return getSource().contains(element) || Equiv.equalNullSafe().eval(element, this.element);
   }
 
 }

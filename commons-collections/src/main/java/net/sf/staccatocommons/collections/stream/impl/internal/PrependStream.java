@@ -30,7 +30,7 @@ import net.sf.staccatocommons.lang.tuple.Pair;
  * 
  * @param <A>
  */
-public class PrependStream<A> extends WrapperStream<A> {
+public class PrependStream<A> extends AbstractAppendStream<A> {
 
   public Thriterator<A> iterator() {
     return new PrependThriterator<A>(head(), tailIterator());
@@ -44,11 +44,6 @@ public class PrependStream<A> extends WrapperStream<A> {
   public PrependStream(A head, Stream<A> source) {
     super(source);
     this.head = head;
-  }
-
-  @Override
-  public final boolean isEmpty() {
-    return false;
   }
 
   @Override

@@ -33,6 +33,9 @@ import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.collections.internal.iterator.DropIterator;
+import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
+import net.sf.staccatocommons.collections.internal.iterator.FilterIterator;
+import net.sf.staccatocommons.collections.internal.iterator.TakeWhileIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
@@ -40,8 +43,6 @@ import net.sf.staccatocommons.collections.stream.impl.internal.AppendIterableStr
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropWhileStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.FilterIndexIterator;
-import net.sf.staccatocommons.collections.stream.impl.internal.FilterIterator;
 import net.sf.staccatocommons.collections.stream.impl.internal.FlatMapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.GroupByStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.MapStream;
@@ -49,7 +50,6 @@ import net.sf.staccatocommons.collections.stream.impl.internal.MemorizedStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.PrependStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.SortedStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.TakeStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.TakeWhileIterator;
 import net.sf.staccatocommons.collections.stream.impl.internal.TransformStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.ZipStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedAppendStream;
@@ -337,7 +337,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public Stream<A> memorize() {
-    return new MemorizedStream<A>(this);
+    return new MemorizedStream<A>(iterator());
   }
 
   @Override

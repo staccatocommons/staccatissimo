@@ -31,4 +31,8 @@ public abstract class StrictStream<A> extends AbstractStream<A> {
     return this;
   }
 
+  protected int atMost(int amountOfElements) {
+    return Math.min(amountOfElements, size());
+  }
+
 }

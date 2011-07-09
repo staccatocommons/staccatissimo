@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
+import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
@@ -25,7 +26,9 @@ import net.sf.staccatocommons.iterators.thriter.Thriterators;
  * @author flbulgarelli
  * 
  */
-public final class SortedStream<A> extends WrapperStream<A> {
+public final class SortedStream<A> extends AbstractStream<A> {
+
+  private final Stream<A> source;
 
   private final Comparator<? super A> comparator;
 
@@ -33,7 +36,7 @@ public final class SortedStream<A> extends WrapperStream<A> {
    * Creates a new {@link SortedStream}
    */
   public SortedStream(Stream<A> source, Comparator<A> comparator) {
-    super(source);
+    this.source = source;
     this.comparator = comparator;
   }
 
@@ -60,5 +63,12 @@ public final class SortedStream<A> extends WrapperStream<A> {
   @Override
   public A last() {
     return maximumBy(comparator);
+  }
+
+  /**
+   * @return the source
+   */
+  private Stream<A> getSource() {
+    return source;
   }
 }

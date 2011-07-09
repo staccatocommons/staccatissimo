@@ -56,6 +56,10 @@ public abstract class AbstractTransformStream<A, B> extends AbstractStream<B> {
     return applyCached().isEmpty();
   }
 
+  public final int size() {
+    return applyCached().size();
+  }
+
   @Override
   public final List<B> toList() {
     return applyCached().toList();

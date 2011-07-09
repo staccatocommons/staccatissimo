@@ -13,6 +13,7 @@
 
 package net.sf.staccatocommons.collections.stream.impl;
 
+import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.iterators.CharSequenceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -34,4 +35,21 @@ public final class CharSequenceStream extends StrictStream<Character> {
   public Thriterator<Character> iterator() {
     return new CharSequenceThriterator(charSequence);
   }
+
+  public int size() {
+    return charSequence.length();
+  }
+
+  public Character get(int n) {
+    return charSequence.charAt(n);
+  }
+
+  public Stream<Character> take(int amountOfElements) {
+    return new CharSequenceStream(charSequence.subSequence(0, atMost(amountOfElements)));
+  }
+
+  public Stream<Character> drop(int amountOfElements) {
+    return new CharSequenceStream(charSequence.subSequence(atMost(amountOfElements), size()));
+  }
+
 }

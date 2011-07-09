@@ -19,19 +19,27 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 /**
  * @author flbulgarelli
  */
-public abstract class WrapperStream<A> extends AbstractStream<A> {
+public abstract class AbstractAppendStream<A> extends AbstractStream<A> {
 
   private final Stream<A> source;
 
   /**
-   * Creates a new {@link WrapperStream}
+   * Creates a new {@link AbstractAppendStream}
    */
-  public WrapperStream(@NonNull Stream<A> source) {
+  public AbstractAppendStream(@NonNull Stream<A> source) {
     this.source = source;
   }
 
   protected final Stream<A> getSource() {
     return source;
+  }
+
+  public final int size() {
+    return getSource().size() + 1;
+  }
+
+  public final boolean isEmpty() {
+    return false;
   }
 
 }

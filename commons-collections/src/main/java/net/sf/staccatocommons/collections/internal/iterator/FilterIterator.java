@@ -11,7 +11,7 @@
  *  GNU Lesser General Public License for more details.
  */
 
-package net.sf.staccatocommons.collections.stream.impl.internal;
+package net.sf.staccatocommons.collections.internal.iterator;
 
 import java.util.Iterator;
 

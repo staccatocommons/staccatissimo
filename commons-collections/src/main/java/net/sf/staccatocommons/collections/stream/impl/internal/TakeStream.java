@@ -44,4 +44,5 @@ public final class TakeStream<A> extends IteratorStream<A> {
     ModifiableIterables.addAll(list, this);
     return list;
   }
+
 }

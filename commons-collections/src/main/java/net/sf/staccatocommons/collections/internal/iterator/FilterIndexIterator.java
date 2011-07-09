@@ -11,31 +11,36 @@
  *  GNU Lesser General Public License for more details.
  */
 
-package net.sf.staccatocommons.collections.stream.impl.internal;
+package net.sf.staccatocommons.collections.internal.iterator;
 
 import java.util.Iterator;
 
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.iterators.NextGetIterator;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
- * 
  */
-public final class TakeWhileIterator<A> extends NextGetIterator<A> {
-  private final Evaluable<? super A> predicate;
+public final class FilterIndexIterator<A> extends NextGetIterator<A> {
+  private final Evaluable<Integer> predicate;
   private final Iterator<A> iter;
+  private int i = 0;
 
   /**
-   * Creates a new {@link TakeWhileIterator}
+   * Creates a new {@link FilterIndexIterator}
    */
-  public TakeWhileIterator(Iterator<A> iter, Evaluable<? super A> predicate) {
+  public FilterIndexIterator(@NonNull Iterator<A> iter, @NonNull Evaluable<Integer> predicate) {
     this.predicate = predicate;
     this.iter = iter;
   }
 
-  @Override
   protected boolean updateNext() {
-    return iter.hasNext() && predicate.eval(setNext(iter.next()));
+    while (iter.hasNext()) {
+      setNext(iter.next());
+      if (predicate.eval(i++))
+        return true;
+    }
+    return false;
   }
 }
