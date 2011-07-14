@@ -17,6 +17,7 @@ import static net.sf.staccatocommons.collections.iterable.Iterables.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.lang.MapBuilder;
 import net.sf.staccatocommons.lang.None;
@@ -51,6 +52,28 @@ public class Maps {
       return Option.someNull();
 
     return Option.none();
+  }
+
+  /**
+   * Answers the value for the given key. Throws a
+   * {@link NoSuchElementException} if there is no mapping for it
+   * 
+   * @param <V>
+   * @param map
+   * @param key
+   *          the key to lookup
+   * @return Some(value) if the key exists, None, otherwise
+   */
+  @NonNull
+  public static <V> V getExistent(@NonNull Map<?, V> map, Object key) {
+    V value = map.get(key);
+    if (value != null)
+      return value;
+
+    if (map.containsKey(key))
+      return null;
+
+    throw new NoSuchElementException("No entry found for key " + key);
   }
 
   /**
