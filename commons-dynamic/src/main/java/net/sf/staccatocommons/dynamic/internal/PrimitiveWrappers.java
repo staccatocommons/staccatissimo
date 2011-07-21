@@ -22,7 +22,7 @@ import java.util.Map;
 public class PrimitiveWrappers {
 
   @SuppressWarnings("serial")
-  private static final Map<Class<?>, Class<?>> MAP = new IdentityHashMap<Class<?>, Class<?>>(6) {
+  private static final Map<Class<?>, Class<?>> MAP = new IdentityHashMap<Class<?>, Class<?>>(8) {
     {
       put(Integer.TYPE, Integer.class);
       put(Long.TYPE, Long.class);
