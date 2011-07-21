@@ -27,23 +27,18 @@
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.staccatocommons</groupId>
-			<artifactId>commons-iterators</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-lambda</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
             <groupId>net.sf.staccatocommons</groupId>
             <artifactId>commons-testing</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 	</dependencies>
@@ -56,51 +51,4 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<profiles>
-		<profile>
-			<id>noinstrument</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.5</version>
-						<configuration>
-							<excludes>
-								<exclude>**/ClassesInstrumentedDummyTest.java</exclude>
-							</excludes>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>instrument</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>net.sf.staccatocommons</groupId>
-						<artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
-						<version>1.0-SNAPSHOT</version>
-						<configuration>
-							<ignoreReturnChecks>true</ignoreReturnChecks>
-							<ignoreConstants>false</ignoreConstants>
-							<ignoreChecks>false</ignoreChecks>
-						</configuration>
-						<executions>
-							<execution>
-								<phase>process-classes</phase>
-								<goals>
-									<goal>instrument</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>

@@ -31,9 +31,9 @@ Getting started
   Staccato-Commons-Check resolves problems related with implementing preconditions and postconditions checks. 
   Descriptions of such problems, solutions and examples can be found in the following links:
  
- * {{{docs/api-walkthrough.html}API Walkthrough}} 
+ * {{{./docs/api-walkthrough.html}API Walkthrough}} 
  
- * {{{docs/check-by-example.html}Check by example}}
+ * {{{./docs/check-by-example.html}Check by example}}
   
 
 What is next?
