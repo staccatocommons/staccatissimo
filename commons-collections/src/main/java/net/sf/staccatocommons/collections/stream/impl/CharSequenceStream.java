@@ -17,6 +17,7 @@ import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.iterators.CharSequenceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.check.NotNegative;
 
 /**
  * @author flbulgarelli
@@ -48,7 +49,7 @@ public final class CharSequenceStream extends StrictStream<Character> {
     return new CharSequenceStream(charSequence.subSequence(0, atMost(amountOfElements)));
   }
 
-  public Stream<Character> drop(int amountOfElements) {
+  public Stream<Character> drop(@NotNegative int amountOfElements) {
     return new CharSequenceStream(charSequence.subSequence(atMost(amountOfElements), size()));
   }
 

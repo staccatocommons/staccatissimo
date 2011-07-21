@@ -17,6 +17,7 @@ import java.util.List;
 
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.check.NotNegative;
 
 /**
  * 
@@ -59,7 +60,7 @@ public class ListStream<A> extends CollectionStream<A> {
     return new ListStream<A>(getList().subList(0, atMost(amountOfElements)));
   }
 
-  public Stream<A> drop(int amountOfElements) {
+  public Stream<A> drop(@NotNegative int amountOfElements) {
     return new ListStream<A>(getList().subList(atMost(amountOfElements), size()));
   }
 
