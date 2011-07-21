@@ -118,6 +118,17 @@ public class LambdaUnitTest {
     assertFalse(list.contains(20));
   }
 
+  /***/
+  @Test
+  public void testLambda2Curried() {
+    Function2<Object, Object, List> lambda2 = lambda2($(List.class).subList(_(Integer.class), 3));
+    ArrayList<Integer> list = new ArrayList<Integer>(Arrays.asList(60, 20, 3));
+
+    assertEquals(3, lambda2.apply(list, 0).size());
+    assertEquals(2, lambda2.apply(list, 1).size());
+    assertEquals(1, lambda2.apply(list, 2).size());
+  }
+
   /**
    * Test method for {@link LambdaFactory#lambda3(java.lang.Object)}.
    */

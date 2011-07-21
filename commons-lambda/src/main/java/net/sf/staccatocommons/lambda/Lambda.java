@@ -18,6 +18,7 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.predicate.Predicate;
+import net.sf.staccatocommons.lambda.internal.Defaults;
 
 import org.apache.commons.proxy.ProxyFactory;
 import org.apache.commons.proxy.factory.javassist.JavassistProxyFactory;
@@ -134,9 +135,15 @@ public final class Lambda {
   }
 
   /**
-   * @param <A>
+   * Answers a {@link Function2} that when applied sends to its first argument
+   * the message previously sent to the last stubbed type, passing its second
+   * argument as the first message argument. Refer to the use cases described in
+   * {@link Lambda}
+   * 
    * @param returnType
-   * @return
+   *          meaningless, this argument is simply ignored
+   * @return a new {@link Function2}
+   * 
    * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda2(java.lang.Object)
    */
   public static <A> Function2<Object, Object, A> lambda2(A returnType) {
@@ -144,12 +151,17 @@ public final class Lambda {
   }
 
   /**
-   * Answers a new {@link Function3} using a shared, thread safe
-   * {@link LambdaFactory}
+   * Answers a {@link Function3} that when applied sends to its first argument
+   * the message previously sent to the last stubbed type, passing its second
+   * argument as the first message argument, and its third argument to the
+   * second message argument.
    * 
-   * @param <A>
+   * Refer to the use cases described in {@link Lambda}
+   * 
    * @param returnType
+   *          meaningless, this argument is simply ignored
    * @return a new {@link Function3}
+   * 
    * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda3(java.lang.Object)
    */
   public static <A> Function3<Object, Object, Object, A> lambda3(A returnType) {
@@ -170,10 +182,20 @@ public final class Lambda {
     return SHARED_LAMBDA_FACTORY.get();
   }
 
+  /**
+   * Answers a placeholder for lambdas arguments with arity > 1.
+   * 
+   * @param <A>
+   * @param clazz
+   * @return a placeholder for a lambda argument. Its value is opaque to client
+   *         code
+   */
   public static <A> A _(Class<A> clazz) {
-    return null;
+    return Defaults.getDefault(clazz);
   }
 
+  /**
+   * Equivalent to _(Object.class)
+   */
   public static final Object _ = null;
-
 }

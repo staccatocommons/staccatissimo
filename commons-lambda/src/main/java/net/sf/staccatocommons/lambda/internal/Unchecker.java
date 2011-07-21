@@ -10,22 +10,23 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lambda;
+package net.sf.staccatocommons.lambda.internal;
 
 /**
  * @author flbulgarelli
  * 
  */
-final class Unchecker<E extends Throwable> {
+public final class Unchecker<E extends Throwable> {
 
   private static final Unchecker<RuntimeException> INSTANCE = new Unchecker<RuntimeException>();
 
   private Unchecker() {}
 
-  public void throwUncheckedImpl(Throwable throwable) throws E {
+  private void throwUncheckedImpl(Throwable throwable) throws E {
     throw (E) throwable;
   }
 
+  /***/
   public static void throwUnchecked(Throwable e) {
     INSTANCE.throwUncheckedImpl(e);
   }

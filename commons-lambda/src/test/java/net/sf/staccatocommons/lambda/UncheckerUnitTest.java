@@ -14,6 +14,8 @@ package net.sf.staccatocommons.lambda;
 
 import java.io.IOException;
 
+import net.sf.staccatocommons.lambda.internal.Unchecker;
+
 import org.junit.Test;
 
 /**

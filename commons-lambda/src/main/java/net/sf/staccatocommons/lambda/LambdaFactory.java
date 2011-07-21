@@ -21,6 +21,7 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.predicate.Predicate;
+import net.sf.staccatocommons.lambda.internal.Unchecker;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
@@ -153,10 +154,19 @@ public final class LambdaFactory {
     };
   }
 
-  /*
-   * FIXME partial application order is not clear, should it be interpreted
-   * right to left or left to right?
+  /**
+   * Answers a {@link Function2} that when applied sends to its first argument
+   * the message previously sent to the last stubbed type, passing its second
+   * argument as the first message argument. Refer to the use cases described in
+   * {@link Lambda}
+   * 
+   * @param returnType
+   *          meaningless, this argument is simply ignored
+   * @return a new {@link Function2}
+   * 
+   * @see Lambda
    */
+  @NonNull
   public <A> Function2<Object, Object, A> lambda2(A returnType) {
     final Method method = handler.getMethod();
     final Object[] args = handler.getArgsCopy();
@@ -169,6 +179,20 @@ public final class LambdaFactory {
     };
   }
 
+  /**
+   * Answers a {@link Function3} that when applied sends to its first argument
+   * the message previously sent to the last stubbed type, passing its second
+   * argument as the first message argument, and its third argument to the
+   * second message argument.
+   * 
+   * Refer to the use cases described in {@link Lambda}
+   * 
+   * @param returnType
+   *          meaningless, this argument is simply ignored
+   * @return a new {@link Function3}
+   * 
+   * @see Lambda
+   */
   public <A> Function3<Object, Object, Object, A> lambda3(A returnType) {
     final Method method = handler.getMethod();
     final Object[] args = handler.getArgsCopy();

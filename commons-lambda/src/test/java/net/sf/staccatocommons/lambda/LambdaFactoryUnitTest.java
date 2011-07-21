@@ -73,22 +73,27 @@ public class LambdaFactoryUnitTest {
     assertNotNull(l.lambda(l.$(Tuple.FirstAware.class).first()));
   }
 
+  /***/
   @Test(expected = IndexOutOfBoundsException.class)
   public void testCodeThrowsRuntimeException() {
     LambdaFactory l = Lambda.factory();
     l.lambda(l.$(List.class).get(10)).apply(Arrays.asList(5, 9));
   }
 
+  /***/
   @Test(expected = IOException.class)
   public void testCodeThrowsCheckedException() throws IOException {
     LambdaFactory l = Lambda.factory();
     l.lambda(l.$(Foo.class).foo()).apply(new FooBar());
   }
 
+  /***/
   public static interface Foo {
+    /***/
     Integer foo() throws IOException;
   }
 
+  /***/
   public static class FooBar implements Foo {
     public Integer foo() throws IOException {
       throw new IOException();
