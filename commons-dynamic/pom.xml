@@ -26,7 +26,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
-			<artifactId>commons-defs</artifactId>
+			<artifactId>commons-check</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

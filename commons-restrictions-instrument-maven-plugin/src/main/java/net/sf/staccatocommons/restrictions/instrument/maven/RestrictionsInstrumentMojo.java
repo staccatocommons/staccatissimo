@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.restrictions.instrument.maven;
 
+import java.io.File;
 import java.util.Collection;
 
 import net.sf.staccatocommons.instrument.config.InstrumenterConfigurer;
@@ -88,6 +89,10 @@ public class RestrictionsInstrumentMojo extends AbstractMojo {
 
   public void execute() throws MojoExecutionException, MojoFailureException {
     getLog().info("*** Staccato-Commons-Restrictions-Instrument *** ");
+    if (!new File(location).exists()) {
+      getLog().info("Nothing to instrument");
+      return;
+    }
     new InstrumentMojoSupport(this, location, artifact, projectArtifactsList) {
 
       @Override

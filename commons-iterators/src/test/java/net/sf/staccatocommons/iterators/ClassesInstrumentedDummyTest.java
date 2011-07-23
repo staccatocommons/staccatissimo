@@ -32,4 +32,9 @@ public class ClassesInstrumentedDummyTest {
     assertSame(EmptyThriterator.empty(), EmptyThriterator.empty());
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testname() throws Exception {
+    new EnumerationIterator(null);
+  }
+
 }

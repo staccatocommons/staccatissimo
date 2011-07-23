@@ -229,7 +229,7 @@
              <module>commons-io</module>
              <module>commons-instrument</module>
              <module>commons-restrictions-instrument</module>
-             <module>commons-restrictions-instrument-maven-plugin</module>  
+             <module>commons-restrictions-instrument-maven-plugin</module>   
            </modules>
 			<build>
 				<plugins>
@@ -250,11 +250,6 @@
 		<profile>
 			<id>instrument</id>
           <modules>
-             <module>commons-site</module>
-             <module>commons-testing</module>
-             <module>commons-restrictions</module>
-             <module>commons-defs</module>
-             <module>commons-check</module>
              <module>commons-iterators</module>
              <module>commons-lang</module>
              <module>commons-dynamic</module>
