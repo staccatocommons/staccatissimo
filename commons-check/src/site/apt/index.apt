@@ -22,9 +22,6 @@ classes you can find in {{{http://commons.apache.org/lang/}Apache Commons Lang}}
 or {{{http://code.google.com/p/guava-libraries/}Guava}}. It is by no means a conversion and validation 
 API like {{{http://commons.apache.org/validator/}Apache Commons Validator}}    
  
-Beta State 
-
- Staccato-Commons-Check is currently in beta state. It should not be used in productive systems yet. 
  
 Getting started
 
@@ -38,10 +35,10 @@ Getting started
 
 What is next?
 
- * Navigate the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheck/apidocs/index.html}API javadoc}}
+ * Navigate the {{{http://staccatocommons.sourceforge.net/commons-check/apidocs/index.html}API javadoc}}
  
  * Explore the rest of Staccato-Commons projects. They extensively use Staccato-Commons-Check
  
- * Have a look to the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument/}Staccato-Commons-Restricions-Instrument}} API,
+ * Have a look to the {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument/}Staccato-Commons-Restricions-Instrument}} API,
 which can instrument check annotations, by inserting at compile time calls to the Validation API previously described.      
 

@@ -15,7 +15,7 @@ Numbers
 
 * Introduction
 
- {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs/net/sf/staccatocommons/lang/number/Numbers.html}Numbers}}
+ {{{http://staccatocommons.sourceforge.net/commons-lang/apidocs/net/sf/staccatocommons/lang/number/Numbers.html}Numbers}}
  is an utility class for creating in a succinct way big intergers and big decimals.   
    
 * The problem        

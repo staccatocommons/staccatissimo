@@ -15,9 +15,6 @@ About Staccato-Commons-Instrument
  
  Staccato-Commons-Instrument is the annotation-oriented instrumentation tool of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}, built on top of {{{http://www.javassist.org}Javassist}}. It allows compile-time annotation processing and class instrumentation in an event-handling fashion.       
  
-Beta State 
-
- Staccato-Commons-Instrument is currently in beta state. It should not be used in productive systems yet. 
 
 Getting started
 
@@ -247,11 +244,11 @@ significant runtime overhead
  
 What is next?
    
-   * Explore the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument/apidocs/index.html}API javadoc}} 
+   * Explore the {{{http://staccatocommons.sourceforge.net/commons-instrument/apidocs/index.html}API javadoc}} 
    
    * Write custom annotation processors and build your own instrumenter using them
    
    * Staccato-Commons project offers a ready to use instrumenter for simple precondition and postcondition annotations - in a way similar 
 to the NonNegativeDecimal proof-of-concept of the previous example - based on Staccato-Commons-Check API. It is extensively used on 
-all the Staccato-Commons projects. It can be found {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrument/}here}}. 
-Also a easy-to-use maven plugin exists for it, it can be found {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheckinstrumentmavenplugin}here}}.             
+all the Staccato-Commons projects. It can be found {{{http://staccatocommons.sourceforge.net/commons-check-instrument/}here}}. 
+Also a easy-to-use maven plugin exists for it, it can be found {{{http://staccatocommons.sourceforge.net/commons-check-instrument-maven-plugin}here}}.             

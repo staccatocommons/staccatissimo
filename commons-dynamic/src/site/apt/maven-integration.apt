@@ -11,17 +11,20 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccato-Commons-Iterators 
- 
- Staccato-Commons-Iterators is a small and lightweight library with few dependencies that implements many common  
-concrete iterators and iterator decorators, that are not tied to any collections API, and thriters, a lazier iterator model, 
-interoperable with existent Java Collections Framework Iterators  
+Maven Integration
 
-Getting Started
+ The recommended way of using Staccato-Commons-Dynamic in your project is by adding 
+ it as a Maven2 dependency: 
 
- * {{{./simple-iterators-by-example.html}Simple iterators by example}}
- 
- * {{{./thriters-by-example.html}Thriters by example}}  
- 
- 
++---------
+    <dependencies>
+        <dependency>
+            <groupId>net.sf.staccatocommons</groupId>
+            <artifactId>commons-dynamic</artifactId>
+            <version>1.0-beta-2</version>
+        </dependency>
+    </dependencies>
++---------- 
+  
+
  

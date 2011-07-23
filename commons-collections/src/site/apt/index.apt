@@ -22,9 +22,6 @@ About Staccato-Commons-Collections
  It also offers Streams, rich, fluent, lazy iterables that can wrap many different sources - much more than just collections - , making
  complex transformations on anything that is iterable extremely simple.  
  
-Beta State 
-
- Staccato-Commons-Collections is currently in beta state. It should not be used in productive systems yet. 
   
 Getting started
 
@@ -32,7 +29,7 @@ Getting started
   collection and collection-like objects. Descriptions of such problems, solutions and examples 
   can be found in the following links:
  
- * {{{iterables-by-example.html}Iterables}} - more than 60 functional and imperative common transformations over collections, 
+ * {{{./iterables-by-example.html}Iterables}} - more than 60 functional and imperative common transformations over collections, 
  iterables and maps.  
  
- * {{{stream-by-example.html}Stream}}. A "super" iterable - rich, fluent interfaced, lazy and generic.  
+ * {{{./stream-by-example.html}Stream}}. A "super" iterable - rich, fluent interfaced, lazy and generic.  

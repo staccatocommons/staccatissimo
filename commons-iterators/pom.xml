@@ -10,7 +10,7 @@
 	<artifactId>commons-iterators</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>Staccato-Commons-Iterators</name>
-	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators</url>
+	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<scm>
 		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-iterators</developerConnection>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-iterators</connection>
@@ -32,7 +32,7 @@
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}/staccatissimo/commonsiterators</url>
+			<url>${distribution.site.url}/${project.artifactId}</url>
 		</site>
 	</distributionManagement>
 	<reporting>

@@ -14,43 +14,40 @@
 About Staccato-Commons-Restrictions-Instrument 
  
  Staccato-Commons-Restrictions-Instrument is an instrumentation tool build on top of
- Staccato-Commons-Restrictions, {{{http://staccatocommons.sourceforge.net/staccatissimo/commonscheck}Staccato-Commons-Check}} and
-{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsinstrument}Staccato-Commons-Instrument}}. It is capable of inserting   
+ Staccato-Commons-Restrictions, {{{http://staccatocommons.sourceforge.net/commons-check}Staccato-Commons-Check}} and
+{{{http://staccatocommons.sourceforge.net/commons-instrument}Staccato-Commons-Instrument}}. It is capable of inserting   
 preconditions and postconditions checks for most of check restrictions annotations, and of ensuring that
-{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/index.html}Constant}} methods effectively are.   
+{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/index.html}Constant}} methods effectively are.   
  
-Beta State 
-
- Staccato-Commons-Restrictions-Instrument is currently in beta state. It should not be used in productive systems yet. 
  
 Check-Annotations Supported
 
  Currently, the following check-annotations are supported by the tool:
 
- * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/NonNull.html}NonNull}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/check/NonNull.html}NonNull}}>>>
  
- * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/Size.html}Size}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/check/Size.html}Size}}>>>
  
- * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/MinSize.html}MinSize}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/check/MinSize.html}MinSize}}>>>
  
- * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/MaxSize.html}MaxSize}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/check/MaxSize.html}MaxSize}}>>>
  
- * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/NotEmpty.html}NotEmpty}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/check/NotEmpty.html}NotEmpty}}>>>
  
- * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/Positive.html}Positive}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/check/Positive.html}Positive}}>>>
  
- * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/NotNegative.html}NotNegative}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/check/NotNegative.html}NotNegative}}>>>
  
- * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/check/Matches.html}Matches}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/check/Matches.html}Matches}}>>>
    
 Processing directives Supported
   
- * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/processing/IgnoreRestrictions.html}IgnoreRestrictions}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/processing/IgnoreRestrictions.html}IgnoreRestrictions}}>>>
  
- * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/processing/ForceRestrictions.html}ForceRestrictions}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/processing/ForceRestrictions.html}ForceRestrictions}}>>>
   
 Other Restrictions Supported
 
- * <<<{{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/Constant.html}Constant}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/Constant.html}Constant}}>>>
  
  

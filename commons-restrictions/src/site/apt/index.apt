@@ -17,9 +17,6 @@ About Staccato-Commons-Restrictions
 It contains annotations that express restrictions, that can be used in the form of preconditions, postconditions or invariants 
 over objects and messages, focused on documentation reuse. 
 
-Beta State 
-
- Staccato-Commons-Restrictions is currently in beta state. It should not be used in productive systems yet. 
 
 * Introduction
 
@@ -29,12 +26,12 @@ Beta State
  making consistent and meaningful documentation easier to write. 
   
   With such principles in mind, the Restrictions API is composed by source and class level annotations that express constraints
-  over code elements, and the {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs/net/sf/staccatocommons/restrictions/Restriction.html}Restriction}} 
+  over code elements, and the {{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/Restriction.html}Restriction}} 
  meta-annotation, that express the semantics of such annotations, like for example, how both implementor and client code should behave 
  on constraints violations, or how do they react to inheritance. 
  
   Although it is primary targeted for documenting such constraints, many of them may be processed in a non intrusive ways through
- {{{http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictionsinstrument/index.html}Staccato-Commons-Restrictions-Instrument}}.
+ {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument/index.html}Staccato-Commons-Restrictions-Instrument}}.
  
   In addition to that, the project <encapsulates> consistent use of words of must, must not, etc. with {{{http://www.ietf.org/rfc/rfc2119.txt}RFC2119}} across Javadoc. 
  This means that whenever such words are used within Staccato-Commons-Restrictions and the rest of the projects, they

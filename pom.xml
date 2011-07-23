@@ -6,8 +6,8 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Staccato-Commons-Parent-Pom</name>
-  <url>http://staccatocommons.sourceforge.net/staccatissimo/commonsparentpom</url>
-  <description>Staccato-Commons base pom</description>
+  <url>http://staccatocommons.sourceforge.net/</url>
+  <description>Staccato-Commons Module and Parent Pom</description>
 	<organization>
 		<name>Staccato-Commons</name>
 		<url>http://staccatocommons.sourceforge.net/</url>
@@ -50,7 +50,7 @@
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}/staccatissimo/commonsparentpom</url>
+			<url>${distribution.site.url}</url>
 		</site>
 	</distributionManagement>
 	<build>
@@ -126,13 +126,13 @@
 								<bottom><![CDATA[<a href="http://sourceforge.net/projects/staccatocommons"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13" width="120" height="30" alt="Get Staccato-Commons at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>]]></bottom>
 								<useStandardDocletOptions>true</useStandardDocletOptions>
 								<links>
-									<link>http://staccatocommons.sourceforge.net/staccatissimo/commonscheck/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/staccatissimo/commonsiterators/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/staccatissimo/commonsrestrictions/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/staccatissimo/commonsio/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/staccatissimo/commonscollections/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/staccatissimo/commonsdefs/apidocs</link>
+									<link>http://staccatocommons.sourceforge.net/commons-check/apidocs</link>
+									<link>http://staccatocommons.sourceforge.net/commons-iterators/apidocs</link>
+									<link>http://staccatocommons.sourceforge.net/commons-restrictions/apidocs</link>
+									<link>http://staccatocommons.sourceforge.net/commons-lang/apidocs</link>
+									<link>http://staccatocommons.sourceforge.net/commons-io/apidocs</link>
+									<link>http://staccatocommons.sourceforge.net/commons-collections/apidocs</link>
+									<link>http://staccatocommons.sourceforge.net/commons-defs/apidocs</link>
 								</links>
 								<skip>false</skip>
 							</configuration>
@@ -195,6 +195,7 @@
                         <exclude>target/**</exclude>
                         <exclude>**/*.txt</exclude>
                     </excludes>
+                  <!--  <strictCheck>true</strictCheck> -->
                 </configuration>
                 <executions>
                     <execution>
@@ -216,7 +217,6 @@
 		<profile>
 			<id>noinstrument</id>
 			  <modules>
-             <module>commons-site</module>
              <module>commons-testing</module>
              <module>commons-restrictions</module>
              <module>commons-defs</module>

@@ -15,7 +15,7 @@ Prioritized
 
 * Introduction
 
- {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs/net/sf/staccatocommons/lang/Prioritized.html}Prioritized}}
+ {{{http://staccatocommons.sourceforge.net/commons-lang/apidocs/net/sf/staccatocommons/lang/Prioritized.html}Prioritized}}
  is a simple generic wrapper for assigning arbitrary priorities to existing objects. 
    
 * The problem        

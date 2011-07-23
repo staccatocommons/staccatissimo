@@ -16,20 +16,17 @@ About Staccato-Commons-Lang
  Staccato-Commons-Lang is the core library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. 
 It offers options, tuples, lazy values, functor objects, builders, lifecycles, ranges and sequences.  
  
-Beta State 
-
- Staccato-Commons-Lang is currently in beta state. It should not be used in productive systems yet. 
 
 Getting Started
 
   Staccato-Commons-Lang resolves simple and common everyday problems. Descriptions of such problems, solutions and examples 
   can be found in the following links:
   
-  * {{{relevant-state-by-example.html}RelevantState}} and BasicEquals
+  * {{{./relevant-state-by-example.html}RelevantState}} and BasicEquals
    - Consistently implementing equals, hashcode, toString, and/or compareTo in an efficient 
   way and without boilerplate code. 
   
-  * {{{prioritized-by-example.html}Prioritized}} - Prioritizing elements in sorted collections
+  * {{{./prioritized-by-example.html}Prioritized}} - Prioritizing elements in sorted collections
   
   * Nulls and Option - Handling nulls and optional values
   

@@ -22,7 +22,7 @@ Stream by example
   projects offer other alternative implementations that extend their scope.  
   
   On the other hand, for performing simple, eager transformations on just iterables, eventually in a more imperative style, 
- have a look at {{{iterables-by-example.html}Iterables by example}}.
+ have a look at {{{./iterables-by-example.html}Iterables by example}}.
   
 * The problem
   
@@ -100,7 +100,7 @@ by decorating other Iterables  or using sources like databases result sets, dire
     }
 +---- 
 
- Or even cleaner, if using {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslambda/index.html}Staccato-Commons-Lambda}}:
+ Or even cleaner, if using {{{http://staccatocommons.sourceforge.net/commons-lambda/index.html}Staccato-Commons-Lambda}}:
  
 +---
     Collection<Incident> getMostUrgentProblems3() {

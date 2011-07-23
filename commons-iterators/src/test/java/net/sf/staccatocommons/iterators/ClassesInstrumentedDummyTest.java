@@ -32,6 +32,8 @@ public class ClassesInstrumentedDummyTest {
     assertSame(EmptyThriterator.empty(), EmptyThriterator.empty());
   }
 
+  /***/
+  @SuppressWarnings("unused")
   @Test(expected = IllegalArgumentException.class)
   public void testname() throws Exception {
     new EnumerationIterator(null);

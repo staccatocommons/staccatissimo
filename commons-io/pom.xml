@@ -10,11 +10,11 @@
 	<artifactId>commons-io</artifactId>
 	<name>Staccato-Commons-IO</name>
 	<version>1.0-SNAPSHOT</version>
-	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonsio</url>
+	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}/staccatissimo/commonsio</url>
+			<url>${distribution.site.url}/${project.artifactId}</url>
 		</site>
 	</distributionManagement>
 	<scm>

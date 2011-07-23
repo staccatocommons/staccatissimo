@@ -16,10 +16,6 @@ About Staccato-Commons-Defs
  Staccato-Commons-Defs is the minimal definitions library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}.
  It provides very abstract interfaces with well defined but generic semantics, focused on code reuse.   
  
-Beta State 
-
- Staccato-Commons-Defs is currently in beta state. It should not be used in productive systems yet.
- 
 Getting Started 
 
  Staccato-Commons-Defs contains no classes, but only interfaces and as such, it is not very useful by itself, but in combination

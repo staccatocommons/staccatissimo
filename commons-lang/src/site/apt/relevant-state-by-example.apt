@@ -15,7 +15,7 @@ Relevant State
 
 * Introduction
 
- {{{http://staccatocommons.sourceforge.net/staccatissimo/commonslang/apidocs/net/sf/staccatocommons/lang/value/RelevantState.html}RelevantState}}
+ {{{http://staccatocommons.sourceforge.net/commons-lang/apidocs/net/sf/staccatocommons/lang/value/RelevantState.html}RelevantState}}
  is an abstract class aimed to consistently implement equals, hashcode, toString, and/or compareTo in an efficient 
   way and without boilerplate code.
   

@@ -14,18 +14,12 @@
 
 -->
 
-<project name="Staccato-Commons-Restrictions-Instrument-Maven-Plugin">
+<project name="Staccato-Commons-Instrument">
   <body>
-    <menu name="Commons-Restrictions-Instrument-Maven-Plugin">
+    <menu name="Commons-Instrument">
       <item name="Introduction" href="index.html"/>
       <item name="Maven Integration" href="maven-integration.html"/>
-      <item name="FAQ" href="faq.html"/>
-      <item name="Usage" href="usage.html"/>
-      <item name="Goals" href="plugin-info.html"/>
-      <item name="Download" href="http://sourceforge.net/projects/staccatocommons/files"/>
-      <item name="Browse Code" href="http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons"/>      
-      <item name="General Information" href="http://sourceforge.net/projects/staccatocommons/"/>
     </menu>    
-    <menu ref="reports"/>
+    <menu ref="reports" inherit="top"/>
   </body>
 </project>

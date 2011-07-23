@@ -10,7 +10,7 @@
     <name>Staccato-Commons-Dynamic</name>
 	<artifactId>commons-dynamic</artifactId>
 	<version>1.0-SNAPSHOT</version>
-    <url>http://staccatocommons.sourceforge.net/staccatissimo/commonsdynamic</url>
+    <url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
     <inceptionYear>2010</inceptionYear>
     <scm>
         <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-dynamic</connection>
@@ -20,7 +20,7 @@
     <distributionManagement>
         <site>
             <id> ${distribution.site.id}</id>
-            <url>${distribution.site.url}/staccatissimo/commonsdynamic</url>
+            <url>${distribution.site.url}/${project.artifactId}</url>
         </site>
     </distributionManagement>
 	<dependencies>

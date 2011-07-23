@@ -6,7 +6,7 @@
 	<name>Staccato-Commons-Collections</name>
 	<version>1.0-SNAPSHOT</version>
 	<inceptionYear>2010</inceptionYear>
-	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonscollections</url>
+	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<parent>
 		<groupId>net.sf.staccatocommons</groupId>
 		<artifactId>commons-parent-pom</artifactId>
@@ -20,7 +20,7 @@
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}/staccatissimo/commonscollections</url>
+			<url>${distribution.site.url}/${project.artifactId}</url>
 		</site>
 	</distributionManagement>
 	<dependencies>

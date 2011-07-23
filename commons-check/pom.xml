@@ -11,7 +11,7 @@
 	<name>Staccato-Commons-Check</name>
 	<version>1.0-SNAPSHOT</version>
 	<inceptionYear>2010</inceptionYear>
-	<url>http://staccatocommons.sourceforge.net/staccatissimo/commonscheck</url>
+	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<scm>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-check</connection>
 		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-check</developerConnection>
@@ -20,7 +20,7 @@
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}/staccatissimo/commonscheck</url>
+			<url>${distribution.site.url}/${project.artifactId}</url>
 		</site>
 	</distributionManagement>
 	<dependencies>
