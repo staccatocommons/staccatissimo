@@ -21,7 +21,7 @@ Maven Integration
         <dependency>
             <groupId>net.sf.staccatocommons</groupId>
             <artifactId>commons-iterators</artifactId>
-            <version>1.0-beta-2</version>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 +---------- 

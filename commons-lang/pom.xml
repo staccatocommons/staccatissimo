@@ -5,7 +5,7 @@
 	<artifactId>commons-lang</artifactId>
 	<name>Staccato-Commons-Lang</name>
 	<description>Staccato-Commons core classes</description>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<inceptionYear>2010</inceptionYear>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<scm>
@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>net.sf.staccatocommons</groupId>
 		<artifactId>commons-parent-pom</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 	<distributionManagement>
 		<site>

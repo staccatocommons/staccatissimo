@@ -4,13 +4,13 @@
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-collections</artifactId>
 	<name>Staccato-Commons-Collections</name>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<inceptionYear>2010</inceptionYear>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<parent>
 		<groupId>net.sf.staccatocommons</groupId>
 		<artifactId>commons-parent-pom</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 	<scm>
 		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-collections</connection>

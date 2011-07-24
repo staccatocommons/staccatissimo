@@ -4,12 +4,12 @@
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-lambda</artifactId>
 	<name>Staccato-Commons-Lambda</name>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<inceptionYear>2011</inceptionYear>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<scm>
