@@ -14,10 +14,12 @@ package net.sf.staccatocommons.lang.tuple;
 
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
+import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
+import net.sf.staccatocommons.lang.function.AbstractFunction3;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
 import net.sf.staccatocommons.lang.tuple.Tuple.FourthAware;
@@ -106,13 +108,9 @@ public class Tuples {
    * @param <T3>
    * @param <T4>
    * @param first
-   *          nullable.
    * @param second
-   *          nullable
    * @param third
-   *          nullable
    * @param fourth
-   *          nullable
    * @return a new {@link Quadruple}. Non null.
    */
   @NonNull
@@ -127,11 +125,8 @@ public class Tuples {
    * @param <T2>
    * @param <T3>
    * @param first
-   *          nullable.
    * @param second
-   *          nullable
    * @param third
-   *          nullable
    * @return a new {@link Triple}. Non null.
    */
   @NonNull
@@ -145,14 +140,45 @@ public class Tuples {
    * @param <T1>
    * @param <T2>
    * @param first
-   *          nullable.
    * @param second
-   *          nullable
    * @return a new {@link Pair}. Non null.
    */
   @NonNull
   public static <T1, T2> Pair<T1, T2> _(T1 first, T2 second) {
     return new Pair<T1, T2>(first, second);
+  }
+
+  /**
+   * Answers a function that creates {@link Pair}s for its arguments
+   * 
+   * @param <T1>
+   * @param <T2>
+   * @param <T3>
+   * @return a new {@link Function2}
+   */
+  @Constant
+  public static <T1, T2, T3> Function3<T1, T2, T3, Triple<T1, T2, T3>> toTriple() {
+    return new AbstractFunction3<T1, T2, T3, Triple<T1, T2, T3>>() {
+      public Triple<T1, T2, T3> apply(T1 arg0, T2 arg1, T3 arg2) {
+        return _(arg0, arg1, arg2);
+      }
+    };
+  }
+
+  /**
+   * Answers a function that creates {@link Triple}s for its arguments
+   * 
+   * @param <T1>
+   * @param <T2>
+   * @return a new {@link Function3}
+   */
+  @Constant
+  public static <T1, T2> Function2<T1, T2, Pair<T1, T2>> toPair() {
+    return new AbstractFunction2<T1, T2, Pair<T1, T2>>() {
+      public Pair<T1, T2> apply(T1 arg0, T2 arg1) {
+        return _(arg0, arg1);
+      }
+    };
   }
 
   /**

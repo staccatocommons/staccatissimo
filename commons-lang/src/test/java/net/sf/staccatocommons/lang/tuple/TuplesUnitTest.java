@@ -74,4 +74,21 @@ public class TuplesUnitTest {
     assertFalse(uncurry(Equiv.<Integer> equal()).apply(_(10, 5)));
   }
 
+  /*** Test for {@link Tuples#toPair()} */
+  @Test
+  public void toPair() throws Exception {
+    Pair<String, Integer> pair = Tuples.<String, Integer> toPair().apply("hello", 40);
+    assertEquals("hello", pair._0());
+    assertEquals(40, (int) pair._1());
+  }
+
+  /*** Test for {@link Tuples#toTriple()} */
+  @Test
+  public void toTriple() throws Exception {
+    Triple<String, Integer, Boolean> triple = Tuples.<String, Integer, Boolean> toTriple().apply("hello", 40, false);
+    assertEquals("hello", triple._0());
+    assertEquals(40, (int) triple._1());
+    assertEquals(false, (boolean) triple._2());
+  }
+
 }
