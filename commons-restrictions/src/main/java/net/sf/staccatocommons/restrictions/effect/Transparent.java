@@ -25,8 +25,9 @@ import net.sf.staccatocommons.restrictions.value.Immutable;
 
 /**
  * Transparent is a {@link Restriction} that applies to methods that are
- * referentially transparent - are {@link SideEffectFree} and return always
- * equal results for equals arguments.
+ * referentially transparent - their invocations can be replaced by its return
+ * value. In other words, are {@link SideEffectFree} and return always equal
+ * results for equals arguments.
  * <p>
  * When applied to types, it means that all its methods are {@link Transparent}.
  * As a consequence, statefull classes that are annotated this way
