@@ -18,6 +18,7 @@ import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
@@ -69,6 +70,16 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
         return AbstractFunction.this.apply(arg);
       }
     };
+  }
+
+  @ForceRestrictions
+  public <C> Function<A, C> then(@NonNull Function<? super B, ? extends C> other) {
+    return (Function<A, C>) other.of(this);
+  }
+
+  @ForceRestrictions
+  public Predicate<A> then(@NonNull Predicate<? super B> other) {
+    return other.of(this);
   }
 
   public String toString() {

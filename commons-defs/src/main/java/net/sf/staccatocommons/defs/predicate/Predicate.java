@@ -74,4 +74,6 @@ public interface Predicate<A> extends Evaluable<A>, Applicable<A, Boolean> {
    */
   @NullSafe
   Predicate<A> orNull();
+
+  <B> Predicate<B> of(@NonNull final Applicable<? super B, ? extends A> other);
 }

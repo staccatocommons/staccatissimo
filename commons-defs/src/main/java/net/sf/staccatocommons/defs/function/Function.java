@@ -19,6 +19,7 @@ import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Delayable;
 import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.defs.NullSafeAware;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -77,6 +78,18 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @return a new function, this composed with other. Non null
    */
   <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other);
+
+  /**
+   * Function composition, like {@link #of(Applicable)}, but with receptor and
+   * argument interchanged. Equivalent to {@code other.of(this)}
+   * 
+   * @param <C>
+   * @param other
+   * @return a new {@link Function}
+   */
+  <C> Function<A, C> then(@NonNull Function<? super B, ? extends C> other);
+
+  Predicate<A> then(@NonNull Predicate<? super B> other);
 
   /**
    * Answers a new function that returns null if is argument is null, or the

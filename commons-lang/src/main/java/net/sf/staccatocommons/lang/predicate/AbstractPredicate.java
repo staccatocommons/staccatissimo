@@ -13,9 +13,11 @@
 
 package net.sf.staccatocommons.lang.predicate;
 
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * <p>
@@ -29,15 +31,15 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  *          the type of argument to evaluate
  */
-public abstract class AbstractPredicate<T> implements Predicate<T> {
+public abstract class AbstractPredicate<A> implements Predicate<A> {
 
   @Override
-  public abstract boolean eval(@NonNull T argument);
+  public abstract boolean eval(@NonNull A argument);
 
-  public Boolean apply(T arg) {
+  public Boolean apply(A arg) {
     return eval(arg);
   }
 
@@ -45,14 +47,14 @@ public abstract class AbstractPredicate<T> implements Predicate<T> {
    * @return a {@link AbstractPredicate} that negates this
    *         {@link AbstractPredicate}'s result. Non Null.
    */
-  public Predicate<T> not() {
-    final class Not extends AbstractPredicate<T> {
-      public boolean eval(T argument) {
+  public Predicate<A> not() {
+    final class Not extends AbstractPredicate<A> {
+      public boolean eval(A argument) {
         return !AbstractPredicate.this.eval(argument);
       }
 
       @Override
-      public AbstractPredicate<T> not() {
+      public AbstractPredicate<A> not() {
         return AbstractPredicate.this;
       }
     }
@@ -68,9 +70,10 @@ public abstract class AbstractPredicate<T> implements Predicate<T> {
    * @return A new predicate that performs the short circuited or between this
    *         and other when evaluated. Non Null
    */
-  public Predicate<T> or(@NonNull final Evaluable<? super T> other) {
-    final class Or extends AbstractPredicate<T> {
-      public boolean eval(T argument) {
+  @ForceRestrictions
+  public Predicate<A> or(@NonNull final Evaluable<? super A> other) {
+    final class Or extends AbstractPredicate<A> {
+      public boolean eval(A argument) {
         return AbstractPredicate.this.eval(argument) || other.eval(argument);
       }
     }
@@ -86,21 +89,31 @@ public abstract class AbstractPredicate<T> implements Predicate<T> {
    * @return A new predicate that performs the short circuited logical-and
    *         between this and other when evaluated. Non Null
    */
-  public Predicate<T> and(@NonNull final Evaluable<? super T> other) {
-    final class And extends AbstractPredicate<T> {
-      public boolean eval(T argument) {
+  @ForceRestrictions
+  public Predicate<A> and(@NonNull final Evaluable<? super A> other) {
+    final class And extends AbstractPredicate<A> {
+      public boolean eval(A argument) {
         return AbstractPredicate.this.eval(argument) && other.eval(argument);
       }
     }
     return new And();
   }
 
-  public final Predicate<T> andNotNull() {
-    return Predicates.<T> notNull().and(this);
+  public final Predicate<A> andNotNull() {
+    return Predicates.<A> notNull().and(this);
   }
 
-  public final Predicate<T> orNull() {
-    return Predicates.<T> null_().or(this);
+  public final Predicate<A> orNull() {
+    return Predicates.<A> null_().or(this);
+  }
+
+  @ForceRestrictions
+  public <B> Predicate<B> of(@NonNull final Applicable<? super B, ? extends A> other) {
+    return new AbstractPredicate<B>() {
+      public boolean eval(B argument) {
+        return AbstractPredicate.this.eval(other.apply(argument));
+      }
+    };
   }
 
   public String toString() {
