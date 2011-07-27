@@ -13,6 +13,7 @@
 
 package net.sf.staccatocommons.collections;
 
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -68,6 +69,16 @@ public class MapsUnitTest {
     assertEquals(50, (int) Maps.get(map, "Foo").value());
     assertTrue(Maps.get(map, "FOO").isUndefined());
     assertEquals(Option.someNull(), Maps.get(MapBuilder.mapWith(10, null).build(), 10));
+  }
 
+  /**
+   * Test method for
+   * {@link Maps#from(net.sf.staccatocommons.lang.tuple.Pair...)}
+   */
+  @Test
+  public void fromEntries() throws Exception {
+    Map<String, String> m = Maps.from(_("Hello", "World"), _("Foo", "Bar"));
+    assertEquals("World", m.get("Hello"));
+    assertEquals("Bar", m.get("Foo"));
   }
 }

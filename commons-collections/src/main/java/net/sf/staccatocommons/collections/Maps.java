@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections;
 
 import static net.sf.staccatocommons.collections.iterable.Iterables.*;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -164,11 +165,24 @@ public class Maps {
    *          the new map entries
    * @return a new unmodifiable map
    */
-  public static <K, V> Map<K, V> from(Pair<K, V>... entries) {
-    MapBuilder<K, V, Map<K, V>> b = MapBuilder.from(new LinkedHashMap<K, V>(entries.length));
+  public static <K, V> Map<K, V> from(Iterable<Pair<K, V>> entries) {
+    MapBuilder<K, V, Map<K, V>> b = MapBuilder.from(new LinkedHashMap<K, V>());
     for (Pair<K, V> p : entries)
       b.with(p);
     return b.build();
+  }
+
+  /**
+   * Answers a new {@link Unmodifiable} map with the given entries
+   * 
+   * @param <K>
+   * @param <V>
+   * @param entries
+   *          the new map entries
+   * @return a new unmodifiable map
+   */
+  public static <K, V> Map<K, V> from(Pair<K, V>... entries) {
+    return from(Arrays.asList(entries));
   }
 
 }
