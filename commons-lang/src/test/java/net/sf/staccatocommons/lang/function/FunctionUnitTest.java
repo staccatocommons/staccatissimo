@@ -157,4 +157,29 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
     assertTrue(add(10).then(Compare.lessThan(20)).eval(5));
   }
 
+  /** Test for {@link AbstractFunction#equal(Object)} */
+  @Test
+  public void testEqual() throws Exception {
+    // ((==10).(+6)) 4
+    assertTrue(add(6).equal(10).apply(4));
+    assertFalse(add(6).equal(10).apply(5));
+
+    Object o = new Object();
+    assertTrue(Functions.identity().same(o).apply(o));
+    assertFalse(add(6).same(10).apply(5));
+  }
+
+  /**
+   * Test for {@link AbstractFunction#null_()} and
+   * {@link AbstractFunction#notNull()}
+   */
+  @Test
+  public void testNull() throws Exception {
+    assertTrue(Functions.identity().notNull().apply(new Object()));
+    assertFalse(Functions.identity().notNull().apply(null));
+
+    assertTrue(Functions.identity().null_().apply(null));
+    assertFalse(Functions.identity().null_().apply(9));
+  }
+
 }

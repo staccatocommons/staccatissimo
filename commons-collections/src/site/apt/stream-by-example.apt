@@ -218,6 +218,27 @@ by decorating other Iterables  or using sources like databases result sets, dire
         .maximumOn(lambda($(Company.class).getRevenue()));
 +---
 
+** Finding an element
+
++---
+    interface Product { 
+        String getSku();
+        URI getDetailsPage();
+    }
+    
+    Iterable<Product> products = ...;
+    //Answer the first product whose SKU is "PX896-A"
+    Streams
+        .cons(products)
+        .find(lambda($(Product.class).getSku()).equal("PX896-A"));
+        
+    //Answer the first product with a non null details page
+    Streams
+        .cons(products)
+        .find(lambda($(Product.class).getDetailsPage()).notNull());     
+        
++---
+
 
 
  

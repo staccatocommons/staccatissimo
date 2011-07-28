@@ -19,6 +19,7 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.predicate.Predicate;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
@@ -80,6 +81,42 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
   @ForceRestrictions
   public Predicate<A> then(@NonNull Predicate<? super B> other) {
     return other.of(this);
+  }
+
+  /** equivalent to then(Predicates.equal(object)) */
+  public Predicate<A> equal(final B object) {
+    return new AbstractPredicate<A>() {
+      public boolean eval(A argument) {
+        return AbstractFunction.this.apply(argument).equals(object);
+      }
+    };
+  }
+
+  /** equivalent to then(Predicates.same(object)) */
+  public Predicate<A> same(final B object) {
+    return new AbstractPredicate<A>() {
+      public boolean eval(A argument) {
+        return AbstractFunction.this.apply(argument) == object;
+      }
+    };
+  }
+
+  /** equivalent to then(Predicates.notNull()); */
+  public Predicate<A> notNull() {
+    return new AbstractPredicate<A>() {
+      public boolean eval(A argument) {
+        return AbstractFunction.this.apply(argument) != null;
+      }
+    };
+  }
+
+  /** then(Predicates.null_()) */
+  public Predicate<A> null_() {
+    return new AbstractPredicate<A>() {
+      public boolean eval(A argument) {
+        return AbstractFunction.this.apply(argument) == null;
+      }
+    };
   }
 
   public String toString() {
