@@ -250,5 +250,5 @@ What is next?
    
    * Staccato-Commons project offers a ready to use instrumenter for simple precondition and postcondition annotations - in a way similar 
 to the NonNegativeDecimal proof-of-concept of the previous example - based on Staccato-Commons-Check API. It is extensively used on 
-all the Staccato-Commons projects. It can be found {{{http://staccatocommons.sourceforge.net/commons-check-instrument/}here}}. 
-Also a easy-to-use maven plugin exists for it, it can be found {{{http://staccatocommons.sourceforge.net/commons-check-instrument-maven-plugin}here}}.             
+all the Staccato-Commons projects. It can be found {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument/}here}}. 
+Also a easy-to-use maven plugin exists for it, it can be found {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument-maven-plugin}here}}.             
