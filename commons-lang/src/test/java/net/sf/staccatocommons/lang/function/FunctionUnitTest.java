@@ -14,11 +14,13 @@
 package net.sf.staccatocommons.lang.function;
 
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
+import static net.sf.staccatocommons.lang.number.Numbers.*;
 import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -141,6 +143,18 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
   public void testNullSafe() throws Exception {
     assertNull(add(1).nullSafe().apply(null));
     assertEquals((Integer) 2, add(1).nullSafe().apply(1));
+  }
+
+  /** Test for function composition */
+  @Test
+  public void testThenFunction() throws Exception {
+    assertEquals(e(101, -1), bigDecimal().inverse().then(add(d(10))).apply(d(10)));
+  }
+
+  /** Test for predicate composition */
+  @Test
+  public void testThenPredicate() throws Exception {
+    assertTrue(add(10).then(Compare.lessThan(20)).eval(5));
   }
 
 }

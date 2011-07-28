@@ -40,7 +40,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
 
   /**
    * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
-   * this lambda with another {@link Applicable}, resulting in a new
+   * this function with another {@link Applicable}, resulting in a new
    * {@link Function} that when applied returns
    * <code>this.apply(other.apply(arg)</code>
    * 
@@ -52,7 +52,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
 
   /**
    * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
-   * this lambda with another {@link Applicable2}, resulting in a new
+   * this function with another {@link Applicable2}, resulting in a new
    * {@link Function2} that when applied returns
    * <code>this.apply(other.apply(arg0, arg1)</code>
    * 
@@ -66,7 +66,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
 
   /**
    * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
-   * this lambda with another {@link Applicable3}, resulting in a new
+   * this function with another {@link Applicable3}, resulting in a new
    * {@link Function3} that when applied returns
    * <code>this.apply(other.apply(arg0,arg1,arg2)</code>
    * 
@@ -89,6 +89,13 @@ public interface Function<A, B> extends Applicable<A, B>, //
    */
   <C> Function<A, C> then(@NonNull Function<? super B, ? extends C> other);
 
+  /**
+   * Predicate composition, like {@link Predicate#of(Applicable)}, but with
+   * receptor and argument interchanged. Equivalent to {@code other.of(this)}
+   * 
+   * @param other
+   * @return a new {@link Predicate}
+   */
   Predicate<A> then(@NonNull Predicate<? super B> other);
 
   /**

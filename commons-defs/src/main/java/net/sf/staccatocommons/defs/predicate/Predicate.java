@@ -75,5 +75,15 @@ public interface Predicate<A> extends Evaluable<A>, Applicable<A, Boolean> {
   @NullSafe
   Predicate<A> orNull();
 
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
+   * this predicate with another {@link Applicable}, resulting in a new
+   * {@link Predicate} that when applied returns
+   * <code>this.eval(other.apply(arg)</code>
+   * 
+   * @param <B>
+   * @param other
+   * @return a new predicate, <code>this</code> composed with <code>other</code>
+   */
   <B> Predicate<B> of(@NonNull final Applicable<? super B, ? extends A> other);
 }
