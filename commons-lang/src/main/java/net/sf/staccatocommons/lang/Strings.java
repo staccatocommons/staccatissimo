@@ -21,7 +21,12 @@ import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.EqualsIgnoreCase;
 import net.sf.staccatocommons.lang.predicate.internal.Matches;
+import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
+import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * @author flbulgarelli
@@ -96,12 +101,41 @@ public class Strings {
    * @param <A>
    * @return a function that returns <code>arg.toString()</code>
    */
+  @Constant
   public static <A> Function<A, String> toString_() {
     return new AbstractFunction<A, String>() {
       public String apply(A arg) {
         return arg.toString();
       }
     };
+  }
+
+  /**
+   * Returns a function that returns the result of sending
+   * {@link ToStringBuilder#reflectionToString(Object, org.apache.commons.lang.builder.ToStringStyle)}
+   * to its argument, using the given {@link ToStringStyle}
+   * 
+   * @param <A>
+   * @return a function that returns toString() of the argument using reflection
+   */
+  public static <A> Function<A, String> reflectionToString(final ToStringStyle toStringStyle) {
+    return new AbstractFunction<A, String>() {
+      public String apply(A arg) {
+        return ToStringBuilder.reflectionToString(arg, toStringStyle);
+      }
+    };
+  }
+
+  /**
+   * Returns a function that returns the result of sending
+   * {@link ToStringBuilder#reflectionToString(Object, org.apache.commons.lang.builder.ToStringStyle)}
+   * to its argument, using the {@link NamedTupleToStringStyle}
+   * 
+   * @param <A>
+   * @return a function that returns toString() of the argument using reflection
+   */
+  public static <A> Function<A, String> reflectionToString() {
+    return reflectionToString(NamedTupleToStringStyle.getInstance());
   }
 
 }
