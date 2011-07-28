@@ -24,8 +24,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -44,7 +46,6 @@ import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DropWhileStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.FlatMapStream;
-import net.sf.staccatocommons.collections.stream.impl.internal.GroupByStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.MapStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.MemorizedStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.PrependStream;
@@ -71,6 +72,7 @@ import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
+import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
 import net.sf.staccatocommons.lang.predicate.Equiv;
@@ -577,17 +579,42 @@ public abstract class AbstractStream<A> implements Stream<A> {
     return Streams.from((List<A>) reversedList);
   }
 
-  // TODO move to top level
-  /***
-   * TODO pass aggregation function? This case would a particular one of
-   * groupBy(pred, concat())
-   * 
-   * @param pred
-   * @return a new {@link Stream}. Although the resulting stream itself is lazy,
-   *         its stream elements are not.
-   */
-  public Stream<Stream<A>> groupBy(final Evaluable2<A, A> pred) {
-    return new GroupByStream<A>(this, pred);
+  public <K> Map<K, A> mapReduce(Applicable<? super A, K> groupFunction,
+    Applicable2<? super A, ? super A, A> reduceFunction) {
+    return mapReduce(groupFunction, Functions.<A> identity(), reduceFunction);
+  }
+
+  public <K, V> Map<K, V> mapReduce(Applicable<? super A, K> groupFunction, Applicable<? super A, V> mapFunction,
+    Applicable2<? super V, ? super V, V> reduceFunction) {
+    Map<K, V> map = new LinkedHashMap<K, V>();
+    for (A element : this) {
+      K key = groupFunction.apply(element);
+      V value = mapFunction.apply(element);
+      V acum = map.get(key);
+      if (acum != null)
+        map.put(key, reduceFunction.apply(acum, value));
+      else if (map.containsKey(key))
+        map.put(key, reduceFunction.apply(null, value));
+      else
+        map.put(key, value);
+    }
+    return map;
+  }
+
+  public <K, V> Map<K, V> mapReduce(Applicable<? super A, K> groupFunction, V initial,
+    Applicable2<? super V, ? super A, V> foldFunction) {
+    Map<K, V> map = new LinkedHashMap<K, V>();
+    for (A element : this) {
+      K key = groupFunction.apply(element);
+      V acum = map.get(key);
+      if (acum != null)
+        map.put(key, foldFunction.apply(acum, element));
+      else if (map.containsKey(key))
+        map.put(key, foldFunction.apply(null, element));
+      else
+        map.put(key, foldFunction.apply(initial, element));
+    }
+    return map;
   }
 
   public Stream<Pair<A, A>> cross() {

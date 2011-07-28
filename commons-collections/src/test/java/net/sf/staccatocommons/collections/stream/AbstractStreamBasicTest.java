@@ -24,17 +24,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
-import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
-import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.lang.tuple.Tuples;
@@ -273,13 +271,23 @@ public class AbstractStreamBasicTest {
     assertEquals(6, (int) Streams.cons(90, 10, 30, 6, 150, 65).minimum());
   }
 
-  // TODO group by operation are poor
-  /** Test for {@link AbstractStream#groupBy(Evaluable2)} */
+  /**
+   * Test for
+   * {@link AbstractStream#mapReduce(net.sf.staccatocommons.defs.Applicable, Applicable2)}
+   */
   @Test
   public void testGroupBy() {
-    assertTrue(new ListStream<Integer>(Arrays.asList(1, 1, 2, 4, 4, 4, 5)) //
-      .groupBy(Equiv.<Integer> equal())
-      .equiv(Streams.cons(1, 1), Streams.cons(2), Streams.cons(4, 4, 4), Streams.cons(5)));
+    // Gets the sum of integers grouped by their modulo-3
+    Map<BigInteger, BigInteger> mapReduce = Streams.cons(i(2), i(2), i(9), i(5)) //
+      .mapReduce(new AbstractFunction<BigInteger, BigInteger>() {
+        public BigInteger apply(BigInteger arg) {
+          return arg.remainder(i(3));
+        }
+      }, bigInteger().add());
+
+    assertEquals(i(9), mapReduce.get(i(0)));
+    assertFalse(mapReduce.containsKey(i(1)));
+    assertEquals(i(2 + 2 + 5), mapReduce.get(i(2)));
   }
 
   /**
