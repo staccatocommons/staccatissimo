@@ -17,6 +17,7 @@
         <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-dynamic</developerConnection>
         <url>${staccatissimo.scm.view.base}/trunk/commons-dynamic/</url>
     </scm>
+    <description>Library for handling objects in a dynamically-typed way</description>
     <distributionManagement>
         <site>
             <id> ${distribution.site.id}</id>

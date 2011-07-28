@@ -12,6 +12,11 @@
 	<version>1.1-SNAPSHOT</version>
 	<inceptionYear>2011</inceptionYear>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
+	<description>Lightweight library for instantiating functions and predicates
+	 in a DSL style, without using anonymous classes. 
+	 This project is aimed to simplify higher-order programming until Java adds 
+	 lambdas to its language
+	</description>
 	<scm>
         <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lambda</connection>
         <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lambda</developerConnection>

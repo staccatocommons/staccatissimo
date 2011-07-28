@@ -17,6 +17,9 @@
 		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-collections</developerConnection>
 		<url>${staccatissimo.scm.view.base}/trunk/commons-collections/</url>
 	</scm>
+	<description>Collections library of the Staccato-Commons project, focused on providing new abstractions 
+	that mix object oriented and functional programming style for dealing with iterable objects. 
+	</description>
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
