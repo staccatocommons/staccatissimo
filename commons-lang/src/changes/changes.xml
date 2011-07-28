@@ -58,5 +58,22 @@
                 Nul-Safe Functions
             </action>
 		</release>
+	    <release version="1.1" date="TBD" description="Composition">
+            <action dev="flbulgarelli" type="add">
+                Predicate composition 
+            </action>
+            <action dev="flbulgarelli" type="add">
+                Improved function composition 
+            </action>
+            <action dev="flbulgarelli" type="add">
+                Rich function composition 
+            </action>
+            <action dev="flbulgarelli" type="add">
+                Strings.reflectionToString() function 
+            </action>
+            <action dev="flbulgarelli" type="add">
+                Tuples.toPair() and Tuples.toTriple() functions 
+            </action>
+        </release>
 	</body>
 </document>
