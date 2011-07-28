@@ -11,6 +11,10 @@
 	<version>1.1-SNAPSHOT</version>
 	<name>Staccato-Commons-Restrictions</name>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
+	<description>
+	Library of annotations that express restrictions, that can be used to indicate preconditions, 
+	postconditions and invariants over objects and messages, focused on documentation reuse.
+	</description>
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>
