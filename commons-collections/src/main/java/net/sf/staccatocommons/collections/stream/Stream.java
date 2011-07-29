@@ -18,6 +18,7 @@ import java.io.Serializable;
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.collections.restrictions.Repeatable;
 import net.sf.staccatocommons.defs.ContainsAware;
+import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
@@ -106,5 +107,7 @@ public interface Stream<A> extends //
   Zippeable<A> {
 
   Thriterator<A> iterator();
+
+  void each(Executable<? super A> block);
 
 }

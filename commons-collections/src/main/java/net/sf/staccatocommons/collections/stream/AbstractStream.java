@@ -61,6 +61,7 @@ import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
+import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
@@ -112,6 +113,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
   @Override
   public boolean isEmpty() {
     return iterator().isEmpty();
+  }
+
+  public void each(Executable<? super A> block) {
+    for (A element : this)
+      block.exec(element);
   }
 
   @Override
