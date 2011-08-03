@@ -16,41 +16,38 @@ package net.sf.staccatocommons.io;
 import java.io.File;
 
 import net.sf.staccatocommons.defs.function.Function;
-import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.restrictions.Constant;
 
 /**
+ * @deprecated use {@link Files} instead
  * @author flbulgarelli
- * 
  */
+@Deprecated
 public class IOFunctions {
 
   /**
    * Answers a function that returns the name of a file
    * 
+   * @deprecated use {@link Files#fileName()} instead
+   * 
    * @return a {@link Function} that returns <code>arg.getName()</code>
    */
   @Constant
+  @Deprecated
   public static Function<File, String> fileName() {
-    return new AbstractFunction<File, String>() {
-      public String apply(File arg) {
-        return arg.getName();
-      }
-    };
+    return Files.fileName();
   }
 
   /**
    * Answers a function that returns the path of a file
    * 
+   * @deprecated use {@link Files#filePath()} instead
    * @return a {@link Function} that returns <code>arg.getPath()</code>
    */
   @Constant
+  @Deprecated
   public static Function<File, String> filePath() {
-    return new AbstractFunction<File, String>() {
-      public String apply(File arg) {
-        return arg.getPath();
-      }
-    };
+    return Files.filePath();
   }
 
 }

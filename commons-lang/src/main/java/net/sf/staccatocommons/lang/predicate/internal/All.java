@@ -20,7 +20,7 @@ import net.sf.staccatocommons.defs.Evaluable;
  * 
  * @param <T>
  */
-public final class All<T> extends NonAnnonymousPredicate<T> {
+public final class All<T> extends TopLevelPredicate<T> {
   private static final long serialVersionUID = 2032230415038798930L;
   private final Iterable<Evaluable<T>> predicates;
 

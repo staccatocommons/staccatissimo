@@ -18,7 +18,7 @@ package net.sf.staccatocommons.lang.predicate.internal;
  * 
  * @param <T>
  */
-public final class Same<T> extends NonAnnonymousPredicate<T> {
+public final class Same<T> extends TopLevelPredicate<T> {
   private static final long serialVersionUID = 3404033724148091585L;
   private final T value;
 

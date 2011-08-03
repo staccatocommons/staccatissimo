@@ -12,26 +12,21 @@
  */
 package net.sf.staccatocommons.lang.function.internal;
 
-import net.sf.staccatocommons.defs.Applicable;
+import java.io.Serializable;
+
+import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.internal.ToString;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class ApplicableFunction<A, B> extends TopLevelFunction<A, B> {
+public abstract class TopLevelFunction<A, B> extends AbstractFunction<A, B> implements Serializable {
 
-  private static final long serialVersionUID = 7025329352284641259L;
-  private Applicable<? super A, ? extends B> applicable;
+  private static final long serialVersionUID = -8365200949039362206L;
 
-  /**
-   * Creates a new {@link ApplicableFunction}
-   */
-  public ApplicableFunction(Applicable<? super A, ? extends B> applicable) {
-    this.applicable = applicable;
-  }
-
-  public B apply(A arg) {
-    return applicable.apply(arg);
+  public String toString() {
+    return ToString.toString(this);
   }
 
 }

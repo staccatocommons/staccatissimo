@@ -35,7 +35,7 @@ public final class NullPredicates {
     return NULL;
   }
 
-  private static class NotNull<T> extends NonAnnonymousPredicate<T> {
+  private static class NotNull<T> extends TopLevelPredicate<T> {
     /**
        * 
        */
@@ -50,7 +50,7 @@ public final class NullPredicates {
     }
   }
 
-  private static class Null<T> extends NonAnnonymousPredicate<T> {
+  private static class Null<T> extends TopLevelPredicate<T> {
     /**
        * 
        */

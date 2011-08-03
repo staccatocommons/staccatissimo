@@ -20,7 +20,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * @param <T>
  */
-public final class Equals<T> extends NonAnnonymousPredicate<T> {
+public final class Equals<T> extends TopLevelPredicate<T> {
   private static final long serialVersionUID = -7587113479123370400L;
   private final T value;
 

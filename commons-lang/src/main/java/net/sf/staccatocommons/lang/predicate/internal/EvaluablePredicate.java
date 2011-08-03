@@ -20,7 +20,7 @@ import net.sf.staccatocommons.defs.Evaluable;
  * @param <T>
  * 
  */
-public class EvaluablePredicate<T> extends NonAnnonymousPredicate<T> {
+public class EvaluablePredicate<T> extends TopLevelPredicate<T> {
 
   private static final long serialVersionUID = -7926781232880056763L;
   private final Evaluable<? super T> evaluable;

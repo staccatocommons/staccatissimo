@@ -21,7 +21,7 @@ import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 /**
  * @author flbulgarelli
  */
-abstract class NonAnnonymousPredicate<T> extends AbstractPredicate<T> implements Serializable {
+public abstract class TopLevelPredicate<T> extends AbstractPredicate<T> implements Serializable {
 
   private static final long serialVersionUID = 2953242687325764205L;
 

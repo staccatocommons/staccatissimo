@@ -23,7 +23,7 @@ import net.sf.staccatocommons.restrictions.Constant;
  * 
  * @param <T>
  */
-public final class False<T> extends NonAnnonymousPredicate<T> {
+public final class False<T> extends TopLevelPredicate<T> {
   private static final long serialVersionUID = 7804525181528599615L;
 
   public boolean eval(T argument) {

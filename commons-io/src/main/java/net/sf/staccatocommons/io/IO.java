@@ -14,15 +14,17 @@ package net.sf.staccatocommons.io;
 
 import java.io.PrintStream;
 
+import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.lang.block.Block;
 import net.sf.staccatocommons.restrictions.Constant;
 
 /**
- * @author flbulgarelli
+ * Simple IO {@link Applicative}s
  * 
+ * @author flbulgarelli
  */
-public class IOBlocks {
+public class IO {
 
   public static <A> Executable<A> print(final PrintStream printStream) {
     return new Block<A>() {

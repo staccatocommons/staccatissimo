@@ -25,7 +25,7 @@ import net.sf.staccatocommons.restrictions.Constant;
  * @param <A>
  */
 @NullSafe
-public final class Equals2<A> extends NonAnnonymousPredicate2<A> {
+public final class Equals2<A> extends TopLevelPredicate2<A> {
   private static final long serialVersionUID = -5196215375584803443L;
 
   public boolean eval(A arg0, A arg1) {

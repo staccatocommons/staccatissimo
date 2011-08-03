@@ -101,7 +101,7 @@ public class DirectoryUnitTest {
   @Test
   public void testGetDepthFirstFileStream() {
     Stream<File> stream = new Directory(root).getDepthFirstFileStream();
-    assertEquals(Arrays.asList("f1", "f2", "f3", "f4", "f5"), stream.map(IOFunctions.fileName()).toList());
+    assertEquals(Arrays.asList("f1", "f2", "f3", "f4", "f5"), stream.map(Files.fileName()).toList());
   }
 
   /**
@@ -111,6 +111,6 @@ public class DirectoryUnitTest {
   @Test
   public void testGetRecurseFileStream() {
     Stream<File> stream = new Directory(root).getBreadthFirstFileStream();
-    assertEquals(Arrays.asList("f5", "f1", "f2", "f4", "f3"), stream.map(IOFunctions.fileName()).toList());
+    assertEquals(Arrays.asList("f5", "f1", "f2", "f4", "f3"), stream.map(Files.fileName()).toList());
   }
 }

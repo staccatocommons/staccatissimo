@@ -21,6 +21,7 @@ import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * A {@link Stream} is a lazy, rich-interfaced, {@link Iterable}, chained
@@ -108,6 +109,13 @@ public interface Stream<A> extends //
 
   Thriterator<A> iterator();
 
-  void each(Executable<? super A> block);
+  /**
+   * Executes the given {@link Executable} block for each element.
+   * 
+   * This message is equivalent to a for-each loop over this {@link Stream}
+   * 
+   * @param block
+   */
+  void each(@NonNull Executable<? super A> block);
 
 }

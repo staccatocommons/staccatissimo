@@ -13,14 +13,11 @@
 
 package net.sf.staccatocommons.lang.function.internal;
 
-import java.io.Serializable;
-
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
-import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.restrictions.Constant;
@@ -31,7 +28,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * @param <A>
  */
-public final class IdentityFunction<A> extends AbstractFunction<A, A> implements Serializable {
+public final class IdentityFunction<A> extends TopLevelFunction<A, A> {
 
   private static final long serialVersionUID = -9042770205177366369L;
 

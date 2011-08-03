@@ -21,7 +21,7 @@ import net.sf.staccatocommons.restrictions.Constant;
  * 
  * @param <A>
  */
-public final class Compare2<A extends Comparable<A>> extends NonAnnonymousPredicate2<A> {
+public final class Compare2<A extends Comparable<A>> extends TopLevelPredicate2<A> {
 
   private static final long serialVersionUID = 2333778927729616411L;
 

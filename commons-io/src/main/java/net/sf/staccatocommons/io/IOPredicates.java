@@ -21,19 +21,23 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 
 /**
+ * @deprecated use {@link Files} instead
  * @author flbulgarelli
  * 
  */
+@Deprecated
 public class IOPredicates {
 
   /**
    * Answers a predicate that evaluates if a file ends with a given suffix
    * 
+   * @deprecated use {@link Files#suffix(String...)} instead
    * @param suffixes
    * @return a new {@link Predicate}
    * @see SuffixFileFilter
    */
+  @Deprecated
   public static Predicate<File> suffix(@NonNull String... suffixes) {
-    return new FilePredicate(new SuffixFileFilter(suffixes));
+    return Files.suffix(suffixes);
   }
 }

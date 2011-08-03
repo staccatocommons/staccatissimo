@@ -19,7 +19,7 @@ package net.sf.staccatocommons.lang.predicate.internal;
  * 
  * @param <T>
  */
-public final class GreaterThan<T extends Comparable<T>> extends NonAnnonymousPredicate<T> {
+public final class GreaterThan<T extends Comparable<T>> extends TopLevelPredicate<T> {
   private static final long serialVersionUID = 8841731221163195322L;
   private final T value;
 

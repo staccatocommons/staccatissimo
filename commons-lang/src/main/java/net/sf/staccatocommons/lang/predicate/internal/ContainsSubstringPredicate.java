@@ -18,7 +18,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 /**
  * @author flbulgarelli
  */
-public class ContainsSubstringPredicate extends NonAnnonymousPredicate<String> {
+public class ContainsSubstringPredicate extends TopLevelPredicate<String> {
 
   private static final long serialVersionUID = -1561905956909887950L;
   private final String substring;

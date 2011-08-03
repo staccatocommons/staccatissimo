@@ -38,7 +38,7 @@ public class ClassesInstrumentedDummyTest {
   /** Test that the constant instrumenter is working */
   @Test
   public void testConst() throws Exception {
-    assertSame(IOFunctions.fileName(), IOFunctions.fileName());
+    assertSame(Files.fileName(), Files.fileName());
   }
 
 }

@@ -23,7 +23,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public class Matches extends NonAnnonymousPredicate<String> {
+public class Matches extends TopLevelPredicate<String> {
 
   private static final long serialVersionUID = -4663999428767203678L;
   private Pattern pattern;
