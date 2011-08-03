@@ -137,7 +137,7 @@ public class Predicates {
    * 
    * @param <T>
    * @param values
-   * @return a new {@link AbstractPredicate}
+   * @return a new {@link Predicate}
    */
   public static <T> Predicate<T> in(@NonNull T... values) {
     return new InPredicate<T>(values);

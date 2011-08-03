@@ -20,6 +20,8 @@ import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.internal.NaturalComparator;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
+import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.predicate.internal.GreaterThan;
 import net.sf.staccatocommons.lang.predicate.internal.LessThan;
 import net.sf.staccatocommons.restrictions.Constant;
@@ -54,7 +56,7 @@ public class Compare {
    * @return if element is between min inclusive, and max, inclusive
    */
   public static <T extends Comparable<T>> boolean between(@NonNull T element, @NonNull T min, @NonNull T max) {
-    return element.compareTo(max) <= 0 && element.compareTo(min) >= 0;
+    return between(element, min, max, Compare.<T> natural());
   }
 
   /**
@@ -124,6 +126,14 @@ public class Compare {
     return element <= max && element >= min;
   }
 
+  public static <T extends Comparable<T>> Predicate<T> between(final T min, final T max) {
+    return new AbstractPredicate<T>() {
+      public boolean eval(T argument) {
+        return between(argument, min, max);
+      }
+    };
+  }
+
   /**
    * Tests if a given array contains an element
    * 
@@ -166,6 +176,18 @@ public class Compare {
       if (element.equals(value))
         return true;
     return false;
+  }
+
+  /**
+   * Returns a predicate that tests if its argument is equal to any of the given
+   * values
+   * 
+   * @param <T>
+   * @param values
+   * @return a new {@link Predicate}
+   */
+  public static <T> Predicate<T> in_(@NonNull T... values) {
+    return Predicates.in(values);
   }
 
   /**
