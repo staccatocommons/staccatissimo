@@ -74,6 +74,12 @@
             <action dev="flbulgarelli" type="add">
                 Tuples.toPair() and Tuples.toTriple() functions 
             </action>
+            <action dev="flbulgarelli" type="add">
+                Compare.between predicate
+            </action>
+            <action dev="flbulgarelli" type="fix">
+                Fixed top level functions that did not implement toString 
+            </action>
         </release>
 	</body>
 </document>

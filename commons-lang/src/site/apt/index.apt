@@ -38,7 +38,7 @@ Getting Started
   
   * MapBuilder and CollectionBuilder - Builders for creating unmodifiable collections and maps
   
-  * Compare - Functions and utilities for comparing elements
+  * {{{./compare-by-example.html}Compare}} - Functions and utilities for comparing elements
   
   * Sequences - An iterable source of objects where next object is computed based on the previous     
   
@@ -53,7 +53,7 @@ Getting Started
   
   * SoftExceptions
      
-  * Numbers and NumberTypes - Compactly express BigInteger and BigDecimal literals, and deal with numeric types polimorphically.  
+  * {{{./numbers-by-example.html}Numbers}} and NumberTypes - Compactly express BigInteger and BigDecimal literals, and deal with numeric types polimorphically.  
   
    
   

@@ -22,11 +22,35 @@ Numbers
 
    Java language does not offer any way to declare big decimal nor big integer literals. While it is easy, for example to construct
   Long objects - thanks to autoboxing - just writing 1L, there is no equivalent for the already mentioned frequently used number types.
-  There are only two ways of instantiating them: by constructor  or by <<<valueOf>>> class 
+  There are only two ways of instantiating them: by calling its constructors or by <<<valueOf>>> class 
   methods. 
    
-  The problem with the first alternative is that it bypass frequently used long values caches, so it should be avoided; 
-  the second alternative is that it is clumsy, due to the long factory method names. Their are neither IDE friendly, adding
+  The problem with the first alternative is that it bypass frequently used long values caches, so it should be avoided.  
+  The second alternative is clumsy, due to the long factory method names. Their are neither IDE friendly, adding
   {{{http://stackoverflow.com/questions/288861/eclipse-optimize-imports-to-include-static-imports}them to a static imports autocomplete}} 
-  list may be trick, as both factory  methods of big decimals and big integers are named in the same way.
+  list may be trick, as both factory methods of big decimals and big integers are named in the same way.
+  
+* The solution
+
+   Configure your IDE to automatically import <<<net.sf.staccatocommons.lang.number.Numbers>>> when needed, and you will have
+   BigDecimal/BigInteger "literals":
+ 
++---
+    ...
+    //Equivalent to BigInteger.valueOf(900)
+    BigInteger initialPopulation = i(900);
+    
+    ....
+    //distance is 15906 × 10^-3
+    //Equivalent to BigDecimal.valueOf(15906,3)
+    BigDecimal distance = d(15906, 3);
+    
+    //Or, If you prefer E-notation:
+    BigDecimal distance = e(15906,-3);
+    
+    ...
+    //salary is 5000. 
+    //Equivalent to BigDecimal.valueOf(5000)
+    BigDecimal salary = d(5000);
++---   
  
