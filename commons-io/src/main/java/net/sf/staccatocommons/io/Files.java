@@ -14,12 +14,19 @@
 package net.sf.staccatocommons.io;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.Reader;
+import java.nio.channels.FileChannel;
 
+import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.io.internal.FilePredicate;
-import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.internal.TopLevelFunction;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -57,11 +64,15 @@ public class Files {
    */
   @Constant
   public static Function<File, String> filePath() {
-    return new AbstractFunction<File, String>() {
+    class FilePathFunction extends TopLevelFunction<File, String> {
+      private static final long serialVersionUID = 8740286164884158913L;
+
       public String apply(File arg) {
         return arg.getPath();
       }
-    };
+    }
+    return new FilePathFunction();
+
   }
 
   /**
@@ -73,6 +84,57 @@ public class Files {
    */
   public static Predicate<File> suffix(@NonNull String... suffixes) {
     return new FilePredicate(new SuffixFileFilter(suffixes));
+  }
+
+  /**
+   * Opens a {@link Reader} for the given file. The file <strong>must</strong>
+   * exist, <strong>must</strong> be readable, and <strong>must</strong> be a
+   * regular file.
+   * 
+   * @param file
+   * @return a new {@link Reader}
+   */
+  public static Reader openReader(@NonNull File file) {
+    try {
+      return new FileReader(file);
+    } catch (FileNotFoundException e) {
+      return handleFileNotFound(file, e);
+    }
+  }
+
+  /**
+   * Opens an {@link InputStream} for the given file. The file
+   * <strong>must</strong> exist, <strong>must</strong> be readable, and
+   * <strong>must</strong> be a regular file.
+   * 
+   * @param file
+   * @return a new {@link InputStream}
+   */
+  public static FileInputStream openInputStream(@NonNull File file) {
+    try {
+      return new FileInputStream(file);
+    } catch (FileNotFoundException e) {
+      return handleFileNotFound(file, e);
+    }
+  }
+
+  /**
+   * Opens an {@link FileChannel} for the given file. The file
+   * <strong>must</strong> exist, <strong>must</strong> be readable, and
+   * <strong>must</strong> be a regular file.
+   * 
+   * @param file
+   * @return <code>openInputStream(file).getChannel()</code>
+   */
+  public static FileChannel openChannel(@NonNull File file) {
+    return openInputStream(file).getChannel();
+  }
+
+  protected static <T> T handleFileNotFound(File file, FileNotFoundException e) {
+    Ensure.that("file", file, file.isFile(), "must be a regular file");
+    Ensure.that("file", file, file.exists(), "must exist");
+    Ensure.that("file", file, file.canRead(), "must be readable");
+    throw SoftException.soften(e);
   }
 
 }

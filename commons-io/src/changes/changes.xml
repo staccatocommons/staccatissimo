@@ -37,5 +37,16 @@
                 Enabled Constant annotations instrumentation
             </action>
         </release>
+        <release version="1.1" date="TBD" description="IO &amp; Composition">
+            <action dev="flbulgarelli" type="fix">
+                Fixed top level functions that did not implement serializable 
+            </action>
+            <action dev="flbulgarelli" type="add">
+                IO utility class with some executables for performing IO 
+            </action>
+            <action dev="flbulgarelli" type="add">
+                KeepOpen restriction 
+            </action>
+        </release>
 	</body>
 </document>

@@ -15,8 +15,15 @@ package net.sf.staccatocommons.io;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Reader;
 import java.io.StringReader;
+
+import net.sf.staccatocommons.lang.Range;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +32,7 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class ReadStrategiesUnitTest {
+public class IOStreamsUnitTest {
 
   private static final String SAMPLE_TEXT = "this is line 1\n this is line 2 \n this is line three";
   private Reader readable;
@@ -54,6 +61,28 @@ public class ReadStrategiesUnitTest {
   @Test
   public void testReadWords() {
     assertEquals("this|is|line|1|this|is|line|2|this|is|line|three", IOStreams.fromWords(readable).joinStrings("|"));
+  }
+
+  /**
+   * Test for {@link IOStreams#fromObjects(java.io.ObjectInput)}
+   * 
+   * @throws IOException
+   */
+  @Test
+  public void testReadObjects() throws IOException {
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    ObjectOutputStream objectOutput = new ObjectOutputStream(out);
+
+    objectOutput.writeObject(Range.from(10, 90));
+    objectOutput.writeObject(Range.from(8, 40));
+    objectOutput.writeObject(Range.from(9, 10));
+    objectOutput.writeObject(Range.from(9, 12));
+
+    ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+
+    assertEquals(
+      "[Range(10,90), Range(8,40), Range(9,10), Range(9,12)]",
+      IOStreams.<Range<Integer>> fromObjects(new ObjectInputStream(in)).printString());
   }
 
 }

@@ -34,11 +34,25 @@ public class IO {
     };
   }
 
+  /**
+   * Answers an {@link Executable} that prints its argument to the standard
+   * output
+   * 
+   * @param <A>
+   * @return {@code print(System.out)}
+   */
   @Constant
   public static <A> Executable<A> printSysout() {
     return print(System.out);
   }
 
+  /**
+   * Answers an {@link Executable} that prints its argument to the standard
+   * error output
+   * 
+   * @param <A>
+   * @return {@code print(System.err)}
+   */
   @Constant
   public static <A> Executable<A> printSyserr() {
     return print(System.err);
@@ -52,11 +66,25 @@ public class IO {
     };
   }
 
+  /**
+   * Answers an {@link Executable} that prints its argument to the standard
+   * output, followed by a line terminator.
+   * 
+   * @param <A>
+   * @return {@code println(System.out)}
+   */
   @Constant
   public static <A> Executable<A> printlnSysout() {
     return println(System.out);
   }
 
+  /**
+   * Answers an {@link Executable} that prints its argument to the standard
+   * error output, followed by a line terminator.
+   * 
+   * @param <A>
+   * @return {@code println(System.err)}
+   */
   @Constant
   public static <A> Executable<A> printlnSyserr() {
     return println(System.err);

@@ -14,6 +14,8 @@
 package net.sf.staccatocommons.io;
 
 import java.io.EOFException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInput;
 import java.io.Reader;
 import java.util.Scanner;
@@ -21,6 +23,7 @@ import java.util.Scanner;
 import net.sf.staccatocommons.collections.internal.iterator.NextOptionIterator;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.io.restrictions.KeepOpen;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -45,8 +48,13 @@ public class IOStreams {
    * @return a new single-iteration {@link Stream}
    */
   @NonNull
-  public static Stream<String> fromWords(@NonNull Readable readable) {
+  public static Stream<String> fromWords(@KeepOpen @NonNull Readable readable) {
     return Streams.from(new Scanner(readable));
+  }
+
+  @NonNull
+  public static Stream<String> fromWords(@NonNull InputStream in) {
+    return fromWords(new InputStreamReader(in));
   }
 
   /**
@@ -57,8 +65,13 @@ public class IOStreams {
    * @return a new single-iteration {@link Stream}
    */
   @NonNull
-  public static Stream<String> fromLines(@NonNull Reader readable) {
+  public static Stream<String> fromLines(@KeepOpen @NonNull Reader readable) {
     return Streams.from(new LineIterator(readable));
+  }
+
+  @NonNull
+  public static Stream<String> fromLines(@KeepOpen @NonNull InputStream in) {
+    return fromLines(new InputStreamReader(in));
   }
 
   /**
@@ -70,8 +83,13 @@ public class IOStreams {
    * @return a new single-iteration {@link Stream}
    */
   @NonNull
-  public static Stream<String> fromTokens(@NonNull Readable readable, @NonNull String regexp) {
+  public static Stream<String> fromTokens(@KeepOpen @NonNull Readable readable, @NonNull String regexp) {
     return Streams.from(new Scanner(readable).useDelimiter(regexp));
+  }
+
+  @NonNull
+  public static Stream<String> fromTokens(@KeepOpen @NonNull InputStream in, @NonNull String regexp) {
+    return fromTokens(new InputStreamReader(in), regexp);
   }
 
   /**
@@ -86,7 +104,7 @@ public class IOStreams {
    * @return a new single-iteration {@link Stream}
    */
   @NonNull
-  public static <A> Stream<A> fromObjects(@NonNull final ObjectInput readable) {
+  public static <A> Stream<A> fromObjects(@KeepOpen @NonNull final ObjectInput readable) {
     return Streams.from(new NextOptionIterator<A>() {
       protected Option<A> nextOption() {
         try {
@@ -99,5 +117,4 @@ public class IOStreams {
       }
     });
   }
-
 }
