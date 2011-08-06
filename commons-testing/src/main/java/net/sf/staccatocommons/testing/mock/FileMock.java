@@ -59,10 +59,16 @@ import java.net.URL;
 public class FileMock extends File {
   private static final long serialVersionUID = -4997788227815563688L;
   private final File[] contents;
+  private final boolean readable;
 
   protected FileMock(String pathname, File... contents) {
+    this(pathname, true, contents);
+  }
+
+  protected FileMock(String pathname, boolean readable, File... contents) {
     super(pathname);
     this.contents = contents;
+    this.readable = readable;
   }
 
   public boolean exists() {
@@ -82,7 +88,7 @@ public class FileMock extends File {
   }
 
   public boolean canRead() {
-    return true;
+    return exists() && readable;
   }
 
   public boolean canWrite() {
@@ -255,6 +261,17 @@ public class FileMock extends File {
    */
   public static FileMock file(String pathname) {
     return new FileMock(pathname, (File[]) null);
+  }
+
+  /**
+   * Creates a {@link FileMock} that represents a regular file
+   * 
+   * @param pathname
+   *          the name of the fake file
+   * @return a new {@link FileMock}
+   */
+  public static FileMock unreadableFile(String pathname) {
+    return new FileMock(pathname, false, (File[]) null);
   }
 
 }
