@@ -126,7 +126,17 @@ public class Compare {
     return element <= max && element >= min;
   }
 
-  public static <T extends Comparable<T>> Predicate<T> between(final T min, final T max) {
+  /**
+   * Answers a predicate that evalutes if its argument is between
+   * <code>min</code> and <code>max</code>
+   * 
+   * @param <T>
+   * @param min
+   * @param max
+   * @return a new {@link Predicate}
+   */
+  @ForceRestrictions
+  public static <T extends Comparable<T>> Predicate<T> between(@NonNull final T min, @NonNull final T max) {
     return new AbstractPredicate<T>() {
       public boolean eval(T argument) {
         return between(argument, min, max);

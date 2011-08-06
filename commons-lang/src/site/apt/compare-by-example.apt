@@ -27,7 +27,7 @@ Compare
 * The Solution
 
   Compare offers a hub of natural ordering comparators, generic min/max/between/in methods and functions, 
-  &lt;, &lt;=, &gt;, &gt;= functions, and generic, type-safe comparators based on a field.
+  \>, \>=, \<, \<= functions, and generic, type-safe comparators based on a field.
   
   Examples:
 
@@ -36,7 +36,7 @@ Compare
    import static net.sf.staccatocommons.lang.Compare.*;
    ...
    
-   //Tests if  9 &lt;= x &lt;= 98
+   //Tests if  9 <= x <= 98
    long x = ...; 
    between(x, 9, 98);
    

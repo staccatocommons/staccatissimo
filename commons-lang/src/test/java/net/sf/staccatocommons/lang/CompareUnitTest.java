@@ -129,4 +129,11 @@ public class CompareUnitTest {
     assertTrue(Compare.on(Tuples.<Integer> second()).compare(_(20, 30), _(20, 40)) < 0);
   }
 
+  /** Test for {@link Compare#between(Comparable, Comparable)} */
+  @Test
+  public void testBetween() throws Exception {
+    assertTrue(Compare.between("bar", "foo").eval("baz"));
+    assertFalse(Compare.between(9, 50).eval(4));
+  }
+
 }
