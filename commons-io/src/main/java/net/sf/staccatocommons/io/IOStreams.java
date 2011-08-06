@@ -52,6 +52,13 @@ public class IOStreams {
     return Streams.from(new Scanner(readable));
   }
 
+  /**
+   * Answers a {@link Stream} that retrieves words from the given
+   * {@link InputStream}
+   * 
+   * @param readable
+   * @return a new single-iteration {@link Stream}
+   */
   @NonNull
   public static Stream<String> fromWords(@NonNull InputStream in) {
     return fromWords(new InputStreamReader(in));
@@ -69,6 +76,13 @@ public class IOStreams {
     return Streams.from(new LineIterator(readable));
   }
 
+  /**
+   * Answers a {@link Stream} that retrieves lines from the given
+   * {@link InputStream}
+   * 
+   * @param readable
+   * @return a new single-iteration {@link Stream}
+   */
   @NonNull
   public static Stream<String> fromLines(@KeepOpen @NonNull InputStream in) {
     return fromLines(new InputStreamReader(in));
@@ -87,6 +101,14 @@ public class IOStreams {
     return Streams.from(new Scanner(readable).useDelimiter(regexp));
   }
 
+  /**
+   * Answers a {@link Stream} that retrieves tokens that match the given regular
+   * expression from the given {@link InputStream}
+   * 
+   * @param readable
+   * @param regexp
+   * @return a new single-iteration {@link Stream}
+   */
   @NonNull
   public static Stream<String> fromTokens(@KeepOpen @NonNull InputStream in, @NonNull String regexp) {
     return fromTokens(new InputStreamReader(in), regexp);

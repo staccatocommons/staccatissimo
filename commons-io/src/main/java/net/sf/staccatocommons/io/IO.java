@@ -16,8 +16,10 @@ import java.io.PrintStream;
 
 import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.lang.block.Block;
+import net.sf.staccatocommons.lang.block.internal.TopLevelBlock;
 import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * Simple IO {@link Applicative}s
@@ -26,12 +28,25 @@ import net.sf.staccatocommons.restrictions.Constant;
  */
 public class IO {
 
-  public static <A> Executable<A> print(final PrintStream printStream) {
-    return new Block<A>() {
+  /**
+   * Answers an {@link Executable} that prints its argument to the given
+   * <code>printStream</code>
+   * 
+   * @param <A>
+   * @param printStream
+   *          the target stream
+   * @return {@code print(System.out)}
+   */
+  @ForceRestrictions
+  public static <A> Executable<A> print(@NonNull final PrintStream printStream) {
+    class PrintBlock extends TopLevelBlock<A> {
+      private static final long serialVersionUID = 4013144383142068467L;
+
       protected void softExec(A argument) throws Exception {
         printStream.print(argument);
       };
-    };
+    }
+    return new PrintBlock();
   }
 
   /**
@@ -58,12 +73,24 @@ public class IO {
     return print(System.err);
   }
 
+  /**
+   * Answers an {@link Executable} that prints its argument, followed by a line
+   * terminator, to the given <code>printStream</code>
+   * 
+   * @param <A>
+   * @param printStream
+   *          the target stream
+   * @return {@code print(System.out)}
+   */
   public static <A> Executable<A> println(final PrintStream printStream) {
-    return new Block<A>() {
+    class PrintlnBlock extends TopLevelBlock<A> {
+      private static final long serialVersionUID = 9163954134933452924L;
+
       protected void softExec(A argument) throws Exception {
         printStream.println(argument);
       };
-    };
+    }
+    return new PrintlnBlock();
   }
 
   /**
