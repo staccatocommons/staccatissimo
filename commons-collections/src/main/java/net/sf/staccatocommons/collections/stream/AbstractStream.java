@@ -688,8 +688,9 @@ public abstract class AbstractStream<A> implements Stream<A> {
   @Override
   public final void print(java.lang.Appendable o) throws IOException {
     o.append('[');
-    printElement(o, head());
-    for (A element : tail()) {
+    Pair<A, Stream<A>> ht = decons();
+    printElement(o, ht._0());
+    for (A element : ht._1()) {
       o.append(", ");
       printElement(o, element);
     }
@@ -704,8 +705,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   @Override
-  public final void print() throws IOException {
-    println(System.out);
+  public final void print() {
+    try {
+      println(System.out);
+    } catch (IOException e) {
+      throw new AssertionError(e);
+    }
   }
 
   @Override
@@ -715,8 +720,12 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   @Override
-  public final void println() throws IOException {
-    println(System.out);
+  public final void println() {
+    try {
+      println(System.out);
+    } catch (IOException e) {
+      throw new AssertionError(e);
+    }
   }
 
   @Override

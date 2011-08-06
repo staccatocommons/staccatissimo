@@ -40,7 +40,7 @@ public interface Printable<A> {
    * @throws IOException
    *           if any io error occurs
    */
-  void print() throws IOException;
+  void print();
 
   /**
    * Prints the stream elements to an appendable, like {@link StringBuilder} or
@@ -60,7 +60,7 @@ public interface Printable<A> {
    * @throws IOException
    *           if any io error occurs
    */
-  void println() throws IOException;
+  void println();
 
   /**
    * Prints the stream elements to a string
