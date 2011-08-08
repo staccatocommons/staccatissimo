@@ -13,7 +13,7 @@
 
 /*
  Copyright (c) 2010, The Staccato-Commons Team   
- 
+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation; version 3 of the License.
@@ -43,6 +43,13 @@ import org.hamcrest.Matchers;
  */
 public class MiscMatchers {
 
+  /**
+   * Answers a matcher that matches any collection
+   * 
+   * @param <T>
+   * @param c
+   * @return a new {@link Matcher}
+   */
   @SuppressWarnings("unchecked")
   public static <T> Matcher<Collection<T>> anyCollection(Class<T> c) {
     return (Matcher) Matchers.any(Collection.class);
