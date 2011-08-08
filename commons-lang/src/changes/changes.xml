@@ -69,13 +69,13 @@
                 Rich function composition 
             </action>
             <action dev="flbulgarelli" type="add">
-                Strings.reflectionToString() function 
+                Strings.reflectionToString(), Strings.empty(), Strings.notEmpty()  
             </action>
             <action dev="flbulgarelli" type="add">
                 Tuples.toPair() and Tuples.toTriple() functions 
             </action>
             <action dev="flbulgarelli" type="add">
-                Compare.between predicate
+                Compare.between(A,A) predicate
             </action>
             <action dev="flbulgarelli" type="fix">
                 Fixed top level functions that did not implement toString 
