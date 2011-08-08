@@ -13,7 +13,6 @@
 
 package net.sf.staccatocommons.lang.function;
 
-import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.junit.Assert.*;
 
 import java.util.Date;
@@ -96,12 +95,6 @@ public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
   public void testConstThunk() throws Exception {
     Function<Object, Date> constant = Functions.constant(Thunks.currentDate());
     assertNotSame(constant.apply(_), constant.apply(_));
-  }
-
-  /** Test for {@link Strings#reflectionToString()} **/
-  @Test
-  public void testReflectionToString() throws Exception {
-    assertEquals("Pair(10,5)", Strings.reflectionToString().apply(_(10, 5)));
   }
 
 }

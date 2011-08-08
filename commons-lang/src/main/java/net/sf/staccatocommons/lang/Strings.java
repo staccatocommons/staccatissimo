@@ -21,6 +21,7 @@ import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.EqualsIgnoreCase;
 import net.sf.staccatocommons.lang.predicate.internal.Matches;
+import net.sf.staccatocommons.lang.predicate.internal.TopLevelPredicate;
 import net.sf.staccatocommons.lang.value.NamedTupleToStringStyle;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -92,6 +93,40 @@ public class Strings {
         return args.startsWith(string);
       }
     };
+  }
+
+  /**
+   * Returns a {@link Predicate} that tells if its String argument is empty
+   * 
+   * @return a new {@link Predicate} that evaluates {@code argument.isEmpty()}
+   */
+  @Constant
+  public static Predicate<String> empty() {
+    class EmptyStringPredicate extends TopLevelPredicate<String> {
+      private static final long serialVersionUID = -7092542419751229862L;
+
+      public boolean eval(String argument) {
+        return argument.isEmpty();
+      }
+    }
+    return new EmptyStringPredicate();
+  }
+
+  /**
+   * Returns a {@link Predicate} that tells if its String argument is not empty
+   * 
+   * @return a new {@link Predicate} that evaluates {@code !argument.isEmpty()}
+   */
+  @Constant
+  public static Predicate<String> notEmpty() {
+    class NotEmptyPredicate extends TopLevelPredicate<String> {
+      private static final long serialVersionUID = -6617185455944513316L;
+
+      public boolean eval(String argument) {
+        return !argument.isEmpty();
+      }
+    }
+    return new NotEmptyPredicate();
   }
 
   /**
