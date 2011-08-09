@@ -21,14 +21,14 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public class ContainsSubstringPredicate extends TopLevelPredicate<String> {
 
   private static final long serialVersionUID = -1561905956909887950L;
-  private final String substring;
+  private final CharSequence substring;
 
   /**
    * Creates a new {@link ContainsSubstringPredicate}
    * 
    * @param substring
    */
-  public ContainsSubstringPredicate(String substring) {
+  public ContainsSubstringPredicate(CharSequence substring) {
     this.substring = substring;
   }
 

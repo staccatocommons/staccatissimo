@@ -69,7 +69,7 @@
                 Rich function composition 
             </action>
             <action dev="flbulgarelli" type="add">
-                Strings.reflectionToString(), Strings.empty(), Strings.notEmpty()  
+                Strings.reflectionToString(), Strings.empty(), Strings.notEmpty(), Strings.length()  
             </action>
             <action dev="flbulgarelli" type="add">
                 Tuples.toPair() and Tuples.toTriple() functions 

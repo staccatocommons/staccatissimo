@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.function.internal.TopLevelFunction;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.EqualsIgnoreCase;
@@ -34,9 +35,6 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 
  */
 public class Strings {
-
-  // TODO length
-  // TODO accept charSequences when possible
 
   /**
    * Returns a new {@link Predicate} that tests
@@ -79,7 +77,7 @@ public class Strings {
    *          the substring to test if it is contained
    * @return a new predicate
    */
-  public static Predicate<String> contains(@NonNull String substring) {
+  public static Predicate<String> contains(@NonNull CharSequence substring) {
     return new ContainsSubstringPredicate(substring);
   }
 
@@ -131,6 +129,24 @@ public class Strings {
       }
     }
     return new NotEmptyPredicate();
+  }
+
+  /**
+   * Returns a {@link Function} that answers the char sequence length
+   * 
+   * @param value
+   * @return a constant function
+   */
+  @Constant
+  public static Function<CharSequence, Integer> length() {
+    class StringLengthFunction extends TopLevelFunction<CharSequence, Integer> {
+      private static final long serialVersionUID = -1564325023701893305L;
+
+      public Integer apply(CharSequence arg) {
+        return arg.length();
+      }
+    }
+    return new StringLengthFunction();
   }
 
   /**

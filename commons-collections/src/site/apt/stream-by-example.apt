@@ -256,7 +256,7 @@ by decorating other Iterables  or using sources like databases result sets, dire
        Streams
         .cons(recordings)
         .groupOn(
-            lambda($(Recording.class).getAuthor(), 
+            lambda($(Recording.class).getAuthor()), 
             lambda($(Recording.class).getLengthInMinutes()),
             integer().add());
 +---
