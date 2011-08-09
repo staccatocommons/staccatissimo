@@ -29,8 +29,9 @@ Compare
   Compare offers a hub of natural ordering comparators, generic min/max/between/in methods and functions, 
   \>, \>=, \<, \<= functions, and generic, type-safe comparators based on a field.
   
-  Examples:
+* Examples 
 
+** Between, LessThan, GreaterThan, LessThanOrEqualTo, GreatherThanOrEqualTo 
  
 +----
    import static net.sf.staccatocommons.lang.Compare.*;
@@ -49,9 +50,16 @@ Compare
    
    //Answers a predicate that tests if a date is < now
    lessThan(new Date()); 
++---
+
+** Comparators
+
++---
+   import static net.sf.staccatocommons.lang.Compare.*;
+   ...   
    
    //Answers the natural comparator
-   natural();
+   Compare.natural();
    
    //Answers a comparator that orders Customer
    //objects based on its name - using staccato-commons-lambda
@@ -60,7 +68,14 @@ Compare
    //Usage example, sort in place a list of accounts based on its bigDecimal debt.   
    List<BankAccount> accounts = ...;
    java.util.Collections.sort(accounts, on(lambda($(BankAccount.class).getDebt()));
++----
    
+** Min, Max
+
++--   
+    import static net.sf.staccatocommons.lang.Compare.*;
+    ...
+    
    //Answers a 2-arg function that returns the lowest of its arguments
    //based on a given comparator 
    Comparator<Blog> comparator = ...;

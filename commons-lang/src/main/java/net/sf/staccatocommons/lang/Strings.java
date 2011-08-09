@@ -34,6 +34,10 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 
  */
 public class Strings {
+
+  // TODO length
+  // TODO accept charSequences when possible
+
   /**
    * Returns a new {@link Predicate} that tests
    * <code>argument.equalsIgnoreCase(value)</code>
