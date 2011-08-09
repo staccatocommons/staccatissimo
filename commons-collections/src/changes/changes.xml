@@ -96,5 +96,17 @@
 				toString in Streams
             </action>
 		</release>
+		<release version="1.1" date="TBD" description="IO &amp; Composition">
+            <action dev="flbulgarelli" type="fix">
+                AbstractStream.print() now works with non repeatable streams
+            </action>
+            <action dev="flbulgarelli" type="update">
+                AbstractStream.print() and AbstractStream.println()
+                do not throw IOException anymore 
+            </action>
+            <action dev="flbulgarelli" type="add">
+                Implemented group functions 
+            </action>
+        </release>
 	</body>
 </document>

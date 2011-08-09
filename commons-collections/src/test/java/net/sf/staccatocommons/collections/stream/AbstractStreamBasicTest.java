@@ -273,13 +273,13 @@ public class AbstractStreamBasicTest {
 
   /**
    * Test for
-   * {@link AbstractStream#mapReduce(net.sf.staccatocommons.defs.Applicable, Applicable2)}
+   * {@link AbstractStream#groupOn(net.sf.staccatocommons.defs.Applicable, Applicable2)}
    */
   @Test
-  public void testGroupBy() {
+  public void testGroupOn() {
     // Gets the sum of integers grouped by their modulo-3
     Map<BigInteger, BigInteger> mapReduce = Streams.cons(i(2), i(2), i(9), i(5)) //
-      .mapReduce(new AbstractFunction<BigInteger, BigInteger>() {
+      .groupOn(new AbstractFunction<BigInteger, BigInteger>() {
         public BigInteger apply(BigInteger arg) {
           return arg.remainder(i(3));
         }

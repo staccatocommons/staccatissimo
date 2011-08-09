@@ -148,7 +148,7 @@ by decorating other Iterables  or using sources like databases result sets, dire
 +---
     interface Fruit {}
     class Apple implements Fruit {};
-    Collection<Fruit> fruits = ...;
+    Iterator<Fruit> fruits = ...;
     
     //Answers any fruit, except of the first one.
     //If there is no fruit, or just one fruit element, 
@@ -239,6 +239,26 @@ by decorating other Iterables  or using sources like databases result sets, dire
         
 +---
 
+** Grouping elements on an attribute
 
++---
+    class Recording { 
+        public String getTitle() { ... }
+        public Author getAuthor() { ... }
+        public int getLengthInMinutes() { ... }
+    }
+    
+    Iterable<Recording> recordings = ...;
+    
+    //Group recordings by its author, and
+    //aggregate the total length all the recordings for each of them
+    Map<Author, Integer> totalRecordingLengthByAuthor = 
+       Streams
+        .cons(recordings)
+        .groupOn(
+            lambda($(Recording.class).getAuthor(), 
+            lambda($(Recording.class).getLengthInMinutes()),
+            integer().add());
++---
 
  

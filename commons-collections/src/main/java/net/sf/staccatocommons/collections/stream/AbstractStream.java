@@ -41,6 +41,8 @@ import net.sf.staccatocommons.collections.internal.iterator.TakeWhileIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
+import net.sf.staccatocommons.collections.stream.impl.fold.internal.Reduction;
+import net.sf.staccatocommons.collections.stream.impl.fold.internal.Reductions;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendIterableStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DeconsTransformStream;
@@ -585,40 +587,27 @@ public abstract class AbstractStream<A> implements Stream<A> {
     return Streams.from((List<A>) reversedList);
   }
 
-  public <K> Map<K, A> mapReduce(Applicable<? super A, K> groupFunction,
+  public <K> Map<K, A> groupOn(Applicable<? super A, K> groupFunction,
     Applicable2<? super A, ? super A, A> reduceFunction) {
-    return mapReduce(groupFunction, Functions.<A> identity(), reduceFunction);
+    return groupOn(groupFunction, Functions.<A> identity(), reduceFunction);
   }
 
-  public <K, V> Map<K, V> mapReduce(Applicable<? super A, K> groupFunction, Applicable<? super A, V> mapFunction,
+  public <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Applicable<? super A, V> mapFunction,
     Applicable2<? super V, ? super V, V> reduceFunction) {
-    Map<K, V> map = new LinkedHashMap<K, V>();
-    for (A element : this) {
-      K key = groupFunction.apply(element);
-      V value = mapFunction.apply(element);
-      V acum = map.get(key);
-      if (acum != null)
-        map.put(key, reduceFunction.apply(acum, value));
-      else if (map.containsKey(key))
-        map.put(key, reduceFunction.apply(null, value));
-      else
-        map.put(key, value);
-    }
-    return map;
+    return mapReduce(groupFunction, Reductions.from(mapFunction, reduceFunction));
   }
 
-  public <K, V> Map<K, V> mapReduce(Applicable<? super A, K> groupFunction, V initial,
-    Applicable2<? super V, ? super A, V> foldFunction) {
+  private <K, V> Map<K, V> mapReduce(Applicable<? super A, K> groupFunction, Reduction<A, V> reducer) {
     Map<K, V> map = new LinkedHashMap<K, V>();
     for (A element : this) {
       K key = groupFunction.apply(element);
       V acum = map.get(key);
       if (acum != null)
-        map.put(key, foldFunction.apply(acum, element));
+        map.put(key, reducer.reduce(element, acum));
       else if (map.containsKey(key))
-        map.put(key, foldFunction.apply(null, element));
+        map.put(key, reducer.reduce(element, null));
       else
-        map.put(key, foldFunction.apply(initial, element));
+        map.put(key, reducer.initial(element));
     }
     return map;
   }
