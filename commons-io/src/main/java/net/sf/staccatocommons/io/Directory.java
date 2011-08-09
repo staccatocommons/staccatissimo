@@ -172,6 +172,42 @@ public class Directory {
     return this;
   }
 
+  // /**
+  // * @return
+  // * @see java.io.File#canRead()
+  // */
+  // public boolean canRead() {
+  // return file.canRead();
+  // }
+  //
+  // /**
+  // * @return
+  // * @see java.io.File#canWrite()
+  // */
+  // public boolean canWrite() {
+  // return file.canWrite();
+  // }
+  //
+  // /**
+  // * @return
+  // * @see java.io.File#exists()
+  // */
+  // public boolean exists() {
+  // return file.exists();
+  // }
+  //
+  // /**
+  // * @return
+  // * @throws IOException
+  // * @see java.io.File#createNewFile()
+  // */
+  // public boolean create() throws IOException {
+  // return file.createNewFile();
+  // }
+
+  // TODO open streams, create/get files inside the directory
+  // TODO extract interface?
+
 }
 
 final class BreadthFirst extends AbstractFunction<Stream<File>, Stream<File>> {
