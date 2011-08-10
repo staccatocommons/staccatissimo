@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
@@ -15,9 +16,9 @@
 	 abstract interfaces with well defined but generic semantics, 
 	 focused on code reuse.</description>
 	<scm>
-		<connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-defs</connection>
-		<developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-defs</developerConnection>
-		<url>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-defs</url>
+		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-defs</connection>
+		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-defs</developerConnection>
+		<url>${staccatissimo.scm.view.base}/trunk/commons-defs/</url>
 	</scm>
 	<dependencies>
 		<dependency>

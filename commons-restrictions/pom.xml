@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
@@ -21,8 +22,8 @@
 		</site>
 	</distributionManagement>
 	<scm>
-		<developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-restrictions</developerConnection>
-		<connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-restrictions</connection>
-		<url>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-restrictions</url>
+		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions</developerConnection>
+		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions</connection>
+		<url>${staccatissimo.scm.view.base}/trunk/commons-restrictions/</url>
 	</scm>
 </project>

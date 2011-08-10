@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-collections</artifactId>
@@ -12,9 +13,9 @@
 		<version>1.1</version>
 	</parent>
 	<scm>
-		<connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-collections</connection>
-		<developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-collections</developerConnection>
-		<url>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-collections</url>
+		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-collections</connection>
+		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-collections</developerConnection>
+		<url>${staccatissimo.scm.view.base}/trunk/commons-collections/</url>
 	</scm>
 	<description>Collections library of the Staccato-Commons project, focused on providing new abstractions 
 	that mix object oriented and functional programming style for dealing with iterable objects. 
