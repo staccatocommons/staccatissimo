@@ -41,9 +41,9 @@
 	</developers>
 	
 	<scm>
-		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-parent-pom</developerConnection>
-		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-parent-pom</connection>
-		<url>${staccatissimo.scm.view.base}/trunk/commons-parent-pom/</url>
+		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk</developerConnection>
+		<connection>scm:svn:${staccatissimo.scm.base}/trunk</connection>
+		<url>${staccatissimo.scm.view.base}/trunk</url>
 	</scm>
 	
 	
