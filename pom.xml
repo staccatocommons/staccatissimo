@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.staccatocommons</groupId>
   <artifactId>commons-parent-pom</artifactId>
-  <version>1.1</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Staccato-Commons-Parent-Pom</name>
   <url>http://staccatocommons.sourceforge.net/</url>
@@ -41,9 +41,9 @@
 	</developers>
 	
 	<scm>
-		<developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1</developerConnection>
-		<connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1</connection>
-		<url>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1</url>
+		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk</developerConnection>
+		<connection>scm:svn:${staccatissimo.scm.base}/trunk</connection>
+		<url>${staccatissimo.scm.view.base}/trunk</url>
 	</scm>
 	
 	
