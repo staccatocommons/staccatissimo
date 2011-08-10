@@ -1,15 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.1-SNAPSHOT</version>
+		<version>1.1</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-io</artifactId>
 	<name>Staccato-Commons-IO</name>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<distributionManagement>
 		<site>
@@ -18,9 +17,9 @@
 		</site>
 	</distributionManagement>
 	<scm>
-		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-io</connection>
-		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-io</developerConnection>
-		<url>${staccatissimo.scm.view.base}/trunk/commons-io/</url>
+		<connection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-io</connection>
+		<developerConnection>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-io</developerConnection>
+		<url>scm:svn:https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/releases/commons-parent-pom/1.1/commons-io</url>
 	</scm>
 	<dependencies>
 		<dependency>
