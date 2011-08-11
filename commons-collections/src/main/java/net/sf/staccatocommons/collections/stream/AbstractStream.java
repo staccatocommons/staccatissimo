@@ -65,6 +65,7 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.computation.Computation;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
@@ -73,6 +74,7 @@ import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.computation.Computations;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.function.Functions;
@@ -120,6 +122,14 @@ public abstract class AbstractStream<A> implements Stream<A> {
   public void each(Executable<? super A> block) {
     for (A element : this)
       block.exec(element);
+  }
+
+  public Computation<Void> processEach(final Executable<? super A> block) {
+    return Computations.from(new Runnable() {
+      public void run() {
+        each(block);
+      }
+    });
   }
 
   @Override
