@@ -71,4 +71,13 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    */
   @NullSafe
   Function2<A, B, C> nullSafe();
+
+  /**
+   * 
+   * @param <D>
+   * @param function
+   * @return
+   * @since 1.2
+   */
+  <D> Function2<D, B, C> of(Applicable<? super D, ? extends A> function);
 }

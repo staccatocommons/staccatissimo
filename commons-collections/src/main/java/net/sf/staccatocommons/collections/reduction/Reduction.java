@@ -10,13 +10,12 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl.fold.internal;
+package net.sf.staccatocommons.collections.reduction;
 
 /**
- * TODO make public
  * 
  * @author flbulgarelli
- * 
+ * @since 1.2
  * @param <B>
  * @param <A>
  */

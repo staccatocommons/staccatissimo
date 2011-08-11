@@ -81,5 +81,10 @@
                 Fixed top level functions that did not implement toString 
             </action>
         </release>
+        <release version="1.2" date="TBD" description="Control">
+            <action dev="flbulgarelli" type="add">
+                Adding Computations 
+            </action>
+        </release>
 	</body>
 </document>

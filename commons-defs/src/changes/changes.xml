@@ -77,5 +77,10 @@
                 Rich function composition 
             </action>
         </release>
+        <release version="1.2" date="TBD" description="Control">
+            <action dev="flbulgarelli" type="add">
+                Adding Computation 
+            </action>
+        </release>
 	</body>
 </document>

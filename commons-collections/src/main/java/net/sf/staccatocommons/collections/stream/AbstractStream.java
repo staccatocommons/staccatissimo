@@ -33,16 +33,15 @@ import java.util.Set;
 
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.Validate;
-import net.sf.staccatocommons.collections.internal.ToPair;
 import net.sf.staccatocommons.collections.internal.iterator.DropIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIterator;
 import net.sf.staccatocommons.collections.internal.iterator.TakeWhileIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
+import net.sf.staccatocommons.collections.reduction.Reduction;
+import net.sf.staccatocommons.collections.reduction.Reductions;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
-import net.sf.staccatocommons.collections.stream.impl.fold.internal.Reduction;
-import net.sf.staccatocommons.collections.stream.impl.fold.internal.Reductions;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendIterableStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.DeconsTransformStream;
@@ -83,6 +82,7 @@ import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
@@ -481,7 +481,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   @Override
   public <B> Stream<Pair<A, B>> zip(Iterable<B> iterable) {
-    return zip(iterable, ToPair.<A, B> getInstance());
+    return zip(iterable, Tuples.<A, B> toPair());
   }
 
   @Override

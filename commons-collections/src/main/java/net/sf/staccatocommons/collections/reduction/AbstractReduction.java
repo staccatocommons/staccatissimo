@@ -10,11 +10,11 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream.impl.fold.internal;
+package net.sf.staccatocommons.collections.reduction;
 
 /**
  * @author flbulgarelli
- * 
+ * @since 1.2
  */
 public abstract class AbstractReduction<A, B> implements Reduction<A, B> {
 
