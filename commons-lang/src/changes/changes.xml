@@ -58,7 +58,7 @@
                 Nul-Safe Functions
             </action>
 		</release>
-	    <release version="1.1" date="TBD" description="IO &amp; Composition">
+	    <release version="1.1" date="2011-08-10" description="IO &amp; Composition">
             <action dev="flbulgarelli" type="add">
                 Predicate composition 
             </action>
