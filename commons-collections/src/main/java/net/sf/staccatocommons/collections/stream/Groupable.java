@@ -14,6 +14,7 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.util.Map;
 
+import net.sf.staccatocommons.collections.reduction.Reduction;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -72,10 +73,5 @@ public interface Groupable<A> {
   <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Applicable<? super A, V> mapFunction,
     Applicable2<? super V, ? super V, V> reduceFunction);
 
-  // TODO <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, V
-  // initial,
-  // Applicable2<? super V, ? super A, V> foldFunction);
-
-  // TODO <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction,
-  // Reduction<A, V> function);
+  <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Reduction<A, V> function);
 }

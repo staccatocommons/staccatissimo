@@ -15,9 +15,13 @@ package net.sf.staccatocommons.collections.reduction;
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 
 import net.sf.staccatocommons.collections.reduction.internal.FoldReducer;
 import net.sf.staccatocommons.collections.reduction.internal.MapReduction;
+import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.type.NumberType;
@@ -37,6 +41,7 @@ import org.apache.commons.lang.mutable.MutableInt;
  */
 public class Reductions {
 
+  @Constant
   public static <A> Reduction<A, Integer> count() {
     return new AbstractReduction<A, Integer>() {
       public Integer reduce(A element, Integer accum) {
@@ -49,6 +54,7 @@ public class Reductions {
     };
   }
 
+  @Constant
   public static <A> Reduction<A, MutableInt> fastCount() {
     return new AbstractReduction<A, MutableInt>() {
       public MutableInt reduce(A element, MutableInt accum) {
@@ -58,6 +64,31 @@ public class Reductions {
 
       public MutableInt initial() {
         return new MutableInt();
+      }
+    };
+  }
+
+  public static <A> Reduction<A, Stream<A>> append() {
+    return new AbstractReduction<A, Stream<A>>() {
+      public Stream<A> reduce(A element, Stream<A> accum) {
+        return Streams.cons(element, accum);
+      }
+
+      public Stream<A> initial() {
+        return Streams.empty();
+      }
+    };
+  }
+
+  public static <A> Reduction<A, List<A>> fastAppend() {
+    return new AbstractReduction<A, List<A>>() {
+      public List<A> reduce(A element, List<A> accum) {
+        accum.add(element);
+        return accum;
+      }
+
+      public List<A> initial() {
+        return new LinkedList<A>();
       }
     };
   }

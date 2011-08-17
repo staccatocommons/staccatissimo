@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
+import net.sf.staccatocommons.collections.reduction.Reductions;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.lang.Compare;
@@ -284,6 +285,25 @@ public class AbstractStreamBasicTest {
           return arg.remainder(i(3));
         }
       }, bigInteger().add());
+
+    assertEquals(i(9), mapReduce.get(i(0)));
+    assertFalse(mapReduce.containsKey(i(1)));
+    assertEquals(i(2 + 2 + 5), mapReduce.get(i(2)));
+  }
+
+  /**
+   * Test for
+   * {@link AbstractStream#groupOn(net.sf.staccatocommons.defs.Applicable, Applicable2)}
+   */
+  @Test
+  public void testGroupOnReduction() {
+    // Gets the sum of integers grouped by their modulo-3
+    Map<BigInteger, BigInteger> mapReduce = Streams.cons(i(2), i(2), i(9), i(5)) //
+      .groupOn(new AbstractFunction<BigInteger, BigInteger>() {
+        public BigInteger apply(BigInteger arg) {
+          return arg.remainder(i(3));
+        }
+      }, Reductions.sum(bigInteger()));
 
     assertEquals(i(9), mapReduce.get(i(0)));
     assertFalse(mapReduce.containsKey(i(1)));

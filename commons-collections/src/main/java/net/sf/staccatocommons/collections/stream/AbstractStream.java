@@ -449,6 +449,18 @@ public abstract class AbstractStream<A> implements Stream<A> {
     });
   }
 
+  public Stream<A> incorporate(final Function<? super A, ? extends A> function) {
+    return flatMap(new AbstractFunction<A, Iterable<? extends A>>() {
+      public Iterable<? extends A> apply(A arg) {
+        return cons(arg, function.apply(arg));
+      }
+    });
+  }
+
+  public Stream<A> incorporate(A element) {
+    return incorporate(Functions.constant(element));
+  }
+
   @Override
   public Stream<A> append(A element) {
     return new AppendStream<A>(this, element);
@@ -599,15 +611,15 @@ public abstract class AbstractStream<A> implements Stream<A> {
 
   public <K> Map<K, A> groupOn(Applicable<? super A, K> groupFunction,
     Applicable2<? super A, ? super A, A> reduceFunction) {
-    return groupOn(groupFunction, Functions.<A> identity(), reduceFunction);
+    return groupOn(groupFunction, Reductions.from(reduceFunction));
   }
 
   public <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Applicable<? super A, V> mapFunction,
     Applicable2<? super V, ? super V, V> reduceFunction) {
-    return mapReduce(groupFunction, Reductions.from(mapFunction, reduceFunction));
+    return groupOn(groupFunction, Reductions.from(mapFunction, reduceFunction));
   }
 
-  private <K, V> Map<K, V> mapReduce(Applicable<? super A, K> groupFunction, Reduction<A, V> reducer) {
+  public <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Reduction<A, V> reducer) {
     Map<K, V> map = new LinkedHashMap<K, V>();
     for (A element : this) {
       K key = groupFunction.apply(element);

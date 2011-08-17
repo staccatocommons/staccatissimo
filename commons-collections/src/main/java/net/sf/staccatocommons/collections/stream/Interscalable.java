@@ -13,6 +13,8 @@
 package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.collections.restrictions.Projection;
+import net.sf.staccatocommons.defs.function.Function;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * Interface for interscalating elements in a stream
@@ -31,5 +33,11 @@ public interface Interscalable<A> {
    */
   @Projection
   Stream<A> intersperse(A element);
+
+  @Projection
+  Stream<A> incorporate(@NonNull Function<? super A, ? extends A> function);
+
+  @Projection
+  Stream<A> incorporate(@NonNull A element);
 
 }
