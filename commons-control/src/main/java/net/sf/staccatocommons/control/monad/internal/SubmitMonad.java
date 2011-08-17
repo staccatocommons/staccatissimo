@@ -34,7 +34,7 @@ public class SubmitMonad<A> extends AbstractUnboundMonad<A> {
     this.callable = callable;
   }
 
-  protected MonadValue<A> monadValue() {
+  public MonadValue<A> monadValue() {
     return new MonadValue<A>() {
       public <T> void eval(final Applicable<A, Monad<T>> function) {
         executor.submit(new Callable<Void>() {

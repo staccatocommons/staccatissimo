@@ -14,19 +14,28 @@ package net.sf.staccatocommons.control.monad.internal;
 
 import net.sf.staccatocommons.control.monad.AbstractMonad;
 import net.sf.staccatocommons.control.monad.Monad;
+import net.sf.staccatocommons.control.monad.MonadValue;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.restrictions.Constant;
 
 /**
  * @author flbulgarelli
- * @see <a href=
- *      "http://comonad.com/haskell/monad-param/dist/doc/html/Control-Monad-Parameterized.html"
- *      >A Monad that uses some tricks similar to this one</a>
- * 
  */
 public class NilMonad<A> extends AbstractMonad<A> {
 
   public <B> Monad<B> bind(Applicable<A, Monad<B>> function) {
     return (Monad<B>) this;
+  }
+
+  @Constant
+  public MonadValue<A> monadValue() {
+    return new MonadValue<A>() {
+      public <T> void eval(Applicable<A, Monad<T>> function) {}
+    };
+  }
+
+  public Monad<A> append(Monad<A> other) {
+    return other;
   }
 
   public Void value() {

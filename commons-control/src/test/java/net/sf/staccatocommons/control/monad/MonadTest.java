@@ -32,7 +32,7 @@ public class MonadTest {
   @Test
   public void testname() throws Exception {
     Monads//
-      .from(4)
+      .cons(4)
       .map(add(5))
       .map(add(1))
       .filter(Compare.greaterThan(2))
@@ -43,7 +43,7 @@ public class MonadTest {
   @Test
   public void testAsync() throws Exception {
     Monads //
-      .from(4)
+      .cons(4)
       .map(logThread())
       .map(add(1))
       .fork(Executors.newSingleThreadExecutor())
@@ -55,7 +55,7 @@ public class MonadTest {
   @Test
   public void testIterable() throws Exception {
     Monads //
-      .iterable(4, 5, 6, 9)
+      .from(4, 5, 6, 9)
       .map(add(1))
       .filter(Compare.greaterThan(6))
       .each(IO.printlnSysout())

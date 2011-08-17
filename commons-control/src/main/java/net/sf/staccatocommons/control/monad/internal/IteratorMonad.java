@@ -31,7 +31,7 @@ public class IteratorMonad<A> extends AbstractUnboundMonad<A> {
     this.iter = iter;
   }
 
-  protected MonadValue<A> monadValue() {
+  public MonadValue<A> monadValue() {
     return new MonadValue<A>() {
       public <T> void eval(Applicable<A, Monad<T>> function) {
         while (iter.hasNext())

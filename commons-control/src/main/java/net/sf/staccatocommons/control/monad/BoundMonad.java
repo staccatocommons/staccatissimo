@@ -28,11 +28,7 @@ public class BoundMonad<A, B> extends AbstractMonad<B> {
     this.sourceBind = sourceBind;
   }
 
-  public <C> Monad<C> bind(Applicable<B, Monad<C>> function) {
-    return new BoundMonad<B, C>(monadValue(), function);
-  }
-
-  protected MonadValue<B> monadValue() {
+  public MonadValue<B> monadValue() {
     return new MonadValue<B>() {
       public <T> void eval(final Applicable<B, Monad<T>> function) {
         sourceValue.eval(new Applicable<A, Monad<T>>() {

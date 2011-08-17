@@ -34,43 +34,37 @@ import net.sf.staccatocommons.restrictions.Constant;
  */
 public class Monads {
 
-  // TODO rename to cons
-  public static <A> Monad<A> from(A element) {
+  public static <A> Monad<A> cons(A element) {
     return new SingleMonad<A>(element);
   }
 
-  // TODO rename to cons
-  public static <A> Function<A, Monad<A>> from() {
+  public static <A> Function<A, Monad<A>> cons() {
     return new AbstractFunction<A, Monad<A>>() {
       public Monad<A> apply(A arg) {
-        return from(arg);
+        return cons(arg);
       }
     };
   }
 
-  // TODO rename to from
-  public static <A> Monad<A> iterable(A... elements) {
-    return iterable(Arrays.asList(elements));
+  public static <A> Monad<A> from(A... elements) {
+    return from(Arrays.asList(elements));
   }
 
-  // TODO rename to from
-  public static <A> Monad<A> iterable(Iterable<? extends A> elements) {
+  public static <A> Monad<A> from(Iterable<? extends A> elements) {
     Iterator<? extends A> iterator = elements.iterator();
     if (iterator.hasNext())
       return new IteratorMonad<A>(iterator);
     return nil();
   }
 
-  // TODO rename to from
-  public static <A> Monad<A> option(Option<? extends A> element) {
+  public static <A> Monad<A> from(Option<? extends A> element) {
     if (element.isDefined())
-      return from((A) element.value());
+      return cons((A) element.value());
     return nil();
   }
 
-  // TODO rename to from
-  public static <A> Monad<A> blocking(BlockingQueue<A> queue) {
-    return iterable(BlockingStreams.from(queue));
+  public static <A> Monad<A> from(BlockingQueue<? extends A> queue) {
+    return from(BlockingStreams.from(queue));
   }
 
   /**

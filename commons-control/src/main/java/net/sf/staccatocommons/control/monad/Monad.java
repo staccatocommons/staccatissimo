@@ -49,18 +49,39 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Monad<A> extends Thunk<Void> {
 
+  /* ======== */
+  /* =Monad= */
+
+  /* Bind */
+
   /** >>= */
   <B> Monad<B> bind(Applicable<A, Monad<B>> function);
+
+  /* ======== */
+  /* Functor */
+  /* ======== */
+
+  /* Filtering */
 
   /** mfilter */
   Monad<A> filter(@NonNull Evaluable<? super A> predicate);
 
   Monad<A> skip(A element);
 
-  /** fmap */
+  /* Mapping */
+
+  /* fmap */
   <B> Monad<B> map(@NonNull Applicable<? super A, ? extends B> function);
 
   <B> Monad<B> flatMap(@NonNull Function<? super A, ? extends Iterable<? extends B>> function);
+
+  /* <B> */Monad<A> incorporate(@NonNull Function<? super A, Monad<A>> function);
+
+  Monad<Void> each(Executable<? super A> block);
+
+  Computation<Void> processEach(Executable<? super A> block);
+
+  Computation<Void> process();
 
   /**
    * Binds this {@link Monad} to {@link Monads#async(ExecutorService)}
@@ -70,10 +91,15 @@ public interface Monad<A> extends Thunk<Void> {
    */
   Monad<A> fork(ExecutorService executor);
 
-  Monad<Void> each(Executable<? super A> block);
+  /* ========= */
+  /* MonadPlus */
+  /* ========= */
 
-  Computation<Void> processEach(Executable<? super A> block);
+  /* mplus */
+  Monad<A> append(Monad<A> other);
 
-  Computation<Void> process();
+  /* OOMonad specific */
+
+  MonadValue<A> monadValue();
 
 }

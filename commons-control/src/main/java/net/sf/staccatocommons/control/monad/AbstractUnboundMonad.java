@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.control.monad;
 
-import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * @author flbulgarelli
@@ -20,14 +19,8 @@ import net.sf.staccatocommons.defs.Applicable;
  */
 public abstract class AbstractUnboundMonad<A> extends AbstractMonad<A> {
 
-  public final <B> Monad<B> bind(Applicable<A, Monad<B>> function) {
-    return new BoundMonad<A, B>(monadValue(), function);
-  }
-
   public final Void value() {
     return null;
   }
-
-  protected abstract MonadValue<A> monadValue();
 
 }

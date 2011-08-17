@@ -10,30 +10,34 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.control.monad.internal;
+package net.sf.staccatocommons.control.monad;
 
-import net.sf.staccatocommons.control.monad.AbstractUnboundMonad;
-import net.sf.staccatocommons.control.monad.Monad;
-import net.sf.staccatocommons.control.monad.MonadValue;
 import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class SingleMonad<A> extends AbstractUnboundMonad<A> {
+public class AppendMonad<A> extends AbstractMonad<A> {
 
-  private final A value;
+  private final Monad<A> first, second;
 
-  public SingleMonad(A value) {
-    this.value = value;
+  public AppendMonad(Monad<A> first, Monad<A> second) {
+    this.first = first;
+    this.second = second;
   }
 
-  /* return a >>= k == k a */
+  public Void value() {
+    first.value();
+    second.value();
+    return null;
+  }
+
   public MonadValue<A> monadValue() {
     return new MonadValue<A>() {
       public <T> void eval(Applicable<A, Monad<T>> function) {
-        function.apply(value).value();
+        first.monadValue().eval(function);
+        second.monadValue().eval(function);
       }
     };
   }

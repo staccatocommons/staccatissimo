@@ -20,6 +20,7 @@ import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.computation.Computation;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.computation.Computations;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 
 /**
@@ -32,7 +33,7 @@ public abstract class AbstractMonad<A> implements Monad<A> {
     return bind(new Applicable<A, Monad<A>>() {
       public Monad<A> apply(A arg) {
         if (predicate.eval(arg))
-          return Monads.from(arg);
+          return Monads.cons(arg);
         return Monads.nil();
       }
     });
@@ -46,7 +47,7 @@ public abstract class AbstractMonad<A> implements Monad<A> {
   public final <B> Monad<B> map(final Applicable<? super A, ? extends B> function) {
     return bind(new Applicable<A, Monad<B>>() {
       public Monad<B> apply(A arg) {
-        return Monads.from((B) function.apply(arg));
+        return Monads.cons((B) function.apply(arg));
       }
     });
   }
@@ -54,7 +55,19 @@ public abstract class AbstractMonad<A> implements Monad<A> {
   public final <B> Monad<B> flatMap(final Function<? super A, ? extends Iterable<? extends B>> function) {
     return bind(new Applicable<A, Monad<B>>() {
       public Monad<B> apply(A arg) {
-        return Monads.iterable(function.apply(arg));
+        return Monads.from(function.apply(arg));
+      }
+    });
+  }
+
+  public <B> Monad<B> bind(Applicable<A, Monad<B>> function) {
+    return new BoundMonad<A, B>(monadValue(), function);
+  }
+
+  public Monad<A> incorporate(final Function<? super A, Monad<A>> function) {
+    return bind(new AbstractFunction<A, Monad<A>>() {
+      public Monad<A> apply(A arg) {
+        return Monads.cons(arg).append(function.apply(arg));
       }
     });
   }
@@ -67,7 +80,7 @@ public abstract class AbstractMonad<A> implements Monad<A> {
     return bind(new Applicable<A, Monad<Void>>() {
       public Monad<Void> apply(A arg) {
         block.exec(arg);
-        return Monads.from(null);
+        return Monads.cons(null);
       }
     });
   }
@@ -78,6 +91,10 @@ public abstract class AbstractMonad<A> implements Monad<A> {
 
   public final Computation<Void> process() {
     return Computations.from(this);
+  }
+
+  public Monad<A> append(Monad<A> other) {
+    return new AppendMonad<A>(this, other);
   }
 
 }
