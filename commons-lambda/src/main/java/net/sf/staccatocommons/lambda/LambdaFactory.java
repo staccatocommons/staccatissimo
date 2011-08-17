@@ -123,10 +123,10 @@ public final class LambdaFactory {
    * @see Lambda
    */
   @NonNull
-  public Predicate<Object> lambda(boolean returnType) {
+  public <A> Predicate<A> lambda(boolean returnType) {
     final Method method = handler.getMethod();
     final Object[] args = handler.getArgs();
-    return new AbstractPredicate<Object>() {
+    return new AbstractPredicate<A>() {
       public boolean eval(Object argument) {
         return invoke(method, argument, args);
       }
@@ -144,11 +144,11 @@ public final class LambdaFactory {
    * @see Lambda
    */
   @NonNull
-  public <A> Function<Object, A> lambda(A returnType) {
+  public <A, B> Function<A, B> lambda(B returnType) {
     final Method method = handler.getMethod();
     final Object[] args = handler.getArgs();
-    return new AbstractFunction<Object, A>() {
-      public A apply(Object receptor) {
+    return new AbstractFunction<A, B>() {
+      public B apply(Object receptor) {
         return invoke(method, receptor, args);
       }
     };
@@ -167,12 +167,12 @@ public final class LambdaFactory {
    * @see Lambda
    */
   @NonNull
-  public <A> Function2<Object, Object, A> lambda2(A returnType) {
+  public <A, B, C> Function2<A, B, C> lambda2(C returnType) {
     final Method method = handler.getMethod();
     final Object[] args = handler.getArgsCopy();
     args[0] = null;
-    return new AbstractFunction2<Object, Object, A>() {
-      public A apply(Object arg0, Object arg1) {
+    return new AbstractFunction2<A, B, C>() {
+      public C apply(Object arg0, Object arg1) {
         args[0] = arg1;
         return invoke(method, arg0, args);
       }
@@ -193,13 +193,13 @@ public final class LambdaFactory {
    * 
    * @see Lambda
    */
-  public <A> Function3<Object, Object, Object, A> lambda3(A returnType) {
+  public <A, B, C, D> Function3<A, B, C, D> lambda3(D returnType) {
     final Method method = handler.getMethod();
     final Object[] args = handler.getArgsCopy();
     args[0] = null;
     args[1] = null;
-    return new AbstractFunction3<Object, Object, Object, A>() {
-      public A apply(Object arg0, Object arg1, Object arg2) {
+    return new AbstractFunction3<A, B, C, D>() {
+      public D apply(Object arg0, Object arg1, Object arg2) {
         args[0] = arg1;
         args[1] = arg2;
         return invoke(method, arg0, args);

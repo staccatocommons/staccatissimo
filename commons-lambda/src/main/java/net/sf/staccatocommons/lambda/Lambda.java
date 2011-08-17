@@ -115,7 +115,7 @@ public final class Lambda {
    * 
    * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(java.lang.Object)
    */
-  public static <A> Function<Object, A> lambda(A returnType) {
+  public static <A, B> Function<A, B> lambda(B returnType) {
     return getSharedLambdaFactory().lambda(returnType);
   }
 
@@ -130,7 +130,7 @@ public final class Lambda {
    * @see Lambda
    * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda(boolean)
    */
-  public static Predicate<Object> lambda(boolean returnType) {
+  public static <A> Predicate<A> lambda(boolean returnType) {
     return getSharedLambdaFactory().lambda(returnType);
   }
 
@@ -146,7 +146,7 @@ public final class Lambda {
    * 
    * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda2(java.lang.Object)
    */
-  public static <A> Function2<Object, Object, A> lambda2(A returnType) {
+  public static <A, B, C> Function2<A, B, C> lambda2(C returnType) {
     return getSharedLambdaFactory().lambda2(returnType);
   }
 
@@ -164,7 +164,7 @@ public final class Lambda {
    * 
    * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda3(java.lang.Object)
    */
-  public static <A> Function3<Object, Object, Object, A> lambda3(A returnType) {
+  public static <A, B, C, D> Function3<A, B, C, D> lambda3(D returnType) {
     return getSharedLambdaFactory().lambda3(returnType);
   }
 
