@@ -227,6 +227,7 @@
              <module>commons-lambda</module>
              <module>commons-collections</module> 
              <module>commons-io</module>
+             <module>commons-control</module>
              <module>commons-instrument</module>
              <module>commons-restrictions-instrument</module>
              <module>commons-restrictions-instrument-maven-plugin</module>   
