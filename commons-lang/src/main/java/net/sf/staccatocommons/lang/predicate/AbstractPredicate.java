@@ -15,6 +15,7 @@ package net.sf.staccatocommons.lang.predicate;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
@@ -115,6 +116,37 @@ public abstract class AbstractPredicate<A> implements Predicate<A> {
       }
     };
   }
+
+  public Predicate<A> withEffectOnFalse(final Executable<A> executable) {
+    return new AbstractPredicate<A>() {
+      public boolean eval(A argument) {
+        boolean result = AbstractPredicate.this.eval(argument);
+        if (result)
+          executable.exec(argument);
+        return result;
+      }
+    };
+  }
+
+  public Predicate<A> withEffectOnTrue(final Executable<A> executable) {
+    return new AbstractPredicate<A>() {
+      public boolean eval(A argument) {
+        boolean result = AbstractPredicate.this.eval(argument);
+        if (!result)
+          executable.exec(argument);
+        return result;
+      }
+    };
+  }
+
+  // public Predicate<A> withEffect(final Executable<A> executable) {
+  // return new AbstractPredicate<A>() {
+  // public boolean eval(A argument) {
+  // executable.exec(argument);
+  // return AbstractPredicate.this.eval(argument);
+  // }
+  // };
+  // }
 
   public String toString() {
     return "Predicate";

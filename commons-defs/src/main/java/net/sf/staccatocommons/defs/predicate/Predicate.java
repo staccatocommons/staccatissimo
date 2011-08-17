@@ -15,6 +15,7 @@ package net.sf.staccatocommons.defs.predicate;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -74,6 +75,33 @@ public interface Predicate<A> extends Evaluable<A>, Applicable<A, Boolean> {
    */
   @NullSafe
   Predicate<A> orNull();
+
+  // /**
+  // * Adds a side effect to this predicate, that will be evaluated whenever the
+  // * predicate is evaluated.
+  // *
+  // * @param executable
+  // * @return a new Predicate that adds an {@link Executable} effect to this
+  // */
+  // Predicate<A> withEffect(Executable<A> executable);
+
+  /**
+   * Adds a side effect to this predicate, that will be evaluated whenever the
+   * predicate evaluation is <code>true</code>
+   * 
+   * @param executable
+   * @return a new Predicate that adds an {@link Executable} effect to this
+   */
+  Predicate<A> withEffectOnTrue(Executable<A> executable);
+
+  /**
+   * Adds a a side effect to this predicate, that will be evaluated whenever the
+   * predicate evaluation is <code>false</code>
+   * 
+   * @param executable
+   * @return a new Predicate that adds an {@link Executable} effect to this
+   */
+  Predicate<A> withEffectOnFalse(Executable<A> executable);
 
   /**
    * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>

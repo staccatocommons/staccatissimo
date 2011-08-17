@@ -152,4 +152,6 @@ public interface Function<A, B> extends Applicable<A, B>, //
    */
   Predicate<A> notNull();
 
+  // Function<A, B> withEffect(Executable<A> effect);
+
 }
