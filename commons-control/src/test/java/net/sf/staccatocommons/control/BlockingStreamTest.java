@@ -16,11 +16,9 @@ import static net.sf.staccatocommons.control.Concurrent.*;
 import static net.sf.staccatocommons.io.IO.*;
 
 import java.util.concurrent.DelayQueue;
-import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
 import net.sf.staccatocommons.collections.Lists;
-import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.io.IO;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.thunk.Thunks;
@@ -96,54 +94,13 @@ public class BlockingStreamTest {
     // sino que se ejecuta en un hilo indepte
   }
 
-  private DelayQueue<SimpleDelayed<Integer>> testQueue() {
-    return new DelayQueue<SimpleDelayed<Integer>>(Lists.from(
-      from(5, 100L),
-      from(9, 200L),
-      from(98, 650L),
-      from(675, 400L),
-      from(400, 1500L)));
-  }
-
-  public static <A> SimpleDelayed<A> from(A value, long delayInMillis) {
-    return new SimpleDelayed<A>(value, delayInMillis);
-  }
-
-  static class SimpleDelayed<A> implements Delayed, Thunk<A> {
-
-    private final A value;
-    private final long delayInMillis;
-    private final long startTimeInMillis;
-
-    public SimpleDelayed(A value, long delayInMillis, long startTimeInMillis) {
-      this.value = value;
-      this.delayInMillis = delayInMillis;
-      this.startTimeInMillis = System.currentTimeMillis();
-    }
-
-    public SimpleDelayed(A value, long delayInMillis) {
-      this(value, delayInMillis, System.currentTimeMillis());
-    }
-
-    public int compareTo(Delayed other) {
-      if (this == other) {
-        return 0;
-      }
-      long diff = getDelay(TimeUnit.MILLISECONDS) - other.getDelay(TimeUnit.MILLISECONDS);
-      return diff == 0 ? 0 : diff < 0 ? -1 : 1;
-    }
-
-    public long getDelay(TimeUnit unit) {
-      return unit.convert(millisLeft(), TimeUnit.MILLISECONDS);
-    }
-
-    private long millisLeft() {
-      return delayInMillis + startTimeInMillis - System.currentTimeMillis();
-    }
-
-    public A value() {
-      return value;
-    }
+  private DelayQueue<FixedDelayed<Integer>> testQueue() {
+    return new DelayQueue<FixedDelayed<Integer>>(Lists.from(
+      FixedDelayed.from(5, 100L),
+      FixedDelayed.from(9, 200L),
+      FixedDelayed.from(98, 650L),
+      FixedDelayed.from(675, 400L),
+      FixedDelayed.from(400, 1500L)));
   }
 
 }
