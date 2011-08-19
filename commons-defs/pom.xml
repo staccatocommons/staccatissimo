@@ -4,13 +4,13 @@
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.2-SNAPSHOT</version>
+		<version>1.2-beta-1</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-defs</artifactId>
 	<inceptionYear>2010</inceptionYear>
 	<name>Staccato-Commons-Defs</name>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2-beta-1</version>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<description>Minimal definitions library that provides very
 	 abstract interfaces with well defined but generic semantics, 

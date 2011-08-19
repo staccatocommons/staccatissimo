@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.2-SNAPSHOT</version>
+		<version>1.2-beta-1</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-iterators</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2-beta-1</version>
 	<name>Staccato-Commons-Iterators</name>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<scm>
