@@ -16,10 +16,9 @@ import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * @author flbulgarelli
- * @since 1.2
+ * 
  */
-public interface MonadValue<A> {
+public interface MonadFunction<A, B> extends Applicable<A, Monad<B>> {
 
-  <T> void eval(Applicable<? super A, Monad<T>> function);
-
+  public <C> MonadFunction<A, C> then(Applicable<? super B, Monad<C>> other);
 }

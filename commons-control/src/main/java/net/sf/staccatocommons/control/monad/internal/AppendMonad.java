@@ -12,10 +12,7 @@
  */
 package net.sf.staccatocommons.control.monad.internal;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-
-import net.sf.staccatocommons.control.monad.AbstractUnboundMonad;
+import net.sf.staccatocommons.control.monad.AbstractMonad;
 import net.sf.staccatocommons.control.monad.Monad;
 import net.sf.staccatocommons.control.monad.MonadValue;
 import net.sf.staccatocommons.defs.Applicable;
@@ -24,25 +21,26 @@ import net.sf.staccatocommons.defs.Applicable;
  * @author flbulgarelli
  * 
  */
-public class SubmitMonad<A> extends AbstractUnboundMonad<A> {
+public class AppendMonad<A> extends AbstractMonad<A> {
 
-  private final ExecutorService executor;
-  private final Callable<A> callable;
+  private final Monad<A> first, second;
 
-  public SubmitMonad(ExecutorService executor, Callable<A> callable) {
-    this.executor = executor;
-    this.callable = callable;
+  public AppendMonad(Monad<A> first, Monad<A> second) {
+    this.first = first;
+    this.second = second;
+  }
+
+  public Void value() {
+    first.value();
+    second.value();
+    return null;
   }
 
   public MonadValue<A> monadValue() {
     return new MonadValue<A>() {
-      public <T> void eval(final Applicable<? super A, Monad<T>> function) {
-        executor.submit(new Callable<Void>() {
-          public Void call() throws Exception {
-            function.apply(callable.call()).value();
-            return null;
-          }
-        });
+      public <T> void eval(Applicable<? super A, Monad<T>> function) {
+        first.monadValue().eval(function);
+        second.monadValue().eval(function);
       }
     };
   }

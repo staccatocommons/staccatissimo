@@ -32,7 +32,7 @@ public class SingleMonad<A> extends AbstractUnboundMonad<A> {
   /* return a >>= k == k a */
   public MonadValue<A> monadValue() {
     return new MonadValue<A>() {
-      public <T> void eval(Applicable<A, Monad<T>> function) {
+      public <T> void eval(Applicable<? super A, Monad<T>> function) {
         function.apply(value).value();
       }
     };

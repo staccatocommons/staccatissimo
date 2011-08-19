@@ -23,12 +23,15 @@ import net.sf.staccatocommons.control.monad.internal.IteratorMonad;
 import net.sf.staccatocommons.control.monad.internal.NilMonad;
 import net.sf.staccatocommons.control.monad.internal.SingleMonad;
 import net.sf.staccatocommons.control.monad.internal.SubmitMonad;
-import net.sf.staccatocommons.defs.function.Function;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.restrictions.Constant;
 
 /**
+ * Simple {@link Monad}s and {@link MonadFunction}s
+ * 
  * @author flbulgarelli
  * @since 1.2
  */
@@ -36,14 +39,6 @@ public class Monads {
 
   public static <A> Monad<A> cons(A element) {
     return new SingleMonad<A>(element);
-  }
-
-  public static <A> Function<A, Monad<A>> cons() {
-    return new AbstractFunction<A, Monad<A>>() {
-      public Monad<A> apply(A arg) {
-        return cons(arg);
-      }
-    };
   }
 
   public static <A> Monad<A> from(A... elements) {
@@ -80,25 +75,6 @@ public class Monads {
   }
 
   /**
-   * The async Monad function
-   * 
-   * @param <A>
-   * @param executor
-   * @return
-   */
-  public static <A> Function<A, Monad<A>> async(final ExecutorService executor) {
-    return new AbstractFunction<A, Monad<A>>() {
-      public Monad<A> apply(final A arg) {
-        return async(executor, new Callable<A>() {
-          public A call() throws Exception {
-            return arg;
-          }
-        });
-      }
-    };
-  }
-
-  /**
    * The Empty Monad
    * 
    * @param <A>
@@ -107,6 +83,60 @@ public class Monads {
   @Constant
   public static <A> Monad<A> nil() {
     return new NilMonad();
+  }
+
+  public static <A, B> MonadFunction<A, B> map(final Applicable<? super A, ? extends B> function) {
+    return new AbstractMonadFunction<A, B>() {
+      public Monad<B> apply(A arg) {
+        return Monads.cons((B) function.apply(arg));
+      }
+    };
+  }
+
+  public static <A> MonadFunction<A, A> filter(final Evaluable<? super A> predicate) {
+    return new AbstractMonadFunction<A, A>() {
+      public Monad<A> apply(A arg) {
+        if (predicate.eval(arg))
+          return Monads.cons(arg);
+        return Monads.nil();
+      }
+    };
+  }
+
+  public static <A> MonadFunction<A, Void> each(final Executable<? super A> block) {
+    return new AbstractMonadFunction<A, Void>() {
+      public Monad<Void> apply(A arg) {
+        block.exec(arg);
+        return Monads.cons(null);
+      }
+    };
+  }
+
+  /**
+   * The async Monad function
+   * 
+   * @param <A>
+   * @param executor
+   * @return
+   */
+  public static <A> MonadFunction<A, A> async(final ExecutorService executor) {
+    return new AbstractMonadFunction<A, A>() {
+      public Monad<A> apply(final A arg) {
+        return Monads.async(executor, new Callable<A>() {
+          public A call() throws Exception {
+            return arg;
+          }
+        });
+      }
+    };
+  }
+
+  public static <A> MonadFunction<A, A> cons() {
+    return new AbstractMonadFunction<A, A>() {
+      public Monad<A> apply(A arg) {
+        return Monads.cons(arg);
+      }
+    };
   }
 
 }

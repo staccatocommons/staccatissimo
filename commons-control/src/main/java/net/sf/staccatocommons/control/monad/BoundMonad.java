@@ -21,16 +21,16 @@ import net.sf.staccatocommons.defs.Applicable;
 public class BoundMonad<A, B> extends AbstractMonad<B> {
 
   private final MonadValue<A> sourceValue;
-  private final Applicable<A, Monad<B>> sourceBind;
+  private final Applicable<? super A, Monad<B>> sourceBind;
 
-  public BoundMonad(MonadValue<A> sourceValue, Applicable<A, Monad<B>> sourceBind) {
+  public BoundMonad(MonadValue<A> sourceValue, Applicable<? super A, Monad<B>> sourceBind) {
     this.sourceValue = sourceValue;
     this.sourceBind = sourceBind;
   }
 
   public MonadValue<B> monadValue() {
     return new MonadValue<B>() {
-      public <T> void eval(final Applicable<B, Monad<T>> function) {
+      public <T> void eval(final Applicable<? super B, Monad<T>> function) {
         sourceValue.eval(new Applicable<A, Monad<T>>() {
           public Monad<T> apply(A arg) {
             return sourceBind.apply(arg).bind(function);

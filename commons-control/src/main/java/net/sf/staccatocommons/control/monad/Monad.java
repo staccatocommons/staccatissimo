@@ -19,7 +19,6 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.computation.Computation;
-import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -55,7 +54,7 @@ public interface Monad<A> extends Thunk<Void> {
   /* Bind */
 
   /** >>= */
-  <B> Monad<B> bind(Applicable<A, Monad<B>> function);
+  <B> Monad<B> bind(Applicable<? super A, Monad<B>> function);
 
   /* ======== */
   /* Functor */
@@ -73,9 +72,9 @@ public interface Monad<A> extends Thunk<Void> {
   /* fmap */
   <B> Monad<B> map(@NonNull Applicable<? super A, ? extends B> function);
 
-  <B> Monad<B> flatMap(@NonNull Function<? super A, ? extends Iterable<? extends B>> function);
+  <B> Monad<B> flatMap(@NonNull Applicable<? super A, ? extends Iterable<? extends B>> function);
 
-  /* <B> */Monad<A> incorporate(@NonNull Function<? super A, Monad<A>> function);
+  /* <B> */Monad<A> incorporate(@NonNull Applicable<? super A, Monad<A>> function);
 
   Monad<Void> each(Executable<? super A> block);
 

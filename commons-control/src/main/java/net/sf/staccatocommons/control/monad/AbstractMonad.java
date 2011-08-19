@@ -14,11 +14,11 @@ package net.sf.staccatocommons.control.monad;
 
 import java.util.concurrent.ExecutorService;
 
+import net.sf.staccatocommons.control.monad.internal.AppendMonad;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.computation.Computation;
-import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.computation.Computations;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.Predicates;
@@ -30,13 +30,7 @@ import net.sf.staccatocommons.lang.predicate.Predicates;
 public abstract class AbstractMonad<A> implements Monad<A> {
 
   public final Monad<A> filter(final Evaluable<? super A> predicate) {
-    return bind(new Applicable<A, Monad<A>>() {
-      public Monad<A> apply(A arg) {
-        if (predicate.eval(arg))
-          return Monads.cons(arg);
-        return Monads.nil();
-      }
-    });
+    return bind(Monads.filter(predicate));
   }
 
   public final Monad<A> skip(A element) {
@@ -45,14 +39,10 @@ public abstract class AbstractMonad<A> implements Monad<A> {
 
   /* fmap f xs == xs >>= return . f */
   public final <B> Monad<B> map(final Applicable<? super A, ? extends B> function) {
-    return bind(new Applicable<A, Monad<B>>() {
-      public Monad<B> apply(A arg) {
-        return Monads.cons((B) function.apply(arg));
-      }
-    });
+    return bind(Monads.map(function));
   }
 
-  public final <B> Monad<B> flatMap(final Function<? super A, ? extends Iterable<? extends B>> function) {
+  public final <B> Monad<B> flatMap(final Applicable<? super A, ? extends Iterable<? extends B>> function) {
     return bind(new Applicable<A, Monad<B>>() {
       public Monad<B> apply(A arg) {
         return Monads.from(function.apply(arg));
@@ -60,11 +50,11 @@ public abstract class AbstractMonad<A> implements Monad<A> {
     });
   }
 
-  public <B> Monad<B> bind(Applicable<A, Monad<B>> function) {
+  public <B> Monad<B> bind(Applicable<? super A, Monad<B>> function) {
     return new BoundMonad<A, B>(monadValue(), function);
   }
 
-  public Monad<A> incorporate(final Function<? super A, Monad<A>> function) {
+  public Monad<A> incorporate(final Applicable<? super A, Monad<A>> function) {
     return bind(new AbstractFunction<A, Monad<A>>() {
       public Monad<A> apply(A arg) {
         return Monads.cons(arg).append(function.apply(arg));
@@ -77,12 +67,7 @@ public abstract class AbstractMonad<A> implements Monad<A> {
   }
 
   public final Monad<Void> each(final Executable<? super A> block) {
-    return bind(new Applicable<A, Monad<Void>>() {
-      public Monad<Void> apply(A arg) {
-        block.exec(arg);
-        return Monads.cons(null);
-      }
-    });
+    return bind(Monads.each(block));
   }
 
   public final Computation<Void> processEach(Executable<? super A> block) {

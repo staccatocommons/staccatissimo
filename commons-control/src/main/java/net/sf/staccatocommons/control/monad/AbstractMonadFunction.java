@@ -18,26 +18,12 @@ import net.sf.staccatocommons.defs.Applicable;
  * @author flbulgarelli
  * 
  */
-public class AppendMonad<A> extends AbstractMonad<A> {
+public abstract class AbstractMonadFunction<A, B> implements MonadFunction<A, B> {
 
-  private final Monad<A> first, second;
-
-  public AppendMonad(Monad<A> first, Monad<A> second) {
-    this.first = first;
-    this.second = second;
-  }
-
-  public Void value() {
-    first.value();
-    second.value();
-    return null;
-  }
-
-  public MonadValue<A> monadValue() {
-    return new MonadValue<A>() {
-      public <T> void eval(Applicable<A, Monad<T>> function) {
-        first.monadValue().eval(function);
-        second.monadValue().eval(function);
+  public <C> MonadFunction<A, C> then(final Applicable<? super B, Monad<C>> other) {
+    return new AbstractMonadFunction<A, C>() {
+      public Monad<C> apply(A arg) {
+        return AbstractMonadFunction.this.apply(arg).bind(other);
       }
     };
   }

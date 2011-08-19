@@ -12,12 +12,13 @@
  */
 package net.sf.staccatocommons.control.monad;
 
+import static net.sf.staccatocommons.control.monad.Monads.*;
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 
 import java.util.concurrent.Executors;
 
-import net.sf.staccatocommons.control.monad.Monads;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.io.IO;
 import net.sf.staccatocommons.lang.Compare;
 
@@ -37,6 +38,17 @@ public class MonadTest {
       .map(add(1))
       .filter(Compare.greaterThan(2))
       .each(IO.printlnSysout())
+      .value();
+  }
+
+  public void testKleisli() throws Exception {
+    Monads //
+      .from(4, 5, 6)
+      .bind(map(add(5)) //
+        .then(map(add(1)))
+        .then(map(add(90)))
+        .then(filter(Compare.greaterThan(2)))
+        .then(each(IO.printlnSysout())))
       .value();
   }
 
@@ -70,5 +82,18 @@ public class MonadTest {
         return arg;
       }
     };
+  }
+
+  public static <A> Executable<A> printStackTrace() {
+    return new Executable<A>() {
+      public void exec(A argument) {
+        try {
+          throw new Exception();
+        } catch (Exception e) {
+          e.printStackTrace(System.out);
+        }
+      }
+    };
+
   }
 }

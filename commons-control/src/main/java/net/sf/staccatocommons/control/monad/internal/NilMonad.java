@@ -23,14 +23,14 @@ import net.sf.staccatocommons.restrictions.Constant;
  */
 public class NilMonad<A> extends AbstractMonad<A> {
 
-  public <B> Monad<B> bind(Applicable<A, Monad<B>> function) {
+  public <B> Monad<B> bind(Applicable<? super A, Monad<B>> function) {
     return (Monad<B>) this;
   }
 
   @Constant
   public MonadValue<A> monadValue() {
     return new MonadValue<A>() {
-      public <T> void eval(Applicable<A, Monad<T>> function) {}
+      public <T> void eval(Applicable<? super A, Monad<T>> function) {}
     };
   }
 
