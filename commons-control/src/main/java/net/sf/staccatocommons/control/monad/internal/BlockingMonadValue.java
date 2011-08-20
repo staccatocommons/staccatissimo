@@ -12,9 +12,8 @@
  */
 package net.sf.staccatocommons.control.monad.internal;
 
-import java.util.Iterator;
+import java.util.concurrent.BlockingQueue;
 
-import net.sf.staccatocommons.control.monad.AbstractUnboundMonad;
 import net.sf.staccatocommons.control.monad.Monad;
 import net.sf.staccatocommons.control.monad.MonadValue;
 import net.sf.staccatocommons.defs.Applicable;
@@ -23,21 +22,21 @@ import net.sf.staccatocommons.defs.Applicable;
  * @author flbulgarelli
  * 
  */
-public class IteratorMonad<A> extends AbstractUnboundMonad<A> {
+public class BlockingMonadValue<A> implements MonadValue<A> {
 
-  private final Iterator<? extends A> iter;
+  private final BlockingQueue<? extends A> queue;
 
-  public IteratorMonad(Iterator<? extends A> iter) {
-    this.iter = iter;
+  public BlockingMonadValue(BlockingQueue<? extends A> queue) {
+    this.queue = queue;
   }
 
-  public MonadValue<A> monadValue() {
-    return new MonadValue<A>() {
-      public <T> void eval(Applicable<? super A, Monad<T>> function) {
-        while (iter.hasNext())
-          function.apply(iter.next()).value();
-      }
-    };
+  public <T> void eval(Applicable<? super A, Monad<T>> function) {
+    try {
+      while (true)
+        function.apply(queue.take()).value();
+    } catch (InterruptedException e) {
+      // stream end
+    }
   }
 
 }

@@ -12,7 +12,8 @@
  */
 package net.sf.staccatocommons.control.monad.internal;
 
-import net.sf.staccatocommons.control.monad.AbstractUnboundMonad;
+import java.util.Iterator;
+
 import net.sf.staccatocommons.control.monad.Monad;
 import net.sf.staccatocommons.control.monad.MonadValue;
 import net.sf.staccatocommons.defs.Applicable;
@@ -21,21 +22,17 @@ import net.sf.staccatocommons.defs.Applicable;
  * @author flbulgarelli
  * 
  */
-public class SingleMonad<A> extends AbstractUnboundMonad<A> {
+public class IteratorMonadValue<A> implements MonadValue<A> {
 
-  private final A value;
+  private final Iterator<? extends A> iter;
 
-  public SingleMonad(A value) {
-    this.value = value;
+  public IteratorMonadValue(Iterator<? extends A> iter) {
+    this.iter = iter;
   }
 
-  /* return a >>= k == k a */
-  public MonadValue<A> monadValue() {
-    return new MonadValue<A>() {
-      public <T> void eval(Applicable<? super A, Monad<T>> function) {
-        function.apply(value).value();
-      }
-    };
+  public <T> void eval(Applicable<? super A, Monad<T>> function) {
+    while (iter.hasNext())
+      function.apply(iter.next()).value();
   }
 
 }

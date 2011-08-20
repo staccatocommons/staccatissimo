@@ -13,14 +13,9 @@
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
-			<artifactId>commons-io</artifactId>
+			<artifactId>commons-lang</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.staccatocommons</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
@@ -34,6 +29,12 @@
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>net.sf.staccatocommons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 </project>

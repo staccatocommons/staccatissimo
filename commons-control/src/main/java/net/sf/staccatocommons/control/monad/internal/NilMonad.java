@@ -38,8 +38,6 @@ public class NilMonad<A> extends AbstractMonad<A> {
     return other;
   }
 
-  public Void value() {
-    return null;
-  }
+  public void run() {}
 
 }

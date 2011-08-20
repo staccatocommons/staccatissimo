@@ -30,10 +30,9 @@ public class AppendMonad<A> extends AbstractMonad<A> {
     this.second = second;
   }
 
-  public Void value() {
+  public void run() {
     first.value();
     second.value();
-    return null;
   }
 
   public MonadValue<A> monadValue() {

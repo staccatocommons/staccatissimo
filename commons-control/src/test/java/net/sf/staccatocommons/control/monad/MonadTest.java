@@ -37,7 +37,7 @@ public class MonadTest {
       .map(add(5))
       .map(add(1))
       .filter(Compare.greaterThan(2))
-      .each(IO.printlnSysout())
+      .forEach(IO.printlnSysout())
       .value();
   }
 
@@ -70,7 +70,7 @@ public class MonadTest {
       .from(4, 5, 6, 9)
       .map(add(1))
       .filter(Compare.greaterThan(6))
-      .each(IO.printlnSysout())
+      .forEach(IO.printlnSysout())
       .value();
 
   }

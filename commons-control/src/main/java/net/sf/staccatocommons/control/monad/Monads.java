@@ -18,11 +18,11 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
-import net.sf.staccatocommons.control.BlockingStreams;
-import net.sf.staccatocommons.control.monad.internal.IteratorMonad;
+import net.sf.staccatocommons.control.monad.internal.BlockingMonadValue;
+import net.sf.staccatocommons.control.monad.internal.IteratorMonadValue;
 import net.sf.staccatocommons.control.monad.internal.NilMonad;
-import net.sf.staccatocommons.control.monad.internal.SingleMonad;
-import net.sf.staccatocommons.control.monad.internal.SubmitMonad;
+import net.sf.staccatocommons.control.monad.internal.SingleMonadValue;
+import net.sf.staccatocommons.control.monad.internal.SubmitMonadValue;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
@@ -38,7 +38,7 @@ import net.sf.staccatocommons.restrictions.Constant;
 public class Monads {
 
   public static <A> Monad<A> cons(A element) {
-    return new SingleMonad<A>(element);
+    return from(new SingleMonadValue<A>(element));
   }
 
   public static <A> Monad<A> from(A... elements) {
@@ -48,7 +48,7 @@ public class Monads {
   public static <A> Monad<A> from(Iterable<? extends A> elements) {
     Iterator<? extends A> iterator = elements.iterator();
     if (iterator.hasNext())
-      return new IteratorMonad<A>(iterator);
+      return from(new IteratorMonadValue<A>(iterator));
     return nil();
   }
 
@@ -59,7 +59,11 @@ public class Monads {
   }
 
   public static <A> Monad<A> from(BlockingQueue<? extends A> queue) {
-    return from(BlockingStreams.from(queue));
+    return from(new BlockingMonadValue<A>(queue));
+  }
+
+  public static <A> Monad<A> from(MonadValue<A> monadValue) {
+    return new UnboundMonad<A>(monadValue);
   }
 
   /**
@@ -71,7 +75,7 @@ public class Monads {
    * @return
    */
   public static <A> Monad<A> async(final ExecutorService executor, Callable<A> callable) {
-    return new SubmitMonad<A>(executor, callable);
+    return from(new SubmitMonadValue<A>(executor, callable));
   }
 
   /**

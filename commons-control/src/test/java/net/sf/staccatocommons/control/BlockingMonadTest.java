@@ -13,12 +13,12 @@
 package net.sf.staccatocommons.control;
 
 import static net.sf.staccatocommons.control.Concurrent.*;
-import static net.sf.staccatocommons.io.IO.*;
 
+import java.util.Arrays;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.TimeUnit;
 
-import net.sf.staccatocommons.collections.Lists;
+import net.sf.staccatocommons.control.monad.Monads;
 import net.sf.staccatocommons.io.IO;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.thunk.Thunks;
@@ -29,7 +29,7 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class BlockingStreamTest {
+public class BlockingMonadTest {
 
   @Test
   public void testBlockingQueueNoFork() throws Exception {
@@ -40,7 +40,7 @@ public class BlockingStreamTest {
     // infinito.
     withTimeout(2000L, TimeUnit.MILLISECONDS, new Runnable() {
       public void run() {
-        BlockingStreams
+        Monads //
           .from(testQueue())
           .map(Thunks.<Integer> value())
           .filter(Compare.greaterThan(10))
@@ -55,12 +55,12 @@ public class BlockingStreamTest {
     // algo. Los foldeos nofuncionaran, necesariamente,
     // ya que es infinita. El mensaje no se bloquea en el hilo actual, sino que
     // lanza otro hilo que procesa la cola, de uno por vez.
-    BlockingStreams
+    Monads
       .from(testQueue())
       .map(Thunks.<Integer> value())
       .filter(Compare.greaterThan(10))
-      .processEach(printSysout())
-      .eval(fork());
+      .forEach(IO.printSysout())
+      .run(fork());
   }
 
   @Test
@@ -95,7 +95,7 @@ public class BlockingStreamTest {
   }
 
   private DelayQueue<FixedDelayed<Integer>> testQueue() {
-    return new DelayQueue<FixedDelayed<Integer>>(Lists.from(
+    return new DelayQueue<FixedDelayed<Integer>>(Arrays.asList(
       FixedDelayed.from(5, 100L),
       FixedDelayed.from(9, 200L),
       FixedDelayed.from(98, 650L),

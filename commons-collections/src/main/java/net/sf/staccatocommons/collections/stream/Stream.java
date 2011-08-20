@@ -20,7 +20,6 @@ import net.sf.staccatocommons.collections.restrictions.Repeatable;
 import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.SizeAware;
-import net.sf.staccatocommons.defs.computation.Computation;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -118,12 +117,5 @@ public interface Stream<A> extends //
    * @param block
    */
   void each(@NonNull Executable<? super A> block);
-
-  /**
-   * @param printSysout
-   * @return
-   * @since 1.2
-   */
-  Computation<Void> processEach(Executable<? super A> printSysout);
 
 }

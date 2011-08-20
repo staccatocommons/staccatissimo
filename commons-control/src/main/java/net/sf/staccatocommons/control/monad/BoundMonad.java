@@ -40,9 +40,8 @@ public class BoundMonad<A, B> extends AbstractMonad<B> {
     };
   }
 
-  public Void value() {
+  public void run() {
     sourceValue.eval(sourceBind);
-    return null;
   }
 
 }

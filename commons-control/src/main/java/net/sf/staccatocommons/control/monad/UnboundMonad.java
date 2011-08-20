@@ -10,26 +10,24 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.defs.computation;
-
-import java.util.concurrent.Executor;
-
-import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.defs.Thunk;
+package net.sf.staccatocommons.control.monad;
 
 /**
  * @author flbulgarelli
  * 
- * @param <A>
- * @since 1.2
  */
-public interface Computation<A> {
+public class UnboundMonad<A> extends AbstractMonad<A> {
 
-  <B> B eval(Applicable<Thunk<A>, B> processor);
+  private final MonadValue<A> monadValue;
 
-  void eval(Executable<Thunk<A>> processor);
+  public UnboundMonad(MonadValue<A> monadValue) {
+    this.monadValue = monadValue;
+  }
 
-  void eval(Executor executor);
+  public MonadValue<A> monadValue() {
+    return monadValue;
+  }
+
+  public final void run() {}
 
 }

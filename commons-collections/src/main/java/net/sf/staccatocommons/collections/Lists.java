@@ -13,11 +13,12 @@
 
 package net.sf.staccatocommons.collections;
 
+import java.util.AbstractList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.RandomAccess;
 
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.MinSize;
@@ -173,6 +174,58 @@ public class Lists {
    * @return an unmodifiable list
    */
   public static <A> List<A> from(A... elements) {
-    return Collections.unmodifiableList(Arrays.asList(elements));
+    return new UnmodifiableArrayList<A>(elements);
   }
+
+  /** Based on Arrays#ArrayList */
+  private static class UnmodifiableArrayList<A> extends AbstractList<A> implements RandomAccess, java.io.Serializable {
+    private static final long serialVersionUID = -5513852306359377448L;
+    private final A[] a;
+
+    UnmodifiableArrayList(A[] array) {
+      if (array == null)
+        throw new NullPointerException();
+      a = array;
+    }
+
+    public int size() {
+      return a.length;
+    }
+
+    public Object[] toArray() {
+      return a.clone();
+    }
+
+    public <T> T[] toArray(T[] a) {
+      int size = size();
+      if (a.length < size)
+        return Arrays.copyOf(this.a, size, (Class<? extends T[]>) a.getClass());
+      System.arraycopy(this.a, 0, a, 0, size);
+      if (a.length > size)
+        a[size] = null;
+      return a;
+    }
+
+    public A get(int index) {
+      return a[index];
+    }
+
+    public int indexOf(Object o) {
+      if (o == null) {
+        for (int i = 0; i < a.length; i++)
+          if (a[i] == null)
+            return i;
+      } else {
+        for (int i = 0; i < a.length; i++)
+          if (o.equals(a[i]))
+            return i;
+      }
+      return -1;
+    }
+
+    public boolean contains(Object o) {
+      return indexOf(o) != -1;
+    }
+  }
+
 }

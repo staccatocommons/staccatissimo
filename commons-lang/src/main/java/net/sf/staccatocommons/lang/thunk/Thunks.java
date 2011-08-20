@@ -18,7 +18,7 @@ import java.util.concurrent.Callable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
-import net.sf.staccatocommons.lang.computation.Computations;
+import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.thunk.internal.DateThunk;
 import net.sf.staccatocommons.lang.thunk.internal.NullThunk;
@@ -80,8 +80,12 @@ public class Thunks {
    * @param callable
    * @return a new {@link Thunk} that wraps the given callable
    */
-  public static <A> Thunk<A> from(@NonNull Callable<A> callable) {
-    return (Thunk<A>) Computations.from(callable);
+  public static <A> Thunk<A> from(@NonNull final Callable<A> callable) {
+    return new Thunk<A>() {
+      public A value() {
+        return SoftException.callOrSoften(callable);
+      }
+    };
   }
 
   /**

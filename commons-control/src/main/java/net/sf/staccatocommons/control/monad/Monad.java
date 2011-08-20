@@ -12,13 +12,13 @@
  */
 package net.sf.staccatocommons.control.monad;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.defs.computation.Computation;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -46,7 +46,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * @since 1.2
  */
-public interface Monad<A> extends Thunk<Void> {
+public interface Monad<A> extends Thunk<Void>, Runnable {
 
   /* ======== */
   /* =Monad= */
@@ -76,11 +76,9 @@ public interface Monad<A> extends Thunk<Void> {
 
   /* <B> */Monad<A> incorporate(@NonNull Applicable<? super A, Monad<A>> function);
 
-  Monad<Void> each(Executable<? super A> block);
+  Monad<Void> forEach(Executable<? super A> block);
 
-  Computation<Void> processEach(Executable<? super A> block);
-
-  Computation<Void> process();
+  void each(Executable<? super A> block);
 
   /**
    * Binds this {@link Monad} to {@link Monads#async(ExecutorService)}
@@ -100,5 +98,11 @@ public interface Monad<A> extends Thunk<Void> {
   /* OOMonad specific */
 
   MonadValue<A> monadValue();
+
+  void run(Executor executor);
+
+  void run();
+
+  Void value();
 
 }

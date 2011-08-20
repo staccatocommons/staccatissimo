@@ -10,23 +10,27 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang.computation.internal;
+package net.sf.staccatocommons.control.monad.internal;
+
+import net.sf.staccatocommons.control.monad.Monad;
+import net.sf.staccatocommons.control.monad.MonadValue;
+import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class RunnableComputation extends AbstractComputation<Void> {
+public class SingleMonadValue<A> implements MonadValue<A> {
 
-  private Runnable runnable;
+  private final A value;
 
-  public RunnableComputation(Runnable runnable) {
-    this.runnable = runnable;
+  public SingleMonadValue(A value) {
+    this.value = value;
   }
 
-  public Void value() {
-    runnable.run();
-    return null;
+  /* return a >>= k == k a */
+  public <T> void eval(Applicable<? super A, Monad<T>> function) {
+    function.apply(value).value();
   }
 
 }

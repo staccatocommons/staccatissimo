@@ -12,14 +12,13 @@
  */
 package net.sf.staccatocommons.control.monad;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
 import net.sf.staccatocommons.control.monad.internal.AppendMonad;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.defs.computation.Computation;
-import net.sf.staccatocommons.lang.computation.Computations;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 
@@ -66,20 +65,25 @@ public abstract class AbstractMonad<A> implements Monad<A> {
     return bind(Monads.<A> async(executor));
   }
 
-  public final Monad<Void> each(final Executable<? super A> block) {
+  public final Monad<Void> forEach(final Executable<? super A> block) {
     return bind(Monads.each(block));
   }
 
-  public final Computation<Void> processEach(Executable<? super A> block) {
-    return each(block).process();
-  }
-
-  public final Computation<Void> process() {
-    return Computations.from(this);
+  public final void each(Executable<? super A> block) {
+    forEach(block).run();
   }
 
   public Monad<A> append(Monad<A> other) {
     return new AppendMonad<A>(this, other);
+  }
+
+  public void run(Executor executor) {
+    executor.execute(this);
+  }
+
+  public final Void value() {
+    run();
+    return null;
   }
 
 }

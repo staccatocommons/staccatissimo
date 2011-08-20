@@ -12,17 +12,11 @@
  */
 package net.sf.staccatocommons.control;
 
+import java.util.Arrays;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
-import net.sf.staccatocommons.collections.Lists;
-import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.callable.Callables;
 import net.sf.staccatocommons.restrictions.Constant;
 
 /**
@@ -45,24 +39,6 @@ public class Concurrent {
   // mainExecutor, final Executable<A> callback,
   // final Executor callbackExecutor) {}
 
-  public static <A> Applicable<Thunk<A>, Future<A>> submit(final ExecutorService executor) {
-    return new Applicable<Thunk<A>, Future<A>>() {
-      public Future<A> apply(Thunk<A> arg) {
-        return executor.submit(Callables.from(arg));
-      }
-    };
-  }
-
-  public static <A> Applicable<Thunk<A>, Future<A>> submit(final Executor executor) {
-    return new Applicable<Thunk<A>, Future<A>>() {
-      public Future<A> apply(Thunk<A> arg) {
-        FutureTask<A> futureTask = new FutureTask<A>(Callables.from(arg));
-        executor.execute(futureTask);
-        return futureTask;
-      }
-    };
-  }
-
   @Constant
   public static <A> Executor sync() {
     return new Executor() {
@@ -82,7 +58,7 @@ public class Concurrent {
   // }
 
   public static void withTimeout(long timeout, TimeUnit timeUnit, Runnable runnable) throws InterruptedException {
-    Executors.newSingleThreadExecutor().invokeAll(Lists.from(Executors.callable(runnable)), timeout, timeUnit);
+    Executors.newSingleThreadExecutor().invokeAll(Arrays.asList(Executors.callable(runnable)), timeout, timeUnit);
   }
 
 }
