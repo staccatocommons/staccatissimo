@@ -28,6 +28,8 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.Functions;
+import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.Constant;
 
 /**
@@ -110,6 +112,15 @@ public class Monads {
 
   public static <A> MonadFunction<A, A> each(final Executable<? super A> block) {
     return map(Functions.impure(block));
+  }
+
+  public static <A, B> MonadFunction<A, Pair<A, B>> clone(final Applicable<? super A, ? extends B> function0) {
+    return map(Tuples.clone(function0));
+  }
+
+  public static <A, B, C> MonadFunction<A, Pair<B, C>> branch(final Applicable<? super A, ? extends B> function0,
+    final Applicable<? super A, ? extends C> function1) {
+    return map(Tuples.branch(function0, function1));
   }
 
   /**

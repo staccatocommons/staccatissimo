@@ -22,7 +22,6 @@ import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.tuple.Pair;
-import net.sf.staccatocommons.lang.tuple.Tuples;
 
 /**
  * @author flbulgarelli
@@ -72,12 +71,12 @@ public abstract class AbstractMonad<A> implements Monad<A> {
   }
 
   public <B> Monad<Pair<A, B>> clone(Applicable<? super A, ? extends B> function) {
-    return map(Tuples.clone(function));
+    return bind(Monads.clone(function));
   }
 
   public <B, C> Monad<Pair<B, C>> branch(Applicable<? super A, ? extends B> function0,
     Applicable<? super A, ? extends C> function1) {
-    return map(Tuples.branch(function0, function1));
+    return bind(Monads.branch(function0, function1));
   }
 
   public final void forEach(Executable<? super A> block) {
