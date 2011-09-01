@@ -15,7 +15,6 @@
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>${project.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
