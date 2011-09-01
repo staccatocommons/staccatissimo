@@ -88,6 +88,8 @@ public interface Monad<A> extends Thunk<Void>, Runnable {
 
   void forEach(Executable<? super A> block);
 
+  Monad<Void> discard();
+
   /* Collection Monad transformation */
 
   <B> Monad<B> flatMap(@NonNull Applicable<? super A, ? extends Iterable<? extends B>> function);

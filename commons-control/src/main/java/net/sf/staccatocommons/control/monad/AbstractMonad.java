@@ -70,6 +70,10 @@ public abstract class AbstractMonad<A> implements Monad<A> {
     return bind(Monads.each(block));
   }
 
+  public Monad<Void> discard() {
+    return (Monad<Void>) this;
+  }
+
   public <B> Monad<Pair<A, B>> clone(Applicable<? super A, ? extends B> function) {
     return bind(Monads.clone(function));
   }
