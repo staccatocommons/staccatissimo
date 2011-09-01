@@ -19,6 +19,7 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -56,9 +57,21 @@ public interface Monad<A> extends Thunk<Void>, Runnable {
   /** >>= */
   <B> Monad<B> bind(Applicable<? super A, Monad<B>> function);
 
+  /* ========= */
+  /* MonadPlus */
+  /* ========= */
+
+  /* mplus */
+  Monad<A> append(Monad<A> other);
+
   /* ======== */
   /* Functor */
   /* ======== */
+
+  /* Mapping */
+
+  /* fmap */
+  <B> Monad<B> map(@NonNull Applicable<? super A, ? extends B> function);
 
   /* Filtering */
 
@@ -67,18 +80,19 @@ public interface Monad<A> extends Thunk<Void>, Runnable {
 
   Monad<A> skip(A element);
 
-  /* Mapping */
+  /* <B> */Monad<A> incorporate(@NonNull Applicable<? super A, Monad<A>> function);
 
-  /* fmap */
-  <B> Monad<B> map(@NonNull Applicable<? super A, ? extends B> function);
+  /* Iterable */
+
+  Monad<A> each(Executable<? super A> block);
+
+  void forEach(Executable<? super A> block);
+
+  /* Collection Monad transformation */
 
   <B> Monad<B> flatMap(@NonNull Applicable<? super A, ? extends Iterable<? extends B>> function);
 
-  /* <B> */Monad<A> incorporate(@NonNull Applicable<? super A, Monad<A>> function);
-
-  Monad<Void> forEach(Executable<? super A> block);
-
-  void each(Executable<? super A> block);
+  /* Async Monad Transformation */
 
   /**
    * Binds this {@link Monad} to {@link Monads#async(ExecutorService)}
@@ -88,12 +102,12 @@ public interface Monad<A> extends Thunk<Void>, Runnable {
    */
   Monad<A> fork(ExecutorService executor);
 
-  /* ========= */
-  /* MonadPlus */
-  /* ========= */
+  /* Arrow-like */
 
-  /* mplus */
-  Monad<A> append(Monad<A> other);
+  <B> Monad<Pair<A, B>> clone(Applicable<? super A, ? extends B> function);
+
+  <B, C> Monad<Pair<B, C>> branch(Applicable<? super A, ? extends B> function0,
+    Applicable<? super A, ? extends C> function1);
 
   /* OOMonad specific */
 

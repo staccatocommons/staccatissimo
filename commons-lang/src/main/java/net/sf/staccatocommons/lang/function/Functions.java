@@ -15,6 +15,7 @@ package net.sf.staccatocommons.lang.function;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
@@ -117,7 +118,8 @@ public class Functions {
    * This function grants to be {@link Transparent} and {@link Constant} only as
    * long as the given {@code thunk} is transparent too. As a consequence,
    * passing a non-transparent {@link Thunk} may be effective, but
-   * counterintuitive, as the resulting function would not be constant at all.
+   * counterintuitive, as the resulting function would be impure and not
+   * constant at all.
    * </p>
    * 
    * @param <A>
@@ -134,13 +136,12 @@ public class Functions {
     };
   }
 
-  // XXX
-  // public static <A, B> Function<A, B> constant2(B value) {
-  // return new ConstantLambda<A, B>(value);
-  // }
-  //
-  // public static <A, B> Function<A, B> constant3(B value) {
-  // return new ConstantLambda<A, B>(value);
-  // }
-
+  public static <A> Function<A, A> impure(final Executable<? super A> block) {
+    return new AbstractFunction<A, A>() {
+      public A apply(A arg) {
+        block.equals(arg);
+        return arg;
+      }
+    };
+  }
 }

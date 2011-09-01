@@ -28,7 +28,15 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
+// @RunWith(Theories.class)
 public class MonadTest {
+
+  // @Ignore("not valid code")
+  // @Theory
+  // public <A, B> void testMapEach(Monad<A> m, Function<A, B> f, Executable<B>
+  // g) throws Exception {
+  // asssertTrue(m.map(f).each(g) == m.map(f.then(g)));
+  // }
 
   @Test
   public void testname() throws Exception {
@@ -37,7 +45,7 @@ public class MonadTest {
       .map(add(5))
       .map(add(1))
       .filter(Compare.greaterThan(2))
-      .forEach(IO.printlnSysout())
+      .each(IO.printlnSysout())
       .value();
   }
 
@@ -70,7 +78,7 @@ public class MonadTest {
       .from(4, 5, 6, 9)
       .map(add(1))
       .filter(Compare.greaterThan(6))
-      .forEach(IO.printlnSysout())
+      .each(IO.printlnSysout())
       .value();
 
   }

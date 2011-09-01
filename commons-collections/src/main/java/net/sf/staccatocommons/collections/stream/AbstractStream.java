@@ -117,12 +117,15 @@ public abstract class AbstractStream<A> implements Stream<A> {
     return iterator().isEmpty();
   }
 
-  public void each(Executable<? super A> block) {
+  public void forEach(Executable<? super A> block) {
     for (A element : this)
       block.exec(element);
   }
 
-  @Override
+  public Stream<A> each(final Executable<? super A> block) {
+    return map(Functions.impure(block));
+  }
+
   public boolean contains(A element) {
     return IterablesInternal.containsInternal(this, element);
   }
@@ -238,6 +241,15 @@ public abstract class AbstractStream<A> implements Stream<A> {
   @Override
   public boolean any(Evaluable<? super A> predicate) {
     return Iterables.any(this, predicate);
+  }
+
+  public <B> Stream<Pair<A, B>> clone(Applicable<? super A, ? extends B> function) {
+    return map(Tuples.clone(function));
+  }
+
+  public <B, C> Stream<Pair<B, C>> branch(Applicable<? super A, ? extends B> function0,
+    Applicable<? super A, ? extends C> function1) {
+    return map(Tuples.branch(function0, function1));
   }
 
   @Override

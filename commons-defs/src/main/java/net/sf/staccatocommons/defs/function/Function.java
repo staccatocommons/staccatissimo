@@ -38,6 +38,8 @@ public interface Function<A, B> extends Applicable<A, B>, //
   NullSafeAware<Function<A, B>>, //
   Delayable<A, B> {
 
+  /* Composition */
+
   /**
    * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
    * this function with another {@link Applicable}, resulting in a new
@@ -79,6 +81,8 @@ public interface Function<A, B> extends Applicable<A, B>, //
    */
   <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other);
 
+  /* Then-composition */
+
   /**
    * Function composition, like {@link #of(Applicable)}, but with receptor and
    * argument interchanged. Equivalent to {@code other.of(this)}
@@ -98,6 +102,8 @@ public interface Function<A, B> extends Applicable<A, B>, //
    */
   Predicate<A> then(@NonNull Predicate<? super B> other);
 
+  /* Nulls handling */
+
   /**
    * Answers a new function that returns null if is argument is null, or the
    * result of applying this function, otherwise.
@@ -106,6 +112,8 @@ public interface Function<A, B> extends Applicable<A, B>, //
    */
   @NullSafe
   Function<A, B> nullSafe();
+
+  /* Builtin common compositions */
 
   /**
    * Returns a predicate that answers if the result of applying this function is

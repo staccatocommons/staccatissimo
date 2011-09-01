@@ -12,6 +12,7 @@
  */
 package net.sf.staccatocommons.lang.tuple;
 
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
@@ -20,6 +21,7 @@ import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.function.AbstractFunction3;
+import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
 import net.sf.staccatocommons.lang.tuple.Tuple.FourthAware;
@@ -257,6 +259,41 @@ public class Tuples {
         return predicate.eval(argument.first(), argument.second());
       }
     };
+  }
+
+  /*
+   * Loosely based on
+   * http://haskell.org/ghc/docs/latest/html/libraries/base/Control-Arrow.html
+   */
+
+  public static <A, B, C> Function<Pair<A, B>, C> merge(final Applicable<? super B, ? extends C> function) {
+    return new AbstractFunction<Pair<A, B>, C>() {
+      public C apply(Pair<A, B> arg) {
+        return function.apply(arg._1());
+      }
+    };
+  }
+
+  public static <A, B, C, D> Function<Pair<A, B>, Pair<C, D>> zip(final Applicable<? super A, ? extends C> function0,
+    final Applicable<? super B, ? extends D> function1) {
+    return new AbstractFunction<Pair<A, B>, Pair<C, D>>() {
+      public Pair<C, D> apply(Pair<A, B> arg) {
+        return _((C) function0.apply(arg._0()), (D) function1.apply(arg._1()));
+      }
+    };
+  }
+
+  public static <A, B, C> Function<A, Pair<B, C>> branch(final Applicable<? super A, ? extends B> function0,
+    final Applicable<? super A, ? extends C> function1) {
+    return new AbstractFunction<A, Pair<B, C>>() {
+      public Pair<B, C> apply(A arg) {
+        return _((B) function0.apply(arg), (C) function1.apply(arg));
+      }
+    };
+  }
+
+  public static <A, B> Function<A, Pair<A, B>> clone(final Applicable<? super A, ? extends B> function0) {
+    return branch(Functions.<A> identity(), function0);
   }
 
 }

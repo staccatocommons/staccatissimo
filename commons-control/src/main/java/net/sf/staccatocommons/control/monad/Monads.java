@@ -27,6 +27,7 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.restrictions.Constant;
 
 /**
@@ -107,13 +108,8 @@ public class Monads {
     };
   }
 
-  public static <A> MonadFunction<A, Void> each(final Executable<? super A> block) {
-    return new AbstractMonadFunction<A, Void>() {
-      public Monad<Void> apply(A arg) {
-        block.exec(arg);
-        return Monads.cons(null);
-      }
-    };
+  public static <A> MonadFunction<A, A> each(final Executable<? super A> block) {
+    return map(Functions.impure(block));
   }
 
   /**

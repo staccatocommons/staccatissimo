@@ -44,7 +44,7 @@ public class BlockingMonadTest {
           .from(testQueue())
           .map(Thunks.<Integer> value())
           .filter(Compare.greaterThan(10))
-          .each(IO.printlnSysout());
+          .forEach(IO.printlnSysout());
       }
     });
   }
@@ -59,7 +59,7 @@ public class BlockingMonadTest {
       .from(testQueue())
       .map(Thunks.<Integer> value())
       .filter(Compare.greaterThan(10))
-      .forEach(IO.printSysout())
+      .each(IO.printSysout())
       .run(fork());
   }
 

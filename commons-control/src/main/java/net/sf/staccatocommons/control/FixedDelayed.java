@@ -55,4 +55,8 @@ class FixedDelayed<A> implements Delayed, Thunk<A> {
   public static <A> FixedDelayed<A> from(A value, long delayInMillis) {
     return new FixedDelayed<A>(value, delayInMillis);
   }
+
+  public static <A> FixedDelayed<A> from(A value, long delayInMillis, long startTimeInMillis) {
+    return new FixedDelayed<A>(value, delayInMillis, startTimeInMillis);
+  }
 }

@@ -88,6 +88,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public interface Stream<A> extends //
   Indexed<A>, //
   Appendable<A>, //
+  Branchable<A>, //
   Collectible<A>, //
   ContainsAware<A>, //
   Crossable<A>, //
@@ -116,6 +117,8 @@ public interface Stream<A> extends //
    * 
    * @param block
    */
-  void each(@NonNull Executable<? super A> block);
+  void forEach(@NonNull Executable<? super A> block);
+
+  Stream<A> each(@NonNull Executable<? super A> block);
 
 }
