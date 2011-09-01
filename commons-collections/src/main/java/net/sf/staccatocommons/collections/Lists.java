@@ -192,8 +192,9 @@ public class Lists {
       return a.length;
     }
 
+    @SuppressWarnings("cast")
     public Object[] toArray() {
-      return a.clone();
+      return (Object[]) a.clone();
     }
 
     public <T> T[] toArray(T[] a) {
