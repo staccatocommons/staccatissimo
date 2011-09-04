@@ -15,11 +15,15 @@ package net.sf.staccatocommons.control.monad;
 /**
  * @author flbulgarelli
  * 
+ * @since 1.2
  */
 public class UnboundMonad<A> extends AbstractMonad<A> {
 
   private final MonadValue<A> monadValue;
 
+  /**
+   * Creates a new {@link UnboundMonad}
+   */
   public UnboundMonad(MonadValue<A> monadValue) {
     this.monadValue = monadValue;
   }

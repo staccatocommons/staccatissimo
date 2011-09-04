@@ -26,6 +26,9 @@ public class IteratorMonadValue<A> implements MonadValue<A> {
 
   private final Iterator<? extends A> iter;
 
+  /**
+   * Creates a new {@link IteratorMonadValue}
+   */
   public IteratorMonadValue(Iterator<? extends A> iter) {
     this.iter = iter;
   }

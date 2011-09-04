@@ -16,7 +16,7 @@ import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * @author flbulgarelli
- * 
+ * @since 1.2
  */
 public abstract class AbstractMonadFunction<A, B> implements MonadFunction<A, B> {
 

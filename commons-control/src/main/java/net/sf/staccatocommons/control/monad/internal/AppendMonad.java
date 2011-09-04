@@ -21,10 +21,18 @@ import net.sf.staccatocommons.defs.Applicable;
  * @author flbulgarelli
  * 
  */
+/**
+ * @author flbulgarelli
+ * 
+ * @param <A>
+ */
 public class AppendMonad<A> extends AbstractMonad<A> {
 
   private final Monad<A> first, second;
 
+  /**
+   * Creates a new {@link AppendMonad}
+   */
   public AppendMonad(Monad<A> first, Monad<A> second) {
     this.first = first;
     this.second = second;

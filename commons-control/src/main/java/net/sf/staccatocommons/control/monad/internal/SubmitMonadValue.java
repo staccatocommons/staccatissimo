@@ -28,6 +28,9 @@ public class SubmitMonadValue<A> implements MonadValue<A> {
   private final ExecutorService executor;
   private final Callable<A> callable;
 
+  /**
+   * Creates a new {@link SubmitMonadValue}
+   */
   public SubmitMonadValue(ExecutorService executor, Callable<A> callable) {
     this.executor = executor;
     this.callable = callable;

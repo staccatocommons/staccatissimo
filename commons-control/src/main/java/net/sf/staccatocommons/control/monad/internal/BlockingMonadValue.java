@@ -26,6 +26,9 @@ public class BlockingMonadValue<A> implements MonadValue<A> {
 
   private final BlockingQueue<? extends A> queue;
 
+  /**
+   * Creates a new {@link BlockingMonadValue}
+   */
   public BlockingMonadValue(BlockingQueue<? extends A> queue) {
     this.queue = queue;
   }

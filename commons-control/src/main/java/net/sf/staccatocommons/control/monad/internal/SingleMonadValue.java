@@ -24,6 +24,9 @@ public class SingleMonadValue<A> implements MonadValue<A> {
 
   private final A value;
 
+  /**
+   * Creates a new {@link SingleMonadValue}
+   */
   public SingleMonadValue(A value) {
     this.value = value;
   }

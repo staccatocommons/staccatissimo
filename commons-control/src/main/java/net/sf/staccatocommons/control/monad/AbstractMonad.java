@@ -25,7 +25,7 @@ import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
  * @author flbulgarelli
- * 
+ * @since 1.2
  */
 public abstract class AbstractMonad<A> implements Monad<A> {
 
