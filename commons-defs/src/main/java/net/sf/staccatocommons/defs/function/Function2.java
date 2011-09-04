@@ -82,8 +82,51 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    */
   <D> Function2<D, B, C> of(Applicable<? super D, ? extends A> function);
 
+  /**
+   * Function composition, like {@link Function#of(Applicable2)}, but with
+   * receptor and argument interchanged. Equivalent to {@code other.of(this)}
+   * 
+   * Functions get combined in the following figure:
+   * 
+   * <pre>
+   * >----+
+   *      +--this---+---other---->
+   * >----+
+   * </pre>
+   * 
+   * @param <C>
+   * @param other
+   * @return a new {@link Function2}
+   */
   <D> Function2<A, B, D> then(@NonNull Function<? super C, ? extends D> other);
 
-  <A2, B2, D> Function3<A, B, A2, D> then(Function2<C, B2, D> combinator,
+  /**
+   * Answers a three arg function that combines <code>this</code> function with
+   * <code>other</code> function, using a <code>binaryFunction</code> to merge
+   * the results.
+   * 
+   * The answered {@link Function2} will apply this function to its first and
+   * second argument argument, <code>other</code> function to the third
+   * argument, and return the application of <code>binaryFunction</code> to both
+   * resulting values.
+   * 
+   * Functions get combined in the following figure:
+   * 
+   * <pre>
+   * >----+
+   *      +--this-+
+   * >----+       +---binaryFunction---->
+   *              |
+   * >--other-----+
+   * </pre>
+   * 
+   * @param <A2>
+   * @param <B2>
+   * @param <C>
+   * @param binayFunction
+   * @param other
+   * @return
+   */
+  <A2, B2, D> Function3<A, B, A2, D> then(Function2<C, B2, D> binaryFunction,
     @NonNull Function<? super A2, ? extends B2> other);
 }
