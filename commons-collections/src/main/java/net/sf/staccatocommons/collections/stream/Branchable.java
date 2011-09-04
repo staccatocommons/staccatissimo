@@ -12,17 +12,32 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
  * @author flbulgarelli
- * 
+ * @since 1.2
  */
 public interface Branchable<A> {
 
+  @Projection
   <B> Stream<Pair<A, B>> clone(Applicable<? super A, ? extends B> function);
 
+  /**
+   * Answers a Stream of pairs, where each one contains both results of applying
+   * the given functions. Equivalent to
+   * <code>this.map(Tuples.branch(function0, function1))</code>
+   * 
+   * @param <B>
+   * @param <C>
+   * @param function0
+   * @param function1
+   * @return a new {@link Stream}
+   * @since 1.2
+   */
+  @Projection
   <B, C> Stream<Pair<B, C>> branch(Applicable<? super A, ? extends B> function0,
     Applicable<? super A, ? extends C> function1);
 

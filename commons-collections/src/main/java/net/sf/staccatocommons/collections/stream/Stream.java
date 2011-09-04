@@ -116,9 +116,18 @@ public interface Stream<A> extends //
    * This message is equivalent to a for-each loop over this {@link Stream}
    * 
    * @param block
+   * @since 1.2
    */
   void forEach(@NonNull Executable<? super A> block);
 
+  /**
+   * 
+   * @param block
+   * @return
+   * @since 1.1 original version, replaced by {@link #forEach(Executable)}
+   * @since 1.2 current version, incompatible with previous 1.1
+   * 
+   */
   Stream<A> each(@NonNull Executable<? super A> block);
 
 }
