@@ -139,7 +139,7 @@ public class Functions {
   public static <A> Function<A, A> impure(final Executable<? super A> block) {
     return new AbstractFunction<A, A>() {
       public A apply(A arg) {
-        block.equals(arg);
+        block.exec(arg);
         return arg;
       }
     };

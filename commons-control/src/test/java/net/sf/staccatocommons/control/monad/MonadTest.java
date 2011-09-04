@@ -15,13 +15,17 @@ package net.sf.staccatocommons.control.monad;
 import static net.sf.staccatocommons.control.monad.Monads.*;
 import static net.sf.staccatocommons.lang.number.NumberTypes.*;
 
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.concurrent.Executors;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.io.IO;
 import net.sf.staccatocommons.lang.Compare;
+import net.sf.staccatocommons.lang.block.Block;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -40,13 +44,20 @@ public class MonadTest {
 
   @Test
   public void testname() throws Exception {
+    final Collection<Integer> col = new LinkedList<Integer>();
     Monads//
       .cons(4)
       .map(add(5))
       .map(add(1))
       .filter(Compare.greaterThan(2))
+      .each(new Block<Integer>() {
+        protected void softExec(Integer argument) throws Exception {
+          col.add(argument);
+        }
+      })
       .each(IO.printlnSysout())
       .value();
+    Assert.assertEquals(1, col.size());
   }
 
   public void testKleisli() throws Exception {
