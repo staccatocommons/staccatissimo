@@ -17,7 +17,9 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.ContainsAware;
+import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.Thunk;
@@ -104,6 +106,18 @@ public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, Con
    */
   public boolean isUndefined() {
     return !isDefined();
+  }
+
+  public <T2> Option<T2> map(Applicable<? super T, ? extends T2> function) {
+    if (isDefined())
+      return Option.some((T2) function.apply(value()));
+    return Option.none();
+  }
+
+  public Option<T> filter(Evaluable<? super T> function) {
+    if (isDefined() && function.eval(value()))
+      return this;
+    return Option.none();
   }
 
   /**
