@@ -54,6 +54,15 @@ public class Reductions {
     };
   }
 
+  /**
+   * Impure reduction that performs count, in a more time and memory efficient
+   * way that {@link #count()}, but that should not be used in multithreaded
+   * reduction. The reduction object itself is thread safe, though.
+   * 
+   * @param <A>
+   * @return the impure count reduction
+   * @since 1.2
+   */
   @Constant
   public static <A> Reduction<A, MutableInt> fastCount() {
     return new AbstractReduction<A, MutableInt>() {
@@ -80,6 +89,15 @@ public class Reductions {
     };
   }
 
+  /**
+   * Impure reduction that performs append, in a more time and memory efficient
+   * way that {@link #append()}, but that should not be used in multithreaded
+   * reduction. The reduction object itself is thread safe, though.
+   * 
+   * @param <A>
+   * @return the impure append reduction
+   * @since 1.2
+   */
   public static <A> Reduction<A, List<A>> fastAppend() {
     return new AbstractReduction<A, List<A>>() {
       public List<A> reduce(A element, List<A> accum) {
