@@ -119,6 +119,15 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
     };
   }
 
+  public <A2, B2, C> Function2<A, A2, C> then(final Function2<B, B2, C> combinator,
+    final Function<? super A2, ? extends B2> other) {
+    return new AbstractFunction2<A, A2, C>() {
+      public C apply(A arg0, A2 arg1) {
+        return combinator.apply(AbstractFunction.this.apply(arg0), other.apply(arg1));
+      }
+    };
+  }
+
   public String toString() {
     return "Function";
   }

@@ -18,6 +18,7 @@ import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Delayable2;
 import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.defs.NullSafeAware;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * {@link Function2}s are rich interfaced {@link Applicable2}s - two arguments
@@ -80,4 +81,9 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    * @since 1.2
    */
   <D> Function2<D, B, C> of(Applicable<? super D, ? extends A> function);
+
+  <D> Function2<A, B, D> then(@NonNull Function<? super C, ? extends D> other);
+
+  <A2, B2, D> Function3<A, B, A2, D> then(Function2<C, B2, D> combinator,
+    @NonNull Function<? super A2, ? extends B2> other);
 }

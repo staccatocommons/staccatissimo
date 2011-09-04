@@ -15,6 +15,7 @@ package net.sf.staccatocommons.lang.function;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
+import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
@@ -62,6 +63,19 @@ public abstract class AbstractFunction2<A, B, C> extends AbstractDelayable2<A, B
         return AbstractFunction2.this.apply(function.apply(arg0), arg1);
       }
     };
+  }
+
+  public <A2, B2, D> Function3<A, B, A2, D> then(final Function2<C, B2, D> combinator,
+    final Function<? super A2, ? extends B2> other) {
+    return new AbstractFunction3<A, B, A2, D>() {
+      public D apply(A arg0, B arg1, A2 arg2) {
+        return combinator.apply(AbstractFunction2.this.apply(arg0, arg1), other.apply(arg2));
+      }
+    };
+  }
+
+  public <D> Function2<A, B, D> then(Function<? super C, ? extends D> other) {
+    return (Function2<A, B, D>) other.of(this);
   }
 
   public String toString() {

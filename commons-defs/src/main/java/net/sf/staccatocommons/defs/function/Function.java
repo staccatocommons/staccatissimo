@@ -93,6 +93,8 @@ public interface Function<A, B> extends Applicable<A, B>, //
    */
   <C> Function<A, C> then(@NonNull Function<? super B, ? extends C> other);
 
+  <A2, B2, C> Function2<A, A2, C> then(Function2<B, B2, C> combinator, @NonNull Function<? super A2, ? extends B2> other);
+
   /**
    * Predicate composition, like {@link Predicate#of(Applicable)}, but with
    * receptor and argument interchanged. Equivalent to {@code other.of(this)}
