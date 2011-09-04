@@ -97,6 +97,7 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    * @param <C>
    * @param other
    * @return a new {@link Function2}
+   * @since 1.2
    */
   <D> Function2<A, B, D> then(@NonNull Function<? super C, ? extends D> other);
 
@@ -126,6 +127,7 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    * @param binayFunction
    * @param other
    * @return
+   * @since 1.2
    */
   <A2, B2, D> Function3<A, B, A2, D> then(Function2<C, B2, D> binaryFunction,
     @NonNull Function<? super A2, ? extends B2> other);

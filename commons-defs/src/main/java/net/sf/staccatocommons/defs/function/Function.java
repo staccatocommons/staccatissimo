@@ -84,8 +84,8 @@ public interface Function<A, B> extends Applicable<A, B>, //
   /* Then-combination */
 
   /**
-   * Function composition, like {@link #of(Applicable)}, but with receptor and
-   * argument interchanged. Equivalent to {@code other.of(this)}
+   * Pipeline combination, equivalent to function composition, like but with
+   * receptor and argument interchanged.
    * 
    * Functions get combined in the following figure:
    * 
@@ -95,14 +95,14 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * 
    * @param <C>
    * @param other
-   * @return a new {@link Function}
+   * @return {@code other.of(this)}
    */
   <C> Function<A, C> then(@NonNull Function<? super B, ? extends C> other);
 
   /**
-   * Answers a two arg function that combines <code>this</code> function with
-   * <code>other</code> function, using a <code>binaryFunction</code> to merge
-   * the results.
+   * Merge combination. Answers a two arg function that combines
+   * <code>this</code> function with <code>other</code> function, using a
+   * <code>binaryFunction</code> to merge the results.
    * 
    * The answered {@link Function2} will apply this function to its first
    * argument, the <code>other</code> function to the second argument, and
@@ -122,6 +122,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @param <C>
    * @param binayFunction
    * @param other
+   * @since 1.2
    * @return
    */
   <A2, B2, C> Function2<A, A2, C> then(Function2<B, B2, C> binayFunction,
