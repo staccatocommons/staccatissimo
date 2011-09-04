@@ -205,6 +205,26 @@ public class Tuples {
 
   /**
    * <a href="http://en.wikipedia.org/wiki/Currying">Curries</a> the given
+   * {@code function} that takes a single {@link Triple}, by returning a new one
+   * that takes three arguments, one for each component of the triple
+   * 
+   * @param <A>
+   * @param <B>
+   * @param <C>
+   * @param function
+   *          the function to curry
+   * @return a new {@link Function3}
+   */
+  public static <A, B, C, D> Function3<A, B, C, D> curry3(final Function<Triple<A, B, C>, D> function) {
+    return new AbstractFunction3<A, B, C, D>() {
+      public D apply(A arg0, B arg1, C arg2) {
+        return function.apply(_(arg0, arg1, arg2));
+      }
+    };
+  }
+
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Currying">Curries</a> the given
    * {@code predicate} that takes a single {@link Pair}, by returning a new one
    * that takes two arguments, one for each component of the pair
    * 
@@ -303,6 +323,33 @@ public class Tuples {
     };
   }
 
+  /**
+   * Answers a function that applies both given functions to its argument, and
+   * returns both results, as a {@link Pair}.
+   * 
+   * Example:
+   * 
+   * <pre>
+   * branch(NumberTypes.add(10), Compare.greaterThan(5)).apply(2)
+   * </pre>
+   * 
+   * Returns the tuple
+   * 
+   * <pre>
+   * (12, false)
+   * </pre>
+   * 
+   * 
+   * @param <A>
+   * @param <B>
+   * @param <C>
+   * @param function0
+   *          the function whose result will be the first component of the tuple
+   * @param function1
+   *          the function whose result will be the second component of the
+   *          tuple
+   * @return a new {@link Function} that "branches" its argument
+   */
   public static <A, B, C> Function<A, Pair<B, C>> branch(final Applicable<? super A, ? extends B> function0,
     final Applicable<? super A, ? extends C> function1) {
     return new AbstractFunction<A, Pair<B, C>>() {
@@ -312,6 +359,15 @@ public class Tuples {
     };
   }
 
+  /**
+   * Answers a function that returns a pair that contains the original function
+   * argument and the result of applying
+   * 
+   * @param <A>
+   * @param <B>
+   * @param function0
+   * @return
+   */
   public static <A, B> Function<A, Pair<A, B>> clone(final Applicable<? super A, ? extends B> function0) {
     return branch(Functions.<A> identity(), function0);
   }

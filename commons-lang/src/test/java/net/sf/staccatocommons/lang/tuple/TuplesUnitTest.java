@@ -18,9 +18,11 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
+import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.function.AbstractFunction3;
+import net.sf.staccatocommons.lang.number.NumberTypes;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 
 import org.apache.commons.lang.StringUtils;
@@ -103,6 +105,15 @@ public class TuplesUnitTest {
     assertEquals("hello", triple._0());
     assertEquals(40, (int) triple._1());
     assertEquals(false, (boolean) triple._2());
+  }
+
+  /**
+   * test for
+   * {@link Tuples#branch(net.sf.staccatocommons.defs.Applicable, net.sf.staccatocommons.defs.Applicable)}
+   */
+  @Test
+  public void branch() throws Exception {
+    assertEquals(Tuples.branch(NumberTypes.add(10), Compare.greaterThan(5)).apply(2), _(12, false));
   }
 
 }
