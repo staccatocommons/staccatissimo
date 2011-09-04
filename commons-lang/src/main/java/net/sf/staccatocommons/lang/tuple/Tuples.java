@@ -151,12 +151,11 @@ public class Tuples {
   }
 
   /**
-   * Answers a function that creates {@link Pair}s for its arguments
+   * Answers a function that creates {@link Triple}s for its arguments
    * 
    * @param <T1>
    * @param <T2>
-   * @param <T3>
-   * @return a new {@link Function2}
+   * @return a new {@link Function3}
    */
   @Constant
   public static <T1, T2, T3> Function3<T1, T2, T3, Triple<T1, T2, T3>> toTriple() {
@@ -168,11 +167,12 @@ public class Tuples {
   }
 
   /**
-   * Answers a function that creates {@link Triple}s for its arguments
+   * Answers a function that creates {@link Pair}s for its arguments
    * 
    * @param <T1>
    * @param <T2>
-   * @return a new {@link Function3}
+   * @param <T3>
+   * @return a new {@link Function2}
    */
   @Constant
   public static <T1, T2> Function2<T1, T2, Pair<T1, T2>> toPair() {
@@ -238,6 +238,14 @@ public class Tuples {
     return new AbstractFunction<Pair<A, B>, C>() {
       public C apply(Pair<A, B> argument) {
         return function.apply(argument.first(), argument.second());
+      }
+    };
+  }
+
+  public static <A, B, C, D> Function<Triple<A, B, C>, D> uncurry(final Function3<A, B, C, D> function) {
+    return new AbstractFunction<Triple<A, B, C>, D>() {
+      public D apply(Triple<A, B, C> argument) {
+        return function.apply(argument.first(), argument.second(), argument.third());
       }
     };
   }
