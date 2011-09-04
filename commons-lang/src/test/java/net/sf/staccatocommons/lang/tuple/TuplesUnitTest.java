@@ -20,6 +20,7 @@ import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
+import net.sf.staccatocommons.lang.function.AbstractFunction3;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 
 import org.apache.commons.lang.StringUtils;
@@ -63,6 +64,19 @@ public class TuplesUnitTest {
         return StringUtils.repeat(arg1.toString(), arg0);
       }
     }).apply(_(3, 'a')));
+  }
+
+  /**
+   * Test method for
+   * {@link Tuples#uncurry(net.sf.staccatocommons.defs.function.Function3)} .
+   */
+  @Test
+  public void testUncurryFunction3() {
+    assertEquals("ababab", uncurry(new AbstractFunction3<Integer, Character, Character, String>() {
+      public String apply(Integer arg0, Character arg1, Character arg2) {
+        return StringUtils.repeat(arg1.toString() + arg2, arg0);
+      }
+    }).apply(_(3, 'a', 'b')));
   }
 
   /**

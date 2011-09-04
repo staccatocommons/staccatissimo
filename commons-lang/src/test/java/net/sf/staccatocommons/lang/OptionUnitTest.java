@@ -20,6 +20,8 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.lang.function.Functions;
+import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
@@ -147,4 +149,55 @@ public class OptionUnitTest extends JUnit4MockObjectTestCase {
     assertEquals("Some(foo)", Option.some("foo").toString());
     assertEquals("Some(null)", Option.someNull().toString());
   }
+
+  /**
+   * Test for {@link Option#map(net.sf.staccatocommons.defs.Applicable)}
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void mapNoneIsNone() throws Exception {
+    assertTrue(Option.none().map(Functions.identity()).isUndefined());
+  }
+
+  /**
+   * Test for {@link Option#map(net.sf.staccatocommons.defs.Applicable)}
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void mapSomeIsSome() throws Exception {
+    assertTrue(Option.some(10).map(Functions.identity()).isDefined());
+  }
+
+  /**
+   * Test for {@link Option#filter(net.sf.staccatocommons.defs.Evaluable)}
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void filterNoneIsNone() throws Exception {
+    assertTrue(Option.none().filter(Predicates.true_()).isUndefined());
+  }
+
+  /**
+   * Test for {@link Option#filter(net.sf.staccatocommons.defs.Evaluable)}
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void filterSomeIsSomeIfPredicateIsTrue() throws Exception {
+    assertTrue(Option.some(10).filter(Compare.greaterThan(9)).isDefined());
+  }
+
+  /**
+   * Test for {@link Option#filter(net.sf.staccatocommons.defs.Evaluable)}
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void filterSomeIsNoneIfPredicateIsFalse() throws Exception {
+    assertTrue(Option.some(10).filter(Compare.greaterThan(90)).isUndefined());
+  }
+
 }

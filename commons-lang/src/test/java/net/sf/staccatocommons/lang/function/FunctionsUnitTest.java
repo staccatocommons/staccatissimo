@@ -18,11 +18,13 @@ import static org.junit.Assert.*;
 import java.util.Date;
 
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
+import org.apache.commons.lang.mutable.MutableInt;
 import org.jmock.Expectations;
 import org.junit.Before;
 import org.junit.Test;
@@ -95,6 +97,21 @@ public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
   public void testConstThunk() throws Exception {
     Function<Object, Date> constant = Functions.constant(Thunks.currentDate());
     assertNotSame(constant.apply(_), constant.apply(_));
+  }
+
+  /**
+   * Test for {@link Functions#impure(Executable)}
+   * 
+   * @throws Exception
+   */
+  @Test
+  public void impureFunction() throws Exception {
+    assertEquals(1, //
+      Functions.impure(new Executable<MutableInt>() {
+        public void exec(MutableInt argument) {
+          argument.increment();
+        }
+      }).apply(new MutableInt()).intValue());
   }
 
 }

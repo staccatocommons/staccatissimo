@@ -242,6 +242,18 @@ public class Tuples {
     };
   }
 
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Currying">Uncurries</a> the given
+   * three-args {@code function}, by returning a {@link Function} that takes a
+   * single triple, being its components each of the original function
+   * parameters
+   * 
+   * @param <A>
+   * @param <B>
+   * @param <C>
+   * @param function
+   * @return a new {@link Function}
+   */
   public static <A, B, C, D> Function<Triple<A, B, C>, D> uncurry(final Function3<A, B, C, D> function) {
     return new AbstractFunction<Triple<A, B, C>, D>() {
       public D apply(Triple<A, B, C> argument) {

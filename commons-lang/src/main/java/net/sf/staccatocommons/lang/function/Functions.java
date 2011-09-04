@@ -136,7 +136,17 @@ public class Functions {
     };
   }
 
-  public static <A> Function<A, A> impure(final Executable<? super A> block) {
+  /**
+   * Answers an impure - with side effect - function that executes the given
+   * block and answers its argument
+   * 
+   * @param <A>
+   * @param block
+   *          the block to wrap
+   * @return a new, impure, function.
+   */
+  @ForceRestrictions
+  public static <A> Function<A, A> impure(@NonNull final Executable<? super A> block) {
     return new AbstractFunction<A, A>() {
       public A apply(A arg) {
         block.exec(arg);

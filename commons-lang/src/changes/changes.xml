@@ -83,7 +83,10 @@
         </release>
         <release version="1.2" date="TBD" description="Control">
             <action dev="flbulgarelli" type="add">
-                Adding Computations 
+                Functions.impure 
+            </action>
+              <action dev="flbulgarelli" type="add">
+                Option.map, Option.filter 
             </action>
         </release>
 	</body>

@@ -108,14 +108,29 @@ public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, Con
     return !isDefined();
   }
 
-  public <T2> Option<T2> map(Applicable<? super T, ? extends T2> function) {
+  /**
+   * Applies the given <code>function</code> to the Option's value and wraps it
+   * into an Option, if defined. Returns {@link #none()}, otherwise
+   * 
+   * @param <T2>
+   * @param function
+   * @return the mapped {@link Option}
+   */
+  public final <T2> Option<T2> map(Applicable<? super T, ? extends T2> function) {
     if (isDefined())
       return Option.some((T2) function.apply(value()));
     return Option.none();
   }
 
-  public Option<T> filter(Evaluable<? super T> function) {
-    if (isDefined() && function.eval(value()))
+  /**
+   * Answers this option if defined and the given <code>predicate</code>
+   * evaluates to <code>true</code>. Answers {@link #none()}, otherwise
+   * 
+   * @param predicate
+   * @return the filtered Option
+   */
+  public final Option<T> filter(Evaluable<? super T> predicate) {
+    if (isDefined() && predicate.eval(value()))
       return this;
     return Option.none();
   }
