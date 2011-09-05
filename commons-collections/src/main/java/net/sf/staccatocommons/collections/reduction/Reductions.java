@@ -28,6 +28,7 @@ import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.apache.commons.lang.mutable.MutableInt;
 
@@ -111,12 +112,24 @@ public class Reductions {
     };
   }
 
+  /**
+   * Integer reduction that computes the elements sum
+   * 
+   * @return the integer elements-sum reduction
+   */
   @Constant
   public static Reduction<Integer, Integer> sum() {
     return sum(integer());
   }
 
-  public static <A> Reduction<A, A> sum(NumberType<A> numberType) {
+  /**
+   * Generic reduction that computes the elements sum
+   * 
+   * @param numberType
+   *          the type of numbers to be summed
+   * @return the elements-sum reduction
+   */
+  public static <A> Reduction<A, A> sum(@NonNull NumberType<A> numberType) {
     return from(numberType.zero(), numberType.add());
   }
 
@@ -128,6 +141,12 @@ public class Reductions {
     return from(numberType.zero(), numberType.add().of(function).flip());
   }
 
+  /**
+   * Reduction that computes the first element
+   * 
+   * @param <A>
+   * @return the first-element reduction
+   */
   @Constant
   public static <A> Reduction<A, A> first() {
     return new AbstractReduction<A, A>() {
