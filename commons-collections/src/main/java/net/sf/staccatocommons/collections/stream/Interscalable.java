@@ -34,9 +34,36 @@ public interface Interscalable<A> {
   @Projection
   Stream<A> intersperse(A element);
 
+  /**
+   * Inserts after each element the result of applying the given function to it. 
+   * For example:
+   * 
+   * <pre>
+   *    Streams.cons(10, 9, 90).incorporate(integer().negate()).equiv(10,-10,9,-9,90,-90);
+   * </pre>
+   * 
+   * @param function
+   * @return a new {@link Stream}
+   * @since 1.2
+   */
   @Projection
   Stream<A> incorporate(@NonNull Function<? super A, ? extends A> function);
 
+  /**
+   * Inserts the given value after each element of the stream.
+   * 
+   * This message is similar to {@link #intersperse(Object)}, 
+   * but inserts the value also at the end of the stream.  
+   * @param element
+   * Example: 
+   * 
+   * <pre>
+   *    Streams.cons('a', 'b', 'c').incorporate('d').equiv('a', 'd', 'b', 'd','c', 'd');
+   * </pre>
+   * 
+   * @return a new {@link Stream}
+   * @since 1.2
+   */
   @Projection
   Stream<A> incorporate(@NonNull A element);
 

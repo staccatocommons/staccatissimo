@@ -173,18 +173,44 @@ public class AbstractStreamBasicTest {
       .cons(4, 5, 6)
       .intersperse(1)
       .equiv(4, 1, 5, 1, 6));
-
+  }
+  
+  /**Test for {@link Stream#intersperse(Object)}*/
+  @Test
+  public void interspereIterator() throws Exception {
     assertTrue(Streams//
       .from(Arrays.asList(4, 5).iterator())
       .append(10)
       .intersperse(1)
       .take(4)
       .equiv(4, 1, 5, 1));
-
+  }
+  
+  /**Test for {@link Stream#intersperse(Object)}*/
+  @Test
+  public void testIntersperseTwoElementsStream() throws Exception {
     assertEquals("[56, 0, 1]", Streams//
       .cons(56, 1)
       .intersperse(0)
       .printString());
+  }
+  
+  /**Test for {@link Stream#incorporate(Function)}*/
+  @Test
+  public void testIncorporate() throws Exception {
+    assertTrue(Streams.cons(10, 9, 90).incorporate(integer().negate()).equiv(10,-10,9,-9,90,-90));
+  }
+  
+  /**Test for {@link Stream#incorporate(Object)}*/
+  @Test
+  public void testIncorporateElement() throws Exception {
+    assertTrue(Streams.cons('a', 'b', 'c').incorporate('d').equiv('a', 'd', 'b', 'd','c', 'd'));
+  }
+  
+  /**Test for {@link Stream#incorporate(Function)}*/
+  @Test
+  public void testIncorporateIsLazy() throws Exception {
+    assertEquals((Integer)0, Streams.repeat(10).incorporate(-10).take(10).sum(integer()));
   }
 
   /**
