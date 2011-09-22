@@ -88,7 +88,7 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
   public Function<A, A> negate() {
     return new AbstractFunction<A, A>() {
       public A apply(A arg) {
-        return inverse(arg);
+        return negate(arg);
       }
     };
   }

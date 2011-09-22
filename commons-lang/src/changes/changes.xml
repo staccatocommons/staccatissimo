@@ -91,6 +91,9 @@
              <action dev="flbulgarelli" type="add">
                 Tuples.branch, Tuples.clone, Tuples.uncurry3, Tuples.zip 
             </action>
+            <action dev="flbulgarelli" type="fix">
+                Fixed AbstractNumberType.negate() 
+            </action>
         </release>
 	</body>
 </document>
