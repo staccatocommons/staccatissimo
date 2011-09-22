@@ -20,6 +20,12 @@ import net.sf.staccatocommons.defs.Applicable;
  */
 public interface MonadValue<A> {
 
+  /**
+   * Effectfull evaluation of this monad value, passing its elements
+   * to the given monad function
+   * 
+   * @param function
+   */
   <T> void eval(Applicable<? super A, Monad<T>> function);
 
 }

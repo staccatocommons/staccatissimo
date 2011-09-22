@@ -61,7 +61,13 @@ public interface Monad<A> extends Thunk<Void>, Runnable {
   /* MonadPlus */
   /* ========= */
 
-  /* mplus */
+  /**
+   * Answers a monad that, when evaluated, will produce the effects of the
+   * evaluation of this monad and then the given one
+   * 
+   * @param other
+   * @return a new {@link Monad} 
+   */
   Monad<A> append(Monad<A> other);
 
   /* ======== */
@@ -115,10 +121,25 @@ public interface Monad<A> extends Thunk<Void>, Runnable {
 
   MonadValue<A> monadValue();
 
+  /**
+   * Evalutes this monad, executing its effects, insde the given executor
+   * 
+   * @param executor
+   *          the executor used to process the resulting effects of the
+   *          evalaution of this monad
+   */
   void run(Executor executor);
 
+  /**
+   * Evaluates this monad, executing its effects
+   */
   void run();
 
+  /**
+   * Evaluates this monad, executing its effects. This message is equivalent to
+   * {@link #run()}, but is provided for compatibilty with {@link Thunk}
+   * interface
+   */
   Void value();
 
 }

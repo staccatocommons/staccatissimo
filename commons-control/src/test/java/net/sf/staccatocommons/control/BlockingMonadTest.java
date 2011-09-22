@@ -12,22 +12,23 @@
  */
 package net.sf.staccatocommons.control;
 
-import static net.sf.staccatocommons.control.Concurrent.*;
 
 import java.util.Arrays;
 import java.util.concurrent.DelayQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import net.sf.staccatocommons.control.monad.Monads;
 import net.sf.staccatocommons.io.IO;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.thunk.Thunks;
+import net.sf.staccatocommons.restrictions.Constant;
 
 import org.junit.Test;
 
 /**
  * @author flbulgarelli
- * 
  */
 public class BlockingMonadTest {
 
@@ -102,5 +103,20 @@ public class BlockingMonadTest {
       FixedDelayed.from(675, 400L),
       FixedDelayed.from(400, 1500L)));
   }
+  
+
+  @Constant
+  public static Executor fork() {
+    return new Executor() {
+      public void execute(Runnable command) {
+        Executors.defaultThreadFactory().newThread(command).start();
+      }
+    };
+  }
+
+  public static void withTimeout(long timeout, TimeUnit timeUnit, Runnable runnable) throws InterruptedException {
+    Executors.newSingleThreadExecutor().invokeAll(Arrays.asList(Executors.callable(runnable)), timeout, timeUnit);
+  }
+
 
 }
