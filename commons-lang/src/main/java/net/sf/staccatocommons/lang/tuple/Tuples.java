@@ -306,14 +306,32 @@ public class Tuples {
    * http://haskell.org/ghc/docs/latest/html/libraries/base/Control-Arrow.html
    */
 
-  public static <A, B, C> Function<Pair<A, B>, C> merge(final Applicable<? super B, ? extends C> function) {
-    return new AbstractFunction<Pair<A, B>, C>() {
-      public C apply(Pair<A, B> arg) {
-        return function.apply(arg._1());
-      }
-    };
-  }
-
+  /**
+   * Combines two functions into one that takes a pair and applies the first function to the first component, and the second
+   * function to the second component, and returns the pair of results. 
+   * 
+   * Functions get combined as in the following figure:
+   * <pre> 
+   * >------function0----->
+   * 
+   * >------function1----->
+   * </pre>
+   * Example:
+   * 
+   * <pre>
+   * zip(NumberTypes.add(10), NumberTypes.add(1)).apply(_(2,0))
+   * </pre>
+   * 
+   * Returns the tuple
+   * 
+   * <pre>
+   * (12, 1)
+   * </pre>
+   * 
+   * @param function0
+   * @param function1
+   * @return a new function that zips both given functions 
+   */
   public static <A, B, C, D> Function<Pair<A, B>, Pair<C, D>> zip(final Applicable<? super A, ? extends C> function0,
     final Applicable<? super B, ? extends D> function1) {
     return new AbstractFunction<Pair<A, B>, Pair<C, D>>() {
@@ -322,11 +340,57 @@ public class Tuples {
       }
     };
   }
+  
+  
+  /**
+   * Curried version of {@link #zip(Applicable, Applicable)}
+   * Combines two functions into one a two arguments function that applies 
+   * the first function to the first argument, and the second
+   * function to the second argument, and returns the pair of results. 
+   * 
+   * Functions get combined as in the following figure:
+   * <pre> 
+   * >------function0----->
+   * 
+   * >------function1----->
+   * </pre>
+   * Example:
+   * 
+   * <pre>
+   * zip(NumberTypes.add(10), NumberTypes.add(1)).apply(2,0)
+   * </pre>
+   * 
+   * Returns the tuple
+   * 
+   * <pre>
+   * (12, 1)
+   * </pre>
+   * 
+   * 
+   * @param function0
+   * @param function1
+   * @return a new function that zips both given functions 
+   */
+  public static <A, B, C, D> Function2<A, B, Pair<C, D>> zipCurried(final Applicable<? super A, ? extends C> function0,
+    final Applicable<? super B, ? extends D> function1) {
+    return new AbstractFunction2<A, B, Pair<C, D>>() {
+      public Pair<C, D> apply(A arg0, B arg1) {
+        return _((C) function0.apply(arg0), (D) function1.apply(arg1));
+      }
+    };
+  }
 
   /**
    * Answers a function that applies both given functions to its argument, and
    * returns both results, as a {@link Pair}.
    * 
+   * Functions get combined as in the following figure:
+   * 
+   * <pre>
+   *      +------function0----->
+   * >----+
+   *      +------function1----->
+   * </pre>
    * Example:
    * 
    * <pre>
@@ -363,10 +427,16 @@ public class Tuples {
    * Answers a function that returns a pair that contains the original function
    * argument and the result of applying
    * 
+   * <pre>
+   *      +------function0----->
+   * >----+
+   *      +-------------------->
+   * </pre>
+   * 
    * @param <A>
    * @param <B>
    * @param function0
-   * @return
+   * @return a new frunction
    */
   public static <A, B> Function<A, Pair<A, B>> clone(final Applicable<? super A, ? extends B> function0) {
     return branch(Functions.<A> identity(), function0);
