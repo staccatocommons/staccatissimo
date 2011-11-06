@@ -53,25 +53,6 @@ public interface Groupable<A> {
   @NonNull
   <K> Map<K, A> groupOn(Applicable<? super A, K> groupFunction, Applicable2<? super A, ? super A, A> reduceFunction);
 
-  /**
-   * Groups elements by the given {@code groupingFunction}, and reduces each
-   * group using the given {@code mapFunction} and {@code reduceFunction}.
-   * <p>
-   * The grouping is performed so that two elements {@code a} and {@code b} will
-   * be put in the same group if and only if
-   * {@code  groupFunction.apply(a).equals(groupFunction.apply(b)) }
-   * </p>
-   * 
-   * @param <K>
-   * @param groupFunction
-   * @param reduceFunction
-   * @return a Map with an entry for each group, where its key is the result of
-   *         the grouping function, and the value is the result of the reduction
-   *         of the elements for that group
-   */
-  @NonNull
-  <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Applicable<? super A, V> mapFunction,
-    @NonNull Applicable2<? super V, ? super V, V> reduceFunction);
 
   /**
    * Groups elements by the given {@code groupingFunction}, and reduces each
@@ -90,5 +71,5 @@ public interface Groupable<A> {
    *         of the elements for that group
    */
   @NonNull
-  <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Reduction<A, V> reduction);
+  <K, I, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Reduction<A, I, V> reduction);
 }

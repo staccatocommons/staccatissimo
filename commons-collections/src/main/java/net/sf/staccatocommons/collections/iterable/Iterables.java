@@ -13,8 +13,12 @@
 
 package net.sf.staccatocommons.collections.iterable;
 
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.*;
-import static net.sf.staccatocommons.lang.tuple.Tuples.*;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.ITERABLE;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.addAllInternal;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.collectInternal;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.filterInternal;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.takeInternal;
+import static net.sf.staccatocommons.lang.tuple.Tuples._;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +34,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import net.sf.staccatocommons.check.Ensure;
+import net.sf.staccatocommons.collections.reduction.Reduction;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
@@ -152,6 +157,27 @@ public class Iterables {
       result = function.apply(result, element);
     return result;
   }
+  
+  @NonNull
+  public static <A, B, C> C reduce(@NonNull Iterable<A> iterable, @NonNull Reduction<A, B, C> reduction) {
+    return reduction.reduceLast(foldPartial(iterable, reduction));
+  }
+  
+  private static <A, B> B foldPartial(@NonNull Iterable<A> iterable,
+    @NonNull Reduction<A, B, ?> reduction) {
+    Iterator<A> iter = iterable.iterator();
+
+    if (!iter.hasNext())
+      return reduction.initial();
+
+    B result = reduction.reduceFirst(iter.next());
+
+    while (iter.hasNext())
+      result = reduction.reduce(result, iter.next());
+
+    return result;
+  }
+  
 
   /*
    * Search

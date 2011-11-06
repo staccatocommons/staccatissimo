@@ -13,9 +13,10 @@
 
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccatocommons.collections.stream.Streams.*;
-import static net.sf.staccatocommons.lang.Compare.*;
-import static net.sf.staccatocommons.lang.tuple.Tuples.*;
+import static net.sf.staccatocommons.collections.stream.Streams.cons;
+import static net.sf.staccatocommons.lang.Compare.max;
+import static net.sf.staccatocommons.lang.Compare.min;
+import static net.sf.staccatocommons.lang.tuple.Tuples._;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -28,6 +29,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -166,6 +168,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
     } catch (IllegalArgumentException e) { // FIXME why illegal argument ???
       return VALIDATE_ELEMENT.fail("Can not reduce an empty stream");
     }
+  }
+  
+  @Override
+  public <B, C> C reduce(Reduction<A, B, C> reduction) throws NoSuchElementException {
+    return Iterables.reduce(this, reduction);
   }
 
   @Override
@@ -616,24 +623,23 @@ public abstract class AbstractStream<A> implements Stream<A> {
     return groupOn(groupFunction, Reductions.from(reduceFunction));
   }
 
-  public <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Applicable<? super A, V> mapFunction,
-    Applicable2<? super V, ? super V, V> reduceFunction) {
-    return groupOn(groupFunction, Reductions.from(mapFunction, reduceFunction));
-  }
 
-  public <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Reduction<A, V> reducer) {
-    Map<K, V> map = new LinkedHashMap<K, V>();
+  public <K, I, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Reduction<A, I, V> reducer) {
+    Map<K, I> map = new LinkedHashMap<K, I>();
     for (A element : this) {
       K key = groupFunction.apply(element);
-      V acum = map.get(key);
+      I acum = map.get(key);
       if (acum != null)
-        map.put(key, reducer.reduce(element, acum));
+        map.put(key, reducer.reduce(acum, element));
       else if (map.containsKey(key))
-        map.put(key, reducer.reduce(element, null));
+        map.put(key, reducer.reduce(null, element));
       else
-        map.put(key, reducer.initial(element));
+        map.put(key, reducer.reduceFirst(element));
     }
-    return map;
+    if(!reducer.isReduceLastIdentity())
+      for(Entry<K,I> e : map.entrySet()) 
+        ((Entry<K, V>) e).setValue(reducer.reduceLast(e.getValue()));
+    return (Map<K, V>) map;
   }
 
   public Stream<Pair<A, A>> cross() {

@@ -12,21 +12,17 @@
  */
 package net.sf.staccatocommons.collections.reduction;
 
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
+import static net.sf.staccatocommons.lang.number.NumberTypes.integer;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.sf.staccatocommons.collections.reduction.internal.FoldReducer;
-import net.sf.staccatocommons.collections.reduction.internal.MapReduction;
-import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Compare;
-import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -43,31 +39,9 @@ import org.apache.commons.lang.mutable.MutableInt;
 public class Reductions {
 
   @Constant
-  public static <A> Reduction<A, Integer> count() {
-    return new AbstractReduction<A, Integer>() {
-      public Integer reduce(A element, Integer accum) {
-        return accum + 1;
-      }
-
-      public Integer initial() {
-        return 0;
-      }
-    };
-  }
-
-  /**
-   * Impure reduction that performs count, in a more time and memory efficient
-   * way that {@link #count()}, but that should not be used in multithreaded
-   * reduction. The reduction object itself is thread safe, though.
-   * 
-   * @param <A>
-   * @return the impure count reduction
-   * @since 1.2
-   */
-  @Constant
-  public static <A> Reduction<A, MutableInt> fastCount() {
-    return new AbstractReduction<A, MutableInt>() {
-      public MutableInt reduce(A element, MutableInt accum) {
+  public static <A> Reduction<A, MutableInt, Integer> count() {
+    return new InitialElementReduction<A, MutableInt, Integer>() {
+      public MutableInt reduce(MutableInt accum, A element) {
         accum.increment();
         return accum;
       }
@@ -75,39 +49,28 @@ public class Reductions {
       public MutableInt initial() {
         return new MutableInt();
       }
-    };
-  }
 
-  public static <A> Reduction<A, Stream<A>> append() {
-    return new AbstractReduction<A, Stream<A>>() {
-      public Stream<A> reduce(A element, Stream<A> accum) {
-        return Streams.cons(element, accum);
-      }
-
-      public Stream<A> initial() {
-        return Streams.empty();
+      @Override
+      public Integer reduceLast(MutableInt accum) {
+        return accum.toInteger();
       }
     };
   }
 
-  /**
-   * Impure reduction that performs append, in a more time and memory efficient
-   * way that {@link #append()}, but that should not be used in multithreaded
-   * reduction. The reduction object itself is thread safe, though.
-   * 
-   * @param <A>
-   * @return the impure append reduction
-   * @since 1.2
-   */
-  public static <A> Reduction<A, List<A>> fastAppend() {
-    return new AbstractReduction<A, List<A>>() {
-      public List<A> reduce(A element, List<A> accum) {
+  public static <A> Reduction<A, List<A>, List<A>> append() {
+    return new InitialElementReduction<A, List<A>, List<A>>() {
+      public List<A> reduce(List<A> accum, A element) {
         accum.add(element);
         return accum;
       }
 
       public List<A> initial() {
         return new LinkedList<A>();
+      }
+
+      @Override
+      public List<A> reduceLast(List<A> accum) {
+        return Collections.unmodifiableList(accum);
       }
     };
   }
@@ -118,8 +81,25 @@ public class Reductions {
    * @return the integer elements-sum reduction
    */
   @Constant
-  public static Reduction<Integer, Integer> sum() {
-    return sum(integer());
+  public static Reduction<Integer, MutableInt, Integer> sum() {
+    return new InitialElementReduction<Integer, MutableInt, Integer>() {
+
+      @Override
+      public MutableInt initial() {
+        return new MutableInt();
+      }
+
+      @Override
+      public MutableInt reduce(MutableInt accum, Integer element) {
+        accum.add(element.intValue());
+        return accum;
+      }
+
+      @Override
+      public Integer reduceLast(MutableInt accum) {
+        return accum.intValue();
+      }
+    };
   }
 
   /**
@@ -129,15 +109,15 @@ public class Reductions {
    *          the type of numbers to be summed
    * @return the elements-sum reduction
    */
-  public static <A> Reduction<A, A> sum(@NonNull NumberType<A> numberType) {
+  public static <A> Reduction<A, A, A> sum(@NonNull NumberType<A> numberType) {
     return from(numberType.zero(), numberType.add());
   }
 
-  public static <A> Reduction<A, Integer> sumOn(Applicable<A, Integer> function) {
-    return sumOn(function, integer());
+  public static <A> Reduction<A, MutableInt, Integer> sumOn(Applicable<A, Integer> function) {
+    return sum().of(function);
   }
 
-  public static <A, B> Reduction<A, B> sumOn(Applicable<A, B> function, NumberType<B> numberType) {
+  public static <A, B> Reduction<A, B, B> sumOn(Applicable<A, B> function, NumberType<B> numberType) {
     return from(numberType.zero(), numberType.add().of(function).flip());
   }
 
@@ -148,56 +128,71 @@ public class Reductions {
    * @return the first-element reduction
    */
   @Constant
-  public static <A> Reduction<A, A> first() {
-    return new AbstractReduction<A, A>() {
-      public A reduce(A element, A accum) {
+  public static <A> Reduction<A, A, A> first() {
+    return new NoInitialElementIdentityReduction<A>() {
+      public A reduce(A accum, A element) {
         return accum;
       }
+    };
+  }
 
-      public A initial(A element) {
+  @Constant
+  public static <A> Reduction<A, A, A> last() {
+    return new NoInitialElementIdentityReduction<A>() {
+      public A reduce(A accum, A element) {
         return element;
       }
     };
   }
 
   @Constant
-  public static <A extends Comparable<A>> Reduction<A, A> max() {
+  public static <A extends Comparable<A>> Reduction<A, A, A> max() {
     return max(Compare.<A> natural());
   }
 
-  public static <A> Reduction<A, A> max(Comparator<A> comparator) {
+  public static <A> Reduction<A, A, A> max(Comparator<A> comparator) {
     return from(Compare.max(comparator));
   }
 
-  public static <A, B extends Comparable<B>> Reduction<A, A> maxOn(Applicable<A, B> function) {
+  public static <A, B extends Comparable<B>> Reduction<A, A, A> maxOn(Applicable<A, B> function) {
     return max(Compare.on(function));
   }
 
   @Constant
-  public static <A extends Comparable<A>> Reduction<A, A> min() {
+  public static <A extends Comparable<A>> Reduction<A, A, A> min() {
     return min(Compare.<A> natural());
   }
 
-  public static <A> Reduction<A, A> min(Comparator<A> comparator) {
+  public static <A> Reduction<A, A, A> min(Comparator<A> comparator) {
     return from(Compare.min(comparator));
   }
 
-  public static <A, B extends Comparable<B>> Reduction<A, A> minOn(Applicable<A, B> function) {
+  public static <A, B extends Comparable<B>> Reduction<A, A, A> minOn(Applicable<A, B> function) {
     return min(Compare.on(function));
   }
 
-  public static <A> Reduction<A, A> from(Applicable2<? super A, ? super A, ? extends A> function) {
-    return from(Functions.<A> identity(), function);
+  public static <A> Reduction<A, A, A> from(
+    final Applicable2<? super A, ? super A, ? extends A> function) {
+    return new NoInitialElementIdentityReduction<A>() {
+      @Override
+      public A reduce(A accum, A element) {
+        return function.apply(accum, element);
+      }
+    };
   }
 
-  /***/
-  public static <A, B> Reduction<A, B> from(Applicable<? super A, ? extends B> unary,
-    Applicable2<? super B, ? super B, ? extends B> binary) {
-    return new MapReduction<A, B>(unary, binary);
-  }
+  public static <A, B> Reduction<A, B, B> from(final B initial,
+    final Applicable2<? super B, ? super A, ? extends B> function) {
+    return new InitialElementIdentityReduction<A, B>() {
+      public B initial() {
+        return initial;
+      }
 
-  public static <A, B> Reduction<A, B> from(B initial, Applicable2<? super B, ? super A, ? extends B> function) {
-    return new FoldReducer<A, B>(function, initial);
+      @Override
+      public B reduce(B accum, A element) {
+        return function.apply(accum, element);
+      }
+    };
   }
 
 }

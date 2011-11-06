@@ -1,29 +1,74 @@
-/*
- Copyright (c) 2011, The Staccato-Commons Team
-
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU Lesser General Public License as published by
- the Free Software Foundation; version 3 of the License.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU Lesser General Public License for more details.
- */
 package net.sf.staccatocommons.collections.reduction;
 
-/**
- * @author flbulgarelli
- * @since 1.2
- */
-public abstract class AbstractReduction<A, B> implements Reduction<A, B> {
+import net.sf.staccatocommons.defs.Applicable;
 
-  public B initial(A element) {
-    return reduce(element, initial());
+public abstract class AbstractReduction<A, B, C> implements Reduction<A, B, C> {
+
+  @Override
+  public final <D> Reduction<A, B, D> then(final Applicable<C, D> function) {
+    return new AbstractReduction<A, B, D>() {
+
+      @Override
+      public B initial() {
+        return AbstractReduction.this.initial();
+      }
+
+      @Override
+      public B reduceFirst(A element) {
+        return AbstractReduction.this.reduceFirst(element);
+      }
+
+      @Override
+      public B reduce(B accum, A element) {
+        return AbstractReduction.this.reduce(accum, element);
+      }
+
+      @Override
+      public D reduceLast(B accum) {
+        return function.apply(AbstractReduction.this.reduceLast(accum));
+      }
+
+      @Override
+      public boolean isReduceLastIdentity() {
+        return false;
+      }
+    };
   }
 
-  public B initial() {
-    throw new UnsupportedOperationException();
+  @Override
+  public final <D> Reduction<D, B, C> of(final Applicable<D, A> function) {
+    return new AbstractReduction<D, B, C>() {
+
+      @Override
+      public B initial() {
+        return AbstractReduction.this.initial();
+      }
+
+      @Override
+      public B reduceFirst(D element) {
+        return AbstractReduction.this.reduceFirst(function.apply(element));
+      }
+
+      @Override
+      public B reduce(B accum, D element) {
+        return AbstractReduction.this.reduce(accum, function.apply(element));
+      }
+
+      @Override
+      public C reduceLast(B accum) {
+        return AbstractReduction.this.reduceLast(accum);
+      }
+
+      @Override
+      public boolean isReduceLastIdentity() {
+        return AbstractReduction.this.isReduceLastIdentity();
+      }
+    };
   }
 
+  @Override
+  public boolean isReduceLastIdentity() {
+    return false;
+  }
+  
 }

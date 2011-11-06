@@ -10,9 +10,8 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.reduction.internal;
+package net.sf.staccatocommons.collections.reduction;
 
-import net.sf.staccatocommons.collections.reduction.AbstractReduction;
 import net.sf.staccatocommons.defs.Applicable2;
 
 /**
@@ -22,22 +21,16 @@ import net.sf.staccatocommons.defs.Applicable2;
  * @param <A>
  * @param <B>
  */
-public class FoldReducer<A, B> extends AbstractReduction<A, B> {
+public abstract class InitialElementIdentityReduction<A, B> extends
+  InitialElementReduction<A, B, B> {
 
-  private final Applicable2<? super B, ? super A, ? extends B> foldingFunction;
-  private final B initial;
-
-  /***/
-  public FoldReducer(Applicable2<? super B, ? super A, ? extends B> foldingFunction, B initial) {
-    this.foldingFunction = foldingFunction;
-    this.initial = initial;
+  @Override
+  public final B reduceLast(B accum) {
+    return accum;
   }
 
-  public B reduce(A element, B accum) {
-    return foldingFunction.apply(accum, element);
-  }
-
-  public B initial() {
-    return initial;
+  @Override
+  public final boolean isReduceLastIdentity() {
+    return true;
   }
 }

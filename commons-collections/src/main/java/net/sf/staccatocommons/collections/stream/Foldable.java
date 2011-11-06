@@ -16,6 +16,7 @@ package net.sf.staccatocommons.collections.stream;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
+import net.sf.staccatocommons.collections.reduction.Reduction;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -59,6 +60,18 @@ public interface Foldable<A> {
    *           if the {@link Stream} is empty
    */
   A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function) throws NoSuchElementException;
+  
+  
+  /**
+   * (Left)folds the tail of this {@link Stream} using the first element of the
+   * stream as initial value
+   * 
+   * @param function
+   * @return the folding result
+   * @since 1.2          
+   */
+  <B, C> C reduce(Reduction<A, B, C> reduction) throws NoSuchElementException;
+  
 
   /**
    * (Left)folds this {@link Stream} concatenating each elements toString with a
