@@ -20,10 +20,14 @@ import static org.junit.Assert.*;
 import java.util.Collections;
 import java.util.Map;
 
+import net.sf.staccatocommons.lambda.LambdaFactoryUnitTest.Foo;
 import net.sf.staccatocommons.lang.MapBuilder;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.Strings;
 
 import org.junit.Test;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 /**
  * Test for {@link Maps}
@@ -80,5 +84,14 @@ public class MapsUnitTest {
     Map<String, String> m = Maps.from(_("Hello", "World"), _("Foo", "Bar"));
     assertEquals("World", m.get("Hello"));
     assertEquals("Bar", m.get("Foo"));
+  }
+  
+  @Test 
+  public void foo() {
+    Map<String, Integer> result = Maps.delayedMapKeys(Maps.from(_("Hello", "World"), _("Foo", "Bar")), Strings.length());
+    
+    System.out.println(result.get("Hello"));
+    System.out.println(result.containsValue(5));
+    System.out.println(result);
   }
 }

@@ -16,8 +16,8 @@ package net.sf.staccatocommons.collections.stream;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
-import net.sf.staccatocommons.collections.reduction.Reduction;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.reduction.Reduction;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -70,7 +70,7 @@ public interface Foldable<A> {
    * @return the folding result
    * @since 1.2          
    */
-  <B, C> C reduce(Reduction<A, B, C> reduction) throws NoSuchElementException;
+  <B> B reduce(Reduction<A, B> reduction) throws NoSuchElementException;
   
 
   /**

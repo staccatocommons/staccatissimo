@@ -34,11 +34,12 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import net.sf.staccatocommons.check.Ensure;
-import net.sf.staccatocommons.collections.reduction.Reduction;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
+import net.sf.staccatocommons.defs.reduction.Accumulator;
+import net.sf.staccatocommons.defs.reduction.Reduction;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.predicate.Equiv;
@@ -159,26 +160,14 @@ public class Iterables {
   }
   
   @NonNull
-  public static <A, B, C> C reduce(@NonNull Iterable<A> iterable, @NonNull Reduction<A, B, C> reduction) {
-    return reduction.reduceLast(foldPartial(iterable, reduction));
+  public static <A, B> B reduce(@NonNull Iterable<A> iterable, @NonNull Reduction<A, B> reduction) {
+    Accumulator<A, B> accum = reduction.start();
+    for(A element : iterable) {
+      accum.accumulate(element);
+    }
+    return accum.value();
   }
   
-  private static <A, B> B foldPartial(@NonNull Iterable<A> iterable,
-    @NonNull Reduction<A, B, ?> reduction) {
-    Iterator<A> iter = iterable.iterator();
-
-    if (!iter.hasNext())
-      return reduction.initial();
-
-    B result = reduction.reduceFirst(iter.next());
-
-    while (iter.hasNext())
-      result = reduction.reduce(result, iter.next());
-
-    return result;
-  }
-  
-
   /*
    * Search
    */

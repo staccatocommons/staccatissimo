@@ -10,11 +10,10 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.reduction;
+package net.sf.staccatocommons.defs.reduction;
 
 import java.io.InputStream;
 
-import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.defs.Applicable;
 
 /**
@@ -27,12 +26,17 @@ import net.sf.staccatocommons.defs.Applicable;
  * {@link Iterables}, {@link InputStream}s, etc.
  * </p>
  * <p>
- * The general pattern of using them is as following;
+ * The general pattern of using them is as following:
  * 
  * <code>
- * 
- * 
- * 
+ * A accum;
+ *  if(sequence is empty) 
+ *    accum = reduction.initial()
+ *  else 
+ *   for each element
+ *    accum = reduction.reduceFirst(element) 
+ *    
+ *    
  * </code>
  * 
  * </p>
@@ -45,38 +49,12 @@ import net.sf.staccatocommons.defs.Applicable;
  * @param <B>
  * @param <A>
  */
-public interface Reduction<A, B, C> {
+public interface Reduction<A, B> {
 
-  /**
-   */
-  B initial();
+  Accumulator<A, B> start();
+  
+  <D> Reduction<A, D> then(Applicable<B, D> function);
 
-  /***/
-
-  /***
-   * Applies the reduction for an initial element
-   * 
-   * @param element
-   *          the first element of
-   * @return the initial accumulation value
-   */
-  B reduceFirst(A element);
-
-  /**
-   * Applies the reduction for a generic element
-   * 
-   * @param accum
-   * @param element
-   * @return
-   */
-  B reduce(B accum, A element);
-
-  C reduceLast(B accum);
-
-  boolean isReduceLastIdentity();
-
-  <D> Reduction<A, B, D> then(Applicable<C, D> function);
-
-  <D> Reduction<D, B, C> of(Applicable<D, A> function);
+  <D> Reduction<D, B> of(Applicable<D, A> function);
 
 }
