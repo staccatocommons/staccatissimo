@@ -12,8 +12,8 @@
  */
 
 /**
- * This package contains {@link net.sf.staccatocommons.lang.lifecycle.Lifecycle}
- * and {@link net.sf.staccatocommons.lang.lifecycle.CloseableLifecycle}, 
+ * This package contains {@link net.sf.staccatocommons.io.internal.lifecycle.Lifecycle}
+ * and {@link net.sf.staccatocommons.io.internal.lifecycle.CloseableLifecycle}, 
  * classes that help to automate handling of resources which need to be initialized
  * before being used, and then disposed.
  * 
@@ -21,5 +21,5 @@
  * with automated close of resources, so it may become deprecated in the near future.
  * 
  */
-package net.sf.staccatocommons.lang.lifecycle;
+package net.sf.staccatocommons.io.internal.lifecycle;
 

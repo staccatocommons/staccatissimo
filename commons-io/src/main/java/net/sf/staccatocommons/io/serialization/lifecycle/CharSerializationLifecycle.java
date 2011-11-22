@@ -18,9 +18,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
+import net.sf.staccatocommons.io.internal.lifecycle.CloseableLifecycle;
+import net.sf.staccatocommons.io.internal.lifecycle.Lifecycle;
 import net.sf.staccatocommons.io.serialization.CharSerializationManager;
-import net.sf.staccatocommons.lang.lifecycle.CloseableLifecycle;
-import net.sf.staccatocommons.lang.lifecycle.Lifecycle;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**

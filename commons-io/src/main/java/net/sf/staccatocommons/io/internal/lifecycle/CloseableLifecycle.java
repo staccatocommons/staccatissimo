@@ -11,7 +11,7 @@
  *  GNU Lesser General Public License for more details.
  */
 
-package net.sf.staccatocommons.lang.lifecycle;
+package net.sf.staccatocommons.io.internal.lifecycle;
 
 import java.io.Closeable;
 
