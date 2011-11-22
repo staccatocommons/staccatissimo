@@ -47,7 +47,7 @@ import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * Class methods for creating very simple {@link Stream}s wrapping existing
@@ -261,7 +261,7 @@ public class Streams {
    * @return a new {@link Stream}
    */
   @Projection
-  @ForceRestrictions
+  @EnforceRestrictions
   public static <A> Stream<A> repeat(@NonNull final Thunk<A> thunk) {
     return from(new NextThriterator<A>() {
 

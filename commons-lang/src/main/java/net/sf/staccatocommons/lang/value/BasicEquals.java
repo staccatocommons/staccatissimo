@@ -14,7 +14,7 @@
 package net.sf.staccatocommons.lang.value;
 
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 
@@ -113,7 +113,7 @@ public enum BasicEquals {
    *         objects are the same, or {@link #MAYBE} otherwise
    */
   @NonNull
-  @ForceRestrictions
+  @EnforceRestrictions
   public static <T> BasicEquals from(@NonNull T this_, Object that) {
     if (that == null)
       return NEVER;

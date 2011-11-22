@@ -84,7 +84,7 @@ import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -360,7 +360,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   @Override
-  @ForceRestrictions
+  @EnforceRestrictions
   public String joinStrings(@NonNull String separator) {
     return StringUtils.join(iterator(), separator);
   }
@@ -503,7 +503,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
     }
   }
 
-  @ForceRestrictions
+  @EnforceRestrictions
   public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable, @NonNull final Function2<A, B, C> function) {
     return new ZipStream<C, A, B>(this, iterable, function);
   }
@@ -621,7 +621,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   // this >>= (\x -> other >>= (\y -> return (x,y)))
-  @ForceRestrictions
+  @EnforceRestrictions
   public <B> Stream<Pair<A, B>> cross(@NonNull final Stream<B> other) {
     return transform(new AbstractFunction<Stream<A>, Stream<Pair<A, B>>>() {
       public Stream<Pair<A, B>> apply(Stream<A> stram) {
@@ -638,7 +638,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
     });
   }
 
-  @ForceRestrictions
+  @EnforceRestrictions
   public Stream<Stream<A>> crossStreams(@NonNull Stream<Stream<A>> other) {
     Ensure.that().isNotEmpty("other", (EmptyAware) other);
     return fcross(other.prepend(this));

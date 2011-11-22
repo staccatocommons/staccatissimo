@@ -21,19 +21,19 @@ import java.lang.annotation.Target;
 import net.sf.staccatocommons.restrictions.Restriction;
 
 /**
- * {@link ForceRestrictions} is a directive for automated annotation processors,
+ * {@link EnforceRestrictions} is a directive for automated annotation processors,
  * indicating that {@link Restriction}s in the annotated element and its
  * descendants <strong>must</strong> be processed
  * 
  * This annotation is incompatible with {@link IgnoreRestrictions} - an element
  * <strong>must not</strong> be annotated with {@link IgnoreRestrictions} and
- * {@link ForceRestrictions} at the same time
+ * {@link EnforceRestrictions} at the same time
  * 
  * @author flbulgarelli
  * @see IgnoreRestrictions
  */
 @Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.TYPE })
-public @interface ForceRestrictions {
+public @interface EnforceRestrictions {
 
 }

@@ -20,7 +20,7 @@ import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -40,7 +40,7 @@ public class SingleLinkedDelayedQueue<A> implements Iterable<A>, EmptyAware {
    * 
    * @param element
    */
-  @ForceRestrictions
+  @EnforceRestrictions
   public void add(@NonNull Thunk<A> element) {
     Cell<A> prev = last;
     last = new Cell<A>(element);

@@ -19,7 +19,7 @@ import java.util.Arrays;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
 import net.sf.staccatocommons.io.Directory;
 import net.sf.staccatocommons.restrictions.instrument.RestrictionConfigurer;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 import org.junit.BeforeClass;
@@ -53,7 +53,7 @@ public class InstrumentationManualTest {
 
   /**
    * Test for {@link NotNullHandler} in methods arguments with
-   * {@link ForceRestrictions}
+   * {@link EnforceRestrictions}
    */
   @Test(expected = IllegalArgumentException.class)
   public void testForceNonNullMethodArgNull() throws Exception {
@@ -111,7 +111,7 @@ public class InstrumentationManualTest {
 
   /**
    * Test for {@link NotNullHandler} in constructors with
-   * {@link ForceRestrictions}
+   * {@link EnforceRestrictions}
    */
   @Test(expected = IllegalArgumentException.class)
   public void testNonNullForceInit() throws Exception {

@@ -19,7 +19,7 @@ import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.lang.block.internal.TopLevelBlock;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * Simple IO {@link Applicative}s
@@ -37,7 +37,7 @@ public class IO {
    *          the target stream
    * @return {@code print(System.out)}
    */
-  @ForceRestrictions
+  @EnforceRestrictions
   public static <A> Executable<A> print(@NonNull final PrintStream printStream) {
     class PrintBlock extends TopLevelBlock<A> {
       private static final long serialVersionUID = 4013144383142068467L;

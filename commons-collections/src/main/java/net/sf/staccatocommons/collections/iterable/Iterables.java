@@ -43,7 +43,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotEmpty;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
 import net.sf.staccatocommons.restrictions.check.Size;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 import org.apache.commons.lang.ObjectUtils;
 
@@ -97,7 +97,7 @@ public class Iterables {
    *         iterable.
    */
   @NonNull
-  @ForceRestrictions
+  @EnforceRestrictions
   public static <A> List<A> take(@NonNull Iterable<A> iterable, @NotNegative int amountOfElements) {
     return takeInternal(iterable, amountOfElements, new ArrayList<A>(amountOfElements));
   }
@@ -207,7 +207,7 @@ public class Iterables {
    *          a single element (size==1) collection
    * @return The unique element of the collection
    */
-  @ForceRestrictions
+  @EnforceRestrictions
   public static <A> A single(@Size(1) Collection<A> collection) {
     return any(collection);
   }

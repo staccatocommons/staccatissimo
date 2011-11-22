@@ -25,12 +25,12 @@ import net.sf.staccatocommons.restrictions.Restriction;
  * processors, indicating that {@link Restriction}s in the annotated element and
  * its descendants <strong>must not</strong> be processed
  * 
- * This annotation is incompatible with {@link ForceRestrictions} - an element
+ * This annotation is incompatible with {@link EnforceRestrictions} - an element
  * <strong>must not</strong> be annotated with {@link IgnoreRestrictions} and
- * {@link ForceRestrictions} at the same time
+ * {@link EnforceRestrictions} at the same time
  * 
  * @author flbulgarelli
- * @see ForceRestrictions
+ * @see EnforceRestrictions
  */
 @Retention(RetentionPolicy.CLASS)
 @Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.TYPE })

@@ -16,7 +16,7 @@ import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Delayable2;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * @author flbulgarelli
@@ -50,7 +50,7 @@ public abstract class AbstractDelayable2<A, B, C> implements Applicable2<A, B, C
     };
   }
 
-  @ForceRestrictions
+  @EnforceRestrictions
   @NonNull
   @Override
   public Thunk<C> delayedValue(@NonNull final Thunk<A> thunk0, @NonNull final Thunk<B> thunk1) {

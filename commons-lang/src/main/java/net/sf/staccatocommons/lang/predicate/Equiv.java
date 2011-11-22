@@ -19,7 +19,7 @@ import net.sf.staccatocommons.lang.predicate.internal.Equals2;
 import net.sf.staccatocommons.lang.predicate.internal.Same2;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * Factory class methods for creating common, simple {@link Predicate2} that
@@ -105,7 +105,7 @@ public class Equiv {
    * @param function
    * @return a new {@link Predicate2}
    */
-  @ForceRestrictions
+  @EnforceRestrictions
   public static <A, B> Predicate2<A, A> on(@NonNull final Applicable<? super A, ? extends B> function) {
     return new AbstractPredicate2<A, A>() {
       public boolean eval(A arg0, A arg1) {
