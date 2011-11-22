@@ -11,11 +11,7 @@
 	<name>Staccato-Commons-Restrictions-Instrument</name>
 	<version>1.1-SNAPSHOT</version>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
-	<scm>
-		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument</connection>
-		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument</developerConnection>
-		<url>${staccatissimo.scm.view.base}/trunk/commons-restrictions-instrument/</url>
-	</scm>
+	
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>

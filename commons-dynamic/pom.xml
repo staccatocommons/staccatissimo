@@ -12,11 +12,7 @@
 	<version>1.1-SNAPSHOT</version>
     <url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
     <inceptionYear>2010</inceptionYear>
-    <scm>
-        <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-dynamic</connection>
-        <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-dynamic</developerConnection>
-        <url>${staccatissimo.scm.view.base}/trunk/commons-dynamic/</url>
-    </scm>
+    
     <description>Library for handling objects in a dynamically-typed way</description>
     <distributionManagement>
         <site>
