@@ -37,7 +37,7 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 
   protected static final String ENSURE_FULLY_QUALIFIED_NAME = "net.sf.staccatocommons.check.Ensure.";
   protected static final String ASSERT_FULLY_QUALIFIED_NAME = "net.sf.staccatocommons.check.Assert.";
-  private final StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport(activeByDefault());
+  private final StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport();
   private final boolean ignoreReturns;
 
   /**
@@ -55,7 +55,7 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
   @Override
   public void processAnnotatedArgument(T annotation, ArgumentAnnotationContext context) throws CannotCompileException,
     NotFoundException {
-    if (!deactivableSupport.isActive())
+    if (!isActive(context))
       return;
     try {
       context.getArgumentBehavior().insertBefore(
@@ -68,7 +68,7 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 
   @Override
   public void preProcessAnnotatedMethod(T annotation, MethodAnnotationContext context) throws NotFoundException {
-    if (ignoreReturns || !deactivableSupport.isActive())
+    if (ignoreReturns || !isActive(context))
       return;
     // TODO handle properly
     Ensure.that(!context.isVoid(), "Context must not be void: %s", context.getMethod().getLongName());
@@ -126,8 +126,21 @@ public abstract class AbstractCheckAnnotationHandler<T extends Annotation> imple
 
   protected abstract String getVarMnemonic(T annotation);
 
-  protected boolean activeByDefault() {
-    return true;
+  protected boolean activeByDefault(AnnotationContext context) {
+    return context.isPublic() && !context.getPackage().matches(".+\\.internal(\\..+)?");
+  }
+  
+  private boolean isActive(AnnotationContext context) {
+    boolean activeByDefault = activeByDefault(context);
+    if (activeByDefault)
+      deactivableSupport.activate();
+    try {
+      return deactivableSupport.isActive();
+    } finally {
+      if (activeByDefault)
+        deactivableSupport.deactivate();
+    }
   }
 
+  
 }

@@ -13,10 +13,7 @@
 
 package net.sf.staccatocommons.restrictions.instrument.check;
 
-import javassist.CannotCompileException;
-import javassist.NotFoundException;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
-import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -40,17 +37,6 @@ public class NotNullHandler extends AbstractCheckAnnotationHandler<NonNull> {
   @Override
   protected String getVarMnemonic(NonNull nonNull) {
     return nonNull.value();
-  }
-
-  public void processAnnotatedArgument(NonNull annotation, ArgumentAnnotationContext context)
-    throws CannotCompileException, NotFoundException {
-    if (context.isConstructorArgument()) {
-      super.processAnnotatedArgument(annotation, context);
-    } else {
-      deactivate();
-      super.processAnnotatedArgument(annotation, context);
-      activate();
-    }
   }
 
   @Override

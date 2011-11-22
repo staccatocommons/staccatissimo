@@ -38,6 +38,9 @@ public class ConstantHandler implements MethodAnnotationHandler<Constant>, Deact
   private static final String METHOD_TEMPLATE = "return %s;";
   private static final String INITIALIZER_NAME_TEMPLATE = "%sInitializer";
   private StackedDeactivableSupport deactivableSupport = new StackedDeactivableSupport();
+  {
+    deactivableSupport.activate();
+  }
 
   public Class<Constant> getSupportedAnnotationType() {
     return Constant.class;

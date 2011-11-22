@@ -16,6 +16,7 @@ package net.sf.staccatocommons.instrument.context.internal;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
+import javassist.Modifier;
 import javassist.NotFoundException;
 import net.sf.staccatocommons.instrument.context.MethodAnnotationContext;
 
@@ -71,5 +72,10 @@ public class DefaultMethodAnnotationContext extends AbstractAnnotationContext im
 
   public CtClass getElementType() throws NotFoundException {
     return getMethod().getReturnType();
+  }
+  
+  @Override
+  public boolean isPublic() {
+   return Modifier. isPublic(getMethod().getModifiers());
   }
 }

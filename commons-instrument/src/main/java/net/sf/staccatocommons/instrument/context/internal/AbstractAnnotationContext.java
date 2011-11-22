@@ -21,6 +21,7 @@ import javassist.NotFoundException;
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.instrument.context.AnnotationContext;
+import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -95,5 +96,14 @@ public abstract class AbstractAnnotationContext implements AnnotationContext {
       }).toSet();
     }
     return presentAnnotations;
+  }
+
+  @Override
+  public String getPackage() {
+    try {
+      return getDeclaringClass().getPackageName();
+    } catch (NotFoundException e) {
+      throw SoftException.soften(e);
+    }
   }
 }

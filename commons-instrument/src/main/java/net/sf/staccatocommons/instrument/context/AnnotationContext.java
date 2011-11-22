@@ -90,5 +90,9 @@ public interface AnnotationContext {
    */
   @NonNull
   CtClass getElementType() throws NotFoundException;
+  
+  String getPackage();
+  
+  boolean isPublic();
 
 }

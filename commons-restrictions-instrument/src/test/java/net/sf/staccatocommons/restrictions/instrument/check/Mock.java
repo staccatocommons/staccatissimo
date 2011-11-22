@@ -62,6 +62,9 @@ public class Mock {
 
   /***/
   public void defaultNonNullMethodArgument(@NonNull Object argument) {}
+  
+  /***/
+  protected void defaultNonNullProtectedMethodArgument(@NonNull Object argument) {}
 
   /***/
   public void defaultSizeMethodArgument(@Size(1) List<?> argument) {}

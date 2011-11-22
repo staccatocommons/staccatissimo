@@ -19,20 +19,12 @@ package net.sf.staccatocommons.instrument.handler.deactivator;
  */
 public class StackedDeactivableSupport implements Deactivable {
 
-  private int activationCounter;
+  private int activationCounter = -1;
 
   /**
-   * Creates a new {@link StackedDeactivableSupport}
-   */
-  public StackedDeactivableSupport(boolean active) {
-    activationCounter = active ? 0 : -1;
-  }
-
-  /**
-   * Creates a new {@link StackedDeactivableSupport} initially active
+   * Creates a new {@link StackedDeactivableSupport} initially inactive
    */
   public StackedDeactivableSupport() {
-    this(true);
   }
 
   public void activate() {

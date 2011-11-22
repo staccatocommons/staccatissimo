@@ -14,10 +14,12 @@ package net.sf.staccatocommons.instrument.context.internal;
 
 import javassist.ClassPool;
 import javassist.CtClass;
+import javassist.Modifier;
 import javassist.NotFoundException;
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.instrument.context.ClassAnnotationContext;
 import net.sf.staccatocommons.lang.Nulls;
+import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.slf4j.Logger;
@@ -49,6 +51,15 @@ public class DefaultClassAnnotationContext extends AbstractAnnotationContext imp
 
   public CtClass getElementType() throws NotFoundException {
     return clazz;
+  }
+  
+  @Override
+  public boolean isPublic() {
+    try {
+      return Modifier.isPublic(getDeclaringClass().getModifiers());
+    } catch (NotFoundException e) {
+      throw SoftException.soften(e);
+    }
   }
 
 }

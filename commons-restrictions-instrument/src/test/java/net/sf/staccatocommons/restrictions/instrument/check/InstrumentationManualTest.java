@@ -40,10 +40,15 @@ public class InstrumentationManualTest {
   }
 
   /** Test for {@link NotNullHandler} in methods arguments */
-  @Test
+  @Test(expected = IllegalArgumentException.class)
   public void testDefaultNonNullMethodArg() throws Exception {
-    new Mock().defaultNonNullMethodArgument(5);
     new Mock().defaultNonNullMethodArgument(null);
+  }
+  
+  /** Test for {@link NotNullHandler} in methods arguments */
+  @Test
+  public void testDefaultNonNullProtectedMethodArg() throws Exception {
+    new Mock().defaultNonNullProtectedMethodArgument(null);
   }
 
   /**
