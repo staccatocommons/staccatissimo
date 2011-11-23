@@ -16,6 +16,8 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
+import net.sf.staccatocommons.defs.tuple.Tuple3;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
@@ -72,9 +74,17 @@ public abstract class AbstractFunction2<A, B, C> extends AbstractDelayable2<A, B
       }
     };
   }
-
+  
   public <D> Function2<A, B, D> then(Function<? super C, ? extends D> other) {
     return (Function2<A, B, D>) other.of(this);
+  }
+  
+  public Function<Tuple2<A, B>, C> uncurry() {
+    return new AbstractFunction<Tuple2<A, B>, C>() {
+      public C apply(Tuple2<A, B> argument) {
+        return AbstractFunction2.this.apply(argument.first(), argument.second());
+      }
+    };
   }
 
   public String toString() {

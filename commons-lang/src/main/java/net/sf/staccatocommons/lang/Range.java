@@ -17,8 +17,8 @@ import java.io.Serializable;
 
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.defs.ContainsAware;
-import net.sf.staccatocommons.defs.EmptyAware;
+import net.sf.staccatocommons.defs.partial.ContainsAware;
+import net.sf.staccatocommons.defs.partial.EmptyAware;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.sequence.StopConditions;
 import net.sf.staccatocommons.lang.value.RelevantState;

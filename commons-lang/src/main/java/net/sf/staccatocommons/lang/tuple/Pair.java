@@ -14,10 +14,8 @@
 package net.sf.staccatocommons.lang.tuple;
 
 import java.io.Serializable;
-import java.util.Map;
 
-import net.sf.staccatocommons.lang.tuple.Tuple.FirstAware;
-import net.sf.staccatocommons.lang.tuple.Tuple.SecondAware;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.value.RelevantState;
 import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -25,29 +23,28 @@ import net.sf.staccatocommons.restrictions.value.Immutable;
 import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
- * Two-components {@link Tuple}
+ * Two-components {@link AbstractTuple}
  * 
  * @author flbulgarelli
  * 
- * @param <T1>
+ * @param <A>
  *          first component type
- * @param <T2>
+ * @param <B>
  *          second component type
  */
 @Value
 @Conditionally({ Immutable.class, Serializable.class })
-public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>>, Map.Entry<T1, T2>, FirstAware<T1>,
-  SecondAware<T2> {
+public final class Pair<A, B> extends AbstractTuple implements Tuple2<A, B> {
 
   private static final long serialVersionUID = -6479045670420592337L;
-  private static final RelevantState<Pair> VAL = new TupleState<Pair>(2) {
-    protected void collectState(Pair o, StateCollector s) {
-      s.add(o.first).add(o.second);
+  private static final RelevantState<Tuple2> VAL = new TupleState<Tuple2>(2) {
+    protected void collectState(Tuple2 o, StateCollector s) {
+      s.add(o.first()).add(o.second());
     }
   };
 
-  private final T1 first;
-  private final T2 second;
+  private final A first;
+  private final B second;
 
   /**
    * Creates a new pair.
@@ -55,28 +52,28 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
    * @param fist
    * @param second
    */
-  public Pair(T1 fist, T2 second) {
+  public Pair(A fist, B second) {
     this.first = fist;
     this.second = second;
   }
 
   @Override
-  public T1 first() {
+  public A first() {
     return first;
   }
 
   @Override
-  public T1 _0() {
+  public A _0() {
     return first;
   }
 
   @Override
-  public T2 second() {
+  public B second() {
     return second;
   }
 
   @Override
-  public T2 _1() {
+  public B _1() {
     return second;
   }
 
@@ -86,8 +83,8 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
    * @return a new pair, never null.
    */
   @NonNull
-  public Pair<T2, T1> swap() {
-    return new Pair<T2, T1>(second, first);
+  public Pair<B, A> swap() {
+    return new Pair<B, A>(second, first);
   }
 
   @Override
@@ -101,7 +98,7 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
     return new Object[] { first, second };
   }
 
-  public int compareTo(Pair<T1, T2> other) {
+  public int compareTo(Tuple2<A, B> other) {
     return VAL.compareTo(this, other);
   }
 
@@ -115,15 +112,15 @@ public final class Pair<T1, T2> extends Tuple implements Comparable<Pair<T1, T2>
     return VAL.equals(this, obj);
   }
 
-  public T1 getKey() {
+  public A getKey() {
     return first();
   }
 
-  public T2 getValue() {
+  public B getValue() {
     return second();
   }
 
-  public T2 setValue(T2 arg0) {
+  public B setValue(B arg0) {
     throw new UnsupportedOperationException();
   }
 

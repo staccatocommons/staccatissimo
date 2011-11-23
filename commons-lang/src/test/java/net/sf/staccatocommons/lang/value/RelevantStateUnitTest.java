@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
-import net.sf.staccatocommons.lang.tuple.Triple;
+import net.sf.staccatocommons.defs.tuple.Tuple3;
 import net.sf.staccatocommons.lang.value.RelevantState.StateCollector;
 
 import org.junit.Test;
@@ -28,9 +28,9 @@ import org.junit.Test;
  */
 public class RelevantStateUnitTest {
 
-  private RelevantState<Triple> val = //
-  new RelevantState<Triple>(3) {
-    protected void collectState(Triple o, StateCollector b) {
+  private RelevantState<Tuple3> val = //
+  new RelevantState<Tuple3>(3) {
+    protected void collectState(Tuple3 o, StateCollector b) {
       b.add(o._0()).add(o._1()).add(o._2());
     }
   };
@@ -77,7 +77,7 @@ public class RelevantStateUnitTest {
   @Test
   public void testCompareTo() throws Exception {
 
-    Triple<Integer, Integer, Integer> t = _(4, 5, 6);
+    Tuple3<Integer, Integer, Integer> t = _(4, 5, 6);
     assertEquals(0, val.compareTo(t, t));
     assertEquals(0, val.compareTo(_(4, 5, 6), _(4, 5, 6)));
     assertTrue(val.compareTo(_(4, 10, 6), _(4, 5, 6)) > 0);
@@ -93,9 +93,9 @@ public class RelevantStateUnitTest {
   /** Test for primitive variants of {@link StateCollector#add(Object)} **/
   @Test
   public void testPrimitiveTypes() throws Exception {
-    RelevantState<Triple<Integer, Boolean, Long>> rs = //
-    new RelevantState<Triple<Integer, Boolean, Long>>(3) {
-      protected void collectState(Triple<Integer, Boolean, Long> object, StateCollector s) {
+    RelevantState<Tuple3<Integer, Boolean, Long>> rs = //
+    new RelevantState<Tuple3<Integer, Boolean, Long>>(3) {
+      protected void collectState(Tuple3<Integer, Boolean, Long> object, StateCollector s) {
         s.add((int) object._0()).add((boolean) object._1()).add((long) object._2());
       }
     };

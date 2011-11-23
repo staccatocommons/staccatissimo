@@ -16,7 +16,7 @@ import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Map;
 
-import net.sf.staccatocommons.defs.SizeAware;
+import net.sf.staccatocommons.defs.partial.SizeAware;
 import net.sf.staccatocommons.defs.type.SizeAwareType;
 
 /**

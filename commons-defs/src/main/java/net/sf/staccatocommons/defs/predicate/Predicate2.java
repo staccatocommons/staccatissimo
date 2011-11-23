@@ -16,7 +16,8 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.NullSafe;
-import net.sf.staccatocommons.defs.NullSafeAware;
+import net.sf.staccatocommons.defs.partial.NullSafeAware;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -63,5 +64,15 @@ public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Bo
    */
   @NullSafe
   Predicate2<A, B> nullSafe();
+  
+  
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Currying">Uncurries</a> this predicate,
+   *  by returning a {@link Predicate} that takes a
+   * single pair, being its components each of the original predicate parameters
+   * 
+   * @return a new {@link Predicate}
+   */
+  public Predicate<Tuple2<A, B>> uncurry();
 
 }

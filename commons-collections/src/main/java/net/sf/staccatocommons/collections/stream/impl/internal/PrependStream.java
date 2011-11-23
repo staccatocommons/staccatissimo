@@ -15,10 +15,10 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.iterators.PrependThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.thunk.Thunks;
-import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
  * 
@@ -47,12 +47,12 @@ public class PrependStream<A> extends AbstractAppendStream<A> {
   }
 
   @Override
-  public final Pair<A, Stream<A>> decons() {
+  public final Tuple2<A, Stream<A>> decons() {
     return _(head(), tail());
   }
 
   @Override
-  public Pair<Thunk<A>, Stream<A>> delayedDecons() {
+  public Tuple2<Thunk<A>, Stream<A>> delayedDecons() {
     return _(Thunks.constant(head), tail());
   }
 

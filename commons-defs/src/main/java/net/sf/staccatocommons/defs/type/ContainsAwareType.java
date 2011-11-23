@@ -12,8 +12,10 @@
  */
 package net.sf.staccatocommons.defs.type;
 
-import net.sf.staccatocommons.defs.ContainsAware;
-import net.sf.staccatocommons.defs.EmptyAware;
+import java.util.Collection;
+
+import net.sf.staccatocommons.defs.partial.ContainsAware;
+import net.sf.staccatocommons.defs.partial.EmptyAware;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**

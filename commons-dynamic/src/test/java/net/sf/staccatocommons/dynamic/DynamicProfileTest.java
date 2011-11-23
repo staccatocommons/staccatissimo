@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.dynamic;
 
-import net.sf.staccatocommons.defs.EmptyAware;
+import net.sf.staccatocommons.defs.partial.EmptyAware;
 
 import org.junit.Test;
 

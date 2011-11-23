@@ -16,22 +16,26 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
+import net.sf.staccatocommons.defs.partial.FirstAware;
+import net.sf.staccatocommons.defs.partial.FourthAware;
+import net.sf.staccatocommons.defs.partial.SecondAware;
+import net.sf.staccatocommons.defs.partial.ThirdAware;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
+import net.sf.staccatocommons.defs.tuple.Tuple3;
+import net.sf.staccatocommons.defs.tuple.Tuple4;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.function.AbstractFunction3;
 import net.sf.staccatocommons.lang.function.Functions;
-import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
-import net.sf.staccatocommons.lang.tuple.Tuple.FourthAware;
-import net.sf.staccatocommons.lang.tuple.Tuple.ThirdAware;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
- * Class methods hub for creating {@link Tuple}s, and obtaining Tuple-related
- * functions
+ * Class methods hub for creating {@link AbstractTuple}s, and obtaining
+ * Tuple-related functions
  * 
  * @author flbulgarelli
  * 
@@ -46,9 +50,9 @@ public class Tuples {
    * @return a constant function
    */
   @Constant
-  public static <A> Function<Tuple.FirstAware<A>, A> first() {
-    return new AbstractFunction<Tuple.FirstAware<A>, A>() {
-      public A apply(Tuple.FirstAware<A> arg) {
+  public static <A> Function<FirstAware<A>, A> first() {
+    return new AbstractFunction<FirstAware<A>, A>() {
+      public A apply(FirstAware<A> arg) {
         return arg._0();
       }
     };
@@ -62,9 +66,9 @@ public class Tuples {
    * @return a constant function
    */
   @Constant
-  public static <A> Function<Tuple.SecondAware<A>, A> second() {
-    return new AbstractFunction<Tuple.SecondAware<A>, A>() {
-      public A apply(Tuple.SecondAware<A> arg) {
+  public static <A> Function<SecondAware<A>, A> second() {
+    return new AbstractFunction<SecondAware<A>, A>() {
+      public A apply(SecondAware<A> arg) {
         return arg._1();
       }
     };
@@ -79,8 +83,8 @@ public class Tuples {
    */
   @Constant
   public static <A> Function<ThirdAware<A>, A> third() {
-    return new AbstractFunction<Tuple.ThirdAware<A>, A>() {
-      public A apply(Tuple.ThirdAware<A> arg) {
+    return new AbstractFunction<ThirdAware<A>, A>() {
+      public A apply(ThirdAware<A> arg) {
         return arg._2();
       }
     };
@@ -116,12 +120,12 @@ public class Tuples {
    * @return a new {@link Quadruple}. Non null.
    */
   @NonNull
-  public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> _(T1 first, T2 second, T3 third, T4 fourth) {
+  public static <T1, T2, T3, T4> Tuple4<T1, T2, T3, T4> _(T1 first, T2 second, T3 third, T4 fourth) {
     return new Quadruple<T1, T2, T3, T4>(first, second, third, fourth);
   }
 
   /**
-   * Creates a new {@link Triple}
+   * Creates a new {@link Tuple3}
    * 
    * @param <T1>
    * @param <T2>
@@ -129,45 +133,45 @@ public class Tuples {
    * @param first
    * @param second
    * @param third
-   * @return a new {@link Triple}. Non null.
+   * @return a new {@link Tuple3}. Non null.
    */
   @NonNull
-  public static <T1, T2, T3> Triple<T1, T2, T3> _(T1 first, T2 second, T3 third) {
+  public static <T1, T2, T3> Tuple3<T1, T2, T3> _(T1 first, T2 second, T3 third) {
     return new Triple<T1, T2, T3>(first, second, third);
   }
 
   /**
-   * Creates a new {@link Pair}
+   * Creates a new {@link Tuple2}
    * 
    * @param <T1>
    * @param <T2>
    * @param first
    * @param second
-   * @return a new {@link Pair}. Non null.
+   * @return a new {@link Tuple2}. Non null.
    */
   @NonNull
-  public static <T1, T2> Pair<T1, T2> _(T1 first, T2 second) {
+  public static <T1, T2> Tuple2<T1, T2> _(T1 first, T2 second) {
     return new Pair<T1, T2>(first, second);
   }
 
   /**
-   * Answers a function that creates {@link Triple}s for its arguments
+   * Answers a function that creates {@link Tuple3}s for its arguments
    * 
    * @param <T1>
    * @param <T2>
    * @return a new {@link Function3}
    */
   @Constant
-  public static <T1, T2, T3> Function3<T1, T2, T3, Triple<T1, T2, T3>> toTriple() {
-    return new AbstractFunction3<T1, T2, T3, Triple<T1, T2, T3>>() {
-      public Triple<T1, T2, T3> apply(T1 arg0, T2 arg1, T3 arg2) {
+  public static <T1, T2, T3> Function3<T1, T2, T3, Tuple3<T1, T2, T3>> toTuple3() {
+    return new AbstractFunction3<T1, T2, T3, Tuple3<T1, T2, T3>>() {
+      public Tuple3<T1, T2, T3> apply(T1 arg0, T2 arg1, T3 arg2) {
         return _(arg0, arg1, arg2);
       }
     };
   }
 
   /**
-   * Answers a function that creates {@link Pair}s for its arguments
+   * Answers a function that creates {@link Tuple2}s for its arguments
    * 
    * @param <T1>
    * @param <T2>
@@ -175,9 +179,9 @@ public class Tuples {
    * @return a new {@link Function2}
    */
   @Constant
-  public static <T1, T2> Function2<T1, T2, Pair<T1, T2>> toPair() {
-    return new AbstractFunction2<T1, T2, Pair<T1, T2>>() {
-      public Pair<T1, T2> apply(T1 arg0, T2 arg1) {
+  public static <T1, T2> Function2<T1, T2, Tuple2<T1, T2>> toTuple2() {
+    return new AbstractFunction2<T1, T2, Tuple2<T1, T2>>() {
+      public Tuple2<T1, T2> apply(T1 arg0, T2 arg1) {
         return _(arg0, arg1);
       }
     };
@@ -185,7 +189,7 @@ public class Tuples {
 
   /**
    * <a href="http://en.wikipedia.org/wiki/Currying">Curries</a> the given
-   * {@code function} that takes a single {@link Pair}, by returning a new one
+   * {@code function} that takes a single {@link Tuple2}, by returning a new one
    * that takes two arguments, one for each component of the pair
    * 
    * @param <A>
@@ -195,7 +199,7 @@ public class Tuples {
    *          the function to curry
    * @return a new {@link Function2}
    */
-  public static <A, B, C> Function2<A, B, C> curry(final Function<Pair<A, B>, C> function) {
+  public static <A, B, C> Function2<A, B, C> curry(final Function<Tuple2<A, B>, C> function) {
     return new AbstractFunction2<A, B, C>() {
       public C apply(A arg0, B arg1) {
         return function.apply(_(arg0, arg1));
@@ -205,7 +209,7 @@ public class Tuples {
 
   /**
    * <a href="http://en.wikipedia.org/wiki/Currying">Curries</a> the given
-   * {@code function} that takes a single {@link Triple}, by returning a new one
+   * {@code function} that takes a single {@link Tuple3}, by returning a new one
    * that takes three arguments, one for each component of the triple
    * 
    * @param <A>
@@ -215,7 +219,7 @@ public class Tuples {
    *          the function to curry
    * @return a new {@link Function3}
    */
-  public static <A, B, C, D> Function3<A, B, C, D> curry3(final Function<Triple<A, B, C>, D> function) {
+  public static <A, B, C, D> Function3<A, B, C, D> curry3(final Function<Tuple3<A, B, C>, D> function) {
     return new AbstractFunction3<A, B, C, D>() {
       public D apply(A arg0, B arg1, C arg2) {
         return function.apply(_(arg0, arg1, arg2));
@@ -225,8 +229,8 @@ public class Tuples {
 
   /**
    * <a href="http://en.wikipedia.org/wiki/Currying">Curries</a> the given
-   * {@code predicate} that takes a single {@link Pair}, by returning a new one
-   * that takes two arguments, one for each component of the pair
+   * {@code predicate} that takes a single {@link Tuple2}, by returning a new
+   * one that takes two arguments, one for each component of the pair
    * 
    * @param <A>
    * @param <B>
@@ -235,69 +239,11 @@ public class Tuples {
    *          the function to curry
    * @return a new {@link Predicate2}
    */
-  public static <A, B> Predicate2<A, B> curry(final Predicate<Pair<A, B>> predicate) {
+  public static <A, B> Predicate2<A, B> curry(final Predicate<Tuple2<A, B>> predicate) {
     return new AbstractPredicate2<A, B>() {
       public boolean eval(A arg0, B arg1) {
         return predicate.eval(_(arg0, arg1));
       };
-    };
-  }
-
-  /**
-   * <a href="http://en.wikipedia.org/wiki/Currying">Uncurries</a> the given
-   * two-args {@code function}, by returning a {@link Function} that takes a
-   * single pair, being its components each of the original function parameters
-   * 
-   * @param <A>
-   * @param <B>
-   * @param <C>
-   * @param function
-   * @return a new {@link Function}
-   */
-  public static <A, B, C> Function<Pair<A, B>, C> uncurry(final Function2<A, B, C> function) {
-    return new AbstractFunction<Pair<A, B>, C>() {
-      public C apply(Pair<A, B> argument) {
-        return function.apply(argument.first(), argument.second());
-      }
-    };
-  }
-
-  /**
-   * <a href="http://en.wikipedia.org/wiki/Currying">Uncurries</a> the given
-   * three-args {@code function}, by returning a {@link Function} that takes a
-   * single triple, being its components each of the original function
-   * parameters
-   * 
-   * @param <A>
-   * @param <B>
-   * @param <C>
-   * @param function
-   * @return a new {@link Function}
-   */
-  public static <A, B, C, D> Function<Triple<A, B, C>, D> uncurry(final Function3<A, B, C, D> function) {
-    return new AbstractFunction<Triple<A, B, C>, D>() {
-      public D apply(Triple<A, B, C> argument) {
-        return function.apply(argument.first(), argument.second(), argument.third());
-      }
-    };
-  }
-
-  /**
-   * <a href="http://en.wikipedia.org/wiki/Currying">Uncurries</a> the given
-   * two-args {@code predicate}, by returning a {@link Predicate} that takes a
-   * single pair, being its components each of the original predicate parameters
-   * 
-   * @param <A>
-   * @param <B>
-   * @param <C>
-   * @param function
-   * @return a new {@link Predicate}
-   */
-  public static <A, B> Predicate<Pair<A, B>> uncurry(final Predicate2<A, B> predicate) {
-    return new AbstractPredicate<Pair<A, B>>() {
-      public boolean eval(Pair<A, B> argument) {
-        return predicate.eval(argument.first(), argument.second());
-      }
     };
   }
 
@@ -332,53 +278,23 @@ public class Tuples {
    * @param function1
    * @return a new function that zips both given functions 
    */
-  public static <A, B, C, D> Function<Pair<A, B>, Pair<C, D>> zip(final Applicable<? super A, ? extends C> function0,
-    final Applicable<? super B, ? extends D> function1) {
-    return new AbstractFunction<Pair<A, B>, Pair<C, D>>() {
-      public Pair<C, D> apply(Pair<A, B> arg) {
+  public static <A, B, C, D> Function<Tuple2<A, B>, Tuple2<C, D>> zip(
+    final Applicable<? super A, ? extends C> function0, final Applicable<? super B, ? extends D> function1) {
+    return new AbstractFunction<Tuple2<A, B>, Tuple2<C, D>>() {
+      public Tuple2<C, D> apply(Tuple2<A, B> arg) {
         return _((C) function0.apply(arg._0()), (D) function1.apply(arg._1()));
       }
     };
   }
-  
-  
-  /**
-   * Curried version of {@link #zip(Applicable, Applicable)}
-   * Combines two functions into one a two arguments function that applies 
-   * the first function to the first argument, and the second
-   * function to the second argument, and returns the pair of results. 
-   * 
-   * Functions get combined as in the following figure:
-   * <pre> 
-   * >------function0----->
-   * 
-   * >------function1----->
-   * </pre>
-   * Example:
-   * 
-   * <pre>
-   * zip(NumberTypes.add(10), NumberTypes.add(1)).apply(2,0)
-   * </pre>
-   * 
-   * Returns the tuple
-   * 
-   * <pre>
-   * (12, 1)
-   * </pre>
-   * 
-   * 
-   * @param function0
-   * @param function1
-   * @return a new function that zips both given functions 
-   */
-  public static <A, B, C, D> Function2<A, B, Pair<C, D>> zipCurried(final Applicable<? super A, ? extends C> function0,
-    final Applicable<? super B, ? extends D> function1) {
-    return new AbstractFunction2<A, B, Pair<C, D>>() {
-      public Pair<C, D> apply(A arg0, B arg1) {
-        return _((C) function0.apply(arg0), (D) function1.apply(arg1));
+
+  public static <A, B, C> Function<Tuple2<A, B>, C> merge(final Applicable<? super B, ? extends C> function) {
+    return new AbstractFunction<Tuple2<A, B>, C>() {
+      public C apply(Tuple2<A, B> arg) {
+        return function.apply(arg._1());
       }
     };
   }
+
 
   /**
    * Answers a function that applies both given functions to its argument, and
@@ -414,18 +330,18 @@ public class Tuples {
    *          tuple
    * @return a new {@link Function} that "branches" its argument
    */
-  public static <A, B, C> Function<A, Pair<B, C>> branch(final Applicable<? super A, ? extends B> function0,
+  public static <A, B, C> Function<A, Tuple2<B, C>> branch(final Applicable<? super A, ? extends B> function0,
     final Applicable<? super A, ? extends C> function1) {
-    return new AbstractFunction<A, Pair<B, C>>() {
-      public Pair<B, C> apply(A arg) {
+    return new AbstractFunction<A, Tuple2<B, C>>() {
+      public Tuple2<B, C> apply(A arg) {
         return _((B) function0.apply(arg), (C) function1.apply(arg));
       }
     };
   }
 
   /**
-   * Answers a function that returns a pair that contains the original function
-   * argument and the result of applying
+   * Answers a function that returns a Tuple2 that contains the original
+   * function argument and the result of applying
    * 
    * <pre>
    *      +------function0----->
@@ -436,9 +352,9 @@ public class Tuples {
    * @param <A>
    * @param <B>
    * @param function0
-   * @return a new frunction
+   * @return a new {@link Function}
    */
-  public static <A, B> Function<A, Pair<A, B>> clone(final Applicable<? super A, ? extends B> function0) {
+  public static <A, B> Function<A, Tuple2<A, B>> clone(final Applicable<? super A, ? extends B> function0) {
     return branch(Functions.<A> identity(), function0);
   }
 

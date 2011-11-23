@@ -17,7 +17,7 @@ import java.util.List;
 
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
 
@@ -100,11 +100,11 @@ public interface Filterable<A> {
    * returned in the second component
    * 
    * @param predicate
-   * @return a new {@link Pair} that contains this stream partitioned into two
+   * @return a new {@link Tuple2} that contains this stream partitioned into two
    *         lists.
    */
   @NonNull
-  Pair<List<A>, List<A>> partition(@NonNull Evaluable<? super A> predicate);
+  Tuple2<List<A>, List<A>> partition(@NonNull Evaluable<? super A> predicate);
 
   /**
    * Splits stream elements into two ordered streams, that support random
@@ -112,10 +112,10 @@ public interface Filterable<A> {
    * {@link #partition(Evaluable)} into Streams.
    * 
    * @param predicate
-   * @return a new {@link Pair} that contains this stream partitioned into two
+   * @return a new {@link Tuple2} that contains this stream partitioned into two
    *         other streams.
    */
   @NonNull
-  Pair<Stream<A>, Stream<A>> streamPartition(@NonNull Evaluable<? super A> predicate);
+  Tuple2<Stream<A>, Stream<A>> streamPartition(@NonNull Evaluable<? super A> predicate);
 
 }

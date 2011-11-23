@@ -15,6 +15,7 @@ package net.sf.staccatocommons.lang.function;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
+import net.sf.staccatocommons.defs.tuple.Tuple3;
 
 /**
  * A three-arguments function
@@ -57,6 +58,14 @@ public abstract class AbstractFunction3<A, B, C, D> extends AbstractDelayable3<A
     return new AbstractFunction2<B, C, D>() {
       public D apply(B arg1, C arg2) {
         return AbstractFunction3.this.apply(arg0, arg1, arg2);
+      }
+    };
+  }
+  
+  public Function<Tuple3<A, B, C>, D> uncurry() {
+    return new AbstractFunction<Tuple3<A, B, C>, D>() {
+      public D apply(Tuple3<A, B, C> argument) {
+        return AbstractFunction3.this.apply(argument.first(), argument.second(), argument.third());
       }
     };
   }

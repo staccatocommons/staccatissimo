@@ -23,8 +23,8 @@ import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.StreamTheories;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.iterators.EmptyThriterator;
-import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
@@ -58,7 +58,7 @@ public class IteratorStreamUnitTest extends StreamTheories {
    */
   @Test
   public void testDecons() {
-    Pair<Object, Stream<Object>> decons = Streams.from(Arrays.asList(90, 50, "foo").iterator()).decons();
+    Tuple2<Object, Stream<Object>> decons = Streams.from(Arrays.asList(90, 50, "foo").iterator()).decons();
     assertEquals(90, decons._0());
     assertThat(decons._1(), instanceOf(IteratorStream.class));
     assertEquals(Arrays.asList(50, "foo"), decons._1().toList());

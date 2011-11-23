@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.tuple.internal.TupleToStringStyle;
 import net.sf.staccatocommons.lang.value.RelevantState;
 import net.sf.staccatocommons.restrictions.Conditionally;
@@ -26,9 +27,9 @@ import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
  * <p>
- * A {@link Tuple} is a fixed size sequence of heterogeneous objects. They are
- * {@link ConditionallyImmutable} and {@link ConditionallySerializable}. They
- * are comparable, as long as they components are, too.
+ * A {@link AbstractTuple} is a fixed size sequence of heterogeneous objects.
+ * They are {@link ConditionallyImmutable} and {@link ConditionallySerializable}
+ * . They are comparable, as long as they components are, too.
  * </p>
  * <p>
  * Tuples are aimed to be used in those situations where an object that just
@@ -50,7 +51,7 @@ import net.sf.staccatocommons.restrictions.value.Value;
  * <li>When a method needs to return a fixed amount of different results. For
  * example, using 2-components tuple, it is easy to implement a divmod method
  * that returns the quotient and modulus of an integral division, with the
- * signature <code>Pair&lt;Integer, Integer&gt; divMod(int x, int y)</code></li>
+ * signature <code>Tuple2&lt;Integer, Integer&gt; divMod(int x, int y)</code></li>
  * </ul>
  * 
  * Although it is possible to create tuples of arities from 2 to 4 invoking the
@@ -63,7 +64,7 @@ import net.sf.staccatocommons.restrictions.value.Value;
  *  import static net.sf.staccatocommons.lang.tuple._;
  *  
  *  ...
- *  Pair&lt;Integer, Integer&gt; divMod(int x, int y)
+ *  Tuple2&lt;Integer, Integer&gt; divMod(int x, int y)
  *   return _(x/y, x%y)
  *  ...
  * 
@@ -71,17 +72,17 @@ import net.sf.staccatocommons.restrictions.value.Value;
  * 
  * 
  * @author flbulgarelli
- * @see Pair
- * @see Triple
+ * @see Tuple2
+ * @see Tuple3
  * @see Quadruple
  */
 @Value
 @Conditionally({ Immutable.class, Serializable.class })
-public abstract class Tuple implements Serializable {
+public abstract class AbstractTuple implements Serializable {
 
   private static final long serialVersionUID = -3943649706502147516L;
 
-  Tuple() {}
+  AbstractTuple() {}
 
   /**
    * Converts this tuple into an array
@@ -102,111 +103,12 @@ public abstract class Tuple implements Serializable {
     return Arrays.asList(toArray());
   }
 
-  /**
-   * Interface for accessing the first element of a tuple
-   * 
-   * @author flbulgarelli
-   * 
-   * @param <A>
-   */
-  public static interface FirstAware<A> {
-
-    /**
-     * Answers the first component
-     * 
-     * @return the first component
-     */
-    A first();
-
-    /**
-     * Synonym for {@link #first()}
-     * 
-     * @return {@link #first()}
-     * 
-     */
-    A _0();
-
-  }
-
-  /**
-   * Interface for accessing the second element of a tuple
-   * 
-   * @author flbulgarelli
-   * 
-   * @param <A>
-   */
-
-  public static interface SecondAware<A> {
-
-    /**
-     * Answers the second component
-     * 
-     * @return the second component
-     */
-    A second();
-
-    /**
-     * Synonym for {@link #second()}
-     * 
-     * @return {@link #second()}
-     * 
-     */
-    A _1();
-  }
-
-  /**
-   * Interface for accessing the third element of a tuple
-   * 
-   * @author flbulgarelli
-   * 
-   * @param <A>
-   */
-
-  public static interface ThirdAware<A> {
-    /**
-     * Answers the third component
-     * 
-     * @return the third component
-     */
-    A third();
-
-    /**
-     * 
-     * Synonym for {@link #third()}
-     * 
-     * @return the third component
-     */
-    A _2();
-  }
-
-  /**
-   * Interface for accessing the fourth element of a tuple
-   * 
-   * @author flbulgarelli
-   * 
-   * @param <A>
-   */
-  public static interface FourthAware<A> {
-
-    /**
-     * @return the fourth component
-     */
-    A fourth();
-
-    /**
-     * Synonym for {@link #fourth()}
-     * 
-     * @return the fourth component
-     */
-    A _3();
-  }
-
-  protected abstract static class TupleState<A extends Tuple> extends RelevantState<A> {
+  protected abstract static class TupleState<A> extends RelevantState<A> {
     /**
      * Creates a new {@link TupleState}
      */
-    public TupleState(int relevantAttributesCount) {
-      super(relevantAttributesCount, TupleToStringStyle.getInstance());
+    public TupleState(int componentsCount) {
+      super(componentsCount, TupleToStringStyle.getInstance());
     }
   }
 

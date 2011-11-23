@@ -27,10 +27,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import net.sf.staccatocommons.defs.EmptyAware;
-import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
+import net.sf.staccatocommons.defs.partial.EmptyAware;
+import net.sf.staccatocommons.defs.partial.SizeAware;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.Option;
 

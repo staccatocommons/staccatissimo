@@ -19,10 +19,12 @@ import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import java.util.Calendar;
 import java.util.Date;
 
+import net.sf.staccatocommons.defs.tuple.Tuple2;
+
 import org.junit.Test;
 
 /**
- * Unit test for {@link Pair}
+ * Unit test for {@link Tuple2}
  * 
  * @author flbulgarelli
  * 
@@ -31,7 +33,7 @@ public class PairUnitTest extends TupleAbstractUnitTest {
 
   @Override
   public void testComponents() throws Exception {
-    Pair<Integer, String> pair = _(9, "Hello");
+    Tuple2<Integer, String> pair = _(9, "Hello");
     assertEquals((Integer) 9, pair.first());
     assertEquals("Hello", pair.second());
     assertSame(pair._0(), pair.first());
@@ -56,7 +58,7 @@ public class PairUnitTest extends TupleAbstractUnitTest {
     assertEquals(_(40, date).hashCode(), _(40, date.clone()).hashCode());
   }
 
-  /** Test for {@link Pair#swap()} */
+  /** Test for {@link Tuple2#swap()} */
   @Test
   public void testSwap() throws Exception {
     Calendar calendar = Calendar.getInstance();
@@ -83,13 +85,13 @@ public class PairUnitTest extends TupleAbstractUnitTest {
 
   @Override
   public void testToArray() throws Exception {
-    Pair<Integer, Integer> pair = _(90, 6);
+    Tuple2<Integer, Integer> pair = _(90, 6);
     Object[] a = pair.toArray();
     assertEquals(pair, _(a[0], a[1]));
   }
 
   @Override
-  protected Tuple sampleTuple() {
+  protected Tuple2 sampleTuple() {
     return _("", 5);
   }
 }

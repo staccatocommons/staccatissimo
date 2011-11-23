@@ -14,8 +14,8 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.partial.EmptyAware;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.thunk.Thunks;

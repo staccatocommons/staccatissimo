@@ -14,8 +14,8 @@ package net.sf.staccatocommons.dynamic;
  */
 
 import static org.junit.Assert.*;
-import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.partial.EmptyAware;
 
 import org.apache.commons.lang.mutable.MutableInt;
 import org.junit.Test;

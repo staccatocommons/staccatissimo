@@ -18,6 +18,9 @@ import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
 import java.util.Date;
 
+import net.sf.staccatocommons.defs.tuple.Tuple3;
+import net.sf.staccatocommons.defs.tuple.Tuple4;
+
 /**
  * Test for {@link Quadruple}
  * 
@@ -28,7 +31,7 @@ public class QuadrupleUnitTest extends TupleAbstractUnitTest {
 
   @Override
   public void testComponents() throws Exception {
-    Quadruple<Integer, String, String, String> quad = _(9, "Hello", "World", "!");
+    Tuple4<Integer, String, String, String> quad = _(9, "Hello", "World", "!");
     assertEquals((Integer) 9, quad.first());
     assertSame(quad._0(), quad.first());
 
@@ -66,13 +69,13 @@ public class QuadrupleUnitTest extends TupleAbstractUnitTest {
 
   @Override
   public void testToArray() throws Exception {
-    Quadruple<Integer, Integer, Integer, Integer> quad = _(90, 6, 9, 5);
+    Tuple4<Integer, Integer, Integer, Integer> quad = _(90, 6, 9, 5);
     Object[] a = quad.toArray();
     assertEquals(quad, _(a[0], a[1], a[2], a[3]));
   }
 
   @Override
-  protected Tuple sampleTuple() {
+  protected Tuple3 sampleTuple() {
     return _(9, "", 4);
   }
 }

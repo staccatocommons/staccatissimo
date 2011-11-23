@@ -10,8 +10,11 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.defs;
+package net.sf.staccatocommons.defs.partial;
 
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Applicative;
+import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**

@@ -34,10 +34,10 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.predicate.Equiv;
-import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotEmpty;
@@ -404,7 +404,7 @@ public class Iterables {
    * @param iterable2
    *          second iterable
    * @return <code>true</code> if <code>iterable1</code> has the same number of
-   *         elements that <code>iterable2</code>, and each pair formed by
+   *         elements that <code>iterable2</code>, and each Tuple2 formed by
    *         elements of both iterables at same position are equal.
    *         <code>false</code> otherwise
    */
@@ -420,7 +420,7 @@ public class Iterables {
    * @param equivTest
    * @param equalityTest
    * @return <code>true</code> if <code>iterable1</code> has the same number of
-   *         elements that <code>iterable2</code>, and each pair formed by
+   *         elements that <code>iterable2</code>, and each Tuple2 formed by
    *         elements of both iterables at same position are equivalent using
    *         the given <code>eqivTest</code>. <code>false</code> otherwise
    */
@@ -660,7 +660,7 @@ public class Iterables {
    * Iterables.partition(Arrays.asList(4, 8, 5, 20, 1), Predicate.greaterThan(5));
    * </pre>
    * 
-   * will return a pair equal to:
+   * will return a Tuple2 equal to:
    * 
    * <pre>
    * _(Arrays.asList(8, 20), Arrays.asList(4, 5, 1))
@@ -671,9 +671,9 @@ public class Iterables {
    * @param predicate
    *          the {@link Evaluable} used to determine if an elements goes into
    *          the first or second list
-   * @return a pair of lists
+   * @return a Tuple2 of lists
    */
-  public static <A> Pair<List<A>, List<A>> partition(@NonNull Iterable<A> iterable, Evaluable<? super A> predicate) {
+  public static <A> Tuple2<List<A>, List<A>> partition(@NonNull Iterable<A> iterable, Evaluable<? super A> predicate) {
 
     List<A> first = new LinkedList<A>();
     List<A> second = new LinkedList<A>();
@@ -759,7 +759,7 @@ public class Iterables {
 
   /**
    * Returns a {@link List} formed by the result of applying the given
-   * <code>function</code> to each pair of elements from the two iterables
+   * <code>function</code> to each Tuple2 of elements from the two iterables
    * given. If any if the {@link Iterable}s is shorter than the other one, the
    * remaining elements are discarded.
    * <p>
@@ -773,9 +773,9 @@ public class Iterables {
    * @param iterable1
    * @param iterable2
    * @param function
-   *          the function to apply to each pair
+   *          the function to apply to each Tuple2
    * @return a new list formed applying the given {@link Applicable2} to each
-   *         pair of element retrieved from the given iterables. The resulting
+   *         Tuple2 of element retrieved from the given iterables. The resulting
    *         list size is the minimum of both iterables sizes. As a particular
    *         case, if any of both iterables is empty, returns an empty list,
    *         regardless of the given function
@@ -793,7 +793,7 @@ public class Iterables {
   }
 
   /**
-   * Returns a {@link List} formed by pair of elements from the two iterables.
+   * Returns a {@link List} formed by Tuple2 of elements from the two iterables.
    * If any if the {@link Iterable}s is shorter than the other one, the
    * remaining elements are discarded.
    * <p>
@@ -817,15 +817,15 @@ public class Iterables {
    *          second iterable element type
    * @param iterable1
    * @param iterable2
-   * @return a new list formed by pair of element retrieved from the given
+   * @return a new list formed by Tuple2 of element retrieved from the given
    *         iterables. The resulting list size is the minimum of both iterables
    *         sizes. As a particular case, if any of both iterables is empty,
    *         returns an empty list.
    * @see #zip(Iterable, Iterable, Applicable2)
    */
   @NonNull
-  public static <A, B> List<Pair<A, B>> zip(@NonNull Iterable<A> iterable1, @NonNull Iterable<B> iterable2) {
-    return zip(iterable1, iterable2, Tuples.<A, B> toPair());
+  public static <A, B> List<Tuple2<A, B>> zip(@NonNull Iterable<A> iterable1, @NonNull Iterable<B> iterable2) {
+    return zip(iterable1, iterable2, Tuples.<A, B> toTuple2());
   }
 
   /**
@@ -900,7 +900,7 @@ public class Iterables {
    * @return a new List with the Cartesian product of both collections.
    */
   @NonNull
-  public static final <A, B> List<Pair<A, B>> cross(@NonNull Iterable<A> iterable1, @NonNull Iterable<B> iterable2) {
+  public static final <A, B> List<Tuple2<A, B>> cross(@NonNull Iterable<A> iterable1, @NonNull Iterable<B> iterable2) {
     return cross(iterable1, iterable2, new LinkedList());
   }
 
@@ -926,14 +926,14 @@ public class Iterables {
    * @return a new List with the Cartesian product of both collections.
    */
   @NonNull
-  public static final <A, B> List<Pair<A, B>> cross(@NonNull Collection<A> collection1,
+  public static final <A, B> List<Tuple2<A, B>> cross(@NonNull Collection<A> collection1,
     @NonNull Collection<B> collection2) {
     return cross(collection1, collection2, new ArrayList(collection1.size() * collection2.size()));
   }
 
   @NonNull
-  private static <A, B> List<Pair<A, B>> cross(@NonNull Iterable<A> iterable1, @NonNull Iterable<B> iterable2,
-    @NonNull List<Pair<A, B>> result) {
+  private static <A, B> List<Tuple2<A, B>> cross(@NonNull Iterable<A> iterable1, @NonNull Iterable<B> iterable2,
+    @NonNull List<Tuple2<A, B>> result) {
     for (A a : iterable1)
       for (B b : iterable2) {
         result.add(_(a, b));

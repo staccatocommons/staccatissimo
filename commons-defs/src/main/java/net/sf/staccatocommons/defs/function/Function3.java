@@ -18,7 +18,8 @@ import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Delayable3;
 import net.sf.staccatocommons.defs.NullSafe;
-import net.sf.staccatocommons.defs.NullSafeAware;
+import net.sf.staccatocommons.defs.partial.NullSafeAware;
+import net.sf.staccatocommons.defs.tuple.Tuple3;
 
 /**
  * {@link Function3}s are rich interfaced {@link Applicable3}s - two arguments
@@ -66,5 +67,15 @@ public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>, Applicab
    */
   @NullSafe
   Function3<A, B, C, D> nullSafe();
+  
 
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Currying">Uncurries</a> this function,
+   *  by returning a {@link Function} that takes a
+   * single triple, being its components each of the original function
+   * parameters
+   * 
+   * @return a new {@link Function}
+   */
+  Function<Tuple3<A, B, C>, D> uncurry();
 }

@@ -15,6 +15,7 @@ package net.sf.staccatocommons.lang.predicate;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -68,6 +69,15 @@ public abstract class AbstractPredicate2<A, B> implements Predicate2<A, B> {
 
   public Predicate2<A, B> nullSafe() {
     return new NullSafePredicate2();
+  }
+  
+  
+  public Predicate<Tuple2<A, B>> uncurry() {
+    return new AbstractPredicate<Tuple2<A, B>>() {
+      public boolean eval(Tuple2<A, B> argument) {
+        return AbstractPredicate2.this.eval(argument.first(), argument.second());
+      }
+    };
   }
 
   /**

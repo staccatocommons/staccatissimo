@@ -73,7 +73,7 @@ public class MapsUnitTest {
 
   /**
    * Test method for
-   * {@link Maps#from(net.sf.staccatocommons.lang.tuple.Pair...)}
+   * {@link Maps#from(net.sf.staccatocommons.lang.tuple.Tuple2...)}
    */
   @Test
   public void fromEntries() throws Exception {

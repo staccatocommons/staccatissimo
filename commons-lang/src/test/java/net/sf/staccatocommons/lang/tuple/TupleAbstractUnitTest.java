@@ -17,10 +17,12 @@ import static junit.framework.Assert.*;
 
 import java.util.Arrays;
 
+import net.sf.staccatocommons.defs.partial.ToListAware;
+
 import org.junit.Test;
 
 /**
- * Abstract test for {@link Tuple}s
+ * Abstract test for {@link AbstractTuple}s
  * 
  * @author flbulgarelli
  * 
@@ -50,10 +52,10 @@ public abstract class TupleAbstractUnitTest {
   /** Test tuples can be converted into a list */
   @Test
   public void testToList() throws Exception {
-    Tuple sampleTuple = sampleTuple();
+    ToListAware<Object> sampleTuple = sampleTuple();
     assertEquals(sampleTuple.toList(), Arrays.asList(sampleTuple.toArray()));
   }
 
-  protected abstract Tuple sampleTuple();
+  protected abstract ToListAware<Object> sampleTuple();
 
 }

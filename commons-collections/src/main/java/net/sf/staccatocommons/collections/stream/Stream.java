@@ -17,9 +17,9 @@ import java.io.Serializable;
 
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.collections.restrictions.Repeatable;
-import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.defs.SizeAware;
+import net.sf.staccatocommons.defs.partial.ContainsAware;
+import net.sf.staccatocommons.defs.partial.SizeAware;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 

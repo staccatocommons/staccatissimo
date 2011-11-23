@@ -19,9 +19,9 @@ import java.util.Iterator;
 
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
-import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -52,7 +52,7 @@ public class IteratorStream<A> extends AbstractStream<A> {
     return iterator;
   }
 
-  public final Pair<A, Stream<A>> decons() {
+  public final Tuple2<A, Stream<A>> decons() {
     VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams can not be deconstructed");
     return _(head(), (Stream<A>) this);
   }

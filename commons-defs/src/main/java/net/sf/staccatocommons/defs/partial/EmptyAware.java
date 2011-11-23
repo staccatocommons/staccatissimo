@@ -11,31 +11,24 @@
  *  GNU Lesser General Public License for more details.
  */
 
-package net.sf.staccatocommons.defs;
+package net.sf.staccatocommons.defs.partial;
+
+import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
 
 /**
- * Interface for objects that understand {@link #size()} message. It extends the
- * {@link EmptyAware} interface.
+ * Interface for objects that understand {@link #isEmpty()} message.
  * 
  * @author flbulgarelli
  * 
  */
-public interface SizeAware extends EmptyAware {
+public interface EmptyAware {
 
   /**
-   * Answers the size of this size aware. It <strong>should</strong> be a non
-   * negative int.
+   * Answers if this {@link EmptyAware} is empty. This message
+   * <strong>should</strong> be {@link SideEffectFree}
    * 
-   * @return the size
+   * @return if the object is empty.
    */
-  int size();
-
-  /**
-   * Answers if this {@link SizeAware} is empty. It <strong>should</strong> be
-   * true that
-   * 
-   * <code>aSizeAware.isEmpty() == (aSizeAware.size() == 0)</code>
-   */
-  @Override
   boolean isEmpty();
+
 }

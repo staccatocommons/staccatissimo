@@ -17,7 +17,8 @@ import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Delayable2;
 import net.sf.staccatocommons.defs.NullSafe;
-import net.sf.staccatocommons.defs.NullSafeAware;
+import net.sf.staccatocommons.defs.partial.NullSafeAware;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -131,4 +132,15 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    */
   <A2, B2, D> Function3<A, B, A2, D> then(Function2<C, B2, D> binaryFunction,
     @NonNull Function<? super A2, ? extends B2> other);
+  
+  
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Currying">Uncurries</a> this function,
+   * by returning a {@link Function} that takes a
+   * single pair, being its components each of the original function parameters
+   * 
+   * @return a new {@link Function}
+   */
+  Function<Tuple2<A, B>, C> uncurry();
+
 }

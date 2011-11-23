@@ -21,9 +21,9 @@ import java.util.GregorianCalendar;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import net.sf.staccatocommons.defs.tuple.Tuple3;
 import net.sf.staccatocommons.io.serialization.CharSerializationManager;
 import net.sf.staccatocommons.io.serialization.XStreamXmlSerializationManager;
-import net.sf.staccatocommons.lang.tuple.Triple;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
@@ -89,8 +89,8 @@ public class CharSerializationObjectPreferencesUnitTest extends JUnit4MockObject
         will(returnValue("fdsfsdfsd<>!!"));
       }
     });
-    Triple<Integer, Integer, String> defaultValue = _(90, 56, "Hello");
-    Triple<Integer, Integer, String> value = objectPreferences.get(KEY, defaultValue);
+    Tuple3<Integer, Integer, String> defaultValue = _(90, 56, "Hello");
+    Tuple3<Integer, Integer, String> value = objectPreferences.get(KEY, defaultValue);
     assertEquals(defaultValue, value);
   }
 
@@ -103,8 +103,8 @@ public class CharSerializationObjectPreferencesUnitTest extends JUnit4MockObject
         will(returnValue(null));
       }
     });
-    Triple<Integer, Integer, String> defaultValue = _(90, 56, "Bye");
-    Triple<Integer, Integer, String> value = objectPreferences.get(KEY, defaultValue);
+    Tuple3<Integer, Integer, String> defaultValue = _(90, 56, "Bye");
+    Tuple3<Integer, Integer, String> value = objectPreferences.get(KEY, defaultValue);
     assertEquals(defaultValue, value);
   }
 

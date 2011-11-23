@@ -10,27 +10,17 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators.thriter;
+package net.sf.staccatocommons.defs.tuple;
 
-import java.util.Iterator;
-
-import net.sf.staccatocommons.defs.partial.EmptyAware;
+import net.sf.staccatocommons.defs.partial.FirstAware;
+import net.sf.staccatocommons.defs.partial.FourthAware;
+import net.sf.staccatocommons.defs.partial.SecondAware;
+import net.sf.staccatocommons.defs.partial.ThirdAware;
+import net.sf.staccatocommons.defs.partial.ToListAware;
 
 /**
- * An object that both implements {@link Iterator} and {@link Thriter}
- * 
  * @author flbulgarelli
- * @see AbstractThriterator
- * @param <A>
- *          the type of elements retrieved by this {@link Thriterator}
+ * 
  */
-public interface Thriterator<A> extends Thriter<A>, Iterator<A>, EmptyAware {
-
-  /**
-   * Answers if this {@link Thriterator} is empty
-   * 
-   * @return <code>!hasNext()</code>
-   */
-  boolean isEmpty();
-
-}
+public interface Tuple4<A, B, C, D> extends ToListAware<Object>, FirstAware<A>, SecondAware<B>, ThirdAware<C>,
+  FourthAware<D>, Comparable<Tuple4<A, B, C, D>> {}

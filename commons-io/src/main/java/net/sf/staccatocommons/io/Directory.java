@@ -20,9 +20,9 @@ import java.util.Arrays;
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
-import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 import org.apache.commons.io.FileUtils;
@@ -216,7 +216,7 @@ final class BreadthFirst extends AbstractFunction<Stream<File>, Stream<File>> {
   public Stream<File> apply(Stream<File> files) {
     if (files.isEmpty())
       return Streams.empty();
-    Pair<Stream<File>, Stream<File>> partion = files //
+    Tuple2<Stream<File>, Stream<File>> partion = files //
       .streamPartition(new AbstractPredicate<File>() {
         public boolean eval(File argument) {
           return !argument.isDirectory();

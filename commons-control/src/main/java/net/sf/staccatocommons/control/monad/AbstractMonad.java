@@ -19,9 +19,9 @@ import net.sf.staccatocommons.control.monad.internal.AppendMonad;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.Predicates;
-import net.sf.staccatocommons.lang.tuple.Pair;
 
 /**
  * @author flbulgarelli
@@ -74,11 +74,11 @@ public abstract class AbstractMonad<A> implements Monad<A> {
     return (Monad<Void>) this;
   }
 
-  public <B> Monad<Pair<A, B>> clone(Applicable<? super A, ? extends B> function) {
+  public <B> Monad<Tuple2<A, B>> clone(Applicable<? super A, ? extends B> function) {
     return bind(Monads.clone(function));
   }
 
-  public <B, C> Monad<Pair<B, C>> branch(Applicable<? super A, ? extends B> function0,
+  public <B, C> Monad<Tuple2<B, C>> branch(Applicable<? super A, ? extends B> function0,
     Applicable<? super A, ? extends C> function1) {
     return bind(Monads.branch(function0, function1));
   }

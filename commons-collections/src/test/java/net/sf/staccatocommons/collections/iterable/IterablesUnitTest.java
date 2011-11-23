@@ -29,6 +29,7 @@ import java.util.List;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.Strings;
@@ -36,7 +37,6 @@ import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.sequence.Sequence;
-import net.sf.staccatocommons.lang.tuple.Pair;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -225,7 +225,7 @@ public class IterablesUnitTest {
    */
   @Test
   public void testPartition() throws Exception {
-    Pair<List<Integer>, List<Integer>> partition = Iterables.partition(
+    Tuple2<List<Integer>, List<Integer>> partition = Iterables.partition(
       Sequence.fromTo(10, 20),
       new AbstractPredicate<Integer>() {
         public boolean eval(Integer argument) {

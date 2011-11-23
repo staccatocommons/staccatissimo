@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -45,7 +45,7 @@ public interface Deconstructable<A> {
    *           if stream is empty
    */
   @NonNull
-  Pair<A, Stream<A>> decons();
+  Tuple2<A, Stream<A>> decons();
 
   /**
    * Answers this non-empty stream split into a head thunk and tail.
@@ -61,7 +61,7 @@ public interface Deconstructable<A> {
    *           if stream is empty
    */
   @NonNull
-  Pair<Thunk<A>, Stream<A>> delayedDecons();
+  Tuple2<Thunk<A>, Stream<A>> delayedDecons();
 
   /**
    * Answers the head of the {@link Stream}, which is the first element of the

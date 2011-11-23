@@ -14,7 +14,7 @@
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 
 /**
  * @author flbulgarelli
@@ -37,7 +37,7 @@ public final class DeconsTransformStream<B, A> extends AbstractTransformStream<A
   protected Stream<B> apply() {
     if (getStream().isEmpty())
       return function.emptyApply();
-    Pair<A, Stream<A>> decons = getStream().decons();
+    Tuple2<A, Stream<A>> decons = getStream().decons();
     return function.apply(decons._0(), decons._1());
   }
 }

@@ -10,27 +10,33 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.iterators.thriter;
+package net.sf.staccatocommons.defs.partial;
 
-import java.util.Iterator;
+import java.util.List;
 
-import net.sf.staccatocommons.defs.partial.EmptyAware;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
- * An object that both implements {@link Iterator} and {@link Thriter}
- * 
  * @author flbulgarelli
- * @see AbstractThriterator
- * @param <A>
- *          the type of elements retrieved by this {@link Thriterator}
+ * 
  */
-public interface Thriterator<A> extends Thriter<A>, Iterator<A>, EmptyAware {
+public interface ToListAware<A> {
 
   /**
-   * Answers if this {@link Thriterator} is empty
+   * Converts this tuple into an array
    * 
-   * @return <code>!hasNext()</code>
+   * @return an new Object[] containing each of the elements of this tuple
    */
-  boolean isEmpty();
+  @NonNull
+  A[] toArray();
+
+  /**
+   * Gets an unmodifiable list containing each components of this tuple as
+   * elements
+   * 
+   * @return a non null, unmodifiable list
+   */
+  @NonNull
+  List<A> toList();
 
 }

@@ -21,8 +21,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 
+import net.sf.staccatocommons.defs.partial.FirstAware;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
-import net.sf.staccatocommons.lang.tuple.Tuple;
 
 import org.junit.Test;
 
@@ -45,7 +45,7 @@ public class LambdaFactoryUnitTest {
         return iter;
       }
     }));
-    assertEquals(10, l.lambda(l.$(Tuple.FirstAware.class).first()).apply(_(10, 20)));
+    assertEquals(10, l.lambda(l.$(FirstAware.class).first()).apply(_(10, 20)));
   }
 
   /** Test that fails if invoked in the wrong order */
@@ -70,7 +70,7 @@ public class LambdaFactoryUnitTest {
     try {
       l.lambda(l.$(String.class).isEmpty());
     } catch (Exception e) { /* ignore */}
-    assertNotNull(l.lambda(l.$(Tuple.FirstAware.class).first()));
+    assertNotNull(l.lambda(l.$(FirstAware.class).first()));
   }
 
   /***/

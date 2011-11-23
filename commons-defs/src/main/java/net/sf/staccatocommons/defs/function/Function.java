@@ -18,7 +18,7 @@ import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Applicative;
 import net.sf.staccatocommons.defs.Delayable;
 import net.sf.staccatocommons.defs.NullSafe;
-import net.sf.staccatocommons.defs.NullSafeAware;
+import net.sf.staccatocommons.defs.partial.NullSafeAware;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 

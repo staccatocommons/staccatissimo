@@ -19,7 +19,7 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -112,9 +112,9 @@ public interface Monad<A> extends Thunk<Void>, Runnable {
 
   /* Arrow-like */
 
-  <B> Monad<Pair<A, B>> clone(Applicable<? super A, ? extends B> function);
+  <B> Monad<Tuple2<A, B>> clone(Applicable<? super A, ? extends B> function);
 
-  <B, C> Monad<Pair<B, C>> branch(Applicable<? super A, ? extends B> function0,
+  <B, C> Monad<Tuple2<B, C>> branch(Applicable<? super A, ? extends B> function0,
     Applicable<? super A, ? extends C> function1);
 
   /* OOMonad specific */

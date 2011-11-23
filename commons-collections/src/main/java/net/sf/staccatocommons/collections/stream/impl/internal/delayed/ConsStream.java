@@ -16,9 +16,9 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -53,7 +53,7 @@ public final class ConsStream<A> extends DelayedPrependStream<A> {
       public void advanceNext() throws NoSuchElementException {
         if (!hasNext())
           throw new NoSuchElementException();
-        Pair<Thunk<A>, Stream<A>> decons = next.delayedDecons();
+        Tuple2<Thunk<A>, Stream<A>> decons = next.delayedDecons();
         current = decons.first();
         next = decons.second();
         hasNext = !next.isEmpty();

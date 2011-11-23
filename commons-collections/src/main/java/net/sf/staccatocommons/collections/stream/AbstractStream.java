@@ -60,14 +60,15 @@ import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedDe
 import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedPrependStream;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
-import net.sf.staccatocommons.defs.EmptyAware;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
+import net.sf.staccatocommons.defs.partial.EmptyAware;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
@@ -80,7 +81,6 @@ import net.sf.staccatocommons.lang.internal.ToString;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.predicate.Predicates;
-import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -243,11 +243,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
     return Iterables.any(this, predicate);
   }
 
-  public <B> Stream<Pair<A, B>> clone(Applicable<? super A, ? extends B> function) {
+  public <B> Stream<Tuple2<A, B>> clone(Applicable<? super A, ? extends B> function) {
     return map(Tuples.clone(function));
   }
 
-  public <B, C> Stream<Pair<B, C>> branch(Applicable<? super A, ? extends B> function0,
+  public <B, C> Stream<Tuple2<B, C>> branch(Applicable<? super A, ? extends B> function0,
     Applicable<? super A, ? extends C> function1) {
     return map(Tuples.branch(function0, function1));
   }
@@ -377,13 +377,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   @Override
-  public Pair<List<A>, List<A>> partition(Evaluable<? super A> predicate) {
+  public Tuple2<List<A>, List<A>> partition(Evaluable<? super A> predicate) {
     return Iterables.partition(this, predicate);
   }
 
   @Override
-  public final Pair<Stream<A>, Stream<A>> streamPartition(Evaluable<? super A> predicate) {
-    Pair<List<A>, List<A>> partition = partition(predicate);
+  public final Tuple2<Stream<A>, Stream<A>> streamPartition(Evaluable<? super A> predicate) {
+    Tuple2<List<A>, List<A>> partition = partition(predicate);
     return _(Streams.from(partition._0()), Streams.from(partition._1()));
   }
 
@@ -493,19 +493,19 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   @Override
-  public <B> Stream<Pair<A, B>> zip(Iterable<B> iterable) {
-    return zip(iterable, Tuples.<A, B> toPair());
+  public <B> Stream<Tuple2<A, B>> zip(Iterable<B> iterable) {
+    return zip(iterable, Tuples.<A, B> toTuple2());
   }
 
   @Override
-  public Pair<A, Stream<A>> decons() {
+  public Tuple2<A, Stream<A>> decons() {
     Iterator<A> iter = iterator();
     VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams can not be deconstructed");
     return _(iter.next(), Streams.from(iter));
   }
 
   @Override
-  public Pair<Thunk<A>, Stream<A>> delayedDecons() {
+  public Tuple2<Thunk<A>, Stream<A>> delayedDecons() {
     Thriterator<A> iter = iterator();
     VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams can not be deconstructed");
     return _(iter.delayedNext(), Streams.from(iter));
@@ -634,22 +634,22 @@ public abstract class AbstractStream<A> implements Stream<A> {
     return map;
   }
 
-  public Stream<Pair<A, A>> cross() {
+  public Stream<Tuple2<A, A>> cross() {
     return cross(this);
   }
 
-  public <B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other) {
+  public <B> Stream<Tuple2<A, B>> cross(@NonNull Iterable<B> other) {
     return cross(Streams.from(other));
   }
 
   // this >>= (\x -> other >>= (\y -> return (x,y)))
-  public <B> Stream<Pair<A, B>> cross(@NonNull final Stream<B> other) {
-    return transform(new AbstractFunction<Stream<A>, Stream<Pair<A, B>>>() {
-      public Stream<Pair<A, B>> apply(Stream<A> stram) {
-        return flatMap(new AbstractFunction<A, Stream<Pair<A, B>>>() {
-          public Stream<Pair<A, B>> apply(final A x) {
-            return other.flatMap(new AbstractFunction<B, Stream<Pair<A, B>>>() {
-              public Stream<Pair<A, B>> apply(B y) {
+  public <B> Stream<Tuple2<A, B>> cross(@NonNull final Stream<B> other) {
+    return transform(new AbstractFunction<Stream<A>, Stream<Tuple2<A, B>>>() {
+      public Stream<Tuple2<A, B>> apply(Stream<A> stram) {
+        return flatMap(new AbstractFunction<A, Stream<Tuple2<A, B>>>() {
+          public Stream<Tuple2<A, B>> apply(final A x) {
+            return other.flatMap(new AbstractFunction<B, Stream<Tuple2<A, B>>>() {
+              public Stream<Tuple2<A, B>> apply(B y) {
                 return cons(_(x, y));
               }
             });
@@ -697,7 +697,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
   @Override
   public final void print(java.lang.Appendable o) throws IOException {
     o.append('[');
-    Pair<A, Stream<A>> ht = decons();
+    Tuple2<A, Stream<A>> ht = decons();
     printElement(o, ht._0());
     for (A element : ht._1()) {
       o.append(", ");

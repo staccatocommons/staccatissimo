@@ -17,9 +17,9 @@ import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.collections.stream.impl.internal.PrependStream;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.iterators.delayed.DelayedPrependIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -41,7 +41,7 @@ public class DelayedPrependStream<A> extends PrependStream<A> {
   }
 
   @Override
-  public Pair<Thunk<A>, Stream<A>> delayedDecons() {
+  public Tuple2<Thunk<A>, Stream<A>> delayedDecons() {
     return _(headThunk(), Streams.from(tail()));
   }
 

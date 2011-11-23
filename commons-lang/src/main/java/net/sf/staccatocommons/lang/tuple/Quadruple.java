@@ -15,10 +15,7 @@ package net.sf.staccatocommons.lang.tuple;
 
 import java.io.Serializable;
 
-import net.sf.staccatocommons.lang.tuple.Tuple.FirstAware;
-import net.sf.staccatocommons.lang.tuple.Tuple.FourthAware;
-import net.sf.staccatocommons.lang.tuple.Tuple.SecondAware;
-import net.sf.staccatocommons.lang.tuple.Tuple.ThirdAware;
+import net.sf.staccatocommons.defs.tuple.Tuple4;
 import net.sf.staccatocommons.lang.value.RelevantState;
 import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -26,32 +23,31 @@ import net.sf.staccatocommons.restrictions.value.Immutable;
 import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
- * Four-components {@link Tuple}
+ * Four-components {@link AbstractTuple}
  * 
  * @author flbulgarelli
  * 
- * @param <T1>
- * @param <T2>
- * @param <T3>
- * @param <T4>
+ * @param <A>
+ * @param <B>
+ * @param <C>
+ * @param <D>
  * 
  */
 @Value
 @Conditionally({ Immutable.class, Serializable.class })
-public final class Quadruple<T1, T2, T3, T4> extends Tuple implements Comparable<Quadruple<T1, T2, T3, T4>>,
-  FirstAware<T1>, SecondAware<T2>, ThirdAware<T3>, FourthAware<T4> {
+public final class Quadruple<A, B, C, D> extends AbstractTuple implements Tuple4<A, B, C, D> {
 
   private static final long serialVersionUID = -1072243152313731077L;
-  private static final RelevantState<Quadruple> VAL = new TupleState<Quadruple>(4) {
-    protected void collectState(Quadruple o, StateCollector b) {
-      b.add(o.first).add(o.second).add(o.third).add(o.fourth);
+  private static final RelevantState<Tuple4> VAL = new TupleState<Tuple4>(4) {
+    protected void collectState(Tuple4 o, StateCollector b) {
+      b.add(o.first()).add(o.second()).add(o.third()).add(o.fourth());
     }
   };
 
-  private final T1 first;
-  private final T2 second;
-  private final T3 third;
-  private final T4 fourth;
+  private final A first;
+  private final B second;
+  private final C third;
+  private final D fourth;
 
   /**
    * Creates a new {@link Quadruple}
@@ -61,44 +57,44 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements Comparable
    * @param third
    * @param fourth
    */
-  public Quadruple(T1 first, T2 second, T3 third, T4 fourth) {
+  public Quadruple(A first, B second, C third, D fourth) {
     this.first = first;
     this.second = second;
     this.third = third;
     this.fourth = fourth;
   }
 
-  public T1 first() {
+  public A first() {
     return first;
   }
 
-  public T2 second() {
+  public B second() {
     return second;
   }
 
-  public T3 third() {
+  public C third() {
     return third;
   }
 
   @Override
-  public T4 fourth() {
+  public D fourth() {
     return fourth;
   }
 
-  public T1 _0() {
+  public A _0() {
     return first();
   }
 
-  public T2 _1() {
+  public B _1() {
     return second();
   }
 
-  public T3 _2() {
+  public C _2() {
     return third();
   }
 
   @Override
-  public T4 _3() {
+  public D _3() {
     return fourth();
   }
 
@@ -114,7 +110,7 @@ public final class Quadruple<T1, T2, T3, T4> extends Tuple implements Comparable
   }
 
   @Override
-  public int compareTo(Quadruple<T1, T2, T3, T4> other) {
+  public int compareTo(Tuple4<A, B, C, D> other) {
     return VAL.compareTo(this, other);
   }
 

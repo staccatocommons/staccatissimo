@@ -18,11 +18,11 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.defs.ContainsAware;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.defs.SizeAware;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.partial.ContainsAware;
+import net.sf.staccatocommons.defs.partial.SizeAware;
 import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;

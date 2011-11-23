@@ -11,24 +11,26 @@
  *  GNU Lesser General Public License for more details.
  */
 
-package net.sf.staccatocommons.defs;
-
-import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
+package net.sf.staccatocommons.defs.partial;
 
 /**
- * Interface for objects that understand {@link #isEmpty()} message.
+ * Interface for accessing the fourth element of a tuple
  * 
  * @author flbulgarelli
  * 
+ * @param <A>
  */
-public interface EmptyAware {
+public interface FourthAware<A> {
 
   /**
-   * Answers if this {@link EmptyAware} is empty. This message
-   * <strong>should</strong> be {@link SideEffectFree}
-   * 
-   * @return if the object is empty.
+   * @return the fourth component
    */
-  boolean isEmpty();
+  A fourth();
 
+  /**
+   * Synonym for {@link #fourth()}
+   * 
+   * @return the fourth component
+   */
+  A _3();
 }

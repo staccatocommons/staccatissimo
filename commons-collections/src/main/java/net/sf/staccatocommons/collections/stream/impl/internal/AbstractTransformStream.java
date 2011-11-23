@@ -17,8 +17,8 @@ import java.util.List;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -47,7 +47,7 @@ public abstract class AbstractTransformStream<A, B> extends AbstractStream<B> {
   }
 
   @Override
-  public final Pair<Thunk<B>, Stream<B>> delayedDecons() {
+  public final Tuple2<Thunk<B>, Stream<B>> delayedDecons() {
     return applyCached().delayedDecons();
   }
 

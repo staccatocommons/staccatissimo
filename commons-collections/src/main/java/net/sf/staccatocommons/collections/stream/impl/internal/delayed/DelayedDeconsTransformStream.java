@@ -16,7 +16,7 @@ package net.sf.staccatocommons.collections.stream.impl.internal.delayed;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AbstractTransformStream;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 
 /**
  * @author flbulgarelli
@@ -37,7 +37,7 @@ public final class DelayedDeconsTransformStream<A, B> extends AbstractTransformS
   protected Stream<B> apply() {
     if (getStream().isEmpty())
       return function.emptyApply();
-    Pair<Thunk<A>, Stream<A>> decons = getStream().delayedDecons();
+    Tuple2<Thunk<A>, Stream<A>> decons = getStream().delayedDecons();
     return function.apply(decons._0(), decons._1());
   }
 }

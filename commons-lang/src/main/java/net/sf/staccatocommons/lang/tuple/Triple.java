@@ -15,9 +15,7 @@ package net.sf.staccatocommons.lang.tuple;
 
 import java.io.Serializable;
 
-import net.sf.staccatocommons.lang.tuple.Tuple.FirstAware;
-import net.sf.staccatocommons.lang.tuple.Tuple.SecondAware;
-import net.sf.staccatocommons.lang.tuple.Tuple.ThirdAware;
+import net.sf.staccatocommons.defs.tuple.Tuple3;
 import net.sf.staccatocommons.lang.value.RelevantState;
 import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -25,30 +23,29 @@ import net.sf.staccatocommons.restrictions.value.Immutable;
 import net.sf.staccatocommons.restrictions.value.Value;
 
 /**
- * Three-components {@link Tuple}.
+ * Three-components {@link AbstractTuple}.
  * 
  * @author flbulgarelli
  * 
- * @param <T1>
- * @param <T2>
- * @param <T3>
+ * @param <A>
+ * @param <B>
+ * @param <C>
  * 
  */
 @Value
 @Conditionally({ Immutable.class, Serializable.class })
-public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple<T1, T2, T3>>, FirstAware<T1>,
-  SecondAware<T2>, ThirdAware<T3> {
+public final class Triple<A, B, C> extends AbstractTuple implements Tuple3<A, B, C> {
 
   private static final long serialVersionUID = 5811264763831754560L;
-  private static final RelevantState<Triple> VAL = new TupleState<Triple>(3) {
-    protected void collectState(Triple o, StateCollector b) {
-      b.add(o.first).add(o.second).add(o.third);
+  private static final RelevantState<Tuple3> VAL = new TupleState<Tuple3>(3) {
+    protected void collectState(Tuple3 o, StateCollector b) {
+      b.add(o.first()).add(o.second()).add(o.third());
     }
   };
 
-  private final T1 first;
-  private final T2 second;
-  private final T3 third;
+  private final A first;
+  private final B second;
+  private final C third;
 
   /**
    * Creates a new {@link Triple}
@@ -60,38 +57,38 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
    * @param third
    *          3rd component. Nullable.
    */
-  public Triple(T1 first, T2 second, T3 third) {
+  public Triple(A first, B second, C third) {
     this.first = first;
     this.second = second;
     this.third = third;
   }
 
   @Override
-  public T1 first() {
+  public A first() {
     return first;
   }
 
   @Override
-  public T2 second() {
+  public B second() {
     return second;
   }
 
   @Override
-  public T3 third() {
+  public C third() {
     return third;
   }
 
   @Override
-  public T1 _0() {
+  public A _0() {
     return first();
   }
 
   @Override
-  public T2 _1() {
+  public B _1() {
     return second();
   }
 
-  public T3 _2() {
+  public C _2() {
     return third();
   }
 
@@ -115,8 +112,8 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
    * {@link Triple}, with its components rotated to left
    */
   @NonNull
-  public Triple<T2, T3, T1> rotateLeft() {
-    return new Triple<T2, T3, T1>(this.second, this.third, this.first);
+  public Tuple3<B, C, A> rotateLeft() {
+    return new Triple<B, C, A>(this.second, this.third, this.first);
   }
 
   /**
@@ -138,8 +135,8 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
    * {@link Triple}, with its components rotated to right
    */
   @NonNull
-  public Triple<T3, T1, T2> rotateRight() {
-    return new Triple<T3, T1, T2>(this.third, this.first, this.second);
+  public Tuple3<C, A, B> rotateRight() {
+    return new Triple<C, A, B>(this.third, this.first, this.second);
   }
 
   @Override
@@ -163,7 +160,7 @@ public final class Triple<T1, T2, T3> extends Tuple implements Comparable<Triple
     return VAL.equals(this, obj);
   }
 
-  public int compareTo(Triple<T1, T2, T3> other) {
+  public int compareTo(Tuple3<A, B, C> other) {
     return VAL.compareTo(this, other);
   }
 

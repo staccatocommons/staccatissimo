@@ -11,25 +11,32 @@
  *  GNU Lesser General Public License for more details.
  */
 
-package net.sf.staccatocommons.defs;
+package net.sf.staccatocommons.defs.partial;
+
 
 /**
- * Interface for objects that understand {@link #contains(Object)} message.
+ * Interface for objects that understand {@link #size()} message. It extends the
+ * {@link EmptyAware} interface.
  * 
  * @author flbulgarelli
  * 
- * @param <T>
- *          the type of object this {@link ContainsAware} can contain
  */
-public interface ContainsAware<T> {
+public interface SizeAware extends EmptyAware {
 
   /**
-   * Answers if this contains-aware contains the given <code>element</code>
+   * Answers the size of this size aware. It <strong>should</strong> be a non
+   * negative int.
    * 
-   * @param element
-   * 
-   * @return if the element is contained
+   * @return the size
    */
-  boolean contains(T element);
+  int size();
 
+  /**
+   * Answers if this {@link SizeAware} is empty. It <strong>should</strong> be
+   * true that
+   * 
+   * <code>aSizeAware.isEmpty() == (aSizeAware.size() == 0)</code>
+   */
+  @Override
+  boolean isEmpty();
 }

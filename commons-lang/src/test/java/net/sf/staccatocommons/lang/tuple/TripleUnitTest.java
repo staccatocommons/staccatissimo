@@ -18,6 +18,9 @@ import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
 import java.util.Date;
 
+import net.sf.staccatocommons.defs.tuple.Tuple3;
+import net.sf.staccatocommons.defs.tuple.Tuple4;
+
 import org.junit.Test;
 
 /**
@@ -29,7 +32,7 @@ public class TripleUnitTest extends TupleAbstractUnitTest {
 
   @Override
   public void testComponents() throws Exception {
-    Triple<Integer, String, String> triple = _(9, "Hello", "World");
+    Tuple3<Integer, String, String> triple = _(9, "Hello", "World");
     assertEquals((Integer) 9, triple.first());
     assertSame(triple._0(), triple.first());
 
@@ -74,13 +77,13 @@ public class TripleUnitTest extends TupleAbstractUnitTest {
 
   @Override
   public void testToArray() throws Exception {
-    Triple<Integer, Integer, Integer> triple = _(90, 6, 5);
+    Tuple3<Integer, Integer, Integer> triple = _(90, 6, 5);
     Object[] a = triple.toArray();
     assertEquals(triple, _(a[0], a[1], a[2]));
   }
 
   @Override
-  protected Tuple sampleTuple() {
+  protected Tuple4 sampleTuple() {
     return _(new Object(), 9, 5, 5);
   }
 

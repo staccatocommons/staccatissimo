@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.check.internal;
 
-import net.sf.staccatocommons.defs.EmptyAware;
+import net.sf.staccatocommons.defs.partial.EmptyAware;
 import net.sf.staccatocommons.defs.type.EmptyAwareType;
 
 /**

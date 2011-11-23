@@ -14,7 +14,7 @@ package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.restrictions.Projection;
-import net.sf.staccatocommons.lang.tuple.Pair;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -34,7 +34,7 @@ public interface Crossable<A> {
    * @see Iterables#cross(Iterable, Iterable)
    */
   @Projection
-  Stream<Pair<A, A>> cross();
+  Stream<Tuple2<A, A>> cross();
 
   /**
    * Answers the Cartesian product of this stream and the given one
@@ -45,7 +45,7 @@ public interface Crossable<A> {
    * @see Iterables#cross(Iterable, Iterable)
    */
   @Projection
-  <B> Stream<Pair<A, B>> cross(@NonNull Stream<B> other);
+  <B> Stream<Tuple2<A, B>> cross(@NonNull Stream<B> other);
 
   /**
    * Answers the cartesian product of this {@link Stream} and the given
@@ -57,7 +57,7 @@ public interface Crossable<A> {
    * @see #cross(Stream)
    */
   @Projection
-  <B> Stream<Pair<A, B>> cross(@NonNull Iterable<B> other);
+  <B> Stream<Tuple2<A, B>> cross(@NonNull Iterable<B> other);
 
   /**
    * Answers the cartesian product of this {@link Stream} and each one of the

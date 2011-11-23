@@ -20,10 +20,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.MapBuilder;
 import net.sf.staccatocommons.lang.None;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
@@ -165,9 +165,9 @@ public class Maps {
    *          the new map entries
    * @return a new unmodifiable map
    */
-  public static <K, V> Map<K, V> from(Iterable<Pair<K, V>> entries) {
+  public static <K, V> Map<K, V> from(Iterable<Tuple2<K, V>> entries) {
     MapBuilder<K, V, Map<K, V>> b = MapBuilder.from(new LinkedHashMap<K, V>());
-    for (Pair<K, V> p : entries)
+    for (Tuple2<K, V> p : entries)
       b.with(p);
     return b.build();
   }
@@ -181,7 +181,7 @@ public class Maps {
    *          the new map entries
    * @return a new unmodifiable map
    */
-  public static <K, V> Map<K, V> from(Pair<K, V>... entries) {
+  public static <K, V> Map<K, V> from(Tuple2<K, V>... entries) {
     return from(Arrays.asList(entries));
   }
 
