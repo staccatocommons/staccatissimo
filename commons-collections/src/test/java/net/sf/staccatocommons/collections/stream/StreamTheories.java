@@ -12,11 +12,21 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccatocommons.lambda.Lambda.*;
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
-import static net.sf.staccatocommons.lang.predicate.Predicates.*;
-import static org.junit.Assert.*;
-import static org.junit.Assume.*;
+import static net.sf.staccatocommons.lambda.Lambda.$;
+import static net.sf.staccatocommons.lambda.Lambda.lambda;
+import static net.sf.staccatocommons.lang.number.NumberTypes.integer;
+import static net.sf.staccatocommons.lang.predicate.Predicates.equal;
+import static net.sf.staccatocommons.lang.predicate.Predicates.false_;
+import static net.sf.staccatocommons.lang.predicate.Predicates.isInstanceOf;
+import static net.sf.staccatocommons.lang.predicate.Predicates.notNull;
+import static net.sf.staccatocommons.lang.predicate.Predicates.true_;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.junit.Assume.assumeTrue;
 
 import java.util.NoSuchElementException;
 

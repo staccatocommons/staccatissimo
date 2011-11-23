@@ -10,20 +10,21 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons;
+package net.sf.staccatocommons.reductions;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
-import net.sf.staccatocommons.defs.reduction.Accumulator;
 import net.sf.staccatocommons.defs.reduction.Reduction;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Compare;
+import net.sf.staccatocommons.reductions.internal.Append;
+import net.sf.staccatocommons.reductions.internal.Count;
+import net.sf.staccatocommons.reductions.internal.Foldl;
+import net.sf.staccatocommons.reductions.internal.Foldl1;
+import net.sf.staccatocommons.reductions.internal.Sum;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -39,39 +40,11 @@ public class Reductions {
 
   @Constant
   public static <A> Reduction<A, Integer> count() {
-    return new AbstractReduction<A, Integer>() {
-      public Accumulator<A, Integer> start() {
-        return new Accumulator<A, Integer>() {
-          private int i = 0;
-
-          public void accumulate(A element) {
-            i++;
-          }
-
-          public Integer value() {
-            return i;
-          }
-        };
-      }
-    };
+    return new Count<A>();
   }
 
   public static <A> Reduction<A, List<A>> append() {
-    return new AbstractReduction<A, List<A>>() {
-      public Accumulator<A, List<A>> start() {
-        return new Accumulator<A, List<A>>() {
-          private List<A> list = new LinkedList<A>();
-
-          public void accumulate(A element) {
-            list.add(element);
-          }
-
-          public List<A> value() {
-            return Collections.unmodifiableList(list);
-          }
-        };
-      }
-    };
+    return new Append<A>();
   }
 
   /**
@@ -81,21 +54,7 @@ public class Reductions {
    */
   @Constant
   public static Reduction<Integer, Integer> sum() {
-    return new AbstractReduction<Integer, Integer>() {
-      public Accumulator<Integer, Integer> start() {
-        return new Accumulator<Integer, Integer>() {
-          private int i = 0;
-
-          public void accumulate(Integer element) {
-            i += element;
-          }
-
-          public Integer value() {
-            return i;
-          }
-        };
-      }
-    };
+    return new Sum();
   }
 
   /**
@@ -177,47 +136,12 @@ public class Reductions {
 
   public static <A> Reduction<A, A> from(
     final Applicable2<? super A, ? super A, ? extends A> function) {
-    return new AbstractReduction<A, A>() {
-      public Accumulator<A, A> start() {
-        return new Accumulator<A, A>() {
-          private A i;
-          private boolean init;
-
-          public void accumulate(A element) {
-            if (!init) {
-              i = element;
-              init = true;
-            } else
-              i = function.apply(i, element);
-          }
-
-          public A value() {
-            if (!init)
-              throw new NoSuchElementException();
-            return i;
-          }
-        };
-      }
-    };
+    return new Foldl1<A>(function);
   }
 
   public static <A, B> Reduction<A, B> from(final B initial,
     final Applicable2<? super B, ? super A, ? extends B> function) {
-    return new AbstractReduction<A, B>() {
-      public Accumulator<A, B> start() {
-        return new Accumulator<A, B>() {
-          private B i = initial;
-
-          public void accumulate(A element) {
-            i = function.apply(i, element);
-          }
-
-          public B value() {
-            return i;
-          }
-        };
-      }
-    };
+    return new Foldl<A, B>(initial, function);
   }
   
 

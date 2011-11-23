@@ -11,14 +11,23 @@
  *  GNU Lesser General Public License for more details.
  */
 
-package net.sf.staccatocommons.defs.reduction;
+package net.sf.staccatocommons.reductions.internal;
 
-import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.reduction.Accumulator;
+import net.sf.staccatocommons.reductions.AbstractReduction;
 
-public interface Accumulator<A, B> extends Thunk<B> {
+public final class Sum extends AbstractReduction<Integer, Integer> {
+  public Accumulator<Integer, Integer> start() {
+    return new Accumulator<Integer, Integer>() {
+      private int i = 0;
 
-  void accumulate(A element);
+      public void accumulate(Integer element) {
+        i += element;
+      }
 
-  B value();
-
+      public Integer value() {
+        return i;
+      }
+    };
+  }
 }

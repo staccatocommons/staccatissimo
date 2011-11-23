@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import static java.lang.Math.*;
+import static java.lang.Math.min;
 import net.sf.staccatocommons.collections.internal.iterator.ZipIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.AbstractStream;

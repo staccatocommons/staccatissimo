@@ -12,9 +12,10 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static junit.framework.Assert.*;
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
-import static net.sf.staccatocommons.lang.sequence.StopConditions.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNull;
+import static net.sf.staccatocommons.lang.number.NumberTypes.add;
+import static net.sf.staccatocommons.lang.sequence.StopConditions.upTo;
 
 import java.util.Arrays;
 

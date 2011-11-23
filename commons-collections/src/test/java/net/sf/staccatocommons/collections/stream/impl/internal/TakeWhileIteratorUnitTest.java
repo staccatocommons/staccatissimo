@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import static net.sf.staccatocommons.lang.Compare.*;
+import static net.sf.staccatocommons.lang.Compare.lessThan;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 

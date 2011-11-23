@@ -15,7 +15,6 @@ package net.sf.staccatocommons.collections.stream;
 import java.util.Map;
 
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.reduction.Reduction;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 

@@ -12,12 +12,18 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccatocommons.lambda.Lambda.*;
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
-import static net.sf.staccatocommons.lang.number.Numbers.*;
-import static net.sf.staccatocommons.lang.sequence.StopConditions.*;
-import static net.sf.staccatocommons.lang.tuple.Tuples.*;
-import static org.junit.Assert.*;
+import static net.sf.staccatocommons.lambda.Lambda.$;
+import static net.sf.staccatocommons.lambda.Lambda.lambda;
+import static net.sf.staccatocommons.lang.number.NumberTypes.add;
+import static net.sf.staccatocommons.lang.number.NumberTypes.bigInteger;
+import static net.sf.staccatocommons.lang.number.NumberTypes.double_;
+import static net.sf.staccatocommons.lang.number.NumberTypes.integer;
+import static net.sf.staccatocommons.lang.number.Numbers.i;
+import static net.sf.staccatocommons.lang.sequence.StopConditions.upTo;
+import static net.sf.staccatocommons.lang.tuple.Tuples._;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -28,15 +34,16 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
-import net.sf.staccatocommons.collections.reduction.Reductions;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.tuple.Pair;
 import net.sf.staccatocommons.lang.tuple.Tuples;
+import net.sf.staccatocommons.reductions.Reductions;
 
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -310,7 +317,7 @@ public class AbstractStreamBasicTest {
         public BigInteger apply(BigInteger arg) {
           return arg.remainder(i(3));
         }
-      }, bigInteger().add());
+      }, Reductions.from(bigInteger().add()));
 
     assertEquals(i(9), mapReduce.get(i(0)));
     assertFalse(mapReduce.containsKey(i(1)));

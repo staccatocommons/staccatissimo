@@ -629,8 +629,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
     for (A element : this) {
       K key = groupFunction.apply(element);
       Accumulator<A, V> accum = map.get(key);
-      if (accum == null)
-        map.put(key, reduction.start());
+      
+      if (accum == null) {
+        accum = reduction.start();
+        map.put(key, accum);
+      }
       accum.accumulate(element);
     }
     for (Entry<K, Accumulator<A, V>> e : map.entrySet())

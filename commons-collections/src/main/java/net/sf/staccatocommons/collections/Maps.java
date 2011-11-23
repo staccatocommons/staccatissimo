@@ -13,17 +13,16 @@
 
 package net.sf.staccatocommons.collections;
 
-import static net.sf.staccatocommons.collections.iterable.Iterables.*;
+import static net.sf.staccatocommons.collections.iterable.Iterables.any;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Map.Entry;
+import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.defs.reduction.Accumulator;
 import net.sf.staccatocommons.lang.MapBuilder;
 import net.sf.staccatocommons.lang.None;
 import net.sf.staccatocommons.lang.Option;
