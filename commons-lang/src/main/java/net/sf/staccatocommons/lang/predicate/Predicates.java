@@ -30,7 +30,6 @@ import net.sf.staccatocommons.lang.predicate.internal.Same;
 import net.sf.staccatocommons.lang.predicate.internal.True;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * Factory methods for common predicates
@@ -122,7 +121,6 @@ public class Predicates {
    * @param clazz
    * @return a new {@link AbstractPredicate}
    */
-  @ForceRestrictions
   public static <T> Predicate<T> isInstanceOf(@NonNull final Class<? extends T> clazz) {
     return new AbstractPredicate<T>() {
       public boolean eval(T argument) {

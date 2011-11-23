@@ -43,7 +43,8 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotEmpty;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
 import net.sf.staccatocommons.restrictions.check.Size;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 import org.apache.commons.lang.ObjectUtils;
 
@@ -97,7 +98,6 @@ public class Iterables {
    *         iterable.
    */
   @NonNull
-  @ForceRestrictions
   public static <A> List<A> take(@NonNull Iterable<A> iterable, @NotNegative int amountOfElements) {
     return takeInternal(iterable, amountOfElements, new ArrayList<A>(amountOfElements));
   }
@@ -115,8 +115,10 @@ public class Iterables {
    * @return the result of aggregating the <code>iterable</code>'s element
    */
   @NonNull
+  @IgnoreRestrictions
   public static <A> A reduce(@NotEmpty Iterable<A> iterable,
     @NonNull Applicable2<? super A, ? super A, ? extends A> function) {
+    Ensure.isNotNull("function", function);
     Iterator<A> iter = iterable.iterator();
     if (!iter.hasNext())
       Ensure.fail(ITERABLE, iterable, "Must be not empty");
@@ -207,7 +209,6 @@ public class Iterables {
    *          a single element (size==1) collection
    * @return The unique element of the collection
    */
-  @ForceRestrictions
   public static <A> A single(@Size(1) Collection<A> collection) {
     return any(collection);
   }
@@ -364,7 +365,7 @@ public class Iterables {
    * @return if the iterable is null or empty
    * @see #isEmpty(Iterable)
    */
-  public static <A> boolean isNullOrEmpty(@NonNull Iterable<A> iterable) {
+  public static <A> boolean isNullOrEmpty(Iterable<A> iterable) {
     return iterable == null || isEmpty(iterable);
   }
 
@@ -376,7 +377,7 @@ public class Iterables {
    * @param collection
    * @return if the collection is null or empty
    */
-  public static <A> boolean isNullOrEmpty(@NonNull Collection<A> collection) {
+  public static <A> boolean isNullOrEmpty(Collection<A> collection) {
     return collection == null || collection.isEmpty();
   }
 

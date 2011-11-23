@@ -47,7 +47,7 @@ import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 /**
  * Class methods for creating very simple {@link Stream}s wrapping existing
@@ -165,6 +165,7 @@ public class Streams {
    * @see Sequence#from(Object, Applicable, Evaluable)
    */
   @Projection
+  @IgnoreRestrictions
   public static <A> Stream<A> iterate(@NonNull A seed, @NonNull Applicable<? super A, ? extends A> generator) {
     return from(Sequence.from(seed, generator, StopConditions.stopNever()));
   }
@@ -184,6 +185,7 @@ public class Streams {
    * @see Sequence#from(Object, Applicable, Evaluable)
    */
   @Projection
+  @IgnoreRestrictions
   public static <A> Stream<A> iterateUntilNull(@NonNull A seed, @NonNull Applicable<? super A, ? extends A> generator) {
     return from(Sequence.from(seed, generator, Predicates.null_()));
   }
@@ -205,6 +207,7 @@ public class Streams {
    * @see Sequence#from(Object, Applicable, Evaluable)
    */
   @Projection
+  @IgnoreRestrictions
   public static <A> Stream<A> iterate(@NonNull A start, @NonNull Applicable<? super A, ? extends A> generator,
     @NonNull Evaluable<A> stopCondition) {
     return from(Sequence.from(start, generator, stopCondition));
@@ -261,7 +264,6 @@ public class Streams {
    * @return a new {@link Stream}
    */
   @Projection
-  @ForceRestrictions
   public static <A> Stream<A> repeat(@NonNull final Thunk<A> thunk) {
     return from(new NextThriterator<A>() {
 
@@ -307,6 +309,7 @@ public class Streams {
    * @return a new {@link Stream}
    */
   @Projection
+  @IgnoreRestrictions
   public static <A> Stream<A> from(@NonNull Iterator<? extends A> iterator) {
     return new IteratorStream<A>(iterator);
   }

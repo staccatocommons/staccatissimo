@@ -16,6 +16,7 @@ package net.sf.staccatocommons.instrument.context.internal;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtConstructor;
+import javassist.Modifier;
 import javassist.NotFoundException;
 import net.sf.staccatocommons.instrument.context.ConstructorAnnotationContext;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -61,4 +62,8 @@ public class DefaultConstructorAnnotationContext extends AbstractAnnotationConte
     return constructor.getDeclaringClass();
   }
 
+  @Override
+  public boolean isPublic() {
+   return Modifier. isPublic(getConstructor().getModifiers());
+  }
 }

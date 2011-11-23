@@ -25,7 +25,7 @@ import net.sf.staccatocommons.dynamic.Dynamics;
 import net.sf.staccatocommons.dynamic.MessageNotUnderstoodException;
 import net.sf.staccatocommons.dynamic.MethodEvaluationException;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * @author flbulgarelli
@@ -46,7 +46,7 @@ public final class ReflectiveDynamic extends AbstractDynamic {
     this.target = target;
   }
 
-  @ForceRestrictions
+  @EnforceRestrictions
   public <T> T send(@NonNull final String selector, @NonNull final Object... args) {
     MethodDescriptor descriptor = newDescriptor(selector, getArgTypes(args));
     Method method = getMethod(descriptor);

@@ -17,6 +17,7 @@ import javassist.ClassPool;
 import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.CtConstructor;
+import javassist.Modifier;
 import javassist.NotFoundException;
 import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -27,7 +28,8 @@ import org.slf4j.Logger;
  * @author flbulgarelli
  * 
  */
-public class DefaultArgumentAnnotationContext extends AbstractAnnotationContext implements ArgumentAnnotationContext {
+public class DefaultArgumentAnnotationContext extends AbstractAnnotationContext implements
+  ArgumentAnnotationContext {
 
   private CtBehavior behavior;
   private int parameterNumber;
@@ -84,5 +86,10 @@ public class DefaultArgumentAnnotationContext extends AbstractAnnotationContext 
 
   public CtClass getElementType() throws NotFoundException {
     return getArgumentBehavior().getParameterTypes()[getArgumentNumber()];
+  }
+
+  @Override
+  public boolean isPublic() {
+    return Modifier.isPublic(getArgumentBehavior().getModifiers());
   }
 }

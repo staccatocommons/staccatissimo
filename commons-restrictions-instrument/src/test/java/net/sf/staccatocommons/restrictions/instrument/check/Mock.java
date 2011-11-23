@@ -24,7 +24,7 @@ import net.sf.staccatocommons.restrictions.check.NotNegative;
 import net.sf.staccatocommons.restrictions.check.NotZero;
 import net.sf.staccatocommons.restrictions.check.Positive;
 import net.sf.staccatocommons.restrictions.check.Size;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 /**
@@ -43,7 +43,7 @@ public class Mock {
   public Mock(@NonNull Object argument, @NonNull Long argument2) {}
 
   /***/
-  @ForceRestrictions
+  @EnforceRestrictions
   public Mock(@NonNull Object argument, @NonNull String argument2) {}
 
   /***/
@@ -53,7 +53,7 @@ public class Mock {
   }
 
   /***/
-  @ForceRestrictions
+  @EnforceRestrictions
   public void forceChecksNonNullMethodArgument(@NonNull Object argument) {}
 
   /***/
@@ -62,6 +62,9 @@ public class Mock {
 
   /***/
   public void defaultNonNullMethodArgument(@NonNull Object argument) {}
+  
+  /***/
+  protected void defaultNonNullProtectedMethodArgument(@NonNull Object argument) {}
 
   /***/
   public void defaultSizeMethodArgument(@Size(1) List<?> argument) {}

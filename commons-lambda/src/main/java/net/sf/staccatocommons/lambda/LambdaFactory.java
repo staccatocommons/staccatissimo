@@ -28,7 +28,7 @@ import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.function.AbstractFunction3;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 import org.apache.commons.proxy.ProxyFactory;
 import org.apache.commons.proxy.invoker.NullInvoker;
@@ -95,7 +95,7 @@ public final class LambdaFactory {
    *          the type to stub
    * @return a new stub
    */
-  @ForceRestrictions
+  @EnforceRestrictions
   @NonNull
   public <A> A $(@NonNull Class<A> clazz) {
     STATE.that(!firstStep, "Wrong invocation order");

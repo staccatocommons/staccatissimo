@@ -21,15 +21,15 @@ import net.sf.staccatocommons.instrument.handler.ClassAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.ConstructorAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.MethodAnnotationHandler;
 import net.sf.staccatocommons.instrument.handler.deactivator.AbstractActivationAnnotationHandler;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class ForceChecksHandler extends AbstractActivationAnnotationHandler<ForceRestrictions> implements
-  ClassAnnotationHandler<ForceRestrictions>, ConstructorAnnotationHandler<ForceRestrictions>,
-  MethodAnnotationHandler<ForceRestrictions> {
+public class ForceChecksHandler extends AbstractActivationAnnotationHandler<EnforceRestrictions> implements
+  ClassAnnotationHandler<EnforceRestrictions>, ConstructorAnnotationHandler<EnforceRestrictions>,
+  MethodAnnotationHandler<EnforceRestrictions> {
 
   /**
    * Creates a new {@link ForceChecksHandler}
@@ -38,35 +38,35 @@ public class ForceChecksHandler extends AbstractActivationAnnotationHandler<Forc
     super();
   }
 
-  public Class<ForceRestrictions> getSupportedAnnotationType() {
-    return ForceRestrictions.class;
+  public Class<EnforceRestrictions> getSupportedAnnotationType() {
+    return EnforceRestrictions.class;
   }
 
-  public void preProcessAnnotatedMethod(ForceRestrictions annotation, MethodAnnotationContext context) {
+  public void preProcessAnnotatedMethod(EnforceRestrictions annotation, MethodAnnotationContext context) {
     activateAll();
   }
 
-  public void postProcessAnnotatedMethod(ForceRestrictions annotation, MethodAnnotationContext context) {
+  public void postProcessAnnotatedMethod(EnforceRestrictions annotation, MethodAnnotationContext context) {
     deactivateAll();
   }
 
-  public void preProcessAnnotatedConstructor(ForceRestrictions annotation, ConstructorAnnotationContext context) {
+  public void preProcessAnnotatedConstructor(EnforceRestrictions annotation, ConstructorAnnotationContext context) {
     activateAll();
   }
 
-  public void postProcessAnnotatedConstructor(ForceRestrictions annotation, ConstructorAnnotationContext context) {
+  public void postProcessAnnotatedConstructor(EnforceRestrictions annotation, ConstructorAnnotationContext context) {
     deactivateAll();
   }
 
   @Override
-  public void preProcessAnnotatedClass(ForceRestrictions annotation, ClassAnnotationContext context)
+  public void preProcessAnnotatedClass(EnforceRestrictions annotation, ClassAnnotationContext context)
     throws CannotCompileException {
     activateAll();
 
   }
 
   @Override
-  public void postProcessAnnotatedClass(ForceRestrictions annotation, ClassAnnotationContext context)
+  public void postProcessAnnotatedClass(EnforceRestrictions annotation, ClassAnnotationContext context)
     throws CannotCompileException {
     deactivateAll();
   }

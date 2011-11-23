@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.dynamic.internal.PrimitiveWrappers;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 import org.apache.commons.proxy.Invoker;
 import org.apache.commons.proxy.exception.ProxyFactoryException;
@@ -42,7 +42,7 @@ public abstract class AbstractDynamic implements Dynamic {
   }
 
   @NonNull
-  @ForceRestrictions
+  @EnforceRestrictions
   public final <T> Thunk<T> delayedSend(@NonNull final String selector, @NonNull final Object... args) {
     return new Thunk<T>() {
       public T value() {
@@ -52,7 +52,7 @@ public abstract class AbstractDynamic implements Dynamic {
   }
 
   @NonNull
-  @ForceRestrictions
+  @EnforceRestrictions
   public final <T> T as(@NonNull Class<T> clazz) {
     if (valueIsInstanceOf(clazz)) {
       return (T) value();
@@ -61,7 +61,7 @@ public abstract class AbstractDynamic implements Dynamic {
   }
 
   @NonNull
-  @ForceRestrictions
+  @EnforceRestrictions
   public final <T> T chainingAs(@NonNull Class<T> clazz) {
     if (valueIsInstanceOf(clazz)) {
       return (T) value();

@@ -21,7 +21,7 @@ import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * 
@@ -33,7 +33,6 @@ import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> implements Function<A, B> {
 
   @NonNull
-  @ForceRestrictions
   public <C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other) {
     return new AbstractFunction<C, B>() {
       public B apply(C arg) {
@@ -43,7 +42,6 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
   }
 
   @NonNull
-  @ForceRestrictions
   public <Tp1, Tp2> Function2<Tp1, Tp2, B> of(@NonNull final Applicable2<Tp1, Tp2, ? extends A> other) {
     return new AbstractFunction2<Tp1, Tp2, B>() {
       public B apply(Tp1 arg0, Tp2 arg1) {
@@ -53,7 +51,6 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
   }
 
   @NonNull
-  @ForceRestrictions
   public <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other) {
     return new AbstractFunction3<Tp1, Tp2, Tp3, B>() {
       public B apply(Tp1 arg0, Tp2 arg1, Tp3 arg2) {
@@ -73,12 +70,10 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
     };
   }
 
-  @ForceRestrictions
   public <C> Function<A, C> then(@NonNull Function<? super B, ? extends C> other) {
     return (Function<A, C>) other.of(this);
   }
 
-  @ForceRestrictions
   public Predicate<A> then(@NonNull Predicate<? super B> other) {
     return other.of(this);
   }

@@ -44,7 +44,7 @@ Processing directives Supported
   
  * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/processing/IgnoreRestrictions.html}IgnoreRestrictions}}>>>
  
- * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/processing/ForceRestrictions.html}ForceRestrictions}}>>>
+ * <<<{{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/processing/EnforceRestrictions.html}EnforceRestrictions}}>>>
   
 Other Restrictions Supported
 

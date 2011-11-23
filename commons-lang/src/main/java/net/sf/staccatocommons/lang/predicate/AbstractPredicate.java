@@ -18,7 +18,7 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * <p>
@@ -71,7 +71,6 @@ public abstract class AbstractPredicate<A> implements Predicate<A> {
    * @return A new predicate that performs the short circuited or between this
    *         and other when evaluated. Non Null
    */
-  @ForceRestrictions
   public Predicate<A> or(@NonNull final Evaluable<? super A> other) {
     final class Or extends AbstractPredicate<A> {
       public boolean eval(A argument) {
@@ -90,7 +89,6 @@ public abstract class AbstractPredicate<A> implements Predicate<A> {
    * @return A new predicate that performs the short circuited logical-and
    *         between this and other when evaluated. Non Null
    */
-  @ForceRestrictions
   public Predicate<A> and(@NonNull final Evaluable<? super A> other) {
     final class And extends AbstractPredicate<A> {
       public boolean eval(A argument) {
@@ -108,7 +106,6 @@ public abstract class AbstractPredicate<A> implements Predicate<A> {
     return Predicates.<A> null_().or(this);
   }
 
-  @ForceRestrictions
   public <B> Predicate<B> of(@NonNull final Applicable<? super B, ? extends A> other) {
     return new AbstractPredicate<B>() {
       public boolean eval(B argument) {

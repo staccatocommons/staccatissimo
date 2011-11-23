@@ -25,7 +25,6 @@ import net.sf.staccatocommons.lang.thunk.internal.NullThunk;
 import net.sf.staccatocommons.lang.thunk.internal.UndefinedThunk;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.ForceRestrictions;
 
 /**
  * Class factory methods for some common {@link Thunk}s
@@ -107,7 +106,6 @@ public class Thunks {
    * @param runnable
    * @return a new {@link Thunk} that wraps the given {@link Runnable}
    */
-  @ForceRestrictions
   public static Thunk<Void> from(@NonNull final Runnable runnable) {
     return new Thunk<Void>() {
       public Void value() {
