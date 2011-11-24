@@ -37,9 +37,19 @@ public final class Ensure {
    * 
    * @see Check#fail(String, Object, String, Object...)
    */
-  public static void fail(String varName, Object var, String message, Object... args) {
-    that().fail(varName, var, message, args);
+  public static <A> A fail(String varName, Object var, String message, Object... args) {
+    return that().fail(varName, var, message, args);
   }
+  
+  /**
+   * Shortcut to <code>Ensure.that().fail(message,args)</code>
+   * 
+   * @see Check#fail(String, Object...)
+   */
+  public static <A> A fail(String message, Object... args) {
+    return that().fail(message, args);
+  }
+
 
   /**
    * Shortcut to
