@@ -13,13 +13,16 @@
 
 package net.sf.staccatocommons.collections;
 
-import static net.sf.staccatocommons.collections.iterable.Iterables.*;
+import static net.sf.staccatocommons.collections.iterable.Iterables.any;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.MapBuilder;
 import net.sf.staccatocommons.lang.None;
@@ -154,6 +157,22 @@ public class Maps {
    */
   public static boolean isNullOrEmpty(Map<?, ?> map) {
     return map == null || map.isEmpty();
+  }
+  
+  public static <K, V1, V2> Map<K, V2> mapKeys(Map<K, V1> map, Applicable<V1, V2> function) {
+    Map<K, V2> result = new LinkedHashMap<K, V2>();
+    for (Entry<K, V1> e : map.entrySet())
+      result.put(e.getKey(), function.apply(e.getValue()));
+    return Collections.unmodifiableMap(result);
+  }
+  
+  public static <K, V1, V2> Map<K, V2> delayedMapKeys(final Map<K, V1> map,
+    final Applicable<? super V1, ? extends V2> function) {
+    return Collections.unmodifiableMap(new LinkedHashMap<K, V2>() {
+      public V2 get(Object key) {
+        return function.apply(map.get(key));
+      }
+    });
   }
 
   /**

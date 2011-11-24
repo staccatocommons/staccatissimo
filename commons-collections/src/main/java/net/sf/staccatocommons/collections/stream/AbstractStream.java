@@ -29,6 +29,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -40,8 +41,6 @@ import net.sf.staccatocommons.collections.internal.iterator.FilterIterator;
 import net.sf.staccatocommons.collections.internal.iterator.TakeWhileIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
-import net.sf.staccatocommons.collections.reduction.Reduction;
-import net.sf.staccatocommons.collections.reduction.Reductions;
 import net.sf.staccatocommons.collections.stream.impl.ListStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendIterableStream;
 import net.sf.staccatocommons.collections.stream.impl.internal.AppendStream;
@@ -68,6 +67,8 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.partial.EmptyAware;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
+import net.sf.staccatocommons.defs.reduction.Accumulator;
+import net.sf.staccatocommons.defs.reduction.Reduction;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
@@ -166,6 +167,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
     } catch (IllegalArgumentException e) { // FIXME why illegal argument ???
       return VALIDATE_ELEMENT.fail("Can not reduce an empty stream");
     }
+  }
+
+  @Override
+  public <B> B reduce(Reduction<A, B> reduction) throws NoSuchElementException {
+    return Iterables.reduce(this, reduction);
   }
 
   @Override
@@ -401,7 +407,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
   private static <A> Predicate2<A, A> equalOrEquiv() {
     return Equiv.<A> equalNullSafe().or(new AbstractPredicate2<A, A>() {
       public boolean eval(A arg0, A arg1) {
-        return arg0 instanceof Stream<?> && arg1 instanceof Stream<?> && ((Stream) arg0).equiv((Stream) arg1);
+        return arg0 instanceof Stream<?> && arg1 instanceof Stream<?>
+          && ((Stream) arg0).equiv((Stream) arg1);
       }
     });
   }
@@ -417,7 +424,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   @Override
-  public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, Iterable<? extends A> iterable) {
+  public final <B> boolean equivOn(Applicable<? super A, ? extends B> function,
+    Iterable<? extends A> iterable) {
     return equivBy(Equiv.on(function), iterable);
   }
 
@@ -575,12 +583,14 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   @Override
-  public final <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function) throws NoSuchElementException {
+  public final <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function)
+    throws NoSuchElementException {
     return maximumBy(Compare.on(function));
   }
 
   @Override
-  public final <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function) throws NoSuchElementException {
+  public final <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function)
+    throws NoSuchElementException {
     return minimumBy(Compare.on(function));
   }
 
@@ -609,29 +619,22 @@ public abstract class AbstractStream<A> implements Stream<A> {
     return Streams.from((List<A>) reversedList);
   }
 
-  public <K> Map<K, A> groupOn(Applicable<? super A, K> groupFunction,
-    Applicable2<? super A, ? super A, A> reduceFunction) {
-    return groupOn(groupFunction, Reductions.from(reduceFunction));
-  }
+  public <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Reduction<A, V> reduction) {
+    Map<K, Accumulator<A, V>> map = new LinkedHashMap<K, Accumulator<A, V>>();
 
-  public <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Applicable<? super A, V> mapFunction,
-    Applicable2<? super V, ? super V, V> reduceFunction) {
-    return groupOn(groupFunction, Reductions.from(mapFunction, reduceFunction));
-  }
-
-  public <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Reduction<A, V> reducer) {
-    Map<K, V> map = new LinkedHashMap<K, V>();
     for (A element : this) {
       K key = groupFunction.apply(element);
-      V acum = map.get(key);
-      if (acum != null)
-        map.put(key, reducer.reduce(element, acum));
-      else if (map.containsKey(key))
-        map.put(key, reducer.reduce(element, null));
-      else
-        map.put(key, reducer.initial(element));
+      Accumulator<A, V> accum = map.get(key);
+      
+      if (accum == null) {
+        accum = reduction.start();
+        map.put(key, accum);
+      }
+      accum.accumulate(element);
     }
-    return map;
+    for (Entry<K, Accumulator<A, V>> e : map.entrySet())
+      ((Entry<K, V>) e).setValue(e.getValue().value());
+    return (Map<K, V>) map;
   }
 
   public Stream<Tuple2<A, A>> cross() {

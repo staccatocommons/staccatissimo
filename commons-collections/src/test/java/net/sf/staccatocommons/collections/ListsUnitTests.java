@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.collections;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;

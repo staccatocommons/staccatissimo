@@ -13,8 +13,12 @@
 
 package net.sf.staccatocommons.collections.iterable;
 
-import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.*;
-import static net.sf.staccatocommons.lang.tuple.Tuples.*;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.ITERABLE;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.addAllInternal;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.collectInternal;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.filterInternal;
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.takeInternal;
+import static net.sf.staccatocommons.lang.tuple.Tuples._;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +38,8 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Evaluable2;
+import net.sf.staccatocommons.defs.reduction.Accumulator;
+import net.sf.staccatocommons.defs.reduction.Reduction;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Option;
@@ -43,7 +49,6 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotEmpty;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
 import net.sf.staccatocommons.restrictions.check.Size;
-import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -154,7 +159,16 @@ public class Iterables {
       result = function.apply(result, element);
     return result;
   }
-
+  
+  @NonNull
+  public static <A, B> B reduce(@NonNull Iterable<A> iterable, @NonNull Reduction<A, B> reduction) {
+    Accumulator<A, B> accum = reduction.start();
+    for(A element : iterable) {
+      accum.accumulate(element);
+    }
+    return accum.value();
+  }
+  
   /*
    * Search
    */

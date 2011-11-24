@@ -75,5 +75,10 @@ public final class IdentityFunction<A> extends TopLevelFunction<A, A> {
   public static <I> Function<I, I> identity() {
     return new IdentityFunction();
   }
+  
+  @Override
+  public boolean isIdentity() {
+    return true;
+  }
 
 }

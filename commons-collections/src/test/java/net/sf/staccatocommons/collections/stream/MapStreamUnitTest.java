@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
+import static net.sf.staccatocommons.lang.number.NumberTypes.add;
 
 import java.util.Arrays;
 

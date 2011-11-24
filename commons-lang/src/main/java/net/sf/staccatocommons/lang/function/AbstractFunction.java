@@ -126,5 +126,10 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
   public String toString() {
     return "Function";
   }
+  
+  @Override
+  public boolean isIdentity() {
+    return false;
+  }
 
 }

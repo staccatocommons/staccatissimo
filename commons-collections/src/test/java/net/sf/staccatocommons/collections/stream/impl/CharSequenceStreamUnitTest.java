@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.impl;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
 import net.sf.staccatocommons.collections.stream.RepetableStreamTheories;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;

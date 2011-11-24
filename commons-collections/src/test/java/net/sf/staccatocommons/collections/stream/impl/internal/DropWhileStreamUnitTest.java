@@ -12,8 +12,9 @@
  */
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
-import static net.sf.staccatocommons.lang.Compare.*;
-import static org.junit.Assert.*;
+import static net.sf.staccatocommons.lang.Compare.greaterThan;
+import static net.sf.staccatocommons.lang.Compare.greaterThanOrEqualTo;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 

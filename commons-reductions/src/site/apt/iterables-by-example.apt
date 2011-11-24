@@ -1,0 +1,87 @@
+~~
+~~  Copyright (c) 2011, The Staccato-Commons Team
+~~
+~~  This program is free software; you can redistribute it and/or modify
+~~  it under the terms of the GNU Lesser General Public License as published by
+~~  the Free Software Foundation; version 3 of the License.
+~~
+~~  This program is distributed in the hope that it will be useful,
+~~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~~  GNU Lesser General Public License for more details.
+~~
+
+Iterables by example
+
+* Introduction 
+ 
+ Staccato-Commons-Collections offers some utility classes to perform simple transformations on iterables, collections 
+ and maps: {{{http://staccatocommons.sourceforge.net/commons-collections/apidocs/net/sf/staccatocommons/collections/iterable/Iterables.html}Iterables}},
+  {{{http://staccatocommons.sourceforge.net/commons-collections/apidocs/net/sf/staccatocommons/collections/iterable/ModifiableIterables.html}ModifiableIterables}}, 
+  {{{http://staccatocommons.sourceforge.net/commons-collections/apidocs/net/sf/staccatocommons/collections/Lists.html}Lists}} 
+  and {{{http://staccatocommons.sourceforge.net/commons-collections/apidocs/net/sf/staccatocommons/collections/Maps.html}Maps}}. 
+  
+  On the other hand, for performing complex, lazy transformations on more than just iterables in a more functional way, 
+ have a look at {{{./stream-by-example.html}Stream by example}}.
+
+* The problem
+
+   Quite frequently, developers need to perform in-memory simple transformations over collections, like selecting,
+  filtering or mapping elements. In Java, without any support for those operation neither at language nor standard library level, 
+  developers have usually to implement them writing ad-hoc methods. Code like the following is far too common:
+  
++---
+ Collection<Service> getDownServices(){ 
+  Collection<Service> downServices = new ArrayList<Service>(services.size());
+  for(Service service : services)
+    if(service.isDown())
+    downServices.add(service);
+  return downServices;   
+ }   
++--- 
+ 
+  The problem of such code is that it is reinventing the wheel. In this case, developer is implementing the logic of filtering
+  once and again, which sooner or later will be a maintenance headache. 
+  
+  Fortunately, many Java frameworks exists that attack those problems, each one with its pros and cons:
+   {{{http://commons.apache.org/collections/}Apache Commons Collections}}, 
+  {{{http://code.google.com/p/guava-libraries/}Guava (formerly Google Collections)}},
+   {{{http://code.google.com/p/totallylazy/}TotallyLazy}},
+  {{{http://functionaljava.org/}FunctionalJava}}, 
+  {{{http://www.op4j.org/}Op4J}}, {{{http://quaere.codehaus.org/}Quaere}} 
+  and of course, Staccato-Commons-Collections.
+  
+  It is not our intention to make a comparison between all those frameworks.
+  As said before, all them have both strengths and flaws, and the developer should decide which fits better. 
+  Instead, we will just present the solutions Staccato-Commons-Collections offers.
+  
+* The Solution  
+  
+  Iterables, ModifiableIterables, Maps and Lists are utility classes that provide around 60 common operations over Collections. 
+  Although those methods share similar names with those of Streams, they are implemented in a non-lazy manner, and are targeted
+  for performing simple, non-chained operations. With exception of ModifiableIterables, all those operations are side-effect free - they 
+  do not modify their arguments. 
+  
+  For example, previous code can be refactored using Iterables:
+  
++---
+ Collection<Service> getDownServices() { 
+  return Iterables.filter(services, new AbstractPredicate<Service>() {
+    public boolean eval(Service service) {
+     return service.isDown();
+    }}); 
+  }
++--- 
+
+ Or, using {{{http://staccatocommons.sourceforge.net/commons-lambda}Staccato-Commons-Lambda}}:
+
++---
+ Collection<Service> getDownServices() {
+   return Iterables.filter(services, lambda($(Service.class).isDown());
+ }
++---  
+  
+   
+  
+  
+  

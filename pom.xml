@@ -225,6 +225,7 @@
              <module>commons-lang</module>
              <module>commons-dynamic</module>
              <module>commons-lambda</module>
+             <module>commons-reductions</module>
              <module>commons-collections</module> 
              <module>commons-io</module>
              <module>commons-control</module>
@@ -278,6 +279,8 @@
              <module>commons-lang</module>
              <module>commons-dynamic</module>
              <module>commons-lambda</module>
+             <module>commons-restrictions</module>
+             <module>commons-reductions</module>
              <module>commons-collections</module> 
              <module>commons-control</module>
              <module>commons-io</module>

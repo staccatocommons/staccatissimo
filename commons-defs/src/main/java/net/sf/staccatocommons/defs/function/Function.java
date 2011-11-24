@@ -197,4 +197,5 @@ public interface Function<A, B> extends Applicable<A, B>, //
 
   // Function<A, B> withEffect(Executable<A> effect);
 
+  boolean isIdentity();
 }
