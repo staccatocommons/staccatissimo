@@ -12,6 +12,8 @@
  */
 package net.sf.staccatocommons.lang.thunk.internal;
 
+import java.util.NoSuchElementException;
+
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.restrictions.Constant;
 
@@ -22,7 +24,7 @@ import net.sf.staccatocommons.restrictions.Constant;
 public class UndefinedThunk<A> implements Thunk<A> {
 
   public A value() {
-    throw new RuntimeException("Undefined");
+    throw new NoSuchElementException("Undefined");
   }
 
   public String toString() {

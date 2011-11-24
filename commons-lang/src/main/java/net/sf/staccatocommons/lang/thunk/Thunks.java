@@ -15,12 +15,16 @@ package net.sf.staccatocommons.lang.thunk;
 import java.util.Date;
 import java.util.concurrent.Callable;
 
+import com.sun.istack.internal.NotNull;
+
+import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.thunk.internal.DateThunk;
+import net.sf.staccatocommons.lang.thunk.internal.FailThunk;
 import net.sf.staccatocommons.lang.thunk.internal.NullThunk;
 import net.sf.staccatocommons.lang.thunk.internal.UndefinedThunk;
 import net.sf.staccatocommons.restrictions.Constant;
@@ -97,6 +101,18 @@ public class Thunks {
   @Constant
   public static <A> Thunk<A> undefined() {
     return UndefinedThunk.undefined();
+  }
+  
+  /**
+   * Answers a {@link Thunk} that, when evaluated, throws an exception with the given 
+   * formatted message as {@link Ensure#fail(String, Object...)}
+   * 
+   * @param message the message
+   * @param args the message arguments
+   * @return a new {@link Thunk} that fails with the given message 
+   */
+  public static <A> Thunk<A> fail(@NotNull String message, Object... args) {
+    return new FailThunk<A>(message, args);
   }
 
   /**
