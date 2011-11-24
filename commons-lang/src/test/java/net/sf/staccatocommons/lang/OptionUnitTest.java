@@ -13,8 +13,16 @@
 
 package net.sf.staccatocommons.lang;
 
-import static net.sf.staccatocommons.lang.Option.*;
-import static org.junit.Assert.*;
+import static net.sf.staccatocommons.lang.Option.none;
+import static net.sf.staccatocommons.lang.Option.nullToNone;
+import static net.sf.staccatocommons.lang.Option.some;
+import static net.sf.staccatocommons.lang.Option.someNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.NoSuchElementException;
 

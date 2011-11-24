@@ -19,6 +19,9 @@ public interface Accumulator<A, B> extends Thunk<B> {
 
   void accumulate(A element);
 
+  /**
+   * Answers the accumulated value
+   */
   B value();
 
 }

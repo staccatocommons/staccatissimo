@@ -123,7 +123,8 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @param binayFunction
    * @param other
    * @since 1.2
-   * @return
+   * @return a new {@link Function2} that merges {@code this} and {@code other}
+   *         with {@code binaryFunction}
    */
   <A2, B2, C> Function2<A, A2, C> then(Function2<B, B2, C> binayFunction,
     @NonNull Function<? super A2, ? extends B2> other);
@@ -197,5 +198,11 @@ public interface Function<A, B> extends Applicable<A, B>, //
 
   // Function<A, B> withEffect(Executable<A> effect);
 
+  /**
+   * Answers if this function is the identity function, that is, 
+   * the function that answers the argument it receives
+   * 
+   * @return if this function is the identity
+   */
   boolean isIdentity();
 }

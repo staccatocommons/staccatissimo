@@ -20,7 +20,7 @@ import net.sf.staccatocommons.defs.partial.ToListAware;
 
 /**
  * @author flbulgarelli
- * 
+ * @since 1.2
  */
-public interface Tuple4<A, B, C, D> extends ToListAware<Object>, FirstAware<A>, SecondAware<B>, ThirdAware<C>,
-  FourthAware<D>, Comparable<Tuple4<A, B, C, D>> {}
+public interface Tuple4<A, B, C, D> extends ToListAware<Object>, FirstAware<A>, SecondAware<B>,
+  ThirdAware<C>, FourthAware<D>, Comparable<Tuple4<A, B, C, D>> {}

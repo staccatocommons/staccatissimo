@@ -20,6 +20,13 @@ import java.util.List;
 import net.sf.staccatocommons.defs.reduction.Accumulator;
 import net.sf.staccatocommons.reductions.AbstractReduction;
 
+/**
+ * Append reduction
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <A>
+ */
 public final class Append<A> extends AbstractReduction<A, List<A>> {
   public Accumulator<A, List<A>> start() {
     return new Accumulator<A, List<A>>() {

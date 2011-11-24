@@ -13,8 +13,9 @@
 
 package net.sf.staccatocommons.io.preferences;
 
-import static net.sf.staccatocommons.lang.tuple.Tuples.*;
-import static org.junit.Assert.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples._;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

@@ -25,7 +25,6 @@ import net.sf.staccatocommons.lang.function.internal.IdentityFunction;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.effect.Transparent;
-import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * Class factory methods for some common {@link Function}s

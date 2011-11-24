@@ -13,8 +13,10 @@
 
 package net.sf.staccatocommons.lang.sequence;
 
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
-import static net.sf.staccatocommons.lang.sequence.StopConditions.*;
+import static net.sf.staccatocommons.lang.number.NumberTypes.add;
+import static net.sf.staccatocommons.lang.sequence.StopConditions.downTo;
+import static net.sf.staccatocommons.lang.sequence.StopConditions.stopNever;
+import static net.sf.staccatocommons.lang.sequence.StopConditions.upTo;
 
 import java.io.Serializable;
 import java.util.Iterator;

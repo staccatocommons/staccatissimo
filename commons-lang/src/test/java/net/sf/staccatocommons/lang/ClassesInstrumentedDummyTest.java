@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.lang;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.restrictions.Constant;

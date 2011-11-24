@@ -29,7 +29,6 @@ import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 import net.sf.staccatocommons.restrictions.value.Unmodifiable;
 
 /**

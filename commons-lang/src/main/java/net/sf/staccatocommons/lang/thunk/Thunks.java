@@ -15,8 +15,6 @@ package net.sf.staccatocommons.lang.thunk;
 import java.util.Date;
 import java.util.concurrent.Callable;
 
-import com.sun.istack.internal.NotNull;
-
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
@@ -29,6 +27,8 @@ import net.sf.staccatocommons.lang.thunk.internal.NullThunk;
 import net.sf.staccatocommons.lang.thunk.internal.UndefinedThunk;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+
+import com.sun.istack.internal.NotNull;
 
 /**
  * Class factory methods for some common {@link Thunk}s

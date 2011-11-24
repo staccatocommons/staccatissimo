@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.instrument.context.internal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
 import javassist.CtConstructor;
 
 import org.junit.Test;

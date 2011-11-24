@@ -13,7 +13,8 @@
 
 package net.sf.staccatocommons.lang.predicate.internal;
 
-import static net.sf.staccatocommons.lang.predicate.Predicates.*;
+import static net.sf.staccatocommons.lang.predicate.Predicates.false_;
+import static net.sf.staccatocommons.lang.predicate.Predicates.from;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.restrictions.Constant;

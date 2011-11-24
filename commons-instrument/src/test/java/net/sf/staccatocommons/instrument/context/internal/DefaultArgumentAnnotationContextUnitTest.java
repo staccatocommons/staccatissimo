@@ -12,7 +12,9 @@
  */
 package net.sf.staccatocommons.instrument.context.internal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 import net.sf.staccatocommons.instrument.context.ArgumentAnnotationContext;

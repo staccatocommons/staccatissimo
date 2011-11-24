@@ -13,10 +13,13 @@
 
 package net.sf.staccatocommons.lang;
 
-import static net.sf.staccatocommons.lang.MapBuilder.*;
-import static net.sf.staccatocommons.lang.tuple.Tuples.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static net.sf.staccatocommons.lang.MapBuilder.linkedMapWith;
+import static net.sf.staccatocommons.lang.MapBuilder.mapWith;
+import static net.sf.staccatocommons.lang.MapBuilder.treeMapWith;
+import static net.sf.staccatocommons.lang.tuple.Tuples._;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.junit.Assert.assertThat;
 
 import java.util.Map;
 import java.util.SortedMap;

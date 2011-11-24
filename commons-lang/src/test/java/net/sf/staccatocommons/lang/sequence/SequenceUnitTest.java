@@ -13,10 +13,12 @@
 
 package net.sf.staccatocommons.lang.sequence;
 
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
-import static net.sf.staccatocommons.lang.number.Numbers.*;
-import static net.sf.staccatocommons.lang.sequence.StopConditions.*;
-import static org.junit.Assert.*;
+import static net.sf.staccatocommons.lang.number.NumberTypes.add;
+import static net.sf.staccatocommons.lang.number.Numbers.i;
+import static net.sf.staccatocommons.lang.sequence.StopConditions.upTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
 import java.util.Arrays;

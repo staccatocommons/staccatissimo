@@ -16,7 +16,14 @@ package net.sf.staccatocommons.reductions.internal;
 import net.sf.staccatocommons.defs.reduction.Accumulator;
 import net.sf.staccatocommons.reductions.AbstractReduction;
 
-public  final class Count<A> extends AbstractReduction<A, Integer> {
+/**
+ * Reduction that perfoms count
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <A>
+ */
+public final class Count<A> extends AbstractReduction<A, Integer> {
   public Accumulator<A, Integer> start() {
     return new Accumulator<A, Integer>() {
       private int i = 0;

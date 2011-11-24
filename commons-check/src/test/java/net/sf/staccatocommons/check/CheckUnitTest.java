@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.check;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

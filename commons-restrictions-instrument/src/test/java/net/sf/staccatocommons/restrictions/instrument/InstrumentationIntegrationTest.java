@@ -12,7 +12,8 @@
  */
 package net.sf.staccatocommons.restrictions.instrument;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 import net.sf.staccatocommons.instrument.InstrumentationRunner;
 import net.sf.staccatocommons.io.Directory;
 

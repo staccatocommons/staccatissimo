@@ -15,6 +15,7 @@ package net.sf.staccatocommons.defs.reduction;
 import java.io.InputStream;
 
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * A {@link Reduction} encapsulates a computation that, like SQL's aggregate
@@ -29,19 +30,10 @@ import net.sf.staccatocommons.defs.Applicable;
  * The general pattern of using them is as following:
  * 
  * <code>
- * A accum;
- *  if(sequence is empty) 
- *    accum = reduction.initial()
- *  else 
- *   for each element
- *    accum = reduction.reduceFirst(element) 
- *    
  *    
  * </code>
  * 
  * </p>
- * 
- * 
  * 
  * 
  * @author flbulgarelli
@@ -51,8 +43,14 @@ import net.sf.staccatocommons.defs.Applicable;
  */
 public interface Reduction<A, B> {
 
+  /**
+   * Answers a new, reseted accumulator to perform the reduction
+   * 
+   * @return a new, non null, {@link Accumulator}
+   */
+  @NonNull
   Accumulator<A, B> start();
-  
+
   <D> Reduction<A, D> then(Applicable<B, D> function);
 
   <D> Reduction<D, B> of(Applicable<D, A> function);

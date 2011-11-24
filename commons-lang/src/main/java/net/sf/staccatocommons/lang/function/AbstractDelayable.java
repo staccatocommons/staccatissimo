@@ -16,7 +16,6 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Delayable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * @author flbulgarelli

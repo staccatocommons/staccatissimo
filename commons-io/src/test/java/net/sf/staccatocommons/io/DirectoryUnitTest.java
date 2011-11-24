@@ -13,8 +13,9 @@
 
 package net.sf.staccatocommons.io;
 
-import static net.sf.staccatocommons.testing.mock.FileMock.*;
-import static org.junit.Assert.*;
+import static net.sf.staccatocommons.testing.mock.FileMock.dir;
+import static net.sf.staccatocommons.testing.mock.FileMock.file;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.util.Arrays;

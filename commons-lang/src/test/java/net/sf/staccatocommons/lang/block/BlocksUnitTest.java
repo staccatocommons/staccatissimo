@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.lang.block;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 

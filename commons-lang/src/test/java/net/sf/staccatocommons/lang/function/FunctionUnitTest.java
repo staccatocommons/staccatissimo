@@ -13,9 +13,14 @@
 
 package net.sf.staccatocommons.lang.function;
 
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
-import static net.sf.staccatocommons.lang.number.Numbers.*;
-import static org.junit.Assert.*;
+import static net.sf.staccatocommons.lang.number.NumberTypes.add;
+import static net.sf.staccatocommons.lang.number.NumberTypes.bigDecimal;
+import static net.sf.staccatocommons.lang.number.Numbers.d;
+import static net.sf.staccatocommons.lang.number.Numbers.e;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;

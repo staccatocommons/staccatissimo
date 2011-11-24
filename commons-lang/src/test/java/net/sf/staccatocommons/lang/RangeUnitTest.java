@@ -13,9 +13,12 @@
 
 package net.sf.staccatocommons.lang;
 
-import static net.sf.staccatocommons.lang.Range.*;
-import static net.sf.staccatocommons.testing.junit.jmock.MiscMatchers.*;
-import static org.junit.Assert.*;
+import static net.sf.staccatocommons.lang.Range.from;
+import static net.sf.staccatocommons.testing.junit.jmock.MiscMatchers.canSerialize;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 

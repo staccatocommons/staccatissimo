@@ -12,9 +12,19 @@
  */
 package net.sf.staccatocommons.lang.number;
 
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
-import static net.sf.staccatocommons.lang.number.Numbers.*;
-import static org.junit.Assert.*;
+import static net.sf.staccatocommons.lang.number.NumberTypes.add;
+import static net.sf.staccatocommons.lang.number.NumberTypes.bigDecimal;
+import static net.sf.staccatocommons.lang.number.NumberTypes.bigInteger;
+import static net.sf.staccatocommons.lang.number.NumberTypes.double_;
+import static net.sf.staccatocommons.lang.number.NumberTypes.float_;
+import static net.sf.staccatocommons.lang.number.NumberTypes.integer;
+import static net.sf.staccatocommons.lang.number.NumberTypes.long_;
+import static net.sf.staccatocommons.lang.number.Numbers.d;
+import static net.sf.staccatocommons.lang.number.Numbers.e;
+import static net.sf.staccatocommons.lang.number.Numbers.i;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import net.sf.staccatocommons.defs.type.NumberType;
 
 import org.junit.Test;

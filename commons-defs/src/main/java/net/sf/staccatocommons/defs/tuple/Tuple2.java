@@ -21,7 +21,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
- * 
+ * @since 1.2 
  */
 public interface Tuple2<A, B> extends ToListAware<Object>, FirstAware<A>, SecondAware<B>, Comparable<Tuple2<A, B>>,
   Entry<A, B> {

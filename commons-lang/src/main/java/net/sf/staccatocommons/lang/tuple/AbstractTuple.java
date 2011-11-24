@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.sf.staccatocommons.defs.tuple.Tuple2;
+import net.sf.staccatocommons.defs.tuple.Tuple3;
 import net.sf.staccatocommons.lang.tuple.internal.TupleToStringStyle;
 import net.sf.staccatocommons.lang.value.RelevantState;
 import net.sf.staccatocommons.restrictions.Conditionally;

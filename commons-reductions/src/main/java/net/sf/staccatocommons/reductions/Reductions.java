@@ -38,11 +38,23 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public class Reductions {
 
+  /**
+   * Answers a reduction that counts elements it processes
+   * 
+   * @return a {@link Constant} count reduction
+   */
   @Constant
   public static <A> Reduction<A, Integer> count() {
     return new Count<A>();
   }
 
+  /**
+   * Answers a function that appends to an unmodifiable list the elements it
+   * processes.
+   * 
+   * @return a {@link Constant} append reduction
+   */
+  @Constant
   public static <A> Reduction<A, List<A>> append() {
     return new Append<A>();
   }
@@ -76,38 +88,44 @@ public class Reductions {
     return from(numberType.zero(), numberType.add().of(function).flip());
   }
 
-//  /**
-//   * Reduction that computes the first element
-//   * 
-//   * @param <A>
-//   * @return the first-element reduction
-//   */
-//  @Constant
-//  public static <A> Reduction<A, A> first() {
-//    return new AbstractReduction<A,A>() {
-//      public A reduce(A accum, A element) {
-//        return accum;
-//      }
-//      public Accumulator<A, A> start() {
-//        // TODO Auto-generated method stub
-//        return null;
-//      }
-//    };
-//  }
-//
-//  @Constant
-//  public static <A> Reduction<A, A> last() {
-//    return new AbstractReduction<A,A>() {
-//      public A reduce(A accum, A element) {
-//        return element;
-//      }
-//      public Accumulator<A, A> start() {
-//        // TODO Auto-generated method stub
-//        return null;
-//      }
-//    };
-//  }
+  // /**
+  // * Reduction that computes the first element
+  // *
+  // * @param <A>
+  // * @return the first-element reduction
+  // */
+  // @Constant
+  // public static <A> Reduction<A, A> first() {
+  // return new AbstractReduction<A,A>() {
+  // public A reduce(A accum, A element) {
+  // return accum;
+  // }
+  // public Accumulator<A, A> start() {
+  // // TODO Auto-generated method stub
+  // return null;
+  // }
+  // };
+  // }
+  //
+  // @Constant
+  // public static <A> Reduction<A, A> last() {
+  // return new AbstractReduction<A,A>() {
+  // public A reduce(A accum, A element) {
+  // return element;
+  // }
+  // public Accumulator<A, A> start() {
+  // // TODO Auto-generated method stub
+  // return null;
+  // }
+  // };
+  // }
 
+  /**
+   * Answers reduction that computes the maximum element of the processed
+   * elements
+   * 
+   * @return a reduction that computes the maximum element of the processed
+   */
   @Constant
   public static <A extends Comparable<A>> Reduction<A, A> max() {
     return max(Compare.<A> natural());
@@ -121,6 +139,12 @@ public class Reductions {
     return max(Compare.on(function));
   }
 
+  /**
+   * Answers reduction that computes the minimum element of the processed
+   * elements
+   * 
+   * @return a reduction that computes the minimum element of the processed
+   */
   @Constant
   public static <A extends Comparable<A>> Reduction<A, A> min() {
     return min(Compare.<A> natural());
@@ -134,15 +158,30 @@ public class Reductions {
     return min(Compare.on(function));
   }
 
+  /**
+   * Answers a reduction that wraps the given folding with no initial element
+   * 
+   * @param function the folding
+   * @return new {@link Reduction}
+   */
   public static <A> Reduction<A, A> from(
-    final Applicable2<? super A, ? super A, ? extends A> function) {
+    @NonNull final Applicable2<? super A, ? super A, ? extends A> function) {
     return new Foldl1<A>(function);
   }
 
+  /**
+   * Answers a reduction that wraps the given folding function with an initial
+   * element
+   * 
+   * @param initial
+   *          the initial element of the reduction
+   * @param function
+   *          the folding function
+   * @return a new {@link Reduction}
+   */
   public static <A, B> Reduction<A, B> from(final B initial,
-    final Applicable2<? super B, ? super A, ? extends B> function) {
+    @NonNull final Applicable2<? super B, ? super A, ? extends B> function) {
     return new Foldl<A, B>(initial, function);
   }
-  
 
 }

@@ -17,9 +17,7 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
-import net.sf.staccatocommons.defs.tuple.Tuple3;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * 

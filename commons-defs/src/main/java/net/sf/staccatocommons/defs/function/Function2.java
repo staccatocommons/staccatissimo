@@ -127,7 +127,8 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    * @param <C>
    * @param binayFunction
    * @param other
-   * @return
+   * @return a new {@link Function3} the merges {@code this} and {@code other}
+   *         using the {@code binaryFunciton}
    * @since 1.2
    */
   <A2, B2, D> Function3<A, B, A2, D> then(Function2<C, B2, D> binaryFunction,

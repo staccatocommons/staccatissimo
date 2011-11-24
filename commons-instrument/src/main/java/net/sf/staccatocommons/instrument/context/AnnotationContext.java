@@ -91,6 +91,11 @@ public interface AnnotationContext {
   @NonNull
   CtClass getElementType() throws NotFoundException;
   
+  /**
+   * Answers the package of the annotated element
+   * 
+   * @return the package name
+   */
   String getPackage();
   
   boolean isPublic();

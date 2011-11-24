@@ -13,8 +13,9 @@
 
 package net.sf.staccatocommons.lang.function;
 
-import static net.sf.staccatocommons.lang.number.NumberTypes.*;
-import static org.junit.Assert.*;
+import static net.sf.staccatocommons.lang.number.NumberTypes.integer;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function2;

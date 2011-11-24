@@ -15,12 +15,27 @@ package net.sf.staccatocommons.reductions.internal;
 
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.reduction.Accumulator;
+import net.sf.staccatocommons.defs.reduction.Reduction;
 import net.sf.staccatocommons.reductions.AbstractReduction;
 
+/**
+ * Fold with initial element {@link Reduction}
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <A>
+ * @param <B>
+ */
 public final class Foldl<A, B> extends AbstractReduction<A, B> {
   private final B initial;
   private final Applicable2<? super B, ? super A, ? extends B> function;
 
+  /**
+   * Creates the {@link Foldl} reduction
+   * 
+   * @param initial
+   * @param function
+   */
   public Foldl(B initial, Applicable2<? super B, ? super A, ? extends B> function) {
     this.initial = initial;
     this.function = function;

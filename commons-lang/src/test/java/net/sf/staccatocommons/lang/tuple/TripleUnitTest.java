@@ -13,8 +13,11 @@
 
 package net.sf.staccatocommons.lang.tuple;
 
-import static junit.framework.Assert.*;
-import static net.sf.staccatocommons.lang.tuple.Tuples.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertSame;
+import static junit.framework.Assert.assertTrue;
+import static net.sf.staccatocommons.lang.tuple.Tuples._;
 
 import java.util.Date;
 

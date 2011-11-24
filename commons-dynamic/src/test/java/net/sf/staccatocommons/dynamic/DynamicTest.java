@@ -13,7 +13,9 @@ package net.sf.staccatocommons.dynamic;
  GNU Lesser General Public License for more details.
  */
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.partial.EmptyAware;
 

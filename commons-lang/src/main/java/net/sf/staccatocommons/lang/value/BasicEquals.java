@@ -14,7 +14,6 @@
 package net.sf.staccatocommons.lang.value;
 
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 

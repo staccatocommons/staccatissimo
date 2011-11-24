@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.io.serialization.lifecycle;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertSame;
 
 import java.io.IOException;
 import java.io.Reader;

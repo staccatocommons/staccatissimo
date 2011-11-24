@@ -16,6 +16,11 @@ package net.sf.staccatocommons.reductions.internal;
 import net.sf.staccatocommons.defs.reduction.Accumulator;
 import net.sf.staccatocommons.reductions.AbstractReduction;
 
+/**
+ * Reduction that performs integer sum
+ * 
+ * @author flbulgarelli
+ */
 public final class Sum extends AbstractReduction<Integer, Integer> {
   public Accumulator<Integer, Integer> start() {
     return new Accumulator<Integer, Integer>() {

@@ -19,9 +19,19 @@ import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.reduction.Accumulator;
 import net.sf.staccatocommons.reductions.AbstractReduction;
 
+/**
+ * Reduction that performs no-initial-element folding
+ * 
+ * @author flbulgarelli
+ * 
+ * @param <A>
+ */
 public final class Foldl1<A> extends AbstractReduction<A, A> {
   private final Applicable2<? super A, ? super A, ? extends A> function;
 
+  /**
+   * @param function
+   */
   public Foldl1(Applicable2<? super A, ? super A, ? extends A> function) {
     this.function = function;
   }

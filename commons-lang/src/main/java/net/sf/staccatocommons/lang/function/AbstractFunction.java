@@ -21,7 +21,6 @@ import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * 

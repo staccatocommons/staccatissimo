@@ -20,7 +20,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
- * 
+ * @since 1.2 
  */
 public interface Tuple3<A, B, C> extends ToListAware<Object>, FirstAware<A>, SecondAware<B>, ThirdAware<C>,
   Comparable<Tuple3<A, B, C>> {

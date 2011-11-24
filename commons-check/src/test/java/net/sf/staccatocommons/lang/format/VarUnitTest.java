@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.lang.format;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 import net.sf.staccatocommons.check.format.Var;
 
 import org.junit.Test;

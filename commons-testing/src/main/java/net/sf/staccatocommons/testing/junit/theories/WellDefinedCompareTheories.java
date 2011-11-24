@@ -25,8 +25,9 @@
  */
 package net.sf.staccatocommons.testing.junit.theories;
 
-import static org.junit.Assert.*;
-import static org.junit.Assume.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 
 import org.junit.experimental.theories.Theory;
 

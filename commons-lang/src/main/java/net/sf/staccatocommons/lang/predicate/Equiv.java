@@ -19,7 +19,6 @@ import net.sf.staccatocommons.lang.predicate.internal.Equals2;
 import net.sf.staccatocommons.lang.predicate.internal.Same2;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
 /**
  * Factory class methods for creating common, simple {@link Predicate2} that

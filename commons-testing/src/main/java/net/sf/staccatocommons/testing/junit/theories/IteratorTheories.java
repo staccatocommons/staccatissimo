@@ -25,7 +25,7 @@
  */
 package net.sf.staccatocommons.testing.junit.theories;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertTrue;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
