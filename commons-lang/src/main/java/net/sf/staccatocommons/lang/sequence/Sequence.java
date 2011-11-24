@@ -217,7 +217,7 @@ public class Sequence<A> implements Iterable<A>, Serializable {
    */
   @NonNull
   public static Sequence<Integer> fromToBy(int from, int to, int step) {
-    Ensure.that("step", step, step != 0, "must be non zero");
+    Ensure.thatVar("step", step, step != 0, "must be non zero");
     return new Sequence(from, add(step), step < 0 ? downTo(to) : upTo(to));
   }
 

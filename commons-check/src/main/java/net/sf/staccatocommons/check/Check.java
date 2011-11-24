@@ -115,7 +115,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    * @throws ExceptionType
    *           always
    */
-  public <Nothing> Nothing fail(String varName, Object var, String message, Object... args) throws ExceptionType {
+  public <Nothing> Nothing failVar(String varName, Object var, String message, Object... args) throws ExceptionType {
     throw createVarException(new VarFailure(varName, var, String.format(message, args)));
   }
 
@@ -136,10 +136,10 @@ public abstract class Check<ExceptionType extends Throwable> {
    * @throws ExceptionType
    *           if the check failed
    */
-  public final Check<ExceptionType> that(String varName, Object var, boolean condition, String message, Object... args)
+  public final Check<ExceptionType> thatVar(String varName, Object var, boolean condition, String message, Object... args)
     throws ExceptionType {
     if (!condition)
-      fail(varName, var, message, args);
+      failVar(varName, var, message, args);
     return this;
   }
 
@@ -174,7 +174,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    *           if the check failed
    */
   public final Check<ExceptionType> isNotNull(String varName, Object var) throws ExceptionType {
-    return that(varName, var, var != null, "must not be null");
+    return thatVar(varName, var, var != null, "must not be null");
   }
 
   /**
@@ -189,7 +189,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    *           if the check failed
    */
   public final Check<ExceptionType> isNull(String varName, Object var) throws ExceptionType {
-    return that(varName, var, var == null, "must be null");
+    return thatVar(varName, var, var == null, "must be null");
   }
 
   /* Extra ops */
@@ -207,7 +207,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    *           if the check failed
    */
   public final Check<ExceptionType> isTrue(String varName, boolean var) throws ExceptionType {
-    return that(varName, var, var, "must be true");
+    return thatVar(varName, var, var, "must be true");
   }
 
   /**
@@ -223,7 +223,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    *           if the check failed
    */
   public final Check<ExceptionType> isFalse(String varName, boolean var) throws ExceptionType {
-    return that(varName, var, !var, "must be false");
+    return thatVar(varName, var, !var, "must be false");
   }
 
   /**
@@ -263,7 +263,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    */
   public final Check<ExceptionType> matches(String varName, String var, Pattern pattern) throws ExceptionType {
     return isNotNull(varName, var) //
-      .that(varName, var, pattern.matcher(var).matches(), "must match %s", pattern.pattern());
+      .thatVar(varName, var, pattern.matcher(var).matches(), "must match %s", pattern.pattern());
   }
 
   /**
@@ -368,7 +368,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    * @see #that(boolean, String, Object...)
    */
   public final <A> Check<ExceptionType> isEmpty(String varName, A var, EmptyAwareType<A> type) throws ExceptionType {
-    return isNotNull(varName, var).that(varName, var, type.isEmpty(var), "must be empty");
+    return isNotNull(varName, var).thatVar(varName, var, type.isEmpty(var), "must be empty");
   }
 
   /**
@@ -389,7 +389,7 @@ public abstract class Check<ExceptionType extends Throwable> {
   public final Check<ExceptionType> isInstanceOf(String varName, Object var, Class<?> expectedClass)
     throws ExceptionType {
     return isNotNull(varName, var)//
-      .that(varName, var, expectedClass.isInstance(var), //
+      .thatVar(varName, var, expectedClass.isInstance(var), //
         "must be instance of class %s",
         expectedClass);
   }
@@ -486,7 +486,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    */
   public final <A> Check<ExceptionType> isSize(String varName, A var, int expectedSize, SizeAwareType<A> type)
     throws ExceptionType {
-    return that(varName, var, type.size(var) == expectedSize, //
+    return thatVar(varName, var, type.size(var) == expectedSize, //
       "must be of size %s, but was %s",
       expectedSize,
       type.size(var));
@@ -533,7 +533,7 @@ public abstract class Check<ExceptionType extends Throwable> {
   public final <A> Check<ExceptionType> isMinSize(String varName, A var, int minSize, SizeAwareType<A> type)
     throws ExceptionType {
     return isNotNull(varName, var) //
-      .that(varName, var, type.size(var) >= minSize, //
+      .thatVar(varName, var, type.size(var) >= minSize, //
         "must be at least of size %s, but was %s",
         minSize,
         type.size(var));
@@ -580,7 +580,7 @@ public abstract class Check<ExceptionType extends Throwable> {
   public final <A> Check<ExceptionType> isMaxSize(String varName, A var, int maxSize, SizeAwareType<A> type)
     throws ExceptionType {
     return isNotNull(varName, var) //
-      .that(varName, var, type.size(var) <= maxSize, //
+      .thatVar(varName, var, type.size(var) <= maxSize, //
         "must be at most of size %s, but was %s",
         maxSize,
         type.size(var));
@@ -698,7 +698,7 @@ public abstract class Check<ExceptionType extends Throwable> {
   }
 
   private Check<ExceptionType> isNotNegative(String varName, Object number, boolean notNegative) throws ExceptionType {
-    return that(varName, number, notNegative, "must be not negative");
+    return thatVar(varName, number, notNegative, "must be not negative");
   }
 
   /**
@@ -717,7 +717,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    *           if the check failed
    */
   public final <A> Check<ExceptionType> isNotZero(String varName, A var, NumberType<A> type) throws ExceptionType {
-    return isNotNull(varName, var).that(varName, var, !type.isZero(var), "must not be zero");
+    return isNotNull(varName, var).thatVar(varName, var, !type.isZero(var), "must not be zero");
   }
 
   /**
@@ -736,7 +736,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    *           if the check failed
    */
   public final <A> Check<ExceptionType> isZero(String varName, A var, NumberType<A> type) throws ExceptionType {
-    return isNotNull(varName, var).that(varName, var, type.isZero(var), "must be zero");
+    return isNotNull(varName, var).thatVar(varName, var, type.isZero(var), "must be zero");
   }
 
   /**
@@ -831,7 +831,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    * @see #that(boolean, String, Object...)
    */
   public final <A> Check<ExceptionType> isNotEmpty(String varName, A var, EmptyAwareType<A> type) throws ExceptionType {
-    return isNotNull(varName, var).that(varName, var, !type.isEmpty(var), "must not be empty");
+    return isNotNull(varName, var).thatVar(varName, var, !type.isEmpty(var), "must not be empty");
   }
 
   /**
@@ -945,7 +945,7 @@ public abstract class Check<ExceptionType extends Throwable> {
   }
 
   private Check<ExceptionType> isPositive(String varName, Object var, boolean positive) throws ExceptionType {
-    return that(varName, var, positive, "must be positive");
+    return thatVar(varName, var, positive, "must be positive");
   }
 
   /**
@@ -965,7 +965,7 @@ public abstract class Check<ExceptionType extends Throwable> {
   public final <T extends Comparable<T>> Check<ExceptionType> isBetween(String varName, T var, T min, T max)
     throws ExceptionType {
     return isNotNull(varName, var) //
-      .that(varName, var, var.compareTo(max) <= 0 && var.compareTo(min) >= 0, //
+      .thatVar(varName, var, var.compareTo(max) <= 0 && var.compareTo(min) >= 0, //
         "must be between %s and %s",
         min,
         max);
@@ -988,7 +988,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    */
   public final <T> Check<ExceptionType> contains(String varName, ContainsAware<T> var, T element) throws ExceptionType {
     return isNotNull(varName, var)//
-      .that(varName, var, var.contains(element), "must contain %s", element);
+      .thatVar(varName, var, var.contains(element), "must contain %s", element);
   }
 
   /**
@@ -1007,7 +1007,7 @@ public abstract class Check<ExceptionType extends Throwable> {
    */
   public final <T> Check<ExceptionType> isIn(String varName, T var, ContainsAware<T> container) throws ExceptionType {
     return isNotNull(varName, var)//
-      .that(varName, var, container.contains(var), "must be in %s", container);
+      .thatVar(varName, var, container.contains(var), "must be in %s", container);
   }
 
   /**
@@ -1030,7 +1030,7 @@ public abstract class Check<ExceptionType extends Throwable> {
   public final <T extends Comparable<T>> Check<ExceptionType> isGreaterThan(String varName, T var, T other)
     throws ExceptionType {
     return isNotNull(varName, var)//
-      .that(varName, var, var.compareTo(other) > 0, "must be greater than %s", other);
+      .thatVar(varName, var, var.compareTo(other) > 0, "must be greater than %s", other);
   }
 
   /**
@@ -1053,7 +1053,7 @@ public abstract class Check<ExceptionType extends Throwable> {
   public final <T extends Comparable<T>> Check<ExceptionType> isGreaterThanOrEqualTo(String varName, T var, T other)
     throws ExceptionType {
     return isNotNull(varName, var)//
-      .that(varName, var, var.compareTo(other) >= 0, "must be greater than or equal to %s", other);
+      .thatVar(varName, var, var.compareTo(other) >= 0, "must be greater than or equal to %s", other);
   }
 
   /**
@@ -1076,7 +1076,7 @@ public abstract class Check<ExceptionType extends Throwable> {
   public final <T extends Comparable<T>> Check<ExceptionType> isLessThan(String varName, T var, T other)
     throws ExceptionType {
     return isNotNull(varName, var)//
-      .that(varName, var, var.compareTo(other) < 0, "must be less than %s", other);
+      .thatVar(varName, var, var.compareTo(other) < 0, "must be less than %s", other);
   }
 
   /**
@@ -1099,7 +1099,7 @@ public abstract class Check<ExceptionType extends Throwable> {
   public final <T extends Comparable<T>> Check<ExceptionType> isLessThanOrEqualTo(String varName, T var, T other)
     throws ExceptionType {
     return isNotNull(varName, var) //
-      .that(varName, var, var.compareTo(other) <= 0, "must be less than or equal to %s", other);
+      .thatVar(varName, var, var.compareTo(other) <= 0, "must be less than or equal to %s", other);
   }
 
   /**

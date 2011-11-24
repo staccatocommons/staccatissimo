@@ -35,10 +35,10 @@ public final class Ensure {
   /**
    * Shortcut to <code>Ensure.that().fail(varName,var,message,args)</code>
    * 
-   * @see Check#fail(String, Object, String, Object...)
+   * @see Check#failVar(String, Object, String, Object...)
    */
   public static <A> A fail(String varName, Object var, String message, Object... args) {
-    return that().fail(varName, var, message, args);
+    return that().failVar(varName, var, message, args);
   }
   
   /**
@@ -55,10 +55,10 @@ public final class Ensure {
    * Shortcut to
    * <code>Ensure.that().is(varName,var,condition,message,args)</code>
    * 
-   * @see Check#that(String, Object, boolean, String, Object...)
+   * @see Check#thatVar(String, Object, boolean, String, Object...)
    */
-  public static void that(String varName, Object var, boolean condition, String message, Object... messageArgs) {
-    that().that(varName, var, condition, message, messageArgs);
+  public static void thatVar(String varName, Object var, boolean condition, String message, Object... messageArgs) {
+    that().thatVar(varName, var, condition, message, messageArgs);
   }
 
   /**

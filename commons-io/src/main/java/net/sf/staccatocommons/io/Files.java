@@ -133,9 +133,9 @@ public class Files {
   // TODO openOutputStream, openWriter
 
   protected static <T> T handleFileNotFound(File file, FileNotFoundException e) {
-    Ensure.that("file", file, file.isFile(), "must be a regular file");
-    Ensure.that("file", file, file.exists(), "must exist");
-    Ensure.that("file", file, file.canRead(), "must be readable");
+    Ensure.thatVar("file", file, file.isFile(), "must be a regular file");
+    Ensure.thatVar("file", file, file.exists(), "must exist");
+    Ensure.thatVar("file", file, file.canRead(), "must be readable");
     throw SoftException.soften(e);
   }
 

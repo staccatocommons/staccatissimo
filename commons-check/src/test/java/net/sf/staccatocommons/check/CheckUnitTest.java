@@ -379,11 +379,11 @@ public class CheckUnitTest extends JUnit4MockObjectTestCase {
   }
 
   /**
-   * Test for {@link Check#fail(String, Object, String, Object...)}
+   * Test for {@link Check#failVar(String, Object, String, Object...)}
    */
   @Test(expected = IllegalArgumentException.class)
   public void testFail() {
-    c.fail(VAR_NAME, "Foo", "Should be palindromic");
+    c.failVar(VAR_NAME, "Foo", "Should be palindromic");
   }
 
   /**

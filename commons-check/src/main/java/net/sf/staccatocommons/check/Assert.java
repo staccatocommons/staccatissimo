@@ -33,16 +33,16 @@ public final class Assert {
   /**
    * Shortcut to <code>Assert.that().fail(varName,var,message,args)</code>
    * 
-   * @see Check#fail(String, Object, String, Object...)
+   * @see Check#failVar(String, Object, String, Object...)
    */
   public static void fail(String varName, Object var, String message) {
-    that().fail(varName, var, message);
+    that().failVar(varName, var, message);
   }
 
   /**
    * Shortcut to <code>Assert.that().fail(message,args)</code>
    * 
-   * @see Check#fail(String, Object, String, Object...)
+   * @see Check#failVar(String, Object, String, Object...)
    */
   public static void fail(String message, Object... args) {
     that().fail(message, args);
@@ -52,10 +52,10 @@ public final class Assert {
    * Shortcut to
    * <code>Assert.that().is(varName,var,condition,message,args)</code>
    * 
-   * @see Check#that(String, Object, boolean, String, Object...)
+   * @see Check#thatVar(String, Object, boolean, String, Object...)
    */
-  public static void that(String varName, Object var, boolean condition, String message, Object... messageArgs) {
-    that().that(varName, var, condition, message, messageArgs);
+  public static void thatVar(String varName, Object var, boolean condition, String message, Object... messageArgs) {
+    that().thatVar(varName, var, condition, message, messageArgs);
   }
 
   /**
