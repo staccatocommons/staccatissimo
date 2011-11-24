@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 import java.util.Arrays;
 
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.collections.stream.internal.algorithms.MemorizedStream;
 import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 
 /**

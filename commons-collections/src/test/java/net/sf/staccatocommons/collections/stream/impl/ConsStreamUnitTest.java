@@ -15,7 +15,7 @@ package net.sf.staccatocommons.collections.stream.impl;
 import net.sf.staccatocommons.collections.stream.RepetableStreamTheories;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.collections.stream.impl.internal.delayed.DelayedPrependStream;
+import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedPrependStream;
 
 import org.junit.Before;
 import org.junit.experimental.theories.DataPoints;

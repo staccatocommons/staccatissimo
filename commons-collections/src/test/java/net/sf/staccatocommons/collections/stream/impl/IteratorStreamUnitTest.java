@@ -24,6 +24,7 @@ import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.StreamTheories;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.collections.stream.internal.IteratorStream;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.iterators.EmptyThriterator;
 

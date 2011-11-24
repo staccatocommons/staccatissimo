@@ -16,7 +16,7 @@ import static net.sf.staccatocommons.lang.number.NumberTypes.add;
 
 import java.util.Arrays;
 
-import net.sf.staccatocommons.collections.stream.impl.internal.MapStream;
+import net.sf.staccatocommons.collections.stream.internal.algorithms.MapStream;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.Functions;
 

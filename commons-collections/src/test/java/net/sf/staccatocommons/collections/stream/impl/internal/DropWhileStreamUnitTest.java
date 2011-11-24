@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.collections.stream.internal.algorithms.DropWhileStream;
 import net.sf.staccatocommons.defs.Evaluable;
 
 import org.junit.Test;
