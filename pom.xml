@@ -8,184 +8,184 @@
   <name>Staccato-Commons-Parent-Pom</name>
   <url>http://staccatocommons.sourceforge.net/</url>
   <description>Staccato-Commons Module and Parent Pom</description>
-	<organization>
-		<name>Staccato-Commons</name>
-		<url>http://staccatocommons.sourceforge.net/</url>
-	</organization>
+   <organization>
+      <name>Staccato-Commons</name>
+      <url>http://staccatocommons.sourceforge.net/</url>
+   </organization>
   <licenses>
-		<license>
-			<name>GNU Lesser General Public License v3 </name>
-			<url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
-		</license>
-	</licenses>
-	<inceptionYear>2010</inceptionYear>
-	
-	  
+      <license>
+         <name>GNU Lesser General Public License v3 </name>
+         <url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
+      </license>
+   </licenses>
+   <inceptionYear>2010</inceptionYear>
+   
+     
   <parent>
      <groupId>org.sonatype.oss</groupId>
      <artifactId>oss-parent</artifactId>
      <version>7</version>
   </parent>
   
-  
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<staccatissimo.scm.base>https://staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo</staccatissimo.scm.base>
-		<staccatissimo.scm.view.base>http://staccatocommons.svn.sourceforge.net/viewvc/staccatocommons/staccatissimo</staccatissimo.scm.view.base>
-	</properties>
-	
-	<developers>
-		<developer>
-			<id>flbulgarelli</id>
-		</developer>
-	</developers>
-	
-	<scm>
-		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk</developerConnection>
-		<connection>scm:svn:${staccatissimo.scm.base}/trunk</connection>
-		<url>${staccatissimo.scm.view.base}/trunk</url>
-	</scm>
-	
-	
-	<distributionManagement>
-		<site>
-			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}</url>
-		</site>
-	</distributionManagement>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.0.2</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<compilerId>eclipse</compilerId>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.plexus</groupId>
-						<artifactId>plexus-compiler-eclipse</artifactId>
-						<version>1.8.1</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.0-beta-3</version>
-				<executions>
-					<execution>
-						<id>attach-descriptor</id>
-						<goals>
-							<goal>attach-descriptor</goal>
-						</goals>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.wagon</groupId>
-						<artifactId>wagon-ssh</artifactId>
-						<version>1.0-beta-7</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<reportPlugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-changes-plugin</artifactId>
-							<version>2.3</version>
-						</plugin>
-						<plugin>
-							<groupId>org.codehaus.mojo</groupId>
-							<artifactId>cobertura-maven-plugin</artifactId>
-							<version>2.4</version>
-						</plugin>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-surefire-report-plugin</artifactId>
-							<version>2.5</version>
-						</plugin>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-pmd-plugin</artifactId>
-							<version>2.5</version>
-							<configuration>
-								<sourceEncoding>utf-8</sourceEncoding>
-								<minimumTokens>70</minimumTokens>
-								<targetJdk>1.6</targetJdk>
-							</configuration>
-						</plugin>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-javadoc-plugin</artifactId>
-							<version>2.8</version>
-							<configuration>
-								<excludePackageNames>*.internal</excludePackageNames>
-								<bottom><![CDATA[<a href="http://sourceforge.net/projects/staccatocommons"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13" width="120" height="30" alt="Get Staccato-Commons at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>]]></bottom>
-								<useStandardDocletOptions>true</useStandardDocletOptions>
-								<links>
-									<link>http://staccatocommons.sourceforge.net/commons-check/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/commons-iterators/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/commons-restrictions/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/commons-lang/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/commons-io/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/commons-collections/apidocs</link>
-									<link>http://staccatocommons.sourceforge.net/commons-defs/apidocs</link>
-								</links>
-								<skip>false</skip>
-							</configuration>
-							<reportSets>
-								<reportSet>
-									<id>default</id>
-									<reports>
-										<report>javadoc</report>
-									</reports>
-								</reportSet>
-							</reportSets> 
-						</plugin>  
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-project-info-reports-plugin</artifactId>
-							<version>2.2</version>
-							<configuration>
-								<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-								<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-							</configuration>
-							<reports>
-								<report>license</report>
-								<report>scm</report>
-							</reports>
-						</plugin>
-					</reportPlugins>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-install-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2-beta-4</version>
-				<configuration>
-					<descriptors>
-						<descriptor>assembly.xml</descriptor>
-					</descriptors>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<tagBase>${staccatissimo.scm.base}/releases/${project.artifactId}</tagBase>
-				</configuration>
-			</plugin>
-			
-				<plugin>
+   <scm>
+        <connection>scm:git:git://staccatocommons.git.sourceforge.net/gitroot/staccatocommons/staccatocommons</connection>
+        <developerConnection>
+            scm:git:git://staccatocommons.git.sourceforge.net/gitroot/staccatocommons/staccatocommons
+        </developerConnection>
+        <url>http://staccatocommons.git.sourceforge.net/git/gitweb.cgi?p=staccatocommons/staccatocommons</url>
+    </scm> 
+
+ 
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   </properties>
+   
+   <developers>
+      <developer>
+         <id>flbulgarelli</id>
+      </developer>
+   </developers>
+   
+   <distributionManagement>
+      <site>
+         <id> ${distribution.site.id}</id>
+         <url>${distribution.site.url}</url>
+      </site>
+   </distributionManagement>
+   <build>
+      <plugins>
+         <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.0.2</version>
+            <configuration>
+               <source>1.6</source>
+               <target>1.6</target>
+               <compilerId>eclipse</compilerId>
+            </configuration>
+            <dependencies>
+               <dependency>
+                  <groupId>org.codehaus.plexus</groupId>
+                  <artifactId>plexus-compiler-eclipse</artifactId>
+                  <version>1.8.1</version>
+               </dependency>
+            </dependencies>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+            <version>3.0-beta-3</version>
+            <executions>
+               <execution>
+                  <id>attach-descriptor</id>
+                  <goals>
+                     <goal>attach-descriptor</goal>
+                  </goals>
+               </execution>
+            </executions>
+            <dependencies>
+               <dependency>
+                  <groupId>org.apache.maven.wagon</groupId>
+                  <artifactId>wagon-ssh</artifactId>
+                  <version>1.0-beta-7</version>
+               </dependency>
+            </dependencies>
+            <configuration>
+               <reportPlugins>
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-changes-plugin</artifactId>
+                     <version>2.3</version>
+                  </plugin>
+                  <plugin>
+                     <groupId>org.codehaus.mojo</groupId>
+                     <artifactId>cobertura-maven-plugin</artifactId>
+                     <version>2.4</version>
+                  </plugin>
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-surefire-report-plugin</artifactId>
+                     <version>2.5</version>
+                  </plugin>
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-pmd-plugin</artifactId>
+                     <version>2.5</version>
+                     <configuration>
+                        <sourceEncoding>utf-8</sourceEncoding>
+                        <minimumTokens>70</minimumTokens>
+                        <targetJdk>1.6</targetJdk>
+                     </configuration>
+                  </plugin>
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-javadoc-plugin</artifactId>
+                     <version>2.8</version>
+                     <configuration>
+                        <excludePackageNames>*.internal</excludePackageNames>
+                        <bottom><![CDATA[<a href="http://sourceforge.net/projects/staccatocommons"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13" width="120" height="30" alt="Get Staccato-Commons at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>]]></bottom>
+                        <useStandardDocletOptions>true</useStandardDocletOptions>
+                        <links>
+                           <link>http://staccatocommons.sourceforge.net/commons-check/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/commons-iterators/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/commons-restrictions/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/commons-lang/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/commons-io/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/commons-collections/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/commons-defs/apidocs</link>
+                        </links>
+                        <skip>false</skip>
+                     </configuration>
+                     <reportSets>
+                        <reportSet>
+                           <id>default</id>
+                           <reports>
+                              <report>javadoc</report>
+                           </reports>
+                        </reportSet>
+                     </reportSets> 
+                  </plugin>  
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-project-info-reports-plugin</artifactId>
+                     <version>2.2</version>
+                     <configuration>
+                        <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
+                        <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                     </configuration>
+                     <reports>
+                        <report>license</report>
+                        <report>scm</report>
+                     </reports>
+                  </plugin>
+               </reportPlugins>
+            </configuration>
+         </plugin>
+         <plugin>
+            <artifactId>maven-install-plugin</artifactId>
+            <version>2.3</version>
+            <configuration>
+            </configuration>
+         </plugin>
+         <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.2-beta-4</version>
+            <configuration>
+               <descriptors>
+                  <descriptor>assembly.xml</descriptor>
+               </descriptors>
+            </configuration>
+         </plugin>
+      <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-release-plugin</artifactId>
+            <configuration>
+                 <autoVersionSubmodules>true</autoVersionSubmodules>
+                 <pushChanges>false</pushChanges>
+            </configuration>
+            <version>2.1</version>
+      </plugin>
+   
+            <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
                 <version>1.8.0</version>
@@ -205,9 +205,9 @@
                     </execution>
                 </executions>
             </plugin>
-			
-		</plugins>
-	</build>
+         
+      </plugins>
+   </build>
    
 
   
@@ -215,8 +215,8 @@
   <profiles>
   
     <profile>
-			<id>basic</id>
-			  <modules>
+         <id>basic</id>
+           <modules>
              <module>commons-testing</module>
              <module>commons-restrictions</module>
              <module>commons-defs</module>
@@ -233,47 +233,47 @@
              <module>commons-restrictions-instrument</module>
              <module>commons-restrictions-instrument-maven-plugin</module>   
            </modules>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.5</version>
-						<configuration>
-							<excludes>
-								<exclude>**/ClassesInstrumentedDummyTest.java</exclude>
-							</excludes>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>noinstrument</id>
-			  <modules>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-surefire-plugin</artifactId>
+                  <version>2.5</version>
+                  <configuration>
+                     <excludes>
+                        <exclude>**/ClassesInstrumentedDummyTest.java</exclude>
+                     </excludes>
+                  </configuration>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+      <profile>
+         <id>noinstrument</id>
+           <modules>
              <module>commons-testing</module>
              <module>commons-restrictions</module>
              <module>commons-defs</module>
              <module>commons-check</module>
              <module>commons-restrictions-instrument-maven-plugin</module>   
            </modules>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.5</version>
-						<configuration>
-							<excludes>
-								<exclude>**/ClassesInstrumentedDummyTest.java</exclude>
-							</excludes>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>instrument</id>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-surefire-plugin</artifactId>
+                  <version>2.5</version>
+                  <configuration>
+                     <excludes>
+                        <exclude>**/ClassesInstrumentedDummyTest.java</exclude>
+                     </excludes>
+                  </configuration>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+      <profile>
+         <id>instrument</id>
           <modules>
              <module>commons-iterators</module>
              <module>commons-lang</module>
@@ -287,31 +287,31 @@
              <module>commons-instrument</module>
              <module>commons-restrictions-instrument</module>
            </modules>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>net.sf.staccatocommons</groupId>
-						<artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
-						<version>${project.version}</version>
-						<configuration>
-							<ignoreReturnChecks>true</ignoreReturnChecks>
-							<ignoreConstants>false</ignoreConstants>
-							<ignoreChecks>false</ignoreChecks>
-						</configuration>
-						<executions>
-							<execution>
-								<phase>process-classes</phase>
-								<goals>
-									<goal>instrument</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+         <activation>
+            <activeByDefault>true</activeByDefault>
+         </activation>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>net.sf.staccatocommons</groupId>
+                  <artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
+                  <version>${project.version}</version>
+                  <configuration>
+                     <ignoreReturnChecks>true</ignoreReturnChecks>
+                     <ignoreConstants>false</ignoreConstants>
+                     <ignoreChecks>false</ignoreChecks>
+                  </configuration>
+                  <executions>
+                     <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                           <goal>instrument</goal>
+                        </goals>
+                     </execution>
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+   </profiles>
 </project>

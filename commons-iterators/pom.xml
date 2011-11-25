@@ -11,11 +11,7 @@
 	<version>1.2-SNAPSHOT</version>
 	<name>Staccato-Commons-Iterators</name>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
-	<scm>
-		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-iterators</developerConnection>
-		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-iterators</connection>
-		<url>${staccatissimo.scm.view.base}/trunk/commons-iterators/</url>
-	</scm>
+	
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>

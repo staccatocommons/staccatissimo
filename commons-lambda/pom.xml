@@ -17,11 +17,7 @@
 	 This project is aimed to simplify higher-order programming until Java adds 
 	 lambdas to its language
 	</description>
-	<scm>
-        <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lambda</connection>
-        <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-lambda</developerConnection>
-        <url>${staccatissimo.scm.view.base}/trunk/commons-lambda/</url>
-    </scm>
+	
     <distributionManagement>
         <site>
             <id> ${distribution.site.id}</id>

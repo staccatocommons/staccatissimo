@@ -13,11 +13,7 @@
 	<packaging>maven-plugin</packaging>
 	<description>A Maven Mojo for instrummenting restrictions as part of the build process</description>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
-	<scm>
-		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument-maven-plugin</connection>
-		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions-instrument-maven-plugin</developerConnection>
-		<url>${staccatissimo.scm.view.base}/trunk/commons-restrictions-instrument-maven-plugin/</url>
-	</scm>
+	
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>

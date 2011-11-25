@@ -21,9 +21,5 @@
 			<url>${distribution.site.url}/${project.artifactId}</url>
 		</site>
 	</distributionManagement>
-	<scm>
-		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions</developerConnection>
-		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-restrictions</connection>
-		<url>${staccatissimo.scm.view.base}/trunk/commons-restrictions/</url>
-	</scm>
+	
 </project>

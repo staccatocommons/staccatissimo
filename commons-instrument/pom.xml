@@ -12,11 +12,7 @@
 	<name>Staccato-Commons-Instrument</name>
 	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<inceptionYear>2010</inceptionYear>
-	<scm>
-        <connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-instrument</connection>
-        <developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-instrument</developerConnection>
-        <url>${staccatissimo.scm.view.base}/trunk/commons-instrument/</url>
-    </scm>
+	
 	<distributionManagement>
 		<site>
 			<id> ${distribution.site.id}</id>

@@ -17,11 +17,7 @@
 			<url>${distribution.site.url}/${project.artifactId}</url>
 		</site>
 	</distributionManagement>
-	<scm>
-		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-io</connection>
-		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-io</developerConnection>
-		<url>${staccatissimo.scm.view.base}/trunk/commons-io/</url>
-	</scm>
+	
 	<dependencies>
 		<dependency>
 			<groupId>commons-io</groupId>

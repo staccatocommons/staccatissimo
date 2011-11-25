@@ -15,11 +15,7 @@
 	<description>Minimal definitions library that provides very
 	 abstract interfaces with well defined but generic semantics, 
 	 focused on code reuse.</description>
-	<scm>
-		<connection>scm:svn:${staccatissimo.scm.base}/trunk/commons-defs</connection>
-		<developerConnection>scm:svn:${staccatissimo.scm.base}/trunk/commons-defs</developerConnection>
-		<url>${staccatissimo.scm.view.base}/trunk/commons-defs/</url>
-	</scm>
+	
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
