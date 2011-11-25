@@ -18,6 +18,8 @@ import java.util.List;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
+import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
+import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 /**
  * 
@@ -25,6 +27,7 @@ import net.sf.staccatocommons.restrictions.check.NotNegative;
  * 
  * @param <A>
  */
+@EnforceRestrictions
 public class ListStream<A> extends CollectionStream<A> {
 
   /**
@@ -33,6 +36,7 @@ public class ListStream<A> extends CollectionStream<A> {
    * @param iterable
    *          the list to wrap
    */
+  @IgnoreRestrictions
   public ListStream(@NonNull List<? extends A> iterable) {
     super(iterable);
   }
@@ -56,7 +60,8 @@ public class ListStream<A> extends CollectionStream<A> {
     return get(size() - 1);
   }
 
-  public Stream<A> take(int amountOfElements) {
+  
+  public Stream<A> take(@NotNegative int amountOfElements) {
     return new ListStream<A>(getList().subList(0, atMost(amountOfElements)));
   }
 
