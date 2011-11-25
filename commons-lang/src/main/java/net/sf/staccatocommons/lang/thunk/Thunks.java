@@ -28,7 +28,6 @@ import net.sf.staccatocommons.lang.thunk.internal.UndefinedThunk;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
-import com.sun.istack.internal.NotNull;
 
 /**
  * Class factory methods for some common {@link Thunk}s
@@ -111,7 +110,7 @@ public class Thunks {
    * @param args the message arguments
    * @return a new {@link Thunk} that fails with the given message 
    */
-  public static <A> Thunk<A> fail(@NotNull String message, Object... args) {
+  public static <A> Thunk<A> fail(@NonNull String message, Object... args) {
     return new FailThunk<A>(message, args);
   }
 
