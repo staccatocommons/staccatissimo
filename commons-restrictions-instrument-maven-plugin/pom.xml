@@ -1,14 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.2-SNAPSHOT</version>
+		<version>1.2-beta-2</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2-beta-2</version>
 	<name>Staccato-Commons-Restrictions-Instrument-Maven-Plugin</name>
 	<packaging>maven-plugin</packaging>
 	<description>A Maven Mojo for instrummenting restrictions as part of the build process</description>
