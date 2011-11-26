@@ -16,7 +16,7 @@ package net.sf.staccatocommons.io.internal.lifecycle;
 import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.Handle;
+import net.sf.staccatocommons.io.internal.Handle;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 

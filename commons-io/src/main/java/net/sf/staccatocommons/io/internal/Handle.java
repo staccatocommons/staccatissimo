@@ -10,9 +10,11 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.lang;
+package net.sf.staccatocommons.io.internal;
 
 import java.util.concurrent.Callable;
+
+import net.sf.staccatocommons.lang.SoftException;
 
 /**
  * Utility class for handling exception in {@link Callable}s
