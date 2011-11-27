@@ -14,6 +14,7 @@
 package net.sf.staccatocommons.collections.stream;
 
 import net.sf.staccatocommons.collections.restrictions.Projection;
+import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -37,6 +38,18 @@ public interface Mappable<A> {
    */
   @Projection
   <B> Stream<B> map(@NonNull Function<? super A, ? extends B> function);
+
+  /**
+   * Transforms each element using the given function
+   * 
+   * @param <B>
+   * @param function
+   *          the mapper used to transform each element, applying it
+   * @return a new {@link Stream} projection that will retrieve the result of
+   *         applying the given function to each element
+   */
+  @Projection
+  <B> Stream<B> map(@NonNull Applicable<? super A, ? extends B> function);
 
   /**
    * Transformes each element into an iterable using the given function, and

@@ -82,10 +82,11 @@ public class Monads {
   }
 
   /**
-   * The Empty Monad
+   * The Empty Monad, that is, the monad that has no elements to visit and has
+   * no side effect. Binding the nil monad always results in the nil monad
    * 
    * @param <A>
-   * @return
+   * @return the constant empty {@link Monad}
    */
   @Constant
   public static <A> Monad<A> nil() {

@@ -65,9 +65,14 @@ public final class None<T> extends Option<T> {
   }
 
   @Override
-  public void ifDefined(Executable<T> block) {
+  public void ifDefined(Executable<? super T> block) {
 
   }
+  
+//  @Override
+//  public <B> Option<B> bind(Applicable<? super T, Option<B>> function) {
+//    return none();
+//  }
 
   @Override
   public T valueOrNull() {

@@ -20,6 +20,7 @@ import java.util.NoSuchElementException;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
+import net.sf.staccatocommons.defs.ProtoMonad;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.partial.ContainsAware;
 import net.sf.staccatocommons.defs.partial.SizeAware;
@@ -63,13 +64,13 @@ import net.sf.staccatocommons.restrictions.value.Value;
  * 
  * @author flbulgarelli
  * 
- * @param <T>
+ * @param <A>
  *          the type of optional value
  * 
  */
 @Value
 @Conditionally({ Immutable.class, Serializable.class })
-public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, ContainsAware<T>, Serializable {
+public abstract class Option<A> implements Thunk<A>, Iterable<A>, SizeAware, ContainsAware<A>, ProtoMonad<Option, A>, Serializable {
 
   private static final long serialVersionUID = -4635925023376621559L;
 
@@ -91,7 +92,7 @@ public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, Con
    * @throws NoSuchElementException
    *           if this option is undefined, and thus there is no value.
    */
-  public abstract T value() throws NoSuchElementException;
+  public abstract A value() throws NoSuchElementException;
 
   /**
    * Returns if the value has been defined or not.
@@ -116,12 +117,12 @@ public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, Con
    * @param function
    * @return the mapped {@link Option}
    */
-  public final <T2> Option<T2> map(Applicable<? super T, ? extends T2> function) {
+  public final <T2> Option<T2> map(Applicable<? super A, ? extends T2> function) {
     if (isDefined())
       return Option.some((T2) function.apply(value()));
     return Option.none();
   }
-
+  
   /**
    * Answers this option if defined and the given <code>predicate</code>
    * evaluates to <code>true</code>. Answers {@link #none()}, otherwise
@@ -129,11 +130,13 @@ public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, Con
    * @param predicate
    * @return the filtered Option
    */
-  public final Option<T> filter(Evaluable<? super T> predicate) {
+  public final Option<A> filter(Evaluable<? super A> predicate) {
     if (isDefined() && predicate.eval(value()))
       return this;
     return Option.none();
   }
+  
+  //public abstract <B> Option<B> bind(Applicable<? super A, Option<B>> function);
 
   /**
    * Factory method for creating an undefined value. This method guarantees to
@@ -156,7 +159,7 @@ public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, Con
    *          the return value in case this {@link Option} is undefined
    * @return <code>this.value()</code> if defined, other <code>otherwise</code>
    */
-  public abstract T valueOrElse(T other);
+  public abstract A valueOrElse(A other);
 
   /**
    * Returns the value of this {@link Option}, or the provided object if
@@ -168,7 +171,7 @@ public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, Con
    * @return <code>this.value()</code> if defined, other.value()
    *         <code>otherwise</code>
    */
-  public abstract T valueOrElse(Thunk<? extends T> other);
+  public abstract A valueOrElse(Thunk<? extends A> other);
 
   /**
    * Returns the value of this {@link Option}, or <code>null</code>, if
@@ -177,14 +180,18 @@ public abstract class Option<T> implements Thunk<T>, Iterable<T>, SizeAware, Con
    * @return <code>this.value()</code> if defined, or <code>null</code>,
    *         otherwise
    */
-  public abstract T valueOrNull();
+  public abstract A valueOrNull();
 
   /**
    * Executed the given block if this option is defined
    * 
    * @param block
    */
-  public abstract void ifDefined(@NonNull Executable<T> block);
+  public abstract void ifDefined(@NonNull Executable<? super A> block);
+  
+  public void forEach(@NonNull Executable<? super A> block) {
+    ifDefined(block);
+  }
 
   /**
    * Factory method for creating defined values.This method does not guarantee

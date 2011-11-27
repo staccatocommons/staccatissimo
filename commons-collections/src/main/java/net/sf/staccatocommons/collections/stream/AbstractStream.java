@@ -262,6 +262,11 @@ public abstract class AbstractStream<A> implements Stream<A> {
   public <B> Stream<B> map(final Function<? super A, ? extends B> function) {
     return new MapStream<A, B>(this, function);
   }
+  
+  @Override
+  public <B> Stream<B> map(Applicable<? super A, ? extends B> function) {
+    return map(Functions.from(function));
+  }
 
   @Override
   public <B> Stream<B> flatMap(final Function<? super A, ? extends Iterable<? extends B>> function) {

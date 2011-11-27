@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutorService;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
+import net.sf.staccatocommons.defs.ProtoMonad;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -47,7 +48,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * @since 1.2
  */
-public interface Monad<A> extends Thunk<Void>, Runnable {
+public interface Monad<A> extends Thunk<Void>, ProtoMonad<Monad, A>, Runnable {
 
   /* ======== */
   /* =Monad= */
@@ -81,7 +82,6 @@ public interface Monad<A> extends Thunk<Void>, Runnable {
 
   /* Filtering */
 
-  /** mfilter */
   Monad<A> filter(@NonNull Evaluable<? super A> predicate);
 
   Monad<A> skip(A element);

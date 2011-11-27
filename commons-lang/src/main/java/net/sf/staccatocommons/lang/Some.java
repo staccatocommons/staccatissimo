@@ -82,7 +82,7 @@ public final class Some<T> extends Option<T> {
   }
 
   @Override
-  public void ifDefined(@NonNull Executable<T> block) {
+  public void ifDefined(@NonNull Executable<? super T> block) {
     block.exec(value);
   }
 
@@ -93,6 +93,11 @@ public final class Some<T> extends Option<T> {
   public boolean contains(T element) {
     return ObjectUtils.equals(value, element);
   }
+  
+//  @Override
+//  public <B> Option<B> bind(Applicable<? super T, Option<B>> function) {
+//    return function.apply(value);
+//  }
 
   @Override
   public int hashCode() {
