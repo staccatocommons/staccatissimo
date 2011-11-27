@@ -223,6 +223,8 @@
              <module>commons-check</module>
              <module>commons-iterators</module>
              <module>commons-lang</module>
+             <module>commons-numbers</module>
+             <module>commons-util</module>
              <module>commons-dynamic</module>
              <module>commons-lambda</module>
              <module>commons-reductions</module>
@@ -277,6 +279,8 @@
           <modules>
              <module>commons-iterators</module>
              <module>commons-lang</module>
+             <module>commons-numbers</module>
+             <module>commons-util</module>
              <module>commons-dynamic</module>
              <module>commons-lambda</module>
              <module>commons-restrictions</module>

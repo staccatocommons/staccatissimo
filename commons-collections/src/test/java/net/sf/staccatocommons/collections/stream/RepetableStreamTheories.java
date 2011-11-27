@@ -27,12 +27,12 @@ import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
-import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.lang.thunk.internal.NullThunk;
+import net.sf.staccatocommons.util.Strings;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;

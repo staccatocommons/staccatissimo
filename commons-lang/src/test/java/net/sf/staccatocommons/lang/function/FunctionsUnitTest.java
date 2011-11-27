@@ -22,7 +22,6 @@ import java.util.Date;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.function.Function;
-import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
@@ -80,12 +79,6 @@ public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
     Function<Object, Object> identity = Functions.identity();
     assertEquals((Character) 'a', Functions.from(applicable).apply(5));
     assertSame(identity, Functions.from(identity));
-  }
-
-  /** Test for {@link Functions#toString_()} */
-  @Test
-  public void testToString() throws Exception {
-    assertEquals("50", Strings.toString_().apply(50));
   }
 
   Object _ = null;

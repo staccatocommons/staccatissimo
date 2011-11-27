@@ -13,14 +13,14 @@
 package net.sf.staccatocommons.control.monad.internal;
 
 import net.sf.staccatocommons.control.monad.Monad;
-import net.sf.staccatocommons.control.monad.MonadValue;
+import net.sf.staccatocommons.control.monad.MonadicValue;
 import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class SingleMonadValue<A> implements MonadValue<A> {
+public class SingleMonadValue<A> implements MonadicValue<A> {
 
   private final A value;
 

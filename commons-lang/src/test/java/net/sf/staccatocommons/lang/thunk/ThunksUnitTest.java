@@ -24,13 +24,15 @@ import java.util.Date;
 import java.util.concurrent.Callable;
 
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.Prioritized;
+import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * @author flbulgarelli
@@ -145,6 +147,14 @@ public class ThunksUnitTest extends JUnit4MockObjectTestCase {
    */
   @Test
   public void testValue() throws Exception {
-    assertEquals("Hello", Thunks.<String> value().apply(Prioritized.from(10, "Hello")));
+    assertEquals("Hello", Thunks.<String> value().apply(Option.some("Hello")));
+  }
+  
+  /**
+   * Test that {@link Thunks#fail(String, Object...)} actually fails when evaluated
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testFail() throws Exception {
+    Thunks.fail("Something %s happend", "wrong").value();
   }
 }

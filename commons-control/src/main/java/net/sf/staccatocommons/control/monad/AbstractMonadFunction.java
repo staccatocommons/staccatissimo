@@ -18,9 +18,9 @@ import net.sf.staccatocommons.defs.Applicable;
  * @author flbulgarelli
  * @since 1.2
  */
-public abstract class AbstractMonadFunction<A, B> implements MonadFunction<A, B> {
+public abstract class AbstractMonadFunction<A, B> implements MonadicFunction<A, B> {
 
-  public <C> MonadFunction<A, C> then(final Applicable<? super B, Monad<C>> other) {
+  public <C> MonadicFunction<A, C> then(final Applicable<? super B, Monad<C>> other) {
     return new AbstractMonadFunction<A, C>() {
       public Monad<C> apply(A arg) {
         return AbstractMonadFunction.this.apply(arg).bind(other);

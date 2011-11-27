@@ -14,6 +14,7 @@
 package net.sf.staccatocommons.instrument.context;
 
 import javassist.ClassPool;
+import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.NotFoundException;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -81,7 +82,7 @@ public interface AnnotationContext {
    * declared such constructor</li>
    * <li>When the annotated element is a method, the type is the return type of
    * the method</li>
-   * <li>Then the annotated element is an argument, the type is argument type</li>
+   * <li>When the annotated element is an argument, the type is argument type</li>
    * <ul>
    * 
    * @return a {@link CtClass} that represents the type of the annotated element
@@ -90,14 +91,26 @@ public interface AnnotationContext {
    */
   @NonNull
   CtClass getElementType() throws NotFoundException;
-  
+
   /**
    * Answers the package of the annotated element
    * 
    * @return the package name
    */
   String getPackage();
-  
+
+  /**
+   * If this annotated contextis public, that is:
+   * 
+   * <ul>
+   * <li>When the annotated element is a class, method or constructor, whether
+   * it is marked with the Java public keyword</li>
+   * <li>When the annotated element is an argument, whether the enclosing
+   * {@link CtBehavior} is public</li>
+   * <ul>
+   * 
+   * @return if the annotated context is public
+   */
   boolean isPublic();
 
 }

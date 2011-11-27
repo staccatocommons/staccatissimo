@@ -15,14 +15,14 @@ package net.sf.staccatocommons.control.monad.internal;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.control.monad.Monad;
-import net.sf.staccatocommons.control.monad.MonadValue;
+import net.sf.staccatocommons.control.monad.MonadicValue;
 import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class IteratorMonadValue<A> implements MonadValue<A> {
+public class IteratorMonadValue<A> implements MonadicValue<A> {
 
   private final Iterator<? extends A> iter;
 

@@ -14,15 +14,13 @@ package net.sf.staccatocommons.collections.stream;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
-import static net.sf.staccatocommons.lang.number.NumberTypes.add;
-import static net.sf.staccatocommons.lang.sequence.StopConditions.upTo;
+import static net.sf.staccatocommons.numbers.NumberTypes.add;
 
 import java.util.Arrays;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.lang.sequence.Sequence;
 
 import org.junit.Test;
 
@@ -41,7 +39,7 @@ public class StreamsUnitTest {
    */
   @Test
   public void testFromSeq() {
-    assertEquals(Streams.iterate(10, add(20), upTo(50)).toList(), Streams.from(Sequence.fromToBy(10, 50, 20)).toList());
+    assertEquals(Streams.enumerate(10, 50, 20).toList(), Streams.from(Streams.enumerate(10, 50, 20)).toList());
 
     assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), //
       Streams.iterate(1, add(1)).take(10).toList());

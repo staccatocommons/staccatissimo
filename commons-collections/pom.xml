@@ -29,6 +29,18 @@
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>
+			<artifactId>commons-util</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.staccatocommons</groupId>
+			<artifactId>commons-numbers</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-lambda</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>

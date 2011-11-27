@@ -23,7 +23,7 @@ import java.io.ObjectOutputStream;
 import java.io.Reader;
 import java.io.StringReader;
 
-import net.sf.staccatocommons.lang.Range;
+import net.sf.staccatocommons.util.Range;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -19,7 +19,6 @@ import java.util.Deque;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.collections.restrictions.Repeatable;
@@ -31,6 +30,9 @@ import net.sf.staccatocommons.collections.stream.internal.IterableStream;
 import net.sf.staccatocommons.collections.stream.internal.IteratorStream;
 import net.sf.staccatocommons.collections.stream.internal.ListStream;
 import net.sf.staccatocommons.collections.stream.internal.SingleStream;
+import net.sf.staccatocommons.collections.stream.internal.algorithms.DelayedRepatIterator;
+import net.sf.staccatocommons.collections.stream.internal.algorithms.IterateStream;
+import net.sf.staccatocommons.collections.stream.internal.algorithms.RepeatIterator;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.UndefinedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.ConsStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedSingleStream;
@@ -38,11 +40,8 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.EnumerationIterator;
-import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
-import net.sf.staccatocommons.iterators.thriter.NextThriterator;
+import net.sf.staccatocommons.lang.internal.Add;
 import net.sf.staccatocommons.lang.predicate.Predicates;
-import net.sf.staccatocommons.lang.sequence.Sequence;
-import net.sf.staccatocommons.lang.sequence.StopConditions;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.restrictions.Conditionally;
 import net.sf.staccatocommons.restrictions.Constant;
@@ -162,13 +161,48 @@ public class Streams {
    *          a function used to generated each element from the sequence after
    *          the initial element
    * @return a new {@link Stream}
-   * @see Sequence#from(Object, Applicable, Evaluable)
+   * @see IterateStream#from(Object, Applicable, Evaluable)
    */
   @Projection
   @IgnoreRestrictions
-  public static <A> Stream<A> iterate(@NonNull A seed, @NonNull Applicable<? super A, ? extends A> generator) {
-    return from(Sequence.from(seed, generator, StopConditions.stopNever()));
+  public static <A> Stream<A> iterate(@NonNull A seed,
+    @NonNull Applicable<? super A, ? extends A> generator) {
+    return new IterateStream(seed, generator);
   }
+
+  /**
+   * Iterates from the starting integer, adding 1. This generates the infinite
+   * stream {@code [start, start+1, start+2...]}
+   * 
+   * @param start the starting element od the sequence
+   * @return an stream that retrieves the sequence {@code [start, start+1, start+2...]}
+   * @since 1.2
+   */
+  @Projection
+  public static Stream<Integer> enumerate(int start) {
+    return iterate(start, Add.one());
+  }
+
+  @Projection
+  public static Stream<Integer> enumerate(int start, int stop) {
+    return enumerate(start, stop, 1);
+  }
+
+  @Projection
+  public static Stream<Integer> enumerate(int start, int stop, int step) {
+    return iterate(start, Add.add(step)).take(1 + (stop - start) / step);
+  }
+
+  // @Projection
+  // public static <A> Stream<A> enumerate(A start, EnumType<A> type) {
+  // return iterate(start, type.increment());
+  // }
+  //
+  // @Projection
+  // public static <A> Stream<A> enumerate(A start, A stop, EnumType<A> type) {
+  // return enumerate(start, type).take(type.increment(type.subtract(stop,
+  // start)));
+  // }
 
   /**
    * Creates a new infinite {@link Stream} that retrieves element from the
@@ -182,50 +216,13 @@ public class Streams {
    *          a function used to generated each element from the sequence after
    *          the initial element
    * @return a new {@link Stream}
-   * @see Sequence#from(Object, Applicable, Evaluable)
+   * @see IterateStream#from(Object, Applicable, Evaluable)
    */
   @Projection
   @IgnoreRestrictions
-  public static <A> Stream<A> iterateUntilNull(@NonNull A seed, @NonNull Applicable<? super A, ? extends A> generator) {
-    return from(Sequence.from(seed, generator, Predicates.null_()));
-  }
-
-  /**
-   * Creates a new {@link Stream} that retrieves element from the sequence
-   * <code>Sequence.from(start, generator, stopCondition)</code>
-   * 
-   * @param <A>
-   * @param start
-   *          the initial element of the sequence
-   * @param generator
-   *          a function used to generated each element from the sequence after
-   *          the initial element
-   * @param stopCondition
-   *          predicate is satisfied when sequencing should stop, that is, when
-   *          the given element and subsequent should not be retrieved.
-   * @return a new {@link Stream}
-   * @see Sequence#from(Object, Applicable, Evaluable)
-   */
-  @Projection
-  @IgnoreRestrictions
-  public static <A> Stream<A> iterate(@NonNull A start, @NonNull Applicable<? super A, ? extends A> generator,
-    @NonNull Evaluable<A> stopCondition) {
-    return from(Sequence.from(start, generator, stopCondition));
-  }
-
-  /**
-   * Creates a new {@link Stream} that retrieves element from the sequence
-   * <code>Sequence.from(start, stop)</code>
-   * 
-   * @param start
-   *          the seed of the sequence
-   * @param stop
-   *          the stop value
-   * @return a new {@link Stream}
-   */
-  @Projection
-  public static Stream<Integer> iterate(int start, int stop) {
-    return from(Sequence.fromTo(start, stop));
+  public static <A> Stream<A> iterateUntilNull(@NonNull A seed,
+    @NonNull Applicable<? super A, ? extends A> generator) {
+    return iterate(seed, generator).takeWhile(Predicates.notNull());
   }
 
   /**
@@ -237,21 +234,7 @@ public class Streams {
    */
   @Projection
   public static <A> Stream<A> repeat(final A element) {
-    return from(new AbstractThriterator<A>() {
-      public boolean hasNext() {
-        return true;
-      }
-
-      public A next() {
-        return element;
-      }
-
-      public void advanceNext() throws NoSuchElementException {}
-
-      public A current() {
-        return element;
-      }
-    });
+    return from(new RepeatIterator<A>(element));
   }
 
   /**
@@ -265,16 +248,7 @@ public class Streams {
    */
   @Projection
   public static <A> Stream<A> repeat(@NonNull final Thunk<A> thunk) {
-    return from(new NextThriterator<A>() {
-
-      public boolean hasNext() {
-        return true;
-      }
-
-      public A nextImpl() {
-        return thunk.value();
-      }
-    });
+    return from(new DelayedRepatIterator<A>(thunk));
   }
 
   // private static <A> Stream<A> cycle(@NonNull A element) {

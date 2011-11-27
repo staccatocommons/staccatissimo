@@ -12,7 +12,8 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccatocommons.lang.number.NumberTypes.add;
+import static net.sf.staccatocommons.numbers.NumberTypes.*;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
@@ -20,6 +21,7 @@ import net.sf.staccatocommons.collections.stream.internal.algorithms.MapStream;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.Functions;
 
+import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
 
 /**
@@ -44,6 +46,15 @@ public class MapStreamUnitTest extends StreamTheories {
   @DataPoint
   public static Stream twoElementsNonRepetable() {
     return new MapStream(Streams.from(Arrays.asList(20, 30, 40).iterator()).filter(Compare.greaterThan(25)), add(10));
+  }
+  
+  /**
+   * Tests that mapping and then mapping is the same that composing mapping
+   * functions
+   */
+  @Test
+  public void mapMapIsTheSameThatComposing() throws Exception {
+    assertTrue(Streams.cons(10, 9, 6).map(add(1)).map(integer().negate()).equiv(-11, -10, -7));
   }
 
 }

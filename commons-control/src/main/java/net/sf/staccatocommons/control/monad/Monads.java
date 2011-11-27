@@ -26,28 +26,54 @@ import net.sf.staccatocommons.control.monad.internal.SubmitMonadValue;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
+import net.sf.staccatocommons.defs.ProtoMonad;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
- * Simple {@link Monad}s and {@link MonadFunction}s
+ * Simple {@link Monad}s and {@link MonadicFunction}s
  * 
  * @author flbulgarelli
  * @since 1.2
  */
 public class Monads {
 
+  /**
+   * Answers a {@link Monad} that wraps a single element. Evaluating this monad
+   * has no effect
+   * 
+   * @param element
+   *          the element to wrap
+   * @return a monad that wraps the given element
+   */
   public static <A> Monad<A> cons(A element) {
     return from(new SingleMonadValue<A>(element));
   }
 
+  /**
+   * Answers a {@link Monad} that wraps an array of elements. Evaluating this
+   * monad has no effect
+   * 
+   * @param elements
+   *          the elements to wrap
+   * @return a monad that wraps the given array of elements
+   */
   public static <A> Monad<A> from(A... elements) {
     return from(Arrays.asList(elements));
   }
 
+  /**
+   * Answers a {@link Monad} that wraps an {@link Iterable} of elements.
+   * Evaluating this monad has no effect
+   * 
+   * @param elements
+   *          the elements to wrap
+   * @return a monad that wraps the given {@link Iterable} of elements
+   */
   public static <A> Monad<A> from(Iterable<? extends A> elements) {
     Iterator<? extends A> iterator = elements.iterator();
     if (iterator.hasNext())
@@ -65,7 +91,7 @@ public class Monads {
     return from(new BlockingMonadValue<A>(queue));
   }
 
-  public static <A> Monad<A> from(MonadValue<A> monadValue) {
+  public static <A> Monad<A> from(MonadicValue<A> monadValue) {
     return new UnboundMonad<A>(monadValue);
   }
 
@@ -93,7 +119,16 @@ public class Monads {
     return new NilMonad();
   }
 
-  public static <A, B> MonadFunction<A, B> map(final Applicable<? super A, ? extends B> function) {
+  /**
+   * Answers a {@link MonadicFunction} that performs mapping using the given
+   * mapping function
+   * 
+   * @param function
+   * @return a new {@link MonadicFunction} that performs mapping, as defined in
+   *         {@link ProtoMonad#map(Applicable)}
+   */
+  public static <A, B> MonadicFunction<A, B> map(
+    @NonNull final Applicable<? super A, ? extends B> function) {
     return new AbstractMonadFunction<A, B>() {
       public Monad<B> apply(A arg) {
         return Monads.cons((B) function.apply(arg));
@@ -101,7 +136,15 @@ public class Monads {
     };
   }
 
-  public static <A> MonadFunction<A, A> filter(final Evaluable<? super A> predicate) {
+  /**
+   * Answers a {@link MonadicFunction} that performs filtering using the given
+   * filtering function
+   * 
+   * @param function
+   * @return a new {@link MonadicFunction} that performs filtering, as defined
+   *         in {@link ProtoMonad#filter(Applicable)}
+   */
+  public static <A> MonadicFunction<A, A> filter(@NonNull final Evaluable<? super A> predicate) {
     return new AbstractMonadFunction<A, A>() {
       public Monad<A> apply(A arg) {
         if (predicate.eval(arg))
@@ -111,15 +154,17 @@ public class Monads {
     };
   }
 
-  public static <A> MonadFunction<A, A> each(final Executable<? super A> block) {
+  public static <A> MonadicFunction<A, A> each(final Executable<? super A> block) {
     return map(Functions.impure(block));
   }
 
-  public static <A, B> MonadFunction<A, Tuple2<A, B>> clone(final Applicable<? super A, ? extends B> function0) {
+  public static <A, B> MonadicFunction<A, Tuple2<A, B>> clone(
+    final Applicable<? super A, ? extends B> function0) {
     return map(Tuples.clone(function0));
   }
 
-  public static <A, B, C> MonadFunction<A, Tuple2<B, C>> branch(final Applicable<? super A, ? extends B> function0,
+  public static <A, B, C> MonadicFunction<A, Tuple2<B, C>> branch(
+    final Applicable<? super A, ? extends B> function0,
     final Applicable<? super A, ? extends C> function1) {
     return map(Tuples.branch(function0, function1));
   }
@@ -131,7 +176,7 @@ public class Monads {
    * @param executor
    * @return
    */
-  public static <A> MonadFunction<A, A> async(final ExecutorService executor) {
+  public static <A> MonadicFunction<A, A> async(final ExecutorService executor) {
     return new AbstractMonadFunction<A, A>() {
       public Monad<A> apply(final A arg) {
         return Monads.async(executor, new Callable<A>() {
@@ -143,7 +188,7 @@ public class Monads {
     };
   }
 
-  public static <A> MonadFunction<A, A> cons() {
+  public static <A> MonadicFunction<A, A> cons() {
     return new AbstractMonadFunction<A, A>() {
       public Monad<A> apply(A arg) {
         return Monads.cons(arg);

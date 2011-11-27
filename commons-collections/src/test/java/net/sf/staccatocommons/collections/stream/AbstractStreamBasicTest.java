@@ -14,13 +14,12 @@ package net.sf.staccatocommons.collections.stream;
 
 import static net.sf.staccatocommons.lambda.Lambda.$;
 import static net.sf.staccatocommons.lambda.Lambda.lambda;
-import static net.sf.staccatocommons.lang.number.NumberTypes.add;
-import static net.sf.staccatocommons.lang.number.NumberTypes.bigInteger;
-import static net.sf.staccatocommons.lang.number.NumberTypes.double_;
-import static net.sf.staccatocommons.lang.number.NumberTypes.integer;
-import static net.sf.staccatocommons.lang.number.Numbers.i;
-import static net.sf.staccatocommons.lang.sequence.StopConditions.upTo;
 import static net.sf.staccatocommons.lang.tuple.Tuples._;
+import static net.sf.staccatocommons.numbers.NumberTypes.add;
+import static net.sf.staccatocommons.numbers.NumberTypes.bigInteger;
+import static net.sf.staccatocommons.numbers.NumberTypes.double_;
+import static net.sf.staccatocommons.numbers.NumberTypes.integer;
+import static net.sf.staccatocommons.numbers.Numbers.i;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -41,7 +40,6 @@ import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
-import net.sf.staccatocommons.lang.sequence.Sequence;
 import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.reductions.Reductions;
 
@@ -94,7 +92,7 @@ public class AbstractStreamBasicTest {
   @Test
   public void testAvg() throws Exception {
     assertEquals(9.6, Streams.cons(10.0, 12.0, 15.0, 2.0, 9.0).average(double_()), 0.01);
-    assertEquals(6, (int) Streams.iterate(1, add(1), upTo(11)).average(integer()));
+    assertEquals(6, (int) Streams.enumerate(1, 11).average(integer()));
   }
 
   /** Test for {@link Stream#average()} **/
@@ -138,7 +136,7 @@ public class AbstractStreamBasicTest {
   public void flatMap() throws Exception {
     assertTrue(Streams.iterate(4, add(1)).take(3).flatMap(new AbstractFunction<Integer, Iterable<Integer>>() {
       public Iterable<Integer> apply(Integer arg) {
-        return Sequence.fromTo(1, arg);
+        return Streams.enumerate(1, arg);
       }
     }).equiv(1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6));
   }
@@ -389,16 +387,16 @@ public class AbstractStreamBasicTest {
   // FIXME
   @Ignore("Extremly time-consuming when running cobertura")
   public void testLongFlatMapStream() throws Exception {
-    Streams.iterate(1, 4000).cross(Streams.iterate(1, 4000)).size();
+    Streams.enumerate(1, 4000).cross(Streams.enumerate(1, 4000)).size();
   }
 
   /** Tests simple crossing */
   @Test
   public void testCross() throws Exception {
     assertTrue(Streams
-      .iterate(1, 20)
-      .cross(Streams.iterate(20, 40))
-      .equiv(Iterables.cross(Sequence.fromTo(1, 20), Sequence.fromTo(20, 40))));
+      .enumerate(1, 20)
+      .cross(Streams.enumerate(20, 40))
+      .equiv(Iterables.cross(Streams.enumerate(1, 20), Streams.enumerate(20, 40))));
   }
 
   /**
@@ -443,7 +441,7 @@ public class AbstractStreamBasicTest {
    */
   @Test
   public void testEquivStreamOfStreams() throws Exception {
-    assertTrue(Streams.cons(Streams.iterate(2, 4), Streams.cons(4, 4, 4)).equiv(
+    assertTrue(Streams.cons(Streams.enumerate(2, 4), Streams.cons(4, 4, 4)).equiv(
       Streams.cons(Streams.cons(2, 3, 4), Streams.repeat(4).take(3))));
   }
 

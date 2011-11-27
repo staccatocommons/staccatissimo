@@ -15,8 +15,8 @@ package net.sf.staccatocommons.collections.iterable;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
-import static net.sf.staccatocommons.lang.number.NumberTypes.integer;
 import static net.sf.staccatocommons.lang.tuple.Tuples._;
+import static net.sf.staccatocommons.numbers.NumberTypes.integer;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
@@ -30,16 +30,16 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 
+import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.Strings;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
-import net.sf.staccatocommons.lang.sequence.Sequence;
+import net.sf.staccatocommons.util.Strings;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -108,9 +108,9 @@ public class IterablesUnitTest {
   public void testFlatMap() throws Exception {
     assertEquals(
       Arrays.asList(1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6),
-      Iterables.flatMap(Sequence.fromTo(4, 6), new AbstractFunction<Integer, Iterable<Integer>>() {
+      Iterables.flatMap(Streams.enumerate(4, 6), new AbstractFunction<Integer, Iterable<Integer>>() {
         public Iterable<Integer> apply(Integer arg) {
-          return Sequence.fromTo(1, arg);
+          return Streams.enumerate(1, arg);
         }
       }));
   }
@@ -229,15 +229,15 @@ public class IterablesUnitTest {
   @Test
   public void testPartition() throws Exception {
     Tuple2<List<Integer>, List<Integer>> partition = Iterables.partition(
-      Sequence.fromTo(10, 20),
+      Streams.enumerate(10, 20),
       new AbstractPredicate<Integer>() {
         public boolean eval(Integer argument) {
           return argument % 2 == 0;
         }
       });
 
-    assertEquals(Iterables.toList(Sequence.fromToBy(10, 20, 2)), partition._0());
-    assertEquals(Iterables.toList(Sequence.fromToBy(11, 20, 2)), partition._1());
+    assertEquals(Streams.enumerate(10, 20, 2).toList(), partition._0());
+    assertEquals(Streams.enumerate(11, 20, 2).toList(), partition._1());
   }
 
   /**
@@ -247,7 +247,7 @@ public class IterablesUnitTest {
    */
   @Test
   public void testTake() throws Exception {
-    assertEquals(Arrays.asList(11, 12, 13, 14), Iterables.take(Sequence.fromBy(11, 1), 4));
+    assertEquals(Arrays.asList(11, 12, 13, 14), Iterables.take(Streams.enumerate(11), 4));
   }
 
   /**
@@ -267,7 +267,7 @@ public class IterablesUnitTest {
    */
   @Test
   public void testSum() throws Exception {
-    assertEquals(55, (int) Iterables.sum(Sequence.fromToBy(1, 10, 1), integer()));
+    assertEquals(55, (int) Iterables.sum(Streams.enumerate(1, 10, 1), integer()));
   }
 
   /**
@@ -275,7 +275,7 @@ public class IterablesUnitTest {
    */
   @Test
   public void testProduct() throws Exception {
-    assertEquals(3628800, (int) Iterables.product(Sequence.fromToBy(1, 10, 1), integer()));
+    assertEquals(3628800, (int) Iterables.product(Streams.enumerate(1, 10, 1), integer()));
   }
 
   /** test for {@link Iterables#cross(Iterable, Iterable)} */

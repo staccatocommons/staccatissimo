@@ -7,6 +7,7 @@
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-control</artifactId>
+	<name>Staccato-Commons-Control</name>
 	<version>1.2-SNAPSHOT</version>
 
 	<dependencies>
@@ -14,6 +15,12 @@
 			<groupId>net.sf.staccatocommons</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.staccatocommons</groupId>
+			<artifactId>commons-numbers</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>

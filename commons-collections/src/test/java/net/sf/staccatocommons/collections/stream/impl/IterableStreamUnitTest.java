@@ -18,7 +18,6 @@ import java.util.Collections;
 import net.sf.staccatocommons.collections.stream.RepetableStreamTheories;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.lang.sequence.Sequence;
 
 import org.junit.experimental.theories.DataPoints;
 
@@ -30,7 +29,7 @@ public class IterableStreamUnitTest extends RepetableStreamTheories {
 
   /** Set of iterable Streams to test */
   @DataPoints
-  public static final Stream[] STREAMS = new Stream[] { Streams.from(Sequence.fromToBy(85, 3, 190)),
+  public static final Stream[] STREAMS = new Stream[] { Streams.from(Streams.enumerate(85, 3, 190)),
       Streams.from((Iterable<Integer>) Streams.cons(5, 9, 10, 156).toSet()),
       Streams.from((Iterable<Integer>) Collections.singleton(5)),
       Streams.from((Iterable<Integer>) Collections.<Integer> emptyList()) };

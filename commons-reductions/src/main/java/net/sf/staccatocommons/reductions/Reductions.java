@@ -27,6 +27,7 @@ import net.sf.staccatocommons.reductions.internal.Foldl1;
 import net.sf.staccatocommons.reductions.internal.Sum;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 /**
  * Common {@link Reduction}s modeled after <a
@@ -131,11 +132,20 @@ public class Reductions {
     return max(Compare.<A> natural());
   }
 
-  public static <A> Reduction<A, A> max(Comparator<A> comparator) {
+  /**
+   * Answers reduction that computes the maximum element of the processed
+   * elements, according to the given {@link Comparator}
+   * 
+   * @return a reduction that computes the maximum element of the processed
+   */
+  @IgnoreRestrictions
+  public static <A> Reduction<A, A> max(@NonNull Comparator<A> comparator) {
     return from(Compare.max(comparator));
   }
 
-  public static <A, B extends Comparable<B>> Reduction<A, A> maxOn(Applicable<A, B> function) {
+  @IgnoreRestrictions
+  public static <A, B extends Comparable<B>> Reduction<A, A> maxOn(
+    @NonNull Applicable<A, B> function) {
     return max(Compare.on(function));
   }
 
@@ -150,18 +160,28 @@ public class Reductions {
     return min(Compare.<A> natural());
   }
 
+  /**
+   * Answers reduction that computes the minimum element of the processed
+   * elements, according to the given {@link Comparator}
+   * 
+   * @return a reduction that computes the minimum element of the processed
+   */
+  @IgnoreRestrictions
   public static <A> Reduction<A, A> min(Comparator<A> comparator) {
     return from(Compare.min(comparator));
   }
 
-  public static <A, B extends Comparable<B>> Reduction<A, A> minOn(Applicable<A, B> function) {
+  @IgnoreRestrictions
+  public static <A, B extends Comparable<B>> Reduction<A, A> minOn(
+    @NonNull Applicable<A, B> function) {
     return min(Compare.on(function));
   }
 
   /**
    * Answers a reduction that wraps the given folding with no initial element
    * 
-   * @param function the folding
+   * @param function
+   *          the folding
    * @return new {@link Reduction}
    */
   public static <A> Reduction<A, A> from(

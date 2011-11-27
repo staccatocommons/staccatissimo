@@ -14,7 +14,8 @@
 package net.sf.staccatocommons.lang.value;
 
 import static org.junit.Assert.assertEquals;
-import net.sf.staccatocommons.lang.Range;
+
+import javax.xml.ws.Holder;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Before;
@@ -36,8 +37,8 @@ public class NamedTupleToStringStyleTest {
    * @throws Exception
    */
   @Test
-  public void testStyle() throws Exception {
-    assertEquals("Range(5,9)", ToStringBuilder.reflectionToString(Range.from(5, 9), new NamedTupleToStringStyle()));
+  public void testStyle() throws Exception {    
+    assertEquals("Holder(hello)", ToStringBuilder.reflectionToString(new Holder<String>("hello"), new NamedTupleToStringStyle()));
   }
 
 }
