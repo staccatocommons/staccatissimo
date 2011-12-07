@@ -51,6 +51,10 @@ Projects
  but essential abstractions for the rest of the projects, like Options, Lifecycles and Tuples. It contains also abstract and/or 
  concrete implementations of most of the interfaces in staccato-commons-defs, like NumberTypes, and facilities for implementing 
  equals, hashcode, toString and compareTo in a consistent way, without performance impacts or boilerplate code.    
+
+ * {{{http://staccatocommons.sourceforge.net/commons-util}staccato-commons-util}}
+
+* {{{http://staccatocommons.sourceforge.net/commons-numbers}staccato-commons-numbers}}
  
  * {{{http://staccatocommons.sourceforge.net/commons-check}staccato-commons-check}}:
   a general purpose, abstract validation ecosystem, with concrete classes for checking preconditions and postconditions 
@@ -61,7 +65,9 @@ Projects
  * {{{http://staccatocommons.sourceforge.net/commons-collections}staccato-commons-collections}}:
   dozens of class methods for iterables handling, in both a functional and a more imperative style,
   and Streams, the "super"-iterable - rich, lazy, and generic enough to handle much more than just collections.
-   
+ 
+ * {{{http://staccatocommons.sourceforge.net/commons-control}staccato-commons-control}}
+  
  * {{{http://staccatocommons.sourceforge.net/commons-io}staccato-commons-io}}:
   integration between the Staccato libraries and java.io.  
  

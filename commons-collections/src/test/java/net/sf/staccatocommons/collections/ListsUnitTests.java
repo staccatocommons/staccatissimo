@@ -14,7 +14,6 @@
 package net.sf.staccatocommons.collections;
 
 import static junit.framework.Assert.assertEquals;
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

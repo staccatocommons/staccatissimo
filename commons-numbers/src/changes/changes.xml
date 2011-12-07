@@ -1,0 +1,34 @@
+<!--
+
+     Copyright (c) 2011, The Staccato-Commons Team
+
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU Lesser General Public License as published by
+     the Free Software Foundation; version 3 of the License.
+
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU Lesser General Public License for more details.
+
+-->
+
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+	<properties>
+		<title>Staccato-Commons-Lang Changes History</title>
+		<author>flbulgarelli</author>
+	</properties>
+	<body>
+		<release version="1.2" date="2011-01-08" description="Inception">
+			<action dev="flbulgarelli" type="add">
+				Initial Version, with Ranges,
+				Sequences, Options, Functions, Tuples, Blocks,
+				Predicates,
+				Lifecycles, BasicEquals, Nulls, SoftExceptions, MapBuilder and
+				Provders
+			</action>
+		</release>
+	</body>
+</document>

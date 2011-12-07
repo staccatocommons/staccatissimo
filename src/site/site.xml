@@ -26,9 +26,12 @@
       <item name="Defs" href="http://staccatocommons.sourceforge.net/commons-defs/index.html" />
       <item name="Check" href="http://staccatocommons.sourceforge.net/commons-check/index.html"/>      
       <item name="Lang" href="http://staccatocommons.sourceforge.net/commons-lang/index.html" />
+      <item name="Util" href="http://staccatocommons.sourceforge.net/commons-util/index.html" /> 
+      <item name="Numbers" href="http://staccatocommons.sourceforge.net/commons-numbers/index.html" />
       <item name="Dynamic" href="http://staccatocommons.sourceforge.net/commons-dynamic/index.html"/>
       <item name="Lambda" href="http://staccatocommons.sourceforge.net/commons-lambda/index.html"/>
       <item name="Iterators" href="http://staccatocommons.sourceforge.net/commons-iterators/index.html"/>
+      <item name="Control" href="http://staccatocommons.sourceforge.net/commons-control/index.html" />
       <item name="Collections" href="http://staccatocommons.sourceforge.net/commons-collections/index.html"/>
       <item name="IO" href="http://staccatocommons.sourceforge.net/commons-io/index.html"/>
       <item name="Instrument" href="http://staccatocommons.sourceforge.net/commons-instrument/index.html"/>
