@@ -51,7 +51,7 @@ public abstract class AbstractMonad<A> implements Monad<A> {
   }
 
   public <B> Monad<B> bind(Applicable<? super A, Monad<B>> function) {
-    return new BoundMonad<A, B>(monadValue(), function);
+    return new BoundMonad<A, B>(monadicValue(), function);
   }
 
   public Monad<A> incorporate(final Applicable<? super A, Monad<A>> function) {

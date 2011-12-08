@@ -105,6 +105,7 @@ public class BlockingMonadTest {
   }
   
 
+  /***/
   @Constant
   public static Executor fork() {
     return new Executor() {
@@ -114,6 +115,7 @@ public class BlockingMonadTest {
     };
   }
 
+  /***/
   public static void withTimeout(long timeout, TimeUnit timeUnit, Runnable runnable) throws InterruptedException {
     Executors.newSingleThreadExecutor().invokeAll(Arrays.asList(Executors.callable(runnable)), timeout, timeUnit);
   }

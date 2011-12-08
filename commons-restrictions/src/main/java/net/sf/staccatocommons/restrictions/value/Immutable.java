@@ -24,7 +24,7 @@ import net.sf.staccatocommons.restrictions.Restriction;
 
 /**
  * {@link Immutable}s are objects whose state, if any, can not be mutated in any
- * way. Such objects either have no attributes - statless - or are
+ * way. Such objects either have no attributes - stateless - or are
  * {@link Unmodifiable} whose attributes are primitive or immutable. Examples of
  * immutable objects are strings and {@code Collections.emptyList()}.
  * <p>

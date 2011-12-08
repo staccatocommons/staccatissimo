@@ -16,14 +16,14 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
 import net.sf.staccatocommons.control.monad.Monad;
-import net.sf.staccatocommons.control.monad.MonadValue;
+import net.sf.staccatocommons.control.monad.MonadicValue;
 import net.sf.staccatocommons.defs.Applicable;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class SubmitMonadValue<A> implements MonadValue<A> {
+public class SubmitMonadValue<A> implements MonadicValue<A> {
 
   private final ExecutorService executor;
   private final Callable<A> callable;

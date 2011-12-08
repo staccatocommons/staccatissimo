@@ -14,7 +14,7 @@ package net.sf.staccatocommons.control.monad.internal;
 
 import net.sf.staccatocommons.control.monad.AbstractMonad;
 import net.sf.staccatocommons.control.monad.Monad;
-import net.sf.staccatocommons.control.monad.MonadValue;
+import net.sf.staccatocommons.control.monad.MonadicValue;
 import net.sf.staccatocommons.defs.Applicable;
 
 /**
@@ -43,11 +43,11 @@ public class AppendMonad<A> extends AbstractMonad<A> {
     second.value();
   }
 
-  public MonadValue<A> monadValue() {
-    return new MonadValue<A>() {
+  public MonadicValue<A> monadicValue() {
+    return new MonadicValue<A>() {
       public <T> void eval(Applicable<? super A, Monad<T>> function) {
-        first.monadValue().eval(function);
-        second.monadValue().eval(function);
+        first.monadicValue().eval(function);
+        second.monadicValue().eval(function);
       }
     };
   }

@@ -11,6 +11,7 @@
  GNU Lesser General Public License for more details.
  */
 package net.sf.staccatocommons.lang.tuple;
+import static net.sf.staccatocommons.lang.internal.Add.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples._;
 import static net.sf.staccatocommons.lang.tuple.Tuples.curry;
 import static org.junit.Assert.assertEquals;
@@ -27,7 +28,6 @@ import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.function.AbstractFunction3;
-import net.sf.staccatocommons.lang.number.NumberTypes;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 
 import org.apache.commons.lang.StringUtils;
@@ -118,7 +118,7 @@ public class TuplesUnitTest {
    */
   @Test
   public void branch() throws Exception {
-    assertEquals(Tuples.branch(NumberTypes.add(10), Compare.greaterThan(5)).apply(2), _(12, false));
+    assertEquals(Tuples.branch(add(10), Compare.greaterThan(5)).apply(2), _(12, false));
   }
 
 }

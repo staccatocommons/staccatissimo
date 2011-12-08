@@ -25,7 +25,7 @@ import java.util.Map;
 
 import net.sf.staccatocommons.lang.MapBuilder;
 import net.sf.staccatocommons.lang.Option;
-import net.sf.staccatocommons.lang.Strings;
+import net.sf.staccatocommons.util.Strings;
 
 import org.junit.Test;
 

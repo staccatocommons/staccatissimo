@@ -52,6 +52,5 @@ public class ClassesInstrumentedDummyTest {
     assertSame(Predicates.true_(), Predicates.true_());
     assertSame(Equiv.equal(), Equiv.equal());
     assertSame(Equiv.<Integer> compare(), Equiv.<Integer> compare());
-    assertSame(Strings.empty(), Strings.empty());
   }
 }

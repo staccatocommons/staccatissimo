@@ -15,31 +15,31 @@ package net.sf.staccatocommons.defs.reduction;
 import java.io.InputStream;
 
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
 
 /**
- * A {@link Reduction} encapsulates a computation that, like SQL's aggregate
- * functions, processes each element of a sequence of objects, calculating
- * intermediate, accumulative results. The last accumulation is the final result
- * of the reduction over such sequence.
+ * A {@link Reduction} are aggregate-functions-like objects that encapsulates a
+ * computation with effect that processes each element of a sequence of objects,
+ * calculating intermediate, accumulative results. The last accumulation is the
+ * final result of the reduction over such sequence.
  * <p>
  * Reductions can be applied to potentially any sequence of objects:
  * {@link Iterables}, {@link InputStream}s, etc.
  * </p>
  * <p>
- * The general pattern of using them is as following:
- * 
- * <code>
- *    
- * </code>
- * 
- * </p>
- * 
+ * Although {@link Reduction}s implement aggregation in an impure manner - its
+ * {@link #start()} message will return a mutable {@link Accumulator} - they are
+ * sharable, since {@link Reduction} itself are stateless
  * 
  * @author flbulgarelli
  * @since 1.2
  * @param <B>
  * @param <A>
+ * 
+ * @see SideEffectFree
+ * @see Function
  */
 public interface Reduction<A, B> {
 

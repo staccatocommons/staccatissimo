@@ -67,7 +67,7 @@ public interface Monad<A> extends Thunk<Void>, ProtoMonad<Monad, A>, Runnable {
    * evaluation of this monad and then the given one
    * 
    * @param other
-   * @return a new {@link Monad} 
+   * @return a new {@link Monad}
    */
   Monad<A> append(Monad<A> other);
 
@@ -119,7 +119,19 @@ public interface Monad<A> extends Thunk<Void>, ProtoMonad<Monad, A>, Runnable {
 
   /* OOMonad specific */
 
-  MonadValue<A> monadValue();
+  /**
+   * The {@link MonadicValue} associated to this monad, which is capable of
+   * perform this {@link Monad}'s effect using a monadic function.
+   * 
+   * Using this object is not normally necessary for Monad's users, but for
+   * Monad developers.
+   * 
+   * {@link #monadicValue()} message is for {@link Monads} analogous to
+   * {@link Iterable#iterator()} message for {@link Iterable}s
+   * 
+   * @return the monad value
+   */
+  MonadicValue<A> monadicValue();
 
   /**
    * Evalutes this monad, executing its effects, insde the given executor

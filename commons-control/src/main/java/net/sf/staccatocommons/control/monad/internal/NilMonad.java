@@ -14,7 +14,7 @@ package net.sf.staccatocommons.control.monad.internal;
 
 import net.sf.staccatocommons.control.monad.AbstractMonad;
 import net.sf.staccatocommons.control.monad.Monad;
-import net.sf.staccatocommons.control.monad.MonadValue;
+import net.sf.staccatocommons.control.monad.MonadicValue;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.restrictions.Constant;
 
@@ -28,8 +28,8 @@ public class NilMonad<A> extends AbstractMonad<A> {
   }
 
   @Constant
-  public MonadValue<A> monadValue() {
-    return new MonadValue<A>() {
+  public MonadicValue<A> monadicValue() {
+    return new MonadicValue<A>() {
       public <T> void eval(Applicable<? super A, Monad<T>> function) {}
     };
   }

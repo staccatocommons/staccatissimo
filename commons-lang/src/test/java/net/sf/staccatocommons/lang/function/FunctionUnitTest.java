@@ -12,11 +12,7 @@
  */
 
 package net.sf.staccatocommons.lang.function;
-
-import static net.sf.staccatocommons.lang.number.NumberTypes.add;
-import static net.sf.staccatocommons.lang.number.NumberTypes.bigDecimal;
-import static net.sf.staccatocommons.lang.number.Numbers.d;
-import static net.sf.staccatocommons.lang.number.Numbers.e;
+import static net.sf.staccatocommons.lang.internal.Add.add;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -150,11 +146,7 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
     assertEquals((Integer) 2, add(1).nullSafe().apply(1));
   }
 
-  /** Test for function composition */
-  @Test
-  public void testThenFunction() throws Exception {
-    assertEquals(e(101, -1), bigDecimal().inverse().then(add(d(10))).apply(d(10)));
-  }
+
 
   /** Test for predicate composition */
   @Test

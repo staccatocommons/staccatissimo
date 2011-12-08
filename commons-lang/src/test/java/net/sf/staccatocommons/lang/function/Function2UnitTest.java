@@ -13,7 +13,6 @@
 
 package net.sf.staccatocommons.lang.function;
 
-import static net.sf.staccatocommons.lang.number.NumberTypes.integer;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import net.sf.staccatocommons.defs.Applicable2;
@@ -106,7 +105,7 @@ public class Function2UnitTest extends JUnit4MockObjectTestCase {
    */
   @Test
   public void testNullSafe() throws Exception {
-    Function2<Integer, Integer, Integer> add = Compare.max(integer());
+    Function2<Integer, Integer, Integer> add = Compare.max(Compare.<Integer>natural());
     assertNull(add.nullSafe().apply(null, 1));
     assertNull(add.nullSafe().apply(1, null));
     assertEquals((Integer) 10, add.apply(10, 5));

@@ -17,6 +17,12 @@ import net.sf.staccatocommons.defs.Thunk;
 
 public interface Accumulator<A, B> extends Thunk<B> {
 
+  /**
+   * Adds an element to this accumulator
+   * 
+   * @param element
+   *          the element to add.
+   */
   void accumulate(A element);
 
   /**
