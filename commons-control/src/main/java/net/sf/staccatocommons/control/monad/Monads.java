@@ -129,7 +129,7 @@ public class Monads {
    */
   public static <A, B> MonadicFunction<A, B> map(
     @NonNull final Applicable<? super A, ? extends B> function) {
-    return new AbstractMonadFunction<A, B>() {
+    return new AbstractMonadicFunction<A, B>() {
       public Monad<B> apply(A arg) {
         return Monads.cons((B) function.apply(arg));
       }
@@ -145,7 +145,7 @@ public class Monads {
    *         in {@link ProtoMonad#filter(Applicable)}
    */
   public static <A> MonadicFunction<A, A> filter(@NonNull final Evaluable<? super A> predicate) {
-    return new AbstractMonadFunction<A, A>() {
+    return new AbstractMonadicFunction<A, A>() {
       public Monad<A> apply(A arg) {
         if (predicate.eval(arg))
           return Monads.cons(arg);
@@ -177,7 +177,7 @@ public class Monads {
    * @return
    */
   public static <A> MonadicFunction<A, A> async(final ExecutorService executor) {
-    return new AbstractMonadFunction<A, A>() {
+    return new AbstractMonadicFunction<A, A>() {
       public Monad<A> apply(final A arg) {
         return Monads.async(executor, new Callable<A>() {
           public A call() throws Exception {
@@ -189,7 +189,7 @@ public class Monads {
   }
 
   public static <A> MonadicFunction<A, A> cons() {
-    return new AbstractMonadFunction<A, A>() {
+    return new AbstractMonadicFunction<A, A>() {
       public Monad<A> apply(A arg) {
         return Monads.cons(arg);
       }
