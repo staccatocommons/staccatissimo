@@ -54,7 +54,7 @@ Projects
 
  * {{{http://staccatocommons.sourceforge.net/commons-util}staccato-commons-util}}
 
-* {{{http://staccatocommons.sourceforge.net/commons-numbers}staccato-commons-numbers}}
+ * {{{http://staccatocommons.sourceforge.net/commons-numbers}staccato-commons-numbers}}
  
  * {{{http://staccatocommons.sourceforge.net/commons-check}staccato-commons-check}}:
   a general purpose, abstract validation ecosystem, with concrete classes for checking preconditions and postconditions 

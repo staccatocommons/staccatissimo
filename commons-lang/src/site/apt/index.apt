@@ -13,39 +13,31 @@
 
 About Staccato-Commons-Lang 
  
- Staccato-Commons-Lang is the core library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. 
-It offers options, tuples, lazy values, functor objects, builders, lifecycles, ranges and sequences.  
+ Staccato-Commons-Lang is the core library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}.
+It provides abstract and concrete implementations of function-like interfaces
+of {{{http://staccatocommons.sourceforge.net/commons-defs/index.html}Staccato-Commons-Defs}}, as well as options, tuples, and builders.  
  
-
 Getting Started
 
   Staccato-Commons-Lang resolves simple and common everyday problems. Descriptions of such problems, solutions and examples 
   can be found in the following links:
   
+  * Abstract and concrete implementations of applicables - function-like objects
+  
   * {{{./relevant-state-by-example.html}RelevantState}} and BasicEquals
    - Consistently implementing equals, hashcode, toString, and/or compareTo in an efficient 
   way and without boilerplate code. 
   
-  * {{{./prioritized-by-example.html}Prioritized}} - Prioritizing elements in sorted collections
-  
   * Nulls and Option - Handling nulls and optional values
-  
-  * Handle - Handling exceptions in a high level way
-  
-  * Range - Expressing a range of comparable objects
-  
+    
   * Builders - Templates for creating builder-pattern style objects
   
   * MapBuilder and CollectionBuilder - Builders for creating unmodifiable collections and maps
   
   * {{{./compare-by-example.html}Compare}} - Functions and utilities for comparing elements
-  
-  * Sequences - An iterable source of objects where next object is computed based on the previous     
-  
+    
   * Tuples
-  
-  * Lifecycle
-  
+    
   * Predicates, Functions and Thunks - abstract and concrete implementations 
   of the rich, function-like interface defined by staccato-commons-defs
   
@@ -53,7 +45,7 @@ Getting Started
   
   * SoftExceptions
      
-  * {{{./numbers-by-example.html}Numbers}} and NumberTypes - Compactly express BigInteger and BigDecimal literals, and deal with numeric types polimorphically.  
+    
   
    
   
