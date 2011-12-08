@@ -13,8 +13,7 @@
 
 package net.sf.staccatocommons.io.internal.lifecycle;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 

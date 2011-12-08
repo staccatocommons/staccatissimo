@@ -13,8 +13,8 @@
 
 package net.sf.staccatocommons.instrument.internal;
 
-import static net.sf.staccatocommons.testing.mock.FileMock.dir;
-import static org.junit.Assert.assertEquals;
+import static net.sf.staccatocommons.testing.mock.FileMock.*;
+import static org.junit.Assert.*;
 
 import java.io.File;
 

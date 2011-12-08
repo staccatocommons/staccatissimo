@@ -12,15 +12,12 @@
  */
 package net.sf.staccatocommons.util;
 
-import static net.sf.staccatocommons.lang.tuple.Tuples._;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
+import static org.junit.Assert.*;
 
 import java.util.regex.Pattern;
 
 import net.sf.staccatocommons.lang.function.Functions;
-import net.sf.staccatocommons.util.Strings;
 
 import org.junit.Test;
 
@@ -52,13 +49,13 @@ public class StringsUnitTest {
     assertFalse(Strings.notEmpty().apply(""));
     assertTrue(Strings.notEmpty().apply("fsfs"));
   }
-  
+
   /** Test for {@link Functions#toString_()} */
   @Test
   public void testToString() throws Exception {
     assertEquals("50", Strings.toString_().apply(50));
   }
-  
+
   /**
    * Test method for
    * {@link net.sf.staccatocommons.util.Strings#equalsIgnoreCase(java.lang.String)}

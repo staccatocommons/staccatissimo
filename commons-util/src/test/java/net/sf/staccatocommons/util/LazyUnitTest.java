@@ -13,9 +13,7 @@
 
 package net.sf.staccatocommons.util;
 
-import static org.junit.Assert.assertEquals;
-
-import net.sf.staccatocommons.util.Lazy;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 

@@ -94,7 +94,7 @@ public class Strings {
       public boolean eval(String args) {
         return args.startsWith(string);
       }
-    };
+    }
     return new StartsWith();
   }
 

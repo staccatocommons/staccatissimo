@@ -13,10 +13,9 @@
 
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccatocommons.collections.stream.Streams.cons;
-import static net.sf.staccatocommons.lang.Compare.max;
-import static net.sf.staccatocommons.lang.Compare.min;
-import static net.sf.staccatocommons.lang.tuple.Tuples._;
+import static net.sf.staccatocommons.collections.stream.Streams.*;
+import static net.sf.staccatocommons.lang.Compare.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
 import java.io.IOException;
 import java.lang.reflect.Array;

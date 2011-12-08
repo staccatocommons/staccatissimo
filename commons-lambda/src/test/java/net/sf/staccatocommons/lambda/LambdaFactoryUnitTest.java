@@ -12,10 +12,8 @@
  */
 package net.sf.staccatocommons.lambda;
 
-import static net.sf.staccatocommons.lang.tuple.Tuples._;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -90,7 +88,7 @@ public class LambdaFactoryUnitTest {
   }
 
   /***/
-  public static interface Foo {
+  public interface Foo {
     /***/
     Integer foo() throws IOException;
   }

@@ -12,14 +12,8 @@
  */
 package net.sf.staccatocommons.lambda;
 
-import static net.sf.staccatocommons.lambda.Lambda.$;
-import static net.sf.staccatocommons.lambda.Lambda._;
-import static net.sf.staccatocommons.lambda.Lambda.lambda;
-import static net.sf.staccatocommons.lambda.Lambda.lambda2;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static net.sf.staccatocommons.lambda.Lambda.*;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

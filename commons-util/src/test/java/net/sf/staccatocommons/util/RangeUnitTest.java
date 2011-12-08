@@ -13,14 +13,9 @@
 
 package net.sf.staccatocommons.util;
 
-import static net.sf.staccatocommons.testing.junit.jmock.MiscMatchers.canSerialize;
-import static net.sf.staccatocommons.util.Range.from;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import net.sf.staccatocommons.util.Range;
+import static net.sf.staccatocommons.testing.junit.jmock.MiscMatchers.*;
+import static net.sf.staccatocommons.util.Range.*;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -81,6 +76,5 @@ public class RangeUnitTest {
   public void testSerialization() throws Exception {
     assertThat(Range.from(50, 90), canSerialize());
   }
-  
 
 }

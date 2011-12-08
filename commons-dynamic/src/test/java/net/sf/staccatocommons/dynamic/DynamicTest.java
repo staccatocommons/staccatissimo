@@ -13,9 +13,7 @@ package net.sf.staccatocommons.dynamic;
  GNU Lesser General Public License for more details.
  */
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.partial.EmptyAware;
 
@@ -38,19 +36,19 @@ public class DynamicTest {
   /***/
   public interface LongAdder {
     /***/
-    public long add(int x, int y);
+    long add(int x, int y);
   }
 
   /***/
   public interface IntegerAdder {
     /***/
-    public Integer add(int x, int y);
+    Integer add(int x, int y);
   }
 
   /***/
   public interface IntAdder {
     /***/
-    public int add(int x, int y);
+    int add(int x, int y);
   }
 
   /***/
@@ -97,13 +95,13 @@ public class DynamicTest {
   }
 
   /***/
-  public static interface IPet {
+  public interface IPet {
     /***/
     String getName();
   }
 
   /***/
-  public static interface IPerson {
+  public interface IPerson {
     /***/
     IPet getPet();
   }
@@ -149,7 +147,9 @@ public class DynamicTest {
    */
   @Test
   public void dynamicSendChained() throws Exception {
-    assertEquals("Gardfield", Dynamics.from(new Person("Jon", new Pet("Gardfield"))).$("getPet").$("getName").value());
+    assertEquals(
+      "Gardfield",
+      Dynamics.from(new Person("Jon", new Pet("Gardfield"))).$("getPet").$("getName").value());
   }
 
   /** Test for dynamicsend */
@@ -198,17 +198,21 @@ public class DynamicTest {
   /** Tests that dynamicAs performs a "deep" cast */
   @Test
   public void dynamicAs() throws Exception {
-    assertEquals("Sylvester", Dynamics
-      .from(new Person("Granny", new Pet("Sylvester")))
-      .chainingAs(IPerson.class)
-      .getPet()
-      .getName());
+    assertEquals(
+      "Sylvester",
+      Dynamics
+        .from(new Person("Granny", new Pet("Sylvester")))
+        .chainingAs(IPerson.class)
+        .getPet()
+        .getName());
   }
 
   /** Tests that dynamicAs works ok with primitives */
   @Test
   public void dynamicAsPrimitives() throws Exception {
-    assertEquals((Integer) 230, Dynamics.from(new Adder()).chainingAs(IntegerAdder.class).add(10, 220));
+    assertEquals(
+      (Integer) 230,
+      Dynamics.from(new Adder()).chainingAs(IntegerAdder.class).add(10, 220));
     assertEquals(230, Dynamics.from(new Adder()).chainingAs(IntAdder.class).add(10, 220));
   }
 
@@ -225,7 +229,9 @@ public class DynamicTest {
   /***/
   @Test
   public void fromClassName() throws Exception {
-    assertEquals(30, Dynamics.fromClassName("net.sf.staccatocommons.dynamic.DynamicTest$Adder").send("add", 10, 20));
+    assertEquals(30, Dynamics
+      .fromClassName("net.sf.staccatocommons.dynamic.DynamicTest$Adder")
+      .send("add", 10, 20));
   }
 
 }

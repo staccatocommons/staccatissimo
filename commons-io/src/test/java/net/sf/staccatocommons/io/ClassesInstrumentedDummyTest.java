@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.io;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 

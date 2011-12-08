@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.collections.stream.internal;
 
-import static net.sf.staccatocommons.lang.tuple.Tuples._;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
 import java.util.Iterator;
 

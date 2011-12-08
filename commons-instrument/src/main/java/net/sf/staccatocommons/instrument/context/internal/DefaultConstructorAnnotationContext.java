@@ -64,6 +64,6 @@ public class DefaultConstructorAnnotationContext extends AbstractAnnotationConte
 
   @Override
   public boolean isPublic() {
-   return Modifier. isPublic(getConstructor().getModifiers());
+    return Modifier.isPublic(getConstructor().getModifiers());
   }
 }

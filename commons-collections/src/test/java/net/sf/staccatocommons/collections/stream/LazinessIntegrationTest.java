@@ -12,8 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 

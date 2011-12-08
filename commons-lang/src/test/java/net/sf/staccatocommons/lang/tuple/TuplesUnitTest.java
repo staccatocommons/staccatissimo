@@ -12,12 +12,8 @@
  */
 package net.sf.staccatocommons.lang.tuple;
 import static net.sf.staccatocommons.lang.internal.Add.*;
-import static net.sf.staccatocommons.lang.tuple.Tuples._;
-import static net.sf.staccatocommons.lang.tuple.Tuples.curry;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.predicate.Predicate;

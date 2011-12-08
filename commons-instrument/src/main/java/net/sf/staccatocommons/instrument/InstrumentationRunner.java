@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.instrument;
 
-import static net.sf.staccatocommons.io.Files.suffix;
+import static net.sf.staccatocommons.io.Files.*;
 
 import java.io.File;
 

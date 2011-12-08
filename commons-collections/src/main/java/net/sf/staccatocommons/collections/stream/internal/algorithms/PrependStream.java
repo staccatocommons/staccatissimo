@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.internal.algorithms;
 
-import static net.sf.staccatocommons.lang.tuple.Tuples._;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.tuple.Tuple2;

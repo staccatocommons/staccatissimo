@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.lang;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 import java.io.IOError;
 import java.io.IOException;

@@ -12,10 +12,8 @@
  */
 package net.sf.staccatocommons.control.monad;
 
-import static net.sf.staccatocommons.control.monad.Monads.each;
-import static net.sf.staccatocommons.control.monad.Monads.filter;
-import static net.sf.staccatocommons.control.monad.Monads.map;
-import static net.sf.staccatocommons.numbers.NumberTypes.add;
+import static net.sf.staccatocommons.control.monad.Monads.*;
+import static net.sf.staccatocommons.numbers.NumberTypes.*;
 
 import java.util.Collection;
 import java.util.LinkedList;

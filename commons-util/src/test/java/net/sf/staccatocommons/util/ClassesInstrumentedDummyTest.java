@@ -13,9 +13,8 @@
 
 package net.sf.staccatocommons.util;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.restrictions.Constant;
-import net.sf.staccatocommons.util.Strings;
 
 import org.junit.Test;
 

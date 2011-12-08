@@ -12,9 +12,8 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNull;
-import static net.sf.staccatocommons.numbers.NumberTypes.add;
+import static junit.framework.Assert.*;
+import static net.sf.staccatocommons.numbers.NumberTypes.*;
 
 import java.util.Arrays;
 

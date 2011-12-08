@@ -12,21 +12,10 @@
  */
 package net.sf.staccatocommons.numbers;
 
-import static net.sf.staccatocommons.numbers.NumberTypes.add;
-import static net.sf.staccatocommons.numbers.NumberTypes.bigDecimal;
-import static net.sf.staccatocommons.numbers.NumberTypes.bigInteger;
-import static net.sf.staccatocommons.numbers.NumberTypes.double_;
-import static net.sf.staccatocommons.numbers.NumberTypes.float_;
-import static net.sf.staccatocommons.numbers.NumberTypes.integer;
-import static net.sf.staccatocommons.numbers.NumberTypes.long_;
-import static net.sf.staccatocommons.numbers.Numbers.d;
-import static net.sf.staccatocommons.numbers.Numbers.e;
-import static net.sf.staccatocommons.numbers.Numbers.i;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static net.sf.staccatocommons.numbers.NumberTypes.*;
+import static net.sf.staccatocommons.numbers.Numbers.*;
+import static org.junit.Assert.*;
 import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.numbers.NumberTypes;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;

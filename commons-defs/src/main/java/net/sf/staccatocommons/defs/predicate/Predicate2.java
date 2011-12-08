@@ -25,8 +25,8 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * @author flbulgarelli
  */
-public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Boolean>, Applicable<A, Predicate<B>>,
-  NullSafeAware<Predicate2<A, B>> {
+public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Boolean>,
+  Applicable<A, Predicate<B>>, NullSafeAware<Predicate2<A, B>> {
 
   /**
    * Negates this {@link Predicate}
@@ -64,15 +64,14 @@ public interface Predicate2<A, B> extends Evaluable2<A, B>, Applicable2<A, B, Bo
    */
   @NullSafe
   Predicate2<A, B> nullSafe();
-  
-  
+
   /**
-   * <a href="http://en.wikipedia.org/wiki/Currying">Uncurries</a> this predicate,
-   *  by returning a {@link Predicate} that takes a
-   * single pair, being its components each of the original predicate parameters
+   * <a href="http://en.wikipedia.org/wiki/Currying">Uncurries</a> this
+   * predicate, by returning a {@link Predicate} that takes a single pair, being
+   * its components each of the original predicate parameters
    * 
    * @return a new {@link Predicate}
    */
-  public Predicate<Tuple2<A, B>> uncurry();
+  Predicate<Tuple2<A, B>> uncurry();
 
 }

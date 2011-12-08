@@ -13,14 +13,11 @@
 
 package net.sf.staccatocommons.collections.iterable;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static net.sf.staccatocommons.lang.tuple.Tuples._;
-import static net.sf.staccatocommons.numbers.NumberTypes.integer;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static java.util.Arrays.*;
+import static java.util.Collections.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
+import static net.sf.staccatocommons.numbers.NumberTypes.*;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.Calendar;

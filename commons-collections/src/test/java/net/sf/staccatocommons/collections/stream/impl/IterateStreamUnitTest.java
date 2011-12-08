@@ -13,10 +13,8 @@ package net.sf.staccatocommons.collections.stream.impl;
  */
 
 
-import static net.sf.staccatocommons.numbers.NumberTypes.add;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static net.sf.staccatocommons.numbers.NumberTypes.*;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.Iterator;

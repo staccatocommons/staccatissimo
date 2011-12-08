@@ -12,7 +12,7 @@
  */
 package net.sf.staccatocommons.collections.stream.internal.algorithms.delayed;
 
-import static net.sf.staccatocommons.lang.tuple.Tuples._;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.PrependStream;

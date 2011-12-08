@@ -12,17 +12,11 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
-import static net.sf.staccatocommons.lambda.Lambda.$;
-import static net.sf.staccatocommons.lambda.Lambda.lambda;
-import static net.sf.staccatocommons.lang.tuple.Tuples._;
-import static net.sf.staccatocommons.numbers.NumberTypes.add;
-import static net.sf.staccatocommons.numbers.NumberTypes.bigInteger;
-import static net.sf.staccatocommons.numbers.NumberTypes.double_;
-import static net.sf.staccatocommons.numbers.NumberTypes.integer;
-import static net.sf.staccatocommons.numbers.Numbers.i;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static net.sf.staccatocommons.lambda.Lambda.*;
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
+import static net.sf.staccatocommons.numbers.NumberTypes.*;
+import static net.sf.staccatocommons.numbers.Numbers.*;
+import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -134,11 +128,15 @@ public class AbstractStreamBasicTest {
    */
   @Test
   public void flatMap() throws Exception {
-    assertTrue(Streams.iterate(4, add(1)).take(3).flatMap(new AbstractFunction<Integer, Iterable<Integer>>() {
-      public Iterable<Integer> apply(Integer arg) {
-        return Streams.enumerate(1, arg);
-      }
-    }).equiv(1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6));
+    assertTrue(Streams
+      .iterate(4, add(1))
+      .take(3)
+      .flatMap(new AbstractFunction<Integer, Iterable<Integer>>() {
+        public Iterable<Integer> apply(Integer arg) {
+          return Streams.enumerate(1, arg);
+        }
+      })
+      .equiv(1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6));
   }
 
   /** Test for {@link AbstractStream#append(Iterable)} ***/
@@ -179,8 +177,8 @@ public class AbstractStreamBasicTest {
       .intersperse(1)
       .equiv(4, 1, 5, 1, 6));
   }
-  
-  /**Test for {@link Stream#intersperse(Object)}*/
+
+  /** Test for {@link Stream#intersperse(Object)} */
   @Test
   public void interspereIterator() throws Exception {
     assertTrue(Streams//
@@ -190,8 +188,8 @@ public class AbstractStreamBasicTest {
       .take(4)
       .equiv(4, 1, 5, 1));
   }
-  
-  /**Test for {@link Stream#intersperse(Object)}*/
+
+  /** Test for {@link Stream#intersperse(Object)} */
   @Test
   public void testIntersperseTwoElementsStream() throws Exception {
     assertEquals("[56, 0, 1]", Streams//
@@ -199,23 +197,29 @@ public class AbstractStreamBasicTest {
       .intersperse(0)
       .printString());
   }
-  
-  /**Test for {@link Stream#incorporate(Function)}*/
+
+  /** Test for {@link Stream#incorporate(Function)} */
   @Test
   public void testIncorporate() throws Exception {
-    assertTrue(Streams.cons(10, 9, 90).incorporate(integer().negate()).equiv(10,-10,9,-9,90,-90));
+    assertTrue(Streams
+      .cons(10, 9, 90)
+      .incorporate(integer().negate())
+      .equiv(10, -10, 9, -9, 90, -90));
   }
-  
-  /**Test for {@link Stream#incorporate(Object)}*/
+
+  /** Test for {@link Stream#incorporate(Object)} */
   @Test
   public void testIncorporateElement() throws Exception {
-    assertTrue(Streams.cons('a', 'b', 'c').incorporate('d').equiv('a', 'd', 'b', 'd','c', 'd'));
+    assertTrue(Streams //
+      .cons('a', 'b', 'c')
+      .incorporate('d')
+      .equiv('a', 'd', 'b', 'd', 'c', 'd'));
   }
-  
-  /**Test for {@link Stream#incorporate(Function)}*/
+
+  /** Test for {@link Stream#incorporate(Function)} */
   @Test
   public void testIncorporateIsLazy() throws Exception {
-    assertEquals((Integer)0, Streams.repeat(10).incorporate(-10).take(10).sum(integer()));
+    assertEquals((Integer) 0, Streams.repeat(10).incorporate(-10).take(10).sum(integer()));
   }
 
   /**
@@ -271,8 +275,9 @@ public class AbstractStreamBasicTest {
   /** Test for {@link Stream#streamPartition(Evaluable)} */
   @Test
   public void testPartition() throws Exception {
-    Tuple2<Stream<Integer>, Stream<Integer>> partition = Streams.cons(50, 60, 1, 6, 9, 10, 100).streamPartition(
-      Compare.greaterThan(9));
+    Tuple2<Stream<Integer>, Stream<Integer>> partition = Streams
+      .cons(50, 60, 1, 6, 9, 10, 100)
+      .streamPartition(Compare.greaterThan(9));
 
     assertTrue(partition._0().equiv(50, 60, 10, 100));
     assertTrue(partition._1().equiv(1, 6, 9));
@@ -290,7 +295,11 @@ public class AbstractStreamBasicTest {
   @Test
   public void testMaximum() throws Exception {
     String max = Streams
-      .cons(_(new Object(), 10, "hello"), _(new Object(), 12, "foo"), _(new Object(), 9, "bye"), _(new Object(), 6, ""))
+      .cons(
+        _(new Object(), 10, "hello"),
+        _(new Object(), 12, "foo"),
+        _(new Object(), 9, "bye"),
+        _(new Object(), 6, ""))
       .maximumOn(Tuples.<Integer> second())
       ._2();
     assertEquals("foo", max);
@@ -406,7 +415,8 @@ public class AbstractStreamBasicTest {
    */
   @Test
   public void testFullCross() throws Exception {
-    assertEquals("[[1, 3, 5], [1, 3, 6], [1, 4, 5], [1, 4, 6], [2, 3, 5], [2, 3, 6], [2, 4, 5], [2, 4, 6]]", //
+    assertEquals(
+      "[[1, 3, 5], [1, 3, 6], [1, 4, 5], [1, 4, 6], [2, 3, 5], [2, 3, 6], [2, 4, 5], [2, 4, 6]]", //
       Streams
         .cons(1, 2)
         .crossStreams(Streams.<Stream<Integer>> cons(Streams.cons(3, 4), Streams.cons(5, 6)))

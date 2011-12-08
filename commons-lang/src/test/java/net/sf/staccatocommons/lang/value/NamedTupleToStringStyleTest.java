@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.lang.value;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import javax.xml.ws.Holder;
 

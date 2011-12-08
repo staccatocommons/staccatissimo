@@ -12,12 +12,8 @@
  */
 package net.sf.staccatocommons.numbers;
 
-import static net.sf.staccatocommons.numbers.Numbers.d;
-import static net.sf.staccatocommons.numbers.Numbers.e;
-import static net.sf.staccatocommons.numbers.Numbers.i;
-import static org.junit.Assert.assertEquals;
-
-import net.sf.staccatocommons.numbers.Numbers;
+import static net.sf.staccatocommons.numbers.Numbers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 

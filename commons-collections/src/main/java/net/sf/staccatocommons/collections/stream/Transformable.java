@@ -80,7 +80,7 @@ public interface Transformable<A> {
    * @author flbulgarelli
    * @param <A>
    */
-  public static interface EmptyApplicable<A> {
+  public interface EmptyApplicable<A> {
     /**
      * Applies this transformation when this Stream can not be deconstructed in
      * head and tail, because it is empty.
@@ -102,7 +102,7 @@ public interface Transformable<A> {
    * @param <B>
    *          output stream type
    */
-  public static interface DeconsApplicable<A, B> extends Applicable2<A, Stream<A>, Stream<B>>,
+  public interface DeconsApplicable<A, B> extends Applicable2<A, Stream<A>, Stream<B>>,
     EmptyApplicable<Stream<B>> {
 
     /**
@@ -129,8 +129,8 @@ public interface Transformable<A> {
    * @param <B>
    *          output stream type
    */
-  public static interface DelayedDeconsApplicable<A, B> extends Applicable2<Thunk<A>, Stream<A>, Stream<B>>,
-    EmptyApplicable<Stream<B>> {
+  public interface DelayedDeconsApplicable<A, B> extends
+    Applicable2<Thunk<A>, Stream<A>, Stream<B>>, EmptyApplicable<Stream<B>> {
 
     /**
      * Applies this transformation to a non empty Stream splitted into tail and

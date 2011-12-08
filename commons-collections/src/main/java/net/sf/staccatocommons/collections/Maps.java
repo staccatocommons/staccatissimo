@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.collections;
 
-import static net.sf.staccatocommons.collections.iterable.Iterables.any;
+import static net.sf.staccatocommons.collections.iterable.Iterables.*;
 
 import java.util.Arrays;
 import java.util.Collections;

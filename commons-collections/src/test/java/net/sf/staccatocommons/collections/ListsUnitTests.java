@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.collections;
 
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -124,12 +124,12 @@ public class ListsUnitTests {
     list.add(3);
     return list;
   }
-  
+
   /**
    * test for {@link Lists#from(Object...)}
    */
   @Test
   public void fromEquivalentToArraysAsList() throws Exception {
-    assertEquals(Arrays.asList(10,6,9), Lists.from(10,6,9));
+    assertEquals(Arrays.asList(10, 6, 9), Lists.from(10, 6, 9));
   }
 }

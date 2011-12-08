@@ -26,7 +26,8 @@ import org.slf4j.Logger;
  * @author flbulgarelli
  * 
  */
-public class DefaultMethodAnnotationContext extends AbstractAnnotationContext implements MethodAnnotationContext {
+public class DefaultMethodAnnotationContext extends AbstractAnnotationContext implements
+  MethodAnnotationContext {
 
   private CtMethod method;
 
@@ -73,9 +74,9 @@ public class DefaultMethodAnnotationContext extends AbstractAnnotationContext im
   public CtClass getElementType() throws NotFoundException {
     return getMethod().getReturnType();
   }
-  
+
   @Override
   public boolean isPublic() {
-   return Modifier. isPublic(getMethod().getModifiers());
+    return Modifier.isPublic(getMethod().getModifiers());
   }
 }

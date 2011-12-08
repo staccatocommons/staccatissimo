@@ -12,13 +12,12 @@
  */
 package net.sf.staccatocommons.util;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.SoftException;
-import net.sf.staccatocommons.util.Callables;
 
 import org.junit.Test;
 

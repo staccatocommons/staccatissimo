@@ -13,7 +13,7 @@
 
 package net.sf.staccatocommons.lang.block;
 
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.*;
 
 import java.io.IOException;
 

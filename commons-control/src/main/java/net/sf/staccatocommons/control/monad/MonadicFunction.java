@@ -66,5 +66,5 @@ public interface MonadicFunction<A, B> extends Applicable<A, Monad<B>> {
    * @return new {@link MonadicFunction} that combines this one with the given
    *         function into a pipeline
    */
-  public <C> MonadicFunction<A, C> then(Applicable<? super B, Monad<C>> other);
+  <C> MonadicFunction<A, C> then(Applicable<? super B, Monad<C>> other);
 }

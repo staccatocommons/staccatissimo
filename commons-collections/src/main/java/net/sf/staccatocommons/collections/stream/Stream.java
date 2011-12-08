@@ -87,7 +87,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  *          the type of object the stream is source of
  */
 public interface Stream<A> extends //
-  Indexed<A>, // 
+  Indexed<A>, //
   Appendable<A>, //
   Branchable<A>, //
   Collectible<A>, //
@@ -101,7 +101,7 @@ public interface Stream<A> extends //
   Mappable<A>, //
   Groupable<A>, //
   Printable<A>, //
-  ProtoMonad<Stream, A>,//
+  ProtoMonad<Stream, A>, //
   Reversable<A>, //
   Searchable<A>, //
   SizeAware, //
