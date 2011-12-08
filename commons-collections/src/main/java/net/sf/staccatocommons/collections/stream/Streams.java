@@ -174,8 +174,10 @@ public class Streams {
    * Iterates from the starting integer, adding 1. This generates the infinite
    * stream {@code [start, start+1, start+2...]}
    * 
-   * @param start the starting element od the sequence
-   * @return an stream that retrieves the sequence {@code [start, start+1, start+2...]}
+   * @param start
+   *          the initial element of the sequence
+   * @return an stream that retrieves the sequence
+   *         {@code [start, start+1, start+2...]}
    * @since 1.2
    */
   @Projection
@@ -183,6 +185,21 @@ public class Streams {
     return iterate(start, Add.one());
   }
 
+  /**
+   * Iterates from the {@code start} integer, by adding 1, up to the
+   * {@code stop} integer, inclusive. This generates the finite stream
+   * {@code [start, start+1, start+2..., stop]}
+   * 
+   * @param start
+   *          the initial element of the sequence
+   * @param stop
+   *          the final element of the sequence
+   * @return an stream that retrieves the sequence
+   *         {@code [start, start+1, start+2..., stop]}. As a particular case,
+   *         if start == stop, the sequence {@code [start]} is retrieved. If
+   *         start > stop, an empty stream is retrieved
+   * @since 1.2
+   */
   @Projection
   public static Stream<Integer> enumerate(int start, int stop) {
     return enumerate(start, stop, 1);
@@ -190,7 +207,7 @@ public class Streams {
 
   @Projection
   public static Stream<Integer> enumerate(int start, int stop, int step) {
-    return iterate(start, Add.add(step)).take(1 + (stop - start) / step);
+    return iterate(start, Add.add(step)).take(Math.max(0, 1 + (stop - start) / step));
   }
 
   // @Projection
