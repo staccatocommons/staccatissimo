@@ -39,7 +39,7 @@ public class DefaultArgumentAnnotationContextUnitTest extends AbstractAnnotation
   @Before
   public void createContext() throws NotFoundException {
     context = new DefaultArgumentAnnotationContext(getPool(), getLogger());
-    method = getPool().getMethod("net.sf.staccatocommons.lang.sequence.Sequence", "from");
+    method = getPool().getMethod("net.sf.staccatocommons.util.Range", "from");
     ((DefaultArgumentAnnotationContext) context).setBehavior(method);
     ((DefaultArgumentAnnotationContext) context).setParameterNumber(1);
   }
