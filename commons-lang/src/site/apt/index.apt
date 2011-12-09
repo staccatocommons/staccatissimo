@@ -22,7 +22,7 @@ Getting Started
   Staccato-Commons-Lang resolves simple and common everyday problems. Descriptions of such problems, solutions and examples 
   can be found in the following links:
   
-  * Abstract and concrete implementations of applicables - function-like objects
+  * Abstract and concrete implementations of {{{../commons-defs/applicatives-by-example.html}}applicables} - function-like objects
   
   * {{{./relevant-state-by-example.html}RelevantState}} and BasicEquals
    - Consistently implementing equals, hashcode, toString, and/or compareTo in an efficient 
