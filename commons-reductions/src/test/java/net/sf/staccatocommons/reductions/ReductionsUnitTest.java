@@ -40,7 +40,7 @@ public class ReductionsUnitTest {
    */
   @Test
   public void append() {
-    Accumulator<Object, List<Object>> accum = Reductions.append().start();
+    Accumulator<Object, List<Object>> accum = Reductions.append().newAccumulator();
     accum.accumulate("foo");
     accum.accumulate("bar");
     List<Object> result = accum.value();
@@ -54,7 +54,7 @@ public class ReductionsUnitTest {
    */
   @Test(expected = UnsupportedOperationException.class)
   public void appendAnswersUnmodifiableList() {
-    Accumulator<Object, List<Object>> accum = Reductions.append().start();
+    Accumulator<Object, List<Object>> accum = Reductions.append().newAccumulator();
     accum.accumulate("foo");
     accum.value().set(0, "");
   }
@@ -84,7 +84,7 @@ public class ReductionsUnitTest {
   }
 
   protected int reduceSomeIntegers(Reduction<Integer, Integer> reduction) {
-    Accumulator<Integer, Integer> accum = reduction.start();
+    Accumulator<Integer, Integer> accum = reduction.newAccumulator();
     accum.accumulate(40);
     accum.accumulate(63);
     accum.accumulate(10);
@@ -112,7 +112,7 @@ public class ReductionsUnitTest {
   }
 
   protected int reduceSomeStrings(Reduction<CharSequence, Integer> reduction) {
-    Accumulator<CharSequence, Integer> accum = reduction.start();
+    Accumulator<CharSequence, Integer> accum = reduction.newAccumulator();
     accum.accumulate("hello");
     accum.accumulate("foo");
     accum.accumulate("Bye Bye!");

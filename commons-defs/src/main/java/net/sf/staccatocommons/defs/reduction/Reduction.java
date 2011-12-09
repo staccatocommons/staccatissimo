@@ -30,7 +30,7 @@ import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
  * </p>
  * <p>
  * Although {@link Reduction}s implement aggregation in an impure manner - its
- * {@link #start()} message will return a mutable {@link Accumulator} - they are
+ * {@link #newAccumulator()} message will return a mutable {@link Accumulator} - they are
  * sharable, since {@link Reduction} itself are stateless
  * 
  * @author flbulgarelli
@@ -49,7 +49,7 @@ public interface Reduction<A, B> {
    * @return a new, non null, {@link Accumulator}
    */
   @NonNull
-  Accumulator<A, B> start();
+  Accumulator<A, B> newAccumulator();
 
   <D> Reduction<A, D> then(Applicable<B, D> function);
 

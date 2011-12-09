@@ -22,7 +22,7 @@ import net.sf.staccatocommons.reductions.AbstractReduction;
  * @author flbulgarelli
  */
 public final class Sum extends AbstractReduction<Integer, Integer> {
-  public Accumulator<Integer, Integer> start() {
+  public Accumulator<Integer, Integer> newAccumulator() {
     return new Accumulator<Integer, Integer>() {
       private int i = 0;
 

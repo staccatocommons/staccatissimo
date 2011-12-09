@@ -631,7 +631,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
       Accumulator<A, V> accum = map.get(key);
       
       if (accum == null) {
-        accum = reduction.start();
+        accum = reduction.newAccumulator();
         map.put(key, accum);
       }
       accum.accumulate(element);

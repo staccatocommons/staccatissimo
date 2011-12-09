@@ -28,7 +28,7 @@ import net.sf.staccatocommons.reductions.AbstractReduction;
  * @param <A>
  */
 public final class Append<A> extends AbstractReduction<A, List<A>> {
-  public Accumulator<A, List<A>> start() {
+  public Accumulator<A, List<A>> newAccumulator() {
     return new Accumulator<A, List<A>>() {
       private List<A> list = new LinkedList<A>();
 

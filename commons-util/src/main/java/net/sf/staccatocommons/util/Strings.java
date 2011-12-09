@@ -193,5 +193,7 @@ public class Strings {
   public static <A> Function<A, String> reflectionToString() {
     return reflectionToString(NamedTupleToStringStyle.getInstance());
   }
+  
+  //TODO move toString to Functions
 
 }

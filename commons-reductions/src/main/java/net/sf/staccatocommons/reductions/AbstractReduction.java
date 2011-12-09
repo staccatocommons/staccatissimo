@@ -29,8 +29,8 @@ public abstract class AbstractReduction<A, B> implements Reduction<A, B> {
   @Override
   public final <C> Reduction<A, C> then(final Applicable<B, C> function) {
     return new AbstractReduction<A, C>() {
-      public Accumulator<A, C> start() {
-        final Accumulator<A, B> start = AbstractReduction.this.start();
+      public Accumulator<A, C> newAccumulator() {
+        final Accumulator<A, B> start = AbstractReduction.this.newAccumulator();
         return new Accumulator<A, C>() {
           public void accumulate(A element) {
             start.accumulate(element);
@@ -47,8 +47,8 @@ public abstract class AbstractReduction<A, B> implements Reduction<A, B> {
   @Override
   public final <C> Reduction<C, B> of(final Applicable<C, A> function) {
     return new AbstractReduction<C, B>() {
-      public Accumulator<C, B> start() {
-        final Accumulator<A, B> accum = AbstractReduction.this.start();
+      public Accumulator<C, B> newAccumulator() {
+        final Accumulator<A, B> accum = AbstractReduction.this.newAccumulator();
         return new Accumulator<C, B>() {
           public void accumulate(C element) {
             accum.accumulate(function.apply(element));

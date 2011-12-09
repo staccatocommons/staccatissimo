@@ -41,7 +41,7 @@ public final class Foldl<A, B> extends AbstractReduction<A, B> {
     this.function = function;
   }
 
-  public Accumulator<A, B> start() {
+  public Accumulator<A, B> newAccumulator() {
     return new Accumulator<A, B>() {
       private B i = initial;
 

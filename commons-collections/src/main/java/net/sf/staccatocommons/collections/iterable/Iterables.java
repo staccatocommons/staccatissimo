@@ -159,7 +159,7 @@ public class Iterables {
 
   @NonNull
   public static <A, B> B reduce(@NonNull Iterable<A> iterable, @NonNull Reduction<A, B> reduction) {
-    Accumulator<A, B> accum = reduction.start();
+    Accumulator<A, B> accum = reduction.newAccumulator();
     for (A element : iterable) {
       accum.accumulate(element);
     }

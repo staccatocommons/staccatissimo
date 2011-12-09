@@ -24,7 +24,7 @@ import net.sf.staccatocommons.reductions.AbstractReduction;
  * @param <A>
  */
 public final class Count<A> extends AbstractReduction<A, Integer> {
-  public Accumulator<A, Integer> start() {
+  public Accumulator<A, Integer> newAccumulator() {
     return new Accumulator<A, Integer>() {
       private int i = 0;
 
