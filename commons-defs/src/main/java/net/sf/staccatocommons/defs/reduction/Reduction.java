@@ -53,6 +53,23 @@ public interface Reduction<A, B> {
 
   <D> Reduction<A, D> then(Applicable<B, D> function);
 
+  /**
+   * Composes this reduction with a function, by returning a new
+   * {@link Reduction} that will apply {@code this} reduction to the results of
+   * applying the given {@code function} to each element
+   * 
+   * For example, the following code:
+   * 
+   * <pre>
+   * Reductions.&lt;Integer&gt; max().of(Strings.length())
+   * </pre>
+   * 
+   * will return a reduction that computes the maximum length of the strings it
+   * processes
+   * 
+   * @param function
+   * @return a new reduction
+   */
   <D> Reduction<D, B> of(Applicable<D, A> function);
 
 }
