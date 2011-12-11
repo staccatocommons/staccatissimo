@@ -33,7 +33,11 @@ import org.junit.Test;
  * 
  */
 public class MapsUnitTest {
-  private Map<String, Integer> map = MapBuilder.mapWith("Foo", 50).with("Bar", 90).with("Foobar", 120).build();
+  private Map<String, Integer> map = MapBuilder
+    .mapWith("Foo", 50)
+    .with("Bar", 90)
+    .with("Foobar", 120)
+    .build();
 
   /**
    * Test method for {@link Maps#anyKey(Map)}
@@ -82,11 +86,17 @@ public class MapsUnitTest {
     assertEquals("World", m.get("Hello"));
     assertEquals("Bar", m.get("Foo"));
   }
-  
-  @Test 
-  public void foo() {
-    Map<String, Integer> result = Maps.delayedMapKeys(Maps.from(_("Hello", "World"), _("Foo", "Bar")), Strings.length());
-    
+
+  /**
+   * Test for
+   * {@link Maps#delayedMapKeys(Map, net.sf.staccatocommons.defs.Applicable)}
+   */
+  @Test
+  public void delayedMapKeys() {
+    Map<String, Integer> result = Maps.delayedMapKeys(
+      Maps.from(_("Hello", "World"), _("Foo", "Bar")),
+      Strings.length());
+
     System.out.println(result.get("Hello"));
     System.out.println(result.containsValue(5));
     System.out.println(result);

@@ -15,6 +15,7 @@ package net.sf.staccatocommons.collections.stream;
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
+import net.sf.staccatocommons.lang.tuple.Tuples;
 
 /**
  * @author flbulgarelli
@@ -22,6 +23,20 @@ import net.sf.staccatocommons.defs.tuple.Tuple2;
  */
 public interface Branchable<A> {
 
+  /**
+   * Answers a stream that retrieves a tuple per each element, formed by the
+   * original element as the first component, and the result of applying the
+   * given function to it as the second component.
+   * <p>
+   * This message is equivalent to {@code map(Tuples.clone(function))}
+   * </p>
+   * 
+   * @param function
+   *          the function to apply to each element
+   * @return a new {@link Stream}
+   * @see Tuples#clone(Applicable)
+   * @since 1.2
+   */
   @Projection
   <B> Stream<Tuple2<A, B>> clone(Applicable<? super A, ? extends B> function);
 
@@ -36,6 +51,7 @@ public interface Branchable<A> {
    * @param function1
    * @return a new {@link Stream}
    * @since 1.2
+   * @see Tuples#branch(Applicable, Applicable)
    */
   @Projection
   <B, C> Stream<Tuple2<B, C>> branch(Applicable<? super A, ? extends B> function0,

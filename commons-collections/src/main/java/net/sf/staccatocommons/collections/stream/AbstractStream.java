@@ -169,7 +169,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
   }
 
   @Override
-  public <B> B reduce(Reduction<A, B> reduction) throws NoSuchElementException {
+  public <B> B reduce(Reduction<? super A, B> reduction) throws NoSuchElementException {
     return Iterables.reduce(this, reduction);
   }
 
@@ -261,7 +261,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
   public <B> Stream<B> map(final Function<? super A, ? extends B> function) {
     return new MapStream<A, B>(this, function);
   }
-  
+
   @Override
   public <B> Stream<B> map(Applicable<? super A, ? extends B> function) {
     return map(Functions.from(function));
@@ -538,7 +538,8 @@ public abstract class AbstractStream<A> implements Stream<A> {
     }
   }
 
-  public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable, @NonNull final Function2<A, B, C> function) {
+  public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable,
+    @NonNull final Function2<A, B, C> function) {
     return new ZipStream<C, A, B>(this, iterable, function);
   }
 
@@ -629,7 +630,7 @@ public abstract class AbstractStream<A> implements Stream<A> {
     for (A element : this) {
       K key = groupFunction.apply(element);
       Accumulator<A, V> accum = map.get(key);
-      
+
       if (accum == null) {
         accum = reduction.newAccumulator();
         map.put(key, accum);

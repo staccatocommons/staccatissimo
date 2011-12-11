@@ -34,9 +34,21 @@
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
+		  <dependency>
+            <groupId>net.sf.staccatocommons</groupId>
+            <artifactId>commons-reductions</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>net.sf.staccatocommons</groupId>
             <artifactId>commons-io</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+           <dependency>
+            <groupId>net.sf.staccatocommons</groupId>
+            <artifactId>commons-util</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>

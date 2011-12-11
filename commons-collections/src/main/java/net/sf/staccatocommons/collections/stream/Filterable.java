@@ -41,7 +41,9 @@ public interface Filterable<A> {
   Stream<A> filter(@NonNull Evaluable<? super A> predicate);
 
   /**
-   * Preserves all elements but those that are equal to the given one
+   * Preserves all elements but those that are equal to the given one.
+   * 
+   * Equivalent to {@code filter(Predicates.equal(element).not())}
    * 
    * @param element
    * @return a {@link Stream} that retrieves all elements that are not equal to

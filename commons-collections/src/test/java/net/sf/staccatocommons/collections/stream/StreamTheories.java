@@ -120,7 +120,8 @@ public abstract class StreamTheories {
 
   /** Test for any */
   @Theory
-  public final <A> void emptyStreamSatisfyAnyPredicate(Stream<A> stream, final Evaluable<A> predicate) {
+  public final <A> void emptyStreamSatisfyAnyPredicate(Stream<A> stream,
+    final Evaluable<A> predicate) {
     assumeEmpty(stream, new Block<Stream>() {
       @Override
       public void exec(Stream stream) {
@@ -140,7 +141,8 @@ public abstract class StreamTheories {
 
   /** Test that any in an empty stream returns false always */
   @Theory
-  public final <A> void emptyStreamsSatisfyNoPredicate(Stream<A> stream, final Evaluable<A> predicate) {
+  public final <A> void emptyStreamsSatisfyNoPredicate(Stream<A> stream,
+    final Evaluable<A> predicate) {
     assumeEmpty(stream, new Block<Stream>() {
       @Override
       public void exec(Stream stream) {
@@ -219,7 +221,11 @@ public abstract class StreamTheories {
   /** Tests that if **/
   @Theory
   public void emptyIsAlwaysConsistent(Stream<?> stream) throws Exception {
-    assertTrue(Streams.repeat(stream).map(lambda((Boolean) $(EmptyAware.class).isEmpty())).take(10).allEquiv());
+    assertTrue(Streams
+      .repeat(stream)
+      .map(lambda((Boolean) $(EmptyAware.class).isEmpty()))
+      .take(10)
+      .allEquiv());
   }
 
   /** Tests that memorizing grants repeatable iteration order */

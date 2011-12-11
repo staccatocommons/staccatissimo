@@ -1,17 +1,10 @@
-<!--
-
-     Copyright (c) 2011, The Staccato-Commons Team
-
-     This program is free software; you can redistribute it and/or modify
-     it under the terms of the GNU Lesser General Public License as published by
-     the Free Software Foundation; version 3 of the License.
-
-     This program is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     GNU Lesser General Public License for more details.
-
--->
+<!-- Copyright (c) 2011, The Staccato-Commons Team This program is free software; 
+	you can redistribute it and/or modify it under the terms of the GNU Lesser 
+	General Public License as published by the Free Software Foundation; version 
+	3 of the License. This program is distributed in the hope that it will be 
+	useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+	or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+	for more details. -->
 
 <document xmlns="http://maven.apache.org/changes/1.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -23,16 +16,24 @@
 	<body>
 		<release version="1.0-alpha-1" date="2011-01-08" description="Inception">
 			<action dev="flbulgarelli" type="add">
-				Initial Version, with Check, Validate, Ensure, Assert, and check annotations
+				Initial Version, with Check,
+				Validate, Ensure, Assert, and check annotations
 			</action>
 		</release>
 		<release version="1.0-alpha-2" date="2011-01-21" description="Types">
 			<action dev="flbulgarelli" type="add">
-				Support for numeric types, empty aware types and size aware types
-            </action>
+				Support for numeric types,
+				empty aware types and size aware types
+			</action>
 			<action dev="flbulgarelli" type="add">
-				Added MinSize and MaxSize annotations
-            </action>
+				Added MinSize and MaxSize
+				annotations
+			</action>
+		</release>
+		<release version="1.2-beta-3" date="2011-12-11" description="Modularization">
+			<action dev="flbulgarelli" type="update">
+				Renaming check.that and check.fail with var names
+			</action>
 		</release>
 	</body>
 </document>

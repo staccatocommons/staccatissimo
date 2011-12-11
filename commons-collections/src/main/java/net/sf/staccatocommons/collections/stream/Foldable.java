@@ -59,19 +59,18 @@ public interface Foldable<A> {
    * @throws NoSuchElementException
    *           if the {@link Stream} is empty
    */
-  A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function) throws NoSuchElementException;
-  
-  
+  A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function)
+    throws NoSuchElementException;
+
   /**
    * (Left)folds the tail of this {@link Stream} using the first element of the
    * stream as initial value
    * 
    * @param function
    * @return the folding result
-   * @since 1.2          
+   * @since 1.2
    */
-  <B> B reduce(Reduction<A, B> reduction) throws NoSuchElementException;
-  
+  <B> B reduce(Reduction<? super A, B> reduction) throws NoSuchElementException;
 
   /**
    * (Left)folds this {@link Stream} concatenating each elements toString with a

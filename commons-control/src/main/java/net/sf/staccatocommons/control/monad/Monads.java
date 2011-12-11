@@ -33,6 +33,7 @@ import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 /**
  * Simple {@link Monad}s and {@link MonadicFunction}s
@@ -154,15 +155,39 @@ public class Monads {
     };
   }
 
-  public static <A> MonadicFunction<A, A> each(final Executable<? super A> block) {
+  /**
+   * Answers a {@link MonadicFunction} that executes an actions with effect
+   * using the given {@code block}
+   * 
+   * @param block
+   * @return a new {@link MonadicFunction}
+   */
+  @IgnoreRestrictions
+  public static <A> MonadicFunction<A, A> each(@NonNull final Executable<? super A> block) {
     return map(Functions.impure(block));
   }
 
+  /**
+   * Answers a {@link MonadicFunction} that performs
+   * {@link Tuples#clone(Applicable)} using the given {@code function}
+   * 
+   * @param function
+   * @return a new {@link MonadicFunction} that performs cloning
+   */
+  @IgnoreRestrictions
   public static <A, B> MonadicFunction<A, Tuple2<A, B>> clone(
-    final Applicable<? super A, ? extends B> function0) {
-    return map(Tuples.clone(function0));
+    final Applicable<? super A, ? extends B> function) {
+    return map(Tuples.clone(function));
   }
 
+  /**
+   * Answers a {@link MonadicFunction} that performs
+   * {@link Tuples#branch(Applicable)} using the given {@code function}
+   * 
+   * @param function
+   * @return a new {@link MonadicFunction} that performs branching
+   */
+  @IgnoreRestrictions
   public static <A, B, C> MonadicFunction<A, Tuple2<B, C>> branch(
     final Applicable<? super A, ? extends B> function0,
     final Applicable<? super A, ? extends C> function1) {

@@ -21,6 +21,7 @@ import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.ProtoMonad;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
+import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -43,7 +44,6 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * 
  * </ul>
- * 
  * 
  * @author flbulgarelli
  * @since 1.2
@@ -84,6 +84,14 @@ public interface Monad<A> extends Thunk<Void>, ProtoMonad<Monad, A>, Runnable {
 
   Monad<A> filter(@NonNull Evaluable<? super A> predicate);
 
+  /**
+   * Answers a monad that produces all elements of this one but those that are
+   * equal to the given one
+   * 
+   * @param element
+   * @return a {@link Monad} that produces all elements that are not equal to
+   *         the given one
+   */
   Monad<A> skip(A element);
 
   /* <B> */Monad<A> incorporate(@NonNull Applicable<? super A, Monad<A>> function);
@@ -94,6 +102,12 @@ public interface Monad<A> extends Thunk<Void>, ProtoMonad<Monad, A>, Runnable {
 
   void forEach(Executable<? super A> block);
 
+  /**
+   * Answers a {@link Monad} that has the same effects that this one, but has no
+   * significant wrapper values
+   * 
+   * @return a monad that discards the wrapped values
+   */
   Monad<Void> discard();
 
   /* Collection Monad transformation */
@@ -112,8 +126,33 @@ public interface Monad<A> extends Thunk<Void>, ProtoMonad<Monad, A>, Runnable {
 
   /* Arrow-like */
 
+  /**
+   * Answers a Monad that produces a tuple per each wrapped element, formed by
+   * the original element as the first component, and the result of applying the
+   * given function to it as the second component.
+   * <p>
+   * This message is equivalent to {@code map(Tuples.clone(function))}
+   * </p>
+   * 
+   * @param function
+   *          the function to apply to each element
+   * @return a new {@link Monad}
+   * @see Tuples#clone(Applicable)
+   */
   <B> Monad<Tuple2<A, B>> clone(Applicable<? super A, ? extends B> function);
 
+  /**
+   * Answers a Monad of pairs, where each one contains both results of applying
+   * the given functions to each element. Equivalent to
+   * <code>map(Tuples.branch(function0, function1))</code>
+   * 
+   * @param <B>
+   * @param <C>
+   * @param function0
+   * @param function1
+   * @return a new {@link Monad}
+   * @see Tuples#branch(Applicable, Applicable)
+   */
   <B, C> Monad<Tuple2<B, C>> branch(Applicable<? super A, ? extends B> function0,
     Applicable<? super A, ? extends C> function1);
 

@@ -28,6 +28,7 @@ import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.lang.thunk.internal.NullThunk;
+import net.sf.staccatocommons.reductions.Reductions;
 import net.sf.staccatocommons.util.Strings;
 
 import org.junit.Test;
@@ -45,8 +46,8 @@ public abstract class RepetableStreamTheories extends StreamTheories {
 
   /** Functions data points */
   @DataPoints
-  public static final Function[] FUNCTIONS = new Function[] { Functions.constant(59), Functions.identity(),
-      Strings.toString_() };
+  public static final Function[] FUNCTIONS = new Function[] { Functions.constant(59),
+      Functions.identity(), Strings.toString_() };
 
   /** thunks data points */
   @DataPoints
@@ -133,7 +134,9 @@ public abstract class RepetableStreamTheories extends StreamTheories {
    */
   @Theory
   public void testFindOrElse(Stream stream, Evaluable predicate, Thunk thunk) {
-    assertEquals(stream.findOrNone(predicate).valueOrElse(thunk), stream.findOrElse(predicate, thunk));
+    assertEquals(
+      stream.findOrNone(predicate).valueOrElse(thunk),
+      stream.findOrElse(predicate, thunk));
   }
 
   /**
@@ -258,5 +261,13 @@ public abstract class RepetableStreamTheories extends StreamTheories {
   @Theory
   public <A, B> void testZip(Stream<A> stream, Iterable<B> iterable) throws Exception {
     assertEquals(Iterables.zip(stream, iterable), stream.zip(iterable).toList());
+  }
+
+  /***
+   * Theory for reduction and equivalence
+   */
+  @Theory
+  public <A> void reduceToListIsEquivalentToItself(Stream<A> stream) throws Exception {
+    assertTrue(stream.equiv(stream.reduce(Reductions.<A> append())));
   }
 }

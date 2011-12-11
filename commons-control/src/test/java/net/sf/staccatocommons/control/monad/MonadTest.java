@@ -14,16 +14,24 @@ package net.sf.staccatocommons.control.monad;
 
 import static net.sf.staccatocommons.control.monad.Monads.*;
 import static net.sf.staccatocommons.numbers.NumberTypes.*;
+import static org.junit.Assert.*;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.Executors;
 
+import net.sf.staccatocommons.collections.Maps;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Executable;
+import net.sf.staccatocommons.defs.reduction.Accumulator;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.io.IO;
 import net.sf.staccatocommons.lang.Compare;
+import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.block.Block;
+import net.sf.staccatocommons.reductions.Reductions;
+import net.sf.staccatocommons.util.Strings;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -42,6 +50,7 @@ public class MonadTest {
   // asssertTrue(m.map(f).each(g) == m.map(f.then(g)));
   // }
 
+  /***/
   @Test
   public void testname() throws Exception {
     final Collection<Integer> col = new LinkedList<Integer>();
@@ -56,10 +65,12 @@ public class MonadTest {
         }
       })
       .each(IO.printlnSysout())
-      .value();
+      .run();
     Assert.assertEquals(1, col.size());
   }
 
+  /***/
+  @Test
   public void testKleisli() throws Exception {
     Monads //
       .from(4, 5, 6)
@@ -68,9 +79,10 @@ public class MonadTest {
         .then(map(add(90)))
         .then(filter(Compare.greaterThan(2)))
         .then(each(IO.printlnSysout())))
-      .value();
+      .run();
   }
 
+  /***/
   @Test
   public void testAsync() throws Exception {
     Monads //
@@ -79,10 +91,11 @@ public class MonadTest {
       .map(add(1))
       .fork(Executors.newSingleThreadExecutor())
       .map(logThread())
-      .value();
+      .run();
     Thread.sleep(1000);
   }
 
+  /***/
   @Test
   public void testIterable() throws Exception {
     Monads //
@@ -90,7 +103,7 @@ public class MonadTest {
       .map(add(1))
       .filter(Compare.greaterThan(6))
       .each(IO.printlnSysout())
-      .value();
+      .run();
 
   }
 
@@ -103,7 +116,7 @@ public class MonadTest {
     };
   }
 
-  public static <A> Executable<A> printStackTrace() {
+  protected static <A> Executable<A> printStackTrace() {
     return new Executable<A>() {
       public void exec(A argument) {
         try {
@@ -113,6 +126,51 @@ public class MonadTest {
         }
       }
     };
+  }
 
+  /***/
+  @Test
+  public void testSkipAfterEffect() throws Exception {
+    Accumulator<Integer, Integer> accum = Reductions.sum().newAccumulator();
+    Monads.from(10, 20, 3).each(accumulate(accum)).skip(20).run();
+    assertEquals(33, (int) accum.value());
+  }
+
+  /***/
+  @Test
+  public void testSkipBeforeEffect() throws Exception {
+    Accumulator<Integer, Integer> accum = Reductions.sum().newAccumulator();
+    Monads.from(10, 20, 3).skip(20).each(accumulate(accum)).run();
+    assertEquals(13, (int) accum.value());
+  }
+
+  /***/
+  @Test
+  public void testAppendBeforeEffect() throws Exception {
+    Accumulator<Integer, Integer> accum = Reductions.sum().newAccumulator();
+    Monads.from(10, 3).append(Monads.from(10)).each(accumulate(accum)).run();
+    assertEquals(23, (int) accum.value());
+  }
+
+  /***/
+  @Test
+  public void fromOption() throws Exception {
+    Accumulator<Tuple2<String, Integer>, List<Tuple2<String, Integer>>> accum = Reductions
+      .<Tuple2<String, Integer>> append()
+      .newAccumulator();
+
+    Monads.from(Option.some("hello")).clone(Strings.length()).each(accumulate(accum)).run();
+    assertEquals(5, (int) Maps.from(accum.value()).get("hello"));
+
+  }
+
+  /***/
+  // TODO move to reductions
+  protected static <A, B> Executable<A> accumulate(final Accumulator<A, B> accumularor) {
+    return new Executable<A>() {
+      public void exec(A argument) {
+        accumularor.accumulate(argument);
+      }
+    };
   }
 }

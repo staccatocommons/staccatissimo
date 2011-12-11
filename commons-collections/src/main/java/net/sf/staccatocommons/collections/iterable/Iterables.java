@@ -157,9 +157,24 @@ public class Iterables {
     return result;
   }
 
+  /**
+   * Answers the result of aggregating the given <code>iterable</code> using the
+   * given <code>reduction</code>
+   * 
+   * @param <A>
+   *          the {@link Iterable}'s elements type
+   * @param <B>
+   *          the aggregated value type
+   * @param iterable
+   *          the iterable to aggregate
+   * @param function
+   *          the {@link Reduction} to apply to this iterable
+   * @return the result of aggregating the initial value and the given
+   *         <code>iterable</code>'s elements.
+   */
   @NonNull
-  public static <A, B> B reduce(@NonNull Iterable<A> iterable, @NonNull Reduction<A, B> reduction) {
-    Accumulator<A, B> accum = reduction.newAccumulator();
+  public static <A, B> B reduce(@NonNull Iterable<A> iterable, @NonNull Reduction<? super A, B> reduction) {
+    Accumulator<? super A, B> accum = reduction.newAccumulator();
     for (A element : iterable) {
       accum.accumulate(element);
     }

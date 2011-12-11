@@ -17,103 +17,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
 	<properties>
-		<title>Staccato-Commons-Collections Changes History</title>
+		<title>Staccato-Commons-Control Changes History</title>
 		<author>flbulgarelli</author>
 	</properties>
 	<body>
-		<release version="1.0-alpha-1" date="2011-01-08" description="Inception">
-			<action dev="flbulgarelli" type="add">
-				Initial Version with Streams,
-				Lists, Maps and Iterables
-			</action>
-		</release>
-		<release version="1.0-alpha-2" date="2011-01-21" description="Types">
-			<action dev="flbulgarelli" type="add">
-				Support for summing and
-				product in Iterables and
-				Streams using NumericType
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Zipping support for Streams
-			</action>
-		</release>
-		<release version="1.0-alpha-3" date="2011-01-30" description="Streams">
-			<action dev="flbulgarelli" type="add">
-				Tail-Head Stream construction
-				and deconstruction
-			</action>
-			<action dev="flbulgarelli" type="add">
-				Drop, drop while, maximum,
-				minimum, reversing,
-				interscalating implementation
-				in streams
-            </action>
-			<action dev="flbulgarelli" type="update">
-				Improved streams documentation
-			</action>
-			<action dev="flbulgarelli" type="add">
-				Elements comparison for
-				streams
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Implicit number type support
-				for streams
-            </action>
-			<action dev="flbulgarelli" type="update">
-				Extracted iterators to
-				staccato-commons-iterators
-            </action>
-		</release>
-		<release version="1.0-alpha-4" date="2011-03-11" description="Laziness">
-			<action dev="flbulgarelli" type="update">
-				Replaced plain iterators in
-				Stream by thriterators
-            </action>
-			<action dev="flbulgarelli" type="update">
-				Modified get and size
-				implementation in Stream in order to
-				take advange of thriterators
-			</action>
-			<action dev="flbulgarelli" type="add">
-				GroupBy in Stream
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Adding sort methods to Stream
-			</action>
-			<action dev="flbulgarelli" type="add">
-				Adding memorize and dettach to
-				Stream
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Adding ConsStream  
-			</action>
-			<action dev="flbulgarelli" type="add">
-				Adding cartesian product
-				method to Stream
-			</action>
-			<action dev="flbulgarelli" type="update">
-				Consistent implementing
-				toString in Streams
-            </action>
-		</release>
-		<release version="1.1" date="2011-08-10" description="IO &amp; Composition">
-            <action dev="flbulgarelli" type="fix">
-                AbstractStream.print() now works with non repeatable streams
-            </action>
-            <action dev="flbulgarelli" type="update">
-                AbstractStream.print() and AbstractStream.println()
-                do not throw IOException anymore 
-            </action>
+        <release version="1.2-beta-1" date="TBD" description="Monadic Control">
             <action dev="flbulgarelli" type="add">
-                Implemented group functions 
+                Initial version
             </action>
         </release>
-        <release version="1.2" date="TBD" description="Monadic Control">
+         <release version="1.2-beta-3" date="TBD" description="Modularization">
             <action dev="flbulgarelli" type="add">
-                Reductions
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Intercalate
+                Initial version
             </action>
         </release>
 	</body>

@@ -30,8 +30,8 @@ import net.sf.staccatocommons.restrictions.effect.SideEffectFree;
  * </p>
  * <p>
  * Although {@link Reduction}s implement aggregation in an impure manner - its
- * {@link #newAccumulator()} message will return a mutable {@link Accumulator} - they are
- * sharable, since {@link Reduction} itself are stateless
+ * {@link #newAccumulator()} message will return a mutable {@link Accumulator} -
+ * they are sharable, since {@link Reduction} itself are stateless
  * 
  * @author flbulgarelli
  * @since 1.2
@@ -51,6 +51,32 @@ public interface Reduction<A, B> {
   @NonNull
   Accumulator<A, B> newAccumulator();
 
+  /**
+   * Composes the given function with this reduction, by returning a new
+   * {@link Reduction} that applies the {@code function} to the resulting
+   * element of the reduction
+   * 
+   * For example, the following code:
+   * 
+   * <pre>
+   * Reductions.&lt;Strin&gt; max().then(Strings.length())
+   * </pre>
+   * 
+   * will return a reduction that computes the length of the maximum -
+   * lexicographically - string it processes:
+   * 
+   * <pre>
+   *  accumulator = lengthOfMax.newAccumulator();
+   *  accumulator.accumulate("aaa");
+   *  accumulator.accumulate("bbbbb");
+   *  accumulator.accumulate("dd");
+   *  
+   *  accumulator.value() // 2, because length of "dd", the max string,  is 2
+   * </pre>
+   * 
+   * @param function
+   * @return a new reduction
+   */
   <D> Reduction<A, D> then(Applicable<B, D> function);
 
   /**
@@ -65,7 +91,17 @@ public interface Reduction<A, B> {
    * </pre>
    * 
    * will return a reduction that computes the maximum length of the strings it
-   * processes
+   * processes:
+   * 
+   * <pre>
+   *  accumulator = maxLength.newAccumulator();
+   *  accumulator.accumulate("aaa");
+   *  accumulator.accumulate("bbbbb");
+   *  accumulator.accumulate("dd");
+   *  
+   *  accumulator.value() // 5, because "bbbbb" has the max length, which is 5
+   * </pre>
+   * 
    * 
    * @param function
    * @return a new reduction
