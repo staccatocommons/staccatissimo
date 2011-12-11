@@ -91,7 +91,11 @@ public final class MethodDescriptor {
    * Answers a String that signals that a message was not understood
    */
   public String createNotUnderstoodMessage() {
-    return String.format("Message %s(%s) not understood by class %s", selector, toString(argTypes), receptor);
+    return String.format(
+      "Message %s(%s) not understood by instance of class %s",
+      selector,
+      toString(argTypes),
+      receptor);
   }
 
   private static String toString(Class<?>[] argumentTypes) {

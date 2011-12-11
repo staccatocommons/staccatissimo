@@ -24,12 +24,26 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class DynamicTest {
+@SuppressWarnings("unused")
+public class DynamicUnitTest {
   /***/
   public static class Adder {
+
+    private int i;
+
+    /***/
+    public Adder() {
+      this(0);
+    }
+
+    /***/
+    public Adder(int i) {
+      this.i = i;
+    }
+
     /***/
     public int add(int x, int y) {
-      return x + y;
+      return x + y + i;
     }
   }
 
@@ -230,8 +244,21 @@ public class DynamicTest {
   @Test
   public void fromClassName() throws Exception {
     assertEquals(30, Dynamics
-      .fromClassName("net.sf.staccatocommons.dynamic.DynamicTest$Adder")
+      .fromClassName("net.sf.staccatocommons.dynamic.DynamicUnitTest$Adder")
       .send("add", 10, 20));
+  }
+
+  /***/
+  @Test
+  public void fromClassWithArgs() throws Exception {
+    assertEquals(31, Dynamics.fromClass(Adder.class, 1).send("add", 10, 20));
+  }
+
+
+  /***/
+  @Test(expected = InstantiationFailedException.class)
+  public void fromClassWithArgsBadArgs() throws Exception {
+    Dynamics.fromClass(Adder.class, "hello");
   }
 
 }

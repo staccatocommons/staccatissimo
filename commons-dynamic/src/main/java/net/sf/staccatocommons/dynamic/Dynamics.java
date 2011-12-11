@@ -12,10 +12,15 @@
  */
 package net.sf.staccatocommons.dynamic;
 
+import java.lang.reflect.Constructor;
+
+import net.sf.staccatocommons.dynamic.internal.Methods;
 import net.sf.staccatocommons.dynamic.internal.NullDynamic;
 import net.sf.staccatocommons.dynamic.internal.ReflectiveDynamic;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Class methods for creating simple {@link Dynamic}s
@@ -96,6 +101,29 @@ public class Dynamics {
   public static Dynamic fromClass(@NonNull Class<?> clazz) {
     try {
       return from(clazz.newInstance());
+    } catch (Exception e) {
+      throw new InstantiationFailedException(e);
+    }
+  }
+
+  /**
+   * Answer a new {@link Dynamic} that wraps a new instance of the given class
+   * 
+   * @param clazz
+   *          the class to instantiate
+   * @return a new Dynamic wrapper for a new instance of the given class
+   * @throws InstantiationFailedException
+   *           if class can not be instantiated
+   */
+  @NonNull
+  public static Dynamic fromClass(@NonNull Class<?> clazz, Object... args) {
+    Constructor constructor = Methods.findConstructor(clazz, Methods.getArgTypes(args));
+    // TODO refactor message and use MethodDescriptor
+    if (constructor == null)
+      throw new InstantiationFailedException("There is no suitable constructor in class " + clazz
+        + " for arguments [" + StringUtils.join(args) + "]");
+    try {
+      return from(constructor.newInstance(args));
     } catch (Exception e) {
       throw new InstantiationFailedException(e);
     }

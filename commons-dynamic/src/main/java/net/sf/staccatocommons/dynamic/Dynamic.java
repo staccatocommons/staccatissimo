@@ -113,8 +113,8 @@ public interface Dynamic extends Thunk<Object> {
    * if it can be casted to the given class, or by returning a proxy that
    * forwards messages to {@link #send(String, Object...)}, otherwise.
    * 
-   * Methods <strong>must</strong> throw {@link ClassCastException} if the
-   * actual returned value of the dynamic can not be cast the the returned value
+   * Methods of the proxy result will throw {@link ClassCastException} when the
+   * actual returned value of the dynamic can not be cast to the returned value
    * of the method, and {@link NullPointerException} if null is returned when a
    * primitive return type is expected
    * 
@@ -133,8 +133,8 @@ public interface Dynamic extends Thunk<Object> {
    * {@link #chainingAs(Class)} the result to the desired method return type,
    * otherwise.
    * 
-   * Methods <strong>must</strong> throw {@link NullPointerException} if null is
-   * returned when a primitive return type is expected
+   * Methods will throw {@link NullPointerException} when null is returned when
+   * a primitive return type is expected
    * 
    * @param <T>
    * @param clazz

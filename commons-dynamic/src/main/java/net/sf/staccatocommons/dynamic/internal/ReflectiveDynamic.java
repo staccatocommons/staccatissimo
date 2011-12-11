@@ -12,9 +12,10 @@
  */
 package net.sf.staccatocommons.dynamic.internal;
 
+import static net.sf.staccatocommons.dynamic.internal.Methods.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -76,7 +77,7 @@ public final class ReflectiveDynamic extends AbstractDynamic {
     if (method != null) {
       return method;
     }
-    method = findMethod(key.getSelector(), key.getArgTypes());
+    method = findMethod(target.getClass(), key.getSelector(), key.getArgTypes());
     if (method == null)
       return null;
     CACHE.put(key, method);
@@ -86,43 +87,6 @@ public final class ReflectiveDynamic extends AbstractDynamic {
   private MethodDescriptor newDescriptor(final String selector, final Class<?>... argTypes) {
     MethodDescriptor key = new MethodDescriptor(target.getClass(), selector, argTypes);
     return key;
-  }
-
-  private Method findMethod(final String selector, final Class<?>[] argsTypes) {
-    for (Class<?> c = target.getClass(); c != null; c = c.getSuperclass()) {
-      for (Method m : c.getDeclaredMethods()) {
-        if (isDesiredMethod(selector, m, argsTypes)) {
-          return m;
-        }
-      }
-    }
-    return null;
-  }
-
-  private static boolean isDesiredMethod(final String selector, Method method, final Class<?>[] argTypes) {
-    return Modifier.isPublic(method.getModifiers()) //
-      && method.getParameterTypes().length == argTypes.length //
-      && method.getName().equals(selector) //
-      && argTypesMatch(argTypes, method.getParameterTypes()); //
-  }
-
-  private static boolean argTypesMatch(Class<?>[] passedArgTypes, Class<?>[] actualArgTypes) {
-    for (int i = 0; i < passedArgTypes.length; i++) {
-      Class<?> actual = actualArgTypes[i];
-      Class<?> passed = passedArgTypes[i];
-      if (!(actual.isAssignableFrom(passed) || PrimitiveWrappers.isPrimitiveWrapperFor(actual, passed)))
-        return false;
-    }
-    return true;
-  }
-
-  private static Class<?>[] getArgTypes(Object[] args) {
-    int arguments = args.length;
-    Class<?>[] parameterTypes = new Class[arguments];
-    for (int i = 0; i < arguments; i++) {
-      parameterTypes[i] = args[i].getClass();
-    }
-    return parameterTypes;
   }
 
   private <T> T invoke(Method method, final Object... args) {

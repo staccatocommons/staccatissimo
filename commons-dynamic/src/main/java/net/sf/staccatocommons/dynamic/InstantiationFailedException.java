@@ -27,4 +27,11 @@ public class InstantiationFailedException extends RuntimeException {
     super(cause);
   }
 
+  /**
+   * Creates a new {@link InstantiationFailedException}
+   */
+  public InstantiationFailedException(String message) {
+    super(message);
+  }
+
 }
