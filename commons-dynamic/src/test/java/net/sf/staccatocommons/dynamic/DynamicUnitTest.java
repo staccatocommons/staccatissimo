@@ -260,5 +260,15 @@ public class DynamicUnitTest {
   public void fromClassWithArgsBadArgs() throws Exception {
     Dynamics.fromClass(Adder.class, "hello");
   }
+  
+  /***/
+  @Test
+  public void sendToAnnonymousClass() throws Exception {
+    assertEquals(10, Dynamics.from(new Object() {
+      public Object value() {
+        return 10;
+      }
+    }).as(Thunk.class).value());
+  }
 
 }

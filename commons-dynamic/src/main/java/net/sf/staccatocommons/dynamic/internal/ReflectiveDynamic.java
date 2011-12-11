@@ -51,17 +51,15 @@ public final class ReflectiveDynamic extends AbstractDynamic {
   public <T> T send(@NonNull final String selector, @NonNull final Object... args) {
     MethodDescriptor descriptor = newDescriptor(selector, getArgTypes(args));
     Method method = getMethod(descriptor);
-    if (method != null) {
+    if (method != null)
       return invoke(method, args);
-    }
     throw new MessageNotUnderstoodException(descriptor);
   }
 
   public Dynamic chainingSend(String selector, Object... args) {
     Method method = getMethod(newDescriptor(selector, getArgTypes(args)));
-    if (method != null) {
+    if (method != null)
       return Dynamics.nullSafeFrom(invoke(method, args));
-    }
     return Dynamics.null_();
   }
 
@@ -74,9 +72,8 @@ public final class ReflectiveDynamic extends AbstractDynamic {
 
   private Method getMethod(MethodDescriptor key) {
     Method method = CACHE.get(key);
-    if (method != null) {
+    if (method != null)
       return method;
-    }
     method = findMethod(target.getClass(), key.getSelector(), key.getArgTypes());
     if (method == null)
       return null;
@@ -91,6 +88,8 @@ public final class ReflectiveDynamic extends AbstractDynamic {
 
   private <T> T invoke(Method method, final Object... args) {
     try {
+      if (!method.isAccessible())
+        method.setAccessible(true);
       return (T) method.invoke(target, args);
     } catch (IllegalAccessException e) {
       throw new MethodEvaluationException(e);
