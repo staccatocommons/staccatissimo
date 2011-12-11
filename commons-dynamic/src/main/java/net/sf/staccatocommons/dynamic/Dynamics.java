@@ -20,8 +20,6 @@ import net.sf.staccatocommons.dynamic.internal.ReflectiveDynamic;
 import net.sf.staccatocommons.restrictions.Constant;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * Class methods for creating simple {@link Dynamic}s
  * 
@@ -121,7 +119,7 @@ public class Dynamics {
     // TODO refactor message and use MethodDescriptor
     if (constructor == null)
       throw new InstantiationFailedException("There is no suitable constructor in class " + clazz
-        + " for arguments [" + StringUtils.join(args) + "]");
+        + " for arguments");
     try {
       return from(constructor.newInstance(args));
     } catch (Exception e) {
