@@ -92,13 +92,13 @@ public class ReductionsUnitTest {
   }
 
   /**
-   * Test for {@link Reductions#sumOn(net.sf.staccatocommons.defs.Applicable)}
+   * Test for {@link Reductions#sumOf(net.sf.staccatocommons.defs.Applicable)}
    * 
    * @throws Exception
    */
   @Test
   public void sumOn() throws Exception {
-    assertEquals(16, reduceSomeStrings(Reductions.sumOn(Strings.length())));
+    assertEquals(16, reduceSomeStrings(Reductions.sum().of(Strings.length())));
   }
 
   /**

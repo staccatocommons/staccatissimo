@@ -81,11 +81,36 @@ public class Reductions {
     return from(numberType.zero(), numberType.add());
   }
 
-  public static <A> Reduction<A, Integer> sumOn(Applicable<A, Integer> function) {
+  /**
+   * Integer reduction that computes the sum of the results of applying the
+   * given function the elements it processes
+   * 
+   * For example:
+   * 
+   * <pre>
+   * Reductions.sumOn(Thunks.&lt;Integer&gt; value())
+   * </pre>
+   * 
+   * Is a reduction that sums the values of the thunks it processes
+   * 
+   * @param function
+   * @return sum reduction composed with the given {@code function}
+   */
+  public static <A> Reduction<A, Integer> sumOf(Applicable<A, Integer> function) {
     return sum().of(function);
   }
 
-  public static <A, B> Reduction<A, B> sumOn(Applicable<A, B> function, NumberType<B> numberType) {
+  /**
+   * Generic reduction that computes the sum of the results of applying the
+   * given function the elements it processes
+   * 
+   * @param function
+   * @param numberType
+   *          the type of number to sum
+   * @return sum reduction composed with the given {@code function}
+   * @see #sumOf(Applicable)
+   */
+  public static <A, B> Reduction<A, B> sumOf(Applicable<A, B> function, NumberType<B> numberType) {
     return from(numberType.zero(), numberType.add().of(function).flip());
   }
 
@@ -143,6 +168,13 @@ public class Reductions {
     return from(Compare.max(comparator));
   }
 
+  /**
+   * Answers reduction that computes the maximum element according to the given
+   * function
+   * 
+   * @return Reductions.max(Compare.on(function))
+   * @see Compare#on(Applicable)
+   */
   @IgnoreRestrictions
   public static <A, B extends Comparable<B>> Reduction<A, A> maxOn(
     @NonNull Applicable<A, B> function) {
@@ -161,16 +193,25 @@ public class Reductions {
   }
 
   /**
-   * Answers reduction that computes the minimum element of the processed
-   * elements, according to the given {@link Comparator}
+   * Answers reduction that computes the minimum element according to the given
+   * function
    * 
-   * @return a reduction that computes the minimum element of the processed
+   * @return Reductions.min(Compare.on(function))
+   * @see Compare#on(Applicable)
    */
   @IgnoreRestrictions
   public static <A> Reduction<A, A> min(Comparator<A> comparator) {
     return from(Compare.min(comparator));
   }
 
+  /**
+   * Answers reduction that computes the minimum element of the result of
+   * applying the given function to the processed elements
+   * 
+   * @return a reduction that computes the minimum result of aplying the given
+   *         {@code function} to each processed element
+   * @see Compare#on(Applicable)
+   */
   @IgnoreRestrictions
   public static <A, B extends Comparable<B>> Reduction<A, A> minOn(
     @NonNull Applicable<A, B> function) {
