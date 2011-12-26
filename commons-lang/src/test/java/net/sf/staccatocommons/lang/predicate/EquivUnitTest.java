@@ -33,7 +33,12 @@ import org.junit.runner.RunWith;
  * 
  */
 @RunWith(Theories.class)
-public class EquivalenceUnitTest {
+public class EquivUnitTest {
+
+  /***/
+  @DataPoints
+  public static final Object[] POINTS = new Object[] { 10, 40, "hello", new String("hello"),
+      new Object(), null, null };
 
   /** Test method for {@link Predicates#equal()} */
   @Test
@@ -69,30 +74,30 @@ public class EquivalenceUnitTest {
     assertTrue(Equiv.equal().not().eval(10, 12));
   }
 
-  @DataPoints
-  public static final Object[] POINTS = new Object[] { 10, 40, "hello", new String("hello"),
-      new Object(), null, null };
-
+  /***/
   @Theory
   public void equalsPredicateIsEquivalentToPartiallyAppliedEquivPredicate(Object o1, Object o2) {
     assumeNotNull(o1);
     assertEquals(Predicates.equal(o1).apply(o2), Equiv.equal().apply(o1).apply(o2));
   }
 
+  /***/
   @Theory
   public void equalsPredicateIsEquivalentToFullyAppliedEquivPredicate(Object o1, Object o2) {
     assumeNotNull(o1);
     assertEquals(Predicates.equal(o1).apply(o2), Equiv.equal().apply(o1, o2));
   }
 
+  /***/
   @Theory
   public void notEqualsPredicateIsEquivalentToFullyAppliedNotEquivPredicate(Object o1, Object o2) {
     assumeNotNull(o1);
     assertEquals(Predicates.equal(o1).not().apply(o2), Equiv.equal().not().apply(o1, o2));
   }
 
+  /***/
   @Theory
-  public void EqualsOrNullPredicateIsEquivalentToPartiallyAppliedEquivOrNullPredicate(Object o1,
+  public void equalsOrNullPredicateIsEquivalentToPartiallyAppliedEquivOrNullPredicate(Object o1,
     Object o2) {
     assumeNotNull(o1);
     assertEquals(//
@@ -100,8 +105,9 @@ public class EquivalenceUnitTest {
       Equiv.equal().apply(o1).orNull().apply(o2));
   }
 
+  /***/
   @Theory
-  public void EqualsAndNotNullPredicateIsEquivalentToPartiallyAppliedEquivAndNotNullPredicate(
+  public void equalsAndNotNullPredicateIsEquivalentToPartiallyAppliedEquivAndNotNullPredicate(
     Object o1, Object o2) {
     assumeNotNull(o1);
     assertEquals(//
