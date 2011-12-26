@@ -14,11 +14,16 @@ package net.sf.staccatocommons.lang.predicate;
 
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.junit.Assert.*;
+import static org.junit.Assume.*;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.lang.predicate.internal.Equals2;
 import net.sf.staccatocommons.lang.tuple.Tuples;
 
 import org.junit.Test;
+import org.junit.experimental.theories.DataPoints;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
 
 /**
  * 
@@ -27,6 +32,7 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
+@RunWith(Theories.class)
 public class EquivalenceUnitTest {
 
   /** Test method for {@link Predicates#equal()} */
@@ -61,5 +67,45 @@ public class EquivalenceUnitTest {
   @Test
   public void testNot() throws Exception {
     assertTrue(Equiv.equal().not().eval(10, 12));
+  }
+
+  @DataPoints
+  public static final Object[] POINTS = new Object[] { 10, 40, "hello", new String("hello"),
+      new Object(), null, null };
+
+  @Theory
+  public void equalsPredicateIsEquivalentToPartiallyAppliedEquivPredicate(Object o1, Object o2) {
+    assumeNotNull(o1);
+    assertEquals(Predicates.equal(o1).apply(o2), Equiv.equal().apply(o1).apply(o2));
+  }
+
+  @Theory
+  public void equalsPredicateIsEquivalentToFullyAppliedEquivPredicate(Object o1, Object o2) {
+    assumeNotNull(o1);
+    assertEquals(Predicates.equal(o1).apply(o2), Equiv.equal().apply(o1, o2));
+  }
+
+  @Theory
+  public void notEqualsPredicateIsEquivalentToFullyAppliedNotEquivPredicate(Object o1, Object o2) {
+    assumeNotNull(o1);
+    assertEquals(Predicates.equal(o1).not().apply(o2), Equiv.equal().not().apply(o1, o2));
+  }
+
+  @Theory
+  public void EqualsOrNullPredicateIsEquivalentToPartiallyAppliedEquivOrNullPredicate(Object o1,
+    Object o2) {
+    assumeNotNull(o1);
+    assertEquals(//
+      Predicates.equal(o1).orNull().apply(o2),
+      Equiv.equal().apply(o1).orNull().apply(o2));
+  }
+
+  @Theory
+  public void EqualsAndNotNullPredicateIsEquivalentToPartiallyAppliedEquivAndNotNullPredicate(
+    Object o1, Object o2) {
+    assumeNotNull(o1);
+    assertEquals(//
+      Predicates.equal(o1).andNotNull().apply(o2),
+      Equiv.equal().apply(o1).andNotNull().apply(o2));
   }
 }

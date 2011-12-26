@@ -13,8 +13,6 @@
 
 package net.sf.staccatocommons.lang.predicate.internal;
 
-import net.sf.staccatocommons.restrictions.check.NonNull;
-
 /**
  * @author flbulgarelli
  * 
@@ -34,7 +32,7 @@ public final class Equals<T> extends TopLevelPredicate<T> {
     this.value = value;
   }
 
-  public boolean eval(@NonNull T argument) {
-    return argument.equals(value);
+  public boolean eval(T argument) {
+    return value.equals(argument);
   }
 }
