@@ -93,11 +93,15 @@ public final class Some<T> extends Option<T> {
   public boolean contains(T element) {
     return ObjectUtils.equals(value, element);
   }
-  
-//  @Override
-//  public <B> Option<B> bind(Applicable<? super T, Option<B>> function) {
-//    return function.apply(value);
-//  }
+
+  public Option<T> skip(T element) {
+    return element.equals(value) ? Option.<T> none() : this;
+  }
+
+  // @Override
+  // public <B> Option<B> bind(Applicable<? super T, Option<B>> function) {
+  // return function.apply(value);
+  // }
 
   @Override
   public int hashCode() {

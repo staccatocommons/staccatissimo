@@ -68,11 +68,11 @@ public final class None<T> extends Option<T> {
   public void ifDefined(Executable<? super T> block) {
 
   }
-  
-//  @Override
-//  public <B> Option<B> bind(Applicable<? super T, Option<B>> function) {
-//    return none();
-//  }
+
+  // @Override
+  // public <B> Option<B> bind(Applicable<? super T, Option<B>> function) {
+  // return none();
+  // }
 
   @Override
   public T valueOrNull() {
@@ -96,6 +96,10 @@ public final class None<T> extends Option<T> {
   @Override
   public boolean contains(Object element) {
     return false;
+  }
+
+  public Option<T> skip(T element) {
+    return this;
   }
 
   public int hashCode() {

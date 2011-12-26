@@ -12,7 +12,6 @@
  */
 package net.sf.staccatocommons.control;
 
-
 import java.util.Arrays;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Executor;
@@ -32,6 +31,7 @@ import org.junit.Test;
  */
 public class BlockingMonadTest {
 
+  /***/
   @Test
   public void testBlockingQueueNoFork() throws Exception {
     // 1. Partir de una cola sincronica, y por cada elemento devuelto, hacer
@@ -50,6 +50,7 @@ public class BlockingMonadTest {
     });
   }
 
+  /***/
   @Test
   public void testBlockingQueueFork() throws Exception {
     // 2. Partir de una cola sincronica, y por cada elemento devuelto, hacer
@@ -64,6 +65,7 @@ public class BlockingMonadTest {
       .run(fork());
   }
 
+  /***/
   @Test
   public void testname() throws Exception {
     // 3. Partir de una cola sincronica, y por cada elemento devuelto, hacer
@@ -103,7 +105,6 @@ public class BlockingMonadTest {
       FixedDelayed.from(675, 400L),
       FixedDelayed.from(400, 1500L)));
   }
-  
 
   /***/
   @Constant
@@ -116,9 +117,12 @@ public class BlockingMonadTest {
   }
 
   /***/
-  public static void withTimeout(long timeout, TimeUnit timeUnit, Runnable runnable) throws InterruptedException {
-    Executors.newSingleThreadExecutor().invokeAll(Arrays.asList(Executors.callable(runnable)), timeout, timeUnit);
+  public static void withTimeout(long timeout, TimeUnit timeUnit, Runnable runnable)
+    throws InterruptedException {
+    Executors.newSingleThreadExecutor().invokeAll(
+      Arrays.asList(Executors.callable(runnable)),
+      timeout,
+      timeUnit);
   }
-
 
 }

@@ -43,14 +43,24 @@ public interface ProtoMonad<ContainerType, A> {
    * Preserves elements that satisfy the given <code>predicate</code>
    * 
    * @param predicate
-   * @return a new {@link ProtoMonad} that will retrieve only elements that
-   *         evaluate to true
+   * @return a new {@link ProtoMonad} that will contain or compute only elements
+   *         that evaluate to true
    */
   ProtoMonad<ContainerType, A> filter(Evaluable<? super A> predicate);
 
-  //TODO ProtoMonad<ContainerType, A> skip(A element);
-  //TODO flatMap
-  
+  /**
+   * Preserves all elements but those that are equal to the given one.
+   * 
+   * Equivalent to {@code filter(Predicates.equal(element).not())}
+   * 
+   * @param element
+   * @return a {@link ProtoMonad} that contains or computes elements that are
+   *         not equal to the given one
+   */
+  ProtoMonad<ContainerType, A> skip(@NonNull A element);
+
+  // TODO flatMap
+
   /**
    * Executes the given {@link Executable} for each element in this
    * {@link ProtoMonad}. {@link ProtoMonad} does not guarantee that this message

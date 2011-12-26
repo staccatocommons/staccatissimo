@@ -70,7 +70,8 @@ import net.sf.staccatocommons.restrictions.value.Value;
  */
 @Value
 @Conditionally({ Immutable.class, Serializable.class })
-public abstract class Option<A> implements Thunk<A>, Iterable<A>, SizeAware, ContainsAware<A>, ProtoMonad<Option, A>, Serializable {
+public abstract class Option<A> implements Thunk<A>, Iterable<A>, SizeAware, ContainsAware<A>,
+  ProtoMonad<Option, A>, Serializable {
 
   private static final long serialVersionUID = -4635925023376621559L;
 
@@ -122,7 +123,7 @@ public abstract class Option<A> implements Thunk<A>, Iterable<A>, SizeAware, Con
       return Option.some((T2) function.apply(value()));
     return Option.none();
   }
-  
+
   /**
    * Answers this option if defined and the given <code>predicate</code>
    * evaluates to <code>true</code>. Answers {@link #none()}, otherwise
@@ -135,8 +136,9 @@ public abstract class Option<A> implements Thunk<A>, Iterable<A>, SizeAware, Con
       return this;
     return Option.none();
   }
-  
-  //public abstract <B> Option<B> bind(Applicable<? super A, Option<B>> function);
+
+  // public abstract <B> Option<B> bind(Applicable<? super A, Option<B>>
+  // function);
 
   /**
    * Factory method for creating an undefined value. This method guarantees to
@@ -188,7 +190,7 @@ public abstract class Option<A> implements Thunk<A>, Iterable<A>, SizeAware, Con
    * @param block
    */
   public abstract void ifDefined(@NonNull Executable<? super A> block);
-  
+
   public void forEach(@NonNull Executable<? super A> block) {
     ifDefined(block);
   }

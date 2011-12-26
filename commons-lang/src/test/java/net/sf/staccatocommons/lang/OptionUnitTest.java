@@ -34,6 +34,15 @@ import org.junit.Test;
  * @author flbulgarelli
  */
 public class OptionUnitTest extends JUnit4MockObjectTestCase {
+
+  /***/
+  @Test
+  public void testSkip() throws Exception {
+    assertTrue(Option.none().skip(10).isEmpty());
+    assertTrue(Option.some(10).skip(10).isEmpty());
+    assertFalse(Option.some(15).skip(10).isEmpty());
+  }
+
   /***/
   @Test
   public void testValuedefined() {
