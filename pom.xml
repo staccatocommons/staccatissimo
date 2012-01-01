@@ -28,11 +28,9 @@
   </parent>
   
    <scm>
-        <connection>scm:git:git://staccatocommons.git.sourceforge.net/gitroot/staccatocommons/staccatocommons</connection>
-        <developerConnection>
-            scm:git:git://staccatocommons.git.sourceforge.net/gitroot/staccatocommons/staccatocommons
-        </developerConnection>
-        <url>http://staccatocommons.git.sourceforge.net/git/gitweb.cgi?p=staccatocommons/staccatocommons</url>
+        <connection>scm:git:https://github.com/staccatocommons/staccatissimo.git</connection>
+        <developerConnection>scm:git:https://github.com/staccatocommons/staccatissimo.git</developerConnection>
+        <url>https://github.com/staccatocommons/staccatissimo</url>
     </scm> 
 
  
