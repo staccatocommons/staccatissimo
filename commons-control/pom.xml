@@ -3,12 +3,12 @@
 	<parent>
 		<artifactId>commons-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>1.2</version>
+		<version>1.3-SNAPSHOT</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>commons-control</artifactId>
 	<name>Staccato-Commons-Control</name>
-	<version>1.2</version>
+	<version>1.3-SNAPSHOT</version>
 
 	<dependencies>
 		<dependency>
