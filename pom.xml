@@ -1,53 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>net.sf.staccatocommons</groupId>
-  <artifactId>commons-parent-pom</artifactId>
-  <version>1.3-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>Staccato-Commons-Parent-Pom</name>
-  <url>http://staccatocommons.sourceforge.net/</url>
-  <description>Staccato-Commons Module and Parent Pom</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>net.sf.staccatocommons</groupId>
+   <artifactId>staccatissimo-parent-pom</artifactId>
+   <version>1.3-SNAPSHOT</version>
+   <packaging>pom</packaging>
+   <name>Staccatissimo-Parent-Pom</name>
+   <url>http://staccatocommons.sourceforge.net/staccatissimo</url>
+   <description>Staccatissimo Module and Parent Pom</description>
    <organization>
-      <name>Staccato-Commons</name>
+      <name>Staccatocommons</name>
       <url>http://staccatocommons.sourceforge.net/</url>
    </organization>
-  <licenses>
+   <licenses>
       <license>
          <name>GNU Lesser General Public License v3 </name>
          <url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
       </license>
    </licenses>
    <inceptionYear>2010</inceptionYear>
-   
-     
-  <parent>
-     <groupId>org.sonatype.oss</groupId>
-     <artifactId>oss-parent</artifactId>
-     <version>7</version>
-  </parent>
-  
-   <scm>
-        <connection>scm:git:https://github.com/staccatocommons/staccatissimo.git</connection>
-        <developerConnection>scm:git:https://github.com/staccatocommons/staccatissimo.git</developerConnection>
-        <url>https://github.com/staccatocommons/staccatissimo</url>
-    </scm> 
 
- 
+
+   <parent>
+      <groupId>org.sonatype.oss</groupId>
+      <artifactId>oss-parent</artifactId>
+      <version>7</version>
+   </parent>
+
+   <scm>
+      <connection>scm:git:https://github.com/staccatocommons/staccatissimo.git</connection>
+      <developerConnection>scm:git:https://github.com/staccatocommons/staccatissimo.git</developerConnection>
+      <url>https://github.com/staccatocommons/staccatissimo</url>
+   </scm>
+
+
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
    </properties>
-   
+
    <developers>
       <developer>
          <id>flbulgarelli</id>
       </developer>
    </developers>
-   
+
    <distributionManagement>
       <site>
          <id> ${distribution.site.id}</id>
-         <url>${distribution.site.url}</url>
+         <url>${distribution.site.url}/staccatissimo</url>
       </site>
    </distributionManagement>
    <build>
@@ -120,16 +121,16 @@
                      <version>2.8</version>
                      <configuration>
                         <excludePackageNames>*.internal</excludePackageNames>
-                        <bottom><![CDATA[<a href="http://sourceforge.net/projects/staccatocommons"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13" width="120" height="30" alt="Get Staccato-Commons at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>]]></bottom>
+                        <bottom><![CDATA[<a href="http://sourceforge.net/projects/staccatocommons"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=317949&amp;type=13" width="120" height="30" alt="Get Staccatocommons at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>]]></bottom>
                         <useStandardDocletOptions>true</useStandardDocletOptions>
                         <links>
-                           <link>http://staccatocommons.sourceforge.net/commons-check/apidocs</link>
-                           <link>http://staccatocommons.sourceforge.net/commons-iterators/apidocs</link>
-                           <link>http://staccatocommons.sourceforge.net/commons-restrictions/apidocs</link>
-                           <link>http://staccatocommons.sourceforge.net/commons-lang/apidocs</link>
-                           <link>http://staccatocommons.sourceforge.net/commons-io/apidocs</link>
-                           <link>http://staccatocommons.sourceforge.net/commons-collections/apidocs</link>
-                           <link>http://staccatocommons.sourceforge.net/commons-defs/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/staccatissimo/staccatissimo-check/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/staccatissimo/staccatissimo-iterators/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/staccatissimo/staccatissimo-restrictions/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/staccatissimo/staccatissimo-lang/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/staccatissimo/staccatissimo-io/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/staccatissimo/staccatissimo-collections/apidocs</link>
+                           <link>http://staccatocommons.sourceforge.net/staccatissimo/staccatissimo-defs/apidocs</link>
                         </links>
                         <skip>false</skip>
                      </configuration>
@@ -140,8 +141,8 @@
                               <report>javadoc</report>
                            </reports>
                         </reportSet>
-                     </reportSets> 
-                  </plugin>  
+                     </reportSets>
+                  </plugin>
                   <plugin>
                      <groupId>org.apache.maven.plugins</groupId>
                      <artifactId>maven-project-info-reports-plugin</artifactId>
@@ -173,66 +174,66 @@
                </descriptors>
             </configuration>
          </plugin>
-      <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-release-plugin</artifactId>
             <configuration>
-                 <autoVersionSubmodules>true</autoVersionSubmodules>
-                 <pushChanges>false</pushChanges>
+               <autoVersionSubmodules>true</autoVersionSubmodules>
+               <pushChanges>false</pushChanges>
             </configuration>
             <version>2.1</version>
-      </plugin>
-   
-            <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <version>1.8.0</version>
-                <configuration>
-                    <header>LICENSE_HEADER.txt</header>
-                    <excludes>
-                        <exclude>target/**</exclude>
-                        <exclude>**/*.txt</exclude>
-                    </excludes>
-                  <!--  <strictCheck>true</strictCheck> -->
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-         
+         </plugin>
+
+         <plugin>
+            <groupId>com.mycila.maven-license-plugin</groupId>
+            <artifactId>maven-license-plugin</artifactId>
+            <version>1.8.0</version>
+            <configuration>
+               <header>LICENSE_HEADER.txt</header>
+               <excludes>
+                  <exclude>target/**</exclude>
+                  <exclude>**/*.txt</exclude>
+               </excludes>
+               <!-- <strictCheck>true</strictCheck> -->
+            </configuration>
+            <executions>
+               <execution>
+                  <goals>
+                     <goal>check</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+
       </plugins>
    </build>
-   
 
-  
-  
-  <profiles>
-  
-    <profile>
+
+
+
+   <profiles>
+
+      <profile>
          <id>basic</id>
-           <modules>
-             <module>commons-testing</module>
-             <module>commons-restrictions</module>
-             <module>commons-defs</module>
-             <module>commons-check</module>
-             <module>commons-iterators</module>
-             <module>commons-lang</module>
-             <module>commons-numbers</module>
-             <module>commons-util</module>
-             <module>commons-dynamic</module>
-             <module>commons-lambda</module>
-             <module>commons-reductions</module>
-             <module>commons-collections</module> 
-             <module>commons-io</module>
-             <module>commons-control</module>
-             <module>commons-instrument</module>
-             <module>commons-restrictions-instrument</module>
-             <module>commons-restrictions-instrument-maven-plugin</module>   
-           </modules>
+         <modules>
+            <module>staccatissimo-testing</module>
+            <module>staccatissimo-restrictions</module>
+            <module>staccatissimo-defs</module>
+            <module>staccatissimo-check</module>
+            <module>staccatissimo-iterators</module>
+            <module>staccatissimo-lang</module>
+            <module>staccatissimo-numbers</module>
+            <module>staccatissimo-util</module>
+            <module>staccatissimo-dynamic</module>
+            <module>staccatissimo-lambda</module>
+            <module>staccatissimo-reductions</module>
+            <module>staccatissimo-collections</module>
+            <module>staccatissimo-io</module>
+            <module>staccatissimo-control</module>
+            <module>staccatissimo-instrument</module>
+            <module>staccatissimo-restrictions-instrument</module>
+            <module>staccatissimo-restrictions-instrument-maven-plugin</module>
+         </modules>
          <build>
             <plugins>
                <plugin>
@@ -250,13 +251,13 @@
       </profile>
       <profile>
          <id>noinstrument</id>
-           <modules>
-             <module>commons-testing</module>
-             <module>commons-restrictions</module>
-             <module>commons-defs</module>
-             <module>commons-check</module>
-             <module>commons-restrictions-instrument-maven-plugin</module>   
-           </modules>
+         <modules>
+            <module>staccatissimo-testing</module>
+            <module>staccatissimo-restrictions</module>
+            <module>staccatissimo-defs</module>
+            <module>staccatissimo-check</module>
+            <module>staccatissimo-restrictions-instrument-maven-plugin</module>
+         </modules>
          <build>
             <plugins>
                <plugin>
@@ -274,21 +275,21 @@
       </profile>
       <profile>
          <id>instrument</id>
-          <modules>
-             <module>commons-iterators</module>
-             <module>commons-lang</module>
-             <module>commons-numbers</module>
-             <module>commons-util</module>
-             <module>commons-dynamic</module>
-             <module>commons-lambda</module>
-             <module>commons-restrictions</module>
-             <module>commons-reductions</module>
-             <module>commons-collections</module> 
-             <module>commons-control</module>
-             <module>commons-io</module>
-             <module>commons-instrument</module>
-             <module>commons-restrictions-instrument</module>
-           </modules>
+         <modules>
+            <module>staccatissimo-iterators</module>
+            <module>staccatissimo-lang</module>
+            <module>staccatissimo-numbers</module>
+            <module>staccatissimo-util</module>
+            <module>staccatissimo-dynamic</module>
+            <module>staccatissimo-lambda</module>
+            <module>staccatissimo-restrictions</module>
+            <module>staccatissimo-reductions</module>
+            <module>staccatissimo-collections</module>
+            <module>staccatissimo-control</module>
+            <module>staccatissimo-io</module>
+            <module>staccatissimo-instrument</module>
+            <module>staccatissimo-restrictions-instrument</module>
+         </modules>
          <activation>
             <activeByDefault>true</activeByDefault>
          </activation>
@@ -296,7 +297,7 @@
             <plugins>
                <plugin>
                   <groupId>net.sf.staccatocommons</groupId>
-                  <artifactId>commons-restrictions-instrument-maven-plugin</artifactId>
+                  <artifactId>staccatissimo-restrictions-instrument-maven-plugin</artifactId>
                   <version>${project.version}</version>
                   <configuration>
                      <ignoreReturnChecks>true</ignoreReturnChecks>
