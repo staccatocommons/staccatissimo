@@ -1,14 +1,14 @@
-#About Staccato-Commons-Lambda 
+#About Staccatissimo-Lambda 
  
- Staccato-Commons-Lambda is a minimalistic and lightweight library for instantiating simple Staccato-Commond-Defs' Functions and Evaluables in a DSL style, without using anonymous classes. This project is aimed to simplify higher-order programming within Staccato-Commons until Java adds lambdas to its language (planned for Java 8) 
+ Staccatissimo-Lambda is a minimalistic and lightweight library for instantiating simple Staccato-Commond-Defs' Functions and Evaluables in a DSL style, without using anonymous classes. This project is aimed to simplify higher-order programming within Staccatissimo until Java adds lambdas to its language (planned for Java 8) 
 
 #Getting Started
 
- The entry point to Staccato-Commons-Lambda is the <<<Lambda>>> class, which allows to create functions in a concise and redable way. There are two ways of using it, this introduction will just show one of them - using a shared lambda factory. The alternative, more performant but a bit more verbose way - using local lambda factories - is discussed in the API docs.  
+ The entry point to Staccatissimo-Lambda is the <<<Lambda>>> class, which allows to create functions in a concise and redable way. There are two ways of using it, this introduction will just show one of them - using a shared lambda factory. The alternative, more performant but a bit more verbose way - using local lambda factories - is discussed in the API docs.  
 
 ##Instantiating 1 argument functions    
  
- The simplest function to create are one argument functions. Without Staccato-Commons-Lambda, implementing such functions require to extend
+ The simplest function to create are one argument functions. Without Staccatissimo-Lambda, implementing such functions require to extend
  AbstractFunction. For example, a function that return book's ISBN looks like the following:
  
 ```java

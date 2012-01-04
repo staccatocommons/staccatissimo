@@ -1,16 +1,16 @@
-#About Staccato-Commons-Restrictions
+#About Staccatissimo-Restrictions
  
- Staccato-Commons-Restrictions is the core annotations library of the [Staccato-Commons project](http://staccatocommons.sourceforge.net). It contains annotations that express restrictions, that can be used in the form of preconditions, postconditions or invariants over objects and messages, focused on documentation reuse. 
+ Staccatissimo-Restrictions is the core annotations library of the [StaccatoCommons project](http://staccatocommons.sourceforge.net). It contains annotations that express restrictions, that can be used in the form of preconditions, postconditions or invariants over objects and messages, focused on documentation reuse. 
 
 ##Introduction
 
-  Staccato-Commons-Restrictions promotes reuse of common code properties expressed in the form of constraints, like NotNull, Positive, SideEffectFree or Unmodifiable. Just like executable code, such restrictions can be encapsulated  - by defining the restrictions semantics once and only once - and composed - by creating new restrictions aggregating existing ones, thus making consistent and meaningful documentation easier to write. 
+  Staccatissimo-Restrictions promotes reuse of common code properties expressed in the form of constraints, like NotNull, Positive, SideEffectFree or Unmodifiable. Just like executable code, such restrictions can be encapsulated  - by defining the restrictions semantics once and only once - and composed - by creating new restrictions aggregating existing ones, thus making consistent and meaningful documentation easier to write. 
   
   With such principles in mind, the Restrictions API is composed by source and class level annotations that express constraints over code elements, and the {{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/net/sf/staccatocommons/restrictions/Restriction.html}Restriction}} meta-annotation, that express the semantics of such annotations, like for example, how both implementor and client code should behave on constraints violations, or how do they react to inheritance. 
  
-  Although it is primary targeted for documenting such constraints, many of them may be processed in a non intrusive ways through [Staccato-Commons-Restrictions-Instrument](http://staccatocommons.sourceforge.net/commons-restrictions-instrument/index.html).
+  Although it is primary targeted for documenting such constraints, many of them may be processed in a non intrusive ways through [Staccatissimo-Restrictions-Instrument](http://staccatocommons.sourceforge.net/commons-restrictions-instrument/index.html).
  
-  In addition to that, the project <encapsulates> consistent use of words of must, must not, etc. with [RFC2119](http://www.ietf.org/rfc/rfc2119.txt) across Javadoc. This means that whenever such words are used within Staccato-Commons-Restrictions and the rest of the projects, they must be interpreted following such guidelines.  
+  In addition to that, the project <encapsulates> consistent use of words of must, must not, etc. with [RFC2119](http://www.ietf.org/rfc/rfc2119.txt) across Javadoc. This means that whenever such words are used within Staccatissimo-Restrictions and the rest of the projects, they must be interpreted following such guidelines.  
  
 ##Examples
 
@@ -41,7 +41,7 @@
  
 ```java
   //Postcondition: this method always returns the same instance. 
-  //This does not mean it is a singleton - in fact Staccato-Commons discourages them 
+  //This does not mean it is a singleton - in fact Staccatissimo discourages them 
   @Constant
   public static <T> Predicate<T> notNull() { ... }
 

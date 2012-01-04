@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -15,7 +15,7 @@ Iterables by example
 
 * Introduction 
  
- Staccato-Commons-Collections offers some utility classes to perform simple transformations on iterables, collections 
+ Staccatissimo-Collections offers some utility classes to perform simple transformations on iterables, collections 
  and maps: {{{http://staccatocommons.sourceforge.net/commons-collections/apidocs/net/sf/staccatocommons/collections/iterable/Iterables.html}Iterables}},
   {{{http://staccatocommons.sourceforge.net/commons-collections/apidocs/net/sf/staccatocommons/collections/iterable/ModifiableIterables.html}ModifiableIterables}}, 
   {{{http://staccatocommons.sourceforge.net/commons-collections/apidocs/net/sf/staccatocommons/collections/Lists.html}Lists}} 
@@ -49,11 +49,11 @@ Iterables by example
    {{{http://code.google.com/p/totallylazy/}TotallyLazy}},
   {{{http://functionaljava.org/}FunctionalJava}}, 
   {{{http://www.op4j.org/}Op4J}}, {{{http://quaere.codehaus.org/}Quaere}} 
-  and of course, Staccato-Commons-Collections.
+  and of course, Staccatissimo-Collections.
   
   It is not our intention to make a comparison between all those frameworks.
   As said before, all them have both strengths and flaws, and the developer should decide which fits better. 
-  Instead, we will just present the solutions Staccato-Commons-Collections offers.
+  Instead, we will just present the solutions Staccatissimo-Collections offers.
   
 * The Solution  
   
@@ -73,7 +73,7 @@ Iterables by example
   }
 +--- 
 
- Or, using {{{http://staccatocommons.sourceforge.net/commons-lambda}Staccato-Commons-Lambda}}:
+ Or, using {{{http://staccatocommons.sourceforge.net/commons-lambda}Staccatissimo-Lambda}}:
 
 +---
  Collection<Service> getDownServices() {

@@ -1,6 +1,6 @@
-#About Staccato-Commons-Util 
+#About Staccatissimo-Util 
  
- Staccato-Commons-Util is library that contains miscellaneous, non-core classes and functions that extend functionality of commons-lang
+ Staccatissimo-Util is library that contains miscellaneous, non-core classes and functions that extend functionality of commons-lang
  
 #Getting Started
  

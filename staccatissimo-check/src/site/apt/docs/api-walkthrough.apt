@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -11,9 +11,9 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-Staccato-Commons-Check API Walkthrough 
+Staccatissimo-Check API Walkthrough 
 
- The core of Staccato-Commons-CHeck is the <<<net.sf.staccatocommons.check.Check\<E\>>>> class.
+ The core of Staccatissimo-CHeck is the <<<net.sf.staccatocommons.check.Check\<E\>>>> class.
  It implements more than 40 common checks with automatic error messages building, in a method-chaining fashion. 
  For example, the following code will check that <<<bar != null && foo.compareTo(bar) <= 0 && baz.size() == 1 && baz.contains(foo)>>>, 
 throwing an exception and generating a proper message if any of the constraints is violated: 

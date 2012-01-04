@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -11,15 +11,15 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccato-Commons-Lang 
+About Staccatissimo-Lang 
  
- Staccato-Commons-Lang is the core library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}.
+ Staccatissimo-Lang is the core library of the {{{http://staccatocommons.sourceforge.net}Staccatissimo project}}.
 It provides abstract and concrete implementations of function-like interfaces
-of {{{http://staccatocommons.sourceforge.net/commons-defs/index.html}Staccato-Commons-Defs}}, as well as options, tuples, and builders.  
+of {{{http://staccatocommons.sourceforge.net/commons-defs/index.html}Staccatissimo-Defs}}, as well as options, tuples, and builders.  
  
 Getting Started
 
-  Staccato-Commons-Lang resolves simple and common everyday problems. Descriptions of such problems, solutions and examples 
+  Staccatissimo-Lang resolves simple and common everyday problems. Descriptions of such problems, solutions and examples 
   can be found in the following links:
   
   * Abstract and concrete implementations of {{{../commons-defs/applicatives-by-example.html}applicables}} - function-like objects
@@ -39,7 +39,7 @@ Getting Started
   * Tuples
     
   * Predicates, Functions and Thunks - abstract and concrete implementations 
-  of the rich, function-like interface defined by staccato-commons-defs
+  of the rich, function-like interface defined by Staccatissimo-defs
   
   * Equiv - Common equality relation implementations 
   

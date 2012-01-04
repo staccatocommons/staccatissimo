@@ -1,5 +1,5 @@
-#About Staccato-Commons-Dynamic 
+#About Staccatissimo-Dynamic 
  
- Staccato-Commons-Dynamic is a library for handling objects in a dynamically-typed way
+ Staccatissimo-Dynamic is a library for handling objects in a dynamically-typed way
  
 

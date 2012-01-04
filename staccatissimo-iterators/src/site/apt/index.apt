@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -11,9 +11,9 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccato-Commons-Iterators 
+About Staccatissimo-Iterators 
  
- Staccato-Commons-Iterators is a small and lightweight library with few dependencies that implements many common  
+ Staccatissimo-Iterators is a small and lightweight library with few dependencies that implements many common  
 concrete iterators and iterator decorators, that are not tied to any collections API, and thriters, a lazier iterator model, 
 interoperable with existent Java Collections Framework Iterators  
 

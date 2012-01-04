@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -11,9 +11,9 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccato-Commons-IO
+About Staccatissimo-IO
  
- Staccato-Commons-IO is the IO library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. It integrates the lang and collection library into the Java IO API, offering a bridge between FileFilter and predicates, Directories, IOStreams, object preferences and serialization managers
+ Staccatissimo-IO is the IO library of the {{{http://staccatocommons.sourceforge.net}Staccatissimo project}}. It integrates the lang and collection library into the Java IO API, offering a bridge between FileFilter and predicates, Directories, IOStreams, object preferences and serialization managers
  
  
 Getting Started

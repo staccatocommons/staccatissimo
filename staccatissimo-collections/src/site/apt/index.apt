@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -11,10 +11,10 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccato-Commons-Collections 
+About Staccatissimo-Collections 
  
- Staccato-Commons-Collection is the collections library of the 
- {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}, focused on providing new abstractions that mix object oriented
+ Staccatissimo-Collection is the collections library of the 
+ {{{http://staccatocommons.sourceforge.net}Staccatissimo project}}, focused on providing new abstractions that mix object oriented
  and functional style for dealing with collections. 
  It extend the existing Java Collections Framework by providing dozen of class methods for performing common operations like
  filtering, mapping, 
@@ -25,7 +25,7 @@ About Staccato-Commons-Collections
   
 Getting started
 
-  Staccato-Commons-Collections resolves problems related with transforming
+  Staccatissimo-Collections resolves problems related with transforming
   collection and collection-like objects. Descriptions of such problems, solutions and examples 
   can be found in the following links:
  

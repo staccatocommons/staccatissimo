@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -67,7 +67,7 @@ Prioritized
  
 * The Solution
 
-  So, the solution is quite obvious: have a generic Prioritized class that implements all those aspects, which Staccato-Commons delivers.
+  So, the solution is quite obvious: have a generic Prioritized class that implements all those aspects, which Staccatissimo delivers.
  Using it, the previous FileUploader can be written like the following:
  
 +----

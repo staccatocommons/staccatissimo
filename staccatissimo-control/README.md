@@ -1,6 +1,6 @@
-#About Staccato-Commons-Control 
+#About Staccatissimo-Control 
  
- Staccato-Commons-Control is a library for building complex, high-level control structures in a simple, consistent way.     
+ Staccatissimo-Control is a library for building complex, high-level control structures in a simple, consistent way.     
  
 
 

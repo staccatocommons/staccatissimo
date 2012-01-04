@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -16,7 +16,7 @@ IOStream by example
 * Introduction 
  
  Streams are potentially infinite iterable objects that have a very rich interface and
-  perform most operations in a lazy manner and functional style. Staccato-Commons-IO exploits their power to 
+  perform most operations in a lazy manner and functional style. Staccatissimo-IO exploits their power to 
   easily perform complex transformations on directories, files and streams.   
   
 * The problem

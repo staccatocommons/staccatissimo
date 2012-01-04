@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -11,16 +11,16 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccato-Commons-Restrictions
+About Staccatissimo-Restrictions
  
- Staccato-Commons-Restrictions is the core annotations library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}. 
+ Staccatissimo-Restrictions is the core annotations library of the {{{http://staccatocommons.sourceforge.net}Staccatissimo project}}. 
 It contains annotations that express restrictions, that can be used in the form of preconditions, postconditions or invariants 
 over objects and messages, focused on documentation reuse. 
 
 
 * Introduction
 
-  Staccato-Commons-Restrictions promotes reuse of common code properties expressed in the form of constraints, like NotNull, 
+  Staccatissimo-Restrictions promotes reuse of common code properties expressed in the form of constraints, like NotNull, 
   Positive, SideEffectFree or Unmodifiable. Just like executable code, such restrictions can be encapsulated 
  - by defining the restrictions semantics once and only once - and composed - by creating new restrictions aggregating existing ones, thus
  making consistent and meaningful documentation easier to write. 
@@ -31,10 +31,10 @@ over objects and messages, focused on documentation reuse.
  on constraints violations, or how do they react to inheritance. 
  
   Although it is primary targeted for documenting such constraints, many of them may be processed in a non intrusive ways through
- {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument/index.html}Staccato-Commons-Restrictions-Instrument}}.
+ {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument/index.html}Staccatissimo-Restrictions-Instrument}}.
  
   In addition to that, the project <encapsulates> consistent use of words of must, must not, etc. with {{{http://www.ietf.org/rfc/rfc2119.txt}RFC2119}} across Javadoc. 
- This means that whenever such words are used within Staccato-Commons-Restrictions and the rest of the projects, they
+ This means that whenever such words are used within Staccatissimo-Restrictions and the rest of the projects, they
  must be interpreted following such guidelines.  
  
 * Examples
@@ -73,7 +73,7 @@ over objects and messages, focused on documentation reuse.
 +---
   
   //Postcondition: this method always returns the same instance. 
-  //This does not mean it is a singleton - in fact Staccato-Commons discourages them 
+  //This does not mean it is a singleton - in fact Staccatissimo discourages them 
   @Constant
   public static <T> Predicate<T> notNull() { ... }
 
@@ -115,8 +115,8 @@ over objects and messages, focused on documentation reuse.
 
 ~~ ** Defining custom restrictions
 ~~ 
-~~ Staccato-Commons-Restriction provides many common restrictions out of the box, but there are lots of business-specific
-~~ constraints not covered by it. Thus, Staccato-Commons encourages you to define your own restrictions and    
+~~ Staccatissimo-Restriction provides many common restrictions out of the box, but there are lots of business-specific
+~~ constraints not covered by it. Thus, Staccatissimo encourages you to define your own restrictions and    
  
 
 

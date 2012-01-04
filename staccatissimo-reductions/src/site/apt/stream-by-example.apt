@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -18,7 +18,7 @@ Stream by example
  Streams are potentially infinite iterable objects that have a very rich interface and
   perform most operations in a lazy manner and functional style.
   They are designed to make complex, lazy transformations on iterable 
-  or iterable-like objects easier. Although they are primary targeted for dealing with collections, other Staccato-Commons
+  or iterable-like objects easier. Although they are primary targeted for dealing with collections, other Staccatissimo
   projects offer other alternative implementations that extend their scope.  
   
   On the other hand, for performing simple, eager transformations on just iterables, eventually in a more imperative style, 
@@ -63,22 +63,22 @@ Stream by example
    {{{http://code.google.com/p/totallylazy/}TotallyLazy}},
   {{{http://functionaljava.org/}FunctionalJava}}, 
   {{{http://www.op4j.org/}Op4J}}, {{{http://quaere.codehaus.org/}Quaere}} 
-  and of course, Staccato-Commons-Collections.
+  and of course, Staccatissimo-Collections.
   
   It is not our intention to make a comparison between all those frameworks.
   As said before, all them have both strengths and flaws, and the developer should decide which fits better. 
-  Instead, we will just present the solutions Staccato-Commons-Collections offers.
+  Instead, we will just present the solutions Staccatissimo-Collections offers.
   
   
   
 * The Solution
 
- Streams are the Staccato-Commons solution for performing such operations on iterables. They are generic wrappers that implement many of those
+ Streams are the Staccatissimo solution for performing such operations on iterables. They are generic wrappers that implement many of those
 common transformation in a lazy manner - that is, no processing is actually performed in most cases unless it it actually necessary, which
 enables them to perform efficiently chained operations on demand on both small and very large sequences of elements. They can be constructed  
 literally by specifying their elements, by specifying the elements generation strategy, 
 by decorating other Iterables  or using sources like databases result sets, directories, files, etc
- (provided by the rest of Staccato-Commons projects). 
+ (provided by the rest of Staccatissimo projects). 
  
  For example, the previous code can be refactored to use Streams:
 
@@ -100,7 +100,7 @@ by decorating other Iterables  or using sources like databases result sets, dire
     }
 +---- 
 
- Or even cleaner, if using {{{http://staccatocommons.sourceforge.net/commons-lambda/index.html}Staccato-Commons-Lambda}}:
+ Or even cleaner, if using {{{http://staccatocommons.sourceforge.net/commons-lambda/index.html}Staccatissimo-Lambda}}:
  
 +---
     Collection<Incident> getMostUrgentProblems3() {

@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -11,11 +11,11 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccato-Commons-Restrictions-Instrument 
+About Staccatissimo-Restrictions-Instrument 
  
- Staccato-Commons-Restrictions-Instrument is an instrumentation tool build on top of
- Staccato-Commons-Restrictions, {{{http://staccatocommons.sourceforge.net/commons-check}Staccato-Commons-Check}} and
-{{{http://staccatocommons.sourceforge.net/commons-instrument}Staccato-Commons-Instrument}}. It is capable of inserting   
+ Staccatissimo-Restrictions-Instrument is an instrumentation tool build on top of
+ Staccatissimo-Restrictions, {{{http://staccatocommons.sourceforge.net/commons-check}Staccatissimo-Check}} and
+{{{http://staccatocommons.sourceforge.net/commons-instrument}Staccatissimo-Instrument}}. It is capable of inserting   
 preconditions and postconditions checks for most of check restrictions annotations, and of ensuring that
 {{{http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/index.html}Constant}} methods effectively are.   
  

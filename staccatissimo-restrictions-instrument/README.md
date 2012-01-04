@@ -1,8 +1,8 @@
-#About Staccato-Commons-Restrictions-Instrument 
+#About Staccatissimo-Restrictions-Instrument 
  
- Staccato-Commons-Restrictions-Instrument is an instrumentation tool build on top of
- Staccato-Commons-Restrictions, [Staccato-Commons-Check](http://staccatocommons.sourceforge.net/commons-check) and
-[Staccato-Commons-Instrument](http://staccatocommons.sourceforge.net/commons-instrument). It is capable of inserting   
+ Staccatissimo-Restrictions-Instrument is an instrumentation tool build on top of
+ Staccatissimo-Restrictions, [Staccatissimo-Check](http://staccatocommons.sourceforge.net/commons-check) and
+[Staccatissimo-Instrument](http://staccatocommons.sourceforge.net/commons-instrument). It is capable of inserting   
 preconditions and postconditions checks for most of check restrictions annotations, and of ensuring that
 [Constant](http://staccatocommons.sourceforge.net/commons-restrictions/apidocs/index.html) methods effectively are.   
  

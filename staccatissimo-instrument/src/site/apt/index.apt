@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -11,16 +11,16 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccato-Commons-Instrument
+About Staccatissimo-Instrument
  
- Staccato-Commons-Instrument is the annotation-oriented instrumentation tool of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}, built on top of {{{http://www.javassist.org}Javassist}}. It allows compile-time annotation processing and class instrumentation in an event-handling fashion.       
+ Staccatissimo-Instrument is the annotation-oriented instrumentation tool of the {{{http://staccatocommons.sourceforge.net}Staccatissimo project}}, built on top of {{{http://www.javassist.org}Javassist}}. It allows compile-time annotation processing and class instrumentation in an event-handling fashion.       
  
 
 Getting started
 
 * Introduction
  
-  Staccato-Commons-Instrument is a tool for processing annotations with instrumentation capabilities.
+  Staccatissimo-Instrument is a tool for processing annotations with instrumentation capabilities.
  It consist of an instrumenter that runs on compiled classes directory with a extremly simple lifecycle:
    
     [[1]] Scans the directory for classfiles and loads each one it finds
@@ -50,7 +50,7 @@ Getting started
    }, new Directory("target/classes"), "");
 +-----------------------------------------------------------------------------------+
     
- As you can see, the instrumenter itself is completely hidden, but you can register annotation handlers and an "instrumentation mark" using an <<<InstrumenterConfigurer>>>. In this example you can already see most of the elements of the staccato-commons-instrument API: handlers, instrumentation marks and configurers.
+ As you can see, the instrumenter itself is completely hidden, but you can register annotation handlers and an "instrumentation mark" using an <<<InstrumenterConfigurer>>>. In this example you can already see most of the elements of the Staccatissimo-instrument API: handlers, instrumentation marks and configurers.
  
 * The API
 
@@ -120,7 +120,7 @@ public class Account {
 resetBalance and deposit are evaluated, log the invocation" and "when a non negative constraint is violated, throw an exception" 
 are harcoded and not encapsulated properly. 
  
-  Using staccato-commons-instrument we can create some annotations that encapsulate that behavior, and document it, by free. 
+  Using Staccatissimo-instrument we can create some annotations that encapsulate that behavior, and document it, by free. 
 So lets define two annotations: <<<Loggeable>>>, and <<<NonNegativeDecimal>>>:
 
 +---------------------------------+
@@ -227,7 +227,7 @@ SEVERE: amount must be positive
  
  Perhaps the reader has already notice that the idea behind this example is the separation of crosscutting concerns, 
 and is probably saying: "That is not new! It is nothing I couldn't have achieved using AOP!". And 
-that is true, the final result is quite similar. However, staccato-commons-instrument is by no means a replacement
+that is true, the final result is quite similar. However, Staccatissimo-instrument is by no means a replacement
 of your favorite Aspects framework or language extension, because:
  
     * It is not a language extension and adds no new abstractions or vocabulary. It is simply a non-invasive annotation processor.  
@@ -248,7 +248,7 @@ What is next?
    
    * Write custom annotation processors and build your own instrumenter using them
    
-   * Staccato-Commons project offers a ready to use instrumenter for simple precondition and postcondition annotations - in a way similar 
-to the NonNegativeDecimal proof-of-concept of the previous example - based on Staccato-Commons-Check API. It is extensively used on 
-all the Staccato-Commons projects. It can be found {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument/}here}}. 
+   * Staccatissimo project offers a ready to use instrumenter for simple precondition and postcondition annotations - in a way similar 
+to the NonNegativeDecimal proof-of-concept of the previous example - based on Staccatissimo-Check API. It is extensively used on 
+all the Staccatissimo projects. It can be found {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument/}here}}. 
 Also a easy-to-use maven plugin exists for it, it can be found {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument-maven-plugin}here}}.             

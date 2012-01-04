@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -11,7 +11,7 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-Staccato-Commons-Check by example
+Staccatissimo-Check by example
 
  <The complete example code can be
   found {{{https:/staccatocommons.svn.sourceforge.net/svnroot/staccatocommons/staccatissimo/trunk/commons-check-examples}here}}>
@@ -94,7 +94,7 @@ Staccato-Commons-Check by example
   All such checks are necessary, but boilerplate, code. We are forced to manually write each condition, negate it,
   generate a failure message, and throw an exception on failure. It works, but is not the Panacea.
   
-  Here is where Staccato-Commons-Check comes to rescue:
+  Here is where Staccatissimo-Check comes to rescue:
   
 +---
     /**
@@ -198,7 +198,7 @@ public class PhoneCall {
 }
 +--
   
-  Again, code is clumsy, so let's refactor it using Staccato-Commons-Check. The main difference with previous example is that
+  Again, code is clumsy, so let's refactor it using Staccatissimo-Check. The main difference with previous example is that
   now we need to throw exceptions other than IllegalArgument: we need to throw an <<<AssertionError>>> if 
   a postcondition is not met - for example, because of a bug - and throw checked <<<PhoneCallException>>>'s under some circumstances when starting
   the connection. Nothing of this is a problem.
@@ -249,7 +249,7 @@ public class PhoneCall2 {
 
   However, messages are now not as human readable as before. For example, <<<isTrue("destination.reachable", destination.isReachable())>>> 
  will produce the message <<<"destionation.reachable must be true">>>, which is clear, but not the best message. In many situations 
- this is not a problem, but if you want better messages, Staccato-Commons-Check allows you to still build them by hand. 
+ this is not a problem, but if you want better messages, Staccatissimo-Check allows you to still build them by hand. 
  
  So, finally, using custom messages in the  connect method, code will look like the following:
  

@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -55,13 +55,13 @@ Relevant State
    
   * Implementing them using reflection, like, again, Apache Commons Lang builders. 
    
-   Staccato-Commons-Lang RelvantState's fall in the second category, but removing most of the boilerplate 
+   Staccatissimo-Lang RelvantState's fall in the second category, but removing most of the boilerplate 
    code needed by the Apache Commons Lang builders. It is indeed, built on top of them.  
    
 ** Example
 
   In the next examples we will compare first approach, second approach with Apache Commons Lang, 
- and second approach with Staccato-Commons-Lang. 
+ and second approach with Staccatissimo-Lang. 
 Third approach is not covered, as it implies an important performance penalty. 
 
  So let's implement a simple class for a Customer value object.    
@@ -189,7 +189,7 @@ class Customer {
 }
 +---  
 
-**  Using Staccato-Commons-Lang RelevantState
+**  Using Staccatissimo-Lang RelevantState
   
    The key concept behind of it is, instead of defining how to implement each equals/hashcode/compareTo/toString method, 
   defining only once which are the relevant fields of an object, which conform its state. Then, all such operations are delegated

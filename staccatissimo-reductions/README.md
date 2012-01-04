@@ -1,4 +1,4 @@
-#About Staccato-Commons-Reductions 
+#About Staccatissimo-Reductions 
  
- Staccato-Commons-Reductions is a library which provides abstract and concrete implementations of aggregate-functions 
+ Staccatissimo-Reductions is a library which provides abstract and concrete implementations of aggregate-functions 
  

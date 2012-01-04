@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -11,14 +11,14 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccato-Commons-Numbers 
+About Staccatissimo-Numbers 
  
- Staccato-Commons-Numbers is a library that implements the
+ Staccatissimo-Numbers is a library that implements the
  notion of NumberType defined in commons-defs  
  
 Getting Started
 
- Staccato-Commons-Numbers offers the following:
+ Staccatissimo-Numbers offers the following:
 
   * {{{./numbers-by-example.html}Numbers}} - compactly express BigInteger and BigDecimal literals, 
 

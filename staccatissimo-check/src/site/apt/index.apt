@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -11,13 +11,13 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccato-Commons-Check
+About Staccatissimo-Check
  
- Staccato-Commons-Check is the validation library of the {{{http://staccatocommons.sourceforge.net}Staccato-Commons project}}, 
+ Staccatissimo-Check is the validation library of the {{{http://staccatocommons.sourceforge.net}Staccatissimo project}}, 
  which allows to perform generic and domain-specific preconditions and postconditions checks. It is is designed 
  for being rich, easy to use and understand, flexible, extensible, and general purpose. 
   
- Please notice Staccato-Commons-Check is a validation API targeted for implementing fail-fast programming, like validation 
+ Please notice Staccatissimo-Check is a validation API targeted for implementing fail-fast programming, like validation 
 classes you can find in {{{http://commons.apache.org/lang/}Apache Commons Lang}}
 or {{{http://code.google.com/p/guava-libraries/}Guava}}. It is by no means a conversion and validation 
 API like {{{http://commons.apache.org/validator/}Apache Commons Validator}}    
@@ -25,7 +25,7 @@ API like {{{http://commons.apache.org/validator/}Apache Commons Validator}}
  
 Getting started
 
-  Staccato-Commons-Check resolves problems related with implementing preconditions and postconditions checks. 
+  Staccatissimo-Check resolves problems related with implementing preconditions and postconditions checks. 
   Descriptions of such problems, solutions and examples can be found in the following links:
  
  * {{{./docs/api-walkthrough.html}API Walkthrough}} 
@@ -37,8 +37,8 @@ What is next?
 
  * Navigate the {{{http://staccatocommons.sourceforge.net/commons-check/apidocs/index.html}API javadoc}}
  
- * Explore the rest of Staccato-Commons projects. They extensively use Staccato-Commons-Check
+ * Explore the rest of Staccatissimo projects. They extensively use Staccatissimo-Check
  
- * Have a look to the {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument/}Staccato-Commons-Restricions-Instrument}} API,
+ * Have a look to the {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument/}Staccatissimo-Restricions-Instrument}} API,
 which can instrument check annotations, by inserting at compile time calls to the Validation API previously described.      
 

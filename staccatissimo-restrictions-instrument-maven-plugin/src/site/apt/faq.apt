@@ -1,5 +1,5 @@
 ~~
-~~  Copyright (c) 2011, The Staccato-Commons Team
+~~  Copyright (c) 2010-2012, The StaccatoCommons Team
 ~~
 ~~  This program is free software; you can redistribute it and/or modify
 ~~  it under the terms of the GNU Lesser General Public License as published by
@@ -26,5 +26,5 @@ Frequently Asked Questions
 
  * Does this introduce runtime dependencies?
  
-  Yes, your code will need a runtime dependency on staccato-commons-check
+  Yes, your code will need a runtime dependency on Staccatissimo-check
   

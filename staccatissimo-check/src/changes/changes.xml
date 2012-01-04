@@ -1,4 +1,19 @@
-<!-- Copyright (c) 2011, The Staccato-Commons Team This program is free software; 
+<!--
+
+     Copyright (c) 2010-2012, The StaccatoCommons Team
+
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU Lesser General Public License as published by
+     the Free Software Foundation; version 3 of the License.
+
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU Lesser General Public License for more details.
+
+-->
+
+<!-- Copyright (c) 2011, The Staccatissimo Team This program is free software; 
 	you can redistribute it and/or modify it under the terms of the GNU Lesser 
 	General Public License as published by the Free Software Foundation; version 
 	3 of the License. This program is distributed in the hope that it will be 
@@ -10,7 +25,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
 	<properties>
-		<title>Staccato-Commons-Check Changes History</title>
+		<title>Staccatissimo-Check Changes History</title>
 		<author>flbulgarelli</author>
 	</properties>
 	<body>
