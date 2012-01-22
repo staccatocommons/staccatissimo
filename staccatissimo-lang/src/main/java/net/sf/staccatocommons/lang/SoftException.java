@@ -40,7 +40,7 @@ public class SoftException extends UnhandledException {
    * @param cause
    *          the wrapped exception.
    */
-  private SoftException(@NonNull Exception cause) {
+  private SoftException(@NonNull Throwable cause) {
     super(cause);
   }
 
@@ -55,7 +55,7 @@ public class SoftException extends UnhandledException {
    *         {@link SoftException} that wrapps it, otherwise.
    */
   @NonNull
-  public static RuntimeException soften(@NonNull Exception exception) {
+  public static RuntimeException soften(@NonNull Throwable exception) {
     if (exception instanceof RuntimeException)
       return (RuntimeException) exception;
     return new SoftException(exception);
