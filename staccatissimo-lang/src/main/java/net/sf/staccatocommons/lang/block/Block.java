@@ -26,7 +26,8 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * @param <T>
  */
-public abstract class Block<T> extends AbstractDelayable<T, Void> implements Executable<T>, NullSafeAware<Block<T>> {
+public abstract class Block<T> extends AbstractDelayable<T, Void> implements Executable<T>,
+  NullSafeAware<Block<T>> {
 
   /**
    * Executes this block. This implementation just invokes
@@ -38,20 +39,20 @@ public abstract class Block<T> extends AbstractDelayable<T, Void> implements Exe
   public void exec(@NonNull T argument) {
     try {
       softExec(argument);
-    } catch (Exception e) {
+    } catch (Throwable e) {
       throw SoftException.soften(e);
     }
   }
 
   /**
-   * Executes this block, potentially throwing a checked {@link Exception}
+   * Executes this block, potentially throwing a checked {@link Throwable}
    * 
    * @see #exec(Object)
    * 
    * @param argument
    * @throws Exception
    */
-  protected void softExec(T argument) throws Exception {}
+  protected void softExec(T argument) throws Throwable {}
 
   public Void apply(T arg) {
     exec(arg);

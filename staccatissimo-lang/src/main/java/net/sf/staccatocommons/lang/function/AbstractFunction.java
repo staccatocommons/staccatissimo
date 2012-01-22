@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.function;
 
 import net.sf.staccatocommons.defs.Applicable;
@@ -21,6 +20,7 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.predicate.Predicate;
+import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -29,9 +29,12 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  * @param <A>
+ *          function argument type
  * @param <B>
+ *          function return type
  */
-public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> implements Function<A, B> {
+public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> implements
+  Function<A, B> {
 
   @NonNull
   public <C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other) {
@@ -43,7 +46,8 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
   }
 
   @NonNull
-  public <Tp1, Tp2> Function2<Tp1, Tp2, B> of(@NonNull final Applicable2<Tp1, Tp2, ? extends A> other) {
+  public <Tp1, Tp2> Function2<Tp1, Tp2, B> of(
+    @NonNull final Applicable2<Tp1, Tp2, ? extends A> other) {
     return new AbstractFunction2<Tp1, Tp2, B>() {
       public B apply(Tp1 arg0, Tp2 arg1) {
         return AbstractFunction.this.apply(other.apply(arg0, arg1));
@@ -52,7 +56,8 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
   }
 
   @NonNull
-  public <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other) {
+  public <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(
+    @NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other) {
     return new AbstractFunction3<Tp1, Tp2, Tp3, B>() {
       public B apply(Tp1 arg0, Tp2 arg1, Tp3 arg2) {
         return AbstractFunction.this.apply(other.apply(arg0, arg1, arg2));
@@ -127,10 +132,39 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
   public String toString() {
     return "Function";
   }
-  
+
   @Override
   public boolean isIdentity() {
     return false;
+  }
+
+  /**
+   * {@link AbstractFunction} that handles exceptions by softening them using
+   * {@link SoftException#soften(Throwable)}
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <A>
+   *          function argument type
+   * @param <B>
+   *          function return type
+   */
+  public abstract static class Soft<A, B> extends AbstractFunction<A, B> {
+
+    public final B apply(A arg) {
+      try {
+        return softApply(arg);
+      } catch (Throwable e) {
+        throw SoftException.soften(e);
+      }
+    }
+
+    /**
+     * Applies this function, potentially throwing a checked exception
+     * 
+     * @see Function#apply(Object)
+     */
+    protected abstract B softApply(A arg) throws Throwable;
   }
 
 }

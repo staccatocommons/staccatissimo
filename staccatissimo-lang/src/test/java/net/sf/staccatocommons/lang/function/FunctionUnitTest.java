@@ -12,18 +12,25 @@
  */
 
 package net.sf.staccatocommons.lang.function;
+
 import static net.sf.staccatocommons.lang.internal.Add.*;
 import static org.junit.Assert.*;
+
+import java.io.IOException;
+
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.lang.Compare;
+import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
 import org.jmock.Expectations;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * @author flbulgarelli
@@ -31,11 +38,22 @@ import org.junit.Test;
  */
 public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
+  /***/
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
+
   private AbstractFunction<Integer, Long> f;
   private Thunk<Integer> g0;
   private Applicable<Character, Integer> g1;
   private Applicable2<Character, String, Integer> g2;
   private Applicable3<Character, String, Integer, Integer> g3;
+  private AbstractFunction<Integer, Integer> softF = new AbstractFunction.Soft<Integer, Integer>() {
+    protected Integer softApply(Integer arg) throws Throwable {
+      if (arg == 0)
+        return 0;
+      throw new IOException();
+    }
+  };
 
   /**
    * 
@@ -143,8 +161,6 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
     assertEquals((Integer) 2, add(1).nullSafe().apply(1));
   }
 
-
-
   /** Test for predicate composition */
   @Test
   public void testThenPredicate() throws Exception {
@@ -174,6 +190,19 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
 
     assertTrue(Functions.identity().null_().apply(null));
     assertFalse(Functions.identity().null_().apply(9));
+  }
+
+  /** test for {@link AbstractFunction.Soft} */
+  @Test
+  public void applyAnswersSoftApply() throws Exception {
+    assertEquals(0, (int) softF.apply(0));
+  }
+
+  /** test for {@link AbstractFunction.Soft} */
+  @Test
+  public void applySoftensExceptionsThrown() throws Exception {
+    thrown.expect(SoftException.class);
+    softF.apply(1);
   }
 
 }
