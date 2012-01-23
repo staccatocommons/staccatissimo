@@ -705,11 +705,13 @@ public abstract class AbstractStream<A> implements Stream<A> {
   @Override
   public final void print(java.lang.Appendable o) throws IOException {
     o.append('[');
-    Tuple2<A, Stream<A>> ht = decons();
-    printElement(o, ht._0());
-    for (A element : ht._1()) {
-      o.append(", ");
-      printElement(o, element);
+    if(!isEmpty()) {
+      Tuple2<A, Stream<A>> ht = decons();
+      printElement(o, ht._0());
+      for (A element : ht._1()) {
+        o.append(", ");
+        printElement(o, element);
+      }
     }
     o.append(']');
   }
