@@ -11,17 +11,22 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.predicate;
 
 import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
+import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
+ * 
+ * @param <A>
+ *          the type of the first argument
+ * @param <B>
+ *          the type of the second argument
  */
 public abstract class AbstractPredicate2<A, B> implements Predicate2<A, B> {
 
@@ -72,8 +77,7 @@ public abstract class AbstractPredicate2<A, B> implements Predicate2<A, B> {
   public Predicate2<A, B> nullSafe() {
     return new NullSafePredicate2();
   }
-  
-  
+
   public Predicate<Tuple2<A, B>> uncurry() {
     return new AbstractPredicate<Tuple2<A, B>>() {
       public boolean eval(Tuple2<A, B> argument) {
@@ -97,5 +101,34 @@ public abstract class AbstractPredicate2<A, B> implements Predicate2<A, B> {
     public Predicate2<A, B> nullSafe() {
       return this;
     }
+  }
+
+  /**
+   * {@link AbstractPredicate2} that handles exceptions by softening them using
+   * {@link SoftException#soften(Throwable)}
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <A>
+   *          the type of the first argument
+   * @param <B>
+   *          the type of the second argument
+   */
+  public abstract static class Soft<A, B> extends AbstractPredicate2<A, B> {
+
+    public final boolean eval(A arg0, B arg1) {
+      try {
+        return softEval(arg0, arg1);
+      } catch (Throwable e) {
+        throw SoftException.soften(e);
+      }
+    }
+
+    /**
+     * Evaluates this predicate, potentially throwing a checked exception
+     * 
+     * @see Predicate2#eval(Object, Object)
+     */
+    protected abstract boolean softEval(A arg, B arg1) throws Throwable;
   }
 }

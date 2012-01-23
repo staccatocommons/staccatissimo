@@ -17,6 +17,7 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.predicate.Predicate;
+import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -146,6 +147,33 @@ public abstract class AbstractPredicate<A> implements Predicate<A> {
 
   public String toString() {
     return "Predicate";
+  }
+
+  /**
+   * {@link AbstractPredicate} that handles exceptions by softening them using
+   * {@link SoftException#soften(Throwable)}
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <A>
+   *          predicate argument type
+   */
+  public abstract static class Soft<A> extends AbstractPredicate<A> {
+
+    public final boolean eval(A arg) {
+      try {
+        return softEval(arg);
+      } catch (Throwable e) {
+        throw SoftException.soften(e);
+      }
+    }
+
+    /**
+     * Evaluates this predicate, potentially throwing a checked exception
+     * 
+     * @see Predicate#eval(Object)
+     */
+    protected abstract boolean softEval(A arg) throws Throwable;
   }
 
 }

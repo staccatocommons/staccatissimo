@@ -95,5 +95,12 @@
                 Fixed AbstractNumberType.negate() 
             </action>
         </release>
+        <release version="2.0" date="TBD" description="SoftException">
+            <action dev="flbulgarelli" type="add">
+                AbstractFunctions.Soft
+            </action>
+        </release>
+        
+        
 	</body>
 </document>
