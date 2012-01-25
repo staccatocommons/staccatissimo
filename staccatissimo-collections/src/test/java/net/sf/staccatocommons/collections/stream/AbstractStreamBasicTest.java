@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream;
 
 import static net.sf.staccatocommons.lambda.Lambda.*;
@@ -477,5 +476,17 @@ public class AbstractStreamBasicTest {
     assertFalse(s.isEmpty());
     assertFalse(s.isEmpty());
 
+  }
+
+  /** test for {@link AbstractStream#printString()} */
+  @Test
+  public void printStingNotEmptyAnswersNonEmptyBracketString() {
+    assertEquals(Streams.cons(4, 5, 9).printString(), "[4, 5, 9]");
+  }
+
+  /** test for {@link AbstractStream#printString()} */
+  @Test
+  public void printStreamEmptyAnswersEmptyBracketString() {
+    assertEquals(Streams.empty().printString(), "[]");
   }
 }
