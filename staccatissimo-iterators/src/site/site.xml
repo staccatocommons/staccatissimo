@@ -16,9 +16,8 @@
 
 <project name="Staccatissimo-Iterators">
   <body>
-    <menu name="Commons-Iterators">
+    <menu name="Staccatissimo-Iterators">
       <item name="Introduction" href="index.html"/>
-      <item name="Maven Integration" href="maven-integration.html"/>
     </menu>    
     <menu ref="reports" inherit="top"/>
   </body>

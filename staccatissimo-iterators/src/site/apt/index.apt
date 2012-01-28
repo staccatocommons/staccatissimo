@@ -11,17 +11,13 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccatissimo-Iterators 
+Welcome to Staccatissimo-Iterators 
  
- Staccatissimo-Iterators is a small and lightweight library with few dependencies that implements many common  
-concrete iterators and iterator decorators, that are not tied to any collections API, and thriters, a lazier iterator model, 
-interoperable with existent Java Collections Framework Iterators  
-
-Getting Started
-
- * {{{./simple-iterators-by-example.html}Simple iterators by example}}
+  Here you will find {{{./apidocs/index.html}Javadoc}} and build reports. For documentation and code samples, 
+please visit {{{https://github.com/staccatocommons/staccatissimo/wiki}Staccatissimo Wiki}} 
  
- * {{{./thriters-by-example.html}Thriters by example}}  
+  
+ 
  
  
  

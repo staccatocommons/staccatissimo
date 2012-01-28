@@ -41,11 +41,11 @@
         href="http://staccatocommons.sourceforge.net/staccatissimo/staccatissimo-restrictions-instrument-maven-plugin/index.html"/>   
 </links>
     <menu name="Staccatissimo" inherit="top">
-      <item name="Introduction" href="staccatissimo/index.html"/>
+      <item name="Introduction" href="index.html"/>
       <item name="Browse Code" href="https://github.com/staccatocommons/staccatissimo"/>      
    </menu>    
    <menu name="StaccatoCommons" inherit="top">
-      <item name="Introduction" href="index.html"/>
+      <item name="Introduction" href="../index.html"/>
       <item name="Download" href="http://sourceforge.net/projects/staccatocommons/files"/>
       <item name="Browse Code" href="https://github.com/staccatocommons/"/>      
       <item name="General Information" href="http://sourceforge.net/projects/staccatocommons/"/>
