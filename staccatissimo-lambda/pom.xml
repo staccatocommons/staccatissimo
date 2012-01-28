@@ -10,19 +10,12 @@
 	<name>Staccatissimo-Lambda</name>
 	<version>2.1-SNAPSHOT</version>
 	<inceptionYear>2011</inceptionYear>
-	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<description>Lightweight library for instantiating functions and predicates
 	 in a DSL style, without using anonymous classes. 
 	 This project is aimed to simplify higher-order programming until Java adds 
 	 lambdas to its language
 	</description>
 	
-    <distributionManagement>
-        <site>
-            <id> ${distribution.site.id}</id>
-            <url>${distribution.site.url}/${project.artifactId}</url>
-        </site>
-    </distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.commons</groupId>

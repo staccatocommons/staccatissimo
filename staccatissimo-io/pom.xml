@@ -9,14 +9,6 @@
 	<artifactId>staccatissimo-io</artifactId>
 	<name>Staccatissimo-IO</name>
 	<version>2.1-SNAPSHOT</version>
-	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
-	<distributionManagement>
-		<site>
-			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}/${project.artifactId}</url>
-		</site>
-	</distributionManagement>
-	
 	<dependencies>
 		<dependency>
 			<groupId>commons-io</groupId>

@@ -9,15 +9,8 @@
 	<artifactId>staccatissimo-instrument</artifactId>
 	<version>2.1-SNAPSHOT</version>
 	<name>Staccatissimo-Instrument</name>
-	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	<inceptionYear>2010</inceptionYear>
 	
-	<distributionManagement>
-		<site>
-			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}/${project.artifactId}</url>
-		</site>
-	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>javassist</groupId>

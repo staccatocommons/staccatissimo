@@ -10,14 +10,7 @@
 	<name>Staccatissimo-Check</name>
 	<version>2.1-SNAPSHOT</version>
 	<inceptionYear>2010</inceptionYear>
-	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	
-	<distributionManagement>
-		<site>
-			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}/${project.artifactId}</url>
-		</site>
-	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.staccatocommons</groupId>

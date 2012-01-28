@@ -11,14 +11,6 @@
 	<name>Staccatissimo-Restrictions-Instrument-Maven-Plugin</name>
 	<packaging>maven-plugin</packaging>
 	<description>A Maven Mojo for instrummenting restrictions as part of the build process</description>
-	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
-	
-	<distributionManagement>
-		<site>
-			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}/${project.artifactId}</url>
-		</site>
-	</distributionManagement>
 	<issueManagement>
 		<system>SourceForge</system>
 		<url>http://sourceforge.net/tracker/?group_id=317949</url>

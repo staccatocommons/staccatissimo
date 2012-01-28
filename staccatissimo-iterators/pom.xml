@@ -9,7 +9,6 @@
 	<artifactId>staccatissimo-iterators</artifactId>
 	<version>2.1-SNAPSHOT</version>
 	<name>Staccatissimo-Iterators</name>
-	<url>http://staccatocommons.sourceforge.net/${project.artifactId}</url>
 	
 	<dependencies>
 		<dependency>
@@ -24,12 +23,6 @@
             <scope>test</scope>
         </dependency>
 	</dependencies>
-	<distributionManagement>
-		<site>
-			<id> ${distribution.site.id}</id>
-			<url>${distribution.site.url}/${project.artifactId}</url>
-		</site>
-	</distributionManagement>
 	<reporting>
 		<plugins>
 			<plugin>
