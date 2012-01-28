@@ -14,10 +14,11 @@
 
 -->
 
-<project name="Staccatissimo-Reductions">
+<project name="Staccatissimo-Utils">
   <body>
-    <menu name="Commons-Util">
+    <menu name="Staccatissmo-Util">
       <item name="Introduction" href="index.html"/>
+      <item name="Wiki" href="https://github.com/staccatocommons/staccatissimo/wiki/utils"/>
       <item name="Maven Integration" href="maven-integration.html"/>
     </menu>    
     <menu ref="reports" inherit="top"/>

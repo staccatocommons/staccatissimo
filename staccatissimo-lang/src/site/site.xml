@@ -16,9 +16,8 @@
 
 <project name="Staccatissimo-Lang">
   <body>
-    <menu name="Commons-Lang">
+    <menu name="Staccatissimo-Lang">
       <item name="Introduction" href="index.html"/>
-      <item name="Maven Integration" href="maven-integration.html"/>
     </menu>    
     <menu ref="reports" inherit="top"/>
   </body>

@@ -17,6 +17,8 @@ import static net.sf.staccatocommons.testing.junit.jmock.MiscMatchers.*;
 import static net.sf.staccatocommons.util.Range.*;
 import static org.junit.Assert.*;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Test;
 
 /**
@@ -29,6 +31,8 @@ public class RangeUnitTest {
   @Test
   public void testContains() {
     assertTrue(from("Hello", "World").contains("Java"));
+    assertTrue(Range.from(TimeUnit.SECONDS, TimeUnit.DAYS).contains(TimeUnit.HOURS));
+    assertFalse(from(5, 9).contains(10));
     assertFalse(from(5, 9).contains(10));
   }
 
@@ -46,7 +50,7 @@ public class RangeUnitTest {
   @Test
   public void testIncludes() {
     assertTrue(from(5, 900).includes(from(9, 65)));
-    assertFalse(from(9, 65).includes(from(5, 900)));
+    assertFalse(from(9L, 65L).includes(from(5L, 900L)));
     assertFalse(from(10, 400).includes(from(5, 900)));
   }
 

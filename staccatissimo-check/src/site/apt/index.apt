@@ -11,34 +11,7 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccatissimo-Check
- 
- Staccatissimo-Check is the validation library of the {{{http://staccatocommons.sourceforge.net}Staccatissimo project}}, 
- which allows to perform generic and domain-specific preconditions and postconditions checks. It is is designed 
- for being rich, easy to use and understand, flexible, extensible, and general purpose. 
-  
- Please notice Staccatissimo-Check is a validation API targeted for implementing fail-fast programming, like validation 
-classes you can find in {{{http://commons.apache.org/lang/}Apache Commons Lang}}
-or {{{http://code.google.com/p/guava-libraries/}Guava}}. It is by no means a conversion and validation 
-API like {{{http://commons.apache.org/validator/}Apache Commons Validator}}    
- 
- 
-Getting started
+Welcome to Staccatissimo-Check
 
-  Staccatissimo-Check resolves problems related with implementing preconditions and postconditions checks. 
-  Descriptions of such problems, solutions and examples can be found in the following links:
- 
- * {{{./docs/api-walkthrough.html}API Walkthrough}} 
- 
- * {{{./docs/check-by-example.html}Check by example}}
-  
-
-What is next?
-
- * Navigate the {{{http://staccatocommons.sourceforge.net/commons-check/apidocs/index.html}API javadoc}}
- 
- * Explore the rest of Staccatissimo projects. They extensively use Staccatissimo-Check
- 
- * Have a look to the {{{http://staccatocommons.sourceforge.net/commons-restrictions-instrument/}Staccatissimo-Restricions-Instrument}} API,
-which can instrument check annotations, by inserting at compile time calls to the Validation API previously described.      
-
+ Here you will find {{{./apidocs/index.html}Javadoc}} and build reports. For documentation and code samples, 
+please visit {{{https://github.com/staccatocommons/staccatissimo/wiki}Staccatissimo Wiki}} 

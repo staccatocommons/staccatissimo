@@ -11,21 +11,10 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccatissimo-Util 
+Welcome to Staccatissimo-Util 
  
- Staccatissimo-Util is the StaccatiCommons library that contains miscellaneous, non-core classes and functions
- that extend functionality of staccatissimo-lang
+  Here you will find {{{./apidocs/index.html}Javadoc}} and build reports. For documentation and code samples, 
+please visit {{{https://github.com/staccatocommons/staccatissimo/wiki}Staccatissimo Wiki}} 
  
-Getting Started
- 
-   * {{{./prioritized-by-example.html}Prioritized}} - Prioritizing elements in sorted collections
-  
-  * Range - Expressing a range of comparable objects 
-  
-  * Strings - String functions
- 
-
-  
-   
   
  

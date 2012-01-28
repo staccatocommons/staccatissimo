@@ -16,9 +16,8 @@
 
 <project name="Staccatissimo-Check">
   <body>
-    <menu name="Commons-Check">
+    <menu name="Staccatissimo-Check">
       <item name="Introduction" href="index.html"/>
-      <item name="Maven Integration" href="maven-integration.html"/>
     </menu>    
     <menu ref="reports" inherit="top"/>
   </body>

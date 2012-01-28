@@ -16,9 +16,8 @@
 
 <project name="Staccatissimo-Collections">
   <body>
-    <menu name="Commons-Collections">
+    <menu name="Staccatissimo-Collections">
       <item name="Introduction" href="index.html"/>
-      <item name="Maven Integration" href="maven-integration.html"/>
     </menu>    
     <menu ref="reports" inherit="top"/>
   </body>

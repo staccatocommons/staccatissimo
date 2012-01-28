@@ -16,7 +16,7 @@
 
 <project name="Staccatissimo-Defs">
   <body>
-    <menu name="Commons-Defs">
+    <menu name="Staccatissimo-Defs">
       <item name="Introduction" href="index.html"/>
       <item name="Maven Integration" href="maven-integration.html"/>
     </menu>    

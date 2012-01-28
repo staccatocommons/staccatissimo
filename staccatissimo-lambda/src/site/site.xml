@@ -16,9 +16,8 @@
 
 <project name="Staccatissimo-Lambda">
   <body>
-    <menu name="Commons-Lambda">
+    <menu name="Staccatissimo-Lambda">
       <item name="Introduction" href="index.html"/>
-      <item name="Maven Integration" href="maven-integration.html"/>
     </menu>    
     <menu ref="reports" inherit="top"/>
   </body>
