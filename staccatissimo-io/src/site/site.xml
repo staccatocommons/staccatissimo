@@ -16,9 +16,8 @@
 
 <project name="Staccatissimo-IO">
   <body>
-    <menu name="Commons-IO">
+    <menu name="Staccatissimo-IO">
       <item name="Introduction" href="index.html"/>
-      <item name="Maven Integration" href="maven-integration.html"/>
     </menu>    
     <menu ref="reports" inherit="top"/>
   </body>

@@ -11,14 +11,11 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccatissimo-IO
+Welcome to Staccatissimo-IO 
  
- Staccatissimo-IO is the IO library of the {{{http://staccatocommons.sourceforge.net}Staccatissimo project}}. It integrates the lang and collection library into the Java IO API, offering a bridge between FileFilter and predicates, Directories, IOStreams, object preferences and serialization managers
+  Here you will find {{{./apidocs/index.html}Javadoc}} and build reports. For documentation and code samples, 
+please visit {{{https://github.com/staccatocommons/staccatissimo/wiki}Staccatissimo Wiki}} 
  
+  
  
-Getting Started
-
- * Directory by example
- 
- * {{{./iostreams-by-example.html}IOStreams}} by example
  
