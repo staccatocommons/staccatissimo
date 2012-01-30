@@ -31,28 +31,6 @@ import net.sf.staccatocommons.restrictions.check.NotNegative;
 public interface Filterable<A> {
 
   /**
-   * Preserves elements that satisfy the given <code>predicate</code>
-   * 
-   * @param predicate
-   * @return a new {@link Stream} projection that will retrieve only elements
-   *         that evaluate to true
-   */
-  @Projection
-  Stream<A> filter(@NonNull Evaluable<? super A> predicate);
-
-  /**
-   * Preserves all elements but those that are equal to the given one.
-   * 
-   * Equivalent to {@code filter(Predicates.equal(element).not())}
-   * 
-   * @param element
-   * @return a {@link Stream} that retrieves all elements that are not equal to
-   *         the given one
-   */
-  @Projection
-  Stream<A> skip(@NonNull A element);
-
-  /**
    * Preserves all elements while they satisfy the given <code>predicate</code>
    * 
    * @param predicate

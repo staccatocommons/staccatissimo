@@ -17,6 +17,8 @@ import java.io.Serializable;
 
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.collections.restrictions.Repeatable;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.ProtoMonad;
 import net.sf.staccatocommons.defs.partial.ContainsAware;
@@ -131,5 +133,39 @@ public interface Stream<A> extends //
    * 
    */
   Stream<A> each(@NonNull Executable<? super A> block);
+
+  /**
+   * Transforms each element using the given function
+   * 
+   * @param <B>
+   * @param function
+   *          the mapper used to transform each element, applying it
+   * @return a new {@link Stream} projection that will retrieve the result of
+   *         applying the given function to each element
+   */
+  @Projection
+  <B> Stream<B> map(@NonNull Applicable<? super A, ? extends B> function);
+
+  /**
+   * Preserves elements that satisfy the given <code>predicate</code>
+   * 
+   * @param predicate
+   * @return a new {@link Stream} projection that will retrieve only elements
+   *         that evaluate to true
+   */
+  @Projection
+  Stream<A> filter(@NonNull Evaluable<? super A> predicate);
+
+  /**
+   * Preserves all elements but those that are equal to the given one.
+   * 
+   * Equivalent to {@code filter(Predicates.equal(element).not())}
+   * 
+   * @param element
+   * @return a {@link Stream} that retrieves all elements that are not equal to
+   *         the given one
+   */
+  @Projection
+  Stream<A> skip(@NonNull A element);
 
 }
