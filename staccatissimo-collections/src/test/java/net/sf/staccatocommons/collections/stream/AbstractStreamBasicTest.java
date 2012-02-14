@@ -32,6 +32,7 @@ import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
+import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
@@ -58,6 +59,15 @@ public class AbstractStreamBasicTest {
   @BeforeClass
   public static void before() {
     lambda($(Streams.type()).toList());
+  }
+
+  /**
+   * Test for {@link Stream#product(NumberType)}
+   */
+  @Test
+  public void foldWithMultilyIsProduct() throws Exception {
+    assertEquals(Streams.enumerate(2, 10).fold(1, integer().multiply()), //
+      Streams.enumerate(2, 10).product(integer()));
   }
 
   /** Test for sum */
