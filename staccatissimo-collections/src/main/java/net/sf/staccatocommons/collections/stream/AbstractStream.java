@@ -112,6 +112,10 @@ public abstract class AbstractStream<A> implements Stream<A> {
     return size;
   }
 
+  public int countOf(Evaluable<? super A> predicate) {
+    return Iterables.countOf(this, predicate);
+  }
+
   @Override
   public boolean isEmpty() {
     return iterator().isEmpty();

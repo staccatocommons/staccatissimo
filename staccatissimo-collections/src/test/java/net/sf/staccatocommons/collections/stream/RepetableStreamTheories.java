@@ -270,4 +270,11 @@ public abstract class RepetableStreamTheories extends StreamTheories {
   public <A> void reduceToListIsEquivalentToItself(Stream<A> stream) throws Exception {
     assertTrue(stream.equiv(stream.reduce(Reductions.<A> append())));
   }
+
+  /** Theory for countOf and filter */
+  @Theory
+  public <A> void countOfIsEquivalentToFilterAndSize(Stream<A> stream, Evaluable<A> predicate)
+    throws Exception {
+    assertEquals(stream.countOf(predicate), stream.filter(predicate).size());
+  }
 }

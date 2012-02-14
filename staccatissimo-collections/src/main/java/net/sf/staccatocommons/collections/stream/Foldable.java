@@ -17,6 +17,7 @@ import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.reduction.Reduction;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -117,5 +118,13 @@ public interface Foldable<A> {
    *           division
    */
   A average(@NonNull NumberType<A> numberType) throws NoSuchElementException;
+
+  /**
+   * Answers the number of element that satisfy the given predicate
+   * 
+   * @param predicate
+   * @return <code>filter(predicate).size()</code>
+   */
+  int countOf(Evaluable<? super A> predicate);
 
 }

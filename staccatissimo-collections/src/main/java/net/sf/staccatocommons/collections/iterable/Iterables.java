@@ -425,6 +425,20 @@ public class Iterables {
   }
 
   /**
+   * Answers the number of element that satisfy the given predicate
+   * 
+   * @param predicate
+   * @return <code>filter(predicate).size()</code>
+   */
+  public static <A> int countOf(@NonNull Iterable<A> iterable, Evaluable<? super A> predicate) {
+    int count = 0;
+    for (A element : iterable)
+      if (predicate.eval(element))
+        count++;
+    return count;
+  }
+
+  /**
    * Test that the elements of both iterables are equal, and in the same order.
    * 
    * @param <A>
