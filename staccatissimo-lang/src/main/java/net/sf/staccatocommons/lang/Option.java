@@ -20,7 +20,6 @@ import java.util.NoSuchElementException;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
-import net.sf.staccatocommons.defs.ProtoMonad;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.partial.ContainsAware;
 import net.sf.staccatocommons.defs.partial.SizeAware;
@@ -70,8 +69,8 @@ import net.sf.staccatocommons.restrictions.value.Value;
  */
 @Value
 @Conditionally({ Immutable.class, Serializable.class })
-public abstract class Option<A> implements Thunk<A>, Iterable<A>, SizeAware, ContainsAware<A>,
-  ProtoMonad<Option, A>, Serializable {
+public abstract class Option<A> extends AbstractProtoMonad<Option<A>, Option, A> implements
+  Thunk<A>, Iterable<A>, SizeAware, ContainsAware<A>, Serializable {
 
   private static final long serialVersionUID = -4635925023376621559L;
 

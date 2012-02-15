@@ -103,7 +103,7 @@ public interface Stream<A> extends //
   Mappable<A>, //
   Groupable<A>, //
   Printable<A>, //
-  ProtoMonad<Stream, A>, //
+  ProtoMonad<Stream<A>, Stream, A>, //
   Reversable<A>, //
   Searchable<A>, //
   SizeAware, //

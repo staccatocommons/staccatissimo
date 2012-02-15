@@ -72,6 +72,7 @@ import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.lang.AbstractProtoMonad;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
@@ -96,7 +97,8 @@ import org.apache.commons.lang.StringUtils;
  * 
  * @param <A>
  */
-public abstract class AbstractStream<A> implements Stream<A> {
+public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, Stream, A> implements
+  Stream<A> {
 
   protected static final Validate<NoSuchElementException> VALIDATE_ELEMENT = Validate
     .throwing(NoSuchElementException.class);
@@ -126,10 +128,6 @@ public abstract class AbstractStream<A> implements Stream<A> {
       block.exec(element);
   }
 
-  public Stream<A> each(final Executable<? super A> block) {
-    return map(Functions.impure(block));
-  }
-
   public boolean contains(A element) {
     return IterablesInternal.containsInternal(this, element);
   }
@@ -137,10 +135,6 @@ public abstract class AbstractStream<A> implements Stream<A> {
   @Override
   public Stream<A> filter(final Evaluable<? super A> predicate) {
     return Streams.from(new FilterIterator<A>(iterator(), predicate));
-  }
-
-  public Stream<A> skip(A element) {
-    return filter(Predicates.equal(element).not());
   }
 
   @Override
@@ -360,6 +354,10 @@ public abstract class AbstractStream<A> implements Stream<A> {
   public List<A> toList() {
     return Iterables.toList(this);
   }
+
+  // public List<A> toReverseList() {
+  // return reverse().toList();
+  // }
 
   @Override
   public Stream<A> force() {

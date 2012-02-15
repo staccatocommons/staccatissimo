@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.control.monad;
 
 import java.util.concurrent.Executor;
@@ -50,7 +49,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * @since 1.2
  */
-public interface Monad<A> extends Thunk<Void>, ProtoMonad<Monad, A>, Runnable {
+public interface Monad<A> extends Thunk<Void>, ProtoMonad<Monad<A>, Monad, A>, Runnable {
 
   /* ======== */
   /* =Monad= */

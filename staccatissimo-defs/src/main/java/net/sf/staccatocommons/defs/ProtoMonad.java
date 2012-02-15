@@ -22,11 +22,13 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * @author flbulgarelli
  * 
- * @param <ContainerType>
+ * @param <RawType>
  * @param <A>
  * @since 1.2
  */
-public interface ProtoMonad<ContainerType, A> {
+public interface ProtoMonad<Type, RawType, A> {
+
+  /* primitive ops */
 
   /**
    * Transforms each element using the given function
@@ -37,7 +39,7 @@ public interface ProtoMonad<ContainerType, A> {
    * @return a {@link ProtoMonad} that contains or computes the result of
    *         applying the given function to each element
    */
-  <B> ProtoMonad<ContainerType, B> map(Applicable<? super A, ? extends B> function);
+  <B> RawType map(Applicable<? super A, ? extends B> function);
 
   /**
    * Preserves elements that satisfy the given <code>predicate</code>
@@ -46,20 +48,7 @@ public interface ProtoMonad<ContainerType, A> {
    * @return a new {@link ProtoMonad} that will contain or compute only elements
    *         that evaluate to true
    */
-  ProtoMonad<ContainerType, A> filter(Evaluable<? super A> predicate);
-
-  /**
-   * Preserves all elements but those that are equal to the given one.
-   * 
-   * Equivalent to {@code filter(Predicates.equal(element).not())}
-   * 
-   * @param element
-   * @return a {@link ProtoMonad} that contains or computes elements that are
-   *         not equal to the given one
-   */
-  ProtoMonad<ContainerType, A> skip(@NonNull A element);
-
-  // TODO flatMap
+  Type filter(Evaluable<? super A> predicate);
 
   /**
    * Executes the given {@link Executable} for each element in this
@@ -70,5 +59,53 @@ public interface ProtoMonad<ContainerType, A> {
    * @param block
    */
   void forEach(@NonNull Executable<? super A> block);
+
+  /* extra ops */
+
+  /**
+   * Preserves all elements except those that are equal to the given one.
+   * 
+   * Equivalent to {@code filter(Predicates.equal(element).not())}
+   * 
+   * @param element
+   * @return a {@link ProtoMonad} that contains or computes elements that are
+   *         not equal to the given one
+   */
+  Type skip(@NonNull A element);
+
+  /**
+   * Preserves all elements except nulls
+   * 
+   * Equivalent to {@code filter(Predicates.notNull())}
+   * 
+   * @return a {@link ProtoMonad} that contains or computes elements that are
+   *         not null
+   */
+  Type skipNull();
+
+  /**
+   * Replaces all elements equal to the give one with the given
+   * {@code replacement}
+   * 
+   * @param element
+   *          the non null element to be replaced
+   * @param replacement
+   * @return a {@link ProtoMonad} that computes or contains the same elements
+   *         that this, except of those equal to the given {@code element}, that
+   *         are replaced by the given {@code replacement}
+   */
+  Type replace(@NonNull A element, A replacement);
+
+  /**
+   * Replaces all null elements with the given {@code replacement}
+   * 
+   * @param replacement
+   * @return a {@link ProtoMonad} that computes or contains the same elements
+   *         that this, except of those null, which are replaced by the given
+   *         {@code replacement}
+   */
+  Type replaceNull(A replacement);
+
+  Type each(@NonNull Executable<? super A> block);
 
 }

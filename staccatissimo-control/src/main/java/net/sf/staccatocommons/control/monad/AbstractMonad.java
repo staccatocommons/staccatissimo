@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.control.monad;
 
 import java.util.concurrent.Executor;
@@ -22,21 +21,18 @@ import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
+import net.sf.staccatocommons.lang.AbstractProtoMonad;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
-import net.sf.staccatocommons.lang.predicate.Predicates;
 
 /**
  * @author flbulgarelli
  * @since 1.2
  */
-public abstract class AbstractMonad<A> implements Monad<A> {
+public abstract class AbstractMonad<A> extends AbstractProtoMonad<Monad<A>, Monad, A> implements
+  Monad<A> {
 
   public final Monad<A> filter(final Evaluable<? super A> predicate) {
     return bind(Monads.filter(predicate));
-  }
-
-  public final Monad<A> skip(A element) {
-    return filter(Predicates.equal(element).not());
   }
 
   /* fmap f xs == xs >>= return . f */
@@ -44,7 +40,8 @@ public abstract class AbstractMonad<A> implements Monad<A> {
     return bind(Monads.map(function));
   }
 
-  public final <B> Monad<B> flatMap(final Applicable<? super A, ? extends Iterable<? extends B>> function) {
+  public final <B> Monad<B> flatMap(
+    final Applicable<? super A, ? extends Iterable<? extends B>> function) {
     return bind(new Applicable<A, Monad<B>>() {
       public Monad<B> apply(A arg) {
         return Monads.from(function.apply(arg));
