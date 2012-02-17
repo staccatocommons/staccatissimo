@@ -11,13 +11,11 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.internal;
-
-import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
+import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
 
@@ -46,6 +44,12 @@ public final class SingleStream<A> extends StrictStream<A> {
     return 1;
   }
 
+  public int countOf(Evaluable<? super A> predicate) {
+    if (predicate.eval(element))
+      return 1;
+    return 0;
+  }
+
   @Override
   public Stream<A> tail() {
     return Streams.empty();
@@ -55,7 +59,7 @@ public final class SingleStream<A> extends StrictStream<A> {
   public A get(int n) {
     if (n == 0)
       return element;
-    throw new NoSuchElementException("At " + n);
+    throw new IndexOutOfBoundsException("At " + n);
   }
 
   @Override
@@ -67,5 +71,4 @@ public final class SingleStream<A> extends StrictStream<A> {
   public boolean isEmpty() {
     return false;
   }
-
 }

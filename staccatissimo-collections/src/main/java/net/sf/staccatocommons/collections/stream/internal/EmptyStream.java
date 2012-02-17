@@ -14,6 +14,8 @@
 package net.sf.staccatocommons.collections.stream.internal;
 
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.iterators.EmptyThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.Constant;
@@ -50,6 +52,18 @@ public final class EmptyStream<A> extends StrictStream<A> {
   @Override
   public int size() {
     return 0;
+  }
+
+  public int countOf(Evaluable<? super A> predicate) {
+    return 0;
+  }
+
+  public Stream<A> filter(Evaluable<? super A> predicate) {
+    return empty();
+  }
+
+  public <B> Stream<B> map(Applicable<? super A, ? extends B> function) {
+    return empty();
   }
 
 }

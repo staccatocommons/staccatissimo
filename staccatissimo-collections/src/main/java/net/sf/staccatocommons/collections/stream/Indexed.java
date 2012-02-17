@@ -52,9 +52,12 @@ public interface Indexed<A> {
   A third();
 
   /**
+   * Answers element at n-th position.
    * 
    * @param n
    * @return the n-th element, zero based
+   * @throws IndexOutOfBoundsException
+   *           if stream has less than {@code n} elements
    */
   A get(int n);
 

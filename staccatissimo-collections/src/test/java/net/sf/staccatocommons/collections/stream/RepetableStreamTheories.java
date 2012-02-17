@@ -206,7 +206,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
    */
   @Theory
   @Test(expected = IndexOutOfBoundsException.class)
-  public void testGetNoSuchElement(Stream stream) {
+  public void testGetThrowsIndexOutOfBounds(Stream stream) {
     stream.get(stream.size());
   }
 
