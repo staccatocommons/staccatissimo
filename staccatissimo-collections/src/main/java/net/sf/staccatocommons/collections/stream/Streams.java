@@ -13,7 +13,6 @@
 
 package net.sf.staccatocommons.collections.stream;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.Enumeration;
@@ -22,6 +21,7 @@ import java.util.List;
 
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.collections.restrictions.Repeatable;
+import net.sf.staccatocommons.collections.stream.internal.ArrayStream;
 import net.sf.staccatocommons.collections.stream.internal.CharSequenceStream;
 import net.sf.staccatocommons.collections.stream.internal.CollectionStream;
 import net.sf.staccatocommons.collections.stream.internal.DequeStream;
@@ -114,7 +114,7 @@ public class Streams {
   @Repeatable
   @Projection
   public static <A> Stream<A> cons(@NonNull A... elements) {
-    return from(Arrays.asList(elements));
+    return new ArrayStream(elements);
   }
 
   /**
