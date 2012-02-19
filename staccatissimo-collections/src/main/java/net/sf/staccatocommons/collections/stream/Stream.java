@@ -13,18 +13,38 @@
 
 package net.sf.staccatocommons.collections.stream;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.Writer;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
+import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.collections.restrictions.Repeatable;
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Evaluable2;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.ProtoMonad;
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.defs.function.Function;
+import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.partial.ContainsAware;
 import net.sf.staccatocommons.defs.partial.SizeAware;
+import net.sf.staccatocommons.defs.reduction.Reduction;
+import net.sf.staccatocommons.defs.tuple.Tuple2;
+import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.lang.None;
+import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.check.NonNull;
+import net.sf.staccatocommons.restrictions.check.NotNegative;
 
 /**
  * A {@link Stream} is a lazy, rich-interfaced, {@link Iterable}, chained
@@ -71,7 +91,9 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * </li>
  * <li>Lazy projections: all of the - many - transformations exposed by streams
  * that are annotated as {@link Projection} are lazy. Such methods do also work
- * with very large o potentially infinte streams.</li>
+ * with very large o potentially infinte streams. Methods not annotated that way
+ * will <strong>not</strong> work on infinite streams, as they will never end
+ * normally</li>
  * </ol>
  * 
  * Concrete, simple streams, collection handling-oriented, may be instantiated
@@ -90,29 +112,17 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Stream<A> extends //
   Indexed<A>, //
-  Appendable<A>, //
-  Branchable<A>, //
-  Collectible<A>, //
   ContainsAware<A>, //
-  Crossable<A>, //
   Deconstructable<A>, //
-  Filterable<A>, //
-  Foldable<A>, //
-  Interscalable<A>, //
   Iterable<A>, //
-  Mappable<A>, //
-  Groupable<A>, //
-  Printable<A>, //
   ProtoMonad<Stream<A>, Stream, A>, //
-  Reversable<A>, //
-  Searchable<A>, //
-  SizeAware, //
-  Sortable<A>, //
-  Testeable<A>, //
-  Transformable<A>, //
-  Zippeable<A> {
+  SizeAware {
+
+  // Iterable
 
   Thriterator<A> iterator();
+
+  // ProtoMonad
 
   /**
    * Executes the given {@link Executable} block for each element.
@@ -167,5 +177,1056 @@ public interface Stream<A> extends //
    */
   @Projection
   Stream<A> skip(@NonNull A element);
+
+  // Specialized filtering
+
+  /**
+   * Preserves all elements while they satisfy the given <code>predicate</code>
+   * 
+   * @param predicate
+   * @return a new {@link Stream} projection that will retrieve all elements
+   *         from this stream, as long as none of them evaluates to false.
+   */
+  @Projection
+  Stream<A> takeWhile(@NonNull Evaluable<? super A> predicate);
+
+  /**
+   * Preserves up to N elements. It this Stream size is shorter than the given
+   * <code>amountOfElements</code>, the resulting stream will retrieve the same
+   * elements than this stream.
+   * 
+   * @param amountOfElements
+   * @return a new {@link Stream} projection that will retrieve up to N elements
+   */
+  @Projection
+  Stream<A> take(@NotNegative int amountOfElements);
+
+  /**
+   * Discards all elements while they satisfy the given <code>predicate</code>
+   * 
+   * @param predicate
+   * @return a new {@link Stream} projection that will skip all elements as long
+   *         as they satisfy the given {@link Evaluable}
+   */
+  @Projection
+  Stream<A> dropWhile(@NonNull Evaluable<? super A> predicate);
+
+  /**
+   * Discards up to N elements from this {@link Stream}. Is the Stream size is
+   * shorter than the given <code>amountOfElements</code>, the resulting stream
+   * will be empty.
+   * 
+   * @param amountOfElements
+   *          the amount of elements to discard
+   * @return a new {@link Stream} that discards up to the given
+   *         <code>amountOfElements</code>
+   */
+  @Projection
+  Stream<A> drop(@NotNegative int amountOfElements);
+
+  /***
+   * Splits stream elements into two lists using a predicate - elements that
+   * evaluate to true will be returned in the first component, the rest will be
+   * returned in the second component
+   * 
+   * @param predicate
+   * @return a new {@link Tuple2} that contains this stream partitioned into two
+   *         lists.
+   */
+  @NonNull
+  Tuple2<List<A>, List<A>> partition(@NonNull Evaluable<? super A> predicate);
+
+  /**
+   * Splits stream elements into two ordered streams, that support random
+   * access. This method just converts list returned by
+   * {@link #partition(Evaluable)} into Streams.
+   * 
+   * @param predicate
+   * @return a new {@link Tuple2} that contains this stream partitioned into two
+   *         other streams.
+   */
+  @NonNull
+  Tuple2<Stream<A>, Stream<A>> streamPartition(@NonNull Evaluable<? super A> predicate);
+
+  // Specialized Mapping
+
+  /**
+   * Transforms each element using the given function
+   * 
+   * @param <B>
+   * @param function
+   *          the mapper used to transform each element, applying it
+   * @return a new {@link Stream} projection that will retrieve the result of
+   *         applying the given function to each element
+   */
+  @Projection
+  <B> Stream<B> map(@NonNull Function<? super A, ? extends B> function);
+
+  // FlatMapping
+
+  /**
+   * Transformes each element into an iterable using the given function, and
+   * concatenates (flattens) the result
+   * 
+   * @param <B>
+   * @param function
+   * @return a new {@link Stream} that will retrieve the result of transforming
+   *         each element and concatenating those transformations
+   */
+  @Projection
+  <B> Stream<B> flatMap(@NonNull Function<? super A, ? extends Iterable<? extends B>> function);
+
+  /**
+   * Transformes each element into an array using the given function, and
+   * concatenates (flattens) the result
+   * 
+   * @param <B>
+   * @param function
+   * @return a new {@link Stream} that will retrieve the result of transforming
+   *         each element and concatenating those trsansformations
+   */
+  @Projection
+  <B> Stream<B> flatMapArray(@NonNull Function<? super A, ? extends B[]> function);
+
+  // Reversing
+
+  /**
+   * Reverses this Stream, by returning a new Stream that retrieves elements in
+   * the inverse order of this Stream.
+   * 
+   * This may not be a {@link Projection}, depending on if the stream's source
+   * permits it.
+   * 
+   * @return a new {@link Stream} that retrieves elements in the inverse order
+   *         of this stream.
+   */
+  @NonNull
+  Stream<A> reverse();
+
+  // Searching
+
+  /**
+   * Returns any element in this {@link Stream}.
+   * 
+   * Any does not mean a random element, but just any of all elements contained,
+   * without having it any particular interest over the rest. Most ordered or
+   * sorted implementations will just retrieve the first element.
+   * 
+   * @return any element contained by this {@link Stream}
+   * @throws NoSuchElementException
+   *           if this {@link Stream} has no elements.
+   */
+  A any();
+
+  /**
+   * Returns any element of the given {@link Stream}, just like {@link #any()},
+   * but as an option. If {@link Stream} has no elements, instead of throwing a
+   * {@link NoSuchElementException}, it returns {@link None}
+   * 
+   * @return <code>Option.some(element)</code> if there is at least one element,
+   *         or <code>Option.none()</code>, otherwise.
+   */
+  @NonNull
+  Option<A> anyOrNone();
+
+  /**
+   * Shorthand for <code>anyOrNone().valueOrNull()</code>
+   * 
+   * @return <code>anyOrNone().valueOrNull()</code>
+   */
+  A anyOrNull();
+
+  /**
+   * Shorthand for <code>anyOrNone().valueOrElse(thunk)</code>
+   * 
+   * @param thunk
+   * 
+   * @return <code>anyOrNone().valueOrElse(thunk)</code>
+   */
+  A anyOrElse(@NonNull Thunk<A> thunk);
+
+  /**
+   * Shorthand for <code>anyOrNone().valueOrElse(value)</code>
+   * 
+   * @param value
+   * @return <code>anyOrNone().valueOrElse(value)</code>
+   */
+  A anyOrElse(A value);
+
+  /**
+   * Looks for a element that satisfies the given {@link Evaluable}. If such
+   * element does not exist, throws {@link NoSuchElementException}
+   * 
+   * @param predicate
+   * @return the first elements that the predicate satisfies, if exists.
+   * @throws NoSuchElementException
+   *           if no element matches the predicate. As a particular case, this
+   *           method will throw it if {@link Stream} has not elements,
+   *           regardless of the predicate
+   */
+  A find(@NonNull Evaluable<? super A> predicate);
+
+  /**
+   * Looks for an element that satisfies the given {@link Evaluable}. If such
+   * element exists, returns <code>some(element)</code>. Otherwise, returns
+   * {@link None}.
+   * 
+   * @param predicate
+   * @return None if no element matches the predicate, or some(element) if at
+   *         least one exists. As a particular case, this method will return
+   *         {@link None} if {@link Stream} is empty, regardless of the given
+   *         predicate
+   */
+  @NonNull
+  Option<A> findOrNone(@NonNull Evaluable<? super A> predicate);
+
+  /**
+   * Looks for an element that satisfies the given {@link Evaluable}. If such
+   * element exists, returns it. Otherwise, returns null.
+   * 
+   * @param predicate
+   * @return null if no element matches the predicate, or an element that
+   *         satisfies it, if at least one exists. As a particular case, this
+   *         method will return null if {@link Stream} is empty, regardless of
+   *         the given predicate
+   */
+  A findOrNull(@NonNull Evaluable<? super A> predicate);
+
+  /**
+   * Looks for an element that satisfies the given {@link Evaluable}. If such
+   * element exists, returns it. Otherwise, returns the given thunk's value.
+   * 
+   * @param predicate
+   * @return <code>thunk.value()</code> if no element matches the predicate, or
+   *         an element that satisfies it, if at least one exists. As a
+   *         particular case, this method will return the thunk's value if
+   *         {@link Stream} is empty, regardless of the given predicate
+   */
+  A findOrElse(@NonNull Evaluable<? super A> predicate, @NonNull Thunk<? extends A> thunk);
+
+  /**
+   * Looks for an element that satisfies the given {@link Evaluable}. If such
+   * element exists, returns it. Otherwise, returns the given
+   * <code>element</code> .
+   * 
+   * @param predicate
+   * @return <code>findOrElse(predicate, Thunks.constant(element))</code>
+   */
+  A findOrElse(@NonNull Evaluable<? super A> predicate, @NonNull A element);
+
+  // Testing
+
+  /**
+   * Tests if all elements satisfy the given {@link Evaluable}
+   * 
+   * @param predicate
+   *          an {@link Evaluable} to evaluate each element
+   * @return if all the elements evaluate to true
+   */
+  boolean all(@NonNull Evaluable<? super A> predicate);
+
+  /**
+   * Tests if all elements are equal
+   * 
+   * @return if all the elements are equal
+   */
+  boolean allEquiv();
+
+  /**
+   * Tests if all elements are equivalent, using the given
+   * <code>equivTest</code>
+   * 
+   * @param equivTest
+   *          an {@link Evaluable2} used to testing if an element is equivalent
+   *          to another
+   * @return if all the elements are equal
+   */
+  boolean allEquivBy(Evaluable2<? super A, ? super A> equivTest);
+
+  /**
+   * Tests if at least one element satisfies the given {@link Evaluable}
+   * 
+   * @param predicate
+   *          an {@link Evaluable} to evaluate each element
+   * @return if any element evaluate to true
+   */
+  boolean any(@NonNull Evaluable<? super A> predicate);
+
+  /**
+   * Test that the elements of this stream are equal to the elements of the
+   * given array, and in the same order.
+   * 
+   * @param elements
+   * @return <code>true</code> if this stream has the same number of elements
+   *         that the given array, and each pair formed by elements of this
+   *         stream and the given array at same position are equal.
+   *         <code>false</code> otherwise
+   */
+  boolean equiv(A... elements);
+
+  /**
+   * Test that the elements of this stream are equal to the elements of the
+   * given {@link Iterable}, and in the same order.
+   * 
+   * @param iterable
+   * @return true if this stream has the same number of elements that the given
+   *         <code>iterable</code>, and each pair formed by elements of this
+   *         stream and given <code>iterable</code> at same position are equal.
+   *         <code>false</code> otherwise
+   */
+  boolean equiv(Iterable<? extends A> iterable);
+
+  /**
+   * Test that the elements of this stream are equivalent to the elements of the
+   * given {@link Iterable}, and in the same order, using the given
+   * <code>equalityTest</code> for determining equivalence between elements.
+   * 
+   * @param equalityTest
+   * @param iterable
+   * 
+   * @return <code>true</code> if this stream has the same number of elements
+   *         that the given <code>iterable</code>, and each pair formed by
+   *         elements of this stream and given <code>iterable</code> at same
+   *         position satisfies the given {@link Evaluable2}
+   */
+  boolean equivBy(@NonNull Evaluable2<? super A, ? super A> equalityTest, @NonNull Iterable<? extends A> iterable);
+
+  /**
+   * Test that the elements of this stream are equivalent to the given
+   * <code>elements</code>, and in the same order, using the given
+   * <code>equalityTest</code> for determining equivalence between elements.
+   * 
+   * @param equalityTest
+   * @param iterable
+   * 
+   * @return <code>true</code> if this stream has the same number of elements
+   *         that the given <code>elements</code>, and each pair formed by
+   *         elements of this stream and given <code>elements</code> at same
+   *         position satisfies the given {@link Evaluable2}
+   */
+  boolean equivBy(@NonNull Evaluable2<? super A, ? super A> equalityTest, A... elements);
+
+  /**
+   * Test that the elements of this stream are equivalent to the elements of the
+   * given {@link Iterable}, and in the same order, using the
+   * <code>Equiv.on(function)</code> for determining equivalence between
+   * elements.
+   * 
+   * @param function
+   * @param iterable
+   * 
+   * @return <code>true</code> if this stream has the same number of elements
+   *         that the given <code>iterable</code>, and each pair formed by
+   *         elements of this stream and given <code>iterable</code> at same
+   *         position satisfies the {@link Evaluable2}
+   *         <code>Equiv.on(function)</code>
+   */
+  <B> boolean equivOn(@NonNull Applicable<? super A, ? extends B> function, @NonNull Iterable<? extends A> iterable);
+
+  /**
+   * Test that the elements of this stream are equivalent to the given elements,
+   * and in the same order, using the <code>Equiv.on(function)</code> for
+   * determining equivalence between elements.
+   * 
+   * @param function
+   * @param iterable
+   * 
+   * @return <code>true</code> if this stream has the same number of elements
+   *         that the given <code>elements</code>, and each pair formed by
+   *         elements of this stream and the given <code>elements</code> at same
+   *         position satisfies the {@link Evaluable2}
+   *         <code>Equiv.on(function)</code>
+   */
+  <B> boolean equivOn(@NonNull Applicable<? super A, ? extends B> function, A... elements);
+
+  // Folding
+
+  /**
+   * (Left)folds this {@link Stream} using an initial value and the given
+   * two-arg function, producing a single aggregated result from all the Stream
+   * elements.
+   * 
+   * This consist of taking the initial value and a {@link Stream} element,
+   * applying the function to them, and then repeating the process with this
+   * result as the next initial value and the next element from the stream. The
+   * last returned value is the folding result.
+   * 
+   * @param <B>
+   * @param initial
+   * @param function
+   * @return the aggregates result
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">Folds</a>
+   */
+  <B> B fold(B initial, @NonNull Applicable2<? super B, ? super A, ? extends B> function);
+
+  /**
+   * (Left)folds the tail of this {@link Stream} using the first element of the
+   * stream as initial value, producing a single aggregated result from all the
+   * Stream elements.
+   * 
+   * @param function
+   * @return the folding result
+   * @throws NoSuchElementException
+   *           if the {@link Stream} is empty
+   * @see #fold(Object, Applicable2)
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">Folds</a>
+   * 
+   */
+  A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function) throws NoSuchElementException;
+
+  /**
+   * Answers the result of aggregating this stream using the given
+   * <code>reduction</code>
+   * 
+   * @param reduction
+   * @return the folding result
+   * @since 1.2
+   */
+  <B> B reduce(Reduction<? super A, B> reduction) throws NoSuchElementException;
+
+  /**
+   * (Left)folds this {@link Stream} concatenating each elements toString with a
+   * separator
+   * 
+   * @param separator
+   * @return the string representation of each element concatenated using a
+   *         separator
+   */
+  @NonNull
+  String joinStrings(@NonNull String separator);
+
+  /**
+   * Answers the sum of the elements of this {@link Stream} using the given
+   * {@link NumberType}
+   * 
+   * @param numberType
+   * @return the result of adding each element, or zero, if this stream is empty
+   * @see Iterables#sum(Iterable, NumberType)
+   */
+  @NonNull
+  A sum(@NonNull NumberType<A> numberType);
+
+  /**
+   * Answers the product of the elements of this {@link Stream} using the given
+   * {@link NumberType}
+   * 
+   * @param numberType
+   * @return the result of multiplying each element, or one, if this stream is
+   *         empty
+   * @see Iterables#product(Iterable, NumberType)
+   */
+  @NonNull
+  A product(@NonNull NumberType<A> numberType);
+
+  /**
+   * Answers the average of the stream elements, using the given
+   * {@link NumberType} for performing addition and division.
+   * 
+   * @param numberType
+   * @return the average of the stream elements
+   * @throws ArithmeticException
+   *           if the stream is empty and number type does not support zero
+   *           division
+   */
+  A average(@NonNull NumberType<A> numberType) throws NoSuchElementException;
+
+  /**
+   * Answers the number of element that satisfy the given predicate
+   * 
+   * @param predicate
+   * @return <code>filter(predicate).size()</code>
+   */
+  int countOf(Evaluable<? super A> predicate);
+
+  // Sorting
+
+  /**
+   * Sorts this Stream, using their element's natural ordering
+   * 
+   * @return a new {@link Stream}
+   */
+  @Projection
+  Stream<A> sort();
+
+  /**
+   * Sorts this Stream, using the given comparator
+   * 
+   * @param comparator
+   * @return a new {@link Stream}
+   */
+  @Projection
+  Stream<A> sortBy(@NonNull Comparator<A> comparator);
+
+  /**
+   * Sorts this Stream, using <code>Compare.on(function)</code> as comparator
+   * 
+   * @param <B>
+   * @param function
+   * @return a new {@link Stream}
+   */
+  @Projection
+  <B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function);
+
+  /**
+   * Answers the min element of the stream, using the given
+   * <code>comparator</code> to compare elements.
+   * 
+   * @param comparator
+   * @return the minimum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   */
+  @NonNull
+  A minimumBy(@NonNull Comparator<? super A> comparator) throws NoSuchElementException;
+
+  /**
+   * Answers the minimum element of the stream, using the given
+   * <code>Compare.on(function)</code> to compare elements.
+   * 
+   * @param function
+   * @return the minimum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   */
+  <B extends Comparable<B>> A minimumOn(@NonNull Applicable<? super A, B> function) throws NoSuchElementException;
+
+  /**
+   * Answers the minimum element of the stream, using elements natural order.
+   * 
+   * @return the minimum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   * @throws ClassCastException
+   *           if elements are not comparable
+   */
+  @NonNull
+  A minimum() throws ClassCastException, NoSuchElementException;
+
+  /**
+   * Answers the maximum element of the stream, using the given
+   * <code>comparator</code> to compare elements.
+   * 
+   * @param comparator
+   * @return the maximum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   */
+  @NonNull
+  A maximumBy(@NonNull Comparator<? super A> comparator) throws NoSuchElementException;
+
+  /**
+   * Answers the maximum element of the stream, using the given
+   * <code>Compare.on(function)</code> to compare elements.
+   * 
+   * @param function
+   * @return the maximum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   */
+  <B extends Comparable<B>> A maximumOn(@NonNull Applicable<? super A, B> function) throws NoSuchElementException;
+
+  /**
+   * Answers the maximum element of the stream, using elements natural order.
+   * 
+   * @return the maximum element.
+   * @throws NoSuchElementException
+   *           if the stream is empty.
+   * @throws ClassCastException
+   *           if elements are not comparable
+   */
+  @NonNull
+  A maximum() throws ClassCastException, NoSuchElementException;
+
+  // Appending
+
+  /**
+   * Concatenates <code>this</code> with <code>other</code>
+   * 
+   * It answers an {@link Stream} that retrieves elements from this Stream, and
+   * then, after its last element, from the given Stream.
+   * 
+   * As a particular case, if this Stream is infinite, the resulting Stream will
+   * retrieve the same elements than this one.
+   * 
+   * @param other
+   * @return a new {@link Stream}
+   */
+  @Projection
+  Stream<A> append(@NonNull Iterable<A> other);
+
+  /**
+   * Concatenates this Stream with the undefined Stream. Equivalent to
+   * <code>concat(Streams.undefined())</code>
+   * 
+   * @return a new {@link Stream}, {@link Repeatable} as long as {@code this} is
+   *         repeatable
+   * @see Streams#undefined()
+   */
+
+  @Projection
+  Stream<A> appendUndefined();
+
+  /**
+   * Adds an element as the last one of the stream.
+   * 
+   * @param element
+   * @return a new {@link Stream} that retrieves this {@link Stream} elements,
+   *         and then, the given <code>element</code>
+   */
+  @Projection
+  Stream<A> append(A element);
+
+  /**
+   * Adds an element's thunk as the last one of the stream.
+   * 
+   * @param thunk
+   * @return a new {@link Stream} that retrieves this {@link Stream} elements,
+   *         and then, the value of the given <code>thunk</code>
+   */
+  @Projection
+  Stream<A> append(@NonNull Thunk<A> thunk);
+
+  /**
+   * Adds an element as the first one of the stream.
+   * 
+   * @param element
+   * @return a new {@link Stream} that retrieves the given <code>element</code>,
+   *         and then, this {@link Stream} elements.
+   */
+  @Projection
+  Stream<A> prepend(A element);
+
+  /**
+   * Adds an element's thunk as the first one of the stream.
+   * 
+   * @param thunk
+   * @return a new {@link Stream} that retrieves the value of the given
+   *         <code>thunk</code>, and then, this {@link Stream} elements.
+   */
+  @Projection
+  Stream<A> prepend(@NonNull Thunk<A> thunk);
+
+  // Branching
+
+  /**
+   * Answers a stream that retrieves a tuple per each element, formed by the
+   * original element as the first component, and the result of applying the
+   * given function to it as the second component.
+   * <p>
+   * This message is equivalent to {@code map(Tuples.clone(function))}
+   * </p>
+   * 
+   * @param function
+   *          the function to apply to each element
+   * @return a new {@link Stream}
+   * @see Tuples#clone(Applicable)
+   * @since 1.2
+   */
+  @Projection
+  <B> Stream<Tuple2<A, B>> clone(Applicable<? super A, ? extends B> function);
+
+  /**
+   * Answers a Stream of pairs, where each one contains both results of applying
+   * the given functions. Equivalent to
+   * <code>this.map(Tuples.branch(function0, function1))</code>
+   * 
+   * @param <B>
+   * @param <C>
+   * @param function0
+   * @param function1
+   * @return a new {@link Stream}
+   * @since 1.2
+   * @see Tuples#branch(Applicable, Applicable)
+   */
+  @Projection
+  <B, C> Stream<Tuple2<B, C>> branch(Applicable<? super A, ? extends B> function0,
+    Applicable<? super A, ? extends C> function1);
+
+  // Zipping
+
+  /**
+   * Returns a {@link Stream} formed by the result of applying the given
+   * <code>function</code> to each pair of elements from <code>this</code> and
+   * the given <code>iterable</code>.
+   * 
+   * If any if either <code>this</code> or the given iterable is shorter than
+   * the other one, the remaining elements are discarded.
+   * 
+   * @param <B>
+   *          the type to the <code>iterable</code> to zip with this
+   *          {@link Stream}
+   * @param <C>
+   *          the resulting Stream element type
+   * @param iterable
+   *          the {@link Iterable} to zip with this Stream
+   * @param function
+   *          the function to apply to each pair
+   * @return a new Stream formed applying the given {@link Applicable2} to each
+   *         pair this Stream and the given iterable. The resulting Stream size
+   *         is the minimum of both iterables sizes, or infinite, if both this
+   *         and <code>iterable</code> are
+   * @see Iterables#zip(Iterable, Iterable)
+   */
+  @Projection
+  <B, C> Stream<C> zip(@NonNull Iterable<B> iterable, Function2<A, B, C> function);
+
+  /**
+   * Returns a {@link Stream} formed by by pair of element from
+   * <code>this</code> and the given <code>iterable</code>.
+   * 
+   * If any if either <code>this</code> or the given iterable is shorter than
+   * the other one, the remaining elements are discarded.
+   * 
+   * @param <B>
+   *          the type to the <code>iterable</code> to zip with this
+   *          {@link Stream}
+   * @param iterable
+   * @return a new Stream formed applying the given {@link Applicable2} to each
+   *         pair this Stream and the given iterable. The resulting Stream size
+   *         is the minimum of both iterables sizes, or infinite, if both this
+   *         and <code>iterable</code> are
+   * @see Iterables#zip(Iterable, Iterable)
+   * @see #zip(Iterable, Function2)
+   */
+  @Projection
+  <B> Stream<Tuple2<A, B>> zip(@NonNull Iterable<B> iterable);
+
+  // Printing
+
+  /**
+   * Prints the stream elements to an appendable, like {@link StringBuilder} or
+   * a {@link Writer}
+   * 
+   * @param destination
+   *          the appendable were print stream elements
+   * @throws IOException
+   *           if any io error occurs
+   */
+  void print(java.lang.Appendable destination) throws IOException;
+
+  /**
+   * Prints the stream elements to {@link System#out}
+   * 
+   * @throws IOException
+   *           if any io error occurs
+   */
+  void print();
+
+  /**
+   * Prints the stream elements to an appendable, like {@link StringBuilder} or
+   * a {@link Writer}, followed by a newline character
+   * 
+   * @param destination
+   *          the appendable were print stream elements
+   * @throws IOException
+   *           if any io error occurs
+   */
+  void println(java.lang.Appendable o) throws IOException;
+
+  /**
+   * Prints the stream elements to {@link System#out}, followed by a newline
+   * character
+   * 
+   * @throws IOException
+   *           if any io error occurs
+   */
+  void println();
+
+  /**
+   * Prints the stream elements to a string
+   * 
+   * @return a string with the stream elements
+   */
+  String printString();
+
+  // Copying
+
+  /**
+   * Converts this {@link Stream} into a Set, by adding all its elements to a
+   * new Set. The resulting Set is {@link Serializable} and non-lazy.
+   * 
+   * @return a new {@link Set} that contains all elements retrieved from this
+   *         {@link Stream}
+   */
+  @NonNull
+  Set<A> toSet();
+
+  /**
+   * * Converts this {@link Stream} into a List, by adding all its elements to a
+   * new List. The resulting List is {@link Serializable} and non-lazy.
+   * 
+   * @return a new {@link List} that contains all elements retrieved from this
+   *         {@link Stream}
+   */
+  @NonNull
+  List<A> toList();
+
+  /**
+   * Creates a new array that has the same elements that the retrived by this
+   * {@link Stream}
+   * 
+   * @param clazz
+   *          the array component class
+   * @return a new array
+   */
+  @NonNull
+  A[] toArray(@NonNull Class<? super A> clazz);
+
+  /**
+   * Memorizes stream elements and their order, by answering a lazy stream with
+   * {@link Repeatable} iteration order that caches elements evaluated during
+   * iteration.
+   * 
+   * @return a new {@link Stream} that memorizes elements evaluated during
+   *         iteration
+   */
+  @Repeatable
+  @Projection
+  Stream<A> memorize();
+
+  /**
+   * Forces stream elements evaluation by converting it into a new ordered
+   * stream one that is not lazy and that has repeatable iteration order.
+   * 
+   * @return a new {@link Stream} that retrieves elements from the next
+   *         iteration of this Stream.
+   */
+  @NonNull
+  @Repeatable
+  Stream<A> force();
+
+  // Interscalating
+
+  /**
+   * Inserts the given <code>element</code> between each retrieved element of
+   * this {@link Stream}
+   * 
+   * @param element
+   * @return a new {@link Stream}
+   */
+  @Projection
+  Stream<A> intersperse(A element);
+
+  /**
+   * Inserts after each element the result of applying the given function to it.
+   * For example:
+   * 
+   * <pre>
+   * Streams.cons(10, 9, 90).incorporate(integer().negate()).equiv(10, -10, 9, -9, 90, -90);
+   * </pre>
+   * 
+   * @param function
+   * @return a new {@link Stream}
+   * @since 1.2
+   */
+  @Projection
+  Stream<A> incorporate(@NonNull Function<? super A, ? extends A> function);
+
+  /**
+   * Inserts the given value after each element of the stream.
+   * 
+   * This message is similar to {@link #intersperse(Object)}, but inserts the
+   * value also at the end of the stream.
+   * 
+   * @param element
+   *          Example:
+   * 
+   *          <pre>
+   * Streams.cons('a', 'b', 'c').incorporate('d').equiv('a', 'd', 'b', 'd', 'c', 'd');
+   * </pre>
+   * 
+   * @return a new {@link Stream}
+   * @since 1.2
+   */
+  @Projection
+  Stream<A> incorporate(@NonNull A element);
+
+  // Grouping
+
+  /**
+   * Groups elements by the given {@code groupingFunction}, and reduces each
+   * group using the given {@code reduction}.
+   * <p>
+   * The grouping is performed so that two elements {@code a} and {@code b} will
+   * be put in the same group if and only if
+   * {@code  groupFunction.apply(a).equals(groupFunction.apply(b)) }
+   * </p>
+   * 
+   * @param <K>
+   * @param groupFunction
+   * @param reduction
+   * @return a Map with an entry for each group, where its key is the result of
+   *         the grouping function, and the value is the result of the reduction
+   *         of the elements for that group
+   */
+  @NonNull
+  <K, V> Map<K, V> groupOn(Applicable<? super A, K> groupFunction, Reduction<A, V> reduction);
+
+  // Cartesian product
+
+  /**
+   * Answers the Cartesian product of this stream and itself
+   * 
+   * @param other
+   * @return a new {@link Stream} projection
+   * @see Iterables#cross(Iterable, Iterable)
+   */
+  @Projection
+  Stream<Tuple2<A, A>> cross();
+
+  /**
+   * Answers the Cartesian product of this stream and the given one
+   * 
+   * @param <B>
+   * @param other
+   * @return a new {@link Stream} projection
+   * @see Iterables#cross(Iterable, Iterable)
+   */
+  @Projection
+  <B> Stream<Tuple2<A, B>> cross(@NonNull Stream<B> other);
+
+  /**
+   * Answers the cartesian product of this {@link Stream} and the given
+   * {@link Iterable}
+   * 
+   * @param <B>
+   * @param other
+   * @return <code>cross(Streams.from(other))</code>
+   * @see #cross(Stream)
+   */
+  @Projection
+  <B> Stream<Tuple2<A, B>> cross(@NonNull Iterable<B> other);
+
+  /**
+   * Answers the cartesian product of this {@link Stream} and each one of the
+   * given <code>streamOfStreams</code>
+   * 
+   * @param streamOfStreams
+   * @return a new {@link Stream} projection
+   */
+  @Projection
+  Stream<Stream<A>> crossStreams(@NonNull Stream<Stream<A>> streamOfStreams);
+
+  // Transforming whole stream
+
+  /**
+   * Lazily applies the given function to this {@link Stream}.
+   * 
+   * @param <B>
+   * @param function
+   *          the function to apply to this stream
+   * @return a new stream that will retrieve elements from the result of
+   *         applying the given function to this stream
+   */
+  @Projection
+  <B> Stream<B> transform(@NonNull Applicable<Stream<A>, ? extends Stream<B>> function);
+
+  /**
+   * Lazily applies the given <code>function</code> to this stream,
+   * deconstructing this stream into head and tail, or into an empty stream.
+   * 
+   * Unlike {@link Stream#transform(Applicable)}, whose function will receive
+   * the whole stream, the given {@link DeconsApplicable}, when applied, will
+   * take the head and tail of this {@link Stream}, if non empty, or no
+   * arguments, if the stream is empty.
+   * 
+   * @param <B>
+   * @param function
+   * @return a new stream that will retrieve elements from the result of
+   *         applying the given function to this stream
+   * @see #decons()
+   */
+  @Projection
+  <B> Stream<B> transform(@NonNull DeconsApplicable<A, B> function);
+
+  /**
+   * Lazily applies the given <code>function</code> to this stream,
+   * deconstructing this stream into a head thunk and tail, or into an empty
+   * stream.
+   * 
+   * Unlike {@link Stream#transform(Applicable)}, whose function will receive
+   * the whole stream, the given {@link DeconsApplicable}, when applied, will
+   * take a head's thunk and tail of this {@link Stream}, if non empty, or no
+   * arguments, if the stream is empty.
+   * 
+   * @param <B>
+   * @param function
+   * @return a new stream that will retrieve elements from the result of
+   *         applying the given function to this stream
+   * @see #delayedDecons()
+   */
+  @Projection
+  <B> Stream<B> transform(@NonNull DelayedDeconsApplicable<A, B> function);
+
+  /**
+   * @author flbulgarelli
+   * @param <A>
+   */
+  public interface EmptyApplicable<A> {
+    /**
+     * Applies this transformation when this Stream can not be deconstructed in
+     * head and tail, because it is empty.
+     * 
+     * @return the result of applying this transformation over and empty
+     *         {@link Stream}
+     */
+    A emptyApply();
+  }
+
+  /**
+   * An {@link Applicable2} that can transform a {@link Stream} by
+   * deconstructing it into head and tail, or into an empty stream.
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <A>
+   *          input stream type
+   * @param <B>
+   *          output stream type
+   */
+  public interface DeconsApplicable<A, B> extends Applicable2<A, Stream<A>, Stream<B>>, EmptyApplicable<Stream<B>> {
+
+    /**
+     * Applies this transformation to a non empty Stream splitted into tail and
+     * head.
+     * 
+     * Independently of the original stream source, the tail Stream is always
+     * non-repeatable.
+     * 
+     * {@link Stream}s will send this message when evaluating
+     * {@link Stream#transform(DeconsApplicable)}
+     */
+    Stream<B> apply(A head, Stream<A> tail);
+  }
+
+  /**
+   * An {@link Applicable2} that can transform a {@link Stream} by
+   * deconstructing it into head thunk and tail, or into an empty stream.
+   * 
+   * @author flbulgarelli
+   * 
+   * @param <A>
+   *          input stream type
+   * @param <B>
+   *          output stream type
+   */
+  public interface DelayedDeconsApplicable<A, B> extends Applicable2<Thunk<A>, Stream<A>, Stream<B>>,
+    EmptyApplicable<Stream<B>> {
+
+    /**
+     * Applies this transformation to a non empty Stream splitted into tail and
+     * head's thunk.
+     * 
+     * Independently of the original stream source, the tail Stream is always
+     * non-repeatable.
+     * 
+     * {@link Stream}s will send this message when evaluating
+     * {@link Stream#transform(DeconsApplicable)}
+     */
+    Stream<B> apply(Thunk<A> head, Stream<A> tail);
+
+  }
 
 }

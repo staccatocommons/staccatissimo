@@ -108,7 +108,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
    */
   @Theory
   @Test(expected = NoSuchElementException.class)
-  public void findFailsForFalsePredicate(Searchable stream) {
+  public void findFailsForFalsePredicate(Stream stream) {
     stream.find(Predicates.false_());
   }
 
