@@ -80,6 +80,7 @@ public interface ProtoMonad<Type, RawType, A> {
    * 
    * @return a {@link ProtoMonad} that contains or computes elements that are
    *         not null
+   * @since 2.1
    */
   Type skipNull();
 
@@ -93,6 +94,7 @@ public interface ProtoMonad<Type, RawType, A> {
    * @return a {@link ProtoMonad} that computes or contains the same elements
    *         that this, except of those equal to the given {@code element}, that
    *         are replaced by the given {@code replacement}
+   * @since 2.1
    */
   Type replace(@NonNull A element, A replacement);
 
@@ -103,6 +105,7 @@ public interface ProtoMonad<Type, RawType, A> {
    * @return a {@link ProtoMonad} that computes or contains the same elements
    *         that this, except of those null, which are replaced by the given
    *         {@code replacement}
+   * @since 2.1
    */
   Type replaceNull(A replacement);
 

@@ -124,6 +124,7 @@ public interface Foldable<A> {
    * 
    * @param predicate
    * @return <code>filter(predicate).size()</code>
+   * @since 2.1 
    */
   int countOf(Evaluable<? super A> predicate);
 

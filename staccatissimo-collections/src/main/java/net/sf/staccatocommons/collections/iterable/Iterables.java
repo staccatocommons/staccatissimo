@@ -429,6 +429,7 @@ public class Iterables {
    * 
    * @param predicate
    * @return <code>filter(predicate).size()</code>
+   * @since 2.1
    */
   public static <A> int countOf(@NonNull Iterable<A> iterable, Evaluable<? super A> predicate) {
     int count = 0;

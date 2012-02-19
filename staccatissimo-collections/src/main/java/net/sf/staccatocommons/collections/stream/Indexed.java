@@ -79,6 +79,7 @@ public interface Indexed<A> {
    * @param predicate
    * @return the index of the first element that evaluates the {@code predicate}
    *         to true, or -1, if no element satisfies it
+   * @since 2.1
    */
   int findIndex(Evaluable<? super A> predicate);
 
@@ -89,6 +90,7 @@ public interface Indexed<A> {
    * @param predicate
    * @return a {@link Stream} with the indices of the elements that satisfy the
    *         given predicate
+   * @since 2.1
    */
   @Projection
   Stream<Integer> indices(Evaluable<? super A> predicate);
@@ -117,6 +119,7 @@ public interface Indexed<A> {
    * @return the index of the first element that evaluates the {@code predicate}
    * @throws NoSuchElementException
    *           if no elements satisfies the given {@code predicate}
+   * @since 2.1
    */
   int findPosition(Evaluable<? super A> predicate);
 
