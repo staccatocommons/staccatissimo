@@ -14,9 +14,11 @@
 package net.sf.staccatocommons.collections.stream;
 
 import static net.sf.staccatocommons.lambda.Lambda.*;
+import static net.sf.staccatocommons.lang.Compare.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static net.sf.staccatocommons.numbers.NumberTypes.*;
 import static net.sf.staccatocommons.numbers.Numbers.*;
+import static net.sf.staccatocommons.util.Strings.*;
 import static org.junit.Assert.*;
 
 import java.math.BigInteger;
@@ -27,6 +29,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.collections.Lists;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
@@ -38,6 +41,7 @@ import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.reductions.Reductions;
+import net.sf.staccatocommons.util.Strings;
 
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -166,6 +170,28 @@ public class AbstractStreamBasicTest {
     assertEquals(3, Streams.from(Arrays.asList(12, 69, null, 1).iterator()).indexOf(1));
     assertEquals(0, Streams.cons(10, 90).indexOf(10));
     assertEquals(-1, Streams.cons(10, 90).indexOf(87));
+  }
+
+  /** Test for {@link Stream#findIndex(Evaluable)} */
+  @Test
+  public void testFindIndex() throws Exception {
+    assertEquals(1, Streams.cons("hello", "world").findIndex(Strings.startsWith("wo")));
+    assertEquals(-1, Streams.cons("hello", "world").findIndex(Strings.startsWith("foo")));
+    assertEquals(0, Streams.cons("hello", "world").findPosition(Strings.startsWith("he")));
+  }
+
+  /** Test for {@link Stream#findIndex(Evaluable)} */
+  @Test(expected = NoSuchElementException.class)
+  public void findPositionThrowsNoSuchElementException() throws Exception {
+    Streams.cons("hello", "world").findPosition(Strings.startsWith("foo"));
+  }
+
+  /** Test for {@link Stream#indices(Evaluable)} */
+  @Test
+  public void indieces() throws Exception {
+    assertEquals(
+      Lists.from(2, 3),
+      Streams.cons("hello", "world", "foo", "bar").indices(lessThan(4).of(length())).toList());
   }
 
   /** Tets for positionOf */

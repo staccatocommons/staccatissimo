@@ -37,9 +37,11 @@ import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.collections.internal.iterator.DropIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIterator;
+import net.sf.staccatocommons.collections.internal.iterator.IndicesIterator;
 import net.sf.staccatocommons.collections.internal.iterator.TakeWhileIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
+import net.sf.staccatocommons.collections.stream.internal.IteratorStream;
 import net.sf.staccatocommons.collections.stream.internal.ListStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.AppendIterableStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.AppendStream;
@@ -330,6 +332,27 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   @Override
   public int indexOf(A element) {
     return Iterables.indexOf(this, element);
+  }
+
+  public int findIndex(Evaluable<? super A> predicate) {
+    int i = 0;
+    for (A element : this) {
+      if (predicate.eval(element))
+        return i;
+      i++;
+    }
+    return -1;
+  }
+
+  public Stream<Integer> indices(Evaluable<? super A> predicate) {
+    return new IteratorStream<Integer>(new IndicesIterator<A>(iterator(), predicate));
+  }
+
+  public int findPosition(Evaluable<? super A> predicate) {
+    int index = findIndex(predicate);
+    if (index == -1)
+      throw new NoSuchElementException();
+    return index;
   }
 
   @Override

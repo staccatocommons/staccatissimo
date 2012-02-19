@@ -67,10 +67,31 @@ public interface Indexed<A> {
    * Answers the zero-based index of the given element
    * 
    * @param element
-   * @return the index of the element, or -1, if it is not contained by this
-   *         stream
+   * @return the index of the element first element equal to {@code element}, or
+   *         -1, if it is not contained by this stream
    */
   int indexOf(A element);
+
+  /**
+   * Answers the zero-based index of first element that matches the given
+   * predicate
+   * 
+   * @param predicate
+   * @return the index of the first element that evaluates the {@code predicate}
+   *         to true, or -1, if no element satisfies it
+   */
+  int findIndex(Evaluable<? super A> predicate);
+
+  /**
+   * Answers a stream containing all the zero-based indices of the elements that
+   * matches the given predicate
+   * 
+   * @param predicate
+   * @return a {@link Stream} with the indices of the elements that satisfy the
+   *         given predicate
+   */
+  @Projection
+  Stream<Integer> indices(Evaluable<? super A> predicate);
 
   /**
    * Answers the index of the given <strong>present</strong> element. This
@@ -84,6 +105,20 @@ public interface Indexed<A> {
    *           if the element is no contained by this {@link Stream}
    */
   int positionOf(A element);
+
+  /**
+   * Answers the zero-based index of first, <strong>present</strong> element
+   * that matches the given predicate. This method behaves exactly like
+   * {@link #findIndex(Evaluable)}, with the only difference that it will throw
+   * a {@link NoSuchElementException} if the given element is not present on the
+   * stream
+   * 
+   * @param predicate
+   * @return the index of the first element that evaluates the {@code predicate}
+   * @throws NoSuchElementException
+   *           if no elements satisfies the given {@code predicate}
+   */
+  int findPosition(Evaluable<? super A> predicate);
 
   /**
    * Answers if both arguments are contained by this stream, and the first one
