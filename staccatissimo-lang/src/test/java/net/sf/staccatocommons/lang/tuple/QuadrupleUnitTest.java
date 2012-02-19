@@ -64,7 +64,7 @@ public class QuadrupleUnitTest extends TupleAbstractUnitTest {
 
   @Override
   public void testToString() throws Exception {
-    assertEquals("(90,6,5,9)", _(90, 6, 5, 9).toString());
+    assertEquals("(90, 6, 5, 9)", _(90, 6, 5, 9).toString());
   }
 
   @Override

@@ -13,6 +13,7 @@
 
 package net.sf.staccatocommons.lang.value;
 
+import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 import static org.junit.Assert.*;
 
 import javax.xml.ws.Holder;
@@ -37,8 +38,16 @@ public class NamedTupleToStringStyleTest {
    * @throws Exception
    */
   @Test
-  public void testStyle() throws Exception {    
-    assertEquals("Holder(hello)", ToStringBuilder.reflectionToString(new Holder<String>("hello"), new NamedTupleToStringStyle()));
+  public void testStyleWithOneAttribute() throws Exception {
+    assertEquals(
+      "Holder(hello)",
+      ToStringBuilder.reflectionToString(new Holder<String>("hello"), new NamedTupleToStringStyle()));
+  }
+
+  /***/
+  @Test
+  public void testStyleWithTwoAttributes() throws Exception {
+    assertEquals("Pair(10, 30)", ToStringBuilder.reflectionToString(_(10, 30), new NamedTupleToStringStyle()));
   }
 
 }

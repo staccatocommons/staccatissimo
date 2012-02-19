@@ -53,6 +53,7 @@ public class NamedTupleToStringStyle extends ToStringStyle {
     setUseShortClassName(true);
     setContentStart("(");
     setContentEnd(")");
+    setFieldSeparator(", ");
     setNullText("null");
   }
 

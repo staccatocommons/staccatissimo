@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lang.value;
 
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
@@ -89,7 +88,7 @@ public class RelevantStateUnitTest {
   /** Test for {@link RelevantState#toString(Object)} **/
   @Test
   public void testToString() throws Exception {
-    assertEquals("Triple(1,2,hello)", val.toString(_(1, 2, "hello")));
+    assertEquals("Triple(1, 2, hello)", val.toString(_(1, 2, "hello")));
   }
 
   /** Test for primitive variants of {@link StateCollector#add(Object)} **/
@@ -104,6 +103,6 @@ public class RelevantStateUnitTest {
     assertTrue(rs.eval(_(10, true, 5L), _(10, true, 5L)));
     assertTrue(rs.compareTo(_(10, true, 5L), _(10, true, 5L)) == 0);
     assertEquals(rs.hashCode(_(10, true, 5L)), rs.hashCode(_(10, true, 5L)));
-    assertEquals("Triple(10,true,5)", rs.toString(_(10, true, 5L)));
+    assertEquals("Triple(10, true, 5)", rs.toString(_(10, true, 5L)));
   }
 }
