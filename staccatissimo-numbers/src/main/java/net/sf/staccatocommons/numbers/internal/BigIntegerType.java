@@ -15,13 +15,13 @@ package net.sf.staccatocommons.numbers.internal;
 
 import java.math.BigInteger;
 
-import net.sf.staccatocommons.numbers.AbstractNumberType;
+import net.sf.staccatocommons.numbers.AbstractIntegralType;
 
 /**
  * @author flbulgarelli
  * 
  */
-public final class BigIntegerType extends AbstractNumberType<BigInteger> {
+public final class BigIntegerType extends AbstractIntegralType<BigInteger> {
 
   private static final long serialVersionUID = 8595141753229390523L;
   /**
@@ -51,6 +51,14 @@ public final class BigIntegerType extends AbstractNumberType<BigInteger> {
 
   public BigInteger one() {
     return BigInteger.ONE;
+  }
+
+  public BigInteger remainder(BigInteger n1, BigInteger n2) {
+    return n1.remainder(n2);
+  }
+
+  public BigInteger fromInt(int ordinal) {
+    return BigInteger.valueOf(ordinal);
   }
 
 }

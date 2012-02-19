@@ -59,4 +59,8 @@ public final class FloatType extends AbstractNumberType<Float> {
   public Float decrement(Float n) {
     return n - 1;
   }
+
+  public Float fromInt(int ordinal) {
+    return Float.valueOf(ordinal);
+  }
 }

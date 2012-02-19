@@ -11,12 +11,12 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.numbers;
 
 import static net.sf.staccatocommons.numbers.NumberTypes.*;
 import static net.sf.staccatocommons.numbers.Numbers.*;
 import static org.junit.Assert.*;
+import net.sf.staccatocommons.defs.type.IntegralType;
 import net.sf.staccatocommons.defs.type.NumberType;
 
 import org.junit.Test;
@@ -35,8 +35,14 @@ public class NumberTypesUnitTest {
 
   /***/
   @DataPoints
-  public static final NumberType<?>[] TYPES = new NumberType[] {//
-  integer(), bigInteger(), bigDecimal(), float_(), double_(), long_() };
+  public static final NumberType<?>[] TYPES = new NumberType[] { bigDecimal(), float_(), double_() };
+  /***/
+  @DataPoints
+  public static final IntegralType<?>[] INTEGRAL_TYPES = { integer(), bigInteger(), long_() };
+
+  /***/
+  @DataPoints
+  public static final int[] ORDINALS = { -4, -3, 0, 1, 8 };
 
   /**
    * Test method for {@link NumberTypes#bigDecimal()}.
@@ -177,10 +183,24 @@ public class NumberTypesUnitTest {
     assertTrue(nt.isNegative(nt.negate(nt.one())));
   }
 
-  
   /** Test for function composition */
   @Test
   public void testThenFunction() throws Exception {
     assertEquals(e(101, -1), bigDecimal().inverse().then(add(d(10))).apply(d(10)));
   }
+
+  /** Test even/odd */
+  @Theory
+  public <A> void testEvenIsNotOdd(IntegralType<A> it, int ordinal) throws Exception {
+    A value = it.fromInt(ordinal);
+    assertEquals(it.isOdd(value), !it.isEven(value));
+  }
+
+  /** Test even/odd */
+  @Theory
+  public <A> void testEvenIsRem2(IntegralType<A> it, int ordinal) throws Exception {
+    A value = it.fromInt(ordinal);
+    assertEquals(it.isEven(value), it.remainder(value, it.fromInt(2)).equals(it.zero()));
+  }
+
 }

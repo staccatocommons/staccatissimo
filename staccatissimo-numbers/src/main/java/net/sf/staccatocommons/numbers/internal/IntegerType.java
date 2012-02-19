@@ -15,13 +15,13 @@ package net.sf.staccatocommons.numbers.internal;
 
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.lang.internal.Add;
-import net.sf.staccatocommons.numbers.AbstractNumberType;
+import net.sf.staccatocommons.numbers.AbstractIntegralType;
 
 /**
  * @author flbulgarelli
  * 
  */
-public final class IntegerType extends AbstractNumberType<Integer> {
+public final class IntegerType extends AbstractIntegralType<Integer> {
 
   private static final long serialVersionUID = 6962808802837682697L;
   /**
@@ -60,9 +60,22 @@ public final class IntegerType extends AbstractNumberType<Integer> {
   public Integer decrement(Integer n) {
     return n - 1;
   }
-  
+
   @Override
   public Function<Integer, Integer> add(Integer n) {
-   return new Add(n);
+    return new Add(n);
   }
+
+  public boolean isEven(Integer n) {
+    return n % 2 == 0;
+  }
+
+  public Integer remainder(Integer n1, Integer n2) {
+    return n1 % n2;
+  }
+
+  public Integer fromInt(int ordinal) {
+    return ordinal;
+  }
+
 }

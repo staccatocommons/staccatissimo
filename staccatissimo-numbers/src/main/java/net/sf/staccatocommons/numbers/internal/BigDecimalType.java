@@ -53,4 +53,8 @@ public final class BigDecimalType extends AbstractNumberType<BigDecimal> {
     return BigDecimal.ONE;
   }
 
+  public BigDecimal fromInt(int ordinal) {
+    return BigDecimal.valueOf(ordinal);
+  }
+
 }

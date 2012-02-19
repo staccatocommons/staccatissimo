@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import net.sf.staccatocommons.defs.function.Function;
+import net.sf.staccatocommons.defs.type.IntegralType;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.numbers.internal.BigDecimalType;
 import net.sf.staccatocommons.numbers.internal.BigIntegerType;
@@ -72,7 +73,7 @@ public class NumberTypes {
    * @return a {@link BigInteger} numberType
    */
   @Constant
-  public static NumberType<BigInteger> bigInteger() {
+  public static IntegralType<BigInteger> bigInteger() {
     return BigIntegerType.TYPE;
   }
 
@@ -102,7 +103,7 @@ public class NumberTypes {
    * @return a {@link BigInteger} numberType
    */
   @Constant
-  public static NumberType<Integer> integer() {
+  public static IntegralType<Integer> integer() {
     return IntegerType.TYPE;
   }
 
@@ -112,7 +113,7 @@ public class NumberTypes {
    * @return a {@link Long} numberType
    */
   @Constant
-  public static NumberType<Long> long_() {
+  public static IntegralType<Long> long_() {
     return LongType.TYPE;
   }
 

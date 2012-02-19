@@ -24,7 +24,7 @@ import net.sf.staccatocommons.restrictions.value.Immutable;
 /**
  * A Strategy for dealing with {@link Number}s is a polymorphic way.
  * <p>
- * All its methods <strong>should</strong> be side efect-free, which implies
+ * All its methods <strong>should</strong> be side effect-free, which implies
  * that arguments their <strong>should</strong> not be mutated, and that return
  * values correspond to new numbers.
  * </p>
@@ -73,6 +73,26 @@ public interface NumberType<A> extends Comparator<A> {
   A add(A n0, A n1);
 
   /**
+   * Answers a 2-arguments function that perform addition as specified by
+   * {@link #add(Object, Object)}
+   * 
+   * @return a function that adds its two arguments using this
+   *         {@link NumberType}
+   */
+  @Constant
+  Function2<A, A, A> add();
+
+  /**
+   * Answers function that adds the given number to its argument, as specified
+   * by {@link #add(Object, Object)}. This message is a shortcut to
+   * <code>add().apply(n)</code>
+   * 
+   * @return a function that adds its its argument with the given <code>n</code>
+   *         using this {@link NumberType}
+   */
+  Function<A, A> add(A n);
+
+  /**
    * Subtracts two numbers, and returns the result.
    * 
    * For any {@link Number}s x and y, a side-effect-free {@link NumberType}s nt
@@ -99,6 +119,16 @@ public interface NumberType<A> extends Comparator<A> {
   A multiply(A n0, A n1);
 
   /**
+   * Answers a 2-arguments function that perform multiplication as specified by
+   * {@link #multiply(Object, Object)}
+   * 
+   * @return a function that multiplies its two arguments using this
+   *         {@link NumberType}
+   */
+  @Constant
+  Function2<A, A, A> multiply();
+
+  /**
    * Divides two numbers, and returns the result.
    * 
    * @param n0
@@ -120,6 +150,15 @@ public interface NumberType<A> extends Comparator<A> {
    * @return <code>-n</code>
    */
   A negate(A n);
+
+  /**
+   * Answers a function that negates its argument, as specified by
+   * {@link #negate(Object)}
+   * 
+   * @return a function
+   */
+  @Constant
+  Function<A, A> negate();
 
   /**
    * Decrements the given number.
@@ -168,6 +207,15 @@ public interface NumberType<A> extends Comparator<A> {
   A inverse(A n);
 
   /**
+   * Answers a function that returns the ivnerse of its argument, as defined by
+   * {@link #inverse(Object)}
+   * 
+   * @return a function
+   */
+  @Constant
+  Function<A, A> inverse();
+
+  /**
    * Answers the absolute value of the given number. It is the same number, if
    * non negative, or the negated number, otherwise
    * 
@@ -175,6 +223,15 @@ public interface NumberType<A> extends Comparator<A> {
    * @return <code>isNegative(n) ? negate(n) : n</code>
    */
   A abs(A n);
+
+  /**
+   * Answers a function that returns the absolute value of its argument, as
+   * specified by {@link #abs(Object)}
+   * 
+   * @return a funciton
+   */
+  @Constant
+  Function<A, A> abs();
 
   /**
    * Answers if the given number is greater than zero
@@ -229,60 +286,16 @@ public interface NumberType<A> extends Comparator<A> {
   A one();
 
   /**
-   * Answers a 2-arguments function that perform addition as specified by
-   * {@link #add(Object, Object)}
+   * Answers a, eventually approximate, representation of the given integer
+   * value in this {@link NumberType}
    * 
-   * @return a function that adds its two arguments using this
-   *         {@link NumberType}
+   * @param ordinal
+   * @return a representation of the given integer in this number type
+   * @throws IllegalArgumentException
+   *           if the given integer value has no exact or approximate
+   *           representation for the this {@link NumberType}
+   * @since 2.1
    */
-  @Constant
-  Function2<A, A, A> add();
-
-  /**
-   * Answers function that adds the given number to its argument, as specified
-   * by {@link #add(Object, Object)}. This message is a shortcut to
-   * <code>add().apply(n)</code>
-   * 
-   * @return a function that adds its its argument with the given <code>n</code>
-   *         using this {@link NumberType}
-   */
-  Function<A, A> add(A n);
-
-  /**
-   * Answers a 2-arguments function that perform multiplication as specified by
-   * {@link #multiply(Object, Object)}
-   * 
-   * @return a function that multiplies its two arguments using this
-   *         {@link NumberType}
-   */
-  @Constant
-  Function2<A, A, A> multiply();
-
-  /**
-   * Answers a function that negates its argument, as specified by
-   * {@link #negate(Object)}
-   * 
-   * @return a function
-   */
-  @Constant
-  Function<A, A> negate();
-
-  /**
-   * Answers a function that returns the absolute value of its argument, as
-   * specified by {@link #abs(Object)}
-   * 
-   * @return a funciton
-   */
-  @Constant
-  Function<A, A> abs();
-
-  /**
-   * Answers a function that returns the ivnerse of its argument, as defined by
-   * {@link #inverse(Object)}
-   * 
-   * @return a function
-   */
-  @Constant
-  Function<A, A> inverse();
+  A fromInt(int value);
 
 }

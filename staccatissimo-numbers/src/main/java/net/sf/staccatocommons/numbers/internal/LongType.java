@@ -13,20 +13,19 @@
 
 package net.sf.staccatocommons.numbers.internal;
 
-import net.sf.staccatocommons.defs.type.NumberType;
-import net.sf.staccatocommons.numbers.AbstractNumberType;
+import net.sf.staccatocommons.numbers.AbstractIntegralType;
 
 /**
  * @author flbulgarelli
  * 
  */
-public final class LongType extends AbstractNumberType<Long> {
+public final class LongType extends AbstractIntegralType<Long> {
 
   private static final long serialVersionUID = -8990585054249024230L;
   /**
    * An instance
    */
-  public static final NumberType<Long> TYPE = new LongType();
+  public static final LongType TYPE = new LongType();
 
   public Long add(Long n0, Long n1) {
     return n0 + n1;
@@ -58,5 +57,17 @@ public final class LongType extends AbstractNumberType<Long> {
 
   public Long decrement(Long n) {
     return n - 1;
+  }
+
+  public boolean isEven(Long n) {
+    return n % 2 == 0;
+  }
+
+  public Long remainder(Long n1, Long n2) {
+    return n1 % n2;
+  }
+
+  public Long fromInt(int ordinal) {
+    return Long.valueOf(ordinal);
   }
 }

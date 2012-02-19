@@ -34,7 +34,6 @@ import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
-import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.util.Strings;
 
@@ -225,13 +224,7 @@ public class IterablesUnitTest {
    */
   @Test
   public void testPartition() throws Exception {
-    Tuple2<List<Integer>, List<Integer>> partition = Iterables.partition(
-      Streams.enumerate(10, 20),
-      new AbstractPredicate<Integer>() {
-        public boolean eval(Integer argument) {
-          return argument % 2 == 0;
-        }
-      });
+    Tuple2<List<Integer>, List<Integer>> partition = Iterables.partition(Streams.enumerate(10, 20), integer().isEven());
 
     assertEquals(Streams.enumerate(10, 20, 2).toList(), partition._0());
     assertEquals(Streams.enumerate(11, 20, 2).toList(), partition._1());

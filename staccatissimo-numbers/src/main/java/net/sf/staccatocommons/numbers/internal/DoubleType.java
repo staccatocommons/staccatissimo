@@ -59,4 +59,8 @@ public final class DoubleType extends AbstractNumberType<Double> {
   public Double decrement(Double n) {
     return n - 1;
   }
+
+  public Double fromInt(int ordinal) {
+    return Double.valueOf(ordinal);
+  }
 }
