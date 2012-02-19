@@ -205,6 +205,22 @@ public class Streams {
     return enumerate(start, stop, 1);
   }
 
+  /**
+   * Iterates from the {@code start} integer, by adding {@code step}, up to the
+   * {@code stop} integer, inclusive. This generates the finite stream
+   * {@code [start, start+step, start+2*step..., stop]}
+   * 
+   * @param start
+   *          the initial element of the sequence
+   * @param stop
+   *          the final element of the sequence
+   * @param step
+   * @return an stream that retrieves the sequence
+   *         {@code [start, start+step, start+2*step..., stop]}. As a particular
+   *         case, if start == stop, the sequence {@code [start]} is retrieved.
+   *         If start > stop, an empty stream is retrieved
+   * @since 1.2
+   */
   @Projection
   public static Stream<Integer> enumerate(int start, int stop, int step) {
     return iterate(start, Add.add(step)).take(Math.max(0, 1 + (stop - start) / step));
