@@ -37,7 +37,7 @@ public abstract class AbstractUnmodifiableIterator<T> implements Iterator<T> {
 
   @Override
   public final void remove() {
-    throw new UnsupportedOperationException("This Iterator does not support unmodifiable");
+    throw new UnsupportedOperationException("This iterator is unmodifiable");
   }
 
 }
