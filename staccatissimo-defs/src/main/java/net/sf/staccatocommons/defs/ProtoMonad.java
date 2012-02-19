@@ -109,6 +109,15 @@ public interface ProtoMonad<Type, RawType, A> {
    */
   Type replaceNull(A replacement);
 
+  /**
+   * Answers a ProtoMonad that executes the given block for each of its
+   * elements. This is equivalent to {@code map(Functions.impure(block)}
+   * 
+   * @param block
+   * @return a {@link ProtoMonad} that computes or contains the same elements of
+   *         this {@link ProtoMonad}, but adding to them and the environment the
+   *         effects produced by the given block
+   */
   Type each(@NonNull Executable<? super A> block);
 
 }
