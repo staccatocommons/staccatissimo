@@ -40,4 +40,7 @@ public class EnumerationIterator<A> extends AbstractUnmodifiableIterator<A> {
     return enumeration.nextElement();
   }
 
+  public String toString() {
+    return "EnumerationIterator(" + enumeration + ")";
+  }
 }

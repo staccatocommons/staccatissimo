@@ -15,9 +15,10 @@ package net.sf.staccatocommons.iterators;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
-import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
 
 import org.junit.Test;
@@ -26,22 +27,26 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class AppendIteratorUnitTest extends IteratorTheories {
+public class UnmodifiableIteratorUnitTest extends IteratorTheories {
 
   protected Iterator<?> createTwoElementsIterator() {
-    return new AppendThriterator<Integer>(Thriterators.from(20), 10);
+    return UnmodifiableIterator.from(Arrays.asList(10, 20).iterator());
   }
 
   protected Iterator<?> createOneElementIterator() {
-    return new AppendThriterator(EmptyThriterator.empty(), 10);
+    return UnmodifiableIterator.from(new SingleThriterator(10));
+  }
+
+  /** test for remove */
+  @Test(expected = UnsupportedOperationException.class)
+  public void removeNotSupported() throws Exception {
+    UnmodifiableIterator.from(new ArrayList().iterator()).remove();
   }
 
   /** test for toString */
   @Test
-  public void testToString() throws Exception {
-    assertEquals(
-      "AppendThriterator(EmptyThriterator(), 10)",
-      new AppendThriterator(EmptyThriterator.empty(), 10).toString());
+  public void testToString() {
+    assertEquals("UnmodifiableIterator(SingleThriterator(10))", createOneElementIterator().toString());
   }
 
 }

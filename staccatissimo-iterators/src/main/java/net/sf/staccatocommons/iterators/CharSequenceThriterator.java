@@ -40,4 +40,8 @@ public class CharSequenceThriterator extends IndexedThriterator<Character> {
   protected Character elementAt(int position) {
     return charSequence.charAt(position);
   }
+
+  public String toString() {
+    return "CharSequenceThriterator(" + charSequence + ")";
+  }
 }

@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.iterators.thriter;
 
 import java.util.Iterator;
@@ -39,6 +38,10 @@ public class IteratorThriterator<A> extends NextThriterator<A> {
 
   public A nextImpl() {
     return iter.next();
+  }
+
+  public String toString() {
+    return "IteratorThriterator(" + iter + ")";
   }
 
 }

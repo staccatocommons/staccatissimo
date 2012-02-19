@@ -57,4 +57,8 @@ public final class UnmodifiableIterator<T> extends AbstractUnmodifiableIterator<
     return new UnmodifiableIterator<A>(iter);
   }
 
+  public String toString() {
+    return "UnmodifiableIterator(" + iter + ")";
+  }
+
 }

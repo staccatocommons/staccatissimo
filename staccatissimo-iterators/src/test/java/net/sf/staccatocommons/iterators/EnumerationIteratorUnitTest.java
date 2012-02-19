@@ -11,14 +11,17 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.iterators;
+
+import static org.junit.Assert.*;
 
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
+
+import org.junit.Test;
 
 /**
  * @author flbulgarelli
@@ -40,6 +43,12 @@ public class EnumerationIteratorUnitTest extends IteratorTheories {
     return new EnumerationIterator(//
       new Hashtable<String, String>(//
         Collections.singletonMap("bar", "baz")).keys());
+  }
+
+  /** Test for toString */
+  @Test
+  public void testToString() throws Exception {
+    assertTrue(createOneElementIterator().toString().startsWith("EnumerationIterator(java.util.Hashtable$Enumerator"));
   }
 
 }

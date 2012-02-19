@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.iterators;
 
 import java.util.Iterator;
@@ -88,6 +87,10 @@ public class PrependThriterator<A> extends AdvanceThriterator<A> {
     if (iterAdvanced)
       return (Thunk<A>) iter.delayedCurrent();
     return elementThunk();
+  }
+
+  public String toString() {
+    return "PrependThriterator(" + element + ", " + iter + ")";
   }
 
 }

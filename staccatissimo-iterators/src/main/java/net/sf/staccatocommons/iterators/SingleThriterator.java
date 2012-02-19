@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
@@ -48,5 +47,9 @@ public class SingleThriterator<A> extends AdvanceThriterator<A> {
 
   public A current() throws NoSuchElementException {
     return element;
+  }
+
+  public String toString() {
+    return "SingleThriterator(" + element + ")";
   }
 }

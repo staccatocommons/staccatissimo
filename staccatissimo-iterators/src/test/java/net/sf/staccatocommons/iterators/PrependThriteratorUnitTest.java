@@ -26,22 +26,20 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-public class AppendIteratorUnitTest extends IteratorTheories {
+public class PrependThriteratorUnitTest extends IteratorTheories {
 
   protected Iterator<?> createTwoElementsIterator() {
-    return new AppendThriterator<Integer>(Thriterators.from(20), 10);
+    return new PrependThriterator<Integer>(10, Thriterators.from(20));
   }
 
   protected Iterator<?> createOneElementIterator() {
-    return new AppendThriterator(EmptyThriterator.empty(), 10);
+    return new PrependThriterator(10, EmptyThriterator.empty());
   }
 
   /** test for toString */
   @Test
   public void testToString() throws Exception {
-    assertEquals(
-      "AppendThriterator(EmptyThriterator(), 10)",
-      new AppendThriterator(EmptyThriterator.empty(), 10).toString());
+    assertEquals("PrependThriterator(10, EmptyThriterator())", createOneElementIterator().toString());
   }
 
 }

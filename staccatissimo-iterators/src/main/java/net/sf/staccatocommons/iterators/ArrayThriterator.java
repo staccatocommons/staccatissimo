@@ -10,9 +10,9 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU Lesser General Public License for more details.
  */
-
-
 package net.sf.staccatocommons.iterators;
+
+import java.util.Arrays;
 
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -37,6 +37,10 @@ public class ArrayThriterator<A> extends IndexedThriterator<A> {
 
   protected int length() {
     return array.length;
+  }
+
+  public String toString() {
+    return "ArrayThriterator(" + Arrays.toString(array) + ")";
   }
 
 }

@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.iterators;
 
 import java.util.Iterator;
@@ -93,6 +92,10 @@ public class AppendThriterator<A> extends AdvanceThriterator<A> {
     if (unconsumed)
       return (Thunk<A>) iterator.delayedCurrent();
     return elementThunk();
+  }
+
+  public String toString() {
+    return "AppendThriterator(" + iterator + ", " + element + ")";
   }
 
 }

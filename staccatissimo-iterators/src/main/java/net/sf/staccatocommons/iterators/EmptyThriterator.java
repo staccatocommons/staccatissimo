@@ -59,4 +59,8 @@ public final class EmptyThriterator<T> extends AbstractThriterator<T> {
     return new EmptyThriterator();
   }
 
+  public String toString() {
+    return "EmptyThriterator()";
+  }
+
 }

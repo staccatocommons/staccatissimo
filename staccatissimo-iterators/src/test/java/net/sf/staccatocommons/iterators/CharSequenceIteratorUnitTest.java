@@ -13,9 +13,13 @@
 
 package net.sf.staccatocommons.iterators;
 
+import static org.junit.Assert.*;
+
 import java.util.Iterator;
 
 import net.sf.staccatocommons.testing.junit.theories.IteratorTheories;
+
+import org.junit.Test;
 
 /**
  * @author flbulgarelli
@@ -29,5 +33,11 @@ public class CharSequenceIteratorUnitTest extends IteratorTheories {
 
   protected Iterator<?> createOneElementIterator() {
     return new CharSequenceThriterator("a");
+  }
+
+  /** test for toString */
+  @Test
+  public void testToString() throws Exception {
+    assertEquals("CharSequenceThriterator(hello)", new CharSequenceThriterator("hello").toString());
   }
 }
