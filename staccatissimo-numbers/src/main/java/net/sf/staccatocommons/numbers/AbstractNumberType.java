@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.numbers;
 
 import java.io.Serializable;
@@ -75,7 +74,11 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
   @Override
   @Constant
   public AbstractFunction2<A, A, A> multiply() {
-    return new Multiply<A>(this);
+    return new AbstractFunction2<A, A, A>() {
+      public A apply(A arg0, A arg1) {
+        return multiply(arg0, arg1);
+      }
+    };
   }
 
   public Function<A, A> add(A n) {
@@ -113,35 +116,4 @@ public abstract class AbstractNumberType<A extends Number & Comparable> implemen
     };
   }
 
-  private static final class Multiply<A> extends NumberTypeFunction2<A> {
-
-    /**
-     * Creates a new {@link Multiply}
-     */
-    public Multiply(NumberType<A> type) {
-      super(type);
-    }
-
-    @Override
-    public A apply(A arg0, A arg1) {
-      return numberType().multiply(arg0, arg1);
-    }
-
-  }
-
-  private abstract static class NumberTypeFunction2<A> extends AbstractFunction2<A, A, A> {
-
-    private NumberType<A> numberType;
-
-    /**
-     * Creates a new {@link NumberTypeFunction2}
-     */
-    public NumberTypeFunction2(NumberType<A> type) {
-      this.numberType = type;
-    }
-
-    public NumberType<A> numberType() {
-      return numberType;
-    }
-  }
 }
