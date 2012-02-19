@@ -14,7 +14,6 @@
 package net.sf.staccatocommons.collections.stream;
 
 import static net.sf.staccatocommons.collections.stream.Streams.*;
-import static net.sf.staccatocommons.lang.Compare.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
 import java.io.IOException;
@@ -581,12 +580,24 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public A maximumBy(Comparator<? super A> comparator) {
-    return reduce(max(comparator));
+    return reduceWithComparator(comparator, 1);
+  }
+
+  private A reduceWithComparator(Comparator<? super A> comparator, int sign) {
+    if (isEmpty())
+      VALIDATE_ELEMENT.fail("Can not reduce an empty stream");
+    Iterator<A> iter = this.iterator();
+    A result = iter.next();
+    while (iter.hasNext()) {
+      A next = iter.next();
+      result = comparator.compare(result, next) * sign >= 0 ? result : next;
+    }
+    return result;
   }
 
   @Override
   public A minimumBy(Comparator<? super A> comparator) {
-    return reduce(min(comparator));
+    return reduceWithComparator(comparator, -1);
   }
 
   @Override
