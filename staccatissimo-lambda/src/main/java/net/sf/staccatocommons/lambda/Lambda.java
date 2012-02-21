@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lambda;
 
 import java.util.Collection;
@@ -20,6 +19,7 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.predicate.Predicate;
+import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lambda.internal.Defaults;
 
 import org.apache.commons.proxy.ProxyFactory;
@@ -149,6 +149,22 @@ public final class Lambda {
    * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda2(java.lang.Object)
    */
   public static <A, B, C> Function2<A, B, C> lambda2(C returnType) {
+    return getSharedLambdaFactory().lambda2(returnType);
+  }
+
+  /**
+   * Answers a {@link Predicate1} that when evaluated sends to its first
+   * argument the message previously sent to the last stubbed type, passing its
+   * second argument as the first message argument. Refer to the use cases
+   * described in {@link Lambda}
+   * 
+   * @param returnType
+   *          meaningless, this argument is simply ignored
+   * @return a new {@link Predicate}
+   * @see Lambda
+   * @see net.sf.staccatocommons.lambda.LambdaFactory#lambda2(boolean)
+   */
+  public static <A, B> Predicate2<A, B> lambda2(boolean returnType) {
     return getSharedLambdaFactory().lambda2(returnType);
   }
 

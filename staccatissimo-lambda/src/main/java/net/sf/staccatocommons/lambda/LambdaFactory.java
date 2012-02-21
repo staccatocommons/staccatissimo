@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lambda;
 
 import java.lang.reflect.InvocationTargetException;
@@ -23,12 +22,14 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.function.Function3;
 import net.sf.staccatocommons.defs.predicate.Predicate;
+import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lambda.internal.Unchecker;
 import net.sf.staccatocommons.lang.SoftException;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
 import net.sf.staccatocommons.lang.function.AbstractFunction3;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
+import net.sf.staccatocommons.lang.predicate.AbstractPredicate2;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.processing.EnforceRestrictions;
 
@@ -157,16 +158,7 @@ public final class LambdaFactory {
   }
 
   /**
-   * Answers a {@link Function2} that when applied sends to its first argument
-   * the message previously sent to the last stubbed type, passing its second
-   * argument as the first message argument. Refer to the use cases described in
-   * {@link Lambda}
-   * 
-   * @param returnType
-   *          meaningless, this argument is simply ignored
-   * @return a new {@link Function2}
-   * 
-   * @see Lambda
+   * @ee {@link Lambda#lambda2(Object)}
    */
   @NonNull
   public <A, B, C> Function2<A, B, C> lambda2(C returnType) {
@@ -175,6 +167,22 @@ public final class LambdaFactory {
     args[0] = null;
     return new AbstractFunction2<A, B, C>() {
       public C apply(Object arg0, Object arg1) {
+        args[0] = arg1;
+        return invoke(method, arg0, args);
+      }
+    };
+  }
+
+  /**
+   * @see Lambda#lambda2(boolean)
+   */
+  @NonNull
+  public <A, B> Predicate2<A, B> lambda2(boolean returnType) {
+    final Method method = handler.getMethod();
+    final Object[] args = handler.getArgsCopy();
+    args[0] = null;
+    return new AbstractPredicate2<A, B>() {
+      public boolean eval(Object arg0, Object arg1) {
         args[0] = arg1;
         return invoke(method, arg0, args);
       }

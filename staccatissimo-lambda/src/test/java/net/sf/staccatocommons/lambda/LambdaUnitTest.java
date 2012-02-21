@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.lambda;
 
 import static net.sf.staccatocommons.lambda.Lambda.*;
@@ -34,6 +33,7 @@ import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.partial.EmptyAware;
 import net.sf.staccatocommons.defs.partial.SizeAware;
 import net.sf.staccatocommons.defs.predicate.Predicate;
+import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lang.Option;
 
 import org.junit.Ignore;
@@ -112,7 +112,7 @@ public class LambdaUnitTest {
    */
   @Test
   public void testLambda2() {
-    Function2<Object, Object, Boolean> lambda2 = lambda2($(Collection.class).remove(_));
+    Predicate2<Object, Object> lambda2 = lambda2($(Collection.class).remove(_));
     ArrayList<Integer> list = new ArrayList<Integer>(Arrays.asList(60, 20, 3));
 
     assertFalse(lambda2.apply(list, 25));
