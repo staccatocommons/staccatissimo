@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.internal.algorithms;
 
 import java.util.Comparator;
@@ -65,6 +64,10 @@ public final class SortedStream<A> extends AbstractStream<A> {
   @Override
   public A last() {
     return maximumBy(comparator);
+  }
+
+  public boolean isEmpty() {
+    return source.isEmpty();
   }
 
   /**
