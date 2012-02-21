@@ -1,86 +1,91 @@
-<!--
-
-     Copyright (c) 2010-2012, The StaccatoCommons Team
-
-     This program is free software; you can redistribute it and/or modify
-     it under the terms of the GNU Lesser General Public License as published by
-     the Free Software Foundation; version 3 of the License.
-
-     This program is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     GNU Lesser General Public License for more details.
-
--->
+<!-- Copyright (c) 2010-2012, The StaccatoCommons Team This program is free 
+  software; you can redistribute it and/or modify it under the terms of the 
+  GNU Lesser General Public License as published by the Free Software Foundation; 
+  version 3 of the License. This program is distributed in the hope that it 
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+  of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser 
+  General Public License for more details. -->
 
 <document xmlns="http://maven.apache.org/changes/1.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
-	<properties>
-		<title>Staccatissimo-Defs Changes History</title>
-		<author>flbulgarelli</author>
-	</properties>
-	<body>
-		<release version="1.0-alpha-1" date="2011-01-08" description="Inception">
-			<action dev="flbulgarelli" type="add">
-				Initial Version, with
-				providers, applicables, executables, evaluables
-				and mutability
-				restrictions
-			</action>
-		</release>
-		<release version="1.0-alpha-2" date="2011-01-21" description="Types">
-			<action dev="flbulgarelli" type="add">
-				Added NumericTypes,
-				EmptyAwareType and SizeAwareType 
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Add Transparent and
-				SideEffectFree restrictons
-			</action>
-			<action dev="flbulgarelli" type="update">
-				Renamed Provider to Thunk, in
-				order to reuse that name for
-				an abstract implementation in lang.
-			</action>
-		</release>
-		<release version="1.0-alpha-3" date="2011-01-30" description="Streams">
-			<action dev="flbulgarelli" type="add">
-				Added Evaluable2
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Added ContainsAwareType
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Added Constant restriction
-            </action>
-		</release>
-		<release version="1.0-alpha-4" date="2011-03-11" description="Laziness">
-			<action dev="flbulgarelli" type="add">
-				Added Deleyables 
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Added Functions
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Added inverse, negate and abs methods and functions to NumberType
-            </action>
-		</release>
-		<release version="1.1" date="2011-08-10" description="IO &amp; Composition">
-            <action dev="flbulgarelli" type="add">
-                Predicate composition 
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Improved function composition 
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Rich function composition 
-            </action>
-        </release>
-        <release version="1.2" date="TBD" description="Control">
-            <action dev="flbulgarelli" type="add">
-                Adding Computation 
-            </action>
-        </release>
-	</body>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>Staccatissimo-Defs Changes History</title>
+    <author>flbulgarelli</author>
+  </properties>
+  <body>
+    <release version="1.0-alpha-1" date="2011-01-08"
+      description="Inception">
+      <action dev="flbulgarelli" type="add">
+        Initial Version, with
+        providers, applicables, executables, evaluables
+        and mutability
+        restrictions
+      </action>
+    </release>
+    <release version="1.0-alpha-2" date="2011-01-21"
+      description="Types">
+      <action dev="flbulgarelli" type="add">
+        Added NumericTypes,
+        EmptyAwareType and SizeAwareType
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Add Transparent and
+        SideEffectFree restrictons
+      </action>
+      <action dev="flbulgarelli" type="update">
+        Renamed Provider to Thunk,
+        in
+        order to reuse that name for
+        an abstract implementation in
+        lang.
+      </action>
+    </release>
+    <release version="1.0-alpha-3" date="2011-01-30"
+      description="Streams">
+      <action dev="flbulgarelli" type="add">
+        Added Evaluable2
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Added ContainsAwareType
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Added Constant restriction
+      </action>
+    </release>
+    <release version="1.0-alpha-4" date="2011-03-11"
+      description="Laziness">
+      <action dev="flbulgarelli" type="add">
+        Added Deleyables
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Added Functions
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Added inverse, negate and
+        abs methods and functions to NumberType
+      </action>
+    </release>
+    <release version="1.1" date="2011-08-10" description="IO &amp; Composition">
+      <action dev="flbulgarelli" type="add">
+        Predicate composition
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Improved function
+        composition
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Rich function composition
+      </action>
+    </release>
+    <release version="2.1" date="2012-02-21" description="Skips & Integrals">
+      <action dev="flbulgarelli" type="add">
+        Adding skip and replace
+        messages to ProtoMonad
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Adding IntegralType
+      </action>
+    </release>
+  </body>
 </document>

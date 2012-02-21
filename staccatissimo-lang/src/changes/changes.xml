@@ -1,106 +1,115 @@
-<!--
-
-     Copyright (c) 2010-2012, The StaccatoCommons Team
-
-     This program is free software; you can redistribute it and/or modify
-     it under the terms of the GNU Lesser General Public License as published by
-     the Free Software Foundation; version 3 of the License.
-
-     This program is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     GNU Lesser General Public License for more details.
-
--->
+<!-- Copyright (c) 2010-2012, The StaccatoCommons Team This program is free 
+  software; you can redistribute it and/or modify it under the terms of the 
+  GNU Lesser General Public License as published by the Free Software Foundation; 
+  version 3 of the License. This program is distributed in the hope that it 
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+  of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser 
+  General Public License for more details. -->
 
 <document xmlns="http://maven.apache.org/changes/1.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
-	<properties>
-		<title>Staccatissimo-Lang Changes History</title>
-		<author>flbulgarelli</author>
-	</properties>
-	<body>
-		<release version="1.0-alpha-1" date="2011-01-08" description="Inception">
-			<action dev="flbulgarelli" type="add">
-				Initial Version, with Ranges,
-				Sequences, Options, Functions, Tuples, Blocks,
-				Predicates,
-				Lifecycles, BasicEquals, Nulls, SoftExceptions, MapBuilder and
-				Provders
-			</action>
-		</release>
-		<release version="1.0-alpha-2" date="2011-01-21" description="Types">
-			<action dev="flbulgarelli" type="add">
-				Added NumericTypes
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Added Provider as abstract
-				base class for Thunks
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Added RelevantState
-            </action>
-			<action dev="flbulgarelli" type="add">
-				Added thread-safe Lazy, and
-				lazy and delayed results for Functions and
-				Blocks
-            </action>
-		</release>
-		<release version="1.0-alpha-3" date="2011-01-30" description="Streams">
-			<action dev="flbulgarelli" type="remove">
-				Removed UndefinedOptionException, and replaced by NoSuchElementException
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Equality
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Nul-Safe Functions
-            </action>
-		</release>
-	    <release version="1.1" date="2011-08-10" description="IO &amp; Composition">
-            <action dev="flbulgarelli" type="add">
-                Predicate composition 
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Improved function composition 
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Rich function composition 
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Strings.reflectionToString(), Strings.empty(), Strings.notEmpty(), Strings.length()  
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Tuples.toPair() and Tuples.toTriple() functions 
-            </action>
-            <action dev="flbulgarelli" type="add">
-                Compare.between(A,A) predicate
-            </action>
-            <action dev="flbulgarelli" type="fix">
-                Fixed top level functions that did not implement toString 
-            </action>
-        </release>
-        <release version="1.2" date="TBD" description="Control">
-            <action dev="flbulgarelli" type="add">
-                Functions.impure 
-            </action>
-              <action dev="flbulgarelli" type="add">
-                Option.map, Option.filter 
-            </action>
-             <action dev="flbulgarelli" type="add">
-                Tuples.branch, Tuples.clone, Tuples.uncurry3, Tuples.zip 
-            </action>
-            <action dev="flbulgarelli" type="fix">
-                Fixed AbstractNumberType.negate() 
-            </action>
-        </release>
-        <release version="2.0" date="TBD" description="SoftException">
-            <action dev="flbulgarelli" type="add">
-                AbstractFunctions.Soft
-            </action>
-        </release>
-        
-        
-	</body>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>Staccatissimo-Lang Changes History</title>
+    <author>flbulgarelli</author>
+  </properties>
+  <body>
+    <release version="1.0-alpha-1" date="2011-01-08"
+      description="Inception">
+      <action dev="flbulgarelli" type="add">
+        Initial Version, with
+        Ranges,
+        Sequences, Options, Functions, Tuples, Blocks,
+        Predicates,
+        Lifecycles, BasicEquals, Nulls, SoftExceptions,
+        MapBuilder and
+        Provders
+      </action>
+    </release>
+    <release version="1.0-alpha-2" date="2011-01-21"
+      description="Types">
+      <action dev="flbulgarelli" type="add">
+        Added NumericTypes
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Added Provider as abstract
+        base class for Thunks
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Added RelevantState
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Added thread-safe Lazy, and
+        lazy and delayed results for Functions and
+        Blocks
+      </action>
+    </release>
+    <release version="1.0-alpha-3" date="2011-01-30"
+      description="Streams">
+      <action dev="flbulgarelli" type="remove">
+        Removed
+        UndefinedOptionException, and replaced by NoSuchElementException
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Equality
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Nul-Safe Functions
+      </action>
+    </release>
+    <release version="1.1" date="2011-08-10" description="IO &amp; Composition">
+      <action dev="flbulgarelli" type="add">
+        Predicate composition
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Improved function
+        composition
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Rich function composition
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Strings.reflectionToString(), Strings.empty(),
+        Strings.notEmpty(), Strings.length()
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Tuples.toPair() and
+        Tuples.toTriple() functions
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Compare.between(A,A)
+        predicate
+      </action>
+      <action dev="flbulgarelli" type="fix">
+        Fixed top level functions
+        that did not implement toString
+      </action>
+    </release>
+    <release version="1.2" date="TBD" description="Control">
+      <action dev="flbulgarelli" type="add">
+        Functions.impure
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Option.map, Option.filter
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Tuples.branch,
+        Tuples.clone, Tuples.uncurry3, Tuples.zip
+      </action>
+      <action dev="flbulgarelli" type="fix">
+        Fixed
+        AbstractNumberType.negate()
+      </action>
+    </release>
+    <release version="2.0" date="2012-01-22" description="SoftException">
+      <action dev="flbulgarelli" type="add">
+        AbstractFunctions.Soft
+      </action>
+    </release>
+    <release version="2.1" date="2012-02-21" description="ProtoMonad">
+      <action dev="flbulgarelli" type="add">
+        Adding AbstractProtoMonad
+      </action>
+    </release>
+  </body>
 </document>
