@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.internal.algorithms;
 
 import static java.lang.Math.*;
@@ -33,14 +32,14 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public final class ZipStream<C, A, B> extends AbstractStream<C> {
   private final Iterable<B> iterable;
-  private final Function2<A, B, C> function;
+  private final Function2<? super A, ? super B, C> function;
   private final Stream<A> stream;
 
   /**
    * Creates a new {@link ZipStream}
    */
   public ZipStream(@NonNull AbstractStream<A> abstractStream, @NonNull Iterable<B> iterable,
-    @NonNull Function2<A, B, C> function) {
+    @NonNull Function2<? super A, ? super B, C> function) {
     this.iterable = iterable;
     this.function = function;
     this.stream = abstractStream;

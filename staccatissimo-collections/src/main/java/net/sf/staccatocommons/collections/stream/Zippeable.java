@@ -53,7 +53,7 @@ public interface Zippeable<A> {
    * @see Iterables#zip(Iterable, Iterable)
    */
   @Projection
-  <B, C> Stream<C> zip(@NonNull Iterable<B> iterable, Function2<A, B, C> function);
+  <B, C> Stream<C> zip(@NonNull Iterable<B> iterable, Function2<? super A, ? super B, C> function);
 
   /**
    * Returns a {@link Stream} formed by by pair of element from

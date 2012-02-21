@@ -99,8 +99,7 @@ import org.apache.commons.lang.StringUtils;
  * 
  * @param <A>
  */
-public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, Stream, A> implements
-  Stream<A> {
+public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, Stream, A> implements Stream<A> {
 
   protected static final Validate<NoSuchElementException> VALIDATE_ELEMENT = Validate
     .throwing(NoSuchElementException.class);
@@ -436,8 +435,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   private static <A> Predicate2<A, A> equalOrEquiv() {
     return Equiv.<A> equalNullSafe().or(new AbstractPredicate2<A, A>() {
       public boolean eval(A arg0, A arg1) {
-        return arg0 instanceof Stream<?> && arg1 instanceof Stream<?>
-          && ((Stream) arg0).equiv((Stream) arg1);
+        return arg0 instanceof Stream<?> && arg1 instanceof Stream<?> && ((Stream) arg0).equiv((Stream) arg1);
       }
     });
   }
@@ -453,8 +451,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   @Override
-  public final <B> boolean equivOn(Applicable<? super A, ? extends B> function,
-    Iterable<? extends A> iterable) {
+  public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, Iterable<? extends A> iterable) {
     return equivBy(Equiv.on(function), iterable);
   }
 
@@ -564,7 +561,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable,
-    @NonNull final Function2<A, B, C> function) {
+    @NonNull final Function2<? super A, ? super B, C> function) {
     return new ZipStream<C, A, B>(this, iterable, function);
   }
 
@@ -613,14 +610,12 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   @Override
-  public final <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function)
-    throws NoSuchElementException {
+  public final <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function) throws NoSuchElementException {
     return maximumBy(Compare.on(function));
   }
 
   @Override
-  public final <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function)
-    throws NoSuchElementException {
+  public final <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function) throws NoSuchElementException {
     return minimumBy(Compare.on(function));
   }
 
