@@ -29,7 +29,6 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Evaluable;
@@ -42,10 +41,8 @@ import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.predicate.Equiv;
 import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.check.NonNull;
-import net.sf.staccatocommons.restrictions.check.NotEmpty;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
 import net.sf.staccatocommons.restrictions.check.Size;
-import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
 
 import org.apache.commons.lang.ObjectUtils;
 
@@ -84,8 +81,7 @@ public class Iterables {
    *         evaluate to true
    */
   @NonNull
-  public static <A> List<A> filter(@NonNull Iterable<A> iterable,
-    @NonNull Evaluable<? super A> predicate) {
+  public static <A> List<A> filter(@NonNull Iterable<A> iterable, @NonNull Evaluable<? super A> predicate) {
     return filterInternal(iterable, predicate, new LinkedList<A>());
   }
 
@@ -106,8 +102,7 @@ public class Iterables {
 
   /**
    * Answers the result of aggregating the given <code>iterable</code> elements
-   * using the given <code>function</code>. The given {@link Iterable}
-   * <strong>must not</strong> be empty.
+   * using the given <code>function</code>.
    * 
    * @param <A>
    *          the {@link Iterable}'s elements type
@@ -115,15 +110,16 @@ public class Iterables {
    * @param function
    *          the aggregation {@link Applicable}
    * @return the result of aggregating the <code>iterable</code>'s element
+   * @throws NoSuchElementException
+   *           if the given {@link Iterable} is empty.
    */
   @NonNull
-  @IgnoreRestrictions
-  public static <A> A reduce(@NotEmpty Iterable<A> iterable,
+  public static <A> A reduce(@NonNull Iterable<A> iterable,
     @NonNull Applicable2<? super A, ? super A, ? extends A> function) {
-    Ensure.isNotNull("function", function);
+
     Iterator<A> iter = iterable.iterator();
-    if (!iter.hasNext())
-      Ensure.fail(ITERABLE, iterable, "Must be not empty");
+    checkNotEmpty(iter);
+
     A result = iter.next();
     while (iter.hasNext())
       result = function.apply(result, iter.next());
@@ -198,10 +194,14 @@ public class Iterables {
    *           if no element matches the predicate
    */
   public static <A> A find(@NonNull Iterable<A> iterable, @NonNull Evaluable<? super A> predicate) {
-    for (A o : iterable)
+    Iterator<A> iter = iterable.iterator();
+    checkNotEmpty(iter);
+    for (; iter.hasNext();) {
+      A o = iter.next();
       if (predicate.eval(o))
         return o;
-    throw new NoSuchElementException();
+    }
+    throw noElementSatisfiesPredicate();
   }
 
   /**
@@ -218,8 +218,7 @@ public class Iterables {
    *         some(element) if at least one exists
    */
   @NonNull
-  public static <A> Option<A> findOrNone(@NonNull Iterable<A> iterable,
-    @NonNull Evaluable<? super A> predicate) {
+  public static <A> Option<A> findOrNone(@NonNull Iterable<A> iterable, @NonNull Evaluable<? super A> predicate) {
     for (A o : iterable)
       if (predicate.eval(o))
         return Option.some(o);
@@ -255,7 +254,9 @@ public class Iterables {
    *         the iterables's iterator may return null.
    */
   public static <A> A any(@NonNull Iterable<A> iterable) {
-    return iterable.iterator().next();
+    Iterator<A> iterator = iterable.iterator();
+    checkNotEmpty(iterator);
+    return iterator.next();
   }
 
   /**
@@ -289,8 +290,7 @@ public class Iterables {
    *         this method will return <code>true</code> for empty iterables,
    *         regardless of the predicate.
    */
-  public static <A> boolean all(@NonNull Iterable<A> iterable,
-    @NonNull Evaluable<? super A> predicate) {
+  public static <A> boolean all(@NonNull Iterable<A> iterable, @NonNull Evaluable<? super A> predicate) {
     for (A o : iterable)
       if (!predicate.eval(o))
         return false;
@@ -311,8 +311,7 @@ public class Iterables {
    *         this collection is empty or has only one element, it will return
    *         <code>true</code>.
    */
-  public static <A> boolean allEquivBy(@NonNull Iterable<A> iterable,
-    Evaluable2<? super A, ? super A> equivTest) {
+  public static <A> boolean allEquivBy(@NonNull Iterable<A> iterable, Evaluable2<? super A, ? super A> equivTest) {
     Iterator<A> iter = iterable.iterator();
     if (!iter.hasNext())
       return true;
@@ -451,8 +450,7 @@ public class Iterables {
    *         elements of both iterables at same position are equal.
    *         <code>false</code> otherwise
    */
-  public static <A> boolean equiv(@NonNull Iterable<? extends A> iterable1,
-    @NonNull Iterable<? extends A> iterable2) {
+  public static <A> boolean equiv(@NonNull Iterable<? extends A> iterable1, @NonNull Iterable<? extends A> iterable2) {
     return equivBy(iterable1, iterable2, Equiv.equal().nullSafe());
   }
 
@@ -468,8 +466,8 @@ public class Iterables {
    *         elements of both iterables at same position are equivalent using
    *         the given <code>eqivTest</code>. <code>false</code> otherwise
    */
-  public static <A> boolean equivBy(@NonNull Iterable<? extends A> iterable1,
-    @NonNull Iterable<? extends A> iterable2, Evaluable2<? super A, ? super A> equivTest) {
+  public static <A> boolean equivBy(@NonNull Iterable<? extends A> iterable1, @NonNull Iterable<? extends A> iterable2,
+    Evaluable2<? super A, ? super A> equivTest) {
     Iterator<? extends A> iter = iterable1.iterator();
     Iterator<? extends A> otherIter = iterable2.iterator();
     while (iter.hasNext()) {
@@ -536,8 +534,7 @@ public class Iterables {
    *         will return an empty list if the given iterable is empty
    */
   @NonNull
-  public static <A, B> List<B> map(@NonNull Iterable<A> iterable,
-    @NonNull Applicable<? super A, ? extends B> function) {
+  public static <A, B> List<B> map(@NonNull Iterable<A> iterable, @NonNull Applicable<? super A, ? extends B> function) {
     return collectInternal(iterable, function, new LinkedList<B>());
   }
 
@@ -581,8 +578,7 @@ public class Iterables {
    *         {@link Iterable} was empty.
    */
   @NonNull
-  public static <A> List<A> toSortedList(@NonNull Iterable<A> iterable,
-    @NonNull Comparator<? super A> comparator) {
+  public static <A> List<A> toSortedList(@NonNull Iterable<A> iterable, @NonNull Comparator<? super A> comparator) {
     List<A> list = new LinkedList<A>();
     addAllInternal(list, iterable);
     java.util.Collections.sort(list, comparator);
@@ -601,8 +597,7 @@ public class Iterables {
    *         given <code>comparator</code>
    */
   @NonNull
-  public static <A> SortedSet<A> toSortedSet(@NonNull Iterable<A> iterable,
-    @NonNull Comparator<? super A> comparator) {
+  public static <A> SortedSet<A> toSortedSet(@NonNull Iterable<A> iterable, @NonNull Comparator<? super A> comparator) {
     TreeSet<A> sortedSet = new TreeSet<A>(comparator);
     addAllInternal(sortedSet, iterable);
     return sortedSet;
@@ -720,8 +715,7 @@ public class Iterables {
    *          the first or second list
    * @return a Tuple2 of lists
    */
-  public static <A> Tuple2<List<A>, List<A>> partition(@NonNull Iterable<A> iterable,
-    Evaluable<? super A> predicate) {
+  public static <A> Tuple2<List<A>, List<A>> partition(@NonNull Iterable<A> iterable, Evaluable<? super A> predicate) {
 
     List<A> first = new LinkedList<A>();
     List<A> second = new LinkedList<A>();
@@ -830,8 +824,8 @@ public class Iterables {
    * @see #zip(Iterable, Iterable)
    */
   @NonNull
-  public static <A, B, C> List<C> zip(@NonNull Iterable<A> iterable1,
-    @NonNull Iterable<B> iterable2, Applicable2<A, B, C> function) {
+  public static <A, B, C> List<C> zip(@NonNull Iterable<A> iterable1, @NonNull Iterable<B> iterable2,
+    Applicable2<A, B, C> function) {
     Iterator<A> iter1 = iterable1.iterator();
     Iterator<B> iter2 = iterable2.iterator();
     List<C> result = new LinkedList<C>();
@@ -872,8 +866,7 @@ public class Iterables {
    * @see #zip(Iterable, Iterable, Applicable2)
    */
   @NonNull
-  public static <A, B> List<Tuple2<A, B>> zip(@NonNull Iterable<A> iterable1,
-    @NonNull Iterable<B> iterable2) {
+  public static <A, B> List<Tuple2<A, B>> zip(@NonNull Iterable<A> iterable1, @NonNull Iterable<B> iterable2) {
     return zip(iterable1, iterable2, Tuples.<A, B> toTuple2());
   }
 
@@ -949,8 +942,7 @@ public class Iterables {
    * @return a new List with the Cartesian product of both collections.
    */
   @NonNull
-  public static final <A, B> List<Tuple2<A, B>> cross(@NonNull Iterable<A> iterable1,
-    @NonNull Iterable<B> iterable2) {
+  public static final <A, B> List<Tuple2<A, B>> cross(@NonNull Iterable<A> iterable1, @NonNull Iterable<B> iterable2) {
     return cross(iterable1, iterable2, new LinkedList());
   }
 
@@ -982,8 +974,8 @@ public class Iterables {
   }
 
   @NonNull
-  private static <A, B> List<Tuple2<A, B>> cross(@NonNull Iterable<A> iterable1,
-    @NonNull Iterable<B> iterable2, @NonNull List<Tuple2<A, B>> result) {
+  private static <A, B> List<Tuple2<A, B>> cross(@NonNull Iterable<A> iterable1, @NonNull Iterable<B> iterable2,
+    @NonNull List<Tuple2<A, B>> result) {
     for (A a : iterable1)
       for (B b : iterable2) {
         result.add(_(a, b));

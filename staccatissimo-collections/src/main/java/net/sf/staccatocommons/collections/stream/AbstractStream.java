@@ -13,6 +13,7 @@
 
 package net.sf.staccatocommons.collections.stream;
 
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.*;
 import static net.sf.staccatocommons.collections.stream.Streams.*;
 import static net.sf.staccatocommons.lang.Compare.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
@@ -33,7 +34,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import net.sf.staccatocommons.check.Ensure;
-import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.collections.internal.iterator.DropIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIterator;
@@ -99,11 +99,7 @@ import org.apache.commons.lang.StringUtils;
  * 
  * @param <A>
  */
-public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, Stream, A> implements
-  Stream<A> {
-
-  protected static final Validate<NoSuchElementException> VALIDATE_ELEMENT = Validate
-    .throwing(NoSuchElementException.class);
+public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, Stream, A> implements Stream<A> {
 
   @Override
   public int size() {
@@ -161,11 +157,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
-    try {
-      return Iterables.reduce(this, function);
-    } catch (IllegalArgumentException e) { // FIXME why illegal argument ???
-      return VALIDATE_ELEMENT.fail("Can not reduce an empty stream");
-    }
+    return Iterables.reduce(this, function);
   }
 
   @Override
@@ -303,7 +295,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   @Override
   public A last() {
     Thriterator<A> iter = iterator();
-    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams have no elements");
+    checkNotEmpty(iter);
     while (iter.hasNext())
       iter.advanceNext();
     return iter.current();
@@ -311,14 +303,14 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public A get(int n) {
-    Thriterator<A> iter = this.iterator();
-    for (int i = 0; i <= n; i++)
-      try {
+    try {
+      Thriterator<A> iter = this.iterator();
+      for (int i = 0; i <= n; i++)
         iter.advanceNext();
-      } catch (NoSuchElementException e) {
-        throw new IndexOutOfBoundsException("At " + n);
-      }
-    return iter.current();
+      return iter.current();
+    } catch (NoSuchElementException e) {
+      throw new IndexOutOfBoundsException("At " + n);
+    }
   }
 
   public final Stream<A> filterIndex(Evaluable<Integer> predicate) {
@@ -436,8 +428,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   private static <A> Predicate2<A, A> equalOrEquiv() {
     return Equiv.<A> equalNullSafe().or(new AbstractPredicate2<A, A>() {
       public boolean eval(A arg0, A arg1) {
-        return arg0 instanceof Stream<?> && arg1 instanceof Stream<?>
-          && ((Stream) arg0).equiv((Stream) arg1);
+        return arg0 instanceof Stream<?> && arg1 instanceof Stream<?> && ((Stream) arg0).equiv((Stream) arg1);
       }
     });
   }
@@ -453,8 +444,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   @Override
-  public final <B> boolean equivOn(Applicable<? super A, ? extends B> function,
-    Iterable<? extends A> iterable) {
+  public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, Iterable<? extends A> iterable) {
     return equivBy(Equiv.on(function), iterable);
   }
 
@@ -537,34 +527,30 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   @Override
   public Tuple2<A, Stream<A>> decons() {
     Iterator<A> iter = iterator();
-    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams can not be deconstructed");
+    checkNotEmpty(iter);
     return _(iter.next(), Streams.from(iter));
   }
 
   @Override
   public Tuple2<Thunk<A>, Stream<A>> delayedDecons() {
     Thriterator<A> iter = iterator();
-    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams can not be deconstructed");
+    checkNotEmpty(iter);
     return _(iter.delayedNext(), Streams.from(iter));
   }
 
   @Override
   public Stream<A> tail() {
-    VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams have not tail");
+    checkNotEmpty(this);
     return drop(1);
   }
 
   @Override
   public A head() {
-    try {
-      return first();
-    } catch (IndexOutOfBoundsException e) {
-      return VALIDATE_ELEMENT.fail("Empty streams have no head");
-    }
+    checkNotEmpty(this);
+    return first();
   }
 
-  public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable,
-    @NonNull final Function2<A, B, C> function) {
+  public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable, @NonNull final Function2<A, B, C> function) {
     return new ZipStream<C, A, B>(this, iterable, function);
   }
 
@@ -613,14 +599,12 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   @Override
-  public final <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function)
-    throws NoSuchElementException {
+  public final <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function) throws NoSuchElementException {
     return maximumBy(Compare.on(function));
   }
 
   @Override
-  public final <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function)
-    throws NoSuchElementException {
+  public final <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function) throws NoSuchElementException {
     return minimumBy(Compare.on(function));
   }
 
