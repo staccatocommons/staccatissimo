@@ -121,6 +121,11 @@ public final class Lambda {
     return getSharedLambdaFactory().lambda(returnType);
   }
 
+  /** Same that {@link #lambda(Object)}, but discarding type parameters */
+  public static Function ulambda(Object returnType) {
+    return lambda(returnType);
+  }
+
   /**
    * Answers a {@link Predicate} that when evaluated sends to its argument the
    * message previously sent to the last stubbed type. Refer to the use cases
@@ -134,6 +139,11 @@ public final class Lambda {
    */
   public static <A> Predicate<A> lambda(boolean returnType) {
     return getSharedLambdaFactory().lambda(returnType);
+  }
+
+  /** Same that {@link #lambda(boolean)}, but discarding type parameters */
+  public static Predicate ulambda(boolean returnType) {
+    return lambda(returnType);
   }
 
   /**
@@ -152,6 +162,11 @@ public final class Lambda {
     return getSharedLambdaFactory().lambda2(returnType);
   }
 
+  /** Same that {@link #lambda2(Object)}, but discarding type parameters */
+  public static Function2 ulambda2(Object returnType) {
+    return lambda2(returnType);
+  }
+
   /**
    * Answers a {@link Predicate1} that when evaluated sends to its first
    * argument the message previously sent to the last stubbed type, passing its
@@ -166,6 +181,11 @@ public final class Lambda {
    */
   public static <A, B> Predicate2<A, B> lambda2(boolean returnType) {
     return getSharedLambdaFactory().lambda2(returnType);
+  }
+
+  /** Same that {@link #lambda2(boolean)}, but discarding type parameters */
+  public static Predicate2 ulambda2(boolean returnType) {
+    return lambda2(returnType);
   }
 
   /**
@@ -184,6 +204,11 @@ public final class Lambda {
    */
   public static <A, B, C, D> Function3<A, B, C, D> lambda3(D returnType) {
     return getSharedLambdaFactory().lambda3(returnType);
+  }
+
+  /** Same that {@link #lambda3(Object)}, but discarding type parameters */
+  public static Function3 ulambda3(Object returnType) {
+    return ulambda3(returnType);
   }
 
   /**
