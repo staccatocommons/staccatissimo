@@ -4,13 +4,13 @@
 	<artifactId>staccatissimo-numbers</artifactId>
 	<name>Staccatissimo-Numbers</name>
 	<description>Staccatissimo Numeric Classes</description>
-	<version>2.1</version>
+	<version>2.2-SNAPSHOT</version>
 	<inceptionYear>2010</inceptionYear>
 	
 	<parent>
 		<groupId>net.sf.staccatocommons</groupId>
 		<artifactId>staccatissimo-parent-pom</artifactId>
-		<version>2.1</version>
+		<version>2.2-SNAPSHOT</version>
 	</parent>
 	<reporting>
 		<plugins>
