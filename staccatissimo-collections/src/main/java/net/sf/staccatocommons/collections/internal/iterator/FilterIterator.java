@@ -16,13 +16,13 @@ package net.sf.staccatocommons.collections.internal.iterator;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.iterators.NextGetIterator;
+import net.sf.staccatocommons.iterators.UpdateCurrentThriterator;
 
 /**
  * @author flbulgarelli
  * 
  */
-public final class FilterIterator<A> extends NextGetIterator<A> {
+public final class FilterIterator<A> extends UpdateCurrentThriterator<A> {
 
   private final Iterator<A> iter;
   private final Evaluable<? super A> predicate;
@@ -35,11 +35,14 @@ public final class FilterIterator<A> extends NextGetIterator<A> {
     this.predicate = predicate;
   }
 
-  protected boolean updateNext() {
-    while (iter.hasNext())
-      if (predicate.eval(setNext(iter.next())))
-        return true;
-    return false;
+  protected void updateCurrent() {
+    while (iter.hasNext()) {
+      A element = iter.next();
+      if (predicate.eval(element)) {
+        setCurrent(element);
+        break;
+      }
+    }
   }
 
 }

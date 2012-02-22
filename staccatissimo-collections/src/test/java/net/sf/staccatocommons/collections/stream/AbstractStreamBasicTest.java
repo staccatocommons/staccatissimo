@@ -188,7 +188,7 @@ public class AbstractStreamBasicTest {
 
   /** Test for {@link Stream#indices(Evaluable)} */
   @Test
-  public void indieces() throws Exception {
+  public void indices() throws Exception {
     assertEquals(
       Lists.from(2, 3),
       Streams.cons("hello", "world", "foo", "bar").indices(lessThan(4).of(length())).toList());

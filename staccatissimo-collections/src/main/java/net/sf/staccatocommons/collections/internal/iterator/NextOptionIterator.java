@@ -11,25 +11,22 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.internal.iterator;
 
-import net.sf.staccatocommons.iterators.NextGetIterator;
+import net.sf.staccatocommons.iterators.UpdateCurrentThriterator;
 import net.sf.staccatocommons.lang.Option;
 
 /**
  * @author flbulgarelli
  * 
  */
-public abstract class NextOptionIterator<A> extends NextGetIterator<A> {
+public abstract class NextOptionIterator<A> extends UpdateCurrentThriterator<A> {
 
-  protected final boolean updateNext() {
+  protected final void updateCurrent() {
     Option<A> nextOption = nextOption();
     if (nextOption.isDefined()) {
-      setNext(nextOption.value());
-      return true;
+      setCurrent(nextOption.value());
     }
-    return false;
   }
 
   protected abstract Option<A> nextOption();

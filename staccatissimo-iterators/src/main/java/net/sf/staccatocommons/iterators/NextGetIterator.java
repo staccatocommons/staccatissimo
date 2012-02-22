@@ -11,18 +11,22 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
-
 package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
+
+import net.sf.staccatocommons.iterators.thriter.Thriterator;
 
 /**
  * 
  * @author flbulgarelli
  * 
  * @param <A>
+ * @deprecated use {@link UpdateCurrentThriterator} instead, which offers same
+ *             functionality, is simpler to use, and implements
+ *             {@link Thriterator}
  */
+@Deprecated
 public abstract class NextGetIterator<A> extends AbstractUnmodifiableIterator<A> {
 
   private A next;

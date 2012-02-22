@@ -15,13 +15,14 @@ package net.sf.staccatocommons.iterators;
 
 import java.util.Enumeration;
 
+import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class EnumerationIterator<A> extends AbstractUnmodifiableIterator<A> {
+public class EnumerationIterator<A> extends NextThriterator<A> {
 
   private final Enumeration<? extends A> enumeration;
 
@@ -36,7 +37,7 @@ public class EnumerationIterator<A> extends AbstractUnmodifiableIterator<A> {
     return enumeration.hasMoreElements();
   }
 
-  public A next() {
+  protected A nextImpl() {
     return enumeration.nextElement();
   }
 

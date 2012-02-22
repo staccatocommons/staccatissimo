@@ -16,13 +16,13 @@ package net.sf.staccatocommons.collections.internal.iterator;
 import java.util.Iterator;
 
 import net.sf.staccatocommons.defs.Evaluable;
-import net.sf.staccatocommons.iterators.NextGetIterator;
+import net.sf.staccatocommons.iterators.UpdateCurrentThriterator;
 
 /**
  * @author flbulgarelli
  * 
  */
-public final class TakeWhileIterator<A> extends NextGetIterator<A> {
+public final class TakeWhileIterator<A> extends UpdateCurrentThriterator<A> {
   private final Evaluable<? super A> predicate;
   private final Iterator<A> iter;
 
@@ -35,7 +35,10 @@ public final class TakeWhileIterator<A> extends NextGetIterator<A> {
   }
 
   @Override
-  protected boolean updateNext() {
-    return iter.hasNext() && predicate.eval(setNext(iter.next()));
+  protected void updateCurrent() {
+    A element;
+    if (iter.hasNext() && predicate.eval(element = iter.next())) {
+      setCurrent(element);
+    }
   }
 }
