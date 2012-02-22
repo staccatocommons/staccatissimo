@@ -11,10 +11,12 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccatissimo-Control 
+Welcome to Staccatissimo-Control
  
- Staccatissimo-Control is a library for building a complex, high-level control structures
- in a simple, consistent way.     
+  Here you will find {{{./apidocs/index.html}Javadoc}} and build reports. For documentation and code samples, 
+please visit {{{https://github.com/staccatocommons/staccatissimo/wiki}Staccatissimo Wiki}} 
  
-
+  
+ 
+ 
 

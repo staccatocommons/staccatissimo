@@ -11,8 +11,11 @@
 ~~  GNU Lesser General Public License for more details.
 ~~
 
-About Staccatissimo-Dynamic 
+Welcome to Staccatissimo-Dynamic 
  
- Staccatissimo-Dynamic is a library for handling objects in a dynamically-typed way
+  Here you will find {{{./apidocs/index.html}Javadoc}} and build reports. For documentation and code samples, 
+please visit {{{https://github.com/staccatocommons/staccatissimo/wiki}Staccatissimo Wiki}} 
  
-
+  
+ 
+ 
