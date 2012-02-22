@@ -67,7 +67,7 @@ public class PairUnitTest extends TupleAbstractUnitTest {
 
   @Override
   public void testToString() throws Exception {
-    assertEquals("(90,6)", _(90, 6).toString());
+    assertEquals("(90, 6)", _(90, 6).toString());
   }
 
   /***/

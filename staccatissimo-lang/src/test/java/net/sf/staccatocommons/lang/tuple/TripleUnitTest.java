@@ -71,7 +71,7 @@ public class TripleUnitTest extends TupleAbstractUnitTest {
 
   @Override
   public void testToString() throws Exception {
-    assertEquals("(90,6,8)", _(90, 6, 8).toString());
+    assertEquals("(90, 6, 8)", _(90, 6, 8).toString());
 
   }
 

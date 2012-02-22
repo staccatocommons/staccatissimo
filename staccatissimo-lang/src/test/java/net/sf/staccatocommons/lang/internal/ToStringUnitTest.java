@@ -35,7 +35,7 @@ public class ToStringUnitTest {
    */
   @Test
   public void testToStringObject() {
-    assertEquals("ToStringUnitTest.Foo(10,90)", ToString.toString(new Foo()));
+    assertEquals("ToStringUnitTest.Foo(10, 90)", ToString.toString(new Foo()));
   }
 
 }

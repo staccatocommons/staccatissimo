@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.util;
 
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
@@ -31,7 +30,7 @@ public class StringsUnitTest {
   /** Test for {@link Strings#reflectionToString()} **/
   @Test
   public void testReflectionToString() throws Exception {
-    assertEquals("Pair(10,5)", Strings.reflectionToString().apply(_(10, 5)));
+    assertEquals("Pair(10, 5)", Strings.reflectionToString().apply(_(10, 5)));
   }
 
   /**

@@ -81,7 +81,7 @@ public class IOStreamsUnitTest {
     ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
 
     assertEquals(
-      "[Range(10,90), Range(8,40), Range(9,10), Range(9,12)]",
+      "[Range(10, 90), Range(8, 40), Range(9, 10), Range(9, 12)]",
       IOStreams.<Range<Integer>> fromObjects(new ObjectInputStream(in)).printString());
   }
 
