@@ -11,10 +11,9 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccatocommons.collections.stream.Transformable.DeconsApplicable;
+import net.sf.staccatocommons.collections.stream.Stream.DeconsApplicable;
 
 /**
  * Abstract {@link DeconsApplicable} that returns an empty stream for

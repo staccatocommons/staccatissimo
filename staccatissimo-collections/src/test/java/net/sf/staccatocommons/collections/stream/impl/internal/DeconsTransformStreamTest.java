@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.impl.internal;
 
 import static net.sf.staccatocommons.lang.Compare.*;
@@ -21,8 +20,8 @@ import java.util.Arrays;
 
 import net.sf.staccatocommons.collections.stream.AbstractDeconsApplicable;
 import net.sf.staccatocommons.collections.stream.Stream;
+import net.sf.staccatocommons.collections.stream.Stream.DeconsApplicable;
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.collections.stream.Transformable.DeconsApplicable;
 import net.sf.staccatocommons.defs.Evaluable;
 
 import org.junit.Test;

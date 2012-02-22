@@ -11,16 +11,16 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream;
 
-import net.sf.staccatocommons.collections.stream.Transformable.DelayedDeconsApplicable;
+import net.sf.staccatocommons.collections.stream.Stream.DelayedDeconsApplicable;
 
 /**
  * @author flbulgarelli
  * 
  */
-public abstract class AbstractDelayedDeconsApplicable<A, B> implements DelayedDeconsApplicable<A, B> {
+public abstract class AbstractDelayedDeconsApplicable<A, B> implements
+  DelayedDeconsApplicable<A, B> {
 
   /**
    * Returns an empty stream

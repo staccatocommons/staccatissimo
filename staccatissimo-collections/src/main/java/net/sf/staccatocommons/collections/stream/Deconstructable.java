@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream;
 
 import java.util.NoSuchElementException;
@@ -28,7 +27,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * <code>cdr</code>.
  * 
  * Constructing is the oposite of deconstructing. Such operations can be found
- * in {@link Cons}
+ * in {@link Streams}
  * 
  * @author flbulgarelli
  */
