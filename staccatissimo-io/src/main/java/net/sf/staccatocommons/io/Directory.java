@@ -222,7 +222,7 @@ final class BreadthFirst extends AbstractFunction<Stream<File>, Stream<File>> {
           return !argument.isDirectory();
         }
       });
-    return partion._0().append(//
+    return partion._0().concat(//
       partion._1().flatMap(new AbstractFunction<File, Iterable<File>>() {
         public Iterable<File> apply(File arg) {
           return Arrays.asList(arg.listFiles());

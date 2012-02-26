@@ -75,9 +75,9 @@ public class LazinessIntegrationTest {
       (int) Streams
         .cons(10, 20)
         .append(21)
-        .append(Thunks.constant(22))
+        .delayedAppend(Thunks.constant(22))
         .appendUndefined()
-        .append(Thunks.constant(25))
+        .delayedAppend(Thunks.constant(25))
         .intersperse(1)
         .last());
   }

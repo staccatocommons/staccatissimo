@@ -743,19 +743,45 @@ public interface Stream<A> extends //
   // Appending
 
   /**
+   * Equivalent to {@link #concat(Iterable)}
+   * 
+   * @deprecated use {@link #concat(Iterable)} instead
+   */
+  @Projection
+  Stream<A> append(@NonNull Iterable<A> other);
+
+  /**
    * Concatenates <code>this</code> with <code>other</code>
    * 
    * It answers an {@link Stream} that retrieves elements from this Stream, and
-   * then, after its last element, from the given Stream.
+   * then, after its last element, from the given iterable.
    * 
    * As a particular case, if this Stream is infinite, the resulting Stream will
    * retrieve the same elements than this one.
    * 
    * @param other
    * @return a new {@link Stream}
+   * @since 2.2
    */
   @Projection
-  Stream<A> append(@NonNull Iterable<A> other);
+  Stream<A> concat(@NonNull Iterable<A> other);
+  
+  
+  /**
+   * Concatenates <code>this</code> with the given <code>elements</code>
+   * 
+   * It answers an {@link Stream} that retrieves elements from this Stream, and
+   * then, after its last element, the given elements.
+   * 
+   * As a particular case, if this Stream is infinite, the resulting Stream will
+   * retrieve the same elements than this one.
+   * 
+   * @param elements the element to add at the end of the stream
+   * @return a new {@link Stream}
+   * @since 2.2
+   */
+  @Projection
+  Stream<A> concat(@NonNull A ... elements);
 
   /**
    * Concatenates this Stream with the undefined Stream. Equivalent to
@@ -780,14 +806,24 @@ public interface Stream<A> extends //
   Stream<A> append(A element);
 
   /**
+   * Equivalent to {@link #delayedAppend(Thunk)}.
+   * 
+   * @deprecated use {@link #delayedAppend(Thunk)} instead
+   */
+  @Deprecated
+  @Projection
+  Stream<A> append(@NonNull Thunk<A> thunk);
+
+  /**
    * Adds an element's thunk as the last one of the stream.
    * 
    * @param thunk
    * @return a new {@link Stream} that retrieves this {@link Stream} elements,
    *         and then, the value of the given <code>thunk</code>
+   * @since 2.2
    */
   @Projection
-  Stream<A> append(@NonNull Thunk<A> thunk);
+  Stream<A> delayedAppend(@NonNull Thunk<A> thunk);
 
   /**
    * Adds an element as the first one of the stream.
@@ -800,6 +836,15 @@ public interface Stream<A> extends //
   Stream<A> prepend(A element);
 
   /**
+   * Equivalent to {@link #delayedPrepend(Thunk)}
+   * 
+   * @deprecated use {@link #delayedPrepend(Thunk)}
+   */
+  @Deprecated
+  @Projection
+  Stream<A> prepend(@NonNull Thunk<A> thunk);
+
+  /**
    * Adds an element's thunk as the first one of the stream.
    * 
    * @param thunk
@@ -807,8 +852,8 @@ public interface Stream<A> extends //
    *         <code>thunk</code>, and then, this {@link Stream} elements.
    */
   @Projection
-  Stream<A> prepend(@NonNull Thunk<A> thunk);
-
+  Stream<A> delayedPrepend(@NonNull Thunk<A> thunk);
+  
   // Branching
 
   /**
@@ -846,13 +891,35 @@ public interface Stream<A> extends //
     Applicable<? super A, ? extends C> function1);
 
   // Zipping
+  
+  
+  /**
+   * Returns a {@link Stream} formed by the result of applying the given
+   * <code>function</code> to each pair of elements from <code>this</code> and
+   * the given <code>iterable</code>.
+   * 
+   * If either <code>this</code> or the given iterable is shorter than the other
+   * given number of elements, the remaining elements of this are discarded
+   * 
+   * @param elements
+   *          the elements to zip with this Stream
+   * @param function
+   *          the function to apply to each pair
+   * @return a new Stream which is the result of applying the given
+   *         {@link Applicable2} to each pair this Stream and the elements. The
+   *         resulting Stream size is the minimum of this size and the number of
+   *         elements
+   * @see Iterables#zip(Iterable, Iterable)
+   */
+  @Projection
+  <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, @NonNull B... elements);
 
   /**
    * Returns a {@link Stream} formed by the result of applying the given
    * <code>function</code> to each pair of elements from <code>this</code> and
    * the given <code>iterable</code>.
    * 
-   * If any if either <code>this</code> or the given iterable is shorter than
+   * If either <code>this</code> or the given iterable is shorter than
    * the other one, the remaining elements are discarded.
    * 
    * @param <B>
@@ -871,18 +938,44 @@ public interface Stream<A> extends //
    * @see Iterables#zip(Iterable, Iterable)
    */
   @Projection
+  <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, @NonNull Iterable<B> iterable);
+
+  /**
+   * Equivalent to {@link #zipWith(Function2, Iterable)}, with arguments
+   * interchanged
+   * 
+   * @deprecated use {@link #zipWith(Function2, Iterable)}
+   */
+  @Deprecated
+  @Projection
   <B, C> Stream<C> zip(@NonNull Iterable<B> iterable, Function2<? super A, ? super B, C> function);
+
+  /**
+   * Returns a {@link Stream} formed by by pair of element from
+   * <code>this</code> and the given <code>elements</code>.
+   * 
+   * If either <code>this</code> or the given array is shorter than the other
+   * one, the remaining elements are discarded.
+   * 
+   * @param <B>
+   * @param iterable
+   * @return a new Stream formed applying the given {@link Applicable2} to each
+   *         pair this Stream and the given elements. The resulting Stream size
+   *         is the minimum of both iterables sizes.
+   * @see #zip(Iterable, Function2)
+   * @since 2.2
+   */
+  @Projection
+  <B> Stream<Tuple2<A, B>> zip(@NonNull B... elements);
 
   /**
    * Returns a {@link Stream} formed by by pair of element from
    * <code>this</code> and the given <code>iterable</code>.
    * 
-   * If any if either <code>this</code> or the given iterable is shorter than
+   * If either <code>this</code> or the given iterable is shorter than
    * the other one, the remaining elements are discarded.
    * 
    * @param <B>
-   *          the type to the <code>iterable</code> to zip with this
-   *          {@link Stream}
    * @param iterable
    * @return a new Stream formed applying the given {@link Applicable2} to each
    *         pair this Stream and the given iterable. The resulting Stream size

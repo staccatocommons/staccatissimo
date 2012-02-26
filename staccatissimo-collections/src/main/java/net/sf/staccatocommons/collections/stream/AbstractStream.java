@@ -277,7 +277,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public Stream<A> append(final Iterable<A> other) {
-    return new AppendIterableStream<A>(this, other);
+    return concat(other);
   }
 
   public Stream<A> appendUndefined() {
@@ -503,7 +503,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public Stream<A> append(Thunk<A> element) {
-    return new DelayedAppendStream<A>(this, element);
+    return delayedAppend(element);
   }
 
   @Override
@@ -513,7 +513,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public Stream<A> prepend(Thunk<A> element) {
-    return new DelayedPrependStream<A>(element, this);
+    return delayedPrepend(element);
   }
 
   @Override
@@ -562,7 +562,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable,
     @NonNull final Function2<? super A, ? super B, C> function) {
-    return new ZipStream<C, A, B>(this, iterable, function);
+    return zipWith(function, iterable);
   }
 
   @Override
@@ -790,5 +790,34 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   public final String toString() {
     return ToString.toString(this);
   }
+
+  public Stream<A> concat(A... elements) {
+    return concat(Arrays.asList(elements));
+  }
+
+  public Stream<A> concat(Iterable<A> other) {
+    return new AppendIterableStream<A>(this, other);
+  }
+
+  public Stream<A> delayedAppend(Thunk<A> thunk) {
+    return new DelayedAppendStream<A>(this, thunk);
+  }
+
+  public Stream<A> delayedPrepend(Thunk<A> thunk) {
+    return new DelayedPrependStream<A>(thunk, this);
+  }
+
+  public <B> Stream<Tuple2<A, B>> zip(B... elements) {
+    return zip(Arrays.asList(elements));
+  }
+
+  public <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, B... elements) {
+    return zipWith(function, Arrays.asList(elements));
+  }
+
+  public <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, Iterable<B> iterable) {
+    return new ZipStream<C, A, B>(this, iterable, function);
+  }
+  
 
 }

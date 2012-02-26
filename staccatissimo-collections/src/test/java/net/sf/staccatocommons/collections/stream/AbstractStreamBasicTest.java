@@ -159,7 +159,7 @@ public class AbstractStreamBasicTest {
   public void concat() {
     assertEquals(
       Arrays.asList(10, 90, 60, 1, 2, 20),
-      Streams.cons(10, 90, 60).append(Arrays.asList(1, 2)).append(Streams.cons(20)).toList());
+      Streams.cons(10, 90, 60).concat(Arrays.asList(1, 2)).concat(Streams.cons(20)).toList());
 
     assertEquals(Arrays.asList("foo"), Streams.cons("foo").appendUndefined().take(1).toList());
   }
