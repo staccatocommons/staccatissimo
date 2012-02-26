@@ -37,6 +37,7 @@ import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.collections.internal.iterator.DropIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIterator;
+import net.sf.staccatocommons.collections.internal.iterator.FlatMapIterator;
 import net.sf.staccatocommons.collections.internal.iterator.IndicesIterator;
 import net.sf.staccatocommons.collections.internal.iterator.TakeWhileIterator;
 import net.sf.staccatocommons.collections.internal.iterator.ZipIterator;
@@ -48,7 +49,6 @@ import net.sf.staccatocommons.collections.stream.internal.algorithms.AppendItera
 import net.sf.staccatocommons.collections.stream.internal.algorithms.AppendStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.DeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.DropWhileStream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.FlatMapStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.MapStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.MemorizedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.PrependStream;
@@ -269,7 +269,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public <B> Stream<B> flatMap(final Function<? super A, ? extends Iterable<? extends B>> function) {
-    return new FlatMapStream<A, B>(this, function);
+    return Streams.from(new FlatMapIterator<A, B>(iterator(), function));
   }
 
   public <B> Stream<B> flatMapArray(@NonNull Function<? super A, ? extends B[]> function) {
