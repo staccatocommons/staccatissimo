@@ -289,6 +289,23 @@ public class Streams {
   // }
 
   /**
+   * Creates a new {@link Stream} that retrieves the elements from the given
+   * array.  Equivalent to {@link Streams#cons(Object)}
+   * 
+   * @param <A>
+   *          the element type
+   * @param elements
+   *          the array that is Stream source
+   * @return a new stream that gets its elements from an array
+   */
+  @Repeatable
+  @Projection
+  public static <A> Stream<A> from(@NonNull A... elements) {
+    return cons(elements);
+  }
+  
+  
+  /**
    * Create a new {@link Stream} that retrieves elements from the given
    * Iterable.
    * 

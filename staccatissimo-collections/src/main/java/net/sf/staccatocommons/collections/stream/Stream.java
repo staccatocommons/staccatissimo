@@ -1069,16 +1069,27 @@ public interface Stream<A> extends //
   A[] toArray(@NonNull Class<? super A> clazz);
 
   /**
-   * Memorizes stream elements and their order, by answering a lazy stream with
+   * Equivalent to {@link #memoize()}
+   * 
+   * @deprecated the exact name of this concept is memoization, not
+   *             memorization. Use {@link #memoize()} instead
+   */
+  @Deprecated
+  @Repeatable
+  @Projection
+  Stream<A> memorize();
+  
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Memoization">Memoizes</a> stream elements and their order, by answering a lazy stream with
    * {@link Repeatable} iteration order that caches elements evaluated during
    * iteration.
    * 
-   * @return a new {@link Stream} that memorizes elements evaluated during
+   * @return a new {@link Stream} that memoizes elements evaluated during
    *         iteration
    */
   @Repeatable
   @Projection
-  Stream<A> memorize();
+  Stream<A> memoize();
 
   /**
    * Forces stream elements evaluation by converting it into a new ordered

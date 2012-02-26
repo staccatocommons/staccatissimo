@@ -233,7 +233,7 @@ public abstract class StreamTheories {
   /** Tests that memorizing grants repeatable iteration order */
   @Theory
   public <A> void memorizeGrantsRepeatableIterationOrder(Stream<A> stream) throws Exception {
-    Stream<A> memorized = stream.memorize();
+    Stream<A> memorized = stream.memoize();
     assertEquals(memorized.isEmpty(), memorized.isEmpty());
     assertTrue(memorized.equiv(memorized));
   }

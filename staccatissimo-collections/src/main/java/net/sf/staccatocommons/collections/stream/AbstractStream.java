@@ -697,7 +697,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   private static <A> Stream<Stream<A>> fcross(Stream<Stream<A>> other) {
     return other.transform(new AbstractFunction<Stream<Stream<A>>, Stream<Stream<A>>>() {
       public Stream<Stream<A>> apply(Stream<Stream<A>> xss_) {
-        final Stream<Stream<A>> xss = xss_.memorize();
+        final Stream<Stream<A>> xss = xss_.memoize();
         if (xss.size() == 2)
           return xss.first().flatMap(new AbstractFunction<A, Stream<Stream<A>>>() {
             public Stream<Stream<A>> apply(final A x) {
@@ -819,5 +819,8 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
     return new ZipStream<C, A, B>(this, iterable, function);
   }
   
+  public Stream<A> memoize() {
+    return memorize();
+  }
 
 }

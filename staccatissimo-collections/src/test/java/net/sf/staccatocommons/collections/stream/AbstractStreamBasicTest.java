@@ -264,7 +264,7 @@ public class AbstractStreamBasicTest {
    */
   @Test
   public void testMemorize() throws Exception {
-    Stream<Integer> interspersed = Streams.cons(10, 20, 30).intersperse(1).memorize();
+    Stream<Integer> interspersed = Streams.cons(10, 20, 30).intersperse(1).memoize();
     assertEquals(10, (int) interspersed.first());
     assertEquals(10, (int) interspersed.first());
     assertEquals(1, (int) interspersed.second());
@@ -290,7 +290,7 @@ public class AbstractStreamBasicTest {
    */
   @Test
   public void testMemorizeLazyOnAppend() throws Exception {
-    Stream<Integer> stream = Streams.cons(10, 98).append(65).appendUndefined().append(9).memorize();
+    Stream<Integer> stream = Streams.cons(10, 98).append(65).appendUndefined().append(9).memoize();
     assertEquals(stream.last(), stream.last());
   }
 
@@ -304,7 +304,7 @@ public class AbstractStreamBasicTest {
       public Integer apply(Integer arg) {
         return 1 / arg;
       }
-    }).memorize();
+    }).memoize();
 
     assertEquals(stream.third(), stream.third());
   }
