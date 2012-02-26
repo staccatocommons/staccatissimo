@@ -13,6 +13,7 @@
 
 package net.sf.staccatocommons.collections.stream.internal;
 
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
 
 import java.util.Iterator;
@@ -53,7 +54,7 @@ public class IteratorStream<A> extends AbstractStream<A> {
   }
 
   public final Tuple2<A, Stream<A>> decons() {
-    VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams can not be deconstructed");
+    checkNotEmpty(this);
     return _(head(), (Stream<A>) this);
   }
 }

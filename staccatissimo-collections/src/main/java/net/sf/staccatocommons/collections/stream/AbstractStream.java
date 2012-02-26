@@ -13,6 +13,7 @@
 
 package net.sf.staccatocommons.collections.stream;
 
+import static net.sf.staccatocommons.collections.iterable.internal.IterablesInternal.*;
 import static net.sf.staccatocommons.collections.stream.Streams.*;
 import static net.sf.staccatocommons.lang.Compare.*;
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
@@ -33,7 +34,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import net.sf.staccatocommons.check.Ensure;
-import net.sf.staccatocommons.check.Validate;
 import net.sf.staccatocommons.collections.internal.iterator.ConcatIterator;
 import net.sf.staccatocommons.collections.internal.iterator.DropIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
@@ -53,8 +53,8 @@ import net.sf.staccatocommons.collections.stream.internal.algorithms.DropWhileSt
 import net.sf.staccatocommons.collections.stream.internal.algorithms.MapStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.MemorizedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.PrependStream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.SortedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.SizeLimitedStream;
+import net.sf.staccatocommons.collections.stream.internal.algorithms.SortedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.TransformStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedDeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedPrependStream;
@@ -103,9 +103,6 @@ import org.apache.commons.lang.StringUtils;
  * @param <A>
  */
 public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, Stream, A> implements Stream<A> {
-
-  protected static final Validate<NoSuchElementException> VALIDATE_ELEMENT = Validate
-    .throwing(NoSuchElementException.class);
 
   @Override
   public int size() {
@@ -163,11 +160,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {
-    try {
-      return Iterables.reduce(this, function);
-    } catch (IllegalArgumentException e) { // FIXME why illegal argument ???
-      return VALIDATE_ELEMENT.fail("Can not reduce an empty stream");
-    }
+    return Iterables.reduce(this, function);
   }
 
   @Override
@@ -305,7 +298,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   @Override
   public A last() {
     Thriterator<A> iter = iterator();
-    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams have no elements");
+    checkNotEmpty(iter);
     while (iter.hasNext())
       iter.advanceNext();
     return iter.current();
@@ -313,14 +306,14 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public A get(int n) {
-    Thriterator<A> iter = this.iterator();
-    for (int i = 0; i <= n; i++)
-      try {
+    try {
+      Thriterator<A> iter = this.iterator();
+      for (int i = 0; i <= n; i++)
         iter.advanceNext();
-      } catch (NoSuchElementException e) {
-        throw new IndexOutOfBoundsException("At " + n);
-      }
-    return iter.current();
+      return iter.current();
+    } catch (NoSuchElementException e) {
+      throw new IndexOutOfBoundsException("At " + n);
+    }
   }
 
   public final Stream<A> filterIndex(Evaluable<Integer> predicate) {
@@ -537,30 +530,27 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   @Override
   public Tuple2<A, Stream<A>> decons() {
     Iterator<A> iter = iterator();
-    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams can not be deconstructed");
+    checkNotEmpty(iter);
     return _(iter.next(), Streams.from(iter));
   }
 
   @Override
   public Tuple2<Thunk<A>, Stream<A>> delayedDecons() {
     Thriterator<A> iter = iterator();
-    VALIDATE_ELEMENT.that(iter.hasNext(), "Empty streams can not be deconstructed");
+    checkNotEmpty(iter);
     return _(iter.delayedNext(), Streams.from(iter));
   }
 
   @Override
   public Stream<A> tail() {
-    VALIDATE_ELEMENT.that(!isEmpty(), "Empty streams have not tail");
+    checkNotEmpty(this);
     return drop(1);
   }
 
   @Override
   public A head() {
-    try {
-      return first();
-    } catch (IndexOutOfBoundsException e) {
-      return VALIDATE_ELEMENT.fail("Empty streams have no head");
-    }
+    checkNotEmpty(this);
+    return first();
   }
 
   public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable,

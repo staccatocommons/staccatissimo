@@ -15,7 +15,11 @@ package net.sf.staccatocommons.collections.iterable.internal;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.check.Validate;
+import net.sf.staccatocommons.collections.EmptySourceException;
+import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Evaluable;
 
@@ -28,6 +32,8 @@ public class IterablesInternal {
 
   /***/
   public static final String ITERABLE = "iterable";
+  private static final Validate<EmptySourceException> checkWithEmptySource = Validate
+    .throwing(EmptySourceException.class);
 
   /***/
   public static <T> void addAllInternal(Collection<T> collection, Iterable<? extends T> iterable) {
@@ -67,6 +73,29 @@ public class IterablesInternal {
       if (each.equals(element))
         return true;
     return false;
+  }
+
+  /**
+   * Checks that source is not empty. Throws a {@link EmptySourceException} if
+   * check fails
+   */
+  public static void checkNotEmpty(Iterator<?> source) {
+    checkWithEmptySource.that(source.hasNext(), "Source is empty");
+  }
+
+  /**
+   * Checks that source is not empty. Throws a {@link EmptySourceException} if
+   * check fails
+   */
+  public static void checkNotEmpty(Stream<?> source) {
+    checkWithEmptySource.that(!source.isEmpty(), "Source is empty");
+  }
+
+  /**
+   * Answers a {@link NoSuchElementException}
+   */
+  public static NoSuchElementException noElementSatisfiesPredicate() {
+    return new NoSuchElementException("No element in source satisfies the given predicate");
   }
 
 }
