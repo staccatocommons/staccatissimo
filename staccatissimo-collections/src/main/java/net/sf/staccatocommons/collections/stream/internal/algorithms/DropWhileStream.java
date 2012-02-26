@@ -14,8 +14,6 @@
 
 package net.sf.staccatocommons.collections.stream.internal.algorithms;
 
-import java.util.Iterator;
-
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Evaluable;
@@ -31,7 +29,8 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
 public class DropWhileStream<A> extends AbstractStream<A> {
   private final Evaluable<? super A> predicate;
   private Stream<A> source;
-
+  private Thriterator<A> iter;
+  
   /**
    * Creates a new {@link TakeWhileStream}
    */
@@ -41,13 +40,18 @@ public class DropWhileStream<A> extends AbstractStream<A> {
   }
 
   public Thriterator<A> iterator() {
-    final Iterator<A> iter = source.iterator();
-    A next = null;
-    while (iter.hasNext() && predicate.eval(next = iter.next())) {
-      next = null;
+    if (iter == null) {
+      iter = source.iterator();
+      A next = null;
+      while (iter.hasNext() && predicate.eval(next = iter.next())) {
+        next = null;
+      }
+      if (next == null)
+        iter = Thriterators.from(iter);
+      else
+        iter = new PrependThriterator<A>(next, iter);
     }
-    if (next == null)
-      return Thriterators.from(iter);
-    return new PrependThriterator<A>(next, iter);
+    return iter;
+
   }
 }
