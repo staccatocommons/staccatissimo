@@ -14,9 +14,7 @@
 
 package net.sf.staccatocommons.dynamic;
 
-import java.lang.reflect.Constructor;
-
-import net.sf.staccatocommons.dynamic.internal.Methods;
+import net.sf.staccatocommons.dynamic.internal.Classes;
 import net.sf.staccatocommons.dynamic.internal.NullDynamic;
 import net.sf.staccatocommons.dynamic.internal.ReflectiveDynamic;
 import net.sf.staccatocommons.restrictions.Constant;
@@ -81,12 +79,10 @@ public class Dynamics {
    *           if class can not be instantiated
    */
   public static Dynamic fromClassName(@NonNull String classname) {
-    try {
-      return fromClass(Class.forName(classname));
-    } catch (Exception e) {
-      throw new InstantiationFailedException(e);
-    }
+      return from(Classes.newInstance(classname));
   }
+
+
 
   /**
    * Answer a new {@link Dynamic} that wraps a new instance of the given class
@@ -99,12 +95,9 @@ public class Dynamics {
    */
   @NonNull
   public static Dynamic fromClass(@NonNull Class<?> clazz) {
-    try {
-      return from(clazz.newInstance());
-    } catch (Exception e) {
-      throw new InstantiationFailedException(e);
-    }
+    return from(Classes.newInstance(clazz));
   }
+
 
   /**
    * Answer a new {@link Dynamic} that wraps a new instance of the given class
@@ -117,16 +110,9 @@ public class Dynamics {
    */
   @NonNull
   public static Dynamic fromClass(@NonNull Class<?> clazz, Object... args) {
-    Constructor constructor = Methods.findConstructor(clazz, Methods.getArgTypes(args));
-    // TODO refactor message and use MethodDescriptor
-    if (constructor == null)
-      throw new InstantiationFailedException("There is no suitable constructor in class " + clazz
-        + " for arguments");
-    try {
-      return from(constructor.newInstance(args));
-    } catch (Exception e) {
-      throw new InstantiationFailedException(e);
-    }
+    return from(Classes.newInstance(clazz, args));
   }
+  
+
 
 }
