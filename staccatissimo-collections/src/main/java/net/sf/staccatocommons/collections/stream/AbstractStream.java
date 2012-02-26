@@ -34,6 +34,7 @@ import java.util.Set;
 
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.Validate;
+import net.sf.staccatocommons.collections.internal.iterator.ConcatIterator;
 import net.sf.staccatocommons.collections.internal.iterator.DropIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIterator;
@@ -45,7 +46,6 @@ import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.internal.IteratorStream;
 import net.sf.staccatocommons.collections.stream.internal.ListStream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.AppendIterableStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.AppendStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.DeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.DropWhileStream;
@@ -797,7 +797,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   public Stream<A> concat(Iterable<A> other) {
-    return new AppendIterableStream<A>(this, other);
+    return Streams.from(new ConcatIterator(this.iterator(), other.iterator()));
   }
 
   public Stream<A> delayedAppend(Thunk<A> thunk) {
