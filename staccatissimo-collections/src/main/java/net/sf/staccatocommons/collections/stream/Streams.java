@@ -33,7 +33,6 @@ import net.sf.staccatocommons.collections.stream.internal.SingleStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.DelayedRepatIterator;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.IterateStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.RepeatIterator;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.UndefinedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.ConsStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedSingleStream;
 import net.sf.staccatocommons.defs.Applicable;
@@ -445,7 +444,7 @@ public class Streams {
    */
   @Constant
   public static <A> Stream<A> undefined() {
-    return UndefinedStream.undefined();
+    return cons(Thunks.<A>undefined());
   }
 
   /**
