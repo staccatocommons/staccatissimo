@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.util;
 
 import java.util.regex.Pattern;
@@ -19,6 +18,7 @@ import java.util.regex.Pattern;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
+import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.function.internal.TopLevelFunction;
 import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
@@ -161,11 +161,7 @@ public class Strings {
    */
   @Constant
   public static <A> Function<A, String> toString_() {
-    return new AbstractFunction<A, String>() {
-      public String apply(A arg) {
-        return arg.toString();
-      }
-    };
+    return Functions.toString_();
   }
 
   /**
@@ -195,7 +191,5 @@ public class Strings {
   public static <A> Function<A, String> reflectionToString() {
     return reflectionToString(NamedTupleToStringStyle.getInstance());
   }
-  
-  //TODO move toString to Functions
 
 }

@@ -20,6 +20,8 @@ import java.util.Date;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.function.Function;
+import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.Some;
 import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.testing.junit.jmock.JUnit4MockObjectTestCase;
 
@@ -105,6 +107,13 @@ public class FunctionsUnitTest extends JUnit4MockObjectTestCase {
           argument.increment();
         }
       }).apply(new MutableInt()).intValue());
+  }
+
+  /** test for {@link Functions#getClass_()} */
+  @Test
+  public void getClassFunctionRetrievesTheArgumentsClass() throws Exception {
+    assertEquals(Integer.class, Functions.<Integer> getClass_().apply(10));
+    assertEquals(Some.class, Functions.<Option> getClass_().apply(Option.some(10)));
   }
 
 }

@@ -151,4 +151,38 @@ public class Functions {
       }
     };
   }
+
+  /**
+   * Returns a function that returns the result of sending
+   * {@link Object#toString()} to its argument
+   * 
+   * @param <A>
+   * @return a function that returns <code>arg.toString()</code>
+   * @since 2.2
+   */
+  @Constant
+  public static <A> Function<A, String> toString_() {
+    return new AbstractFunction<A, String>() {
+      public String apply(A arg) {
+        return arg.toString();
+      }
+    };
+  }
+
+  /**
+   * Returns a function that returns the class of its argument.
+   * 
+   * @param <A>
+   * @return a function that returns <code>{@code argument.getClass()}</code>
+   * @since 2.2
+   */
+  @Constant
+  public static <A> Function<A, Class<A>> getClass_() {
+    return new AbstractFunction<A, Class<A>>() {
+      public Class<A> apply(A arg) {
+        return (Class) arg.getClass();
+      }
+    };
+  }
+
 }
