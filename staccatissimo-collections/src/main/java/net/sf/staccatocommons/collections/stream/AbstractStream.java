@@ -39,6 +39,7 @@ import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIterator;
 import net.sf.staccatocommons.collections.internal.iterator.IndicesIterator;
 import net.sf.staccatocommons.collections.internal.iterator.TakeWhileIterator;
+import net.sf.staccatocommons.collections.internal.iterator.ZipIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.internal.IteratorStream;
@@ -54,7 +55,6 @@ import net.sf.staccatocommons.collections.stream.internal.algorithms.PrependStre
 import net.sf.staccatocommons.collections.stream.internal.algorithms.SortedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.TakeStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.TransformStream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.ZipStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedAppendStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedDeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedPrependStream;
@@ -74,6 +74,7 @@ import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.lang.AbstractProtoMonad;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
@@ -816,7 +817,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   public <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, Iterable<B> iterable) {
-    return new ZipStream<C, A, B>(this, iterable, function);
+    return Streams.from(new ZipIterator(iterator(), Thriterators.from(iterable.iterator()), function));
   }
   
   public Stream<A> memoize() {
