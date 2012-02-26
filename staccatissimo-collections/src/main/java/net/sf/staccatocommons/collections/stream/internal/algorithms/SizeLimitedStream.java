@@ -11,13 +11,13 @@
  *  GNU Lesser General Public License for more details.
  */
 
+package net.sf.staccatocommons.collections.stream.internal.algorithms;
 
-package net.sf.staccatocommons.collections.stream.internal.algorithms.delayed;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.sf.staccatocommons.collections.stream.Stream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.AbstractAppendStream;
-import net.sf.staccatocommons.defs.Thunk;
-import net.sf.staccatocommons.iterators.delayed.DelayedAppendIterator;
+import net.sf.staccatocommons.collections.iterable.ModifiableIterables;
+import net.sf.staccatocommons.collections.stream.internal.IteratorStream;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -25,21 +25,23 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public class DelayedAppendStream<A> extends AbstractAppendStream<A> {
+public final class SizeLimitedStream<A> extends IteratorStream<A> {
 
-  private Thunk<A> element;
+  private final int maxSize;
 
   /**
-   * Creates a new {@link DelayedAppendStream}
+   * Creates a new {@link SizeLimitedStream}
    */
-  public DelayedAppendStream(@NonNull Stream<A> source, @NonNull Thunk<A> element) {
-    super(source);
-    this.element = element;
+  public SizeLimitedStream(@NonNull Thriterator<A> iter, int amountOfElements) {
+    super(iter);
+    this.maxSize = amountOfElements;
   }
 
   @Override
-  public Thriterator<A> iterator() {
-    return new DelayedAppendIterator(getSource().iterator(), element);
+  public List<A> toList() {
+    ArrayList<A> list = new ArrayList<A>(maxSize);
+    ModifiableIterables.addAll(list, this);
+    return list;
   }
 
 }
