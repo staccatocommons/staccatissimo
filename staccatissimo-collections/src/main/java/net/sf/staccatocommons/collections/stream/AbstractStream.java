@@ -34,28 +34,28 @@ import java.util.Set;
 
 import net.sf.staccatocommons.check.Ensure;
 import net.sf.staccatocommons.check.Validate;
+import net.sf.staccatocommons.collections.internal.iterator.ConcatIterator;
 import net.sf.staccatocommons.collections.internal.iterator.DropIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIterator;
+import net.sf.staccatocommons.collections.internal.iterator.FlatMapIterator;
 import net.sf.staccatocommons.collections.internal.iterator.IndicesIterator;
+import net.sf.staccatocommons.collections.internal.iterator.TakeIterator;
 import net.sf.staccatocommons.collections.internal.iterator.TakeWhileIterator;
+import net.sf.staccatocommons.collections.internal.iterator.ZipIterator;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.internal.IteratorStream;
 import net.sf.staccatocommons.collections.stream.internal.ListStream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.AppendIterableStream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.AppendStream;
+import net.sf.staccatocommons.collections.stream.internal.NonEmptyIteratorStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.DeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.DropWhileStream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.FlatMapStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.MapStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.MemorizedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.PrependStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.SortedStream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.TakeStream;
+import net.sf.staccatocommons.collections.stream.internal.algorithms.SizeLimitedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.TransformStream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.ZipStream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedAppendStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedDeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedPrependStream;
 import net.sf.staccatocommons.defs.Applicable;
@@ -72,8 +72,11 @@ import net.sf.staccatocommons.defs.reduction.Accumulator;
 import net.sf.staccatocommons.defs.reduction.Reduction;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.defs.type.NumberType;
+import net.sf.staccatocommons.iterators.AppendThriterator;
+import net.sf.staccatocommons.iterators.delayed.DelayedAppendIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.iterators.thriter.Thriterators;
 import net.sf.staccatocommons.lang.AbstractProtoMonad;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
@@ -145,7 +148,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public Stream<A> take(@NotNegative final int amountOfElements) {
-    return new TakeStream<A>(iterator(), amountOfElements);
+    return new SizeLimitedStream<A>(new TakeIterator<A>(iterator(), amountOfElements), amountOfElements);
   }
 
   @Override
@@ -268,7 +271,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public <B> Stream<B> flatMap(final Function<? super A, ? extends Iterable<? extends B>> function) {
-    return new FlatMapStream<A, B>(this, function);
+    return Streams.from(new FlatMapIterator<A, B>(iterator(), function));
   }
 
   public <B> Stream<B> flatMapArray(@NonNull Function<? super A, ? extends B[]> function) {
@@ -498,7 +501,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   @Override
   public Stream<A> append(A element) {
-    return new AppendStream<A>(this, element);
+    return new NonEmptyIteratorStream<A>(new AppendThriterator<A>(this.iterator(), element));
   }
 
   @Override
@@ -796,11 +799,11 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   public Stream<A> concat(Iterable<A> other) {
-    return new AppendIterableStream<A>(this, other);
+    return Streams.from(new ConcatIterator(this.iterator(), other.iterator()));
   }
 
   public Stream<A> delayedAppend(Thunk<A> thunk) {
-    return new DelayedAppendStream<A>(this, thunk);
+    return new NonEmptyIteratorStream(new DelayedAppendIterator(iterator(), thunk));
   }
 
   public Stream<A> delayedPrepend(Thunk<A> thunk) {
@@ -816,7 +819,7 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   public <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, Iterable<B> iterable) {
-    return new ZipStream<C, A, B>(this, iterable, function);
+    return Streams.from(new ZipIterator(iterator(), Thriterators.from(iterable.iterator()), function));
   }
   
   public Stream<A> memoize() {

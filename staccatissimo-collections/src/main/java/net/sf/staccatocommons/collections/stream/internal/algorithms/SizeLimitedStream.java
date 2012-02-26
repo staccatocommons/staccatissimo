@@ -11,37 +11,37 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.internal.algorithms;
 
-import net.sf.staccatocommons.collections.stream.AbstractStream;
-import net.sf.staccatocommons.collections.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.sf.staccatocommons.collections.iterable.ModifiableIterables;
+import net.sf.staccatocommons.collections.stream.internal.IteratorStream;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
-import net.sf.staccatocommons.iterators.thriter.Thriterators;
-import net.sf.staccatocommons.lang.thunk.Thunks;
-import net.sf.staccatocommons.restrictions.Constant;
+import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
  * @author flbulgarelli
  * 
  */
-public final class UndefinedStream<A> extends AbstractStream<A> {
+public final class SizeLimitedStream<A> extends IteratorStream<A> {
 
-  private static final UndefinedStream INSTANCE = new UndefinedStream();
-
-  public Thriterator<A> iterator() {
-    return Thriterators.from(Thunks.<A> undefined());
-  }
+  private final int maxSize;
 
   /**
-   * Answers an undefined stream
-   * 
-   * @param <A>
-   * @return a undefined {@link Stream}
+   * Creates a new {@link SizeLimitedStream}
    */
-  @Constant
-  public static <A> Stream<A> undefined() {
-    return INSTANCE;
+  public SizeLimitedStream(@NonNull Thriterator<A> iter, int amountOfElements) {
+    super(iter);
+    this.maxSize = amountOfElements;
+  }
+
+  @Override
+  public List<A> toList() {
+    ArrayList<A> list = new ArrayList<A>(maxSize);
+    ModifiableIterables.addAll(list, this);
+    return list;
   }
 
 }

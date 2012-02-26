@@ -11,10 +11,10 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream.internal.algorithms;
 
 import static net.sf.staccatocommons.lang.tuple.Tuples.*;
+import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
@@ -32,20 +32,33 @@ import net.sf.staccatocommons.lang.thunk.Thunks;
  * 
  * @param <A>
  */
-public class PrependStream<A> extends AbstractAppendStream<A> {
-
-  public Thriterator<A> iterator() {
-    return new PrependThriterator<A>(head(), tailIterator());
-  }
+public class PrependStream<A> extends AbstractStream<A> {
 
   private final A head;
+  private final Stream<A> source;
 
   /**
    * Creates a new {@link PrependStream}
    */
   public PrependStream(A head, Stream<A> source) {
-    super(source);
+    this.source = source;
     this.head = head;
+  }
+
+  protected final Stream<A> getSource() {
+    return source;
+  }
+
+  public final int size() {
+    return getSource().size() + 1;
+  }
+
+  public final boolean isEmpty() {
+    return false;
+  }
+
+  public Thriterator<A> iterator() {
+    return new PrependThriterator<A>(head(), tailIterator());
   }
 
   @Override

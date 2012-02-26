@@ -20,6 +20,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
+import net.sf.staccatocommons.collections.internal.iterator.IterateIterator;
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.collections.restrictions.Repeatable;
 import net.sf.staccatocommons.collections.stream.internal.CharSequenceStream;
@@ -31,9 +32,7 @@ import net.sf.staccatocommons.collections.stream.internal.IteratorStream;
 import net.sf.staccatocommons.collections.stream.internal.ListStream;
 import net.sf.staccatocommons.collections.stream.internal.SingleStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.DelayedRepatIterator;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.IterateStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.RepeatIterator;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.UndefinedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.ConsStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedSingleStream;
 import net.sf.staccatocommons.defs.Applicable;
@@ -151,25 +150,28 @@ public class Streams {
 
   /**
    * Creates a new infinite {@link Stream} that retrieves element from the
-   * sequence
-   * <code>Sequence.from(start, generator, StopConditions.stopNever())</code>
+   * sequence where the nth element is the given function applied to the nth-1.
+   * 
+   * If function is side-effect-free, the following sequence is generated:
+   * 
+   * <pre>
+   * [seed, generator(seed), generator(generator(seed)), generator(generator(generator(seed))), ...]
+   * </pre>
    * 
    * @param <A>
    * @param seed
-   *          the initial element of the sequence
+   *          the first value to be retrieved
    * @param generator
    *          a function used to generated each element from the sequence after
    *          the initial element
-   * @return a new {@link Stream}
-   * @see IterateStream#from(Object, Applicable, Evaluable)
+   * @return a new {@link Stream} that iterates over over the generated values
    */
   @Projection
   @IgnoreRestrictions
-  public static <A> Stream<A> iterate(@NonNull A seed,
-    @NonNull Applicable<? super A, ? extends A> generator) {
-    return new IterateStream(seed, generator);
+  public static <A> Stream<A> iterate(@NonNull A seed, @NonNull Applicable<? super A, ? extends A> generator) {
+    return from(new IterateIterator(seed, generator));
   }
-
+  
   /**
    * Iterates from the starting integer, adding 1. This generates the infinite
    * stream {@code [start, start+1, start+2...]}
@@ -238,18 +240,18 @@ public class Streams {
   // }
 
   /**
-   * Creates a new infinite {@link Stream} that retrieves element from the
-   * sequence
-   * <code>Sequence.from(start, generator, StopConditions.stopNever())</code>
+   * Creates a new, potentially infinte {@link Stream} that iterates over the
+   * given seed and generator, but will stop before any retrieved element would be 
+   * null.
    * 
    * @param <A>
    * @param seed
-   *          the initial element of the sequence
+   *          the first value to be retrieved
    * @param generator
    *          a function used to generated each element from the sequence after
    *          the initial element
-   * @return a new {@link Stream}
-   * @see IterateStream#from(Object, Applicable, Evaluable)
+   * @return a new {@link Stream} that iterates over over the generated values,
+   *         until an element is null.
    */
   @Projection
   @IgnoreRestrictions
@@ -445,7 +447,7 @@ public class Streams {
    */
   @Constant
   public static <A> Stream<A> undefined() {
-    return UndefinedStream.undefined();
+    return cons(Thunks.<A>undefined());
   }
 
   /**

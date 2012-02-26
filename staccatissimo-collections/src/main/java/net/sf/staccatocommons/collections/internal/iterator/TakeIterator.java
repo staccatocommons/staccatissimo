@@ -34,7 +34,7 @@ public class TakeIterator<A> extends AdvanceThriterator<A> {
    * Creates a new {@link TakeIterator} that takes up to {@code n} elements from
    * the given {@code thritter}
    */
-  public TakeIterator(int n, @NonNull Thriter<A> thriter) {
+  public TakeIterator(@NonNull Thriter<A> thriter, int n) {
     this.thriter = thriter;
     this.remaining = n;
   }
