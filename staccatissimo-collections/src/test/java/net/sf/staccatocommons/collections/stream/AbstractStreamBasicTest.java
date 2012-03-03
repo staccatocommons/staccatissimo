@@ -39,7 +39,6 @@ import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.AbstractFunction2;
-import net.sf.staccatocommons.lang.predicate.Predicates;
 import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.reductions.Reductions;
 import net.sf.staccatocommons.util.Strings;
@@ -66,13 +65,6 @@ public class AbstractStreamBasicTest {
     lambda($(Streams.type()).toList());
   }
   
-  @Test
-  public void testName() throws Exception {
-    Stream<Integer> sort = Streams.cons(10, 20, 3).filter(Predicates.true_()).sort();
-    assertFalse(sort.isEmpty());
-    assertFalse(sort.isEmpty());
-  }
-
   /**
    * Test for {@link Stream#product(NumberType)}
    */
