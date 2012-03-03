@@ -77,13 +77,9 @@ public abstract class RepetableStreamTheories extends StreamTheories {
   }
 
   /**
-   * Test method for
-   * {@link net.sf.staccatocommons.collections.stream.AbstractStream#any()}.
-   * 
-   * @param stream
    */
   @Theory
-  public void testAny(Stream stream) {
+  public void nonEmptyStreamContainsAny(Stream stream) {
     assumeTrue(!stream.isEmpty());
     assertTrue(stream.toList().contains(stream.any()));
   }
@@ -147,7 +143,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
    * @param function
    */
   @Theory
-  public void testMap(Stream stream, Function function) {
+  public void sizeStreamReturnedByMapSizeIsTheSameOriginalStream(Stream stream, Function function) {
     assertEquals(stream.size(), stream.map(function).size());
   }
 
@@ -158,10 +154,11 @@ public abstract class RepetableStreamTheories extends StreamTheories {
    * @param stream
    */
   @Theory
-  public void testFirst(Stream stream) {
+  public void firstHeadGetZeroAnyAreEquivalent(Stream stream) {
     assumeThat(stream.size(), greaterThan(0));
-    assertEquals(stream.get(0), stream.first());
+    assertEquals(stream.any(), stream.head());
     assertEquals(stream.first(), stream.head());
+    assertEquals(stream.get(0), stream.first());
   }
 
   /**
@@ -169,7 +166,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
    * {@link net.sf.staccatocommons.collections.stream.AbstractStream#second()}.
    */
   @Theory
-  public void testSecond(Stream stream) {
+  public void secondAndGetOneAreEquivalent(Stream stream) {
     assumeThat(stream.size(), greaterThan(1));
     assertEquals(stream.get(1), stream.second());
   }
@@ -181,7 +178,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
    * @param stream
    */
   @Theory
-  public void testThird(Stream stream) {
+  public void thirdAndGetTwoAreEquivalent(Stream stream) {
     assumeThat(stream.size(), greaterThan(2));
     assertEquals(stream.get(2), stream.third());
   }
@@ -206,7 +203,7 @@ public abstract class RepetableStreamTheories extends StreamTheories {
    */
   @Theory
   @Test(expected = IndexOutOfBoundsException.class)
-  public void testGetNoSuchElement(Stream stream) {
+  public void gettingElementOutOfBoundsThrowsIndexOutOfBoundException(Stream stream) {
     stream.get(stream.size());
   }
 

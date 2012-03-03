@@ -11,7 +11,6 @@
  *  GNU Lesser General Public License for more details.
  */
 
-
 package net.sf.staccatocommons.collections.stream;
 
 import static net.sf.staccatocommons.lambda.Lambda.*;
@@ -22,8 +21,9 @@ import static org.junit.Assume.*;
 
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.collections.EmptySourceException;
 import net.sf.staccatocommons.defs.Evaluable;
+import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.partial.EmptyAware;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.Compare;
@@ -34,6 +34,7 @@ import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
+import org.junit.internal.AssumptionViolatedException;
 import org.junit.runner.RunWith;
 
 /**
@@ -59,73 +60,62 @@ public abstract class StreamTheories {
   private boolean emptyImpossible;
 
   /**
-   * Test method for {@link AbstractStream#take(int)} .
    */
   @Theory
-  public final void take(int size, Stream<?> stream) {
+  public final void sizeOfStreamReturnedByTakeIsLessOrEqualToTakeArgument(int size, Stream<?> stream) {
     assertTrue(stream.take(size).size() <= size);
   }
 
   /**
-   * Test method for {@link AbstractStream#fold(java.lang.Object, Applicable2)}
-   * .
    */
   @Theory
-  public final void reduceOnEmpty(Stream<Integer> stream) {
-    assumeEmpty(stream, new Block<Stream>() {
-      @Override
+  public final void reduceFailsWithEmptySourceExceptionOnEmptyStream(Stream<Integer> stream) {
+    assumeEmptyAndExpect(stream, EmptySourceException.class, new Block<Stream>() {
       public void exec(Stream argument) {
-        try {
-          argument.reduce(integer().add());
-          fail();
-        } catch (NoSuchElementException e) {
-          // ok;
-        }
+        argument.reduce(integer().add());
       }
     });
   }
 
   /**
-   * Test method for
-   * {@link net.sf.staccatocommons.collections.stream.AbstractStream#anyOrNone()}
-   * .
-   * 
-   * @param stream
    */
   @Theory
-  public final void anyOrNoneNotEmpty(Stream<?> stream) {
+  public final void anyOrNoneIsDefinedOnNonEmptyStream(Stream<?> stream) {
     assumeTrue(!stream.isEmpty());
     assertTrue(stream.anyOrNone().isDefined());
   }
 
   /**
-   * Test method for {@link AbstractStream#find(Evaluable)} .
    */
   @Theory
   @Test(expected = NoSuchElementException.class)
-  public final void findNoSuchElement(Stream<?> stream) {
+  public final void findFailsWithNoSuchElementExceptionOnFalsePredicate(Stream<?> stream) {
     stream.find(Predicates.false_());
+  }
+  
+  /**
+   */
+  @Theory
+  public final void findFailsWithEmptySourceExceptionOnEmptyStream(Stream<?> stream) {
+    assumeEmptyAndExpect(stream, EmptySourceException.class, new Executable<Stream>() {
+      public void exec(Stream stream) {
+        stream.find(Predicates.true_());
+      }
+    });
   }
 
   /**
-   * Test method for
-   * {@link net.sf.staccatocommons.collections.stream.AbstractStream#all(net.sf.staccatocommons.defs.Evaluable)}
-   * .
-   * 
    * @param stream
    */
   @Theory
-  public final void allNotEmpty(Stream<?> stream) {
-    assumeTrue(!stream.isEmpty());
+  public final void allIsTrueOnTruePredicate(Stream<?> stream) {
     assertTrue(stream.all(Predicates.true_()));
   }
 
   /** Test for any */
   @Theory
-  public final <A> void emptyStreamSatisfyAnyPredicate(Stream<A> stream,
-    final Evaluable<A> predicate) {
+  public final <A> void emptyStreamSatisfyAnyPredicate(Stream<A> stream, final Evaluable<A> predicate) {
     assumeEmpty(stream, new Block<Stream>() {
-      @Override
       public void exec(Stream stream) {
         assertTrue(stream.all(predicate));
       }
@@ -133,7 +123,6 @@ public abstract class StreamTheories {
   }
 
   /**
-   * Test method for {@link AbstractStream#any(Evaluable)}
    */
   @Theory
   public final <A> void anyIsTrueForTruePredicateInNonEmptyStream(Stream<A> stream) {
@@ -141,12 +130,21 @@ public abstract class StreamTheories {
     assertTrue(stream.any(Predicates.true_()));
   }
 
+  /**
+   */
+  @Theory
+  public final <A> void anyFailsWithEmptySourceExceptionOnEmptyStream(Stream<A> stream) {
+    assumeEmptyAndExpect(stream, EmptySourceException.class, new Executable<Stream>() {
+      public void exec(Stream stream) {
+        stream.any();
+      }
+    });
+  }
+
   /** Test that any in an empty stream returns false always */
   @Theory
-  public final <A> void emptyStreamsSatisfyNoPredicate(Stream<A> stream,
-    final Evaluable<A> predicate) {
+  public final <A> void emptyStreamsSatisfyNoPredicate(Stream<A> stream, final Evaluable<A> predicate) {
     assumeEmpty(stream, new Block<Stream>() {
-      @Override
       public void exec(Stream stream) {
         assertFalse(stream.any(predicate));
       }
@@ -174,48 +172,30 @@ public abstract class StreamTheories {
 
   /** test that decons fails on empty streams */
   @Theory
-  public final <A> void deconsFailsOnEmptyStream(Stream<A> stream) throws Exception {
-    assumeEmpty(stream, new Block<Stream>() {
-      @Override
+  public final <A> void deconsFailsOnEmptyStreamWithEmptySourceException(Stream<A> stream) throws Exception {
+    assumeEmptyAndExpect(stream, EmptySourceException.class, new Block<Stream>() {
       public void exec(Stream stream) {
-        try {
-          stream.decons();
-          fail();
-        } catch (NoSuchElementException e) {
-          // ok
-        }
+        stream.decons();
       }
     });
   }
 
   /** Test that empty streams have no tail */
   @Theory
-  public void tailFailsInEmptyStream(Stream<?> stream) {
-    assumeEmpty(stream, new Block<Stream>() {
-      @Override
+  public void tailFailsInEmptyStreamWithEmptySourceException(Stream<?> stream) {
+    assumeEmptyAndExpect(stream, EmptySourceException.class, new Block<Stream>() {
       public void exec(Stream stream) {
-        try {
-          stream.tail();
-          fail();
-        } catch (NoSuchElementException e) {
-          // ok
-        }
+        stream.tail();
       }
     });
   }
 
   /** Test that empty streams have no head */
   @Theory
-  public void headFailsInEmptyStream(Stream<?> stream) {
-    assumeEmpty(stream, new Block<Stream>() {
-      @Override
+  public void headFailsInEmptyStreamWithEmptySourceException(Stream<?> stream) {
+    assumeEmptyAndExpect(stream, EmptySourceException.class, new Block<Stream>() {
       public void exec(Stream stream) {
-        try {
-          stream.head();
-          fail();
-        } catch (NoSuchElementException e) {
-          // ok
-        }
+        stream.head();
       }
     });
   }
@@ -223,11 +203,7 @@ public abstract class StreamTheories {
   /** Tests that if **/
   @Theory
   public void emptyIsAlwaysConsistent(Stream<?> stream) throws Exception {
-    assertTrue(Streams
-      .repeat(stream)
-      .map(lambda((Boolean) $(EmptyAware.class).isEmpty()))
-      .take(10)
-      .allEquiv());
+    assertTrue(Streams.repeat(stream).map(lambda($(EmptyAware.class).isEmpty())).take(10).allEquiv());
   }
 
   /** Tests that memorizing grants repeatable iteration order */
@@ -243,10 +219,26 @@ public abstract class StreamTheories {
     emptyImpossible = true;
   }
 
-  protected void assumeEmpty(Stream<?> stream, Block<Stream> block) {
+  protected void assumeEmpty(Stream<?> stream, Executable<Stream> block) {
     if (emptyImpossible)
       return;
     assumeTrue(stream.isEmpty());
     block.exec(stream);
+  }
+
+  protected void assumeEmptyAndExpect(Stream<?> stream, final Class<? extends Exception> exception, final Executable<Stream> block) {
+    try {
+      assumeEmpty(stream, new Executable<Stream>(){
+        public void exec(Stream argument) {
+          block.exec(argument);
+          fail("Expected exception " + exception);
+        }});
+    } catch (AssumptionViolatedException e) {
+      throw e;
+    } catch (Exception e) {
+      if (e.getClass() != exception) {
+        fail("Unexpected exception " + e);
+      }
+    }
   }
 }

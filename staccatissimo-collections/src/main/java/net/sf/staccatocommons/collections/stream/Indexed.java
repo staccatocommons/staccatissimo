@@ -36,32 +36,16 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  */
 public interface Indexed<A> {
 
+  
   /**
-   * @return the first element
-   */
-  A first();
-
-  /**
-   * @return the second element
-   */
-  A second();
-
-  /**
-   * @return the third element
-   */
-  A third();
-
-  /**
+   * Answers the n-th element.
    * 
    * @param n
    * @return the n-th element, zero based
+   * @throws IndexOutOfBoundsException
+   *           if there is no n-th element
    */
   A get(int n);
-
-  /**
-   * @return the last element
-   */
-  A last();
 
   /**
    * Answers the zero-based index of the given element
@@ -106,7 +90,7 @@ public interface Indexed<A> {
    * @throws NoSuchElementException
    *           if the element is no contained by this {@link Stream}
    */
-  int positionOf(A element);
+  int positionOf(A element) throws NoSuchElementException;
 
   /**
    * Answers the zero-based index of first, <strong>present</strong> element
@@ -121,7 +105,7 @@ public interface Indexed<A> {
    *           if no elements satisfies the given {@code predicate}
    * @since 2.1
    */
-  int findPosition(Evaluable<? super A> predicate);
+  int findPosition(Evaluable<? super A> predicate) throws NoSuchElementException;
 
   /**
    * Answers if both arguments are contained by this stream, and the first one

@@ -24,7 +24,7 @@ import net.sf.staccatocommons.collections.stream.Stream;
 public abstract class StrictStream<A> extends AbstractStream<A> {
 
   @Override
-  public final Stream<A> memorize() {
+  public final Stream<A> memoize() {
     return this;
   }
 

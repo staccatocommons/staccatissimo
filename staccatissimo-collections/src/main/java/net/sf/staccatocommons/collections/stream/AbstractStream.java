@@ -77,7 +77,6 @@ import net.sf.staccatocommons.iterators.delayed.DelayedAppendIterator;
 import net.sf.staccatocommons.iterators.thriter.Thriter;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterators;
-import net.sf.staccatocommons.lang.AbstractProtoMonad;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
@@ -96,13 +95,19 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * An abstract implementation of a {@link Stream}. Only it {@link Iterator}
- * method is abstract
+ * method is abstract.
+ * 
+ * Implementors must grant that the following methods remain consistent:
+ * <ul>
+ * <li>{@link #first()} and {@link #get(int)}</li>
+ * <li>{@link #iterator()} and {@link #isEmpty()}</li>
+ * </ul>
  * 
  * @author flbulgarelli
  * 
  * @param <A>
  */
-public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, Stream, A> implements Stream<A> {
+public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
 
   @Override
   public int size() {
@@ -171,11 +176,6 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   @Override
   public <O> O fold(O initial, Applicable2<? super O, ? super A, ? extends O> function) {
     return Iterables.fold(this, initial, function);
-  }
-
-  @Override
-  public A any() {
-    return Iterables.any(this);
   }
 
   @Override
@@ -258,11 +258,6 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   @Override
-  public <B> Stream<B> map(Applicable<? super A, ? extends B> function) {
-    return map(Functions.from(function));
-  }
-
-  @Override
   public <B> Stream<B> flatMap(final Function<? super A, ? extends Iterable<? extends B>> function) {
     return Streams.from(new FlatMapIterator<A, B>(iterator(), function));
   }
@@ -271,28 +266,15 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
     return flatMap(AbstractStream.<B> toIterable().of(function));
   }
 
-  @Override
-  public Stream<A> append(final Iterable<A> other) {
-    return concat(other);
-  }
-
   public Stream<A> appendUndefined() {
     return append(Streams.<A> undefined());
   }
 
   @Override
-  public A first() {
-    return get(0);
-  }
-
-  @Override
-  public A second() {
-    return get(1);
-  }
-
-  @Override
-  public A third() {
-    return get(2);
+  public A head() {
+    Iterator<A> iterator = iterator();
+    checkNotEmpty(iterator);
+    return iterator.next();
   }
 
   @Override
@@ -316,11 +298,11 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
     }
   }
 
-  public final Stream<A> filterIndex(Evaluable<Integer> predicate) {
+  public Stream<A> filterIndex(Evaluable<Integer> predicate) {
     return Streams.from(new FilterIndexIterator<A>(iterator(), predicate));
   }
 
-  public final Stream<A> skipIndex(int index) {
+  public Stream<A> skipIndex(int index) {
     return filterIndex(Predicates.equal(index).not());
   }
 
@@ -341,21 +323,6 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   public Stream<Integer> indices(Evaluable<? super A> predicate) {
     return new IteratorStream<Integer>(new IndicesIterator<A>(iterator(), predicate));
-  }
-
-  public int findPosition(Evaluable<? super A> predicate) {
-    int index = findIndex(predicate);
-    if (index == -1)
-      throw new NoSuchElementException();
-    return index;
-  }
-
-  @Override
-  public final int positionOf(A element) {
-    int index = indexOf(element);
-    if (index == -1)
-      throw new NoSuchElementException(element.toString());
-    return index;
   }
 
   @Override
@@ -388,11 +355,6 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   @Override
-  public Stream<A> memorize() {
-    return new MemorizedStream<A>(iterator());
-  }
-
-  @Override
   public A[] toArray(Class<? super A> clazz) {
     return toArray(clazz, toList());
   }
@@ -418,11 +380,6 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   }
 
   @Override
-  public final boolean equiv(A... elements) {
-    return equiv(Arrays.asList(elements));
-  }
-
-  @Override
   public boolean equiv(Iterable<? extends A> other) {
     return equivBy(equalOrEquiv(), other);
   }
@@ -441,20 +398,6 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
     return Iterables.equivBy(this, other, equalty);
   }
 
-  @Override
-  public final boolean equivBy(Evaluable2<? super A, ? super A> equalityTest, A... elements) {
-    return equivBy(equalityTest, Arrays.asList(elements));
-  }
-
-  @Override
-  public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, Iterable<? extends A> iterable) {
-    return equivBy(Equiv.on(function), iterable);
-  }
-
-  @Override
-  public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, A... elements) {
-    return equivOn(function, Arrays.asList(elements));
-  }
 
   @Override
   public <B> Stream<B> transform(final Applicable<Stream<A>, ? extends Stream<B>> function) {
@@ -497,19 +440,10 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
     return new NonEmptyIteratorStream<A>(new AppendThriterator<A>(this.iterator(), element));
   }
 
-  @Override
-  public Stream<A> append(Thunk<A> element) {
-    return delayedAppend(element);
-  }
 
   @Override
   public Stream<A> prepend(A element) {
     return new PrependStream<A>(element, this);
-  }
-
-  @Override
-  public Stream<A> prepend(Thunk<A> element) {
-    return delayedPrepend(element);
   }
 
   @Override
@@ -545,17 +479,6 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
   public Stream<A> tail() {
     checkNotEmpty(this);
     return drop(1);
-  }
-
-  @Override
-  public A head() {
-    checkNotEmpty(this);
-    return first();
-  }
-
-  public <B, C> Stream<C> zip(@NonNull final Iterable<B> iterable,
-    @NonNull final Function2<? super A, ? super B, C> function) {
-    return zipWith(function, iterable);
   }
 
   @Override
@@ -602,15 +525,6 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
     return reduce(min(comparator));
   }
 
-  @Override
-  public final <B extends Comparable<B>> A maximumOn(Applicable<? super A, B> function) throws NoSuchElementException {
-    return maximumBy(Compare.on(function));
-  }
-
-  @Override
-  public final <B extends Comparable<B>> A minimumOn(Applicable<? super A, B> function) throws NoSuchElementException {
-    return minimumBy(Compare.on(function));
-  }
 
   public Stream<A> sort() {
     return sortBy(natural());
@@ -618,10 +532,6 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
 
   public Stream<A> sortBy(Comparator<A> comparator) {
     return new SortedStream<A>(this, comparator);
-  }
-
-  public final <B extends Comparable<B>> Stream<A> sortOn(Applicable<? super A, B> function) {
-    return sortBy(Compare.on(function));
   }
 
   private Comparator<A> natural() {
@@ -751,14 +661,6 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
     o.append('\n');
   }
 
-  @Override
-  public final void println() {
-    try {
-      println(System.out);
-    } catch (IOException e) {
-      throw new AssertionError(e);
-    }
-  }
 
   @Override
   public final String printString() {
@@ -784,10 +686,6 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
     return ToString.toString(this);
   }
 
-  public Stream<A> concat(A... elements) {
-    return concat(Arrays.asList(elements));
-  }
-
   public Stream<A> concat(Iterable<A> other) {
     return Streams.from(new ConcatIterator(this.iterator(), other.iterator()));
   }
@@ -800,20 +698,12 @@ public abstract class AbstractStream<A> extends AbstractProtoMonad<Stream<A>, St
     return new DelayedPrependStream<A>(thunk, this);
   }
 
-  public <B> Stream<Tuple2<A, B>> zip(B... elements) {
-    return zip(Arrays.asList(elements));
-  }
-
-  public <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, B... elements) {
-    return zipWith(function, Arrays.asList(elements));
-  }
-
   public <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, Iterable<B> iterable) {
     return Streams.from(new ZipIterator(iterator(), Thriterators.from(iterable.iterator()), function));
   }
-  
+
   public Stream<A> memoize() {
-    return memorize();
+    return new MemorizedStream<A>(iterator());
   }
 
 }

@@ -36,7 +36,6 @@ import net.sf.staccatocommons.collections.stream.internal.algorithms.RepeatItera
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.ConsStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.delayed.DelayedSingleStream;
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.EnumerationIterator;
 import net.sf.staccatocommons.lang.internal.Add;

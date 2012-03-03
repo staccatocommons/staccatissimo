@@ -14,8 +14,6 @@
 
 package net.sf.staccatocommons.collections.stream.internal;
 
-import java.util.NoSuchElementException;
-
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.collections.stream.Streams;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;

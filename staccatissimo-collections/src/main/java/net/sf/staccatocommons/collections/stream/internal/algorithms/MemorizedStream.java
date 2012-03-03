@@ -47,7 +47,7 @@ public class MemorizedStream<A> extends AbstractStream<A> {
   }
 
   @Override
-  public Stream<A> memorize() {
+  public Stream<A> memoize() {
     return this;
   }
 

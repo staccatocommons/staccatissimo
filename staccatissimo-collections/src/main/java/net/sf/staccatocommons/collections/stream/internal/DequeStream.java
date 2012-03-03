@@ -17,6 +17,7 @@ package net.sf.staccatocommons.collections.stream.internal;
 import java.util.Collection;
 import java.util.Deque;
 
+import net.sf.staccatocommons.collections.iterable.internal.IterablesInternal;
 import net.sf.staccatocommons.collections.stream.AbstractStream;
 import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
@@ -55,7 +56,8 @@ public class DequeStream<A> extends CollectionStream<A> {
     };
   }
 
-  public final A first() {
+  public final A head() {
+    IterablesInternal.checkNotEmpty(this);
     return getCollection().getFirst();
   }
 

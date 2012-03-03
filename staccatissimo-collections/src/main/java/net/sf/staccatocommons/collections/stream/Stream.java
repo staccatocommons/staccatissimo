@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import net.sf.staccatocommons.collections.EmptySourceException;
 import net.sf.staccatocommons.collections.iterable.Iterables;
 import net.sf.staccatocommons.collections.restrictions.Projection;
 import net.sf.staccatocommons.collections.restrictions.Repeatable;
@@ -113,7 +114,6 @@ import net.sf.staccatocommons.restrictions.check.NotNegative;
 public interface Stream<A> extends //
   Indexed<A>, //
   ContainsAware<A>, //
-  Deconstructable<A>, //
   Iterable<A>, //
   ProtoMonad<Stream<A>, Stream, A>, //
   SizeAware {
@@ -306,22 +306,22 @@ public interface Stream<A> extends //
   // Searching
 
   /**
-   * Returns any element in this {@link Stream}.
+   * Returns the {@link #head()} of this {@link Stream}
    * 
-   * Any does not mean a random element, but just any of all elements contained,
-   * without having it any particular interest over the rest. Most ordered or
-   * sorted implementations will just retrieve the first element.
+   * The different between {@link #head()} and {@link #any()} is strictly semantic: 
+   * use this message instead of {@link #head()} whenever the code needs an 
+   * unspecified element, rather than the first element of the stream. 
    * 
-   * @return any element contained by this {@link Stream}
-   * @throws NoSuchElementException
+   * @return {@link #head()}
+   * @throws EmptySourceException
    *           if this {@link Stream} has no elements.
    */
-  A any();
+  A any() throws EmptySourceException;
 
   /**
-   * Returns any element of the given {@link Stream}, just like {@link #any()},
+   * Returns the {@link #head()} of the given {@link Stream}, just like {@link #any()},
    * but as an option. If {@link Stream} has no elements, instead of throwing a
-   * {@link NoSuchElementException}, it returns {@link None}
+   * {@link EmptySourceException}, it returns {@link None}
    * 
    * @return <code>Option.some(element)</code> if there is at least one element,
    *         or <code>Option.none()</code>, otherwise.
@@ -359,12 +359,12 @@ public interface Stream<A> extends //
    * 
    * @param predicate
    * @return the first elements that the predicate satisfies, if exists.
+   * @throws EmptySourceException
+   *           if this stream is empty
    * @throws NoSuchElementException
-   *           if no element matches the predicate. As a particular case, this
-   *           method will throw it if {@link Stream} has not elements,
-   *           regardless of the predicate
+   *           if no element matches the predicate.
    */
-  A find(@NonNull Evaluable<? super A> predicate);
+  A find(@NonNull Evaluable<? super A> predicate) throws EmptySourceException, NoSuchElementException;
 
   /**
    * Looks for an element that satisfies the given {@link Evaluable}. If such
@@ -567,14 +567,14 @@ public interface Stream<A> extends //
    * 
    * @param function
    * @return the folding result
-   * @throws NoSuchElementException
-   *           if the {@link Stream} is empty
+   * @throws EmptySourceException
+   *           if this {@link Stream} is empty
    * @see #fold(Object, Applicable2)
    * @see <a
    *      href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">Folds</a>
    * 
    */
-  A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function) throws NoSuchElementException;
+  A reduce(@NonNull Applicable2<? super A, ? super A, ? extends A> function) throws EmptySourceException;
 
   /**
    * Answers the result of aggregating this stream using the given
@@ -584,7 +584,8 @@ public interface Stream<A> extends //
    * @return the folding result
    * @since 1.2
    */
-  <B> B reduce(Reduction<? super A, B> reduction) throws NoSuchElementException;
+  //TODO check exception here
+  <B> B reduce(Reduction<? super A, B> reduction) throws NoSuchElementException; 
 
   /**
    * (Left)folds this {@link Stream} concatenating each elements toString with a
@@ -630,7 +631,7 @@ public interface Stream<A> extends //
    *           if the stream is empty and number type does not support zero
    *           division
    */
-  A average(@NonNull NumberType<A> numberType) throws NoSuchElementException;
+  A average(@NonNull NumberType<A> numberType) throws ArithmeticException;
 
   /**
    * Answers the number of element that satisfy the given predicate
@@ -676,11 +677,11 @@ public interface Stream<A> extends //
    * 
    * @param comparator
    * @return the minimum element.
-   * @throws NoSuchElementException
+   * @throws EmptySourceException
    *           if the stream is empty.
    */
   @NonNull
-  A minimumBy(@NonNull Comparator<? super A> comparator) throws NoSuchElementException;
+  A minimumBy(@NonNull Comparator<? super A> comparator) throws EmptySourceException;
 
   /**
    * Answers the minimum element of the stream, using the given
@@ -688,22 +689,22 @@ public interface Stream<A> extends //
    * 
    * @param function
    * @return the minimum element.
-   * @throws NoSuchElementException
+   * @throws EmptySourceException
    *           if the stream is empty.
    */
-  <B extends Comparable<B>> A minimumOn(@NonNull Applicable<? super A, B> function) throws NoSuchElementException;
+  <B extends Comparable<B>> A minimumOn(@NonNull Applicable<? super A, B> function) throws EmptySourceException;
 
   /**
    * Answers the minimum element of the stream, using elements natural order.
    * 
    * @return the minimum element.
-   * @throws NoSuchElementException
+   * @throws EmptySourceException
    *           if the stream is empty.
    * @throws ClassCastException
    *           if elements are not comparable
    */
   @NonNull
-  A minimum() throws ClassCastException, NoSuchElementException;
+  A minimum() throws ClassCastException, EmptySourceException;
 
   /**
    * Answers the maximum element of the stream, using the given
@@ -711,11 +712,11 @@ public interface Stream<A> extends //
    * 
    * @param comparator
    * @return the maximum element.
-   * @throws NoSuchElementException
+   * @throws EmptySourceException
    *           if the stream is empty.
    */
   @NonNull
-  A maximumBy(@NonNull Comparator<? super A> comparator) throws NoSuchElementException;
+  A maximumBy(@NonNull Comparator<? super A> comparator) throws EmptySourceException;
 
   /**
    * Answers the maximum element of the stream, using the given
@@ -723,22 +724,22 @@ public interface Stream<A> extends //
    * 
    * @param function
    * @return the maximum element.
-   * @throws NoSuchElementException
+   * @throws EmptySourceException
    *           if the stream is empty.
    */
-  <B extends Comparable<B>> A maximumOn(@NonNull Applicable<? super A, B> function) throws NoSuchElementException;
+  <B extends Comparable<B>> A maximumOn(@NonNull Applicable<? super A, B> function) throws EmptySourceException;
 
   /**
    * Answers the maximum element of the stream, using elements natural order.
    * 
    * @return the maximum element.
-   * @throws NoSuchElementException
+   * @throws EmptySourceException
    *           if the stream is empty.
    * @throws ClassCastException
    *           if elements are not comparable
    */
   @NonNull
-  A maximum() throws ClassCastException, NoSuchElementException;
+  A maximum() throws ClassCastException, EmptySourceException;
 
   // Appending
 
@@ -1021,7 +1022,7 @@ public interface Stream<A> extends //
 
   /**
    * Prints the stream elements to {@link System#out}, followed by a newline
-   * character
+   * character. Equivalent to {@code println(System.out)}
    * 
    * @throws IOException
    *           if any io error occurs
@@ -1264,7 +1265,110 @@ public interface Stream<A> extends //
    */
   @Projection
   <B> Stream<B> transform(@NonNull DelayedDeconsApplicable<A, B> function);
+  
+  
+  // Accessing elements in ordered manner
+  
+  /**
+   * Answers the first element.
+   * 
+   * This is equivalent to {@link Stream#head()}. 
+   * 
+   * It is also equivalent to {@code get(0)}, but throws a
+   * {@link EmptySourceException} if stream is empty
+   * 
+   * @return {@link #head()}
+   * @throws EmptySourceException
+   *           if there is no first element
+   */
+  A first() throws EmptySourceException;
 
+  /**
+   * Answers the second element. This is equivalent to {@code get(1)}, but
+   * throws a {@link NoSuchElementException} if stream {@code size < 2}
+   * 
+   * @return {@code get(1)}
+   * @throws NoSuchElementException
+   *           if there is no second element
+   */
+  A second() throws NoSuchElementException;
+
+  /**
+   * Answers the third element. This is equivalent to {@code get(2)}, but throws
+   * a {@link NoSuchElementException} if stream {@code size < 3}
+   * 
+   * @return {@code get(2)}
+   * @throws IndexOutOfBoundsException
+   *           if there is no third element
+   */
+  A third() throws NoSuchElementException;
+
+  /**
+   * Answers the last element of this stream. This method only works with finite
+   * streams
+   * 
+   * @return the last element
+   * @throws EmptySourceException
+   */
+  A last() throws EmptySourceException;
+
+  /*Deconstructtion */
+  
+  /**
+   * Answers this stream split into head and tail.
+   * 
+   * This method is preferred over {@link #head()} and {@link #tail()}, as it
+   * will work as expected even on non repeatable iteration streams.
+   * 
+   * @return a pair containing the head and the tail of this stream. The tail is
+   *         {@link NonNull} and a {@link Projection}, but it is always
+   *         non-repeatable.
+   * @throws EmptySourceException
+   *           if stream is empty
+   */
+  @NonNull
+  Tuple2<A, Stream<A>> decons() throws EmptySourceException;
+
+  /**
+   * Answers this non-empty stream split into a head thunk and tail.
+   * 
+   * This method is preferred over {@link #decons()} when the head value of the
+   * {@link Stream} is potentially irrelevant, as this methods grants to suceeds
+   * even in those cases where {@link #head()} fails.
+   * 
+   * @return a pair containing a thunk that will provide the head, and the tail
+   *         of this stream. The tail is {@link NonNull} and a
+   *         {@link Projection}, but it is always non-repeatable.
+   * @throws EmptySourceException
+   *           if stream is empty
+   */
+  @NonNull
+  Tuple2<Thunk<A>, Stream<A>> delayedDecons() throws EmptySourceException;
+
+  /**
+   * Answers the head of the {@link Stream}, which is the first element of the
+   * stream. However, if you need both head and tail in order to perfom
+   * functional-style transformations over the stream, consider using
+   * {@link #decons()}.
+   * 
+   * @return {@link Stream#first()}
+   * @throws EmptySourceException
+   *           if stream is empty
+   */
+  A head() throws EmptySourceException;
+
+  /**
+   * Answers the tail of the {@link Stream}
+   * 
+   * @return an {@link Stream} that retrieves all its elements, except of the
+   *         first one
+   * @throws EmptySourceException
+   *           if stream is empty
+   */
+  @Projection
+  Stream<A> tail() throws EmptySourceException;
+
+  
   /**
    * @author flbulgarelli
    * @param <A>
