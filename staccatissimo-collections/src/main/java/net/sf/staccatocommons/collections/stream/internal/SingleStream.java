@@ -55,7 +55,7 @@ public final class SingleStream<A> extends StrictStream<A> {
   public A get(int n) {
     if (n == 0)
       return element;
-    throw new NoSuchElementException("At " + n);
+    throw new IndexOutOfBoundsException("At " + n);
   }
 
   @Override
