@@ -57,13 +57,13 @@ public final class SortedStream<A> extends AbstractStream<A> {
   }
 
   @Override
-  public A first() {
-    return minimumBy(comparator);
+  public A head() {
+    return source.minimumBy(comparator);
   }
 
   @Override
   public A last() {
-    return maximumBy(comparator);
+    return source.maximumBy(comparator);
   }
 
   public boolean isEmpty() {
