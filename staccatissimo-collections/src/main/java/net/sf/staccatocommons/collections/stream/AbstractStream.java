@@ -458,7 +458,7 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
 
   @Override
   public <B> Stream<Tuple2<A, B>> zip(Iterable<B> iterable) {
-    return zip(iterable, Tuples.<A, B> toTuple2());
+    return zipWith(Tuples.<A, B> toTuple2(), iterable);
   }
 
   @Override
@@ -705,5 +705,22 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   public Stream<A> memoize() {
     return new MemoizedStream<A>(iterator());
   }
+  
+  @Override
+  public Stream<A> memoize(int numberOfElements) {
+    //TODO
+    return memoize();
+  }
 
+  @Override
+  public Tuple2<Stream<A>, Stream<A>> partitionAt(int position) {
+    Stream<A> stream = this.memoize(position);
+    return _(stream.take(position), stream.drop(position));
+  }
+
+  @Override
+  public Stream<A> insertAt(int position, A element) {
+    Tuple2<Stream<A>, Stream<A>> split = partitionAt(position);
+    return split.first().append(element).concat(split.second());
+  }
 }

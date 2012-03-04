@@ -1087,10 +1087,27 @@ public interface Stream<A> extends //
    * 
    * @return a new {@link Stream} that memoizes elements evaluated during
    *         iteration
+   * @since 2.2        
    */
   @Repeatable
   @Projection
   Stream<A> memoize();
+  
+  /**
+   * <a href="http://en.wikipedia.org/wiki/Memoization">Memoizes</a> the given
+   * number of initial stream elements and their order, by answering a lazy
+   * stream with {@link Repeatable} iteration order up to position
+   * {@code numberOfElements - 1}
+   * 
+   * 
+   * @param numberOfElements
+   *          the number of initial elements to memoize. If this number is
+   *          greather than stream size, all stream elements are memoized
+   * @return a new {@link Stream} that memoizes the first
+   *         {@code numberOfElements} elements evaluated during iteration
+   * @since 2.2
+   */
+  Stream<A> memoize(int numberOfElements);
 
   /**
    * Forces stream elements evaluation by converting it into a new ordered
@@ -1437,5 +1454,9 @@ public interface Stream<A> extends //
     Stream<B> apply(Thunk<A> head, Stream<A> tail);
 
   }
+
+  Tuple2<Stream<A>, Stream<A>> partitionAt(int position);
+
+  Stream<A> insertAt(int position, A element);
 
 }
