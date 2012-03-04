@@ -67,6 +67,17 @@ public abstract class RepetableStreamTheories extends StreamTheories {
   public void filteredSizeLowerOrEqualToOriginal(Stream stream, Evaluable predicate) {
     assertThat(stream.filter(predicate).size(), lessThanOrEqualTo(stream.size()));
   }
+  
+  /***/
+  @Theory
+  public final <A> void takeANumberOfElementsGreaterThanSizeAnswersAnEquivalentStream(Stream<A> stream) {
+    assertTrue(stream.take(stream.size() + 10).equiv(stream));
+  }
+  /***/
+  @Theory
+  public final <A> void dropANumberOfElementsGreaterThanSizeAnswersAnEmptyStream(Stream<A> stream) {
+    assertTrue(stream.drop(stream.size() + 10).isEmpty());
+  }
 
   /**
    * Test that all elements from a filter stream stasify the filtering condition
@@ -244,11 +255,14 @@ public abstract class RepetableStreamTheories extends StreamTheories {
       }
     }));
   }
+  /***/
+  public <A> void streamEquivToItself(Stream<A> stream) throws Exception {
+    assertTrue(stream.equiv(stream));
+  }
 
   /** Test for {@link Stream#equiv(Iterable)} */
   @Theory
   public <A> void testElementEqual(Stream<A> stream) throws Exception {
-    assertTrue(stream.equiv(stream));
     assertTrue(stream.equiv(stream.force()));
     assertTrue(stream.equiv(stream.toList()));
     assertTrue(stream.equiv(stream.toArray(Object.class)));
