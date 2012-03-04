@@ -713,14 +713,13 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   }
 
   @Override
-  public Tuple2<Stream<A>, Stream<A>> partitionAt(int position) {
+  public Tuple2<Stream<A>, Stream<A>> splitBefore(@NotNegative int position) {
     Stream<A> stream = this.memoize(position);
     return _(stream.take(position), stream.drop(position));
   }
-
+  
   @Override
-  public Stream<A> insertAt(int position, A element) {
-    Tuple2<Stream<A>, Stream<A>> split = partitionAt(position);
-    return split.first().append(element).concat(split.second());
+  public Stream<A> insertBefore(@NotNegative int position, A element) {
+    return Streams.from(new InsertBeforeIterator(position, element, iterator()));
   }
 }

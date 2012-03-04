@@ -528,10 +528,9 @@ public class AbstractStreamBasicTest {
   
   @Test
   public void insertAt() throws Exception {
-    assertEquals(Streams.cons(4, 5, 0, 6).toList(), Streams.cons(4, 5, 6).insertAt(2, 0).toList());
-    assertEquals(Streams.cons(1, 1, 0, 1, 1).toList(), Streams.repeat(1).take(4).insertAt(2, 0).toList());
-    assertEquals(Streams.cons(1, 1, 1, 1, 0).toList(), Streams.repeat(1).take(4).insertAt(20, 0).toList());
-    assertEquals(Streams.cons(0, 1, 1, 1, 1).toList(), Streams.repeat(1).take(4).insertAt(-5, 0).toList());
+    assertEquals(Streams.cons(4, 5, 0, 6).toList(), Streams.cons(4, 5, 6).insertBefore(2, 0).toList());
+    assertEquals(Streams.cons(1, 1, 0, 1, 1).toList(), Streams.repeat(1).take(4).insertBefore(2, 0).toList());
+    assertEquals(Streams.cons(1, 1, 1, 1, 0).toList(), Streams.repeat(1).take(4).insertBefore(20, 0).toList());
   }
   
   //TODO document index vs position. Revise consistency of index & position
@@ -539,17 +538,15 @@ public class AbstractStreamBasicTest {
   
   @Test
   public void splitAt() throws Exception {
-    Tuple2<Stream<Character>, Stream<Character>> streams = Streams.from("hello world!").partitionAt(5);
+    Tuple2<Stream<Character>, Stream<Character>> streams = Streams.from("hello world!").splitBefore(5);
     assertEquals(" world!", streams.second().joinStrings(""));
     assertEquals("hello", streams.first().joinStrings(""));
 
-    streams = Streams.from("hello world!").partitionAt(25);
+    streams = Streams.from("hello world!").splitBefore(25);
     assertEquals("hello world!", streams.first().joinStrings(""));
     assertEquals("", streams.second().joinStrings(""));
     
-    
-    assertTrue(Streams.cons(4,5,6,9).take(-1).isEmpty());
-    assertTrue(Streams.cons(4,5,6,9).drop(100).isEmpty());
+    assertTrue(Streams.cons(4, 5, 6, 9).drop(100).isEmpty());
 
   }
 }

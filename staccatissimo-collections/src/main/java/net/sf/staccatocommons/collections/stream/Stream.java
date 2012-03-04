@@ -224,6 +224,11 @@ public interface Stream<A> extends //
   @Projection
   Stream<A> drop(@NotNegative int amountOfElements);
 
+  
+  //Partitioning and splitting
+  
+  Tuple2<Stream<A>, Stream<A>> splitBefore(@NotNegative int position);
+  
   /***
    * Splits stream elements into two lists using a predicate - elements that
    * evaluate to true will be returned in the first component, the rest will be
@@ -855,6 +860,12 @@ public interface Stream<A> extends //
   @Projection
   Stream<A> delayedPrepend(@NonNull Thunk<A> thunk);
   
+  // Inserting
+  
+  Stream<A> insertBefore(@NotNegative int position, A element);
+
+//  Stream<A> insertBeforeIndex(A previous, A element);
+  
   // Branching
 
   /**
@@ -1328,7 +1339,19 @@ public interface Stream<A> extends //
    * @throws EmptySourceException
    */
   A last() throws EmptySourceException;
-
+  
+  /**
+   * Answers if both arguments are contained by this stream, and the first one
+   * is before the second one. This method works even for stream that can be
+   * iterated only once
+   * 
+   * @param previous
+   * @param next
+   * @return if both elements are contained by this {@link Stream}, and the
+   *         first is before the second one
+   */
+  boolean isBefore(A previous, A next);
+  
   /*Deconstructtion */
   
   /**
@@ -1454,9 +1477,5 @@ public interface Stream<A> extends //
     Stream<B> apply(Thunk<A> head, Stream<A> tail);
 
   }
-
-  Tuple2<Stream<A>, Stream<A>> partitionAt(int position);
-
-  Stream<A> insertAt(int position, A element);
 
 }
