@@ -51,7 +51,7 @@ import net.sf.staccatocommons.collections.stream.internal.NonEmptyIteratorStream
 import net.sf.staccatocommons.collections.stream.internal.algorithms.DeconsTransformStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.DropWhileStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.MapStream;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.MemorizedStream;
+import net.sf.staccatocommons.collections.stream.internal.algorithms.MemoizedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.PrependStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.SizeLimitedStream;
 import net.sf.staccatocommons.collections.stream.internal.algorithms.SortedStream;
@@ -703,7 +703,7 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   }
 
   public Stream<A> memoize() {
-    return new MemorizedStream<A>(iterator());
+    return new MemoizedStream<A>(iterator());
   }
 
 }

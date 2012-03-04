@@ -17,21 +17,21 @@ package net.sf.staccatocommons.collections.stream.impl.internal;
 import java.util.Arrays;
 
 import net.sf.staccatocommons.collections.stream.Streams;
-import net.sf.staccatocommons.collections.stream.internal.algorithms.MemorizedStream;
+import net.sf.staccatocommons.collections.stream.internal.algorithms.MemoizedStream;
 import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 
 /**
  * @author flbulgarelli
  * 
  */
-public class MemorizedIteratorUnitTest extends IterableTheories {
+public class MemoizedIteratorUnitTest extends IterableTheories {
 
   protected Iterable<?> createTwoElementsIterable() {
-    return new MemorizedStream(Streams.from(Arrays.asList(10, 20).iterator()).iterator());
+    return new MemoizedStream(Streams.from(Arrays.asList(10, 20).iterator()).iterator());
   }
 
   protected Iterable<?> createOneElementIterable() {
-    return new MemorizedStream(Streams.cons(10).iterator());
+    return new MemoizedStream(Streams.cons(10).iterator());
   }
 
 }

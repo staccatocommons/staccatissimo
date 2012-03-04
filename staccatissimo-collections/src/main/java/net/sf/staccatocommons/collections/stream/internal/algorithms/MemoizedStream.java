@@ -27,7 +27,7 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
  * @author flbulgarelli
  * 
  */
-public class MemorizedStream<A> extends AbstractStream<A> {
+public class MemoizedStream<A> extends AbstractStream<A> {
 
   private SingleLinkedDelayedQueue<A> previous = new SingleLinkedDelayedQueue<A>();
 
@@ -35,9 +35,9 @@ public class MemorizedStream<A> extends AbstractStream<A> {
 
   /**
    * 
-   * Creates a new {@link MemorizedStream}
+   * Creates a new {@link MemoizedStream}
    */
-  public MemorizedStream(Thriterator<A> source) {
+  public MemoizedStream(Thriterator<A> source) {
     this.remaining = source;
   }
 
