@@ -226,8 +226,10 @@ public interface Stream<A> extends //
 
   
   //Partitioning and splitting
+
+  Tuple2<Stream<A>, Stream<A>> splitBeforeIndex(@NotNegative int position);
   
-  Tuple2<Stream<A>, Stream<A>> splitBefore(@NotNegative int position);
+  Tuple2<Stream<A>, Stream<A>> splitBefore(A element);
   
   /***
    * Splits stream elements into two lists using a predicate - elements that
@@ -862,10 +864,10 @@ public interface Stream<A> extends //
   
   // Inserting
   
-  Stream<A> insertBefore(@NotNegative int position, A element);
-
-//  Stream<A> insertBeforeIndex(A previous, A element);
+  Stream<A> insertBeforeIndex(@NotNegative int position, A element);
   
+  Stream<A> insertBefore(A before, A element);
+
   // Branching
 
   /**
@@ -1351,6 +1353,8 @@ public interface Stream<A> extends //
    *         first is before the second one
    */
   boolean isBefore(A previous, A next);
+  
+  boolean isBeforeIndex(int index, A element);
   
   /*Deconstructtion */
   

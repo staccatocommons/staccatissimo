@@ -67,6 +67,7 @@ import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.partial.EmptyAware;
+import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.defs.reduction.Accumulator;
 import net.sf.staccatocommons.defs.reduction.Reduction;
@@ -713,13 +714,23 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   }
 
   @Override
-  public Tuple2<Stream<A>, Stream<A>> splitBefore(@NotNegative int position) {
-    Stream<A> stream = this.memoize(position);
+  public Tuple2<Stream<A>, Stream<A>> splitBeforeIndex(@NotNegative int position) {
+    Stream<A> stream = this.memoize(position); //TODO improve
     return _(stream.take(position), stream.drop(position));
   }
   
+  public Tuple2<Stream<A>, Stream<A>> splitBefore(A element) {
+    Stream<A> stream = this.memoize(); //TODO improve
+    Predicate<A> notEq = Predicates.equal(element).not();
+    return _(stream.takeWhile(notEq), stream.dropWhile(notEq));
+  }
+  
   @Override
-  public Stream<A> insertBefore(@NotNegative int position, A element) {
+  public Stream<A> insertBeforeIndex(@NotNegative int position, A element) {
     return Streams.from(new InsertBeforeIterator(position, element, iterator()));
+  }
+  
+  public boolean isBeforeIndex(@NotNegative int index, A element) {
+   return  indexOf(element) >= index;
   }
 }

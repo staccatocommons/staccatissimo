@@ -527,26 +527,41 @@ public class AbstractStreamBasicTest {
   }
   
   @Test
-  public void insertAt() throws Exception {
-    assertEquals(Streams.cons(4, 5, 0, 6).toList(), Streams.cons(4, 5, 6).insertBefore(2, 0).toList());
-    assertEquals(Streams.cons(1, 1, 0, 1, 1).toList(), Streams.repeat(1).take(4).insertBefore(2, 0).toList());
-    assertEquals(Streams.cons(1, 1, 1, 1, 0).toList(), Streams.repeat(1).take(4).insertBefore(20, 0).toList());
+  public void insertBeforeIndex() throws Exception {
+    assertEquals(Streams.cons(4, 5, 0, 6).toList(), Streams.cons(4, 5, 6).insertBeforeIndex(2, 0).toList());
+    assertEquals(Streams.cons(1, 1, 0, 1, 1).toList(), Streams.repeat(1).take(4).insertBeforeIndex(2, 0).toList());
+    assertEquals(Streams.cons(1, 1, 1, 1, 0).toList(), Streams.repeat(1).take(4).insertBeforeIndex(20, 0).toList());
   }
   
   //TODO document index vs position. Revise consistency of index & position
   //get vs getAtPosition?
   
+  
+  //TODO insertBefore and isBefore are not compatible, since we can insertBefore(x,y) but isBefore(x,y) may be false
   @Test
-  public void splitAt() throws Exception {
-    Tuple2<Stream<Character>, Stream<Character>> streams = Streams.from("hello world!").splitBefore(5);
+  public void splitBeforeIndex() throws Exception {
+    Tuple2<Stream<Character>, Stream<Character>> streams = Streams.from("hello world!").splitBeforeIndex(5);
     assertEquals(" world!", streams.second().joinStrings(""));
     assertEquals("hello", streams.first().joinStrings(""));
 
-    streams = Streams.from("hello world!").splitBefore(25);
+    streams = Streams.from("hello world!").splitBeforeIndex(25);
     assertEquals("hello world!", streams.first().joinStrings(""));
     assertEquals("", streams.second().joinStrings(""));
     
     assertTrue(Streams.cons(4, 5, 6, 9).drop(100).isEmpty());
 
   }
+  
+  @Test
+  public void splitBefore() throws Exception {
+    Tuple2<Stream<Character>, Stream<Character>> streams = Streams.from("aaaaabbbbbcddddd").splitBefore('d');
+    assertEquals("aaaaabbbbbc", streams.first().joinStrings(""));
+    assertEquals("ddddd", streams.second().joinStrings(""));
+    
+    streams = Streams.from("aaaaabbbbbcddddd").splitBefore('x');
+    assertEquals("", streams.second().joinStrings(""));
+    assertEquals("aaaaabbbbbcddddd", streams.first().joinStrings(""));
+  }
+  
+  
 }
