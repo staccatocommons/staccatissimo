@@ -726,11 +726,15 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   }
   
   @Override
-  public Stream<A> insertBeforeIndex(@NotNegative int position, A element) {
-    return Streams.from(new InsertBeforeIterator(position, element, iterator()));
+  public Stream<A> insertBeforeIndex(A element, @NotNegative int position) {
+    return Streams.from(new InsertBeforeIndexIterator(position, element, iterator()));
   }
   
-  public boolean isBeforeIndex(@NotNegative int index, A element) {
-   return  indexOf(element) >= index;
+  public Stream<A> insertBefore(A element, A next) {
+    return Streams.from(new InsertBeforeIterator(next, element, iterator()));
+  }
+  
+  public boolean isBeforeIndex(A element, @NotNegative int index) {
+   return  indexOf(element) < index;
   }
 }

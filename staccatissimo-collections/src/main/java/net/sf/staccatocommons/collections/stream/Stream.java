@@ -864,9 +864,9 @@ public interface Stream<A> extends //
   
   // Inserting
   
-  Stream<A> insertBeforeIndex(@NotNegative int position, A element);
+  Stream<A> insertBeforeIndex(A element, @NotNegative int position);
   
-  Stream<A> insertBefore(A before, A element);
+  Stream<A> insertBefore(A element, A next);
 
   // Branching
 
@@ -1354,7 +1354,7 @@ public interface Stream<A> extends //
    */
   boolean isBefore(A previous, A next);
   
-  boolean isBeforeIndex(int index, A element);
+  boolean isBeforeIndex(A element, int index);
   
   /*Deconstructtion */
   

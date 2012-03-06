@@ -55,7 +55,7 @@ public abstract class StreamTheories {
 
   /** Sizes for testing */
   @DataPoints
-  public static final int[] SIZES = new int[] { 0, 1, 4, 90 };
+  public static final int[] SIZES_OR_INDICES = new int[] { 0, 1, 4, 90 };
 
   private boolean emptyImpossible;
 
@@ -224,6 +224,16 @@ public abstract class StreamTheories {
       return;
     assumeTrue(stream.isEmpty());
     block.exec(stream);
+  }
+  
+  @Theory
+  public void insertBeforeIndexAssureElementIsBeforeIndex(int index, int element, Stream<Object> stream) throws Exception {
+    assertTrue(stream.insertBeforeIndex(element, index).isBeforeIndex(element, index));
+  }
+  
+  @Theory
+  public void insertBeforeReferenceAssureElementIsBeforeReference(int ref, int element, Stream<Object> stream) throws Exception {
+    assertTrue(stream.insertBefore(ref, element).isBefore(ref, element));
   }
 
   protected void assumeEmptyAndExpect(Stream<?> stream, final Class<? extends Exception> exception, final Executable<Stream> block) {

@@ -528,9 +528,9 @@ public class AbstractStreamBasicTest {
   
   @Test
   public void insertBeforeIndex() throws Exception {
-    assertEquals(Streams.cons(4, 5, 0, 6).toList(), Streams.cons(4, 5, 6).insertBeforeIndex(2, 0).toList());
-    assertEquals(Streams.cons(1, 1, 0, 1, 1).toList(), Streams.repeat(1).take(4).insertBeforeIndex(2, 0).toList());
-    assertEquals(Streams.cons(1, 1, 1, 1, 0).toList(), Streams.repeat(1).take(4).insertBeforeIndex(20, 0).toList());
+    assertEquals(Streams.cons(4, 5, 0, 6).toList(), Streams.cons(4, 5, 6).insertBeforeIndex(0, 2).toList());
+    assertEquals(Streams.cons(1, 1, 0, 1, 1).toList(), Streams.repeat(1).take(4).insertBeforeIndex(0, 2).toList());
+    assertEquals(Streams.cons(1, 1, 1, 1, 0).toList(), Streams.repeat(1).take(4).insertBeforeIndex(0, 20).toList());
   }
   
   //TODO document index vs position. Revise consistency of index & position
@@ -563,5 +563,26 @@ public class AbstractStreamBasicTest {
     assertEquals("aaaaabbbbbcddddd", streams.first().joinStrings(""));
   }
   
+  @Test
+  public void testName() throws Exception {
+    assertFalse(Streams.from("abcd").isBefore('a', 'a'));
+    assertTrue(Streams.from("abcd").isBefore('a', 'b'));
+    assertTrue(Streams.from("abcd").isBefore('b', 'd'));
+    
+    assertFalse(Streams.from("abcd").isBeforeIndex('a', 0));
+    assertTrue(Streams.from("abcd").isBeforeIndex('a', 1));
+    assertTrue(Streams.from("abcd").isBeforeIndex('b', 3));
+  }
+  
+  @Test
+  public void testInsertBefore() throws Exception {
+	assertEquals("1,2,3,4", Streams.cons(1,2,4).insertBefore(3, 4).joinStrings(","));
+}
+  
+  @Test
+  public void testName2() throws Exception {
+    assertTrue(Streams.from("abcd").isBeforeIndex('d', 45));
+    assertTrue(Streams.from("abcd").isBefore('d', 'j'));
+  }
   
 }

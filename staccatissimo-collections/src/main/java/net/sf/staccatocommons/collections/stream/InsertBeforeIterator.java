@@ -12,6 +12,11 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import java.util.NoSuchElementException;
+
+import org.omg.CosNaming.NamingContextPackage.AlreadyBound;
+import org.omg.IOP.ENCODING_CDR_ENCAPS;
+
 import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
@@ -24,47 +29,77 @@ import net.sf.staccatocommons.restrictions.check.NotNegative;
  * 
  */
 public class InsertBeforeIterator<A> extends AdvanceThriterator<A> {
-
-  private int remaining;
+  private A reference;
   private final A element;
   private final Thriterator<A> iterator;
 
-  private boolean inserted;
+  private State state = State.NOT_INSERTED_YET;
+  private boolean updated;
 
-  public InsertBeforeIterator(@NotNegative int position, A element, @NonNull Thriterator<A> iterator) {
-    this.remaining = position + 1;
+  private enum State {
+	  NOT_INSERTED_YET, INSERTING, ALREADY_INSERTED, INSERTING_LAST, END
+  }
+  
+  public InsertBeforeIterator(@NotNegative A reference, A element, @NonNull Thriterator<A> iterator) {
+    this.reference = reference;
     this.element = element;
     this.iterator = iterator;
   }
 
+  /**/
   public boolean hasNext() {
-    return !inserted || iterator.hasNext();
+	updateState();
+    return state != State.END;
+  }
+  
+  void updateState() {
+	  if(!updated)
+	    state = getState();
+	  updated = true;
+  }
+  
+  State getState() {
+	  switch(state) {
+	  case NOT_INSERTED_YET:
+		  if(!iterator.hasNext()) 
+			  return  State.INSERTING_LAST;
+		  iterator.advanceNext();
+		  if(reference.equals(iterator.current())) 
+			  return State.INSERTING;
+		  return State.NOT_INSERTED_YET;
+	  case INSERTING:
+		  return State.ALREADY_INSERTED;
+	  case ALREADY_INSERTED:
+		  if(!iterator.hasNext()) 
+			  return State.END;
+		  iterator.advanceNext();
+		  return State.ALREADY_INSERTED;
+	  case INSERTING_LAST:
+		  return State.END; 
+	  default:
+		  throw new AssertionError();
+	  }
   }
 
-  private boolean atEndOfSource() {
-    return !inserted && !iterator.hasNext();
-  }
-
-  private boolean atInsertionPoint() {
-    return remaining == 0;
-  }
+  /**/
 
   public void advanceNext() {
-    remaining--;
-    if (atInsertionPoint() || atEndOfSource()) {
-      remaining = 0;
-      inserted = true;
-    } else {
-      iterator.advanceNext();
-    }
+	 if(!hasNext())
+		 throw new NoSuchElementException("End of source");
+	 updated = false;
   }
 
+  /**/
   public A current() {
     return atInsertionPoint() ? element : iterator.current();
   }
 
+private boolean atInsertionPoint() {
+	return state == State.INSERTING_LAST || state == state.INSERTING;
+}
+
   public Thunk<A> delayedCurrent() {
     return atInsertionPoint() ? Thunks.constant(element) : iterator.delayedCurrent();
   }
-
+  /**/
 }
