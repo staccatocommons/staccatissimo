@@ -40,6 +40,8 @@ import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FlatMapIterator;
 import net.sf.staccatocommons.collections.internal.iterator.IndicesIterator;
+import net.sf.staccatocommons.collections.internal.iterator.InsertBeforeIndexIterator;
+import net.sf.staccatocommons.collections.internal.iterator.InsertBeforeIterator;
 import net.sf.staccatocommons.collections.internal.iterator.TakeIterator;
 import net.sf.staccatocommons.collections.internal.iterator.TakeWhileIterator;
 import net.sf.staccatocommons.collections.internal.iterator.ZipIterator;

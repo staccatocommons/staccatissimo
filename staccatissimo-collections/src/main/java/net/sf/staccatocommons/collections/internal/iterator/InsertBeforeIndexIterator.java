@@ -10,7 +10,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
  */
-package net.sf.staccatocommons.collections.stream;
+package net.sf.staccatocommons.collections.internal.iterator;
 
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
@@ -25,17 +25,21 @@ public class InsertBeforeIndexIterator<A> extends AbstractInsertBeforeIterator<A
   private int remaining;
   private boolean inserted;
 
+  /**
+   * 
+   * Creates a new {@link InsertBeforeIndexIterator}
+   */
   public InsertBeforeIndexIterator(@NotNegative int position, A element, @NonNull Thriterator<A> iterator) {
     super(element, iterator);
     this.remaining = position + 1;
   }
 
   public boolean hasNext() {
-    return !inserted || iterator.hasNext();
+    return !inserted || iterator().hasNext();
   }
 
   private boolean atEndOfSource() {
-    return !inserted && !iterator.hasNext();
+    return !inserted && !iterator().hasNext();
   }
 
   protected boolean atInsertionPoint() {
@@ -48,7 +52,7 @@ public class InsertBeforeIndexIterator<A> extends AbstractInsertBeforeIterator<A
       remaining = 0;
       inserted = true;
     } else {
-      iterator.advanceNext();
+      iterator().advanceNext();
     }
   }
 

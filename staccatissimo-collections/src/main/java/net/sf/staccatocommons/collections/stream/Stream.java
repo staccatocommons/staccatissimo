@@ -1349,8 +1349,8 @@ public interface Stream<A> extends //
    * 
    * @param previous
    * @param next
-   * @return if both elements are contained by this {@link Stream}, and the
-   *         first is before the second one
+   * @return whether both elements are contained by this {@link Stream}, and the
+   *         first is before the second one. If 
    */
   boolean isBefore(A previous, A next);
   

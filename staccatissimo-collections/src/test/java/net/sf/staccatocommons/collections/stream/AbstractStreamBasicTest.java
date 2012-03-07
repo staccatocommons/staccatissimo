@@ -562,7 +562,7 @@ public class AbstractStreamBasicTest {
     assertEquals("", streams.second().joinStrings(""));
     assertEquals("aaaaabbbbbcddddd", streams.first().joinStrings(""));
   }
-  
+
   @Test
   public void containsBefore() throws Exception {
     assertFalse(Streams.from("abcd").containsBefore('c', 'a'));
@@ -572,7 +572,7 @@ public class AbstractStreamBasicTest {
     assertTrue(Streams.from("abcd").containsBefore('a', 'b'));
     assertTrue(Streams.from("abcd").containsBefore('b', 'd'));
   }
-  
+
   @Test
   public void testName() throws Exception {
     assertFalse(Streams.from("abcd").containsBeforeIndex('a', 0));
@@ -580,12 +580,12 @@ public class AbstractStreamBasicTest {
     assertTrue(Streams.from("abcd").containsBeforeIndex('b', 3));
     assertTrue(Streams.from("abcd").containsBeforeIndex('b', 40));
   }
-  
+
   @Test
   public void testInsertBefore() throws Exception {
-	assertEquals("1,2,3,4", Streams.cons(1,2,4).insertBefore(3, 4).joinStrings(","));
-}
-  
+    assertEquals("1,2,3,4", Streams.cons(1, 2, 4).insertBefore(3, 4).joinStrings(","));
+  }
+
   @Test
   public void testName2() throws Exception {
     assertTrue(Streams.from("abcd").containsBeforeIndex('d', 45));

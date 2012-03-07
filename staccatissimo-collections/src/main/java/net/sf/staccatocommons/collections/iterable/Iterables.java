@@ -786,7 +786,7 @@ public class Iterables {
    *         first element is before second one
    */
   public static <A> boolean isBefore(@NonNull Iterable<A> iterable, A previous, A next) {
-    if (ObjectUtils.equals(previous, next))
+    if (ObjectUtils.equals(previous, next))     //FIXME is this ok??
       return false;
     boolean previousFound = false;
     for (A o : iterable) {
