@@ -99,6 +99,10 @@ public class Predicates {
   public static <T> Predicate<T> equal(@NonNull T value) {
     return new Equals<T>(value);
   }
+  
+  public static <T> Predicate<T> notEqual(@NonNull T value) {
+    return equal(value).not();
+  }
 
   /**
    * Returns a predicate that tests if its argument is the same that the given

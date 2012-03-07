@@ -41,7 +41,7 @@ import net.sf.staccatocommons.lang.predicate.Predicates;
 public abstract class AbstractProtoMonad<Type, RawType, A> implements ProtoMonad<Type, RawType, A> {
 
   public Type skip(A element) {
-    return filter(Predicates.equal(element).not());
+    return filter(Predicates.notEqual(element));
   }
 
   public Type skipNull() {
