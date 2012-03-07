@@ -223,6 +223,9 @@ public interface Stream<A> extends //
    */
   @Projection
   Stream<A> drop(@NotNegative int amountOfElements);
+  
+  @Projection
+  Stream<A> slice(@NotNegative int lowerBound, @NotNegative int upperBound);
 
   /***
    * Splits stream elements into two lists using a predicate - elements that

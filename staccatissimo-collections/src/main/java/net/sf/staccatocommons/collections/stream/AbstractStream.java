@@ -162,6 +162,11 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   public Stream<A> drop(@NotNegative int amountOfElements) {
     return Streams.from(new DropIterator<A>(amountOfElements, iterator()));
   }
+  
+  @Override
+  public Stream<A> slice(@NotNegative int lowerBound, @NotNegative int upperBound) {
+    return drop(lowerBound).take(upperBound  - lowerBound); 
+  }
 
   @Override
   public A reduce(Applicable2<? super A, ? super A, ? extends A> function) {

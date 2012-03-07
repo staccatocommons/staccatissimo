@@ -513,6 +513,14 @@ public class AbstractStreamBasicTest {
     assertFalse(s.isEmpty());
 
   }
+  
+  @Test
+  public void testSlice() throws Exception {
+    assertEquals("urge", Streams.from("hamburger").slice(4, 8).joinStrings(""));
+    assertEquals("mile", Streams.from("smiles").slice(1, 5).joinStrings(""));
+    assertEquals("world!", Streams.from("hello world!").slice(6, 309).joinStrings(""));
+    assertEquals("", Streams.from("hello world!").slice(6, 6).joinStrings(""));
+  }
 
   /** test for {@link AbstractStream#printString()} */
   @Test
