@@ -12,7 +12,12 @@
  */
 package net.sf.staccatocommons.collections.stream;
 
+import java.util.NoSuchElementException;
+
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
+import net.sf.staccatocommons.lang.thunk.Thunks;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
 
@@ -20,36 +25,23 @@ import net.sf.staccatocommons.restrictions.check.NotNegative;
  * @author flbulgarelli
  * 
  */
-public class InsertBeforeIndexIterator<A> extends AbstractInsertBeforeIterator<A> {
+public abstract class AbstractInsertBeforeIterator<A> extends AdvanceThriterator<A> {
+  private final A element;
+  protected final Thriterator<A> iterator;
 
-  private int remaining;
-  private boolean inserted;
-
-  public InsertBeforeIndexIterator(@NotNegative int position, A element, @NonNull Thriterator<A> iterator) {
-    super(element, iterator);
-    this.remaining = position + 1;
+  public AbstractInsertBeforeIterator(A element, Thriterator<A> iterator) {
+    this.element = element;
+    this.iterator = iterator;
   }
 
-  public boolean hasNext() {
-    return !inserted || iterator.hasNext();
+  protected abstract boolean atInsertionPoint();
+
+  public final A current() {
+    return atInsertionPoint() ? element : iterator.current();
   }
 
-  private boolean atEndOfSource() {
-    return !inserted && !iterator.hasNext();
+  public final Thunk<A> delayedCurrent() {
+    return atInsertionPoint() ? Thunks.constant(element) : iterator.delayedCurrent();
   }
-
-  protected boolean atInsertionPoint() {
-    return remaining == 0;
-  }
-
-  public void advanceNext() {
-    remaining--;
-    if (atInsertionPoint() || atEndOfSource()) {
-      remaining = 0;
-      inserted = true;
-    } else {
-      iterator.advanceNext();
-    }
-  }
-
+  
 }

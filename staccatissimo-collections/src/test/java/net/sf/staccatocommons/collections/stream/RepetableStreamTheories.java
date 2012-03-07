@@ -56,8 +56,9 @@ public abstract class RepetableStreamTheories extends StreamTheories {
   };
   
   @Theory
-  public void testName(Stream<Integer> stream, int element, int next) throws Exception {
-    assertEquals(stream.containsBefore(element, next), !stream.takeWhile(Predicates.equal(element).not()).contains(next));
+  public void ifContainsBeforeThenReferencesIsNotContainedInFirstSegment(Stream<Integer> stream, int element, int next) throws Exception {
+    assumeTrue(stream.containsBefore(element, next));
+    assertFalse(stream.takeWhile(Predicates.equal(element).not()).contains(next));
   }
 
   /**
