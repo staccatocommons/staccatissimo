@@ -773,7 +773,7 @@ public class Iterables {
   }
 
   /**
-   * If an element is before another when iterating through the given iterable.
+   * Whether an element is before another when iterating through the given iterable.
    * 
    * @param <A>
    * @param iterable
@@ -798,6 +798,21 @@ public class Iterables {
         return previousFound;
     }
     return false;
+  }
+  
+  public static <A> boolean containsBefore(@NonNull Iterable<A> iterable, A element, A next) {
+    for (A o : iterable) {
+      if (ObjectUtils.equals(o, element)) {
+        return true;
+      }
+      if (ObjectUtils.equals(o, next))
+        return false;
+    }
+    return false;
+  }
+  
+  public static <A> boolean containsBeforeIndex(@NonNull Iterable<A> iterable, A element, @NotNegative int index) {
+    return indexOf(iterable, element) < index;
   }
 
   /**

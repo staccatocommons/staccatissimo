@@ -564,14 +564,21 @@ public class AbstractStreamBasicTest {
   }
   
   @Test
+  public void containsBefore() throws Exception {
+    assertFalse(Streams.from("abcd").containsBefore('c', 'a'));
+    assertFalse(Streams.from("abcd").containsBefore('x', 'd'));
+    assertTrue(Streams.from("abcd").containsBefore('a', 'a'));
+    assertTrue(Streams.from("abcd").containsBefore('b', 'b'));
+    assertTrue(Streams.from("abcd").containsBefore('a', 'b'));
+    assertTrue(Streams.from("abcd").containsBefore('b', 'd'));
+  }
+  
+  @Test
   public void testName() throws Exception {
-    assertFalse(Streams.from("abcd").isBefore('a', 'a'));
-    assertTrue(Streams.from("abcd").isBefore('a', 'b'));
-    assertTrue(Streams.from("abcd").isBefore('b', 'd'));
-    
-    assertFalse(Streams.from("abcd").isBeforeIndex('a', 0));
-    assertTrue(Streams.from("abcd").isBeforeIndex('a', 1));
-    assertTrue(Streams.from("abcd").isBeforeIndex('b', 3));
+    assertFalse(Streams.from("abcd").containsBeforeIndex('a', 0));
+    assertTrue(Streams.from("abcd").containsBeforeIndex('a', 1));
+    assertTrue(Streams.from("abcd").containsBeforeIndex('b', 3));
+    assertTrue(Streams.from("abcd").containsBeforeIndex('b', 40));
   }
   
   @Test
@@ -581,8 +588,8 @@ public class AbstractStreamBasicTest {
   
   @Test
   public void testName2() throws Exception {
-    assertTrue(Streams.from("abcd").isBeforeIndex('d', 45));
-    assertTrue(Streams.from("abcd").isBefore('d', 'j'));
+    assertTrue(Streams.from("abcd").containsBeforeIndex('d', 45));
+    assertTrue(Streams.from("abcd").containsBefore('d', 'j'));
   }
   
 }

@@ -24,7 +24,7 @@ import net.sf.staccatocommons.testing.junit.theories.IterableTheories;
 public class InsertBeforeIndexIteratorUnitTest extends IterableTheories {
 
   protected Iterable<?> createTwoElementsIterable() {
-    return Streams.cons(4, 5).insertBeforeIndex(3, 2);
+    return Streams.cons(4).insertBeforeIndex(3, 2);
   }
 
   protected Iterable<?> createOneElementIterable() {

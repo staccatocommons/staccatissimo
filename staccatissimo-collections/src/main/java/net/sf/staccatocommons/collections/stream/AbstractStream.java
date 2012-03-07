@@ -734,7 +734,11 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
     return Streams.from(new InsertBeforeIterator(next, element, iterator()));
   }
   
-  public boolean isBeforeIndex(A element, @NotNegative int index) {
-   return  indexOf(element) < index;
+  public boolean containsBeforeIndex(A element, @NotNegative int index) {
+   return  Iterables.containsBeforeIndex(this, element, index);
+  }
+  
+  public boolean containsBefore(A element, A next) {
+    return Iterables.containsBefore(this, element, next);
   }
 }

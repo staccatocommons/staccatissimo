@@ -1354,7 +1354,10 @@ public interface Stream<A> extends //
    */
   boolean isBefore(A previous, A next);
   
-  boolean isBeforeIndex(A element, int index);
+  boolean containsBefore(A element, A next);
+  
+  boolean containsBeforeIndex(A element, int index);
+  
   
   /*Deconstructtion */
   

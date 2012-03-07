@@ -54,6 +54,11 @@ public abstract class RepetableStreamTheories extends StreamTheories {
   public static final Thunk<Integer>[] THUNKS = new Thunk[] { NullThunk.null_(), //
       Thunks.constant(90) //
   };
+  
+  @Theory
+  public void testName(Stream<Integer> stream, int element, int next) throws Exception {
+    assertEquals(stream.containsBefore(element, next), !stream.takeWhile(Predicates.equal(element).not()).contains(next));
+  }
 
   /**
    * Test method for
