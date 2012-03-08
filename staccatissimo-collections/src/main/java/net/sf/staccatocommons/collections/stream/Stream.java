@@ -224,8 +224,34 @@ public interface Stream<A> extends //
   @Projection
   Stream<A> drop(@NotNegative int amountOfElements);
   
+  /**
+   * Answers a stream that is a substream of this one. The substream begins at
+   * the specified {@code beginIndex}, and extends to the element at index
+   * {@code endIndex} - 1, if it has enough elements, or up to its last element,
+   * otherwise.
+   * </p>
+   * The resulting stream is always finite, and satisfies that
+   * {@code size() <= endIndex - beginIndex}
+   * </p>
+   * As a particular case, if {@code beginIndex == endIndex}, an empty stream is
+   * returned.
+   * </p>
+   * Examples:
+   * <pre>
+   *  Streams.from("hamburger").slice(4, 8).joinStrings(""); //answers "urge"
+   *  Streams.from("smiles").slice(1, 5).joinStrings(""); //answers "mile"
+   *  Streams.from("hello world!").slice(6, 309).joinStrings(""); //answers "world!"
+   *  Streams.enumerate(1,20).slice(5,5).toList(); //answers []  
+   *</pre>
+   * 
+   * @param beginIndex
+   *          the lower bound, inclusive
+   * @param endIndex
+   *          the upper bound, exclusive
+   * @return {@code drop(beginIndex).take(endIndex  - beginIndex)}
+   */
   @Projection
-  Stream<A> slice(@NotNegative int lowerBound, @NotNegative int upperBound);
+  Stream<A> slice(@NotNegative int beginIndex, @NotNegative int endIndex);
 
   /***
    * Splits stream elements into two lists using a predicate - elements that

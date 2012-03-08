@@ -513,14 +513,25 @@ public class AbstractStreamBasicTest {
     assertFalse(s.isEmpty());
 
   }
-  
+  /***/
   @Test
-  public void testSlice() throws Exception {
+  public void sliceEqualLowerAndUpperBoundsIsAnEmptyStream() throws Exception {
+    assertTrue(Streams.enumerate(1, 20).slice(5, 5).toList().isEmpty());
+  }
+  
+  /***/
+  @Test
+  public void sliceIsCompatibleWithSubstringForEnoughLongStreams() throws Exception {
     assertEquals("urge", Streams.from("hamburger").slice(4, 8).joinStrings(""));
     assertEquals("mile", Streams.from("smiles").slice(1, 5).joinStrings(""));
-    assertEquals("world!", Streams.from("hello world!").slice(6, 309).joinStrings(""));
-    assertEquals("", Streams.from("hello world!").slice(6, 6).joinStrings(""));
   }
+  
+  /***/
+  @Test
+  public void sliceWorksWithUpperBoundBeyondSize() throws Exception {
+    assertEquals("world!", Streams.from("hello world!").slice(6, 309).joinStrings(""));
+  }
+    
 
   /** test for {@link AbstractStream#printString()} */
   @Test
