@@ -135,13 +135,17 @@ public interface Stream<A> extends //
   void forEach(@NonNull Executable<? super A> block);
 
   /**
+   * Maps the given side effect over this stream, by answering a {@link Stream}
+   * that lazily applies the given side effect over each stream elements, and
+   * retrieves them.
    * 
    * @param block
-   * @return
+   * @return {@code map(Functions.impure(block)}
    * @since 1.1 original version, replaced by {@link #forEach(Executable)}
    * @since 1.2 current version, incompatible with previous 1.1
    * 
    */
+  @Projection
   Stream<A> each(@NonNull Executable<? super A> block);
 
   /**

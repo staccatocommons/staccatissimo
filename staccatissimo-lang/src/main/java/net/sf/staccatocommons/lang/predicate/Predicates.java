@@ -100,6 +100,13 @@ public class Predicates {
     return new Equals<T>(value);
   }
   
+  /**
+   * Returns a predicate that tests if the given value is not equal to its argument. This is equivalent to 
+   * {@code Predicates.equal(value).not()}
+   * 
+   * @param value
+   * @return a Predicate that evaluates if <code>!value.equals(argument)</code>
+   */
   public static <T> Predicate<T> notEqual(@NonNull T value) {
     return equal(value).not();
   }
