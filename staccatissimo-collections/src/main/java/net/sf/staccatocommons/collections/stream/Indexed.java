@@ -43,7 +43,7 @@ public interface Indexed<A> {
    * @param n
    * @return the n-th element, zero based
    * @throws IndexOutOfBoundsException
-   *           if there is no n-th element
+   *           if there is no n-th element, because stream has less than {@code n} elements
    */
   A get(int n);
 

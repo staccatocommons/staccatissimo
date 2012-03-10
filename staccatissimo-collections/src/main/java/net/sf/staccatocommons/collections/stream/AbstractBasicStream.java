@@ -76,15 +76,15 @@ public abstract class AbstractBasicStream<A> extends AbstractProtoMonad<Stream<A
   /* Overloadings and very strict fixed equivalences */
 
   public final <B> Stream<Tuple2<A, B>> zip(B... elements) {
-    return zip(Arrays.asList(elements));
+    return zip(Streams.cons(elements));
   }
 
   public final <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, B... elements) {
-    return zipWith(function, Arrays.asList(elements));
+    return zipWith(function, Streams.cons(elements));
   }
 
   public final Stream<A> concat(A... elements) {
-    return concat(Arrays.asList(elements));
+    return concat(Streams.cons(elements));
   }
   
   @Override
