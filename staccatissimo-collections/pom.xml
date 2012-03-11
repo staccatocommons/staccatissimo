@@ -3,12 +3,12 @@
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>staccatissimo-collections</artifactId>
 	<name>Staccatissimo-Collections</name>
-	<version>2.2-SNAPSHOT</version>
+	<version>2.2</version>
 	<inceptionYear>2010</inceptionYear>
 	<parent>
 		<groupId>net.sf.staccatocommons</groupId>
 		<artifactId>staccatissimo-parent-pom</artifactId>
-		<version>2.2-SNAPSHOT</version>
+		<version>2.2</version>
 	</parent>
 	
 	<description>Collections library of the Staccatissimo project, focused on providing new abstractions 
