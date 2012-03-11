@@ -32,7 +32,7 @@ public class IterablesInternal {
 
   /***/
   public static final String ITERABLE = "iterable";
-  private static final Validate<EmptySourceException> checkWithEmptySource = Validate
+  private static final Validate<EmptySourceException> CHECK_WITH_EMPTY_SOURCE = Validate
     .throwing(EmptySourceException.class);
 
   /***/
@@ -80,7 +80,7 @@ public class IterablesInternal {
    * check fails
    */
   public static void checkNotEmpty(Iterator<?> source) {
-    checkWithEmptySource.that(source.hasNext(), "Source is empty");
+    CHECK_WITH_EMPTY_SOURCE.that(source.hasNext(), "Source is empty");
   }
 
   /**
@@ -88,7 +88,7 @@ public class IterablesInternal {
    * check fails
    */
   public static void checkNotEmpty(Stream<?> source) {
-    checkWithEmptySource.that(!source.isEmpty(), "Source is empty");
+    CHECK_WITH_EMPTY_SOURCE.that(!source.isEmpty(), "Source is empty");
   }
 
   /**
