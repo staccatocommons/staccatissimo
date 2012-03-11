@@ -27,6 +27,8 @@ package net.sf.staccatocommons.collections.internal.iterator;
 
 import java.util.NoSuchElementException;
 
+import org.apache.commons.lang.ObjectUtils;
+
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -43,7 +45,7 @@ public class InsertBeforeIterator<A> extends AbstractInsertBeforeIterator<A> {
   /**
    * Creates a new {@link InsertBeforeIterator}
    */
-  public InsertBeforeIterator(@NonNull A reference, A element, @NonNull Thriterator<A> iterator) {
+  public InsertBeforeIterator(A reference, A element, @NonNull Thriterator<A> iterator) {
     super(element, iterator);
     this.reference = reference;
   }
@@ -74,7 +76,7 @@ public class InsertBeforeIterator<A> extends AbstractInsertBeforeIterator<A> {
         if (!iter.hasNext())
           return INSERTING_LAST;
         iter.advanceNext();
-        if (reference.equals(iter.current()))
+        if (ObjectUtils.equals(reference, iter.current()))
           return INSERTING;
         return NOT_INSERTED_YET;
       }

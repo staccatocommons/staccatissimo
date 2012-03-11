@@ -541,6 +541,15 @@ public class AbstractStreamBasicTest {
     assertEquals("a,b,x,c", Streams.cons('a', 'b', 'c').insertBefore('x', 'c').joinStrings(","));
     assertEquals("a,b,c,x", Streams.cons('a', 'b', 'c').insertBefore('x', 'd').joinStrings(","));
   }
+ 
+  /***/
+  @Test
+  public void inserBeforeIsNullSafe() throws Exception {
+    assertTrue(Streams.cons('a', 'b', 'c').insertBefore(null, 'a').equiv(null, 'a', 'b', 'c'));
+    assertTrue(Streams.cons('a', 'b', 'c').insertBefore('x', null).equiv('a', 'b', 'c', 'x'));
+    assertTrue(Streams.cons('a', 'b', 'c', null).insertBefore('x', null).equiv('a', 'b', 'c', 'x', null));
+  }
+  
   /*
    * TODO
   @Test
