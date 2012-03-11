@@ -40,6 +40,7 @@ import net.sf.staccatocommons.lang.AbstractProtoMonad;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.predicate.Equiv;
+import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -76,22 +77,6 @@ public abstract class AbstractBasicStream<A> extends AbstractProtoMonad<Stream<A
 
   /* Overloadings and very strict fixed equivalences */
   
-  public final <B> Stream<Tuple2<A, B>> cross(B... elements) {
-    return cross(Streams.from(elements));
-  }
-
-  public final <B> Stream<Tuple2<A, B>> zip(B... elements) {
-    return zip(Streams.cons(elements));
-  }
-
-  public final <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, B... elements) {
-    return zipWith(function, Streams.cons(elements));
-  }
-
-  public final Stream<A> concat(A... elements) {
-    return concat(Streams.cons(elements));
-  }
-  
   @Override
   public final <B> Stream<B> map(Applicable<? super A, ? extends B> function) {
     return map(Functions.from(function));
@@ -123,21 +108,19 @@ public abstract class AbstractBasicStream<A> extends AbstractProtoMonad<Stream<A
   public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, Iterator<? extends A> other) {
     return equivOn(function, Streams.from(other));
   }
-
-  public final Stream<A> concat(Iterator<? extends A> other) {
-    return concat(Streams.from(other));
-  }
-
-  public final <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, Iterator<B> other) {
-    return zipWith(function, Streams.from(other));
+  
+  
+  public final <B> Stream<Tuple2<A, B>> zip(B... elements) {
+    return zipWith(Tuples.<A, B> toTuple2(), elements);
   }
 
   public final <B> Stream<Tuple2<A, B>> zip(Iterator<B> other) {
-    return zip(Streams.from(other));
+    return zipWith(Tuples.<A, B> toTuple2(), other);
   }
 
-  public final <B> Stream<Tuple2<A, B>> cross(Iterator<B> other) {
-    return cross(Streams.from(other));
+  @Override
+  public final <B> Stream<Tuple2<A, B>> zip(Iterable<B> iterable) {
+    return zipWith(Tuples.<A, B> toTuple2(), iterable);
   }
 
   public final int findPosition(Evaluable<? super A> predicate) {

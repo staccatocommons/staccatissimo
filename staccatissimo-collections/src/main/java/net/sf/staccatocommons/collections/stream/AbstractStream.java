@@ -459,12 +459,7 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   public <B> Stream<B> transform(final DelayedDeconsApplicable<A, B> function) {
     return new DelayedDeconsTransformStream<A, B>(this, function);
   }
-
-  @Override
-  public <B> Stream<Tuple2<A, B>> zip(Iterable<B> iterable) {
-    return zip(iterable, Tuples.<A, B> toTuple2());
-  }
-
+  
   @Override
   public Tuple2<A, Stream<A>> decons() {
     Iterator<A> iter = iterator();
@@ -583,6 +578,14 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   public Stream<Tuple2<A, A>> cross() {
     return cross(this);
   }
+  
+  public final <B> Stream<Tuple2<A, B>> cross(B... elements) {
+    return cross(Streams.from(elements));
+  }
+
+  public final <B> Stream<Tuple2<A, B>> cross(Iterator<B> other) {
+    return cross(Streams.from(other));
+  }
 
   public <B> Stream<Tuple2<A, B>> cross(@NonNull Iterable<B> other) {
     return cross(Streams.from(other));
@@ -700,9 +703,17 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   public final String toString() {
     return ToString.toString(this);
   }
+  
+  public final Stream<A> concat(Iterable<A> other) {
+    return concat(other.iterator());
+  }
+  
+  public final Stream<A> concat(A... elements) {
+    return concat(Thriterators.from(elements));
+  }
 
-  public Stream<A> concat(Iterable<A> other) {
-    return Streams.from(new ConcatIterator(this.iterator(), other.iterator()));
+  public Stream<A> concat(Iterator<? extends A> other) {
+    return Streams.from(new ConcatIterator(this.iterator(), other));
   }
 
   public Stream<A> delayedAppend(Thunk<A> thunk) {
@@ -713,8 +724,16 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
     return new DelayedPrependStream<A>(thunk, this);
   }
 
-  public <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, Iterable<B> iterable) {
-    return Streams.from(new ZipIterator(iterator(), Thriterators.from(iterable.iterator()), function));
+  public final <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, B... elements) {
+    return zipWith(function, Thriterators.from(elements));
+  }
+
+  public final <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, Iterable<B> other) {
+    return zipWith(function, other.iterator());
+  }
+  
+  public <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, Iterator<B> other) {
+    return Streams.from(new ZipIterator(iterator(), Thriterators.from(other), function));
   }
 
   public Stream<A> memoize() {
