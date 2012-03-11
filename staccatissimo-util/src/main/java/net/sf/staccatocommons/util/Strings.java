@@ -33,8 +33,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
+ * String {@link Function}s and {@link Predicate}s 
  * @author flbulgarelli
- * 
  */
 public class Strings {
 
@@ -190,6 +190,22 @@ public class Strings {
    */
   public static <A> Function<A, String> reflectionToString() {
     return reflectionToString(NamedTupleToStringStyle.getInstance());
+  }
+
+  public static Function<String, String> toUpperCase() {
+    return new AbstractFunction<String, String>() {
+      public String apply(String arg) {
+        return arg.toUpperCase();
+      }
+    };
+  }
+   
+  public static Function<String, String> toLowerCase() {
+    return new AbstractFunction<String, String>() {
+      public String apply(String arg) {
+        return arg.toLowerCase();
+      }
+    };
   }
 
 }
