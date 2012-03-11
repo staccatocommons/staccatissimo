@@ -13,6 +13,8 @@ import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.predicate.internal.TopLevelPredicate;
 
+import org.apache.commons.lang.CharUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils
 import org.apache.commons.lang.WordUtils;
 
@@ -31,16 +33,18 @@ def wrapPrimitive = {
       return it
     case Integer.TYPE:
       return Integer
+    case Character.TYPE:
+      return Character
     default:
       throw new IllegalArgumentException("unsupported primitive ${it}")
   }
 }
 
-def predicateTemplate = {
+def predicateTemplate = { it, targetClassName ->
   def className = classNameForFunctionLikeMethod(it, 'Predicate')
   """
   /**
-   * @see StringUtils#${it.name}(String)
+   * @see ${targetClassName}#${it.name}(String)
    */
   @NullSafe
   public static Predicate<String> ${it.name}() {
@@ -48,7 +52,7 @@ def predicateTemplate = {
       private static final long serialVersionUID = 1L;
 
       public boolean eval(String arg) {
-        return StringUtils.${it.name}(arg);
+        return ${targetClassName}.${it.name}(arg);
       }
     }
     return new ${className}();
@@ -56,33 +60,34 @@ def predicateTemplate = {
 """}
 
 
-def functionTemplate = {
+def functionTemplate = { it, targetClassName ->
   def className = classNameForFunctionLikeMethod(it, 'Function')
   def returnType = wrapPrimitive(it.returnType).simpleName
 """
   /**
-   * @see StringUtils#${it.name}(String)
+   * @see ${targetClassName}#${it.name}(String)
    */
   @NullSafe
   public static Function<String, ${returnType}> ${it.name}() {
     class ${className} extends TopLevelFunction<String, ${returnType}> {
       private static final long serialVersionUID = 1L;
       public ${returnType} apply(String arg) {
-        return StringUtils.${it.name}(arg);
+        return ${targetClassName}.${it.name}(arg);
       }
     }
     return new ${className}();
   }
 """ }
 
-def toFunctionLike = {
+def toFunctionLike = { it, targetClassName ->
   if (it.returnType == Boolean.TYPE)
-    predicateTemplate(it)
+    predicateTemplate(it, targetClassName)
   else 
-    functionTemplate(it)  
+    functionTemplate(it, targetClassName)  
 }
 
 def generateSource =  { outputDir, generatedClassName, targetApacheClass ->
+  def targetClassName = targetApacheClass.simpleName
   new File(outputDir, "${generatedClassName}.java").withWriter { out ->
     out << """/**
  *  Copyright (c) 2010-2012, The StaccatoCommons Team
@@ -101,7 +106,7 @@ def generateSource =  { outputDir, generatedClassName, targetApacheClass ->
 ///// WARNING: GENERATE CODE. DO NOT EDIT ///////
 /////////////////////////////////////////////////
 
-package net.sf.staccatocommons.util;
+package net.sf.staccatocommons.util.apache;
 
 import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.defs.function.Function;
@@ -109,26 +114,28 @@ import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.lang.function.internal.TopLevelFunction;
 import net.sf.staccatocommons.lang.predicate.internal.TopLevelPredicate;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.${targetClassName};
 
 /***
- * String {@link Function}s and {@link Predicate}s based on Apache {@link StringUtils}. 
+ * {@link Function}s and {@link Predicate}s based on Apache {@link ${targetClassName}}. 
  * They provide a 1-1 mapping to that utility class. 
  */
 public final class ${generatedClassName} {
 
 ${stringMethodsFor(targetApacheClass)
     .findAll { it.parameterTypes == [String] }
-    .collect { toFunctionLike(it) }
+    .collect { toFunctionLike(it, targetClassName) }
     .join("\n")} 
 }
 """
   }
 }
 
-def outputDir = new File("target/generated-sources/net/sf/staccatocommons/util/")
+def outputDir = new File("target/generated-sources/net/sf/staccatocommons/util/apache")
 outputDir.mkdirs()
 
-generateSource outputDir, 'ApacheStrings', StringUtils
-//generateSource outputDir, 'ApacheWords', WordUtils
+generateSource outputDir, 'Strings', StringUtils
+generateSource outputDir, 'Words', WordUtils
+generateSource outputDir, 'Escapes', StringEscapeUtils
+generateSource outputDir, 'Chars', CharUtils
 
