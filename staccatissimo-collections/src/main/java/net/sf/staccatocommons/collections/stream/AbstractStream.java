@@ -39,6 +39,8 @@ import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FlatMapIterator;
 import net.sf.staccatocommons.collections.internal.iterator.IndicesIterator;
+import net.sf.staccatocommons.collections.internal.iterator.InsertBeforeIndexIterator;
+import net.sf.staccatocommons.collections.internal.iterator.InsertBeforeIterator;
 import net.sf.staccatocommons.collections.internal.iterator.TakeIterator;
 import net.sf.staccatocommons.collections.internal.iterator.TakeWhileIterator;
 import net.sf.staccatocommons.collections.internal.iterator.ZipIterator;
@@ -459,7 +461,7 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   public <B> Stream<B> transform(final DelayedDeconsApplicable<A, B> function) {
     return new DelayedDeconsTransformStream<A, B>(this, function);
   }
-  
+
   @Override
   public Tuple2<A, Stream<A>> decons() {
     Iterator<A> iter = iterator();
@@ -739,5 +741,39 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   public Stream<A> memoize() {
     return new MemoizedStream<A>(iterator());
   }
+  
+  /*
+//TODO
+  public Stream<A> memoize(int numberOfElements) {
+    return memoize();
+  }
 
+  @Override
+  public Tuple2<Stream<A>, Stream<A>> splitBeforeIndex(@NotNegative int position) {
+    Stream<A> stream = this.memoize(position); //TODO improve performance
+    return _(stream.take(position), stream.drop(position));
+  }
+  
+  public Tuple2<Stream<A>, Stream<A>> splitBefore(A element) {
+    Stream<A> stream = this.memoize(); //TODO improve performance
+    Predicate<A> notEq = Predicates.equal(element).not();
+    return _(stream.takeWhile(notEq), stream.dropWhile(notEq));
+  }
+  */
+  @Override
+  public Stream<A> insertBeforeIndex(A element, @NotNegative int position) {
+    return Streams.from(new InsertBeforeIndexIterator(position, element, iterator()));
+  }
+  
+  public Stream<A> insertBefore(A element, A reference) {
+    return Streams.from(new InsertBeforeIterator(reference, element, iterator()));
+  }
+  
+  public boolean containsBeforeIndex(A element, @NotNegative int index) {
+   return  Iterables.containsBeforeIndex(this, element, index);
+  }
+  
+  public boolean containsBefore(A element, A reference) {
+    return Iterables.containsBefore(this, element, reference);
+  }
 }

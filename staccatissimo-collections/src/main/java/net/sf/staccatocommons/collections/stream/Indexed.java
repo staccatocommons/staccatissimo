@@ -108,18 +108,6 @@ public interface Indexed<A> {
   int findPosition(Evaluable<? super A> predicate) throws NoSuchElementException;
 
   /**
-   * Answers if both arguments are contained by this stream, and the first one
-   * is before the second one. This method works even for stream that can be
-   * iterated only once
-   * 
-   * @param previous
-   * @param next
-   * @return if both elements are contained by this {@link Stream}, and the
-   *         first is before the second one
-   */
-  boolean isBefore(A previous, A next);
-
-  /**
    * Preserves elements that whose index satisfy the given
    * <code>predicate</code>
    * 

@@ -163,14 +163,44 @@ public class IterablesUnitTest {
    */
   @Test
   public void testIsBefore() {
-    List<Object> list = Arrays.<Object> asList("hola", 80, 20, 'a');
+    List<Object> list = Arrays.<Object> asList("hola", 80, 20, 90, 60, 90, 'a');
+    assertTrue(Iterables.isBefore(list, 90, 60));
+    assertFalse(Iterables.isBefore(list, 60, 90));
     assertTrue(Iterables.isBefore(list, 80, 20));
     assertTrue(Iterables.isBefore(list, "hola", 'a'));
-    assertFalse(Iterables.isBefore(list, 20, 20));
     assertFalse(Iterables.isBefore(list, 80, "hola"));
     assertFalse(Iterables.isBefore(list, 20, 40));
     assertFalse(Iterables.isBefore(list, 90, 10));
     assertFalse(Iterables.isBefore(list, 90, 20));
+    assertFalse(Iterables.isBefore(list, 698, 789));
+    
+    assertFalse(Iterables.isBefore(list, 986, 986));
+    assertFalse(Iterables.isBefore(list, 20, 20));
+    assertTrue(Iterables.isBefore(list, 90, 90));
+  }
+  
+  
+  /**
+   * Test for {@link Iterables#isBefore(Iterable, Object, Object)}
+   */
+  @Test
+  public void testContainsBefore() {
+    List<Object> list = Arrays.<Object> asList("hola", 80, 20, 90, 60, 90, 'a');
+    
+    assertTrue(Iterables.containsBefore(list, 90, 60));
+    assertFalse(Iterables.containsBefore(list, 60, 90));
+    assertTrue(Iterables.containsBefore(list, 80, 20));
+    assertTrue(Iterables.containsBefore(list, "hola", 'a'));
+    
+    assertFalse(Iterables.containsBefore(list, 80, "hola"));
+    assertTrue(Iterables.containsBefore(list, 20, 40));
+    assertTrue(Iterables.containsBefore(list, 90, 10));
+    assertFalse(Iterables.containsBefore(list, 90, 20));
+    assertFalse(Iterables.containsBefore(list, 698, 789));
+    
+    assertFalse(Iterables.containsBefore(list, 986, 986));
+    assertTrue(Iterables.containsBefore(list, 90, 90));
+    assertTrue(Iterables.containsBefore(list, 20, 20));
   }
 
   /**

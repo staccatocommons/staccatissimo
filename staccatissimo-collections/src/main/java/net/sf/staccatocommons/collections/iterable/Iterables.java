@@ -773,7 +773,7 @@ public class Iterables {
   }
 
   /**
-   * If an element is before another when iterating through the given iterable.
+   * Whether an element is before another when iterating through the given iterable.
    * 
    * @param <A>
    * @param iterable
@@ -786,8 +786,6 @@ public class Iterables {
    *         first element is before second one
    */
   public static <A> boolean isBefore(@NonNull Iterable<A> iterable, A previous, A next) {
-    if (ObjectUtils.equals(previous, next))
-      return false;
     boolean previousFound = false;
     for (A o : iterable) {
       if (!previousFound && ObjectUtils.equals(o, previous)) {
@@ -798,6 +796,66 @@ public class Iterables {
         return previousFound;
     }
     return false;
+  }
+  
+  /**
+   * Answers if {@code element} is contained by the given iterable, and its first
+   * occurrence is before the first occurrence of the second one, if any.
+   * 
+   * <p/>
+   * This message is similar to {@link #isBefore(Object, Object)}, but may be
+   * true even if the {@code reference} is not present at the iterable. It will be
+   * always <code>true</code> if both element and reference are equal, too.
+   * <p/>
+   * Examples:
+   * <pre>
+   *  List<Object> list = Arrays.<Object> asList("hello", 80, 20, 90, 60, 90, 'a');
+   * 
+   *  Iterables.containsBefore(list, 90, 10); //true
+   *  Iterables.containsBefore(list, 90, 20); //false
+   *  Iterables.containsBefore(list, 698, 789); //false
+   *  Iterables.containsBefore(list, 986, 986); //false
+   *  Iterables.containsBefore(list, 90, 90); //true
+   * </pre> 
+   * 
+   * @param iterable
+   * @param element
+   * @param next
+   * @param element
+   *          the element to test whether it is contained by the given iterable, and
+   *          appears before {@code reference}
+   * @param reference
+   * @return whether both elements are contained by the given {@link Iterable}, and the
+   *         first is before the second one.
+   * @since 2.2
+   */
+  public static <A> boolean containsBefore(@NonNull Iterable<A> iterable, A element, A next) {
+    for (A o : iterable) {
+      if (ObjectUtils.equals(o, element)) {
+        return true;
+      }
+      if (ObjectUtils.equals(o, next))
+        return false;
+    }
+    return false;
+  }
+  
+  /**
+   * Answers if {@code element} is contained by the given iterable, and its first
+   * occurrence is before the given {@code index}.
+   * 
+   * As a particular case, if {@code index} is 0, return always
+   * <code>false</code>
+   * 
+   * @param iterable
+   * @param element
+   * @param index
+   * @return whether elements is contained and before index
+   * @since 2.2
+   */
+  public static <A> boolean containsBeforeIndex(@NonNull Iterable<A> iterable, A element, @NotNegative int index) {
+    int indexOf = indexOf(iterable, element);
+    return indexOf != -1 && indexOf < index;
   }
 
   /**

@@ -55,6 +55,13 @@ public abstract class RepetableStreamTheories extends StreamTheories {
       Thunks.constant(90) //
   };
 
+  /***/
+  @Theory
+  public void ifContainsBeforeThenReferencesIsNotContainedInFirstSegment(Stream<Integer> stream, int element, int next) {
+    assumeTrue(stream.containsBefore(element, next));
+    assertFalse(stream.takeWhile(Predicates.equal(element).not()).contains(next));
+  }
+
   /**
    * Test method for
    * {@link net.sf.staccatocommons.collections.stream.AbstractStream#filter(net.sf.staccatocommons.defs.Evaluable)}

@@ -10,8 +10,6 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU Lesser General Public License for more details.
  */
-
-
 package net.sf.staccatocommons.collections.stream.impl;
 
 import static junit.framework.Assert.*;
@@ -43,4 +41,7 @@ public class CharSequenceStreamUnitTest extends RepetableStreamTheories {
     assertEquals(string, Streams.from(string).joinStrings(""));
   }
 
+  public void ifContainsBeforeThenReferencesIsNotContainedInFirstSegment(Stream<Integer> stream, int element, int next) {
+    // TODO can not test, since StreamTheories are not generic enough
+  }
 }

@@ -567,5 +567,80 @@ public class AbstractStreamBasicTest {
   public void zipWithIteratorOverloadingAppliesBinaryFunctionToPairsOfElementsOfBothStreams() throws Exception {
     Streams.cons(1, 2).zipWith(integer().add(), 4, 5).equiv(5, 7);
   }
+  
+  /***/
+  @Test
+  public void insertBeforeIndexAddsElementAtIndexMinusOneOrEnd() throws Exception {
+    assertEquals(Streams.cons(4, 5, 0, 6).toList(), Streams.cons(4, 5, 6).insertBeforeIndex(0, 2).toList());
+    assertEquals(Streams.cons(1, 1, 0, 1, 1).toList(), Streams.repeat(1).take(4).insertBeforeIndex(0, 2).toList());
+    assertEquals(Streams.cons(1, 1, 1, 1, 0).toList(), Streams.repeat(1).take(4).insertBeforeIndex(0, 20).toList());
+  }
+  
  
+  /***/
+  @Test
+  public void inserBeforeAddsElementBeforeReferenceOrAtEnd() throws Exception {
+    assertEquals("x,a,b,c", Streams.cons('a', 'b', 'c').insertBefore('x', 'a').joinStrings(","));
+    assertEquals("a,b,x,c", Streams.cons('a', 'b', 'c').insertBefore('x', 'c').joinStrings(","));
+    assertEquals("a,b,c,x", Streams.cons('a', 'b', 'c').insertBefore('x', 'd').joinStrings(","));
+  }
+ 
+  /***/
+  @Test
+  public void inserBeforeIsNullSafe() throws Exception {
+    assertTrue(Streams.cons('a', 'b', 'c').insertBefore(null, 'a').equiv(null, 'a', 'b', 'c'));
+    assertTrue(Streams.cons('a', 'b', 'c').insertBefore('x', null).equiv('a', 'b', 'c', 'x'));
+    assertTrue(Streams.cons('a', 'b', 'c', null).insertBefore('x', null).equiv('a', 'b', 'c', 'x', null));
+  }
+  
+  /*
+   * TODO
+  @Test
+  public void splitBeforeIndex() throws Exception {
+    Tuple2<Stream<Character>, Stream<Character>> streams = Streams.from("hello world!").splitBeforeIndex(5);
+    assertEquals(" world!", streams.second().joinStrings(""));
+    assertEquals("hello", streams.first().joinStrings(""));
+
+    streams = Streams.from("hello world!").splitBeforeIndex(25);
+    assertEquals("hello world!", streams.first().joinStrings(""));
+    assertEquals("", streams.second().joinStrings(""));
+    
+    assertTrue(Streams.cons(4, 5, 6, 9).drop(100).isEmpty());
+
+  }
+  
+  @Test
+  public void splitBefore() throws Exception {
+    Tuple2<Stream<Character>, Stream<Character>> streams = Streams.from("aaaaabbbbbcddddd").splitBefore('d');
+    assertEquals("aaaaabbbbbc", streams.first().joinStrings(""));
+    assertEquals("ddddd", streams.second().joinStrings(""));
+    
+    streams = Streams.from("aaaaabbbbbcddddd").splitBefore('x');
+    assertEquals("", streams.second().joinStrings(""));
+    assertEquals("aaaaabbbbbcddddd", streams.first().joinStrings(""));
+  }*/
+
+  /***/
+  @Test
+  public void containsBeforeIfFirstIsContainedAndAppearsBeforSecond() throws Exception {
+    assertFalse(Streams.from("abcd").containsBefore('c', 'a'));
+    assertFalse(Streams.from("abcd").containsBefore('x', 'd'));
+    assertTrue(Streams.from("abcd").containsBefore('a', 'a'));
+    assertTrue(Streams.from("abcd").containsBefore('b', 'b'));
+    assertTrue(Streams.from("abcd").containsBefore('a', 'b'));
+    assertTrue(Streams.from("abcd").containsBefore('b', 'd'));
+    assertFalse(Streams.from("abcd").containsBefore('x', 'x'));
+  }
+  
+  /***/
+  @Test
+  public void containsBeforeIndexIfFirstIsContainedAndBeforeIndex() throws Exception {
+    assertTrue(Streams.from("abcd").containsBeforeIndex('d', 10));
+    assertTrue(Streams.from("abcd").containsBeforeIndex('a', 1));
+    assertTrue(Streams.from("abcd").containsBeforeIndex('b', 3));
+    assertTrue(Streams.from("abcd").containsBeforeIndex('b', 40));
+    assertFalse(Streams.from("abcd").containsBeforeIndex('x', 2));
+    assertFalse(Streams.from("abcd").containsBeforeIndex('a', 0));
+  }
+  
 }
