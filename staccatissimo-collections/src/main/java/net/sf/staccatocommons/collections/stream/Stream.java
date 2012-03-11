@@ -163,6 +163,12 @@ public interface Stream<A> extends //
 
   /**
    * Preserves elements that satisfy the given <code>predicate</code>
+   * <p/>
+   * Example:
+   * <pre>
+   *  //Answers stream [hello, world], which has only strings whose length is 5   
+   *  Streams.cons("a", "hello", "world", "of", "streams", "!").filter(length().equal(5));
+   * </pre>
    * 
    * @param predicate
    * @return a new {@link Stream} projection that will retrieve only elements
@@ -285,8 +291,22 @@ public interface Stream<A> extends //
   // Specialized Mapping
 
   /**
-   * Transforms each element using the given function
+   * Transforms each element using the given function. 
+   * <p />
+   * Example:
    * 
+   * <pre> 
+   *  import static import net.sf.staccatocommons.util.Strings.*;
+   *  //Answers [HELLO, WORLD, STREAMS]
+   *  Streams.cons("hello", "world", "streams").map(toUpperCase());
+   * </pre>
+   * 
+   * <pre>
+   * import static net.sf.staccatocommons.numbers.NumberTypes.*;
+   *  ...
+   * //answers Stream [6, 9, 11, 26]
+   * Streams.cons(5, 8, 10, 25).map(add(1)).println(); 
+   * </pre>
    * @param <B>
    * @param function
    *          the mapper used to transform each element, applying it
@@ -854,9 +874,15 @@ public interface Stream<A> extends //
    * 
    * It answers an {@link Stream} that retrieves elements from this Stream, and
    * then, after its last element, the given elements.
-   * 
+   * <p/>
    * As a particular case, if this Stream is infinite, the resulting Stream will
    * retrieve the same elements than this one.
+   * <p/>
+   * Example:
+   * <pre>
+   * //answers the Stream [0, 1, 2, 3]
+   * Streams.cons(0, 1).concat(2, 3); 
+   * </pre>
    * 
    * @param elements the element to add at the end of the stream
    * @return a new {@link Stream}
@@ -998,6 +1024,14 @@ public interface Stream<A> extends //
    * If either <code>this</code> or the given iterable is shorter than the other
    * given number of elements, the remaining elements of this are discarded
    * 
+   * <p/>
+   * Example:
+   * 
+   * <pre>
+   * //Answers the stream [1 + 4, 2 + 5] == [5, 7];
+   * Streams.cons(1, 2).zipWith(integer().add(), 4, 5);  
+   * </pre>
+   * 
    * @param elements
    *          the elements to zip with this Stream
    * @param function
@@ -1079,6 +1113,26 @@ public interface Stream<A> extends //
    * 
    * If either <code>this</code> or the given array is shorter than the other
    * one, the remaining elements are discarded.
+   * <p/>
+   * Examples:
+   * 
+   * <pre>
+   * //Answers the stream [(0, a), (1,b), (2,c)]
+   * Streams.cons(0, 1, 2).zip('a', 'b', 'c');
+   * </pre>
+   * 
+   * <pre>
+   * //Answers true
+   * Streams 
+   *   .from(&quot;hello&quot;)
+   *   .zip(Streams.from(&quot;world!&quot;))
+   *   .equiv( 
+   *     _('h', 'w'),
+   *     _('e', 'o'),
+   *     _('l', 'r'),
+   *     _('l', 'l'),
+   *     _('o', 'd')); //notice the last '!' was discarded
+   * </pre>
    * 
    * @param <B>
    * @param iterable
@@ -1349,7 +1403,24 @@ public interface Stream<A> extends //
   
   /**
    * Answers the cartesian product of this {@link Stream} and the given
-   * <code>elements</code>
+   * <code>elements</code>.
+   * 
+   * Example:
+   * 
+   * <pre>
+   * //Answers true
+   * Streams
+   *   .cons(&quot;male&quot;, &quot;female&quot;)
+   *   .cross(&quot;young&quot;, &quot;middle-aged&quot;, &quot;old&quot;)
+   *   .equiv(
+   *     _(&quot;male&quot;, &quot;young&quot;),
+   *     _(&quot;male&quot;, &quot;middle-aged&quot;),
+   *     _(&quot;male&quot;, &quot;old&quot;),
+   *     _(&quot;female&quot;, &quot;young&quot;),
+   *     _(&quot;female&quot;, &quot;middle-aged&quot;),
+   *     _(&quot;female&quot;, &quot;old&quot;));
+   * </pre>
+   * 
    * 
    * @param <B>
    * @param other
@@ -1357,8 +1428,8 @@ public interface Stream<A> extends //
    * @see #cross(Stream)
    * @since 2.2
    */
-  <B> Stream<Tuple2<A, B>> cross(@NonNull B...elements);
-  
+  <B> Stream<Tuple2<A, B>> cross(@NonNull B... elements);
+
   /**
    * Answers the cartesian product of this {@link Stream} and the given
    * {@link Iterator}
