@@ -13,6 +13,8 @@
 
 package net.sf.staccatocommons.collections.stream;
 
+import static org.junit.Assert.*;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.Writer;
@@ -866,7 +868,31 @@ public interface Stream<A> extends //
   
   Stream<A> insertBeforeIndex(A element, @NotNegative int position);
   
-  Stream<A> insertBefore(A element, A next);
+  /**
+   * Inserts {@code reference} before the first occurrence of {@code reference}.
+   * If {@code next} is not contained by this stream, the element is inserted at
+   * its end.
+   * <p/>
+   * This message ensures that for any finite stream, and any element and reference   
+   * <pre>
+   *  stream.insertBefore(element, ref).containsBefore(element, ref)
+   * </pre>
+   * is <code>true</code>.
+   * <p/>
+   * Examples:
+   * <pre>
+   *  Streams.cons('a', 'b', 'c').insertBefore('x', 'a'); //answers [x,a,b,c]
+   *  Streams.cons('a', 'b', 'c').insertBefore('x', 'c'); //answers [a,b,x,c]
+   *  Streams.cons('a', 'b', 'c').insertBefore('x', 'd'); //answers [a,b,c,x]
+   * </pre>
+   * 
+   * @param element
+   * @param reference
+   * @return a {@link Stream} that lazily inserts the given element before the
+   *         reference
+   */
+  @Projection
+  Stream<A> insertBefore(A element, A reference);
 
   // Branching
 
@@ -1350,12 +1376,51 @@ public interface Stream<A> extends //
    * @param previous
    * @param next
    * @return whether both elements are contained by this {@link Stream}, and the
-   *         first is before the second one. If 
+   *         first is before the second one.  
+   *  @see #containsBefore(Object, Object)        
    */
   boolean isBefore(A previous, A next);
   
-  boolean containsBefore(A element, A next);
+  /**
+   * Answers if {@code element} is contained by this stream, and its first
+   * occurence is before the first occurence of the second one, if any.
+   * 
+   * <p/>
+   * This message is similar to {@link #isBefore(Object, Object)}, but may be
+   * true even if the {@code reference} is not present at the stream. It will be
+   * always <code>true</code> if both element and reference are equal, too.
+   * <p/>
+   * Examples:
+   * 
+   * <pre>
+   *  Streams.from("abcd").containsBefore('c', 'a'); //false. c is after a
+   *  Streams.from("abcd").containsBefore('x', 'd'); //false. x is not present
+   *  Streams.from("abcd").containsBefore('a', 'b'); //true
+   *  Streams.from("abcd").containsBefore('b', 'd'); //true
+   *  Streams.from("abcd").containsBefore('a', 'a'); //true
+   *  Streams.from("abcd").containsBefore('x', 'x'); //false. x is not present
+   * </pre> 
+   * 
+   * @param element
+   *          the element to test whether it is contained by this stream, and
+   *          appears before {@code reference}
+   * @param reference
+   * @return whether both elements are contained by this {@link Stream}, and the
+   *         first is before the second one.
+   * @see #insertBefore(Object, Object)
+   * @see #isBefore(Object, Object)
+   */
+  boolean containsBefore(A element, A reference);
   
+  /**
+   * Answers if {@code element} is contained by this stream, and its first occurence is
+   * before the given {@code index}
+   * 
+   * @param element
+   * @param index
+   * @return whether elements is containted and before index
+   * @see #insertBeforeIndex(Object, int)
+   */
   boolean containsBeforeIndex(A element, int index);
   
   
