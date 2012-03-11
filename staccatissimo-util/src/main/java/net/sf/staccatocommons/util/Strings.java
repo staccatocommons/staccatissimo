@@ -17,10 +17,8 @@ import java.util.regex.Pattern;
 
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.predicate.Predicate;
-import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.function.internal.TopLevelFunction;
-import net.sf.staccatocommons.lang.predicate.AbstractPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.ContainsSubstringPredicate;
 import net.sf.staccatocommons.lang.predicate.internal.EqualsIgnoreCase;
 import net.sf.staccatocommons.lang.predicate.internal.Matches;
@@ -91,7 +89,9 @@ public class Strings {
    * @return a new Predicate that evaluates <code>args.startsWith(string)</code>
    */
   public static Predicate<String> startsWith(@NonNull final String string) {
-    class StartsWith extends AbstractPredicate<String> {
+    class StartsWith extends TopLevelPredicate<String> {
+      private static final long serialVersionUID = 1L;
+
       @Override
       public boolean eval(String args) {
         return args.startsWith(string);
@@ -173,11 +173,14 @@ public class Strings {
    * @return a function that returns toString() of the argument using reflection
    */
   public static <A> Function<A, String> reflectionToString(final ToStringStyle toStringStyle) {
-    return new AbstractFunction<A, String>() {
+    class ReflectionToString extends TopLevelFunction<A, String> {
+      private static final long serialVersionUID = 1L;
+
       public String apply(A arg) {
         return ToStringBuilder.reflectionToString(arg, toStringStyle);
       }
-    };
+    }
+    return new ReflectionToString();
   }
 
   /**
@@ -192,20 +195,34 @@ public class Strings {
     return reflectionToString(NamedTupleToStringStyle.getInstance());
   }
 
+  /**
+   * Answers a function that returns {@code arg.toUpperCase()} 
+   */
+  @Constant
   public static Function<String, String> toUpperCase() {
-    return new AbstractFunction<String, String>() {
+    class ToUpperCaseFunction extends TopLevelFunction<String, String> {
+      private static final long serialVersionUID = 1L;
+
       public String apply(String arg) {
         return arg.toUpperCase();
       }
-    };
+    }
+    return new ToUpperCaseFunction();
   }
    
+  /**
+   * Answers a function that returns {@code arg.toLowerCase()}
+   */
+  @Constant
   public static Function<String, String> toLowerCase() {
-    return new AbstractFunction<String, String>() {
+    class ToLowerCaseFunction extends TopLevelFunction<String, String> {
+      private static final long serialVersionUID = 1L;
+
       public String apply(String arg) {
         return arg.toLowerCase();
       }
-    };
+    }
+    return new ToLowerCaseFunction();
   }
 
 }
