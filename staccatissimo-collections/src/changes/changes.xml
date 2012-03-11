@@ -127,7 +127,7 @@
         Adding Streams.enumerate, which replace some variants of Sterams.iterate
       </action>
     </release>
-    <release version="2.1" date="2012-02-21" description="Indices, Skips & Counting">
+    <release version="2.1" date="2012-02-21" description="Indices, Skips &amp; Counting">
       <action dev="flbulgarelli" type="add">
         Adding Streams.countOf
       </action>
@@ -136,6 +136,30 @@
       </action>
       <action dev="flbulgarelli" type="add">
         Adding skip and replace messages to Stream, through ProtoMonad
+      </action>
+    </release>
+    <release version="2.2" date="2012-03-11"
+       description="Insertions, stream iterface simplification, Performance Improvements">
+      <action dev="flbulgarelli" type="add">
+        Adding insertBefore, containsBefore
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Adding insertBeforeIndex, containsBeforeIndex
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Adding slice
+      </action>
+      <action dev="flbulgarelli" type="update">
+        Performance improvements
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Super interfaces of stream merged into stream
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Added many code samples to Stream
+      </action>
+      <action dev="flbulgarelli" type="fix">
+        Bug fixes in isBefore, isEmpty, first, last
       </action>
     </release>
   </body>

@@ -41,5 +41,13 @@
         implementations to iterators
       </action>
     </release>
+    <release version="2.2" date="2012-03-11" description="Thriters">
+      <action dev="flbulgarelli" type="update">
+      All iterators implement Thriter interface
+      </action>
+      <action dev="flbulgarelli" type="add">
+        Added UpdateCurrentThriterator
+      </action>
+    </release>
   </body>
 </document>

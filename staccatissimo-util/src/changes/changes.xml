@@ -10,25 +10,14 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <properties>
-    <title>Staccatissimo-Iterators Changes History</title>
+    <title>Staccatissimo-Utils Changes History</title>
     <author>flbulgarelli</author>
   </properties>
   <body>
-    <release version="1.0-alpha-4" date="2011-03-11"
-      description="Laziness">
+    <release version="2.2" date="2012-03-11"
+       description="Strings">
       <action dev="flbulgarelli" type="add">
-        Initial version with Lambda
-        and LambdaFactory, functions of arities of 1 to 3, and predicates of arity 1
-      </action>
-    </release>
-    <release version="2.1" date="2012-02-21" description="Predicates">
-      <action dev="flbulgarelli" type="add">
-        Adding complete support for predicates
-      </action>
-    </release>
-    <release version="2.2" date="2012-03-11" description="Untyped">
-      <action dev="flbulgarelli" type="add">
-        Adding support for untyped - non generic - lambdas
+        Adding toLowerCase, toUpperCase
       </action>
     </release>
   </body>
