@@ -50,6 +50,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  * @param <A>
+ * @since 2.2
  */
 public abstract class AbstractBasicStream<A> extends AbstractProtoMonad<Stream<A>, Stream, A> implements Stream<A> {
 
