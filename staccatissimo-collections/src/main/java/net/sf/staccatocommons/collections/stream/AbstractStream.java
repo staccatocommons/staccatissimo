@@ -706,7 +706,7 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
     return ToString.toString(this);
   }
   
-  public final Stream<A> concat(Iterable<A> other) {
+  public final Stream<A> concat(Iterable<? extends A> other) {
     return concat(other.iterator());
   }
   

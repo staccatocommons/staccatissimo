@@ -876,7 +876,7 @@ public interface Stream<A> extends //
    * @since 2.2
    */
   @Projection
-  Stream<A> concat(@NonNull Iterable<A> other); //FIXME broader type
+  Stream<A> concat(@NonNull Iterable<? extends A> other); 
   
   /**
    * Concatenates <code>this</code> with the given <code>elements</code>
