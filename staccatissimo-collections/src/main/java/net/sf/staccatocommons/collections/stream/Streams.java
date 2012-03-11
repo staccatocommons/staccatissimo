@@ -291,7 +291,7 @@ public class Streams {
 
   /**
    * Creates a new {@link Stream} that retrieves the elements from the given
-   * array.  Equivalent to {@link Streams#cons(Object)}
+   * array.  Equivalent to {@link Streams#cons(Object...)}
    * 
    * @param <A>
    *          the element type
@@ -301,7 +301,7 @@ public class Streams {
    */
   @Repeatable
   @Projection
-  public static <A> Stream<A> from(@NonNull A... elements) {
+  public static <A> Stream<A> from(@NonNull A[] elements) {
     return cons(elements);
   }
   

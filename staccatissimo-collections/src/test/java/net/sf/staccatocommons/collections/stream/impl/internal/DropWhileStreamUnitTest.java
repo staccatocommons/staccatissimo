@@ -37,7 +37,7 @@ public class DropWhileStreamUnitTest extends StreamTheories {
   /** data point */
   @DataPoint
   public static Stream emptyIter() {
-    return Streams.from(10, 20).dropWhile(greaterThan(2));
+    return Streams.cons(10, 20).dropWhile(greaterThan(2));
   }
 
   /** data point */
@@ -49,7 +49,7 @@ public class DropWhileStreamUnitTest extends StreamTheories {
   /** data point */
   @DataPoint
   public static Stream twoElementsIter() {
-    return Streams.from(2, 3, 6, 8).dropWhile(lessThanOrEqualTo(3));
+    return Streams.cons(2, 3, 6, 8).dropWhile(lessThanOrEqualTo(3));
   }
 
   /** Test for {@link Stream#dropWhile(Evaluable)} */
