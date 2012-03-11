@@ -163,6 +163,12 @@ public class AbstractStreamBasicTest {
 
     assertEquals(Arrays.asList("foo"), Streams.cons("foo").appendUndefined().take(1).toList());
   }
+  
+  /***/
+  @Test
+  public void concatArrayOverloadingJoinsTwoStreams() throws Exception {
+    Streams.cons(0, 1).concat(2, 3).equiv(0, 1, 2, 3);
+  }
 
   /** Tets for indexof */
   @Test
@@ -444,6 +450,11 @@ public class AbstractStreamBasicTest {
       .cross(Streams.enumerate(20, 40))
       .equiv(Iterables.cross(Streams.enumerate(1, 20), Streams.enumerate(20, 40))));
   }
+  /***/
+  @Test
+  public void crossArrayOverloadingAnswersCartesianProduct() throws Exception {
+    Streams.cons(0, 1).cross(0, 1).equiv(_(0, 0), _(0, 1), _(1, 0), _(1, 1));
+  }
 
   /**
    * Tests full-crossing
@@ -545,8 +556,16 @@ public class AbstractStreamBasicTest {
     assertEquals(Streams.empty().printString(), "[]");
   }
   
+  /***/
   @Test
-  public void testName() throws Exception {
-    Streams.cons(0, 1).cross(0, 1).equiv(_(0, 0), _(0, 1), _(1, 0), _(1, 1));
+  public void zipArrayOverloadingAnswersPairsOfElementsOfBothStreams() throws Exception {
+    Streams.cons(0, 1, 2).zip('a', 'b', 'c').equiv(_(0, 'a'), _(1, 'b'), _(2, 'c'));
   }
+  
+  /***/
+  @Test
+  public void zipWithIteratorOverloadingAppliesBinaryFunctionToPairsOfElementsOfBothStreams() throws Exception {
+    Streams.cons(1, 2).zipWith(integer().add(), 4, 5).equiv(5, 7);
+  }
+ 
 }
