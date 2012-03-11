@@ -69,7 +69,6 @@ import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.defs.function.Function;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.partial.EmptyAware;
-import net.sf.staccatocommons.defs.predicate.Predicate;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.defs.reduction.Accumulator;
 import net.sf.staccatocommons.defs.reduction.Reduction;
@@ -709,38 +708,38 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
     return new MemoizedStream<A>(iterator());
   }
   
-  @Override
+  /*
+//TODO
   public Stream<A> memoize(int numberOfElements) {
-    //TODO
     return memoize();
   }
 
   @Override
   public Tuple2<Stream<A>, Stream<A>> splitBeforeIndex(@NotNegative int position) {
-    Stream<A> stream = this.memoize(position); //TODO improve
+    Stream<A> stream = this.memoize(position); //TODO improve performance
     return _(stream.take(position), stream.drop(position));
   }
   
   public Tuple2<Stream<A>, Stream<A>> splitBefore(A element) {
-    Stream<A> stream = this.memoize(); //TODO improve
+    Stream<A> stream = this.memoize(); //TODO improve performance
     Predicate<A> notEq = Predicates.equal(element).not();
     return _(stream.takeWhile(notEq), stream.dropWhile(notEq));
   }
-  
+  */
   @Override
   public Stream<A> insertBeforeIndex(A element, @NotNegative int position) {
     return Streams.from(new InsertBeforeIndexIterator(position, element, iterator()));
   }
   
-  public Stream<A> insertBefore(A element, A next) {
-    return Streams.from(new InsertBeforeIterator(next, element, iterator()));
+  public Stream<A> insertBefore(A element, A reference) {
+    return Streams.from(new InsertBeforeIterator(reference, element, iterator()));
   }
   
   public boolean containsBeforeIndex(A element, @NotNegative int index) {
    return  Iterables.containsBeforeIndex(this, element, index);
   }
   
-  public boolean containsBefore(A element, A next) {
-    return Iterables.containsBefore(this, element, next);
+  public boolean containsBefore(A element, A reference) {
+    return Iterables.containsBefore(this, element, reference);
   }
 }

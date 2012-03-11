@@ -54,9 +54,10 @@ public abstract class RepetableStreamTheories extends StreamTheories {
   public static final Thunk<Integer>[] THUNKS = new Thunk[] { NullThunk.null_(), //
       Thunks.constant(90) //
   };
-  
+
+  /***/
   @Theory
-  public void ifContainsBeforeThenReferencesIsNotContainedInFirstSegment(Stream<Integer> stream, int element, int next) throws Exception {
+  public void ifContainsBeforeThenReferencesIsNotContainedInFirstSegment(Stream<Integer> stream, int element, int next) {
     assumeTrue(stream.containsBefore(element, next));
     assertFalse(stream.takeWhile(Predicates.equal(element).not()).contains(next));
   }

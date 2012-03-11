@@ -13,8 +13,6 @@
 
 package net.sf.staccatocommons.collections.stream;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.Writer;
@@ -228,11 +226,11 @@ public interface Stream<A> extends //
 
   
   //Partitioning and splitting
-
-  Tuple2<Stream<A>, Stream<A>> splitBeforeIndex(@NotNegative int position);
-  
-  Tuple2<Stream<A>, Stream<A>> splitBefore(A element);
-  
+// TODO
+//  Tuple2<Stream<A>, Stream<A>> splitBeforeIndex(@NotNegative int position);
+//  
+//  Tuple2<Stream<A>, Stream<A>> splitBefore(A element);
+//  
   /***
    * Splits stream elements into two lists using a predicate - elements that
    * evaluate to true will be returned in the first component, the rest will be
@@ -865,12 +863,38 @@ public interface Stream<A> extends //
   Stream<A> delayedPrepend(@NonNull Thunk<A> thunk);
   
   // Inserting
-  
-  Stream<A> insertBeforeIndex(A element, @NotNegative int position);
+
+  /**
+   * Inserts {@code element} at {@code index - 1}. If stream has not enough
+   * elements, that is, stream size is less than or equal to {@code index}
+   * elements, the element is inserted at its end.
+   * <p/>
+   * This message ensures that for any finite stream, and any element and index
+   * 
+   * <pre>
+   *  stream.insertBeforeIndex(element, index).containsBeforeIndex(element, index + 1)
+   * </pre>
+   * is <code>true</code>.
+   * <p/>
+   * Examples:
+   * 
+   * <pre>
+   *  Streams.cons(4, 5, 6).insertBeforeIndex(0, 2); //answers [4, 5, 0, 6]
+   *  Streams.repeat(1).take(4).insertBeforeIndex(0, 2); //answers [1, 1, 0, 1, 1]
+   *  Streams.repeat(1).take(4).insertBeforeIndex(0, 20); //answers [1, 1, 1, 1, 0]
+   * </pre>
+   * 
+   * @param element the element to insert
+   * @param index the index before inserting it
+   * @return a {@link Stream} that lazily inserts the given element before the
+   *         given index
+   * @since 2.2
+   */
+  Stream<A> insertBeforeIndex(A element, @NotNegative int index);
   
   /**
-   * Inserts {@code reference} before the first occurrence of {@code reference}.
-   * If {@code next} is not contained by this stream, the element is inserted at
+   * Inserts {@code element} before the first occurrence of {@code reference}.
+   * If {@code reference} is not contained by this stream, the element is inserted at
    * its end.
    * <p/>
    * This message ensures that for any finite stream, and any element and reference   
@@ -890,6 +914,7 @@ public interface Stream<A> extends //
    * @param reference
    * @return a {@link Stream} that lazily inserts the given element before the
    *         reference
+   *  @since 2.2       
    */
   @Projection
   Stream<A> insertBefore(A element, A reference);
@@ -1132,21 +1157,22 @@ public interface Stream<A> extends //
   @Projection
   Stream<A> memoize();
   
-  /**
-   * <a href="http://en.wikipedia.org/wiki/Memoization">Memoizes</a> the given
-   * number of initial stream elements and their order, by answering a lazy
-   * stream with {@link Repeatable} iteration order up to position
-   * {@code numberOfElements - 1}
-   * 
-   * 
-   * @param numberOfElements
-   *          the number of initial elements to memoize. If this number is
-   *          greather than stream size, all stream elements are memoized
-   * @return a new {@link Stream} that memoizes the first
-   *         {@code numberOfElements} elements evaluated during iteration
-   * @since 2.2
-   */
-  Stream<A> memoize(int numberOfElements);
+//  TODO  
+//  /**
+//   * <a href="http://en.wikipedia.org/wiki/Memoization">Memoizes</a> the given
+//   * number of initial stream elements and their order, by answering a lazy
+//   * stream with {@link Repeatable} iteration order up to position
+//   * {@code numberOfElements - 1}
+//   * 
+//   * 
+//   * @param numberOfElements
+//   *          the number of initial elements to memoize. If this number is
+//   *          greather than stream size, all stream elements are memoized
+//   * @return a new {@link Stream} that memoizes the first
+//   *         {@code numberOfElements} elements evaluated during iteration
+//   * @since 2.3
+//   */
+//  Stream<A> memoize(int numberOfElements);
 
   /**
    * Forces stream elements evaluation by converting it into a new ordered
@@ -1409,19 +1435,35 @@ public interface Stream<A> extends //
    *         first is before the second one.
    * @see #insertBefore(Object, Object)
    * @see #isBefore(Object, Object)
+   * @since 2.2
    */
   boolean containsBefore(A element, A reference);
   
   /**
-   * Answers if {@code element} is contained by this stream, and its first occurence is
-   * before the given {@code index}
+   * Answers if {@code element} is contained by this stream, and its first
+   * occurence is before the given {@code index}.
+   * 
+   * As a particular case, if {@code index} is 0, return always
+   * <code>false</code>
+   * <p/>
+   * Examples:
+   * 
+   * <pre>
+   *   Streams.from("abcd").containsBeforeIndex('x', 2); //false. x is not present
+   *   Streams.from("abcd").containsBeforeIndex('c', 1); //false. c is present but at index 2
+   *   Streams.from("abcd").containsBeforeIndex('a', 0); //false. a is present but at index 0
+   *   Streams.from("abcd").containsBeforeIndex('a', 1); //true
+   *   Streams.from("abcd").containsBeforeIndex('b', 3); //true
+   *   Streams.from("abcd").containsBeforeIndex('b', 40); //true
+   * </pre>
    * 
    * @param element
    * @param index
    * @return whether elements is containted and before index
+   * @since 2.2
    * @see #insertBeforeIndex(Object, int)
    */
-  boolean containsBeforeIndex(A element, int index);
+  boolean containsBeforeIndex(A element, @NotNegative int index);
   
   
   /*Deconstructtion */

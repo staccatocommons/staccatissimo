@@ -226,11 +226,13 @@ public abstract class StreamTheories {
     block.exec(stream);
   }
   
+  /***/
   @Theory
   public void insertBeforeIndexAssureElementIsBeforeIndex(int index, int element, Stream<Object> stream) throws Exception {
     assertTrue(stream.insertBeforeIndex(element, index).containsBeforeIndex(element, index + 1));
   }
   
+  /***/
   @Theory
   public void insertBeforeReferenceAssureElementIsBeforeReference(int element, int ref, Stream<Object> stream) throws Exception {
     assertTrue(stream.insertBefore(element, ref).containsBefore(element, ref));

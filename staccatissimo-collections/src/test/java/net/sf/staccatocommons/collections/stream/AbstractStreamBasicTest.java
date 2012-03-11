@@ -526,18 +526,23 @@ public class AbstractStreamBasicTest {
     assertEquals(Streams.empty().printString(), "[]");
   }
   
+  /***/
   @Test
-  public void insertBeforeIndex() throws Exception {
+  public void insertBeforeIndexAddsElementAtIndexMinusOneOrEnd() throws Exception {
     assertEquals(Streams.cons(4, 5, 0, 6).toList(), Streams.cons(4, 5, 6).insertBeforeIndex(0, 2).toList());
     assertEquals(Streams.cons(1, 1, 0, 1, 1).toList(), Streams.repeat(1).take(4).insertBeforeIndex(0, 2).toList());
     assertEquals(Streams.cons(1, 1, 1, 1, 0).toList(), Streams.repeat(1).take(4).insertBeforeIndex(0, 20).toList());
   }
   
-  //TODO document index vs position. Revise consistency of index & position
-  //get vs getAtPosition?
-  
-  
-  //TODO insertBefore and isBefore are not compatible, since we can insertBefore(x,y) but isBefore(x,y) may be false
+  /***/
+  @Test
+  public void inserBeforeAddsElementBeforeReferenceOrAtEnd() throws Exception {
+    assertEquals("x,a,b,c", Streams.cons('a', 'b', 'c').insertBefore('x', 'a').joinStrings(","));
+    assertEquals("a,b,x,c", Streams.cons('a', 'b', 'c').insertBefore('x', 'c').joinStrings(","));
+    assertEquals("a,b,c,x", Streams.cons('a', 'b', 'c').insertBefore('x', 'd').joinStrings(","));
+  }
+  /*
+   * TODO
   @Test
   public void splitBeforeIndex() throws Exception {
     Tuple2<Stream<Character>, Stream<Character>> streams = Streams.from("hello world!").splitBeforeIndex(5);
@@ -561,35 +566,29 @@ public class AbstractStreamBasicTest {
     streams = Streams.from("aaaaabbbbbcddddd").splitBefore('x');
     assertEquals("", streams.second().joinStrings(""));
     assertEquals("aaaaabbbbbcddddd", streams.first().joinStrings(""));
-  }
+  }*/
 
+  /***/
   @Test
-  public void containsBefore() throws Exception {
+  public void containsBeforeIfFirstIsContainedAndAppearsBeforSecond() throws Exception {
     assertFalse(Streams.from("abcd").containsBefore('c', 'a'));
     assertFalse(Streams.from("abcd").containsBefore('x', 'd'));
     assertTrue(Streams.from("abcd").containsBefore('a', 'a'));
     assertTrue(Streams.from("abcd").containsBefore('b', 'b'));
     assertTrue(Streams.from("abcd").containsBefore('a', 'b'));
     assertTrue(Streams.from("abcd").containsBefore('b', 'd'));
+    assertFalse(Streams.from("abcd").containsBefore('x', 'x'));
   }
-
+  
+  /***/
   @Test
-  public void testName() throws Exception {
-    assertFalse(Streams.from("abcd").containsBeforeIndex('a', 0));
+  public void containsBeforeIndexIfFirstIsContainedAndBeforeIndex() throws Exception {
+    assertTrue(Streams.from("abcd").containsBeforeIndex('d', 10));
     assertTrue(Streams.from("abcd").containsBeforeIndex('a', 1));
     assertTrue(Streams.from("abcd").containsBeforeIndex('b', 3));
     assertTrue(Streams.from("abcd").containsBeforeIndex('b', 40));
-  }
-
-  @Test
-  public void testInsertBefore() throws Exception {
-    assertEquals("1,2,3,4", Streams.cons(1, 2, 4).insertBefore(3, 4).joinStrings(","));
-  }
-
-  @Test
-  public void testName2() throws Exception {
-    assertTrue(Streams.from("abcd").containsBeforeIndex('d', 45));
-    assertTrue(Streams.from("abcd").containsBefore('d', 'j'));
+    assertFalse(Streams.from("abcd").containsBeforeIndex('x', 2));
+    assertFalse(Streams.from("abcd").containsBeforeIndex('a', 0));
   }
   
 }
