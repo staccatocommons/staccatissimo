@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.io.Writer;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -501,13 +502,26 @@ public interface Stream<A> extends //
    * Test that the elements of this stream are equal to the elements of the
    * given {@link Iterable}, and in the same order.
    * 
-   * @param iterable
-   * @return true if this stream has the same number of elements that the given
-   *         <code>iterable</code>, and each pair formed by elements of this
+   * @param other
+   * @return true if this stream has the same number of elements that 
+   *         <code>other</code>, and each pair formed by elements of this
    *         stream and given <code>iterable</code> at same position are equal.
    *         <code>false</code> otherwise
    */
-  boolean equiv(Iterable<? extends A> iterable);
+  boolean equiv(Iterable<? extends A> other);
+  
+  /**
+   * Test that the elements of this stream are equal to the elements of the
+   * given {@link iterator}, and in the same order.
+   * 
+   * @param iterable
+   * @return true if this stream has the same number of elements that
+   *         <code>other</code>, and each pair formed by elements of this
+   *         stream and given <code>iterable</code> at same position are equal.
+   *         <code>false</code> otherwise
+   * @since 2.2        
+   */
+  boolean equiv(Iterator<? extends A> other);
 
   /**
    * Test that the elements of this stream are equivalent to the elements of the
@@ -523,6 +537,22 @@ public interface Stream<A> extends //
    *         position satisfies the given {@link Evaluable2}
    */
   boolean equivBy(@NonNull Evaluable2<? super A, ? super A> equalityTest, @NonNull Iterable<? extends A> iterable);
+  
+  /**
+   * Test that the elements of this stream are equivalent to the elements of the
+   * given {@link Iterable}, and in the same order, using the given
+   * <code>equalityTest</code> for determining equivalence between elements.
+   * 
+   * @param equalityTest
+   * @param iterable
+   * 
+   * @return <code>true</code> if this stream has the same number of elements
+   *         that <code>other</code>, and each pair formed by
+   *         elements of this stream and <code>other</code> at same
+   *         position satisfies the given {@link Evaluable2}
+   * @since 2.2        
+   */
+  boolean equivBy(@NonNull Evaluable2<? super A, ? super A> equalityTest, @NonNull Iterator<? extends A> other);
 
   /**
    * Test that the elements of this stream are equivalent to the given
@@ -555,6 +585,24 @@ public interface Stream<A> extends //
    *         <code>Equiv.on(function)</code>
    */
   <B> boolean equivOn(@NonNull Applicable<? super A, ? extends B> function, @NonNull Iterable<? extends A> iterable);
+  
+  /**
+   * Test that the elements of this stream are equivalent to the elements of the
+   * given {@link Iterator}, and in the same order, using the
+   * <code>Equiv.on(function)</code> for determining equivalence between
+   * elements.
+   * 
+   * @param function
+   * @param iterable
+   * 
+   * @return <code>true</code> if this stream has the same number of elements
+   *         that the given {@link Iterator}, and each pair formed by
+   *         elements of this stream and given {@link Iterator} at same
+   *         position satisfies the {@link Evaluable2}
+   *         <code>Equiv.on(function)</code>
+   * @since 2.2        
+   */
+  <B> boolean equivOn(@NonNull Applicable<? super A, ? extends B> function, @NonNull Iterator<? extends A> other);
 
   /**
    * Test that the elements of this stream are equivalent to the given elements,
@@ -798,7 +846,7 @@ public interface Stream<A> extends //
    * @since 2.2
    */
   @Projection
-  Stream<A> concat(@NonNull Iterable<A> other);
+  Stream<A> concat(@NonNull Iterable<A> other); //FIXME broader type
   
   
   /**
@@ -816,6 +864,21 @@ public interface Stream<A> extends //
    */
   @Projection
   Stream<A> concat(@NonNull A ... elements);
+  
+  /**
+   * Concatenates <code>this</code> with the given {@link Iterator}
+   * 
+   * It answers an {@link Stream} that retrieves elements from this Stream, and
+   * then, after its last element, the given iterator's elements.
+   * 
+   * As a particular case, if this Stream is infinite, the resulting Stream will
+   * retrieve the same elements than this one.
+   * 
+   * @param other the iterator whose elements will be added at the end of the stream
+   * @return a new {@link Stream}
+   * @since 2.2
+   */
+  Stream<A> concat(@NonNull Iterator<? extends A> other);
 
   /**
    * Concatenates this Stream with the undefined Stream. Equivalent to
@@ -972,7 +1035,33 @@ public interface Stream<A> extends //
    * @see Iterables#zip(Iterable, Iterable)
    */
   @Projection
-  <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, @NonNull Iterable<B> iterable);
+  <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, @NonNull Iterable<B> other);
+  
+  /**
+   * Returns a {@link Stream} formed by the result of applying the given
+   * <code>function</code> to each pair of elements from <code>this</code> and
+   * the <code>other</code>.
+   * 
+   * If either <code>this</code> or the given {@link Iterator} is shorter than
+   * the other one, the remaining elements are discarded.
+   * 
+   * @param <B>
+   *          the type to the <code>iterable</code> to zip with this
+   *          {@link Stream}
+   * @param <C>
+   *          the resulting Stream element type
+   * @param other
+   *          the {@link Iterator} to zip with this Stream
+   * @param function
+   *          the function to apply to each pair
+   * @return a new Stream formed applying the given {@link Applicable2} to each
+   *         pair this Stream and the given iterator. The resulting Stream size
+   *         is the minimum of both iterables sizes, or infinite, if both this
+   *         and <code>other</code> are
+   * @see Iterables#zip(Iterable, Iterable)
+   * @since 2.2
+   */
+  <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, @NonNull Iterator<B> other);
 
   /**
    * Equivalent to {@link #zipWith(Function2, Iterable)}, with arguments
@@ -1019,7 +1108,27 @@ public interface Stream<A> extends //
    * @see #zip(Iterable, Function2)
    */
   @Projection
-  <B> Stream<Tuple2<A, B>> zip(@NonNull Iterable<B> iterable);
+  <B> Stream<Tuple2<A, B>> zip(@NonNull Iterable<B> iterable); 
+  
+  
+  /**
+   * Returns a {@link Stream} formed by by pair of element from
+   * <code>this</code> and the given {@link Iterator}.
+   * 
+   * If either <code>this</code> or <code>other</code> is shorter than
+   * the other one, the remaining elements are discarded.
+   * 
+   * @param <B>
+   * @param other
+   * @return a new Stream formed applying the given {@link Applicable2} to each
+   *         pair this Stream and the given iterator. The resulting Stream size
+   *         is the minimum of both iterables sizes, or infinite, if both this
+   *         and <code>other</code> are
+   * @see Iterables#zip(Iterable, Iterable)
+   * @see #zip(Iterable, Function2)
+   * @since 2.2
+   */
+  <B> Stream<Tuple2<A, B>> zip(@NonNull Iterator<B> other); 
 
   // Printing
 
@@ -1237,6 +1346,31 @@ public interface Stream<A> extends //
    */
   @Projection
   <B> Stream<Tuple2<A, B>> cross(@NonNull Iterable<B> other);
+  
+  /**
+   * Answers the cartesian product of this {@link Stream} and the given
+   * <code>elements</code>
+   * 
+   * @param <B>
+   * @param other
+   * @return <code>cross(Streams.cons(elements))</code>
+   * @see #cross(Stream)
+   * @since 2.2
+   */
+  <B> Stream<Tuple2<A, B>> cross(@NonNull B...elements);
+  
+  /**
+   * Answers the cartesian product of this {@link Stream} and the given
+   * {@link Iterator}
+   * 
+   * @param <B>
+   * @param other
+   * @return <code>cross(Streams.from(other))</code>
+   * @see #cross(Stream)
+   * @since 2.2
+   */
+  @Projection
+  <B> Stream<Tuple2<A, B>> cross(@NonNull Iterator<B> other);
 
   /**
    * Answers the cartesian product of this {@link Stream} and each one of the

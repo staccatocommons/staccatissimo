@@ -544,4 +544,9 @@ public class AbstractStreamBasicTest {
   public void printStreamEmptyAnswersEmptyBracketString() {
     assertEquals(Streams.empty().printString(), "[]");
   }
+  
+  @Test
+  public void testName() throws Exception {
+    Streams.cons(0, 1).cross(0, 1).equiv(_(0, 0), _(0, 1), _(1, 0), _(1, 1));
+  }
 }

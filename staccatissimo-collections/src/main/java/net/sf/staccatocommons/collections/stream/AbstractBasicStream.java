@@ -27,6 +27,7 @@ package net.sf.staccatocommons.collections.stream;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Applicable;
@@ -74,6 +75,10 @@ public abstract class AbstractBasicStream<A> extends AbstractProtoMonad<Stream<A
   }
 
   /* Overloadings and very strict fixed equivalences */
+  
+  public final <B> Stream<Tuple2<A, B>> cross(B... elements) {
+    return cross(Streams.from(elements));
+  }
 
   public final <B> Stream<Tuple2<A, B>> zip(B... elements) {
     return zip(Streams.cons(elements));
@@ -105,6 +110,34 @@ public abstract class AbstractBasicStream<A> extends AbstractProtoMonad<Stream<A
   @Override
   public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, A... elements) {
     return equivOn(function, Arrays.asList(elements));
+  }
+  
+  public final boolean equiv(Iterator<? extends A> other) {
+    return equiv(Streams.from(other));
+  }
+
+  public final boolean equivBy(Evaluable2<? super A, ? super A> equalityTest, Iterator<? extends A> other) {
+    return equivBy(equalityTest, Streams.from(other));
+  }
+
+  public final <B> boolean equivOn(Applicable<? super A, ? extends B> function, Iterator<? extends A> other) {
+    return equivOn(function, Streams.from(other));
+  }
+
+  public final Stream<A> concat(Iterator<? extends A> other) {
+    return concat(Streams.from(other));
+  }
+
+  public final <B, C> Stream<C> zipWith(Function2<? super A, ? super B, C> function, Iterator<B> other) {
+    return zipWith(function, Streams.from(other));
+  }
+
+  public final <B> Stream<Tuple2<A, B>> zip(Iterator<B> other) {
+    return zip(Streams.from(other));
+  }
+
+  public final <B> Stream<Tuple2<A, B>> cross(Iterator<B> other) {
+    return cross(Streams.from(other));
   }
 
   public final int findPosition(Evaluable<? super A> predicate) {
