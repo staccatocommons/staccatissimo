@@ -164,32 +164,32 @@ public class FunctionUnitTest extends JUnit4MockObjectTestCase {
   /** Test for predicate composition */
   @Test
   public void testThenPredicate() throws Exception {
-    assertTrue(add(10).then(Compare.lessThan(20)).eval(5));
+    assertTrue(add(10).is(Compare.lessThan(20)).eval(5));
   }
 
   /** Test for {@link AbstractFunction#equal(Object)} */
   @Test
   public void testEqual() throws Exception {
     // ((==10).(+6)) 4
-    assertTrue(add(6).equal(10).apply(4));
-    assertFalse(add(6).equal(10).apply(5));
+    assertTrue(add(6).isEqual(10).apply(4));
+    assertFalse(add(6).isEqual(10).apply(5));
 
     Object o = new Object();
-    assertTrue(Functions.identity().same(o).apply(o));
-    assertFalse(add(6).same(10).apply(5));
+    assertTrue(Functions.identity().isSame(o).apply(o));
+    assertFalse(add(6).isSame(10).apply(5));
   }
 
   /**
-   * Test for {@link AbstractFunction#null_()} and
-   * {@link AbstractFunction#notNull()}
+   * Test for {@link AbstractFunction#isNull()} and
+   * {@link AbstractFunction#isNotNull()}
    */
   @Test
   public void testNull() throws Exception {
-    assertTrue(Functions.identity().notNull().apply(new Object()));
-    assertFalse(Functions.identity().notNull().apply(null));
+    assertTrue(Functions.identity().isNotNull().apply(new Object()));
+    assertFalse(Functions.identity().isNotNull().apply(null));
 
-    assertTrue(Functions.identity().null_().apply(null));
-    assertFalse(Functions.identity().null_().apply(9));
+    assertTrue(Functions.identity().isNull().apply(null));
+    assertFalse(Functions.identity().isNull().apply(9));
   }
 
   /** test for {@link AbstractFunction.Soft} */

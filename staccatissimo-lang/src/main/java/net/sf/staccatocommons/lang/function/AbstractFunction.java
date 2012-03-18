@@ -80,12 +80,19 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
     return (Function<A, C>) other.of(this);
   }
 
+  /**
+   * @deprecated Use {@link #is(Predicate)} instead
+   */
   public Predicate<A> then(@NonNull Predicate<? super B> other) {
-    return other.of(this);
+    return is(other);
   }
 
+  public Predicate<A> is(@NonNull Predicate<? super B> other) {
+    return other.of(this);
+  }
+  
   /** equivalent to then(Predicates.equal(object)) */
-  public Predicate<A> equal(final B object) {
+  public Predicate<A> isEqual(final B object) {
     return new AbstractPredicate<A>() {
       public boolean eval(A argument) {
         return AbstractFunction.this.apply(argument).equals(object);
@@ -93,8 +100,15 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
     };
   }
 
+  /**
+   * @deprecated
+   */
+  public Predicate<A> equal(B object) {
+    return isEqual(object);
+  }
+  
   /** equivalent to then(Predicates.same(object)) */
-  public Predicate<A> same(final B object) {
+  public Predicate<A> isSame(final B object) {
     return new AbstractPredicate<A>() {
       public boolean eval(A argument) {
         return AbstractFunction.this.apply(argument) == object;
@@ -102,8 +116,19 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
     };
   }
 
-  /** equivalent to then(Predicates.notNull()); */
+  /**@deprecated*/
+  public Predicate<A> same(B object) {
+    return isSame(object);
+  }
+
+  /** equivalent to then(Predicates.notNull()); 
+   * @deprecated Use {@link #isNotNull()} instead*/
   public Predicate<A> notNull() {
+    return isNotNull();
+  }
+
+  /** equivalent to then(Predicates.notNull()); */
+  public Predicate<A> isNotNull() {
     return new AbstractPredicate<A>() {
       public boolean eval(A argument) {
         return AbstractFunction.this.apply(argument) != null;
@@ -111,8 +136,15 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
     };
   }
 
-  /** then(Predicates.null_()) */
+  /** then(Predicates.null_()) 
+   * @deprecated Use {@link #isNull()} instead*/
   public Predicate<A> null_() {
+    return isNull();
+  }
+  
+
+  /** then(Predicates.null_()) */
+  public Predicate<A> isNull() {
     return new AbstractPredicate<A>() {
       public boolean eval(A argument) {
         return AbstractFunction.this.apply(argument) == null;
