@@ -23,7 +23,7 @@ import net.sf.staccatocommons.restrictions.Constant;
  * @author flbulgarelli
  * 
  */
-public final class Same2<A> extends TopLevelPredicate2<A> {
+public final class Same2<A> extends TopLevelPredicate2<A, A> {
 
   private static final long serialVersionUID = 5767947639495599795L;
 
