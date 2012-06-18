@@ -147,6 +147,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * 
    * @param other
    * @return a new {@link Predicate}
+   * @since 2.3
    */
   Predicate<A> is(@NonNull Predicate<? super B> other);
 
@@ -197,6 +198,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * 
    * @param other
    * @return a new {@link Predicate}
+   * @since 2.3
    */
   Predicate<A> isEqual(B object);
 
@@ -216,6 +218,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * 
    * @param other
    * @return a new {@link Predicate}
+   * @since 2.3
    */
   Predicate<A> isSame(B object);
 
@@ -235,6 +238,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * 
    * @param other
    * @return a new {@link Predicate}
+   * @since 2.3
    */
   Predicate<A> isNull();
 
@@ -254,6 +258,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * 
    * @param other
    * @return a new {@link Predicate}
+   * @since 2.3
    */
   Predicate<A> isNotNull();
 
