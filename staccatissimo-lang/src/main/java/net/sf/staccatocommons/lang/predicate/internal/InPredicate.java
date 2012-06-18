@@ -13,10 +13,8 @@
 
 package net.sf.staccatocommons.lang.predicate.internal;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A predicate that tests if evaluated element is in a set of values
@@ -28,15 +26,7 @@ import java.util.Set;
 public class InPredicate<T> extends TopLevelPredicate<T> {
 
   private static final long serialVersionUID = -7713535502282119414L;
-  private final Set<T> elements;
-
-  /**
-   * Creates a new {@link InPredicate}
-   */
-  public InPredicate(Collection<T> elements) {
-    this(new HashSet<T>());
-    this.elements.addAll(elements);
-  }
+  private final Collection<? extends T> elements;
 
   /**
    * 
@@ -44,7 +34,7 @@ public class InPredicate<T> extends TopLevelPredicate<T> {
    * 
    * @param elements
    */
-  public InPredicate(Set<T> elements) {
+  public InPredicate(Collection<? extends T> elements) {
     this.elements = elements;
   }
 
@@ -55,8 +45,7 @@ public class InPredicate<T> extends TopLevelPredicate<T> {
    * @param elements
    */
   public InPredicate(T... elements) {
-    this(new HashSet<T>());
-    Collections.addAll(this.elements, elements);
+    this(Arrays.asList(elements));
   }
 
   public boolean eval(T e) {

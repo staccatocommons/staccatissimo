@@ -160,7 +160,7 @@ public class Predicates {
    * @param values
    * @return a new {@link AbstractPredicate}
    */
-  public static <T> Predicate<T> in(@NonNull Collection<T> values) {
+  public static <T> Predicate<T> in(@NonNull Collection<? extends T> values) {
     return new InPredicate<T>(values);
   }
 
