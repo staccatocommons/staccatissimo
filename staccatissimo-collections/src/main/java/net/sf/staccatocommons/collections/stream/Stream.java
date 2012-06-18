@@ -16,6 +16,7 @@ package net.sf.staccatocommons.collections.stream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.Writer;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -515,6 +516,26 @@ public interface Stream<A> extends //
    * @return if any element evaluate to true
    */
   boolean any(@NonNull Evaluable<? super A> predicate);
+  
+  /***
+   * Tests if any of the elements in this stream is contained in by the given
+   * collection, using {@link Collection#contains(Object)}
+   * 
+   * @param elements
+   * @return if the intersection between this stream and the given elements is
+   *         not empty
+   * @since 2.3
+   */
+  boolean intersects(Collection<? extends A> other);
+  
+  /***
+   * Tests if any of the elements in this stream is among the given elements
+   * 
+   * @param elements
+   * @return if the intersection between this stream and the given elements is not empty
+   * @since 2.3
+   */
+  boolean intersects(A ... elements);
 
   /**
    * Test that the elements of this stream are equal to the elements of the

@@ -776,4 +776,8 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   public boolean containsBefore(A element, A reference) {
     return Iterables.containsBefore(this, element, reference);
   }
+  
+  public boolean intersects(Collection<? extends A> other) {
+    return any(Predicates.in(other));
+  }
 }

@@ -195,4 +195,7 @@ public abstract class AbstractBasicStream<A> extends AbstractProtoMonad<Stream<A
     return zipWith(function, iterable);
   }
 
+  public final boolean intersects(A... elements) {
+    return intersects(Arrays.asList(elements));
+  }
 }

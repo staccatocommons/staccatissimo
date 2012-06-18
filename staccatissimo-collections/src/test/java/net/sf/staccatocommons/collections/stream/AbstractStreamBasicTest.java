@@ -643,4 +643,10 @@ public class AbstractStreamBasicTest {
     assertFalse(Streams.from("abcd").containsBeforeIndex('a', 0));
   }
   
+  @Test
+  public void testIntersects() throws Exception {
+    assertTrue(Streams.cons(1, 2, 3, 4).intersects(4, 5, 6));
+    assertFalse(Streams.cons(1, 2, 3, 4).intersects(23, 12, 54));
+  }
+
 }
