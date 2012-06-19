@@ -42,24 +42,18 @@ public abstract class AbstractMonad<A> extends AbstractProtoMonad<Monad<A>, Mona
 
   public final <B> Monad<B> flatMap(
     final Applicable<? super A, ? extends Iterable<? extends B>> function) {
-    return bind(new Applicable<A, Monad<B>>() {
-      public Monad<B> apply(A arg) {
-        return Monads.from(function.apply(arg));
-      }
-    });
+    return bind(Monads.flatMap(function));
   }
+
 
   public <B> Monad<B> bind(Applicable<? super A, Monad<B>> function) {
     return new BoundMonad<A, B>(monadicValue(), function);
   }
 
   public Monad<A> incorporate(final Applicable<? super A, Monad<A>> function) {
-    return bind(new AbstractFunction<A, Monad<A>>() {
-      public Monad<A> apply(A arg) {
-        return Monads.cons(arg).append(function.apply(arg));
-      }
-    });
+    return bind(Monads.incorporate(function));
   }
+
 
   public Monad<A> fork(ExecutorService executor) {
     return bind(Monads.<A> async(executor));

@@ -20,6 +20,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
+import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.control.monad.internal.BlockingMonadValue;
 import net.sf.staccatocommons.control.monad.internal.IteratorMonadValue;
 import net.sf.staccatocommons.control.monad.internal.NilMonad;
@@ -31,6 +32,7 @@ import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.ProtoMonad;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.function.AbstractFunction;
 import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.Constant;
@@ -44,6 +46,10 @@ import net.sf.staccatocommons.restrictions.processing.IgnoreRestrictions;
  * @since 1.2
  */
 public class Monads {
+  
+  /*
+   * Simple Monads
+   */
 
   /**
    * Answers a {@link Monad} that wraps a single element. Evaluating this monad
@@ -121,6 +127,10 @@ public class Monads {
   public static <A> Monad<A> nil() {
     return new NilMonad();
   }
+  
+  /*
+   * Simple Monadic Functions 
+   */
 
   /**
    * Answers a {@link MonadicFunction} that performs mapping using the given
@@ -215,10 +225,42 @@ public class Monads {
     };
   }
 
+  /**
+   * The cons monadic function. It takes its argument and lifts into a Monad
+   * 
+   * @return the {@link MonadicFunction} that performs {@link #cons(Object))} on
+   *         its argument
+   */
+  @Constant
   public static <A> MonadicFunction<A, A> cons() {
     return new AbstractMonadicFunction<A, A>() {
       public Monad<A> apply(A arg) {
         return Monads.cons(arg);
+      }
+    };
+  }
+  
+  /**
+   * The flatMap monadic function that performs flat mapping.
+   * 
+   * @param function
+   * @return a {@link MonadicFunction} that performs flat mapping
+   * @since 2.3
+   */
+  public static <A, B> Applicable<A, Monad<B>> flatMap(
+      final Applicable<? super A, ? extends Iterable<? extends B>> function) {
+    return new Applicable<A, Monad<B>>() {
+      public Monad<B> apply(A arg) {
+        return Monads.from(function.apply(arg));
+      }
+    };
+  }
+  
+  
+  public static <A> AbstractFunction<A, Monad<A>> incorporate(final Applicable<? super A, Monad<A>> function) {
+    return new AbstractFunction<A, Monad<A>>() {
+      public Monad<A> apply(A arg) {
+        return Monads.cons(arg).append(function.apply(arg));
       }
     };
   }
