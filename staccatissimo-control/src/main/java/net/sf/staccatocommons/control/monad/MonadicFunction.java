@@ -59,6 +59,24 @@ public interface MonadicFunction<A, B> extends Applicable<A, Monad<B>> {
    * 
    * </pre>
    * 
+   * and
+   * <pre>
+   * 
+   *  MonadicFunction&lt;X, Y&gt; f1 = ...;
+   *  f1.apply(x).bind(f2).bind(f3).run();
+   * 
+   * </pre>
+   * 
+   * Is equivalent to
+   * 
+   * <pre>
+   * 
+   *  MonadicFunction&lt;X, Y&gt; f1 = ...;
+   *  f1.then(f2).then(f3).apply(x).run();
+   *   
+   * </pre> 
+   *  
+   * 
    * This lets encapsulate a pipeline of common transformations into a single
    * function, so that it can be reused latter.
    * 

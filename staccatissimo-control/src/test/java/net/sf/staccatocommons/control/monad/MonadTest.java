@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import net.sf.staccatocommons.collections.Lists;
 import net.sf.staccatocommons.collections.Maps;
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Executable;
@@ -51,6 +52,18 @@ public class MonadTest {
   // g) throws Exception {
   // asssertTrue(m.map(f).each(g) == m.map(f.then(g)));
   // }
+  
+  /***/
+  @Test
+  public void klesiliOfMonadicFunctionsAppliedIsEquivalentToChainedBinding() throws Exception {
+    Accumulator<Integer, List<Integer>> acc1 = Reductions.<Integer>append().newAccumulator();
+    Monads.cons(3).map(add(1)).filter(Compare.greaterThan(2)).each(accumulate(acc1));
+
+    Accumulator<Integer, List<Integer>> acc2 = Reductions.<Integer>append().newAccumulator();
+    Monads.<Integer>cons().then(Monads.map(add(1))).then(Monads.filter(Compare.greaterThan(2))).then(Monads.each(accumulate(acc2))).apply(3);
+    
+    assertEquals(acc2.value(), acc1.value());
+  }
 
   /***/
   @Test
