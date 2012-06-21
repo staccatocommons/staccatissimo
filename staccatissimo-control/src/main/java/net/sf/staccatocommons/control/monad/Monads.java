@@ -20,7 +20,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
-import net.sf.staccatocommons.collections.stream.Stream;
 import net.sf.staccatocommons.control.monad.internal.BlockingMonadValue;
 import net.sf.staccatocommons.control.monad.internal.IteratorMonadValue;
 import net.sf.staccatocommons.control.monad.internal.NilMonad;
