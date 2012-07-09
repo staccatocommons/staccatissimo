@@ -89,6 +89,14 @@ public class Monads {
     return nil();
   }
 
+  /**
+   * Answers a {@link Monad} that wraps an {@link Option}.
+   * Evaluating this monad has no effect
+   * 
+   * @param elements
+   *          the elements to wrap
+   * @return a monad that wraps the given optional element
+   */
   public static <A> Monad<A> from(Option<? extends A> element) {
     if (element.isDefined())
       return cons((A) element.value());
@@ -246,18 +254,17 @@ public class Monads {
    * @return a {@link MonadicFunction} that performs flat mapping
    * @since 2.3
    */
-  public static <A, B> Applicable<A, Monad<B>> flatMap(
+  public static <A, B> MonadicFunction<A, B> flatMap(
       final Applicable<? super A, ? extends Iterable<? extends B>> function) {
-    return new Applicable<A, Monad<B>>() {
+    return new AbstractMonadicFunction<A, B>() {
       public Monad<B> apply(A arg) {
         return Monads.from(function.apply(arg));
       }
     };
   }
   
-  
-  public static <A> AbstractFunction<A, Monad<A>> incorporate(final Applicable<? super A, Monad<A>> function) {
-    return new AbstractFunction<A, Monad<A>>() {
+  public static <A> MonadicFunction<A, A> incorporate(final Applicable<? super A, Monad<A>> function) {
+    return new AbstractMonadicFunction<A, A>() {
       public Monad<A> apply(A arg) {
         return Monads.cons(arg).append(function.apply(arg));
       }
