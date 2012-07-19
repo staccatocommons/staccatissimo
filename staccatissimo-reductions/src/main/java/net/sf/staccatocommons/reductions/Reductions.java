@@ -19,6 +19,8 @@ import java.util.List;
 
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
+import net.sf.staccatocommons.defs.Executable;
+import net.sf.staccatocommons.defs.reduction.Accumulator;
 import net.sf.staccatocommons.defs.reduction.Reduction;
 import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.lang.Compare;
@@ -245,6 +247,19 @@ public class Reductions {
   public static <A, B> Reduction<A, B> from(final B initial,
     @NonNull final Applicable2<? super B, ? super A, ? extends B> function) {
     return new Foldl<A, B>(initial, function);
+  }
+  
+  /**
+   * Answers an executable that accumulates the given accumulator
+   * @param accumularor
+   * @return
+   */
+  public static <A, B> Executable<A> accumulate(final Accumulator<A, B> accumularor) {
+    return new Executable<A>() {
+      public void exec(A argument) {
+        accumularor.accumulate(argument);
+      }
+    };
   }
 
 }

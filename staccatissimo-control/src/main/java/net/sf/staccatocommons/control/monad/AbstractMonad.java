@@ -22,7 +22,6 @@ import net.sf.staccatocommons.defs.Evaluable;
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.tuple.Tuple2;
 import net.sf.staccatocommons.lang.AbstractProtoMonad;
-import net.sf.staccatocommons.lang.function.AbstractFunction;
 
 /**
  * @author flbulgarelli

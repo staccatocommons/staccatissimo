@@ -16,6 +16,7 @@ package net.sf.staccatocommons.control.monad;
 
 import static net.sf.staccatocommons.control.monad.Monads.*;
 import static net.sf.staccatocommons.numbers.NumberTypes.*;
+import static net.sf.staccatocommons.reductions.Reductions.*;
 import static org.junit.Assert.*;
 
 import java.util.Collection;
@@ -33,6 +34,7 @@ import net.sf.staccatocommons.io.IO;
 import net.sf.staccatocommons.lang.Compare;
 import net.sf.staccatocommons.lang.Option;
 import net.sf.staccatocommons.lang.block.Block;
+import net.sf.staccatocommons.lang.function.Functions;
 import net.sf.staccatocommons.reductions.Reductions;
 import net.sf.staccatocommons.util.Strings;
 
@@ -43,28 +45,44 @@ import org.junit.Test;
  * @author flbulgarelli
  * 
  */
-// @RunWith(Theories.class)
 public class MonadTest {
 
-  // @Ignore("not valid code")
-  // @Theory
-  // public <A, B> void testMapEach(Monad<A> m, Function<A, B> f, Executable<B>
-  // g) throws Exception {
-  // asssertTrue(m.map(f).each(g) == m.map(f.then(g)));
-  // }
+  /**
+   */
+  @Test
+  public void flatMapSplitsProcessingPipeline() throws Exception {
+    //  concatMap id $ return [4, 5]
+    //  flip (>>=) id $ return [4, 5]
+    //  return [4, 5] >>= id
+    //  return >=> id $ [4, 5] 
+    
+    //  Cons >=> \x -> x $ [4, 5]
+    //  Cons >=> flatMap id $ [4, 5]
+    
+    assertEquals(Lists.from(4, 5),
+        result(Lists.from(4, 5), Monads.flatMap(Functions.<List<Integer>> identity())));
+  }
+  
+  /**
+   */
+  @Test
+  public void appendAddsAnElementToProcessingPipeline() throws Exception {
+    assertEquals(Lists.from(4, 5),
+        result(Lists.from(4, 5), Monads.flatMap(Functions.<List<Integer>> identity())));
+  }
+  
   
   /***/
   @Test
   public void klesiliOfMonadicFunctionsAppliedIsEquivalentToChainedBinding() throws Exception {
     Accumulator<Integer, List<Integer>> acc1 = Reductions.<Integer>append().newAccumulator();
-    Monads.cons(3).map(add(1)).filter(Compare.greaterThan(2)).each(accumulate(acc1));
+    cons(3).map(add(1)).filter(Compare.greaterThan(2)).each(accumulate(acc1)).run();
 
-    Accumulator<Integer, List<Integer>> acc2 = Reductions.<Integer>append().newAccumulator();
-    Monads.<Integer>cons().then(Monads.map(add(1))).then(Monads.filter(Compare.greaterThan(2))).then(Monads.each(accumulate(acc2))).apply(3);
-    
-    assertEquals(acc2.value(), acc1.value());
+    assertEquals(
+        result(3, Monads.<Integer>cons().then(map(add(1))).then(filter(Compare.greaterThan(2)))), 
+        acc1.value());
   }
-
+    
   /***/
   @Test
   public void testname() throws Exception {
@@ -178,14 +196,12 @@ public class MonadTest {
     assertEquals(5, (int) Maps.from(accum.value()).get("hello"));
 
   }
-
+  
   /***/
-  // TODO move to reductions
-  protected static <A, B> Executable<A> accumulate(final Accumulator<A, B> accumularor) {
-    return new Executable<A>() {
-      public void exec(A argument) {
-        accumularor.accumulate(argument);
-      }
-    };
+  protected <A, B>  List<B> result(A input, MonadicFunction<A, B> f) {
+    Accumulator<B, List<B>> acc1 = Reductions.<B>append().newAccumulator();
+    f.then(each(accumulate(acc1))).apply(input).run();
+    return acc1.value();
   }
+
 }
