@@ -29,7 +29,7 @@ public class IterableStreamUnitTest extends RepetableStreamTheories {
 
   /** Set of iterable Streams to test */
   @DataPoints
-  public static final Stream[] STREAMS = new Stream[] { Streams.from(Streams.enumerate(85, 3, 190)),
+  public static final Stream[] STREAMS = new Stream[] { 
       Streams.from((Iterable<Integer>) Streams.cons(5, 0, 10, 156).toSet()),
       Streams.from((Iterable<Integer>) Collections.singleton(5)),
       Streams.from((Iterable<Integer>) Collections.<Integer> emptyList()) };
