@@ -3,12 +3,12 @@
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>staccatissimo-reductions</artifactId>
 	<name>Staccatissimo-Reductions</name>
-	<version>2.3-SNAPSHOT</version>
+	<version>2.3</version>
 	<inceptionYear>2010</inceptionYear>
 	<parent>
 		<groupId>net.sf.staccatocommons</groupId>
 		<artifactId>staccatissimo-parent-pom</artifactId>
-		<version>2.3-SNAPSHOT</version>
+		<version>2.3</version>
 	</parent>
 
 	<description>Reductions library of the Staccatissimo project
