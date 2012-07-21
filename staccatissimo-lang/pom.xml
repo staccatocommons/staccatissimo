@@ -4,13 +4,13 @@
 	<artifactId>staccatissimo-lang</artifactId>
 	<name>Staccatissimo-Lang</name>
 	<description>Staccatissimo core classes</description>
-	<version>2.3</version>
+	<version>2.4-SNAPSHOT</version>
 	<inceptionYear>2010</inceptionYear>
 	
 	<parent>
 		<groupId>net.sf.staccatocommons</groupId>
 		<artifactId>staccatissimo-parent-pom</artifactId>
-		<version>2.3</version>
+		<version>2.4-SNAPSHOT</version>
 	</parent>
 	<reporting>
 		<plugins>
