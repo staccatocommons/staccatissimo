@@ -157,6 +157,23 @@ public class DynamicUnitTest {
   public void dynamicSendMessageUnderstood() throws Exception {
     assertNull(Dynamics.from("hello").chainingSend("isEmpty", "156", 40).value());
   }
+  
+  @Test
+  public void _1() throws Exception {
+    assertNull(Dynamics.from("hello").chainingSend("isEmpty", null, 40).value());
+  }
+  
+	public static class Foo {
+		public int foo(String o) {
+			return 0;
+		}
+	}
+
+  @Test
+  public void _2() throws Exception {
+    assertEquals(0, Dynamics.from(new Foo()).send("foo", (Object) null));
+  }
+
 
   /**
    * Tests chaining dynamic send

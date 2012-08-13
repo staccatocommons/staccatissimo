@@ -84,8 +84,7 @@ public final class ReflectiveDynamic extends AbstractDynamic {
   }
 
   private MethodDescriptor newDescriptor(final String selector, final Class<?>... argTypes) {
-    MethodDescriptor key = new MethodDescriptor(target.getClass(), selector, argTypes);
-    return key;
+    return new MethodDescriptor(target.getClass(), selector, argTypes);
   }
 
   private <T> T invoke(Method method, final Object... args) {
