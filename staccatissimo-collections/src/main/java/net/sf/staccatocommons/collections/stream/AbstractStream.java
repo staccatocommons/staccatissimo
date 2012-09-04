@@ -33,6 +33,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import net.sf.staccatocommons.check.Ensure;
+import net.sf.staccatocommons.collections.EmptySourceException;
 import net.sf.staccatocommons.collections.internal.iterator.ConcatIterator;
 import net.sf.staccatocommons.collections.internal.iterator.DropIterator;
 import net.sf.staccatocommons.collections.internal.iterator.FilterIndexIterator;
@@ -203,9 +204,20 @@ public abstract class AbstractStream<A> extends AbstractBasicStream<A> {
   public A anyOrElse(A value) {
     return anyOrNone().valueOrElse(value);
   }
+  
+  @Override
+  public <K> A lookup(K key, Function<? super A, ? extends K> function) //
+    throws EmptySourceException, NoSuchElementException {
+    return find(((Function<A, K>) function).isEqual(key));
+  }
 
   @Override
-  public A find(Evaluable<? super A> predicate) {
+  public <K> Option<A> lookupOrNone(K key, Function<? super A, ? extends K> function) {
+    return findOrNone(((Function<A, K>) function).isEqual(key));
+  }
+
+  @Override
+  public A find(Evaluable<? super A> predicate) throws EmptySourceException, NoSuchElementException {
     return Iterables.find(this, predicate);
   }
 

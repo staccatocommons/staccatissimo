@@ -45,6 +45,7 @@ import net.sf.staccatocommons.defs.type.NumberType;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.lang.None;
 import net.sf.staccatocommons.lang.Option;
+import net.sf.staccatocommons.lang.Some;
 import net.sf.staccatocommons.lang.tuple.Tuples;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 import net.sf.staccatocommons.restrictions.check.NotNegative;
@@ -417,7 +418,7 @@ public interface Stream<A> extends //
    * @return <code>anyOrNone().valueOrElse(value)</code>
    */
   A anyOrElse(A value);
-
+  
   /**
    * Looks for a element that satisfies the given {@link Evaluable}. If such
    * element does not exist, throws {@link NoSuchElementException}
@@ -430,7 +431,7 @@ public interface Stream<A> extends //
    *           if no element matches the predicate.
    */
   A find(@NonNull Evaluable<? super A> predicate) throws EmptySourceException, NoSuchElementException;
-
+  
   /**
    * Looks for an element that satisfies the given {@link Evaluable}. If such
    * element exists, returns <code>some(element)</code>. Otherwise, returns
@@ -478,6 +479,41 @@ public interface Stream<A> extends //
    * @return <code>findOrElse(predicate, Thunks.constant(element))</code>
    */
   A findOrElse(@NonNull Evaluable<? super A> predicate, @NonNull A element);
+
+  /**
+   * Looks for a element, using a key, and a function that computes such key for each element. 
+   * If such element does not exist, throws {@link NoSuchElementException}
+   * <p>
+   * Equivalent to <code>find(function.isEqual(key))</code> 
+   * </p>
+   * @param key the key used to lookup the element. 
+   * @param function the function to compute each element's key
+   * @return the first elements whose key is equal to the given key
+   * @throws EmptySourceException
+   *           if this stream is empty
+   * @throws NoSuchElementException
+   *           if no element matches the predicate.
+   */
+  <K> A lookup(K key, @NonNull Function<? super A, ? extends K> function) throws EmptySourceException,
+    NoSuchElementException;
+  
+  
+  /**
+   * Looks for a element, using a key, and a function that computes such key for
+   * each element. If such element exists, returns <code>some(element)</code>.
+   * Otherwise, returns {@link None}.
+   * <p>
+   * Equivalent to <code>find(function.isEqual(key))</code>
+   * </p>
+   * 
+   * @param key
+   *          the key used to lookup the element.
+   * @param function
+   *          the function to compute each element's key
+   * @return the first elements whose key is equal to the given key, wrapped
+   *         into {@link Some}, if exists. {@link None}, otherwise.
+   */
+  <K> Option<A> lookupOrNone(K key, @NonNull Function<? super A, ? extends K> function);
 
   // Testing
 
