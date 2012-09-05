@@ -71,10 +71,13 @@ public interface ProtoMonad<Type, RawType, A> {
    * @return a {@link ProtoMonad} that contains or computes elements that are
    *         not equal to the given one
    */
-  Type skip(@NonNull A element);
+  Type skip(A element);
 
   /**
    * Preserves all elements except nulls
+   * <p>
+   * Equivalent to <code>skip(null)</code>
+   * </p>
    * 
    * Equivalent to {@code filter(Predicates.notNull())}
    * 
@@ -96,11 +99,13 @@ public interface ProtoMonad<Type, RawType, A> {
    *         are replaced by the given {@code replacement}
    * @since 2.1
    */
-  Type replace(@NonNull A element, A replacement);
+  Type replace(A element, A replacement);
 
   /**
    * Replaces all null elements with the given {@code replacement}
-   * 
+   * <p>
+   * Equivalent to <code>replace(null, replacement)</code>
+   * </p>
    * @param replacement
    * @return a {@link ProtoMonad} that computes or contains the same elements
    *         that this, except of those null, which are replaced by the given

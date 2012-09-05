@@ -89,13 +89,14 @@ public class Predicates {
   }
 
   /**
-   * Returns a predicate that tests if the given value is equal to its argument:
-   * <code>value.equals(argument)</code>.
+   * Returns a predicate that tests if the given value is equal to its argument 
+   * (<code>value.equals(argument)</code>) or both are null.
    * 
    * @param <T>
    * @param value
    * @return <code>Equiv.equal().apply(value)</code>
    */
+  @NullSafe
   public static <T> Predicate<T> equal(@NonNull T value) {
     return new Equals<T>(value);
   }

@@ -14,7 +14,10 @@
 
 package net.sf.staccatocommons.lang.predicate;
 
+import org.apache.commons.lang.ObjectUtils;
+
 import net.sf.staccatocommons.defs.Applicable;
+import net.sf.staccatocommons.defs.NullSafe;
 import net.sf.staccatocommons.defs.predicate.Predicate2;
 import net.sf.staccatocommons.lang.predicate.internal.Compare2;
 import net.sf.staccatocommons.lang.predicate.internal.Equals2;
@@ -26,6 +29,8 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * Factory class methods for creating common, simple {@link Predicate2} that
  * implement the notion of and equivalence test, that is, a reflexive, symmetric
  * and transitive relation between its arguments.
+ * 
+ * All {@link Predicate2} here are {@link NullSafe}
  * 
  * @author flbulgarelli
  * @see <a
@@ -66,10 +71,12 @@ public class Equiv {
    * 
    * @param <A>
    * @return <code>Equiv.equal().nullSafe()</code>
+   * @deprecated since 2.4, all {@link Predicate2} in {@link Equiv} are nullsafe
    */
+  @Deprecated
   @Constant
   public static <A> Predicate2<A, A> equalNullSafe() {
-    return Equiv.<A> equal().nullSafe();
+    return equal();
   }
 
   /**
@@ -109,7 +116,10 @@ public class Equiv {
   public static <A, B> Predicate2<A, A> on(@NonNull final Applicable<? super A, ? extends B> function) {
     return new AbstractPredicate2<A, A>() {
       public boolean eval(A arg0, A arg1) {
-        return function.apply(arg0).equals(function.apply(arg1));
+        return ObjectUtils.equals(function.apply(arg0), function.apply(arg1));
+      }
+      public Predicate2<A, A> nullSafe() {
+        return this;
       }
     };
   }

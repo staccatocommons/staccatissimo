@@ -95,7 +95,7 @@ public final class Some<T> extends Option<T> {
   }
 
   public Option<T> skip(T element) {
-    return element.equals(value) ? Option.<T> none() : this;
+    return ObjectUtils.equals(element, value) ? Option.<T> none() : this;
   }
 
   // @Override

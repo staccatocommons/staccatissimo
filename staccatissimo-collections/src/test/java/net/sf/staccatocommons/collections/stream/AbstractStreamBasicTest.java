@@ -659,6 +659,24 @@ public class AbstractStreamBasicTest {
   /***/
   @Test
   public void lookupOrNoneAnswersNoneWhenNoKeyMatches() throws Exception {
-    assertTrue(Streams.cons("bar", "hello", "world", "foo").lookupOrNone(8, Strings.length()).isUndefined());
+    assertTrue(Streams.cons("bar", "hello", "world", "foo").lookupOrNone(null, Strings.length()).isUndefined());
+  }
+  
+  /***/
+  @Test
+  public void lookupOrNoneWorksWithNullsAsKeys() throws Exception {
+    assertEquals("foo", Streams.cons("foobar", "hello", null, "foo").lookup(3, Strings.length().nullSafe()));
+  }
+  
+  /***/
+  @Test
+  public void skipNullFiltersNulls() throws Exception {
+    assertEquals(Lists.from(4, 5), Streams.cons(4, 5, null).skipNull().toList());
+  }
+
+  /***/
+  @Test
+  public void skipAcceptsNull() throws Exception {
+    assertEquals(Lists.from(4, 5), Streams.cons(4, 5, null).skip(null).toList());
   }
 }

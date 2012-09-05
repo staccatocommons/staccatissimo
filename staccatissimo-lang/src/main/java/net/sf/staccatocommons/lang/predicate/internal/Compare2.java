@@ -26,6 +26,10 @@ public final class Compare2<A extends Comparable<A>> extends TopLevelPredicate2<
   private static final long serialVersionUID = 2333778927729616411L;
 
   public boolean eval(A arg0, A arg1) {
+    if (arg0 == arg1)
+      return true;
+    if (arg0 == null || arg1 == null)
+      return false;
     return arg0.compareTo(arg1) == 0;
   }
 
@@ -35,5 +39,9 @@ public final class Compare2<A extends Comparable<A>> extends TopLevelPredicate2<
   @Constant
   public static <A extends Comparable<A>> Predicate2<A, A> compareTest() {
     return new Compare2();
+  }
+  
+  public Predicate2<A, A> nullSafe() {
+    return this;
   }
 }

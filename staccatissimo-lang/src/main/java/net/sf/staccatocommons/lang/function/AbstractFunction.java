@@ -13,6 +13,8 @@
 
 package net.sf.staccatocommons.lang.function;
 
+import org.apache.commons.lang.ObjectUtils;
+
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.Applicable2;
 import net.sf.staccatocommons.defs.Applicable3;
@@ -95,7 +97,7 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
   public Predicate<A> isEqual(final B object) {
     return new AbstractPredicate<A>() {
       public boolean eval(A argument) {
-        return AbstractFunction.this.apply(argument).equals(object);
+        return ObjectUtils.equals(AbstractFunction.this.apply(argument), object);
       }
     };
   }

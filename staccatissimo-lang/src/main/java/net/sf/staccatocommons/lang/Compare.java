@@ -15,6 +15,8 @@ package net.sf.staccatocommons.lang;
 
 import java.util.Comparator;
 
+import org.apache.commons.lang.ObjectUtils;
+
 import net.sf.staccatocommons.defs.Applicable;
 import net.sf.staccatocommons.defs.function.Function2;
 import net.sf.staccatocommons.defs.predicate.Predicate;
@@ -183,7 +185,7 @@ public class Compare {
    */
   public static <T> boolean in(@NonNull T element, @NonNull T... values) {
     for (T value : values)
-      if (element.equals(value))
+      if (ObjectUtils.equals(element, value))
         return true;
     return false;
   }

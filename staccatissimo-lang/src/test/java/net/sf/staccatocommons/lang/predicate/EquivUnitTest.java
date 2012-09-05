@@ -47,8 +47,8 @@ public class EquivUnitTest {
   public void testEquality() throws Exception {
     assertFalse(Equiv.<Integer> equal().eval(4, 9));
     assertTrue(Equiv.<String> equal().eval("Foo", "Foo"));
-    assertTrue(Equiv.<String> equal().nullSafe().eval(null, null));
-    assertFalse(Equiv.<String> equal().nullSafe().eval(null, "foo"));
+    assertTrue(Equiv.<String> equal().eval(null, null));
+    assertFalse(Equiv.<String> equal().eval(null, "foo"));
   }
 
   /** Test method for {@link Predicates#compare()} */
@@ -56,9 +56,9 @@ public class EquivUnitTest {
   public void testCompare() throws Exception {
     assertFalse(Equiv.<Integer> compare().eval(4, 5));
     assertTrue(Equiv.<String> compare().eval("Foo", "Foo"));
-    assertTrue(Equiv.<String> compare().nullSafe().eval(null, null));
-    assertFalse(Equiv.<String> compare().nullSafe().eval(null, ""));
-    assertFalse(Equiv.<String> compare().nullSafe().eval("", null));
+    assertTrue(Equiv.<String> compare().eval(null, null));
+    assertFalse(Equiv.<String> compare().eval(null, ""));
+    assertFalse(Equiv.<String> compare().eval("", null));
 
   }
 

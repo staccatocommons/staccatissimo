@@ -25,6 +25,8 @@
  */
 package net.sf.staccatocommons.lang;
 
+import org.apache.commons.lang.ObjectUtils;
+
 import net.sf.staccatocommons.defs.Executable;
 import net.sf.staccatocommons.defs.ProtoMonad;
 import net.sf.staccatocommons.lang.function.AbstractFunction;
@@ -51,7 +53,7 @@ public abstract class AbstractProtoMonad<Type, RawType, A> implements ProtoMonad
   public Type replace(final A element, final A replacement) {
     return (Type) map(new AbstractFunction<A, A>() {
       public A apply(A arg) {
-        return element.equals(arg) ? replacement : arg;
+        return ObjectUtils.equals(element, arg) ? replacement : arg;
       }
     });
   }

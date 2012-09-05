@@ -452,7 +452,7 @@ public class Iterables {
    *         <code>false</code> otherwise
    */
   public static <A> boolean equiv(@NonNull Iterable<? extends A> iterable1, @NonNull Iterable<? extends A> iterable2) {
-    return equivBy(iterable1, iterable2, Equiv.equal().nullSafe());
+    return equivBy(iterable1, iterable2, Equiv.equal());
   }
 
   /**

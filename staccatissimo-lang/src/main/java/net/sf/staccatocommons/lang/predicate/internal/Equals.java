@@ -13,6 +13,8 @@
 
 package net.sf.staccatocommons.lang.predicate.internal;
 
+import org.apache.commons.lang.ObjectUtils;
+
 /**
  * @author flbulgarelli
  * 
@@ -33,6 +35,6 @@ public final class Equals<T> extends TopLevelPredicate<T> {
   }
 
   public boolean eval(T argument) {
-    return value.equals(argument);
+    return ObjectUtils.equals(value, argument);
   }
 }

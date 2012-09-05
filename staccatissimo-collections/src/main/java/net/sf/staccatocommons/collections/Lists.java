@@ -72,7 +72,7 @@ public class Lists {
    */
   public static <A> void addBefore(@NonNull List<A> list, A element, A reference) {
     for (ListIterator<A> iter = list.listIterator(); iter.hasNext();)
-      if (iter.next().equals(reference)) {
+      if (ObjectUtils.equals(iter.next(), reference)) {
         iter.previous();
         iter.add(element);
         return;
