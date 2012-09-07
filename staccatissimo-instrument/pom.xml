@@ -3,11 +3,11 @@
 	<parent>
 		<artifactId>staccatissimo-parent-pom</artifactId>
 		<groupId>net.sf.staccatocommons</groupId>
-		<version>2.4-SNAPSHOT</version>
+		<version>2.3.1</version>
 	</parent>
 	<groupId>net.sf.staccatocommons</groupId>
 	<artifactId>staccatissimo-instrument</artifactId>
-	<version>2.4-SNAPSHOT</version>
+	<version>2.3.1</version>
 	<name>Staccatissimo-Instrument</name>
 	<inceptionYear>2010</inceptionYear>
 	
