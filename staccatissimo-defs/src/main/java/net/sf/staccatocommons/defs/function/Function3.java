@@ -46,20 +46,27 @@ import net.sf.staccatocommons.defs.tuple.Tuple3;
  * 
  */
 @Applicative
+@FunctionalInterface
 public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>, Applicable2<A, B, Function<C, D>>,
-  Applicable<A, Function2<B, C, D>>, NullSafeAware<Function3<A, B, C, D>>, Delayable3<A, B, C, D> {
+  Applicable<A, Function2<B, C, D>> {
+  //}, NullSafeAware<Function3<A, B, C, D>>, Delayable3<A, B, C, D> {
 
   /**
    * Partially applies the function, passing only its first argument
    */
-  Function2<B, C, D> apply(final A arg0);
+  default Function2<B, C, D> apply(final A arg0) {
+    return (arg1, arg2) -> apply(arg0, arg1, arg2);
+  }
 
   /**
    * Partially applies the function, passing only its first and second arguments
    */
-  Function<C, D> apply(final A arg0, final B arg1);
+  default Function<C, D> apply(final A arg0, final B arg1) {
+    return arg3 -> apply(arg0, arg1, arg3);
+  }
 
   D apply(A arg0, B arg1, C arg2);
+  
 
   /**
    * Answers a new function that returns null if any of its arguments is null,
@@ -68,7 +75,13 @@ public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>, Applicab
    * @return a new null-safe {@link Function3}
    */
   @NullSafe
-  Function3<A, B, C, D> nullSafe();
+  default Function3<A, B, C, D> nullSafe() {
+    return (arg0, arg1, arg2) -> {
+        if (arg0 == null || arg1 == null || arg2 == null)
+          return null;
+        return apply(arg0, arg1, arg2);
+    };
+  }
   
 
   /**
@@ -79,5 +92,9 @@ public interface Function3<A, B, C, D> extends Applicable3<A, B, C, D>, Applicab
    * 
    * @return a new {@link Function}
    */
-  Function<Tuple3<A, B, C>, D> uncurry();
+  default Function<Tuple3<A, B, C>, D> uncurry() {
+    return (argument) -> apply(argument.first(), argument.second(), argument.third());
+  }
+  
+
 }

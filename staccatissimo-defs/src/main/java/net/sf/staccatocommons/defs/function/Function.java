@@ -36,9 +36,12 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  *          function return type
  */
 @Applicative
-public interface Function<A, B> extends Applicable<A, B>, //
-  NullSafeAware<Function<A, B>>, //
-  Delayable<A, B> {
+@FunctionalInterface
+public interface Function<A, B> extends Applicable<A, B> {
+//  
+//}, //
+//  NullSafeAware<Function<A, B>>, //
+//  Delayable<A, B> {
 
   /* Composition */
 
@@ -52,7 +55,9 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @param other
    * @return a new function, <code>this</code> composed with <code>other</code>
    */
-  <C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other);
+  default <C> Function<C, B> of(@NonNull final Applicable<? super C, ? extends A> other){
+      return arg -> apply(other.apply(arg));
+  }
 
   /**
    * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
@@ -66,8 +71,13 @@ public interface Function<A, B> extends Applicable<A, B>, //
    *          non null
    * @return a new function, this composed with other. Non null.
    */
-  <Tp1, Tp2> Function2<Tp1, Tp2, B> of(@NonNull final Applicable2<Tp1, Tp2, ? extends A> other);
-
+  @NonNull
+  default <Tp1, Tp2> Function2<Tp1, Tp2, B> of(
+    @NonNull final Applicable2<Tp1, Tp2, ? extends A> other) {
+    return (arg0, arg1) -> apply(other.apply(arg0, arg1));
+  }
+  
+  
   /**
    * <a href="http://en.wikipedia.org/wiki/Function_composition">Composes</a>
    * this function with another {@link Applicable3}, resulting in a new
@@ -81,8 +91,14 @@ public interface Function<A, B> extends Applicable<A, B>, //
    *          non null
    * @return a new function, this composed with other. Non null
    */
-  <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(@NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other);
+  @NonNull
+  default <Tp1, Tp2, Tp3> Function3<Tp1, Tp2, Tp3, B> of(
+    @NonNull final Applicable3<Tp1, Tp2, Tp3, ? extends A> other) {
+    return (arg0, arg1, arg2) -> apply(other.apply(arg0, arg1, arg2));
+  }
 
+
+  
   /* Then-combination */
 
   /**
@@ -99,8 +115,10 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @param other
    * @return {@code other.of(this)}
    */
-  <C> Function<A, C> then(@NonNull Function<? super B, ? extends C> other);
-
+  default <C> Function<A, C> then(@NonNull Function<? super B, ? extends C> other) {
+    return (Function<A, C>) other.of(this);
+  }
+  
   /**
    * Merge combination. Answers a two arg function that combines
    * <code>this</code> function with <code>other</code> function, using a
@@ -128,8 +146,8 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @return a new {@link Function2} that merges {@code this} and {@code other}
    *         with {@code binaryFunction}
    */
-  <A2, B2, C> Function2<A, A2, C> then(Function2<B, B2, C> binayFunction,
-    @NonNull Function<? super A2, ? extends B2> other);
+//  <A2, B2, C> Function2<A, A2, C> then(Function2<B, B2, C> binayFunction,
+//    @NonNull Function<? super A2, ? extends B2> other);
 
   /**
    * Predicate composition, like {@link Predicate#of(Applicable)}, but with
@@ -139,7 +157,9 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @return a new {@link Predicate}
    * @since 2.3
    */
-  Predicate<A> is(@NonNull Predicate<? super B> other);
+  default Predicate<A> is(@NonNull Predicate<? super B> other) {
+      return other.of(this);
+  }
 
   /* Nulls handling */
 
@@ -150,7 +170,13 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @return a new null-safe {@link Function}
    */
   @NullSafe
-  Function<A, B> nullSafe();
+  default Function<A, B> nullSafe() {
+    return arg -> {
+      if (arg == null)
+        return null;
+      return apply(arg);
+    };
+  }
 
   /* Builtin common compositions */
 
@@ -171,7 +197,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @return a new {@link Predicate}
    * @since 2.3
    */
-  Predicate<A> isEqual(B object);
+//  Predicate<A> isEqual(B object);
 
   /**
    * Returns a predicate that answers if the result of applying this function is
@@ -181,7 +207,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @return a new {@link Predicate}
    * @since 2.3
    */
-  Predicate<A> isSame(B object);
+//  Predicate<A> isSame(B object);
 
   /**
    * Returns a predicate that answers if the result of applying this function is
@@ -191,7 +217,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @return a new {@link Predicate}
    * @since 2.3
    */
-  Predicate<A> isNull();
+//  Predicate<A> isNull();
 
   /**
    * Returns a predicate that answers if the result of applying this function is
@@ -201,7 +227,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * @return a new {@link Predicate}
    * @since 2.3
    */
-  Predicate<A> isNotNull();
+//  Predicate<A> isNotNull();
 
   // Function<A, B> withEffect(Executable<A> effect);
 
@@ -211,5 +237,7 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * 
    * @return if this function is the identity
    */
-  boolean isIdentity();
+  default boolean isIdentity() {
+    return false;
+  }
 }

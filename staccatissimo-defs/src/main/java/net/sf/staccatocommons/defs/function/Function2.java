@@ -46,13 +46,18 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  */
 @Applicative
-public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, Function<B, C>>, Delayable2<A, B, C>,
-  NullSafeAware<Function2<A, B, C>> {
+@FunctionalInterface
+public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, Function<B, C>> {
+//  
+//}, Delayable2<A, B, C>,
+//  NullSafeAware<Function2<A, B, C>> {
 
   /**
    * Partially applies the function passing just its first parameter
    */
-  Function<B, C> apply(final A arg0);
+  default Function<B, C> apply(final A arg0) {
+    return arg1 -> apply(arg0, arg1);
+  }
 
   /**
    * Applies the function
@@ -65,7 +70,9 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    * @return a new {@link Function2} that produces the same result of this one
    *         when applied, but with arguments flipped
    */
-  Function2<B, A, C> flip();
+  default Function2<B, A, C> flip() {
+    return (arg1, arg0) -> apply(arg0, arg1);
+  }
 
   /**
    * Answers a new function that returns null if any of its arguments is null,
@@ -74,7 +81,13 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    * @return a new null-safe {@link Function2}
    */
   @NullSafe
-  Function2<A, B, C> nullSafe();
+  default Function2<A, B, C> nullSafe() {
+    return (arg0, arg1) -> {
+        if (arg0 == null || arg1 == null)
+          return null;
+        return apply(arg0, arg1);
+    };
+  }
 
   /**
    * 
@@ -83,7 +96,9 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    * @return
    * @since 1.2
    */
-  <D> Function2<D, B, C> of(Applicable<? super D, ? extends A> function);
+  default <D> Function2<D, B, C> of(Applicable<? super D, ? extends A> function) {
+    return (arg0, arg1) -> apply(function.apply(arg0), arg1);
+  }
 
   /**
    * Function composition, like {@link Function#of(Applicable2)}, but with
@@ -102,7 +117,9 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    * @return a new {@link Function2}
    * @since 1.2
    */
-  <D> Function2<A, B, D> then(@NonNull Function<? super C, ? extends D> other);
+  default <D> Function2<A, B, D> then(@NonNull Function<? super C, ? extends D> other) {
+    return (Function2<A, B, D>) other.of(this);
+  }
 
   /**
    * Answers a three arg function that combines <code>this</code> function with
@@ -133,8 +150,10 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    *         using the {@code binaryFunciton}
    * @since 1.2
    */
-  <A2, B2, D> Function3<A, B, A2, D> then(Function2<C, B2, D> binaryFunction,
-    @NonNull Function<? super A2, ? extends B2> other);
+  default <A2, B2, D> Function3<A, B, A2, D> then(Function2<C, B2, D> combinator,
+    @NonNull Function<? super A2, ? extends B2> other) {
+    return (arg0, arg1, arg2) -> combinator.apply(apply(arg0, arg1), other.apply(arg2));
+  }
   
   
   /**
@@ -144,6 +163,9 @@ public interface Function2<A, B, C> extends Applicable2<A, B, C>, Applicable<A, 
    * 
    * @return a new {@link Function}
    */
-  Function<Tuple2<A, B>, C> uncurry();
+  default Function<Tuple2<A, B>, C> uncurry() {
+    return argument -> apply(argument.first(), argument.second());
+  }
+
 
 }
