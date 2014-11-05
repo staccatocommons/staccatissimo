@@ -13,6 +13,7 @@
 
 package net.sf.staccatocommons.iterators;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
@@ -27,7 +28,7 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
  *             {@link Thriterator}
  */
 @Deprecated
-public abstract class NextGetIterator<A> implements WithUnsupportedRemoveIterator<A> {
+public abstract class NextGetIterator<A> implements Iterator<A> {
 
   private A next;
   private Boolean hasNext;
