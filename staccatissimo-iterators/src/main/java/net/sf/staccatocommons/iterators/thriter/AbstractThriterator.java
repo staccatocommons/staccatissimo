@@ -22,7 +22,7 @@ import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
  * @author flbulgarelli
  * 
  */
-public abstract class AbstractThriterator<A> implements WithUnsupportedRemoveIterator<A>, Thriterator<A> {
+public abstract class AbstractThriterator<A> implements Thriterator<A> {
 
   public Thunk<A> delayedCurrent() {
     return new ConstantThunk<A>(current());
