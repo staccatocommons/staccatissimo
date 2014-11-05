@@ -15,7 +15,7 @@ package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
+import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 import net.sf.staccatocommons.iterators.thriter.Thriterator;
 import net.sf.staccatocommons.restrictions.Constant;
 
@@ -29,7 +29,7 @@ import net.sf.staccatocommons.restrictions.Constant;
  *          the element type
  * 
  */
-public final class EmptyThriterator<T> extends AbstractThriterator<T> {
+public final class EmptyThriterator<T> extends NextThriterator<T> {
 
   @Override
   public boolean hasNext() {
@@ -39,10 +39,6 @@ public final class EmptyThriterator<T> extends AbstractThriterator<T> {
   @Override
   public T next() {
     throw new NoSuchElementException("Empty Iterator");
-  }
-
-  public void advanceNext() throws NoSuchElementException {
-    next();
   }
 
   public T current() throws NoSuchElementException {

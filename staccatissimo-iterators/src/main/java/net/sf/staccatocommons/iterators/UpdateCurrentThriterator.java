@@ -15,7 +15,7 @@ package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
+import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 
 /**
  * A thriterator that is implemented through a single message
@@ -44,7 +44,7 @@ import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
  * @param <A>
  * @since 2.2
  */
-public abstract class UpdateCurrentThriterator<A> extends AdvanceThriterator<A> {
+public abstract class UpdateCurrentThriterator<A> extends NextThriterator<A> {
 
   private static final Boolean UNKNOWN = null;
 
@@ -59,10 +59,11 @@ public abstract class UpdateCurrentThriterator<A> extends AdvanceThriterator<A> 
     return !endOfSource;
   }
 
-  public final void advanceNext() throws NoSuchElementException {
+  public final A next() throws NoSuchElementException {
     if (!hasNext())
       throw new NoSuchElementException();
     endOfSource = UNKNOWN;
+    return current;
   }
 
   /**

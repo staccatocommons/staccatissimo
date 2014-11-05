@@ -15,7 +15,7 @@ package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
 
-import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
+import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 
 /**
  * An iterator that retrieves a single given element
@@ -23,7 +23,7 @@ import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
  * @author flbulgarelli
  * 
  */
-public class SingleThriterator<A> extends AdvanceThriterator<A> {
+public class SingleThriterator<A> extends NextThriterator<A> {
 
   private final A element;
   private boolean consumed;
@@ -39,10 +39,11 @@ public class SingleThriterator<A> extends AdvanceThriterator<A> {
     return !consumed;
   }
 
-  public void advanceNext() throws NoSuchElementException {
+  public A next() throws NoSuchElementException {
     if (!hasNext())
       throw new NoSuchElementException();
     consumed = true;
+    return element;
   }
 
   public A current() throws NoSuchElementException {

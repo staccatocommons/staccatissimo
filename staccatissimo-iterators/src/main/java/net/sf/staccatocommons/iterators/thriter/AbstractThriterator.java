@@ -24,8 +24,5 @@ import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
  */
 public abstract class AbstractThriterator<A> implements Thriterator<A> {
 
-  public Thunk<A> delayedCurrent() {
-    return new ConstantThunk<A>(current());
-  }
 
 }
