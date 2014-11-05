@@ -27,7 +27,7 @@ import net.sf.staccatocommons.iterators.thriter.Thriterator;
  *             {@link Thriterator}
  */
 @Deprecated
-public abstract class NextGetIterator<A> extends AbstractUnmodifiableIterator<A> {
+public abstract class NextGetIterator<A> implements AbstractUnmodifiableIterator<A> {
 
   private A next;
   private Boolean hasNext;
