@@ -28,14 +28,4 @@ public abstract class AbstractThriterator<A> extends AbstractUnmodifiableIterato
     return new ConstantThunk<A>(current());
   }
 
-  public final Thunk<A> delayedNext() {
-    advanceNext();
-    return delayedCurrent();
-  }
-
-  @Override
-  public final boolean isEmpty() {
-    return !hasNext();
-  }
-
 }

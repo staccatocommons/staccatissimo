@@ -134,6 +134,9 @@ public interface Thriter<A> {
    * @return {@link #delayedCurrent()}
    */
   @NonNull
-  Thunk<A> delayedNext();
+  default Thunk<A> delayedNext() {
+    advanceNext();
+    return delayedCurrent();
+  }
 
 }
