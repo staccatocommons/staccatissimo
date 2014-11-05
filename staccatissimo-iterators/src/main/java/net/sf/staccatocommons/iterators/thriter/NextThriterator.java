@@ -21,7 +21,7 @@ import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
  * @author flbulgarelli
  * 
  */
-public abstract class NextThriterator<A> extends AbstractThriterator<A> {
+public abstract class NextThriterator<A> implements Thriterator<A> {
 
   public final void advanceNext() {
     next();
