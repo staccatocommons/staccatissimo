@@ -137,16 +137,6 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * 
    * @param other
    * @return a new {@link Predicate}
-   * @deprecated Use {@link #is(Predicate)} instead
-   */
-  Predicate<A> then(@NonNull Predicate<? super B> other);
-
-  /**
-   * Predicate composition, like {@link Predicate#of(Applicable)}, but with
-   * receptor and argument interchanged. Equivalent to {@code other.of(this)}
-   * 
-   * @param other
-   * @return a new {@link Predicate}
    * @since 2.3
    */
   Predicate<A> is(@NonNull Predicate<? super B> other);
@@ -179,38 +169,9 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * 
    * @param other
    * @return a new {@link Predicate}
-   * @deprecated Use {@link #isEqual(B)} instead
-   */
-  Predicate<A> equal(B object);
-
-  /**
-   * Returns a predicate that answers if the result of applying this function is
-   * equals to the given object.
-   * 
-   * For example, the following snippet:
-   * 
-   * <pre>
-   * NumberType&lt;Integer&gt; integerType = ...;
-   * integerType.add(10).equal(15).apply(5);
-   * </pre>
-   * 
-   * will be <code>true</code>, since 5 + 10 = 15
-   * 
-   * @param other
-   * @return a new {@link Predicate}
    * @since 2.3
    */
   Predicate<A> isEqual(B object);
-
-  /**
-   * Returns a predicate that answers if the result of applying this function is
-   * the same that the given object.
-   * 
-   * @param other
-   * @return a new {@link Predicate}
-   * @deprecated Use {@link #isSame(B)} instead
-   */
-  Predicate<A> same(B object);
 
   /**
    * Returns a predicate that answers if the result of applying this function is
@@ -228,29 +189,9 @@ public interface Function<A, B> extends Applicable<A, B>, //
    * 
    * @param other
    * @return a new {@link Predicate}
-   * @deprecated Use {@link #isNull()} instead
-   */
-  Predicate<A> null_();
-
-  /**
-   * Returns a predicate that answers if the result of applying this function is
-   * null.
-   * 
-   * @param other
-   * @return a new {@link Predicate}
    * @since 2.3
    */
   Predicate<A> isNull();
-
-  /**
-   * Returns a predicate that answers if the result of applying this function is
-   * not null.
-   * 
-   * @param other
-   * @return a new {@link Predicate}
-   * @deprecated Use {@link #isNotNull()} instead
-   */
-  Predicate<A> notNull();
 
   /**
    * Returns a predicate that answers if the result of applying this function is

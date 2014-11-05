@@ -82,13 +82,6 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
     return (Function<A, C>) other.of(this);
   }
 
-  /**
-   * @deprecated Use {@link #is(Predicate)} instead
-   */
-  public Predicate<A> then(@NonNull Predicate<? super B> other) {
-    return is(other);
-  }
-
   public Predicate<A> is(@NonNull Predicate<? super B> other) {
     return other.of(this);
   }
@@ -102,13 +95,6 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
     };
   }
 
-  /**
-   * @deprecated
-   */
-  public Predicate<A> equal(B object) {
-    return isEqual(object);
-  }
-  
   /** equivalent to then(Predicates.same(object)) */
   public Predicate<A> isSame(final B object) {
     return new AbstractPredicate<A>() {
@@ -118,16 +104,6 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
     };
   }
 
-  /**@deprecated*/
-  public Predicate<A> same(B object) {
-    return isSame(object);
-  }
-
-  /** equivalent to then(Predicates.notNull()); 
-   * @deprecated Use {@link #isNotNull()} instead*/
-  public Predicate<A> notNull() {
-    return isNotNull();
-  }
 
   /** equivalent to then(Predicates.notNull()); */
   public Predicate<A> isNotNull() {
@@ -137,13 +113,6 @@ public abstract class AbstractFunction<A, B> extends AbstractDelayable<A, B> imp
       }
     };
   }
-
-  /** then(Predicates.null_()) 
-   * @deprecated Use {@link #isNull()} instead*/
-  public Predicate<A> null_() {
-    return isNull();
-  }
-  
 
   /** then(Predicates.null_()) */
   public Predicate<A> isNull() {
