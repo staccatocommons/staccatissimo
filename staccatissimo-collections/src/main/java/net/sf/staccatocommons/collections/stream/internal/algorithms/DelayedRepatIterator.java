@@ -14,6 +14,7 @@
 package net.sf.staccatocommons.collections.stream.internal.algorithms;
 
 import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.iterators.thriter.NextBufferedThriterator;
 import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 
 /**
@@ -22,7 +23,7 @@ import net.sf.staccatocommons.iterators.thriter.NextThriterator;
  * 
  * @param <A>
  */
-public final class DelayedRepatIterator<A> extends NextThriterator<A> {
+public final class DelayedRepatIterator<A> extends NextBufferedThriterator<A> {
   private final Thunk<A> thunk;
 
   /**

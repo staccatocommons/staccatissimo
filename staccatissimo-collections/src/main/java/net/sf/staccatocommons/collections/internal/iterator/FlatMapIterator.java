@@ -29,7 +29,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.iterators.thriter.NextThriterator;
+import net.sf.staccatocommons.iterators.thriter.NextBufferedThriterator;
 
 /**
  * @author flbulgarelli
@@ -37,7 +37,7 @@ import net.sf.staccatocommons.iterators.thriter.NextThriterator;
  * @param <B>
  * @param <A>
  */
-public final class FlatMapIterator<A, B> extends NextThriterator<B> {
+public final class FlatMapIterator<A, B> extends NextBufferedThriterator<B> {
 
   private final Iterator<A> iter;
   private final Applicable<? super A, ? extends Iterable<? extends B>> function;
