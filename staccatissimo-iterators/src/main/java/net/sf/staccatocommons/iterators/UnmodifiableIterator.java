@@ -23,7 +23,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * @param <T>
  */
-public final class UnmodifiableIterator<T> implements AbstractUnmodifiableIterator<T> {
+public final class UnmodifiableIterator<T> implements WithUnsupportedRemoveIterator<T> {
 
   private final Iterator<? extends T> iter;
 

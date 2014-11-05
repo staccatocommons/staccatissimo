@@ -15,18 +15,14 @@ package net.sf.staccatocommons.iterators;
 
 import java.util.Iterator;
 
-import net.sf.staccatocommons.restrictions.value.Unmodifiable;
-
 /**
  * An {@link Iterator} mixin that does not support {@link #remove()}.
- * Although its name suggests the contrary, {@link AbstractUnmodifiableIterator}
- * are not {@link Unmodifiable}, actually.
  * 
  * @author flbulgarelli
  * 
  * @param <T>
  */
-public interface AbstractUnmodifiableIterator<A> extends Iterator<A> {
+public interface WithUnsupportedRemoveIterator<A> extends Iterator<A> {
 
   @Override
   default void remove() {
