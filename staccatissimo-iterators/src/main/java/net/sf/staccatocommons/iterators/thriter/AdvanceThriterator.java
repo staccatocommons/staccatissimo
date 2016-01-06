@@ -18,7 +18,7 @@ package net.sf.staccatocommons.iterators.thriter;
  * @author flbulgarelli
  * 
  */
-public abstract class AdvanceThriterator<A> extends AbstractThriterator<A> {
+public abstract class AdvanceThriterator<A> implements Thriterator<A> {
 
   public final A next() {
     advanceNext();

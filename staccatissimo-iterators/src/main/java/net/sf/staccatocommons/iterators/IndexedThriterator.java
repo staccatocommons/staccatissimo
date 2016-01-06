@@ -16,6 +16,7 @@ package net.sf.staccatocommons.iterators;
 
 import java.util.NoSuchElementException;
 
+import net.sf.staccatocommons.defs.Thunk;
 import net.sf.staccatocommons.iterators.thriter.AdvanceThriterator;
 
 /**
@@ -43,4 +44,10 @@ public abstract class IndexedThriterator<A> extends AdvanceThriterator<A> {
   protected abstract A elementAt(int position);
 
   protected abstract int length();
+  
+  @Override
+  public final Thunk<A> delayedCurrent() {
+    int currentPos = pos;
+    return () -> elementAt(currentPos - 1);
+  }
 }

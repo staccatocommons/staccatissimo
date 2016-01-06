@@ -14,25 +14,20 @@
 
 package net.sf.staccatocommons.iterators.thriter;
 
+import net.sf.staccatocommons.defs.Thunk;
+import net.sf.staccatocommons.iterators.thriter.internal.ConstantThunk;
+
 /**
  * @author flbulgarelli
  * 
  */
-public abstract class NextThriterator<A> extends AbstractThriterator<A> {
-
-  private A next;
+public abstract class NextThriterator<A> implements Thriterator<A> {
 
   public final void advanceNext() {
     next();
   }
-
-  public final A next() {
-    return next = nextImpl();
-  }
-
-  protected abstract A nextImpl();
-
-  public final A current() {
-    return next;
+  
+  public Thunk<A> delayedCurrent() {
+    return new ConstantThunk<A>(current());
   }
 }

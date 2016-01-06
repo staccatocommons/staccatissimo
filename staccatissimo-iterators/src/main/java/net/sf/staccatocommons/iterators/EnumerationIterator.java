@@ -15,6 +15,7 @@ package net.sf.staccatocommons.iterators;
 
 import java.util.Enumeration;
 
+import net.sf.staccatocommons.iterators.thriter.NextBufferedThriterator;
 import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
@@ -22,7 +23,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public class EnumerationIterator<A> extends NextThriterator<A> {
+public class EnumerationIterator<A> extends NextBufferedThriterator<A> {
 
   private final Enumeration<? extends A> enumeration;
 

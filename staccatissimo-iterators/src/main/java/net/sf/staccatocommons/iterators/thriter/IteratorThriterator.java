@@ -21,7 +21,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * @author flbulgarelli
  * 
  */
-public class IteratorThriterator<A> extends NextThriterator<A> {
+public class IteratorThriterator<A> extends NextBufferedThriterator<A> {
 
   private final Iterator<? extends A> iter;
 

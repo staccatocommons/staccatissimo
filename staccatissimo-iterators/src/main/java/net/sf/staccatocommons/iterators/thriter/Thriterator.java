@@ -33,6 +33,8 @@ public interface Thriterator<A> extends Thriter<A>, Iterator<A>, EmptyAware {
    * 
    * @return <code>!hasNext()</code>
    */
-  boolean isEmpty();
+  default boolean isEmpty() {
+    return !hasNext();
+  }
 
 }

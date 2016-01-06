@@ -14,7 +14,7 @@
 package net.sf.staccatocommons.collections.internal.iterator;
 
 import net.sf.staccatocommons.defs.Applicable;
-import net.sf.staccatocommons.iterators.thriter.NextThriterator;
+import net.sf.staccatocommons.iterators.thriter.NextBufferedThriterator;
 import net.sf.staccatocommons.restrictions.check.NonNull;
 
 /**
@@ -22,7 +22,7 @@ import net.sf.staccatocommons.restrictions.check.NonNull;
  * 
  * @param <A>
  */
-public class IterateIterator<A> extends NextThriterator<A> {
+public class IterateIterator<A> extends NextBufferedThriterator<A> {
 
   private final Applicable<? super A, ? extends A> generator;
   private A next;

@@ -13,9 +13,7 @@
 
 package net.sf.staccatocommons.collections.stream.internal.algorithms;
 
-import java.util.NoSuchElementException;
-
-import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
+import net.sf.staccatocommons.iterators.thriter.NextThriterator;
 
 /**
  * 
@@ -23,7 +21,7 @@ import net.sf.staccatocommons.iterators.thriter.AbstractThriterator;
  * 
  * @param <A>
  */
-public final class RepeatIterator<A> extends AbstractThriterator<A> {
+public final class RepeatIterator<A> extends NextThriterator<A> {
   private final A element;
 
   /**
@@ -40,8 +38,6 @@ public final class RepeatIterator<A> extends AbstractThriterator<A> {
   public A next() {
     return element;
   }
-
-  public void advanceNext() throws NoSuchElementException {}
 
   public A current() {
     return element;
